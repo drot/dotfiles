@@ -1,0 +1,65 @@
+! drot's X application resource database
+
+
+! X Cursor
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+! URXVT
+!
+! General
+urxvt.termName:  rxvt-256color
+urxvt.loginShell:         true
+urxvt.scrollBar:         false
+urxvt.saveLines:         65535
+urxvt.cursorBlink:        true
+urxvt.urgentOnBell:       true
+urxvt.underlineURLs:      true
+!
+! Extensions
+urxvt*perl-lib:         /usr/lib/urxvt/perl/
+urxvt*perl-ext-common:  default,matcher
+urxvt*urlLauncher:      /usr/bin/chromium
+urxvt*matcher.button:   1
+! So we catch even nasty URLs
+urxvt.cutchars:         `()'*<>[]{|}"
+!
+! Appearance
+urxvt.font:     -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+!
+! tangoesque scheme
+*background:  #222222
+*foreground:  #aaaaaa
+! Black
+*color0:      #000000
+*color8:      #555753
+! Red
+*color1:      #ff6565
+*color9:      #ff8d8d
+! Green
+*color2:      #93d44f
+*color10:     #c8e7a8
+! Yellow
+*color3:      #eab93d
+*color11:     #ffc123
+! Blue
+*color4:      #204a87
+*color12:     #3465a4
+! Mangenta
+*color5:      #ce5c00
+*color13:     #f57900
+! Cyan 
+*color6:      #89b6e2
+*color14:     #46a4ff
+! White
+*color7:      #cccccc
+*color15:     #ffffff
+!
+
+! XMESSAGE
+Xmessage*font: -xos4-terminus-*-*-*-*-*-*-*-*-*-*-iso8859-2
+Xmessage*background: #3F3F3F
+Xmessage*foreground: #F0DFAF
+Xmessage*form.*.shapeStyle: rectangle
+Xmessage*Scrollbar.width: 1
+Xmessage*Scrollbar.borderWidth: 0
