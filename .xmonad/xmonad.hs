@@ -69,11 +69,11 @@ myManageHook = composeAll
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
     {
-	 font  = "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"
+	 font  = "-*-glisp-*-*-*-*-*-*-*-*-*-*-*-*"
 	,fgColor = "#00FFFF"
 	, bgColor = "#000000"
 	, bgHLight    = "#000000"
-	, fgHLight    = "#FF0000"
+	, fgHLight    = "#9c8e29"
 	, position = Top
     }
 
@@ -83,7 +83,7 @@ bar h = defaultPP {
           ppOutput = hPutStrLn h
 	, ppTitle = xmobarColor "#888888" "" . shorten 50
 	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-	, ppUrgent =  xmobarColor "#b0393f" "" . wrap "<fc=#ffff00>[</fc>" "<fc=#ffff00>]</fc>"
+	, ppUrgent =  xmobarColor "#b0393f" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
 	, ppSep = " : "
 	, ppWsSep = " : "
 	, ppLayout = xmobarColor "#9c8e2d" "" .
