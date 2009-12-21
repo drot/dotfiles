@@ -15,6 +15,7 @@ urxvt.saveLines:         65535
 urxvt.cursorBlink:        true
 urxvt.urgentOnBell:       true
 urxvt.underlineURLs:      true
+urxvt.colorUL: #86a2be
 !
 ! Extensions
 urxvt*perl-lib:         /usr/lib/urxvt/perl/

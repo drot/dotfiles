@@ -1,3 +1,2 @@
 set cmd:prompt "\[\e[1;37m\]lftp\] \[\e[01;32m\]\]\u\@\h \[\e[01;34m\]\]\\W \e[1;37m\]> \[\e[00m\]\]"
-set cmd:default-title "lftp \h:\w"
 set cmd:csh-history on
