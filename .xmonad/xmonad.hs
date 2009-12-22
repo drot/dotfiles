@@ -18,14 +18,9 @@ import qualified Data.Map        as M
 --
 main = do
 	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
-        xmonad $ withUrgencyHook NoUrgencyHook $ defaults h
+        xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
-defaults h = defaultConfig {
-      -- simple stuff
+myDefaults h = defaultConfig {
         terminal           = "urxvt", 
         focusFollowsMouse  = True,
         borderWidth        = 2,
@@ -33,15 +28,11 @@ defaults h = defaultConfig {
         workspaces         = ["main","www","irc","music","misc"],
         normalBorderColor  = "#181818",
         focusedBorderColor = "#888888",
-
-      -- key bindings
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = myManageHook,
-        logHook            = dynamicLogWithPP (bar h)  
+        logHook            = dynamicLogWithPP $ (bar h)  
     }
 
 -- Layout configuration
@@ -62,6 +53,7 @@ myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "Wine"           --> doFloat
     , className =? "Gimp"           --> doFloat ]
 
 -- Prompt style
@@ -69,10 +61,10 @@ myManageHook = composeAll
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
     {
-	 font  = "-*-glisp-*-*-*-*-*-*-*-*-*-*-*-*"
-	,fgColor = "#00FFFF"
-	, bgColor = "#000000"
-	, bgHLight    = "#000000"
+	font  = "-*-snap-*-*-*-*-*-*-*-*-*-*-*-*"
+	, fgColor = "#888888"
+	, bgColor = "#181818"
+	, bgHLight    = "#181818"
 	, fgHLight    = "#9c8e29"
 	, position = Top
     }
