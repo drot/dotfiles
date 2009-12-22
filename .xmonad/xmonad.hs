@@ -23,7 +23,7 @@ main = do
 myDefaults h = defaultConfig {
         terminal           = "urxvt", 
         focusFollowsMouse  = True,
-        borderWidth        = 2,
+        borderWidth        = 1,
         modMask            = mod4Mask,
         workspaces         = ["main","www","irc","music","misc"],
         normalBorderColor  = "#181818",
@@ -32,7 +32,7 @@ myDefaults h = defaultConfig {
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayout,
         manageHook         = myManageHook,
-        logHook            = dynamicLogWithPP $ (bar h)  
+        logHook            = dynamicLogWithPP $ myBar h 
     }
 
 -- Layout configuration
@@ -58,34 +58,33 @@ myManageHook = composeAll
 
 -- Prompt style
 --
-myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
     {
-	font  = "-*-snap-*-*-*-*-*-*-*-*-*-*-*-*"
+	font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
 	, fgColor = "#888888"
 	, bgColor = "#181818"
-	, bgHLight    = "#181818"
-	, fgHLight    = "#9c8e29"
+	, bgHLight = "#181818"
+	, fgHLight = "#9c8e29"
 	, position = Top
     }
 
 -- Status bar style
 --
-bar h = defaultPP { 
+myBar h = defaultPP { 
           ppOutput = hPutStrLn h
 	, ppTitle = xmobarColor "#888888" "" . shorten 50
 	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-	, ppUrgent =  xmobarColor "#b0393f" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
+	, ppUrgent = xmobarColor "#b0393f" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
 	, ppSep = " : "
 	, ppWsSep = " : "
 	, ppLayout = xmobarColor "#9c8e2d" "" .
         (\x -> case x of
-        "Tall"           -> " []= "
-	"Mirror Tall"    -> " ><> "
-        "Full"           -> " [M] "
+        "Tall"           -> "[]="
+	"Mirror Tall"    -> "=--"
+        "Full"           -> "[M]"
         _                -> x
         )
-                  }
+                    }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
