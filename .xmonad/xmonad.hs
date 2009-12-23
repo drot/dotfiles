@@ -11,6 +11,8 @@ import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.SimpleFloat
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -30,14 +32,14 @@ myDefaults h = defaultConfig {
         focusedBorderColor = "#888888",
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
-        layoutHook         = myLayout,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         logHook            = dynamicLogWithPP $ myBar h 
     }
 
 -- Layout configuration
 --
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
+myLayoutHook = avoidStruts $  onWorkspace "misc" simpleFloat $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -64,7 +66,7 @@ myXPConfig = defaultXPConfig
 	, fgColor = "#888888"
 	, bgColor = "#181818"
 	, bgHLight = "#181818"
-	, fgHLight = "#9c8e29"
+	, fgHLight = "#9c8e2d"
 	, position = Top
     }
 
@@ -82,6 +84,7 @@ myBar h = defaultPP {
         "Tall"           -> "[]="
 	"Mirror Tall"    -> "=--"
         "Full"           -> "[M]"
+	"SimplestFloat"  -> "><>"
         _                -> x
         )
                     }
@@ -93,7 +96,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch the launcher
+    -- launch prompt
     , ((modm,               xK_p     ), shellPrompt myXPConfig) 
 
     -- close focused window

@@ -1,4 +1,4 @@
-Config { font = "xft:anorexia-11"
+Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
        , bgColor = "#181818"
        , fgColor = "#888888"
        , position = Top
