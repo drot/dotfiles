@@ -44,14 +44,11 @@ function extract () {
             *.tar | *.cbt)      tar -xvf   "$1"     ;;
             *.zip | *.cbz)      unzip      "$1"     ;;
             *.rar | *.cbr)      unrar x    "$1"     ;;
-            *.arj)              unarj x    "$1"     ;;
-            *.ace)              unace x    "$1"     ;;
             *.bz2)              bunzip2    "$1"     ;;
             *.xz)               unxz       "$1"     ;;
             *.gz)               gunzip     "$1"     ;;
             *.7z)               7z x       "$1"     ;;
             *.Z)                uncompress "$1"     ;;
-            *.gpg)        gpg -d "$1" | tar -xvzf - ;;
             *) echo "Error: failed to extract '$1'" ;;
         esac
     else
