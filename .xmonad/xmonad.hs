@@ -84,7 +84,7 @@ myBar h = defaultPP {
         "Tall"           -> "[]="
 	"Mirror Tall"    -> "=--"
         "Full"           -> "[M]"
-	"SimplestFloat"  -> "><>"
+	"Simple Float"   -> "><>"
         _                -> x
         )
                     }
