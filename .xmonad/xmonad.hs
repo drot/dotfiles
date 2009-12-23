@@ -12,7 +12,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.PerWorkspace
-import XMonad.Layout.SimpleFloat
+import XMonad.Layout.SimplestFloat
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -39,7 +39,7 @@ myDefaults h = defaultConfig {
 
 -- Layout configuration
 --
-myLayoutHook = avoidStruts $  onWorkspace "misc" simpleFloat $ tiled ||| Mirror tiled ||| Full
+myLayoutHook = avoidStruts $  onWorkspace "misc" simplestFloat $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -84,7 +84,7 @@ myBar h = defaultPP {
         "Tall"           -> "[]="
 	"Mirror Tall"    -> "=--"
         "Full"           -> "[M]"
-	"Simple Float"   -> "><>"
+	"SimplestFloat"  -> "><>"
         _                -> x
         )
                     }
