@@ -12,6 +12,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
+import XMonad.Hooks.FadeInactive
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 import qualified XMonad.StackSet as W
@@ -36,7 +37,7 @@ myDefaults h = defaultConfig {
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        logHook            = dynamicLogWithPP $ myBar h 
+        logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8 
     }
 
 -- Layout configuration
