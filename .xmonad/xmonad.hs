@@ -21,10 +21,11 @@ import qualified Data.Map        as M
 --
 main = do
 	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
+	spawn "xcompmgr" 
         xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
 
 myDefaults h = defaultConfig {
-        terminal           = "urxvt", 
+        terminal           = "urxvtc", 
         focusFollowsMouse  = True,
         borderWidth        = 1,
         modMask            = mod4Mask,
