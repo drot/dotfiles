@@ -12,7 +12,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
-import XMonad.Hooks.FadeInactive
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 import qualified XMonad.StackSet as W
@@ -30,19 +29,19 @@ myDefaults h = defaultConfig {
         focusFollowsMouse  = True,
         borderWidth        = 1,
         modMask            = mod4Mask,
-        workspaces         = ["main","www","irc","music","misc"],
+        workspaces         = ["main","www","irc","music","float"],
         normalBorderColor  = "#181818",
         focusedBorderColor = "#888888",
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8 
+        logHook            = dynamicLogWithPP $ myBar h
     }
 
 -- Layout configuration
 --
-myLayoutHook = avoidStruts $  onWorkspace "misc" simplestFloat $ tiled ||| Mirror tiled ||| Full
+myLayoutHook = avoidStruts $  onWorkspace "float" simplestFloat $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
