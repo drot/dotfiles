@@ -21,7 +21,6 @@ import qualified Data.Map        as M
 --
 main = do
 	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
-	spawn "xcompmgr" 
         xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
 
 myDefaults h = defaultConfig {
@@ -41,7 +40,7 @@ myDefaults h = defaultConfig {
 
 -- Layout configuration
 --
-myLayoutHook = avoidStruts $  onWorkspace "float" simplestFloat $ tiled ||| Mirror tiled ||| Full
+myLayoutHook = avoidStruts $ onWorkspace "float" simplestFloat $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
