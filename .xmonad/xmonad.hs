@@ -56,7 +56,6 @@ myLayoutHook = avoidStruts $ onWorkspace "float" simplestFloat $ tiled ||| Mirro
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Wine"           --> doFloat
     , className =? "Gimp"           --> doFloat ]
 
 -- Prompt style
