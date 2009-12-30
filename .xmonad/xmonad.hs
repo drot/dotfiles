@@ -12,6 +12,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
+import XMonad.Hooks.FadeInactive
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 import qualified XMonad.StackSet as W
@@ -21,6 +22,7 @@ import qualified Data.Map        as M
 --
 main = do
 	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
+	spawn "xcompmgr"
         xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
 
 myDefaults h = defaultConfig {
@@ -29,13 +31,13 @@ myDefaults h = defaultConfig {
         borderWidth        = 1,
         modMask            = mod4Mask,
         workspaces         = ["main","www","irc","music","float"],
-        normalBorderColor  = "#181818",
-        focusedBorderColor = "#888888",
+        normalBorderColor  = "#888888",
+        focusedBorderColor = "#9c8e2d",
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        logHook            = dynamicLogWithPP $ myBar h
+        logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8
     }
 
 -- Layout configuration
