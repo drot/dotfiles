@@ -82,9 +82,9 @@ myXPConfig = defaultXPConfig
 
 -- Status bar
 --
-sBarCmd = "dzen2  -ta 'l' -fg '#888888' -bg '#181818' -fn '"++ myFont ++"'"
-topBarCmd = "conky -c .conkytop | dzen2 -w '1024' -ta 'r' -x '512' -fn '"++ myFont ++"'"
-botBarCmd = "conky -c .conkybot | dzen2 -ta 'l' -y '768' -fn '"++ myFont ++"'"
+sBarCmd = "dzen2  -ta 'l' -w '520' -fg '#888888' -bg '#181818' -fn '"++ myFont ++"'"
+topBarCmd = "conky -c .conkytop | dzen2 -w '1024'  -fg '#888888' -bg '#181818' -ta 'r' -x '512' -fn '"++ myFont ++"'"
+botBarCmd = "conky -c .conkybot | dzen2 -ta 'l' -y '768' -fg '#888888' -bg '#181818' -fn '"++ myFont ++"'"
 
 -- Pretty printer look
 --
