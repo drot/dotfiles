@@ -21,11 +21,14 @@ import qualified Data.Map        as M
 -- Launch xmonad 
 --
 main = do
-	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
+	dzenSbar <- spawnPipe sBarCmd
+	dzenConkyTop <- spawnPipe topBarCmd
+	dzenConkyBot <- spawnPipe botBarCmd
 	spawn "xcompmgr"
-        xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
+        xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults dzenSbar
 
-myDefaults h = defaultConfig {
+myDefaults dzenSbar = defaultConfig 
+        {
         terminal           = "urxvtc", 
         focusFollowsMouse  = True,
         borderWidth        = 1,
@@ -37,8 +40,8 @@ myDefaults h = defaultConfig {
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8
-    }
+        logHook            = (dynamicLogWithPP $ myDzenPP dzenSbar) >> fadeInactiveLogHook 0.8
+        }
 
 -- Layout configuration
 --
@@ -60,11 +63,16 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat ]
 
+-- Custom settings
+--
+myBitmapsDir = "/home/drot/.dzen"
+myFont = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*" 
+
 -- Prompt style
 --
 myXPConfig = defaultXPConfig
     {
-	font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+	font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"   
 	, fgColor = "#888888"
 	, bgColor = "#181818"
 	, bgHLight = "#181818"
@@ -72,24 +80,32 @@ myXPConfig = defaultXPConfig
 	, position = Top
     }
 
--- Status bar style
+-- Status bar
 --
-myBar h = defaultPP { 
-          ppOutput = hPutStrLn h
-	, ppTitle = xmobarColor "#888888" "" . shorten 50
-	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-	, ppUrgent = xmobarColor "#b0393f" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
+sBarCmd = "dzen2  -ta 'l' -fg '#888888' -bg '#181818' -fn '"++ myFont ++"'"
+topBarCmd = "conky -c .conkytop | dzen2 -w '1024' -ta 'r' -x '512' -fn '"++ myFont ++"'"
+botBarCmd = "conky -c .conkybot | dzen2 -ta 'l' -y '768' -fn '"++ myFont ++"'"
+
+-- Pretty printer look
+--
+myDzenPP dzenSbar = defaultPP 
+        {
+          ppOutput = hPutStrLn dzenSbar
+	, ppTitle = dzenColor "#888888" "" . wrap "^fg(#9c8e2d)<^fg() "" ^fg(#9c8e2d)>^fg()" . shorten 50
+	, ppCurrent = wrap "^fg(#9c8e2d)[^fg()^fg(#b0393f)""^fg(#9c8e2d)]^fg()"
+	, ppUrgent = wrap "^bg(#51588e)^fg(#b0393f)""^fg()^bg()"
 	, ppSep = " : "
 	, ppWsSep = " : "
-	, ppLayout = xmobarColor "#9c8e2d" "" .
+	, ppLayout = dzenColor "#9c8e2d" "" .
         (\x -> case x of
-        "Tall"           -> "[]="
-	"Mirror Tall"    -> "=--"
-        "Full"           -> "[M]"
-	"SimplestFloat"  -> "><>"
+        "Tall"           -> "^i("++ myBitmapsDir ++"/tall.xbm)"
+	"Mirror Tall"    -> "^i("++ myBitmapsDir ++"/mtall.xbm)"
+        "Full"           -> "^i("++ myBitmapsDir ++"/full.xbm)"
+	"SimplestFloat"  -> "^i("++ myBitmapsDir ++"/float.xbm)"
         _                -> x
         )
-                    }
+        }
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
