@@ -1,6 +1,6 @@
 background no
 out_to_console yes
-update_interval 2
+update_interval 1
 
 TEXT
- ^fg(\#9c8e2d)^i(/home/drot/.dzen/avg.xbm)^fg() ${loadavg} ^fg(\#9c8e2d)^i(/home/drot/.dzen/fs.xbm)^fg() ${fs_used}/${fs_free} ^fg(\#9c8e2d)^i(/home/drot/.dzen/note.xbm)^fg() ${execi 30 ~/bin/moc.sh} 
+ ^fg(\#9c8e2d)^i(/home/drot/.dzen/avg.xbm)^fg() ${loadavg} ^fg(\#9c8e2d)^i(/home/drot/.dzen/fs.xbm)^fg() ${fs_used}/${fs_free} ^fg(\#9c8e2d)^i(/home/drot/.dzen/note.xbm)^fg() ${execi 10 ~/bin/moc.sh} 
