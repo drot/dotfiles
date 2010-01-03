@@ -10,6 +10,8 @@ export LESSHISTFILE="-"
 export PAGER="less"
 export VISUAL="vim"
 export EDITOR=$VISUAL
+export BROWSER="chromium"
+export XTERM="urxvt"
 # }}}
 
 # {{{ Dircolors
