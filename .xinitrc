@@ -7,7 +7,4 @@
 sh ~/.fehbg &
 xsetroot -cursor_name left_ptr &
 urxvtd -q -f -o &
-exec ck-launch-session xmonad &
-wm_pid=$!
-wait $wmpid
-killall -9 conky
+exec ck-launch-session xmonad 

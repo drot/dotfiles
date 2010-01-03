@@ -1,0 +1,15 @@
+Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+       , bgColor = "#181818"
+       , fgColor = "#888888"
+       , position = Top
+       , lowerOnStart = False
+       , commands = [ Run StdinReader 
+		    , Run Cpu ["-L","7","-H","50","--low","#888888","--normal","#99bb10","--high","#d12828"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+		    , Run Com "/home/drot/bin/moc.sh" [""] "moc" 10
+                    , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#bd1550>%moc%</fc> <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
+       }
