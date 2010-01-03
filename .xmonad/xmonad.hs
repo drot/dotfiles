@@ -25,7 +25,8 @@ main = do
 	spawn "xcompmgr"
         xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
 
-myDefaults h = defaultConfig {
+myDefaults h = defaultConfig 
+        {
         terminal           = "urxvtc", 
         focusFollowsMouse  = True,
         borderWidth        = 1,
@@ -38,7 +39,7 @@ myDefaults h = defaultConfig {
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8
-    }
+        }
 
 -- Layout configuration
 --
@@ -57,19 +58,19 @@ myLayoutHook = avoidStruts $ onWorkspace "float" simplestFloat $ tiled ||| Mirro
      delta   = 3/100
 
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat ]
+    [ className =? "MPlayer" --> doFloat
+    , className =? "Gimp"    --> doFloat ]
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig
     {
-	font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
-	, fgColor = "#888888"
-	, bgColor = "#181818"
-	, bgHLight = "#181818"
-	, fgHLight = "#9c8e2d"
-	, position = Top
+    font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+    , fgColor = "#888888"
+    , bgColor = "#181818"
+    , bgHLight = "#181818"
+    , fgHLight = "#9c8e2d"
+    , position = Top
     }
 
 -- Status bar style
@@ -84,7 +85,7 @@ myBar h = defaultPP {
 	, ppLayout = xmobarColor "#9c8e2d" "" .
         (\x -> case x of
         "Tall"           -> "[]="
-	"Mirror Tall"    -> "=--"
+	"Mirror Tall"    -> "[=]"
         "Full"           -> "[M]"
 	"SimplestFloat"  -> "><>"
         _                -> x
