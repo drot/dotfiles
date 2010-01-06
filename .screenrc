@@ -1,6 +1,9 @@
 # Turn off startup message
 startup_message off
 
+# Visual bell off
+vbell off
+
 # Residual text fix
 altscreen on
 
