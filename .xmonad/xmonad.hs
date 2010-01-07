@@ -82,7 +82,8 @@ myXPConfig = defaultXPConfig
 
 -- Status bar style
 --
-myPP = xmobarPP { 
+myPP = defaultPP 
+        { 
 	  ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
 	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
 	, ppUrgent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
@@ -96,7 +97,7 @@ myPP = xmobarPP {
 	"SimplestFloat"  -> "><>"
         _                -> x
         )
-                    }
+        }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
