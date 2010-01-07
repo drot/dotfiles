@@ -16,6 +16,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
+import XMonad.Hooks.FadeInactive
 
 -- Layouts
 import XMonad.Layout.Named
@@ -55,6 +56,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
                          , mouseBindings      = myMouseBindings
                          , layoutHook         = myLayoutHook
                          , manageHook         = myManageHook
+			 , logHook            = fadeInactiveLogHook 0.8
                          }    
 
 -- Layout configuration
