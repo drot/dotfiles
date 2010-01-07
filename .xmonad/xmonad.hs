@@ -2,8 +2,13 @@
 -- xmonad by drot
 --
 
+-- Main
 import XMonad
 import System.Exit
+import qualified Data.Map as M
+import qualified XMonad.StackSet as W
+
+-- Utils
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Util.Run
@@ -11,18 +16,20 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
+
+-- Layouts
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
 
 -- Launch xmonad 
 --
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig 
-
---Launch xmobar
---
-myBar = "xmobar ~/.xmonad/xmobarrc"
+main = xmonad =<< statusBar cmd pp kb conf
+  where
+       uhook = withUrgencyHook NoUrgencyHook
+       cmd = "xmobar ~/.xmonad/xmobarrc"
+       pp = myPP
+       kb = toggleStrutsKey
+       conf = uhook myConfig
 
 -- My defaults
 --
