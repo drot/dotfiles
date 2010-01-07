@@ -71,14 +71,14 @@ myFont = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
 -- Prompt style
 --
 myXPConfig = defaultXPConfig
-    {
-	font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"   
+        {
+	font  = myFont   
 	, fgColor = "#888888"
 	, bgColor = "#181818"
 	, bgHLight = "#181818"
 	, fgHLight = "#9c8e2d"
 	, position = Top
-    }
+        }   
 
 -- Status bar
 --
