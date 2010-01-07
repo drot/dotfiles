@@ -1,6 +1,0 @@
-background no
-out_to_console yes
-update_interval 1
-
-TEXT
-^fg(\#9c8e2d)^i(/home/drot/.dzen/cpu.xbm)^fg() ${cpu cpu1}%  ^fg(\#9c8e2d)^i(/home/drot/.dzen/cpu.xbm)^fg() ${cpu cpu2}%  ^fg(\#9c8e2d)^i(/home/drot/.dzen/mem.xbm)^fg() ${mem}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/netup.xbm)^fg() ${totalup eth0}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/netdown.xbm)^fg() ${totaldown eth0}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/clock.xbm)^fg() ${time %d-%m %H:%M}
