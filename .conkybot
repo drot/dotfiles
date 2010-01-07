@@ -3,4 +3,4 @@ out_to_console yes
 update_interval 1
 
 TEXT
-^fg(\#9c8e2d)^i(/home/drot/.dzen/pacman.xbm)^fg() ${execi 1500 xyne.pl}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/avg.xbm)^fg() ${loadavg}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/fs.xbm)^fg() ${fs_used}/${fs_free}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/temp.xbm)^fg() ${execi 10 weather.sh "EUR|BA|BK001|MOSTAR"}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/mail.xbm)^fg() ${execi 60 conkyEmail --servertype=IMAP --servername=imap.googlemail.com --username= --password= --ssl}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/note.xbm)^fg() ${execi 10 mocp -Q %artist\ -\ %song} 
+^fg(\#9c8e2d)^i(/home/drot/.dzen/pacman.xbm)^fg() ${execi 3600 xyne.pl}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/avg.xbm)^fg() ${loadavg}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/fs.xbm)^fg() ${fs_used}/${fs_free}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/temp.xbm)^fg() ${execi 300 weather.sh "EUR|BA|BK001|MOSTAR"}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/mail.xbm)^fg() ${execi 60 conkyEmail --servertype=IMAP --servername=imap.googlemail.com --username= --password= --ssl}  ^fg(\#9c8e2d)^i(/home/drot/.dzen/note.xbm)^fg() ${execi 10 mocp -Q %artist\ -\ %song} 
