@@ -18,6 +18,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
 
 -- Layouts
+import XMonad.Layout.Named
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
@@ -31,38 +32,39 @@ main = xmonad =<< statusBar cmd pp kb conf
        kb = toggleStrutsKey
        conf = uhook myConfig
 
+-- Status bar style
+--
+myPP = defaultPP { ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
+	         , ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
+	         , ppUrgent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
+	         , ppSep = " : "
+	         , ppWsSep = " : "
+	         , ppLayout = xmobarColor "#9c8e2d" ""
+                 } 
+
 -- My defaults
 --
-myConfig = defaultConfig 
-        {
-        terminal           = "urxvtc", 
-        focusFollowsMouse  = True,
-        borderWidth        = 1,
-        modMask            = mod4Mask,
-        workspaces         = ["main","www","irc","music","float"],
-        normalBorderColor  = "#888888",
-        focusedBorderColor = "#9c8e2d",
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-        layoutHook         = myLayoutHook,
-        manageHook         = myManageHook
-        }
+myConfig = defaultConfig { terminal           = "urxvtc" 
+                         , focusFollowsMouse  = True
+                         , borderWidth        = 1
+                         , modMask            = mod4Mask
+                         , workspaces         = ["main","www","irc","music","float"]
+                         , normalBorderColor  = "#888888"
+                         , focusedBorderColor = "#9c8e2d"
+                         , keys               = myKeys
+                         , mouseBindings      = myMouseBindings
+                         , layoutHook         = myLayoutHook
+                         , manageHook         = myManageHook
+                         }    
 
 -- Layout configuration
 --
-myLayoutHook = avoidStruts $ onWorkspace "float" simplestFloat $ tiled ||| Mirror tiled ||| Full
+myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full 
   where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+      tile = named "[]=" $ Tall 1 (3/100) (1/2)
+      mtile = named "[M]=" $ Mirror tile
+      full = named "[]" $ Full
+      float = named "><>" $ simplestFloat
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
@@ -70,34 +72,14 @@ myManageHook = composeAll
 
 -- Prompt style
 --
-myXPConfig = defaultXPConfig
-    {
-    font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
-    , fgColor = "#888888"
-    , bgColor = "#181818"
-    , bgHLight = "#181818"
-    , fgHLight = "#9c8e2d"
-    , position = Top
-    }
+myXPConfig = defaultXPConfig { font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+                             , fgColor = "#888888"
+                             , bgColor = "#181818"
+                             , bgHLight = "#181818"
+                             , fgHLight = "#9c8e2d"
+                             , position = Top
+                             }
 
--- Status bar style
---
-myPP = defaultPP 
-        { 
-	  ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
-	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-	, ppUrgent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
-	, ppSep = " : "
-	, ppWsSep = " : "
-	, ppLayout = xmobarColor "#9c8e2d" "" .
-        (\x -> case x of
-        "Tall"           -> "[]="
-	"Mirror Tall"    -> "[=]"
-        "Full"           -> "[M]"
-	"SimplestFloat"  -> "><>"
-        _                -> x
-        )
-        }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
