@@ -4,7 +4,6 @@
 
 import XMonad
 import System.Exit
-
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Util.Run
@@ -12,7 +11,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GridSelect
-import XMonad.Hooks.FadeInactive
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 import qualified XMonad.StackSet as W
@@ -20,12 +18,15 @@ import qualified Data.Map        as M
 
 -- Launch xmonad 
 --
-main = do
-	h <- spawnPipe "xmobar /home/drot/.xmonad/xmobarrc"
-	spawn "xcompmgr"
-        xmonad $ withUrgencyHook NoUrgencyHook $ myDefaults h
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig 
 
-myDefaults h = defaultConfig 
+--Launch xmobar
+--
+myBar = "xmobar ~/.xmonad/xmobarrc"
+
+-- My defaults
+--
+myConfig = defaultConfig 
         {
         terminal           = "urxvtc", 
         focusFollowsMouse  = True,
@@ -37,8 +38,7 @@ myDefaults h = defaultConfig
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
         layoutHook         = myLayoutHook,
-        manageHook         = myManageHook,
-        logHook            = (dynamicLogWithPP $ myBar h) >> fadeInactiveLogHook 0.8
+        manageHook         = myManageHook
         }
 
 -- Layout configuration
@@ -75,9 +75,8 @@ myXPConfig = defaultXPConfig
 
 -- Status bar style
 --
-myBar h = defaultPP { 
-          ppOutput = hPutStrLn h
-	, ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
+myPP = xmobarPP { 
+	  ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
 	, ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
 	, ppUrgent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
 	, ppSep = " : "
@@ -94,6 +93,11 @@ myBar h = defaultPP {
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
+
+-- Toggle struts
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+-- Main key bindings
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
