@@ -21,7 +21,7 @@ URxvt*depth: 32
 ! Extensions
 URxvt*perl-lib: /usr/lib/URxvt/perl/
 URxvt*perl-ext-common: default,matcher
-URxvt*urlLauncher: /usr/bin/chromium
+URxvt*urlLauncher: /usr/bin/firefox
 URxvt*matcher.button: 1
 ! So we catch even nasty URLs
 URxvt*cutchars: `()'*<>[]{|}"
