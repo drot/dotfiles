@@ -8,31 +8,30 @@ Xcursor.size: 22
 ! URXVT
 !
 ! General
-URxvt*termName: rxvt-256color
-URxvt*loginShell: true
-URxvt*scrollBar: false
-URxvt*saveLines: 65535
-URxvt*cursorBlink: true
-URxvt*urgentOnBell: true
-URxvt*underlineURLs: true
-URxvt*colorUL: #86a2be
-URxvt*depth: 32
+urxvt*termName: rxvt-256color
+urxvt*loginShell: true
+urxvt*scrollBar: false
+urxvt*saveLines: 65535
+urxvt*cursorBlink: true
+urxvt*urgentOnBell: true
+urxvt*underlineURLs: true
+urxvt*colorUL: #86a2be
 !
 ! Extensions
-URxvt*perl-lib: /usr/lib/URxvt/perl/
-URxvt*perl-ext-common: default,matcher
-URxvt*urlLauncher: /usr/bin/firefox
-URxvt*matcher.button: 1
+urxvt*perl-lib: /usr/lib/urxvt/perl/
+urxvt*perl-ext-common: default,matcher
+urxvt*urlLauncher: /usr/bin/firefox
+urxvt*matcher.button: 1
 ! So we catch even nasty URLs
-URxvt*cutchars: `()'*<>[]{|}"
+urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
-URxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
-URxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+urxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+urxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 
 ! tangoesque scheme
-URxvt*background: rgba:0000/0000/0000/bbbb
-URxvt*foreground: #aaaaaa
+*background:  #222222
+*foreground:  #aaaaaa
 ! Black
 *color0:      #000000
 *color8:      #555753
