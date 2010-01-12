@@ -29,31 +29,30 @@ urxvt*cutchars: `()'*<>[]{|}"
 urxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 urxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 
-*background: #151515
-*foreground: #cacaca
-
-!Colorful-Neon
-!! Black
-*color0: #5A5A5A
-*color8: #554444
-!! Red
-*color1: #FF4747
-*color9: #FF6767
-!! Green
-*color2: #AFC81C
-*color10: #BFC81C
-!! Yellow
-*color3: #FDD338
-*color11: #F4D461
-!! Blue
-*color4: #619AF4
-*color12: #5496FF
-!! Purple
-*color5: #5F5A90
-*color13: #826AB1
-!! Cyan
-*color6: #47E0FF
-*color14: #2ED9FB
-!! White
-*color7: #FFFFFF
-*color15: #DEDEDE
+! tangoesque scheme
+*background: #222222
+*foreground: #e1e2db
+! ! Black
+*color0: #000000
+*color8: #555753
+! ! Red
+*color1: #ff6565
+*color9: #ff8d8d
+! ! Green
+*color2: #93d44f
+*color10: #c8e7a8
+! ! Yellow
+*color3: #eab93d
+*color11: #ffc123
+! ! Blue
+*color4: #204a87
+*color12: #3465a4
+! ! Mangenta
+*color5: #ce5c00
+*color13: #f57900
+! ! Cyan
+*color6: #89b6e2
+*color14: #46a4ff
+! ! White
+*color7: #cccccc
+*color15: #ffffff
