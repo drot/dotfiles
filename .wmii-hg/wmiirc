@@ -77,7 +77,7 @@ Event UnfocusTag
 	wmiir xwrite "/lbar/$@" "$WMII_NORMCOLORS" "$@"
 Event UrgentTag
 	shift
-	wmiir xwrite "/lbar/$@" "*$@"
+	wmiir xwrite "/lbar/$@" "$WMII_FOCUSCOLORS" "*$@"
 Event NotUrgentTag
 	shift
 	wmiir xwrite "/lbar/$@" "$@"
