@@ -55,7 +55,7 @@ wmiir write /tagrules <<!
 
 # Status Bar Info
 status() {
-	echo -n $(mocp -Q '%artist - %song') '|' Load: $(uptime | sed 's/.*://; s/,//g') '|' $(date +'%a %b %d %H:%M')
+	echo -n $(mocp -Q '%artist - %song') '|' Load: $(uptime | sed 's/.*://; s/,//g') '|' Disk Usage: $(df -h | grep /dev/sda4 | awk '{print $5}') '|' $(date +'%a %b %d %H:%M')
 }
 
 local_events() { true;}
