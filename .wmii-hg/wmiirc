@@ -19,7 +19,6 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#888888 #1d1d1d #4d4d4d'
 export WMII_FOCUSCOLORS='#add500 #212121 #4d4d4d'
 
-export WMII_BACKGROUND='#222222'
 export WMII_FONT='-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
@@ -244,7 +243,7 @@ wmiir write /ctl <<!
 	grabmod $MODKEY
 	border 1
 !
-xsetroot -solid "$WMII_BACKGROUND" &
+sh ~/.fehbg &
 
 # Misc
 progsfile="$(wmiir namespace)/.proglist"
