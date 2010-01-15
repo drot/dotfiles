@@ -15,7 +15,6 @@ import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
-import XMonad.Actions.GridSelect
 
 -- Layouts
 import XMonad.Layout.Named
@@ -97,9 +96,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch prompt
     , ((modm,               xK_p     ), shellPrompt myXPConfig) 
-
-    -- grid select
-    , ((modm,               xK_g     ), goToSelected defaultGSConfig)
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
