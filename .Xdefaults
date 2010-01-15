@@ -16,6 +16,7 @@ urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
 urxvt*colorUL: #86a2be
+urxvt*depth: 32
 !
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
@@ -30,7 +31,7 @@ urxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 urxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 
 ! tangoesque scheme
-*background: #222222
+*background: rgba:0000/0000/0000/bbbb
 *foreground: #e1e2db
 ! ! Black
 *color0: #000000

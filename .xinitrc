@@ -4,7 +4,8 @@
 #
 # Executed by startx (run your window manager from here)
 
-sh ~/.fehbg &
 xsetroot -cursor_name left_ptr &
+sh ~/.fehbg &
+xcompmgr &
 urxvtd -q -f -o &
 exec ck-launch-session xmonad 
