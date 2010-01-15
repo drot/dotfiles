@@ -68,6 +68,8 @@ myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
+    , className =? "Xarchiver" --> doFloat
+    , className =? "Pcmanfm" --> doFloat
     , className =? "Gimp"    --> doFloat ]
 
 -- Prompt style
