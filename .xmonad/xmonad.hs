@@ -16,12 +16,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 
--- Actions
-
-import XMonad.Actions.NoBorders
-
 -- Layouts
 import XMonad.Layout.Named
+import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
@@ -67,7 +64,7 @@ myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full
       tile = named "[]=" $ Tall 1 (3/100) (1/2)
       mtile = named "[M]=" $ Mirror tile
       full = named "[]" $ Full
-      float = named "><>" $ simplestFloat
+      float = named "><>" $ smartBorders simplestFloat
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
@@ -99,9 +96,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch prompt
     , ((modm,               xK_p     ), shellPrompt myXPConfig) 
-
-    -- toggle border
-    , ((modm,  xK_g ),   withFocused toggleBorder)
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
