@@ -16,6 +16,10 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
 
+-- Actions
+
+import XMonad.Actions.NoBorders
+
 -- Layouts
 import XMonad.Layout.Named
 import XMonad.Layout.PerWorkspace
@@ -68,7 +72,6 @@ myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
     , className =? "Xarchiver" --> doFloat
-    , className =? "Pcmanfm" --> doFloat
     , className =? "Gimp"    --> doFloat ]
 
 -- Prompt style
@@ -96,6 +99,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch prompt
     , ((modm,               xK_p     ), shellPrompt myXPConfig) 
+
+    -- toggle border
+    , ((modm,  xK_g ),   withFocused toggleBorder)
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
