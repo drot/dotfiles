@@ -18,7 +18,6 @@ import XMonad.Hooks.ManageDocks
 
 -- Layouts
 import XMonad.Layout.Named
-import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
@@ -64,7 +63,7 @@ myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full
       tile = named "[]=" $ Tall 1 (3/100) (1/2)
       mtile = named "[M]=" $ Mirror tile
       full = named "[]" $ Full
-      float = named "><>" $ smartBorders simplestFloat
+      float = named "><>" $ simplestFloat
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
