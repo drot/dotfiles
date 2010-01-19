@@ -16,7 +16,6 @@ urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
 urxvt*colorUL: #86a2be
-urxvt*depth: 32
 !
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
@@ -30,30 +29,30 @@ urxvt*cutchars: `()'*<>[]{|}"
 urxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 urxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
 
-! tangoesque scheme
-*background: rgba:0000/0000/0000/bbbb
-*foreground: #e1e2db
-! ! Black
-*color0: #000000
-*color8: #555753
+urxvt*background: #222222
+urxvt*foreground: #e1e2db
+
+! Black
+ *color0:        #000000
+ *color8:        #555753
 ! ! Red
-*color1: #ff6565
-*color9: #ff8d8d
+ *color1:        #ff6565
+ *color9:        #ff8d8d
 ! ! Green
-*color2: #93d44f
-*color10: #c8e7a8
+ *color2:        #93d44f
+ *color10:       #c8e7a8
 ! ! Yellow
-*color3: #eab93d
-*color11: #ffc123
+ *color3:        #eab93d
+ *color11:       #ffc123
 ! ! Blue
-*color4: #204a87
-*color12: #3465a4
+ *color4:        #204a87
+ *color12:       #3465a4
 ! ! Mangenta
-*color5: #ce5c00
-*color13: #f57900
+ *color5:        #ce5c00
+ *color13:       #f57900
 ! ! Cyan
-*color6: #89b6e2
-*color14: #46a4ff
+ *color6:        #89b6e2
+ *color14:       #46a4ff
 ! ! White
-*color7: #cccccc
-*color15: #ffffff
+ *color7:        #cccccc
+ *color15:       #ffffff
