@@ -34,7 +34,7 @@ main = xmonad =<< statusBar cmd pp kb conf
 -- Status bar style
 --
 myPP = defaultPP { ppTitle = xmobarColor "#888888" "" . wrap "<fc=#9c8e2d><</fc> " " <fc=#9c8e2d>></fc>" . shorten 50
-	         , ppCurrent = xmobarColor "#b0393f" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
+	         , ppCurrent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
 	         , ppUrgent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
 	         , ppSep = " : "
 	         , ppWsSep = " : "
@@ -76,7 +76,7 @@ myXPConfig = defaultXPConfig { font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
                              , fgColor = "#888888"
                              , bgColor = "#181818"
                              , bgHLight = "#181818"
-                             , fgHLight = "#9c8e2d"
+                             , fgHLight = "#51588e"
                              , position = Bottom
                              }
 
