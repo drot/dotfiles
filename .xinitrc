@@ -6,6 +6,6 @@
 
 xsetroot -cursor_name left_ptr &
 sh ~/.fehbg &
-xcompmgr -cCf &
+xcompmgr &
 urxvtd -q -f -o &
 exec ck-launch-session xmonad
