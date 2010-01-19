@@ -11,5 +11,5 @@ Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#bd1550>%moc%</fc> <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
+       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#9c8e2d>%moc%</fc> <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
        }
