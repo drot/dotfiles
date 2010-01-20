@@ -11,9 +11,10 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-subdued)
+(require 'color-theme)
+(require 'color-theme-tango)
 (color-theme-initialize)
-(color-theme-subdued)
+(color-theme-tango)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
