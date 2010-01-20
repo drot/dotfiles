@@ -5,6 +5,9 @@
 Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size: 22
 
+! Emacs
+Emacs.font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+
 ! URXVT
 !
 ! General

@@ -161,6 +161,9 @@ setopt extended_glob
             unsetopt zle
             PROMPT='%n@%m:%~%% '
             ;;
+	eterm-color)
+	    PROMPT='$PR_YELLOW%n$PR_WHITE:%~$PR_NO_COLOUR%% '
+	    ;;
         linux)
             PROMPT='$PR_GREEN%n@%m$PR_WHITE:$PR_YELLOW%l$PR_WHITE:$PR_RED%~$PR_YELLOW%%$PR_NO_COLOUR '
             ;;
