@@ -47,7 +47,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
                          , focusFollowsMouse  = True
                          , borderWidth        = 1
                          , modMask            = mod4Mask
-                         , workspaces         = ["main","www","irc","music","float"]
+                         , workspaces         = ["term","emacs","www","music","float"]
                          , normalBorderColor  = "#888888"
                          , focusedBorderColor = "#9c8e2d"
                          , keys               = myKeys
