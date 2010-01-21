@@ -26,24 +26,10 @@
 ;; Show column number in modeline
 (setq column-number-mode t)
 
-;; Modeline setup
-(setq default-mode-line-format
-      '("-"
-       mode-line-mule-info
-       mode-line-modified
-       mode-line-frame-identification
-       mode-line-buffer-identification
-       "  "
-       global-mode-string
-       "   %[(" mode-name mode-line-process minor-mode-alist "%n"")%]--"
-       (line-number-mode "L%l--")
-       (column-number-mode "C%c--")
-       (-3 . "%p")
-       "-%-")
-)
-
-;; Default Web Browser
-(setq browse-url-browser-function 'browse-url-chromium)
+;; Ido
+(require 'ido)
+(ido-mode t)
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
@@ -61,9 +47,10 @@
 ;; No save 
 (setq auto-save-list-file-name nil)
 
-;; No auto save
-(setq auto-save-default nil)
-
 ;; Haskell mode
 (load "haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+;; Link browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium")
