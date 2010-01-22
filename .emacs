@@ -41,11 +41,14 @@
 (setq completion-ignore-case t
   read-file-name-completion-ignore-case t)
 
-;; No backup
-(setq make-backup-files nil)
-
-;; No save 
-(setq auto-save-list-file-name nil)
+;; Change backup behavior to save in a specified directory
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
+ backup-by-copying      t
+ version-control        t
+ delete-old-versions    t
+ kept-new-versions      6
+ kept-old-versions      2
+)
 
 ;; Haskell mode
 (load "haskell-site-file")
