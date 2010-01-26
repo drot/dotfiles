@@ -6,7 +6,7 @@ Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
        , commands = [ Run StdinReader 
 		    , Run Cpu ["-L","7","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828"] 10
                     , Run Memory ["-L","5","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828","-t","Mem: <usedratio>%"] 10
-		    , Run Com "mpc" ["-f","'%artist% - %title%'"] "moc" 10
+		    , Run Com "sh" ["mpd.sh"] "moc" 10
                     , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
                     ]
        , sepChar = "%"

@@ -47,7 +47,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
                          , focusFollowsMouse  = True
                          , borderWidth        = 1
                          , modMask            = mod4Mask
-                         , workspaces         = ["term","emacs","www","music","float"]
+                         , workspaces         = ["1","2","3","4","5","6","7","8","9"]
                          , normalBorderColor  = "#888888"
                          , focusedBorderColor = "#9c8e2d"
                          , keys               = myKeys
@@ -58,7 +58,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspace "float" float $ tile ||| mtile ||| full 
+myLayoutHook = onWorkspaces ["5","9"] float $ tile ||| mtile ||| full 
   where
       tile = named "[]=" $ Tall 1 (3/100) (1/2)
       mtile = named "[M]=" $ Mirror tile
