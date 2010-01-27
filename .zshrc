@@ -11,7 +11,7 @@ export LESSHISTFILE="-"
 export PAGER="less"
 export VISUAL="emacs"
 export EDITOR=$VISUAL
-export BROWSER="midori"
+export BROWSER="chromium-browser"
 export XTERM="urxvtc"
 # }}}
 
