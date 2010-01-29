@@ -6,7 +6,7 @@ Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size: 22
 
 ! Emacs
-Emacs.font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+Emacs.font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
 
 ! URXVT
 !
@@ -30,8 +30,8 @@ urxvt*matcher.button: 1
 urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
-urxvt*font: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
-urxvt*boldFont: -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+urxvt*font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
+urxvt*boldFont: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
 
 urxvt*background: rgba:0000/0000/0000/bbbb
 urxvt*foreground: #e1e2db
