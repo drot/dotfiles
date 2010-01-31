@@ -7,9 +7,10 @@ Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
 		    , Run Cpu ["-L","7","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828"] 10
                     , Run Memory ["-L","5","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828","-t","Mem: <usedratio>%"] 10
 		    , Run Com "sh" ["mpd.sh"] "moc" 10
+                    , Run Com "sh" ["weather.sh 'EUR|BA|BK001|Mostar'"] "weather" 1800
                     , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#9c8e2d>%moc%</fc> <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
+       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#9c8e2d>%moc%</fc> <fc=#51588E>>></fc> %weather% <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
        }
