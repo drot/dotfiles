@@ -1,15 +1,6 @@
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d")
 
-;; Turn off the toolbar
-(tool-bar-mode -1)
-
-;; Turn off the menu bar
-(menu-bar-mode -1)
-
-;; Turn off the scrollbar
-(scroll-bar-mode -1)
-
 ;; Color theme
 (require 'color-theme)
 (color-theme-initialize)
@@ -58,4 +49,4 @@
 
 ;; Link browser
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "vimprobable")
+      browse-url-generic-program "chromium")

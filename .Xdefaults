@@ -7,6 +7,9 @@ Xcursor.size: 22
 
 ! Emacs
 Emacs.font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
+Emacs.menuBar: off
+Emacs.toolBar: -1
+Emacs.verticalScrollBars: off
 
 ! URXVT
 !
@@ -24,7 +27,7 @@ urxvt*depth: 32
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
 urxvt*perl-ext-common: default,matcher
-urxvt*urlLauncher: /usr/bin/vimprobable
+urxvt*urlLauncher: /usr/bin/chromium
 urxvt*matcher.button: 1
 ! So we catch even nasty URLs
 urxvt*cutchars: `()'*<>[]{|}"
