@@ -25,16 +25,16 @@ import XMonad.Layout.SimplestFloat
 --
 main = xmonad =<< statusBar cmd pp kb conf
   where
-       uhook = withUrgencyHook NoUrgencyHook
-       cmd = "xmobar ~/.xmonad/xmobarrc"
-       pp = myPP
-       kb = toggleStrutsKey
-       conf = uhook myConfig
+    uhook = withUrgencyHook NoUrgencyHook
+    cmd = "xmobar ~/.xmonad/xmobarrc"
+    pp = myPP
+    kb = toggleStrutsKey
+    conf = uhook myConfig
 
 -- Status bar style
 --
 myPP = defaultPP { ppTitle = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e><</fc> " " <fc=#51588e>></fc>" . shorten 50
-	         , ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
+                 , ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
 	         , ppUrgent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
 	         , ppSep = " <fc=#9c8e2d>:</fc> "
 	         , ppWsSep = " <fc=#9c8e2d>:</fc> "
@@ -60,10 +60,10 @@ myConfig = defaultConfig { terminal           = "urxvtc"
 --
 myLayoutHook = onWorkspaces ["5","9"] float $ tile ||| mtile ||| full 
   where
-      tile = named "[]=" $ Tall 1 (3/100) (1/2)
-      mtile = named "[M]=" $ Mirror tile
-      full = named "[]" $ Full
-      float = named "><>" $ simplestFloat
+    tile = named "[]=" $ Tall 1 (3/100) (1/2)
+    mtile = named "[M]=" $ Mirror tile
+    full = named "[]" $ Full
+    float = named "><>" $ simplestFloat
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
