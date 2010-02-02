@@ -35,7 +35,7 @@ main = xmonad =<< statusBar cmd pp kb conf
 --
 myPP = defaultPP { ppTitle = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e><</fc> " " <fc=#51588e>></fc>" . shorten 50
                  , ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
-	         , ppUrgent = xmobarColor "#ffffff" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
+	         , ppUrgent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
 	         , ppSep = " <fc=#9c8e2d>:</fc> "
 	         , ppWsSep = " <fc=#9c8e2d>:</fc> "
 	         , ppLayout = xmobarColor "#9c8e2d" ""
