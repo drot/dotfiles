@@ -11,7 +11,6 @@ export LESSHISTFILE="-"
 export PAGER="less"
 export VISUAL="emacs"
 export EDITOR=$VISUAL
-export BROWSER="chromium"
 export XTERM="urxvtc"
 # }}}
 
@@ -73,7 +72,11 @@ setopt shwordsplit
 setopt interactivecomments
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt histreduceblanks histignorespace inc_append_history
-#
+
+# Prompt requirements
+setopt extended_glob prompt_subst
+autoload colors zsh/terminfo
+
 # new style completion system
 autoload -U compinit; compinit
 # list of completers to use
@@ -113,16 +116,16 @@ function precmd {
         PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
     fi
 }
-###
-# extended globbing 
-setopt extended_glob
-    ###
-    # need this so the prompt will work
-    function setprompt () {
-    setopt prompt_subst
-    ###
-    # try to use colors
-    autoload colors zsh/terminfo
+
+function preexec () {
+    # Screen window titles as currently running programs
+    if [[ "$TERM" == "screen-256color" ]]; then
+        local CMD=${1[(wr)^(*=*|sudo|-*)]}
+        echo -n "\ek$CMD\e\\"
+    fi
+}
+
+function setprompt () {
     if [[ "$terminfo[colors]" -ge 8 ]]; then
         colors
     fi
@@ -132,6 +135,7 @@ setopt extended_glob
 	(( count = $count + 1 ))
     done
     PR_NO_COLOUR="%{$terminfo[sgr0]%}"
+
     ###
     # try to use extended characters to look nicer
     typeset -A altchar
@@ -148,7 +152,10 @@ setopt extended_glob
     # set titlebar text on a terminal emulator
     case $TERM in
 	rxvt*)
-            PR_TITLEBAR=$'%{\e]0;%(!.*ROOT* | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+            PR_TITLEBAR=$'%{\e]0;%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+	    ;;
+	screen*)
+            PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
 	    ;;
     esac
     ###
