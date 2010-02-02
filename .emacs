@@ -1,6 +1,15 @@
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d")
 
+;; Turn off the toolbar
+(tool-bar-mode -1)
+
+;; Turn off the menu bar
+(menu-bar-mode -1)
+
+;; Turn off the scrollbar
+(scroll-bar-mode -1)
+
 ;; Color theme
 (require 'color-theme)
 (color-theme-initialize)
