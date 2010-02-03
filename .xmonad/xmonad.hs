@@ -61,8 +61,8 @@ myConfig = defaultConfig { terminal           = "urxvtc"
 myLayoutHook = onWorkspaces ["5","9"] float $ tile ||| mtile ||| full 
   where
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
-    mtile = named "[M]=" $ Mirror tile
-    full = named "[]" $ Full
+    mtile = named "[M]" $ Mirror tile
+    full = named "[ ]" $ Full
     float = named "><>" $ simplestFloat
 
 myManageHook = composeAll
