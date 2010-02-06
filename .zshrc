@@ -9,7 +9,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export LESSHISTFILE="-"
 export PAGER="less"
-export VISUAL="emacs"
+export VISUAL="vim"
 export EDITOR=$VISUAL
 export XTERM="urxvtc"
 # }}}
@@ -168,9 +168,6 @@ function setprompt () {
             unsetopt zle
             PROMPT='%n@%m:%~%% '
             ;;
-	eterm-color)
-	    PROMPT='$PR_YELLOW%n$PR_WHITE:%~$PR_NO_COLOUR%% '
-	    ;;
         linux)
             PROMPT='$PR_GREEN%n@%m$PR_WHITE:$PR_YELLOW%l$PR_WHITE:$PR_RED%~$PR_YELLOW%%$PR_NO_COLOUR '
             ;;
