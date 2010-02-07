@@ -16,8 +16,8 @@ noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-export WMII_NORMCOLORS='#757575 #202020 #202020'
-export WMII_FOCUSCOLORS='#dc8e2d #202020 #505050'
+export WMII_NORMCOLORS='#e0e0e0 #202020 #202020'
+export WMII_FOCUSCOLORS='#A0FF00 #202020 #8c8c8c'
 
 export WMII_FONT='-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*'
 
@@ -145,7 +145,7 @@ Action status
 	if wmiir remove /rbar/status 2>/dev/null; then
 		sleep 2
 	fi
-	echo "$WMII_FOCUSCOLORS" | wmiir create /rbar/status
+	echo "$WMII_NORMCOLORS" | wmiir create /rbar/status
 	while status | wmiir write /rbar/status; do
 		sleep 1
 	done
