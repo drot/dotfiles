@@ -18,6 +18,7 @@ noticebar=/rbar/!notice
 # Colors tuples: "<text> <background> <border>"
 export WMII_NORMCOLORS='#757575 #202020 #202020'
 export WMII_FOCUSCOLORS='#cdff00 #202020 #505050'
+export WMII_URGENTCOLORS='#757ae5 #202020 #505050'
 
 export WMII_FONT='-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*'
 
@@ -76,7 +77,7 @@ Event UnfocusTag
 	wmiir xwrite "/lbar/$@" "$WMII_NORMCOLORS" "$@"
 Event UrgentTag
 	shift
-	wmiir xwrite "/lbar/$@" "*$@"
+	wmiir xwrite "/lbar/$@" "$WMII_URGENTCOLORS" "*$@"
 Event NotUrgentTag
 	shift
 	wmiir xwrite "/lbar/$@" "$@"
