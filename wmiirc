@@ -16,8 +16,8 @@ noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-export WMII_NORMCOLORS='#e0e0e0 #000000 #202020'
-export WMII_FOCUSCOLORS='#A0FF00 #000000 #8c8c8c'
+export WMII_NORMCOLORS='#e0e0e0 #000000 #505050'
+export WMII_FOCUSCOLORS='#A0FF00 #000000 #A0A0A0'
 
 export WMII_FONT='-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*'
 
@@ -54,7 +54,7 @@ wmiir write /tagrules <<!
 
 # Status Bar Info
 status() {
-	echo -n $(~/bin/mpd.sh) '|' Load: $(uptime | sed 's/.*://; s/,//g') '|' Disk Usage: $(df -h | grep /dev/sda4 | awk '{print $5}') '|' $(date +'%a %b %d %H:%M')
+	echo -n $(~/bin/mpd.sh) '>>' Load: $(uptime | sed 's/.*://; s/,//g') '>>' Disk Usage: $(df -h | grep /dev/sda4 | awk '{print $5}') '>>' $(date +'%a %b %d %H:%M')
 }
 
 local_events() { true;}
