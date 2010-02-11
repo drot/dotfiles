@@ -10,7 +10,7 @@ set nohls
 set incsearch
 set showmatch
 
-" identing
+" indenting
 set autoindent
 set smartindent
 
@@ -20,6 +20,7 @@ set wildmode=list:longest,full
 
 " -[ Look ]-
 " general
+colorscheme dante
 set showcmd
 set showmode
 set number
