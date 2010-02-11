@@ -76,7 +76,7 @@ myXPConfig = defaultXPConfig { font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
                              , fgColor = "#888888"
                              , bgColor = "#181818"
                              , bgHLight = "#181818"
-                             , fgHLight = "#51588e"
+                             , fgHLight = "#9c8e2d"
                              , position = Bottom
                              }
 
