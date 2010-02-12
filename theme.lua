@@ -9,11 +9,12 @@
 -- {{{ Main
 theme = {}
 theme.confdir       = awful.util.getdir("config")
-theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/needles.jpg" }
+theme.wallpaper_cmd = { "sh /home/drot/.fehbg" }
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Terminus 8"
+theme.font      = "Profont 8"
+
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"

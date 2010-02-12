@@ -120,6 +120,14 @@ end
 vicious.register(fs.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(fs.b, vicious.widgets.fs, "${/boot used_p}", 500)
 
+-- {{{ GMail widget
+-- Initialize widget
+gmailicon = widget({ type = "imagebox" })
+gmailicon.image = image(beautiful.widget_mail)
+gmailwidget = widget({ type = "textbox" })
+--Register widget
+vicious.register(gmailwidget, vicious.widgets.gmail, "${count}, ${subject}", 300)
+
 -- {{{ Date widget
 -- Initialize widget
 dateicon = widget({ type = "imagebox" })
@@ -173,7 +181,6 @@ for s = 1, screen.count() do
 	awful.button({ }, 4, function () awful.layout.inc(layouts, 1)  end),
 	awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)
 	))
-
 	-- Create the taglist
 	taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
 	-- Create the wibox
@@ -195,6 +202,7 @@ wibox[s].widgets = {
 	separator, membar.widget, memicon,
 	separator, cpugraph.widget, separator, tzswidget, cpuicon, 
 	separator, weatherwidget, weathericon,
+	separator, gmailwidget, gmailicon,
 	separator, mpdwidget, mpdicon,
 	separator, ["layout"] = awful.widget.layout.horizontal.rightleft
 }
@@ -334,12 +342,12 @@ awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
-                     focus = true,
+                     focus = true, size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
-    { rule = { class = "pinentry" },
+    { rule = { class = "Xarchiver" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
@@ -347,13 +355,20 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
 }
+
+
+
 -- }}}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     -- Add a titlebar
-    -- awful.titlebar.add(c, { modkey = modkey })
+    if awful.client.floating.get(c)
+    or awful.layout.get(c.screen) == awful.layout.suit.floating then
+        if   c.titlebar then awful.titlebar.remove(c)
+        else awful.titlebar.add(c, {modkey = modkey}) end
+    end
 
     -- Enable sloppy focus
     c:add_signal("mouse::enter", function(c)
@@ -378,4 +393,16 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+for s = 1, screen.count() do screen[s]:add_signal("arrange", function ()
+    local clients = awful.client.visible(s)
+    local layout = awful.layout.getname(awful.layout.get(s))
+
+    for _, c in pairs(clients) do -- Floaters are always on top
+        if   awful.client.floating.get(c) or layout == "floating"
+        then if not c.fullscreen then c.above       =  true  end
+        else                          c.above       =  false end
+    end
+  end)
+end
 -- }}}
