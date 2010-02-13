@@ -88,6 +88,8 @@ theme.widget_date   = theme.confdir .. "/icons/time.png"
 theme.widget_sep    = theme.confdir .. "/icons/separator.png"
 theme.widget_music  = theme.confdir .. "/icons/music.png"
 theme.widget_weather  = theme.confdir .. "/icons/temp.png"
+theme.widget_uptime  = theme.confdir .. "/icons/power.png"
+theme.widget_vol  = theme.confdir .. "/icons/vol.png"
 -- }}}
 
 -- {{{ Titlebar

@@ -53,6 +53,8 @@ end
 -- {{{ Reusable separators
 separator = widget({ type = "imagebox" })
 separator.image = image(beautiful.widget_sep)
+spacer = widget({ type = "textbox"  })
+spacer.text = " "
 
 -- }}}
 
@@ -91,6 +93,42 @@ beautiful.fg_center_widget, beautiful.fg_end_widget})
 -- Register widget
 vicious.register(membar, vicious.widgets.mem, "$1", 13)
 -- }}}
+
+-- {{{ Volume level
+volicon = widget({ type = "imagebox" })
+volicon.image = image(beautiful.widget_vol)
+-- Initialize widgets
+volbar    = awful.widget.progressbar()
+volwidget = widget({ type = "textbox" })
+-- Progressbar properties
+volbar:set_width(10)
+volbar:set_height(12)
+volbar:set_vertical(true)
+volbar:set_background_color(beautiful.fg_off_widget)
+volbar:set_border_color(beautiful.border_widget)
+volbar:set_color(beautiful.fg_widget)
+volbar:set_gradient_colors({ beautiful.fg_widget,
+   beautiful.fg_center_widget, beautiful.fg_end_widget
+}) -- Enable caching
+vicious.enable_caching(vicious.widgets.volume)
+-- Register widgets
+vicious.register(volbar,    vicious.widgets.volume, "$1",  2, "PCM")
+vicious.register(volwidget, vicious.widgets.volume, "$1%", 2, "PCM")
+-- Register buttons
+volbar.widget:buttons(awful.util.table.join(
+   awful.button({ }, 1, function () awful.util.spawn("amixer -q sset PCM 2dB+", false) end),
+   awful.button({ }, 3, function () awful.util.spawn("amixer -q sset PCM 2dB-", false) end)
+)) -- Register assigned buttons
+volwidget:buttons(volbar.widget:buttons())
+
+-- Uptime widget
+uptimeicon = widget({ type = "imagebox" })
+uptimeicon.image = image(beautiful.widget_uptime)
+uptimewidget = widget({ type = 'textbox' })
+vicious.register(uptimewidget, vicious.widgets.uptime,
+    function (widget, args)
+      return string.format('%2dd %02d:%02d', args[1], args[2], args[3])
+    end, 61)
 
 -- {{{ Network usage
 dnicon = widget({ type = "imagebox" })
@@ -216,14 +254,18 @@ wibox_top[s].widgets = {
 	separator, fs.b.widget, fs.r.widget, fsicon,
 	separator, membar.widget, memicon,
 	separator, cpugraph.widget, tzswidget, cpuicon,
-	separator, mpdwidget, mpdicon,
 	separator, ["layout"] = awful.widget.layout.horizontal.rightleft
 }
 
 wibox_bottom[s].widgets = {
-   weathericon, weatherwidget, separator,
-   gmailicon, gmailwidget, separator,
-   ["layout"] = awful.widget.layout.horizontal.leftright
+   { weathericon, weatherwidget, separator,
+      gmailicon, gmailwidget, separator,
+      ["layout"] = awful.widget.layout.horizontal.leftright
+   },
+   uptimewidget, uptimeicon, separator,
+   volwidget, spacer, volbar.widget, volicon, separator,
+   mpdwidget, mpdicon, separator,
+   ["layout"] = awful.widget.layout.horizontal.rightleft
 }
 end
 
