@@ -35,18 +35,23 @@ layouts = {
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+  names  = { "term", "emacs", "web", "im", "music", "misc", 7, 8, 9 },
+  layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[7],
+             layouts[7], layouts[1], layouts[1], layouts[1]
+}}
+
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layout)
+    awful.tag.setproperty(tags[s][7], "hide",   true)
+    awful.tag.setproperty(tags[s][8], "hide",   true)
+    awful.tag.setproperty(tags[s][9], "hide",   true)
 end
 
 -- {{{ Wibox
 
 -- {{{ Reusable separators
-spacer    = widget({ type = "textbox"  })
 separator = widget({ type = "imagebox" })
-spacer.text     = " "
 separator.image = image(beautiful.widget_sep)
 
 -- }}}
@@ -115,7 +120,8 @@ for _, w in pairs(fs) do
 	w:set_color(beautiful.fg_widget)
 	w:set_gradient_colors({ beautiful.fg_widget,beautiful.fg_center_widget, beautiful.fg_end_widget})
 end
-
+-- Enable caching
+vicious.enable_caching(vicious.widgets.fs)
 -- Register widget
 vicious.register(fs.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(fs.b, vicious.widgets.fs, "${/boot used_p}", 500)
@@ -157,7 +163,8 @@ vicious.register(mpdwidget, vicious.widgets.mpd, "$1")
 
 -- {{{ Wibox initialisation
 
-wibox     = {}
+wibox_top = {}
+wibox_bottom = {}
 promptbox = {}
 layoutbox = {}
 taglist   = {}
@@ -183,28 +190,40 @@ for s = 1, screen.count() do
 	))
 	-- Create the taglist
 	taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
-	-- Create the wibox
-	wibox[s] = awful.wibox({      screen = s,
+	-- Create the wiboxen
+	-- Top
+	wibox_top[s] = awful.wibox({screen = s,
 	fg = beautiful.fg_normal, height = 12,
 	bg = beautiful.bg_normal, position = "top",
 	border_color = beautiful.border_focus,
 	border_width = beautiful.border_width
 })
+	-- Bottom
+	wibox_bottom[s] = awful.wibox({screen = s,
+	fg = beautiful.fg_normal, height = 12,
+	bg = beautiful.bg_normal, position = "bottom",
+	border_color = beautiful.border_focus,
+	border_width = beautiful.border_width
+})
 
--- Add widgets to the wibox
-wibox[s].widgets = {
+-- Add widgets to the wiboxen
+wibox_top[s].widgets = {
 	{   taglist[s], layoutbox[s], separator, promptbox[s],
 	    ["layout"] = awful.widget.layout.horizontal.leftright
 	},
-	separator, datewidget, dateicon, 
+	datewidget, dateicon, 
 	separator, upicon, netwidget, dnicon,
 	separator, fs.b.widget, fs.r.widget, fsicon,
 	separator, membar.widget, memicon,
-	separator, cpugraph.widget, separator, tzswidget, cpuicon, 
-	separator, weatherwidget, weathericon,
-	separator, gmailwidget, gmailicon,
+	separator, cpugraph.widget, tzswidget, cpuicon,
 	separator, mpdwidget, mpdicon,
 	separator, ["layout"] = awful.widget.layout.horizontal.rightleft
+}
+
+wibox_bottom[s].widgets = {
+   weathericon, weatherwidget, separator,
+   gmailicon, gmailwidget, separator,
+   ["layout"] = awful.widget.layout.horizontal.leftright
 }
 end
 
