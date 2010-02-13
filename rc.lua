@@ -13,10 +13,8 @@ require("vicious")
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/drot/.config/awesome/themes/zenburn/theme.lua")
 
--- This is used later as the default terminal and editor to run.
+-- This is used later as the default terminal to run.
 terminal = "urxvtc"
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 modkey = "Mod4"
