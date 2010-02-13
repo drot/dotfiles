@@ -162,6 +162,14 @@ vicious.enable_caching(vicious.widgets.fs)
 vicious.register(fs.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(fs.b, vicious.widgets.fs, "${/boot used_p}", 500)
 
+-- Pkg update widget
+-- Initialize widget
+pkgicon = widget({ type = "imagebox" })
+pkgicon.image = image(beautiful.widget_pkg)
+pkgwidget = widget({ type = "textbox"})
+-- Register widget
+vicious.register(pkgwidget, vicious.widgets.pkg, "$1", 3700, "Arch")
+
 -- {{{ GMail widget
 -- Initialize widget
 gmailicon = widget({ type = "imagebox" })
@@ -256,7 +264,8 @@ wibox_top[s].widgets = {
 }
 
 wibox_bottom[s].widgets = {
-   { weathericon, weatherwidget, separator,
+   { pkgicon, pkgwidget, separator,
+      weathericon, weatherwidget, separator,
       gmailicon, gmailwidget, separator,
       ["layout"] = awful.widget.layout.horizontal.leftright
    },

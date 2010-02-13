@@ -90,6 +90,7 @@ theme.widget_music  = theme.confdir .. "/icons/music.png"
 theme.widget_weather  = theme.confdir .. "/icons/temp.png"
 theme.widget_uptime  = theme.confdir .. "/icons/power.png"
 theme.widget_vol  = theme.confdir .. "/icons/vol.png"
+theme.widget_pkg  = theme.confdir .. "/icons/pacman.png"
 -- }}}
 
 -- {{{ Titlebar
