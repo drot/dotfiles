@@ -123,10 +123,7 @@ volwidget:buttons(volbar.widget:buttons())
 uptimeicon = widget({ type = "imagebox" })
 uptimeicon.image = image(beautiful.widget_uptime)
 uptimewidget = widget({ type = 'textbox' })
-vicious.register(uptimewidget, vicious.widgets.uptime,
-    function (widget, args)
-      return string.format('%2dd %02d:%02d', args[1], args[2], args[3])
-    end, 61)
+vicious.register(uptimewidget, vicious.widgets.uptime, "$4.$5.$6, $1d $2:$3", 61)
 
 -- {{{ Network usage
 dnicon = widget({ type = "imagebox" })
