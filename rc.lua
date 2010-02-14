@@ -165,7 +165,7 @@ pkgicon = widget({ type = "imagebox" })
 pkgicon.image = image(beautiful.widget_pkg)
 pkgwidget = widget({ type = "textbox"})
 -- Register widget
-vicious.register(pkgwidget, vicious.widgets.pkg, "$1", 3700, "Arch")
+vicious.register(pkgwidget, vicious.widgets.pkg, "$1 updates", 3700, "Arch")
 
 -- {{{ GMail widget
 -- Initialize widget
