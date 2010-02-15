@@ -9,7 +9,7 @@
 -- {{{ Main
 theme = {}
 theme.confdir       = awful.util.getdir("config")
-theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/needles.jpg" }
+theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/forest.jpg" }
 -- }}}
 
 -- {{{ Styles

@@ -8,6 +8,8 @@ require("beautiful")
 require("naughty")
 -- Widget display
 require("vicious")
+-- Scratchpad manager
+require("scratch")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -314,6 +316,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey            }, "s", function () scratch.drop("urxvtc", "bottom") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
