@@ -4,8 +4,6 @@ require("awful.autofocus")
 require("awful.rules")
 -- Theme handling library
 require("beautiful")
--- Notification library
-require("naughty")
 -- Widget display
 require("vicious")
 -- Scratchpad manager
