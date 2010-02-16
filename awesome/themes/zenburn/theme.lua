@@ -9,19 +9,19 @@
 -- {{{ Main
 theme = {}
 theme.confdir       = awful.util.getdir("config")
-theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/forest.jpg" }
+theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/distant.jpg" }
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Profont 8"
+theme.font      = "sans 7"
 
 
 -- {{{ Colors
-theme.fg_normal = "#888888"
+theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
 theme.fg_urgent = "#51588e"
-theme.bg_normal = "#181818"
-theme.bg_focus  = "#181818"
+theme.bg_normal = "#000000AA"
+theme.bg_focus  = "#1E2320"
 theme.bg_urgent = theme.bg_normal
 -- }}}
 
@@ -47,8 +47,6 @@ theme.fg_end_widget    = "#FF5656"
 theme.fg_off_widget    = "#494B4F"
 theme.fg_netup_widget  = "#7F9F7F"
 theme.fg_netdn_widget  = theme.fg_normal
-theme.bg_widget        = theme.bg_normal
-theme.border_widget    = theme.bg_normal
 -- }}}
 
 -- {{{ Mouse finder
