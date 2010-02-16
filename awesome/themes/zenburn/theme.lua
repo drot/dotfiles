@@ -19,7 +19,7 @@ theme.font      = "sans 7"
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
-theme.fg_urgent = "#51588e"
+theme.fg_urgent = "#0099FF"
 theme.bg_normal = "#000000AA"
 theme.bg_focus  = "#1E2320"
 theme.bg_urgent = theme.bg_normal
