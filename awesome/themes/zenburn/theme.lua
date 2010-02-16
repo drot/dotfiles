@@ -13,14 +13,13 @@ theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/distant.jpg" }
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 7"
-
+theme.font      = "Terminus 8"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
-theme.fg_urgent = "#0099FF"
-theme.bg_normal = "#000000AA"
+theme.fg_urgent = "#CC9393"
+theme.bg_normal = "#3F3F3F"
 theme.bg_focus  = "#1E2320"
 theme.bg_urgent = theme.bg_normal
 -- }}}
@@ -30,11 +29,6 @@ theme.border_width  = 1
 theme.border_focus  = "#6F6F6F"
 theme.border_normal = theme.bg_normal
 theme.border_marked = theme.fg_urgent
--- }}}
-
--- {{{ Titlebars
-theme.titlebar_bg_focus  = theme.bg_normal
-theme.titlebar_bg_normal = theme.bg_normal
 -- }}}
 
 -- {{{ Widgets
@@ -47,6 +41,8 @@ theme.fg_end_widget    = "#FF5656"
 theme.fg_off_widget    = "#494B4F"
 theme.fg_netup_widget  = "#7F9F7F"
 theme.fg_netdn_widget  = theme.fg_normal
+theme.bg_widget        = theme.bg_normal
+theme.border_widget    = theme.bg_normal
 -- }}}
 
 -- {{{ Mouse finder

@@ -286,7 +286,7 @@ wibox_top[s].widgets = {
 	},
 	datewidget, dateicon, 
 	separator, upicon, netwidget, dnicon,
-	separator, fs.b.widget, spacer, fs.r.widget, fsicon,
+	separator, fs.b.widget, fs.r.widget, fsicon,
 	separator, membar.widget, memicon,
 	separator, cpugraph.widget, tzswidget, cpuicon,
 	separator, tasklist[s],
