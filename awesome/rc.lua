@@ -190,7 +190,7 @@ weathericon = widget({ type = "imagebox" })
 weathericon.image = image(beautiful.widget_weather)
 weatherwidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}°, ${sky}", 3600, "LQMO")
+vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}°, ${weather}", 3600, "LQMO")
 -- }}}
 
 -- {{{ MPD widget
