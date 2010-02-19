@@ -190,7 +190,7 @@ weathericon = widget({ type = "imagebox" })
 weathericon.image = image(beautiful.widget_weather)
 weatherwidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}°, ${weather}", 3600, "LQMO")
+vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}°, ${sky}", 3600, "LQMO")
 -- }}}
 
 -- {{{ MPD widget
@@ -281,7 +281,7 @@ for s = 1, screen.count() do
 
 -- Add widgets to the wiboxen
 wibox_top[s].widgets = {
-	{   taglist[s], layoutbox[s], separator, promptbox[s],
+	{   taglist[s], spacer, layoutbox[s], separator, promptbox[s],
 	    ["layout"] = awful.widget.layout.horizontal.leftright
 	},
 	datewidget, dateicon, 
