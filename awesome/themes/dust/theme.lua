@@ -1,7 +1,7 @@
 -- {{{ Main
 theme = {}
 theme.confdir       = awful.util.getdir("config")
-theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/golf.jpg" }
+theme.wallpaper_cmd = { "awsetbg /home/drot/Pictures/gas.jpg" }
 -- }}}
 
 -- {{{ Font
@@ -25,8 +25,8 @@ theme.border_marked = "#91231c"
 
 -- {{{ Widgets
 theme.fg_widget           = "#908884"
-theme.fg_center_widget    = "#636363"
-theme.fg_end_widget       = "#ffffff"
+theme.fg_center_widget    = "#c6c6c6"
+theme.fg_end_widget       = "#908884"
 theme.border_widget       = theme.bg_normal
 -- }}}
 
