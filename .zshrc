@@ -117,14 +117,6 @@ function precmd {
     fi
 }
 
-function preexec () {
-    # Screen window titles as currently running programs
-    if [[ "$TERM" == "screen-256color" ]]; then
-        local CMD=${1[(wr)^(*=*|sudo|-*)]}
-        echo -n "\ek$CMD\e\\"
-    fi
-}
-
 function setprompt () {
     if [[ "$terminfo[colors]" -ge 8 ]]; then
         colors
@@ -153,9 +145,6 @@ function setprompt () {
     case $TERM in
 	rxvt*)
             PR_TITLEBAR=$'%{\e]0;%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
-	    ;;
-	screen*)
-            PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
 	    ;;
     esac
     ###
