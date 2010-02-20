@@ -288,7 +288,7 @@ wibox_top[s].widgets = {
 	separator, membar.widget, memicon,
 	separator, cpugraph.widget, tzswidget, cpuicon,
 	separator, tasklist[s],
-	separator, ["layout"] = awful.widget.layout.horizontal.rightleft
+	["layout"] = awful.widget.layout.horizontal.rightleft
 }
 
 wibox_bottom[s].widgets = {
