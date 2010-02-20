@@ -133,7 +133,7 @@ upicon.image = image(beautiful.widget_netup)
 -- Initialize widget
 netwidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, "${eth0 down_kb} ${eth0 up_kb}", 3)
+vicious.register(netwidget, vicious.widgets.net, "${eth0 down_kb}/${eth0 up_kb}", 3)
 -- }}}
 
 -- {{{ Filesystem usage
