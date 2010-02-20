@@ -52,9 +52,9 @@
  kept-old-versions      2
 )
 
-;; Haskell mode
-(load "haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; Lua mode
+(setq auto-mode-alist (cons '("\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; Link browser
 (setq browse-url-browser-function 'browse-url-generic

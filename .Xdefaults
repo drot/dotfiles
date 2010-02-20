@@ -22,7 +22,7 @@ urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
 urxvt*colorUL: #86a2be
-urxvt*depth: 32
+urxvt*cursorColor: #DCDCCC
 !
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
@@ -36,33 +36,26 @@ urxvt*cutchars: `()'*<>[]{|}"
 urxvt*font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
 urxvt*boldFont: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
 
-urxvt*background: rgba:0000/0000/0000/bbbb
-urxvt*foreground: #e1e2db
+! Color theme
+urxvt*background:       #222222
+urxvt*foreground:       #e1e2db
 
-! Black
- *color0:        #000000
- *color8:        #555753
-! ! Red
- *color1:        #ff6565
- *color9:        #ff8d8d
-! ! Green
- *color2:        #93d44f
- *color10:       #c8e7a8
-! ! Yellow
- *color3:        #eab93d
- *color11:       #ffc123
-! ! Blue
- *color4:        #204a87
- *color12:       #3465a4
-! ! Mangenta
- *color5:        #ce5c00
- *color13:       #f57900
-! ! Cyan
- *color6:        #89b6e2
- *color14:       #46a4ff
-! ! White
- *color7:        #cccccc
- *color15:       #ffffff
+urxvt*color0:        	#303030
+urxvt*color1:        	#c03000
+urxvt*color2:        	#b1d631
+urxvt*color3:        	#fecf35
+urxvt*color4:        	#426870
+urxvt*color5:        	#6d506d
+urxvt*color6:        	#4bb5c1
+urxvt*color7:        	#e2e2e5
+urxvt*color8:        	#5f5f5f
+urxvt*color9:        	#ff3a78
+urxvt*color10:		#a6cd07
+urxvt*color11:       	#b5c865
+urxvt*color12:       	#4a7781
+urxvt*color13:       	#ff3b77
+urxvt*color14:       	#4bb5c1
+urxvt*color15:       	#e2e2e5
 
 ! xmessage
 xmessage*form.okay.shapeStyle:          rectangle
