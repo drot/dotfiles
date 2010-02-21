@@ -79,11 +79,11 @@ encryption = allow_incoming,enable_retry,prefer_plaintext
 # "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
 # The default is "off". For DHT to work, a session directory must be defined.
 # 
-dht = auto
+#dht = auto
 
 # UDP port to use for DHT. 
 # 
-dht_port = 6881
+#dht_port = 6881
 
 # Enable peer exchange (for torrents not marked private)
 #
@@ -106,3 +106,7 @@ peer_exchange = yes
 # before forcing. Overworked systems might need lower values to get a
 # decent hash checking rate.
 #hash_max_tries = 10
+
+# Colors
+active_fg_color = 2
+done_fg_color = 4
