@@ -56,6 +56,5 @@
 (setq auto-mode-alist (cons '("\.lua$" . lua-mode) auto-mode-alist))
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
-;; Link browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium")
+;; Default browser
+(setq browse-url-browser-function 'browse-url-firefox)
