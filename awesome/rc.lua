@@ -279,7 +279,7 @@ for s = 1, screen.count() do
 
 -- Add widgets to the wiboxen
 wibox_top[s].widgets = {
-	{   taglist[s], spacer, layoutbox[s], separator, promptbox[s],
+	{   taglist[s], spacer, layoutbox[s], promptbox[s],
 	    ["layout"] = awful.widget.layout.horizontal.leftright
 	},
 	datewidget, dateicon, 
@@ -287,7 +287,7 @@ wibox_top[s].widgets = {
 	separator, fs.b.widget, fs.r.widget, fsicon,
 	separator, membar.widget, memicon,
 	separator, cpugraph.widget, tzswidget, cpuicon,
-	separator, tasklist[s],
+	tasklist[s],
 	["layout"] = awful.widget.layout.horizontal.rightleft
 }
 
@@ -446,11 +446,6 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Xarchiver" },
       properties = { floating = true } },
-    { rule = { class = "Gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 
 
@@ -460,12 +455,6 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
-    -- Add a titlebar
-    if awful.client.floating.get(c)
-    or awful.layout.get(c.screen) == awful.layout.suit.floating then
-        if   c.titlebar then awful.titlebar.remove(c)
-        else awful.titlebar.add(c, {modkey = modkey}) end
-    end
 
     -- Enable sloppy focus
     c:add_signal("mouse::enter", function(c)
