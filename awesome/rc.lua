@@ -51,9 +51,6 @@ end
 -- {{{ Reusable separators
 separator = widget({ type = "imagebox" })
 separator.image = image(beautiful.widget_sep)
-spacer = widget({ type = "textbox"  })
-spacer.text = " "
-
 -- }}}
 
 -- {{{ CPU usage and temperature
@@ -279,7 +276,7 @@ for s = 1, screen.count() do
 
 -- Add widgets to the wiboxen
 wibox_top[s].widgets = {
-	{   taglist[s], spacer, layoutbox[s], promptbox[s],
+	{   taglist[s], layoutbox[s], promptbox[s],
 	    ["layout"] = awful.widget.layout.horizontal.leftright
 	},
 	datewidget, dateicon, 
@@ -294,12 +291,12 @@ wibox_top[s].widgets = {
 wibox_bottom[s].widgets = {
    { pkgicon, pkgwidget, separator,
       weathericon, weatherwidget, separator,
-      gmailicon, gmailwidget, separator,
+      gmailicon, gmailwidget,
       ["layout"] = awful.widget.layout.horizontal.leftright
    },
    uptimewidget, uptimeicon, separator,
-   volwidget, spacer, volbar.widget, volicon, separator,
-   mpdwidget, mpdicon, separator,
+   volwidget, volbar.widget, volicon, separator,
+   mpdwidget, mpdicon,
    ["layout"] = awful.widget.layout.horizontal.rightleft
 }
 end
