@@ -57,5 +57,4 @@
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; Default browser
-(setq browse-url-browser-function 'browse-url-generic
-browse-url-generic-program "chromium")
+(setq browse-url-browser-function 'browse-url-firefox)
