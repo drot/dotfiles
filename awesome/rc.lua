@@ -34,14 +34,13 @@ layouts = {
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-  names  = { "1:main", "2:www", "3:irc", "4:music", "5:misc", 6, 7, 8, 9 },
-  layout = { layouts[1], layouts[1], layouts[1], layouts[7], layouts[7],
+  names  = { "main", "emacs", "www", "irc", "music", "misc", 7, 8, 9 },
+  layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[7],
              layouts[7], layouts[1], layouts[1], layouts[1]
 }}
 
 for s = 1, screen.count() do
     tags[s] = awful.tag(tags.names, s, tags.layout)
-    awful.tag.setproperty(tags[s][6], "hide",   true)
     awful.tag.setproperty(tags[s][7], "hide",   true)
     awful.tag.setproperty(tags[s][8], "hide",   true)
     awful.tag.setproperty(tags[s][9], "hide",   true)
