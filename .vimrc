@@ -12,7 +12,6 @@ set showmatch
 
 " indenting
 set autoindent
-set smartindent
 
 " command mode
 set wildmenu

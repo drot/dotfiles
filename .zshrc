@@ -9,7 +9,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export LESSHISTFILE="-"
 export PAGER="less"
-export VISUAL="emacs"
+export VISUAL="vim"
 export EDITOR=$VISUAL
 export XTERM="urxvtc"
 # }}}
