@@ -1,185 +1,104 @@
-# Modified by drot 
+#------------------------------
+# History stuff
+#------------------------------
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
 
-# {{{ User settings
-
-# {{{ Environment
-export PATH=$PATH:~/bin
-export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
-export LESSHISTFILE="-"
+#------------------------------
+# Variables
+#------------------------------
+export EDITOR="emacs"
 export PAGER="less"
-export VISUAL="emacs"
-export EDITOR=$VISUAL
-export XTERM="urxvtc"
-# }}}
+export PATH="${PATH}:${HOME}/bin"
 
-# {{{ Dircolors
-eval `dircolors -b ~/.dircolors`
-# }}}
+#-----------------------------
+# Dircolors
+#-----------------------------
+LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
+export LS_COLORS
 
-# {{{ Manual pages
-#     - colorize, since man-db fails to do so
-export LESS_TERMCAP_mb=$'\E[01;31m'   # begin blinking
-export LESS_TERMCAP_md=$'\E[01;31m'   # begin bold
-export LESS_TERMCAP_me=$'\E[0m'       # end mode
-export LESS_TERMCAP_se=$'\E[0m'       # end standout-mode
-export LESS_TERMCAP_so=$'\E[1;33;40m' # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m'       # end underline
-export LESS_TERMCAP_us=$'\E[1;32m'    # begin underline
-# }}}
+#------------------------------
+# Alias stuff
+#------------------------------
+alias ls="ls --color"
 
-# {{{ Aliases
-alias ls='ls --color'
-# }}}
+#------------------------------
+# Comp stuff
+#------------------------------
+zmodload zsh/complist 
+autoload -Uz compinit
+compinit
+zstyle :compinstall filename '${HOME}/.zshrc'
 
-# {{{ Functions
-function extract () {
-    if [[ -z "$1" ]]; then
-        print -P "Usage: extract filename"
-        print -P "Extract a given file based on the extension."
-    elif [[ -f "$1" ]]; then
-        case "$1" in
-            *.tbz2 | *.tar.bz2) tar -xvjf  "$1"     ;;
-            *.txz | *.tar.xz)   tar -xvJf  "$1"     ;;
-            *.tgz | *.tar.gz)   tar -xvzf  "$1"     ;;
-            *.tar | *.cbt)      tar -xvf   "$1"     ;;
-            *.zip | *.cbz)      unzip      "$1"     ;;
-            *.rar | *.cbr)      unrar x    "$1"     ;;
-            *.bz2)              bunzip2    "$1"     ;;
-            *.xz)               unxz       "$1"     ;;
-            *.gz)               gunzip     "$1"     ;;
-            *.7z)               7z x       "$1"     ;;
-            *.Z)                uncompress "$1"     ;;
-            *) echo "Error: failed to extract '$1'" ;;
-        esac
-    else
-        echo "Error: '$1' is not a valid file for extraction"
-    fi
-}
-# }}}
+#- buggy
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+#-/buggy
 
-# {{{ ZSH settings
-setopt emacs
-setopt nohup
-setopt autocd
-setopt cdablevars
-setopt ignoreeof
-setopt nobgnice
-setopt nobanghist
-setopt noclobber
-setopt shwordsplit
-setopt interactivecomments
-setopt autopushd pushdminus pushdsilent pushdtohome
-setopt histreduceblanks histignorespace inc_append_history
+zstyle ':completion:*:pacman:*' force-list always
+zstyle ':completion:*:*:pacman:*' menu yes select
 
-# Prompt requirements
-setopt extended_glob prompt_subst
-autoload colors zsh/terminfo
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# new style completion system
-autoload -U compinit; compinit
-# list of completers to use
-zstyle ':completion:*' completer _complete _match _approximate
-# allow approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-# selection prompt as menu
-zstyle ':completion:*' menu select=1
-# menuselection for pid completion
 zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
-zstyle ':completion:*:processes' command 'ps -au$USER'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;32'
-# cd don't select parent dir
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-# complete with colors
-zstyle ':completion:*' list-colors ''
-# }}}
+zstyle ':completion:*:kill:*'   force-list always
 
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:killall:*'   force-list always
 
-# {{{ Prompt settings
-function precmd {
-    ###
-    # terminal width to one less than the actual width for lineup
-    local TERMWIDTH
-    (( TERMWIDTH = ${COLUMNS} - 1 ))
-    ###
-    # truncate the path if it's too long
-    PR_FILLBAR=""
-    PR_PWDLEN=""
-    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
-    local pwdsize=${#${(%):-%~}}
-    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
-	((PR_PWDLEN=$TERMWIDTH - $promptsize))
-    else
-        PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
-    fi
+#------------------------------
+# Window title
+#------------------------------
+case $TERM in
+    *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
+		precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" } 
+		preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
+	;;
+    screen)
+    	precmd () { 
+			print -Pn "\e]83;title \"$1\"\a" 
+			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" 
+		}
+		preexec () { 
+			print -Pn "\e]83;title \"$1\"\a" 
+			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" 
+		}
+	;; 
+esac
+
+#------------------------------
+# Prompt
+#------------------------------
+setprompt () {
+	# load some modules
+	autoload -U colors zsh/terminfo # Used in the colour alias below
+	colors
+	setopt prompt_subst
+
+	# make some aliases for the colours: (coud use normal escap.seq's too)
+	for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+		eval PR_$color='%{$fg[${(L)color}]%}'
+	done
+	PR_NO_COLOR="%{$terminfo[sgr0]%}"
+
+	# Check the UID
+	if [[ $UID -ge 1000 ]]; then # normal user
+		eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
+		eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
+	elif [[ $UID -eq 0 ]]; then # root
+		eval PR_USER='${PR_RED}%n${PR_NO_COLOR}'
+		eval PR_USER_OP='${PR_RED}%#${PR_NO_COLOR}'
+	fi	
+
+	# Check if we are on SSH or not
+	if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then 
+		eval PR_HOST='${PR_YELLOW}%M${PR_NO_COLOR}' #SSH
+	else 
+		eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
+	fi
+	# set the prompt
+	PS1=$'${PR_CYAN}[${PR_USER}${PR_CYAN}@${PR_HOST}${PR_CYAN}][${PR_BLUE}%~${PR_CYAN}]${PR_USER_OP} '
+	PS2=$'%_>'
 }
-
-function setprompt () {
-    if [[ "$terminfo[colors]" -ge 8 ]]; then
-        colors
-    fi
-    for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-	eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-	eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
-	(( count = $count + 1 ))
-    done
-    PR_NO_COLOUR="%{$terminfo[sgr0]%}"
-
-    ###
-    # try to use extended characters to look nicer
-    typeset -A altchar
-    set -A altchar ${(s..)terminfo[acsc]}
-    PR_SET_CHARSET="%{$terminfo[enacs]%}"
-    PR_SHIFT_IN="%{$terminfo[smacs]%}"
-    PR_SHIFT_OUT="%{$terminfo[rmacs]%}"
-    PR_HBAR=${altchar[q]:--}
-    PR_ULCORNER=${altchar[l]:--}
-    PR_LLCORNER=${altchar[m]:--}
-    PR_LRCORNER=${altchar[j]:--}
-    PR_URCORNER=${altchar[k]:--}
-    ###
-    # set titlebar text on a terminal emulator
-    case $TERM in
-	rxvt*)
-            PR_TITLEBAR=$'%{\e]0;%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
-	    ;;
-    esac
-    ###
-    # Linux console  gets simple prompt, the rest have:
-    #   - (user@hostname:tty)--($PWD) and an exit code of the last command
-    #   - right hand prompt which makes room if the command line grows past it
-    #   - PS2 continuation prompt to match PS1 in color
-    case $TERM in
-        dumb)
-            unsetopt zle
-            PROMPT='%n@%m:%~%% '
-            ;;
-        linux)
-            PROMPT='$PR_GREEN%n@%m$PR_WHITE:$PR_YELLOW%l$PR_WHITE:$PR_RED%~$PR_YELLOW%%$PR_NO_COLOUR '
-            ;;
-	*)
-            PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
-$PR_GREEN$PR_SHIFT_IN$PR_ULCORNER$PR_GREEN$PR_HBAR$PR_SHIFT_OUT(\
-$PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m$PR_WHITE:$PR_YELLOW%l\
-$PR_GREEN)$PR_SHIFT_IN$PR_HBAR$PR_GREEN$PR_HBAR${(e)PR_FILLBAR}$PR_GREEN$PR_HBAR$PR_SHIFT_OUT(\
-$PR_RED%$PR_PWDLEN<...<%~%<<$PR_GREEN)$PR_SHIFT_IN$PR_HBAR$PR_GREEN$PR_URCORNER$PR_SHIFT_OUT\
-
-$PR_GREEN$PR_SHIFT_IN$PR_LLCORNER$PR_GREEN$PR_HBAR$PR_SHIFT_OUT(\
-%(?..$PR_RED%?$PR_WHITE:)%(!.$PR_RED.$PR_YELLOW)%#$PR_GREEN)$PR_NO_COLOUR '
-
-            RPROMPT=' $PR_GREEN$PR_SHIFT_IN$PR_HBAR$PR_GREEN$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
-
-            PS2='$PR_GREEN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-$PR_GREEN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT(\
-$PR_YELLOW%_$PR_GREEN)$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
-$PR_GREEN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_NO_COLOUR '
-            ;;
-    esac
-}
-
-# Prompt init
 setprompt
-# }}}
