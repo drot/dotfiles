@@ -1,0 +1,17 @@
+# Turn off startup message
+startup_message off
+
+# Visual bell off
+vbell off
+
+# Residual text fix
+altscreen on
+
+# 256 color support
+term screen-256color
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Status bar and title
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{g}(%{W}%n*%f%t%?(%u)%?%{g})%{w}%?%+Lw%?%?%= %{g}][%{B} %d-%m %{W} %c %{g}]'

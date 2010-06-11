@@ -1,0 +1,11 @@
+include "/home/drot/.themes/MurrezaSilver/gtk-2.0/gtkrc"
+
+gtk-theme-name="MurrezaSilver"
+gtk-icon-theme-name="Tango"
+gtk-font-name="Sans 9"
+
+style "user-font"
+{
+    font_name="Sans 9"
+}
+widget_class "*" style "user-font"
