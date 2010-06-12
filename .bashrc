@@ -63,15 +63,18 @@ BLACK='\[\033[1;30m\]'
 DARKGREY='\[\033[0;30m\]'
 NIL='\[\033[00m\]'
 
+[ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
+GITSTATUS="\$(__git_ps1 \" (%s)\")"
+
 # dynamic bash prompt
 if [ -z "$SSH_TTY" ]; then
     if [ ${UID} -eq 0 ] ; then
-        PS1="${RED}\u@\h ${PURPLE}\w\n${LIGHTRED}#${NIL} "
+        PS1="\n${RED}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTRED}#${NIL} "
     else
-        PS1="${BLUE}\u@\h ${PURPLE}\w\n${LIGHTBLUE}\$${NIL} "
+        PS1="\n${BLUE}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTBLUE}\$${NIL} "
     fi
 else
-    PS1="${GREEN}\u@\h ${PURPLE}\w\n${LIGHTGREEN}\$${NIL} "
+    PS1="\n${GREEN}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTGREEN}\$${NIL} "
 fi
 
 # aliases
