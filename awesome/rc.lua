@@ -436,8 +436,6 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
-    { rule = { class = "Xarchiver" },
-      properties = { floating = true } },
 }
 -- }}}
 
