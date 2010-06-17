@@ -27,9 +27,8 @@ urxvt*matcher.button: 1
 urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
-urxvt*font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
-urxvt*boldFont: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
-
+urxvt*font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+urxvt*boldFont: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
 
 *background: #151515
 *foreground: #cacaca
