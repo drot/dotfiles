@@ -17,6 +17,7 @@ urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
 urxvt*colorUL: #86a2be
 urxvt*cursorColor: #999999
+urxvt*internalBorder: 1
 !
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
