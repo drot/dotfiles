@@ -58,7 +58,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| full 
+myLayoutHook = onWorkspace "2" mtile $ onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| full 
   where
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
     mtile = named "[M]" $ Mirror tile
