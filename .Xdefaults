@@ -15,8 +15,9 @@ urxvt*saveLines: 65535
 urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
-urxvt*colorUL: #86a2be
-urxvt*cursorColor: #999999
+urxvt*colorUL: #FF8F00
+urxvt*cursorColor: #EB122E
+urxvt*cursorColor2: #252525 
 urxvt*internalBorder: 1
 !
 ! Extensions
