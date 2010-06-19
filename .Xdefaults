@@ -31,34 +31,35 @@ urxvt*cutchars: `()'*<>[]{|}"
 urxvt*font:     -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 urxvt*boldFont:  -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 
-*background: #151515
-*foreground: #cacaca
+! Colorscheme
+*background: #030303
+*foreground: #FFFFFF
 
-!Colorful-Neon
-! Black
-*color0: #5A5A5A
-*color8: #554444
-! Red
+*color0: #030303
+*color8: #1C1C1C
+/* red */
 *color1: #FF4747
 *color9: #FF6767
-! Green
-*color2: #AFC81C
-*color10: #BFC81C
-! Yellow
-*color3: #FDD338
-*color11: #F4D461
-! Blue
-*color4: #619AF4
+/* green */
+*color2: #4D4C4C
+*color10: #B03B31 
+/* yellow */
+*color3: #FF8F00
+*color11: #BDF13D
+/* blue */
+*color4: #1165E9
 *color12: #5496FF
-! Purple
-*color5: #5F5A90
-*color13: #826AB1
-! Cyan
-*color6: #47E0FF
-*color14: #2ED9FB
-! White
+/* purple */
+*color5: #89005A
+*color13: #B50077
+/* cyan */
+*color6: #CB1C13 
+*color14: #6BE603
+/* white */
 *color7: #FFFFFF
 *color15: #DEDEDE
+/* orange */
+*color16: #FFB000
 
 ! xmessage
 xmessage*form.okay.shapeStyle:          rectangle
