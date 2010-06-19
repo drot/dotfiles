@@ -1,0 +1,16 @@
+Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+       , bgColor = "#181818"
+       , fgColor = "#888888"
+       , position = Top
+       , lowerOnStart = False
+       , commands = [ Run StdinReader 
+		    , Run Cpu ["-L","7","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828"] 10
+                    , Run Memory ["-L","5","-H","30","--low","#51588E","--normal","#9c8e2d","--high","#d12828","-t","Mem: <usedratio>%"] 10
+		    , Run Com "sh" ["mpd.sh"] "moc" 10
+		    , Run Weather "LQMO" ["-t","<station>: <tempC>C","-L","18","-H","25","--normal","#9c8e2d","--high","#d12828","--low","#51588E"] 36000
+                    , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#9c8e2d>%moc%</fc> <fc=#51588E>>></fc> %LQMO% <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %date%"
+       }
