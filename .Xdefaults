@@ -17,7 +17,7 @@ urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
 urxvt*colorUL: #FF8F00
 urxvt*cursorColor: #EB122E
-urxvt*cursorColor2: #252525 
+urxvt*cursorColor2: #252525
 urxvt*internalBorder: 1
 !
 ! Extensions
@@ -43,7 +43,7 @@ urxvt*boldFont:  -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 *color9: #FF6767
 /* green */
 *color2: #4D4C4C
-*color10: #B03B31 
+*color10: #B03B31
 /* yellow */
 *color3: #FF8F00
 *color11: #BDF13D
@@ -54,7 +54,7 @@ urxvt*boldFont:  -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 *color5: #89005A
 *color13: #B50077
 /* cyan */
-*color6: #CB1C13 
+*color6: #CB1C13
 *color14: #6BE603
 /* white */
 *color7: #FFFFFF
