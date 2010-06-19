@@ -28,8 +28,8 @@ urxvt*matcher.button: 1
 urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
-urxvt*font: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
-urxvt*boldFont: -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
+urxvt*font:     -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+urxvt*boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso8859-2
 
 *background: #151515
 *foreground: #cacaca
@@ -78,7 +78,7 @@ xmessage*Command.internalHeight:        3
 xmessage*Command.borderColor:           gray40
 xmessage*Command.shapeStyle:            Rectangle
 xmessage*Command.background:            gray80
-xmessage*font:                          -*-proggytinysz-medium-*-*-*-*-*-*-*-*-*-*-*
+xmessage*font:                          -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
 
 ! xcalc
 xcalc*ti.button1.vertDistance:          4
