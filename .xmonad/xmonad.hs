@@ -58,7 +58,7 @@ myConfig = defaultConfig { terminal           = "urxvtc"
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["5","9"] float $ tile ||| mtile ||| full 
+myLayoutHook = onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| full 
   where
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
     mtile = named "[M]" $ Mirror tile
@@ -67,7 +67,6 @@ myLayoutHook = onWorkspaces ["5","9"] float $ tile ||| mtile ||| full
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
-    , className =? "Xarchiver" --> doFloat
     , className =? "Gimp"    --> doFloat ]
 
 -- Prompt style
