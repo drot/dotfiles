@@ -46,21 +46,10 @@ complete -cf sudo
 
 # prompt colours
 RED='\[\033[0;31m\]'
-LIGHTRED='\[\033[1;31m\]'
 GREEN='\[\033[0;32m\]'
 LIGHTGREEN='\[\033[1;32m\]'
 YELLOW='\[\033[0;33m\]'
-LIGHTYELLOW='\[\033[1;33m\]'
 BLUE='\[\033[0;34m\]'
-LIGHTBLUE='\[\033[1;34m\]'
-PURPLE='\[\033[0;35m\]'
-LIGHTPURPLE='\[\033[1;35m\]'
-CYAN='\[\033[0;36m\]'
-LIGHTCYAN='\[\033[1;36m\]'
-WHITE='\[\033[1;37m\]'
-LIGHTGREY='\[\033[0;37m\]'
-BLACK='\[\033[1;30m\]'
-DARKGREY='\[\033[0;30m\]'
 NIL='\[\033[00m\]'
 
 [ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
@@ -69,12 +58,12 @@ GITSTATUS="\$(__git_ps1 \" (%s)\")"
 # dynamic bash prompt
 if [ -z "$SSH_TTY" ]; then
     if [ ${UID} -eq 0 ] ; then
-        PS1="\n${RED}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTRED}#${NIL} "
+        PS1="\n${RED}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${RED}#${NIL} "
     else
-        PS1="\n${BLUE}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTBLUE}\$${NIL} "
+        PS1="\n${YELLOW}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${YELLOW}\$${NIL} "
     fi
 else
-    PS1="\n${GREEN}\u@\h ${PURPLE}\w${LIGHTGREEN}${GITSTATUS}\n${LIGHTGREEN}\$${NIL} "
+    PS1="\n${GREEN}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${GREEN}\$${NIL} "
 fi
 
 # aliases
