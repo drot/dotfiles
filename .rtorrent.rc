@@ -108,7 +108,7 @@ encryption = allow_incoming,enable_retry,prefer_plaintext
 #hash_max_tries = 10
 
 # Colors
-active_fg_color = 2
+active_fg_color = 3
 done_fg_color = 4
 
 # Remove the torrent file upon completion. This unties it.
