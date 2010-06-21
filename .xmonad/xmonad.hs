@@ -20,64 +20,84 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Named
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
+import XMonad.Layout.Tabbed
 
 -- Launch xmonad 
 --
 main = xmonad =<< statusBar cmd pp kb conf
-  where
-    uhook = withUrgencyHook NoUrgencyHook
-    cmd = "xmobar ~/.xmonad/xmobarrc"
-    pp = myPP
-    kb = toggleStrutsKey
-    conf = uhook myConfig
+	where
+		uhook = withUrgencyHook NoUrgencyHook
+    		cmd = "xmobar ~/.xmonad/xmobarrc"
+		pp = myPP
+		kb = toggleStrutsKey
+		conf = uhook myConfig
 
 -- Status bar style
 --
-myPP = defaultPP { ppTitle = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e><</fc> " " <fc=#51588e>></fc>" . shorten 50
-                 , ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
-	         , ppUrgent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-	         , ppSep = " <fc=#9c8e2d>:</fc> "
-	         , ppWsSep = " <fc=#9c8e2d>:</fc> "
-	         , ppLayout = xmobarColor "#9c8e2d" ""
-                 } 
+myPP = defaultPP
+	{ 
+		ppTitle = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e><</fc> " " <fc=#51588e>></fc>" . shorten 50
+		, ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
+		, ppUrgent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
+		, ppSep = " <fc=#9c8e2d>:</fc> "
+		, ppWsSep = " <fc=#9c8e2d>:</fc> "
+		, ppLayout = xmobarColor "#9c8e2d" ""
+	} 
 
 -- My defaults
 --
-myConfig = defaultConfig { terminal           = "urxvtc" 
-                         , focusFollowsMouse  = True
-                         , borderWidth        = 1
-                         , modMask            = mod4Mask
-                         , workspaces         = ["1","2","3","4","5","6","7","8","9"]
-                         , normalBorderColor  = "#888888"
-                         , focusedBorderColor = "#9c8e2d"
-                         , keys               = myKeys
-                         , mouseBindings      = myMouseBindings
-                         , layoutHook         = myLayoutHook
-                         , manageHook         = myManageHook
-                         }    
+myConfig = defaultConfig
+	{ 
+		terminal = "urxvtc" 
+		, focusFollowsMouse = True
+		, borderWidth = 1
+		, modMask = mod4Mask
+		, workspaces = ["1","2","3","4","5","6","7","8","9"]
+		, normalBorderColor = "#888888"
+		, focusedBorderColor = "#9c8e2d"
+		, keys = myKeys
+		, mouseBindings = myMouseBindings
+		, layoutHook = myLayoutHook
+		, manageHook = myManageHook
+	}    
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspace "2" mtile $ onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| full 
+myLayoutHook = onWorkspace "2" tabs $ onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| tabs ||| full
   where
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
     mtile = named "[M]" $ Mirror tile
-    full = named "[ ]" $ Full
     float = named "><>" $ simplestFloat
+    tabs = named "[=]" $ tabbed shrinkText myTabConfig
+    full = named "[ ]" $ Full
 
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat
     , className =? "Gimp"    --> doFloat ]
 
+-- Tab style
+--
+myTabConfig = defaultTheme
+	{
+		fontName = "-*-lime-*-*-*-*-*-*-*-*-*-*-*-*"
+		, decoHeight = 12
+		, activeColor = "#a6c292"
+		, activeBorderColor = "#a6c292"
+		, activeTextColor = "#000000"
+		, inactiveBorderColor = "#000000"
+	}
+
 -- Prompt style
 --
-myXPConfig = defaultXPConfig { font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
-                             , fgColor = "#888888"
-                             , bgColor = "#181818"
-                             , bgHLight = "#181818"
-                             , fgHLight = "#9c8e2d"
-                             , position = Bottom
-                             }
+myXPConfig = defaultXPConfig 
+	{
+		font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+		, fgColor = "#888888"
+		, bgColor = "#181818"
+		, bgHLight = "#181818"
+		, fgHLight = "#9c8e2d"
+		, position = Bottom
+	}
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
