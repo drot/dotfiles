@@ -1,10 +1,5 @@
 ! drot's X application resource database
 
-
-! X Cursor
-Xcursor.theme: Vanilla-DMZ-AA
-Xcursor.size: 22
-
 ! URXVT
 !
 ! General
