@@ -5,5 +5,6 @@
 # Executed by startx (run your window manager from here)
 
 xsetroot -cursor_name left_ptr &
+sh ~/.fehbg &
 urxvtd -q -f -o &
-exec ck-launch-session awesome
+exec ck-launch-session xmonad
