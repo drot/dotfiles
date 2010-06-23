@@ -81,10 +81,15 @@ myTabConfig = defaultTheme
 	{
 		fontName = "-*-lime-*-*-*-*-*-*-*-*-*-*-*-*"
 		, decoHeight = 12
-		, activeColor = "#a6c292"
-		, activeBorderColor = "#a6c292"
-		, activeTextColor = "#000000"
-		, inactiveBorderColor = "#000000"
+		, activeColor = "#9c8e2d"
+		, activeBorderColor = "#9c8e2d"
+		, activeTextColor = "#181818"
+		, inactiveColor = "#181818"
+		, inactiveBorderColor = "#181818"
+		, inactiveTextColor = "#888888"
+		, urgentColor = "#51588e"
+		, urgentBorderColor = "#51588e"
+		, urgentTextColor = "#181818"
 	}
 
 -- Prompt style
