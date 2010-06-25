@@ -63,12 +63,12 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspace "2" tabs $ onWorkspaces ["4","5","6"] float $ tile ||| mtile ||| tabs ||| full
+myLayoutHook = onWorkspaces ["4","5","6"] float $ tabs ||| tile ||| mtile ||| full ||| float
   where
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
     mtile = named "[M]" $ Mirror tile
     float = named "><>" $ simplestFloat
-    tabs = named "[=]" $ tabbed shrinkText myTabConfig
+    tabs = named "[T]" $ tabbed shrinkText myTabConfig
     full = named "[ ]" $ Full
 
 myManageHook = composeAll
