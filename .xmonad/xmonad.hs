@@ -8,10 +8,9 @@ import System.Exit
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
--- Utils
+-- General
 import XMonad.Prompt
 import XMonad.Prompt.Shell
-import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageDocks
