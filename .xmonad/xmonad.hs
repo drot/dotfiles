@@ -45,6 +45,7 @@ myPP = defaultPP
 
 -- My defaults
 --
+myFont = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
 myConfig = defaultConfig
 	{ 
 		terminal = "urxvtc" 
@@ -78,7 +79,7 @@ myManageHook = composeAll
 --
 myTabConfig = defaultTheme
 	{
-		fontName = "-*-lime-*-*-*-*-*-*-*-*-*-*-*-*"
+		fontName = myFont
 		, decoHeight = 12
 		, activeColor = "#9c8e2d"
 		, activeBorderColor = "#9c8e2d"
@@ -95,7 +96,7 @@ myTabConfig = defaultTheme
 --
 myXPConfig = defaultXPConfig 
 	{
-		font  = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+		font  = myFont
 		, fgColor = "#888888"
 		, bgColor = "#181818"
 		, bgHLight = "#181818"
