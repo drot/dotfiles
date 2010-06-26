@@ -64,16 +64,16 @@ myConfig = defaultConfig
 -- Layout configuration
 --
 myLayoutHook = onWorkspaces ["4","5","6"] float $ tabs ||| tile ||| mtile ||| full ||| float
-  where
-    tile = named "[]=" $ Tall 1 (3/100) (1/2)
-    mtile = named "[M]" $ Mirror tile
-    float = named "><>" $ simplestFloat
-    tabs = named "[T]" $ tabbed shrinkText myTabConfig
-    full = named "[ ]" $ Full
+	where
+		tile = named "[]=" $ Tall 1 (3/100) (1/2)
+		mtile = named "[M]" $ Mirror tile
+		float = named "><>" $ simplestFloat
+		tabs = named "[T]" $ tabbed shrinkText myTabConfig
+		full = named "[ ]" $ Full
 
 myManageHook = composeAll
-    [ className =? "MPlayer" --> doFloat
-    , className =? "Gimp"    --> doFloat ]
+	[ className =? "MPlayer" --> doFloat
+	, className =? "Gimp"    --> doFloat ]
 
 -- Tab style
 --
@@ -99,8 +99,8 @@ myXPConfig = defaultXPConfig
 		font  = myFont
 		, fgColor = "#888888"
 		, bgColor = "#181818"
-		, bgHLight = "#181818"
-		, fgHLight = "#9c8e2d"
+		, bgHLight = "#9c8e2d"
+		, fgHLight = "#181818"
 		, position = Bottom
 	}
 
