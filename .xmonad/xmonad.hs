@@ -63,7 +63,7 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["4","5","6"] float $ tabs ||| tile ||| mtile ||| full ||| float
+myLayoutHook = onWorkspaces ["5","6"] float $ tabs ||| tile ||| mtile ||| full ||| float
 	where
 		tile = named "[]=" $ Tall 1 (3/100) (1/2)
 		mtile = named "[M]" $ Mirror tile

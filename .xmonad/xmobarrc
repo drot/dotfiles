@@ -2,13 +2,13 @@ Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
        , bgColor = "#181818"
        , fgColor = "#888888"
        , position = Top
-       , lowerOnStart = False
+       , lowerOnStart = True
        , commands = [ Run StdinReader 
 		    , Run Cpu ["-L","10","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828"] 10
                     , Run Memory ["-L","5","-H","30","--low","#51588E","--normal","#9c8e2d","--high","#d12828","-t","Mem: <usedratio>%"] 10
 		    , Run Network "eth0" ["-t","Net: <rx><fc=#9c8e2d> >> </fc><tx>","-L","5","-H","100","--normal","#9c8e2d","--high","#d12828","--low","#888888"] 10
-                    , Run Com "sh" ["mpd.sh"] "mpd" 10
                     , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
+		    , Run Com "mocp" ["-Q '%artist - %song'"] "mpd" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
