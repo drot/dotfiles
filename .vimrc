@@ -9,16 +9,21 @@ filetype plugin indent on
 set nohls
 set incsearch
 set showmatch
- 
+set hlsearch
+set ignorecase
+
 " indenting
 set autoindent
- 
+set smartindent
+set smarttab
+
 " command mode
 set wildmenu
 set wildmode=list:longest,full
  
 " -[ Look ]-
 " general
+set cursorline
 set showcmd
 set showmode
 set number
