@@ -10,7 +10,7 @@ urxvt*saveLines: 65535
 urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
-urxvt*colorUL: #567B94
+urxvt*colorUL: #7CB2D6
 urxvt*cursorColor: #FFAF00
 urxvt*cursorColor2: #000000
 urxvt*internalBorder: 1
