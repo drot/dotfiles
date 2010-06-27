@@ -10,9 +10,9 @@ urxvt*saveLines: 65535
 urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
-urxvt*colorUL: #FF8F00
-urxvt*cursorColor: #EB122E
-urxvt*cursorColor2: #252525
+urxvt*colorUL: #567B94
+urxvt*cursorColor: #FFAF00
+urxvt*cursorColor2: #000000
 urxvt*internalBorder: 1
 !
 ! Extensions
@@ -20,7 +20,6 @@ urxvt*perl-lib: /usr/lib/urxvt/perl/
 urxvt*perl-ext-common: default,matcher
 urxvt*urlLauncher: /usr/bin/firefox
 urxvt*matcher.button: 1
-! So we catch even nasty URLs
 urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
@@ -28,54 +27,40 @@ urxvt*font:     -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 urxvt*boldFont:  -*-profont-*-*-*-*-11-*-*-*-*-*-*-*
 
 ! Colorscheme
-*background: #030303
-*foreground: #FFFFFF
+urxvt*background: #000000
+urxvt*foreground: #C7C7C7
 
-*color0: #030303
-*color8: #1C1C1C
-/* red */
-*color1: #FF4747
-*color9: #FF6767
-/* green */
-*color2: #4D4C4C
-*color10: #B03B31
-/* yellow */
-*color3: #FF8F00
-*color11: #BDF13D
-/* blue */
-*color4: #1165E9
-*color12: #5496FF
-/* purple */
-*color5: #89005A
-*color13: #B50077
-/* cyan */
-*color6: #CB1C13
-*color14: #6BE603
-/* white */
-*color7: #FFFFFF
-*color15: #DEDEDE
-/* orange */
-*color16: #FFB000
+! black
+urxvt*color0:  #000000
+urxvt*color8:  #999999
 
-! xmessage
-xmessage*form.okay.shapeStyle:          rectangle
-xmessage*form.okay.background:          IndianRed
-xmessage*form.okay.foreground:          rgb:e/b/b
-xmessage*message*background:            ivory3
-xmessage*background:                    gray85
-xmessage*foreground:                    gray15
-xmessage*Scrollbar.width:               1
-xmessage*Scrollbar.borderWidth:         0
-xmessage*Text.?.cursorColor:            rgb:d/5/5
-xmessage*Text.borderColor:              gray65
-xmessage*Text*background:               gray95
-xmessage*Command.highlightThickness:    1
-xmessage*Command.internalWidth:         5
-xmessage*Command.internalHeight:        3
-xmessage*Command.borderColor:           gray40
-xmessage*Command.shapeStyle:            Rectangle
-xmessage*Command.background:            gray80
-xmessage*font:                          -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+! red
+urxvt*color1:  #BD484A
+urxvt*color9:  #F55D60
+
+! green
+urxvt*color2:  #66994E
+urxvt*color10: #93DB6F
+
+! yellow
+urxvt*color3:  #C4A043
+urxvt*color11: #F0C452
+
+! blue
+urxvt*color4:  #567B94
+urxvt*color12: #7CB2D6
+
+! magenta
+urxvt*color5:  #BB88DD
+urxvt*color13: #D7AFD7
+
+! cyan
+urxvt*color6:  #00BBDD
+urxvt*color14: #0DEBFF
+
+! white
+urxvt*color7:  #C7C7C7
+urxvt*color15: #D9D9D9
 
 ! xcalc
 xcalc*ti.button1.vertDistance:          4
