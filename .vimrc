@@ -22,8 +22,7 @@ set smarttab
 
 " wild menu
 set wildmenu
-set wildchar=<Tab>
-set wildmode=longest,list
+set wildmode=list:longest,full
 
 " -[ Look ]-
 " general
