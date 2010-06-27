@@ -1,26 +1,30 @@
 " -[ General behaviour ]-
 " general
-set nocompatible
+set nocp
+set autoread
+set nobackup
+set noswapfile
 set nowrap
 syntax on
 filetype plugin indent on
  
 " search
-set nohls
 set incsearch
 set showmatch
 set hlsearch
 set ignorecase
+set smartcase
 
 " indenting
 set autoindent
 set smartindent
 set smarttab
 
-" command mode
+" wild menu
 set wildmenu
-set wildmode=list:longest,full
- 
+set wildchar=<Tab>
+set wildmode=longest,list
+
 " -[ Look ]-
 " general
 set cursorline
