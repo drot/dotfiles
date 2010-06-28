@@ -23,8 +23,8 @@ urxvt*matcher.button: 1
 urxvt*cutchars: `()'*<>[]{|}"
 !
 ! Appearance
-urxvt*font: -*-montecarlo-medium-*-normal-*-11-*-*-*-*-*-*-*
-urxvt*boldFont: -*-montecarlo-bold-*-normal-*-11-*-*-*-*-*-*-*
+urxvt*font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
+urxvt*boldFont: -*-montecarlo-bold-*-*-*-11-*-*-*-*-*-*-*
 
 ! Colorscheme
 urxvt*background: #000000
