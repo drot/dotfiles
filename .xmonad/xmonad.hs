@@ -18,6 +18,7 @@ import XMonad.Hooks.ManageDocks
 -- Layouts
 import XMonad.Layout.Named
 import XMonad.Layout.Tabbed
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
 -- Launch xmonad 
@@ -62,7 +63,7 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = tabs ||| float ||| tile ||| mtile ||| full
+myLayoutHook = onWorkspaces ["5", "6"] float $ tabs ||| tile ||| mtile ||| full
 	where
 		tabs = named "[T]" $ tabbed shrinkText myTabConfig
 		float = named "><>" $ simplestFloat
