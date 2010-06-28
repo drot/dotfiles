@@ -6,23 +6,23 @@
 export EDITOR=vim
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
-export BROWSER=firefox
-export MOZ_DISABLE_PANGO=1              # pango slows firefox
-export FIREFOX_DSP=none                 # pango slows firefox
+export BROWSER=firefox     # default browser
+export MOZ_DISABLE_PANGO=1 # pango slows firefox
+export FIREFOX_DSP=none    # pango slows firefox
 
 # history
-export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear"   # don't append consecutive duplicates of these
-export HISTCONTROL=ignoreboth           # ingore duplicates and spaces (ignoreboth|ignoredups|ignorespace)
-export HISTSIZE=10000                   # bash history will save N commands
-export HISTFILESIZE=${HISTSIZE}         # bash will remember N commands
+export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear" # don't append consecutive duplicates of these
+export HISTCONTROL=ignoreboth                       # ingore duplicates and spaces (ignoreboth|ignoredups|ignorespace)
+export HISTSIZE=10000                               # bash history will save N commands
+export HISTFILESIZE=${HISTSIZE}                     # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 # color grep and man pages
-export GREP_OPTIONS='--color=auto'      # beautify grep
-export GROFF_NO_SGR=1                   # output ANSI color escape sequences in raw form
-export LESS_TERMCAP_mb=$'\E[0;31m'      # blinking
-export LESS_TERMCAP_md=$'\E[1;34m'      # bold          used for headings
-export LESS_TERMCAP_us=$'\E[1;32m'      # underline     used for paths,keywords
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'	# beautify grep
+export GROFF_NO_SGR=1                  	# output ANSI color escape sequences in raw form
+export LESS_TERMCAP_mb=$'\E[0;31m'     	# blinking
+export LESS_TERMCAP_md=$'\E[1;34m'     	# bold          used for headings
+export LESS_TERMCAP_us=$'\E[1;32m'     	# underline     used for paths,keywords
 export LESS_TERMCAP_so=$'\E[41;1;37m'   # standout      used for statusbar/search
 export LESS_TERMCAP_ue=$'\E[0m'         # end underline
 export LESS_TERMCAP_se=$'\E[0m'         # end standout-mode
