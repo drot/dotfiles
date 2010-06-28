@@ -18,6 +18,7 @@ import XMonad.Hooks.ManageDocks
 -- Layouts
 import XMonad.Layout.Named
 import XMonad.Layout.Tabbed
+import XMonad.Layout.SimplestFloat
 
 -- Launch xmonad 
 --
@@ -61,11 +62,12 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = tabs ||| tile ||| mtile ||| full
+myLayoutHook = tabs ||| float ||| tile ||| mtile ||| full
 	where
+		tabs = named "[T]" $ tabbed shrinkText myTabConfig
+		float = named "><>" $ simplestFloat
 		tile = named "[]=" $ Tall 1 (3/100) (1/2)
 		mtile = named "[M]" $ Mirror tile
-		tabs = named "[T]" $ tabbed shrinkText myTabConfig
 		full = named "[ ]" $ Full
 
 myManageHook = composeAll
