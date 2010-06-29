@@ -10,8 +10,8 @@ urxvt*saveLines: 65535
 urxvt*cursorBlink: true
 urxvt*urgentOnBell: true
 urxvt*underlineURLs: true
-urxvt*colorUL: #7CB2D6
-urxvt*cursorColor: #FFAF00
+urxvt*colorUL: #B6DCFF
+urxvt*cursorColor: #FFA560
 urxvt*cursorColor2: #000000
 urxvt*internalBorder: 1
 !
@@ -26,41 +26,41 @@ urxvt*cutchars: `()'*<>[]{|}"
 urxvt*font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
 urxvt*boldFont: -*-montecarlo-bold-*-*-*-11-*-*-*-*-*-*-*
 
-! Colorscheme
+! IR_Black
 urxvt*background: #000000
-urxvt*foreground: #C7C7C7
+urxvt*foreground: #F2F2F2
 
 ! black
 urxvt*color0: #000000
-urxvt*color8: #999999
+urxvt*color8: #7C7C7C
 
 ! red
-urxvt*color1: #BD484A
-urxvt*color9: #F55D60
+urxvt*color1: #FF6C60
+urxvt*color9: #FFB6B0
 
 ! green
-urxvt*color2: #66994E
-urxvt*color10: #93DB6F
+urxvt*color2: #A8FF60
+urxvt*color10: #CEFFAC
 
 ! yellow
-urxvt*color3: #C4A043
-urxvt*color11: #F0C452
+urxvt*color3: #FFFFB6
+urxvt*color11: #FFFFCC
 
 ! blue
-urxvt*color4: #567B94
-urxvt*color12: #7CB2D6
+urxvt*color4: #96CBFE
+urxvt*color12: #B6DCFF
 
 ! magenta
-urxvt*color5: #BB88DD
-urxvt*color13: #D7AFD7
+urxvt*color5: #FF73FD
+urxvt*color13: #FF9CFE
 
 ! cyan
-urxvt*color6: #00BBDD
-urxvt*color14: #0DEBFF
+urxvt*color6: #C6C5FE
+urxvt*color14: #DFDFFE
 
 ! white
-urxvt*color7: #C7C7C7
-urxvt*color15: #D9D9D9
+urxvt*color7: #EEEEEE
+urxvt*color15: #FFFFFF
 
 ! xcalc
 xcalc*ti.button1.vertDistance: 4
