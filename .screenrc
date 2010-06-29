@@ -1,0 +1,22 @@
+# Turn off startup message
+startup_message off
+
+# Visual bell off
+vbell off
+
+# Residual text fix
+altscreen on
+
+# Dynamic window title
+shelltitle '$ |bash'
+
+# 256 color support
+term screen-256color
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Status bar and title
+backtick 1 5 5 true
+termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
+hardstatus string "screen (%n: %t)"
+caption string '%{= Y}[%{B} %H%{Y} | %{R}%l %{Y}][ %= %{= w}%-w%{+b M}%n*%t%{-b r}%{w}%+w %= %{Y}][ %{B}%d-%m %{Y}| %{R}%c %{Y}]'
+caption always
