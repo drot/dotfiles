@@ -15,8 +15,4 @@ term screen-256color
 terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 # Status bar and title
-backtick 1 5 5 true
-termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
-hardstatus string "screen (%n: %t)"
-caption string '%{= Y}[%{B} %H%{Y} | %{R}%l %{Y}][ %= %{= w}%-w%{+b Y}%n*%t%{-b r}%{w}%+w %= %{Y}][ %{B}%d-%m %{Y}| %{R}%c %{Y}]'
-caption always
+hardstatus alwayslastline '%{= M} %H%{= B} %l %= %{= w}%-w%{+b G}%n*%t%{-b G}%{w}%+w %= %{B}%d-%m %{M}%c '
