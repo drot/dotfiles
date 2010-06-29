@@ -67,7 +67,7 @@ xcalc*ti.button1.vertDistance: 4
 xcalc*ti.button2.vertDistance: 4
 xcalc*ti.button3.vertDistance: 4
 xcalc*ti.button4.vertDistance: 4
-xcalc*ti.button5.vertDistance:  4
+xcalc*ti.button5.vertDistance: 4
 xcalc*ti.background: gray90
 xcalc*ti.bevel.borderColor: gray65
 xcalc*ti.bevel.borderWidth: 1

@@ -26,7 +26,6 @@ set wildmode=list:longest,full
 
 " -[ Look ]-
 " general
-set cursorline
 set showcmd
 set showmode
 set number
