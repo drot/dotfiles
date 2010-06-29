@@ -97,10 +97,10 @@ myTabConfig = defaultTheme
 myXPConfig = defaultXPConfig 
 	{
 		font  = myFont
-		, fgColor = "#888888"
-		, bgColor = "#181818"
-		, bgHLight = "#9c8e2d"
-		, fgHLight = "#181818"
+		, fgColor = "#FFFFFF"
+		, bgColor = "#000000"
+		, bgHLight = "#000000"
+		, fgHLight = "#CEFFAC"
 		, position = Bottom
 	}
 
