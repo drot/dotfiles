@@ -14,6 +14,7 @@ urxvt*colorUL: #B6DCFF
 urxvt*cursorColor: #FFA560
 urxvt*cursorColor2: #000000
 urxvt*internalBorder: 1
+urxvt*secondaryScroll: true
 !
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
