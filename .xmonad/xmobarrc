@@ -1,16 +1,16 @@
 Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
-       , bgColor = "#181818"
-       , fgColor = "#888888"
+       , bgColor = "#000000"
+       , fgColor = "#F2F2F2"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run StdinReader 
-		    , Run Cpu ["-L","10","-H","50","--low","#888888","--normal","#9c8e2d","--high","#d12828"] 10
-                    , Run Memory ["-L","5","-H","30","--low","#51588E","--normal","#9c8e2d","--high","#d12828","-t","Mem: <usedratio>%"] 10
-		    , Run Network "eth0" ["-t","Net: <rx><fc=#9c8e2d> >> </fc><tx>","-L","5","-H","100","--normal","#9c8e2d","--high","#d12828","--low","#888888"] 10
-                    , Run Date "%a %b %_d<fc=#9c8e2d> %H:%M</fc>" "date" 10 
+		    , Run Cpu ["-L","10","-H","50","--low","#FF9CFE","--normal","#CEFFAC","--high","#FFB6B0"] 10
+                    , Run Memory ["-L","5","-H","30","--low","#FF9CFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10
+		    , Run Network "eth0" ["-t","Net: <rx><fc=#CEFFAC> >> </fc><tx>","-L","5","-H","100","--low","#FF9CFE","--normal","#CEFFAC","--high","#FFB6B0"] 10
+                    , Run Date "%a %b %_d<fc=#CEFFAC> %H:%M</fc>" "date" 10 
 		    , Run Com "mocp" ["-Q '%artist - %song'"] "mpd" 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#51588E>>></fc> <fc=#9c8e2d>%mpd%</fc> <fc=#51588E>>></fc> %cpu% <fc=#51588E>>></fc> %memory% <fc=#51588E>>></fc> %eth0% <fc=#51588E>>></fc> %date%"
+       , template = "%StdinReader% }{ <fc=#B6DCFF>>></fc> <fc=#CEFFAC>%mpd%</fc> <fc=#B6DCFF>>></fc> %cpu% <fc=#B6DCFF>>></fc> %memory% <fc=#B6DCFF>>></fc> %eth0% <fc=#B6DCFF>>></fc> %date%"
        }

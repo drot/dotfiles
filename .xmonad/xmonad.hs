@@ -35,12 +35,12 @@ main = xmonad =<< statusBar cmd pp kb conf
 --
 myPP = defaultPP
 	{ 
-		ppTitle = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e><</fc> " " <fc=#51588e>></fc>" . shorten 50
-		, ppCurrent = xmobarColor "#9c8e2d" "" . wrap "<fc=#51588e>[</fc>" "<fc=#51588e>]</fc>"
-		, ppUrgent = xmobarColor "#51588e" "" . wrap "<fc=#9c8e2d>[</fc>" "<fc=#9c8e2d>]</fc>"
-		, ppSep = " <fc=#9c8e2d>:</fc> "
-		, ppWsSep = " <fc=#9c8e2d>:</fc> "
-		, ppLayout = xmobarColor "#9c8e2d" ""
+		ppTitle = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
+		, ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
+		, ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
+		, ppSep = " <fc=#CEFFAC>:</fc> "
+		, ppWsSep = " <fc=#CEFFAC>:</fc> "
+		, ppLayout = xmobarColor "#CEFFAC" ""
 	} 
 
 -- My defaults
@@ -53,8 +53,8 @@ myConfig = defaultConfig
 		, borderWidth = 1
 		, modMask = mod4Mask
 		, workspaces = ["1","2","3","4","5","6","7","8","9"]
-		, normalBorderColor = "#888888"
-		, focusedBorderColor = "#9c8e2d"
+		, normalBorderColor = "#7C7C7C"
+		, focusedBorderColor = "#FFB6B0"
 		, keys = myKeys
 		, mouseBindings = myMouseBindings
 		, layoutHook = myLayoutHook
@@ -81,15 +81,15 @@ myTabConfig = defaultTheme
 	{
 		fontName = myFont
 		, decoHeight = 12
-		, activeColor = "#9c8e2d"
-		, activeBorderColor = "#9c8e2d"
-		, activeTextColor = "#181818"
-		, inactiveColor = "#181818"
-		, inactiveBorderColor = "#181818"
-		, inactiveTextColor = "#888888"
-		, urgentColor = "#51588e"
-		, urgentBorderColor = "#51588e"
-		, urgentTextColor = "#181818"
+		, activeColor = "#000000"
+		, activeBorderColor = "#7C7C7C"
+		, activeTextColor = "#CEFFAC"
+		, inactiveColor = "#000000"
+		, inactiveBorderColor = "#7C7C7C"
+		, inactiveTextColor = "#EEEEEE"
+		, urgentColor = "#000000"
+		, urgentBorderColor = "#7C7C7C"
+		, urgentTextColor = "#B6DCFF"
 	}
 
 -- Prompt style
