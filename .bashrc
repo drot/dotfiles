@@ -59,7 +59,7 @@ GITSTATUS="\$(__git_ps1 \" (%s)\")"
 # dynamic bash prompt
 if [ -z "$SSH_TTY" ]; then
     if [ ${UID} -eq 0 ] ; then
-        PS1="\n${SCR}${RED}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${RED}#${NIL} "
+        PS1="\n${RED}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${RED}#${NIL} "
     else
         PS1="\n${SCR}${YELLOW}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${YELLOW}\$${NIL} "
     fi
