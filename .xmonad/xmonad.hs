@@ -72,7 +72,7 @@ myLayoutHook = onWorkspaces ["5", "6"] float $ tabs ||| tile ||| mtile ||| full
 		full = named "[ ]" $ Full
 
 myManageHook = composeAll
-	[ className =? "MPlayer" --> doFloat
+	[ className =? "PCManFM" --> doFloat
 	, className =? "Gimp"    --> doFloat ]
 
 -- Tab style
