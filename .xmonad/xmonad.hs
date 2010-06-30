@@ -63,7 +63,7 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["5", "6"] float $ tabs ||| tile ||| mtile ||| full
+myLayoutHook = onWorkspaces ["4","5","6"] float $ tabs ||| tile ||| mtile ||| full
 	where
 		tabs = named "[T]" $ tabbed shrinkText myTabConfig
 		float = named "><>" $ simplestFloat
@@ -72,7 +72,7 @@ myLayoutHook = onWorkspaces ["5", "6"] float $ tabs ||| tile ||| mtile ||| full
 		full = named "[ ]" $ Full
 
 myManageHook = composeAll
-	[ className =? "PCManFM" --> doFloat
+	[ className =? "Pcmanfm" --> doFloat
 	, className =? "Gimp"    --> doFloat ]
 
 -- Tab style
