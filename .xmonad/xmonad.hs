@@ -99,7 +99,7 @@ myXPConfig = defaultXPConfig
 		font  = myFont
 		, fgColor = "#FFFFFF"
 		, bgColor = "#000000"
-		, bgHLight = "#7C7C7C"
+		, bgHLight = "#000000"
 		, fgHLight = "#CEFFAC"
 		, position = Bottom
 	}
