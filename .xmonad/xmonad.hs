@@ -63,7 +63,7 @@ myConfig = defaultConfig
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["4","5","6"] float $ tabs ||| tile ||| mtile ||| full
+myLayoutHook = onWorkspaces ["4","5"] float $ tabs ||| tile ||| mtile ||| full ||| float
 	where
 		tabs = named "[T]" $ tabbed shrinkText myTabConfig
 		float = named "><>" $ simplestFloat
