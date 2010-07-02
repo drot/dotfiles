@@ -1,8 +1,4 @@
-! drot's X application resource database
-
-! Cursor
-Xcursor.theme: Vanilla-DMZ-AA
-Xcursor.size: 22
+! drot X defaults
 
 ! Emacs
 Emacs.font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
