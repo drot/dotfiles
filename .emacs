@@ -14,8 +14,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 (load "color-theme-ir-black.el")
-(color-theme-ir-black)
-(setq color-theme-is-global t)
+(if window-system
+(color-theme-ir-black))
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)

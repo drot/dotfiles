@@ -4,8 +4,7 @@
 
 # global
 export EDITOR=${VISUAL}
-export ALTERNATE_EDITOR=emacs
-export VISUAL=emacsclient
+export VISUAL=emacs
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 export BROWSER=chromium     # default browser
@@ -69,7 +68,6 @@ fi
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
-alias ec="emacsclient -c"
 
 # functions
 # extract - archive extractor
