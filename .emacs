@@ -40,6 +40,7 @@
 ;; Ido
 (require 'ido)
 (ido-mode t)
+(setq ido-enable-flex-matching t)
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;; Show unfinished keystrokes early
