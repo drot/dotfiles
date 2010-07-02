@@ -3,7 +3,7 @@
 #--------------------
 
 # global
-export EDITOR=emacsclient
+export EDITOR=${VISUAL}
 export ALTERNATE_EDITOR=emacs
 export VISUAL=emacsclient
 export PAGER=less
@@ -69,7 +69,7 @@ fi
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
-alias ec="emacsclient"
+alias ec="emacsclient -c"
 
 # functions
 # extract - archive extractor
