@@ -3,7 +3,8 @@
 #--------------------
 
 # global
-export EDITOR=emacs
+export EDITOR=emacsclient
+export ALTERNATE_EDITOR=emacs
 export VISUAL=${EDITOR}
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH

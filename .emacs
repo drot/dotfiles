@@ -1,3 +1,6 @@
+;; Start server
+(server-start)
+
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d")
 
@@ -27,6 +30,12 @@
 
 ;; Show column number in modeline
 (setq column-number-mode t)
+
+;; Highlight matching parentheses
+(show-paren-mode t)
+
+;; Highlight the current line
+(global-hl-line-mode)
 
 ;; Ido
 (require 'ido)
