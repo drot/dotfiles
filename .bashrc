@@ -3,8 +3,8 @@
 #--------------------
 
 # global
-export EDITOR=${VISUAL}
-export VISUAL=emacs
+export EDITOR=emacs
+export VISUAL=${EDITOR}
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 export BROWSER=chromium     # default browser
