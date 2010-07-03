@@ -62,6 +62,10 @@
  kept-old-versions      2
 )
 
+;; Default browser
+(setq browse-url-browser-function 'browse-url-generic 
+      browse-url-generic-program "conkeror")
+
 ;; Haskell mode
 (load "haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
