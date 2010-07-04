@@ -4,7 +4,7 @@ Config { font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run StdinReader
-       	 	    , Run Weather "LQMO" ["-t","<tempC> C, <skyCondition>","-L","10","-H","30","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 3600
+       	 	    , Run Weather "LQMO" ["-t","<tempC> C, <skyCondition>","-L","10","-H","30","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 36000
 		    , Run Cpu ["-L","10","-H","50","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 10
                     , Run Memory ["-L","5","-H","30","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10
 		    , Run Network "eth0" ["-t","Net: <rx><fc=#B6DCFF>/</fc><tx>","-L","5","-H","100","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 10
