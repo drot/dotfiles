@@ -34,9 +34,6 @@
 ;; Highlight matching parentheses
 (show-paren-mode t)
 
-;; Highlight the current line
-(global-hl-line-mode)
-
 ;; Ido
 (require 'ido)
 (ido-mode t)
