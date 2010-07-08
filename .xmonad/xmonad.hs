@@ -70,7 +70,7 @@ myLayoutHook = onWorkspaces ["5","6"] float $ tabs ||| tile ||| mtile ||| full |
     float = named "><>" $ simplestFloat
 
 myManageHook = composeAll [
-  className =? "Pcmanfm" --> doFloat,
+  className =? "MPlayer" --> doFloat,
   className =? "Gimp"    --> doFloat 
   ]
 
