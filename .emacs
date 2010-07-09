@@ -61,7 +61,7 @@
 
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic 
-      browse-url-generic-program "conkeror")
+      browse-url-generic-program "chromium")
 
 ;; Haskell mode
 (load "haskell-site-file")
