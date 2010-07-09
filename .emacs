@@ -61,7 +61,7 @@
 
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic 
-      browse-url-generic-program "midori")
+      browse-url-generic-program "conkeror")
 
 ;; Haskell mode
 (load "haskell-site-file")

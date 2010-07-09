@@ -8,7 +8,7 @@ export ALTERNATE_EDITOR=emacs
 export VISUAL=${EDITOR}
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
-export BROWSER=midori     # default browser
+export BROWSER=conkeror     # default browser
 
 # history
 export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear" # don't append consecutive duplicates of these
