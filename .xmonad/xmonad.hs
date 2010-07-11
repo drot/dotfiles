@@ -114,7 +114,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
   ((modm, xK_Return), spawn $ XMonad.terminal conf),
                                                   
   -- launch prompt
-  ((modm, xK_p), shellPrompt myXPConfig),
+  ((modm, xK_r), shellPrompt myXPConfig),
                                                   
   -- close focused window
   ((modm .|. shiftMask, xK_c), kill),
@@ -129,7 +129,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ [
   ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf),
                                                   
   -- resize viewed windows to the correct size
-  ((modm, xK_n     ), refresh),
+  ((modm, xK_n), refresh),
                                                   
   -- move focus to the next window
   ((modm, xK_Tab), windows W.focusDown),
