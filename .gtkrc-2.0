@@ -1,6 +1,6 @@
-include "/home/drot/.themes/MurrezaSilver/gtk-2.0/gtkrc"
+include "/home/drot/.themes/ElegantBrit/gtk-2.0/gtkrc"
 
-gtk-theme-name="MurrezaSilver"
+gtk-theme-name="Elegant Brit"
 gtk-icon-theme-name="Tango"
 gtk-font-name="Sans 9"
 
