@@ -6,13 +6,13 @@ Config {
        lowerOnStart = True,
        commands = [ 
        		  Run StdinReader, 
-		  Run Cpu ["-L","10","-H","50","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Memory ["-L","5","-H","30","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
-		  Run Network "eth0" ["-t","Net: <rx><fc=#B6DCFF>/</fc><tx>","-L","5","-H","100","--low","#FFFFCC","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Date "%a %b %_d<fc=#FFFFCC> %H:%M</fc>" "date" 10,
+		  Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
+		  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
+		  Run Network "eth0" ["-t","Net: <rx><fc=#CEFFAC>/</fc><tx>","-L","5","-H","100","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
+		  Run Date "%a %b %_d<fc=#CEFFAC> %H:%M</fc>" "date" 10,
 		  Run Com "sh" ["~/.xmonad/mpd.sh"] "mpd" 10 
 		  ],
        sepChar = "%",
        alignSep = "}{",
-       template = "%StdinReader% }{ <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> <fc=#FFFFCC>%mpd%</fc> <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %cpu% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %memory% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %eth0% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %date%"
+       template = "%StdinReader% }{ <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> <fc=#CEFFAC>%mpd%</fc> <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %cpu% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %memory% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %eth0% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %date%"
        }
