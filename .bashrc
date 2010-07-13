@@ -51,7 +51,6 @@ LIGHTGREEN='\[\033[1;32m\]'
 YELLOW='\[\033[0;33m\]'
 BLUE='\[\033[0;34m\]'
 NIL='\[\033[00m\]'
-SCR='\033k\033\134'
 
 [ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
 GITSTATUS="\$(__git_ps1 \" (%s)\")"
@@ -61,10 +60,10 @@ if [ -z "$SSH_TTY" ]; then
     if [ ${UID} -eq 0 ] ; then
         PS1="\n${RED}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${RED}#${NIL} "
     else
-        PS1="\n${SCR}${YELLOW}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${YELLOW}\$${NIL} "
+        PS1="\n${YELLOW}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${YELLOW}\$${NIL} "
     fi
 else
-    PS1="\n${SCR}${GREEN}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${GREEN}\$${NIL} "
+    PS1="\n${GREEN}\u@\h ${BLUE}\w${LIGHTGREEN}${GITSTATUS}\n${GREEN}\$${NIL} "
 fi
 
 # aliases
