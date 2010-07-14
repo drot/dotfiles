@@ -1,6 +1,6 @@
 # drot zsh
 
-# global
+# --- global ---
 export PATH="${PATH}:${HOME}/bin"
 export EDITOR="emacsclient"
 export ALTERNATE_EDITOR="emacs"
@@ -8,12 +8,12 @@ export VISUAL="${EDITOR}"
 export PAGER="less"
 export BROWSER="conkeror"
 
-# history
+# --- history ---
 export HISTFILE="${HOME}/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-# grep, man and dircolors
+# --- grep, man and dircolors ---
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'	# beautify grep
 export GROFF_NO_SGR=1                  	# output ANSI color escape sequences in raw form
 export LESS_TERMCAP_mb=$'\E[0;31m'     	# blinking
@@ -25,21 +25,24 @@ export LESS_TERMCAP_se=$'\E[0m'         # end standout-mode
 export LESS_TERMCAP_me=$'\E[0m'         # end all modes like so, us, mb, md and mr
 eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 
-# aliases
+# --- aliases ---
 alias ls="ls --color=auto"
 
-# zsh settings
+# --- zsh settings ---
 setopt emacs
 setopt nohup
 setopt autocd
 setopt noclobber
-setopt nohashdirs
 setopt extended_glob
 setopt nobanghist
 setopt cdablevars
 setopt histreduceblanks histignorespace inc_append_history
 
-# completion
+# --- key bindings ---
+bindkey '^[[A' history-beginning-search-backward # "Up"
+bindkey '^[[B' history-beginning-search-forward  # "Down"
+
+# --- completion ---
 autoload -U compinit; compinit
 #  * list of completers to use
 zstyle ":completion:*" completer _complete _match _approximate
@@ -57,8 +60,15 @@ zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;32"
 zstyle ":completion:*:cd:*" ignore-parents parent pwd
 #  * complete with colors
 zstyle ":completion:*" list-colors ""
+# auto rehash
+compctl -C -K cmd-comp -c
+function cmd-comp {
+	rehash
+}
 
-# functions
+# --- functions ---
+
+# extraction
 function extract () {
     if [[ -f "$1" ]]; then
         case "$1" in
@@ -83,7 +93,7 @@ function extract () {
     fi
 }
 
-# window title
+# --- window title ---
 case $TERM in
     *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
     precmd () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" } 
@@ -91,7 +101,7 @@ case $TERM in
     ;;
 esac
 
-# prompt
+# --- prompt ---
 setprompt () {
 	# load some modules
 	autoload -U colors zsh/terminfo # Used in the colour alias below
