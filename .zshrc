@@ -60,11 +60,6 @@ zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;32"
 zstyle ":completion:*:cd:*" ignore-parents parent pwd
 #  * complete with colors
 zstyle ":completion:*" list-colors ""
-# auto rehash
-compctl -C -K cmd-comp -c
-function cmd-comp {
-	rehash
-}
 
 # --- functions ---
 
