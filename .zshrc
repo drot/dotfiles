@@ -44,7 +44,7 @@ bindkey '^[[B' history-beginning-search-forward  # "Down"
 # --- completion ---
 autoload -U compinit; compinit
 #  * list of completers to use
-zstyle ":completion:*" completer _complete _correct _match _approximate
+zstyle ":completion:*" completer _complete _match _approximate
 #  * allow approximate
 zstyle ":completion:*:match:*" original only
 zstyle ":completion:*:approximate:*" max-errors 1 numeric
