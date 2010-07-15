@@ -26,7 +26,7 @@ export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
 eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 
 # --- aliases ---
-alias ls="ls --color=auto"
+alias ls="ls -h --group-directories-first --color=always"
 
 # --- zsh settings ---
 setopt emacs # emacs keybindings
