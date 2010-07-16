@@ -1,19 +1,22 @@
 # drot zsh
 
 # --- global ---
-export PATH="${PATH}:${HOME}/bin"
-export EDITOR="emacsclient"
-export ALTERNATE_EDITOR="emacs"
-export VISUAL="${EDITOR}"
-export PAGER="less"
-export BROWSER="conkeror"
+
+export PATH=${PATH}:${HOME}/bin # path for my executables
+export EDITOR=emacsclient # default editor
+export ALTERNATE_EDITOR=emacs # revert to emacs
+export VISUAL=$EDITOR # avoid problems
+export PAGER=less # man page viewer
+export BROWSER=conkeror # default browser
 
 # --- history ---
-export HISTFILE="${HOME}/.zsh_history"
-export HISTSIZE=10000
-export SAVEHIST=10000
+
+export HISTFILE=${HOME}/.zsh_history # hist file location
+export HISTSIZE=10000 # size of history
+export SAVEHIST=$HISTSIZE # lines of history
 
 # --- grep, man and dircolors ---
+
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32' # beautify grep
 export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
 export LESS_TERMCAP_mb=$'\E[0;31m' # blinking
@@ -29,34 +32,53 @@ eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 alias ls="ls -h --group-directories-first --color=always"
 
 # --- zsh settings ---
+
 setopt emacs # emacs keybindings
-setopt autocd # lazy dir switching
+setopt nobeep # kill beeping
+setopt globcomplete # even more globbing
 setopt nohup # don't kill processes
+setopt correctall # correct me
 setopt noclobber # don't overwrite files
-setopt nobanghist # disable chs-style history
-setopt cdablevars #
-setopt histreduceblanks histignorespace inc_append_history
+setopt histreduceblanks # reduce empty lines
+setopt histignorespace # don't save on spaces
+setopt histignorealldups # ignore dup commands
+setopt histignoredups # ignore consecutive dups in history
+setopt incappendhistory	# incrementally add items to history
 
 # --- key bindings ---
 bindkey '^[[A' history-beginning-search-backward # "Up"
 bindkey '^[[B' history-beginning-search-forward  # "Down"
 
 # --- completion ---
+
+# auto rehash
+_force_rehash() {
+  (( CURRENT == 1 )) && rehash
+  return 1
+}
+
+# load completion modules
 autoload -U compinit; compinit
+
 #  * list of completers to use
-zstyle ":completion:*" completer _complete _match _approximate
+zstyle ":completion:*" completer _force_rehash _complete _match _approximate
+
 #  * allow approximate
 zstyle ":completion:*:match:*" original only
 zstyle ":completion:*:approximate:*" max-errors 1 numeric
+
 #  * selection prompt as menu
 zstyle ":completion:*" menu select=1
+
 #  * menu selection for PID completion
 zstyle ":completion:*:*:kill:*" menu yes select
 zstyle ":completion:*:kill:*" force-list always
 zstyle ":completion:*:processes" command "ps -au$USER"
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;32"
+
 #  * don't select parent dir on cd
 zstyle ":completion:*:cd:*" ignore-parents parent pwd
+
 #  * complete with colors
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
@@ -98,17 +120,17 @@ esac
 # --- prompt ---
 setprompt () {
 	# load some modules
-	autoload -U colors zsh/terminfo # Used in the colour alias below
+	autoload -U colors zsh/terminfo # Used in the color alias below
 	colors
 	setopt extended_glob prompt_subst
 
-	# make some aliases for the colours: (coud use normal escap.seq's too)
+	# color aliases
 	for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
 		eval PR_$color='%{$fg[${(L)color}]%}'
 	done
 	PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
-	# Check the UID
+	# check the UID
 	if [[ $UID -ge 1000 ]]; then # normal user
 		eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
 		eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
