@@ -35,21 +35,21 @@ alias ls="ls -h --group-directories-first --color=always"
 
 setopt EMACS # emacs keybindings
 setopt NO_HUP # don't kill processes
-setopt GLOB_COMPLETE # more globbing
 setopt CDABLE_VARS # cd variables
 setopt CORRECT # correct me
 setopt NO_CORRECT_ALL # but don't push it
+setopt ALWAYS_TO_END # move cursor to end on completion
 setopt NO_CLOBBER # don't overwrite files
-setopt COMPLETE_IN_WORD # completion not only at the end
-setopt ALWAYS_TO_END # complete, move from middle to end
 setopt HIST_REDUCE_BLANKS # reduce empty lines
 setopt HIST_IGNORE_SPACE # don't save on spaces
 setopt HIST_IGNORE_ALL_DUPS # ignore dup commands
 setopt HIST_IGNORE_DUPS # ignore consecutive dups in history
 setopt INC_APPEND_HISTORY # incrementally add items to history
-setopt EXTENDED_GLOB # even more globbing
+setopt EXTENDED_GLOB # more globbing
+setopt GLOB_COMPLETE # globbing menu
 
 # --- key bindings ---
+
 bindkey '^[[A' history-beginning-search-backward # Up
 bindkey '^[[B' history-beginning-search-forward  # Down
 
