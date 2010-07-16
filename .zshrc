@@ -47,6 +47,7 @@ setopt HIST_IGNORE_SPACE # don't save on spaces
 setopt HIST_IGNORE_ALL_DUPS # ignore dup commands
 setopt HIST_IGNORE_DUPS # ignore consecutive dups in history
 setopt INC_APPEND_HISTORY # incrementally add items to history
+setopt EXTENDED_GLOB # even more globbing
 
 # --- key bindings ---
 bindkey '^[[A' history-beginning-search-backward # Up
@@ -64,7 +65,7 @@ _force_rehash() {
 autoload -U compinit; compinit
 
 #  * list of completers to use
-zstyle ":completion:*" completer _complete _force_rehash _match _approximate
+zstyle ":completion:*" completer _force_rehash _complete _match _approximate
 
 #  * allow approximate
 zstyle ":completion:*:match:*" original only
@@ -121,11 +122,12 @@ case $TERM in
 esac
 
 # --- prompt ---
+
 setprompt () {
 	# load some modules
 	autoload -U colors zsh/terminfo # Used in the color alias below
 	colors
-	setopt extended_glob prompt_subst
+	setopt PROMPT_SUBST
 
 	# color aliases
 	for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
