@@ -33,21 +33,24 @@ alias ls="ls -h --group-directories-first --color=always"
 
 # --- zsh settings ---
 
-setopt emacs # emacs keybindings
-setopt nobeep # kill beeping
-setopt globcomplete # even more globbing
-setopt nohup # don't kill processes
-setopt correctall # correct me
-setopt noclobber # don't overwrite files
-setopt histreduceblanks # reduce empty lines
-setopt histignorespace # don't save on spaces
-setopt histignorealldups # ignore dup commands
-setopt histignoredups # ignore consecutive dups in history
-setopt incappendhistory	# incrementally add items to history
+setopt EMACS # emacs keybindings
+setopt NO_HUP # don't kill processes
+setopt GLOB_COMPLETE # more globbing
+setopt CDABLE_VARS # cd variables
+setopt CORRECT # correct me
+setopt NO_CORRECT_ALL # but don't push it
+setopt NO_CLOBBER # don't overwrite files
+setopt COMPLETE_IN_WORD # completion not only at the end
+setopt ALWAYS_TO_END # complete, move from middle to end
+setopt HIST_REDUCE_BLANKS # reduce empty lines
+setopt HIST_IGNORE_SPACE # don't save on spaces
+setopt HIST_IGNORE_ALL_DUPS # ignore dup commands
+setopt HIST_IGNORE_DUPS # ignore consecutive dups in history
+setopt INC_APPEND_HISTORY # incrementally add items to history
 
 # --- key bindings ---
-bindkey '^[[A' history-beginning-search-backward # "Up"
-bindkey '^[[B' history-beginning-search-forward  # "Down"
+bindkey '^[[A' history-beginning-search-backward # Up
+bindkey '^[[B' history-beginning-search-forward  # Down
 
 # --- completion ---
 
@@ -61,7 +64,7 @@ _force_rehash() {
 autoload -U compinit; compinit
 
 #  * list of completers to use
-zstyle ":completion:*" completer _force_rehash _complete _match _approximate
+zstyle ":completion:*" completer _complete _force_rehash _match _approximate
 
 #  * allow approximate
 zstyle ":completion:*:match:*" original only
