@@ -149,7 +149,7 @@ setprompt () {
 		eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
 	fi
 	# set the prompt
-	PS1=$'${PR_CYAN}[${PR_USER}${PR_CYAN}@${PR_HOST}${PR_CYAN}][${PR_BLUE}%~${PR_CYAN}]${PR_USER_OP} '
+	PS1=$'${PR_CYAN}[${PR_USER}${PR_CYAN}@${PR_HOST}${PR_CYAN}][${PR_MAGENTA}%~${PR_CYAN}]${PR_USER_OP} '
 	PS2=$'%_>'
 }
 setprompt
