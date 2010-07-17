@@ -1,4 +1,3 @@
-" -[ General behaviour ]-
 " general
 set nocp
 set autoread
@@ -24,11 +23,14 @@ set smarttab
 set wildmenu
 set wildmode=list:longest,full
 
-" -[ Look ]-
-" general
+" look 
+set t_Co=256
+colorscheme neverland
+set cursorline
 set showcmd
 set showmode
 set number
+
 " statusline
 set statusline=%<%f\ %y%h%m%r\ PWD:%{getcwd()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2
