@@ -1,11 +1,5 @@
 ! drot X defaults
 
-! Emacs
-Emacs.font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
-Emacs.menuBar: off
-Emacs.toolBar: -1
-Emacs.verticalScrollBars: off
-
 ! URXVT
 ! General
 urxvt*termName: rxvt-256color
@@ -20,14 +14,14 @@ urxvt*cursorColor: #FFA560
 urxvt*cursorColor2: #000000
 urxvt*internalBorder: 1
 urxvt*secondaryScroll: true
-!
+
 ! Extensions
 urxvt*perl-lib: /usr/lib/urxvt/perl/
 urxvt*perl-ext-common: default,matcher
-urxvt*urlLauncher: /usr/bin/conkeror
+urxvt*urlLauncher: /usr/bin/chromium
 urxvt*matcher.button: 1
 urxvt*cutchars: `()'*<>[]{|}"
-!
+
 ! Appearance
 urxvt*font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
 urxvt*boldFont: -*-montecarlo-bold-*-*-*-11-*-*-*-*-*-*-*
