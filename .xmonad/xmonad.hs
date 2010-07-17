@@ -59,7 +59,7 @@ myConfig = defaultConfig { terminal = "urxvtc"
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["4","5","6"] float $ 
+myLayoutHook = onWorkspaces ["3","4","5"] float $ 
 	tabs ||| tile ||| mtile ||| full ||| float 
   where
 	tabs = named "[T]" $ tabbed shrinkText myTabConfig
