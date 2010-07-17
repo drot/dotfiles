@@ -5,7 +5,7 @@
 export PATH=${PATH}:${HOME}/bin # path for my executables
 export EDITOR=vim # default editor
 export PAGER=less # man page viewer
-export BROWSER=chromium # default browser
+export BROWSER=firefox # default browser
 
 # --- history ---
 
