@@ -5,7 +5,6 @@ set nobackup
 set noswapfile
 set nowrap
 syntax on
-filetype plugin indent on
  
 " search
 set incsearch
@@ -16,8 +15,7 @@ set smartcase
 
 " indenting
 set autoindent
-set smartindent
-set smarttab
+filetype plugin indent on
 
 " wild menu
 set wildmenu
