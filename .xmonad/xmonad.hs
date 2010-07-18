@@ -25,11 +25,11 @@ import XMonad.Layout.SimplestFloat
 --
 main = xmonad =<< statusBar cmd pp kb conf 
   where
-	uhook = withUrgencyHook NoUrgencyHook
-	cmd = "xmobar ~/.xmonad/xmobarrc"
-	pp = myPP
-	kb = toggleStrutsKey
-	conf = uhook myConfig
+    uhook = withUrgencyHook NoUrgencyHook
+    cmd = "xmobar ~/.xmonad/xmobarrc"
+    pp = myPP
+    kb = toggleStrutsKey
+    conf = uhook myConfig
 
 -- Status bar style
 --
@@ -59,18 +59,18 @@ myConfig = defaultConfig { terminal = "urxvtc"
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["3","4","5"] float $ 
-	tabs ||| tile ||| mtile ||| full ||| float 
+myLayoutHook = onWorkspace "3" tile $ onWorkspaces ["4","5","6"] float $ 
+               tabs ||| tile ||| mtile ||| full ||| float 
   where
-	tabs = named "[T]" $ tabbed shrinkText myTabConfig
-	tile = named "[]=" $ Tall 1 (3/100) (1/2)
-	mtile = named "[M]" $ Mirror tile
-	full = named "[ ]" $ Full
-	float = named "><>" $ simplestFloat
+    tabs = named "[T]" $ tabbed shrinkText myTabConfig
+    tile = named "[]=" $ Tall 1 (3/100) (1/2)
+    mtile = named "[M]" $ Mirror tile
+    full = named "[ ]" $ Full
+    float = named "><>" $ simplestFloat
 
 myManageHook = composeAll [ className =? "MPlayer" --> doFloat
-			  , className =? "Gimp"    --> doFloat 
-			  ]	
+                          , className =? "Gimp"    --> doFloat 
+                          ]	
 
 -- Tab style
 --
@@ -107,7 +107,7 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 	-- launch terminal
-	[ ((modm, xK_Return), spawn $ XMonad.terminal conf)
+        [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
 	-- launch prompt
 	, ((modm, xK_r), shellPrompt myXPConfig)
@@ -184,12 +184,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $ 
 
 	-- mod-button1, set the window to floating mode and move by dragging
-	[ ((modm, button1), (\w -> focus w >> mouseMoveWindow w 
-		>> windows W.shiftMaster))
+        [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w 
+                                   >> windows W.shiftMaster))
 	-- mod-button2, raise the window to the top of the stack
-	, ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+        , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
 
 	-- mod-button3, set the window to floating mode and resize by dragging
-	, ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-		>> windows W.shiftMaster)) 
-	]
+        , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
+                                   >> windows W.shiftMaster)) 
+        ]
