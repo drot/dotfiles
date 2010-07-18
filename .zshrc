@@ -27,11 +27,11 @@ export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
 eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 
 # --- aliases ---
+
 alias ls="ls -h --group-directories-first --color=always"
 
 # --- zsh settings ---
 
-setopt EMACS # emacs keybindings
 setopt NO_HUP # don't kill processes
 setopt CDABLE_VARS # cd variables
 setopt CORRECT # correct me
@@ -48,6 +48,7 @@ setopt GLOB_COMPLETE # globbing menu
 
 # --- key bindings ---
 
+bindkey -e
 bindkey '^[[A' history-beginning-search-backward # Up
 bindkey '^[[B' history-beginning-search-forward  # Down
 
