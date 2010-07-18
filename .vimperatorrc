@@ -5,9 +5,6 @@ colorscheme seaweed
 set showtabline=0
 set go-=brT
 
-" Focus content after a page has loaded
-set focuscontent
-
 " Show destination links in 1=status line, 2=command line
 set showstatuslinks=2
 
