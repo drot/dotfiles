@@ -110,7 +110,7 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) =
 	[ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
 	-- launch prompt
-	, ((modm, xK_r), shellPrompt myXPConfig)
+	, ((modm, xK_p), shellPrompt myXPConfig)
 
 	-- focus urgent window
 	, ((modm, xK_u), focusUrgent)
