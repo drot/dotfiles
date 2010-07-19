@@ -103,7 +103,7 @@ myXPConfig = defaultXPConfig { font = myFont
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 -- Main key bindings
-myKeys x  = M.union (keys defaultConfig x) (M.fromList (newKeys x))
+myKeys x  = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys conf@(XConfig {XMonad.modMask = modm}) =
 
 	-- launch terminal
