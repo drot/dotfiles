@@ -23,27 +23,16 @@ import XMonad.Layout.SimplestFloat
 
 -- Launch xmonad
 --
-main = xmonad =<< statusBar cmd pp kb conf 
-	where
-		uhook = withUrgencyHook NoUrgencyHook
-    		cmd = "xmobar ~/.xmonad/xmobarrc"
-    		pp = myPP
-    		kb = toggleStrutsKey
-		conf = uhook myConfig
-
--- Status bar style
---
-myPP = defaultPP { ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
-		 , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
-		 , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
-		 , ppSep = " <fc=#FFB6B0>:</fc> "
-		 , ppWsSep = " <fc=#FFB6B0>:</fc> "
-		 , ppLayout = xmobarColor "#CEFFAC" ""
-		 }
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
 -- My defaults
 --
+myBar = "xmobar ~/.xmonad/xmobarrc"
+
 myFont = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
+
+myUhook = withUrgencyHook NoUrgencyHook myConfig
+
 myConfig = defaultConfig { terminal = "urxvtc"
 			 , focusFollowsMouse = True
 			 , borderWidth = 1
@@ -55,6 +44,16 @@ myConfig = defaultConfig { terminal = "urxvtc"
 			 , layoutHook = myLayoutHook
 			 , manageHook = myManageHook 
 			 }
+
+-- Status bar style
+--
+myPP = defaultPP { ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
+		 , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
+		 , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
+		 , ppSep = " <fc=#FFB6B0>:</fc> "
+		 , ppWsSep = " <fc=#FFB6B0>:</fc> "
+		 , ppLayout = xmobarColor "#CEFFAC" ""
+		 }
 
 -- Layout configuration
 --
