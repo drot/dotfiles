@@ -89,10 +89,10 @@ myTabConfig = defaultTheme { fontName = myFont
 --
 myXPConfig = defaultXPConfig { font = myFont
 			     , fgColor = "#FFFFFF"
-			     ,bgColor = "#000000"
-			     ,bgHLight = "#000000"
-			     ,fgHLight = "#CEFFAC"
-			     ,position = Bottom 
+			     , bgColor = "#000000"
+			     , bgHLight = "#000000"
+			     , fgHLight = "#CEFFAC"
+			     , position = Bottom 
 			     }
 
 -- Key bindings
