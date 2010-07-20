@@ -7,7 +7,6 @@ export EDITOR=emacsclient # default editor
 export ALTERNATE_EDITOR=emacs # avoid trouble
 export VISUAL=$EDITOR # compat
 export PAGER=less # man page viewer
-export BROWSER=firefox # default browser
 
 # --- history ---
 
