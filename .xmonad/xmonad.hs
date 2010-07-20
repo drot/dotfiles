@@ -60,7 +60,7 @@ myPP = defaultPP { ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc>
 myLayoutHook = onWorkspace "3" tile $ onWorkspaces ["5","6","7"] float $ 
                tabs ||| tile ||| mtile ||| full ||| float 
   where
-    tabs = named "[T]" $ tabbed shrinkText myTabConfig
+    tabs = named "[T]" $ tabbedBottom shrinkText myTabConfig
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
     mtile = named "[M]" $ Mirror tile
     full = named "[ ]" $ Full
