@@ -3,7 +3,9 @@
 # --- global ---
 
 export PATH=${PATH}:${HOME}/bin # path for my executables
-export EDITOR=vim # default editor
+export EDITOR=emacsclient # default editor
+export ALTERNATE_EDITOR=emacs # avoid trouble
+export VISUAL=$EDITOR # compat
 export PAGER=less # man page viewer
 export BROWSER=firefox # default browser
 
