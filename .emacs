@@ -34,11 +34,20 @@
 ;; Highlight matching parentheses
 (show-paren-mode t)
 
-;; Ido
+;; IDO
 (require 'ido)
 (ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(setq
+  ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
+  ido-ignore-buffers               ; Ignore buffers:
+    '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
+  ido-everywhere t                 ; Enabled for various dialogs
+  ido-case-fold  t                 ; Case-insensitive
+  ido-use-filename-at-point nil    ; Don't use filename at point
+  ido-use-url-at-point nil         ; Don't use url at point
+  ido-enable-flex-matching t       ; More flexible
+  ido-max-prospects 6              ; Keep minibuffer clean
+)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
