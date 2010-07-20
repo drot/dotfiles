@@ -53,18 +53,18 @@ myPP = defaultPP { ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc>
 		 , ppSep = " <fc=#FFB6B0>:</fc> "
 		 , ppWsSep = " <fc=#FFB6B0>:</fc> "
 		 , ppLayout = xmobarColor "#CEFFAC" ""
-		 }
+                 }
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspaces ["4","5","6"] float $ 
-		tabs ||| tile ||| mtile ||| full ||| float 
-	where
-    		tabs = named "[T]" $ tabbed shrinkText myTabConfig
-    		tile = named "[]=" $ Tall 1 (3/100) (1/2)
-    		mtile = named "[M]" $ Mirror tile
-    		full = named "[ ]" $ Full
-		float = named "><>" $ simplestFloat
+myLayoutHook = onWorkspace "3" tile $ onWorkspaces ["5","6","7"] float $ 
+               tabs ||| tile ||| mtile ||| full ||| float 
+  where
+    tabs = named "[T]" $ tabbed shrinkText myTabConfig
+    tile = named "[]=" $ Tall 1 (3/100) (1/2)
+    mtile = named "[M]" $ Mirror tile
+    full = named "[ ]" $ Full
+    float = named "><>" $ simplestFloat
 
 myManageHook = composeAll [ className =? "MPlayer" --> doFloat
                           , className =? "Gimp" --> doFloat 
@@ -105,15 +105,15 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myKeys x  = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys conf@(XConfig {XMonad.modMask = modm}) =
 
-	-- launch terminal
-	[ ((modm, xK_Return), spawn $ XMonad.terminal conf)
+  -- launch terminal
+  [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
-	-- launch prompt
-	, ((modm, xK_p), shellPrompt myXPConfig)
+    -- launch prompt
+  , ((modm, xK_p), shellPrompt myXPConfig)
 
-	-- focus urgent window
-	, ((modm, xK_u), focusUrgent)
+    -- focus urgent window
+  , ((modm, xK_u), focusUrgent)
 
-	-- swap the focused window and the master window
-	, ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
-	]
+    -- swap the focused window and the master window
+  , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
+  ]
