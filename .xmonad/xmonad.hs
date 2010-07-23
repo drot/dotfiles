@@ -10,10 +10,10 @@ import qualified XMonad.StackSet as W
 
 -- General
 import XMonad.Prompt
+import XMonad.ManageHook
 import XMonad.Prompt.Shell
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.ManageDocks
 
 -- Layouts
 import XMonad.Layout.Named
@@ -42,7 +42,7 @@ myConfig = defaultConfig { terminal = "urxvtc"
 			 , focusedBorderColor = "#FFB6B0"
 			 , keys = myKeys
 			 , layoutHook = myLayoutHook
-			 , manageHook = myManageHook 
+			 , manageHook = myManageHook
 			 }
 
 -- Status bar style
@@ -70,7 +70,7 @@ myManageHook = composeAll [ className =? "MPlayer" --> doFloat
                           , className =? "Gimp" --> doFloat 
                           , className =? "Conkeror" --> doShift "2"
                           , className =? "Emacs" --> doShift "3"
-                          ]	
+                          ]
 
 -- Tab style
 --
@@ -109,7 +109,7 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) =
 
   -- launch terminal
   [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
-
+  
     -- launch prompt
   , ((modm, xK_p), shellPrompt myXPConfig)
 
