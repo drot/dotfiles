@@ -11,8 +11,11 @@ import qualified XMonad.StackSet as W
 -- General
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Util.Scratchpad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
+import XMonad.Util.NamedScratchpad
+import XMonad.Util.WorkspaceCompare
 
 -- Layouts
 import XMonad.Layout.Named
@@ -52,11 +55,12 @@ myPP = defaultPP { ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc>
 		 , ppSep = " <fc=#FFB6B0>:</fc> "
 		 , ppWsSep = " <fc=#FFB6B0>:</fc> "
 		 , ppLayout = xmobarColor "#CEFFAC" ""
+                 , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
                  }
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspace "3" tile $ onWorkspaces ["4","5","6"] float $ 
+myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $ 
                tabs ||| tile ||| mtile ||| full ||| float 
   where
     tabs = named "[T]" $ tabbed shrinkText myTabConfig
@@ -69,7 +73,13 @@ myManageHook = composeAll [ className =? "MPlayer" --> doFloat
                           , className =? "Gimp" --> doFloat 
                           , className =? "Conkeror" --> doShift "2"
                           , className =? "Emacs" --> doShift "3"
-                          ]
+                          ] <+> namedScratchpadManageHook myScratch
+
+-- Scratchpad
+--
+myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
+              (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+            ]
 
 -- Tab style
 --
@@ -109,7 +119,10 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) =
   -- launch terminal
   [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
   
-    -- launch prompt
+    -- launch player
+  , ((modm, xK_r), namedScratchpadAction myScratch "music")
+    
+     -- launch prompt
   , ((modm, xK_p), shellPrompt myXPConfig)
 
     -- focus urgent window
