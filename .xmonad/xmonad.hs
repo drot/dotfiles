@@ -68,6 +68,8 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspaces ["4","5","6"] float $
 
 myManageHook = composeAll [ className =? "MPlayer" --> doFloat
                           , className =? "Gimp" --> doFloat 
+                          , className =? "Conkeror" --> doShift "2"
+                          , className =? "Emacs" --> doShift "3"
                           ]	
 
 -- Tab style
