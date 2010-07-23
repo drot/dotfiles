@@ -10,7 +10,6 @@ import qualified XMonad.StackSet as W
 
 -- General
 import XMonad.Prompt
-import XMonad.ManageHook
 import XMonad.Prompt.Shell
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
