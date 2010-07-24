@@ -116,8 +116,8 @@ function extract () {
 # --- window title ---
 case $TERM in
     *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
-    precmd () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" } 
-    preexec () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" }
+    precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" } 
+    preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
     ;;
 esac
 
