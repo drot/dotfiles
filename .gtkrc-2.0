@@ -1,11 +1,11 @@
-include "/home/drot/.themes/ElegantBrit/gtk-2.0/gtkrc"
+include "/home/drot/.themes/absolute/gtk-2.0/gtkrc"
 
-gtk-theme-name="Elegant Brit"
+gtk-theme-name="absolute"
 gtk-icon-theme-name="Tango"
-gtk-font-name="Sans 9"
+gtk-font-name="Droid Sans 9"
 
 style "user-font"
 {
-    font_name="Sans 9"
+    font_name="Droid Sans 9"
 }
 widget_class "*" style "user-font"
