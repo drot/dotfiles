@@ -110,11 +110,11 @@ XCalc.ti.button38.background: gray95
 XCalc.ti.button39.background: gray95
 
 ! xpdf
-xpdf*enableFreetype: yes
-xpdf*antialias: yes
-xpdf*foreground: black
-xpdf*background: white
-xpdf*urlCommand: /usr/bin/conkeror
+xpdf.enableFreetype: yes
+xpdf.antialias: yes
+xpdf.foreground: black
+xpdf.background: white
+xpdf.urlCommand: /usr/bin/conkeror
 
 ! xmessage
 Xmessage.form.okay.shapeStyle: rectangle
@@ -134,4 +134,4 @@ Xmessage.Command.internalHeight: 3
 Xmessage.Command.borderColor: gray40
 Xmessage.Command.shapeStyle: Rectangle
 Xmessage.Command.background: gray80
-Xmessage*font: -*-gohufont-medium-*-*-*-11-*-*-*-*-*-*-*
+Xmessage.font: -*-gohufont-medium-*-*-*-11-*-*-*-*-*-*-*
