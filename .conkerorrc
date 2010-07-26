@@ -1,3 +1,6 @@
+// tabs
+require("new-tabs.js");
+
 // the default page for new buffers.
 homepage = "www.google.com/ncr";
 
