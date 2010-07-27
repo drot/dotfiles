@@ -10,8 +10,11 @@
 '(erc-notice-prefix "-*- ")
 '(erc-prompt "~>>")
 ;; beeping
-'(erc-match-mode t)
-'(erc-text-matched-hook (quote (erc-log-matches erc-beep-on-match))))
+'(erc-match-mode t))
+(add-hook 'erc-text-matched-hook 'erc-sound-if-not-server)
+(defun erc-sound-if-not-server (match-type nickuserhost msg)
+  (unless (string-match "Server:[0-9]+" nickuserhost)
+    (start-process-shell-command "lolsound" nil "aplay ~/.emacs.d/beep.wav")))
 
 ;; colors
 (custom-set-faces
