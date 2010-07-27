@@ -1,7 +1,3 @@
-;; beeping
-(add-hook 'erc-text-matched-hook 'erc-beep-on-match)
-(setq erc-beep-match-types '(current-nick keyword))
-
 ;; nick colors
 (and
  (require 'erc-highlight-nicknames)
@@ -10,18 +6,21 @@
 
 ;; look
 (custom-set-variables
-  '(erc-nick-uniquifier "_")
- '(erc-notice-prefix "-*- ")
- '(erc-prompt "~>>"))
+'(erc-nick-uniquifier "_")
+'(erc-notice-prefix "-*- ")
+'(erc-prompt "~>>")
+;; beeping
+'(erc-match-mode t)
+'(erc-text-matched-hook (quote (erc-log-matches erc-beep-on-match))))
 
 ;; colors
 (custom-set-faces
- '(erc-notice-face ((t (:foreground "SlateBlue" :weight normal))))
- '(erc-input-face ((t (:foreground "Green"))))
- '(erc-button ((t (:background "black" :foreground "Cyan" :underline "Cyan" :weight normal))))
- '(erc-my-nick-face ((t (:foreground "Green" :weight bold))))
- '(erc-prompt-face ((t (:background "Black" :foreground "Green" :weight normal))))
- '(erc-timestamp-face ((t (:foreground "Green" :weight normal)))))
+'(erc-notice-face ((t (:foreground "Brown" :weight normal))))
+'(erc-input-face ((t (:foreground "Green"))))
+'(erc-button ((t (:background "Black" :foreground "Cyan" :underline "Cyan" :weight normal))))
+'(erc-my-nick-face ((t (:foreground "Green" :weight bold))))
+'(erc-prompt-face ((t (:background "Black" :foreground "Green" :weight normal))))
+'(erc-timestamp-face ((t (:foreground "Green" :weight normal)))))
 
 ;; check channels
 (erc-track-mode t)

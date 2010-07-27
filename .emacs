@@ -24,9 +24,8 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 
-;; Shut off message buffer
-(setq message-log-max nil)
-(kill-buffer "*Messages*")
+;; Message buffer size
+(setq message-log-max 100)
 
 ;; Show column number in modeline
 (setq column-number-mode t)
