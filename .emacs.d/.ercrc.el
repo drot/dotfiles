@@ -37,7 +37,7 @@
 '(erc-button ((t (:background "Black" :foreground "Cyan" :underline "Cyan" :weight normal))))
 '(erc-my-nick-face ((t (:foreground "Green" :weight bold))))
 '(erc-prompt-face ((t (:background "Black" :foreground "Green" :weight normal))))
-'(erc-timestamp-face ((t (:foreground "Green" :weight normal)))))
+'(erc-timestamp-face ((t (:foreground "Cyan" :weight normal)))))
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
