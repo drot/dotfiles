@@ -3,10 +3,9 @@
       '(("freenode.net" "#archlinux" "#xmonad" "#emacs")))
 
 ;; nick colors
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
+(require 'erc-highlight-nicknames)
+(add-to-list 'erc-modules 'highlight-nicknames)
+(erc-update-modules)
 
 ;; look
 (setq erc-nick-uniquifier "_"
