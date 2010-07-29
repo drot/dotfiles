@@ -79,3 +79,22 @@
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
+;; Org-mode
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;; Calendar
+(setq
+ holidays-in-diary-buffer t
+ mark-holidays-in-calendar t
+ all-christian-calendar-holidays t
+ all-islamic-calendar-holidays nil
+ all-hebrew-calendar-holidays nil
+ european-calendar-style t
+ display-time-24hr-format t
+ calendar-latitude 43.20
+ calendar-longitude 17.48
+ calendar-location-name "Mostar, Bosnia and Herzegovina"
+)
