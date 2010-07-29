@@ -1,6 +1,5 @@
 #!/bin/sh
 
-xrdb -merge $HOME/.Xresources
 xsetroot -cursor_name left_ptr &
 sh ~/.fehbg &
 xset -dpms &
