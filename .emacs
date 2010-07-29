@@ -87,7 +87,6 @@
 
 ;; Calendar
 (setq
- holidays-in-diary-buffer t
  mark-holidays-in-calendar t
  all-christian-calendar-holidays t
  all-islamic-calendar-holidays nil
