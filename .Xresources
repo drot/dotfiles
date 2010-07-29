@@ -1,7 +1,7 @@
 ! drot X resources
 
 ! Emacs
-Emacs.font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
+Emacs.font: -*-gohufont-medium-*-*-*-11-*-*-*-*-*-*-*
 
 ! URXVT
 ! General
@@ -26,8 +26,8 @@ URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
 ! Appearance
-URxvt.font: -*-montecarlo-medium-*-*-*-11-*-*-*-*-*-*-*
-URxvt.boldFont: -*-montecarlo-bold-*-*-*-11-*-*-*-*-*-*-*
+URxvt.font: -*-gohufont-medium-*-*-*-11-*-*-*-*-*-*-*
+URxvt.boldFont: -*-gohufont-bold-*-*-*-11-*-*-*-*-*-*-*
 
 ! IR_Black
 URxvt.background: #000000
