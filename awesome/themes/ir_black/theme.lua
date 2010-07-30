@@ -25,8 +25,8 @@ theme.border_marked = "#CEFFAC"
 
 -- {{{ Widgets
 theme.fg_widget           = "#CEFFAC"
-theme.fg_center_widget    = "#7C7C7C"
-theme.fg_end_widget       = "#000000"
+theme.fg_center_widget    = "#CEFFAC"
+theme.fg_end_widget       = "#CEFFAC"
 theme.border_widget       = theme.bg_normal
 -- }}}
 
