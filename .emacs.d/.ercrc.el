@@ -24,7 +24,7 @@
 				"324" "329" "332" "333" "353" "477")
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
-;; Beeping
+;; beeping
 (add-hook 'erc-text-matched-hook 'erc-sound-if-not-server)
 (defun erc-sound-if-not-server (match-type nickuserhost msg)
   (unless (string-match "Server:[0-9]+" nickuserhost)
