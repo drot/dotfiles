@@ -1,6 +1,6 @@
 ;; auto join
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#archlinux" "#xmonad" "#emacs")))
+      '(("freenode.net" "#archlinux" "#emacs")))
 
 ;; nick colors
 (require 'erc-highlight-nicknames)
