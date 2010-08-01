@@ -174,7 +174,7 @@ dateicon = widget({ type = "imagebox" })
 dateicon.image = image(beautiful.widget_date)
 datewidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "%d-%m, %R", 60)
+vicious.register(datewidget, vicious.widgets.date, "%d-%m/%R", 60)
 -- }}}
 
 -- {{{ Weather widget
