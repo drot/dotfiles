@@ -97,14 +97,14 @@ volbar:set_border_color(beautiful.border_widget)
 volbar:set_gradient_colors({ beautiful.fg_widget,
    beautiful.fg_center_widget, beautiful.fg_end_widget
 }) -- Enable caching
-vicious.cache(vicious.widgets.volume)
+vicious.cache(vicious.widgets.ossvol)
 -- Register widgets
-vicious.register(volbar, vicious.widgets.volume, "$1",  2, "PCM")
-vicious.register(volwidget, vicious.widgets.volume, " $1%", 2, "PCM")
+vicious.register(volbar, vicious.widgets.ossvol, "$1", 2, "vol")
+vicious.register(volwidget, vicious.widgets.ossvol, "$1%", 2, "vol")
 -- Register buttons
 volbar.widget:buttons(awful.util.table.join(
-   awful.button({ }, 1, function () awful.util.spawn("amixer -q set PCM 2dB+", false) end),
-   awful.button({ }, 3, function () awful.util.spawn("amixer -q set PCM 2dB-", false) end)
+   awful.button({ }, 1, function () awful.util.spawn("ossmix vol +5", false) end),
+   awful.button({ }, 3, function () awful.util.spawn("ossmix vol -- -5", false) end)
 )) -- Register assigned buttons
 volwidget:buttons(volbar.widget:buttons())
 -- }}}

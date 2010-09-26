@@ -27,7 +27,7 @@ require("vicious.widgets.gmail")
 -- require("vicious.widgets.org")
 require("vicious.widgets.pkg")
 require("vicious.widgets.mpd")
-require("vicious.widgets.volume")
+require("vicious.widgets.ossvol")
 require("vicious.widgets.weather")
 require("vicious.widgets.date")
 -- }}}
