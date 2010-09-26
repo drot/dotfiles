@@ -1,0 +1,25 @@
+" Theme
+colorscheme seaweed
+
+" Hide tabs and scrollbar
+set showtabline=0
+set go-=brT
+
+" Show destination links in 1=status line, 2=command line
+set showstatuslinks=2
+
+" Editor
+set editor="urxvt -e vim -f"
+
+" Show the Feed and Bookmark buttons on the statusbar
+javascript <<EOF
+(function(){
+    var statusPanel = document.createElement("statusbarpanel");
+    statusPanel.setAttribute("id", "buttons-panel-clone");
+    statusPanel.appendChild(document.getElementById("feed-button"));
+    statusPanel.appendChild(document.getElementById("star-button"));
+    statusPanel.firstChild.setAttribute("style", "padding: 0; max-height: 16px;");
+    document.getElementById("status-bar")
+            .insertBefore(statusPanel, document.getElementById("security-button"));
+})();
+EOF
