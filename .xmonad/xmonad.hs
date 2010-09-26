@@ -74,7 +74,8 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
 myManageHook = composeAll [ 
   className =? "MPlayer" --> doFloat
   , className =? "Gimp" --> doFloat 
-  , className =? "Firefox" --> doShift "2"
+  , className =? "Conkeror" --> doShift "2"
+  , className =? "Emacs" --> doShift "3"
   ] <+> namedScratchpadManageHook myScratch
 
 -- Scratchpad
@@ -125,10 +126,10 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
   ((modm, xK_Return), spawn $ XMonad.terminal conf)
   
     -- launch player
-  , ((modm, xK_s), namedScratchpadAction myScratch "music")
+  , ((modm, xK_r), namedScratchpadAction myScratch "music")
     
      -- launch prompt
-  , ((modm, xK_r), shellPrompt myXPConfig)
+  , ((modm, xK_p), shellPrompt myXPConfig)
 
     -- focus urgent window
   , ((modm, xK_u), focusUrgent)

@@ -21,7 +21,7 @@ URxvt.secondaryScroll: true
 ! Extensions
 URxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: /usr/bin/firefox
+URxvt.urlLauncher: /usr/bin/conkeror
 URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
@@ -114,7 +114,7 @@ xpdf.enableFreetype: yes
 xpdf.antialias: yes
 xpdf.foreground: black
 xpdf.background: white
-xpdf.urlCommand: /usr/bin/firefox
+xpdf.urlCommand: /usr/bin/conkeror
 
 ! xmessage
 Xmessage.form.okay.shapeStyle: rectangle
