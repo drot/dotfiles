@@ -1,7 +1,7 @@
-include "/home/drot/.themes/Kupo\ Finale\ Dark/gtk-2.0/gtkrc"
+include "/usr/share/themes/nimbus/gtk-2.0/gtkrc"
 
-gtk-theme-name="Kupo Finale Dark"
-gtk-icon-theme-name="Sunfesta"
+gtk-theme-name="nimbus"
+gtk-icon-theme-name="nimbus"
 gtk-font-name="Droid Sans 9"
 
 style "user-font"
