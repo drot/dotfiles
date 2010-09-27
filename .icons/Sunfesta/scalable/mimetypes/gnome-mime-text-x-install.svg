@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 10.0, SVG Export Plug-In . SVG Version: 3.0.0 Build 76)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg 
+	 xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" i:viewOrigin="11.6128 43.0703" i:rulerOrigin="0 0" i:pageBounds="0 48 48 0"
+	 xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="29.559" height="41.639" viewBox="0 0 29.559 41.639" overflow="visible" enable-background="new 0 0 29.559 41.639"
+	 xml:space="preserve">
+	<metadata>
+		<variableSets  xmlns="http://ns.adobe.com/Variables/1.0/">
+			<variableSet  varSetName="binding1" locked="none">
+				<variables></variables>
+				<v:sampleDataSets  xmlns="http://ns.adobe.com/GenericCustomNamespace/1.0/" xmlns:v="http://ns.adobe.com/Variables/1.0/">
+					</v:sampleDataSets>
+			</variableSet>
+		</variableSets>
+		<sfw  xmlns="&ns_sfw;">
+			<slices></slices>
+			<sliceSourceBounds  x="11.613" y="1.432" width="29.559" height="41.639" bottomLeftOrigin="true"></sliceSourceBounds>
+		</sfw>
+	</metadata>
+	<g id="Layer_1" i:layer="yes" i:dimmedPercent="50" i:rgbTrio="#4F008000FFFF">
+		<g>
+			<path i:knockout="Off" fill="#203842" d="M28.247,37.063l-0.598,2.392l-2.791,1.264l3.521-0.266l0.532-4.719L28.247,37.063z"/>
+			<g>
+				<path i:knockout="Off" fill="#203842" d="M0.701,1.214L0.635,4.537l3.058-4.253L0.769,0.948"/>
+				<path i:knockout="Off" fill="none" stroke="#203842" d="M29.059,36.289c0,5.342-0.428,4.838-5.389,4.838H6.674
+					c-4.962,0-5.133,0.506-5.133-4.838V6.637c0-5.343,0.172-5.184,5.133-5.184h16.995c4.963,0,5.391-0.159,5.391,5.184V36.289z"/>
+				<path i:knockout="Off" fill="none" stroke="#51839F" d="M28.018,35.336c0,5.343-0.428,4.839-5.388,4.839H5.633
+					c-4.962,0-5.133,0.506-5.133-4.839V5.684C0.5,0.34,0.672,0.5,5.633,0.5h16.995c4.963,0,5.389-0.16,5.389,5.184L28.018,35.336z"
+					/>
+			</g>
+		</g>
+		<g>
+			<path i:knockout="Off" fill="#223742" d="M4.723,24.027c0,5.705,4.642,10.348,10.349,10.348c5.706,0,10.348-4.643,10.348-10.348
+				c0-5.707-4.642-10.349-10.348-10.349C9.365,13.679,4.723,18.321,4.723,24.027z M5.205,24.027c0-5.442,4.426-9.868,9.867-9.868
+				c5.44,0,9.865,4.426,9.865,9.868c0,5.439-4.425,9.866-9.865,9.866C9.631,33.893,5.205,29.467,5.205,24.027z"/>
+			<path i:knockout="Off" fill="#223742" d="M11.622,24.027c0,1.9,1.547,3.447,3.45,3.447c1.9,0,3.448-1.547,3.448-3.447
+				c0-1.902-1.547-3.45-3.448-3.45C13.169,20.577,11.622,22.125,11.622,24.027z M13.065,24.027c0-1.106,0.901-2.007,2.007-2.007
+				c1.106,0,2.005,0.9,2.005,2.007c0,1.105-0.898,2.004-2.005,2.004C13.966,26.031,13.065,25.133,13.065,24.027z"/>
+			<path i:knockout="Off" fill="#5383A0" d="M4.14,23.657c0,5.708,4.642,10.349,10.348,10.349s10.348-4.641,10.348-10.349
+				c0-5.706-4.642-10.347-10.348-10.347S4.14,17.952,4.14,23.657z M4.621,23.657c0-5.44,4.426-9.866,9.867-9.866
+				s9.865,4.426,9.865,9.866c0,5.441-4.425,9.867-9.865,9.867S4.621,29.099,4.621,23.657z"/>
+			<path i:knockout="Off" fill="#5383A0" d="M10.82,23.384c0,1.902,1.547,3.45,3.449,3.45s3.449-1.548,3.449-3.45
+				c0-1.9-1.547-3.448-3.449-3.448S10.82,21.483,10.82,23.384z M12.264,23.384c0-1.104,0.899-2.004,2.005-2.004
+				c1.105,0,2.005,0.899,2.005,2.004c0,1.105-0.899,2.007-2.005,2.007C13.163,25.391,12.264,24.489,12.264,23.384z"/>
+		</g>
+	</g>
+</svg>

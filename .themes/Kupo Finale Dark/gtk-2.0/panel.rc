@@ -1,0 +1,140 @@
+#################### PANEL BACKGROUND #########################xx
+
+style "panelbg"
+{
+  
+xthickness            			= 0
+ythickness            			= 0
+bg_pixmap[NORMAL]					= "Panel/panel-bg.png"
+#bg_pixmap[SELECTED]					= "Panel/panel-bg.png"
+#bg_pixmap[INSENSITIVE]					= "Panel/panel-bg.png"
+#bg_pixmap[PRELIGHT]					= "Panel/panel-bg.png"
+#bg_pixmap[ACTIVE]					= "Panel/panel-bg.png"
+}
+
+class "*Panel*" style "panelbg"
+widget_class "*notif*" style "panelbg"
+widget_class "*Notif*" style "panelbg"
+#widget_class "*Tray*" style "panelbg"
+#widget_class "*tray*" style "panelbg"
+
+##################### PANEL BUTTONS ###############################
+
+style "panelbuttons"
+{
+
+  fg[NORMAL]        = "#f4f4f4" # 
+  fg[PRELIGHT]      = "#ffffff" # text on buttons (hover)
+  fg[ACTIVE]        = "#f4f4f4" # text on unfocused tabs
+  
+  
+  xthickness            			= 2
+  ythickness            			= 1
+
+	GtkWidget::focus_padding = 2
+
+	engine "pixmap" {
+      
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			state			= NORMAL
+			file            	= "Panel/panel-button-inactive.png"
+			border          	= { 4, 4, 4, 4 }
+			stretch         	= TRUE			
+		}
+		
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			state			= PRELIGHT
+			file            	= "Panel/panel-button-hover.png"
+			border          	= { 2, 2, 2, 2 }
+			stretch         	= TRUE
+		}
+
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			shadow			= OUT
+			state			= PRELIGHT
+			file            	= "Panel/panel-button-hover.png"
+			border          	= { 4, 4, 4, 4 }
+			stretch         	= TRUE
+			
+		}
+		
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			shadow			= IN
+			state			= PRELIGHT
+			file            	= "Panel/panel-button-hover.png"
+			border          	= { 4, 4, 4, 4 }
+			stretch         	= TRUE
+			
+		}
+		
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			state			= ACTIVE
+			file            	= "Panel/panel-button-active.png"
+			border          	= { 4, 4, 4, 4 }
+			stretch         	= TRUE
+		}  
+		image
+		{
+			function        	= BOX
+			recolorable     	= TRUE
+			state			= INSENSITIVE
+			file            	= "Panel/panel-button-inactive.png"
+			border          	= { 4, 4, 4, 4 }
+			stretch         	 = TRUE
+		}  
+/*    		image
+    		{
+      		function			= HANDLE
+      		recolorable			= TRUE
+      		overlay_file			= "Panel/handle-v.png"
+      		overlay_stretch	= FALSE
+      		orientation			= VERTICAL
+    		}
+    		image
+    		{
+      		function			= HANDLE
+      		overlay_file			= "Panel/handle-h.png"
+      		overlay_stretch 		= FALSE
+     		orientation			= HORIZONTAL
+   		}
+*/
+	}
+
+}
+
+widget "*PanelWidget*" style "panelbuttons"
+widget "*PanelApplet*" style "panelbuttons"
+#widget_class "*Panel*GtkToggleButton*" style "panelbuttons"
+#widget_class "*Panel*GtkButton" style "panelbuttons"
+widget_class "*PanelButton*." style "panelbuttons"
+widget_class "*Panel*" style "panelbg"
+
+#############################################################
+#FIXES THE STANDARD SHUTDOWN-DIALOG ON GNOME
+#############################################################
+
+style "fix"
+{
+xthickness = 0
+ythickness = 0
+ bg[NORMAL]		= "#dcdcdc"
+}
+
+class "*Panel*" style "fix"
+
+#############################################################

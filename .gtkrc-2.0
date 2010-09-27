@@ -1,7 +1,7 @@
-include "/home/drot/.themes/absolute/gtk-2.0/gtkrc"
+include "/home/drot/.themes/Kupo\ Finale\ Dark/gtk-2.0/gtkrc"
 
-gtk-theme-name="absolute"
-gtk-icon-theme-name="Tango"
+gtk-theme-name="Kupo Finale Dark"
+gtk-icon-theme-name="Sunfesta"
 gtk-font-name="Droid Sans 9"
 
 style "user-font"

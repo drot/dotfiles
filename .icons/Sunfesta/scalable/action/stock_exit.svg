@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 10.0, SVG Export Plug-In . SVG Version: 3.0.0 Build 76)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg 
+	 xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" i:viewOrigin="7.6475 40.8955" i:rulerOrigin="0 0" i:pageBounds="0 48 48 0"
+	 xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="33.936" height="35.479" viewBox="0 0 33.936 35.479" overflow="visible" enable-background="new 0 0 33.936 35.479"
+	 xml:space="preserve">
+	<metadata>
+		<variableSets  xmlns="http://ns.adobe.com/Variables/1.0/">
+			<variableSet  varSetName="binding1" locked="none">
+				<variables></variables>
+				<v:sampleDataSets  xmlns="http://ns.adobe.com/GenericCustomNamespace/1.0/" xmlns:v="http://ns.adobe.com/Variables/1.0/">
+					</v:sampleDataSets>
+			</variableSet>
+		</variableSets>
+		<sfw  xmlns="&ns_sfw;">
+			<slices></slices>
+			<sliceSourceBounds  x="7.647" y="5.417" width="33.936" height="35.479" bottomLeftOrigin="true"></sliceSourceBounds>
+		</sfw>
+	</metadata>
+	<g id="Layer_1" i:layer="yes" i:dimmedPercent="50" i:rgbTrio="#4F008000FFFF">
+		<path i:knockout="Off" fill="#7F3A01" stroke="#7F3A01" stroke-width="1.5" stroke-linejoin="round" d="M22.228,3.913
+			c6.017,2.188,10.959,8.386,10.959,15.148c0,8.64-7.028,15.668-15.668,15.668c-8.638,0-15.667-7.028-15.667-15.666
+			c0-6.765,4.088-13.134,10.104-15.321V2.677C5.378,4.908,0.852,11.738,0.852,19.063c0,9.188,7.477,16.666,16.667,16.666
+			c9.19,0,16.668-7.478,16.668-16.668c0-7.323-5.381-13.982-11.959-16.213V3.913z"/>
+		<path i:knockout="Off" fill="#7F3A01" stroke="#7F3A01" d="M17.706,1.666c1.105,0,2-0.104,2,1v14c0,1.104-0.896,1-2,1
+			c-1.104,0-2,0.104-2-1v-14C15.706,1.562,16.602,1.666,17.706,1.666z"/>
+		<g i:knockout="Off">
+			<path i:knockout="Off" fill="#E76F00" stroke="#E76F00" stroke-width="1.5" stroke-linejoin="round" d="M21.75,2.621
+				c6.015,2.188,10.334,7.948,10.334,14.711c0,8.64-7.028,15.667-15.668,15.667c-8.639,0-15.667-7.027-15.667-15.666
+				c0-6.764,4.317-12.523,10.334-14.712V1.557C4.503,3.788-0.251,10.009-0.251,17.333c0,9.189,7.477,16.666,16.667,16.666
+				c9.19,0,16.668-7.477,16.668-16.667c0-7.323-4.756-13.545-11.334-15.775V2.621z"/>
+			<path i:knockout="Off" fill="#E76F00" stroke="#E76F00" d="M16.415,0.499c1.105,0,2.001-0.104,2.001,1v14
+				c0,1.104-0.896,1-2.001,1c-1.104,0-2,0.104-2-1v-14C14.415,0.395,15.311,0.499,16.415,0.499z"/>
+		</g>
+	</g>
+</svg>
