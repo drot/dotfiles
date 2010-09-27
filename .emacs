@@ -14,11 +14,10 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme)
+(require 'zenburn)
 (color-theme-initialize)
-(load "color-theme-ir-black.el")
 (if window-system
-(color-theme-ir-black))
+(color-theme-zenburn))
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
