@@ -1,0 +1,8 @@
+{ "sheets" : [
+    "conkeror--scrollbars.css",
+    "new-tabs.css",
+    "minibuffer.css",
+    "mode-line.css",
+    "hints--url-panel.css"
+  ]
+}
