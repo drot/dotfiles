@@ -28,16 +28,7 @@
 (add-hook 'erc-text-matched-hook 'erc-sound-if-not-server)
 (defun erc-sound-if-not-server (match-type nickuserhost msg)
   (unless (string-match "Server:[0-9]+" nickuserhost)
-    (start-process-shell-command "lolsound" nil "aplay ~/.emacs.d/beep.wav")))
-
-;; colors
-(custom-set-faces
-'(erc-notice-face ((t (:foreground "Brown" :weight normal))))
-'(erc-input-face ((t (:foreground "Green"))))
-'(erc-button ((t (:background "Black" :foreground "Cyan" :underline "Cyan" :weight normal))))
-'(erc-my-nick-face ((t (:foreground "Green" :weight bold))))
-'(erc-prompt-face ((t (:background "Black" :foreground "Green" :weight normal))))
-'(erc-timestamp-face ((t (:foreground "Cyan" :weight normal)))))
+    (start-process-shell-command "lolsound" nil "ossplay ~/.emacs.d/beep.wav")))
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
