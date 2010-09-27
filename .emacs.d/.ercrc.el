@@ -15,6 +15,27 @@
 				"324" "329" "332" "333" "353" "477")
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
+;; beeping
+(add-hook 'erc-text-matched-hook 'erc-sound-if-not-server)
+(defun erc-sound-if-not-server (match-type nickuserhost msg)
+  (unless (string-match "Server:[0-9]+" nickuserhost)
+    (start-process-shell-command "lolsound" nil "ossplay ~/.emacs.d/beep.wav")))
+
+;; colors
+(custom-set-faces
+'(erc-notice-face ((t (:foreground "tomato" :weight normal))))
+'(erc-error-face ((t (:foreground "tomato"))))
+'(erc-input-face ((t (:foreground "dodger blue"))))
+'(erc-button ((t (:background "#2e3434" :foreground "dodger blue" :underline "dodger blue" :weight normal))))
+'(erc-my-nick-face ((t (:foreground "#edd400" :weight bold))))
+'(erc-prompt-face ((t (:background "#2e3434" :foreground "#6ac214" :weight normal))))
+'(erc-timestamp-face ((t (:foreground "dodger blue" :weight normal)))))
+
+;; nick colors
+(require 'erc-highlight-nicknames)
+(add-to-list 'erc-modules 'highlight-nicknames)
+(erc-update-modules)
+
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
 (add-hook 'window-configuration-change-hook 

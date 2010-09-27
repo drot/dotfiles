@@ -14,10 +14,10 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'zenburn)
+(require 'color-theme-tangotango)
 (color-theme-initialize)
 (if window-system
-(color-theme-zenburn))
+(color-theme-tangotango))
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
