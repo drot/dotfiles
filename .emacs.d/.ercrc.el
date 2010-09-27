@@ -1,7 +1,3 @@
-;; auto join
-(setq erc-autojoin-channels-alist
-      '(("freenode.net" "#archlinux" "#emacs")))
-
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
@@ -24,6 +20,21 @@
 (defun erc-sound-if-not-server (match-type nickuserhost msg)
   (unless (string-match "Server:[0-9]+" nickuserhost)
     (start-process-shell-command "lolsound" nil "ossplay ~/.emacs.d/beep.wav")))
+
+;; colors
+(custom-set-faces
+'(erc-notice-face ((t (:foreground "tomato" :weight normal))))
+'(erc-error-face ((t (:foreground "tomato"))))
+'(erc-input-face ((t (:foreground "dodger blue"))))
+'(erc-button ((t (:background "#2e3434" :foreground "cyan" :underline "cyan" :weight normal))))
+'(erc-my-nick-face ((t (:foreground "#edd400" :weight bold))))
+'(erc-prompt-face ((t (:background "#2e3434" :foreground "#6ac214" :weight normal))))
+'(erc-timestamp-face ((t (:foreground "cyan" :weight normal)))))
+
+;; nick colors
+(require 'erc-highlight-nicknames)
+(add-to-list 'erc-modules 'highlight-nicknames)
+(erc-update-modules)
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
