@@ -26,10 +26,10 @@
 '(erc-notice-face ((t (:foreground "tomato" :weight normal))))
 '(erc-error-face ((t (:foreground "tomato"))))
 '(erc-input-face ((t (:foreground "dodger blue"))))
-'(erc-button ((t (:background "#2e3434" :foreground "cyan" :underline "cyan" :weight normal))))
+'(erc-button ((t (:background "#2e3434" :foreground "dodger blue" :underline "dodger blue" :weight normal))))
 '(erc-my-nick-face ((t (:foreground "#edd400" :weight bold))))
 '(erc-prompt-face ((t (:background "#2e3434" :foreground "#6ac214" :weight normal))))
-'(erc-timestamp-face ((t (:foreground "cyan" :weight normal)))))
+'(erc-timestamp-face ((t (:foreground "dodger blue" :weight normal)))))
 
 ;; nick colors
 (require 'erc-highlight-nicknames)
