@@ -2,11 +2,6 @@
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#archlinux" "#emacs")))
 
-;; nick colors
-(require 'erc-highlight-nicknames)
-(add-to-list 'erc-modules 'highlight-nicknames)
-(erc-update-modules)
-
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
