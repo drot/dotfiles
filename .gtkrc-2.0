@@ -1,7 +1,7 @@
-include "/usr/share/themes/Candido/gtk-2.0/gtkrc"
+include "/usr/share/themes/nimbus/gtk-2.0/gtkrc"
 
-gtk-theme-name="Candido"
-gtk-icon-theme-name="Tango"
+gtk-theme-name="nimbus"
+gtk-icon-theme-name="nimbus"
 gtk-font-name="Droid Sans 9"
 
 style "user-font"
