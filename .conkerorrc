@@ -20,13 +20,10 @@ url_remoting_fn = load_url_in_new_buffer;
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
 // external programs for handling various mime types.
-external_content_handlers.set("application/pdf", "xpdf");
+external_content_handlers.set("application/pdf", "epdfview");
 external_content_handlers.set("video/*", "urxvtc -e mplayer");
 
 // webjumps
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("torrentz", "http://www.torrentz.com/search?q=%s");
-
-// blackened theme
-theme_load_paths.push("~/.conkeror.mozdev.org/"); theme_load("blackened"); 
