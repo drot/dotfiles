@@ -439,7 +439,7 @@ awful.rules.rules = {
       properties = { floating = true } },
    { rule = { class = "Gimp" },
       properties = { tag = tags[screen.count()][5] } },
-   { rule = { class = "Firefox" },
+   { rule = { class = "Conkeror" },
       properties = { tag = tags[screen.count()][2] } },
 }
 -- }}}
