@@ -15,9 +15,9 @@
 
 ;; Color theme
 (require 'zenburn)
+(setq color-theme-is-global t)
 (color-theme-initialize)
-(if window-system
-(color-theme-zenburn))
+(color-theme-zenburn)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
