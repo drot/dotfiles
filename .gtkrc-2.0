@@ -1,7 +1,7 @@
-include "/usr/share/themes/nimbus/gtk-2.0/gtkrc"
+include "/usr/share/themes/Nodoka/gtk-2.0/gtkrc"
 
-gtk-theme-name="nimbus"
-gtk-icon-theme-name="nimbus"
+gtk-theme-name="Nodoka"
+gtk-icon-theme-name="gnome-brave"
 gtk-font-name="Droid Sans 9"
 
 style "user-font"
