@@ -41,8 +41,8 @@ myConfig = defaultConfig {
   , borderWidth = 1
   , modMask = mod4Mask
   , workspaces = ["1","2","3","4","5","6","7","8","9"]
-  , normalBorderColor = "#7C7C7C"
-  , focusedBorderColor = "#FFB6B0"
+  , normalBorderColor = "#3F3F3F"
+  , focusedBorderColor = "#6F6F6F"
   , keys = myKeys
   , layoutHook = myLayoutHook
   , manageHook = myManageHook
@@ -51,12 +51,12 @@ myConfig = defaultConfig {
 -- Status bar style
 --
 myPP = defaultPP { 
-  ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
-  , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
-  , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
-  , ppSep = " <fc=#FFB6B0>:</fc> "
-  , ppWsSep = " <fc=#FFB6B0>:</fc> "
-  , ppLayout = xmobarColor "#CEFFAC" ""
+  ppTitle = xmobarColor "#F0DFAF" "" . wrap "<fc=#DCDCCC><</fc> " " <fc=#DCDCCC>></fc>" . shorten 50
+  , ppCurrent = xmobarColor "#F0DFAF" "" . wrap "<fc=#DCDCCC>[</fc>" "<fc=#DCDCCC>]</fc>"
+  , ppUrgent = xmobarColor "#CC9393" "" . wrap "<fc=#CC9393>[</fc>" "<fc=#CC9393>]</fc>"
+  , ppSep = " <fc=#6F6F6F>:</fc> "
+  , ppWsSep = " <fc=#6F6F6F>:</fc> "
+  , ppLayout = xmobarColor "#F0DFAF" ""
   , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
   }
 
@@ -90,25 +90,25 @@ myScratch = [
 myTabConfig = defaultTheme { 
   fontName = myFont
   , decoHeight = 12
-  , activeColor = "#000000"
-  , activeBorderColor = "#FFB6B0"
-  , activeTextColor = "#CEFFAC"
-  , inactiveColor = "#000000"
-  , inactiveBorderColor = "#7C7C7C"
-  , inactiveTextColor = "#EEEEEE"
-  , urgentColor = "#000000"
-  , urgentBorderColor = "#FFB6B0"
-  , urgentTextColor = "#B6DCFF" 
+  , activeColor = "#1E2320"
+  , activeBorderColor = "#6F6F6F"
+  , activeTextColor = "#F0DFAF"
+  , inactiveColor = "#3F3F3F"
+  , inactiveBorderColor = "#3F3F3F"
+  , inactiveTextColor = "#DCDCCC"
+  , urgentColor = "#3F3F3F#"
+  , urgentBorderColor = "#CC9393"
+  , urgentTextColor = "#CC9393" 
   }
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig { 
   font = myFont
-  , fgColor = "#FFFFFF"
-  , bgColor = "#000000"
-  , bgHLight = "#000000"
-  , fgHLight = "#CEFFAC"
+  , fgColor = "#DCDCCC"
+  , bgColor = "#3F3F3F"
+  , bgHLight = "#1E2320"
+  , fgHLight = "#F0DFAF"
   , position = Bottom 
   }
 
@@ -129,7 +129,7 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
   , ((modm, xK_s), namedScratchpadAction myScratch "music")
     
      -- launch prompt
-  , ((modm, xK_r), shellPrompt myXPConfig)
+  , ((modm, xK_p), shellPrompt myXPConfig)
 
     -- focus urgent window
   , ((modm, xK_u), focusUrgent)
