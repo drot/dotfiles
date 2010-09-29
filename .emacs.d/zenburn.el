@@ -526,6 +526,7 @@ static char *gnus-pointer[] = {
 
           '(erc-action ((t (:inherit erc-default))))
           '(erc-bold ((t (:weight bold))))
+	  '(erc-my-nick-face ((t (:inherit zenburn-yellow :weight bold))))
           '(erc-current-nick ((t (:inherit zenburn-primary-1))))
           '(erc-dangerous-host ((t (:inherit font-lock-warning))))
           `(erc-default ((t (:foreground ,zenburn-fg))))
