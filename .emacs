@@ -37,14 +37,14 @@
 (ido-mode t)
 (setq
   ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
-  ido-ignore-buffers               ; Ignore buffers:
+  ido-ignore-buffers               ; ignore buffers:
     '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
-  ido-everywhere t                 ; Enabled for various dialogs
-  ido-case-fold  t                 ; Case-insensitive
-  ido-use-filename-at-point nil    ; Don't use filename at point
-  ido-use-url-at-point nil         ; Don't use url at point
-  ido-enable-flex-matching t       ; More flexible
-  ido-max-prospects 6              ; Keep minibuffer clean
+  ido-everywhere t                 ; enabled for various dialogs
+  ido-case-fold  t                 ; case-insensitive
+  ido-use-filename-at-point nil    ; don't use filename at point
+  ido-use-url-at-point nil         ; don't use url at point
+  ido-enable-flex-matching t       ; more flexible
+  ido-max-prospects 6              ; keep minibuffer clean
 )
 
 ;; Show unfinished keystrokes early
@@ -95,3 +95,14 @@
  calendar-longitude 17.48
  calendar-location-name "Mostar, Bosnia and Herzegovina"
 )
+
+;; Abbreviations
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+; save abbrevs when files are saved
+(setq save-abbrevs t)
+; load abbrevs on startup
+(quietly-read-abbrev-file)
+; abbrev-mode for selected modes
+(dolist (hook '(erc-mode-hook
+		text-mode-hook))
+  (add-hook hook (lambda () (abbrev-mode 1))))
