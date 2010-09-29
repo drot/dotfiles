@@ -30,6 +30,7 @@ eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 # --- aliases ---
 
 alias ls="ls -h --group-directories-first --color=always"
+alias ec="emacsclient"
 
 # --- zsh settings ---
 
