@@ -1,12 +1,6 @@
 // tabs
 require("new-tabs.js");
 
-// disable scroll bars
-function disable_scrollbars (buffer) {
-	 buffer.browser.contentWindow.scrollbars.visible = false;
-	 }
-add_hook ("content_buffer_location_change_hook", disable_scrollbars);
-
 // the default page for new buffers.
 homepage = "www.google.com/ncr";
 
