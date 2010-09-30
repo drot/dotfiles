@@ -53,9 +53,9 @@ myConfig = defaultConfig {
 myPP = defaultPP {
   ppTitle = xmobarColor "#F0DFAF" "" . wrap "<fc=#DCDCCC><</fc> " " <fc=#DCDCCC>></fc>" . shorten 50
   , ppCurrent = xmobarColor "#F0DFAF" "" . wrap "<fc=#DCDCCC>[</fc>" "<fc=#DCDCCC>]</fc>"
-  , ppUrgent = xmobarColor "#CC9393" "" . wrap "<fc=#CC9393>[</fc>" "<fc=#CC9393>]</fc>"
-  , ppSep = " <fc=#6F6F6F>:</fc> "
-  , ppWsSep = " <fc=#6F6F6F>:</fc> "
+  , ppUrgent = xmobarColor "#EC93D3" "" . wrap "<fc=#F0DFAF>[</fc>" "<fc=#F0DFAF>]</fc>"
+  , ppSep = " <fc=#DCA3A3>:</fc> "
+  , ppWsSep = " <fc=#DCA3A3>:</fc> "
   , ppLayout = xmobarColor "#F0DFAF" ""
   , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
   }
@@ -97,8 +97,8 @@ myTabConfig = defaultTheme {
   , inactiveBorderColor = "#3F3F3F"
   , inactiveTextColor = "#DCDCCC"
   , urgentColor = "#3F3F3F#"
-  , urgentBorderColor = "#CC9393"
-  , urgentTextColor = "#CC9393"
+  , urgentBorderColor = "#EC93D3"
+  , urgentTextColor = "#EC93D3"
   }
 
 -- Prompt style

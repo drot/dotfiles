@@ -12,7 +12,7 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: true
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #dfaf8f
+URxvt.colorUL: #f0dfaf
 URxvt.cursorColor: #dcdccc
 URxvt.internalBorder: 1
 URxvt.secondaryScroll: true

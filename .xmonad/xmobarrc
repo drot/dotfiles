@@ -6,13 +6,13 @@ Config {
        lowerOnStart = True,
        commands = [ 
        		  Run StdinReader, 
-		  Run Cpu ["-L","10","-H","50","--low","#7F9F7F","--normal","#F0DFAF","--high","#FF5656"] 10,
-		  Run Memory ["-L","5","-H","30","--low","#7F9F7F","--normal","#F0DFAF","--high","#FF5656","-t","Mem: <usedratio>%"] 10,
-		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#7F9F7F","--normal","#F0DFAF","--high","#FF5656"] 10,
+		  Run Cpu ["-L","10","-H","50","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3"] 10,
+		  Run Memory ["-L","5","-H","40","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3","-t","Mem: <usedratio>%"] 10,
+		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3"] 10,
 		  Run Date "%a <fc=#F0DFAF>%_d</fc> %b <fc=#F0DFAF>%H:%M</fc>" "date" 10,
 		  Run Com "sh" ["~/.xmonad/mpd.sh"] "mpd" 10 
 		  ],
        sepChar = "%",
        alignSep = "}{",
-       template = "%StdinReader% }{ <fc=#DCDCCC>></fc><fc=#CC9393>></fc> <fc=#F0DFAF>%mpd%</fc> <fc=#DCDCCC>></fc><fc=#CC9393>></fc> %cpu% <fc=#DCDCCC>></fc><fc=#CC9393>></fc> %memory% <fc=#DCDCCC>></fc><fc=#CC9393>></fc> %eth0% <fc=#DCDCCC>></fc><fc=#CC9393>></fc> %date%"
+       template = "%StdinReader% }{ <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> <fc=#F0DFAF>%mpd%</fc> <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %cpu% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %memory% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %eth0% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %date%"
        }
