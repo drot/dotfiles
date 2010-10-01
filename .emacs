@@ -67,7 +67,7 @@
 )
 
 ;; Default browser
-(setq browse-url-browser-function 'browse-url-generic 
+(setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
 ;; Haskell mode
@@ -97,13 +97,17 @@
  calendar-location-name "Mostar, Bosnia and Herzegovina"
 )
 
+;; Yasnippet
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
+
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 ; save abbrevs when files are saved
 (setq save-abbrevs t)
 ; load abbrevs on startup
 (quietly-read-abbrev-file)
-; abbrev-mode for selected modes
-(dolist (hook '(erc-mode-hook
-		text-mode-hook))
-  (add-hook hook (lambda () (abbrev-mode 1))))
+; always on
+(setq default-abbrev-mode t)
