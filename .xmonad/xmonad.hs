@@ -74,8 +74,7 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
 myManageHook = composeAll [ 
   className =? "MPlayer" --> doFloat
   , className =? "Gimp" --> doFloat 
-  , className =? "Conkeror" --> doShift "2"
-  , className =? "Emacs" --> doShift "3"
+  , className =? "Firefox" --> doShift "2"
   ] <+> namedScratchpadManageHook myScratch
 
 -- Scratchpad
