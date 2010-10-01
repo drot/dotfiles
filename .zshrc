@@ -3,7 +3,9 @@
 # --- global ---
 
 export PATH=${PATH}:${HOME}/bin # path for my executables
-export EDITOR=vim # default editor
+export EDITOR=emacsclient # default editor
+export ALTERNATE_EDITOR=emacs # avoid trouble
+export VISUAL=$EDITOR # compat
 export PAGER=less # man page viewer
 
 # --- history ---
@@ -15,19 +17,20 @@ export SAVEHIST=$HISTSIZE # lines of history
 # --- grep, man and dircolors ---
 
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32' # beautify grep
-export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
-export LESS_TERMCAP_mb=$'\E[0;31m' # blinking
-export LESS_TERMCAP_md=$'\E[1;34m' # bold, used for headings
-export LESS_TERMCAP_us=$'\E[1;32m' # underline, used for paths,keywords
-export LESS_TERMCAP_so=$'\E[41;1;37m' # standout, used for statusbar/search
-export LESS_TERMCAP_ue=$'\E[0m' # end underline
-export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
-export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
+export GROFF_NO_SGR=1 # output ANSI color escape sequence
+export LESS_TERMCAP_mb=$'\E[01;31m'   # begin blinking
+export LESS_TERMCAP_md=$'\E[01;31m'   # begin bold
+export LESS_TERMCAP_me=$'\E[0m'       # end mode
+export LESS_TERMCAP_se=$'\E[0m'       # end standout-mode
+export LESS_TERMCAP_so=$'\E[1;33;40m' # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'       # end underline
+export LESS_TERMCAP_us=$'\E[1;32m'    # begin underline
 eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 
 # --- aliases ---
 
 alias ls="ls -h --group-directories-first --color=always"
+alias ec="emacsclient"
 
 # --- zsh settings ---
 
@@ -47,9 +50,8 @@ setopt GLOB_COMPLETE # globbing menu
 
 # --- key bindings ---
 
+# emacs
 bindkey -e
-bindkey '^[[A' history-beginning-search-backward # Up
-bindkey '^[[B' history-beginning-search-forward  # Down
 
 # --- completion ---
 
@@ -149,7 +151,7 @@ setprompt () {
 		eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
 	fi
 	# set the prompt
-	PS1=$'${PR_CYAN}[${PR_USER}${PR_CYAN}@${PR_HOST}${PR_CYAN}][${PR_MAGENTA}%~${PR_CYAN}]${PR_USER_OP} '
+	PS1=$'${PR_WHITE}[${PR_USER}${PR_WHITE}@${PR_HOST}${PR_WHITE}][${PR_GREEN}%~${PR_WHITE}]${PR_USER_OP} '
 	PS2=$'%_>'
 }
 setprompt
