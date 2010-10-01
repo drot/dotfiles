@@ -2,7 +2,7 @@
 (server-start)
 
 ;; Load path
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -71,7 +71,7 @@
       browse-url-generic-program "conkeror")
 
 ;; Haskell mode
-(load "haskell-site-file")
+(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
@@ -98,10 +98,11 @@
 )
 
 ;; Yasnippet
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
+(add-to-list 'load-path
+	       "~/.emacs.d/site-lisp/yasnippet")
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet/snippets")
 
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
