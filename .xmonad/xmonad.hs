@@ -126,7 +126,7 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
   ((modm, xK_Return), spawn $ XMonad.terminal conf)
   
     -- launch player
-  , ((modm, xK_r), namedScratchpadAction myScratch "music")
+  , ((modm, xK_s), namedScratchpadAction myScratch "music")
     
      -- launch prompt
   , ((modm, xK_p), shellPrompt myXPConfig)
