@@ -12,15 +12,16 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: true
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #f0dfaf
-URxvt.cursorColor: #dcdccc
+URxvt.colorUL: #B6DCFF
+URxvt.cursorColor: #FFA560
+URxvt.cursorColor2: #000000
 URxvt.internalBorder: 1
 URxvt.secondaryScroll: true
 
 ! Extensions
 URxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: /usr/bin/conkeror
+URxvt.urlLauncher: /usr/bin/firefox
 URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
@@ -28,33 +29,41 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -*-gohufont-medium-*-*-*-11-*-*-*-*-*-*-*
 URxvt.boldFont: -*-gohufont-bold-*-*-*-11-*-*-*-*-*-*-*
 
-! Zenburn color-scheme
-URxvt.background: #3f3f3f
-URxvt.foreground: #dcdccc
-! black + red
-URxvt.color0: #1E2320
-URxvt.color1: #705050
-! green + yellow
-URxvt.color2: #60b48a
-URxvt.color3: #dfaf8f
-! blue + purple
-URxvt.color4: #506070
-URxvt.color5: #dc8cc3
-! cyan + white
-URxvt.color6: #8cd0d3
-URxvt.color7: #dcdccc
-! bright-black + bright-red
-URxvt.color8: #709080
-URxvt.color9: #dca3a3
-! bright-green + bright-yellow
-URxvt.color10: #c3bf9f
-URxvt.color11: #f0dfaf
-! bright-blue + bright-purple
-URxvt.color12: #94bff3
-URxvt.color13: #ec93d3
-! bright-cyan + bright-white
-URxvt.color14: #93e0e3
-URxvt.color15: #ffffff
+! IR_Black
+URxvt.background: #000000
+URxvt.foreground: #F2F2F2
+
+! black
+URxvt.color0: #000000
+URxvt.color8: #7C7C7C
+
+! red
+URxvt.color1: #FF6C60
+URxvt.color9: #FFB6B0
+
+! green
+URxvt.color2: #A8FF60
+URxvt.color10: #CEFFAC
+
+! yellow
+URxvt.color3: #FFFFB6
+URxvt.color11: #FFFFCC
+
+! blue
+URxvt.color4: #96CBFE
+URxvt.color12: #B6DCFF
+
+! magenta
+URxvt.color5: #FF73FD
+URxvt.color13: #FF9CFE
+
+! cyan
+URxvt.color6: #C6C5FE
+URxvt.color14: #DFDFFE
+
+! white
+URxvt.color7: #EEEEEE
+URxvt.color15: #FFFFFF
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
@@ -105,7 +114,7 @@ xpdf.enableFreetype: yes
 xpdf.antialias: yes
 xpdf.foreground: black
 xpdf.background: white
-xpdf.urlCommand: /usr/bin/conkeror
+xpdf.urlCommand: /usr/bin/firefox
 
 ! xmessage
 Xmessage.form.okay.shapeStyle: rectangle
