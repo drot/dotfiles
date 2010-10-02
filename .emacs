@@ -14,9 +14,11 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-subdued)
-(setq color-theme-is-global t)
-(color-theme-subdued)
+(require 'color-theme)
+(color-theme-initialize)
+(load "color-theme-ir-black.el")
+(if window-system
+(color-theme-ir-black))
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
