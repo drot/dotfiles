@@ -15,7 +15,6 @@
 
 ;; Color theme
 (require 'color-theme)
-(color-theme-initialize)
 (load "color-theme-ir-black.el")
 (if window-system
 (color-theme-ir-black))
