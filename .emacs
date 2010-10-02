@@ -111,3 +111,6 @@
 (quietly-read-abbrev-file)
 ; always on
 (setq default-abbrev-mode t)
+
+;; ERC
+(require 'erc)
