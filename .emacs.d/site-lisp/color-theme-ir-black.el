@@ -67,8 +67,8 @@
          (bold ((t (:bold t))))
          (bold-italic ((t (:bold t))))
 	 (ido-first-match ((t (:foreground "#A8FF60"))))
-	 (ido-only-match ((t (:foreground "#C6C5FE"))))
-	 (ido-subdir ((t (:foreground "#7C7C7C"))))
+	 (ido-only-match ((t (:foreground "#7C7C7C"))))
+	 (ido-subdir ((t (:foreground "#C6C5FE"))))
          (underline ((nil (:underline nil)))))))))
 
 (provide 'color-theme-ir-black)
