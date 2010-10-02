@@ -1,6 +1,21 @@
 ;; spelling
 (erc-spelling-mode 1)
 
+;; nick colors
+(require 'erc-highlight-nicknames)
+(add-to-list 'erc-modules 'highlight-nicknames)
+(erc-update-modules)
+
+;; colors
+(custom-set-faces
+'(erc-notice-face ((t (:foreground "#61635e" :weight normal))))
+'(erc-error-face ((t (:foreground "#cc0000"))))
+'(erc-input-face ((t (:foreground "#4e9a06"))))
+'(erc-button ((t (:background "#000" :foreground "#729fcf" :underline "#729fcf" :weight normal))))
+'(erc-my-nick-face ((t (:foreground "#4e9a06" :weight bold))))
+'(erc-prompt-face ((t (:background "#000" :foreground "#4e9a06" :weight normal))))
+'(erc-timestamp-face ((t (:foreground "#729fcf" :weight normal)))))
+
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "

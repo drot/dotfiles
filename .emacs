@@ -14,10 +14,9 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'zenburn)
+(require 'color-theme-subdued)
 (setq color-theme-is-global t)
-(color-theme-initialize)
-(color-theme-zenburn)
+(color-theme-subdued)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -71,7 +70,7 @@
       browse-url-generic-program "conkeror")
 
 ;; Haskell mode
-(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file")
+(load "haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
