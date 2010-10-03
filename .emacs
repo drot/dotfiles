@@ -11,9 +11,9 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'zenburn)
+(require 'color-theme-tangotango)
 (setq color-theme-is-global t)
-(color-theme-zenburn)
+(color-theme-tangotango)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -66,10 +66,9 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
-;; Haskell mode
-(load "haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; Lua mode
+(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
