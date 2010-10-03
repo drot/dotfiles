@@ -11,9 +11,11 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-tangotango)
+(require 'color-theme)
+(color-theme-initialize)
+(load "manoj-colors.el")
 (setq color-theme-is-global t)
-(color-theme-tangotango)
+(color-theme-manoj-dark)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -42,6 +44,9 @@
   ido-enable-flex-matching t       ; more flexible
   ido-max-prospects 6              ; keep minibuffer clean
 )
+
+;; ERC
+(require 'erc)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
@@ -107,6 +112,3 @@
 (quietly-read-abbrev-file)
 ; always on
 (setq default-abbrev-mode t)
-
-;; ERC
-(require 'erc)
