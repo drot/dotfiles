@@ -9,7 +9,7 @@ URxvt.termName: rxvt-256color
 URxvt.loginShell: false
 URxvt.scrollBar: false
 URxvt.saveLines: 65535
-URxvt.cursorBlink: true
+URxvt.cursorBlink: false
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
 URxvt.colorUL: #B6DCFF

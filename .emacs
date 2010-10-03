@@ -48,6 +48,9 @@
 ;; ERC
 (require 'erc)
 
+;; Stop cursor from blinking
+(blink-cursor-mode nil)
+
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
