@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr &
 xset -dpms &
 urxvtd -q -o -f &
