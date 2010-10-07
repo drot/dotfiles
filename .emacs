@@ -62,10 +62,6 @@
 ;; Easy PG
 (require 'epa-file)
 
-;; Emacs Got Git
-(require 'egg)
-(setq egg-enable-tooltip t)
-
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
