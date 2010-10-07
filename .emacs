@@ -45,11 +45,25 @@
   ido-max-prospects 6              ; keep minibuffer clean
 )
 
+;; Icomplete
+(icomplete-mode t)
+
+;; Edit files in compressed archives
+(auto-compression-mode 1)
+
+;; Make buffer names unique
+(require 'uniquify)
+(setq uniquify-separator ":")
+(setq uniquify-buffer-name-style 'post-forward)
+
 ;; ERC
 (require 'erc)
 
 ;; Easy PG
 (require 'epa-file)
+
+;; GIT
+(require 'git)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
