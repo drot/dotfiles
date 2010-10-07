@@ -48,6 +48,9 @@
 ;; ERC
 (require 'erc)
 
+;; Easy PG
+(require 'epa-file)
+
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
