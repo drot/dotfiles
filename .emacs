@@ -45,9 +45,6 @@
   ido-max-prospects 6              ; keep minibuffer clean
 )
 
-;; Icomplete
-(icomplete-mode t)
-
 ;; Edit files in compressed archives
 (auto-compression-mode 1)
 
