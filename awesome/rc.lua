@@ -103,9 +103,9 @@ vicious.register(volbar, vicious.widgets.volume, "$1", 2, "PCM")
 vicious.register(volwidget, vicious.widgets.volume, " $1%", 2, "PCM")
 -- Register buttons
 volbar.widget:buttons(awful.util.table.join(
- awful.button({ }, 1, function () awful.util.spawn("amixer -q set PCM 2dB+", false) end),
- awful.button({ }, 3, function () awful.util.spawn("amixer -q set PCM 2dB-", false) end)))
--- Register assigned buttons
+	awful.button({ }, 1, function () awful.util.spawn("amixer -q set PCM 2dB+", false) end),
+	awful.button({ }, 3, function () awful.util.spawn("amixer -q set PCM 2dB-", false) end)
+)) -- Register assigned buttons
 volwidget:buttons(volbar.widget:buttons())
 -- }}}
 
@@ -132,7 +132,7 @@ vicious.register(netwidget, vicious.widgets.net, "${eth0 down_kb}/${eth0 up_kb}"
 fsicon = widget({ type = "imagebox" })
 fsicon.image = image(beautiful.widget_fs)
 fs = {b = awful.widget.progressbar(), r = awful.widget.progressbar(),
-   v = awful.widget.progressbar(), h = awful.widget.progressbar()}
+      v = awful.widget.progressbar(), h = awful.widget.progressbar()}
 -- Progressbar properties
 for _, w in pairs(fs) do
    w:set_vertical(true):set_ticks(true)
