@@ -11,8 +11,8 @@ local string = { match = string.match }
 -- }}}
 
 
--- Ossvol: provides volume levels of requested OSS mixers
-module("vicious.widgets.ossvol")
+-- Volume: provides volume levels and state of requested ALSA mixers
+module("vicious.widgets.volume")
 
 
 -- {{{ Volume widget type
@@ -25,28 +25,27 @@ local function worker(format, warg)
     }
 
     -- Get mixer control contents
-    local f = io.popen("ossmix -c")
+    local f = io.popen("amixer get " .. warg)
     local mixer = f:read("*all")
     f:close()
 
-    -- Capture mixer control state
-    local volu = tonumber(string.match(mixer, warg .. "[%s]([%d%.]+)"))/0.25
-    local mute = string.match(mixer, "vol%.mute[%s]([%a]+)")
+    -- Capture mixer control state:          [5%] ... ... [on]
+    local volu, mute = string.match(mixer, "([%d]+)%%.*%[([%l]*)")
     -- Handle mixers without data
     if volu == nil then
        return {0, mixer_state["off"]}
     end
 
     -- Handle mixers without mute
-    if mute == "OFF" and volu == "0"
+    if mute == "" and volu == "0"
     -- Handle mixers that are muted
-    or mute == "ON" then
+    or mute == "off" then
        mute = mixer_state["off"]
     else
        mute = mixer_state["on"]
     end
 
-    return {volu, mute}
+    return {tonumber(volu), mute}
 end
 -- }}}
 
