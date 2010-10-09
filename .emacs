@@ -82,6 +82,12 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
+;; Default major mode
+(setq default-major-mode 'text-mode)
+
+;; Wrap lines at 70 in text-mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ;; Lua mode
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
