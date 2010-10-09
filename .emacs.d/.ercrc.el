@@ -8,7 +8,6 @@
       erc-match-mode t
       erc-button-buttonize-nicks nil
       erc-kill-buffer-on-part t
-      erc-server-auto-reconnect nil
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
       erc-insert-timestamp-function 'erc-insert-timestamp-left
