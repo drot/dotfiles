@@ -5,7 +5,7 @@ theme.wallpaper_cmd = { "sh /home/drot/.fehbg" }
 -- }}}
 
 -- {{{ Font
-theme.font = "Gohufont 8"
+theme.font = "Terminus 8"
 -- }}}
 
 -- {{{ Colors

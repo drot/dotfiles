@@ -23,25 +23,25 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts = {
-	awful.layout.suit.tile,        -- 1
-	awful.layout.suit.tile.left,   -- 2
-	awful.layout.suit.tile.bottom, -- 3
-	awful.layout.suit.tile.top,    -- 4
-	awful.layout.suit.max,         -- 5
-	awful.layout.suit.magnifier,   -- 6
-	awful.layout.suit.floating     -- 7
+   awful.layout.suit.tile,        -- 1
+   awful.layout.suit.tile.left,   -- 2
+   awful.layout.suit.tile.bottom, -- 3
+   awful.layout.suit.tile.top,    -- 4
+   awful.layout.suit.max,         -- 5
+   awful.layout.suit.magnifier,   -- 6
+   awful.layout.suit.floating     -- 7
 }
 -- }}}
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-	names  = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-	layout = { layouts[1], layouts[6], layouts[1], layouts[7], layouts[7], layouts[1], layouts[1], layouts[1], layouts[1] }
-	}
+   names  = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+   layout = { layouts[1], layouts[6], layouts[1], layouts[7], layouts[7], layouts[1], layouts[1], layouts[1], layouts[1] }
+     }
 
 for s = 1, screen.count() do
-	tags[s] = awful.tag(tags.names, s, tags.layout)
+   tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
 
@@ -59,7 +59,7 @@ cpuicon.image = image(beautiful.widget_cpu)
 cpugraph  = awful.widget.graph()
 tzswidget = widget({ type = "textbox" })
 -- Graph properties
-cpugraph:set_width(40):set_height(10)
+cpugraph:set_width(40):set_height(13)
 cpugraph:set_background_color(beautiful.fg_off_widget)
 cpugraph:set_gradient_colors({ beautiful.fg_end_widget,
 beautiful.fg_center_widget, beautiful.fg_widget })
@@ -75,7 +75,7 @@ memicon.image = image(beautiful.widget_mem)
 membar = awful.widget.progressbar()
 -- Pogressbar properties
 membar:set_vertical(true):set_ticks(true)
-membar:set_height(11):set_width(8):set_ticks_size(1)
+membar:set_height(14):set_width(10):set_ticks_size(1)
 membar:set_background_color(beautiful.fg_off_widget)
 membar:set_border_color(beautiful.border_widget)
 membar:set_gradient_colors({ beautiful.fg_widget,
@@ -92,7 +92,7 @@ volbar    = awful.widget.progressbar()
 volwidget = widget({ type = "textbox" })
 -- Progressbar properties
 volbar:set_vertical(true):set_ticks(true)
-volbar:set_height(11):set_width(8):set_ticks_size(1)
+volbar:set_height(14):set_width(10):set_ticks_size(1)
 volbar:set_border_color(beautiful.border_widget)
 volbar:set_gradient_colors({ beautiful.fg_widget,
    beautiful.fg_center_widget, beautiful.fg_end_widget
@@ -103,8 +103,8 @@ vicious.register(volbar, vicious.widgets.volume, "$1", 2, "PCM")
 vicious.register(volwidget, vicious.widgets.volume, " $1%", 2, "PCM")
 -- Register buttons
 volbar.widget:buttons(awful.util.table.join(
-	awful.button({ }, 1, function () awful.util.spawn("amixer -q set PCM 2dB+", false) end),
-	awful.button({ }, 3, function () awful.util.spawn("amixer -q set PCM 2dB-", false) end)
+ awful.button({ }, 1, function () awful.util.spawn("amixer -q set PCM 2dB+", false) end),
+ awful.button({ }, 3, function () awful.util.spawn("amixer -q set PCM 2dB-", false) end)
 )) -- Register assigned buttons
 volwidget:buttons(volbar.widget:buttons())
 -- }}}
@@ -136,7 +136,7 @@ fs = {b = awful.widget.progressbar(), r = awful.widget.progressbar(),
 -- Progressbar properties
 for _, w in pairs(fs) do
    w:set_vertical(true):set_ticks(true)
-   w:set_height(11):set_width(5):set_ticks_size(1)
+   w:set_height(14):set_width(6):set_ticks_size(1)
    w:set_background_color(beautiful.fg_off_widget)
    w:set_border_color(beautiful.border_widget)
    w:set_gradient_colors({ beautiful.fg_widget,beautiful.fg_center_widget, beautiful.fg_end_widget})
@@ -256,14 +256,14 @@ for s = 1, screen.count() do
 	-- Create the wiboxen
 	-- Top
 	wibox_top[s] = awful.wibox({screen = s,
-	fg = beautiful.fg_normal, height = 11,
+	fg = beautiful.fg_normal, height = 14,
 	bg = beautiful.bg_normal, position = "top",
 	border_color = beautiful.border_focus,
 	border_width = beautiful.border_width
 })
 	-- Bottom
 	wibox_bottom[s] = awful.wibox({screen = s,
-	fg = beautiful.fg_normal, height = 11,
+	fg = beautiful.fg_normal, height = 14,
 	bg = beautiful.bg_normal, position = "bottom",
 	border_color = beautiful.border_focus,
 	border_width = beautiful.border_width
