@@ -21,22 +21,22 @@
       smtpmail-smtp-service 587)
 
 ;; Summary look
-(setq gnus-sum-thread-tree-indent "  ")
-(setq gnus-sum-thread-tree-root "● ")
-(setq gnus-sum-thread-tree-false-root "◯ ")
-(setq gnus-sum-thread-tree-single-indent "◎ ")
-(setq gnus-sum-thread-tree-vertical        "│")
-(setq gnus-sum-thread-tree-leaf-with-other "├─► ")
-(setq gnus-sum-thread-tree-single-leaf     "╰─► ")
-(setq gnus-summary-line-format
-      (concat
-       "%0{%U%R%z%}"
-       "%3{│%}" "%1{%d%}" "%3{│%}"
-       "  "
-       "%4{%-20,20f%}"
-       "  "
-       "%3{│%}"
-       " "
-       "%1{%B%}"
-       "%s\n"))
-(setq gnus-summary-display-arrow t)
+(copy-face 'gnus-summary-high-unread 'gnus-face-6)
+(setq gnus-face-6 'gnus-face-6)
+(copy-face 'gnus-summary-normal-unread 'gnus-face7)
+(setq gnus-face-7 'gnus-face-7)
+(copy-face 'gnus-summary-normal-read 'gnus-face-8)
+(setq gnus-face-8 'gnus-face-8)
+(copy-face 'gnus-summary-normal-undownloaded 'gnus-face-9)
+(setq gnus-face-9 'gnus-face-9)
+(setq gnus-summary-make-false-root 'dummy)
+(setq gnus-summary-make-false-root-always nil)
+(setq gnus-summary-line-format "%8{%4k│%}%9{%U%R%z%}%8{│%}%*%(%-23,23f%)%7{║%} %6{%B%} %s\n"
+      gnus-summary-dummy-line-format "    %8{│%}   %(%8{│%}                       %7{║%}%) %6{┏○%}  %S\n"
+      gnus-sum-thread-tree-indent " "
+      gnus-sum-thread-tree-root "┏● " 
+      gnus-sum-thread-tree-false-root " ○ "
+      gnus-sum-thread-tree-single-indent " ● "
+      gnus-sum-thread-tree-leaf-with-other "┣━━❯ " 
+      gnus-sum-thread-tree-vertical "┃"
+      gnus-sum-thread-tree-single-leaf "┗━━❯ ")
