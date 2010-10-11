@@ -59,6 +59,12 @@
 ;; Easy PG
 (require 'epa-file)
 
+;; Ediff
+;; Don't spawn a new frame
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; Split the frame horizontally
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
@@ -113,13 +119,6 @@
  calendar-longitude 17.48
  calendar-location-name "Mostar, Bosnia and Herzegovina"
 )
-
-;; Yasnippet
-(add-to-list 'load-path
-	       "~/.emacs.d/site-lisp/yasnippet")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/site-lisp/yasnippet/snippets")
 
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
