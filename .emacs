@@ -94,6 +94,10 @@
 ;; Wrap lines at 70 in text-mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+;; CEDET
+(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+(semantic-load-enable-code-helpers)
+
 ;; Lua mode
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
