@@ -96,7 +96,7 @@
 
 ;; CEDET
 (load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
-(semantic-load-enable-code-helpers)
+(semantic-load-enable-gaudy-code-helpers)
 
 ;; Lua mode
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
