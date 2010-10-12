@@ -443,7 +443,7 @@ awful.rules.rules = {
       properties = { tag = tags[screen.count()][2] } },
    { rule = { class = "Emacs" },
       properties = { tag = tags[screen.count()][3] } },
-   { rule = { class = "ChmSee" },
+   { rule = { class = "Chmsee" },
       properties = { tag = tags[screen.count()][4] } },
 }
 -- }}}
