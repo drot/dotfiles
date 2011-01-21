@@ -42,3 +42,7 @@ subfont-text-scale=3.0
 
 # Autoscale coefficient of the OSD elements (default: 6)
 subfont-osd-scale=4.2
+
+#Color interface
+msgmodule=1
+msgcolor=1
