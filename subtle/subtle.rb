@@ -402,8 +402,19 @@ grab "W-KP_3", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 grab "W-Return", "urxvt"
 
 # Launcher
-@dmenu = "dmenu_run -fn '-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2' -nb '#202020' -nf '#757575' -sb '#202020' -sf '#fecf35' -p 'Selection:'"
-grab "W-x", @dmenu
+begin
+  require "#{ENV["HOME"]}/.config/subtle/subtle-contrib/ruby/launcher.rb"
+
+  Subtle::Contrib::Launcher.fonts = [
+                                     "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2",
+                                     "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2"
+                                    ]
+rescue LoadError
+end
+
+grab "W-x" do
+  Subtle::Contrib::Launcher.run
+end
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
@@ -635,34 +646,35 @@ end
 #
 # http://subforge.org/wiki/subtle/Tagging
 #
+iconpath = "#{ENV["HOME"]}/.config/subtle/icons"
 
 view "terms" do
   match "terms|default"
-  icon "/home/dr/.config/subtle/icons/fox.xbm"
+  icon "#{iconpath}/fox.xbm"
   icon_only true
 end
 
 view "www" do   
   match "browser"
-  icon "/home/dr/.config/subtle/icons/shroom.xbm"
+  icon "#{iconpath}/shroom.xbm"
   icon_only true
 end
 
 view "dev" do   
   match "editor"
-  icon "/home/dr/.config/subtle/icons/bug.xbm"
+  icon "#{iconpath}/bug.xbm"
   icon_only true
 end
 
 view "gimp" do
   match "gimp_.*"
-  icon "/home/dr/.config/subtle/icons/plug.xbm"
+  icon "#{iconpath}/plug.xbm"
   icon_only true
 end
 
 view "other" do   
   match "misc"
-  icon "/home/dr/.config/subtle/icons/fs.xbm"
+  icon "#{iconpath}/fs.xbm"
   icon_only true
 end
 
