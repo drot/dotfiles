@@ -92,7 +92,7 @@ screen 1 do
   top     [ :sublets, :views, :layout, :title, :spacer, :cpu, :separator, :membar, :separator, :clock ]
 
   # Content of the bottom panel
-  bottom  [ :mpd, :separator, :volume, :spacer, :loadavg ]
+  bottom  [ :mpd, :separator, :volume, :spacer, :temp, :separator, :loadavg ]
 end
 
 # Example for a second screen:
