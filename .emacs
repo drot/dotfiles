@@ -11,11 +11,9 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme)
-(color-theme-initialize)
-(load "manoj-colors.el")
+(require 'color-theme-tangotango)
 (setq color-theme-is-global t)
-(color-theme-manoj-dark)
+(color-theme-tangotango)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -93,18 +91,6 @@
 
 ;; Wrap lines at 70 in text-mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; CEDET
-(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
-(semantic-load-enable-gaudy-code-helpers)
-
-;; Lua mode
-(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-
-;; PKGBUILD mode
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
 ;; Org-mode
 (define-key global-map "\C-cl" 'org-store-link)
