@@ -228,9 +228,12 @@ gravity :bottom_right66, [ 100, 100,  50,  66 ]
 gravity :bottom_right33, [ 100, 100,  50,  34 ]
 
   # Gimp
-gravity :gimp_image,     [  50,  50,  80, 100 ]
-gravity :gimp_toolbox,   [   0,   0,  10, 100 ]
-gravity :gimp_dock,      [ 100,   0,  10, 100 ]
+gravity :gimp_image,     [  50,  50,  60, 100 ]
+gravity :gimp_toolbox,   [   0,   0,  20, 100 ]
+gravity :gimp_dock,      [ 100,   0,  20, 100 ]
+
+  # PCManFM
+gravity :pcmanfm,        [ 50, 50, 70, 70 ]
 
 #
 # == Grabs
@@ -314,12 +317,14 @@ grab "W-S-1", :ViewJump1
 grab "W-S-2", :ViewJump2
 grab "W-S-3", :ViewJump3
 grab "W-S-4", :ViewJump4
+grab "W-S-5", :ViewJump5
 
 # Switch current view
 grab "W-1", :ViewSwitch1
 grab "W-2", :ViewSwitch2
 grab "W-3", :ViewSwitch3
 grab "W-4", :ViewSwitch4
+grab "W-5", :ViewSwitch5
 
 # Select next and prev view */
 grab "KP_Add",      :ViewNext
@@ -330,6 +335,7 @@ grab "W-A-1", :ScreenJump1
 grab "W-A-2", :ScreenJump2
 grab "W-A-3", :ScreenJump3
 grab "W-A-4", :ScreenJump4
+grab "W-A-5", :ScreenJump5
 
 # Force reload of config and sublets
 grab "W-S-r", :SubtleReload
@@ -528,26 +534,17 @@ end
 #
 
 # Simple tags
-tag "terms",   "xterm|[u]?rxvt"
-tag "browser", "uzbl|opera|firefox|navigator"
+tag "terms",   "[u]?rxvt"
+tag "browser", "conkeror"
 
 # Placement
 tag "editor" do
   match  "emacs"
 end
 
-tag "fixed" do
-  geometry [ 10, 10, 100, 100 ]
-  stick    true
-end
-
-tag "resize" do
-  match  "sakura|gvim"
-  resize true
-end
-
-tag "gravity" do
-  gravity :center
+tag "misc" do
+  match "pcmanfm"
+  gravity :pcmanfm
 end
 
 # Modes
@@ -651,15 +648,21 @@ view "www" do
   icon_only true
 end
 
+view "dev" do   
+  match "editor"
+  icon "/home/dr/.config/subtle/icons/bug.xbm"
+  icon_only true
+end
+
 view "gimp" do
   match "gimp_.*"
   icon "/home/dr/.config/subtle/icons/plug.xbm"
   icon_only true
 end
 
-view "dev" do   
-  match "editor"
-  icon "/home/dr/.config/subtle/icons/bug.xbm"
+view "other" do   
+  match "misc"
+  icon "/home/dr/.config/subtle/icons/fs.xbm"
   icon_only true
 end
 
