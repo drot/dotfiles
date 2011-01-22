@@ -11,9 +11,11 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-tangotango)
+(require 'color-theme)
+(color-theme-initialize)
+(load "manoj-colors.el")
 (setq color-theme-is-global t)
-(color-theme-tangotango)
+(color-theme-manoj-dark)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -96,6 +98,10 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;; Lua mode
+(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; Calendar
 (setq
