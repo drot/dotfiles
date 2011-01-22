@@ -21,7 +21,7 @@ URxvt.secondaryScroll: true
 ! Extensions
 URxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: /usr/bin/firefox
+URxvt.urlLauncher: /usr/bin/conkeror
 URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
@@ -108,13 +108,6 @@ XCalc.ti.button34.background: gray95
 XCalc.ti.button37.background: gray95
 XCalc.ti.button38.background: gray95
 XCalc.ti.button39.background: gray95
-
-! xpdf
-xpdf.enableFreetype: yes
-xpdf.antialias: yes
-xpdf.foreground: black
-xpdf.background: white
-xpdf.urlCommand: /usr/bin/firefox
 
 ! xmessage
 Xmessage.form.okay.shapeStyle: rectangle
