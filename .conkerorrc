@@ -51,4 +51,3 @@ remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("torrentz", "http://www.torrentz.com/search?q=%s");
-
