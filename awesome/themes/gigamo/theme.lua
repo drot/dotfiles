@@ -1,7 +1,7 @@
 -- {{{ Main
 theme = {}
 theme.confdir = awful.util.getdir("config")
-theme.wallpaper_cmd = { "sh /home/drot/.fehbg" }
+theme.wallpaper_cmd = { "sh /home/dr/.fehbg" }
 -- }}}
 
 -- {{{ Font
