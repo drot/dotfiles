@@ -4,8 +4,13 @@ require("new-tabs.js");
 // the default page for new buffers.
 homepage = "www.google.com/ncr";
 
+// display the url before going to it in hints mode
+hints_display_url_panel = true;
+
 // smart completion
+minibuffer_auto_complete_default = true;
 url_completion_use_history = true
+url_completion_use_bookmarks = true;
 
 // default directory for downloads and shell commands.
 cwd = get_home_directory();
@@ -19,18 +24,31 @@ url_remoting_fn = load_url_in_new_buffer;
 // window, instead of in new windows.
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-// external programs for handling various mime types.
-external_content_handlers.set("application/pdf", "epdfview");
-external_content_handlers.set("video/*", "urxvtc -e mplayer");
+//set emacs as external editor
+editor_shell_command = "emacsclient -a emacs";
+
+// view source in your editor.
+view_source_use_external_editor = true;
+
+// mode-line
+mode_line_mode(true);
+
+// favicons
+require("favicon");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
+
+// we'd like to see the # of buffers being loaded 
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+
+// but really we'd also like to know how many buffers are present and which is the current
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+
+// remove the clock
+remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 
 // webjumps
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("torrentz", "http://www.torrentz.com/search?q=%s");
 
-// modeline
-require("mode-line.js");
-// we'd like to see the # of buffers being loaded 
-add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
-// we don't need a clock
-remove_hook("mode_line_hook", mode_line_adder(clock_widget));
