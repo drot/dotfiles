@@ -15,8 +15,5 @@ urxvtd -q -o -f &
 ## Launch Emacs daemon
 emacs --daemon &
 
-## Set wallpaper
-sh ~/.fehbg &
-
 ## Start window manager - awesome
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session subtle
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome
