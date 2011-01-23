@@ -30,6 +30,9 @@ editor_shell_command = "emacsclient -a emacs";
 // view source in your editor.
 view_source_use_external_editor = true;
 
+// prevent focus stealing
+require("block-content-focus-change.js");
+
 // mode-line
 mode_line_mode(true);
 
@@ -51,3 +54,6 @@ remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("torrentz", "http://www.torrentz.com/search?q=%s");
+
+// Custom CSS
+register_user_stylesheet('file:///home/dr/.stylesheets/4chan.css');
