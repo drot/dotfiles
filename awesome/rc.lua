@@ -438,7 +438,7 @@ awful.rules.rules = {
    { rule = { class = "MPlayer" },
       properties = { floating = true } },
    { rule = { class = "Gimp" },
-      properties = { tag = tags[screen.count()][5] } },
+      properties = { tag = tags[screen.count()][4] } },
    { rule = { class = "Conkeror" },
       properties = { tag = tags[screen.count()][2] } },
    { rule = { class = "Emacs" },
