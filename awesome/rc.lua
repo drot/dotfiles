@@ -337,7 +337,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey            }, "s", function () scratch.drop("urxvtc -e ncmpcpp", "center", "center", 600, 600) end),
+    awful.key({ modkey            }, "s", function () scratch.drop("urxvtc -e ncmpcpp", "center", "center", 600, 300) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
