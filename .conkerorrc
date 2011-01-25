@@ -56,4 +56,5 @@ define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search
 define_webjump("torrentz", "http://www.torrentz.com/search?q=%s");
 
 // Custom CSS
-register_user_stylesheet('file:///home/dr/.stylesheets/4chan.css');
+register_user_stylesheet('file:///home/dr/.conkeror.mozdev.org/stylesheets/4chan.css');
+register_user_stylesheet('file:///home/dr/.conkeror.mozdev.org/stylesheets/bljesak.css');
