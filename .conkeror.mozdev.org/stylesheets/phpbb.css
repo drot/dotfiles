@@ -136,7 +136,7 @@ background-color: #556b2f !important;
 border-color: #556b2f !important;
 }
 
-form#postform  div#postingbox {
+form#postform div#postingbox {
 background-color: #a7a15e !important;
 }
 
@@ -241,7 +241,7 @@ color: #a67b07 !important;
 }
 
 a:visited {
-color: #8a8a8a !important;
+color: #a67b07 !important;
 }
 
 a:hover {
@@ -263,7 +263,7 @@ color: #556b2f !important;
 
 div.bg2 a:visited,
 div.bg1 a:visited {
-color: #8a8a8a !important;
+color: #a67b07 !important;
 }
 
 div.bg2 a:hover,
@@ -280,8 +280,8 @@ color: #af5f00 !important;
 color: #262626 !important;
 }
 
-form#postform  div#postingbox h3,
-form#postform  div#postingbox dt label,
+form#postform div#postingbox h3,
+form#postform div#postingbox dt label,
 div#smiley-box,
 div#smiley-box strong,
 div#smiley-box a:link,
