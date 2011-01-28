@@ -11,11 +11,9 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme)
-(color-theme-initialize)
-(load "manoj-colors.el")
+(require 'zenburn)
 (setq color-theme-is-global t)
-(color-theme-manoj-dark)
+(color-theme-zenburn)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -28,7 +26,7 @@
 (setq column-number-mode t)
 
 ;; Highlight matching parentheses
-(show-paren-mode t)
+(show-paren-mode 1)
 
 ;; IDO
 (require 'ido)
@@ -46,7 +44,7 @@
 )
 
 ;; Edit files in compressed archives
-(auto-compression-mode 1)
+(auto-compression-mode t)
 
 ;; Make buffer names unique
 (require 'uniquify)

@@ -17,11 +17,6 @@
 				"324" "329" "332" "333" "353" "477")
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
-;; nick colors
-(require 'erc-highlight-nicknames)
-(add-to-list 'erc-modules 'highlight-nicknames)
-(erc-update-modules)
-
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
 (add-hook 'window-configuration-change-hook 
