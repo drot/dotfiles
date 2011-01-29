@@ -1,6 +1,13 @@
 ;; spelling
 (erc-spelling-mode 1)
 
+;; mode line format
+(setq-default erc-mode-line-format
+              (concat (propertize "%t" 'face
+                                  (list :weight 'bold
+                                        :foreground "orange"))
+                      " %a"))
+
 ;; nick colors
 (require 'erc-highlight-nicknames)
 (add-to-list 'erc-modules 'highlight-nicknames)
