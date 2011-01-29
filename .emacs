@@ -12,9 +12,10 @@
 
 ;; Color theme
 (require 'color-theme)
-(load "color-theme-ir-black.el")
+(color-theme-initialize)
+(load "manoj-colors.el")
 (setq color-theme-is-global t)
-(color-theme-ir-black)
+(color-theme-manoj-dark)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
