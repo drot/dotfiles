@@ -1,6 +1,11 @@
 ;; spelling
 (erc-spelling-mode 1)
 
+;; nick colors
+(require 'erc-highlight-nicknames)
+(add-to-list 'erc-modules 'highlight-nicknames)
+(erc-update-modules)
+
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
@@ -19,7 +24,7 @@
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
-(add-hook 'window-configuration-change-hook 
+(add-hook 'window-configuration-change-hook
 	  '(lambda ()
 	     (save-excursion
 	       (walk-windows
