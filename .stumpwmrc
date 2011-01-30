@@ -61,7 +61,6 @@
 (set-prefix-key (kbd "C-i"))
 
 ;; keybindings
-(define-key *root-map* (kbd "C-c") "exec urxvtc")
+(define-key *root-map* (kbd "C-c") "exec conkeror")
 (define-key *root-map* (kbd "c") "exec urxvtc")
-(define-key *root-map* (kbd "C-e") "exec emacsclient -c")
 (define-key *root-map* (kbd "e") "exec emacsclient -c")
