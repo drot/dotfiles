@@ -1,0 +1,55 @@
+;-*-lisp-*-
+(in-package :stumpwm)
+
+;; contrib
+(set-contrib-dir "/usr/share/stumpwm")
+
+;; run shell commands
+(stumpwm:run-shell-command "xsetroot -cursor_name left_ptr")
+(stumpwm:run-shell-command "sh ~/.fehbg")
+
+;; font
+(set-font "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2")
+
+;; input and message panels
+(set-fg-color "sienna1")
+(set-bg-color "grey10")
+(set-border-color "sienna4")
+(set-msg-border-width 1)
+
+(setf *maxsize-border-width* 1
+      *normal-border-width* 0
+      *window-border-style* :thin
+      *transient-border-width* 4)
+
+(setf *message-window-gravity* :top-left
+      *timeout-wait* 10
+      *input-window-gravity* :top-right)
+
+;; windows
+(set-focus-color "grey20")
+(set-unfocus-color "grey10")
+(set-normal-gravity :center)
+(setf *normal-border-width* 1)
+
+;; mode-line colors
+(setf *mode-line-background-color* "grey10"
+      *mode-line-foreground-color* "sienna1"
+      *mode-line-border-color* "sienna4"
+      *mode-line-timeout* 1
+      *mode-line-position* :bottom
+      *window-format* "^B^8*%n%s%m%30t :: ^7*"
+      *group-format* "%t")
+
+;; mode-line
+(stumpwm:toggle-mode-line (stumpwm:current-screen)
+			  (stumpwm:current-head))
+
+;; prefix key
+(set-prefix-key (kbd "C-i"))
+
+;; keybindings
+(define-key *root-map* (kbd "C-c") "exec urxvtc")
+(define-key *root-map* (kbd "c") "exec urxvtc")
+(define-key *root-map* (kbd "C-e") "exec emacsclient -c")
+(define-key *root-map* (kbd "e") "exec emacsclient -c")
