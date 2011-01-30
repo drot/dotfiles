@@ -3,6 +3,9 @@
 
 ;; contrib
 (set-contrib-dir "/usr/share/stumpwm")
+(load-module "cpu")
+(load-module "mem")
+(load-module "net")
 
 ;; run shell commands
 (stumpwm:run-shell-command "xsetroot -cursor_name left_ptr")
@@ -32,16 +35,25 @@
 (set-normal-gravity :center)
 (setf *normal-border-width* 1)
 
-;; mode-line colors
-(setf *mode-line-background-color* "grey10"
+;; mode-line
+(setf *screen-mode-line-format*
+      (list "[ "
+	    '(:eval (run-shell-command
+		     "date '+%a %d %b %H:%M' | tr -d [:cntrl:]"
+		     t))
+	    " ] "
+	    "[ %n ] "
+	    "[%c] " ;; cpu
+	    "[%M] " ;; mem
+	    "[%l] " ;; net
+	    "%W")
+      *mode-line-background-color* "grey10"
       *mode-line-foreground-color* "sienna1"
       *mode-line-border-color* "sienna4"
       *mode-line-timeout* 1
-      *mode-line-position* :bottom
-      *window-format* "^B^8*%n%s%m%30t :: ^7*"
-      *group-format* "%t")
+      *mode-line-position* :bottom)
 
-;; mode-line
+;; show mode-line
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
 			  (stumpwm:current-head))
 
