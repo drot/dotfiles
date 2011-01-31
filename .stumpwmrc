@@ -22,11 +22,11 @@
 
 (setf *maxsize-border-width* 1
       *normal-border-width* 0
-      *window-border-style* :thin
+      *window-border-style* :thick
       *transient-border-width* 4)
 
 (setf *message-window-gravity* :top-left
-      *timeout-wait* 10
+      *timeout-wait* 2
       *input-window-gravity* :top-right)
 
 ;; windows
