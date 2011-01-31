@@ -11,11 +11,9 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme)
-(color-theme-initialize)
-(load "manoj-colors.el")
+(require 'zenburn)
 (setq color-theme-is-global t)
-(color-theme-manoj-dark)
+(color-theme-zenburn)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
