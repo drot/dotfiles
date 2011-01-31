@@ -68,6 +68,7 @@ fi
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
 alias ec="emacsclient -a emacs"
+alias eckd="emacsclient -e '(kill-emacs)'"
 
 # functions
 # extract - archive extractor
