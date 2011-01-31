@@ -1,4 +1,4 @@
-;-*-lisp-*-
+					;-*-lisp-*-
 (in-package :stumpwm)
 
 ;; contrib
@@ -38,14 +38,14 @@
 ;; mode-line
 (setf *screen-mode-line-format*
       (list "[ "
-	    '(:eval (run-shell-command
+	    '(:eval (stumpwm:run-shell-command
 		     "date '+%a %d %b %H:%M' | tr -d [:cntrl:]"
 		     t))
 	    " ] "
 	    "[ %n ] "
-	    "[%c] " ;; cpu
-	    "[%M] " ;; mem
-	    "[%l] " ;; net
+	    "[ %c] " ;; cpu
+	    "[ %M] " ;; mem
+	    "[ %l] " ;; net
 	    "%W")
       *mode-line-background-color* "grey10"
       *mode-line-foreground-color* "sienna1"
