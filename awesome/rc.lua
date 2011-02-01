@@ -441,13 +441,15 @@ awful.rules.rules = {
 	 keys = clientkeys, buttons = clientbuttons }
    },
    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
+     properties = { floating = true } },
    { rule = { class = "Gimp" },
-      properties = { tag = tags[screen.count()][4] } },
+     properties = { tag = tags[screen.count()][4] } },
    { rule = { class = "Conkeror" },
-      properties = { tag = tags[screen.count()][2] } },
+     properties = { tag = tags[screen.count()][2] } },
    { rule = { class = "Emacs" },
-      properties = { tag = tags[screen.count()][3] } },
+     properties = { tag = tags[screen.count()][3] } },
+   { rule = { class = "Skype" },
+     properties = { tag = tags[screen.count()][4] } },
 }
 -- }}}
 
