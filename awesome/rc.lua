@@ -195,6 +195,10 @@ mpdwidget = widget({ type = 'textbox' })
 vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}")
 -- }}}
 
+-- {{{ System tray
+systray = widget({ type = "systray" })
+-- }}}
+
 -- {{{ Wibox initialisation
 wibox_top = {}
 wibox_bottom = {}
@@ -274,6 +278,7 @@ wibox_top[s].widgets = {
 	{   taglist[s], layoutbox[s], promptbox[s],
 	    ["layout"] = awful.widget.layout.horizontal.leftright
 	},
+	s == screen.count() and systray or nil,
 	datewidget, dateicon,
 	separator, upicon, netwidget, dnicon,
 	separator, fs.h.widget, fs.v.widget, fs.r.widget, fs.b.widget, fsicon,
