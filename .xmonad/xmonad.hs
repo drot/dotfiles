@@ -35,7 +35,7 @@ myFont = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*"
 
 myUhook = withUrgencyHook NoUrgencyHook myConfig
 
-myConfig = defaultConfig { 
+myConfig = defaultConfig {
   terminal = "urxvtc"
   , focusFollowsMouse = True
   , borderWidth = 1
@@ -50,7 +50,7 @@ myConfig = defaultConfig {
 
 -- Status bar style
 --
-myPP = defaultPP { 
+myPP = defaultPP {
   ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
   , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
   , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
@@ -62,8 +62,8 @@ myPP = defaultPP {
 
 -- Layout configuration
 --
-myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $ 
-               tabs ||| tile ||| mtile ||| full ||| float 
+myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
+	       tabs ||| tile ||| mtile ||| full ||| float
   where
     tabs = named "[T]" $ tabbed shrinkText myTabConfig
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
@@ -71,23 +71,23 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
     full = named "[ ]" $ Full
     float = named "><>" $ simplestFloat
 
-myManageHook = composeAll [ 
+myManageHook = composeAll [
   className =? "MPlayer" --> doFloat
-  , className =? "Gimp" --> doFloat 
+  , className =? "Gimp" --> doFloat
   , className =? "Conkeror" --> doShift "2"
   , className =? "Emacs" --> doShift "3"
   ] <+> namedScratchpadManageHook myScratch
 
 -- Scratchpad
 --
-myScratch = [ 
+myScratch = [
   NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
   (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   ]
 
 -- Tab style
 --
-myTabConfig = defaultTheme { 
+myTabConfig = defaultTheme {
   fontName = myFont
   , decoHeight = 12
   , activeColor = "#000000"
@@ -98,18 +98,18 @@ myTabConfig = defaultTheme {
   , inactiveTextColor = "#EEEEEE"
   , urgentColor = "#000000"
   , urgentBorderColor = "#FFB6B0"
-  , urgentTextColor = "#B6DCFF" 
+  , urgentTextColor = "#B6DCFF"
   }
 
 -- Prompt style
 --
-myXPConfig = defaultXPConfig { 
+myXPConfig = defaultXPConfig {
   font = myFont
   , fgColor = "#FFFFFF"
   , bgColor = "#000000"
   , bgHLight = "#000000"
   , fgHLight = "#CEFFAC"
-  , position = Bottom 
+  , position = Bottom
   }
 
 -- Key bindings
@@ -124,10 +124,10 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
 
   -- launch terminal
   ((modm, xK_Return), spawn $ XMonad.terminal conf)
-  
+
     -- launch player
   , ((modm, xK_s), namedScratchpadAction myScratch "music")
-    
+
      -- launch prompt
   , ((modm, xK_p), shellPrompt myXPConfig)
 

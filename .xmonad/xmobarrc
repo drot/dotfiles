@@ -1,16 +1,16 @@
-Config { 
-       font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*", 
-       bgColor = "#000000", 
+Config {
+       font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*",
+       bgColor = "#000000",
        fgColor = "#F2F2F2",
        position = Top,
        lowerOnStart = True,
-       commands = [ 
-       		  Run StdinReader, 
+       commands = [
+       		  Run StdinReader,
 		  Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
 		  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
 		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
 		  Run Date "%a <fc=#CEFFAC>%_d</fc> %b <fc=#CEFFAC>%H:%M</fc>" "date" 10,
-		  Run Com "sh" ["~/.xmonad/mpd.sh"] "mpd" 10 
+		  Run Com "sh" ["~/.xmonad/mpd.sh"] "mpd" 10
 		  ],
        sepChar = "%",
        alignSep = "}{",
