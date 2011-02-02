@@ -31,6 +31,7 @@ eval `dircolors -b "${HOME}/.dircolors"` #dircolors
 
 alias ls="ls -h --group-directories-first --color=always"
 alias ec="emacsclient -a emacs"
+alias eckd="emacsclient -e '(kill-emacs)'"
 
 # --- zsh settings ---
 
@@ -52,6 +53,8 @@ setopt GLOB_COMPLETE # globbing menu
 
 # emacs
 bindkey -e
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
 
 # --- completion ---
 
@@ -114,10 +117,11 @@ function extract () {
 }
 
 # --- window title ---
+
 case $TERM in
-    *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
-    precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" } 
-    preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
+    *xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
+    precmd () { print -Pn "\e]0;[%n@%M][%~]%#\a" } 
+    preexec () { print -Pn "\e]0;[%n@%M][%~]%# ($1)\a" }
     ;;
 esac
 
