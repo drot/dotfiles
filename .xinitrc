@@ -6,6 +6,9 @@ xrdb -merge ~/.Xresources
 ## Mouse cursor
 xsetroot -cursor_name left_ptr &
 
+## Set background
+sh ~/.fehbg
+
 ## Disable power saving
 xset -dpms &
 
@@ -16,4 +19,4 @@ urxvtd -q -o -f &
 emacs --daemon &
 
 ## Start window manager - awesome
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session awesome
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
