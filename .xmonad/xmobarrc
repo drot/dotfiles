@@ -1,18 +1,18 @@
 Config {
        font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*",
-       bgColor = "#000000",
-       fgColor = "#F2F2F2",
+       bgColor = "#3F3F3F",
+       fgColor = "#DCDCCC",
        position = Top,
        lowerOnStart = True,
        commands = [
        		  Run StdinReader,
-		  Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
-		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Date "%a <fc=#CEFFAC>%_d</fc> %b <fc=#CEFFAC>%H:%M</fc>" "date" 10,
+		  Run Cpu ["-L","10","-H","50","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3"] 10,
+		  Run Memory ["-L","5","-H","40","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3","-t","Mem: <usedratio>%"] 10,
+		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#60B48A","--normal","#F0DFAF","--high","#DCA3A3"] 10,
+		  Run Date "%a <fc=#F0DFAF>%_d</fc> %b <fc=#F0DFAF>%H:%M</fc>" "date" 10,
 		  Run Com "sh" ["~/.xmonad/mpd.sh"] "mpd" 10
 		  ],
        sepChar = "%",
        alignSep = "}{",
-       template = "%StdinReader% }{ <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> <fc=#CEFFAC>%mpd%</fc> <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %cpu% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %memory% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %eth0% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %date%"
+       template = "%StdinReader% }{ <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> <fc=#F0DFAF>%mpd%</fc> <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %cpu% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %memory% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %eth0% <fc=#DCDCCC>></fc><fc=#C3BF9F>></fc> %date%"
        }
