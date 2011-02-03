@@ -11,9 +11,10 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'zenburn)
+(require 'color-theme)
+(load "color-theme-ir-black.el")
 (setq color-theme-is-global t)
-(color-theme-zenburn)
+(color-theme-ir-black)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
