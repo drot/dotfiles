@@ -82,7 +82,6 @@ zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 
 # Completion caching
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache
 
 # Expand partial paths
 zstyle ':completion:*' expand 'yes'
@@ -254,5 +253,13 @@ function extract () {
 	echo 'Error: "$1" is not a valid file for extraction'
     fi
 }
+
+# Window title
+case $TERM in
+    *xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
+    precmd () { print -Pn "\e]0;%n@%M %~ %#\a" }
+    preexec () { print -Pn "\e]0;%n@%M %~ %# ($1)\a" }
+    ;;
+esac
 
 prompt gentoo
