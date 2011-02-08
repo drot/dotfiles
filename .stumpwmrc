@@ -12,7 +12,7 @@
 (stumpwm:run-shell-command "sh ~/.fehbg")
 
 ;; font
-(set-font "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2")
+(set-font "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1")
 
 ;; input and message panels
 (set-fg-color "sienna1")
