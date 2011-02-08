@@ -1,8 +1,5 @@
 #!/bin/sh
 
-## Set X defaults
-xrdb -merge ~/.Xresources
-
 ## Mouse cursor
 xsetroot -cursor_name left_ptr &
 
