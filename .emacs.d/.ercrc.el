@@ -1,11 +1,6 @@
 ;; spelling
 (erc-spelling-mode 1)
 
-;; nick colors
-(require 'erc-highlight-nicknames)
-(add-to-list 'erc-modules 'highlight-nicknames)
-(erc-update-modules)
-
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
