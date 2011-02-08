@@ -11,10 +11,8 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme)
-(load "color-theme-ir-black.el")
-(setq color-theme-is-global t)
-(color-theme-ir-black)
+(require 'color-theme-g0sub)
+(color-theme-g0sub)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -57,6 +55,14 @@
 
 ;; Easy PG
 (require 'epa-file)
+
+;; Encoding
+(prefer-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
 
 ;; Ediff
 ;; Don't spawn a new frame
