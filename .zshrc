@@ -13,6 +13,7 @@ autoload -U promptinit
 promptinit
 
 # Variables
+unset SCREENDIR # fix screen
 export PATH=${PATH}:${HOME}/bin # path for my executables
 export EDITOR=emacsclient # default editor
 export ALTERNATE_EDITOR=emacs # avoid trouble
