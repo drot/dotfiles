@@ -37,7 +37,7 @@ compctl -f -x 'S[1][2][3][4][5][6][7][8][9]' -k '(1 2 3 4 5 6 7 8 9)' \
     - 'p[1,-1]' -c + -K 'match-man' \
     -- man
 
-# Colors for man, grep
+# Colors for grep, man and ls
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32' # beautify grep
 export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
 export LESS_TERMCAP_mb=$'\E[0;31m' # blinking
@@ -47,6 +47,7 @@ export LESS_TERMCAP_so=$'\E[41;1;37m' # standout, used for statusbar/search
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
 export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
+eval `dircolors -b "${HOME}/.dircolors"` # dircolors
 
 # Completion for following commands
 compctl -b bindkey
@@ -238,4 +239,5 @@ case $TERM in
     ;;
 esac
 
+# prompt
 prompt gentoo
