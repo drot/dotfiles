@@ -11,8 +11,8 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-g0sub)
-(color-theme-g0sub)
+(require 'color-theme-hober2)
+(color-theme-hober2)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -104,15 +104,9 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;; Haskell mode
-(load "~/.emacs.d/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
-;; PKGBUILD mode
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode))
-			      auto-mode-alist))
+;; Lua mode
+(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; Calendar
 (setq

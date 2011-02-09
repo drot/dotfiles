@@ -13,7 +13,7 @@ require("eminent")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/dr/.config/awesome/themes/gigamo/theme.lua")
+beautiful.init("/home/drot/.config/awesome/themes/gigamo/theme.lua")
 
 -- This is used later as the default terminal to run.
 terminal = "urxvtc"
