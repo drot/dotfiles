@@ -444,10 +444,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (gnus-summary-selected-face ((t (:background "gray30" :foreground "white"))))
      (gnus-summary-selected ((t (:background "gray30" :foreground "white"))))
 
-     (header-line ((t (:box (:line-width 2
-					 :color "gray8"
-					 :style nil)
-			    :background "gray8" :foreground "white"))))
+     (header-line ((t (:box (:line-width 2 :color "gray8" :style nil) :background "gray8" :foreground "white"))))
 
      (help-argument-name ((t (:foreground "IndianRed1"))))
 
@@ -676,7 +673,6 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (svn-status-blame-highlight-face ((t (:background "DarkGreen" :foreground "light gray" :underline t))))
      (svn-status-blame-rev-number-face ((t (:background "cadet blue" :foreground "gray4"))))
 
-
      (rcirc-my-nick ((t (:foreground "light sea green"))))
      (rcirc-mode-line-nick ((t (:foreground "medium orchid" :bold t))))
      (rcirc-other-nick ((t (:foreground "cadet blue"))))
@@ -684,13 +680,11 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (rcirc-server ((t (:foreground "steel blue"))))
      (rcirc-prompt ((t (:foreground "pale violet red")))) ;%
 
-
      (region ((t (:foreground "white" :background "#5f5f87"))))
 
      (rng-error ((t ,(if (hober2-use-underline-p)
-                         '(:underline "red")
+			 '(:underline "red")
                        '(:background "indian red" :foreground "white" :bold t)))))
-
 
      (scroll-bar ((t (:background "light gray" :foreground "gray4"))))
 
@@ -764,20 +758,15 @@ speedbar, tex, view, viper, w3m, widget, woman"
                    :box (:line-width 4 :color "lemon chiffon")
                    :inherit variable-pitch :height 120))))
 
-
      (trailing-whitespace ((t (:background "IndianRed1" :foreground "light gray"))))
 
      (underline ((t (:underline t))))
 
      (viper-search-face ((t (:background "steel blue" :foreground "lemon chiffon"))))
-     (viper-replace-overlay-face ((t (:foreground "gray4" :bold t
-                                      :background "light pink"))))
-     (viper-minibuffer-emacs-face ((t (:foreground "gray4"
-                                       :background "DarkSeaGreen2"))))
-     (viper-minibuffer-insert-face ((t (:foreground "gray4" ;%
-                                        :background "light pink"))))
-     (viper-minibuffer-vi-face ((t (:foreground "gray4" ;%
-                                    :background "light sea green"))))
+     (viper-replace-overlay-face ((t (:foreground "gray4" :bold t :background "light pink"))))
+     (viper-minibuffer-emacs-face ((t (:foreground "gray4" :background "DarkSeaGreen2"))))
+     (viper-minibuffer-insert-face ((t (:foreground "gray4" :background "light pink"))))
+     (viper-minibuffer-vi-face ((t (:foreground "gray4" :background "light sea green"))))
 
      (ido-first-match ((t (:foreground "cadet blue"))))
      (ido-only-match ((t (:foreground "medium sea green"))))
