@@ -56,6 +56,9 @@
 ;; Easy PG
 (require 'epa-file)
 
+;; Magit
+(require 'magit)
+
 ;; Encoding
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
