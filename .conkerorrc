@@ -1,5 +1,5 @@
 // tabs
-require("new-tabs.js");
+//require("new-tabs.js");
 
 // the default page for new buffers.
 homepage = "www.google.com/ncr";
@@ -37,9 +37,9 @@ require("block-content-focus-change.js");
 mode_line_mode(true);
 
 // favicons
-require("favicon");
-add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
-read_buffer_show_icons = true;
+//require("favicon");
+//add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+//read_buffer_show_icons = true;
 
 // we'd like to see the # of buffers being loaded 
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
@@ -57,3 +57,4 @@ define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search
 // Custom CSS
 register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/4chan.css');
 register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/bljesak.css');
+register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/youtube.css');
