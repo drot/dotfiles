@@ -1,5 +1,5 @@
 ;; Load path
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; Provide an error trace
 (setq debug-on-error t)
