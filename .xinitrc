@@ -15,5 +15,5 @@ urxvtd -q -o -f &
 ## Launch Emacs daemon
 emacs --daemon &
 
-## Start window manager - awesome
+## Start window manager
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
