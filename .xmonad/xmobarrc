@@ -1,5 +1,5 @@
 Config { 
-       font = "-*-anorexia-*-*-*-*-*-*-*-*-*-*-*-*", 
+       font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1",
        bgColor = "#000000", 
        fgColor = "#F2F2F2",
        position = Top,
