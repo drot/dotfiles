@@ -4,7 +4,7 @@
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
-      erc-prompt ">"
+      erc-prompt ">>"
       erc-match-mode t
       erc-button-buttonize-nicks nil
       erc-kill-buffer-on-part t
