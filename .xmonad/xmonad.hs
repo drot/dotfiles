@@ -38,7 +38,7 @@ myUhook = withUrgencyHook NoUrgencyHook myConfig
 myConfig = defaultConfig {
   terminal = "urxvtc"
   , focusFollowsMouse = True
-  , borderWidth = 1
+  , borderWidth = 2
   , modMask = mod4Mask
   , workspaces = ["1","2","3","4","5","6","7","8","9"]
   , normalBorderColor = "#7C7C7C"
@@ -74,6 +74,7 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
 myManageHook = composeAll [
   className =? "MPlayer" --> doFloat
   , className =? "Gimp" --> doFloat
+  , className =? "Skype" --> doFloat    
   , className =? "Conkeror" --> doShift "2"
   , className =? "Emacs" --> doShift "3"
   ] <+> namedScratchpadManageHook myScratch
