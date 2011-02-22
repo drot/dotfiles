@@ -1,7 +1,7 @@
-include "/usr/share/themes/Atolm/gtk-2.0/gtkrc"
+include "/home/drot/.themes/New\ Wave/gtk-2.0/gtkrc"
 
-gtk-theme-name = "Atolm"
-gtk-icon-theme-name = "AwOken"
+gtk-theme-name = "New Wave"
+gtk-icon-theme-name = "nuovext2"
 gtk-font-name = "Ubuntu 9"
 gtk-key-theme-name = "Emacs"
 
