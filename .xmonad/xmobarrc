@@ -1,3 +1,5 @@
+# -*- mode: Conf -*-
+
 Config { 
        font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1",
        bgColor = "#000000", 
