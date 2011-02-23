@@ -5,7 +5,6 @@
 -- Main
 import XMonad
 import System.Exit
-import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
 -- General
