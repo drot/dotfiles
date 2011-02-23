@@ -40,12 +40,12 @@ myConfig = defaultConfig {
   , focusFollowsMouse = True
   , borderWidth = 2
   , modMask = mod4Mask
-  , workspaces = ["1","2","3","4","5","6","7","8","9"]
+  , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   , normalBorderColor = "#7C7C7C"
   , focusedBorderColor = "#FFB6B0"
   , keys = myKeys
   , layoutHook = myLayoutHook
-  , manageHook = myManageHook
+  , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
   }
 
 -- Status bar style
@@ -77,7 +77,7 @@ myManageHook = composeAll [
   , className =? "Skype" --> doFloat    
   , className =? "Conkeror" --> doShift "2"
   , className =? "Emacs" --> doShift "3"
-  ] <+> namedScratchpadManageHook myScratch
+  ] 
 
 -- Scratchpad
 --
