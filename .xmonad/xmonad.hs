@@ -11,6 +11,7 @@ import qualified XMonad.StackSet as W
 -- General
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
@@ -43,10 +44,9 @@ myConfig = defaultConfig {
   , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   , normalBorderColor = "#7C7C7C"
   , focusedBorderColor = "#FFB6B0"
-  , keys = myKeys
   , layoutHook = myLayoutHook
   , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
-  }
+  } `additionalKeysP` myKeys
 
 -- Status bar style
 --
@@ -119,22 +119,10 @@ myXPConfig = defaultXPConfig {
 -- Toggle struts
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
--- Main key bindings
-myKeys x  = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
-newKeys conf@(XConfig {XMonad.modMask = modm}) = [
-
-  -- launch terminal
-  ((modm, xK_Return), spawn $ XMonad.terminal conf)
-
-    -- launch player
-  , ((modm, xK_s), namedScratchpadAction myScratch "music")
-
-     -- launch prompt
-  , ((modm, xK_p), shellPrompt myXPConfig)
-
-    -- focus urgent window
-  , ((modm, xK_u), focusUrgent)
-
-    -- swap the focused window and the master window
-  , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
-  ]
+-- Override defaults
+myKeys = [ ("M-<Return>", spawn $ XMonad.terminal myConfig)
+         , ("M-s", namedScratchpadAction myScratch "music")
+         , ("M-p", shellPrompt myXPConfig)
+         , ("M-u", focusUrgent)
+         , ("M-S-<Return>", windows W.swapMaster) 
+         ]

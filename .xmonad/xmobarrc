@@ -1,4 +1,4 @@
-# -*- mode: Conf -*-
+-- -*- mode: Haskell -*-
 
 Config { 
        font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1",
