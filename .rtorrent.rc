@@ -1,3 +1,5 @@
+# -*- mode: Conf -*-
+
 # This is an example resource file for rTorrent. Copy to
 # ~/.rtorrent.rc and enable/modify the options as needed. Remember to
 # uncomment the options you wish to enable.
