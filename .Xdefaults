@@ -12,8 +12,9 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: true
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #dfaf8f
-URxvt.cursorColor: #dcdccc
+URxvt.colorUL: #B6DCFF
+URxvt.cursorColor: #FFA560
+URxvt.cursorColor2: #000000
 URxvt.internalBorder: 1
 URxvt.secondaryScroll: true
 
@@ -28,38 +29,101 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
 
-! Zenburn color-scheme
-URxvt.background:  #3f3f3f
-URxvt.foreground:  #dcdccc
+! IR_Black
+URxvt.background: #000000
+URxvt.foreground: #F2F2F2
 
-! black + red
-URxvt.color0:      #1E2320
-URxvt.color1:      #705050
+! black
+URxvt.color0: #000000
+URxvt.color8: #7C7C7C
 
-! green + yellow
-URxvt.color2:      #60b48a
-URxvt.color3:      #dfaf8f
+! red
+URxvt.color1: #FF6C60
+URxvt.color9: #FFB6B0
 
-! blue + purple
-URxvt.color4:      #506070
-URxvt.color5:      #dc8cc3
+! green
+URxvt.color2: #A8FF60
+URxvt.color10: #CEFFAC
 
-! cyan + white
-URxvt.color6:      #8cd0d3
-URxvt.color7:      #dcdccc
+! yellow
+URxvt.color3: #FFFFB6
+URxvt.color11: #FFFFCC
 
-! bright-black + bright-red
-URxvt.color8:      #709080
-URxvt.color9:      #dca3a3
+! blue
+URxvt.color4: #96CBFE
+URxvt.color12: #B6DCFF
 
-! bright-green + bright-yellow
-URxvt.color10:     #c3bf9f
-URxvt.color11:     #f0dfaf
+! magenta
+URxvt.color5: #FF73FD
+URxvt.color13: #FF9CFE
 
-! bright-blue + bright-purple
-URxvt.color12:     #94bff3
-URxvt.color13:     #ec93d3
+! cyan
+URxvt.color6: #C6C5FE
+URxvt.color14: #DFDFFE
 
-! bright-cyan + bright-white
-URxvt.color14:     #93e0e3
-URxvt.color15:     #ffffff
+! white
+URxvt.color7: #EEEEEE
+URxvt.color15: #FFFFFF
+
+! xcalc
+XCalc.ti.button1.vertDistance: 4
+XCalc.ti.button2.vertDistance: 4
+XCalc.ti.button3.vertDistance: 4
+XCalc.ti.button4.vertDistance: 4
+XCalc.ti.button5.vertDistance: 4
+XCalc.ti.background: gray90
+XCalc.ti.bevel.borderColor: gray65
+XCalc.ti.bevel.borderWidth: 1
+XCalc.ti.bevel.vertDistance: 4
+XCalc.ti.bevel.defaultDistance: 0
+XCalc.ti.bevel.background: rgb:b/c/b
+XCalc.ti.bevel.screen*background: rgb:b/c/b
+XCalc.ti.bevel.screen.borderColor: rgb:b/c/b
+XCalc.ti.bevel.screen.vertDistance: 10
+XCalc.ti.bevel.screen.horizDistance: 10
+XCalc.ti.bevel.screen*left: chainLeft
+XCalc.ti.bevel.screen*right: chainRight
+XCalc.ti.bevel.screen*top: chainTop
+XCalc.ti.bevel.screen*bottom: chainBottom
+XCalc.ti.bevel.screen*LCD.foreground: gray10
+XCalc.ti.bevel.screen*INV.vertDistance: 0
+XCalc.ti.Command.borderColor: gray65
+XCalc.ti.Command.background: gray85
+XCalc.ti.Command.foreground: gray30
+XCalc.ti.button5.background: rgb:e/b/b
+XCalc.ti.button20.background: rgb:e/d/c
+XCalc.ti.button25.background: rgb:e/d/c
+XCalc.ti.button30.background: rgb:e/d/c
+XCalc.ti.button35.background: rgb:e/d/c
+XCalc.ti.button40.background: rgb:b/b/e
+XCalc.ti.button22.background: gray95
+XCalc.ti.button23.background: gray95
+XCalc.ti.button24.background: gray95
+XCalc.ti.button27.background: gray95
+XCalc.ti.button28.background: gray95
+XCalc.ti.button29.background: gray95
+XCalc.ti.button32.background: gray95
+XCalc.ti.button33.background: gray95
+XCalc.ti.button34.background: gray95
+XCalc.ti.button37.background: gray95
+XCalc.ti.button38.background: gray95
+XCalc.ti.button39.background: gray95
+
+! xmessage
+Xmessage.form.okay.shapeStyle: rectangle
+Xmessage.form.okay.background: IndianRed
+Xmessage.form.okay.foreground: rgb:e/b/b
+Xmessage.message.background: ivory3
+Xmessage.background: gray85
+Xmessage.foreground: gray15
+Xmessage.Scrollbar.width: 1
+Xmessage.Scrollbar.borderWidth: 0
+Xmessage.Text.?.cursorColor:  rgb:d/5/5
+Xmessage.Text.borderColor:  gray65
+Xmessage.Text.background: gray95
+Xmessage.Command.highlightThickness: 1
+Xmessage.Command.internalWidth: 5
+Xmessage.Command.internalHeight: 3
+Xmessage.Command.borderColor: gray40
+Xmessage.Command.shapeStyle: Rectangle
+Xmessage.Command.background: gray80
