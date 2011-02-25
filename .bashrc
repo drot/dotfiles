@@ -44,15 +44,15 @@ complete -cf sudo
 [ -e /etc/bash_completion ] && source /etc/bash_completion
 
 # prompt colors
-CYAN='\[\033[0;36m\]'
 GREEN='\[\033[0;32m\]'
+YELLOW='\[\033[1;33m\]'
 NIL='\[\033[00m\]'
 
 [ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
 GITSTATUS="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-PS1="${GREEN}[${CYAN}\u${GREEN}@${CYAN}\h${GREEN}]${GREEN}[${CYAN}\w${GREEN}]${CYAN}${GITSTATUS}${GREEN} \$${NIL} "
+PS1="${GREEN}[${YELLOW}\u${GREEN}@${YELLOW}\h${GREEN}]${GREEN}[${YELLOW}\w${GREEN}]${GREEN}${GITSTATUS}${YELLOW} \$${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
