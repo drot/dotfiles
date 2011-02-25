@@ -111,7 +111,7 @@ encryption = allow_incoming,enable_retry,prefer_plaintext
 
 # Colors
 active_fg_color = 3
-done_fg_color = 4
+done_fg_color = 6
 
 # Remove the torrent file upon completion. This unties it.
 system.method.set_key = event.download.finished,remove_torrent,"execute=rm,$d.get_tied_to_file="

@@ -11,21 +11,21 @@ export PAGER=less
 
 # history
 export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear" # don't append consecutive duplicates of these
-export HISTCONTROL=ignoreboth                       # ingore duplicates and spaces (ignoreboth|ignoredups|ignorespace)
-export HISTSIZE=10000                               # bash history will save N commands
-export HISTFILESIZE=${HISTSIZE}                     # bash will remember N commands
+export HISTCONTROL=ignoreboth # ingore duplicates and spaces (ignoreboth|ignoredups|ignorespace)
+export HISTSIZE=10000 # bash history will save N commands
+export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 # color grep and man pages
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'	# beautify grep
-export GROFF_NO_SGR=1                  	# output ANSI color escape sequences in raw form
-export LESS_TERMCAP_mb=$'\E[0;31m'     	# blinking
-export LESS_TERMCAP_md=$'\E[1;34m'     	# bold          used for headings
-export LESS_TERMCAP_us=$'\E[1;32m'     	# underline     used for paths,keywords
-export LESS_TERMCAP_so=$'\E[41;1;37m'   # standout      used for statusbar/search
-export LESS_TERMCAP_ue=$'\E[0m'         # end underline
-export LESS_TERMCAP_se=$'\E[0m'         # end standout-mode
-export LESS_TERMCAP_me=$'\E[0m'         # end all modes like so, us, mb, md and mr
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32' # beautify grep
+export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
+export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
+export LESS_TERMCAP_md=$'\E[01;31m' # begin bold
+export LESS_TERMCAP_me=$'\E[0m' # end mode
+export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
+export LESS_TERMCAP_so=$'\E[1;33;40m' # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m' # end underline
+export LESS_TERMCAP_us=$'\E[1;32m' # begin underline
 
 # disable ^s/^q flow control
 stty -ixon
@@ -35,25 +35,24 @@ stty -ixoff
 [ -e $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
 
 # bash options
-shopt -s cmdhist    # save multi-line commands in history as single line
+shopt -s cmdhist # save multi-line commands in history as single line
 shopt -s histappend # append to the history file
-shopt -s no_empty_cmd_completion    # don't search completions in PATH on an empty line
+shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty line
 
 # sudo bash completion and advanced completion
 complete -cf sudo
 [ -e /etc/bash_completion ] && source /etc/bash_completion
 
 # prompt colors
-RED='\[\033[0;31m\]'
+CYAN='\[\033[0;36m\]'
 GREEN='\[\033[0;32m\]'
-BLUE='\[\033[0;34m\]'
 NIL='\[\033[00m\]'
 
 [ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
 GITSTATUS="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-PS1="${GREEN}[${BLUE}\u${GREEN}@${BLUE}\h${GREEN}]${GREEN}[${BLUE}\w${GREEN}]${RED}${GITSTATUS}${GREEN} \$${NIL} "
+PS1="${GREEN}[${CYAN}\u${GREEN}@${CYAN}\h${GREEN}]${GREEN}[${CYAN}\w${GREEN}]${CYAN}${GITSTATUS}${GREEN} \$${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"

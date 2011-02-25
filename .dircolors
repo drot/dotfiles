@@ -20,37 +20,35 @@ EIGHTBIT 1
 
 NORMAL 00
 FILE 00
-DIR 01;34
-LINK 01;36
-FIFO 40;33
-SOCK 01;35
-DOOR 01;35
+DIR 01;36
+LINK 01;33
+FIFO 40;32
+SOCK 01;36
+DOOR 01;36
 BLK 40;33;01
 CHR 40;33;01
-ORPHAN 40;31;01
-EXEC 01;32
-
+ORPHAN 40;37;01
+EXEC 01;33
 
 # File extension coloring:
 
-
 # Compressed
-.tar 00;31
-.tgz 00;31
-.arj 00;31
-.taz 00;31
-.lzh 00;31
-.zip 00;31
-.7z  00;31
-.z   00;31
-.Z   00;31
-.gz  00;31
-.bz2 00;31
-.deb 00;31
-.rpm 00;31
-.jar 00;31
-.rar 00;31
-.xz 00;31
+.tar 00;32
+.tgz 00;32
+.arj 00;32
+.taz 00;32
+.lzh 00;32
+.zip 00;32
+.7z  00;32
+.z   00;32
+.Z   00;32
+.gz  00;32
+.bz2 00;32
+.deb 00;32
+.rpm 00;32
+.jar 00;32
+.rar 00;32
+.xz 00;32
 
 # Images
 .jpg 01;35
