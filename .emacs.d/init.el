@@ -11,8 +11,8 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'zenburn)
-(color-theme-zenburn)
+(require 'color-theme-hober2)
+(color-theme-hober2)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)

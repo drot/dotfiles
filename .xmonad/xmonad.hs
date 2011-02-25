@@ -62,7 +62,7 @@ myPP = defaultPP {
 -- Layout configuration
 --
 myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
-	       tabs ||| tile ||| mtile ||| full ||| float
+               tabs ||| tile ||| mtile ||| full ||| float
   where
     tabs = named "[T]" $ tabbed shrinkText myTabConfig
     tile = named "[]=" $ Tall 1 (3/100) (1/2)
@@ -73,10 +73,10 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
 myManageHook = composeAll [
   className =? "MPlayer" --> doFloat
   , className =? "Gimp" --> doFloat
-  , className =? "Skype" --> doFloat    
+  , className =? "Skype" --> doFloat
   , className =? "Conkeror" --> doShift "2"
   , className =? "Emacs" --> doShift "3"
-  ] 
+  ]
 
 -- Scratchpad
 --
@@ -123,5 +123,5 @@ myKeys = [ ("M-<Return>", spawn $ XMonad.terminal myConfig)
          , ("M-s", namedScratchpadAction myScratch "music")
          , ("M-p", shellPrompt myXPConfig)
          , ("M-u", focusUrgent)
-         , ("M-S-<Return>", windows W.swapMaster) 
+         , ("M-S-<Return>", windows W.swapMaster)
          ]
