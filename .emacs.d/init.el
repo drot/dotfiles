@@ -11,8 +11,8 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(require 'color-theme-hober2)
-(color-theme-hober2)
+(require 'color-theme-folio)
+(color-theme-folio)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
