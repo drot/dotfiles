@@ -27,6 +27,15 @@
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 
+;; ERC
+(require 'erc)
+
+;; Easy PG
+(require 'epa-file)
+
+;; Magit
+(require 'magit)
+
 ;; IDO
 (require 'ido)
 (ido-mode t)
@@ -49,15 +58,6 @@
 (require 'uniquify)
 (setq uniquify-separator ":")
 (setq uniquify-buffer-name-style 'post-forward)
-
-;; ERC
-(require 'erc)
-
-;; Easy PG
-(require 'epa-file)
-
-;; Magit
-(require 'magit)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
