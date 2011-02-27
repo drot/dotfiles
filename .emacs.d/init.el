@@ -36,11 +36,15 @@
 ;; Magit
 (require 'magit)
 
-;; slime
-(setq inferior-lisp-program "sbcl")
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
-(require 'slime)
-(slime-setup '(slime-fancy))
+;; Haskell mode
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+;; Org-mode
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
 
 ;; IDO
 (require 'ido)
@@ -74,9 +78,9 @@
 (set-selection-coding-system 'utf-8)
 
 ;; Ediff
-;; Don't spawn a new frame
+; Don't spawn a new frame
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-;; Split the frame horizontally
+; Split the frame horizontally
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; Show unfinished keystrokes early
@@ -107,11 +111,6 @@
 
 ;; Wrap lines at 70 in text-mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; Org-mode
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
 
 ;; Calendar
 (setq
