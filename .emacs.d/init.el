@@ -36,6 +36,12 @@
 ;; Magit
 (require 'magit)
 
+;; slime
+(setq inferior-lisp-program "sbcl")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+(require 'slime)
+(slime-setup '(slime-fancy))
+
 ;; IDO
 (require 'ido)
 (ido-mode t)
@@ -106,11 +112,6 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;; Calendar
 (setq
