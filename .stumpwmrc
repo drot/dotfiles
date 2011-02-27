@@ -36,7 +36,7 @@
       *input-window-gravity* :top-right)
 
 ;; windows
-(set-focus-color "grey20")
+(set-focus-color "sienna1")
 (set-unfocus-color "grey10")
 (set-normal-gravity :center)
 (setf *normal-border-width* 1)
