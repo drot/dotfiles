@@ -56,7 +56,6 @@ define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search
 // custom CSS
 register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/4chan.css');
 register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/bljesak.css');
-register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/youtube.css');
 
 // prevent quitting by accident
 can_kill_last_buffer = false;
