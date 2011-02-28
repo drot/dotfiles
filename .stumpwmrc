@@ -13,7 +13,7 @@
 
 ;; contrib
 (set-contrib-dir "/usr/share/stumpwm")
-;;(load-module "cpu")
+(load-module "cpu")
 (load-module "mem")
 (load-module "net")
 
@@ -49,7 +49,7 @@
 		     t))
 	    " ] "
 	    "[ %n ] "
-;;	    "[ %c] " ;; cpu
+	    "[ %c] " ;; cpu
 	    "[ %M] " ;; mem
 	    "[ %l] " ;; net
 	    "%W")
