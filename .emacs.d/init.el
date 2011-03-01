@@ -10,6 +10,10 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode -1)
 
+;; Show tooltips in echo area
+(tooltip-mode -1)
+(setq tooltip-use-echo-area t)
+
 ;; Color theme
 (require 'zenburn)
 (color-theme-zenburn)
