@@ -63,6 +63,25 @@
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
 			  (stumpwm:current-head))
 
+;; first group name and group creation
+(setf (group-name (first (screen-groups (current-screen)))) "term")
+(run-commands "gnewbg www" "gnewbg emacs" "gnewbg-float float")
+
+;; window placement
+(clear-window-placement-rules)
+
+(define-frame-preference "www"
+    (0 t t :class "Conkeror"))
+
+(define-frame-preference "emacs"
+    (0 t t :class "Emacs"))
+
+(define-frame-preference "float"
+    (0 t t :class "Skype"))
+
+(define-frame-preference "float"
+    (0 t t :class "Gimp"))
+
 ;; prefix key
 (set-prefix-key (kbd "C-i"))
 
