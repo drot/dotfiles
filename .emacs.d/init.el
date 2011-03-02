@@ -38,17 +38,7 @@
 (require 'epa-file)
 
 ;; Magit
-(autoload 'magit-status "magit" nil t)
-
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
-;; Org-mode
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+(require 'magit)
 
 ;; IDO
 (require 'ido)
@@ -64,6 +54,16 @@
   ido-enable-flex-matching t       ; more flexible
   ido-max-prospects 6              ; keep minibuffer clean
 )
+
+;; Haskell mode
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+;; Org-mode
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
 
 ;; Edit files in compressed archives
 (auto-compression-mode t)
