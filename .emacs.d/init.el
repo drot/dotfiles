@@ -38,7 +38,7 @@
 (require 'epa-file)
 
 ;; Magit
-(require 'magit)
+(autoload 'magit-status "magit" nil t)
 
 ;; Haskell mode
 (load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
