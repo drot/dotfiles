@@ -15,8 +15,8 @@
 (setq tooltip-use-echo-area t)
 
 ;; Color theme
-(require 'zenburn)
-(color-theme-zenburn)
+(require 'color-theme-g0sub)
+(color-theme-g0sub)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
