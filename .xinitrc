@@ -4,7 +4,7 @@
 xsetroot -cursor_name left_ptr &
 
 ## Set background
-sh ~/.fehbg
+sh ~/.fehbg &
 
 ## Disable power saving
 xset -dpms &
