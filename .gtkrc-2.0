@@ -1,7 +1,7 @@
 include "/home/drot/.themes/New\ Wave/gtk-2.0/gtkrc"
 
 gtk-theme-name = "New Wave"
-gtk-icon-theme-name = "nuovext2"
+gtk-icon-theme-name = "Tango"
 gtk-font-name = "Ubuntu 9"
 gtk-key-theme-name = "Emacs"
 
