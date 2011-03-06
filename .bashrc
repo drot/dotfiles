@@ -60,6 +60,27 @@ alias ls="ls -h --group-directories-first --color=auto"
 alias ec="emacsclient -a emacs"
 alias eckd="emacsclient -e '(kill-emacs)'"
 
+# tty colors
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0000000" #black
+    echo -en "\e]P87c7c7c" #darkgrey
+    echo -en "\e]P1ff6c60" #darkred
+    echo -en "\e]P9ffb6b0" #red
+    echo -en "\e]P2a8ff60" #darkgreen
+    echo -en "\e]PAceffac" #green
+    echo -en "\e]P3ffffb6" #brown
+    echo -en "\e]PBffffcc" #yellow
+    echo -en "\e]P496cbfe" #darkblue
+    echo -en "\e]PCb6dcff" #blue
+    echo -en "\e]P5ff73fd" #darkmagenta
+    echo -en "\e]PDff9cfe" #magenta
+    echo -en "\e]P6c6c5fe" #darkcyan
+    echo -en "\e]PEdfdffe" #cyan
+    echo -en "\e]P7eeeeee" #lightgrey
+    echo -en "\e]PFffffff" #white
+    clear #for background artifacting
+fi
+
 # functions
 # extract - archive extractor
 # usage: extract <file>
