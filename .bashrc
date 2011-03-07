@@ -78,7 +78,6 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PEdfdffe" #cyan
     echo -en "\e]P7eeeeee" #lightgrey
     echo -en "\e]PFffffff" #white
-    clear #for background artifacting
 fi
 
 # functions
