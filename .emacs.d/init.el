@@ -40,6 +40,13 @@
 ;; Magit
 (require 'magit)
 
+;; Yasnippet
+(add-to-list 'load-path "~/.emacs.d/yasnippet")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/yasnippet/snippets")
+(setq yas/prompt-functions '(yas/ido-prompt))
+
 ;; IDO
 (require 'ido)
 (ido-mode t)
@@ -60,10 +67,14 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-;; Org-mode
+;; Org mode
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;; CC mode
+(setq c-default-style "stroustrup")
+(setq compile-command "g++")
 
 ;; Edit files in compressed archives
 (auto-compression-mode t)
