@@ -5,65 +5,114 @@ Emacs.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
 
 ! URXVT
 ! General
-URxvt.termName: rxvt-256color
-URxvt.loginShell: false
-URxvt.scrollBar: false
-URxvt.saveLines: 65535
-URxvt.cursorBlink: true
-URxvt.urgentOnBell: true
-URxvt.underlineURLs: true
-URxvt.colorUL: #B6DCFF
-URxvt.cursorColor: #FFA560
-URxvt.cursorColor2: #000000
-URxvt.internalBorder: 1
-URxvt.secondaryScroll: true
+urxvt*termName: rxvt-256color
+urxvt*loginShell: false
+urxvt*scrollBar: false
+urxvt*saveLines: 65535
+urxvt*cursorBlink: true
+urxvt*urgentOnBell: true
+urxvt*underlineURLs: true
+urxvt*colorUL: #B6DCFF
+urxvt*cursorColor: #FFA560
+urxvt*cursorColor2: #000000
+urxvt*internalBorder: 0
+urxvt*secondaryScroll: true
 
 ! Extensions
-URxvt.perl-lib: /usr/lib/urxvt/perl/
-URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: /usr/bin/conkeror
-URxvt.matcher.button: 1
-URxvt.cutchars: '"'()*<>[]{|}
+urxvt*perl-lib: /usr/lib/urxvt/perl/
+urxvt*perl-ext-common: default,matcher
+urxvt*urlLauncher: /usr/bin/conkeror
+urxvt*matcher.button: 1
+urxvt*cutchars: '"'()*<>[]{|}
 
 ! Appearance
-URxvt.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
-URxvt.boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
+urxvt*font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+urxvt*boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
 
 ! IR_Black
-URxvt.background: #000000
-URxvt.foreground: #F2F2F2
+urxvt*background: #000000
+urxvt*foreground: #F2F2F2
 
 ! black
-URxvt.color0: #000000
-URxvt.color8: #7C7C7C
+urxvt*color0: #000000
+urxvt*color8: #7C7C7C
 
 ! red
-URxvt.color1: #FF6C60
-URxvt.color9: #FFB6B0
+urxvt*color1: #FF6C60
+urxvt*color9: #FFB6B0
 
 ! green
-URxvt.color2: #A8FF60
-URxvt.color10: #CEFFAC
+urxvt*color2: #A8FF60
+urxvt*color10: #CEFFAC
 
 ! yellow
-URxvt.color3: #FFFFB6
-URxvt.color11: #FFFFCC
+urxvt*color3: #FFFFB6
+urxvt*color11: #FFFFCC
 
 ! blue
-URxvt.color4: #96CBFE
-URxvt.color12: #B6DCFF
+urxvt*color4: #96CBFE
+urxvt*color12: #B6DCFF
 
 ! magenta
-URxvt.color5: #FF73FD
-URxvt.color13: #FF9CFE
+urxvt*color5: #FF73FD
+urxvt*color13: #FF9CFE
 
 ! cyan
-URxvt.color6: #C6C5FE
-URxvt.color14: #DFDFFE
+urxvt*color6: #C6C5FE
+urxvt*color14: #DFDFFE
 
 ! white
-URxvt.color7: #EEEEEE
-URxvt.color15: #FFFFFF
+urxvt*color7: #EEEEEE
+urxvt*color15: #FFFFFF
+
+! XTERM
+! General
+xterm*internalBorder: 0
+xterm*saveLines: 65535
+xterm*dynamicColors: on
+xterm*highlightSelection: true
+xterm*utf8: 2
+xterm*eightBitInput: true
+
+!Appearance
+xterm*font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+xterm*boldFont: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+
+! IR_Black
+xterm*background: #000000
+xterm*foreground: #F2F2F2
+
+! black
+xterm*color0: #000000
+xterm*color8: #7C7C7C
+
+! red
+xterm*color1: #FF6C60
+xterm*color9: #FFB6B0
+
+! green
+xterm*color2: #A8FF60
+xterm*color10: #CEFFAC
+
+! yellow
+xterm*color3: #FFFFB6
+xterm*color11: #FFFFCC
+
+! blue
+xterm*color4: #96CBFE
+xterm*color12: #B6DCFF
+
+! magenta
+xterm*color5: #FF73FD
+xterm*color13: #FF9CFE
+
+! cyan
+xterm*color6: #C6C5FE
+xterm*color14: #DFDFFE
+
+! white
+xterm*color7: #EEEEEE
+xterm*color15: #FFFFFF
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
