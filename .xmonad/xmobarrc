@@ -12,7 +12,7 @@ Config {
 		  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
 		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
 		  Run Date "%d-%m <fc=#CEFFAC>%H:%M</fc>" "date" 10,
-                  Run Weather "LQMO" ["-t","<skyCondition>: <tempC>°C","-L","10","-H","25","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 36000
+                  Run Weather "LQMO" ["-t","Out: <tempC>°C","-L","10","-H","25","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 36000
 		  ],
        sepChar = "%",
        alignSep = "}{",
