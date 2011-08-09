@@ -37,16 +37,6 @@
 ;; Easy PG
 (require 'epa-file)
 
-;; Magit
-(require 'magit)
-
-;; Yasnippet
-(add-to-list 'load-path "~/.emacs.d/yasnippet")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet/snippets")
-(setq yas/prompt-functions '(yas/ido-prompt))
-
 ;; IDO
 (require 'ido)
 (ido-mode t)
@@ -62,19 +52,10 @@
   ido-max-prospects 6              ; keep minibuffer clean
 )
 
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
 ;; Org mode
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-
-;; CC mode
-(setq c-default-style "stroustrup")
-(setq compile-command "g++")
 
 ;; Edit files in compressed archives
 (auto-compression-mode t)
