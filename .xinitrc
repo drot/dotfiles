@@ -1,5 +1,8 @@
 #!/bin/sh
 
+## Initialize defaults
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
 ## Mouse cursor
 xsetroot -cursor_name left_ptr &
 
@@ -8,6 +11,7 @@ sh ~/.fehbg &
 
 ## Disable power saving
 xset -dpms &
+xset s off &
 
 ## Launch rxvt-unicode daemon
 urxvtd -q -o -f &
@@ -16,4 +20,4 @@ urxvtd -q -o -f &
 emacs --daemon &
 
 ## Start window manager
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
+exec i3

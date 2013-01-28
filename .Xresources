@@ -1,69 +1,73 @@
 ! drot X resources
 
+! Cursor
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 22
+
 ! Emacs
 Emacs.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
 
 ! URXVT
 ! General
-urxvt*termName: rxvt-256color
-urxvt*loginShell: false
-urxvt*scrollBar: false
-urxvt*saveLines: 65535
-urxvt*cursorBlink: true
-urxvt*urgentOnBell: true
-urxvt*underlineURLs: true
-urxvt*colorUL: #B6DCFF
-urxvt*cursorColor: #FFA560
-urxvt*cursorColor2: #000000
-urxvt*internalBorder: 0
-urxvt*secondaryScroll: true
+URxvt.termName: rxvt-256color
+URxvt.loginShell: false
+URxvt.scrollBar: false
+URxvt.saveLines: 65535
+URxvt.cursorBlink: true
+URxvt.urgentOnBell: true
+URxvt.underlineURLs: true
+URxvt.colorUL: #B6DCFF
+URxvt.cursorColor: #FFA560
+URxvt.cursorColor2: #000000
+URxvt.internalBorder: 0
+URxvt.secondaryScroll: true
 
 ! Extensions
-urxvt*perl-lib: /usr/lib/urxvt/perl/
-urxvt*perl-ext-common: default,matcher
-urxvt*urlLauncher: /usr/bin/conkeror
-urxvt*matcher.button: 1
-urxvt*cutchars: '"'()*<>[]{|}
+URxvt.perl-lib: /usr/lib/urxvt/perl/
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.cutchars: '"'()*<>[]{|}
 
 ! Appearance
-urxvt*font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
-urxvt*boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
+URxvt.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+URxvt.boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
 
 ! IR_Black
-urxvt*background: #000000
-urxvt*foreground: #F2F2F2
+URxvt.background: #000000
+URxvt.foreground: #F2F2F2
 
 ! black
-urxvt*color0: #000000
-urxvt*color8: #7C7C7C
+URxvt.color0: #000000
+URxvt.color8: #7C7C7C
 
 ! red
-urxvt*color1: #FF6C60
-urxvt*color9: #FFB6B0
+URxvt.color1: #FF6C60
+URxvt.color9: #FFB6B0
 
 ! green
-urxvt*color2: #A8FF60
-urxvt*color10: #CEFFAC
+URxvt.color2: #A8FF60
+URxvt.color10: #CEFFAC
 
 ! yellow
-urxvt*color3: #FFFFB6
-urxvt*color11: #FFFFCC
+URxvt.color3: #FFFFB6
+URxvt.color11: #FFFFCC
 
 ! blue
-urxvt*color4: #96CBFE
-urxvt*color12: #B6DCFF
+URxvt.color4: #96CBFE
+URxvt.color12: #B6DCFF
 
 ! magenta
-urxvt*color5: #FF73FD
-urxvt*color13: #FF9CFE
+URxvt.color5: #FF73FD
+URxvt.color13: #FF9CFE
 
 ! cyan
-urxvt*color6: #C6C5FE
-urxvt*color14: #DFDFFE
+URxvt.color6: #C6C5FE
+URxvt.color14: #DFDFFE
 
 ! white
-urxvt*color7: #EEEEEE
-urxvt*color15: #FFFFFF
+URxvt.color7: #EEEEEE
+URxvt.color15: #FFFFFF
 
 ! XTERM
 ! General
