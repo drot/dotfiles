@@ -41,6 +41,7 @@ shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty 
 
 # sudo bash completion and advanced completion
 complete -cf sudo
+complete -cf man
 [ -e /etc/bash_completion ] && source /etc/bash_completion
 
 # prompt colors

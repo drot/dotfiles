@@ -15,8 +15,7 @@
 (setq tooltip-use-echo-area t)
 
 ;; Color theme
-(require 'color-theme-g0sub)
-(color-theme-g0sub)
+(load-theme 'manoj-dark t)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -33,6 +32,10 @@
 
 ;; ERC
 (require 'erc)
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
 
 ;; Easy PG
 (require 'epa-file)
@@ -99,8 +102,7 @@
 )
 
 ;; Default browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "conkeror")
+(setq browse-url-browser-function 'browse-url-firefox)
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
