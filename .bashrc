@@ -40,10 +40,6 @@ shopt -s histappend # append to the history file
 shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty line
 shopt -s extglob # extended globbing
 
-# sudo bash completion and advanced completion
-complete -cf sudo
-complete -cf man
-
 # prompt colors
 RED='\[\033[0;31m\]'
 GREEN='\[\033[0;32m\]'
