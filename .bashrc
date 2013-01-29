@@ -17,7 +17,7 @@ export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 # color grep and man pages
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'	# beautify grep
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32' # beautify grep
 export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
 export LESS_TERMCAP_mb=$'\E[0;31m' # blinking
 export LESS_TERMCAP_md=$'\E[1;34m' # bold, used for headings
