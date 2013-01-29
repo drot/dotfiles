@@ -50,7 +50,9 @@ GREEN='\[\033[0;32m\]'
 BLUE='\[\033[0;34m\]'
 NIL='\[\033[00m\]'
 
-[ -e $HOME/.git-completion.sh ] && source $HOME/.git-completion.sh
+# git completion
+[ -e $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
+[ -e $HOME/.git-prompt.sh ] && source $HOME/.git-prompt.sh
 GITSTATUS="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
