@@ -73,7 +73,7 @@ myManageHook = composeAll [
                 className =? "MPlayer" --> doFloat
                , className =? "Gimp" --> doFloat
                , className =? "Skype" --> doFloat
-               , className =? "Conkeror" --> doShift "2"
+               , className =? "Firefox" --> doShift "2"
                , className =? "Emacs" --> doShift "3"
                ]
 
