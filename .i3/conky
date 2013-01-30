@@ -6,10 +6,8 @@ update_interval 1
 total_run_times 0
 short_units yes
 use_spacer none
-cpu_avg_samples 2
 
 TEXT
 CPU: ${cpu cpu0}% | \
 RAM: ${memperc}% | \
-LOAD: ${loadavg} | \
 ${time %a-%d-%b %k:%M}
