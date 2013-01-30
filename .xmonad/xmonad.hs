@@ -4,7 +4,6 @@
 
 -- Main
 import XMonad
-import System.Exit
 import qualified XMonad.StackSet as W
 
 -- General
@@ -49,7 +48,7 @@ myConfig = defaultConfig {
 
 -- Status bar style
 --
-myPP = defaultPP {
+myPP = xmobarPP {
   ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
   , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
   , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
