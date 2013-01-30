@@ -1,20 +1,19 @@
 -- -*- mode: Haskell -*-
 
 Config {
-       font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1",
-       bgColor = "#000000",
-       fgColor = "#F2F2F2",
-       position = Top,
-       lowerOnStart = True,
-       commands = [
-       		  Run StdinReader,
-		  Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
-		  Run Network "eth0" ["-t","Net: <rx>/<tx>","-L","5","-H","100","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
-		  Run Date "%d-%m <fc=#CEFFAC>%H:%M</fc>" "date" 10,
-                  Run Weather "LQMO" ["-t","Out: <tempC>°C","-L","10","-H","25","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 36000
-		  ],
-       sepChar = "%",
-       alignSep = "}{",
-       template = "%StdinReader% }{ <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %cpu% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %memory% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %eth0% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %LQMO% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %date%"
+         font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1",
+         bgColor = "#000000",
+         fgColor = "#F2F2F2",
+         position = Top,
+         lowerOnStart = True,
+         commands = [
+       	  Run StdinReader,
+          Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10,
+	  Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10,
+	  Run Date "%d-%m <fc=#CEFFAC>%H:%M</fc>" "date" 10,
+          Run Weather "LQMO" ["-t","Out: <tempC>°C","-L","10","-H","25","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 36000
+         ],
+         sepChar = "%",
+         alignSep = "}{",
+         template = "%StdinReader% }{ <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %cpu% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %memory% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %LQMO% <fc=#B6DCFF>></fc><fc=#FFB6B0>></fc> %date%"
        }

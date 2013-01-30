@@ -35,81 +35,80 @@ myFont = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1"
 myUhook = withUrgencyHook NoUrgencyHook myConfig
 
 myConfig = defaultConfig {
-  terminal = "urxvtc"
-  , focusFollowsMouse = False
-  , borderWidth = 2
-  , modMask = mod4Mask
-  , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-  , normalBorderColor = "#7C7C7C"
-  , focusedBorderColor = "#FFB6B0"
-  , layoutHook = myLayoutHook
-  , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
-  } `additionalKeysP` myKeys
+             terminal = "urxvtc"
+           , focusFollowsMouse = False
+           , borderWidth = 2
+           , modMask = mod4Mask
+           , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+           , normalBorderColor = "#7C7C7C"
+           , focusedBorderColor = "#FFB6B0"
+           , layoutHook = myLayoutHook
+           , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
+           } `additionalKeysP` myKeys
 
 -- Status bar style
 --
 myPP = xmobarPP {
-  ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
-  , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
-  , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
-  , ppSep = "<fc=#FFB6B0>:</fc>"
-  , ppWsSep = "<fc=#FFB6B0>:</fc>"
-  , ppLayout = xmobarColor "#CEFFAC" ""
-  , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
-  }
+         ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
+       , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
+       , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
+       , ppSep = "<fc=#FFB6B0>:</fc>"
+       , ppWsSep = "<fc=#FFB6B0>:</fc>"
+       , ppLayout = xmobarColor "#CEFFAC" ""
+       , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
+       }
 
 -- Layout configuration
 --
 myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
                tabs ||| tile ||| mtile ||| full ||| float
-  where
-    tabs = named "[T]" $ tabbed shrinkText myTabConfig
-    tile = named "[]=" $ Tall 1 (3/100) (1/2)
-    mtile = named "[M]" $ Mirror tile
-    full = named "[ ]" $ Full
-    float = named "><>" $ simplestFloat
+    where
+      tabs = named "[T]" $ tabbed shrinkText myTabConfig
+      tile = named "[]=" $ Tall 1 (3/100) (1/2)
+      mtile = named "[M]" $ Mirror tile
+      full = named "[ ]" $ Full
+      float = named "><>" $ simplestFloat
 
 myManageHook = composeAll [
-  className =? "MPlayer" --> doFloat
-  , className =? "Gimp" --> doFloat
-  , className =? "Skype" --> doFloat
-  , className =? "Conkeror" --> doShift "2"
-  , className =? "Emacs" --> doShift "3"
-  ]
+                className =? "MPlayer" --> doFloat
+               , className =? "Gimp" --> doFloat
+               , className =? "Skype" --> doFloat
+               , className =? "Conkeror" --> doShift "2"
+               , className =? "Emacs" --> doShift "3"
+               ]
 
 -- Scratchpad
 --
-myScratch = [
-  NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
-  (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
-  ]
+myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
+              (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+            ]
 
 -- Tab style
 --
 myTabConfig = defaultTheme {
-  fontName = myFont
-  , decoHeight = 14
-  , activeColor = "#000000"
-  , activeBorderColor = "#FFB6B0"
-  , activeTextColor = "#CEFFAC"
-  , inactiveColor = "#000000"
-  , inactiveBorderColor = "#7C7C7C"
-  , inactiveTextColor = "#EEEEEE"
-  , urgentColor = "#000000"
-  , urgentBorderColor = "#FFB6B0"
-  , urgentTextColor = "#B6DCFF"
-  }
+                fontName = myFont
+              , decoHeight = 14
+              , activeColor = "#000000"
+              , activeBorderColor = "#FFB6B0"
+              , activeTextColor = "#CEFFAC"
+              , inactiveColor = "#000000"
+              , inactiveBorderColor = "#7C7C7C"
+              , inactiveTextColor = "#EEEEEE"
+              , urgentColor = "#000000"
+              , urgentBorderColor = "#FFB6B0"
+              , urgentTextColor = "#B6DCFF"
+              }
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig {
-  font = myFont
-  , fgColor = "#FFFFFF"
-  , bgColor = "#000000"
-  , bgHLight = "#000000"
-  , fgHLight = "#CEFFAC"
-  , position = Bottom
-  }
+               font = myFont
+             , fgColor = "#FFFFFF"
+             , bgColor = "#000000"
+             , bgHLight = "#000000"
+             , fgHLight = "#CEFFAC"
+             , position = Bottom
+             }
 
 -- Key bindings
 --
