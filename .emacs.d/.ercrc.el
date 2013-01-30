@@ -13,9 +13,9 @@
       erc-insert-timestamp-function 'erc-insert-timestamp-left
       erc-timestamp-format "%H:%M "
       erc-timestamp-only-if-changed-flag nil
-      erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-				"324" "329" "332" "333" "353" "477")
-      erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
+      erc-hide-list '("JOIN" "PART" "QUIT")
+      erc-log-channels-directory "~/.emacs.d/logs/"
+      erc-save-buffer-on-part t)
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
