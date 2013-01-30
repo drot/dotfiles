@@ -9,7 +9,7 @@ Config {
        , position = Top
        , lowerOnStart = True
        , hideOnStart = False
-       , persistent = True
+       , persistent = False
        , commands = [ Run Cpu ["-L","10","-H","50","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0"] 10
 	            , Run Memory ["-L","5","-H","30","--low","#DFDFFE","--normal","#CEFFAC","--high","#FFB6B0","-t","Mem: <usedratio>%"] 10
                     , Run Date "%d-%m <fc=#CEFFAC>%H:%M</fc>" "date" 10
