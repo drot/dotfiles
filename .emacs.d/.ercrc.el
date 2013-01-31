@@ -10,6 +10,7 @@
 ;; logging
 (setq erc-log-insert-log-on-open nil
       erc-log-channels-directory "~/.emacs.d/logs/"
+      erc-log-file-coding-system 'utf-8
       erc-save-buffer-on-part nil
       erc-save-queries-on-quit nil)
 (add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
