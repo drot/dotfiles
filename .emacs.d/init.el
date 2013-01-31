@@ -30,12 +30,14 @@
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 
-;; ERC
-(require 'erc)
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
+;; Haskell mode
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
+;; PKGBUILD mode
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
 ;; Easy PG
 (require 'epa-file)
