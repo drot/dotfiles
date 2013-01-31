@@ -1,21 +1,31 @@
 ;; spelling
 (erc-spelling-mode 1)
 
+;; colorize nicks
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
+
+;; logging
+(setq erc-log-insert-log-on-open nil
+      erc-log-channels-directory "~/.emacs.d/logs/"
+      erc-save-buffer-on-part nil
+      erc-save-queries-on-quit nil)
+(add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
+
 ;; look
 (setq erc-nick-uniquifier "_"
       erc-notice-prefix "* "
       erc-prompt ">>"
-      erc-match-mode t
+      erc-timestamp-format "%H:%M "
       erc-button-buttonize-nicks nil
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
       erc-insert-timestamp-function 'erc-insert-timestamp-left
-      erc-timestamp-format "%H:%M "
       erc-timestamp-only-if-changed-flag nil
-      erc-hide-list '("JOIN" "PART" "QUIT")
-      erc-log-channels-directory "~/.emacs.d/logs/"
-      erc-save-buffer-on-part t)
+      erc-hide-list '("JOIN" "PART" "QUIT"))
 
 ;; dynamic fill width
 (make-variable-buffer-local 'erc-fill-column)
