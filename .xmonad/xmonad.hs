@@ -87,7 +87,6 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 --
 myTabConfig = defaultTheme {
                 fontName = myFont
-              , decoHeight = 14
               , activeColor = "#000000"
               , activeBorderColor = "#FFB6B0"
               , activeTextColor = "#CEFFAC"
