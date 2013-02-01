@@ -1,5 +1,6 @@
 ;; Load path
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/helm/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -14,8 +15,11 @@
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
 
+;; Recursive minibuffers
+(setq enable-recursive-minibuffers t)
+
 ;; Color theme
-(load-theme 'manoj-dark t)
+(load-theme 'zenburn t)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -42,20 +46,10 @@
 ;; Easy PG
 (require 'epa-file)
 
-;; IDO
-(require 'ido)
-(ido-mode t)
-(setq
-  ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
-  ido-ignore-buffers               ; ignore buffers:
-    '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
-  ido-everywhere t                 ; enabled for various dialogs
-  ido-case-fold  t                 ; case-insensitive
-  ido-use-filename-at-point nil    ; don't use filename at point
-  ido-use-url-at-point nil         ; don't use url at point
-  ido-enable-flex-matching t       ; more flexible
-  ido-max-prospects 6              ; keep minibuffer clean
-)
+;; Helm
+(require 'helm-config)
+(helm-mode 1)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; Org mode
 (define-key global-map "\C-cl" 'org-store-link)
@@ -133,3 +127,6 @@
 (quietly-read-abbrev-file)
 ; always on
 (setq default-abbrev-mode t)
+
+;; Colored output fix
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
