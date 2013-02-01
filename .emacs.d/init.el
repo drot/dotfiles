@@ -50,11 +50,7 @@
 (require 'helm-config)
 (helm-mode 1)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-;; Org mode
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; Edit files in compressed archives
 (auto-compression-mode t)
