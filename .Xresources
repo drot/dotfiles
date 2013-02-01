@@ -16,8 +16,9 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: true
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #FFFFFF
-URxvt.cursorColor: #DCDCCC
+URxvt.colorUL: #B6DCFF
+URxvt.cursorColor: #FFA560
+URxvt.cursorColor2: #000000
 URxvt.internalBorder: 0
 URxvt.secondaryScroll: true
 
@@ -32,40 +33,40 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
 
-! Zenburn
-URxvt.background: #3F3F3F
-URxvt.foreground: #DCDCCC
+! IR_Black
+URxvt.background: #000000
+URxvt.foreground: #F2F2F2
 
 ! black
-URxvt.color0: #3F3F3F
-URxvt.color8: #709080
+URxvt.color0: #000000
+URxvt.color8: #7C7C7C
 
 ! red
-URxvt.color1: #705050
-URxvt.color9: #DCA3A3
+URxvt.color1: #FF6C60
+URxvt.color9: #FFB6B0
 
 ! green
 URxvt.color2: #A8FF60
-URxvt.color10: #C3BF9F
+URxvt.color10: #CEFFAC
 
 ! yellow
-URxvt.color3: #DFAF8F
-URxvt.color11: #F0DFAF
+URxvt.color3: #FFFFB6
+URxvt.color11: #FFFFCC
 
 ! blue
-URxvt.color4: #506070
-URxvt.color12: #94BFF3
+URxvt.color4: #96CBFE
+URxvt.color12: #B6DCFF
 
 ! magenta
-URxvt.color5: #DC8CC3
-URxvt.color13: #EC93D3
+URxvt.color5: #FF73FD
+URxvt.color13: #FF9CFE
 
 ! cyan
-URxvt.color6: #8CD0D3
-URxvt.color14: #93E0E3
+URxvt.color6: #C6C5FE
+URxvt.color14: #DFDFFE
 
 ! white
-URxvt.color7: #DCDCCC
+URxvt.color7: #EEEEEE
 URxvt.color15: #FFFFFF
 
 ! XTERM
