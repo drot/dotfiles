@@ -1,6 +1,12 @@
 ;; spelling
 (erc-spelling-mode 1)
 
+;; colorize nicks
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
+
 ;; logging
 (setq erc-log-insert-log-on-open nil
       erc-log-channels-directory "~/.emacs.d/logs/"

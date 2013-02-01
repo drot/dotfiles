@@ -1,6 +1,6 @@
 ;; Load path
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/helm/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -19,7 +19,7 @@
 (setq enable-recursive-minibuffers t)
 
 ;; Color theme
-(load-theme 'zenburn t)
+(load-theme 'manoj-dark t)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
