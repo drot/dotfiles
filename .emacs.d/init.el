@@ -80,10 +80,6 @@
 ;; Answer y or n instead of yes or no at prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Ignore case on completion
-(setq completion-ignore-case t
-  read-file-name-completion-ignore-case t)
-
 ;; Change backup behavior to save in a specified directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
  backup-by-copying      t
