@@ -2,17 +2,11 @@
 (in-package :stumpwm)
 
 ;; load swank
-(load "/usr/share/emacs/site-lisp/slime/swank-loader.lisp")
-(swank-loader:init)
-(defcommand swank () ()
-  (setf stumpwm:*top-level-error-action* :break)
-  (swank:create-server :port 4005
-                       :style swank:*communication-style*
-                       :dont-close t))
-(swank)
+(require 'swank)
+(swank:create-server) 
 
 ;; contrib
-(set-contrib-dir "/usr/share/stumpwm")
+(set-contrib-dir "~/stumpwm/contrib/")
 (load-module "cpu")
 (load-module "mem")
 (load-module "net")
@@ -71,7 +65,7 @@
 (clear-window-placement-rules)
 
 (define-frame-preference "www"
-    (0 t t :class "Conkeror"))
+    (0 t t :class "Firefox"))
 
 (define-frame-preference "emacs"
     (0 t t :class "Emacs"))
@@ -86,6 +80,6 @@
 (set-prefix-key (kbd "C-i"))
 
 ;; keybindings
-(define-key *root-map* (kbd "C-c") "exec conkeror")
+(define-key *root-map* (kbd "C-c") "exec firefox")
 (define-key *root-map* (kbd "c") "exec urxvtc")
 (define-key *root-map* (kbd "e") "exec emacsclient -c")
