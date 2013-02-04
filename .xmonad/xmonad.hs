@@ -70,7 +70,7 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       float = named "><>" $ simplestFloat
 
 myManageHook = composeAll [
-                className =? "MPlayer" --> doFloat
+                className =? "mplayer2" --> doFloat
                , className =? "Gimp" --> doFloat
                , className =? "Skype" --> doFloat
                , className =? "Firefox" --> doShift "2"
