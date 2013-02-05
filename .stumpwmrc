@@ -37,11 +37,7 @@
 
 ;; mode-line
 (setf *screen-mode-line-format*
-      (list "[ "
-	    '(:eval (stumpwm:run-shell-command
-		     "date '+%a %d %b %H:%M' | tr -d [:cntrl:]"
-		     t))
-	    " ] "
+      (list "[ " '(:eval (stumpwm:run-shell-command "date '+%d/%m %H:%M' | tr -d [:cntrl:]" t)) " ] "
 	    "[ %n ] "
 	    "[ %c] " ;; cpu
 	    "[ %M] " ;; mem
