@@ -33,6 +33,9 @@ session_pref("general.useragent.compatMode.firefox", true);
 // don't enable formfill
 session_pref("browser.formfill.enable", false);
 
+// display tabs
+require("new-tabs.js");
+
 // open clicks in buffers (tabs) in the background
 require("clicks-in-new-buffer.js");
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
