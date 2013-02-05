@@ -24,9 +24,6 @@ register_user_stylesheet(
 // don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
 
-// adblock plus
-require("adblockplus.js");
-
 // default directory for downloads and shell commands.
 cwd = make_file("/home/drot/Downloads");
 
