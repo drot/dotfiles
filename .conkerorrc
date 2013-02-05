@@ -1,44 +1,60 @@
 // -*- mode: Javascript -*-
 
+// use 'contrib' stuff
+load_paths.unshift("chrome://conkeror-contrib/content/");
+
 // the default page for new buffers.
 homepage = "www.google.com/ncr";
 
-// display the url before going to it in hints mode
+// improve hint keys
+hint_background_color = "transparent";
+hint_digits = "aoeuhtns";
 hints_display_url_panel = true;
 
-// smart completion
-minibuffer_auto_complete_default = true;
-url_completion_use_history = true
-url_completion_use_bookmarks = true;
+// hint's color
+register_user_stylesheet(
+    "data:text/css," +
+	escape (
+	    "span.__conkeror_hint {" +
+		" border: 1px solid black !important;" +
+		" color: #333 !important;" +
+		" background-color: yellow !important;" +
+		"}"));
+
+// don't require a whitelist to install extensions
+session_pref("xpinstall.whitelist.required", false);
+
+// adblock plus
+require("adblockplus.js");
 
 // default directory for downloads and shell commands.
-cwd = get_home_directory();
-cwd.append("Downloads");
+cwd = make_file("/home/drot/Downloads");
 
-// load urls from the command line in new buffers instead
-// of new windows.
-url_remoting_fn = load_url_in_new_buffer;
+// firefox user agent
+session_pref("general.useragent.compatMode.firefox", true);
+
+// don't enable formfill
+session_pref("browser.formfill.enable", false);
+
+// open clicks in buffers (tabs) in the background
+require("clicks-in-new-buffer.js");
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
+clicks_in_new_buffer_button = 1;
+
+// auto completion in the minibuffer
+minibuffer_auto_complete_default = true;
+url_completion_use_history = true;
+url_completion_use_bookmarks = true;
 
 // load download buffers in the background in the current
 // window, instead of in new windows.
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-//set emacs as external editor
-editor_shell_command = "emacsclient -a emacs";
+// open new urls in new buffer
+url_remoting_fn = load_url_in_new_buffer;
 
-// view source in your editor.
-view_source_use_external_editor = true;
-
-// prevent focus stealing
-require("block-content-focus-change.js");
-
-// mode-line
-mode_line_mode(true);
-
-// favicons
-require("favicon");
-add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
-read_buffer_show_icons = true;
+// prevent quitting by accident
+can_kill_last_buffer = false;
 
 // we'd like to see the # of buffers being loaded 
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
@@ -49,13 +65,37 @@ add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 // remove the clock
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 
+//set emacs as external editor
+editor_shell_command = "emacsclient -a emacs";
+
+// view source in your editor.
+view_source_use_external_editor = true;
+
+// prevent focus stealing
+require("block-content-focus-change.js");
+
+// favicons
+require("favicon");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
+
 // webjumps
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 
-// custom CSS
-register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/4chan.css');
-register_user_stylesheet('file:///home/drot/.conkeror.mozdev.org/stylesheets/bljesak.css');
+// clear history
+function clear_history () {
+    var history = Cc["@mozilla.org/browser/nav-history-service;1"]
+        .getService(Ci.nsIBrowserHistory);
+    history.removeAllPages();
+};
+interactive("clear-history", "Clear the history.", clear_history);
 
-// prevent quitting by accident
-can_kill_last_buffer = false;
+// reload conkerorrc with C-c r
+interactive("reload-config", "reload conkerorrc",
+	    function(I) {
+		load_rc();
+		I.window.minibuffer.message("config reloaded");
+	    }
+	   );
+define_key(default_global_keymap, "C-c r", "reload-config");
