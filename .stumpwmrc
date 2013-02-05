@@ -37,11 +37,11 @@
 
 ;; mode-line
 (setf *screen-mode-line-format*
-      (list "[ " '(:eval (stumpwm:run-shell-command "date '+%d/%m %H:%M' | tr -d [:cntrl:]" t)) " ] "
-	    "[ %n ] "
+      (list "[ %n ] "
 	    "[ %c] " ;; cpu
 	    "[ %M] " ;; mem
 	    "[ %l] " ;; net
+	    "[ " '(:eval (stumpwm:run-shell-command "date '+%d/%m %H:%M' | tr -d [:cntrl:]" t)) " ] "	   
 	    "%W")
       *mode-line-background-color* "black"
       *mode-line-foreground-color* "sienna1"
