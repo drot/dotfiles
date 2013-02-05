@@ -56,10 +56,10 @@
 (run-commands "gnewbg www" "gnewbg emacs" "gnewbg-float float")
 
 ;; Run or raise
-; Firefox
-(defcommand firefox () ()
-	    "Run/Raise Firefox"
-	    (run-or-raise "firefox" '(:class "Firefox")))
+; Conkeror
+(defcommand conkeror () ()
+	    "Run/Raise Conkeror"
+	    (run-or-raise "conkeror" '(:class "Conkeror")))
 
 ; GIMP
 (defcommand gimp () ()
@@ -70,7 +70,7 @@
 (clear-window-placement-rules)
 
 (define-frame-preference "www"
-    (0 t t :class "Firefox"))
+    (0 t t :class "Conkeror"))
 
 (define-frame-preference "emacs"
     (0 t t :class "Emacs"))
@@ -82,6 +82,6 @@
 (set-prefix-key (kbd "C-i"))
 
 ;; keybindings
-(define-key *root-map* (kbd "C-c") "exec firefox")
+(define-key *root-map* (kbd "C-c") "exec conkeror")
 (define-key *root-map* (kbd "c") "exec urxvtc")
 (define-key *root-map* (kbd "e") "exec emacsclient -c")

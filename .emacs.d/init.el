@@ -19,7 +19,7 @@
 (setq enable-recursive-minibuffers t)
 
 ;; Color theme
-(load-theme 'manoj-dark t)
+(load-theme 'cyberpunk t)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -34,10 +34,9 @@
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; SLIME
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
@@ -90,7 +89,8 @@
 )
 
 ;; Default browser
-(setq browse-url-browser-function 'browse-url-firefox)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "conkeror")
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
