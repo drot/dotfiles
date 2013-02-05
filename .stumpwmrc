@@ -1,20 +1,20 @@
 ;; -*-lisp-*-
 (in-package :stumpwm)
 
-;; load swank
+;; Load swank
 (require 'swank)
 (swank:create-server) 
 
-;; contrib
+;; Contrib modules
 (set-contrib-dir "~/stumpwm/contrib/")
 (load-module "cpu")
 (load-module "mem")
 (load-module "net")
 
-;; font
+;; Font
 (set-font "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1")
 
-;; input and message panels
+;; Input and message panels
 (set-fg-color "sienna1")
 (set-bg-color "grey10")
 (set-border-color "sienna4")
@@ -25,37 +25,46 @@
       *window-border-style* :thick
       *transient-border-width* 4)
 
-(setf *message-window-gravity* :top-left
+(setf *message-window-gravity* :bottom-left
       *timeout-wait* 2
-      *input-window-gravity* :top-right)
+      *input-window-gravity* :bottom-right)
 
-;; windows
+;; Windows
 (set-focus-color "sienna1")
 (set-unfocus-color "grey10")
 (set-normal-gravity :center)
 (setf *normal-border-width* 1)
 
-;; mode-line
-(setf *screen-mode-line-format*
-      (list "[ %n ] "
-	    "[ %c] " ;; cpu
-	    "[ %M] " ;; mem
-	    "[ %l] " ;; net
-	    "[ " '(:eval (stumpwm:run-shell-command "date '+%d/%m %H:%M' | tr -d [:cntrl:]" t)) " ] "	   
-	    "%W")
-      *mode-line-background-color* "black"
-      *mode-line-foreground-color* "sienna1"
-      *mode-line-border-color* "sienna4"
-      *mode-line-timeout* 1
-      *mode-line-position* :bottom)
+;; Mode-line output
+(setf *mode-line-background-color* "black"
+*mode-line-foreground-color* "sienna1"
+*mode-line-border-color*  "sienna4"
+*mode-line-timeout* 1
+*mode-line-position* :top
 
-;; show mode-line
+*screen-mode-line-format*
+(list "[ %n ] [ %c ] [ %M ] [ %l ]"
+      " [ " '(:eval (run-shell-command "date '+%d/%m %H:%M'  | tr -d [:cntrl:]" t)) " ] "
+      " %W "))
+
+;; Show mode-line
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
 			  (stumpwm:current-head))
 
-;; first group name and group creation
+;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
 (run-commands "gnewbg www" "gnewbg emacs" "gnewbg-float float")
+
+;; Run or raise
+; Firefox
+(defcommand firefox () ()
+	    "Run/Raise Firefox"
+	    (run-or-raise "firefox" '(:class "Firefox")))
+
+; GIMP
+(defcommand gimp () ()
+	    "Run/Raise GIMP"
+	    (run-or-raise "gimp" '(:class "Gimp")))
 
 ;; window placement
 (clear-window-placement-rules)
@@ -65,9 +74,6 @@
 
 (define-frame-preference "emacs"
     (0 t t :class "Emacs"))
-
-(define-frame-preference "float"
-    (0 t t :class "Skype"))
 
 (define-frame-preference "float"
     (0 t t :class "Gimp"))
