@@ -1,4 +1,0 @@
-MusicDir = "/home/drot/Music"
-StartInMusicDir = yes
-SoundDriver = ALSA
-Theme = nightly_theme
