@@ -13,6 +13,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 
@@ -75,7 +76,9 @@ myManageHook = composeAll [
                , className =? "Skype" --> doFloat
                , className =? "Conkeror" --> doShift "2"
                , className =? "Emacs" --> doShift "3"
-               ]
+               ] <+> composeOne [
+                isFullscreen -?> doFullFloat
+               ] 
 
 -- Scratchpad
 --
