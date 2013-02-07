@@ -1,5 +1,8 @@
 #!/bin/sh
 
+## start session
+systemd --user &
+
 ## Initialize defaults
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
@@ -16,8 +19,5 @@ xset s off &
 ## Launch rxvt-unicode daemon
 urxvtd -q -o -f &
 
-## Launch Emacs daemon
-emacs --daemon &
-
 ## Start window manager
-exec i3
+exec xmonad
