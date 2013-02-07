@@ -5,7 +5,7 @@ Config {
        , bgColor = "#000000"
        , fgColor = "#F2F2F2"
        , border = NoBorder
-       , borderColor = "#000000"
+       , borderColor = "#FFB6B0"
        , position = Static { xpos = 0 , ypos = 0, width = 1024, height = 20 }
        , lowerOnStart = True
        , hideOnStart = False

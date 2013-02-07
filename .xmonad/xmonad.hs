@@ -70,15 +70,17 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       full = named "[ ]" $ Full
       float = named "><>" $ simplestFloat
 
-myManageHook = composeAll [
+myManageHook = myCompose <+> composeAll [
                 className =? "mplayer2" --> doFloat
                , className =? "Gimp" --> doFloat
                , className =? "Skype" --> doFloat
                , className =? "Conkeror" --> doShift "2"
                , className =? "Emacs" --> doShift "3"
-               ] <+> composeOne [
-                isFullscreen -?> doFullFloat
-               ] 
+               ]
+
+myCompose = composeOne [
+             isFullscreen -?> doFullFloat
+            ]
 
 -- Scratchpad
 --
