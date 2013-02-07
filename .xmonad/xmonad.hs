@@ -29,7 +29,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
 -- My defaults
 --
-myBar = "xmobar ~/.xmonad/xmobarrc"
+myBar = "sleep 2 && xmobar ~/.xmonad/xmobarrc"
 
 myFont = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1"
 
