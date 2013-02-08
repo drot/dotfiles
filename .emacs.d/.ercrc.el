@@ -5,10 +5,7 @@
 (erc-button-mode nil)
 
 ;; colorize nicks
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
+(require 'erc-nick-colors)
 
 ;; look
 (setq erc-nick-uniquifier "_"

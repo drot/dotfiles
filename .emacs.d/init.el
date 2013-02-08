@@ -1,4 +1,5 @@
 ;; Load path
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/helm/")
 
 ;; Turn off the toolbar
