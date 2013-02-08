@@ -29,11 +29,11 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
 -- My defaults
 --
-myBar = "sleep 2 && xmobar ~/.xmonad/xmobarrc"
+myBar = "xmobar ~/.xmonad/xmobarrc"
 
 myFont = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1"
 
-myUhook = withUrgencyHook NoUrgencyHook myConfig
+myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
 myConfig = defaultConfig {
              terminal = "urxvtc"
@@ -70,17 +70,21 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       full = named "[ ]" $ Full
       float = named "><>" $ simplestFloat
 
-myManageHook = myCompose <+> composeAll [
-                className =? "mplayer2" --> doFloat
+myManageHook = composeAll [
+                isFullscreen --> doFullFloat
+               , className =? "mplayer2" --> doFloat
                , className =? "Gimp" --> doFloat
                , className =? "Skype" --> doFloat
                , className =? "Conkeror" --> doShift "2"
                , className =? "Emacs" --> doShift "3"
                ]
 
-myCompose = composeOne [
-             isFullscreen -?> doFullFloat
-            ]
+-- Urgent notification
+--
+myUrgent = urgencyConfig {
+             suppressWhen = Focused
+           , remindWhen = Dont
+           }
 
 -- Scratchpad
 --
