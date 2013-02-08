@@ -45,7 +45,8 @@ myConfig = defaultConfig {
            , focusedBorderColor = "#FFB6B0"
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
-           } `additionalKeysP` myKeys
+           }
+           `additionalKeysP` myKeys
 
 -- Status bar style
 --
