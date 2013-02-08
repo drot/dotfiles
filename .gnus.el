@@ -31,5 +31,4 @@
  gnus-sum-thread-tree-leaf-with-other "├► "
  gnus-sum-thread-tree-root ""
  gnus-sum-thread-tree-single-leaf "╰► "
- gnus-sum-thread-tree-vertical "│"
- )
+ gnus-sum-thread-tree-vertical "│")
