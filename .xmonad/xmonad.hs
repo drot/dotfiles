@@ -18,7 +18,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 
 -- Layouts
-import XMonad.Layout.Named
+import XMonad.Layout.Renamed
 import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
@@ -65,11 +65,11 @@ myPP = defaultPP {
 myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
                tabs ||| tile ||| mtile ||| full ||| float
     where
-      tabs = named "[T]" $ tabbed shrinkText myTabConfig
-      tile = named "[]=" $ Tall 1 (3/100) (1/2)
-      mtile = named "[M]" $ Mirror tile
-      full = named "[ ]" $ Full
-      float = named "><>" $ simplestFloat
+      tabs = renamed [Replace "[T]"] $ tabbed shrinkText myTabConfig
+      tile = renamed [Replace "[]="] $ Tall 1 (3/100) (1/2)
+      mtile = renamed [Replace "[M]"] $ Mirror tile
+      full = renamed [Replace "[ ]"] $ Full
+      float = renamed [Replace "><>"] $ simplestFloat
 
 myManageHook = composeAll [
                 isFullscreen --> doFullFloat
