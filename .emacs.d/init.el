@@ -1,6 +1,5 @@
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
-(add-to-list 'load-path "~/.emacs.d/helm/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -14,9 +13,6 @@
 ;; Show tooltips in echo area
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
-
-;; Recursive minibuffers
-(setq enable-recursive-minibuffers t)
 
 ;; Color theme
 (load-theme 'cyberpunk t)
@@ -34,6 +30,9 @@
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 
+;; Colored output fix
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;; Haskell mode
 (load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -46,12 +45,6 @@
 ;; Easy PG
 (require 'epa-file)
 
-;; Helm
-(require 'helm-config)
-(helm-mode 1)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-
 ;; Edit files in compressed archives
 (auto-compression-mode t)
 
@@ -59,6 +52,21 @@
 (require 'uniquify)
 (setq uniquify-separator ":")
 (setq uniquify-buffer-name-style 'post-forward)
+
+;; Ido
+(require 'ido)
+(ido-mode t)
+(setq
+ ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
+ ido-ignore-buffers
+ '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
+ ido-everywhere t
+ ido-case-fold t
+ ido-create-new-buffer 'prompt
+ ido-use-filename-at-point nil
+ ido-use-url-at-point nil
+ ido-enable-flex-matching t
+ ido-max-prospects 6)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -82,12 +90,12 @@
 
 ;; Change backup behavior to save in a specified directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
- backup-by-copying      t
- version-control        t
- delete-old-versions    t
- kept-new-versions      6
- kept-old-versions      2
-)
+      backup-by-copying      t
+      version-control        t
+      delete-old-versions    t
+      kept-new-versions      6
+      kept-old-versions      2
+      )
 
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic
@@ -109,8 +117,7 @@
  display-time-24hr-format t
  calendar-latitude 43.20
  calendar-longitude 17.48
- calendar-location-name "Mostar, Bosnia and Herzegovina"
-)
+ calendar-location-name "Mostar, Bosnia and Herzegovina")
 
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
@@ -120,6 +127,3 @@
 (quietly-read-abbrev-file)
 ; always on
 (setq default-abbrev-mode t)
-
-;; Colored output fix
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
