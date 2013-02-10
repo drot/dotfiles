@@ -18,7 +18,7 @@ header() {
 }
 
 chpwd() {
-    header "%~"
+    header "%n@%m: %~"
 }
 
 # Variables
