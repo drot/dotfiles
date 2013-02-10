@@ -240,8 +240,5 @@ setopt                   \
     NO_verbose           \
     zle
 
-# Set env
-source /etc/profile
-
 # Prompt theme
 prompt gentoo
