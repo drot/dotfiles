@@ -12,6 +12,15 @@ compinit
 autoload -U promptinit
 promptinit
 
+# Window title
+header() { 
+    print -nP "\e]2;$*\a" 
+}
+
+chpwd() {
+    header "%~"
+}
+
 # Variables
 unset SCREENDIR # fix screen
 export PATH=${PATH}:${HOME}/bin # path for my executables
@@ -231,13 +240,8 @@ setopt                   \
     NO_verbose           \
     zle
 
-# Window title
-case $TERM in
-    *xterm*|*rxvt*)
-    precmd () { print -Pn "\e]0;%n@%M %~ %#\a" }
-    preexec () { print -Pn "\e]0;%n@%M %~ %# ($1)\a" }
-    ;;
-esac
+# Set env
+source /etc/profile
 
-# prompt
+# Prompt theme
 prompt gentoo
