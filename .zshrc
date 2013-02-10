@@ -11,15 +11,7 @@ compinit
 # Prompt
 autoload -U promptinit
 promptinit
-
-# Window title
-header() { 
-    print -nP "\e]2;$*\a" 
-}
-
-chpwd() {
-    header "%n@%m: %~"
-}
+prompt gentoo
 
 # Variables
 unset SCREENDIR # fix screen
@@ -239,6 +231,3 @@ setopt                   \
     unset                \
     NO_verbose           \
     zle
-
-# Prompt theme
-prompt gentoo
