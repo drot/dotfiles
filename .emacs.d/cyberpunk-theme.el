@@ -1,10 +1,10 @@
 ;;; cyberpunk-theme.el --- Cyberpunk Color Theme
 
-;; Copyright 2012, Nick Van Horn
+;; Copyright 2012, Nicholas M. Van Horn
 
-;; Author: Nick Van Horn <nemo1211@gmail.com>
+;; Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
 ;; Keywords: color theme cyberpunk
-;; Version: 1.0
+;; Version: 1.1
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -333,7 +333,7 @@
    `(gnus-summary-normal-ticked ((,class (:foreground ,cyberpunk-orange :weight bold))))
    `(gnus-summary-normal-unread ((,class (:foreground ,cyberpunk-fg))))
    `(gnus-summary-selected ((,class (:foreground ,cyberpunk-yellow :weight bold))))
-   `(gnus-cite-1 ((,class (:foreground ,cyberpunk-blue))))
+   `(gnus-cite-1 ((,class (:foreground ,cyberpunk-yellow-2))))
    `(gnus-cite-10 ((,class (:foreground ,cyberpunk-yellow-1))))
    `(gnus-cite-11 ((,class (:foreground ,cyberpunk-yellow))))
    `(gnus-cite-2 ((,class (:foreground ,cyberpunk-blue-1))))
