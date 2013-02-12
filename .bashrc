@@ -6,6 +6,7 @@
 export EDITOR=emacsclient
 export ALTERNATE_EDITOR=emacs
 export VISUAL=${EDITOR}
+export BROWSER=conkeror
 export PAGER=less
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
