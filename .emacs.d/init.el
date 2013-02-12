@@ -1,6 +1,5 @@
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
-(add-to-list 'load-path "~/.emacs.d/helm/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -16,7 +15,7 @@
 (setq tooltip-use-echo-area t)
 
 ;; Color theme
-(load-theme 'cyberpunk t)
+(load-theme 'jazz t)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
@@ -54,14 +53,20 @@
 (setq uniquify-separator ":")
 (setq uniquify-buffer-name-style 'post-forward)
 
-;; Recursive minibuffers
-(setq enable-recursive-minibuffers t)
-
-;; Helm
-(require 'helm-config)
-(helm-mode 1)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
+;; Ido
+(require 'ido)
+(ido-mode t)
+(setq
+ ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
+ ido-ignore-buffers
+ '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
+ ido-everywhere t
+ ido-case-fold t
+ ido-create-new-buffer 'prompt
+ ido-use-filename-at-point nil
+ ido-use-url-at-point nil
+ ido-enable-flex-matching t
+ ido-max-prospects 6)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
