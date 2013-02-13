@@ -1,8 +1,7 @@
 ! drot X resources
 
 ! Cursor
-Xcursor.theme: Vanilla-DMZ-AA
-Xcursor.size: 22
+Xcursor.theme: Neutral
 
 ! Emacs
 Emacs.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
