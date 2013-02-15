@@ -4,7 +4,7 @@
 Xcursor.theme: Neutral
 
 ! Emacs
-Emacs.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+Emacs.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1
 
 ! URXVT
 ! General
@@ -29,8 +29,8 @@ URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
 ! Appearance
-URxvt.font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
-URxvt.boldFont: -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso10646-1
+URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1
+URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-1
 
 ! IR_Black
 URxvt.background: #000000
@@ -78,8 +78,8 @@ xterm*utf8: 2
 xterm*eightBitInput: true
 
 !Appearance
-xterm*font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
-xterm*boldFont: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1
+xterm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1
+xterm*boldFont: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1
 
 ! IR_Black
 xterm*background: #000000

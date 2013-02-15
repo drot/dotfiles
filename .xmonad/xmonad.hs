@@ -31,7 +31,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 --
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
-myFont = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1"
+myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1"
 
 myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
@@ -51,7 +51,7 @@ myConfig = defaultConfig {
 -- Status bar style
 --
 myPP = defaultPP {
-         ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 80
+         ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
        , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
        , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
        , ppSep = "<fc=#FFB6B0>:</fc>"
@@ -97,6 +97,7 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 --
 myTabConfig = defaultTheme {
                 fontName = myFont
+              , decoHeight = 28
               , activeColor = "#000000"
               , activeBorderColor = "#FFB6B0"
               , activeTextColor = "#CEFFAC"

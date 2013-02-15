@@ -1,12 +1,12 @@
 -- -*- mode: Haskell -*-
 
 Config {
-         font = "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1"
+         font = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1"
        , bgColor = "#000000"
        , fgColor = "#F2F2F2"
        , border = NoBorder
        , borderColor = "#FFB6B0"
-       , position = Static { xpos = 0 , ypos = 0, width = 1024, height = 20 }
+       , position = Static { xpos = 0 , ypos = 0, width = 1024, height = 22 }
        , lowerOnStart = True
        , hideOnStart = False
        , persistent = False
