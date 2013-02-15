@@ -46,13 +46,25 @@
 ;; Easy PG
 (require 'epa-file)
 
+;; X clipboard copy and paste
+(setq x-select-enable-clipboard t)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+
 ;; Edit files in compressed archives
 (auto-compression-mode t)
 
 ;; Make buffer names unique
 (require 'uniquify)
-(setq uniquify-separator ":")
+(setq uniquify-separator "/")
 (setq uniquify-buffer-name-style 'post-forward)
+(setq uniquify-ignore-buffers-re "^\\*")
+
+;; Save minibuffer history
+(setq savehist-file "~/.emacs.d/.savehist")
+(savehist-mode 1)
+
+;; Use Ibuffer for buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Ido
 (require 'ido)
@@ -95,8 +107,7 @@
       version-control        t
       delete-old-versions    t
       kept-new-versions      6
-      kept-old-versions      2
-      )
+      kept-old-versions      2)
 
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic
