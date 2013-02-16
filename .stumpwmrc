@@ -12,7 +12,7 @@
 (load-module "net")
 
 ;; Font
-(set-font "-xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso10646-1")
+(set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
 ;; Input and message panels
 (set-fg-color "sienna1")
