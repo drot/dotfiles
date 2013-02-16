@@ -1,9 +1,3 @@
-# ----------------------------------------
-# file: $HOME/.dir_colors
-# author: jason ryan http:/jasonwryan.com
-# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
-# ----------------------------------------
-#
 # COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
 # pipes. 'all' adds color characters to all output. 'none' shuts colorization
 # off.
