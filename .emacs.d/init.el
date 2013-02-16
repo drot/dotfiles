@@ -60,8 +60,8 @@
 (setq uniquify-ignore-buffers-re "^\\*")
 
 ;; Save minibuffer history
-(setq savehist-file "~/.emacs.d/.savehist")
 (savehist-mode 1)
+(setq savehist-file "~/.emacs.d/.savehist")
 
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
