@@ -1,25 +1,15 @@
-# Load colors
-autoload colors zsh/terminfo
-if [[ "$terminfo[colors]" -ge 8 ]]; then
-    colors
-fi
-
-# Auto completion
-autoload -U compinit
-compinit
-
-# Prompt
-autoload -U promptinit
-promptinit
-prompt gentoo
+#
+# drot zsh
+#
 
 # Variables
 unset SCREENDIR # fix screen
 export PATH=${PATH}:${HOME}/bin # path for my executables
 export EDITOR=emacsclient # default editor
 export ALTERNATE_EDITOR=emacs # avoid trouble
-export VISUAL=$EDITOR # compat
+export VISUAL=$EDITOR # compatibility
 export PAGER=less # man page viewer
+export BROWSER=conkeror # default browser
 
 # No core dumps
 limit coredumpsize 0
@@ -48,7 +38,7 @@ export LESS_TERMCAP_so=$'\E[41;1;37m' # standout, used for statusbar/search
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
 export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
-eval `dircolors -b "${HOME}/.dircolors"` # dircolors
+eval `dircolors -b "${HOME}/.dircolors"` # colored ls
 
 # Completion for following commands
 compctl -b bindkey
@@ -231,3 +221,18 @@ setopt                   \
     unset                \
     NO_verbose           \
     zle
+
+# Load colors
+autoload colors zsh/terminfo
+if [[ "$terminfo[colors]" -ge 8 ]]; then
+    colors
+fi
+
+# Auto completion
+autoload -U compinit
+compinit
+
+# Prompt
+autoload -U promptinit
+promptinit
+prompt gentoo
