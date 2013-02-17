@@ -71,23 +71,26 @@
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Icomplete for mini-buffer completion
-(icomplete-mode t)
-
 ;; Ido
 (require 'ido)
 (ido-mode t)
-(setq
- ido-save-directory-list-file "~/.emacs.d/emacs-ido-last"
- ido-ignore-buffers
- '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
- ido-everywhere t
- ido-case-fold t
- ido-create-new-buffer 'prompt
- ido-use-filename-at-point nil
- ido-use-url-at-point nil
- ido-enable-flex-matching t
- ido-max-prospects 6)
+(setq ido-save-directory-list-file "~/.emacs.d/ido-last"
+      ido-ignore-buffers
+      '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
+      ido-everywhere t
+      ido-case-fold t
+      ido-create-new-buffer 'prompt
+      ido-use-filename-at-point nil
+      ido-use-url-at-point nil
+      ido-enable-flex-matching t
+      ido-max-prospects 6)
+
+;; Smex
+(require 'smex)
+(setq smex-save-file "~/.emacs.d/smex-items")
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
