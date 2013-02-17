@@ -66,7 +66,7 @@
 
 ;; Save minibuffer history
 (savehist-mode 1)
-(setq savehist-file "~/.emacs.d/.savehist")
+(setq savehist-file "~/.emacs.d/savehist")
 
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -87,7 +87,8 @@
 
 ;; Smex
 (require 'smex)
-(setq smex-save-file "~/.emacs.d/smex-items")
+(setq smex-save-file "~/.emacs.d/smex-items"
+      smex-key-advice-ignore-menu-bar t)
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
