@@ -1,3 +1,7 @@
+;;
+;; drot emacs
+;;
+
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -11,16 +15,22 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode -1)
 
+;; Color theme
+(load-theme 'jazz t)
+
 ;; Show tooltips in echo area
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
 
-;; Color theme
-(load-theme 'jazz t)
+;; Answer y or n instead of yes or no at prompts
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
+
+;; Show unfinished keystrokes early
+(setq echo-keystrokes 0.1)
 
 ;; Message buffer size
 (setq message-log-max 100)
@@ -34,24 +44,19 @@
 ;; Colored output fix
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-;; PKGBUILD mode
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
-
-;; Easy PG
-(require 'epa-file)
-
 ;; X clipboard copy and paste
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; Edit files in compressed archives
 (auto-compression-mode t)
+
+;; Enable Easy PG
+(require 'epa-file)
+
+;; Ediff window placement
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -65,6 +70,9 @@
 
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; Icomplete for mini-buffer completion
+(icomplete-mode t)
 
 ;; Ido
 (require 'ido)
@@ -89,26 +97,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;; Ediff
-; don't spawn a new frame
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-; split the frame horizontally
-(setq ediff-split-window-function 'split-window-horizontally)
-
-;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
-
-;; Answer y or n instead of yes or no at prompts
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; Change backup behavior to save in a specified directory
-(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
-      backup-by-copying      t
-      version-control        t
-      delete-old-versions    t
-      kept-new-versions      6
-      kept-old-versions      2)
-
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
@@ -118,6 +106,23 @@
 
 ;; Wrap lines at 70 in text-mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; Haskell mode
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
+;; PKGBUILD mode
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
+;; Change backup behavior to save in a specified directory
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
+      backup-by-copying      t
+      version-control        t
+      delete-old-versions    t
+      kept-new-versions      6
+      kept-old-versions      2)
 
 ;; Calendar
 (setq
@@ -133,9 +138,6 @@
 
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
-; save abbrevs when files are saved
 (setq save-abbrevs t)
-; load abbrevs on startup
 (quietly-read-abbrev-file)
-; always on
 (setq default-abbrev-mode t)
