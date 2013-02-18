@@ -65,15 +65,16 @@
 (setq uniquify-ignore-buffers-re "^\\*")
 
 ;; Save minibuffer history
-(savehist-mode 1)
-(setq savehist-file "~/.emacs.d/savehist")
+(setq savehist-additional-variables
+      '(search-ring regexp-search-ring)
+      savehist-file "~/.emacs.d/savehist")
+(savehist-mode t)
 
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Ido
 (require 'ido)
-(ido-mode t)
 (setq ido-save-directory-list-file "~/.emacs.d/ido-last"
       ido-ignore-buffers
       '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
@@ -84,6 +85,7 @@
       ido-use-url-at-point nil
       ido-enable-flex-matching t
       ido-max-prospects 6)
+(ido-mode t)
 
 ;; Ido Imenu
 (require 'ido-imenu)
