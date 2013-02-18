@@ -85,6 +85,10 @@
       ido-enable-flex-matching t
       ido-max-prospects 6)
 
+;; Ido Imenu
+(require 'ido-imenu)
+(global-set-key (kbd "M-i") 'ido-goto-symbol)
+
 ;; Smex
 (require 'smex)
 (setq smex-save-file "~/.emacs.d/smex-items"
