@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## start session
+## Start session
 systemd --user &
 
 ## Initialize defaults
