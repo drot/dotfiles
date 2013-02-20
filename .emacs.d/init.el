@@ -4,6 +4,7 @@
 
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
+(add-to-list 'load-path "~/.emacs.d/icicles/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 ;; Turn off the toolbar
@@ -73,31 +74,16 @@
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Ido
-(require 'ido)
-(setq ido-save-directory-list-file "~/.emacs.d/ido-last"
-      ido-ignore-buffers
-      '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
-      ido-everywhere t
-      ido-case-fold t
-      ido-create-new-buffer 'prompt
-      ido-use-filename-at-point nil
-      ido-use-url-at-point nil
-      ido-enable-flex-matching t
-      ido-max-prospects 6)
-(ido-mode t)
+;; Icomplete+ (Icicles)
+(eval-after-load "icomplete" '(progn (require 'icomplete+)))
+(icomplete-mode t)
 
-;; Ido Imenu
-(require 'ido-imenu)
-(global-set-key (kbd "M-i") 'ido-goto-symbol)
+;; Fuzzy matching (Icicles)
+(require 'fuzzy-match)
 
-;; Smex
-(require 'smex)
-(setq smex-save-file "~/.emacs.d/smex-items"
-      smex-key-advice-ignore-menu-bar t)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; Icicles
+(require 'icicles)
+(icy-mode 1)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
