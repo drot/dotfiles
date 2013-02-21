@@ -75,8 +75,8 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Icomplete+ (Icicles)
-(eval-after-load "icomplete" '(progn (require 'icomplete+)))
 (icomplete-mode t)
+(eval-after-load "icomplete" '(progn (require 'icomplete+)))
 
 ;; Fuzzy matching (Icicles)
 (require 'fuzzy-match)
