@@ -14,48 +14,89 @@
 ;; Font
 (set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
-;; Input and message panels
-(set-fg-color "sienna1")
-(set-bg-color "grey10")
-(set-border-color "sienna4")
-(set-msg-border-width 1)
+;; Change color map
+(setf *colors* (list "gray10"            ; 0
+		     "PaleVioletRed3"    ; 1
+		     "medium sea green"  ; 2
+		     "LightGoldenrod3"   ; 3
+		     "SkyBlue"           ; 4
+		     "wheat"             ; 5
+		     "honeydew"          ; 6
+		     "honeydew2"         ; 7
+		     "honeydew3"         ; 8
+		     "gray15"))          ; 9
+(update-color-map (current-screen))
 
-(setf *maxsize-border-width* 1
-      *normal-border-width* 0
-      *window-border-style* :thick
-      *transient-border-width* 4)
+;; Change highlight function format
+(defun fmt-highlight (s)
+  (format nil "^6*~A^n" s))
 
-(setf *message-window-gravity* :bottom-left
-      *timeout-wait* 2
-      *input-window-gravity* :bottom-right)
+;; Window colors
+(set-focus-color "honeydew")
+(set-border-color "honeydew4")
+(set-win-bg-color "gray10")
+(set-focus-color "honeydew2")
+(set-fg-color "honeydew")
+(set-bg-color "gray10")
+(set-unfocus-color "honeydew4")
+(set-float-focus-color "honeydew2")
+(set-float-unfocus-color "gray5")
 
-;; Windows
-(set-focus-color "sienna1")
-(set-unfocus-color "grey10")
-(set-normal-gravity :center)
-(setf *normal-border-width* 1)
+;; Mode-line colors
+(setf *mode-line-background-color* "gray10"
+      *mode-line-foreground-color* "honeydew4"
+      *mode-line-border-color* "gray5"
+      *background* "gray10")
 
-;; Mode-line output
-(setf *mode-line-background-color* "black"
-*mode-line-foreground-color* "sienna1"
-*mode-line-border-color*  "sienna4"
-*mode-line-timeout* 1
-*mode-line-position* :top
-;; Mode-line format
-*screen-mode-line-format*
-(list "[ %n ] [ %c ] [ %M ] [ %l ]"
-      " [ " '(:eval (run-shell-command "date '+%d/%m %H:%M'  | tr -d [:cntrl:]" t)) " ] "
-      " %W "))
+;; Mode-line
+(setf *time-modeline-string* "^6*%d-%m^n/^6*%H^n:^6*%M" ; Set mode-line format
+      *group-format* "%n  %s  %t"
+      *screen-mode-line-format* (list "^6*%n^n  %W ^>  ^6*"
+                                      "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
+      *input-window-gravity* :bottom-right ; Set location of input prompts
+      *input-history-ignore-duplicates* 1
+      *message-window-gravity* :bottom-left ; Set location of message prompts
+      *mode-line-pad-x* 2
+      *mode-line-pad-y* 0
+      *mode-line-border-width* 0
+      *mode-line-position* :top
+      *window-border-style* :thin
+      *maxsize-border-width* 1)
 
 ;; Show mode-line
-(stumpwm:toggle-mode-line (stumpwm:current-screen)
-			  (stumpwm:current-head))
+(mode-line)
+
+;; Display the keysequence in progress
+(defun key-press-hook (key key-seq cmd)
+  (declare (ignore key))
+  (unless (eq *top-map* *resize-map*)
+    (let ((*message-window-gravity* :bottom-left))
+      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
+    (when (stringp cmd)
+      ;; Message duration
+      (sleep 0.2))))
+
+(defmacro replace-hook (hook fn)
+  `(remove-hook ,hook ,fn)
+  `(add-hook ,hook ,fn))
+
+(replace-hook *key-press-hook* 'key-press-hook)
 
 ;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
-(run-commands "gnewbg www" "gnewbg emacs" "gnewbg-float float")
+(run-commands "gnewbg www" "gnewbg work" "gnewbg-misc")
 
 ;; Run or raise
+; RXVT
+(defcommand rxvt () ()
+            "Run/Raise urxvt-client"
+            (run-or-raise "urxvtc" '(:class "URXVT")))
+
+; Emacs Client
+(defcommand eclient () ()
+            "Run/Raise Emacs Client"
+            (run-or-raise "emacsclient -c" '(:class "Emacs")))
+
 ; Conkeror
 (defcommand conkeror () ()
 	    "Run/Raise Conkeror"
@@ -72,10 +113,10 @@
 (define-frame-preference "www"
     (0 t t :class "Conkeror"))
 
-(define-frame-preference "emacs"
+(define-frame-preference "work"
     (0 t t :class "Emacs"))
 
-(define-frame-preference "float"
+(define-frame-preference "misc"
     (0 t t :class "Gimp"))
 
 ;; Prefix key
