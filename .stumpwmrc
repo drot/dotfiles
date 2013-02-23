@@ -48,24 +48,31 @@
       *mode-line-border-color* "gray5"
       *background* "gray10")
 
+;; Startup message
+(setf *startup-message* "StumpWM has initialized.")
+
+;; Window style
+(setf *window-border-style* :thin
+      *maxsize-border-width* 1
+      *mouse-focus-policy* :click)
+
+;; Input and message prompt style
+(setf *input-window-gravity* :center
+      *message-window-gravity* :center
+      *input-history-ignore-duplicates* 1
+      *timeout-wait* 3)
+
 ;; Mode-line format
 (setf *time-modeline-string* "^6*%d-%m^n/^6*%H^n:^6*%M" ; Set mode-line format
       *group-format* "%n %s %t"
       *screen-mode-line-format* (list "^6*%n^n %W ^> ^6*" "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
       *mode-line-border-width* 0
-      *mode-line-position* :top)
+      *mode-line-position* :top
+      *mode-line-timeout* 1)
 
-;; Window style
-(setf *window-border-style* :thin
-      *maxsize-border-width* 1)
-
-;; Input and message prompt style
-(setf *input-window-gravity* :center
-      *message-window-gravity* :center
-      *input-history-ignore-duplicates* 1)
-
-;; Show mode-line
-(mode-line)
+;; Show mode-line for current screen
+(stumpwm:toggle-mode-line (stumpwm:current-screen)
+                          (stumpwm:current-head))
 
 ;; Display the keysequence in progress
 (defun key-press-hook (key key-seq cmd)
