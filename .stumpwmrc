@@ -48,20 +48,21 @@
       *mode-line-border-color* "gray5"
       *background* "gray10")
 
-;; Mode-line
+;; Mode-line format
 (setf *time-modeline-string* "^6*%d-%m^n/^6*%H^n:^6*%M" ; Set mode-line format
-      *group-format* "%n  %s  %t"
-      *screen-mode-line-format* (list "^6*%n^n  %W ^>  ^6*"
-                                      "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
-      *input-window-gravity* :bottom-right ; Set location of input prompts
-      *input-history-ignore-duplicates* 1
-      *message-window-gravity* :bottom-left ; Set location of message prompts
-      *mode-line-pad-x* 2
-      *mode-line-pad-y* 0
+      *group-format* "%n %s %t"
+      *screen-mode-line-format* (list "^6*%n^n %W ^> ^6*" "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
       *mode-line-border-width* 0
-      *mode-line-position* :top
-      *window-border-style* :thin
+      *mode-line-position* :top)
+
+;; Window style
+(setf *window-border-style* :thin
       *maxsize-border-width* 1)
+
+;; Input and message prompt style
+(setf *input-window-gravity* :center
+      *message-window-gravity* :center
+      *input-history-ignore-duplicates* 1)
 
 ;; Show mode-line
 (mode-line)
@@ -70,7 +71,7 @@
 (defun key-press-hook (key key-seq cmd)
   (declare (ignore key))
   (unless (eq *top-map* *resize-map*)
-    (let ((*message-window-gravity* :bottom-left))
+    (let ((*message-window-gravity* :center))
       (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
     (when (stringp cmd)
       ;; Message duration
