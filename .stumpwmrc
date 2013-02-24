@@ -63,9 +63,10 @@
       *timeout-wait* 3)
 
 ;; Mode-line format
-(setf *time-modeline-string* "^6*%d-%m^n/^6*%H^n:^6*%M" ; Set mode-line format
+(setf *time-modeline-string* "^6*%d-%m^n/^6*%H^n:^6*%M"
       *group-format* "%n %s %t"
-      *screen-mode-line-format* (list "^6*%n^n %W ^> ^6*" "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
+      *screen-mode-line-format* (list "^6*%n^n %W ^> ^6*"
+				      "^6*%c^n| ^6*%M^n| ^6*%l^n| ^6*%d^n")
       *mode-line-border-width* 0
       *mode-line-position* :top
       *mode-line-timeout* 1)
@@ -128,7 +129,7 @@
     (0 t t :class "Gimp"))
 
 ;; Prefix key
-(set-prefix-key (kbd "C-i"))
+(set-prefix-key (kbd "Menu"))
 
 ;; Keybindings
 (define-key *root-map* (kbd "C-c") "exec conkeror")
