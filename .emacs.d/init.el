@@ -29,6 +29,7 @@
 ;; Don't show the welcome message
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
+(setq gnus-inhibit-startup-message t)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
