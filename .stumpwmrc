@@ -129,7 +129,7 @@
     (0 t t :class "Gimp"))
 
 ;; Prefix key
-(set-prefix-key (kbd "Menu"))
+(set-prefix-key (kbd "C-i"))
 
 ;; Keybindings
 (define-key *root-map* (kbd "C-c") "exec conkeror")
