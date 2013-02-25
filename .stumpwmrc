@@ -60,7 +60,7 @@
 (setf *input-window-gravity* :center
       *message-window-gravity* :center
       *input-history-ignore-duplicates* 1
-      *timeout-wait* 3)
+      *timeout-wait* 2)
 
 ;; Mode-line format
 (setf *time-modeline-string* "^3*%d-%m^n / ^4*%H:%M^n"
