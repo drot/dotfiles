@@ -36,6 +36,7 @@
 
 ;; Highlight matching parentheses
 (show-paren-mode 1)
+(setq show-paren-delay 0)
 
 ;; Message buffer size
 (setq message-log-max 100)
@@ -55,8 +56,12 @@
 (auto-compression-mode t)
 
 ;; X clipboard copy and paste
-(setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(global-set-key "\C-w" 'clipboard-kill-region)
+(global-set-key "\M-w" 'clipboard-kill-ring-save)
+(global-set-key "\C-y" 'clipboard-yank)
+
+;; Use Ibuffer for buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -99,6 +104,9 @@
 (quietly-read-abbrev-file)
 (setq default-abbrev-mode t)
 
+;; Disable autosave
+(setq auto-save-default nil)
+
 ;; Change backup behavior to save in a specified directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
       backup-by-copying      t
@@ -123,9 +131,6 @@
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
-
-;; Use Ibuffer for buffer list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Icomplete+ (Icicles)
 (icomplete-mode t)
