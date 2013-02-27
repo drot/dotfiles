@@ -56,16 +56,8 @@
 (auto-compression-mode t)
 
 ;; X clipboard copy and paste
-(global-set-key "\C-w" 'clipboard-kill-region)
-(global-set-key "\M-w" 'clipboard-kill-ring-save)
-(global-set-key "\C-y" 'clipboard-yank)
-
-;; Use Ibuffer for buffer list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; Ediff window placement
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
+(setq x-select-enable-clipboard t)
+(setq x-select-enable-primary t)
 
 ;; Colored output fix
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -73,12 +65,19 @@
 ;; Enable Easy PG
 (require 'epa-file)
 
+;; Use Ibuffer for buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-separator "/")
 (setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
+
+;; Ediff window placement
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
