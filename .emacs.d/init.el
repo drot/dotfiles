@@ -52,9 +52,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;; Edit files in compressed archives
-(auto-compression-mode t)
-
 ;; X clipboard copy and paste
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
@@ -103,15 +100,12 @@
 (quietly-read-abbrev-file)
 (setq default-abbrev-mode t)
 
-;; Disable autosave
-(setq auto-save-default nil)
-
 ;; Change backup behavior to save in a specified directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
       backup-by-copying      t
       version-control        t
       delete-old-versions    t
-      kept-new-versions      6
+      kept-new-versions      4
       kept-old-versions      2)
 
 ;; Save minibuffer history
