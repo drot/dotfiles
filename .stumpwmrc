@@ -10,6 +10,7 @@
 (load-module "cpu")
 (load-module "mem")
 (load-module "net")
+(load-module "mpd")
 
 ;; Font
 (set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
@@ -31,6 +32,9 @@
 (defun fmt-highlight (s)
   (format nil "^6*~A^n" s))
 
+;; Startup message
+(setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
+
 ;; Window colors
 (set-focus-color "honeydew")
 (set-border-color "honeydew4")
@@ -47,9 +51,6 @@
       *mode-line-foreground-color* "honeydew4"
       *mode-line-border-color* "gray5"
       *background* "gray10")
-
-;; Startup message
-(setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
 
 ;; Window style
 (setf *window-border-style* :thin
@@ -75,21 +76,8 @@
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
 
-;; Display the keysequence in progress
-(defun key-press-hook (key key-seq cmd)
-  (declare (ignore key))
-  (unless (eq *top-map* *resize-map*)
-    (let ((*message-window-gravity* :center))
-      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
-    (when (stringp cmd)
-      ;; Message duration
-      (sleep 0.2))))
-
-(defmacro replace-hook (hook fn)
-  `(remove-hook ,hook ,fn)
-  `(add-hook ,hook ,fn))
-
-(replace-hook *key-press-hook* 'key-press-hook)
+;; MPD control
+(mpd-connect)
 
 ;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
