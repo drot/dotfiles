@@ -84,11 +84,6 @@
 (run-commands "gnewbg www" "gnewbg work" "gnewbg misc")
 
 ;; Run or raise
-; RXVT
-(defcommand rxvt () ()
-            "Run/Raise urxvt-client"
-            (run-or-raise "urxvtc" '(:class "URXVT")))
-
 ; Emacs Client
 (defcommand eclient () ()
             "Run/Raise Emacs Client"
@@ -116,10 +111,18 @@
 (define-frame-preference "misc"
     (0 t t :class "Gimp"))
 
-;; Prefix key
-(set-prefix-key (kbd "C-i"))
 
 ;; Keybindings
-(define-key *root-map* (kbd "C-c") "exec conkeror")
+; Prefix key
+(set-prefix-key (kbd "C-i"))
+
+; Swap defaults
+(define-key *root-map* (kbd "C-c") "conkeror")
 (define-key *root-map* (kbd "c") "exec urxvtc")
-(define-key *root-map* (kbd "e") "exec emacsclient -c")
+(define-key *root-map* (kbd "e") "eclient")
+
+; MPD controls
+(define-key *top-map* (kbd "s-b") *mpd-browse-map*)
+(define-key *top-map* (kbd "s-s") *mpd-search-map*)
+(define-key *top-map* (kbd "s-a") *mpd-add-map*)
+(define-key *top-map* (kbd "s-m") *mpd-map*)
