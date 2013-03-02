@@ -13,6 +13,7 @@
       erc-prompt ">>"
       erc-timestamp-format "%H:%M "
       erc-button-buttonize-nicks nil
+      erc-interpret-mirc-color t
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
