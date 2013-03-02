@@ -20,4 +20,4 @@ xset s off &
 urxvtd -q -o -f &
 
 ## Start window manager
-exec ~/stumpwm/stumpwm
+exec xmonad

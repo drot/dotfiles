@@ -5,9 +5,6 @@ Xcursor.theme: Neutral
 
 ! Emacs
 Emacs.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
-Emacs*menu*fontSet: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
-Emacs.dialog*.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
-
 
 ! URXVT
 ! General
