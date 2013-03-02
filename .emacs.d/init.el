@@ -59,7 +59,7 @@
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
 
-;; Colored output fix
+;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Enable Easy PG
