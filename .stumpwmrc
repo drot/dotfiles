@@ -74,7 +74,7 @@
 
 ;; Show mode-line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
-                          (stumpwm:current-head))
+			  (stumpwm:current-head))
 
 ;; MPD control
 (mpd-connect)
@@ -86,8 +86,8 @@
 ;; Run or raise
 ; Emacs Client
 (defcommand eclient () ()
-            "Run/Raise Emacs Client"
-            (run-or-raise "emacsclient -c" '(:class "Emacs")))
+	    "Run/Raise Emacs Client"
+	    (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
 ; Conkeror
 (defcommand conkeror () ()
