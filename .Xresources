@@ -7,6 +7,26 @@ Xcursor.theme: Neutral
 Emacs.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 
 ! URXVT
+! Solarized pallete
+#define S_yellow #b58900
+#define S_orange #cb4b16
+#define S_red #dc322f
+#define S_magenta #d33682
+#define S_violet #6c71c4
+#define S_blue #268bd2
+#define S_cyan #2aa198
+#define S_green #859900
+
+! Solarized Dark
+#define S_base03 #002b36
+#define S_base02 #073642
+#define S_base01 #586e75
+#define S_base00 #657b83
+#define S_base0 #839496
+#define S_base1 #93a1a1
+#define S_base2 #eee8d5
+#define S_base3 #fdf6e3
+
 ! General
 URxvt.termName: rxvt-256color
 URxvt.loginShell: false
@@ -15,11 +35,14 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: true
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #B6DCFF
-URxvt.cursorColor: #FFA560
-URxvt.cursorColor2: #000000
-URxvt.internalBorder: 0
+URxvt.fading:40
+URxvt.fadeColor: S_base03
+URxvt.colorUL: #268bd2
+URxvt.cursorColor: S_base1
+URxvt.pointerColorBackground: S_base01
+URxvt.pointerColorForeground: S_base1
 URxvt.secondaryScroll: true
+URxvt.internalBorder: 0
 
 ! Extensions
 URxvt.perl-lib: /usr/lib/urxvt/perl/
@@ -32,41 +55,26 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! IR_Black
-URxvt.background: #000000
-URxvt.foreground: #F2F2F2
+! Colors
+URxvt.background: S_base03
+URxvt.foreground: S_base0
 
-! black
-URxvt.color0: #000000
-URxvt.color8: #7C7C7C
-
-! red
-URxvt.color1: #FF6C60
-URxvt.color9: #FFB6B0
-
-! green
-URxvt.color2: #A8FF60
-URxvt.color10: #CEFFAC
-
-! yellow
-URxvt.color3: #FFFFB6
-URxvt.color11: #FFFFCC
-
-! blue
-URxvt.color4: #96CBFE
-URxvt.color12: #B6DCFF
-
-! magenta
-URxvt.color5: #FF73FD
-URxvt.color13: #FF9CFE
-
-! cyan
-URxvt.color6: #C6C5FE
-URxvt.color14: #DFDFFE
-
-! white
-URxvt.color7: #EEEEEE
-URxvt.color15: #FFFFFF
+URxvt.color0: S_base02
+URxvt.color1: S_red
+URxvt.color2: S_green
+URxvt.color3: S_yellow
+URxvt.color4: S_blue
+URxvt.color5: S_magenta
+URxvt.color6: S_cyan
+URxvt.color7: S_base2
+URxvt.color9: S_orange
+URxvt.color8: S_base03
+URxvt.color10: S_base01
+URxvt.color11: S_base00
+URxvt.color12: S_base0
+URxvt.color13: S_violet
+URxvt.color14: S_base1
+URxvt.color15: S_base3
 
 ! XTERM
 ! General
