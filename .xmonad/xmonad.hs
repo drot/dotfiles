@@ -41,8 +41,8 @@ myConfig = defaultConfig {
            , borderWidth = 2
            , modMask = mod4Mask
            , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-           , normalBorderColor = "#7C7C7C"
-           , focusedBorderColor = "#FFB6B0"
+           , normalBorderColor = "#839496"
+           , focusedBorderColor = "#859900"
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -51,12 +51,12 @@ myConfig = defaultConfig {
 -- Status bar style
 --
 myPP = defaultPP {
-         ppTitle = xmobarColor "#FFB6B0" "" . wrap "<fc=#B6DCFF><</fc> " " <fc=#B6DCFF>></fc>" . shorten 50
-       , ppCurrent = xmobarColor "#CEFFAC" "" . wrap "<fc=#B6DCFF>[</fc>" "<fc=#B6DCFF>]</fc>"
-       , ppUrgent = xmobarColor "#B6DCFF" "" . wrap "<fc=#CEFFAC>[</fc>" "<fc=#CEFFAC>]</fc>"
-       , ppSep = "<fc=#FFB6B0>:</fc>"
-       , ppWsSep = "<fc=#FFB6B0>:</fc>"
-       , ppLayout = xmobarColor "#CEFFAC" ""
+         ppTitle = xmobarColor "#859900" "" . wrap "<fc=#268bd2><</fc> " " <fc=#268bd2>></fc>" . shorten 50
+       , ppCurrent = xmobarColor "#859900" "" . wrap "<fc=#268bd2>[</fc>" "<fc=#268bd2>]</fc>"
+       , ppUrgent = xmobarColor "#268bd2" "" . wrap "<fc=#859900>[</fc>" "<fc=#859900>]</fc>"
+       , ppSep = "<fc=#859900>:</fc>"
+       , ppWsSep = "<fc=#859900>:</fc>"
+       , ppLayout = xmobarColor "#268bd2" ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
 
@@ -98,25 +98,25 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
-              , activeColor = "#000000"
-              , activeBorderColor = "#FFB6B0"
-              , activeTextColor = "#CEFFAC"
-              , inactiveColor = "#000000"
-              , inactiveBorderColor = "#7C7C7C"
-              , inactiveTextColor = "#EEEEEE"
-              , urgentColor = "#000000"
-              , urgentBorderColor = "#FFB6B0"
-              , urgentTextColor = "#B6DCFF"
+              , activeColor = "#002b36"
+              , activeBorderColor = "#859900"
+              , activeTextColor = "#859900"
+              , inactiveColor = "#002b36"
+              , inactiveBorderColor = "#839496"
+              , inactiveTextColor = "#839496"
+              , urgentColor = "#002b36"
+              , urgentBorderColor = "#268bd2"
+              , urgentTextColor = "#268bd2"
               }
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig {
                font = myFont
-             , fgColor = "#FFFFFF"
-             , bgColor = "#000000"
-             , bgHLight = "#000000"
-             , fgHLight = "#CEFFAC"
+             , fgColor = "#839496"
+             , bgColor = "#002b36"
+             , bgHLight = "#002b36"
+             , fgHLight = "#859900"
              , position = Bottom
              }
 
