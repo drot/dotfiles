@@ -23,6 +23,9 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
+-- Color theme
+import Solarized
+
 -- Launch xmonad
 --
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
@@ -41,8 +44,8 @@ myConfig = defaultConfig {
            , borderWidth = 2
            , modMask = mod4Mask
            , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-           , normalBorderColor = "#839496"
-           , focusedBorderColor = "#859900"
+           , normalBorderColor = solarizedFG
+           , focusedBorderColor = solarizedGreen
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -51,12 +54,12 @@ myConfig = defaultConfig {
 -- Status bar style
 --
 myPP = defaultPP {
-         ppTitle = xmobarColor "#859900" "" . wrap "<fc=#268bd2><</fc> " " <fc=#268bd2>></fc>" . shorten 50
-       , ppCurrent = xmobarColor "#859900" "" . wrap "<fc=#268bd2>[</fc>" "<fc=#268bd2>]</fc>"
-       , ppUrgent = xmobarColor "#268bd2" "" . wrap "<fc=#859900>[</fc>" "<fc=#859900>]</fc>"
-       , ppSep = "<fc=#859900>:</fc>"
-       , ppWsSep = "<fc=#859900>:</fc>"
-       , ppLayout = xmobarColor "#268bd2" ""
+         ppTitle = xmobarColor solarizedGreen "" . wrap ("<fc=" ++ solarizedBlue ++ ">[</fc>") ("<fc=" ++ solarizedBlue ++ ">]</fc>") . shorten 50
+       , ppCurrent = xmobarColor solarizedGreen "" . wrap ("<fc=" ++ solarizedBlue ++ ">[</fc>") ("<fc=" ++ solarizedBlue ++ ">]</fc>")
+       , ppUrgent = xmobarColor solarizedBlue "" . wrap ("<fc=" ++ solarizedGreen ++ ">[</fc>") ("<fc=" ++ solarizedGreen ++ ">]</fc>")
+       , ppSep = "<fc=" ++ solarizedGreen ++ ">:</fc>"
+       , ppWsSep = "<fc=" ++ solarizedGreen ++ ">:</fc>"
+       , ppLayout = xmobarColor solarizedBlue ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
 
@@ -98,25 +101,25 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
-              , activeColor = "#002b36"
-              , activeBorderColor = "#859900"
-              , activeTextColor = "#859900"
-              , inactiveColor = "#002b36"
-              , inactiveBorderColor = "#839496"
-              , inactiveTextColor = "#839496"
-              , urgentColor = "#002b36"
-              , urgentBorderColor = "#268bd2"
-              , urgentTextColor = "#268bd2"
+              , activeColor = solarizedBG
+              , activeBorderColor = solarizedGreen
+              , activeTextColor = solarizedGreen
+              , inactiveColor = solarizedBG
+              , inactiveBorderColor = solarizedFG
+              , inactiveTextColor = solarizedFG
+              , urgentColor = solarizedBG
+              , urgentBorderColor = solarizedBlue
+              , urgentTextColor = solarizedBlue
               }
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig {
                font = myFont
-             , fgColor = "#839496"
-             , bgColor = "#002b36"
-             , bgHLight = "#002b36"
-             , fgHLight = "#859900"
+             , fgColor = solarizedFG
+             , bgColor = solarizedBG
+             , bgHLight = solarizedBG
+             , fgHLight = solarizedGreen
              , position = Bottom
              }
 
