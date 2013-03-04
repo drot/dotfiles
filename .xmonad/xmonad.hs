@@ -23,29 +23,33 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
--- Color theme
-import Solarized
+-- Font and colors
+--
+myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2"
+myBGColor = "#002b36"
+myFGColor = "#839496"
+myGreenColor = "#859900"
+myBlueColor = "#268bd2"
 
 -- Launch xmonad
 --
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
--- My defaults
---
+-- Spawn status bar
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
-myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1"
-
+-- Urgency hook
 myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
+-- Override defaults
 myConfig = defaultConfig {
              terminal = "urxvtc"
            , focusFollowsMouse = False
            , borderWidth = 2
            , modMask = mod4Mask
            , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-           , normalBorderColor = solarizedFG
-           , focusedBorderColor = solarizedGreen
+           , normalBorderColor = myFGColor
+           , focusedBorderColor = myGreenColor
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -54,12 +58,12 @@ myConfig = defaultConfig {
 -- Status bar style
 --
 myPP = defaultPP {
-         ppTitle = xmobarColor solarizedGreen "" . wrap ("<fc=" ++ solarizedBlue ++ ">[</fc>") ("<fc=" ++ solarizedBlue ++ ">]</fc>") . shorten 50
-       , ppCurrent = xmobarColor solarizedGreen "" . wrap ("<fc=" ++ solarizedBlue ++ ">[</fc>") ("<fc=" ++ solarizedBlue ++ ">]</fc>")
-       , ppUrgent = xmobarColor solarizedBlue "" . wrap ("<fc=" ++ solarizedGreen ++ ">[</fc>") ("<fc=" ++ solarizedGreen ++ ">]</fc>")
-       , ppSep = "<fc=" ++ solarizedGreen ++ ">:</fc>"
-       , ppWsSep = "<fc=" ++ solarizedGreen ++ ">:</fc>"
-       , ppLayout = xmobarColor solarizedBlue ""
+         ppTitle = xmobarColor myGreenColor "" . wrap ("<fc=" ++ myBlueColor ++ ">< </fc>") ("<fc=" ++ myBlueColor ++ "> ></fc>") . shorten 50
+       , ppCurrent = xmobarColor myGreenColor "" . wrap ("<fc=" ++ myBlueColor ++ ">[</fc>") ("<fc=" ++ myBlueColor ++ ">]</fc>")
+       , ppUrgent = xmobarColor myBlueColor "" . wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColor ++ ">]</fc>")
+       , ppSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
+       , ppWsSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
+       , ppLayout = xmobarColor myBlueColor ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
 
@@ -74,6 +78,8 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       full = renamed [Replace "[ ]"] $ Full
       float = renamed [Replace "><>"] $ simplestFloat
 
+-- Application behavior
+--
 myManageHook = composeAll [
                 isFullscreen --> doFullFloat
                , className =? "mplayer2" --> doFloat
@@ -101,25 +107,25 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
-              , activeColor = solarizedBG
-              , activeBorderColor = solarizedGreen
-              , activeTextColor = solarizedGreen
-              , inactiveColor = solarizedBG
-              , inactiveBorderColor = solarizedFG
-              , inactiveTextColor = solarizedFG
-              , urgentColor = solarizedBG
-              , urgentBorderColor = solarizedBlue
-              , urgentTextColor = solarizedBlue
+              , activeColor = myBGColor
+              , activeBorderColor = myGreenColor
+              , activeTextColor = myGreenColor
+              , inactiveColor = myBGColor
+              , inactiveBorderColor = myFGColor
+              , inactiveTextColor = myFGColor
+              , urgentColor = myBGColor
+              , urgentBorderColor = myBlueColor
+              , urgentTextColor = myBlueColor
               }
 
 -- Prompt style
 --
 myXPConfig = defaultXPConfig {
                font = myFont
-             , fgColor = solarizedFG
-             , bgColor = solarizedBG
-             , bgHLight = solarizedBG
-             , fgHLight = solarizedGreen
+             , fgColor = myFGColor
+             , bgColor = myBGColor
+             , bgHLight = myBGColor
+             , fgHLight = myGreenColor
              , position = Bottom
              }
 
