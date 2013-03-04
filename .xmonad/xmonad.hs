@@ -35,12 +35,6 @@ myBlueColor = "#268bd2"
 --
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
--- Spawn status bar
-myBar = "xmobar ~/.xmonad/xmobarrc"
-
--- Urgency hook
-myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
-
 -- Override defaults
 myConfig = defaultConfig {
              terminal = "urxvtc"
@@ -55,14 +49,27 @@ myConfig = defaultConfig {
            }
            `additionalKeysP` myKeys
 
--- Status bar style
+-- Status bar
 --
+
+-- Spawn status bar
+myBar = "xmobar ~/.xmonad/xmobarrc"
+
+-- Wrappers for title and workspaces
+myTitleWrap = wrap ("<fc=" ++ myBlueColor ++ ">< </fc>") ("<fc=" ++ myBlueColor ++ "> ></fc>")
+myWorkspaceWrap = wrap ("<fc=" ++ myBlueColor ++ ">[</fc>") ("<fc=" ++ myBlueColor ++ ">]</fc>")
+myUrgentWrap = wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColor ++ ">]</fc>")
+
+-- Urgency hook
+myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
+
+-- Status bar output
 myPP = defaultPP {
-         ppTitle = xmobarColor myGreenColor "" . wrap ("<fc=" ++ myBlueColor ++ ">< </fc>") ("<fc=" ++ myBlueColor ++ "> ></fc>") . shorten 50
-       , ppCurrent = xmobarColor myGreenColor "" . wrap ("<fc=" ++ myBlueColor ++ ">[</fc>") ("<fc=" ++ myBlueColor ++ ">]</fc>")
-       , ppUrgent = xmobarColor myBlueColor "" . wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColor ++ ">]</fc>")
-       , ppSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
-       , ppWsSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
+         ppTitle = xmobarColor myGreenColor "" . myTitleWrap . shorten 50
+       , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
+       , ppUrgent = xmobarColor myBlueColor "" . myUrgentWrap
+       , ppSep = "<fc="++ myGreenColor ++">:</fc>"
+       , ppWsSep = "<fc="++ myGreenColor ++">:</fc>"
        , ppLayout = xmobarColor myBlueColor ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
@@ -78,7 +85,7 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       full = renamed [Replace "[ ]"] $ Full
       float = renamed [Replace "><>"] $ simplestFloat
 
--- Application behavior
+-- Window rules
 --
 myManageHook = composeAll [
                 isFullscreen --> doFullFloat
