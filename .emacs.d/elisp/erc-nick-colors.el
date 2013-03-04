@@ -1,8 +1,9 @@
 ;; Pool of colors to use when coloring IRC nicks.
-(setq erc-colors-list '("#b58900" "#cb4b16"
-			"#d33682" "#6c71c4"
-			"#268bd2" "#2aa198"
-			"#859900" "#dc322f"))
+(setq erc-colors-list '("#cc9393" "#dfaf8f" "#f0dfaf"
+			"#7f9f7f" "#93e0e3"
+			"#9c6363" "#d0bf8f"
+			"#afd8af" "#5c888b"
+			"#dc8cc3" "#8cd0d3"))
 
 (defun erc-get-color-for-nick (nick)
   "Gets a color for NICK.  Hash the nick and use a random color from the pool"
