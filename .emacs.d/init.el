@@ -20,7 +20,7 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(load-theme 'zenburn t)
+(load-theme 'solarized-dark t)
 
 ;; Show tooltips in echo area
 (tooltip-mode -1)

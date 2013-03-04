@@ -26,12 +26,10 @@ import XMonad.Layout.SimplestFloat
 -- Font and colors
 --
 myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2"
-myBGColor = "#3f3f3f"
-myFGColor = "#dcdccc"
-myRedColor = "#dca3a3"
-myBlackColor = "#1E2320"
-myYellowColor = "#f0dfaf"
-myPurpleColor = "#ec93d3"
+myBGColor = "#002b36"
+myFGColor = "#839496"
+myGreenColor = "#859900"
+myBlueColor = "#268bd2"
 
 -- Launch xmonad
 --
@@ -45,7 +43,7 @@ myConfig = defaultConfig {
            , modMask = mod4Mask
            , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
            , normalBorderColor = myFGColor
-           , focusedBorderColor = myYellowColor
+           , focusedBorderColor = myGreenColor
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -58,21 +56,21 @@ myConfig = defaultConfig {
 myBar = "xmobar ~/.xmonad/xmobarrc"
 
 -- Wrappers for title and workspaces
-myTitleWrap = wrap ("<fc=" ++ myFGColor ++ ">< </fc>") ("<fc=" ++ myFGColor ++ "> ></fc>")
-myWorkspaceWrap = wrap ("<fc=" ++ myFGColor ++ ">[</fc>") ("<fc=" ++ myFGColor ++ ">]</fc>")
-myUrgentWrap = wrap ("<fc=" ++ myYellowColor ++ ">[</fc>") ("<fc=" ++ myYellowColor ++ ">]</fc>")
+myTitleWrap = wrap ("<fc=" ++ myBlueColor ++ ">< </fc>") ("<fc=" ++ myBlueColor ++ "> ></fc>")
+myWorkspaceWrap = wrap ("<fc=" ++ myBlueColor ++ ">[</fc>") ("<fc=" ++ myBlueColor ++ ">]</fc>")
+myUrgentWrap = wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColor ++ ">]</fc>")
 
 -- Urgency hook
 myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
 -- Status bar output
 myPP = defaultPP {
-         ppTitle = xmobarColor myYellowColor "" . myTitleWrap . shorten 50
-       , ppCurrent = xmobarColor myYellowColor "" . myWorkspaceWrap
-       , ppUrgent = xmobarColor myPurpleColor "" . myUrgentWrap
-       , ppSep = "<fc="++ myRedColor ++">:</fc>"
-       , ppWsSep = "<fc="++ myRedColor ++">:</fc>"
-       , ppLayout = xmobarColor myYellowColor ""
+         ppTitle = xmobarColor myGreenColor "" . myTitleWrap . shorten 50
+       , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
+       , ppUrgent = xmobarColor myBlueColor "" . myUrgentWrap
+       , ppSep = "<fc="++ myGreenColor ++">:</fc>"
+       , ppWsSep = "<fc="++ myGreenColor ++">:</fc>"
+       , ppLayout = xmobarColor myBlueColor ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
 
@@ -116,15 +114,15 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
-              , activeColor = myBlackColor
-              , activeBorderColor = myYellowColor
-              , activeTextColor = myYellowColor
+              , activeColor = myBGColor
+              , activeBorderColor = myGreenColor
+              , activeTextColor = myGreenColor
               , inactiveColor = myBGColor
               , inactiveBorderColor = myFGColor
               , inactiveTextColor = myFGColor
               , urgentColor = myBGColor
-              , urgentBorderColor = myPurpleColor
-              , urgentTextColor = myPurpleColor
+              , urgentBorderColor = myBlueColor
+              , urgentTextColor = myBlueColor
               }
 
 -- Prompt style
@@ -133,8 +131,8 @@ myXPConfig = defaultXPConfig {
                font = myFont
              , fgColor = myFGColor
              , bgColor = myBGColor
-             , bgHLight = myBlackColor
-             , fgHLight = myYellowColor
+             , bgHLight = myBGColor
+             , fgHLight = myGreenColor
              , position = Bottom
              }
 

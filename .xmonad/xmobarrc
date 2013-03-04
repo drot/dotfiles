@@ -2,21 +2,21 @@
 
 Config {
          font = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1"
-       , bgColor = "#3f3f3f"
-       , fgColor = "#dcdccc"
+       , bgColor = "#002b36"
+       , fgColor = "#839496"
        , border = NoBorder
-       , borderColor = "#3f3f3f"
+       , borderColor = "#dc322f"
        , position = Static { xpos = 0 , ypos = 0, width = 1024, height = 22 }
        , lowerOnStart = True
        , hideOnStart = False
        , persistent = False
-       , commands = [ Run Cpu ["-L","10","-H","50","--low","#94BFF3","--normal","#f0dfaf","--high","#dca3a3"] 10
-	            , Run Memory ["-L","10","-H","50","--low","#94BFF3","--normal","#f0dfaf","--high","#dca3a3","-t","Mem: <usedratio>%"] 10
-                    , Run Weather "LQMO" ["-t","Out: <tempC>°C","-L","10","-H","25","--low","#94BFF3","--normal","#f0dfaf","--high","#dca3a3"] 36000
-                    , Run Date "%d-%m <fc=#f0dfaf>%H:%M</fc>" "date" 10
+       , commands = [ Run Cpu ["-L","10","-H","50","--low","#6c71c4","--normal","#859900","--high","#dc322f"] 10
+	            , Run Memory ["-L","10","-H","50","--low","#6c71c4","--normal","#859900","--high","#dc322f","-t","Mem: <usedratio>%"] 10
+                    , Run Weather "LQMO" ["-t","Out: <tempC>°C","-L","10","-H","25","--low","#6c71c4","--normal","#859900","--high","#dc322f"] 36000
+                    , Run Date "%d-%m <fc=#859900>%H:%M</fc>" "date" 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#dcdccc>></fc><fc=#c3bf9f>></fc> %cpu% <fc=#dcdccc>></fc><fc=#c3bf9f>></fc> %memory% <fc=#dcdccc>></fc><fc=#c3bf9f>></fc> %LQMO% <fc=#dcdccc>></fc><fc=#c3bf9f>></fc> %date%"
+       , template = "%StdinReader% }{ <fc=#268bd2>></fc><fc=#859900>></fc> %cpu% <fc=#268bd2>></fc><fc=#859900>></fc> %memory% <fc=#268bd2>></fc><fc=#859900>></fc> %LQMO% <fc=#268bd2>></fc><fc=#859900>></fc> %date%"
        }
