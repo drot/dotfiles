@@ -1,7 +1,7 @@
 ;; Pool of colors to use when coloring IRC nicks.
-(setq erc-colors-list '("#cc9393" "#dfaf8f" "#f0dfaf"
+(setq erc-colors-list '("#dca3a3" "#dfaf8f" "#f0dfaf"
 			"#7f9f7f" "#93e0e3"
-			"#9c6363" "#d0bf8f"
+			"#d0bf8f" "#d0bf8f"
 			"#afd8af" "#5c888b"
 			"#dc8cc3" "#8cd0d3"))
 
