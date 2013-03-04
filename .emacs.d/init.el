@@ -20,7 +20,7 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 ;; Show tooltips in echo area
 (tooltip-mode -1)
@@ -62,8 +62,9 @@
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
 
-;; Use ANSI colors within shell-mode
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; Default browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "conkeror")
 
 ;; Enable Easy PG
 (require 'epa-file)
@@ -88,9 +89,8 @@
 ;; Wrap lines at 70 in text-mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Default browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "conkeror")
+;; Use ANSI colors within shell-mode
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Haskell mode
 (load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
