@@ -68,8 +68,8 @@ myPP = defaultPP {
          ppTitle = xmobarColor myGreenColor "" . myTitleWrap . shorten 50
        , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
        , ppUrgent = xmobarColor myBlueColor "" . myUrgentWrap
-       , ppSep = "<fc="++ myGreenColor ++">:</fc>"
-       , ppWsSep = "<fc="++ myGreenColor ++">:</fc>"
+       , ppSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
+       , ppWsSep = "<fc=" ++ myGreenColor ++ ">:</fc>"
        , ppLayout = xmobarColor myBlueColor ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
