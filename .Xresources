@@ -55,7 +55,7 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Colors
+! Solarized Dark
 URxvt.background: S_base03
 URxvt.foreground: S_base0
 
@@ -89,41 +89,26 @@ xterm*eightBitInput: true
 xterm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 xterm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! IR_Black
-xterm*background: #000000
-xterm*foreground: #F2F2F2
+! Solarized Dark
+xterm*background: S_base03
+xterm*foreground: S_base0
 
-! black
-xterm*color0: #000000
-xterm*color8: #7C7C7C
-
-! red
-xterm*color1: #FF6C60
-xterm*color9: #FFB6B0
-
-! green
-xterm*color2: #A8FF60
-xterm*color10: #CEFFAC
-
-! yellow
-xterm*color3: #FFFFB6
-xterm*color11: #FFFFCC
-
-! blue
-xterm*color4: #96CBFE
-xterm*color12: #B6DCFF
-
-! magenta
-xterm*color5: #FF73FD
-xterm*color13: #FF9CFE
-
-! cyan
-xterm*color6: #C6C5FE
-xterm*color14: #DFDFFE
-
-! white
-xterm*color7: #EEEEEE
-xterm*color15: #FFFFFF
+xterm*color0: S_base02
+xterm*color1: S_red
+xterm*color2: S_green
+xterm*color3: S_yellow
+xterm*color4: S_blue
+xterm*color5: S_magenta
+xterm*color6: S_cyan
+xterm*color7: S_base2
+xterm*color9: S_orange
+xterm*color8: S_base03
+xterm*color10: S_base01
+xterm*color11: S_base00
+xterm*color12: S_base0
+xterm*color13: S_violet
+xterm*color14: S_base1
+xterm*color15: S_base3
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
