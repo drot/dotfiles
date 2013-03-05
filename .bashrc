@@ -42,7 +42,7 @@ shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty 
 shopt -s extglob # extended globbing
 
 # prompt colors
-RED='\[\033[0;31m\]'
+GIT='\[\033[42;1;30m\]'
 GREEN='\[\033[0;32m\]'
 BLUE='\[\033[0;34m\]'
 NIL='\[\033[00m\]'
@@ -50,10 +50,10 @@ NIL='\[\033[00m\]'
 # git completion
 [ -e /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -e /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
-GITSTATUS="\$(__git_ps1 \" (%s)\")"
+GITSTATUS="\$(__git_ps1 \"(%s)\")"
 
 # prompt look
-PS1="${GREEN}[${BLUE}\u${GREEN}@${BLUE}\h${GREEN}]${GREEN}[${BLUE}\w${GREEN}]${RED}${GITSTATUS}${GREEN} \$${NIL} "
+PS1="${GREEN}[${BLUE}\u${GREEN}@${BLUE}\h${GREEN}]${GREEN}[${BLUE}\w${GREEN}]${GIT}${GITSTATUS}${GREEN} \$${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
