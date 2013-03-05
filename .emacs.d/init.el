@@ -8,7 +8,7 @@
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/icicles/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
