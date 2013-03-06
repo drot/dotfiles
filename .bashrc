@@ -45,13 +45,23 @@ shopt -s extglob # extended globbing
 function EXT_COLOR () { echo -ne "\e[38;5;$1m"; }
 function CLOSE_COLOR () { echo -ne '\e[m'; }
 
+# prompt colors for tty
+GREEN='\[\033[0;32m\]'
+BLUE='\[\033[0;34m\]'
+NIL='\[\033[00m\]'
+
 # git completion
 [ -e /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -e /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-export PS1="\[`EXT_COLOR 187`\]\u@\h\[`CLOSE_COLOR`\]\[`EXT_COLOR 174`\] \w \$\[`EXT_COLOR 187`\]${GIT}\[`CLOSE_COLOR`\] > "
+export PS1="\[`EXT_COLOR 187`\]\u@\h\[`EXT_COLOR 174`\] \w \$\[`EXT_COLOR 187`\]${GIT}\[`CLOSE_COLOR`\] > "
+
+# prompt look for tty
+if [ "$TERM" = "linux" ]; then
+    export PS1="${GREEN}\u@\h${BLUE} \w \$${GREEN}${GIT}${NIL} > "
+fi
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
