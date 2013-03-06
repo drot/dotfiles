@@ -44,7 +44,7 @@ myConfig = defaultConfig {
            , borderWidth = 2
            , modMask = mod4Mask
            , normalBorderColor = myFGColor
-           , focusedBorderColor = myYellowColor
+           , focusedBorderColor = myRedColor
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -66,7 +66,7 @@ myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
 -- Status bar output
 myPP = defaultPP {
-         ppTitle = xmobarColor myYellowColor "" . myTitleWrap . shorten 50
+         ppTitle = xmobarColor myRedColor "" . myTitleWrap . shorten 50
        , ppCurrent = xmobarColor myYellowColor "" . myWorkspaceWrap
        , ppUrgent = xmobarColor myPurpleColor "" . myUrgentWrap
        , ppSep = "<fc="++ myRedColor ++">:</fc>"
