@@ -43,7 +43,6 @@ myConfig = defaultConfig {
            , focusFollowsMouse = False
            , borderWidth = 2
            , modMask = mod4Mask
-           , workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
            , normalBorderColor = myFGColor
            , focusedBorderColor = myYellowColor
            , layoutHook = myLayoutHook
