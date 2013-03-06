@@ -1,14 +1,225 @@
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR all
 
-# Dark 256 color solarized theme for the color GNU ls utility.
-# Used and tested with dircolors (GNU coreutils) 8.5
-#
-# @author  {@link http://sebastian.tramp.name Sebastian Tramp}
-# @license http://sam.zoy.org/wtfpl/  Do What The Fuck You Want To Public License (WTFPL)
-#
-# More Information at
-# https://github.com/seebi/dircolors-solarized
+# Extra command line options for ls go here.
+# Basically these ones are:
+#  -F = show '/' for dirs, '*' for executables, etc.
+#  -T 0 = don't trust tab spacing when formatting ls output.
+# -b = better support for special characters
+OPTIONS -F -b -T 0
 
-# Term Section
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes: 
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+ 
+NORMAL             00         # global default, although everything should be something.
+FILE               00;37      # normal file
+DIR                00;34      # directory
+LINK               01;35      # symbolic link
+FIFO               00;33      # pipe
+SOCK               01;35      # socket
+BLK                01;33;40   # block device driver
+CHR                01;35;40   # character device driver
+ORPHAN             01;30
+#EXEC              01;31 
+STICKY_OTHER_WRITABLE 01;33   # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE     01;35      # dir that is other-writable (o+w) and not sticky
+STICKY             01;34      # dir with the sticky bit set (+t) and not other-writable
+
+.cmd               01;32      # executables (bright green)
+.exe               01;32
+.com               01;32
+.btm               01;32
+.bat               01;32
+
+.tar               00;33      # archives or compressed (bright yellow)
+.tgz               00;33
+.zip               00;33
+.gz                00;33
+.bz2               00;33
+.tar.xz            00;33
+.tar.gz            00;33
+.tgz               00;33
+.xz                00;33
+
+.jpg               00;36      # image formats (cyan)
+.gif               00;36
+.bmp               00;36
+.xbm               00;36
+.xpm               00;36
+.tif               00;36
+.tga               00;36
+.png               00;36
+.jpeg              00;36
+.tiff              00;36
+.xcf               00;36
+.xcf.gz            00;36
+.blend             00;36
+.pcx               00;36
+.ppm               00;36
+
+.mp3               00;32      # media (green)
+.fla               00;32
+.mid               00;32
+.wav               00;32
+.au                00;32
+.nes               00;31
+.smc               00;31
+.fig               00;31
+.sfc               00;31
+.smc.gz            00;31
+.fig.gz            00;31
+.sfc.gz            00;31
+
+.mpg               01;35     # movies (magenta)
+.mpeg              01;35
+.mkv               01;35
+.m4v               01;35
+.mp4               01;35
+.avi               01;35
+.mov               01;35
+.fli               01;35
+.flc               01;35
+.flv               01;35
+
+# all of the rest
+.PL                00;36
+.asm               00;36
+.apvlvrc           00;32
+.apvlvinfo         00;32
+.asoundrc          00;36
+.asunder           01;36
+.awk               00;36
+.bash              00;31
+.bashrc            00;31
+.bash_history      00;31
+.bash_logout       00;31
+.bash_profile      00;31
+.profile           00;31
+.bak               01;31
+.c                 00;36
+.cfg               00;36
+.coffee            00;36
+.conf              00;36
+.cpp               00;36
+.cs                00;36
+.css               00;36
+.csv               00;36
+.deb               00;36
+.diff              01;33 
+.dircolors         01;33
+.dmenurc           00;32
+.dmenu_cache       00;32
+.dmenu-short       00;32
+.enc               00;36
+.eps               00;36
+.etx               00;36
+.ex                00;36
+.example           00;36
+.fehbg             00;36
+.fonts             00;36
+.git               00;36
+.gitconfig         01;34
+.gitignore         00;36
+.hgrc              01;34
+.hgignore          01;34
+.go                01;34
+.gpg-agent-info    01;31
+.gtk-bookmarks     01;34
+.gtkrc-2\.0        01;34
+.h                 01;34
+.hs                01;34
+.htm               01;34
+.html              01;34
+.htoprc            01;34
+.info              01;34
+.inputrc           00;31
+.ini               01;34
+.java              01;34
+.jhtm              01;34
+.js                01;34
+.jsm               01;34
+.jsm               01;34
+.json              01;34
+.jsp               01;34
+.lisp              01;34
+.lesshst           01;34
+.log               01;34
+.lua               00;33
+.map               00;33
+.markdown          00;33
+.md                00;33
+.mf                00;33
+.mfasl             00;33
+.mi                00;33
+.mkd               00;33
+.msmtprc           00;33
+.mtx               00;33
+.muttrc            00;33
+.muttprintrc       00;33
+.nfo               00;33
+.notify-osd        00;36
+.netrc             01;31
+.notmuch-config    00;33
+.nvidia-settings-rc 00;36
+.offlineimaprc     00;33
+.pacnew            00;33
+.patch             00;31
+.pc                00;31
+.pfa               00;31
+.php               00;31
+.pid               00;31
+.pl                00;31
+.pm                00;31
+.pod               00;31
+.pulse-cookie      00;36
+.py                00;31
+.rc                00;31
+.recently-used     00;35
+.rb                00;31
+.rdf               00;31
+.ru                00;31
+.sdcv_history      00;32
+.sed               00;31
+.sfv               00;31
+.sh                00;31
+.signature         00;31
+.sty               01;35
+.sug               01;35
+.t                 01;35
+.tcl               01;35
+.tdy               01;35
+.tex               01;35
+.textile           01;35
+.tfm               01;35
+.tfnt              01;35
+.theme             01;35
+.viminfo           01;35
+.xml               01;35
+.yml               01;35
+.zsh               01;35
+.txt               01;35
+.ttytterkey        00;31
+.ttytterrc         01;35
+.urlview           01;35
+.vim               01;35
+.vimrc             01;35
+.xinitrc           01;31 
+.Xauthority        01;31
+.Xmodmap           00;31
+.Xresources        01;33
+
+# Below, there should be one TERM entry for each termtype that is colorizable
 TERM Eterm
 TERM ansi
 TERM color-xterm
@@ -24,7 +235,6 @@ TERM con80x50
 TERM con80x60
 TERM cons25
 TERM console
-TERM cygwin
 TERM dtterm
 TERM eterm-color
 TERM gnome
@@ -39,229 +249,21 @@ TERM mlterm
 TERM putty
 TERM rxvt
 TERM rxvt-256color
-TERM rxvt-cygwin
-TERM rxvt-cygwin-native
 TERM rxvt-unicode
-TERM rxvt-unicode256
 TERM rxvt-unicode-256color
+TERM rxvt-unicode256
 TERM screen
 TERM screen-256color
 TERM screen-256color-bce
-TERM screen-256color-s
-TERM screen-256color-bce-s
 TERM screen-bce
 TERM screen-w
+TERM screen.rxvt
 TERM screen.linux
+TERM terminator
 TERM vt100
 TERM xterm
 TERM xterm-16color
 TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
-TERM xterm-debian
-
-## Documentation
-#
-# standard colors
-#
-# Below are the color init strings for the basic file types. A color init
-# string consists of one or more of the following numeric codes:
-# Attribute codes:
-# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
-# Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
-# Background color codes:
-# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-#
-#
-# 256 color support
-# see here: http://www.mail-archive.com/bug-coreutils@gnu.org/msg11030.html)
-#
-# Text 256 color coding:
-# 38;5;COLOR_NUMBER
-# Background 256 color coding:
-# 48;5;COLOR_NUMBER
-
-## Special files
-
-NORMAL 00;38;5;244 # no color code at all
-#FILE 00 # regular file: use no color at all
-RESET 0 # reset to "normal" color
-DIR 00;38;5;33 # directory 01;34
-LINK 01;38;5;37 # symbolic link. (If you set this to 'target' instead of a
- # numerical value, the color is as for the file pointed to.)
-MULTIHARDLINK 00 # regular file with more than one link
-FIFO 48;5;230;38;5;136;01 # pipe
-SOCK 48;5;230;38;5;136;01 # socket
-DOOR 48;5;230;38;5;136;01 # door
-BLK 48;5;230;38;5;244;01 # block device driver
-CHR 48;5;230;38;5;244;01 # character device driver
-ORPHAN 48;5;235;38;5;160 # symlink to nonexistent file, or non-stat'able file
-SETUID 48;5;160;38;5;230 # file that is setuid (u+s)
-SETGID 48;5;136;38;5;230 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
-STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
-# This is for files with execute permission:
-EXEC 01;38;5;64
-
-## Archives or compressed (violet + bold for compression)
-.tar    00;38;5;61
-.tgz    01;38;5;61
-.arj    01;38;5;61
-.taz    01;38;5;61
-.lzh    01;38;5;61
-.lzma   01;38;5;61
-.tlz    01;38;5;61
-.txz    01;38;5;61
-.zip    01;38;5;61
-.z      01;38;5;61
-.Z      01;38;5;61
-.dz     01;38;5;61
-.gz     01;38;5;61
-.lz     01;38;5;61
-.xz     01;38;5;61
-.bz2    01;38;5;61
-.bz     01;38;5;61
-.tbz    01;38;5;61
-.tbz2   01;38;5;61
-.tz     01;38;5;61
-.deb    01;38;5;61
-.rpm    01;38;5;61
-.jar    01;38;5;61
-.rar    01;38;5;61
-.ace    01;38;5;61
-.zoo    01;38;5;61
-.cpio   01;38;5;61
-.7z     01;38;5;61
-.rz     01;38;5;61
-.apk    01;38;5;61
-.gem    01;38;5;61
-
-# Image formats (yellow)
-.jpg    00;38;5;136
-.JPG    00;38;5;136 #stupid but needed
-.jpeg   00;38;5;136
-.gif    00;38;5;136
-.bmp    00;38;5;136
-.pbm    00;38;5;136
-.pgm    00;38;5;136
-.ppm    00;38;5;136
-.tga    00;38;5;136
-.xbm    00;38;5;136
-.xpm    00;38;5;136
-.tif    00;38;5;136
-.tiff   00;38;5;136
-.png    00;38;5;136
-.svg    00;38;5;136
-.svgz   00;38;5;136
-.mng    00;38;5;136
-.pcx    00;38;5;136
-.dl     00;38;5;136
-.xcf    00;38;5;136
-.xwd    00;38;5;136
-.yuv    00;38;5;136
-.cgm    00;38;5;136
-.emf    00;38;5;136
-.eps    00;38;5;136
-.CR2    00;38;5;136
-.ico    00;38;5;136
-
-# Files of special interest (base1 + bold)
-.tex             01;38;5;245
-.rdf             01;38;5;245
-.owl             01;38;5;245
-.n3              01;38;5;245
-.ttl             01;38;5;245
-.nt              01;38;5;245
-.torrent         01;38;5;245
-.xml             01;38;5;245
-*Makefile        01;38;5;245
-*Rakefile        01;38;5;245
-*build.xml       01;38;5;245
-*rc              01;38;5;245
-*1               01;38;5;245
-.nfo             01;38;5;245
-*README          01;38;5;245
-*README.txt      01;38;5;245
-*readme.txt      01;38;5;245
-.md              01;38;5;245
-*README.markdown 01;38;5;245
-.ini             01;38;5;245
-.yml             01;38;5;245
-.cfg             01;38;5;245
-.conf            01;38;5;245
-.c               01;38;5;245
-.cpp             01;38;5;245
-.cc              01;38;5;245
-
-# "unimportant" files as logs and backups (base01)
-.log        00;38;5;240
-.bak        00;38;5;240
-.aux        00;38;5;240
-.bbl        00;38;5;240
-.blg        00;38;5;240
-*~          00;38;5;240
-*#          00;38;5;240
-.part       00;38;5;240
-.incomplete 00;38;5;240
-.swp        00;38;5;240
-.tmp        00;38;5;240
-.temp       00;38;5;240
-.o          00;38;5;240
-.pyc        00;38;5;240
-.class      00;38;5;240
-.cache      00;38;5;240
-
-# Audio formats (orange)
-.aac    00;38;5;166
-.au     00;38;5;166
-.flac   00;38;5;166
-.mid    00;38;5;166
-.midi   00;38;5;166
-.mka    00;38;5;166
-.mp3    00;38;5;166
-.mpc    00;38;5;166
-.ogg    00;38;5;166
-.ra     00;38;5;166
-.wav    00;38;5;166
-.m4a    00;38;5;166
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axa    00;38;5;166
-.oga    00;38;5;166
-.spx    00;38;5;166
-.xspf   00;38;5;166
-
-# Video formats (as audio + bold)
-.mov    01;38;5;166
-.mpg    01;38;5;166
-.mpeg   01;38;5;166
-.m2v    01;38;5;166
-.mkv    01;38;5;166
-.ogm    01;38;5;166
-.mp4    01;38;5;166
-.m4v    01;38;5;166
-.mp4v   01;38;5;166
-.vob    01;38;5;166
-.qt     01;38;5;166
-.nuv    01;38;5;166
-.wmv    01;38;5;166
-.asf    01;38;5;166
-.rm     01;38;5;166
-.rmvb   01;38;5;166
-.flc    01;38;5;166
-.avi    01;38;5;166
-.fli    01;38;5;166
-.flv    01;38;5;166
-.gl     01;38;5;166
-.m2ts   01;38;5;166
-.divx   01;38;5;166
-.webm   01;38;5;166
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv 01;38;5;166
-.anx 01;38;5;166
-.ogv 01;38;5;166
-.ogx 01;38;5;166
-
-
+TERM xterm-debian 
