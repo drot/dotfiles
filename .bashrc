@@ -18,12 +18,12 @@ export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 # color grep and man pages
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;31;40' # beautify grep
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;33;40' # beautify grep
 export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
-export LESS_TERMCAP_mb=$'\E[0;31m' # blinking
-export LESS_TERMCAP_md=$'\E[1;34m' # bold, used for headings
-export LESS_TERMCAP_us=$'\E[1;33m' # underline, used for paths,keywords
-export LESS_TERMCAP_so=$'\E[1;31;40m' # standout, used for statusbar/search
+export LESS_TERMCAP_mb=$'\E[1;31m' # blinking
+export LESS_TERMCAP_md=$'\E[1;31m' # bold, used for headings
+export LESS_TERMCAP_us=$'\E[1;32m' # underline, used for paths,keywords
+export LESS_TERMCAP_so=$'\E[1;33;40m' # standout, used for statusbar/search
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 export LESS_TERMCAP_se=$'\E[0m' # end standout-mode
 export LESS_TERMCAP_me=$'\E[0m' # end all modes like so, us, mb, md and mr
@@ -42,9 +42,9 @@ shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty 
 shopt -s extglob # extended globbing
 
 # prompt colors
-GIT='\[\033[1;33m\]'
 GREEN='\[\033[0;32m\]'
-BLUE='\[\033[0;34m\]'
+CYAN='\[\033[0;36m\]'
+GIT='\[\033[1;33m\]'
 NIL='\[\033[00m\]'
 
 # git completion
@@ -53,7 +53,7 @@ NIL='\[\033[00m\]'
 GITSTATUS="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-PS1="${GREEN}[${BLUE}\u${GREEN}@${BLUE}\h${GREEN}]${GREEN}[${BLUE}\w${GREEN}]${GIT}${GITSTATUS}${GREEN} \$${NIL} "
+PS1="${GREEN}[${CYAN}\u${GREEN}@${CYAN}\h${GREEN}]${GREEN}[${CYAN}\w${GREEN}]${GIT}${GITSTATUS}${GREEN} \$${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
