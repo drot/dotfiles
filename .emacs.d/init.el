@@ -20,7 +20,7 @@
 (scroll-bar-mode -1)
 
 ;; Color theme
-(load-theme 'solarized-dark t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;; Show tooltips in echo area
 (tooltip-mode -1)
@@ -92,10 +92,9 @@
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Haskell mode
-(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; SLIME
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
