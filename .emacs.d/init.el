@@ -132,12 +132,9 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-;; Icomplete+ (Icicles)
+;; Icomplete+
 (icomplete-mode t)
 (eval-after-load "icomplete" '(progn (require 'icomplete+)))
-
-;; Fuzzy matching (Icicles)
-(require 'fuzzy-match)
 
 ;; Icicles
 (require 'icicles)
