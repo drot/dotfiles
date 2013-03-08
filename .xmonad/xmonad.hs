@@ -29,7 +29,6 @@ myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2"
 myBGColor = "#3f3f3f"
 myFGColor = "#dcdccc"
 myRedColor = "#dca3a3"
-myBlackColor = "#1E2320"
 myYellowColor = "#f0dfaf"
 myPurpleColor = "#ec93d3"
 
@@ -115,7 +114,7 @@ myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
 myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
-              , activeColor = myBlackColor
+              , activeColor = myBGColor
               , activeBorderColor = myYellowColor
               , activeTextColor = myYellowColor
               , inactiveColor = myBGColor
@@ -132,7 +131,7 @@ myXPConfig = defaultXPConfig {
                font = myFont
              , fgColor = myFGColor
              , bgColor = myBGColor
-             , bgHLight = myBlackColor
+             , bgHLight = myBGColor
              , fgHLight = myYellowColor
              , position = Bottom
              }
