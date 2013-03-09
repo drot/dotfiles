@@ -15,14 +15,14 @@
 		     "#afd8af" "#5c888b"
 		     "#dc8cc3" "#8cd0d3"))
 
-; Max line width
-(setq rcirc-fill-column 'frame-width)
+; Max line width and number
+(setq rcirc-fill-column 'frame-width
+      rcirc-buffer-maximum-lines 2000)
 
 ; Keep prompt at bottom
-(add-hook 'rcirc-mode-hook
-	  (lambda ()
-	    (set (make-local-variable 'scroll-conservatively)
-		 8192)))
+(add-hook 'rcirc-mode-hook (lambda ()
+			     (set (make-local-variable 'scroll-conservatively)
+				  8192)))
 
 ; Turn on spell checking.
 (add-hook 'rcirc-mode-hook (lambda ()
@@ -34,8 +34,7 @@
 			      (rcirc-omit-mode)))
 
 ; Track channel activity
-(add-hook 'rcirc-mode-hook
-	  (lambda ()
-	    (rcirc-track-minor-mode 1)))
+(add-hook 'rcirc-mode-hook (lambda ()
+			     (rcirc-track-minor-mode 1)))
 
 (provide 'rcirc-config)
