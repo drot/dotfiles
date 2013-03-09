@@ -15,15 +15,17 @@
 		     "#afd8af" "#5c888b"
 		     "#dc8cc3" "#8cd0d3"))
 
-; Hide IRC spam
-(setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
-
 ; Max line width
 (setq rcirc-fill-column 'frame-width)
 
 ; Turn on spell checking.
 (add-hook 'rcirc-mode-hook (lambda ()
 			     (flyspell-mode 1)))
+
+; Hide IRC spam
+(setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
+(add-hook 'rcirc-mode-hook '(lambda ()
+			      (rcirc-omit-mode)))
 
 ; Track channel activity
 (add-hook 'rcirc-mode-hook
