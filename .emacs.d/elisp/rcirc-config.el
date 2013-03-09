@@ -18,6 +18,12 @@
 ; Max line width
 (setq rcirc-fill-column 'frame-width)
 
+; Keep prompt at bottom
+(add-hook 'rcirc-mode-hook
+	  (lambda ()
+	    (set (make-local-variable 'scroll-conservatively)
+		 8192)))
+
 ; Turn on spell checking.
 (add-hook 'rcirc-mode-hook (lambda ()
 			     (flyspell-mode 1)))
@@ -31,11 +37,5 @@
 (add-hook 'rcirc-mode-hook
 	  (lambda ()
 	    (rcirc-track-minor-mode 1)))
-
-; Keep prompt at bottom
-(add-hook 'rcirc-mode-hook
-	  (lambda ()
-	    (set (make-local-variable 'scroll-conservatively)
-		 8192)))
 
 (provide 'rcirc-config)
