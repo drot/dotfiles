@@ -107,6 +107,9 @@
 (quietly-read-abbrev-file)
 (setq default-abbrev-mode t)
 
+;; rcirc
+(require 'rcirc-config)
+
 ;; Change backup behavior to save in a specified directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
       backup-by-copying      t
