@@ -1,9 +1,13 @@
 ; drot rcirc
 (require 'rcirc)
 
-; Connect to channels
+; Connection
 (setq rcirc-server-alist
       '(("irc.freenode.net" :channels ("#archlinux" "#emacs"))))
+
+; Authorization
+(setq rcirc-authinfo
+      '(("freenode" nickserv "drot" "")))
 
 ; Colorize nicks
 (eval-after-load 'rcirc '(require 'rcirc-color))
@@ -24,7 +28,7 @@
 			     (set (make-local-variable 'scroll-conservatively)
 				  8192)))
 
-; Turn on spell checking.
+; Turn on spell checking
 (add-hook 'rcirc-mode-hook (lambda ()
 			     (flyspell-mode 1)))
 
