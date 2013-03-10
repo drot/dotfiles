@@ -27,12 +27,22 @@
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
 
-; Keep prompt at bottom, track acitvity, omit-mode, spelling
+; Keep prompt at bottom
+(add-hook 'rcirc-mode-hook
+	  (lambda ()
+	    (set (make-local-variable 'scroll-conservatively)
+		 8192)))
+
+; Turn on spell checking
 (add-hook 'rcirc-mode-hook (lambda ()
-			     (set (make-local-variable 'scroll-conservatively)
-				  8192)
-			     (rcirc-track-minor-mode 1)
-			     (rcirc-omit-mode)
 			     (flyspell-mode 1)))
+
+; Turn on omit-mode
+(add-hook 'rcirc-mode-hook '(lambda ()
+			      (rcirc-omit-mode)))
+
+; Track channel activity
+(add-hook 'rcirc-mode-hook (lambda ()
+			     (rcirc-track-minor-mode 1)))
 
 (provide 'rcirc-config)
