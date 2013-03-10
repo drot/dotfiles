@@ -6,8 +6,9 @@
       '(("irc.freenode.net" :channels ("#archlinux" "#emacs"))))
 
 ; Authorization
+(load "~/.ircpass")
 (setq rcirc-authinfo
-      '(("freenode" nickserv "drot" "")))
+      `(("freenode" nickserv "drot" ,freenode-password)))
 
 ; Colorize nicks
 (eval-after-load 'rcirc '(require 'rcirc-color))
