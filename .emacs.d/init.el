@@ -139,7 +139,7 @@
 (icomplete-mode t)
 (setq icomplete-prospects-height 1
       icomplete-compute-delay 0)
-(require 'icomplete+ nil 'noerror)
+(require 'icomplete+)
 
 ;; Icicles
 (require 'icicles)
