@@ -74,7 +74,7 @@
 
 ;; Make buffer names unique
 (require 'uniquify)
-(setq uniquify-separator "/")
+(setq uniquify-separator ":")
 (setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
@@ -137,7 +137,9 @@
 
 ;; Icomplete+
 (icomplete-mode t)
-(eval-after-load "icomplete" '(progn (require 'icomplete+)))
+(setq icomplete-prospects-height 1
+      icomplete-compute-delay 0)
+(require 'icomplete+ nil 'noerror)
 
 ;; Icicles
 (require 'icicles)
