@@ -24,22 +24,15 @@
 (setq rcirc-fill-column 'frame-width
       rcirc-buffer-maximum-lines 2000)
 
-; Keep prompt at bottom
-(add-hook 'rcirc-mode-hook (lambda ()
-			     (set (make-local-variable 'scroll-conservatively)
-				  8192)))
-
-; Turn on spell checking
-(add-hook 'rcirc-mode-hook (lambda ()
-			     (flyspell-mode 1)))
-
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
-(add-hook 'rcirc-mode-hook '(lambda ()
-			      (rcirc-omit-mode)))
 
-; Track channel activity
+; Keep prompt at bottom, track acitvity, omit-mode, spelling
 (add-hook 'rcirc-mode-hook (lambda ()
-			     (rcirc-track-minor-mode 1)))
+			     (set (make-local-variable 'scroll-conservatively)
+				  8192)
+			     (rcirc-track-minor-mode 1)
+			     (rcirc-omit-mode)
+			     (flyspell-mode 1)))
 
 (provide 'rcirc-config)
