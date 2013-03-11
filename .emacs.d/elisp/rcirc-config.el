@@ -22,7 +22,7 @@
 
 ; Max line width and number
 (setq rcirc-fill-column 'frame-width
-      rcirc-buffer-maximum-lines 2000)
+      rcirc-buffer-maximum-lines 500)
 
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
