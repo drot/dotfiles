@@ -58,6 +58,20 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+;; Change backup behavior to save in a specified directory
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
+      backup-by-copying      t
+      version-control        t
+      delete-old-versions    t
+      kept-new-versions      4
+      kept-old-versions      2)
+
+;; Save minibuffer history
+(setq savehist-additional-variables
+      '(search-ring regexp-search-ring)
+      savehist-file "~/.emacs.d/savehist")
+(savehist-mode t)
+
 ;; X clipboard copy and paste
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
@@ -69,8 +83,37 @@
 ;; Enable Easy PG
 (require 'epa-file)
 
+;; rcirc
+(require 'rcirc-config)
+
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; Ido
+(require 'ido)
+(setq ido-save-directory-list-file "~/.emacs.d/ido-last"
+      ido-ignore-buffers
+      '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
+      ido-everywhere t
+      ido-case-fold t
+      ido-create-new-buffer 'prompt
+      ido-use-filename-at-point nil
+      ido-use-url-at-point nil
+      ido-enable-flex-matching t
+      ido-max-prospects 6)
+(ido-mode t)
+
+;; Ido Imenu
+(require 'ido-imenu)
+(global-set-key (kbd "M-i") 'ido-goto-symbol)
+
+;; Smex
+(require 'smex)
+(setq smex-save-file "~/.emacs.d/smex-items"
+      smex-key-advice-ignore-menu-bar t)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -107,23 +150,6 @@
 (quietly-read-abbrev-file)
 (setq default-abbrev-mode t)
 
-;; rcirc
-(require 'rcirc-config)
-
-;; Change backup behavior to save in a specified directory
-(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
-      backup-by-copying      t
-      version-control        t
-      delete-old-versions    t
-      kept-new-versions      4
-      kept-old-versions      2)
-
-;; Save minibuffer history
-(setq savehist-additional-variables
-      '(search-ring regexp-search-ring)
-      savehist-file "~/.emacs.d/savehist")
-(savehist-mode t)
-
 ;; Calendar
 (setq mark-holidays-in-calendar t
       all-christian-calendar-holidays t
@@ -134,13 +160,3 @@
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
-
-;; Icomplete+
-(icomplete-mode t)
-(setq icomplete-prospects-height 1
-      icomplete-compute-delay 0)
-(require 'icomplete+)
-
-;; Icicles
-(require 'icicles)
-(icy-mode 1)
