@@ -89,32 +89,6 @@
 ;; Use Ibuffer for buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Ido
-(require 'ido)
-(setq ido-save-directory-list-file "~/.emacs.d/ido-last"
-      ido-ignore-buffers
-      '("\\` " "^\*Back" "^\*Compile-Log" ".*Completion" "^\*Ido")
-      ido-everywhere t
-      ido-case-fold t
-      ido-create-new-buffer 'prompt
-      ido-use-filename-at-point nil
-      ido-use-url-at-point nil
-      ido-enable-flex-matching t
-      ido-max-prospects 6)
-(ido-mode t)
-
-;; Ido Imenu
-(require 'ido-imenu)
-(global-set-key (kbd "M-i") 'ido-goto-symbol)
-
-;; Smex
-(require 'smex)
-(setq smex-save-file "~/.emacs.d/smex-items"
-      smex-key-advice-ignore-menu-bar t)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-separator ":")
@@ -128,9 +102,6 @@
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
-
-;; Wrap lines at 70 in text-mode
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -160,3 +131,13 @@
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
+
+;; Icomplete+
+(icomplete-mode t)
+(setq icomplete-prospects-height 1
+      icomplete-compute-delay 0)
+(require 'icomplete+)
+
+;; Icicles
+(require 'icicles)
+(icy-mode 1)
