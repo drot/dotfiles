@@ -18,8 +18,9 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 
 -- Layouts
-import XMonad.Layout.Renamed
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Renamed
+import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
@@ -83,13 +84,13 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       tile = renamed [Replace "[]="] $ Tall 1 (3/100) (1/2)
       mtile = renamed [Replace "[M]"] $ Mirror tile
       full = renamed [Replace "[ ]"] $ Full
-      float = renamed [Replace "><>"] $ simplestFloat
+      float = renamed [Replace "><>"] $ smartBorders simplestFloat
 
 -- Window rules
 --
 myManageHook = composeAll [
                 isFullscreen --> doFullFloat
-               , className =? "mplayer2" --> doFloat
+               , className =? "mpv" --> doFloat
                , className =? "Gimp" --> doFloat
                , className =? "Skype" --> doFloat
                , className =? "Conkeror" --> doShift "2"
