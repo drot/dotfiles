@@ -13,7 +13,7 @@ export PAGER=less
 # history
 export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear" # don't append consecutive duplicates of these
 export HISTCONTROL=ignoreboth # ingore duplicates and spaces (ignoreboth|ignoredups|ignorespace)
-export HISTSIZE=10000 # bash history will save N commands
+export HISTSIZE=20000 # bash history will save N commands
 export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
@@ -39,7 +39,6 @@ stty -ixoff
 shopt -s cmdhist # save multi-line commands in history as single line
 shopt -s histappend # append to the history file
 shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty line
-shopt -s extglob # extended globbing
 
 # prompt colors
 function EXT_COLOR () { echo -ne "\e[38;5;$1m"; }
