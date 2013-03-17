@@ -25,7 +25,7 @@
       rcirc-buffer-maximum-lines 1000)
 
 ; Hide IRC spam
-(setq rcirc-omit-responses '("JOIN" "PART" "QUIT"))
+(setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
 ; Keep prompt at bottom
 (add-hook 'rcirc-mode-hook
