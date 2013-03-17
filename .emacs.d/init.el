@@ -7,8 +7,12 @@
 
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
-(add-to-list 'load-path "~/.emacs.d/icicles/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+;; Packages
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -140,5 +144,4 @@
 (require 'icomplete+)
 
 ;; Icicles
-(require 'icicles)
 (icy-mode 1)
