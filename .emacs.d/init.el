@@ -43,6 +43,7 @@
 
 ;; Highlight matching parentheses
 (show-paren-mode 1)
+(setq show-paren-delay 0)
 
 ;; Message buffer size
 (setq message-log-max 100)
