@@ -21,7 +21,7 @@
 		     "#dc8cc3" "#8cd0d3"))
 
 ; Max line width and number
-(setq rcirc-fill-column 'frame-width
+(setq rcirc-fill-flag nil
       rcirc-buffer-maximum-lines 1024)
 
 ; Hide IRC spam
