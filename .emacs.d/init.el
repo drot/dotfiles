@@ -2,9 +2,6 @@
 ;; drot emacs
 ;;
 
-;; Enter the debugger on an error
-(setq debug-on-error t)
-
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
