@@ -108,9 +108,9 @@
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; SLIME
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+;; Haskell mode
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
