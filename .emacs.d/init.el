@@ -118,9 +118,9 @@
 
 ;; Abbreviations
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs"
-      save-abbrevs t
-      quietly-read-abbrev-file
-      setq default-abbrev-mode t)
+      save-abbrevs t)
+(quietly-read-abbrev-file)
+(setq default-abbrev-mode t)
 
 ;; Calendar
 (setq mark-holidays-in-calendar t
