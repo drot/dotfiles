@@ -31,16 +31,16 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Don't show the welcome message
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message nil)
-(setq gnus-inhibit-startup-message t)
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
+      gnus-inhibit-startup-message t)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
 ; Ignore case on completion
-(setq completion-ignore-case t
-      read-file-name-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 
 ;; Highlight matching parentheses
 (show-paren-mode 1)
@@ -93,14 +93,14 @@
 
 ;; Make buffer names unique
 (require 'uniquify)
-(setq uniquify-separator ":")
-(setq uniquify-buffer-name-style 'post-forward)
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
+(setq uniquify-separator ":"
+      uniquify-buffer-name-style 'post-forward
+      uniquify-after-kill-buffer-p t
+      uniquify-ignore-buffers-re "^\\*")
 
 ;; Ediff window placement
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
@@ -117,10 +117,10 @@
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
 ;; Abbreviations
-(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
-(setq save-abbrevs t)
-(quietly-read-abbrev-file)
-(setq default-abbrev-mode t)
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs"
+      save-abbrevs t
+      quietly-read-abbrev-file
+      setq default-abbrev-mode t)
 
 ;; Calendar
 (setq mark-holidays-in-calendar t
