@@ -109,7 +109,7 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; CC mode
-(setq c-default-style "k&r"
+(setq c-default-style "stroustrup"
       c-basic-offset 4)
 
 ;; PKGBUILD mode
