@@ -36,7 +36,6 @@
 (setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-focus-color "honeydew")
 (set-border-color "honeydew4")
 (set-win-bg-color "gray10")
 (set-focus-color "honeydew2")
