@@ -45,7 +45,7 @@
 
 ;; Mode-line colors
 (setf *mode-line-background-color* "grey25"
-      *mode-line-foreground-color* "beige"
+      *mode-line-foreground-color* "darkseagreen4"
       *mode-line-border-color* "darkseagreen4"
       *background* "grey25")
 
