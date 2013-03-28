@@ -20,8 +20,16 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode -1)
 
+;; Don't show the welcome message
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
+      gnus-inhibit-startup-message t)
+
 ;; Color theme
 (load-theme 'zenburn t)
+
+; Recursive minibuffer
+(setq enable-recursive-minibuffers t)
 
 ;; Show tooltips in echo area
 (tooltip-mode -1)
@@ -30,17 +38,8 @@
 ;; Answer y or n instead of yes or no at prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Don't show the welcome message
-(setq inhibit-startup-screen t
-      initial-scratch-message nil
-      gnus-inhibit-startup-message t)
-
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
-
-; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
 
 ;; Highlight matching parentheses
 (show-paren-mode 1)
@@ -112,6 +111,10 @@
 (setq c-default-style "stroustrup"
       c-basic-offset 4)
 
+;; SLIME
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
+
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
@@ -133,11 +136,8 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-;; Icomplete+
-(icomplete-mode t)
-(setq icomplete-prospects-height 1
-      icomplete-compute-delay 0)
-(require 'icomplete+)
-
-;; Icicles
-(icy-mode 1)
+;; Helm
+(require 'helm-config)
+(helm-mode 1)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
