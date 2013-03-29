@@ -87,9 +87,6 @@
 ;; rcirc
 (require 'rcirc-config)
 
-;; Use Ibuffer for buffer list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-separator ":"
@@ -141,3 +138,4 @@
 (helm-mode 1)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)

@@ -38,10 +38,10 @@
 (set-fg-color "beige")
 (set-border-color "darkseagreen4")
 (set-win-bg-color "grey25")
-(set-focus-color "darkseagreen4")
-(set-unfocus-color "darkseagreen1")
-(set-float-focus-color "darkseagreen4")
-(set-float-unfocus-color "grey25")
+(set-focus-color "darkseagreen1")
+(set-unfocus-color "darkseagreen4")
+(set-float-focus-color "darkseagreen1")
+(set-float-unfocus-color "darkseagreen4")
 
 ;; Mode-line colors
 (setf *mode-line-background-color* "grey25"
