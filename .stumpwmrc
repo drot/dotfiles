@@ -77,7 +77,7 @@
 
 ;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
-(run-commands "gnewbg www" "gnewbg work" "gnewbg misc")
+(run-commands "gnewbg www" "gnewbg emacs" "gnewbg misc")
 
 ;; Run or raise
 ; Emacs Client
@@ -101,7 +101,7 @@
 (define-frame-preference "www"
     (0 t t :class "Conkeror"))
 
-(define-frame-preference "work"
+(define-frame-preference "emacs"
     (0 t t :class "Emacs"))
 
 (define-frame-preference "misc"
