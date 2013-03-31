@@ -41,10 +41,6 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
-; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
-
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 (setq show-paren-delay 0)
