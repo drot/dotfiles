@@ -41,6 +41,10 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
+; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -137,7 +141,7 @@
 (require 'helm-config)
 (helm-mode 1)
 
-;; Replace commands with Helm
+; Replace commands with Helm
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
