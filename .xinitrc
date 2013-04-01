@@ -1,8 +1,5 @@
 #!/bin/sh
 
-## Start session
-systemd --user &
-
 ## Initialize defaults
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
@@ -19,6 +16,8 @@ xset s off &
 ## Launch rxvt-unicode daemon
 urxvtd -q -o -f &
 
+## Start session
+systemd --user &
+
 ## Start window manager
-conky | while read -r; do xsetroot -name "$REPLY"; done &
-exec dwm
+exec xmonad

@@ -108,9 +108,9 @@
 (setq c-default-style "stroustrup"
       c-basic-offset 4)
 
-;; SLIME
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+;; Haskell mode
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
@@ -142,6 +142,9 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 
-;; Helm describe bindings
+; Helm describe bindings
 (helm-descbinds-mode)
 (setq helm-descbinds-window-style 'split-window)
+
+; Multiple regexp matching methods
+(helm-match-plugin-mode t)
