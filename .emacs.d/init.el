@@ -41,6 +41,10 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
+;; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
 ;; Highlight matching parentheses
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -107,10 +111,6 @@
 ;; CC mode
 (setq c-default-style "stroustrup"
       c-basic-offset 4)
-
-;; Haskell mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;; PKGBUILD mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
