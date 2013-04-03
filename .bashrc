@@ -4,7 +4,7 @@
 
 # global
 export EDITOR=emacsclient
-export ALTERNATE_EDITOR=emacs
+export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export BROWSER=conkeror
 export PAGER=less
@@ -64,7 +64,6 @@ fi
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
-alias ec="emacsclient -a emacs"
 alias eckd="emacsclient -e '(kill-emacs)'"
 
 # extract - archive extractor
