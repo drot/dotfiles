@@ -2,9 +2,6 @@
 ;; drot emacs
 ;;
 
-;; Save customizations in the specified file
-(setq custom-file "~/.emacs.d/custom.el")
-
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
@@ -24,6 +21,10 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Save customizations in the specified file
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
