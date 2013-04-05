@@ -20,7 +20,7 @@ transparency = 0.0
 pseudo_transparency = false
 
 # "system", "on" or "off"
-cursor_blink = on
+cursor_blink = off
 
 # "block", "underline" or "ibeam"
 cursor_shape = block
