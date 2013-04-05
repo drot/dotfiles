@@ -2,17 +2,28 @@
 ;; drot emacs
 ;;
 
+;; Save customizations in the specified file
+(setq custom-file "~/.emacs.d/custom.el")
+
 ;; Load path
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
-;; Packages
+;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
-;; Save customizations in the specified file
-(setq custom-file "~/.emacs.d/custom.el")
+;; Check for installed packages
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages '(pkgbuild-mode helm helm-descbinds zenburn-theme)
+  "A list of packages to ensure are installed at launch.")
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -28,10 +39,13 @@
       initial-scratch-message nil
       gnus-inhibit-startup-message t)
 
+;; Disable cursor blink
+(blink-cursor-mode 0)
+
 ;; Color theme
 (load-theme 'zenburn t)
 
-; Recursive minibuffer
+;; Recursive minibuffer
 (setq enable-recursive-minibuffers t)
 
 ;; Show tooltips in echo area
@@ -52,11 +66,17 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Message buffer size
 (setq message-log-max 100)
 
 ;; Show column number in modeline
-(setq column-number-mode t)
+(column-number-mode t)
+
+;; Show file size in modeline
+(size-indication-mode t)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -96,8 +116,8 @@
 
 ;; Make buffer names unique
 (require 'uniquify)
-(setq uniquify-separator ":"
-      uniquify-buffer-name-style 'post-forward
+(setq uniquify-buffer-name-style 'post-forward
+      uniquify-separator "/"
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
@@ -140,14 +160,14 @@
 (require 'helm-config)
 (helm-mode 1)
 
-; Replace commands with Helm
+;; Replace commands with Helm
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 
-; Helm describe bindings
+;; Helm describe bindings
 (helm-descbinds-mode)
 (setq helm-descbinds-window-style 'split-window)
 
-; Multiple regexp matching methods
+;; Multiple regexp matching methods
 (helm-match-plugin-mode t)
