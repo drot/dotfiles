@@ -11,6 +11,9 @@
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
+;; Save customizations in the specified file
+(setq custom-file "~/.emacs.d/custom.el")
+
 ;; Turn off the toolbar
 (tool-bar-mode -1)
 
