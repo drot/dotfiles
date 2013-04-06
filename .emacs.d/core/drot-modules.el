@@ -16,3 +16,6 @@
 
 ;; Helm mode
 (require 'drot-helm)
+
+(provide 'drot-modules)
+;; drot-modules.el ends here

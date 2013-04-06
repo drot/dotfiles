@@ -11,8 +11,6 @@
   "This directory houses all of the Emacs modules.")
 (defvar vendor-dir (expand-file-name "vendor" emacs-dir)
   "This directory houses packages that are not yet available.")
-(defvar drot-modules-file (expand-file-name "drot-modules.el" emacs-dir)
-  "This files contains a list of modules that will be loaded by Emacs.")
 
 ;; Add to load path
 (add-to-list 'load-path core-dir)
@@ -26,7 +24,6 @@
 (require 'drot-editor)
 
 ;; Load modules
-(when (file-exists-p drot-modules-file)
-  (load drot-modules-file))
+(require 'drot-modules)
 
 ;; init.el ends here
