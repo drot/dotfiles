@@ -15,16 +15,12 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(pkgbuild-mode icicles icomplete+ zenburn-theme)
+(defvar my-packages '(pkgbuild-mode helm helm-descbinds zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-;; Save customizations in the specified file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -45,6 +41,9 @@
 
 ;; Color theme
 (load-theme 'zenburn t)
+
+;; Recursive minibuffer
+(setq enable-recursive-minibuffers t)
 
 ;; Show tooltips in echo area
 (tooltip-mode -1)
@@ -109,9 +108,6 @@
 ;; rcirc
 (require 'rcirc-config)
 
-;; Use Ibuffer for buffer list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward
@@ -154,12 +150,18 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-;; Icomplete+
-(icomplete-mode t)
-(setq icomplete-prospects-height 1
-      icomplete-compute-delay 0)
-(require 'icomplete+)
-(setq icompletep-exact-separator "* ")
+;; Helm
+(require 'helm-config)
+(helm-mode 1)
 
-;; Icicles
-(icy-mode 1)
+;; Replace commands with Helm
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+
+;; Helm describe bindings
+(helm-descbinds-mode)
+(setq helm-descbinds-window-style 'split-window)
+
+;; Multiple regexp matching methods
+(helm-match-plugin-mode t)
