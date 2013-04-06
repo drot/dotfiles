@@ -3,7 +3,7 @@
 ;;
 
 ;; Load abbrevs and enable abbrev-mode
-(setq abbrev-file-name "~/.emacs.d/abbrev_defs"
+(setq abbrev-file-name (expand-file-name "abbrev_defs" drot-saves-dir)
       save-abbrevs t)
 (quietly-read-abbrev-file)
 (setq default-abbrev-mode t)

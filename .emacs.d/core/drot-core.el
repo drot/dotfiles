@@ -25,13 +25,6 @@
       savehist-file (expand-file-name "savehist" drot-saves-dir))
 (savehist-mode t)
 
-;; Save recent files
-(require 'recentf)
-(setq recentf-save-file (expand-file-name "recentf" drot-saves-dir)
-      recentf-max-saved-items 100
-      recentf-max-menu-items 15)
-(recentf-mode 1)
-
 ;; X clipboard copy and paste
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
