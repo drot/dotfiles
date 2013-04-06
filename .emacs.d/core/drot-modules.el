@@ -8,6 +8,12 @@
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
+;; CUA mode
+(require 'drot-cua)
+
+;; Undo tree
+(require 'drot-undo)
+
 ;; Abbrev mode
 (require 'drot-abbrev)
 
