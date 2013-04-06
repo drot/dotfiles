@@ -13,12 +13,16 @@
 (setq message-log-max 100)
 
 ;; Change backup behavior to save in a specified directory
-(setq backup-directory-alist '(("." . "~/.emacs.d/saves/"))
+(setq backup-directory-alist '((".*" . "~/.emacs.d/saves/"))
       backup-by-copying      t
       version-control        t
       delete-old-versions    t
       kept-new-versions      4
       kept-old-versions      2)
+
+;; Keep auto-saves in the tmp directory
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;; Save minibuffer history
 (setq savehist-additional-variables
