@@ -1,4 +1,7 @@
-; drot rcirc
+;;
+;; drot-rcirc.el - rcirc IRC client configuration
+;;
+
 (require 'rcirc)
 
 ; Colorize nicks
@@ -45,4 +48,5 @@
 (add-hook 'rcirc-mode-hook (lambda ()
 			     (rcirc-track-minor-mode 1)))
 
-(provide 'rcirc-config)
+(provide 'drot-rcirc)
+;; drot-rcirc.el ends here
