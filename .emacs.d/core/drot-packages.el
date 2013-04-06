@@ -12,7 +12,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(pkgbuild-mode helm helm-descbinds zenburn-theme)
+(defvar my-packages '(pkgbuild-mode undo-tree helm helm-descbinds zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)

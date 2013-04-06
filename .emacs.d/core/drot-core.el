@@ -68,5 +68,8 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
+;; Undo tree
+(global-undo-tree-mode)
+
 (provide 'drot-core)
 ;; drot-core.el ends here
