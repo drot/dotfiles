@@ -12,23 +12,25 @@
 ;; Message buffer size
 (setq message-log-max 100)
 
-;; Change backup behavior to save in a specified directory
-(setq backup-directory-alist '((".*" . "~/.emacs.d/saves/"))
-      backup-by-copying      t
-      version-control        t
-      delete-old-versions    t
-      kept-new-versions      4
-      kept-old-versions      2)
-
-;; Keep auto-saves in the tmp directory
+;; Store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
 ;; Save minibuffer history
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
-      savehist-file "~/.emacs.d/savehist")
+      savehist-autosave-interval 60
+      savehist-file (expand-file-name "savehist" drot-saves-dir))
 (savehist-mode t)
+
+;; Save recent files
+(require 'recentf)
+(setq recentf-save-file (expand-file-name "recentf" drot-saves-dir)
+      recentf-max-saved-items 100
+      recentf-max-menu-items 15)
+(recentf-mode 1)
 
 ;; X clipboard copy and paste
 (setq x-select-enable-clipboard t)

@@ -11,6 +11,8 @@
   "This directory houses all of the Emacs modules.")
 (defvar drot-vendor-dir (expand-file-name "vendor" drot-emacs-dir)
   "This directory houses packages that are not yet available.")
+(defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
+  "This folder stores all the automatically generated save/history-files.")
 
 ;; Add to load path
 (add-to-list 'load-path drot-core-dir)
