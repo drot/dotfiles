@@ -12,10 +12,9 @@
 ;; Message buffer size
 (setq message-log-max 100)
 
-;; Store all backup and auto-save files in the tmp dir
+;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
-(setq auto-save-list-file-prefix temporary-file-directory)
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
