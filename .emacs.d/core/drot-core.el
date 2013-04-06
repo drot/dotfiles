@@ -25,10 +25,6 @@
       savehist-file (expand-file-name "savehist" drot-saves-dir))
 (savehist-mode t)
 
-;; Enable CUA mode for rectangular selection
-(setq cua-enable-cua-keys nil)
-(cua-mode)
-
 ;; Enable X clipboard usage
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
@@ -71,9 +67,6 @@
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
-
-;; Undo tree
-(global-undo-tree-mode)
 
 (provide 'drot-core)
 ;; drot-core.el ends here
