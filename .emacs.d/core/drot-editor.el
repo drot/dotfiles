@@ -43,11 +43,13 @@
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
 
+(defun drot-enable-flyspell ()
+  "Turn flyspell-mode on."
+  (flyspell-mode 1))
+
 ;; Enable Fly Spell for text mode
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
+(add-hook 'text-mode-hook 'drot-enable-flyspell)
+
 
 ;; Default major mode
 (setq default-major-mode 'text-mode)
