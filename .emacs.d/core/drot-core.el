@@ -25,7 +25,11 @@
       savehist-file (expand-file-name "savehist" drot-saves-dir))
 (savehist-mode t)
 
-;; X clipboard copy and paste
+;; Enable CUA mode for rectangular selection
+(setq cua-enable-cua-keys nil)
+(cua-mode)
+
+;; Enable X clipboard usage
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
 

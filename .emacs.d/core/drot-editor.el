@@ -50,7 +50,6 @@
 ;; Enable Fly Spell for text mode
 (add-hook 'text-mode-hook 'drot-enable-flyspell)
 
-
 ;; Default major mode
 (setq default-major-mode 'text-mode)
 
