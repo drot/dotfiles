@@ -20,6 +20,11 @@
 ;; Enable Easy PG
 (require 'epa-file)
 
+;; Spell checking with Fly Spell
+(require 'flyspell)
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
+
 ;; Default major mode
 (setq default-major-mode 'text-mode)
 
