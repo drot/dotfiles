@@ -40,8 +40,22 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+;; Easier switching between visible buffers
+(require 'windmove)
+(windmove-default-keybindings)
+
+;; Enable Winner mode
+(winner-mode 1)
+
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; Eshell directory
+(require 'eshell)
+(setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
+
+;; Reuse dired buffer
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;; Calendar
 (setq mark-holidays-in-calendar t
