@@ -15,7 +15,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(pkgbuild-mode helm helm-descbinds zenburn-theme)
+(defvar my-packages '(pkgbuild-mode icicles icomplete+ zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -46,9 +46,6 @@
 ;; Color theme
 (load-theme 'zenburn t)
 
-;; Recursive minibuffer
-(setq enable-recursive-minibuffers t)
-
 ;; Show tooltips in echo area
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
@@ -75,9 +72,6 @@
 
 ;; Show column number in modeline
 (column-number-mode t)
-
-;; Show file size in modeline
-(size-indication-mode t)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -114,6 +108,9 @@
 
 ;; rcirc
 (require 'rcirc-config)
+
+;; Use Ibuffer for buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -157,18 +154,12 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-;; Helm
-(require 'helm-config)
-(helm-mode 1)
+;; Icomplete+
+(icomplete-mode t)
+(setq icomplete-prospects-height 1
+      icomplete-compute-delay 0)
+(require 'icomplete+)
+(setq icompletep-exact-separator "* ")
 
-;; Replace commands with Helm
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-
-;; Helm describe bindings
-(helm-descbinds-mode)
-(setq helm-descbinds-window-style 'split-window)
-
-;; Multiple regexp matching methods
-(helm-match-plugin-mode t)
+;; Icicles
+(icy-mode 1)

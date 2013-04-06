@@ -4,7 +4,7 @@
 Xcursor.theme: Neutral
 
 ! Emacs
-Emacs.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
+Emacs.font: Terminus-10
 
 ! URXVT
 ! General
