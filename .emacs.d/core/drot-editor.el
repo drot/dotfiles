@@ -44,8 +44,9 @@
 (setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
       bookmark-save-flag 1)
 
-;; Enable Easy PG
-(require 'epa-file)
+;; TRAMP
+(require 'tramp)
+(setq tramp-default-method "ssh")
 
 ;; Spell checking with Fly Spell
 (require 'flyspell)
