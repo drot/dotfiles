@@ -30,14 +30,14 @@
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
+; Turn on spell checking
+(add-hook 'rcirc-mode-hook 'drot-enable-flyspell)
+
 ; Keep prompt at bottom
 (add-hook 'rcirc-mode-hook
 	  (lambda ()
 	    (set (make-local-variable 'scroll-conservatively)
 		 8192)))
-
-; Turn on spell checking
-(add-hook 'rcirc-mode-hook 'drot-enable-flyspell)
 
 ; Turn on omit-mode
 (add-hook 'rcirc-mode-hook '(lambda ()
