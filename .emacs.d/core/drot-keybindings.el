@@ -8,11 +8,14 @@
 ;; Replace dabbrev-expand with hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-;; Use Helm to find files
+;; Helm find files
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-;; Use Helm for M-x
+;; Helm M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
+
+;; Helm Imenu
+(global-set-key (kbd "M-i") 'helm-imenu)
 
 (provide 'drot-keybindings)
 ;; drot-keybindings.el ends here
