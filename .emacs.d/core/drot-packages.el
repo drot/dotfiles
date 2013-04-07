@@ -12,10 +12,11 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(pkgbuild-mode undo-tree helm helm-descbinds zenburn-theme)
+(defvar drot-package-list
+  '(pkgbuild-mode undo-tree yasnippet helm helm-descbinds zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
-(dolist (p my-packages)
+(dolist (p drot-package-list)
   (when (not (package-installed-p p))
     (package-install p)))
 
