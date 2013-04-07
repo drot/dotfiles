@@ -5,14 +5,19 @@
 ;; Define directories
 (defvar drot-emacs-dir (file-name-directory load-file-name)
   "The root dir of the Emacs distribution.")
+
 (defvar drot-core-dir (expand-file-name "core" drot-emacs-dir)
   "This directory houses Emacs core configuration.")
+
 (defvar drot-modules-dir (expand-file-name "modules" drot-emacs-dir)
   "This directory houses all of the Emacs modules.")
+
 (defvar drot-personal-dir (expand-file-name "personal" drot-emacs-dir)
   "This directory houses all personal customizations.")
+
 (defvar drot-vendor-dir (expand-file-name "vendor" drot-emacs-dir)
   "This directory houses packages that are not yet available.")
+
 (defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
   "This directory houses all automatically generated save/history-files.")
 

@@ -14,6 +14,9 @@
 ;; Undo tree
 (require 'drot-undo)
 
+;; YASnippet
+(require 'drot-yasnippet)
+
 ;; Abbrev mode
 (require 'drot-abbrev)
 
