@@ -31,6 +31,7 @@
 (require 'drot-ui)
 (require 'drot-core)
 (require 'drot-editor)
+(require 'drot-keybindings)
 
 ;; Load modules
 (require 'drot-modules)
