@@ -37,8 +37,7 @@
 		 8192)))
 
 ; Turn on spell checking
-(add-hook 'rcirc-mode-hook (lambda ()
-			     (flyspell-mode 1)))
+(add-hook 'rcirc-mode-hook 'drot-enable-flyspell)
 
 ; Turn on omit-mode
 (add-hook 'rcirc-mode-hook '(lambda ()

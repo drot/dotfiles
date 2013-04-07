@@ -26,10 +26,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;; Saner regex syntax
-(require 're-builder)
-(setq reb-re-syntax 'string)
-
 ;; Bookmarks
 (require 'bookmark)
 (setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
