@@ -21,25 +21,33 @@
 (defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
   "This directory houses all automatically generated save/history-files.")
 
-;; Add to load path
+;; Add directories to load path
 (add-to-list 'load-path drot-core-dir)
 (add-to-list 'load-path drot-modules-dir)
 (add-to-list 'load-path drot-vendor-dir)
 
-;; Core configuration
+;; Load packages
 (require 'drot-packages)
+
+;; Load UI configuration
 (require 'drot-ui)
+
+;; Load general configuration
 (require 'drot-core)
+
+;; Load editing-specific configuration
 (require 'drot-editor)
-(require 'drot-keybindings)
 
 ;; Load modules
 (require 'drot-modules)
 
-;; Store changes from Customize in the selected file
+;; Load custom key bindings
+(require 'drot-keybindings)
+
+;; Store changes from the customize interface in the selected file
 (setq custom-file (expand-file-name "custom.el" drot-personal-dir))
 
-;; Load personal settings
+;; Load personal configuration
 (when (file-exists-p drot-personal-dir)
   (message "Loading personal configuration files in %s..." drot-personal-dir)
   (mapc 'load (directory-files drot-personal-dir 't "^[^#].*el$")))
