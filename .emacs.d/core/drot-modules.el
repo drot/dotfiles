@@ -14,6 +14,9 @@
 ;; Undo tree
 (require 'drot-undo)
 
+;; Smartparens
+(require 'drot-smartparens)
+
 ;; YASnippet
 (require 'drot-yasnippet)
 
