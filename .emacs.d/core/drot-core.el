@@ -21,6 +21,7 @@
 ;; Save minibuffer history
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
+      savehist-autosave-interval 60
       savehist-file (expand-file-name "saved.hist" drot-saves-dir))
 (savehist-mode t)
 
