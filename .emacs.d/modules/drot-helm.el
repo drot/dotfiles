@@ -7,8 +7,8 @@
 (helm-mode 1)
 
 ;; Helm describe bindings
-(helm-descbinds-mode)
 (setq helm-descbinds-window-style 'split-window)
+(helm-descbinds-mode)
 
 ;; Multiple regexp matching methods
 (helm-match-plugin-mode t)
