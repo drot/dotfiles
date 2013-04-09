@@ -4,7 +4,7 @@
 
 (defun drot-paredit-mode ()
   "Turn ParEdit mode on."
-  (paredit-mode +1))
+  (paredit-mode 1))
 
 ;; Turn ParEdit mode on for selected modes
 (add-hook 'emacs-lisp-mode-hook 'drot-paredit-mode)

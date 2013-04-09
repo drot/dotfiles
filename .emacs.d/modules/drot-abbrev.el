@@ -2,7 +2,7 @@
 ;; drot-abbrev.el - Emacs abbreviation mode configuration
 ;;
 
-;; Load abbrevs and enable abbrev-mode
+;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" drot-saves-dir)
       save-abbrevs t)
 (if (file-exists-p abbrev-file-name)

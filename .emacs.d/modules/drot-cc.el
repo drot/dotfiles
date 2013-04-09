@@ -8,7 +8,7 @@
 
 (defun drot-c-pair-mode ()
   "Turn on Electric Pair mode."
-  (electric-pair-mode +1))
+  (electric-pair-mode 1))
 
 ;; Enable Electric Pair mode for all related languages
 (add-hook 'c-mode-common-hook 'drot-c-pair-mode)
