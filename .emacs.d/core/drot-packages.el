@@ -13,7 +13,7 @@
   (package-refresh-contents))
 
 (defvar drot-package-list
-  '(pkgbuild-mode undo-tree smartparens yasnippet helm helm-descbinds diminish zenburn-theme)
+  '(pkgbuild-mode undo-tree paredit yasnippet helm helm-descbinds diminish zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p drot-package-list)

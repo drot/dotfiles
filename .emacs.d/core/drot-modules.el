@@ -11,11 +11,11 @@
 ;; CUA mode
 (require 'drot-cua)
 
+;; ParEdit mode
+(require 'drot-paredit)
+
 ;; Undo tree
 (require 'drot-undo)
-
-;; Smartparens
-(require 'drot-smartparens)
 
 ;; YASnippet
 (require 'drot-yasnippet)

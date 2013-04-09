@@ -13,6 +13,10 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
+;; Highlight matching parentheses
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
 ;; Enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
