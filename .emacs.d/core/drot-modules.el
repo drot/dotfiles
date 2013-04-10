@@ -8,6 +8,9 @@
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
+;; Ido
+(require 'drot-ido)
+
 ;; CUA mode
 (require 'drot-cua)
 
@@ -25,9 +28,6 @@
 
 ;; rcirc mode
 (require 'drot-rcirc)
-
-;; Helm mode
-(require 'drot-helm)
 
 (provide 'drot-modules)
 ;; drot-modules.el ends here

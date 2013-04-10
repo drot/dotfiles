@@ -8,14 +8,8 @@
 ;; Replace dabbrev-expand with hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-;; Helm find files
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-;; Helm M-x
-(global-set-key (kbd "M-x") 'helm-M-x)
-
-;; Helm Imenu
-(global-set-key (kbd "M-i") 'helm-imenu)
+;; Imenu with Ido completion
+(global-set-key (kbd "M-i") 'ido-goto-symbol)
 
 (provide 'drot-keybindings)
 ;; drot-keybindings.el ends here
