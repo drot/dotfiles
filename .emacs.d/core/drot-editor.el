@@ -26,15 +26,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;; Whitespace mode configuration
-(require 'whitespace)
-(setq whitespace-line-column 80)
-(setq whitespace-style '(face tabs empty trailing lines-tail))
-
-(defun drot-enable-whitespace ()
-  "Turn whitespace-mode on."
-  (whitespace-mode 1))
-
 ;; Saner regex syntax
 (require 're-builder)
 (setq reb-re-syntax 'string)
@@ -56,6 +47,15 @@
 (defun drot-enable-flyspell ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
+
+;; Whitespace mode configuration
+(require 'whitespace)
+(setq whitespace-line-column 80)
+(setq whitespace-style '(face tabs empty trailing lines-tail))
+
+(defun drot-enable-whitespace ()
+  "Turn whitespace-mode on."
+  (whitespace-mode 1))
 
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)
