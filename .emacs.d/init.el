@@ -12,14 +12,11 @@
 (defvar drot-modules-dir (expand-file-name "modules" drot-emacs-dir)
   "This directory houses all of the Emacs modules.")
 
-(defvar drot-personal-dir (expand-file-name "personal" drot-emacs-dir)
-  "This directory houses all personal customizations.")
-
 (defvar drot-vendor-dir (expand-file-name "vendor" drot-emacs-dir)
   "This directory houses packages that are not yet available.")
 
 (defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
-  "This directory houses all automatically generated save/history-files.")
+  "This directory houses all save files.")
 
 ;; Add directories to load path
 (add-to-list 'load-path drot-core-dir)
@@ -45,11 +42,10 @@
 (require 'drot-keybindings)
 
 ;; Store changes from the customize interface in the selected file
-(setq custom-file (expand-file-name "custom.el" drot-personal-dir))
+(setq custom-file (expand-file-name "custom.el" drot-saves-dir))
 
 ;; Load personal configuration
-(when (file-exists-p drot-personal-dir)
-  (message "Loading personal configuration files in %s..." drot-personal-dir)
-  (mapc 'load (directory-files drot-personal-dir 't "^[^#].*el$")))
+(if (file-exists-p custom-file)
+  (load custom-file))
 
 ;; init.el ends here
