@@ -10,7 +10,6 @@
 (add-hook 'emacs-lisp-mode-hook 'drot-paredit-mode)
 (add-hook 'lisp-mode-hook 'drot-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook 'drot-paredit-mode)
-(add-hook 'scheme-mode-hook 'drot-paredit-mode)
 
 (defun drot-paredit-slime ()
   "Fix ParEdit conflict with SLIME."
