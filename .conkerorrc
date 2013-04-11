@@ -10,7 +10,7 @@ require("favicon");
 homepage = "about:blank";
 
 // Improve hinting keys
-hint_background_color = "transparent";
+hint_background_color = "blue";
 hint_digits = "aoeuhtns";
 hints_display_url_panel = true;
 
@@ -36,6 +36,9 @@ session_pref("general.useragent.compatMode.firefox", true);
 
 // Don't enable formfill
 session_pref("browser.formfill.enable", false);
+
+// Block auto focus
+block_content_focus_change_duration = 20;
 
 // Open clicks in buffers in the background
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
