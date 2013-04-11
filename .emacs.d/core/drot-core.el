@@ -2,13 +2,6 @@
 ;; drot-core.el - Core Emacs configuration
 ;;
 
-;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
-
-;; Message buffer size
-(setq message-log-max 100)
-
 ;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -21,6 +14,13 @@
       savehist-autosave-interval 60
       savehist-file (expand-file-name "saved.hist" drot-saves-dir))
 (savehist-mode t)
+
+;; Message buffer size
+(setq message-log-max 100)
+
+;; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 
 ;; Enable X clipboard usage
 (setq x-select-enable-clipboard t)
@@ -37,6 +37,23 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+;; Bookmarks
+(require 'bookmark)
+(setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
+      bookmark-save-flag 1)
+
+;; TRAMP
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
+;; Saner regex syntax
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
+;; Eshell directory
+(require 'eshell)
+(setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
+
 ;; Easier switching between visible buffers
 (require 'windmove)
 (windmove-default-keybindings)
@@ -46,10 +63,6 @@
 
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; Eshell directory
-(require 'eshell)
-(setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
 
 ;; Reuse dired buffer
 (put 'dired-find-alternate-file 'disabled nil)

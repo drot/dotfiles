@@ -26,19 +26,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;; Saner regex syntax
-(require 're-builder)
-(setq reb-re-syntax 'string)
-
-;; Bookmarks
-(require 'bookmark)
-(setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
-      bookmark-save-flag 1)
-
-;; TRAMP
-(require 'tramp)
-(setq tramp-default-method "ssh")
-
 ;; Spell checking with Fly Spell
 (require 'flyspell)
 (setq ispell-program-name "aspell"
