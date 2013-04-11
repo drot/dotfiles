@@ -34,8 +34,8 @@ cursor_shape = block
 
 [colors]
 foreground = #dcdccc
-foreground_bold = #ffffff
-#foreground_dim = #2b2b2b
+foreground_bold = #dcdccc
+foreground_dim = #2b2b2b
 background = #3f3f3f
 cursor = #dcdccc
 
@@ -44,7 +44,7 @@ highlight = #2b2b2b
 
 # colors from color0 to color254 can be set
 color0 = #3f3f3f
-color1 = #705050
+color1 = #cc9393
 color2 = #60b48a
 color3 = #dfaf8f
 color4 = #506070
