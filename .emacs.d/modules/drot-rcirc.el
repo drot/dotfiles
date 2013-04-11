@@ -12,7 +12,8 @@
 (setq rcirc-colors '("#dca3a3" "#dfaf8f" "#f0dfaf"
                      "#7f9f7f" "#93e0e3" "#cc9393"
                      "#d0bf8f" "#afd8af" "#5c888b"
-                     "#dc8cc3" "#8cd0d3"))
+                     "#dc8cc3" "#8cd0d3" "#94bff3"
+                     "#9fc59f" "#e0cf9f" "#6ca0a3"))
 
 ; Color palette for escape characters
 (setq rcirc-color-vector '("#cc9393" "#60b48a" "#dfaf8f"
