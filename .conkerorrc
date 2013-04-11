@@ -1,17 +1,20 @@
 // -*- mode: Javascript -*-
 
-// use 'contrib' stuff
-load_paths.unshift("chrome://conkeror-contrib/content/");
+// Modules
+require("new-tabs.js");
+require("clicks-in-new-buffer.js");
+require("block-content-focus-change.js");
+require("favicon");
 
-// the default page for new buffers.
-homepage = "www.google.com/ncr";
+// The default page for new buffers.
+homepage = "about:blank";
 
-// improve hint keys
+// Improve hinting keys
 hint_background_color = "transparent";
 hint_digits = "aoeuhtns";
 hints_display_url_panel = true;
 
-// hint's color
+// Hinting color
 register_user_stylesheet(
     "data:text/css," +
 	escape (
@@ -21,69 +24,72 @@ register_user_stylesheet(
 		" background-color: yellow !important;" +
 		"}"));
 
-// don't require a whitelist to install extensions
+// Don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
 
-// default directory for downloads and shell commands.
-cwd = make_file("/home/drot/Downloads");
+// Default directory for downloads and shell commands.
+cwd = get_home_directory();
+cwd.append('Downloads');
 
-// firefox user agent
+// Firefox user agent
 session_pref("general.useragent.compatMode.firefox", true);
 
-// don't enable formfill
+// Don't enable formfill
 session_pref("browser.formfill.enable", false);
 
-// display tabs
-require("new-tabs.js");
-
-// open clicks in buffers (tabs) in the background
-require("clicks-in-new-buffer.js");
+// Open clicks in buffers in the background
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
 clicks_in_new_buffer_button = 1;
 
-// auto completion in the minibuffer
+// Auto completion in the minibuffer
 minibuffer_auto_complete_default = true;
 url_completion_use_history = true;
 url_completion_use_bookmarks = true;
 
-// load download buffers in the background in the current
-// window, instead of in new windows.
+// Load download buffers in the background
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-// open new urls in new buffer
+// Open new urls in new buffer
 url_remoting_fn = load_url_in_new_buffer;
 
-// prevent quitting by accident
+// Prevent quitting by accident
 can_kill_last_buffer = false;
 
-// we'd like to see the # of buffers being loaded 
+// Display number of buffers being loaded
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
 
-// but really we'd also like to know how many buffers are present and which is the current
+// Display number of present buffers and which is the current
 add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 
-// remove the clock
+// Remove the clock
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 
-//set emacs as external editor
-editor_shell_command = "emacsclient -a emacs";
+// External editor
+editor_shell_command = "emacsclient";
 
-// view source in your editor.
+// View source in external editor
 view_source_use_external_editor = true;
 
-// prevent focus stealing
-require("block-content-focus-change.js");
-
-// favicons
-require("favicon");
+// Favicons
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 read_buffer_show_icons = true;
 
-// webjumps
+// Delete existing webjumps
+existing_webjumps = ['answers', 'bugzilla', 'buildd', 'buildd-ports', 'clhs',
+                     'cliki', 'clusty', 'debbugs', 'debfile', 'debpopcon',
+                     'debpts', 'debqa', 'duckduckgo', 'ebay', 'freshmeat',
+                     'image', 'kuro5hin', 'lucky', 'maps', 'mdc',
+                     'ratpoisonwiki', 'savannah', 'slang', 'slashdot', 'sourceforge',
+                     'stumpwmwiki', 'ubuntubugs','ubuntufile', 'ubuntupkg', 'yahoo'];
+for (x in existing_webjumps) {
+    delete webjumps[existing_webjumps[x]];
+}
+
+// Webjumps
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 
-// clear history
+// Clear history
 function clear_history () {
     var history = Cc["@mozilla.org/browser/nav-history-service;1"]
         .getService(Ci.nsIBrowserHistory);
@@ -91,7 +97,7 @@ function clear_history () {
 };
 interactive("clear-history", "Clear the history.", clear_history);
 
-// reload conkerorrc with C-c r
+// Reload conkerorrc with C-c r
 interactive("reload-config", "reload conkerorrc",
 	    function(I) {
 		load_rc();
