@@ -2,9 +2,6 @@
 ;; drot-core.el - Core Emacs configuration
 ;;
 
-;; Recursive minibuffer
-(setq enable-recursive-minibuffers t)
-
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
