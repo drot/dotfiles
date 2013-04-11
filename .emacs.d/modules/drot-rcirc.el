@@ -9,12 +9,17 @@
 (require 'rcirc-controls)
 
 ; Color palette for nicks and escape characters
-(setq rcirc-colors '("#cc9393" "#60b48a" "#dfaf8f"
-                     "#506070" "#dc8cc3" "#8cd0d3"
-                     "#dcdccc" "#709080" "#dca3a3"
-                     "#c3bf9f" "#f0dfaf" "#94bff3"
-                     "#ec93d3" "#93e0e3" "#ffffff"))
-(setq rcirc-color-vector 'rcirc-colors)
+(setq rcirc-colors '("#dca3a3" "#dfaf8f" "#f0dfaf"
+                     "#7f9f7f" "#93e0e3" "#cc9393"
+                     "#d0bf8f" "#afd8af" "#5c888b"
+                     "#dc8cc3" "#8cd0d3"))
+
+; Color palette for escape characters
+(setq rcirc-color-vector '("#cc9393" "#60b48a" "#dfaf8f"
+                           "#506070" "#dc8cc3" "#8cd0d3"
+                           "#dcdccc" "#709080" "#dca3a3"
+                           "#c3bf9f" "#f0dfaf" "#94bff3"
+                           "#ec93d3" "#93e0e3" "#ffffff"))
 
 ; Connection
 (setq rcirc-server-alist
