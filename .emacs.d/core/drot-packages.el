@@ -12,7 +12,7 @@
   (package-refresh-contents))
 
 (defvar drot-package-list
-  '(pkgbuild-mode undo-tree paredit yasnippet ido-hacks diminish zenburn-theme)
+  '(pkgbuild-mode undo-tree paredit auto-complete yasnippet ido-hacks diminish zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p drot-package-list)
