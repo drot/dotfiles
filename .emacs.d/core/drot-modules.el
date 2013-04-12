@@ -23,11 +23,11 @@
 ;; Undo tree
 (require 'drot-undo)
 
-;; Auto Complete
-(require 'drot-ac)
-
 ;; YASnippet
 (require 'drot-yasnippet)
+
+;; Auto Complete
+(require 'drot-ac)
 
 ;; Abbrev mode
 (require 'drot-abbrev)
