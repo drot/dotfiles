@@ -8,6 +8,9 @@
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
+;; SLIME
+(require 'drot-slime)
+
 ;; Ido
 (require 'drot-ido)
 
