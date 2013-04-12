@@ -2,9 +2,6 @@
 ;; drot-ui.el - Emacs UI configuration
 ;;
 
-;; Color theme
-(load-theme 'zenburn t)
-
 ;; Turn off the toolbar
 (tool-bar-mode -1)
 
@@ -40,9 +37,19 @@
 ;; Show column number in modeline
 (column-number-mode t)
 
+;; Show buffer size in modeline
+(size-indication-mode t)
+
+;; Make the fringe smaller
+(if (fboundp 'fringe-mode)
+    (fringe-mode 4))
+
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
+
+;; Color theme
+(load-theme 'zenburn t)
 
 (provide 'drot-ui)
 ;; drot-ui.el ends here
