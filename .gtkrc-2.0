@@ -1,10 +1,10 @@
 gtk-theme-name = "Adwaita"
 gtk-icon-theme-name = "Tangerine"
-gtk-font-name = "Cantarell 10"
+gtk-font-name = "Ubuntu 10"
 gtk-key-theme-name = "Emacs"
 
 style "user-font"
 {
-    font_name="Ubuntu 9"
+    font_name="Ubuntu 10"
 }
 widget_class "*" style "user-font"
