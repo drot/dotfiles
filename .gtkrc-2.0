@@ -1,8 +1,6 @@
-include "/home/drot/.themes/New\ Wave/gtk-2.0/gtkrc"
-
-gtk-theme-name = "New Wave"
-gtk-icon-theme-name = "Tango"
-gtk-font-name = "Ubuntu 9"
+gtk-theme-name = "Adwaita"
+gtk-icon-theme-name = "Tangerine"
+gtk-font-name = "Cantarell 10"
 gtk-key-theme-name = "Emacs"
 
 style "user-font"
