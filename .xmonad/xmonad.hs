@@ -29,8 +29,9 @@ import XMonad.Layout.SimplestFloat
 myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2"
 myBGColor = "#3f3f3f"
 myFGColor = "#dcdccc"
-myRedColor = "#dca3a3"
-myYellowColor = "#f0dfaf"
+myBlackColor = "2b2b2b"
+myRedColor = "#cc9393"
+myGreenColor = "#60b48a"
 myPurpleColor = "#ec93d3"
 
 -- Launch xmonad
@@ -43,8 +44,8 @@ myConfig = defaultConfig {
            , focusFollowsMouse = False
            , borderWidth = 2
            , modMask = mod4Mask
-           , normalBorderColor = myFGColor
-           , focusedBorderColor = myRedColor
+           , normalBorderColor = myBlackColor
+           , focusedBorderColor = myGreenColor
            , layoutHook = myLayoutHook
            , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
            }
@@ -59,7 +60,7 @@ myBar = "xmobar ~/.xmonad/xmobarrc"
 -- Wrappers for title and workspaces
 myTitleWrap = wrap ("<fc=" ++ myFGColor ++ ">< </fc>") ("<fc=" ++ myFGColor ++ "> ></fc>")
 myWorkspaceWrap = wrap ("<fc=" ++ myFGColor ++ ">[</fc>") ("<fc=" ++ myFGColor ++ ">]</fc>")
-myUrgentWrap = wrap ("<fc=" ++ myYellowColor ++ ">[</fc>") ("<fc=" ++ myYellowColor ++ ">]</fc>")
+myUrgentWrap = wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColor ++ ">]</fc>")
 
 -- Urgency hook
 myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
@@ -67,11 +68,11 @@ myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 -- Status bar output
 myPP = defaultPP {
          ppTitle = xmobarColor myRedColor "" . myTitleWrap . shorten 50
-       , ppCurrent = xmobarColor myYellowColor "" . myWorkspaceWrap
+       , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
        , ppUrgent = xmobarColor myPurpleColor "" . myUrgentWrap
        , ppSep = "<fc=" ++ myRedColor ++ ">:</fc>"
        , ppWsSep = "<fc=" ++ myRedColor ++ ">:</fc>"
-       , ppLayout = xmobarColor myYellowColor ""
+       , ppLayout = xmobarColor myGreenColor ""
        , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
        }
 
@@ -115,10 +116,10 @@ myTabConfig = defaultTheme {
                 fontName = myFont
               , decoHeight = 28
               , activeColor = myBGColor
-              , activeBorderColor = myYellowColor
-              , activeTextColor = myYellowColor
+              , activeBorderColor = myGreenColor
+              , activeTextColor = myGreenColor
               , inactiveColor = myBGColor
-              , inactiveBorderColor = myFGColor
+              , inactiveBorderColor = myBlackColor
               , inactiveTextColor = myFGColor
               , urgentColor = myBGColor
               , urgentBorderColor = myPurpleColor
@@ -132,7 +133,7 @@ myXPConfig = defaultXPConfig {
              , fgColor = myFGColor
              , bgColor = myBGColor
              , bgHLight = myBGColor
-             , fgHLight = myYellowColor
+             , fgHLight = myGreenColor
              , position = Bottom
              }
 
