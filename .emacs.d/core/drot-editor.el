@@ -31,7 +31,7 @@
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
 
-(defun drot-enable-flyspell ()
+(defun activate-flyspell-mode ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
 
@@ -40,7 +40,7 @@
 (setq whitespace-line-column 80)
 (setq whitespace-style '(face tabs empty trailing lines-tail))
 
-(defun drot-enable-whitespace ()
+(defun activate-whitespace-mode ()
   "Turn whitespace-mode on."
   (whitespace-mode 1))
 
@@ -48,10 +48,10 @@
 (setq default-major-mode 'text-mode)
 
 ;; Enable Fly Spell for text mode
-(add-hook 'text-mode-hook 'drot-enable-flyspell)
+(add-hook 'text-mode-hook 'activate-flyspell-mode)
 
 ;; Enable whitespace-mode for text mode
-(add-hook 'text-mode-hook 'drot-enable-whitespace)
+(add-hook 'text-mode-hook 'activate-whitespace-mode)
 
 (provide 'drot-editor)
 ;; drot-editor.el ends here
