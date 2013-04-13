@@ -11,8 +11,14 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar drot-package-list
-  '(pkgbuild-mode undo-tree paredit auto-complete yasnippet ido-hacks diminish zenburn-theme)
+(defvar drot-package-list '(auto-complete
+                            diminish
+                            paredit
+                            pkgbuild-mode
+                            undo-tree
+                            yasnippet
+                            ido-hacks
+                            zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p drot-package-list)
