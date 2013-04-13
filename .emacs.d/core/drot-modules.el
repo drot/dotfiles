@@ -2,8 +2,23 @@
 ;; drot-modules.el - Enable/disable modules
 ;;
 
+;; Abbrev mode
+(require 'drot-abbrev)
+
 ;; CC mode
 (require 'drot-cc)
+
+;; rcirc mode
+(require 'drot-rcirc)
+
+;; CUA mode
+(require 'drot-cua)
+
+;; Ido
+(require 'drot-ido)
+
+;; Undo tree
+(require 'drot-undo)
 
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
@@ -11,29 +26,14 @@
 ;; SLIME
 (require 'drot-slime)
 
-;; Ido
-(require 'drot-ido)
-
-;; CUA mode
-(require 'drot-cua)
-
 ;; ParEdit mode
 (require 'drot-paredit)
-
-;; Undo tree
-(require 'drot-undo)
 
 ;; YASnippet
 (require 'drot-yasnippet)
 
 ;; Auto Complete
 (require 'drot-ac)
-
-;; Abbrev mode
-(require 'drot-abbrev)
-
-;; rcirc mode
-(require 'drot-rcirc)
 
 (provide 'drot-modules)
 ;; drot-modules.el ends here
