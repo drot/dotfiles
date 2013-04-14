@@ -16,40 +16,38 @@
 (set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
 ;; Change color map
-(setf *colors* (list "gray10"            ; 0
-		     "PaleVioletRed3"    ; 1
-		     "medium sea green"  ; 2
-		     "LightGoldenrod3"   ; 3
-		     "SkyBlue"           ; 4
-		     "wheat"             ; 5
-		     "honeydew"          ; 6
-		     "honeydew2"         ; 7
-		     "honeydew3"         ; 8
-		     "gray15"))          ; 9
+(setf *colors* (list "grey25"        ; 0
+		     "darkslategray" ; 1
+		     "darkseagreen4" ; 2
+		     "darkseagreen1" ; 3
+		     "deeppink3"     ; 4
+		     "plum3"         ; 5
+		     "powderblue"    ; 6
+		     "beige"))       ; 7
 (update-color-map (current-screen))
 
 ;; Change highlight function format
 (defun fmt-highlight (s)
-  (format nil "^6*~A^n" s))
+  (format nil "^3*~A^n" s))
 
 ;; Startup message
-(setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
+(setf *startup-message* "^6*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-border-color "honeydew4")
-(set-win-bg-color "gray10")
-(set-focus-color "honeydew2")
-(set-fg-color "honeydew")
-(set-bg-color "gray10")
-(set-unfocus-color "honeydew4")
-(set-float-focus-color "honeydew2")
-(set-float-unfocus-color "gray5")
+(set-bg-color "grey25")
+(set-fg-color "beige")
+(set-border-color "darkseagreen4")
+(set-win-bg-color "grey25")
+(set-focus-color "darkseagreen1")
+(set-unfocus-color "darkseagreen4")
+(set-float-focus-color "darkseagreen1")
+(set-float-unfocus-color "darkseagreen4")
 
 ;; Mode-line colors
-(setf *mode-line-background-color* "gray10"
-      *mode-line-foreground-color* "honeydew4"
-      *mode-line-border-color* "gray5"
-      *background* "gray10")
+(setf *mode-line-background-color* "grey25"
+      *mode-line-foreground-color* "darkseagreen4"
+      *mode-line-border-color* "darkseagreen4"
+      *background* "grey25")
 
 ;; Window style
 (setf *window-border-style* :thin
@@ -62,10 +60,10 @@
       *input-history-ignore-duplicates* 1)
 
 ;; Mode-line format
-(setf *time-modeline-string* "^3*%d-%m^n / ^4*%H:%M^n"
+(setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *group-format* "%n %s %t"
-      *screen-mode-line-format* (list "^5*%n^n %W ^> "
-				      "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
+      *screen-mode-line-format* (list "^6*%n^n %W ^> "
+				      "^6*%c^n^7*|^n ^3*%M^n^7*|^n ^6*%l^n^7*|^n %d")
       *mode-line-border-width* 0
       *mode-line-position* :top
       *mode-line-timeout* 1)
