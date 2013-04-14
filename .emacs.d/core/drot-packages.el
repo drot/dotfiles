@@ -14,6 +14,7 @@
 (defvar drot-package-list '(auto-complete
                             diminish
                             paredit
+                            magit
                             pkgbuild-mode
                             undo-tree
                             yasnippet
