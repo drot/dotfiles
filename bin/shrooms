@@ -1,0 +1,46 @@
+#!/bin/bash
+#made by toru
+#irc.unixhub.net
+  bkf=$'\e[30m';   rf=$'\e[31m';    gf=$'\e[32m'
+  yf=$'\e[33m'   bf=$'\e[34m';   mf=$'\e[35m'
+  cf=$'\e[36m';    wf=$'\e[37m'
+
+  bkb=$'\e[40m';   rb=$'\e[41m';    gb=$'\e[42m'
+  yb=$'\e[43m'   bb=$'\e[44m';   mb=$'\e[45m'
+  cb=$'\e[46m';    wb=$'\e[47m'; rst=$'\e[0m'
+
+  ibkf=$'\e[90m';   irf=$'\e[91m';    igf=$'\e[92m'
+  iyf=$'\e[93m'   ibf=$'\e[94m';   imf=$'\e[95m'
+  icf=$'\e[96m';    iwf=$'\e[97m'
+
+  ibkb=$'\e[100m';   irb=$'\e[101m';    igb=$'\e[102m'
+  iyb=$'\e[103m'   ibb=$'\e[104m';   imb=$'\e[105m'
+  icb=$'\e[106m';    iwb=$'\e[107m';
+cat << EOF
+${bkf}   ▄▄█${rb}▀${wb}▀▀${rb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${gb}▀${wb}▀▀${gb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${yb}▀${wb}▀▀${yb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${bb}▀${wb}▀▀${bb}▀█${rst}${bkf}▄${rst}
+${bkf} ▄█${wb}▀${rf}██▀${wf}██${rf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${gf}██▀${wf}██${gf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${yf}██▀${wf}██${yf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${bf}██▀${wf}██${bf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}
+${bkf}▄█${rf}█${wb}▄${wf}██${rb}▀▀▀▀██▀${rf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${gf}█${wb}▄${wf}██${gb}▀▀▀▀██▀${gf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${yf}█${wb}▄${wf}██${yb}▀▀▀▀██▀${yf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${bf}█${wb}▄${wf}██${bb}▀▀▀▀██▀${bf}█${rst}${bkf}█▄${rst}
+${bkf}█${rf}███${wf}█${rf}██████${wf}█${rf}███${bkf}█${rst}${break} ${bkf}█${gf}███${wf}█${gf}██████${wf}█${gf}███${bkf}█${rst}${break} ${bkf}█${yf}███${wf}█${yf}██████${wf}█${yf}███${bkf}█${rst}${break} ${bkf}█${bf}███${wf}█${bf}██████${wf}█${bf}███${bkf}█${rst}
+${bkf}█${wf}${rb}▄▄██▄${rf}████${wf}${rb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${gb}▄▄██▄${gf}████${wf}${gb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${yb}▄▄██▄${yf}████${wf}${yb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${bb}▄▄██▄${bf}████${wf}${bb}▄██▄▄${bkf}█${rst}
+${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}
+${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}
+${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${endofline}
+
+${bkf}   ▄▄█${mb}▀${wb}▀▀${mb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${cb}▀${wb}▀▀${cb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${irb}▀${wb}▀▀${irb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${igb}▀${wb}▀▀${igb}▀█${rst}${bkf}▄${rst}
+${bkf} ▄█${wb}▀${mf}██▀${wf}██${mf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${cf}██▀${wf}██${cf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${irf}██▀${wf}██${irf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${igf}██▀${wf}██${igf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}
+${bkf}▄█${mf}█${wb}▄${wf}██${mb}▀▀▀▀██▀${mf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${cf}█${wb}▄${wf}██${cb}▀▀▀▀██▀${cf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${irf}█${wb}▄${wf}██${irb}▀▀▀▀██▀${irf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${igf}█${wb}▄${wf}██${igb}▀▀▀▀██▀${igf}█${rst}${bkf}█▄${rst}
+${bkf}█${mf}███${wf}█${mf}██████${wf}█${mf}███${bkf}█${rst}${break} ${bkf}█${cf}███${wf}█${cf}██████${wf}█${cf}███${bkf}█${rst}${break} ${bkf}█${irf}███${wf}█${irf}██████${wf}█${irf}███${bkf}█${rst}${break} ${bkf}█${igf}███${wf}█${igf}██████${wf}█${igf}███${bkf}█${rst}
+${bkf}█${wf}${mb}▄▄██▄${mf}████${wf}${mb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${cb}▄▄██▄${cf}████${wf}${cb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${irb}▄▄██▄${irf}████${wf}${irb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${igb}▄▄██▄${igf}████${wf}${igb}▄██▄▄${bkf}█${rst}
+${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}
+${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}
+${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${endofline}
+
+${bkf}   ▄▄█${iyb}▀${wb}▀▀${iyb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${ibb}▀${wb}▀▀${ibb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${imb}▀${wb}▀▀${imb}▀█${rst}${bkf}▄${rst}${break}     ${bkf}   ▄▄█${icb}▀${wb}▀▀${icb}▀█${rst}${bkf}▄${rst}
+${bkf} ▄█${wb}▀${iyf}██▀${wf}██${iyf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${ibf}██▀${wf}██${ibf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${imf}██▀${wf}██${imf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}${break}  ${bkf} ▄█${wb}▀${icf}██▀${wf}██${icf}${wb}▀██${bkf}▀█${rst}${bkf}▄${rst}
+${bkf}▄█${iyf}█${wb}▄${wf}██${iyb}▀▀▀▀██▀${iyf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${ibf}█${wb}▄${wf}██${ibb}▀▀▀▀██▀${ibf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${imf}█${wb}▄${wf}██${imb}▀▀▀▀██▀${imf}█${rst}${bkf}█▄${rst}${break} ${bkf}▄█${icf}█${wb}▄${wf}██${icb}▀▀▀▀██▀${icf}█${rst}${bkf}█▄${rst}
+${bkf}█${iyf}███${wf}█${iyf}██████${wf}█${iyf}███${bkf}█${rst}${break} ${bkf}█${ibf}███${wf}█${ibf}██████${wf}█${ibf}███${bkf}█${rst}${break} ${bkf}█${imf}███${wf}█${imf}██████${wf}█${imf}███${bkf}█${rst}${break} ${bkf}█${icf}███${wf}█${icf}██████${wf}█${icf}███${bkf}█${rst}
+${bkf}█${wf}${iyb}▄▄██▄${iyf}████${wf}${iyb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${ibb}▄▄██▄${ibf}████${wf}${ibb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${imb}▄▄██▄${imf}████${wf}${imb}▄██▄▄${bkf}█${rst}${break} ${bkf}█${wf}${icb}▄▄██▄${icf}████${wf}${icb}▄██▄▄${bkf}█${rst}
+${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}${break} ${bkf}█${wb}▄▄█▀▀█▀▀█▀▀█▄▄█${rst}
+${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}${break}  ${bkf} ▀█${wf}███${bkb}▄██▄███${rst}${bkf}█▀${rst}
+${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}${break}   ${bkf}  ▀█${wb}▄▄▄▄▄▄▄▄█${rst}${bkf}▀${rst}
+EOF
