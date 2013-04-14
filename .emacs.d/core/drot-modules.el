@@ -11,9 +11,6 @@
 ;; rcirc mode
 (require 'drot-rcirc)
 
-;; CUA mode
-(require 'drot-cua)
-
 ;; Ido
 (require 'drot-ido)
 

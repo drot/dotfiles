@@ -26,6 +26,10 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
+;; Enable CUA mode for rectangular selection
+(setq cua-enable-cua-keys nil)
+(cua-mode t)
+
 ;; Spell checking with Fly Spell
 (require 'flyspell)
 (setq ispell-program-name "aspell"
