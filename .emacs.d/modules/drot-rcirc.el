@@ -22,7 +22,7 @@
       '(("irc.freenode.net" :channels ("#archlinux" "#emacs"))))
 
 ; Authorization
-(when (file-exists-p "~/.ircpass")
+(if (file-exists-p "~/.ircpass")
     (load "~/.ircpass"))
 (setq rcirc-authinfo
       `(("freenode" nickserv "drot" ,freenode-password)))

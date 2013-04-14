@@ -5,7 +5,7 @@
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" drot-saves-dir)
       save-abbrevs t)
-(when (file-exists-p abbrev-file-name)
+(if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
 (setq default-abbrev-mode t)
 
