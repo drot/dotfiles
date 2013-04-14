@@ -2,9 +2,6 @@
 ;; drot-modules.el - Enable/disable modules
 ;;
 
-;; Abbrev mode
-(require 'drot-abbrev)
-
 ;; CC mode
 (require 'drot-cc)
 
