@@ -4,6 +4,8 @@
 
 ;; Enable Undo tree
 (global-undo-tree-mode)
+
+;; Shorten mode name
 (diminish 'undo-tree-mode "Undo")
 
 (provide 'drot-undo)
