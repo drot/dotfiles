@@ -52,6 +52,9 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
+;; Shorten mode name
+(diminish 'abbrev-mode "Abv")
+
 ;; Spell checking with Fly Spell
 (require 'flyspell)
 (setq ispell-program-name "aspell"
