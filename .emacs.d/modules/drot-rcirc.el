@@ -5,17 +5,9 @@
 ;; Load rcirc
 (require 'rcirc)
 
-(defun activate-bottom-prompt ()
+(defun regular-irc-prompt ()
   "Keep prompt at bottom."
   (set (make-local-variable 'scroll-conservatively) 8192))
-
-(defun activate-omit-mode ()
-  "Turn rcirc Omit mode on."
-  (rcirc-omit-mode))
-
-(defun activate-track-mode ()
-  "Turn rcirc Track mode on."
-  (rcirc-track-minor-mode 1))
 
 ; Connection
 (setq rcirc-server-alist
@@ -35,16 +27,16 @@
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
 ; Keep prompt at bottom
-(add-hook 'rcirc-mode-hook 'activate-bottom-prompt)
+(add-hook 'rcirc-mode-hook 'regular-irc-prompt)
 
 ; Turn on spell checking
-(add-hook 'rcirc-mode-hook 'activate-flyspell-mode)
+(add-hook 'rcirc-mode-hook 'flyspell-mode)
 
 ; Turn on Omit mode
-(add-hook 'rcirc-mode-hook 'activate-omit-mode)
+(add-hook 'rcirc-mode-hook 'rcirc-omit-mode)
 
 ; Track channel activity
-(add-hook 'rcirc-mode-hook 'activate-track-mode)
+(add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
 
 (provide 'drot-rcirc)
 ;; drot-rcirc.el ends here
