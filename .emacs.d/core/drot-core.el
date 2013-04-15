@@ -64,9 +64,6 @@
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Reuse dired buffer
-(put 'dired-find-alternate-file 'disabled nil)
-
 ;; Calendar
 (setq mark-holidays-in-calendar t
       all-christian-calendar-holidays t

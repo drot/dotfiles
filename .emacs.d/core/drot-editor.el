@@ -17,6 +17,12 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;; Enable CUA mode for rectangular selection
+(cua-selection-mode 1)
+
+;; Easier navigation with CamelCase words
+(global-subword-mode 1)
+
 ;; Enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
@@ -25,10 +31,6 @@
 ;; Enable change region case commands
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
-
-;; Enable CUA mode for rectangular selection
-(setq cua-enable-cua-keys nil)
-(cua-mode t)
 
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" drot-saves-dir)
