@@ -65,7 +65,13 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Calendar
-(setq calendar-christian-all-holidays-flag t
+(setq calendar-mark-holidays-flag t
+      holiday-general-holidays nil
+      holiday-bahai-holidays nil
+      holiday-oriental-holidays nil
+      holiday-solar-holidays nil
+      holiday-islamic-holidays nil
+      holiday-hebrew-holidays nil
       calendar-date-style 'european
       calendar-latitude 43.20
       calendar-longitude 17.48
