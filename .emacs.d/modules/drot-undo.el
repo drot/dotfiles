@@ -2,11 +2,11 @@
 ;; drot-undo.el - Undo tree configuration
 ;;
 
-;; Store undo history in the tmp directory
+;; Store Undo Tree history in the tmp directory
 (setq undo-tree-history-directory-alist
       `((".*" . ,temporary-file-directory)))
 
-;; Enable undo history
+;; Enable Undo tree history
 (setq undo-tree-auto-save-history t)
 
 ;; Enable Undo tree
