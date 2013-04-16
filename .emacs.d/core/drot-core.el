@@ -66,7 +66,6 @@
 
 ;; Calendar
 (setq calendar-christian-all-holidays-flag t
-      calendar-mark-holidays-flag t
       calendar-date-style 'european
       calendar-latitude 43.20
       calendar-longitude 17.48
