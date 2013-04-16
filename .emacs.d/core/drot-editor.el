@@ -17,11 +17,11 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
-;; Enable CUA mode for rectangular selection
-(cua-selection-mode 1)
-
 ;; Easier navigation with CamelCase words
 (global-subword-mode 1)
+
+;; Enable CUA mode for rectangular selection
+(cua-selection-mode 1)
 
 ;; Enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
