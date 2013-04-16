@@ -65,12 +65,9 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Calendar
-(setq mark-holidays-in-calendar t
-      all-christian-calendar-holidays t
-      all-islamic-calendar-holidays nil
-      all-hebrew-calendar-holidays nil
-      european-calendar-style t
-      display-time-24hr-format t
+(setq calendar-christian-all-holidays-flag t
+      calendar-mark-holidays-flag t
+      calendar-date-style 'european
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
