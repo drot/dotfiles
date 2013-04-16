@@ -10,7 +10,7 @@ require("favicon");
 homepage = "about:blank";
 
 // Improve hinting keys
-hint_background_color = "blue";
+hint_background_color = "transparent";
 hint_digits = "aoeuhtns";
 hints_display_url_panel = true;
 
