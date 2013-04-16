@@ -12,7 +12,7 @@
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
-      savehist-file (expand-file-name "saved.hist" drot-saves-dir))
+      savehist-file (expand-file-name "minbuf.hist" drot-saves-dir))
 (savehist-mode t)
 
 ;; Message buffer size
@@ -54,15 +54,15 @@
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
 
+;; Use ANSI colors within shell-mode
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;; Easier switching between visible buffers
 (require 'windmove)
 (windmove-default-keybindings)
 
 ;; Enable Winner mode
 (winner-mode 1)
-
-;; Use ANSI colors within shell-mode
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Calendar
 (setq calendar-mark-holidays-flag t

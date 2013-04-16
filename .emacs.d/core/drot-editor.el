@@ -55,7 +55,7 @@
 ;; Shorten mode name
 (diminish 'abbrev-mode "Abv")
 
-;; Spell checking with Fly Spell
+;; Fly Spell configuration
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -67,12 +67,6 @@
 
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)
-
-;; Enable Fly Spell for text mode
-(add-hook 'text-mode-hook 'flyspell-mode)
-
-;; Enable whitespace mode for text mode
-(add-hook 'text-mode-hook 'whitespace-mode)
 
 (provide 'drot-editor)
 ;; drot-editor.el ends here
