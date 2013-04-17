@@ -32,6 +32,14 @@
 ;; Use ParEdit in the minibuffer
 (add-hook 'minibuffer-setup-hook 'paredit-minbuf)
 
+;; Make ParEdit work with delete-selection mode
+(put 'paredit-forward-delete 'delete-selection 'supersede)
+(put 'paredit-backward-delete 'delete-selection 'supersede)
+(put 'paredit-open-round 'delete-selection t)
+(put 'paredit-open-square 'delete-selection t)
+(put 'paredit-doublequote 'delete-selection t)
+(put 'paredit-newline 'delete-selection t)
+
 ;; Shorten mode name
 (eval-after-load "paredit" '(diminish 'paredit-mode "PEd"))
 

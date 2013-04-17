@@ -23,6 +23,9 @@
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 
+;; Delete a selection with a keypress
+(delete-selection-mode t)
+
 ;; Enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
