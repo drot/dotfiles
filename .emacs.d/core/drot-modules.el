@@ -17,9 +17,6 @@
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
-;; magit
-(eval-after-load 'magit '(require 'drot-magit))
-
 ;; SLIME
 (require 'drot-slime)
 
