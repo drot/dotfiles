@@ -41,7 +41,7 @@
 (put 'paredit-newline 'delete-selection t)
 
 ;; Shorten mode name
-(eval-after-load "paredit" '(diminish 'paredit-mode "PEd"))
+(eval-after-load 'paredit '(diminish 'paredit-mode "PEd"))
 
 (provide 'drot-paredit)
 ;; drot-paredit.el ends here
