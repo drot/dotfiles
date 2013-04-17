@@ -14,17 +14,17 @@
 ;; Undo tree
 (require 'drot-undo)
 
-;; magit
-(eval-after-load 'magit '(require 'drot-magit))
-
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
+
+;; magit
+(eval-after-load 'magit '(require 'drot-magit))
 
 ;; SLIME
 (require 'drot-slime)
 
 ;; ParEdit mode
-(require 'drot-paredit)
+(eval-after-load 'drot-slime '(require 'drot-paredit))
 
 ;; YASnippet
 (require 'drot-yasnippet)
