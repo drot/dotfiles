@@ -14,6 +14,9 @@
 ;; Undo tree
 (require 'drot-undo)
 
+;; magit
+(require 'drot-magit)
+
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
