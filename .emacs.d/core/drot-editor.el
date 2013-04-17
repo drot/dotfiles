@@ -71,5 +71,8 @@
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)
 
+;; Code folding with Hide Show
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
 (provide 'drot-editor)
 ;; drot-editor.el ends here
