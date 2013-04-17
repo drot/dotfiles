@@ -15,7 +15,7 @@
 (require 'drot-undo)
 
 ;; magit
-(require 'drot-magit)
+(eval-after-load 'magit '(require 'drot-magit))
 
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
