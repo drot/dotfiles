@@ -30,7 +30,7 @@
 (require 'drot-yasnippet)
 
 ;; Auto Complete
-(require 'drot-ac)
+(eval-after-load 'drot-yasnippet '(require 'drot-ac))
 
 (provide 'drot-modules)
 ;; drot-modules.el ends here
