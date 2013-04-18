@@ -29,7 +29,7 @@
       scroll-preserve-screen-position 1)
 
 ;; Answer y or n instead of yes or no at prompts
-(defalias 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
