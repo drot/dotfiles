@@ -29,6 +29,9 @@
 ; Keep prompt at bottom
 (add-hook 'rcirc-mode-hook 'regular-irc-prompt)
 
+;; Wrap lines that are too long
+(add-hook 'rcirc-mode-hook 'visual-line-mode)
+
 ; Turn on spell checking
 (add-hook 'rcirc-mode-hook 'flyspell-mode)
 
