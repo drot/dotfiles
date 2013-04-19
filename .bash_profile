@@ -1,4 +1,5 @@
-# drot bash profile
+#
+# ~/.bash_profile
+#
 
-# source bashrc
-[ -f .bashrc ] && source $HOME/.bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc

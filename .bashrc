@@ -55,11 +55,11 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-export PS1="\[`EXT_COLOR 187`\]\u@\h\[`EXT_COLOR 174`\] \w \$\[`EXT_COLOR 187`\]${GIT}\[`CLOSE_COLOR`\] > "
+export PS1="\[`EXT_COLOR 187`\]\u@\h\[`EXT_COLOR 174`\] \w\[`EXT_COLOR 187`\]${GIT} \[`EXT_COLOR 174`\]\$\[`CLOSE_COLOR`\] "
 
 # prompt look for tty
 if [ "$TERM" = "linux" ]; then
-    export PS1="${GREEN}\u@\h${BLUE} \w \$${GREEN}${GIT}${NIL} > "
+    export PS1="${GREEN}\u@\h${BLUE} \w${GREEN}${GIT} ${BLUE}\$${NIL} "
 fi
 
 # aliases

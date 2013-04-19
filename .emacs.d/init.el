@@ -4,7 +4,7 @@
 
 ;; Define directories
 (defvar drot-emacs-dir (file-name-directory load-file-name)
-  "The root dir of the Emacs distribution.")
+  "The root directory of the Emacs distribution.")
 
 (defvar drot-core-dir (expand-file-name "core" drot-emacs-dir)
   "This directory houses Emacs core configuration.")
