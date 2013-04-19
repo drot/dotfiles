@@ -74,5 +74,11 @@
 ;; Code folding with Hide Show
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
+;; ElDoc
+(require 'eldoc)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
 (provide 'drot-editor)
 ;; drot-editor.el ends here

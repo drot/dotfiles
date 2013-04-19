@@ -32,6 +32,11 @@
 ;; Use ParEdit in the minibuffer
 (add-hook 'minibuffer-setup-hook 'paredit-minbuf)
 
+;; Make ParEdit work with ElDoc
+(eldoc-add-command
+ 'paredit-backward-delete
+ 'paredit-close-round)
+
 ;; Make ParEdit work with delete-selection mode
 (put 'paredit-forward-delete 'delete-selection 'supersede)
 (put 'paredit-backward-delete 'delete-selection 'supersede)
