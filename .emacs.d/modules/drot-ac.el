@@ -14,7 +14,7 @@
   (ac-set-trigger-key "<tab>"))
 
 (defun my-ac-cc-setup ()
-  "Enable Clang for CC mode."
+  "Enable Clang completion for CC mode."
   (setq ac-sources (append '(ac-source-clang-async ac-source-yasnippet) ac-sources))
   (ac-clang-launch-completion-process))
 
