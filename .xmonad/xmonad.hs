@@ -40,7 +40,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
 -- Override defaults
 myConfig = defaultConfig {
-             terminal = "urxvtc"
+             terminal = "termite"
            , focusFollowsMouse = False
            , borderWidth = 2
            , modMask = mod4Mask
@@ -106,7 +106,7 @@ myUrgent = urgencyConfig {
 
 -- Scratchpad
 --
-myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
+myScratch = [ NS "music" "termite -e ncmpcpp" (title =? "ncmpcpp")
               (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
             ]
 

@@ -13,7 +13,6 @@
 
 (defvar drot-package-list '(auto-complete
                             diminish
-                            haskell-mode
                             paredit
                             magit
                             pkgbuild-mode

@@ -17,9 +17,6 @@
 ;; PKGBUILD mode
 (require 'drot-pkgbuild)
 
-;; Haskell mode
-(require 'drot-haskell)
-
 ;; rcirc mode
 (require 'drot-rcirc)
 
