@@ -114,7 +114,7 @@
 
 ; Swap defaults
 (define-key *root-map* (kbd "C-c") "conkeror")
-(define-key *root-map* (kbd "c") "exec urxvtc")
+(define-key *root-map* (kbd "c") "exec termite")
 (define-key *root-map* (kbd "e") "eclient")
 
 ; Fast group switching

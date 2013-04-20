@@ -1,5 +1,8 @@
 #!/bin/sh
 
+## Start session
+systemd --user &
+
 ## Initialize defaults
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
@@ -13,11 +16,5 @@ sh ~/.fehbg &
 xset -dpms &
 xset s off &
 
-## Launch rxvt-unicode daemon
-urxvtd -q -o -f &
-
-## Start session
-systemd --user &
-
 ## Start window manager
-exec xmonad
+exec ~/stumpwm/stumpwm
