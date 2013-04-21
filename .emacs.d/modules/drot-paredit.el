@@ -21,6 +21,15 @@
 (add-hook 'lisp-mode-hook 'paredit-mode)
 (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
 
+(defun paredit-slime-fix ()
+  "Fix ParEdit conflict with SLIME."
+  (define-key slime-repl-mode-map
+    (read-kbd-macro paredit-backward-delete-key) nil))
+
+;; Use ParEdit with SLIME
+(add-hook 'slime-repl-mode-hook 'paredit-mode)
+(add-hook 'slime-repl-mode-hook 'paredit-slime-fix)
+
 (defvar paredit-minbuf-commands '(eval-expression
                                       pp-eval-expression
                                       eval-expression-with-eldoc
