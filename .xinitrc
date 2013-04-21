@@ -17,4 +17,4 @@ xset -dpms &
 xset s off &
 
 ## Start window manager
-exec xmonad
+exec ~/stumpwm/stumpwm
