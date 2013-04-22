@@ -9,7 +9,6 @@
   "Change some defaults."
   (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (setq-default ac-comphist-file (expand-file-name "ac-comphist.dat" drot-saves-dir))
-  (setq ac-clang-complete-executable (expand-file-name "clang-complete" drot-vendor-dir))
   (ac-set-trigger-key "TAB")
   (ac-set-trigger-key "<tab>"))
 

@@ -49,7 +49,7 @@
       ediff-split-window-function 'split-window-horizontally)
 
 ;; Color theme
-(load-theme 'zenburn t)
+(load-theme 'jazz t)
 
 (provide 'drot-ui)
 ;; drot-ui.el ends here

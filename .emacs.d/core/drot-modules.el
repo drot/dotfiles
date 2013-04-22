@@ -14,9 +14,6 @@
 ;; Org mode
 (require 'drot-org)
 
-;; PKGBUILD mode
-(require 'drot-pkgbuild)
-
 ;; rcirc mode
 (require 'drot-rcirc)
 

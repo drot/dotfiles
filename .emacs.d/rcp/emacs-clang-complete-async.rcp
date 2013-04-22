@@ -1,0 +1,6 @@
+(:name emacs-clang-complete-async
+       :type github
+       :pkgname "Golevka/emacs-clang-complete-async"
+       :description "An emacs plugin to complete C and C++ code using libclang."
+       :build ("make")
+       :post-init (setq ac-clang-complete-executable (expand-file-name "clang-complete")))
