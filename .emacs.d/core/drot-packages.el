@@ -2,12 +2,11 @@
 ;; drot-packages.el - Emacs default package selection
 ;;
 
-;; Put el-get into the Emacs directory
+;; Put El-Get into the Emacs directory
 (setq el-get-dir (file-name-as-directory (expand-file-name "el-get" drot-emacs-dir)))
 (add-to-list 'load-path (file-name-as-directory (expand-file-name "el-get" el-get-dir)))
-;; Fetch only latest versions from git repositories
-(setq el-get-git-shallow-clone t)
-;; Bootstrap el-get
+
+;; Bootstrap El-Get
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -19,19 +18,19 @@
 ;; Additional recipes
 (add-to-list 'el-get-recipe-path (expand-file-name "rcp" drot-emacs-dir))
 
-(defvar my-package-list '(auto-complete
-                            diminish
-                            emacs-clang-complete-async
-                            jazz-theme
-                            paredit
-                            magit
-                            pkgbuild-mode
-                            undo-tree
-                            yasnippet
-                            ido-hacks)
+(defvar my-packages '(auto-complete
+                      diminish
+                      emacs-clang-complete-async
+                      jazz-theme
+                      paredit
+                      magit
+                      pkgbuild-mode
+                      undo-tree
+                      yasnippet
+                      ido-hacks)
   "A list of packages to ensure are installed at launch.")
 
-(el-get 'sync my-package-list)
+(el-get 'sync my-packages)
 
 (provide 'drot-packages)
 ;; drot-packages.el ends here
