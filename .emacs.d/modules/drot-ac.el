@@ -3,7 +3,6 @@
 ;;
 
 (require 'auto-complete-config)
-(require 'auto-complete-clang-async)
 
 (defun my-ac-setup ()
   "Change some defaults."
