@@ -41,10 +41,6 @@ shopt -s histappend # append to the history file
 shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty line
 
 # prompt colors
-function EXT_COLOR () { echo -ne "\e[38;5;$1m"; }
-function CLOSE_COLOR () { echo -ne '\e[m'; }
-
-# prompt colors for tty
 GREEN='\[\033[0;32m\]'
 BLUE='\[\033[0;34m\]'
 NIL='\[\033[00m\]'
@@ -55,12 +51,7 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-export PS1="\[`EXT_COLOR 187`\]\u@\h\[`EXT_COLOR 174`\] \w\[`EXT_COLOR 187`\]${GIT} \[`EXT_COLOR 174`\]\$\[`CLOSE_COLOR`\] "
-
-# prompt look for tty
-if [ "$TERM" = "linux" ]; then
-    export PS1="${GREEN}\u@\h${BLUE} \w${GREEN}${GIT} ${BLUE}\$${NIL} "
-fi
+export PS1="${GREEN}\u@\h${BLUE} \w${GREEN}${GIT} ${BLUE}\$${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
