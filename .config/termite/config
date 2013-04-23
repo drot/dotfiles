@@ -33,38 +33,38 @@ cursor_shape = block
 #word_chars = -A-Za-z0-9,./?%&#:_=+@~
 
 [colors]
-foreground = #dcdccc
-foreground_bold = #ffffff
+foreground = #FFFFFF
+#foreground_bold = #ffffff
 #foreground_dim = #888888
-background = #3f3f3f
-#cursor = #dcdccc
+background = #261515
+cursor = #E25454
 
 # if unset, will reverse foreground and background
-highlight = #2b2b2b
+highlight = #757575
 
 # colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #cc9393
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
+color0 = #757575
+color1 = #FF5F5F
+color2 = #DE8A36
+color3 = #D78787
+color4 = #AF5FD7
+color5 = #FF87D7
+color6 = #DEA3E5
+color7 = #B8B8B8
+color8 = #B8B8B8
+color9 = #D78787
+color10 = #FF9F6F
+color11 = #FF5F5F
+color12 = #DEA3E5
+color13 = #D7AFAF
+color14 = #AF5FD7
+color15 = #757575
 
 [hints]
 font = Terminus 10
-foreground = #3f3f3f
-background = #60b48a
+foreground = #261515
+background = #AF5FD7
 padding = 1
-border = #2b2b2b
-border_width = 4.0
+border = #DE8A36
+border_width = 2.0
 roundness = 2.0
