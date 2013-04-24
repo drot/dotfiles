@@ -17,9 +17,6 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
-;; Easier navigation with CamelCase words
-(global-subword-mode 1)
-
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 
@@ -80,11 +77,13 @@
 ;; Code folding with Hide Show
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
+;; Easier navigation with CamelCase words
+(add-hook 'prog-mode-hook 'subword-mode)
+
 ;; ElDoc
-(require 'eldoc)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+(add-hook 'ielm-mode-hook 'eldoc-mode)
 
 (provide 'drot-editor)
 ;; drot-editor.el ends here
