@@ -71,6 +71,12 @@
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)
 
+;; Enable Fly Spell for text mode
+(add-hook 'text-mode-hook 'flyspell-mode)
+
+;; Enable whitespace mode for text mode
+(add-hook 'text-mode-hook 'whitespace-mode)
+
 ;; Code folding with Hide Show
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
