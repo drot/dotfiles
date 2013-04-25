@@ -9,12 +9,9 @@ systemd --user &
 ## Mouse cursor
 xsetroot -cursor_name left_ptr &
 
-## Set background
-sh ~/.fehbg &
-
 ## Disable power saving
 xset -dpms &
 xset s off &
 
 ## Start window manager
-exec ~/stumpwm/stumpwm
+exec awesome
