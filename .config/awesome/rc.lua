@@ -9,6 +9,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
+-- Scratchpad
+local scratch = require("scratch")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -255,7 +257,10 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "p",     function () mypromptbox[mouse.screen]:run() end),
+   awful.key({ modkey }, "p", function () mypromptbox[mouse.screen]:run() end),
+
+   -- Scratchpad
+   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 600, 300) end),
 
    awful.key({ modkey }, "x",
              function ()
