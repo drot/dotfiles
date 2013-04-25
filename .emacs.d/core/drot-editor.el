@@ -17,6 +17,9 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;; Parenthesis matching
+(electric-pair-mode t)
+
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 
@@ -79,9 +82,6 @@
 
 ;; Easier navigation with CamelCase words
 (add-hook 'prog-mode-hook 'subword-mode)
-
-;; Paren matching with Electric Pair mode
-(add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;; ElDoc
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
