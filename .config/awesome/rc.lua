@@ -114,7 +114,8 @@ mymainmenu = awful.menu({ items = { { "open terminal", terminal },
 
 -- {{{ Separator
 -- Simple space
-separator = wibox.widget.textbox(" ")
+separator = wibox.widget.imagebox()
+separator:set_image(beautiful.widget_sep)
 -- }}}
 
 -- {{{ CPU temperature widget
@@ -160,7 +161,7 @@ memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
 memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
--- Pogressbar properties
+-- Progressbar properties
 membar:set_vertical(true):set_ticks(true)
 membar:set_width(11):set_ticks_size(2)
 membar:set_background_color(beautiful.bg_normal)
@@ -171,6 +172,29 @@ vicious.cache(vicious.widgets.mem)
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1%", 13)
 vicious.register(membar, vicious.widgets.mem, "$1", 15)
+-- }}}
+
+-- {{{ Disk usage widget
+diskicon = wibox.widget.imagebox()
+diskicon:set_image(beautiful.widget_disk)
+-- Initialize widget
+dperc = { r = wibox.widget.textbox(), h = wibox.widget.textbox() }
+dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
+-- Progresbar properties
+for _, dstyle in pairs(dusage) do
+   dstyle:set_vertical(true):set_ticks(true)
+   dstyle:set_width(6):set_ticks_size(2)
+   dstyle:set_background_color(beautiful.bg_normal)
+   dstyle:set_color(beautiful.fg_focus)
+   dstyle:set_border_color(beautiful.border_normal)
+end
+-- Enable caching
+vicious.cache(vicious.widgets.fs)
+-- Register widget
+vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 490)
+vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 490)
+vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 500)
+vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 500)
 -- }}}
 
 -- {{{ Date widget
@@ -271,6 +295,12 @@ for s = 1, screen.count() do
    right_layout:add(memicon)
    right_layout:add(memwidget)
    right_layout:add(membar)
+   right_layout:add(separator)
+   right_layout:add(diskicon)
+   right_layout:add(dperc.r)
+   right_layout:add(dusage.r)
+   right_layout:add(dperc.h)
+   right_layout:add(dusage.h)
    right_layout:add(separator)
    right_layout:add(dateicon)
    right_layout:add(datewidget)
@@ -447,18 +477,7 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-                         -- Enable sloppy focus
-                         c:connect_signal("mouse::enter", function(c)
-                                             if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                                             and awful.client.focus.filter(c) then
-                                                client.focus = c
-                                             end
-                                                          end)
-
                          if not startup then
-                            -- Set the windows at the slave,
-                            -- i.e. put it at the end of others instead of setting it master.
-                            -- awful.client.setslave(c)
 
                             -- Put windows in a smart way, only if they does not set an initial position.
                             if not c.size_hints.user_position and not c.size_hints.program_position then
