@@ -9,7 +9,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -38,10 +37,12 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/drot/.config/awesome/themes/tomorrow/theme.lua")
 
--- This is used later as the default terminal run.
+-- This is used later as the default terminal and editor to run.
 terminal = "termite"
+editor = os.getenv("EDITOR") or "emacs"
+editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -54,10 +55,16 @@ modkey = "Mod4"
 local layouts =
    {
       awful.layout.suit.tile,
+      awful.layout.suit.tile.left,
+      awful.layout.suit.tile.bottom,
+      awful.layout.suit.tile.top,
       awful.layout.suit.floating,
       awful.layout.suit.fair,
+      awful.layout.suit.fair.horizontal,
       awful.layout.suit.spiral,
+      awful.layout.suit.spiral.dwindle,
       awful.layout.suit.max,
+      awful.layout.suit.max.fullscreen,
       awful.layout.suit.magnifier
    }
 -- }}}
@@ -73,8 +80,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names = { "1", "2", "3", "4" },
-   layout = { layouts[1], layouts[6], layouts[1], layouts[2] }
+   names = { "1", "2", "3", "4", "5" },
+   layout = { layouts[1], layouts[12], layouts[1], layouts[5], layouts[1] }
 }
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
@@ -84,6 +91,8 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
+   { "manual", terminal .. " -e man awesome" },
+   { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
@@ -93,9 +102,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
 }
                         })
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
+mylauncher = awful.widget.launcher({ menu = mymainmenu })
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -171,6 +178,7 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
+   left_layout:add(mylauncher)
    left_layout:add(mytaglist[s])
    left_layout:add(mylayoutbox[s])
    left_layout:add(mypromptbox[s])
@@ -247,7 +255,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+   awful.key({ modkey },            "p",     function () mypromptbox[mouse.screen]:run() end),
 
    awful.key({ modkey }, "x",
              function ()
@@ -255,9 +263,7 @@ globalkeys = awful.util.table.join(
                                  mypromptbox[mouse.screen].widget,
                                  awful.util.eval, nil,
                                  awful.util.getdir("cache") .. "/history_eval")
-             end),
-   -- Menubar
-   awful.key({ modkey }, "p", function() menubar.show() end)
+             end)
 )
 
 clientkeys = awful.util.table.join(
@@ -335,19 +341,18 @@ awful.rules.rules = {
                     focus = awful.client.focus.filter,
                     keys = clientkeys,
                     buttons = clientbuttons,
-                    size_hints_honor = false
-     }
-   },
-
+                    size_hints_honor = false } },
    { rule = { class = "mpv" },
      properties = { floating = true } },
    { rule = { class = "pinentry" },
      properties = { floating = true } },
    { rule = { class = "gimp" },
      properties = { floating = true } },
-   -- Set Firefox to always map on tags number 2 of screen 1.
-   -- { rule = { class = "Firefox" },
-   --   properties = { tag = tags[1][2] } },
+   -- Set applications to always map on specified tags
+   { rule = { class = "Conkeror" },
+     properties = { tag = tags[2] } },
+   { rule = { class = "Emacs" },
+     properties = { tag = tags[3] } },
 }
 -- }}}
 
