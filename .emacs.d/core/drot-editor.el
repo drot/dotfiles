@@ -80,6 +80,9 @@
 ;; Easier navigation with CamelCase words
 (add-hook 'prog-mode-hook 'subword-mode)
 
+;; Paren matching with Electric Pair mode
+(add-hook 'prog-mode-hook 'electric-pair-mode)
+
 ;; ElDoc
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
