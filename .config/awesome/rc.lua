@@ -101,49 +101,76 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
-                                    { "open terminal", terminal }
+myaccessories = {
+   { "Conkeror", "conkeror" },
+   { "GIMP", "gimp" }
+}
+
+mymainmenu = awful.menu({ items = { { "open terminal", terminal },
+                                    { "accessories", myaccessories },
+                                    { "awesome", myawesomemenu }
 }
                         })
-
-mylauncher = awful.widget.launcher({ menu = mymainmenu })
 
 -- {{{ Separator
 -- Simple space
 separator = wibox.widget.textbox(" ")
 -- }}}
 
--- {{{ CPU usage and temperature widget
-cpuicon = wibox.widget.imagebox()
-cpuicon:set_image(beautiful.widget_cpu)
+-- {{{ CPU temperature widget
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
--- Initialize widget
-cpugraph = awful.widget.graph()
+--Initialize widget
 tempwidget = wibox.widget.textbox()
+tempbar = awful.widget.progressbar()
 -- Graph properties
-cpugraph:set_width(40)
+tempbar:set_vertical(true):set_ticks(true)
+tempbar:set_width(11):set_ticks_size(2)
+tempbar:set_background_color(beautiful.bg_normal)
+tempbar:set_color(beautiful.fg_focus)
+tempbar:set_border_color(beautiful.border_normal)
+-- Enable caching
+vicious.cache(vicious.widgets.thermal)
+-- Register widgets
+vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
+vicious.register(tempbar, vicious.widgets.thermal, "$1", 21, "thermal_zone0")
+-- }}}
+
+-- {{{ CPU usage widget
+cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.widget_cpu)
+-- Initialize widget
+cpuwidget = wibox.widget.textbox()
+cpugraph = awful.widget.graph()
+-- Graph properties
+cpugraph:set_width(42)
 cpugraph:set_background_color(beautiful.bg_normal)
 cpugraph:set_color(beautiful.fg_focus)
 cpugraph:set_border_color(beautiful.border_normal)
+-- Enable caching
+vicious.cache(vicious.widgets.cpu)
 -- Register widgets
-vicious.register(cpugraph, vicious.widgets.cpu, "$1")
-vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 4)
+vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
 -- }}}
 
 -- {{{ Memory usage widget
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
+memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
 -- Pogressbar properties
 membar:set_vertical(true):set_ticks(true)
-membar:set_width(10):set_ticks_size(2)
+membar:set_width(11):set_ticks_size(2)
 membar:set_background_color(beautiful.bg_normal)
 membar:set_color(beautiful.fg_focus)
 membar:set_border_color(beautiful.border_normal)
+-- Enable caching
+vicious.cache(vicious.widgets.mem)
 -- Register widget
-vicious.register(membar, vicious.widgets.mem, "$1", 13)
+vicious.register(memwidget, vicious.widgets.mem, "$1%", 13)
+vicious.register(membar, vicious.widgets.mem, "$1", 15)
 -- }}}
 
 -- {{{ Date widget
@@ -226,7 +253,6 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
-   left_layout:add(mylauncher)
    left_layout:add(mytaglist[s])
    left_layout:add(mylayoutbox[s])
    left_layout:add(mypromptbox[s])
@@ -236,11 +262,14 @@ for s = 1, screen.count() do
    if s == 1 then right_layout:add(wibox.widget.systray()) end
    right_layout:add(tempicon)
    right_layout:add(tempwidget)
+   right_layout:add(tempbar)
    right_layout:add(separator)
    right_layout:add(cpuicon)
+   right_layout:add(cpuwidget)
    right_layout:add(cpugraph)
    right_layout:add(separator)
    right_layout:add(memicon)
+   right_layout:add(memwidget)
    right_layout:add(membar)
    right_layout:add(separator)
    right_layout:add(dateicon)
