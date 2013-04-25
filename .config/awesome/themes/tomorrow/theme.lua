@@ -52,9 +52,14 @@ theme.layout_tiletop = "/home/drot/.config/awesome/icons/layouts/tiletop.png"
 theme.layout_spiral = "/home/drot/.config/awesome/icons/layouts/spiral.png"
 theme.layout_dwindle = "/home/drot/.config/awesome/icons/layouts/dwindle.png"
 
+-- Widget separator
+theme.widget_sep = "/home/drot/.config/awesome/icons/separator.png"
+
 -- Widget icons
 theme.widget_temp = "/home/drot/.config/awesome/icons/widgets/temp.png"
 theme.widget_cpu = "/home/drot/.config/awesome/icons/widgets/cpu.png"
 theme.widget_mem = "/home/drot/.config/awesome/icons/widgets/mem.png"
+theme.widget_disk = "/home/drot/.config/awesome/icons/widgets/disk.png"
+theme.widget_date = "/home/drot/.config/awesome/icons/widgets/date.png"
 
 return theme
