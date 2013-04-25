@@ -6,7 +6,7 @@ theme = {}
 
 theme.font = "Terminus 10"
 
-theme.wallpaper = "/usr/share/awesome/themes/default/background.png"
+theme.wallpaper = "/home/drot/Pictures/dead.jpg"
 
 theme.bg_normal = "#1f1f1f"
 theme.bg_focus = "#1f1f1f"
@@ -25,11 +25,11 @@ theme.border_focus = "#2f2f2f"
 theme.border_marked = "#1f1f1f"
 
 -- Display the taglist squares
-theme.taglist_squares_sel = "/usr/share/awesome/themes/default/taglist/squarefw.png"
-theme.taglist_squares_unsel = "/usr/share/awesome/themes/default/taglist/squarew.png"
+theme.taglist_squares_sel = "/home/drot/.config/awesome/icons/taglist/squaref.png"
+theme.taglist_squares_unsel = "/home/drot/.config/awesome/icons/taglist/squareu.png"
 
 -- Variables set for theming the menu:
-theme.menu_submenu_icon = "/usr/share/awesome/themes/default/submenu.png"
+theme.menu_submenu_icon = "/home/drot/.config/awesome/icons/submenu.png"
 theme.menu_height = 15
 theme.menu_width = 140
 
@@ -39,17 +39,22 @@ theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical = "" 
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
-theme.layout_fairv = "/usr/share/awesome/themes/default/layouts/fairvw.png"
-theme.layout_floating = "/usr/share/awesome/themes/default/layouts/floatingw.png"
-theme.layout_magnifier = "/usr/share/awesome/themes/default/layouts/magnifierw.png"
-theme.layout_max = "/usr/share/awesome/themes/default/layouts/maxw.png"
-theme.layout_fullscreen = "/usr/share/awesome/themes/default/layouts/fullscreenw.png"
-theme.layout_tilebottom = "/usr/share/awesome/themes/default/layouts/tilebottomw.png"
-theme.layout_tileleft = "/usr/share/awesome/themes/default/layouts/tileleftw.png"
-theme.layout_tile = "/usr/share/awesome/themes/default/layouts/tilew.png"
-theme.layout_tiletop = "/usr/share/awesome/themes/default/layouts/tiletopw.png"
-theme.layout_spiral = "/usr/share/awesome/themes/default/layouts/spiralw.png"
-theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
+theme.layout_fairh = "/home/drot/.config/awesome/icons/layouts/fairh.png"
+theme.layout_fairv = "/home/drot/.config/awesome/icons/layouts/fairv.png"
+theme.layout_floating = "/home/drot/.config/awesome/icons/layouts/floating.png"
+theme.layout_magnifier = "/home/drot/.config/awesome/icons/layouts/magnifier.png"
+theme.layout_max = "/home/drot/.config/awesome/icons/layouts/max.png"
+theme.layout_fullscreen = "/home/drot/.config/awesome/icons/layouts/fullscreen.png"
+theme.layout_tilebottom = "/home/drot/.config/awesome/icons/layouts/tilebottom.png"
+theme.layout_tileleft = "/home/drot/.config/awesome/icons/layouts/tileleft.png"
+theme.layout_tile = "/home/drot/.config/awesome/icons/layouts/tile.png"
+theme.layout_tiletop = "/home/drot/.config/awesome/icons/layouts/tiletop.png"
+theme.layout_spiral = "/home/drot/.config/awesome/icons/layouts/spiral.png"
+theme.layout_dwindle = "/home/drot/.config/awesome/icons/layouts/dwindle.png"
+
+-- Widget icons
+theme.widget_temp = "/home/drot/.config/awesome/icons/widgets/temp.png"
+theme.widget_cpu = "/home/drot/.config/awesome/icons/widgets/cpu.png"
+theme.widget_mem = "/home/drot/.config/awesome/icons/widgets/mem.png"
 
 return theme

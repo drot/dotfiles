@@ -9,6 +9,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
+-- Vicious
+local vicious = require("vicious")
 -- Scratchpad
 local scratch = require("scratch")
 
@@ -106,10 +108,52 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
 
 mylauncher = awful.widget.launcher({ menu = mymainmenu })
 
--- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock()
+-- {{{ Separator
+-- Simple space
+separator = wibox.widget.textbox(" ")
+-- }}}
 
+-- {{{ CPU usage and temperature widget
+cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.widget_cpu)
+tempicon = wibox.widget.imagebox()
+tempicon:set_image(beautiful.widget_temp)
+-- Initialize widget
+cpugraph = awful.widget.graph()
+tzswidget = wibox.widget.textbox()
+-- Graph properties
+cpugraph:set_width(40)
+cpugraph:set_background_color(beautiful.bg_normal)
+cpugraph:set_color(beautiful.fg_focus)
+cpugraph:set_border_color(beautiful.border_normal)
+-- Register widgets
+vicious.register(cpugraph, vicious.widgets.cpu, "$1")
+vicious.register(tzswidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
+-- }}}
+
+-- {{{ Memory usage widget
+memicon = wibox.widget.imagebox()
+memicon:set_image(beautiful.widget_mem)
+-- Initialize widget
+membar = awful.widget.progressbar()
+-- Pogressbar properties
+membar:set_vertical(true):set_ticks(true)
+membar:set_width(10):set_ticks_size(2)
+membar:set_background_color(beautiful.bg_normal)
+membar:set_color(beautiful.fg_focus)
+membar:set_border_color(beautiful.border_normal)
+-- Register widget
+vicious.register(membar, vicious.widgets.mem, "$1", 13)
+-- }}}
+
+-- {{{ Date widget
+-- Initialize widget
+datewidget = wibox.widget.textbox()
+-- Register widget
+vicious.register(datewidget, vicious.widgets.date, "%d-%m/%R", 60)
+-- }}}
+
+-- {{{ Wibox
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -188,7 +232,16 @@ for s = 1, screen.count() do
    -- Widgets that are aligned to the right
    local right_layout = wibox.layout.fixed.horizontal()
    if s == 1 then right_layout:add(wibox.widget.systray()) end
-   right_layout:add(mytextclock)
+   right_layout:add(tempicon)
+   right_layout:add(tzswidget)
+   right_layout:add(separator)
+   right_layout:add(cpuicon)
+   right_layout:add(cpugraph)
+   right_layout:add(separator)
+   right_layout:add(memicon)
+   right_layout:add(membar)
+   right_layout:add(separator)
+   right_layout:add(datewidget)
 
    -- Now bring it all together (with the tasklist in the middle)
    local layout = wibox.layout.align.horizontal()
@@ -382,51 +435,6 @@ client.connect_signal("manage", function (c, startup)
                                awful.placement.no_overlap(c)
                                awful.placement.no_offscreen(c)
                             end
-                         end
-
-                         local titlebars_enabled = false
-                         if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-                            -- buttons for the titlebar
-                            local buttons = awful.util.table.join(
-                               awful.button({ }, 1, function()
-                                               client.focus = c
-                                               c:raise()
-                                               awful.mouse.client.move(c)
-                                                    end),
-                               awful.button({ }, 3, function()
-                                               client.focus = c
-                                               c:raise()
-                                               awful.mouse.client.resize(c)
-                                                    end)
-                            )
-
-                            -- Widgets that are aligned to the left
-                            local left_layout = wibox.layout.fixed.horizontal()
-                            left_layout:add(awful.titlebar.widget.iconwidget(c))
-                            left_layout:buttons(buttons)
-
-                            -- Widgets that are aligned to the right
-                            local right_layout = wibox.layout.fixed.horizontal()
-                            right_layout:add(awful.titlebar.widget.floatingbutton(c))
-                            right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-                            right_layout:add(awful.titlebar.widget.stickybutton(c))
-                            right_layout:add(awful.titlebar.widget.ontopbutton(c))
-                            right_layout:add(awful.titlebar.widget.closebutton(c))
-
-                            -- The title goes in the middle
-                            local middle_layout = wibox.layout.flex.horizontal()
-                            local title = awful.titlebar.widget.titlewidget(c)
-                            title:set_align("center")
-                            middle_layout:add(title)
-                            middle_layout:buttons(buttons)
-
-                            -- Now bring it all together
-                            local layout = wibox.layout.align.horizontal()
-                            layout:set_left(left_layout)
-                            layout:set_right(right_layout)
-                            layout:set_middle(middle_layout)
-
-                            awful.titlebar(c):set_widget(layout)
                          end
                                 end)
 
