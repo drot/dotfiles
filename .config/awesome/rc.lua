@@ -120,7 +120,7 @@ tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
 -- Initialize widget
 cpugraph = awful.widget.graph()
-tzswidget = wibox.widget.textbox()
+tempwidget = wibox.widget.textbox()
 -- Graph properties
 cpugraph:set_width(40)
 cpugraph:set_background_color(beautiful.bg_normal)
@@ -128,7 +128,7 @@ cpugraph:set_color(beautiful.fg_focus)
 cpugraph:set_border_color(beautiful.border_normal)
 -- Register widgets
 vicious.register(cpugraph, vicious.widgets.cpu, "$1")
-vicious.register(tzswidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
+vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
 -- }}}
 
 -- {{{ Memory usage widget
@@ -147,6 +147,8 @@ vicious.register(membar, vicious.widgets.mem, "$1", 13)
 -- }}}
 
 -- {{{ Date widget
+dateicon = wibox.widget.imagebox()
+dateicon:set_image(beautiful.widget_date)
 -- Initialize widget
 datewidget = wibox.widget.textbox()
 -- Register widget
@@ -233,7 +235,7 @@ for s = 1, screen.count() do
    local right_layout = wibox.layout.fixed.horizontal()
    if s == 1 then right_layout:add(wibox.widget.systray()) end
    right_layout:add(tempicon)
-   right_layout:add(tzswidget)
+   right_layout:add(tempwidget)
    right_layout:add(separator)
    right_layout:add(cpuicon)
    right_layout:add(cpugraph)
@@ -241,6 +243,7 @@ for s = 1, screen.count() do
    right_layout:add(memicon)
    right_layout:add(membar)
    right_layout:add(separator)
+   right_layout:add(dateicon)
    right_layout:add(datewidget)
 
    -- Now bring it all together (with the tasklist in the middle)
