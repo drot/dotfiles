@@ -22,6 +22,7 @@
                       diminish
                       emacs-clang-complete-async
                       jazz-theme
+                      lua-mode
                       paredit
                       magit
                       pkgbuild-mode
