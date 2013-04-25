@@ -436,13 +436,11 @@ awful.rules.rules = {
      properties = { floating = true } },
    { rule = { class = "pinentry" },
      properties = { floating = true } },
-   { rule = { class = "gimp" },
-     properties = { floating = true } },
    -- Set applications to always map on specified tags
    { rule = { class = "Conkeror" },
-     properties = { tag = tags[2] } },
+     properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
-     properties = { tag = tags[3] } },
+     properties = { tag = tags[1][3] } },
 }
 -- }}}
 
