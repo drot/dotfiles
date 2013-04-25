@@ -17,9 +17,6 @@
 ;; rcirc mode
 (require 'drot-rcirc)
 
-;; SLIME
-(require 'drot-slime)
-
 ;; ParEdit mode
 (require 'drot-paredit)
 
