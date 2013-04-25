@@ -24,6 +24,9 @@ theme.border_normal = "#2f2f2f"
 theme.border_focus = "#2f2f2f"
 theme.border_marked = "#1f1f1f"
 
+-- awesome icon
+theme.awesome_icon = "/home/drot/.config/awesome/icons/awesome.png"
+
 -- Display the taglist squares
 theme.taglist_squares_sel = "/home/drot/.config/awesome/icons/taglist/squaref.png"
 theme.taglist_squares_unsel = "/home/drot/.config/awesome/icons/taglist/squareu.png"

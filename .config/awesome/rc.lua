@@ -103,6 +103,7 @@ myawesomemenu = {
 
 myaccessories = {
    { "Conkeror", "conkeror" },
+   { "Emacs", "emacs" },
    { "GIMP", "gimp" }
 }
 
@@ -111,6 +112,9 @@ mymainmenu = awful.menu({ items = { { "open terminal", terminal },
                                     { "awesome", myawesomemenu }
 }
                         })
+
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                     menu = mymainmenu })
 
 -- {{{ Separator
 -- Simple space
@@ -277,6 +281,7 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
+   left_layout:add(mylauncher)
    left_layout:add(mytaglist[s])
    left_layout:add(mylayoutbox[s])
    left_layout:add(mypromptbox[s])
