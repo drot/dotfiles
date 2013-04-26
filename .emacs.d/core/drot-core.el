@@ -24,7 +24,7 @@
 
 ;; Enable X clipboard usage
 (setq x-select-enable-clipboard t
-      setq x-select-enable-primary t
+      x-select-enable-primary t
       save-interprogram-paste-before-kill t)
 
 ;; Default browser
