@@ -23,8 +23,9 @@
       read-buffer-completion-ignore-case t)
 
 ;; Enable X clipboard usage
-(setq x-select-enable-clipboard t)
-(setq x-select-enable-primary t)
+(setq x-select-enable-clipboard t
+      setq x-select-enable-primary t
+      save-interprogram-paste-before-kill t)
 
 ;; Default browser
 (setq browse-url-browser-function 'browse-url-generic
