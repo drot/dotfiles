@@ -122,25 +122,6 @@ separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
 -- }}}
 
--- {{{ CPU temperature widget
-tempicon = wibox.widget.imagebox()
-tempicon:set_image(beautiful.widget_temp)
---Initialize widget
-tempwidget = wibox.widget.textbox()
-tempbar = awful.widget.progressbar()
--- Graph properties
-tempbar:set_vertical(true):set_ticks(true)
-tempbar:set_width(11):set_ticks_size(2)
-tempbar:set_background_color(beautiful.bg_normal)
-tempbar:set_color(beautiful.fg_focus)
-tempbar:set_border_color(beautiful.border_normal)
--- Enable caching
-vicious.cache(vicious.widgets.thermal)
--- Register widgets
-vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
-vicious.register(tempbar, vicious.widgets.thermal, "$1", 21, "thermal_zone0")
--- }}}
-
 -- {{{ CPU usage widget
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
@@ -178,6 +159,25 @@ vicious.register(memwidget, vicious.widgets.mem, "$1%", 13)
 vicious.register(membar, vicious.widgets.mem, "$1", 15)
 -- }}}
 
+-- {{{ CPU temperature widget
+tempicon = wibox.widget.imagebox()
+tempicon:set_image(beautiful.widget_temp)
+--Initialize widget
+tempwidget = wibox.widget.textbox()
+tempbar = awful.widget.progressbar()
+-- Graph properties
+tempbar:set_vertical(true):set_ticks(true)
+tempbar:set_width(11):set_ticks_size(2)
+tempbar:set_background_color(beautiful.bg_normal)
+tempbar:set_color(beautiful.fg_focus)
+tempbar:set_border_color(beautiful.border_normal)
+-- Enable caching
+vicious.cache(vicious.widgets.thermal)
+-- Register widgets
+vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
+vicious.register(tempbar, vicious.widgets.thermal, "$1", 21, "thermal_zone0")
+-- }}}
+
 -- {{{ Disk usage widget
 diskicon = wibox.widget.imagebox()
 diskicon:set_image(beautiful.widget_disk)
@@ -199,6 +199,29 @@ vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 490)
 vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 490)
 vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 500)
+-- }}}
+
+-- {{{ Volume widget
+volicon = wibox.widget.imagebox()
+volicon:set_image(beautiful.widget_vol)
+-- Initialize widget
+volwidget = wibox.widget.textbox()
+volbar = awful.widget.progressbar()
+-- Graph properties
+volbar:set_vertical(true):set_ticks(true)
+volbar:set_width(11):set_ticks_size(2)
+volbar:set_background_color(beautiful.bg_normal)
+volbar:set_color(beautiful.fg_focus)
+volbar:set_border_color(beautiful.border_normal)
+-- Enable caching
+vicious.cache(vicious.contrib.pulse)
+-- Register widget
+vicious.register(volwidget, vicious.contrib.pulse, "$1%", 3, "alsa_output.pci-0000_00_11.5.analog-stereo")
+vicious.register(volbar, vicious.contrib.pulse, "$1", 1, "alsa_output.pci-0000_00_11.5.analog-stereo")
+volbar:buttons(awful.util.table.join(
+                  awful.button({ }, 4, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
+                  awful.button({ }, 5, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
+                                    ))
 -- }}}
 
 -- {{{ Date widget
@@ -289,10 +312,6 @@ for s = 1, screen.count() do
    -- Widgets that are aligned to the right
    local right_layout = wibox.layout.fixed.horizontal()
    if s == 1 then right_layout:add(wibox.widget.systray()) end
-   right_layout:add(tempicon)
-   right_layout:add(tempwidget)
-   right_layout:add(tempbar)
-   right_layout:add(separator)
    right_layout:add(cpuicon)
    right_layout:add(cpuwidget)
    right_layout:add(cpugraph)
@@ -301,11 +320,19 @@ for s = 1, screen.count() do
    right_layout:add(memwidget)
    right_layout:add(membar)
    right_layout:add(separator)
+   right_layout:add(tempicon)
+   right_layout:add(tempwidget)
+   right_layout:add(tempbar)
+   right_layout:add(separator)
    right_layout:add(diskicon)
    right_layout:add(dperc.r)
    right_layout:add(dusage.r)
    right_layout:add(dperc.h)
    right_layout:add(dusage.h)
+   right_layout:add(separator)
+   right_layout:add(volicon)
+   right_layout:add(volwidget)
+   right_layout:add(volbar)
    right_layout:add(separator)
    right_layout:add(dateicon)
    right_layout:add(datewidget)
