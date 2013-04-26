@@ -122,10 +122,10 @@ separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
 -- }}}
 
--- {{{ CPU usage widget
+-- {{{ CPU usage widgets
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
--- Initialize widget
+-- Initialize widgets
 cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
@@ -140,10 +140,10 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 4)
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 4)
 -- }}}
 
--- {{{ Memory usage widget
+-- {{{ Memory usage widgets
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
--- Initialize widget
+-- Initialize widgets
 memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
 -- Progressbar properties
@@ -154,15 +154,15 @@ membar:set_color(beautiful.fg_focus)
 membar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
--- Register widget
+-- Register widgets
 vicious.register(memwidget, vicious.widgets.mem, "$1%", 10)
 vicious.register(membar, vicious.widgets.mem, "$1", 10)
 -- }}}
 
--- {{{ CPU temperature widget
+-- {{{ CPU temperature widgets
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
---Initialize widget
+--Initialize widgets
 tempwidget = wibox.widget.textbox()
 tempbar = awful.widget.progressbar()
 -- Graph properties
@@ -178,10 +178,10 @@ vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 20, "thermal_zone0
 vicious.register(tempbar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
 -- }}}
 
--- {{{ Disk usage widget
+-- {{{ Disk usage widgets
 diskicon = wibox.widget.imagebox()
 diskicon:set_image(beautiful.widget_disk)
--- Initialize widget
+-- Initialize widgets
 dperc = { r = wibox.widget.textbox(), h = wibox.widget.textbox() }
 dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
 -- Progresbar properties
@@ -194,17 +194,17 @@ for _, dstyle in pairs(dusage) do
 end
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
--- Register widget
+-- Register widgets
 vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 500)
 vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 500)
 vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 500)
 -- }}}
 
--- {{{ Volume widget
+-- {{{ Volume widgets
 volicon = wibox.widget.imagebox()
 volicon:set_image(beautiful.widget_vol)
--- Initialize widget
+-- Initialize widgets
 volwidget = wibox.widget.textbox()
 volbar = awful.widget.progressbar()
 -- Graph properties
@@ -215,7 +215,7 @@ volbar:set_color(beautiful.fg_focus)
 volbar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
--- Register widget
+-- Register widgets
 vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 vicious.register(volbar, vicious.contrib.pulse, "$1", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 volbar:buttons(awful.util.table.join(
