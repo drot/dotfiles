@@ -8,6 +8,12 @@
 ;; Replace dabbrev-expand with hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 
+;; Swap Isearch with regexp Isearch
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+
 ;; Imenu with Ido completion
 (global-set-key (kbd "M-i") 'ido-goto-symbol)
 

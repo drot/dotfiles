@@ -58,6 +58,9 @@
 ;; Shorten mode name
 (diminish 'abbrev-mode "Abv")
 
+;; Mouse yank at point instead of click
+(setq mouse-yank-at-point t)
+
 ;; Fly Spell configuration
 (require 'flyspell)
 (setq ispell-program-name "aspell"
