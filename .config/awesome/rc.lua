@@ -137,7 +137,7 @@ cpugraph:set_border_color(beautiful.border_normal)
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 4)
-vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
+vicious.register(cpugraph, vicious.widgets.cpu, "$1", 4)
 -- }}}
 
 -- {{{ Memory usage widget
@@ -155,8 +155,8 @@ membar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widget
-vicious.register(memwidget, vicious.widgets.mem, "$1%", 13)
-vicious.register(membar, vicious.widgets.mem, "$1", 15)
+vicious.register(memwidget, vicious.widgets.mem, "$1%", 10)
+vicious.register(membar, vicious.widgets.mem, "$1", 10)
 -- }}}
 
 -- {{{ CPU temperature widget
@@ -174,8 +174,8 @@ tempbar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
-vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 19, "thermal_zone0")
-vicious.register(tempbar, vicious.widgets.thermal, "$1", 21, "thermal_zone0")
+vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
+vicious.register(tempbar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
 -- }}}
 
 -- {{{ Disk usage widget
@@ -195,8 +195,8 @@ end
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widget
-vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 490)
-vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 490)
+vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 500)
+vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 500)
 vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 500)
 vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 500)
 -- }}}
@@ -216,8 +216,8 @@ volbar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widget
-vicious.register(volwidget, vicious.contrib.pulse, "$1%", 3, "alsa_output.pci-0000_00_11.5.analog-stereo")
-vicious.register(volbar, vicious.contrib.pulse, "$1", 1, "alsa_output.pci-0000_00_11.5.analog-stereo")
+vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
+vicious.register(volbar, vicious.contrib.pulse, "$1", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 volbar:buttons(awful.util.table.join(
                   awful.button({ }, 4, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
                   awful.button({ }, 5, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
