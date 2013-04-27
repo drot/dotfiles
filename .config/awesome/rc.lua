@@ -85,7 +85,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
    names = { "1", "2", "3", "4", "5" },
-   layout = { layouts[1], layouts[12], layouts[1], layouts[5], layouts[10] }
+   layout = { layouts[1], layouts[10], layouts[1], layouts[5], layouts[10] }
 }
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
@@ -503,6 +503,8 @@ awful.rules.rules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },
+   { rule = { class = "Gimp" },
+     properties = { tag = tags[1][5] } },
 }
 -- }}}
 
