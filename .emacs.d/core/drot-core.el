@@ -16,7 +16,7 @@
 (savehist-mode t)
 
 ;; Message buffer size
-(setq message-log-max 100)
+(setq message-log-max 1024)
 
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t

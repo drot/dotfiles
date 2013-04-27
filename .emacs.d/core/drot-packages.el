@@ -20,6 +20,7 @@
 
 (defvar my-packages '(auto-complete
                       diminish
+                      el-get
                       emacs-clang-complete-async
                       jazz-theme
                       lua-mode
