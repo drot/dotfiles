@@ -1,29 +1,28 @@
----------------------------
--- Tomorrow awesome theme --
----------------------------
+------------------------------
+-- jellybeans awesome theme --
+------------------------------
 
 theme = {}
 
 theme.font = "Terminus 10"
 theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons"
-
 theme.wallpaper = "/home/drot/Pictures/dead.jpg"
 
-theme.bg_normal = "#1f1f1f"
-theme.bg_focus = "#1f1f1f"
-theme.bg_urgent = "#f2777a"
-theme.bg_minimize = "#1f1f1f"
+theme.bg_normal = "#151515"
+theme.bg_focus = "#151515"
+theme.bg_urgent = "#b85335"
+theme.bg_minimize = "#151515"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#cccccc"
-theme.fg_focus = "#ffd75f"
-theme.fg_urgent = "#ffffff"
-theme.fg_minimize = "#515151"
+theme.fg_normal = "#e8e8d3"
+theme.fg_focus = "#fad07a"
+theme.fg_urgent = "#e8e8d3"
+theme.fg_minimize = "#888888"
 
 theme.border_width = 1
-theme.border_normal = "#2f2f2f"
-theme.border_focus = "#2f2f2f"
-theme.border_marked = "#1f1f1f"
+theme.border_normal = "#404040"
+theme.border_focus = "#888888"
+theme.border_marked = "#151515"
 
 -- awesome icon
 theme.awesome_icon = theme.icons_dir .. "/awesome.png"
