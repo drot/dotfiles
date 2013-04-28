@@ -9,9 +9,9 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
--- Vicious
+-- Vicious widget library
 local vicious = require("vicious")
--- Scratchpad
+-- Scratchpad manager
 local scratch = require("scratch")
 
 -- {{{ Error handling
@@ -46,8 +46,7 @@ beautiful.init(themes_dir .. "/jellybeans/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
-editor = os.getenv("EDITOR") or "emacs"
-editor_cmd = terminal .. " -e " .. editor
+editor = os.getenv("EDITOR")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -96,8 +95,8 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "manual", terminal .. " -e 'man awesome'" },
+   { "edit config", editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
