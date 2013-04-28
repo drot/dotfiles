@@ -185,7 +185,7 @@ diskicon:set_image(beautiful.widget_disk)
 -- Initialize widgets
 dperc = { r = wibox.widget.textbox(), h = wibox.widget.textbox() }
 dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
--- Progresbar properties
+-- Progressbar properties
 for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
    dstyle:set_width(6):set_ticks_size(2)
