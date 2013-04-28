@@ -1,0 +1,12 @@
+# Audio and video output
+ao=pulse
+vo=opengl-old
+
+# Colored output
+msgmodule=yes
+msgcolor=yes
+
+# Subtitle search and encoding
+autosub-match=all
+subcp="utf8"
+no-ass=yes

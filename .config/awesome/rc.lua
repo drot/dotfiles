@@ -494,8 +494,6 @@ awful.rules.rules = {
                     keys = clientkeys,
                     buttons = clientbuttons,
                     size_hints_honor = false } },
-   { rule = { class = "mpv" },
-     properties = { floating = true } },
    { rule = { class = "pinentry" },
      properties = { floating = true } },
    -- Set applications to always map on specified tags
@@ -503,6 +501,8 @@ awful.rules.rules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },
+   { rule = { class = "mpv" },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "Gimp" },
      properties = { tag = tags[1][5] } },
 }
@@ -515,6 +515,7 @@ client.connect_signal("manage", function (c, startup)
 
                             -- Put windows in a smart way, only if they do not set an initial position.
                             if not c.size_hints.user_position and not c.size_hints.program_position then
+                               awful.placement.no_overlap(c)
                                awful.placement.no_offscreen(c)
                             end
                          end
