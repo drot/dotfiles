@@ -41,8 +41,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-theme_dir = os.getenv("HOME") .. "/.config/awesome/themes"
-beautiful.init(theme_dir .. "/jellybeans/theme.lua")
+themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
+beautiful.init(themes_dir .. "/jellybeans/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
