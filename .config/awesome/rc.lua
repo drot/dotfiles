@@ -128,7 +128,7 @@ cpuicon:set_image(beautiful.widget_cpu)
 cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
-cpugraph:set_width(30)
+cpugraph:set_width(45)
 cpugraph:set_background_color(beautiful.bg_normal)
 cpugraph:set_color(beautiful.fg_focus)
 cpugraph:set_border_color(beautiful.border_normal)
