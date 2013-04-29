@@ -22,6 +22,9 @@
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
 
+;; More useful apropos
+(setq apropos-do-all t)
+
 ;; Enable X clipboard usage
 (setq x-select-enable-clipboard t
       x-select-enable-primary t

@@ -24,7 +24,10 @@
 (cua-selection-mode 1)
 
 ;; Delete a selection with a keypress
-(delete-selection-mode t)
+(delete-selection-mode 1)
+
+;; Recognize CamelCase words
+(global-subword-mode 1)
 
 ;; Enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
@@ -82,9 +85,6 @@
 
 ;; Code folding with Hide Show
 (add-hook 'prog-mode-hook 'hs-minor-mode)
-
-;; Easier navigation with CamelCase words
-(add-hook 'prog-mode-hook 'subword-mode)
 
 ;; ElDoc
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
