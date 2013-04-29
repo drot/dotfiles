@@ -64,6 +64,11 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
+;; Remember point position in files
+(require 'saveplace)
+(setq save-place-file (expand-file-name "saved-places" drot-saves-dir))
+(setq-default save-place t)
+
 ;; Fly Spell configuration
 (require 'flyspell)
 (setq ispell-program-name "aspell"
@@ -86,7 +91,7 @@
 ;; Code folding with Hide Show
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
-;; ElDoc
+;; Show documentation with ElDoc
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
