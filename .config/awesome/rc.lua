@@ -117,7 +117,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- {{{ Separator
--- Simple space
 separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
 -- }}}
@@ -129,7 +128,7 @@ cpuicon:set_image(beautiful.widget_cpu)
 cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
-cpugraph:set_width(42)
+cpugraph:set_width(30)
 cpugraph:set_background_color(beautiful.bg_normal)
 cpugraph:set_color(beautiful.fg_focus)
 cpugraph:set_border_color(beautiful.border_normal)
@@ -148,7 +147,7 @@ memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
 -- Progressbar properties
 membar:set_vertical(true):set_ticks(true)
-membar:set_width(11):set_ticks_size(2)
+membar:set_width(15):set_ticks_size(2)
 membar:set_background_color(beautiful.bg_normal)
 membar:set_color(beautiful.fg_focus)
 membar:set_border_color(beautiful.border_normal)
@@ -167,7 +166,7 @@ tempwidget = wibox.widget.textbox()
 tempbar = awful.widget.progressbar()
 -- Graph properties
 tempbar:set_vertical(true):set_ticks(true)
-tempbar:set_width(11):set_ticks_size(2)
+tempbar:set_width(15):set_ticks_size(2)
 tempbar:set_background_color(beautiful.bg_normal)
 tempbar:set_color(beautiful.fg_focus)
 tempbar:set_border_color(beautiful.border_normal)
@@ -187,7 +186,7 @@ dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
 -- Progressbar properties
 for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
-   dstyle:set_width(6):set_ticks_size(2)
+   dstyle:set_width(7):set_ticks_size(2)
    dstyle:set_background_color(beautiful.bg_normal)
    dstyle:set_color(beautiful.fg_focus)
    dstyle:set_border_color(beautiful.border_normal)
@@ -209,7 +208,7 @@ volwidget = wibox.widget.textbox()
 volbar = awful.widget.progressbar()
 -- Graph properties
 volbar:set_vertical(true):set_ticks(true)
-volbar:set_width(11):set_ticks_size(2)
+volbar:set_width(15):set_ticks_size(2)
 volbar:set_background_color(beautiful.bg_normal)
 volbar:set_color(beautiful.fg_focus)
 volbar:set_border_color(beautiful.border_normal)
