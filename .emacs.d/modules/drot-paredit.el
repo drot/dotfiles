@@ -20,15 +20,7 @@
 (add-hook 'ielm-mode-hook 'paredit-mode)
 (add-hook 'lisp-mode-hook 'paredit-mode)
 (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-
-(defun paredit-slime-fix ()
-  "Fix ParEdit conflict with SLIME."
-  (define-key slime-repl-mode-map
-    (read-kbd-macro paredit-backward-delete-key) nil))
-
-;; Use ParEdit with SLIME
-(add-hook 'slime-repl-mode-hook 'paredit-mode)
-(add-hook 'slime-repl-mode-hook 'paredit-slime-fix)
+(add-hook 'scheme-mode-hook 'paredit-mode)
 
 (defvar paredit-minbuf-commands '(eval-expression
                                       pp-eval-expression
@@ -44,6 +36,15 @@
 
 ;; Use ParEdit in the minibuffer
 (add-hook 'minibuffer-setup-hook 'paredit-minbuf)
+
+(defun paredit-slime-fix ()
+  "Fix ParEdit conflict with SLIME."
+  (define-key slime-repl-mode-map
+    (read-kbd-macro paredit-backward-delete-key) nil))
+
+;; Use ParEdit with SLIME
+(add-hook 'slime-repl-mode-hook 'paredit-mode)
+(add-hook 'slime-repl-mode-hook 'paredit-slime-fix)
 
 ;; Shorten mode name
 (eval-after-load 'paredit '(diminish 'paredit-mode "PEd"))
