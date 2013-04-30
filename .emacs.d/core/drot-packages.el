@@ -16,7 +16,7 @@
       (eval-print-last-sexp))))
 
 ;; Additional recipes
-(add-to-list 'el-get-recipe-path (expand-file-name "rcp" drot-emacs-dir))
+(add-to-list 'el-get-recipe-path (expand-file-name "recipes" drot-emacs-dir))
 
 (defvar my-packages '(auto-complete
                       diminish
