@@ -95,21 +95,18 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e 'man awesome'", beautiful.menu_manual },
-   { "edit config", editor .. " " .. awesome.conffile, beautiful.menu_edit },
-   { "restart", awesome.restart, beautiful.menu_restart },
-   { "quit", awesome.quit, beautiful.menu_quit }
+   { "Manual", terminal .. " -e 'man awesome'", beautiful.menu_manual },
+   { "Edit rc", editor .. " " .. awesome.conffile, beautiful.menu_edit },
+   { "Restart", awesome.restart, beautiful.menu_restart },
+   { "Quit", awesome.quit, beautiful.menu_quit }
 }
 
-myaccessories = {
-   { "Conkeror", "conkeror", beautiful.menu_browser },
-   { "Emacs", "emacs", beautiful.menu_emacs },
-   { "GIMP", "gimp", beautiful.menu_gimp }
-}
-
-mymainmenu = awful.menu({ items = { { "open terminal", terminal, beautiful.menu_term },
-                                    { "accessories", myaccessories, beautiful.menu_program },
+mymainmenu = awful.menu({ items = { { "Termite", terminal, beautiful.menu_term },
+                                    { "Conkeror", "conkeror", beautiful.menu_browser },
+                                    { "Emacs", "emacs", beautiful.menu_emacs },
+                                    { "GIMP", "gimp", beautiful.menu_gimp },
                                     { "awesome", myawesomemenu, beautiful.awesome_icon }
+                                    
 }
                         })
 

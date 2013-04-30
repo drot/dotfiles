@@ -33,11 +33,10 @@ theme.taglist_squares_unsel = theme.icons_dir .. "/taglist/squareu.png"
 
 -- Variables set for theming the menu:
 theme.menu_height = 21
-theme.menu_width = 140
+theme.menu_width = 105
 
 theme.menu_submenu_icon = theme.icons_dir .. "/submenu.png"
 theme.menu_term = theme.icons_dir .. "/menu/term.png"
-theme.menu_program = theme.icons_dir .. "/menu/program.png"
 theme.menu_browser = theme.icons_dir .. "/menu/browser.png"
 theme.menu_emacs = theme.icons_dir .. "/menu/emacs.png"
 theme.menu_gimp = theme.icons_dir .. "/menu/gimp.png"
