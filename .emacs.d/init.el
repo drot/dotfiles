@@ -7,13 +7,13 @@
   "The root directory of the Emacs distribution.")
 
 (defvar drot-core-dir (expand-file-name "core" drot-emacs-dir)
-  "This directory houses Emacs core configuration.")
+  "This directory houses the Emacs core configuration.")
 
 (defvar drot-modules-dir (expand-file-name "modules" drot-emacs-dir)
   "This directory houses all of the Emacs modules.")
 
-(defvar drot-vendor-dir (expand-file-name "vendor" drot-emacs-dir)
-  "This directory houses packages that are not yet available.")
+(defvar drot-elisp-dir (expand-file-name "elisp" drot-emacs-dir)
+  "This directory houses custom elisp files.")
 
 (defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
   "This directory houses all save files.")
@@ -21,7 +21,7 @@
 ;; Add directories to load path
 (add-to-list 'load-path drot-core-dir)
 (add-to-list 'load-path drot-modules-dir)
-(add-to-list 'load-path drot-vendor-dir)
+(add-to-list 'load-path drot-elisp-dir)
 
 ;; Load packages
 (require 'drot-packages)
