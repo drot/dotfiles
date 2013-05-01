@@ -27,7 +27,6 @@
                       jazz-theme
                       lua-mode
                       paredit
-                      rcirc-color
                       magit
                       pkgbuild-mode
                       undo-tree
