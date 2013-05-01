@@ -215,8 +215,10 @@ vicious.cache(vicious.contrib.pulse)
 vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 vicious.register(volbar, vicious.contrib.pulse, "$1", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 volbar:buttons(awful.util.table.join(
-                  awful.button({ }, 4, function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
-                  awful.button({ }, 5, function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
+                  awful.button({ }, 4, function ()
+                                  vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
+                  awful.button({ }, 5, function ()
+                                  vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
                                     ))
 -- }}}
 
