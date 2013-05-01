@@ -88,10 +88,13 @@
 ;; Enable whitespace mode for text mode
 (add-hook 'text-mode-hook 'whitespace-mode)
 
-;; Code folding with Hide Show
+;; Enable Fly Spell for comments and strings in source code
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; Code folding with Hide Show mode
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
-;; Show documentation with ElDoc
+;; Show documentation with ElDoc mode
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
