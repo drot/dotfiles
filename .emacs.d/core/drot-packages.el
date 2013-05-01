@@ -22,14 +22,16 @@
                       diminish
                       el-get
                       emacs-clang-complete-async
+                      idomenu
+                      ido-hacks
                       jazz-theme
                       lua-mode
                       paredit
+                      rcirc-color
                       magit
                       pkgbuild-mode
                       undo-tree
-                      yasnippet
-                      ido-hacks)
+                      yasnippet)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync my-packages)

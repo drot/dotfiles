@@ -15,7 +15,7 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; Imenu with Ido completion
-(global-set-key (kbd "M-i") 'ido-goto-symbol)
+(global-set-key (kbd "M-i") 'idomenu)
 
 ;; Org mode
 (global-set-key "\C-cl" 'org-store-link)

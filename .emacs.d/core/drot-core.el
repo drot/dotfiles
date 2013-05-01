@@ -54,7 +54,7 @@
 (require 're-builder)
 (setq reb-re-syntax 'string)
 
-;; Eshell directory
+;; Eshell behavior
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
 

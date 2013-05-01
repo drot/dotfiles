@@ -5,10 +5,6 @@
 ;; Load rcirc
 (require 'rcirc)
 
-(defun regular-irc-prompt ()
-  "Keep prompt at bottom."
-  (set (make-local-variable 'scroll-conservatively) 8192))
-
 ; Connection
 (setq rcirc-server-alist
       '(("irc.freenode.net" :channels ("#archlinux" "#emacs"))))
@@ -19,6 +15,13 @@
 (setq rcirc-authinfo
       `(("freenode" nickserv "drot" ,freenode-password)))
 
+;; Colorize nicks
+(require 'rcirc-color)
+(setq rcirc-colors '("#953331" "#ba5b34" "#909737"
+                     "#546a29" "#34676f" "#385e6b"
+                     "#7f355e" "#96a62d" "#7e9960"
+                     "#5c737c" "#8d4a4a"))
+
 ; Max line width and number
 (setq rcirc-fill-flag nil
       rcirc-buffer-maximum-lines 1024)
@@ -26,8 +29,11 @@
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
-; Keep prompt at bottom
-(add-hook 'rcirc-mode-hook 'regular-irc-prompt)
+(defun my-rcirc-prompt ()
+  "Keep prompt at bottom."
+  (set (make-local-variable 'scroll-conservatively) 8192))
+
+(add-hook 'rcirc-mode-hook 'my-rcirc-prompt)
 
 ;; Wrap lines that are too long
 (add-hook 'rcirc-mode-hook 'visual-line-mode)
