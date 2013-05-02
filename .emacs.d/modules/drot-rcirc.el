@@ -31,7 +31,7 @@
 ;; Wrap lines that are too long
 (add-hook 'rcirc-mode-hook 'visual-line-mode)
 
-; Turn on spell checking
+; Turn on Fly Spell mode
 (add-hook 'rcirc-mode-hook 'flyspell-mode)
 
 ; Turn on Omit mode

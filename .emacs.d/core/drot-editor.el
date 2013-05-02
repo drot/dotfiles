@@ -69,7 +69,7 @@
 (setq save-place-file (expand-file-name "saved-places" drot-saves-dir))
 (setq-default save-place t)
 
-;; Fly Spell configuration
+;; Fly Spell mode configuration
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -77,16 +77,15 @@
 
 ;; Whitespace mode configuration
 (require 'whitespace)
-(setq whitespace-line-column 80)
 (setq whitespace-style '(face tabs empty trailing lines-tail))
 
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)
 
-;; Enable Fly Spell for text mode
+;; Enable Fly Spell mode for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
-;; Enable Fly Spell for comments and strings in source code
+;; Enable Fly Spell mode for comments and strings in source code
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; Code folding with Hide Show mode
