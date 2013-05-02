@@ -2,6 +2,16 @@
 ;; drot-org.el - Configuration for Org mode
 ;;
 
+;; Use Ido for completion
+(setq org-completion-use-ido t)
+
+;; Show timestamps
+(setq org-log-done 'time)
+
+;; Treat code blocks as regular code
+(setq org-src-fontify-natively t
+      org-src-tab-acts-natively t)
+
 ;; Calendar
 (setq calendar-mark-holidays-flag t
       holiday-general-holidays nil
@@ -14,12 +24,6 @@
       calendar-latitude 43.20
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
-
-;; Use Ido for completion
-(setq org-completion-use-ido t)
-
-;; Show timestamps
-(setq org-log-done 'time)
 
 (provide 'drot-org)
 ;; drot-org.el ends here

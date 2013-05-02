@@ -86,9 +86,6 @@
 ;; Enable Fly Spell for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
-;; Enable whitespace mode for text mode
-(add-hook 'text-mode-hook 'whitespace-mode)
-
 ;; Enable Fly Spell for comments and strings in source code
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
