@@ -34,6 +34,10 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
+;; Ediff window placement
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
+
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward
