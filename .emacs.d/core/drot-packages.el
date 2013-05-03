@@ -26,9 +26,9 @@
                       ido-hacks
                       jazz-theme
                       lua-mode
-                      paredit
                       magit
                       org-mode
+                      paredit
                       pkgbuild-mode
                       undo-tree
                       yasnippet)
