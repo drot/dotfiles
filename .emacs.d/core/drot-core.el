@@ -38,6 +38,9 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
 
+;; Scroll compilation buffer to first error
+(setq compilation-scroll-output 'first-error)
+
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward
