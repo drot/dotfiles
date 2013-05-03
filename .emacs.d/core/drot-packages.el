@@ -2,9 +2,9 @@
 ;; drot-packages.el - Emacs default package selection
 ;;
 
-;; Put El-Get into the Emacs directory
-(setq el-get-dir (file-name-as-directory (expand-file-name "el-get" drot-emacs-dir)))
-(add-to-list 'load-path (file-name-as-directory (expand-file-name "el-get" el-get-dir)))
+(defvar el-get-dir (expand-file-name "el-get" drot-emacs-dir)
+  "El-Get root directory")
+(add-to-list 'load-path (expand-file-name "el-get" el-get-dir))
 
 ;; Bootstrap El-Get
 (unless (require 'el-get nil 'noerror)
@@ -28,6 +28,7 @@
                       lua-mode
                       paredit
                       magit
+                      org-mode
                       pkgbuild-mode
                       undo-tree
                       yasnippet)
