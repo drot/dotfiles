@@ -34,12 +34,16 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
+;; Scroll compilation buffer to first error
+(setq compilation-scroll-output 'first-error)
+
+;; DocView cache directory and rendering resolution
+(setq doc-view-cache-directory (expand-file-name "doc-view" drot-saves-dir)
+      doc-view-resolution 300)
+
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
-
-;; Scroll compilation buffer to first error
-(setq compilation-scroll-output 'first-error)
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -48,12 +52,12 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
-;; Bookmarks
+;; Bookmarks save directory
 (require 'bookmark)
 (setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
       bookmark-save-flag 1)
 
-;; TRAMP
+;; TRAMP default file transfer method
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
@@ -61,7 +65,7 @@
 (require 're-builder)
 (setq reb-re-syntax 'string)
 
-;; Eshell behavior
+;; Eshell save directory
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
 
