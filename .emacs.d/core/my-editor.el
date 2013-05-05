@@ -66,8 +66,8 @@
 
 ;; Remember point position in files
 (require 'saveplace)
-(setq save-place-file (expand-file-name "saved-places" my-saves-dir))
-(setq-default save-place t)
+(setq save-place-file (expand-file-name "saved-places" my-saves-dir)
+      save-place t)
 
 ;; Fly Spell mode configuration
 (require 'flyspell)
@@ -78,6 +78,11 @@
 ;; Whitespace mode configuration
 (require 'whitespace)
 (setq whitespace-style '(face tabs empty trailing lines-tail))
+
+;; Doc View mode configuration
+(require 'doc-view)
+(setq doc-view-resolution 300
+      doc-view-continuous t)
 
 ;; Text mode as default major mode
 (setq default-major-mode 'text-mode)

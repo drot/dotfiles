@@ -34,10 +34,6 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
-;; Doc View saner defaults
-(setq doc-view-resolution 300
-      doc-view-continuous t)
-
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
 
