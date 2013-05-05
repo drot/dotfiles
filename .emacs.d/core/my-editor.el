@@ -76,8 +76,8 @@
 (setq doc-view-resolution 300
       doc-view-continuous t)
 
-;; Text mode as default major mode
-(setq default-major-mode 'text-mode)
+;; Org mode as default major mode
+(setq-default major-mode 'org-mode)
 
 ;; Enable Auto Fill mode for text mode
 (add-hook 'text-mode-hook 'auto-fill-mode)
