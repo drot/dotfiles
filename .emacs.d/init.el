@@ -3,48 +3,49 @@
 ;;
 
 ;; Define directories
-(defvar drot-emacs-dir (file-name-directory load-file-name)
+(defvar my-emacs-dir (file-name-directory load-file-name)
   "The root directory of the Emacs distribution.")
 
-(defvar drot-core-dir (expand-file-name "core" drot-emacs-dir)
+(defvar my-core-dir (expand-file-name "core" my-emacs-dir)
   "This directory houses the Emacs core configuration.")
 
-(defvar drot-modules-dir (expand-file-name "modules" drot-emacs-dir)
+(defvar my-modules-dir (expand-file-name "modules" my-emacs-dir)
   "This directory houses all of the Emacs modules.")
 
-(defvar drot-elisp-dir (expand-file-name "elisp" drot-emacs-dir)
+(defvar my-elisp-dir (expand-file-name "elisp" my-emacs-dir)
   "This directory houses custom elisp files.")
 
-(defvar drot-saves-dir (expand-file-name "saves" drot-emacs-dir)
+(defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
   "This directory houses all save files.")
 
 ;; Add directories to load path
-(add-to-list 'load-path drot-core-dir)
-(add-to-list 'load-path drot-modules-dir)
-(add-to-list 'load-path drot-elisp-dir)
+(add-to-list 'load-path my-core-dir)
+(add-to-list 'load-path my-modules-dir)
+(add-to-list 'load-path my-elisp-dir)
 
-;; Load packages
-(require 'drot-packages)
-
-;; Load UI configuration
-(require 'drot-ui)
-
-;; Load general configuration
-(require 'drot-core)
-
-;; Load editing-specific configuration
-(require 'drot-editor)
-
-;; Load modules
-(require 'drot-modules)
-
-;; Load custom key bindings
-(require 'drot-keybindings)
-
-;; Store changes from the customize interface in the selected file
-(setq custom-file (expand-file-name "custom.el" drot-saves-dir))
+(defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
+  "Store changes from the customize interface in the selected file.")
 
 ;; Load personal configuration
-(if (file-exists-p custom-file)
-  (load custom-file))
+(if (file-exists-p my-custom-file)
+  (load my-custom-file))
+
+;; Load packages
+(require 'my-packages)
+
+;; Load UI configuration
+(require 'my-ui)
+
+;; Load general configuration
+(require 'my-core)
+
+;; Load editing-specific configuration
+(require 'my-editor)
+
+;; Load modules
+(require 'my-modules)
+
+;; Load custom key bindings
+(require 'my-keybindings)
+
 ;; init.el ends here
