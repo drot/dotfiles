@@ -14,6 +14,13 @@
 ;; Show timestamps
 (setq org-log-done 'time)
 
+;; Languages which can be evaluated
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((C . t)
+   (emacs-lisp . t)
+   (sh . t)))
+
 ;; Treat code blocks as regular code
 (setq org-src-fontify-natively t
       org-src-tab-acts-natively t)
