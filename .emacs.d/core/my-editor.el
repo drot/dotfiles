@@ -11,7 +11,7 @@
 (set-selection-coding-system 'utf-8)
 
 ;; Use spaces instead of tabs
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Highlight matching parentheses
 (setq show-paren-delay 0)
