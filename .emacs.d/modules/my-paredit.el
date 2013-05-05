@@ -1,5 +1,5 @@
 ;;
-;; drot-paredit.el - ParEdit configuration
+;; my-paredit.el - ParEdit configuration
 ;;
 
 ;; Make ParEdit work with ElDoc
@@ -49,5 +49,5 @@
 ;; Shorten mode name
 (eval-after-load 'paredit '(diminish 'paredit-mode "PEd"))
 
-(provide 'drot-paredit)
-;; drot-paredit.el ends here
+(provide 'my-paredit)
+;; my-paredit.el ends here

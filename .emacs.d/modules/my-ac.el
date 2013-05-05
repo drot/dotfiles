@@ -1,5 +1,5 @@
 ;;
-;; drot-ac.el - Configuration for Auto Complete
+;; my-ac.el - Configuration for Auto Complete
 ;;
 
 (require 'auto-complete-config)
@@ -8,7 +8,7 @@
 (defun my-ac-setup ()
   "Change some defaults."
   (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-  (setq-default ac-comphist-file (expand-file-name "ac-comphist.dat" drot-saves-dir))
+  (setq-default ac-comphist-file (expand-file-name "ac-comphist.dat" my-saves-dir))
   (ac-set-trigger-key "TAB")
   (ac-set-trigger-key "<tab>"))
 
@@ -29,5 +29,5 @@
 ;; Enable Auto Complete
 (my-ac-init)
 
-(provide 'drot-ac)
-;; drot-ac.el ends here
+(provide 'my-ac)
+;; my-ac.el ends here

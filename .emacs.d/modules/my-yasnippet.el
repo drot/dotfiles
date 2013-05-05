@@ -1,5 +1,5 @@
 ;;
-;; drot-yasnippet.el - Configuration for YASnippet
+;; my-yasnippet.el - Configuration for YASnippet
 ;;
 
 ;; Use Ido to select snippets
@@ -8,5 +8,5 @@
 ;; Enable YASnippet
 (yas-global-mode 1)
 
-(provide 'drot-yasnippet)
-;; drot-yasnippet.el ends here
+(provide 'my-yasnippet)
+;; my-yasnippet.el ends here

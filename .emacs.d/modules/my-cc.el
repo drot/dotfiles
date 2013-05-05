@@ -1,5 +1,5 @@
 ;;
-;; drot-cc.el - Configuration for the C/C++ mode
+;; my-cc.el - Configuration for the C/C++ mode
 ;;
 
 ;; Indentation style
@@ -18,5 +18,5 @@
                    (concat "gcc "
                            (buffer-file-name))))))
 
-(provide 'drot-cc)
-;; drot-cc.el ends here
+(provide 'my-cc)
+;; my-cc.el ends here

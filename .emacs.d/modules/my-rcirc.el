@@ -1,5 +1,5 @@
 ;;
-;; drot-rcirc.el - rcirc IRC client configuration
+;; my-rcirc.el - rcirc IRC client configuration
 ;;
 
 ;; Load rcirc
@@ -40,5 +40,5 @@
 ; Track channel activity
 (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
 
-(provide 'drot-rcirc)
-;; drot-rcirc.el ends here
+(provide 'my-rcirc)
+;; my-rcirc.el ends here

@@ -1,5 +1,5 @@
 ;;
-;; drot-ido.el - Configuration for Ido
+;; my-ido.el - Configuration for Ido
 ;;
 
 ;; Enable Ido
@@ -9,7 +9,7 @@
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-max-prospects 5
-      ido-save-directory-list-file (expand-file-name "ido.hist" drot-saves-dir)
+      ido-save-directory-list-file (expand-file-name "ido.hist" my-saves-dir)
       ido-default-file-method 'selected-window
       ido-everywhere t)
 (ido-mode 1)
@@ -18,5 +18,5 @@
 (require 'ido-hacks)
 (ido-hacks-mode 1)
 
-(provide 'drot-ido)
-;; drot-ido.el ends here
+(provide 'my-ido)
+;; my-ido.el ends here

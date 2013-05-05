@@ -1,5 +1,5 @@
 ;;
-;; drot-editor.el - Emacs editing configuration
+;; my-editor.el - Emacs editing configuration
 ;;
 
 ;; Encoding
@@ -39,7 +39,7 @@
 (put 'downcase-region 'disabled nil)
 
 ;; Load abbrevs and enable Abbrev mode
-(setq abbrev-file-name (expand-file-name "abbrev_defs" drot-saves-dir)
+(setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
       save-abbrevs t)
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
@@ -66,7 +66,7 @@
 
 ;; Remember point position in files
 (require 'saveplace)
-(setq save-place-file (expand-file-name "saved-places" drot-saves-dir))
+(setq save-place-file (expand-file-name "saved-places" my-saves-dir))
 (setq-default save-place t)
 
 ;; Fly Spell mode configuration
@@ -96,5 +96,5 @@
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
-(provide 'drot-editor)
-;; drot-editor.el ends here
+(provide 'my-editor)
+;; my-editor.el ends here

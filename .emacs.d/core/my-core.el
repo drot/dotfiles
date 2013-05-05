@@ -1,5 +1,5 @@
 ;;
-;; drot-core.el - Core Emacs configuration
+;; my-core.el - Core Emacs configuration
 ;;
 
 ;; Store all backup and auto-save files in the tmp directory
@@ -12,7 +12,7 @@
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
-      savehist-file (expand-file-name "minbuf.hist" drot-saves-dir))
+      savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
 (savehist-mode t)
 
 ;; Message buffer size
@@ -54,7 +54,7 @@
 
 ;; Bookmarks save directory
 (require 'bookmark)
-(setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
+(setq bookmark-default-file (expand-file-name "bookmarks" my-saves-dir)
       bookmark-save-flag 1)
 
 ;; Saner regex syntax
@@ -67,7 +67,7 @@
 
 ;; Eshell save directory
 (require 'eshell)
-(setq eshell-directory-name (expand-file-name "eshell" drot-saves-dir))
+(setq eshell-directory-name (expand-file-name "eshell" my-saves-dir))
 
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -79,5 +79,5 @@
 ;; Enable Winner mode
 (winner-mode 1)
 
-(provide 'drot-core)
-;; drot-core.el ends here
+(provide 'my-core)
+;; my-core.el ends here

@@ -1,5 +1,5 @@
 ;;
-;; drot-undo.el - Undo tree configuration
+;; my-undo.el - Undo tree configuration
 ;;
 
 ;; Store Undo Tree history in the tmp directory
@@ -15,5 +15,5 @@
 ;; Shorten mode name
 (diminish 'undo-tree-mode "UTr")
 
-(provide 'drot-undo)
-;; drot-undo.el ends here
+(provide 'my-undo)
+;; my-undo.el ends here

@@ -1,5 +1,5 @@
 ;;
-;; drot-ui.el - Emacs UI configuration
+;; my-ui.el - Emacs UI configuration
 ;;
 
 ;; Turn off the toolbar
@@ -47,5 +47,5 @@
 ;; Color theme
 (load-theme 'jazz t)
 
-(provide 'drot-ui)
-;; drot-ui.el ends here
+(provide 'my-ui)
+;; my-ui.el ends here

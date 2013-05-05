@@ -1,5 +1,5 @@
 ;;
-;; drot-keybindings.el - Custom key bindings configuration
+;; my-keybindings.el - Custom key bindings configuration
 ;;
 
 ;; Replace buffer-menu with ibuffer
@@ -21,5 +21,5 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 
-(provide 'drot-keybindings)
-;; drot-keybindings.el ends here
+(provide 'my-keybindings)
+;; my-keybindings.el ends here

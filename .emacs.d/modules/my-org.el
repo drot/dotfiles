@@ -1,5 +1,5 @@
 ;;
-;; drot-org.el - Configuration for Org mode
+;; my-org.el - Configuration for Org mode
 ;;
 
 ;; Enable org-indent-mode
@@ -31,5 +31,5 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-(provide 'drot-org)
-;; drot-org.el ends here
+(provide 'my-org)
+;; my-org.el ends here
