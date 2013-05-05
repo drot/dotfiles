@@ -26,7 +26,7 @@
 (defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
   "Store changes from the customize interface in the selected file.")
 
-;; Load personal configuration
+;; Load changes from the customize interface
 (if (file-exists-p my-custom-file)
   (load my-custom-file))
 
