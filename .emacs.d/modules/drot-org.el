@@ -2,6 +2,12 @@
 ;; drot-org.el - Configuration for Org mode
 ;;
 
+;; Enable org-indent-mode
+(setq org-startup-indented t)
+
+;; Enable speed commands
+(setq org-use-speed-commands t)
+
 ;; Use Ido for completion
 (setq org-completion-use-ido t)
 
