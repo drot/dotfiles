@@ -34,6 +34,10 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
+;; Doc View saner defaults
+(setq doc-view-resolution 300
+      doc-view-continuous t)
+
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
 
@@ -52,11 +56,6 @@
 (require 'bookmark)
 (setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
       bookmark-save-flag 1)
-
-;; Doc View saner defaults
-(require 'doc-view)
-(setq doc-view-resolution 300
-      doc-view-continuous t)
 
 ;; Saner regex syntax
 (require 're-builder)
