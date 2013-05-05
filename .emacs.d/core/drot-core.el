@@ -37,10 +37,6 @@
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
 
-;; DocView cache directory and rendering resolution
-(setq doc-view-cache-directory (expand-file-name "doc-view" drot-saves-dir)
-      doc-view-resolution 300)
-
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
@@ -57,13 +53,19 @@
 (setq bookmark-default-file (expand-file-name "bookmarks" drot-saves-dir)
       bookmark-save-flag 1)
 
-;; TRAMP default file transfer method
-(require 'tramp)
-(setq tramp-default-method "ssh")
+;; Doc View saner defaults
+(require 'doc-view)
+(setq doc-view-cache-directory (expand-file-name "doc-view" drot-saves-dir)
+      doc-view-resolution 300
+      doc-view-continuous t)
 
 ;; Saner regex syntax
 (require 're-builder)
 (setq reb-re-syntax 'string)
+
+;; TRAMP default file transfer method
+(require 'tramp)
+(setq tramp-default-method "ssh")
 
 ;; Eshell save directory
 (require 'eshell)
