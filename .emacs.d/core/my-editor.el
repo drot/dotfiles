@@ -57,8 +57,8 @@
 
 ;; Remember point position in files
 (require 'saveplace)
-(setq save-place-file (expand-file-name "saved-places" my-saves-dir)
-      save-place t)
+(setq save-place-file (expand-file-name "saved-places" my-saves-dir))
+(setq-default save-place t)
 
 ;; Fly Spell mode configuration
 (require 'flyspell)
