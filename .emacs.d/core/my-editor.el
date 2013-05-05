@@ -11,11 +11,11 @@
 (set-selection-coding-system 'utf-8)
 
 ;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
 
 ;; Highlight matching parentheses
-(show-paren-mode 1)
 (setq show-paren-delay 0)
+(show-paren-mode 1)
 
 ;; Parenthesis matching
 (electric-pair-mode t)
@@ -28,15 +28,6 @@
 
 ;; Recognize CamelCase words
 (global-subword-mode 1)
-
-;; Enable narrowing commands
-(put 'narrow-to-region 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
-(put 'narrow-to-defun 'disabled nil)
-
-;; Enable change region case commands
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
 
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
@@ -72,7 +63,8 @@
 ;; Fly Spell mode configuration
 (require 'flyspell)
 (setq ispell-program-name "aspell"
-      ispell-extra-args '("--sug-mode=ultra"))
+      ispell-extra-args '("--sug-mode=ultra")
+      ispell-dictionary "english")
 (setq flyspell-issue-message-flag nil)
 
 ;; Whitespace mode configuration
@@ -84,8 +76,11 @@
 (setq doc-view-resolution 300
       doc-view-continuous t)
 
-;; Org mode as default major mode
-(setq default-major-mode 'org-mode)
+;; Text mode as default major mode
+(setq default-major-mode 'text-mode)
+
+;; Enable Auto Fill mode for text mode
+(add-hook 'text-mode-hook 'auto-fill-mode)
 
 ;; Enable Fly Spell mode for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)

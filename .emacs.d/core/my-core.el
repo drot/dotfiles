@@ -25,6 +25,9 @@
 ;; More useful apropos
 (setq apropos-do-all t)
 
+;; Enable all disabled commands
+(setq disabled-command-function nil)
+
 ;; Enable X clipboard usage
 (setq x-select-enable-clipboard t
       x-select-enable-primary t
