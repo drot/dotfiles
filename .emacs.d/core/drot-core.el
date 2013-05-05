@@ -55,8 +55,7 @@
 
 ;; Doc View saner defaults
 (require 'doc-view)
-(setq doc-view-cache-directory (expand-file-name "doc-view" drot-saves-dir)
-      doc-view-resolution 300
+(setq doc-view-resolution 300
       doc-view-continuous t)
 
 ;; Saner regex syntax
