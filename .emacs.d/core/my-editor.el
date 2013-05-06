@@ -79,8 +79,11 @@
 ;; Org mode as default major mode
 (setq-default major-mode 'org-mode)
 
-;; Enable Auto Fill mode for text mode
-(add-hook 'text-mode-hook 'auto-fill-mode)
+;; Enable Visual Line mode for text mode
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+;; Show indicators for wrapped lines
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 ;; Enable Fly Spell mode for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
