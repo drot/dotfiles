@@ -67,23 +67,16 @@
       ispell-dictionary "english")
 (setq flyspell-issue-message-flag nil)
 
-;; Whitespace mode configuration
-(require 'whitespace)
-(setq whitespace-style '(face tabs empty trailing lines-tail))
-
 ;; Doc View mode configuration
 (require 'doc-view)
 (setq doc-view-resolution 300
       doc-view-continuous t)
 
+;; Show indicators for wrapped lines in Visual Line mode
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
 ;; Org mode as default major mode
 (setq-default major-mode 'org-mode)
-
-;; Enable Visual Line mode for text mode
-(add-hook 'text-mode-hook 'visual-line-mode)
-
-;; Show indicators for wrapped lines
-(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 ;; Enable Fly Spell mode for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
@@ -91,7 +84,7 @@
 ;; Enable Fly Spell mode for comments and strings in source code
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-;; Code folding with Hide Show mode
+;; Enable code folding with Hide Show mode
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; Show documentation with ElDoc mode
