@@ -40,10 +40,6 @@
 ;; Show buffer size in modeline
 (size-indication-mode t)
 
-;; Make the fringe smaller
-(if (fboundp 'fringe-mode)
-    (fringe-mode 4))
-
 ;; Color theme
 (load-theme 'jazz t)
 

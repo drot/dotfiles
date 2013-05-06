@@ -1,5 +1,5 @@
 ;;
-;; init.el
+;; init.el - My emacs configuration
 ;;
 
 ;; Define directories
