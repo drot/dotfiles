@@ -56,6 +56,11 @@
 (setq bookmark-default-file (expand-file-name "bookmarks" my-saves-dir)
       bookmark-save-flag 1)
 
+;; Remember point position in files
+(require 'saveplace)
+(setq save-place-file (expand-file-name "saved-places" my-saves-dir))
+(setq-default save-place t)
+
 ;; Saner regex syntax
 (require 're-builder)
 (setq reb-re-syntax 'string)
@@ -68,8 +73,17 @@
 (require 'eshell)
 (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir))
 
-;; Use ANSI colors within shell-mode
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; Fly Spell mode configuration
+(require 'flyspell)
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra")
+      ispell-dictionary "english")
+(setq flyspell-issue-message-flag nil)
+
+;; Doc View mode configuration
+(require 'doc-view)
+(setq doc-view-resolution 300
+      doc-view-continuous t)
 
 ;; Easier switching between visible buffers
 (require 'windmove)

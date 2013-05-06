@@ -55,23 +55,6 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Remember point position in files
-(require 'saveplace)
-(setq save-place-file (expand-file-name "saved-places" my-saves-dir))
-(setq-default save-place t)
-
-;; Fly Spell mode configuration
-(require 'flyspell)
-(setq ispell-program-name "aspell"
-      ispell-extra-args '("--sug-mode=ultra")
-      ispell-dictionary "english")
-(setq flyspell-issue-message-flag nil)
-
-;; Doc View mode configuration
-(require 'doc-view)
-(setq doc-view-resolution 300
-      doc-view-continuous t)
-
 ;; Show indicators for wrapped lines in Visual Line mode
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
@@ -91,6 +74,9 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
+
+;; Use ANSI colors within shell-mode
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (provide 'my-editor)
 ;; my-editor.el ends here
