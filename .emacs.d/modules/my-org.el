@@ -2,23 +2,14 @@
 ;; my-org.el - Configuration for Org mode
 ;;
 
-;; Enable org-indent-mode
-(setq org-startup-indented t)
-
 ;; Fix conflict with WindMove
 (setq org-replace-disputed-keys t)
-
-;; Enable speed commands
-(setq org-use-speed-commands t)
 
 ;; Use Ido for completion
 (setq org-completion-use-ido t)
 
 ;; Show timestamps
 (setq org-log-done 'time)
-
-;; Allow single character alphabetical bullets
-(setq org-list-allow-alphabetical t)
 
 ;; Languages which can be evaluated
 (org-babel-do-load-languages
