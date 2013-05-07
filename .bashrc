@@ -33,12 +33,13 @@ stty -ixon
 stty -ixoff
 
 # pretty dir listings
-[ -e $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
+[ -e $HOME/.dir_colors ] && eval $(dircolors -b $HOME/.dir_colors)
 
 # bash options
 shopt -s cmdhist # save multi-line commands in history as single line
 shopt -s histappend # append to the history file
 shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty line
+shopt -s extglob # extended globbing
 
 # prompt colors
 GREEN='\[\033[0;32m\]'
@@ -59,26 +60,38 @@ alias eckd="emacsclient -e '(kill-emacs)'"
 
 # extract - archive extractor
 # usage: extract <file>
-extract () {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xvjf $1    ;;
-            *.tar.gz)    tar xvzf $1    ;;
-            *.tar.xz)    tar xvJf $1    ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xvf $1     ;;
-            *.tbz2)      tar xvjf $1    ;;
-            *.tgz)       tar xvzf $1    ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *.xz)        unxz $1        ;;
-            *.exe)       cabextract $1  ;;
-            *)           echo "\`$1': unrecognized file compression" ;;
-        esac
-    else
-        echo "\`$1' is not a valid file"
-    fi
+extract() {
+    local c e i
+
+    (($#)) || return
+
+    for i; do
+        c=''
+        e=1
+        
+        if [[ ! -r $i ]]; then
+            echo "$0: file is unreadable: \`$i'" >&2
+            continue
+        fi
+
+        case $i in
+            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz)))))
+c='bsdtar xvf';;
+*.7z)  c='7z x';;
+*.Z)   c='uncompress';;
+*.bz2) c='bunzip2';;
+*.exe) c='cabextract';;
+*.gz)  c='gunzip';;
+*.rar) c='unrar x';;
+*.xz)  c='unxz';;
+*.zip) c='unzip';;
+*)     echo "$0: unrecognized file extension: \`$i'" >&2
+continue;;
+esac
+
+command $c "$i"
+e=$?
+done
+
+return $e
 }
