@@ -18,17 +18,14 @@
 (defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
   "This directory houses all save files.")
 
+;; Define customize file
+(defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
+  "Store changes from the customize interface in the selected file.")
+
 ;; Add directories to load path
 (add-to-list 'load-path my-core-dir)
 (add-to-list 'load-path my-modules-dir)
 (add-to-list 'load-path my-elisp-dir)
-
-(defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
-  "Store changes from the customize interface in the selected file.")
-
-;; Load changes from the customize interface
-(if (file-exists-p my-custom-file)
-  (load my-custom-file))
 
 ;; Load packages
 (require 'my-packages)
@@ -47,5 +44,9 @@
 
 ;; Load custom key bindings
 (require 'my-keybindings)
+
+;; Load changes from the customize interface
+(if (file-exists-p my-custom-file)
+  (load my-custom-file))
 
 ;; init.el ends here
