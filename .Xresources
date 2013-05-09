@@ -15,8 +15,8 @@ URxvt.saveLines: 65535
 URxvt.cursorBlink: false
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #ffffff
-URxvt.cursorColor: #dcdccc
+URxvt.colorUL: #AF5FD7
+URxvt.cursorColor: #E25454
 URxvt.secondaryScroll: true
 URxvt.internalBorder: 0
 
@@ -31,41 +31,41 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Zenburn color-scheme
-URxvt.background: #3f3f3f
-URxvt.foreground: #dcdccc
+! Erebus color theme
+URxvt.background: #261515
+URxvt.foreground: #FFFFFF
 
 ! black + red
-URxvt.color0: #3f3f3f
-URxvt.color1: #cc9393
+URxvt.color0: #757575
+URxvt.color1: #FF5F5F
 
 ! green + yellow
-URxvt.color2: #60b48a
-URxvt.color3: #dfaf8f
+URxvt.color2: #DE8A36
+URxvt.color3: #D78787
 
 ! blue + purple
-URxvt.color4: #506070
-URxvt.color5: #dc8cc3
+URxvt.color4: #AF5FD7
+URxvt.color5: #FF87D7
 
 ! cyan + white
-URxvt.color6: #8cd0d3
-URxvt.color7: #dcdccc
+URxvt.color6: #DEA3E5
+URxvt.color7: #B8B8B8
 
 ! bright-black + bright-red
-URxvt.color8: #709080
-URxvt.color9: #dca3a3
+URxvt.color8: #B8B8B8
+URxvt.color9: #D78787
 
 ! bright-green + bright-yellow
-URxvt.color10: #c3bf9f
-URxvt.color11: #f0dfaf
+URxvt.color10: #FF9F6F
+URxvt.color11: #FF5F5F
 
 ! bright-blue + bright-purple
-URxvt.color12: #94bff3
-URxvt.color13: #ec93d3
+URxvt.color12: #DEA3E5
+URxvt.color13: #D7AFAF
 
 ! bright-cyan + bright-white
-URxvt.color14: #93e0e3
-URxvt.color15: #ffffff
+URxvt.color14: #AF5FD7
+URxvt.color15: #757575
 
 ! XTERM
 ! General
@@ -80,41 +80,41 @@ xterm*eightBitInput: true
 xterm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 xterm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Zenburn color-scheme
-xterm*background: #3f3f3f
-xterm*foreground: #dcdccc
+! Erebus color theme
+xterm*background: #261515
+xterm*foreground: #FFFFFF
 
 ! black + red
-xterm*color0: #3f3f3f
-xterm*color1: #705050
+xterm*color0: #757575
+xterm*color1: #FF5F5F
 
 ! green + yellow
-xterm*color2: #60b48a
-xterm*color3: #dfaf8f
+xterm*color2: #DE8A36
+xterm*color3: #D78787
 
 ! blue + purple
-xterm*color4: #506070
-xterm*color5: #dc8cc3
+xterm*color4: #AF5FD7
+xterm*color5: #FF87D7
 
 ! cyan + white
-xterm*color6: #8cd0d3
-xterm*color7: #dcdccc
+xterm*color6: #DEA3E5
+xterm*color7: #B8B8B8
 
 ! bright-black + bright-red
-xterm*color8: #709080
-xterm*color9: #dca3a3
+xterm*color8: #B8B8B8
+xterm*color9: #D78787
 
 ! bright-green + bright-yellow
-xterm*color10: #c3bf9f
-xterm*color11: #f0dfaf
+xterm*color10: #FF9F6F
+xterm*color11: #FF5F5F
 
 ! bright-blue + bright-purple
-xterm*color12: #94bff3
-xterm*color13: #ec93d3
+xterm*color12: #DEA3E5
+xterm*color13: #D7AFAF
 
 ! bright-cyan + bright-white
-xterm*color14: #93e0e3
-xterm*color15: #ffffff
+xterm*color14: #AF5FD7
+xterm*color15: #757575
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
