@@ -18,26 +18,27 @@
 ;; Additional recipes
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
-;; Install via ELPA
+;; Modify existing recipes
 (setq el-get-sources
       '((:name undo-tree
                :description "Treat undo history as a tree"
                :type elpa)))
 
-(defvar my-package-list '(auto-complete
-                          diminish
-                          el-get
-                          emacs-clang-complete-async
-                          idomenu
-                          ido-hacks
-                          jazz-theme
-                          lua-mode
-                          magit
-                          org-mode
-                          paredit
-                          pkgbuild-mode
-                          undo-tree
-                          yasnippet)
+(defvar my-package-list
+  '(auto-complete
+    diminish
+    el-get
+    emacs-clang-complete-async
+    idomenu
+    ido-hacks
+    jazz-theme
+    lua-mode
+    magit
+    org-mode
+    paredit
+    pkgbuild-mode
+    undo-tree
+    yasnippet)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync my-package-list)
