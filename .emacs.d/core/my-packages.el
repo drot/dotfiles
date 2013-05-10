@@ -18,6 +18,12 @@
 ;; Additional recipes
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
+;; Install via ELPA
+(setq el-get-sources
+      '((:name undo-tree
+               :description "Treat undo history as a tree"
+               :type elpa)))
+
 (defvar my-package-list '(auto-complete
                           diminish
                           el-get
