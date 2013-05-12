@@ -7,8 +7,7 @@
 
 (defun my-ac-setup ()
   "Change some defaults."
-  (setq ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-  (setq-default ac-comphist-file (expand-file-name "ac-comphist.dat" my-saves-dir))
+  (setq ac-comphist-file (expand-file-name "ac-comphist.dat" my-saves-dir))
   (ac-set-trigger-key "TAB")
   (ac-set-trigger-key "<tab>"))
 
@@ -19,6 +18,7 @@
 
 (defun my-ac-init ()
   "Start Auto Complete for selected modes."
+  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
   (add-hook 'c-mode-common-hook 'my-ac-cc-setup)
   (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
