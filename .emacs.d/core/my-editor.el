@@ -29,9 +29,6 @@
 ;; Recognize CamelCase words
 (global-subword-mode 1)
 
-;; Use Unified diff format
-(setq diff-switches "-u")
-
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
       save-abbrevs t)

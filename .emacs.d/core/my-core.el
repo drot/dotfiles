@@ -40,6 +40,9 @@
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
 
+;; Use Unified diff format
+(setq diff-switches "-u")
+
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
