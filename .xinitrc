@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ## Start session
-systemd --user &
+/usr/lib/systemd/systemd --user &
 
 ## Initialize defaults
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
