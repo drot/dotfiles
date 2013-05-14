@@ -43,10 +43,6 @@ dht_port = 6881
 # Enable peer exchange (for torrents not marked private)
 peer_exchange = yes
 
-# Colors
-active_fg_color = 2
-done_fg_color = 4
-
 # Untie torrents upon completion
 system.method.set_key = event.download.finished,remove_torrent,"execute=rm,$d.get_tied_to_file="
 
