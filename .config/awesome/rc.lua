@@ -45,7 +45,7 @@ themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
 beautiful.init(themes_dir .. "/jellybeans/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "termite"
+terminal = "st"
 editor = os.getenv("EDITOR")
 
 -- Default modkey.
@@ -101,7 +101,7 @@ myawesomemenu = {
    { "Quit", awesome.quit, beautiful.menu_quit }
 }
 
-mymainmenu = awful.menu({ items = { { "Termite", terminal, beautiful.menu_term },
+mymainmenu = awful.menu({ items = { { "st", terminal, beautiful.menu_term },
                                     { "Conkeror", "conkeror", beautiful.menu_browser },
                                     { "Emacs", "emacs", beautiful.menu_emacs },
                                     { "GIMP", "gimp", beautiful.menu_gimp },
