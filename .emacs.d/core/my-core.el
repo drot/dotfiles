@@ -45,7 +45,7 @@
 
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
+      ediff-split-window-function 'split-window-vertically)
 
 ;; Make buffer names unique
 (require 'uniquify)
