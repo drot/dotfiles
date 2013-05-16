@@ -37,16 +37,6 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
-;; Scroll compilation buffer to first error
-(setq compilation-scroll-output 'first-error)
-
-;; Use Unified diff format
-(setq diff-switches "-u")
-
-;; Ediff window placement
-(setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-vertically)
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward
@@ -80,7 +70,7 @@
 (require 'flyspell)
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra")
-      ispell-dictionary "american")
+      ispell-dictionary "english")
 (setq flyspell-issue-message-flag nil)
 
 ;; Doc View mode configuration
