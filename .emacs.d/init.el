@@ -48,5 +48,4 @@
 ;; Load changes from the customize interface
 (if (file-exists-p my-custom-file)
   (load my-custom-file))
-
 ;; init.el ends here

@@ -14,10 +14,13 @@
 ;; Org mode
 (require 'my-org)
 
-;; rcirc mode
+;; Rmail
+(require 'my-rmail)
+
+;; rcirc
 (require 'my-rcirc)
 
-;; ParEdit mode
+;; ParEdit
 (require 'my-paredit)
 
 ;; YASnippet
