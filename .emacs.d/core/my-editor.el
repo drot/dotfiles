@@ -37,7 +37,7 @@
 
 ;; Ediff window placement
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-vertically)
+      ediff-split-window-function 'split-window-horizontally)
 
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
