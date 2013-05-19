@@ -71,7 +71,6 @@
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra")
       ispell-dictionary "english")
-(setq flyspell-issue-message-flag nil)
 
 ;; Doc View mode configuration
 (require 'doc-view)
