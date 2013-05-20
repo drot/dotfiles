@@ -11,6 +11,9 @@
 ;; Org mode
 (require 'my-org)
 
+;; ParEdit
+(require 'my-paredit)
+
 ;; RainbowDelimiters
 (require 'my-rainbow)
 
@@ -20,8 +23,8 @@
 ;; Rmail
 (require 'my-rmail)
 
-;; ParEdit
-(require 'my-paredit)
+;; Skeletons
+(require 'my-skeletons)
 
 ;; Undo tree
 (require 'my-undo)
