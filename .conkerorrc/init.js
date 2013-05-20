@@ -10,11 +10,13 @@ require("favicon");
 homepage = "about:blank";
 
 // Improve hinting keys
-hint_background_color = "transparent";
 hint_digits = "aoeuhtns";
+
+// Display selected hint URL
 hints_display_url_panel = true;
 
 // Hinting color
+hint_background_color = "transparent";
 register_user_stylesheet(
     "data:text/css," +
 	escape (
@@ -27,7 +29,7 @@ register_user_stylesheet(
 // Don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
 
-// Default directory for downloads and shell commands.
+// Default directory for downloads and shell commands
 cwd = get_home_directory();
 cwd.append('Downloads');
 
@@ -99,12 +101,3 @@ function clear_history () {
     history.removeAllPages();
 };
 interactive("clear-history", "Clear the history.", clear_history);
-
-// Reload conkerorrc with C-c r
-interactive("reload-config", "reload conkerorrc",
-	    function(I) {
-		load_rc();
-		I.window.minibuffer.message("config reloaded");
-	    }
-	   );
-define_key(default_global_keymap, "C-c r", "reload-config");
