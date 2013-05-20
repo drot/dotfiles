@@ -2,6 +2,9 @@
 ;; my-modules.el - Enable/disable modules
 ;;
 
+;; Abbrev mode
+(require 'my-abbrev)
+
 ;; Ido
 (require 'my-ido)
 
