@@ -5,9 +5,6 @@
 ;; Ido
 (require 'my-ido)
 
-;; Undo tree
-(require 'my-undo)
-
 ;; CC mode
 (require 'my-cc)
 
@@ -26,8 +23,8 @@
 ;; ParEdit
 (require 'my-paredit)
 
-;; YASnippet
-(require 'my-yasnippet)
+;; Undo tree
+(require 'my-undo)
 
 ;; Auto Complete
 (require 'my-ac)

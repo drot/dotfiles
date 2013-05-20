@@ -8,12 +8,11 @@
 (defun my-ac-setup ()
   "Change some defaults."
   (setq ac-comphist-file (expand-file-name "ac-comphist.dat" my-saves-dir))
-  (ac-set-trigger-key "TAB")
-  (ac-set-trigger-key "<tab>"))
+  (ac-set-trigger-key "TAB"))
 
 (defun my-ac-cc-setup ()
   "Enable Clang completion for CC mode."
-  (setq ac-sources (append '(ac-source-clang-async ac-source-yasnippet) ac-sources))
+  (setq ac-sources (append '(ac-source-clang-async) ac-sources))
   (ac-clang-launch-completion-process))
 
 (defun my-ac-init ()
