@@ -14,11 +14,14 @@
 ;; Org mode
 (require 'my-org)
 
-;; Rmail
-(require 'my-rmail)
+;; RainbowDelimiters
+(require 'my-rainbow)
 
 ;; rcirc
 (require 'my-rcirc)
+
+;; Rmail
+(require 'my-rmail)
 
 ;; ParEdit
 (require 'my-paredit)

@@ -37,6 +37,7 @@
     org-mode
     paredit
     pkgbuild-mode
+    rainbow-delimiters
     undo-tree
     yasnippet)
   "A list of packages to ensure are installed at launch.")
