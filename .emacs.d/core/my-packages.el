@@ -18,12 +18,6 @@
 ;; Additional recipes
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
-;; Modify existing recipes
-(setq el-get-sources
-      '((:name undo-tree
-               :description "Treat undo history as a tree"
-               :type elpa)))
-
 (defvar my-package-list
   '(auto-complete
     diminish
@@ -38,8 +32,7 @@
     paredit
     pkgbuild-mode
     rainbow-delimiters
-    undo-tree
-    yasnippet)
+    undo-tree)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync my-package-list)
