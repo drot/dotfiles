@@ -22,12 +22,6 @@
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
-(defun my-rcirc-prompt ()
-  "Keep prompt at bottom."
-  (set (make-local-variable 'scroll-conservatively) 8192))
-
-(add-hook 'rcirc-mode-hook 'my-rcirc-prompt)
-
 ;; Wrap lines that are too long
 (add-hook 'rcirc-mode-hook 'visual-line-mode)
 
