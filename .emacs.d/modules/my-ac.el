@@ -8,7 +8,12 @@
 (defun my-ac-setup ()
   "Change some defaults."
   (setq ac-comphist-file (expand-file-name "ac-comphist.dat" my-saves-dir))
-  (ac-set-trigger-key "TAB"))
+  (setq ac-fuzzy-enable t)
+  (ac-set-trigger-key "TAB")
+  (setq ac-auto-start nil)
+  (setq ac-use-menu-map t)
+  (define-key ac-menu-map "\C-n" 'ac-next)
+  (define-key ac-menu-map "\C-p" 'ac-previous))
 
 (defun my-ac-cc-setup ()
   "Enable Clang completion for CC mode."
