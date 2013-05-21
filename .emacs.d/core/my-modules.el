@@ -2,11 +2,11 @@
 ;; my-modules.el - Enable/disable modules
 ;;
 
-;; Abbrev mode
-(require 'my-abbrev)
-
 ;; Ido
 (require 'my-ido)
+
+;; Abbrev mode
+(require 'my-abbrev)
 
 ;; CC mode
 (require 'my-cc)
@@ -26,14 +26,14 @@
 ;; Rmail
 (require 'my-rmail)
 
-;; Skeletons
-(require 'my-skeletons)
-
 ;; Undo tree
 (require 'my-undo)
 
 ;; Auto Complete
 (require 'my-ac)
+
+;; YASnippet
+(require 'my-yasnippet)
 
 (provide 'my-modules)
 ;; my-modules.el ends here
