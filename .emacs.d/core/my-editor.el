@@ -62,8 +62,5 @@
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
-;; Use ANSI colors within shell-mode
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
 (provide 'my-editor)
 ;; my-editor.el ends here

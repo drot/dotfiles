@@ -33,9 +33,12 @@
       x-select-enable-primary t
       save-interprogram-paste-before-kill t)
 
-;; Default browser
+;; Open URLs in the selected browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
+
+;; Skip buffer kill confirmation in Ibuffer
+(setq ibuffer-expert t)
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -83,6 +86,9 @@
 
 ;; Enable Winner mode
 (winner-mode 1)
+
+;; Use ANSI colors within shell-mode
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (provide 'my-core)
 ;; my-core.el ends here
