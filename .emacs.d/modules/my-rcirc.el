@@ -15,6 +15,15 @@
 (setq rcirc-authinfo
       `(("freenode" nickserv "drot" ,freenode-password)))
 
+;; Colorize nicks
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (require 'rcirc-color)))
+(setq rcirc-colors '("#8d4a4a" "#953331" "#ba5b34"
+                     "#96a62d" "#909737" "#546a29"
+                     "#7e9960" "#34676f" "#5c737c"
+                     "#385e6b" "#7f355e"))
+
 ; Max line width and number
 (setq rcirc-fill-flag nil
       rcirc-buffer-maximum-lines 1024)

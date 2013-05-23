@@ -32,6 +32,7 @@
     paredit
     pkgbuild-mode
     rainbow-delimiters
+    rcirc-color
     undo-tree
     yasnippet)
   "A list of packages to ensure are installed at launch.")
