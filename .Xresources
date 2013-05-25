@@ -31,41 +31,41 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Erebus color theme
-URxvt.background: #261515
-URxvt.foreground: #FFFFFF
+! X::DotShare color theme
+URxvt.foreground: #D7D0C7
+URxvt.background: #151515
 
-! black + red
-URxvt.color0: #757575
-URxvt.color1: #FF5F5F
+!black
+URxvt.color0: #101010
+URxvt.color8: #404040
 
-! green + yellow
-URxvt.color2: #DE8A36
-URxvt.color3: #D78787
+!red
+URxvt.color1: #E84F4F
+URxvt.color9: #D23D3D
 
-! blue + purple
-URxvt.color4: #AF5FD7
-URxvt.color5: #FF87D7
+!green
+URxvt.color2: #B8D68C
+URxvt.color10:#A0CF5D
 
-! cyan + white
-URxvt.color6: #DEA3E5
-URxvt.color7: #B8B8B8
+!yellow
+URxvt.color3: #E1AA5D
+URxvt.color11: #F39D21
 
-! bright-black + bright-red
-URxvt.color8: #B8B8B8
-URxvt.color9: #D78787
+!blue
+URxvt.color4: #7DC1CF
+URxvt.color12: #4E9FB1
 
-! bright-green + bright-yellow
-URxvt.color10: #FF9F6F
-URxvt.color11: #FF5F5F
+!magenta
+URxvt.color5: #9B64FB
+URxvt.color13: #8542FF
 
-! bright-blue + bright-purple
-URxvt.color12: #DEA3E5
-URxvt.color13: #D7AFAF
+!cyan
+URxvt.color6: #6D878D
+URxvt.color14: #42717B
 
-! bright-cyan + bright-white
-URxvt.color14: #AF5FD7
-URxvt.color15: #757575
+!white
+URxvt.color7: #dddddd
+URxvt.color15: #dddddd
 
 ! XTERM
 ! General
@@ -80,41 +80,41 @@ xterm*eightBitInput: true
 xterm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 xterm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Erebus color theme
-xterm*background: #261515
-xterm*foreground: #FFFFFF
+! X::DotShare color theme
+xterm*foreground: #D7D0C7
+xterm*background: #151515
 
-! black + red
-xterm*color0: #757575
-xterm*color1: #FF5F5F
+!black
+xterm*color0: #101010
+xterm*color8: #404040
 
-! green + yellow
-xterm*color2: #DE8A36
-xterm*color3: #D78787
+!red
+xterm*color1: #E84F4F
+xterm*color9: #D23D3D
 
-! blue + purple
-xterm*color4: #AF5FD7
-xterm*color5: #FF87D7
+!green
+xterm*color2: #B8D68C
+xterm*color10:#A0CF5D
 
-! cyan + white
-xterm*color6: #DEA3E5
-xterm*color7: #B8B8B8
+!yellow
+xterm*color3: #E1AA5D
+xterm*color11: #F39D21
 
-! bright-black + bright-red
-xterm*color8: #B8B8B8
-xterm*color9: #D78787
+!blue
+xterm*color4: #7DC1CF
+xterm*color12: #4E9FB1
 
-! bright-green + bright-yellow
-xterm*color10: #FF9F6F
-xterm*color11: #FF5F5F
+!magenta
+xterm*color5: #9B64FB
+xterm*color13: #8542FF
 
-! bright-blue + bright-purple
-xterm*color12: #DEA3E5
-xterm*color13: #D7AFAF
+!cyan
+xterm*color6: #6D878D
+xterm*color14: #42717B
 
-! bright-cyan + bright-white
-xterm*color14: #AF5FD7
-xterm*color15: #757575
+!white
+xterm*color7: #dddddd
+xterm*color15: #dddddd
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
