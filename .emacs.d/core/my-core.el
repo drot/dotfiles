@@ -80,13 +80,6 @@
 (setq doc-view-resolution 300
       doc-view-continuous t)
 
-;; Easier switching between visible buffers
-(require 'windmove)
-(windmove-default-keybindings)
-
-;; Enable Winner mode
-(winner-mode 1)
-
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 

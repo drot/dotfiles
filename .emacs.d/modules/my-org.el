@@ -2,9 +2,6 @@
 ;; my-org.el - Configuration for Org mode
 ;;
 
-;; Fix conflict with WindMove
-(setq org-replace-disputed-keys t)
-
 ;; Use Ido for completion
 (setq org-completion-use-ido t)
 
