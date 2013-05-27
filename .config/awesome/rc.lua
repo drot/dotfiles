@@ -132,8 +132,8 @@ cpugraph:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 4)
-vicious.register(cpugraph, vicious.widgets.cpu, "$1", 4)
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 2)
+vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
 -- }}}
 
 -- {{{ Memory usage widgets
@@ -151,8 +151,8 @@ membar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
-vicious.register(memwidget, vicious.widgets.mem, "$1%", 10)
-vicious.register(membar, vicious.widgets.mem, "$1", 10)
+vicious.register(memwidget, vicious.widgets.mem, "$1%", 4)
+vicious.register(membar, vicious.widgets.mem, "$1", 4)
 -- }}}
 
 -- {{{ CPU temperature widgets
@@ -191,10 +191,10 @@ end
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widgets
-vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 500)
-vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 500)
-vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 500)
-vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 500)
+vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 300)
+vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 300)
+vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 300)
+vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 300)
 -- }}}
 
 -- {{{ Volume widgets
@@ -309,7 +309,6 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the right
    local right_layout = wibox.layout.fixed.horizontal()
-   if s == 1 then right_layout:add(wibox.widget.systray()) end
    right_layout:add(cpuicon)
    right_layout:add(cpuwidget)
    right_layout:add(cpugraph)
@@ -334,6 +333,7 @@ for s = 1, screen.count() do
    right_layout:add(separator)
    right_layout:add(dateicon)
    right_layout:add(datewidget)
+   right_layout:add(wibox.widget.systray())
 
    -- Now bring it all together (with the tasklist in the middle)
    local layout = wibox.layout.align.horizontal()
