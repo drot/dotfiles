@@ -8,6 +8,9 @@
 ;; Abbrev mode
 (require 'my-abbrev)
 
+;; Auto Complete
+(require 'my-ac)
+
 ;; CC mode
 (require 'my-cc)
 
@@ -26,14 +29,11 @@
 ;; Rmail
 (require 'my-rmail)
 
+;; Skeletons
+(require 'my-skeletons)
+
 ;; Undo tree
 (require 'my-undo)
-
-;; Auto Complete
-(require 'my-ac)
-
-;; YASnippet
-(require 'my-yasnippet)
 
 (provide 'my-modules)
 ;; my-modules.el ends here

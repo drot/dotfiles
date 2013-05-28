@@ -33,8 +33,7 @@
     pkgbuild-mode
     rainbow-delimiters
     rcirc-color
-    undo-tree
-    yasnippet)
+    undo-tree)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync my-package-list)

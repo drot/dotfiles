@@ -25,8 +25,7 @@
   (setq-default ac-sources '(ac-source-abbrev
                              ac-source-dictionary
                              ac-source-filename
-                             ac-source-words-in-same-mode-buffers
-                             ac-source-yasnippet))
+                             ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
   (add-hook 'c-mode-common-hook 'my-ac-cc-setup)
   (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
