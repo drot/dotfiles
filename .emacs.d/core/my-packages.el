@@ -22,7 +22,6 @@
   '(auto-complete
     diminish
     el-get
-    emacs-clang-complete-async
     idomenu
     ido-hacks
     jazz-theme
