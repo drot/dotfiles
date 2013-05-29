@@ -22,7 +22,6 @@
   '(auto-complete
     diminish
     el-get
-    idomenu
     ido-hacks
     jazz-theme
     lua-mode
