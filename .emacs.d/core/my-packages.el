@@ -27,7 +27,6 @@
     jazz-theme
     lua-mode
     magit
-    org-mode
     paredit
     pkgbuild-mode
     rainbow-delimiters
