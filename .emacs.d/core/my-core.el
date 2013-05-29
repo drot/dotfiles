@@ -37,9 +37,6 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
-;; Skip buffer kill confirmation in Ibuffer
-(setq ibuffer-expert t)
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward
