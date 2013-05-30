@@ -7,7 +7,8 @@
 
 ; Connection
 (setq rcirc-server-alist
-      '(("adams.freenode.net" :channels ("#archlinux" "#emacs"))))
+      '(("adams.freenode.net" :channels ("#archlinux" "#emacs")
+         :port 7000 :encryption tls)))
 
 ; Authorization
 (if (file-exists-p "~/.ircpass")
