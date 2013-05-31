@@ -17,9 +17,6 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
-;; Parenthesis matching
-(electric-pair-mode t)
-
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 
