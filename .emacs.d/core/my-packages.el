@@ -23,9 +23,9 @@
     diminish
     el-get
     ido-hacks
-    jazz-theme
     lua-mode
     magit
+    monokai-theme
     org-mode
     paredit
     pkgbuild-mode
