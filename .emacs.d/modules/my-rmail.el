@@ -12,9 +12,6 @@
       smtpmail-smtp-server "lavabit.com"
       smtpmail-smtp-service 587)
 
-;; Don't show the number of lines in each message
-(setq rmail-summary-line-count-flag nil)
-
 ;; Always display the summary buffer
 (setq rmail-display-summary t)
 
