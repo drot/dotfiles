@@ -42,6 +42,7 @@ shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty 
 shopt -s extglob # extended globbing
 
 # prompt colors
+RED='\[\033[0;33m\]'
 GREEN='\[\033[0;32m\]'
 BLUE='\[\033[0;34m\]'
 CYAN='\[\033[0;36m\]'
@@ -53,7 +54,7 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${GREEN}${GIT}${CYAN}]${GREEN}%${NIL} "
+export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${RED}${GIT}${CYAN}]${GREEN}%${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
