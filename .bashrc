@@ -7,6 +7,7 @@ export EDITOR=emacsclient
 export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export PAGER=less
+export BROWSER=conkeror
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 # history
@@ -43,6 +44,7 @@ shopt -s extglob # extended globbing
 # prompt colors
 GREEN='\[\033[0;32m\]'
 BLUE='\[\033[0;34m\]'
+CYAN='\[\033[0;36m\]'
 NIL='\[\033[00m\]'
 
 # git completion
@@ -51,7 +53,7 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # prompt look
-export PS1="${GREEN}\u@\h${BLUE} \w${GREEN}${GIT} ${BLUE}\$${NIL} "
+export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${GREEN}${GIT}${CYAN}]${GREEN}%${NIL} "
 
 # aliases
 alias ls="ls -h --group-directories-first --color=auto"
