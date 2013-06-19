@@ -8,13 +8,16 @@
 ; Connection
 (setq rcirc-server-alist
       '(("adams.freenode.net" :channels ("#archlinux" "#emacs")
-         :port 7000 :encryption tls)))
+         :port 7000 :encryption tls)
+        ("pine.forestnet.org" :channels ("#2238")
+         :port 6697 :encryption tls)))
 
 ; Authorization
 (if (file-exists-p "~/.ircpass")
     (load "~/.ircpass"))
 (setq rcirc-authinfo
-      `(("freenode" nickserv "drot" ,freenode-password)))
+      `(("freenode" nickserv "drot" ,freenode-password)
+        ("forestnet" nickserv "drot" ,freenode-password)))
 
 ;; Colorize nicks
 (add-hook 'after-make-frame-functions
@@ -26,13 +29,11 @@
 
 ; Max line width and number
 (setq rcirc-fill-flag nil
+      rcirc-fill-column 'frame-width
       rcirc-buffer-maximum-lines 1024)
 
 ; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
-
-;; Wrap lines that are too long
-(add-hook 'rcirc-mode-hook 'visual-line-mode)
 
 ; Turn on Fly Spell mode
 (add-hook 'rcirc-mode-hook 'flyspell-mode)

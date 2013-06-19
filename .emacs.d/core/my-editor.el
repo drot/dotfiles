@@ -39,9 +39,6 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Show indicators for wrapped lines in Visual Line mode
-(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
-
 ;; Enable Fly Spell mode for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
