@@ -28,7 +28,7 @@
                      "#CDF187" "#FC87B0" "#FEA7F7"))
 
 ; Max line width and number
-(setq rcirc-fill-flag nil
+(setq rcirc-fill-flag t
       rcirc-fill-column 'frame-width
       rcirc-buffer-maximum-lines 1024)
 
