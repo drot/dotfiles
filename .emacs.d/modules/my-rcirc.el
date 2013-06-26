@@ -14,15 +14,16 @@
 
 ; Authorization
 (if (file-exists-p "~/.ircpass")
-    (load "~/.ircpass"))
-(setq rcirc-authinfo
-      `(("freenode" nickserv "drot" ,freenode-password)
-        ("forestnet" nickserv "drot" ,freenode-password)))
+    (load "~/.ircpass")
+  (setq rcirc-authinfo
+        `(("freenode" nickserv "drot" ,freenode-password)
+          ("forestnet" nickserv "drot" ,freenode-password))))
 
 ;; Colorize nicks
 (add-hook 'after-make-frame-functions
           (lambda (frame)
             (require 'rcirc-color)))
+
 (setq rcirc-colors '("#F92672" "#A6E22E" "#FD971F"
                      "#E6DB74" "#66D9EF" "#F3ECB0"
                      "#CDF187" "#FC87B0" "#FEA7F7"))
