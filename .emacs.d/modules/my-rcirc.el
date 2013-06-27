@@ -9,7 +9,7 @@
 (setq rcirc-server-alist
       '(("adams.freenode.net" :channels ("#archlinux" "#emacs")
          :port 7000 :encryption tls)
-        ("pine.forestnet.org" :channels ("#2238")
+        ("pine.forestnet.org" :channels ("#fo2")
          :port 6697 :encryption tls)))
 
 ; Authorization
