@@ -25,21 +25,21 @@
                      "#E6DB74" "#66D9EF" "#F3ECB0"
                      "#CDF187" "#FC87B0" "#FEA7F7"))
 
-                                        ; Max line width and number
+;; Max line width and number
 (setq rcirc-fill-flag t
       rcirc-fill-column 'frame-width
       rcirc-buffer-maximum-lines 1024)
 
-                                        ; Hide IRC spam
+;; Hide IRC spam
 (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
-                                        ; Turn on Fly Spell mode
+;; Turn on Fly Spell mode
 (add-hook 'rcirc-mode-hook 'flyspell-mode)
 
-                                        ; Turn on Omit mode
+;; Turn on Omit mode
 (add-hook 'rcirc-mode-hook 'rcirc-omit-mode)
 
-                                        ; Track channel activity
+;; Track channel activity
 (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
 
 (provide 'my-rcirc)
