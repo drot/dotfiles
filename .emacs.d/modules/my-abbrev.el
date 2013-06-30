@@ -20,8 +20,5 @@
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol))
 
-;; Shorten mode name
-(diminish 'abbrev-mode "Abv")
-
 (provide 'my-abbrev)
 ;; my-abbrev.el ends here

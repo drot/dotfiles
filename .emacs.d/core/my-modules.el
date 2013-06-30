@@ -14,6 +14,9 @@
 ;; CC mode
 (require 'my-cc)
 
+;; Diminish
+(require 'my-diminish)
+
 ;; Org mode
 (require 'my-org)
 

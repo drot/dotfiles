@@ -46,8 +46,5 @@
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'paredit-slime-fix)
 
-;; Shorten mode name
-(eval-after-load 'paredit '(diminish 'paredit-mode "PEd"))
-
 (provide 'my-paredit)
 ;; my-paredit.el ends here

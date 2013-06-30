@@ -1,19 +1,16 @@
 ;;
-;; my-undo.el - Undo tree configuration
+;; my-undo.el - Undo Tree configuration
 ;;
 
 ;; Store Undo Tree history in the tmp directory
 (setq undo-tree-history-directory-alist
       `((".*" . ,temporary-file-directory)))
 
-;; Enable Undo tree history
+;; Enable Undo Tree history
 (setq undo-tree-auto-save-history t)
 
-;; Enable Undo tree
+;; Enable Undo Tree
 (global-undo-tree-mode)
-
-;; Shorten mode name
-(diminish 'undo-tree-mode "UTr")
 
 (provide 'my-undo)
 ;; my-undo.el ends here
