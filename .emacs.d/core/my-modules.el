@@ -20,6 +20,9 @@
 ;; ParEdit
 (require 'my-paredit)
 
+;; PKGBUILD mode
+(require 'my-pkgbuild)
+
 ;; RainbowDelimiters
 (require 'my-rainbow)
 
