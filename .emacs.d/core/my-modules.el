@@ -38,7 +38,7 @@
 ;; Skeletons
 (require 'my-skeletons)
 
-;; Undo tree
+;; Undo Tree
 (require 'my-undo)
 
 (provide 'my-modules)
