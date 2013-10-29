@@ -41,7 +41,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'monokai t)
+(load-theme 'anti-zenburn t)
 
 (provide 'my-ui)
 ;; my-ui.el ends here
