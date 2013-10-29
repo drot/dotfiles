@@ -41,7 +41,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'anti-zenburn t)
+(load-theme 'noctilux t)
 
 (provide 'my-ui)
 ;; my-ui.el ends here

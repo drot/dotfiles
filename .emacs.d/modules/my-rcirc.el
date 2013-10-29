@@ -8,9 +8,7 @@
 ;; Connection
 (setq rcirc-server-alist
       '(("adams.freenode.net" :channels ("#archlinux" "#emacs")
-         :port 7000 :encryption tls)
-        ("pine.forestnet.org" :channels ("#fo2")
-         :port 6697 :encryption tls)))
+         :port 7000 :encryption tls)))
 
 ;; Authorization
 (when (file-exists-p "~/.ircpass")
@@ -21,9 +19,9 @@
 
 ;; Colorize nicks
 (require 'rcirc-color)
-(setq rcirc-colors '("#F92672" "#A6E22E" "#FD971F"
-                     "#E6DB74" "#66D9EF" "#F3ECB0"
-                     "#CDF187" "#FC87B0" "#FEA7F7"))
+(setq rcirc-colors '("#aaeecc" "#ff8888" "#ff3333"
+                     "#FF1F69" "#ccaaff" "#aaccff"
+                     "#aadddd" "#ffffff" "#aaffaa"))
 
 ;; Max line width and number
 (setq rcirc-fill-flag t

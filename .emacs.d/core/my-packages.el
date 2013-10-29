@@ -19,12 +19,12 @@
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
 (defvar my-package-list
-  '(anti-zenburn-theme
-    auto-complete
+  '(auto-complete
     diminish
     el-get
     ido-hacks
     magit
+    noctilux-theme
     org-mode
     paredit
     pkgbuild-mode
