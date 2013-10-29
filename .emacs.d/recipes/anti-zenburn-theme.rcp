@@ -1,0 +1,5 @@
+(:name anti-zenburn-theme
+       :description "Low contrast grayish theme derived from Zenburn."
+       :type github
+       :pkgname "m00natic/anti-zenburn-theme"
+       :prepare (add-to-list 'custom-theme-load-path default-directory))

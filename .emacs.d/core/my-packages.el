@@ -2,43 +2,37 @@
 ;; my-packages.el - Emacs default package selection
 ;;
 
-(require 'cl-lib)
-(require 'package)
+(defvar el-get-dir (expand-file-name "el-get" my-emacs-dir)
+  "El-Get root directory")
+(add-to-list 'load-path (expand-file-name "el-get" el-get-dir))
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; Bootstrap El-Get
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch)
+      (goto-char (point-max))
+      (eval-print-last-sexp))))
 
-(package-initialize)
+;; Additional recipes
+(add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
-(defvar my-packages-list
-  '(auto-complete
+(defvar my-package-list
+  '(anti-zenburn-theme
+    auto-complete
     diminish
+    el-get
     ido-hacks
-    lua-mode
     magit
-    monokai-theme
+    org-mode
     paredit
     pkgbuild-mode
     rainbow-delimiters
     undo-tree)
   "A list of packages to ensure are installed at launch.")
 
-(defun my-packages-installed-p ()
-  "Check if all packages in `my-packages-list' are installed."
-  (cl-every #'package-installed-p my-packages-list))
-
-(defun my-packages-installation ()
-  "Install all packages listed in `my-packages-list'."
-  (unless (my-packages-installed-p)
-    ;; Check for new package versions
-    (message "%s" "Emacs is now refreshing the package database...")
-    (package-refresh-contents)
-    (message "%s" " done.")
-    ;; Install the missing packages
-    (mapc #'package-install
-     (cl-remove-if #'package-installed-p my-packages-list))))
-
-(my-packages-installation)
+(el-get 'sync my-package-list)
 
 (provide 'my-packages)
 ;; my-packages.el ends here
