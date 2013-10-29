@@ -78,17 +78,17 @@
 (run-commands "gnewbg www" "gnewbg emacs" "gnewbg misc")
 
 ;; Run or raise
-; Emacs Client
+;; Emacs Client
 (defcommand eclient () ()
 	    "Run/Raise Emacs Client"
 	    (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
-; Conkeror
+;; Conkeror
 (defcommand conkeror () ()
 	    "Run/Raise Conkeror"
 	    (run-or-raise "conkeror" '(:class "Conkeror")))
 
-; GIMP
+;; GIMP
 (defcommand gimp () ()
 	    "Run/Raise GIMP"
 	    (run-or-raise "gimp" '(:class "Gimp")))
@@ -107,15 +107,15 @@
 
 
 ;; Keybindings
-; Prefix key
+;; Prefix key
 (set-prefix-key (kbd "C-i"))
 
-; Swap defaults
+;; Swap defaults
 (define-key *root-map* (kbd "C-c") "conkeror")
 (define-key *root-map* (kbd "c") "exec termite")
 (define-key *root-map* (kbd "e") "eclient")
 
-; Fast group switching
+;; Fast group switching
 (define-key *top-map* (kbd "s-1") "gselect 1")
 (define-key *top-map* (kbd "s-2") "gselect 2")
 (define-key *top-map* (kbd "s-3") "gselect 3")
