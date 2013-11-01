@@ -1,5 +1,5 @@
 ;;
-;; my-core.el - Core Emacs configuration
+;; my-defaults.el - Core Emacs configuration
 ;;
 
 ;; Store all backup and auto-save files in the tmp directory
@@ -36,6 +36,16 @@
 ;; Open URLs in the selected browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
+
+;; Scroll compilation buffer to first error
+(setq compilation-scroll-output 'first-error)
+
+;; Ediff window placement
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
+
+;; Use Unified diff format
+(setq diff-switches "-u")
 
 ;; Make buffer names unique
 (require 'uniquify)
@@ -80,5 +90,5 @@
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-(provide 'my-core)
-;; my-core.el ends here
+(provide 'my-defaults)
+;; my-defaults.el ends here

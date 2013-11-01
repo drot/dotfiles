@@ -1,5 +1,5 @@
 ;;
-;; my-editor.el - Emacs editing configuration
+;; my-editing.el - Emacs editing configuration
 ;;
 
 ;; Encoding
@@ -26,16 +26,6 @@
 ;; Recognize CamelCase words
 (global-subword-mode 1)
 
-;; Scroll compilation buffer to first error
-(setq compilation-scroll-output 'first-error)
-
-;; Use Unified diff format
-(setq diff-switches "-u")
-
-;; Ediff window placement
-(setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
-
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
@@ -50,5 +40,5 @@
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
-(provide 'my-editor)
-;; my-editor.el ends here
+(provide 'my-editing)
+;; my-editing.el ends here

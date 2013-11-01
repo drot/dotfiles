@@ -34,10 +34,10 @@
 (require 'my-ui)
 
 ;; Load general configuration
-(require 'my-core)
+(require 'my-defaults)
 
 ;; Load editing-specific configuration
-(require 'my-editor)
+(require 'my-editing)
 
 ;; Load modules
 (require 'my-modules)
