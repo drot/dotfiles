@@ -69,52 +69,53 @@ URxvt.color15: #757575
 
 ! XTERM
 ! General
-xterm*internalBorder: 0
-xterm*saveLines: 65535
-xterm*dynamicColors: on
-xterm*highlightSelection: true
-xterm*utf8: 2
-xterm*eightBitInput: true
+XTerm*termName: xterm-256color
+XTerm*loginShell: true
+XTerm*locale: true
+XTerm*metaSendsEscape: true
+XTerm*saveLines: 4096
+XTerm*fastScroll: true
+XTerm*highlightSelection: true
 
 ! Appearance
-xterm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
-xterm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
+XTerm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
+XTerm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
 ! Erebus color theme
-xterm*background: #261515
-xterm*foreground: #FFFFFF
+XTerm*background: #261515
+XTerm*foreground: #FFFFFF
 
 ! black + red
-xterm*color0: #757575
-xterm*color1: #FF5F5F
+XTerm*color0: #757575
+XTerm*color1: #FF5F5F
 
 ! green + yellow
-xterm*color2: #DE8A36
-xterm*color3: #D78787
+XTerm*color2: #DE8A36
+XTerm*color3: #D78787
 
 ! blue + purple
-xterm*color4: #AF5FD7
-xterm*color5: #FF87D7
+XTerm*color4: #AF5FD7
+XTerm*color5: #FF87D7
 
 ! cyan + white
-xterm*color6: #DEA3E5
-xterm*color7: #B8B8B8
+XTerm*color6: #DEA3E5
+XTerm*color7: #B8B8B8
 
 ! bright-black + bright-red
-xterm*color8: #B8B8B8
-xterm*color9: #D78787
+XTerm*color8: #B8B8B8
+XTerm*color9: #D78787
 
 ! bright-green + bright-yellow
-xterm*color10: #FF9F6F
-xterm*color11: #FF5F5F
+XTerm*color10: #FF9F6F
+XTerm*color11: #FF5F5F
 
 ! bright-blue + bright-purple
-xterm*color12: #DEA3E5
-xterm*color13: #D7AFAF
+XTerm*color12: #DEA3E5
+XTerm*color13: #D7AFAF
 
 ! bright-cyan + bright-white
-xterm*color14: #AF5FD7
-xterm*color15: #757575
+XTerm*color14: #AF5FD7
+XTerm*color15: #757575
 
 ! xcalc
 XCalc.ti.button1.vertDistance: 4
