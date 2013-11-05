@@ -1,6 +1,6 @@
-(:name noctilux-theme
-       :description "Noctilux theme for Emacs."
+(:name flatland-theme
+       :description "Flatland theme for Emacs."
        :type github
-       :pkgname "stafu/noctilux-theme"
+       :pkgname "gregchapple/noctilux-theme"
        :minimum-emacs-version 24
        :prepare (add-to-list 'custom-theme-load-path default-directory))

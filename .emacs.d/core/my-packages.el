@@ -22,9 +22,9 @@
   '(auto-complete
     diminish
     el-get
+    flatland-theme
     ido-hacks
     magit
-    noctilux-theme
     org-mode
     paredit
     pkgbuild-mode

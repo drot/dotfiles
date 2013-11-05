@@ -19,9 +19,9 @@
 
 ;; Colorize nicks
 (require 'rcirc-color)
-(setq rcirc-colors '("#aaeecc" "#ff8888" "#ff3333"
-                     "#FF1F69" "#ccaaff" "#aaccff"
-                     "#aadddd" "#ffffff" "#aaffaa"))
+(setq rcirc-colors '("#40b83e" "#afc4db" "#93e0e3"
+                     "#dc8cc3" "#f6aa11" "#f6f080"
+                     "#ff4a52" "#ffffaa" "#0f0031"))
 
 ;; Max line width and number
 (setq rcirc-fill-flag t
