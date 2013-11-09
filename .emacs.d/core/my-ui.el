@@ -41,7 +41,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'flatland t)
+(load-theme 'ample-zen t)
 
 (provide 'my-ui)
 ;; my-ui.el ends here

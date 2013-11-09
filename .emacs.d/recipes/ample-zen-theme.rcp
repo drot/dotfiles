@@ -1,6 +1,6 @@
-(:name flatland-theme
-       :description "Flatland theme for Emacs."
+(:name ample-zen-theme
+       :description "Ample Zen theme for Emacs."
        :type github
-       :pkgname "gregchapple/flatland-emacs"
+       :pkgname "mjwall/ample-zen"
        :minimum-emacs-version 24
        :prepare (add-to-list 'custom-theme-load-path default-directory))

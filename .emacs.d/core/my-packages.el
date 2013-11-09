@@ -19,10 +19,10 @@
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
 (defvar my-package-list
-  '(auto-complete
+  '(ample-zen-theme
+    auto-complete
     diminish
     el-get
-    flatland-theme
     ido-hacks
     magit
     org-mode
