@@ -26,9 +26,9 @@
     ido-hacks
     magit
     org-mode
-    paredit
     pkgbuild-mode
     rainbow-delimiters
+    smartparens
     undo-tree)
   "A list of packages to ensure are installed at launch.")
 
