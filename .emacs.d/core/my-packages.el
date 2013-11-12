@@ -28,6 +28,7 @@
     org-mode
     pkgbuild-mode
     rainbow-delimiters
+    rcirc-color
     smartparens
     undo-tree)
   "A list of packages to ensure are installed at launch.")
