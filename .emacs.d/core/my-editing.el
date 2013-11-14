@@ -13,6 +13,10 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
+;; Highlight matching parentheses
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 

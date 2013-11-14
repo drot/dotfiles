@@ -19,17 +19,17 @@
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
 (defvar my-package-list
-  '(ample-zen-theme
-    auto-complete
+  '(auto-complete
     diminish
     el-get
     ido-hacks
     magit
+    monokai-emacs
     org-mode
+    paredit
     pkgbuild-mode
     rainbow-delimiters
     rcirc-color
-    smartparens
     undo-tree)
   "A list of packages to ensure are installed at launch.")
 

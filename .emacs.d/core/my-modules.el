@@ -20,6 +20,9 @@
 ;; Org mode
 (require 'my-org)
 
+;; ParEdit
+(require 'my-paredit)
+
 ;; PKGBUILD mode
 (require 'my-pkgbuild)
 
@@ -34,9 +37,6 @@
 
 ;; Skeletons
 (require 'my-skeletons)
-
-;; Smartparens
-(require 'my-smartparens)
 
 ;; Undo Tree
 (require 'my-undo)
