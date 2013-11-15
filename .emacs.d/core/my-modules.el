@@ -14,17 +14,11 @@
 ;; CC mode
 (require 'my-cc)
 
-;; Diminish
-(require 'my-diminish)
-
 ;; Org mode
 (require 'my-org)
 
 ;; ParEdit
 (require 'my-paredit)
-
-;; PKGBUILD mode
-(require 'my-pkgbuild)
 
 ;; RainbowDelimiters
 (require 'my-rainbow)

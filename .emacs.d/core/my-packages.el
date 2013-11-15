@@ -20,14 +20,12 @@
 
 (defvar my-package-list
   '(auto-complete
-    diminish
     el-get
     ido-hacks
     magit
     monokai-emacs
     org-mode
     paredit
-    pkgbuild-mode
     rainbow-delimiters
     rcirc-color
     undo-tree)
