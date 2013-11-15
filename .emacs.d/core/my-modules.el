@@ -2,17 +2,17 @@
 ;; my-modules.el - Enable/disable modules
 ;;
 
-;; Ido
-(require 'my-ido)
-
 ;; Abbrev mode
 (require 'my-abbrev)
 
-;; Auto Complete
-(require 'my-ac)
-
 ;; CC mode
 (require 'my-cc)
+
+;; Company
+(require 'my-company)
+
+;; Ido
+(require 'my-ido)
 
 ;; Org mode
 (require 'my-org)
