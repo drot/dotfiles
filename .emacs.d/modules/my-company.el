@@ -16,6 +16,12 @@
                          company-files 
                          company-dabbrev))
 
+;; Delay before completion
+(setq company-idle-delay 0.5)
+
+;; Disable echo delay
+(setq company-echo-delay 0)
+
 ;; Enable Company
 (add-hook 'after-init-hook 'global-company-mode)
 
