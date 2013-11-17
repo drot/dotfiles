@@ -5,11 +5,14 @@
 ;; Abbrev mode
 (require 'my-abbrev)
 
+;; Auto-Complete
+(require 'my-ac)
+
 ;; CC mode
 (require 'my-cc)
 
 ;; Company
-(require 'my-company)
+;;(require 'my-company)
 
 ;; Ido
 (require 'my-ido)

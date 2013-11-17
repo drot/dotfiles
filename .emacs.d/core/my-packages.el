@@ -19,7 +19,7 @@
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
 (defvar my-package-list
-  '(company-mode
+  '(auto-complete
     el-get
     ido-hacks
     magit
