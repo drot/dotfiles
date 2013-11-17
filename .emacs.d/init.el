@@ -12,11 +12,14 @@
 (defvar my-modules-dir (expand-file-name "modules" my-emacs-dir)
   "This directory houses all of the Emacs modules.")
 
-(defvar my-elisp-dir (expand-file-name "elisp" my-emacs-dir)
-  "This directory houses custom elisp files.")
-
 (defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
   "This directory houses all save files.")
+
+(defvar my-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))
+  "This directory houses all backup and auto-save files.")
+
+(defvar my-elisp-dir (expand-file-name "elisp" my-emacs-dir)
+  "This directory houses all custom elisp files.")
 
 ;; Define customize file
 (defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)

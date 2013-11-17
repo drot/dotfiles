@@ -4,7 +4,7 @@
 
 ;; Store Undo Tree history in the tmp directory
 (setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,my-tmp-dir)))
 
 ;; Enable Undo Tree history
 (setq undo-tree-auto-save-history t)

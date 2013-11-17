@@ -4,9 +4,10 @@
 
 ;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,my-tmp-dir)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" ,my-tmp-dir t)))
+(setq auto-save-list-file-prefix my-tmp-dir)
 
 ;; Save minibuffer history
 (setq savehist-additional-variables
@@ -34,8 +35,7 @@
       save-interprogram-paste-before-kill t)
 
 ;; Open URLs in the selected browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "conkeror")
+(setq browse-url-browser-function 'browse-url-default-windows-browser)
 
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
