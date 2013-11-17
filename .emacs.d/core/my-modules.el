@@ -11,9 +11,6 @@
 ;; CC mode
 (require 'my-cc)
 
-;; Company
-;;(require 'my-company)
-
 ;; Ido
 (require 'my-ido)
 
