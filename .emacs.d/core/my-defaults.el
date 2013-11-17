@@ -35,7 +35,8 @@
       save-interprogram-paste-before-kill t)
 
 ;; Open URLs in the selected browser
-(setq browse-url-browser-function 'browse-url-default-windows-browser)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "conkeror")
 
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
