@@ -9,6 +9,9 @@
 ;; Enable Undo Tree history
 (setq undo-tree-auto-save-history t)
 
+;; Shorten Undo Tree mode lighter
+(setq undo-tree-mode-lighter " UT")
+
 ;; Enable Undo Tree
 (global-undo-tree-mode)
 
