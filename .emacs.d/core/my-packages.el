@@ -2,36 +2,33 @@
 ;; my-packages.el - Emacs default package selection
 ;;
 
-(defvar el-get-dir (expand-file-name "el-get" my-emacs-dir)
-  "El-Get root directory")
-(add-to-list 'load-path (expand-file-name "el-get" el-get-dir))
+(require 'package)
 
-;; Bootstrap El-Get
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
+;; Add MELPA repository
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;; Additional recipes
-(add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
+;; Initialize packages
+(package-initialize)
 
-(defvar my-package-list
+;; Refresh the package database
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages
   '(auto-complete
-    el-get
     ido-hacks
     magit
-    monokai-emacs
-    org-mode
+    monokai-theme
     paredit
     rainbow-delimiters
-    rcirc-color
     undo-tree)
-  "A list of packages to ensure are installed at launch.")
+  "List of packages to install.")
 
-(el-get 'sync my-package-list)
+;; Install packages
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 (provide 'my-packages)
 ;; my-packages.el ends here
