@@ -23,7 +23,7 @@
     paredit
     rainbow-delimiters
     undo-tree)
-  "List of packages to install.")
+  "A list of packages to install.")
 
 ;; Install packages
 (dolist (p my-packages)
