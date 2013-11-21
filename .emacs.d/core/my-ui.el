@@ -2,8 +2,6 @@
 ;; my-ui.el - Emacs UI configuration
 ;;
 
-(set-frame-font "PragmataPro-11")
-
 ;; Turn off the toolbar
 (tool-bar-mode -1)
 
