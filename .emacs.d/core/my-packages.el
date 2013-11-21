@@ -1,4 +1,4 @@
-;;; my-packages.el - Emacs default package selection
+;;; my-packages.el --- Emacs default package selection
 
 (require 'package)
 

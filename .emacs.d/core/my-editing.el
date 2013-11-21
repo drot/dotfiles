@@ -1,4 +1,4 @@
-;;; my-editing.el - Emacs editing configuration
+;;; my-editing.el --- Emacs editing configuration
 
 ;; Encoding
 (prefer-coding-system 'utf-8)

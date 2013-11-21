@@ -1,4 +1,4 @@
-;;; my-keybindings.el - Custom key bindings configuration
+;;; my-keybindings.el --- Custom key bindings configuration
 
 ;; Replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)

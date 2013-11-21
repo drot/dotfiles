@@ -1,4 +1,4 @@
-;;; my-paredit.el - ParEdit configuration
+;;; my-paredit.el --- ParEdit configuration
 
 ;; Make ParEdit work with ElDoc
 (eldoc-add-command

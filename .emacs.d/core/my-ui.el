@@ -1,4 +1,4 @@
-;;; my-ui.el - Emacs UI configuration
+;;; my-ui.el --- Emacs UI configuration
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)

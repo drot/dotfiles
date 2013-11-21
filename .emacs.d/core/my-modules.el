@@ -1,4 +1,4 @@
-;;; my-modules.el - Enable/disable modules
+;;; my-modules.el --- Enable/disable modules
 
 ;; Abbrev mode
 (require 'my-abbrev)

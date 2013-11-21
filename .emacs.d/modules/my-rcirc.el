@@ -1,4 +1,4 @@
-;;; my-rcirc.el - rcirc IRC client configuration
+;;; my-rcirc.el --- rcirc IRC client configuration
 
 ;; Load rcirc
 (require 'rcirc)

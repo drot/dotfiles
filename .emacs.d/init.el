@@ -1,4 +1,4 @@
-;;; init.el - Modular Emacs configuration
+;;; init.el --- Modular Emacs configuration
 
 ;; Define directories
 (defvar my-emacs-dir (file-name-directory load-file-name)

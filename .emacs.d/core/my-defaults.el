@@ -1,4 +1,4 @@
-;;; my-defaults.el - Core Emacs configuration
+;;; my-defaults.el --- Core Emacs configuration
 
 ;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist

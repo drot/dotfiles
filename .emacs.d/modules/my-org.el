@@ -1,4 +1,4 @@
-;;; my-org.el - Configuration for Org mode
+;;; my-org.el --- Configuration for Org mode
 
 ;; Use Ido for completion
 (setq org-completion-use-ido t)

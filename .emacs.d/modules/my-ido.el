@@ -1,4 +1,4 @@
-;;; my-ido.el - Configuration for Ido
+;;; my-ido.el --- Configuration for Ido
 
 ;; Enable Ido
 (require 'ido)

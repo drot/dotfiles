@@ -1,4 +1,4 @@
-;;; my-ac.el - Configuration for Auto Complete
+;;; my-ac.el --- Configuration for Auto Complete
 
 (require 'auto-complete-config)
 
