@@ -37,7 +37,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'monokai t)
+(load-theme 'flatland t)
 
 (provide 'my-ui)
 

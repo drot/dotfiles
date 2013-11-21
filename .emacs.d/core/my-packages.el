@@ -13,18 +13,18 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages
+(defvar my-package-list
   '(auto-complete
+    flatland-theme
     ido-hacks
     magit
-    monokai-theme
     paredit
     rainbow-delimiters
     undo-tree)
   "A list of packages to install.")
 
 ;; Install packages
-(dolist (p my-packages)
+(dolist (p my-package-list)
   (when (not (package-installed-p p))
     (package-install p)))
 
