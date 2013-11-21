@@ -25,10 +25,8 @@
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
 
-;; Nicer scrolling
-(setq scroll-margin 0
-      scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
+;; Keep point on same position when scrolling
+(setq scroll-preserve-screen-position 1)
 
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p 'y-or-n-p)
