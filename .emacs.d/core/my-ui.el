@@ -2,6 +2,8 @@
 ;; my-ui.el - Emacs UI configuration
 ;;
 
+(set-frame-font "PragmataPro-11")
+
 ;; Turn off the toolbar
 (tool-bar-mode -1)
 
@@ -24,8 +26,8 @@
 (setq tooltip-use-echo-area t)
 
 ;; Nicer scrolling
-(setq scroll-margin 2
-      scroll-conservatively 5
+(setq scroll-margin 0
+      scroll-conservatively 10000
       scroll-preserve-screen-position 1)
 
 ;; Answer y or n instead of yes or no at prompts
