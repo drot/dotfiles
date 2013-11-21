@@ -1,4 +1,4 @@
-;; my-abbrev.el - Abbrev mode configuration
+;;; my-abbrev.el - Abbrev mode configuration
 
 ;; Load abbrevs and enable Abbrev mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
@@ -21,4 +21,5 @@
         try-complete-lisp-symbol))
 
 (provide 'my-abbrev)
-;; my-abbrev.el ends here
+
+;;; my-abbrev.el ends here

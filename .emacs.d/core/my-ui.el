@@ -1,6 +1,4 @@
-;;
-;; my-ui.el - Emacs UI configuration
-;;
+;;; my-ui.el - Emacs UI configuration
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -42,4 +40,5 @@
 (load-theme 'monokai t)
 
 (provide 'my-ui)
-;; my-ui.el ends here
+
+;;; my-ui.el ends here

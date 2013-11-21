@@ -1,4 +1,4 @@
-;; my-rmail.el - Configuration for Rmail
+;;; my-rmail.el - Configuration for Rmail
 
 ;; Mail receiving
 (setq rmail-primary-inbox-list '("po:drot:lavabit.com"))
@@ -19,4 +19,5 @@
 (add-hook 'rmail-show-message-hook 'goto-address-mode)
 
 (provide 'my-rmail)
-;; my-rmail.el ends here
+
+;;; my-rmail.el ends here

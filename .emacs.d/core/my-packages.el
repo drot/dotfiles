@@ -1,6 +1,4 @@
-;;
-;; my-packages.el - Emacs default package selection
-;;
+;;; my-packages.el - Emacs default package selection
 
 (require 'package)
 
@@ -31,4 +29,5 @@
     (package-install p)))
 
 (provide 'my-packages)
-;; my-packages.el ends here
+
+;;; my-packages.el ends here

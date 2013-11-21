@@ -1,6 +1,4 @@
-;;
-;; my-modules.el - Enable/disable modules
-;;
+;;; my-modules.el - Enable/disable modules
 
 ;; Abbrev mode
 (require 'my-abbrev)
@@ -36,4 +34,5 @@
 (require 'my-undo)
 
 (provide 'my-modules)
-;; my-modules.el ends here
+
+;;; my-modules.el ends here

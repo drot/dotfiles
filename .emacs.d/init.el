@@ -1,6 +1,4 @@
-;;
-;; init.el - Modular Emacs configuration
-;;
+;;; init.el - Modular Emacs configuration
 
 ;; Define directories
 (defvar my-emacs-dir (file-name-directory load-file-name)
@@ -51,4 +49,5 @@
 ;; Load changes from the customize interface
 (if (file-exists-p my-custom-file)
   (load my-custom-file))
-;; init.el ends here
+
+;;; init.el ends here

@@ -1,6 +1,4 @@
-;;
-;; my-editing.el - Emacs editing configuration
-;;
+;;; my-editing.el - Emacs editing configuration
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -41,4 +39,5 @@
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 (provide 'my-editing)
-;; my-editing.el ends here
+
+;;; my-editing.el ends here

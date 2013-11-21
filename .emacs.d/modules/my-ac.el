@@ -1,6 +1,4 @@
-;;
-;; my-ac.el - Configuration for Auto Complete
-;;
+;;; my-ac.el - Configuration for Auto Complete
 
 (require 'auto-complete-config)
 
@@ -25,4 +23,5 @@
 (define-key ac-menu-map "\C-p" 'ac-previous)
 
 (provide 'my-ac)
-;; my-ac.el ends here
+
+;;; my-ac.el ends here

@@ -1,6 +1,4 @@
-;;
-;; my-undo.el - Undo Tree configuration
-;;
+;;; my-undo.el - Undo Tree configuration
 
 ;; Store Undo Tree history in the tmp directory
 (setq undo-tree-history-directory-alist
@@ -16,4 +14,5 @@
 (global-undo-tree-mode)
 
 (provide 'my-undo)
-;; my-undo.el ends here
+
+;;; my-undo.el ends here

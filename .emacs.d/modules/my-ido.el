@@ -1,6 +1,4 @@
-;;
-;; my-ido.el - Configuration for Ido
-;;
+;;; my-ido.el - Configuration for Ido
 
 ;; Enable Ido
 (require 'ido)
@@ -19,4 +17,5 @@
 (ido-hacks-mode 1)
 
 (provide 'my-ido)
-;; my-ido.el ends here
+
+;;; my-ido.el ends here
