@@ -19,7 +19,7 @@
 (require 'rcirc-color)
 (setq rcirc-colors '("#40b83e" "#afc4db" "#93e0e3"
                      "#dc8cc3" "#f6aa11" "#f6f080"
-                     "#ff4a52" "#65a4a4" "#df9400"))
+                     "#eb939a" "#65a4a4" "#ff4a52"))
 
 ;; Max line width and number
 (setq rcirc-fill-flag t
