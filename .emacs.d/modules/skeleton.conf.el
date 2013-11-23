@@ -1,4 +1,4 @@
-;;; skeletons.conf.el --- Skeleton mode skeletons
+;;; skeleton.conf.el --- Skeleton Mode skeletons
 
 ;; Prevent skeleton/abbrev recursion
 (setq skeleton-further-elements '((abbrev-mode nil)))
@@ -15,6 +15,6 @@
   > "return 0;"
   "\n}")
 
-(provide 'skeletons.conf)
+(provide 'skeleton.conf)
 
 ;;; skeletons.conf.el ends here

@@ -1,4 +1,4 @@
-;;; cc.conf.el --- Configuration for the C/C++ mode
+;;; cc.conf.el --- Configuration for the C/C++ Mode
 
 ;; General indentation style
 (setq c-basic-offset 4)

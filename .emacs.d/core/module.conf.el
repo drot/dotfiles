@@ -1,12 +1,12 @@
 ;;; module.conf.el --- Enable/disable modules
 
-;; Abbrev mode
+;; Abbrev Mode
 (require 'abbrev.conf)
 
 ;; Auto-Complete
 (require 'ac.conf)
 
-;; CC mode
+;; CC Mode
 (require 'cc.conf)
 
 ;; Ido
@@ -27,8 +27,8 @@
 ;; Rmail
 (require 'rmail.conf)
 
-;; Skeletons
-(require 'skeletons.conf)
+;; Skeleton Mode
+(require 'skeleton.conf)
 
 ;; Undo Tree
 (require 'undotree.conf)

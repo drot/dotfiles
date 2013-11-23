@@ -1,6 +1,6 @@
-;;; abbrev.conf.el --- Abbrev mode configuration
+;;; abbrev.conf.el --- Abbrev Mode configuration
 
-;; Load abbrevs and enable Abbrev mode
+;; Load abbrevs and enable Abbrev Mode
 (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
       save-abbrevs t)
 (if (file-exists-p abbrev-file-name)
