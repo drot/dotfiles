@@ -1,4 +1,4 @@
-;;; my-packages.el --- Emacs default package selection
+;;; package.conf.el --- Emacs default package selection
 
 (require 'package)
 
@@ -28,6 +28,6 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-(provide 'my-packages)
+(provide 'package.conf)
 
-;;; my-packages.el ends here
+;;; package.conf.el ends here

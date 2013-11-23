@@ -1,4 +1,4 @@
-;;; my-defaults.el --- Core Emacs configuration
+;;; general.conf.el --- General Emacs configuration
 
 ;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist
@@ -89,6 +89,6 @@
 ;; Use ANSI colors within shell-mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-(provide 'my-defaults)
+(provide 'general.conf)
 
-;;; my-defaults.el ends here
+;;; general.conf.el ends here

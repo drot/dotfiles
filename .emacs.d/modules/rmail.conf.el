@@ -20,6 +20,6 @@
 ;; URL handling
 (add-hook 'rmail-show-message-hook 'goto-address-mode)
 
-(provide 'my-rmail)
+(provide 'rmail.conf)
 
-;;; my-rmail.el ends here
+;;; rmail.conf.el ends here
