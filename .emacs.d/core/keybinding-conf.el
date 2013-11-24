@@ -1,4 +1,4 @@
-;;; keybinding.conf.el --- Custom key bindings configuration
+;;; keybinding-conf.el --- Custom key bindings configuration
 
 ;; Replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -16,6 +16,6 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 
-(provide 'keybinding.conf)
+(provide 'keybinding-conf)
 
-;;; keybinding.conf.el ends here
+;;; keybinding-conf.el ends here

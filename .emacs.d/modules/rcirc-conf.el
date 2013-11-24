@@ -1,4 +1,4 @@
-;;; rcirc.conf.el --- rcirc IRC client configuration
+;;; rcirc-conf.el --- rcirc IRC client configuration
 
 ;; Load rcirc
 (require 'rcirc)
@@ -38,6 +38,6 @@
 ;; Track channel activity
 (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
 
-(provide 'rcirc.conf)
+(provide 'rcirc-conf)
 
-;;; rcirc.conf.el ends here
+;;; rcirc-conf.el ends here

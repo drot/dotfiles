@@ -1,4 +1,4 @@
-;;; cc.conf.el --- Configuration for the C/C++ Mode
+;;; cc-conf.el --- Configuration for the C/C++ Mode
 
 ;; General indentation style
 (setq c-basic-offset 4)
@@ -27,6 +27,6 @@
 ;; Enable Auto Fill mode
 (add-hook 'c-mode-common-hook 'auto-fill-mode)
 
-(provide 'cc.conf)
+(provide 'cc-conf)
 
-;;; cc.conf.el ends here
+;;; cc-conf.el ends here

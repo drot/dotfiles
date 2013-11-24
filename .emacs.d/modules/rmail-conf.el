@@ -1,4 +1,4 @@
-;;; my-rmail.el --- Configuration for Rmail
+;;; rmail-conf.el --- Configuration for Rmail
 
 ;; Mail address
 (setq user-full-name "Davor Rotim")
@@ -20,6 +20,6 @@
 ;; URL handling
 (add-hook 'rmail-show-message-hook 'goto-address-mode)
 
-(provide 'rmail.conf)
+(provide 'rmail-conf)
 
-;;; rmail.conf.el ends here
+;;; rmail-conf.el ends here

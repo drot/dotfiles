@@ -1,4 +1,4 @@
-;;; paredit.conf.el --- ParEdit configuration
+;;; paredit-conf.el --- ParEdit configuration
 
 ;; Make ParEdit work with ElDoc
 (eldoc-add-command
@@ -44,6 +44,6 @@
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'paredit-slime-fix)
 
-(provide 'paredit.conf)
+(provide 'paredit-conf)
 
-;;; paredit.conf.el ends here
+;;; paredit-conf.el ends here
