@@ -1,4 +1,4 @@
-;;; ac-conf.el --- Configuration for Auto Complete
+;;; init-ac.el --- Configuration for Auto Complete
 
 (require 'auto-complete-config)
 
@@ -22,6 +22,6 @@
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 
-(provide 'ac-conf)
+(provide 'init-ac)
 
-;;; ac-conf.el ends here
+;;; init-ac.el ends here

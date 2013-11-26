@@ -29,22 +29,22 @@
 (add-to-list 'load-path my-elisp-dir)
 
 ;; Load packages
-(require 'package-conf)
+(require 'init-packages)
 
 ;; Load UI configuration
-(require 'ui-conf)
+(require 'init-ui)
 
 ;; Load general configuration
-(require 'general-conf)
+(require 'init-general)
 
 ;; Load editing-specific configuration
-(require 'editing-conf)
+(require 'init-editing)
 
 ;; Load modules
-(require 'module-conf)
+(require 'init-modules)
 
 ;; Load custom key bindings
-(require 'keybinding-conf)
+(require 'init-keybindings)
 
 ;; Load changes from the customize interface
 (if (file-exists-p my-custom-file)

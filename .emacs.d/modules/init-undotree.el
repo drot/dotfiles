@@ -1,4 +1,4 @@
-;;; undotree-conf.el --- Undo Tree configuration
+;;; init-undotree.el --- Undo Tree configuration
 
 ;; Store Undo Tree history in the tmp directory
 (setq undo-tree-history-directory-alist
@@ -13,6 +13,6 @@
 ;; Enable Undo Tree
 (global-undo-tree-mode)
 
-(provide 'undotree-conf)
+(provide 'init-undotree)
 
-;;; undotree-conf.el ends here
+;;; init-undotree.el ends here

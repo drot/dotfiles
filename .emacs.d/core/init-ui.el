@@ -1,4 +1,4 @@
-;;; ui-conf.el --- Emacs UI configuration
+;;; init-ui.el --- Emacs UI configuration
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -39,6 +39,6 @@
 ;; Color theme
 (load-theme 'flatland t)
 
-(provide 'ui-conf)
+(provide 'init-ui)
 
-;;; ui-conf.el ends here
+;;; init-ui.el ends here

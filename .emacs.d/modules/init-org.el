@@ -1,4 +1,4 @@
-;;; org-conf.el --- Configuration for Org mode
+;;; init-org.el --- Configuration for Org mode
 
 ;; Use Ido for completion
 (setq org-completion-use-ido t)
@@ -30,6 +30,6 @@
       calendar-longitude 17.48
       calendar-location-name "Mostar, Bosnia and Herzegovina")
 
-(provide 'org-conf)
+(provide 'init-org)
 
-;;; org-conf.el ends here
+;;; init-org.el ends here
