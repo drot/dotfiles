@@ -37,7 +37,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'flatland t)
+(load-theme 'anti-zenburn t)
 
 (provide 'init-ui)
 

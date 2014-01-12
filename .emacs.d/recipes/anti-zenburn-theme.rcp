@@ -1,0 +1,6 @@
+(:name anti-zenburn-theme
+       :description "Anti-Zenburn theme for Emacs."
+       :type github
+       :pkgname "m00natic/anti-zenburn-theme"
+       :minimum-emacs-version 24
+       :post-init (add-to-list 'custom-theme-load-path default-directory))
