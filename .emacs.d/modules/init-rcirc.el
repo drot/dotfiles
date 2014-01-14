@@ -7,7 +7,7 @@
 (setq rcirc-server-alist
       '(("adams.freenode.net" :channels ("#archlinux" "#emacs")
          :port 7000 :encryption tls)
-        ("pine.forestnet.org" :channels ("#reloaded")
+        ("pine.forestnet.org" :channels ("#reloaded" "#fo2")
          :port 6697 :encryption tls)))
 
 ;; Authorization
@@ -19,9 +19,9 @@
 
 ;; Colorize nicks
 (require 'rcirc-color)
-(setq rcirc-colors '("#40b83e" "#afc4db" "#93e0e3"
-                     "#dc8cc3" "#f6aa11" "#f6f080"
-                     "#eb939a" "#65a4a4" "#ff4a52"))
+(setq rcirc-colors '("#336c6c" "#538c8c" "#205070"
+                     "#0f2050" "#806080" "#6c1f1c"
+                     "#732f2c" "#23733c" "#935f5c"))
 
 ;; Max line width and number
 (setq rcirc-fill-flag t
