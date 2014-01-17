@@ -16,9 +16,9 @@
 (add-to-list 'el-get-recipe-path (expand-file-name "recipes" my-emacs-dir))
 
 (defvar my-package-list
-  '(anti-zenburn-theme
-    auto-complete
+  '(auto-complete
     el-get
+    flatland-emacs
     ido-hacks
     magit
     org-mode
