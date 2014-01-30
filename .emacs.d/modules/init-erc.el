@@ -3,11 +3,34 @@
 ;; Load ERC
 (require 'erc)
 
+(defun start-irc ()
+  "Connect to IRC."
+  (interactive)
+  (erc-tls :server "adams.freenode.net" :port 6697
+           :nick "drot")
+  (erc-tls :server "pine.forestnet.org" :port 6697
+           :nick "drot"))
+
+;; Auto identify
+(when (file-exists-p (expand-file-name "~/.ercpass"))
+  (load "~/.ercpass")
+  (require 'erc-services)
+  (erc-services-mode 1)
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-nickserv-passwords
+        `((freenode (("drot" . ,freenode-password)))
+          (ForestNet (("drot" . ,freenode-password))))))
+
+;; Auto join selected channels
+(setq erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
+                                      ("forestnet" "#reloaded" "#fo2")))
+
 ;; Enable Fly Spell mode
 (erc-spelling-mode 1)
 
 ;; Static text fill
 (setq erc-fill-function 'erc-fill-static)
+(setq erc-fill-column 100)
 (setq erc-fill-static-center 15)
 
 ;; Hide IRC spam
