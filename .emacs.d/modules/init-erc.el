@@ -6,11 +6,16 @@
 ;; Enable Fly Spell mode
 (erc-spelling-mode 1)
 
-;; Disable button mode
-(erc-button-mode nil)
+;; Static text fill
+(setq erc-fill-function 'erc-fill-static)
+(setq erc-fill-static-center 15)
 
 ;; Hide IRC spam
 (setq erc-hide-list '("JOIN" "PART" "QUIT" "AWAY"))
+
+;; Show timestamp on the left side
+(setq erc-insert-timestamp-function 'erc-insert-timestamp-left
+      erc-timestamp-only-if-changed-flag nil)
 
 ;; Interpret mIRC colors
 (setq erc-interpret-mirc-color t)
@@ -18,9 +23,8 @@
 ;; Default nick uniquifer
 (setq erc-nick-uniquifier "_")
 
-;; Static text fill
-(setq erc-fill-function 'erc-fill-static)
-(setq erc-fill-static-center 15)
+;; Disable nick buttonization
+(setq erc-button-buttonize-nicks nil)
 
 ;; Prompt format
 (setq erc-prompt ">>")
