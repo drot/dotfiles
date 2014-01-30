@@ -3,6 +3,11 @@
 ;; Load ERC
 (require 'erc)
 
+;; Load modules
+(add-to-list 'erc-modules 'notifications)
+(add-to-list 'erc-modules 'scrolltobottom)
+(add-to-list 'erc-modules 'smiley)
+
 (defun start-irc ()
   "Connect to IRC."
   (interactive)
@@ -34,7 +39,15 @@
 (setq erc-fill-static-center 15)
 
 ;; Hide IRC spam
-(setq erc-hide-list '("JOIN" "PART" "QUIT" "AWAY"))
+(setq erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY"))
+
+;; Don't track the server buffer
+(setq erc-track-exclude-server-buffer t)
+
+;; Tracking options
+(setq erc-track-showcount t)
+(setq erc-track-switch-direction 'importance)
+(setq erc-track-visibility 'selected-visible)
 
 ;; Show timestamp on the left side
 (setq erc-insert-timestamp-function 'erc-insert-timestamp-left
@@ -50,7 +63,24 @@
 (setq erc-button-buttonize-nicks nil)
 
 ;; Prompt format
-(setq erc-prompt ">>")
+(setq erc-prompt (lambda ()
+                   (if erc-network
+                       (concat "[" (symbol-name erc-network) "]")
+                     (concat "[" (car erc-default-recipients) "]"))))
+
+(defun erc-button-url-previous ()
+  "Go to the previous URL button in this buffer."
+  (interactive)
+  (let* ((point (point))
+         (found (catch 'found
+                  (while (setq point (previous-single-property-change point 'erc-callback))
+                    (when (eq (get-text-property point 'erc-callback) 'browse-url)
+                      (throw 'found point))))))
+    (if found
+        (goto-char found)
+      (error "No previous URL button."))))
+
+(define-key erc-mode-map [backtab] 'erc-button-url-previous)
 
 (provide 'init-erc)
 
