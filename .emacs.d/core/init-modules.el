@@ -9,6 +9,9 @@
 ;; CC Mode
 (require 'init-cc)
 
+;; ERC
+(require 'init-erc)
+
 ;; Ido
 (require 'init-ido)
 
@@ -20,9 +23,6 @@
 
 ;; RainbowDelimiters
 (require 'init-raindel)
-
-;; rcirc
-(require 'init-rcirc)
 
 ;; Rmail
 (require 'init-rmail)

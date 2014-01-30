@@ -16,12 +16,13 @@
 
 (defvar my-package-list
   '(auto-complete
-    flatland-theme
+    erc-hl-nicks
     ido-hacks
     magit
     paredit
     rainbow-delimiters
-    undo-tree)
+    undo-tree
+    zenburn-theme)
   "A list of packages to install.")
 
 ;; Install packages
