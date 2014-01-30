@@ -1,6 +1,0 @@
-(:name flatland-emacs 
-       :description "Flatland theme for Emacs."
-       :type github
-       :pkgname "gregchapple/flatland-emacs"
-       :minimum-emacs-version 24
-       :post-init (add-to-list 'custom-theme-load-path default-directory))
