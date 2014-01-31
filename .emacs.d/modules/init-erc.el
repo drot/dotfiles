@@ -16,36 +16,26 @@
   (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))
 
-;; Auto identify
-(when (file-exists-p (expand-file-name "~/.ercpass"))
-  (load "~/.ercpass")
-  (require 'erc-services)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-nickserv-passwords
-        `((freenode (("drot" . ,freenode-password)))
-          (ForestNet (("drot" . ,freenode-password))))))
+;; Don't prompt for a password
+(setq erc-prompt-for-password nil)
 
 ;; Auto join selected channels
 (setq erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                      ("forestnet" "#reloaded" "#fo2")))
+                                    ("forestnet" "#reloaded" "#fo2")))
 
 ;; Enable Fly Spell mode
 (erc-spelling-mode 1)
 
 ;; Static text fill
 (setq erc-fill-function 'erc-fill-static)
-(setq erc-fill-column 100)
+(setq erc-fill-column 120)
 (setq erc-fill-static-center 15)
 
 ;; Hide IRC spam
-(setq erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY"))
+(setq erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
 ;; Don't track the server buffer
 (setq erc-track-exclude-server-buffer t)
-
-;; Don't switch to buffers automatically
-(setq erc-join-buffer 'bury)
 
 ;; Tracking options
 (setq erc-track-showcount t)
