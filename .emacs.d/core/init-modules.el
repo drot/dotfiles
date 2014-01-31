@@ -12,6 +12,9 @@
 ;; ERC
 (require 'init-erc)
 
+;; Gnus
+(require 'init-gnus)
+
 ;; Ido
 (require 'init-ido)
 
@@ -23,9 +26,6 @@
 
 ;; RainbowDelimiters
 (require 'init-raindel)
-
-;; Rmail
-(require 'init-rmail)
 
 ;; Skeleton Mode
 (require 'init-skeleton)

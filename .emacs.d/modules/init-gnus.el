@@ -1,20 +1,18 @@
-;; Gnus setup for GMail
+;;; init-gnus.el --- Configuration for Gnus
 
 ;; User information
-(setq user-mail-address "")
-(setq user-full-name "")
+(setq user-full-name "Davor Rotim")
+(setq user-mail-address "mlinfo@cock.li")
 
 ;; Incoming mail
-(setq gnus-select-method '(nnimap "gmail"
-				  (nnimap-address "imap.gmail.com")
+(setq gnus-select-method '(nnimap "cock"
+				  (nnimap-address "mail.cock.li")
 				  (nnimap-server-port 993)
-				  (nnimap-authinfo-file "~/.authinfo.gpg")
 				  (nnimap-stream ssl)))
 
 ;; Outgoing mail
 (setq send-mail-function 'smtpmail-send-it
-      smtpmail-auth-credentials "~/.authinfo.gpg"
-      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "mail.cock.li"
       smtpmail-smtp-service 587)
 
 ;; Message date format
@@ -31,11 +29,6 @@
       (concat "%U%R %~(max-right 17)~(pad-right 17)&user-date; "
 	      "%~(max-right 20)~(pad-right 20)n %B%s\n"))
 
-;; Summary tree format
-(setq gnus-sum-thread-tree-false-root " ♽ "
-      gnus-sum-thread-tree-single-indent "⚙ "
-      gnus-sum-thread-tree-indent " "
-      gnus-sum-thread-tree-root "⚈ "
-      gnus-sum-thread-tree-leaf-with-other "├─►"
-      gnus-sum-thread-tree-single-leaf "└─►"
-      gnus-sum-thread-tree-vertical "┆" )
+(provide 'init-gnus)
+
+;;; init-gnus.el ends here
