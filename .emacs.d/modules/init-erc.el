@@ -44,6 +44,9 @@
 ;; Don't track the server buffer
 (setq erc-track-exclude-server-buffer t)
 
+;; Don't switch to buffers automatically
+(setq erc-join-buffer 'bury)
+
 ;; Tracking options
 (setq erc-track-showcount t)
 (setq erc-track-switch-direction 'importance)
@@ -61,6 +64,14 @@
 
 ;; Disable nick buttonization
 (setq erc-button-buttonize-nicks nil)
+
+;; Truncate buffers
+(defvar erc-insert-post-hook)
+(add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
+(setq erc-truncate-buffer-on-save t)
+
+;; Header line format
+(setq erc-header-line-format "%t: %o")
 
 ;; Prompt format
 (setq erc-prompt (lambda ()
