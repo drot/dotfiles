@@ -23,6 +23,10 @@
 (setq erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                     ("forestnet" "#reloaded" "#fo2")))
 
+;; Always reconnect
+(setq erc-server-reconnect-attempts t)
+(setq erc-server-reconnect-timeout 10)
+
 ;; Enable Fly Spell mode
 (erc-spelling-mode 1)
 

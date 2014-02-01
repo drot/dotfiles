@@ -33,8 +33,7 @@
       save-interprogram-paste-before-kill t)
 
 ;; Open URLs in the selected browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "conkeror")
+(setq browse-url-browser-function 'browse-url-default-windows-browser)
 
 ;; Scroll compilation buffer to first error
 (setq compilation-scroll-output 'first-error)
@@ -45,6 +44,9 @@
 
 ;; Use Unified diff format
 (setq diff-switches "-u")
+
+;; Prevent GnuTLS warnings
+(setq gnutls-min-prime-bits 1024)
 
 ;; Make buffer names unique
 (require 'uniquify)
