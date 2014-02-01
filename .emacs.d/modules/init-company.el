@@ -13,11 +13,14 @@
                          company-files 
                          company-dabbrev))
 
-;; Delay before completion
-(setq company-idle-delay 0.5)
+;; No idle completion
+(setq company-idle-delay 0.3)
 
 ;; Disable echo delay
 (setq company-echo-delay 0)
+
+;; Shorten Company lighter
+(setq company-default-lighter " cmp")
 
 ;; Enable Company
 (add-hook 'after-init-hook 'global-company-mode)
