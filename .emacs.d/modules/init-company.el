@@ -4,7 +4,6 @@
 (setq company-backends '(company-elisp 
                          company-nxml
                          company-css
-                         company-eclim
                          company-semantic
                          company-cmake
                          company-gtags
