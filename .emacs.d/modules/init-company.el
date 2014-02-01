@@ -13,9 +13,6 @@
                          company-files 
                          company-dabbrev))
 
-;; No idle completion
-(setq company-idle-delay 0.3)
-
 ;; Disable echo delay
 (setq company-echo-delay 0)
 
