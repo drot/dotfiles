@@ -1,8 +1,5 @@
 ;;; init-gnus.el --- Configuration for Gnus
 
-;; Load MIME decoding functions
-(require 'mm-decode)
-
 ;; User information
 (setq user-full-name "Davor Rotim")
 (setq user-mail-address "mlinfo@cock.li")
@@ -62,9 +59,8 @@
 (setq gnus-blocked-images nil)
 
 ;; Display attached images
-(setq mm-inline-large-images 'resize
-      mm-inline-large-images-proportion 0.2)
-(add-to-list 'mm-attachment-override-types "image/.*")
+(setq mm-inline-large-images 'resize)
+(setq mm-attachment-override-types '("image/.*"))
 
 ;; Display GnuPG signatures
 (setq gnus-buttonized-mime-types '("multipart/signed" "multipart/alternative"))
