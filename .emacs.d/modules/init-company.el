@@ -1,17 +1,11 @@
 ;;; init-company.el --- Configuration for Company
 
-;; Enable the following backends
-(setq company-backends '(company-elisp 
-                         company-nxml
-                         company-css
-                         company-semantic
-                         company-cmake
-                         company-gtags
-                         company-etags
-                         company-dabbrev-code
-                         company-keywords
-                         company-files 
-                         company-dabbrev))
+;; Disable the following backends
+(setq company--disabled-backends '(company-eclim
+                                   company-clang
+                                   company-xcode
+                                   company-ropemacs
+                                   company-oddmuse))
 
 ;; Disable echo delay
 (setq company-echo-delay 0)
