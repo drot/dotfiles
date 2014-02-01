@@ -8,7 +8,7 @@
 (add-to-list 'erc-modules 'scrolltobottom)
 (add-to-list 'erc-modules 'smiley)
 
-(defun start-irc ()
+(defun my-erc ()
   "Connect to IRC."
   (interactive)
   (erc-tls :server "adams.freenode.net" :port 6697
