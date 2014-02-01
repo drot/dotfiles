@@ -15,7 +15,7 @@
   (package-refresh-contents))
 
 (defvar my-package-list
-  '(auto-complete
+  '(company
     erc-hl-nicks
     ido-hacks
     magit

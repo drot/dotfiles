@@ -3,11 +3,11 @@
 ;; Abbrev Mode
 (require 'init-abbrev)
 
-;; Auto-Complete
-(require 'init-ac)
-
 ;; CC Mode
 (require 'init-cc)
+
+;; Company
+(require 'init-company)
 
 ;; ERC
 (require 'init-erc)
