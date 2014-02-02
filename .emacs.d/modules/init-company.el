@@ -7,11 +7,14 @@
                                    company-ropemacs
                                    company-oddmuse))
 
+;; Increase completion delay
+(setq company-idle-delay 1)
+
 ;; Disable echo delay
 (setq company-echo-delay 0)
 
 ;; Shorten Company lighter
-(setq company-default-lighter " cmp")
+(setq company-default-lighter " co")
 
 ;; Enable Company
 (add-hook 'after-init-hook 'global-company-mode)
