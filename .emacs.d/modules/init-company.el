@@ -13,6 +13,9 @@
 ;; Disable echo delay
 (setq company-echo-delay 0)
 
+;; Show quick-access numbers
+(setq company-show-numbers t)
+
 ;; Shorten Company lighter
 (setq company-default-lighter " co")
 
