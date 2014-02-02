@@ -21,9 +21,6 @@
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
 
-;; More useful apropos
-(setq apropos-do-all t)
-
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
