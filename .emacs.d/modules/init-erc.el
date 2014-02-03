@@ -35,6 +35,11 @@
 (setq erc-fill-column 120)
 (setq erc-fill-static-center 15)
 
+(add-hook 'erc-mode-hook
+          (defun fix-scrolling-bug ()
+            "Keep the prompt at bottom"
+            (set (make-local-variable 'scroll-conservatively) 1000)))
+
 ;; Hide IRC spam
 (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
@@ -56,11 +61,11 @@
 ;; Interpret mIRC colors
 (setq erc-interpret-mirc-color t)
 
+;; Completion functions
+(setq erc-complete-functions '(erc-pcomplete erc-button-next))
+
 ;; Default nick uniquifer
 (setq erc-nick-uniquifier "_")
-
-;; Disable nick buttonization
-(setq erc-button-buttonize-nicks nil)
 
 ;; Truncate buffers
 (defvar erc-insert-post-hook)
@@ -75,11 +80,6 @@
                    (if erc-network
                        (concat "[" (symbol-name erc-network) "]")
                      (concat "[" (car erc-default-recipients) "]"))))
-
-(add-hook 'erc-mode-hook
-          (defun fix-scrolling-bug ()
-            "Keep the prompt at bottom"
-            (set (make-local-variable 'scroll-conservatively) 1000)))
 
 (provide 'init-erc)
 
