@@ -50,6 +50,9 @@
 (setq erc-insert-timestamp-function 'erc-insert-timestamp-left
       erc-timestamp-only-if-changed-flag nil)
 
+;; Timestamp format
+(setq erc-timestamp-format "[%H:%M] ")
+
 ;; Interpret mIRC colors
 (setq erc-interpret-mirc-color t)
 
