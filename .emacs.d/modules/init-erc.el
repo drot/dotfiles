@@ -61,11 +61,11 @@
 ;; Interpret mIRC colors
 (setq erc-interpret-mirc-color t)
 
-;; Completion functions
-(setq erc-complete-functions '(erc-pcomplete erc-button-next))
-
 ;; Default nick uniquifer
 (setq erc-nick-uniquifier "_")
+
+;; Don't buttonize nicks
+(setq erc-button-buttonize-nicks nil)
 
 ;; Truncate buffers
 (defvar erc-insert-post-hook)
