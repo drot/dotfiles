@@ -37,7 +37,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'sanityinc-tomorrow-eighties t)
+(load-theme 'naquadah t)
 
 (provide 'init-ui)
 

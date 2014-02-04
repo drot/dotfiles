@@ -30,6 +30,9 @@
 ;; Enable Fly Spell mode
 (erc-spelling-mode 1)
 
+;; Truncate buffers
+(erc-truncate-mode 1)
+
 ;; Static text fill
 (setq erc-fill-function 'erc-fill-static)
 (setq erc-fill-column 120)
@@ -63,14 +66,6 @@
 
 ;; Default nick uniquifer
 (setq erc-nick-uniquifier "_")
-
-;; Don't buttonize nicks
-(setq erc-button-buttonize-nicks nil)
-
-;; Truncate buffers
-(defvar erc-insert-post-hook)
-(add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-(setq erc-truncate-buffer-on-save t)
 
 ;; Header line format
 (setq erc-header-line-format "%t: %o")

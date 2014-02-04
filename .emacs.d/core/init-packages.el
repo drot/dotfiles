@@ -15,11 +15,11 @@
   (package-refresh-contents))
 
 (defvar my-package-list
-  '(color-theme-sanityinc-tomorrow
-    company
+  '(company
     erc-hl-nicks
     ido-hacks
     magit
+    naquadah-theme
     paredit
     rainbow-delimiters
     undo-tree)
