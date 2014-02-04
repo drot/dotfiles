@@ -37,7 +37,7 @@
 (size-indication-mode t)
 
 ;; Color theme
-(load-theme 'zenburn t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 (provide 'init-ui)
 

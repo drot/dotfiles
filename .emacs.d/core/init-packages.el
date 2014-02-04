@@ -15,14 +15,14 @@
   (package-refresh-contents))
 
 (defvar my-package-list
-  '(company
+  '(color-theme-sanityinc-tomorrow
+    company
     erc-hl-nicks
     ido-hacks
     magit
     paredit
     rainbow-delimiters
-    undo-tree
-    zenburn-theme)
+    undo-tree)
   "A list of packages to install.")
 
 ;; Install packages
