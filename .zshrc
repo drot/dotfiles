@@ -1,7 +1,3 @@
-#
-# drot zsh
-#
-
 # Variables
 unset SCREENDIR # fix screen
 export PATH=${PATH}:${HOME}/bin # path for my executables

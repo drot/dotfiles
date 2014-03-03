@@ -1,5 +1,3 @@
-# drot ncmpcpp
-
 mpd_music_dir = "/home/drot/Music"
 user_interface = "alternative"
 enable_window_title = "no"

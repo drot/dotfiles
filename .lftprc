@@ -1,5 +1,3 @@
-# drot lftp
-
 # Prompt
 set prompt '\[\e[0;34m\]\w\[\e[0;32m\] >>\[\e[00m\] '
 set torrent:seed-max-time 10s

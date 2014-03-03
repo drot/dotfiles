@@ -1,7 +1,3 @@
---
--- xmonad by drot
---
-
 -- Main
 import XMonad
 import qualified XMonad.StackSet as W
