@@ -342,7 +342,6 @@
   (setq erc-prompt-for-password nil
         erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                       ("forestnet" "#reloaded" "#fo2"))
-        erc-server-reconnect-attempts t
         erc-server-reconnect-timeout 10
         erc-fill-function 'erc-fill-static
         erc-fill-column 120
