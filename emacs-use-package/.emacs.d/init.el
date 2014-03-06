@@ -8,15 +8,9 @@
 (defvar my-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))
   "This directory houses all backup and auto-save files.")
 
-(defvar my-elisp-dir (expand-file-name "elisp" my-emacs-dir)
-  "This directory houses all custom elisp files.")
-
 ;; Define customize file
 (defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
   "Store changes from the customize interface in the selected file.")
-
-;; Add directory to load path
-(add-to-list 'load-path my-elisp-dir)
 
 ;; Package repository selection and activation
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -33,16 +27,19 @@
 
 (set-frame-font "Envy Code R-10")
 
-;; Turn off the toolbar
-(tool-bar-mode -1)
-
 ;; Turn off the menu bar
-(menu-bar-mode -1)
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+
+;; Turn off the toolbar
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;; Turn off the scrollbar
-(scroll-bar-mode -1)
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
-;; Don't show the welcome message
+;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil
       gnus-inhibit-startup-message t)

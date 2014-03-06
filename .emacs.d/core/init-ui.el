@@ -1,15 +1,18 @@
 ;;; init-ui.el --- Emacs UI configuration
 
-;; Turn off the toolbar
-(tool-bar-mode -1)
-
 ;; Turn off the menu bar
-(menu-bar-mode -1)
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+
+;; Turn off the toolbar
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
 
 ;; Turn off the scrollbar
-(scroll-bar-mode -1)
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
-;; Don't show the welcome message
+;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil
       gnus-inhibit-startup-message t)
