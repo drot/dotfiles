@@ -32,9 +32,6 @@
       initial-scratch-message nil
       gnus-inhibit-startup-message t)
 
-;; Disable cursor blink
-(blink-cursor-mode 0)
-
 ;; Keep point on same position when scrolling
 (setq scroll-preserve-screen-position 1)
 
@@ -80,9 +77,6 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; Use Unified diff format
-(setq diff-switches "-u")
-
 ;; Open URLs in the selected browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
@@ -124,6 +118,11 @@
   (tooltip-mode -1)
   :config
   (setq tooltip-use-echo-area t))
+
+;; Disable cursor blink
+(use-package frame
+  :init
+  (blink-cursor-mode 0))
 
 ;; Ediff window placement
 (use-package ediff
@@ -181,6 +180,12 @@
   :defer t
   :config
   (setq compilation-scroll-output 'first-error))
+
+;; Use Unified diff format
+(use-package diff
+  :defer t
+  :config
+  (setq diff-switches "-u"))
 
 ;; TRAMP default file transfer method
 (use-package tramp

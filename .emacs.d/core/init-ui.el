@@ -14,8 +14,7 @@
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
-      initial-scratch-message nil
-      gnus-inhibit-startup-message t)
+      initial-scratch-message nil)
 
 ;; Disable cursor blink
 (blink-cursor-mode 0)
