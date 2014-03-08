@@ -27,18 +27,6 @@
 
 (set-frame-font "Envy Code R-10")
 
-;; Turn off the menu bar
-(when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
-
-;; Turn off the toolbar
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-;; Turn off the scrollbar
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil
@@ -46,10 +34,6 @@
 
 ;; Disable cursor blink
 (blink-cursor-mode 0)
-
-;; Show tooltips in echo area
-(tooltip-mode -1)
-(setq tooltip-use-echo-area t)
 
 ;; Keep point on same position when scrolling
 (setq scroll-preserve-screen-position 1)
@@ -59,12 +43,6 @@
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
-
-;; Show column number in modeline
-(column-number-mode t)
-
-;; Show buffer size in modeline
-(size-indication-mode t)
 
 ;; Store all backup and auto-save files in the tmp directory
 (setq backup-directory-alist
@@ -91,13 +69,6 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Scroll compilation buffer to first error
-(setq compilation-scroll-output 'first-error)
-
-;; Ediff window placement
-(setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
-
 ;; Encoding
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
@@ -112,25 +83,116 @@
 ;; Use Unified diff format
 (setq diff-switches "-u")
 
-;; Calendar configuration
-(setq calendar-mark-holidays-flag t
-      holiday-general-holidays nil
-      holiday-bahai-holidays nil
-      holiday-oriental-holidays nil
-      holiday-solar-holidays nil
-      holiday-islamic-holidays nil
-      holiday-hebrew-holidays nil
-      calendar-date-style 'european
-      calendar-latitude 43.20
-      calendar-longitude 17.48
-      calendar-location-name "Mostar, Bosnia and Herzegovina")
-
 ;; Open URLs in the selected browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "conkeror")
 
 ;; Prevent GnuTLS warnings
 (setq gnutls-min-prime-bits 1024)
+
+;; Turn off the menu bar
+(use-package menu-bar
+  :init
+  (progn
+    (when (fboundp 'menu-bar-mode)
+      (menu-bar-mode -1))))
+
+;; Turn off the toolbar
+(use-package tool-bar
+  :init
+  (progn
+    (when (fboundp 'tool-bar-mode)
+      (tool-bar-mode -1))))
+
+;; Turn off the scrollbar
+(use-package scroll-bar
+  :init
+  (progn
+    (when (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))))
+
+;; Show column number and buffer size on the modeline
+(use-package simple
+  :init
+  (progn
+    (column-number-mode t)
+    (size-indication-mode t)))
+
+;; Show tooltips in echo area
+(use-package tooltip
+  :init
+  (tooltip-mode -1)
+  :config
+  (setq tooltip-use-echo-area t))
+
+;; Ediff window placement
+(use-package ediff
+  :defer t
+  :config  
+  (setq ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain))
+
+;; Make buffer names unique
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-separator "/"
+        uniquify-after-kill-buffer-p t
+        uniquify-ignore-buffers-re "^\\*"))
+
+;; Save minibuffer history
+(use-package savehist
+  :init
+  (progn
+    (setq savehist-additional-variables '(search-ring regexp-search-ring)
+          savehist-autosave-interval 60
+          savehist-file (expand-file-name "minbuf.hist" my-saves-dir)))
+  (savehist-mode t))
+
+;; Remember point position in files
+(use-package saveplace
+  :init
+  (setq-default save-place t)
+  :config
+  (setq save-place-file (expand-file-name "saved-places" my-saves-dir)))
+
+;; Bookmarks save directory
+(use-package bookmark
+  :defer t
+  :config
+  (setq bookmark-default-file (expand-file-name "bookmarks" my-saves-dir)
+        bookmark-save-flag 1))
+
+;; Eshell save directory
+(use-package eshell
+  :defer t
+  :config
+  (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir)))
+
+;; Highlight matching parentheses
+(use-package paren
+  :init
+  (show-paren-mode 1)
+  :config
+  (setq show-paren-delay 0))
+
+;; Scroll compilation buffer to first error
+(use-package compile
+  :defer t
+  :config
+  (setq compilation-scroll-output 'first-error))
+
+;; TRAMP default file transfer method
+(use-package tramp
+  :defer t
+  :config
+  (setq tramp-default-method "ssh"))
+
+;; Use ANSI colors within shell-mode
+(use-package shell
+  :defer t
+  :init
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
@@ -157,75 +219,10 @@
                                            try-complete-lisp-symbol-partially
                                            try-complete-lisp-symbol)))
 
-;; Make buffer names unique
-(use-package uniquify
-  :config
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-separator "/"
-        uniquify-after-kill-buffer-p t
-        uniquify-ignore-buffers-re "^\\*"))
-
-;; Save minibuffer history
-(use-package savehist
-  :init
-  (progn
-    (setq savehist-additional-variables '(search-ring regexp-search-ring)
-          savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" my-saves-dir)))
-  (savehist-mode t))
-
-;; Bookmarks save directory
-(use-package bookmark
-  :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" my-saves-dir)
-        bookmark-save-flag 1))
-
-;; Remember point position in files
-(use-package saveplace
-  :init
-  (setq-default save-place t)
-  :config
-  (setq save-place-file (expand-file-name "saved-places" my-saves-dir)))
-
-;; Saner regex syntax
-(use-package re-builder
-  :config
-  (setq reb-re-syntax 'string))
-
 ;; Enable code folding with Hide Show mode
 (use-package hideshow
   :init
   (add-hook 'prog-mode-hook 'hs-minor-mode))
-
-;; TRAMP default file transfer method
-(use-package tramp
-  :config
-  (setq tramp-default-method "ssh"))
-
-;; Eshell save directory
-(use-package eshell
-  :config
-  (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir)))
-
-;; Use ANSI colors within shell-mode
-(use-package shell
-  :init
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
-
-;; Fly Spell mode configuration
-(use-package flyspell
-  :init
-  (add-hook 'text-mode-hook 'flyspell-mode)
-  :config
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra")
-        ispell-dictionary "english"))
-
-;; Doc View mode configuration
-(use-package doc-view
-  :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -236,13 +233,6 @@
   :config
   (eldoc-add-command 'paredit-backward-delete
                      'paredit-close-round))
-
-;; Highlight matching parentheses
-(use-package paren
-  :init
-  (show-paren-mode 1)
-  :config
-  (setq show-paren-delay 0))
 
 ;; Enable CUA mode for rectangular selection
 (use-package cua-base
@@ -261,6 +251,7 @@
 
 ;; CC mode configuration
 (use-package cc-mode
+  :defer t
   :init
   (progn
     (defun my-c-mode-hook ()
@@ -287,6 +278,22 @@
                           (awk-mode . "awk")
                           (other . "stroustrup"))))
 
+;; Fly Spell mode configuration
+(use-package flyspell
+  :init
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  :config
+  (setq ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra")
+        ispell-dictionary "english"))
+
+;; Doc View mode configuration
+(use-package doc-view
+  :defer t
+  :config
+  (setq doc-view-resolution 300
+        doc-view-continuous t))
+
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
@@ -299,6 +306,12 @@
          ("C-r" . isearch-backward-regexp)
          ("C-M-s" . isearch-forward)
          ("C-M-r" . isearch-backward)))
+
+;; Saner regex syntax
+(use-package re-builder
+  :defer t
+  :config
+  (setq reb-re-syntax 'string))
 
 ;; Enable Ido for completion
 (use-package ido
@@ -318,11 +331,6 @@
 (use-package erc
   :init
   (progn
-    (add-to-list 'erc-modules 'notifications)
-    (add-to-list 'erc-modules 'scrolltobottom)
-    (add-to-list 'erc-modules 'smiley)
-    (erc-spelling-mode 1)
-
     (defun my-erc ()
       "Connect to IRC."
       (interactive)
@@ -331,6 +339,11 @@
       (erc-tls :server "pine.forestnet.org" :port 6697
                :nick "drot"))
 
+    (add-to-list 'erc-modules 'notifications)
+    (add-to-list 'erc-modules 'scrolltobottom)
+    (add-to-list 'erc-modules 'smiley)
+    (erc-spelling-mode 1)
+    
     (add-hook 'erc-mode-hook
               (defun fix-scrolling-bug ()
                 "Keep the prompt at bottom"
@@ -358,6 +371,22 @@
                      (if erc-network
                          (concat "[" (symbol-name erc-network) "]")
                        (concat "[" (car erc-default-recipients) "]")))))
+
+;; Calendar configuration
+(use-package calendar
+  :defer t
+  :config
+  (setq calendar-mark-holidays-flag t
+      holiday-general-holidays nil
+      holiday-bahai-holidays nil
+      holiday-oriental-holidays nil
+      holiday-solar-holidays nil
+      holiday-islamic-holidays nil
+      holiday-hebrew-holidays nil
+      calendar-date-style 'european
+      calendar-latitude 43.20
+      calendar-longitude 17.48
+      calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org mode configuration
 (use-package org
@@ -394,7 +423,7 @@
 
 ;; -- Color theme ---
 
-(use-package darkburn-theme
+(use-package naquadah-theme
   :ensure t)
 
 ;; --- company mode ---
@@ -429,6 +458,7 @@
 
 (use-package magit
   :ensure t
+  :defer t
   :config
   (setq magit-completing-read-function 'magit-ido-completing-read))
 
