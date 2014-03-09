@@ -76,7 +76,7 @@
 ;; Save minibuffer history
 (setq savehist-additional-variables '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
-      savehist-file (expand-file-name "minbuf.hist" my-saves-dir)))
+      savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
 (savehist-mode t)
 
 ;; Show column number and buffer size on the modeline
