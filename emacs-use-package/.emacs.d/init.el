@@ -73,6 +73,12 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
+;; Save minibuffer history
+(setq savehist-additional-variables '(search-ring regexp-search-ring)
+      savehist-autosave-interval 60
+      savehist-file (expand-file-name "minbuf.hist" my-saves-dir)))
+(savehist-mode t)
+
 ;; Show column number and buffer size on the modeline
 (column-number-mode t)
 (size-indication-mode t)
@@ -111,15 +117,6 @@
         uniquify-separator "/"
         uniquify-after-kill-buffer-p t
         uniquify-ignore-buffers-re "^\\*"))
-
-;; Save minibuffer history
-(use-package savehist
-  :init
-  (progn
-    (setq savehist-additional-variables '(search-ring regexp-search-ring)
-          savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" my-saves-dir)))
-  (savehist-mode t))
 
 ;; Remember point position in files
 (use-package saveplace
