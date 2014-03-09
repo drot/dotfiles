@@ -141,13 +141,6 @@
   :config
   (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir)))
 
-;; Enable X clipboard usage
-(use-package x-win
-  :defer t
-  :config
-  (setq x-select-enable-clipboard t
-        x-select-enable-primary t))
-
 ;; Highlight matching parentheses
 (use-package paren
   :init

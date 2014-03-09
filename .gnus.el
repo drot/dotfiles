@@ -1,4 +1,4 @@
-;; Don't display the splash screen
+;; Don't show the splash screen
 (setq gnus-inhibit-startup-message t)
 
 ;; User information
