@@ -4,6 +4,7 @@
 
 (defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
   "This directory houses all save files.")
+(make-directory my-saves-dir t)
 
 (defvar my-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))
   "This directory houses all backup and auto-save files.")
