@@ -25,46 +25,23 @@
   (package-install 'use-package))
 (require 'use-package)
 
+;; Turn off the menu bar
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+
+;; Turn off the toolbar
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+
+;; Turn off the scrollbar
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
 (set-frame-font "Envy Code R-10")
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
-      initial-scratch-message nil
-      gnus-inhibit-startup-message t)
-
-;; Keep point on same position when scrolling
-(setq scroll-preserve-screen-position 1)
-
-;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
-
-;; Store all backup and auto-save files in the tmp directory
-(setq backup-directory-alist
-      `((".*" . ,my-tmp-dir)))
-(setq auto-save-file-name-transforms
-      `((".*" ,my-tmp-dir t)))
-(setq auto-save-list-file-prefix my-tmp-dir)
-
-;; Message buffer size
-(setq message-log-max 1024)
-
-;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
-
-;; Enable all disabled commands
-(setq disabled-command-function nil)
-
-;; Enable X clipboard usage
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t
-      save-interprogram-paste-before-kill t)
-
-;; Mouse yank at point instead of click
-(setq mouse-yank-at-point t)
+      initial-scratch-message nil)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -74,62 +51,58 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+;; Store all backup and auto-save files in the tmp directory
+(setq backup-directory-alist
+      `((".*" . ,my-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,my-tmp-dir t)))
+(setq auto-save-list-file-prefix my-tmp-dir)
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; Open URLs in the selected browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "conkeror")
+;; Enable all disabled commands
+(setq disabled-command-function nil)
 
-;; Prevent GnuTLS warnings
-(setq gnutls-min-prime-bits 1024)
-
-;; Turn off the menu bar
-(use-package menu-bar
-  :init
-  (progn
-    (when (fboundp 'menu-bar-mode)
-      (menu-bar-mode -1))))
-
-;; Turn off the toolbar
-(use-package tool-bar
-  :init
-  (progn
-    (when (fboundp 'tool-bar-mode)
-      (tool-bar-mode -1))))
-
-;; Turn off the scrollbar
-(use-package scroll-bar
-  :init
-  (progn
-    (when (fboundp 'scroll-bar-mode)
-      (scroll-bar-mode -1))))
-
-;; Show column number and buffer size on the modeline
-(use-package simple
-  :init
-  (progn
-    (column-number-mode t)
-    (size-indication-mode t)))
+;; Answer y or n instead of yes or no at prompts
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Show tooltips in echo area
-(use-package tooltip
-  :init
-  (tooltip-mode -1)
-  :config
-  (setq tooltip-use-echo-area t))
+(setq tooltip-use-echo-area t)
 
-;; Disable cursor blink
-(use-package frame
-  :init
-  (blink-cursor-mode 0))
+;; Show unfinished keystrokes early
+(setq echo-keystrokes 0.1)
 
-;; Ediff window placement
-(use-package ediff
-  :defer t
-  :config  
-  (setq ediff-split-window-function 'split-window-horizontally
-        ediff-window-setup-function 'ediff-setup-windows-plain))
+;; Show column number and buffer size on the modeline
+(column-number-mode t)
+(size-indication-mode t)
+
+;; Disable point blink
+(blink-cursor-mode 0)
+
+;; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
+;; Keep point on same position when scrolling
+(setq scroll-preserve-screen-position 1)
+
+;; Enable X clipboard usage
+(setq x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t)
+
+;; Mouse yank at point instead of click
+(setq mouse-yank-at-point t)
+
+;; Enable CUA mode for rectangular selection
+(cua-selection-mode 1)
+
+;; Delete a selection with a keypress
+(delete-selection-mode 1)
+
+;; Recognize CamelCase words
+(global-subword-mode 1)
 
 ;; Make buffer names unique
 (use-package uniquify
@@ -168,6 +141,13 @@
   :config
   (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir)))
 
+;; Enable X clipboard usage
+(use-package x-win
+  :defer t
+  :config
+  (setq x-select-enable-clipboard t
+        x-select-enable-primary t))
+
 ;; Highlight matching parentheses
 (use-package paren
   :init
@@ -187,11 +167,24 @@
   :config
   (setq diff-switches "-u"))
 
+;; Ediff window split
+(use-package ediff
+  :defer t
+  :config  
+  (setq ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain))
+
 ;; TRAMP default file transfer method
 (use-package tramp
   :defer t
   :config
   (setq tramp-default-method "ssh"))
+
+;; Prevent GnuTLS warnings
+(use-package gnutls
+  :defer t
+  :config
+  (setq gnutls-min-prime-bits 1024))
 
 ;; Use ANSI colors within shell-mode
 (use-package shell
@@ -238,21 +231,6 @@
   :config
   (eldoc-add-command 'paredit-backward-delete
                      'paredit-close-round))
-
-;; Enable CUA mode for rectangular selection
-(use-package cua-base
-  :init
-  (cua-selection-mode 1))
-
-;; Delete a selection with a keypress
-(use-package delsel
-  :init
-  (delete-selection-mode 1))
-
-;; Recognize CamelCase words
-(use-package subword
-  :init
-  (global-subword-mode 1))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -311,6 +289,12 @@
          ("C-r" . isearch-backward-regexp)
          ("C-M-s" . isearch-forward)
          ("C-M-r" . isearch-backward)))
+
+;; Open URLs in the selected browser
+(use-package browse-url
+  :defer t
+  :config
+  (setq browse-url-browser-function 'browse-url-default-windows-browser))
 
 ;; Saner regex syntax
 (use-package re-builder
@@ -382,16 +366,16 @@
   :defer t
   :config
   (setq calendar-mark-holidays-flag t
-      holiday-general-holidays nil
-      holiday-bahai-holidays nil
-      holiday-oriental-holidays nil
-      holiday-solar-holidays nil
-      holiday-islamic-holidays nil
-      holiday-hebrew-holidays nil
-      calendar-date-style 'european
-      calendar-latitude 43.20
-      calendar-longitude 17.48
-      calendar-location-name "Mostar, Bosnia and Herzegovina"))
+        holiday-general-holidays nil
+        holiday-bahai-holidays nil
+        holiday-oriental-holidays nil
+        holiday-solar-holidays nil
+        holiday-islamic-holidays nil
+        holiday-hebrew-holidays nil
+        calendar-date-style 'european
+        calendar-latitude 43.20
+        calendar-longitude 17.48
+        calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org mode configuration
 (use-package org

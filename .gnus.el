@@ -1,3 +1,6 @@
+;; Don't display the splash screen
+(setq gnus-inhibit-startup-message t)
+
 ;; User information
 (setq user-full-name "Davor Rotim")
 (setq user-mail-address "mlinfo@cock.li")
