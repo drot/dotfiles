@@ -2,15 +2,15 @@
 
 ;; Turn off the menu bar
 (when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
+  (menu-bar-mode 0))
 
 ;; Turn off the toolbar
 (when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+  (tool-bar-mode 0))
 
 ;; Turn off the scrollbar
 (when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+  (scroll-bar-mode 0))
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
@@ -21,8 +21,7 @@
 (blink-cursor-mode 0)
 
 ;; Show tooltips in echo area
-(tooltip-mode -1)
-(setq tooltip-use-echo-area t)
+(tooltip-mode 0)
 
 ;; Keep point on same position when scrolling
 (setq scroll-preserve-screen-position 1)

@@ -28,15 +28,15 @@
 
 ;; Turn off the menu bar
 (when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
+  (menu-bar-mode 0))
 
 ;; Turn off the toolbar
 (when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+  (tool-bar-mode 0))
 
 ;; Turn off the scrollbar
 (when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+  (scroll-bar-mode 0))
 
 (set-frame-font "Envy Code R-10")
 
@@ -70,7 +70,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Show tooltips in echo area
-(setq tooltip-use-echo-area t)
+(tooltip-mode 0)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
