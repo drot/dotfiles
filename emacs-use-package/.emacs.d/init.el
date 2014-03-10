@@ -42,7 +42,8 @@
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
-      initial-scratch-message nil)
+      initial-scratch-message nil
+      gnus-inhibit-startup-message t)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)

@@ -1,8 +1,5 @@
 ;;; init-gnus.el --- Configuration for Gnus
 
-;; Don't show the splash screen
-(setq gnus-inhibit-startup-message t)
-
 ;; User information
 (setq user-full-name "Davor Rotim")
 (setq user-mail-address "mlinfo@cock.li")
