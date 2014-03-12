@@ -308,7 +308,6 @@
     (ido-mode 1)))
 
 ;; ERC configuration
-
 (defun my-erc ()
   "Connect to IRC."
   (interactive)
@@ -371,7 +370,6 @@
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org mode configuration
-
 (bind-key "\C-cl" 'org-store-link)
 (bind-key "\C-ca" 'org-agenda)
 
@@ -391,8 +389,10 @@
 
 ;; Skeleton mode configuration
 (use-package skeleton
-  :init
-  (define-skeleton my-cpp-skel
+  :config
+  (setq skeleton-further-elements '((abbrev-mode nil))))
+
+(define-skeleton my-cpp-skel
     "C++ skeleton"
     nil
     "#include <iostream>\n"
@@ -403,8 +403,6 @@
     "\n"
     > "return 0;"
     "\n}")
-  :config
-  (setq skeleton-further-elements '((abbrev-mode nil))))
 
 ;; -- Color theme ---
 
