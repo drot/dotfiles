@@ -162,7 +162,7 @@
 ;; Ediff window split
 (use-package ediff
   :defer t
-  :config  
+  :config
   (setq ediff-split-window-function 'split-window-horizontally
         ediff-window-setup-function 'ediff-setup-windows-plain))
 
@@ -309,49 +309,51 @@
     (ido-mode 1)))
 
 ;; ERC configuration
-(use-package erc
-  :init
-  (progn
-    (defun my-erc ()
-      "Connect to IRC."
-      (interactive)
-      (erc-tls :server "adams.freenode.net" :port 6697
-               :nick "drot")
-      (erc-tls :server "pine.forestnet.org" :port 6697
-               :nick "drot"))
 
+(defun my-erc ()
+  "Connect to IRC."
+  (interactive)
+  (erc-tls :server "adams.freenode.net" :port 6697
+           :nick "drot")
+  (erc-tls :server "pine.forestnet.org" :port 6697
+           :nick "drot"))
+
+(use-package erc
+  :defer t
+  :config
+  (progn
     (add-to-list 'erc-modules 'notifications)
     (add-to-list 'erc-modules 'scrolltobottom)
     (add-to-list 'erc-modules 'smiley)
     (erc-spelling-mode 1)
-    
+
     (add-hook 'erc-mode-hook
               (defun fix-scrolling-bug ()
                 "Keep the prompt at bottom"
-                (set (make-local-variable 'scroll-conservatively) 1000))))
-  :config
-  (setq erc-prompt-for-password nil
-        erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                      ("forestnet" "#reloaded" "#fo2"))
-        erc-server-reconnect-timeout 10
-        erc-fill-function 'erc-fill-static
-        erc-fill-column 120
-        erc-fill-static-center 15
-        erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
-        erc-track-exclude-server-buffer t
-        erc-track-showcount t
-        erc-track-switch-direction 'importance
-        erc-track-visibility 'selected-visible
-        erc-insert-timestamp-function 'erc-insert-timestamp-left
-        erc-timestamp-only-if-changed-flag nil
-        erc-timestamp-format "[%H:%M] "
-        erc-interpret-mirc-color t
-        erc-nick-uniquifier "_"
-        erc-header-line-format "%t: %o"
-        erc-prompt (lambda ()
-                     (if erc-network
-                         (concat "[" (symbol-name erc-network) "]")
-                       (concat "[" (car erc-default-recipients) "]")))))
+                (set (make-local-variable 'scroll-conservatively) 1000)))
+
+    (setq erc-prompt-for-password nil
+          erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
+                                        ("forestnet" "#reloaded" "#fo2"))
+          erc-server-reconnect-timeout 10
+          erc-fill-function 'erc-fill-static
+          erc-fill-column 120
+          erc-fill-static-center 15
+          erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
+          erc-track-exclude-server-buffer t
+          erc-track-showcount t
+          erc-track-switch-direction 'importance
+          erc-track-visibility 'selected-visible
+          erc-insert-timestamp-function 'erc-insert-timestamp-left
+          erc-timestamp-only-if-changed-flag nil
+          erc-timestamp-format "[%H:%M] "
+          erc-interpret-mirc-color t
+          erc-nick-uniquifier "_"
+          erc-header-line-format "%t: %o"
+          erc-prompt (lambda ()
+                       (if erc-network
+                           (concat "[" (symbol-name erc-network) "]")
+                         (concat "[" (car erc-default-recipients) "]"))))))
 
 ;; Calendar configuration
 (use-package calendar
@@ -426,7 +428,8 @@
 ;; --- ERC Highlight Nicks ---
 
 (use-package erc-hl-nicks
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; --- Ido Hacks ---
 
@@ -449,12 +452,12 @@
   :ensure t
   :diminish "PEd"
   :init
-  (progn    
+  (progn
     (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
     (add-hook 'ielm-mode-hook 'paredit-mode)
     (add-hook 'lisp-mode-hook 'paredit-mode)
     (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-    (add-hook 'scheme-mode-hook 'paredit-mode)    
+    (add-hook 'scheme-mode-hook 'paredit-mode)
 
     (defvar paredit-minbuf-commands '(eval-expression
                                       pp-eval-expression
