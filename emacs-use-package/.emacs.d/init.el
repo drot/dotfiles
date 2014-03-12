@@ -103,6 +103,12 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
+;; Swap Isearch with regexp Isearch
+(bind-key "C-s" 'isearch-forward-regexp)
+(bind-key "C-r" 'isearch-backward-regexp)
+(bind-key "C-M-s" 'isearch-forward)
+(bind-key "C-M-r" 'isearch-backward)
+
 ;; Enable CUA mode for rectangular selection
 (cua-selection-mode 1)
 
@@ -275,13 +281,6 @@
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
-;; Swap Isearch with regexp Isearch
-(use-package isearch
-  :bind (("C-s" . isearch-forward-regexp)
-         ("C-r" . isearch-backward-regexp)
-         ("C-M-s" . isearch-forward)
-         ("C-M-r" . isearch-backward)))
-
 ;; Open URLs in the selected browser
 (use-package browse-url
   :defer t
@@ -372,20 +371,23 @@
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org mode configuration
+
+(bind-key "\C-cl" 'org-store-link)
+(bind-key "\C-ca" 'org-agenda)
+
 (use-package org
-  :init
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((C . t)
-     (emacs-lisp . t)
-     (sh . t)))
-  :bind (("\C-cl" . org-store-link)
-         ("\C-ca" . org-agenda))
+  :defer t
   :config
-  (setq org-completion-use-ido t
-        org-log-done 'time
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+  (progn
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((C . t)
+       (emacs-lisp . t)
+       (sh . t)))
+    (setq org-completion-use-ido t
+          org-log-done 'time
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t)))
 
 ;; Skeleton mode configuration
 (use-package skeleton
