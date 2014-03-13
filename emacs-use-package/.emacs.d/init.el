@@ -118,6 +118,10 @@
 ;; Recognize CamelCase words
 (global-subword-mode 1)
 
+;; Color theme
+(use-package naquadah-theme
+  :ensure t)
+
 ;; Make buffer names unique
 (use-package uniquify
   :config
@@ -189,10 +193,6 @@
   :defer t
   :init
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
-
-;; Color theme
-(use-package naquadah-theme
-  :ensure t)
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
@@ -467,7 +467,7 @@
     (put 'paredit-doublequote 'delete-selection t)
     (put 'paredit-newline 'delete-selection t)))
 
-;;; Rainbow Delimiters
+;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
   :init
