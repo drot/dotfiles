@@ -190,6 +190,10 @@
   :init
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
 
+;; Color theme
+(use-package naquadah-theme
+  :ensure t)
+
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
   :init
@@ -261,6 +265,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
+  :defer t
   :init
   (add-hook 'text-mode-hook 'flyspell-mode)
   :config
@@ -306,6 +311,27 @@
           ido-default-file-method 'selected-window
           ido-everywhere t)
     (ido-mode 1)))
+
+;; Ido Hacks
+(use-package ido-hacks
+  :ensure t
+  :init
+  (ido-hacks-mode t))
+
+;; Company mode
+(use-package company
+  :ensure t
+  :diminish "co"
+  :init
+  (global-company-mode)
+  :config
+  (setq company-echo-delay 0
+        company-show-numbers t
+        company--disabled-backends '(company-eclim
+                                     company-clang
+                                     company-xcode
+                                     company-ropemacs
+                                     company-oddmuse)))
 
 ;; ERC configuration
 (defun my-erc ()
@@ -353,6 +379,18 @@
                            (concat "[" (symbol-name erc-network) "]")
                          (concat "[" (car erc-default-recipients) "]"))))))
 
+;; ERC Highlight Nicks
+(use-package erc-hl-nicks
+  :ensure t
+  :defer t)
+
+;; Magit
+(use-package magit
+  :ensure t
+  :defer t
+  :config
+  (setq magit-completing-read-function 'magit-ido-completing-read))
+
 ;; Calendar configuration
 (use-package calendar
   :defer t
@@ -387,67 +425,7 @@
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
 
-;; Skeleton mode configuration
-(use-package skeleton
-  :config
-  (setq skeleton-further-elements '((abbrev-mode nil))))
-
-(define-skeleton my-cpp-skel
-  "C++ skeleton"
-  nil
-  "#include <iostream>\n"
-  "\n"
-  "int main ()\n"
-  "{\n"
-  > _
-  "\n"
-  > "return 0;"
-  "\n}")
-
-;; -- Color theme ---
-
-(use-package naquadah-theme
-  :ensure t)
-
-;; --- company mode ---
-
-(use-package company
-  :ensure t
-  :diminish "co"
-  :init
-  (global-company-mode)
-  :config
-  (setq company-echo-delay 0
-        company-show-numbers t
-        company--disabled-backends '(company-eclim
-                                     company-clang
-                                     company-xcode
-                                     company-ropemacs
-                                     company-oddmuse)))
-
-;; --- ERC Highlight Nicks ---
-
-(use-package erc-hl-nicks
-  :ensure t
-  :defer t)
-
-;; --- Ido Hacks ---
-
-(use-package ido-hacks
-  :ensure t
-  :init
-  (ido-hacks-mode t))
-
-;; --- Magit ---
-
-(use-package magit
-  :ensure t
-  :defer t
-  :config
-  (setq magit-completing-read-function 'magit-ido-completing-read))
-
-;; --- ParEdit ---
-
+;; ParEdit
 (use-package paredit
   :ensure t
   :diminish "PEd"
@@ -489,15 +467,30 @@
     (put 'paredit-doublequote 'delete-selection t)
     (put 'paredit-newline 'delete-selection t)))
 
-;;; --- Rainbow Delimiters ---
-
+;;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;; --- Undo Tree ---
+;; Skeleton mode configuration
+(use-package skeleton
+  :config
+  (setq skeleton-further-elements '((abbrev-mode nil))))
 
+(define-skeleton my-cpp-skel
+  "C++ skeleton"
+  nil
+  "#include <iostream>\n"
+  "\n"
+  "int main ()\n"
+  "{\n"
+  > _
+  "\n"
+  > "return 0;"
+  "\n}")
+
+;; Undo Tree
 (use-package undo-tree
   :ensure t
   :diminish "UT"
