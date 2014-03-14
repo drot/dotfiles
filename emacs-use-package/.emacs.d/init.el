@@ -79,11 +79,11 @@
 (setq savehist-additional-variables '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
       savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
-(savehist-mode t)
+(savehist-mode)
 
 ;; Show column number and buffer size on the modeline
-(column-number-mode t)
-(size-indication-mode t)
+(column-number-mode)
+(size-indication-mode)
 
 ;; Disable point blink
 (blink-cursor-mode 0)
@@ -308,15 +308,15 @@
           ido-use-filename-at-point 'guess
           ido-max-prospects 5
           ido-save-directory-list-file (expand-file-name "ido.hist" my-saves-dir)
-          ido-default-file-method 'selected-window
-          ido-everywhere t)
-    (ido-mode 1)))
+          ido-default-file-method 'selected-window)
+    (ido-mode 1)
+    (ido-everywhere 1)))
 
 ;; Ido Hacks
 (use-package ido-hacks
   :ensure t
   :init
-  (ido-hacks-mode t))
+  (ido-hacks-mode 1))
 
 ;; Company mode
 (use-package company
@@ -331,7 +331,7 @@
                                        company-xcode
                                        company-ropemacs
                                        company-oddmuse))
-    (global-company-mode)))
+    (global-company-mode 1)))
 
 ;; ERC configuration
 (defun my-erc ()
@@ -498,7 +498,7 @@
   (progn
     (setq undo-tree-history-directory-alist `((".*" . ,my-tmp-dir))
           undo-tree-auto-save-history t)
-    (global-undo-tree-mode)))
+    (global-undo-tree-mode 1)))
 
 ;; Load changes from the customize interface
 (if (file-exists-p my-custom-file)
