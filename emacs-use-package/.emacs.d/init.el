@@ -79,11 +79,11 @@
 (setq savehist-additional-variables '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
       savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
-(savehist-mode)
+(savehist-mode 1)
 
 ;; Show column number and buffer size on the modeline
-(column-number-mode)
-(size-indication-mode)
+(column-number-mode 1)
+(size-indication-mode 1)
 
 ;; Disable point blink
 (blink-cursor-mode 0)
