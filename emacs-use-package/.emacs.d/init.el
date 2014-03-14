@@ -323,15 +323,15 @@
   :ensure t
   :diminish "co"
   :init
-  (global-company-mode)
-  :config
-  (setq company-echo-delay 0
-        company-show-numbers t
-        company--disabled-backends '(company-eclim
-                                     company-clang
-                                     company-xcode
-                                     company-ropemacs
-                                     company-oddmuse)))
+  (progn
+    (setq company-echo-delay 0
+          company-show-numbers t
+          company--disabled-backends '(company-eclim
+                                       company-clang
+                                       company-xcode
+                                       company-ropemacs
+                                       company-oddmuse))
+    (global-company-mode)))
 
 ;; ERC configuration
 (defun my-erc ()
