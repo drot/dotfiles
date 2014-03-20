@@ -109,26 +109,14 @@
 (bind-key "C-M-s" 'isearch-forward)
 (bind-key "C-M-r" 'isearch-backward)
 
-;; Enable CUA mode for rectangular selection
-(cua-selection-mode 1)
-
 ;; Delete a selection with a keypress
 (delete-selection-mode 1)
 
-;; Recognize CamelCase words
-(global-subword-mode 1)
-
 ;; Color theme
-(use-package naquadah-theme
-  :ensure t)
-
-;; Make buffer names unique
-(use-package uniquify
-  :config
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-separator "/"
-        uniquify-after-kill-buffer-p t
-        uniquify-ignore-buffers-re "^\\*"))
+(use-package alect-themes
+  :ensure t
+  :init
+  (load-theme 'alect-dark t))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -298,25 +286,12 @@
   :config
   (setq reb-re-syntax 'string))
 
-;; Enable Ido for completion
-(use-package ido
+;; Icomplete
+(use-package icomplete
   :init
-  (progn
-    (setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-max-prospects 5
-          ido-save-directory-list-file (expand-file-name "ido.hist" my-saves-dir)
-          ido-default-file-method 'selected-window)
-    (ido-mode 1)
-    (ido-everywhere 1)))
-
-;; Ido Hacks
-(use-package ido-hacks
-  :ensure t
-  :init
-  (ido-hacks-mode 1))
+  (icomplete-mode 1)
+  :config
+  (setq icomplete-prospects-height 1))
 
 ;; Company mode
 (use-package company
@@ -387,9 +362,7 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :defer t
-  :config
-  (setq magit-completing-read-function 'magit-ido-completing-read))
+  :defer t)
 
 ;; Calendar configuration
 (use-package calendar
@@ -420,8 +393,7 @@
      '((C . t)
        (emacs-lisp . t)
        (sh . t)))
-    (setq org-completion-use-ido t
-          org-log-done 'time
+    (setq org-log-done 'time
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
 
