@@ -335,6 +335,7 @@
           erc-timestamp-only-if-changed-flag nil
           erc-timestamp-format "[%H:%M] "
           erc-interpret-mirc-color t
+          erc-button-buttonize-nicks nil
           erc-nick-uniquifier "_"
           erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
