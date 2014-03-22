@@ -38,8 +38,6 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode 0))
 
-(set-frame-font "Envy Code R-10")
-
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil
@@ -207,11 +205,6 @@
                                            try-complete-lisp-symbol-partially
                                            try-complete-lisp-symbol)))
 
-;; Enable code folding with Hide Show mode
-(use-package hideshow
-  :init
-  (add-hook 'prog-mode-hook 'hs-minor-mode))
-
 ;; Show documentation with ElDoc mode
 (use-package eldoc
   :init
@@ -274,11 +267,11 @@
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
-;; Open URLs in the selected browser
+;; Open URLs in eww
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-default-windows-browser))
+  (setq browse-url-browser-function 'eww-browse-url))
 
 ;; Saner regex syntax
 (use-package re-builder
@@ -356,6 +349,11 @@
 
 ;; ERC Highlight Nicks
 (use-package erc-hl-nicks
+  :ensure t
+  :defer t)
+
+;; Lua mode
+(use-package lua-mode
   :ensure t
   :defer t)
 
