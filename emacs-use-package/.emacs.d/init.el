@@ -1,15 +1,10 @@
-;; Define directories
 (defvar my-emacs-dir (file-name-directory load-file-name)
-  "The root directory of the Emacs distribution.")
+  "Emacs root directory.")
 
 (defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
   "This directory houses all save files.")
 (make-directory my-saves-dir t)
 
-(defvar my-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))
-  "This directory houses all backup and auto-save files.")
-
-;; Define customize file
 (defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
   "Store changes from the customize interface in the selected file.")
 
@@ -51,12 +46,12 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;; Store all backup and auto-save files in the tmp directory
+;; Store all backup and auto-save files in the saves directory
 (setq backup-directory-alist
-      `((".*" . ,my-tmp-dir)))
+      `((".*" . ,my-saves-dir)))
 (setq auto-save-file-name-transforms
-      `((".*" ,my-tmp-dir t)))
-(setq auto-save-list-file-prefix my-tmp-dir)
+      `((".*" ,my-saves-dir t)))
+(setq auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir))
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -325,7 +320,7 @@
                 (set (make-local-variable 'scroll-conservatively) 1000)))
 
     (setq erc-prompt-for-password nil
-          erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
+          erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
                                         ("forestnet" "#reloaded" "#fo2"))
           erc-server-reconnect-timeout 10
           erc-fill-function 'erc-fill-static
@@ -466,7 +461,7 @@
   :diminish "UT"
   :init
   (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,my-tmp-dir))
+    (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
           undo-tree-auto-save-history t)
     (global-undo-tree-mode 1)))
 
