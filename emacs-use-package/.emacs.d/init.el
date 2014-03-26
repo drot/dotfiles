@@ -109,7 +109,13 @@
 (use-package alect-themes
   :ensure t
   :init
-  (load-theme 'alect-dark t))
+  (progn
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-black t)))
 
 ;; Remember point position in files
 (use-package saveplace
