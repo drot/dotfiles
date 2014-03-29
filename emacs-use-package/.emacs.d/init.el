@@ -22,16 +22,16 @@
 (require 'use-package)
 
 ;; Turn off the menu bar
-(when (fboundp 'menu-bar-mode)
-  (menu-bar-mode 0))
+(menu-bar-mode 0)
 
 ;; Turn off the toolbar
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode 0))
+(tool-bar-mode 0)
 
 ;; Turn off the scrollbar
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode 0))
+(scroll-bar-mode 0)
+
+;; Show tooltips in echo area
+(tooltip-mode 0)
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
@@ -62,17 +62,8 @@
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Show tooltips in echo area
-(tooltip-mode 0)
-
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
-
-;; Save minibuffer history
-(setq savehist-additional-variables '(search-ring regexp-search-ring)
-      savehist-autosave-interval 60
-      savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
-(savehist-mode 1)
 
 ;; Show column number and buffer size on the modeline
 (column-number-mode 1)
@@ -102,9 +93,6 @@
 (bind-key "C-M-s" 'isearch-forward)
 (bind-key "C-M-r" 'isearch-backward)
 
-;; Delete a selection with a keypress
-(delete-selection-mode 1)
-
 ;; Color theme
 (use-package alect-themes
   :ensure t
@@ -116,6 +104,15 @@
       (let (custom--inhibit-theme-enable)
         ad-do-it))
     (load-theme 'alect-black t)))
+
+;; Save minibuffer history
+(use-package savehist
+  :init
+  (progn
+    (setq savehist-additional-variables '(search-ring regexp-search-ring)
+          savehist-autosave-interval 60
+          savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
+    (savehist-mode 1)))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -143,6 +140,11 @@
   (show-paren-mode 1)
   :config
   (setq show-paren-delay 0))
+
+;; Delete a selection with a keypress
+(use-package delsel
+  :init
+  (delete-selection-mode 1))
 
 ;; Scroll compilation buffer to first error
 (use-package compile
