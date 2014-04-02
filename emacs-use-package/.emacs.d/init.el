@@ -361,11 +361,6 @@
   :ensure t
   :defer t)
 
-;; Magit
-(use-package magit
-  :ensure t
-  :defer t)
-
 ;; Calendar configuration
 (use-package calendar
   :defer t
