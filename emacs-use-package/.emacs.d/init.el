@@ -30,9 +30,6 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode 0)
 
-;; Show tooltips in echo area
-(tooltip-mode 0)
-
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil
@@ -59,6 +56,10 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
+;; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -69,12 +70,11 @@
 (column-number-mode 1)
 (size-indication-mode 1)
 
+;; Show tooltips in echo area
+(tooltip-mode 0)
+
 ;; Disable point blink
 (blink-cursor-mode 0)
-
-;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
 
 ;; Keep point on same position when scrolling
 (setq scroll-preserve-screen-position 1)
