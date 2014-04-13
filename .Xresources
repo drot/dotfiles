@@ -7,15 +7,12 @@ Emacs.font: Terminus-10
 ! URXVT
 ! General
 URxvt.termName: rxvt-unicode-256color
-URxvt.loginShell: false
 URxvt.scrollBar: false
-URxvt.saveLines: 65535
-URxvt.cursorBlink: false
+URxvt.saveLines: 80000
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
 URxvt.colorUL: #AF5FD7
 URxvt.cursorColor: #E25454
-URxvt.secondaryScroll: true
 URxvt.internalBorder: 0
 
 ! Extensions
@@ -25,155 +22,41 @@ URxvt.url-launcher: /usr/bin/conkeror
 URxvt.matcher.button: 1
 URxvt.cutchars: '"'()*<>[]{|}
 
-! Appearance
+! Font
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
-
-! Erebus color theme
-URxvt.background: #261515
-URxvt.foreground: #FFFFFF
-
-! black + red
-URxvt.color0: #757575
-URxvt.color1: #FF5F5F
-
-! green + yellow
-URxvt.color2: #DE8A36
-URxvt.color3: #D78787
-
-! blue + purple
-URxvt.color4: #AF5FD7
-URxvt.color5: #FF87D7
-
-! cyan + white
-URxvt.color6: #DEA3E5
-URxvt.color7: #B8B8B8
-
-! bright-black + bright-red
-URxvt.color8: #B8B8B8
-URxvt.color9: #D78787
-
-! bright-green + bright-yellow
-URxvt.color10: #FF9F6F
-URxvt.color11: #FF5F5F
-
-! bright-blue + bright-purple
-URxvt.color12: #DEA3E5
-URxvt.color13: #D7AFAF
-
-! bright-cyan + bright-white
-URxvt.color14: #AF5FD7
-URxvt.color15: #757575
 
 ! XTERM
 ! General
 XTerm*termName: xterm-256color
-XTerm*loginShell: true
 XTerm*locale: true
 XTerm*metaSendsEscape: true
-XTerm*saveLines: 4096
+XTerm*saveLines: 80000
 XTerm*fastScroll: true
 XTerm*highlightSelection: true
+XTerm*cursorColor: #E25454
 
-! Appearance
+! Font
 XTerm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 XTerm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
 ! Erebus color theme
-XTerm*background: #261515
-XTerm*foreground: #FFFFFF
+*background: #261515
+*foreground: #FFFFFF
 
-! black + red
-XTerm*color0: #757575
-XTerm*color1: #FF5F5F
-
-! green + yellow
-XTerm*color2: #DE8A36
-XTerm*color3: #D78787
-
-! blue + purple
-XTerm*color4: #AF5FD7
-XTerm*color5: #FF87D7
-
-! cyan + white
-XTerm*color6: #DEA3E5
-XTerm*color7: #B8B8B8
-
-! bright-black + bright-red
-XTerm*color8: #B8B8B8
-XTerm*color9: #D78787
-
-! bright-green + bright-yellow
-XTerm*color10: #FF9F6F
-XTerm*color11: #FF5F5F
-
-! bright-blue + bright-purple
-XTerm*color12: #DEA3E5
-XTerm*color13: #D7AFAF
-
-! bright-cyan + bright-white
-XTerm*color14: #AF5FD7
-XTerm*color15: #757575
-
-! xcalc
-XCalc.ti.button1.vertDistance: 4
-XCalc.ti.button2.vertDistance: 4
-XCalc.ti.button3.vertDistance: 4
-XCalc.ti.button4.vertDistance: 4
-XCalc.ti.button5.vertDistance: 4
-XCalc.ti.background: gray90
-XCalc.ti.bevel.borderColor: gray65
-XCalc.ti.bevel.borderWidth: 1
-XCalc.ti.bevel.vertDistance: 4
-XCalc.ti.bevel.defaultDistance: 0
-XCalc.ti.bevel.background: rgb:b/c/b
-XCalc.ti.bevel.screen*background: rgb:b/c/b
-XCalc.ti.bevel.screen.borderColor: rgb:b/c/b
-XCalc.ti.bevel.screen.vertDistance: 10
-XCalc.ti.bevel.screen.horizDistance: 10
-XCalc.ti.bevel.screen*left: chainLeft
-XCalc.ti.bevel.screen*right: chainRight
-XCalc.ti.bevel.screen*top: chainTop
-XCalc.ti.bevel.screen*bottom: chainBottom
-XCalc.ti.bevel.screen*LCD.foreground: gray10
-XCalc.ti.bevel.screen*INV.vertDistance: 0
-XCalc.ti.Command.borderColor: gray65
-XCalc.ti.Command.background: gray85
-XCalc.ti.Command.foreground: gray30
-XCalc.ti.button5.background: rgb:e/b/b
-XCalc.ti.button20.background: rgb:e/d/c
-XCalc.ti.button25.background: rgb:e/d/c
-XCalc.ti.button30.background: rgb:e/d/c
-XCalc.ti.button35.background: rgb:e/d/c
-XCalc.ti.button40.background: rgb:b/b/e
-XCalc.ti.button22.background: gray95
-XCalc.ti.button23.background: gray95
-XCalc.ti.button24.background: gray95
-XCalc.ti.button27.background: gray95
-XCalc.ti.button28.background: gray95
-XCalc.ti.button29.background: gray95
-XCalc.ti.button32.background: gray95
-XCalc.ti.button33.background: gray95
-XCalc.ti.button34.background: gray95
-XCalc.ti.button37.background: gray95
-XCalc.ti.button38.background: gray95
-XCalc.ti.button39.background: gray95
-
-! xmessage
-Xmessage.form.okay.shapeStyle: rectangle
-Xmessage.form.okay.background: IndianRed
-Xmessage.form.okay.foreground: rgb:e/b/b
-Xmessage.message.background: ivory3
-Xmessage.background: gray85
-Xmessage.foreground: gray15
-Xmessage.Scrollbar.width: 1
-Xmessage.Scrollbar.borderWidth: 0
-Xmessage.Text.?.cursorColor:  rgb:d/5/5
-Xmessage.Text.borderColor:  gray65
-Xmessage.Text.background: gray95
-Xmessage.Command.highlightThickness: 1
-Xmessage.Command.internalWidth: 5
-Xmessage.Command.internalHeight: 3
-Xmessage.Command.borderColor: gray40
-Xmessage.Command.shapeStyle: Rectangle
-Xmessage.Command.background: gray80
+*color0: #757575
+*color1: #FF5F5F
+*color2: #DE8A36
+*color3: #D78787
+*color4: #AF5FD7
+*color5: #FF87D7
+*color6: #DEA3E5
+*color7: #B8B8B8
+*color8: #B8B8B8
+*color9: #D78787
+*color10: #FF9F6F
+*color11: #FF5F5F
+*color12: #DEA3E5
+*color13: #D7AFAF
+*color14: #AF5FD7
+*color15: #757575
