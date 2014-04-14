@@ -154,12 +154,6 @@
   (setq ediff-split-window-function 'split-window-horizontally
         ediff-window-setup-function 'ediff-setup-windows-plain))
 
-;; Don't show whitespace in vc diff
-(use-package vc
-  :defer t
-  :config
-  (setq vc-diff-switches '("-b" "-B" "-u")))
-
 ;; TRAMP default file transfer method
 (use-package tramp
   :defer t
