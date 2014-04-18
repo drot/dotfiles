@@ -9,8 +9,7 @@
   "Store changes from the customize interface in the selected file.")
 
 ;; Package repository selection and activation
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -317,7 +316,7 @@
                 (set (make-local-variable 'scroll-conservatively) 1000)))
 
     (setq erc-prompt-for-password nil
-          erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
+          erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                         ("forestnet" "#reloaded" "#fo2"))
           erc-server-reconnect-timeout 10
           erc-fill-function 'erc-fill-static

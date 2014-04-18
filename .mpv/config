@@ -9,4 +9,3 @@ msgcolor=yes
 # Subtitle search and encoding
 autosub-match=all
 subcp="utf8"
-no-ass=yes
