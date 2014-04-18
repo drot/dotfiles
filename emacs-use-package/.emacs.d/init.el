@@ -349,6 +349,11 @@
   :ensure t
   :defer t)
 
+;; PKGBUILD mode
+(use-package pkgbuild-mode
+  :ensure t
+  :defer t)
+
 ;; Calendar configuration
 (use-package calendar
   :defer t
