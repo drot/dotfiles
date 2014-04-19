@@ -90,8 +90,16 @@
 (bind-key "C-M-r" 'isearch-backward)
 
 ;; Color theme
-(use-package naquadah-theme
-  :ensure t)
+(use-package alect-themes
+  :ensure t
+  :init
+  (progn
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-black t)))
 
 ;; Save minibuffer history
 (use-package savehist
