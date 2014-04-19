@@ -26,6 +26,27 @@ URxvt.cutchars: '"'()*<>[]{|}
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
+! Erebus color theme
+URxvt.background: #261515
+URxvt.foreground: #FFFFFF
+
+URxvt.color0: #757575
+URxvt.color1: #FF5F5F
+URxvt.color2: #DE8A36
+URxvt.color3: #D78787
+URxvt.color4: #AF5FD7
+URxvt.color5: #FF87D7
+URxvt.color6: #DEA3E5
+URxvt.color7: #B8B8B8
+URxvt.color8: #B8B8B8
+URxvt.color9: #D78787
+URxvt.color10: #FF9F6F
+URxvt.color11: #FF5F5F
+URxvt.color12: #DEA3E5
+URxvt.color13: #D7AFAF
+URxvt.color14: #AF5FD7
+URxvt.color15: #757575
+
 ! XTERM
 ! General
 XTerm*termName: xterm-256color
@@ -41,22 +62,22 @@ XTerm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 XTerm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
 ! Erebus color theme
-*background: #261515
-*foreground: #FFFFFF
+XTerm*background: #261515
+XTerm*foreground: #FFFFFF
 
-*color0: #757575
-*color1: #FF5F5F
-*color2: #DE8A36
-*color3: #D78787
-*color4: #AF5FD7
-*color5: #FF87D7
-*color6: #DEA3E5
-*color7: #B8B8B8
-*color8: #B8B8B8
-*color9: #D78787
-*color10: #FF9F6F
-*color11: #FF5F5F
-*color12: #DEA3E5
-*color13: #D7AFAF
-*color14: #AF5FD7
-*color15: #757575
+XTerm*color0: #757575
+XTerm*color1: #FF5F5F
+XTerm*color2: #DE8A36
+XTerm*color3: #D78787
+XTerm*color4: #AF5FD7
+XTerm*color5: #FF87D7
+XTerm*color6: #DEA3E5
+XTerm*color7: #B8B8B8
+XTerm*color8: #B8B8B8
+XTerm*color9: #D78787
+XTerm*color10: #FF9F6F
+XTerm*color11: #FF5F5F
+XTerm*color12: #DEA3E5
+XTerm*color13: #D7AFAF
+XTerm*color14: #AF5FD7
+XTerm*color15: #757575
