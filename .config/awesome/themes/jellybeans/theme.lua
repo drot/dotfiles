@@ -6,7 +6,7 @@ theme = {}
 
 theme.font = "Terminus 10"
 theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons"
-theme.wallpaper = "/home/drot/Pictures/dead.jpg"
+theme.wallpaper = "/usr/share/awesome/themes/zenburn/zenburn-background.png"
 
 theme.bg_normal = "#151515"
 theme.bg_focus = "#151515"
@@ -33,13 +33,15 @@ theme.taglist_squares_unsel = theme.icons_dir .. "/taglist/squareu.png"
 
 -- Variables set for theming the menu:
 theme.menu_height = 21
-theme.menu_width = 105
+theme.menu_width = 126
 
 theme.menu_submenu_icon = theme.icons_dir .. "/submenu.png"
 theme.menu_term = theme.icons_dir .. "/menu/term.png"
-theme.menu_browser = theme.icons_dir .. "/menu/browser.png"
 theme.menu_emacs = theme.icons_dir .. "/menu/emacs.png"
+theme.menu_browser = theme.icons_dir .. "/menu/browser.png"
+theme.menu_skype = theme.icons_dir .. "/menu/skype.png"
 theme.menu_gimp = theme.icons_dir .. "/menu/gimp.png"
+theme.menu_pavu = theme.icons_dir .. "/menu/pavu.png"
 theme.menu_manual = theme.icons_dir .. "/menu/manual.png"
 theme.menu_edit = theme.icons_dir .. "/menu/edit.png"
 theme.menu_restart = theme.icons_dir .. "/menu/restart.png"

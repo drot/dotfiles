@@ -101,12 +101,14 @@ myawesomemenu = {
    { "Quit", awesome.quit, beautiful.menu_quit }
 }
 
-mymainmenu = awful.menu({ items = { { "termite", terminal, beautiful.menu_term },
-                             { "Firefox", "firefox", beautiful.menu_browser },
+mymainmenu = awful.menu({ items = {
+                             { "termite", terminal, beautiful.menu_term },
                              { "Emacs", "emacs", beautiful.menu_emacs },
+                             { "Firefox", "firefox", beautiful.menu_browser },
+                             { "Skype", "skype", beautiful.menu_skype },
                              { "GIMP", "gimp", beautiful.menu_gimp },
+                             { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
                              { "awesome", myawesomemenu, beautiful.awesome_icon }
-
 }
                        })
 
@@ -504,6 +506,8 @@ awful.rules.rules = {
    { rule = { class = "mpv" },
      properties = { tag = tags[1][4] } },
    { rule = { class = "Gimp" },
+     properties = { tag = tags[1][5] } },
+   { rule = { class = "Pavucontrol" },
      properties = { tag = tags[1][5] } },
 }
 -- }}}
