@@ -106,6 +106,7 @@ mymainmenu = awful.menu({ items = {
                              { "Emacs", "emacs", beautiful.menu_emacs },
                              { "Firefox", "firefox", beautiful.menu_browser },
                              { "Skype", "skype", beautiful.menu_skype },
+                             { "Writer", "lowriter", beautiful.menu_writer },
                              { "GIMP", "gimp", beautiful.menu_gimp },
                              { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
                              { "awesome", myawesomemenu, beautiful.awesome_icon }
@@ -505,6 +506,8 @@ awful.rules.rules = {
      properties = { tag = tags[1][3] } },
    { rule = { class = "mpv" },
      properties = { tag = tags[1][4] } },
+   { rule = { class = "libreoffice" },
+     properties = { tag = tags[1][5] } },
    { rule = { class = "Gimp" },
      properties = { tag = tags[1][5] } },
    { rule = { class = "Pavucontrol" },
