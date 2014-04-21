@@ -3,7 +3,7 @@ export EDITOR=emacsclient
 export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export PAGER=less
-export BROWSER=conkeror
+export BROWSER=firefox
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 # History
@@ -29,7 +29,7 @@ stty -ixon
 stty -ixoff
 
 # Pretty dir listings
-[ -e $HOME/.dir_colors ] && eval $(dircolors -b $HOME/.dir_colors)
+[ -e $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
 
 # Bash options
 shopt -s cmdhist # save multi-line commands in history as single line
@@ -55,6 +55,7 @@ export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${RED}${GIT}${
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
 alias eckd="emacsclient -e '(kill-emacs)'"
+alias skype="LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so skype"
 
 # Extract - archive extractor
 # Usage: extract <file>

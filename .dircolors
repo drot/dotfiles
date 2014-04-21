@@ -1,5 +1,5 @@
 # ----------------------------------------
-# file: $HOME/.dir_colors
+# file: $HOME/.dircolors
 # author: jason ryan http:/jasonwryan.com
 # vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
 # ----------------------------------------
@@ -79,14 +79,13 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .mid               00;32
 .wav               00;32
 .au                00;32
-.nes               00;31
-.smc               00;31
-.sdcv_history      00;32
-.fig               00;31
-.sfc               00;31
-.smc.gz            00;31
-.fig.gz            00;31
-.sfc.gz            00;31
+.nes               00;32
+.smc               00;32
+.fig               00;32
+.sfc               00;32
+.smc.gz            00;32
+.fig.gz            00;32
+.sfc.gz            00;32
 
 .avi               01;35
 .flc               01;35
@@ -123,6 +122,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .cs                00;36
 .css               00;36
 .csv               00;36
+.curlrc            01;34
 .deb               00;36
 .diff              01;33 
 .dir_colors        01;33
@@ -139,7 +139,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .fonts             00;36
 .gemrc             00;32
 .git               00;36
-.gitconfig         01;34
+.gitconfig         00;35
 .gitignore         00;36
 .hgrc              00;35
 .hgignore          00;35
@@ -184,6 +184,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .nvidia-settings-rc 00;36
 .offlineimaprc     00;33
 .pacnew            00;33
+.pam_environment   00;31
 .patch             00;31
 .pc                00;31
 .pfa               00;31
@@ -200,6 +201,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .rdf               00;31
 .ru                00;31
 .ruby-version      00;32
+.sdcv_history      00;32
 .sed               00;31
 .sfv               00;31
 .sh                00;31
@@ -214,7 +216,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .tfm               01;35
 .tfnt              01;35
 .theme             01;35
-.viminfo           01;35
+.viminfo           00;32
 .xml               01;35
 .yml               01;35
 .zsh               01;35
@@ -224,6 +226,7 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .urlview           01;35
 .vim               01;35
 .vimrc             00;32
+.xbindkeysrc       01;34
 .xinitrc           00;33 
 .Xauthority        01;31
 .Xmodmap           00;31
@@ -234,6 +237,14 @@ STICKY             01;34      # dir with the sticky bit set (+t) and not other-w
 .zsh_history       00;31
 .zshenv            00;31
 .zshrc             00;31
+
+# sysd file types
+*.mount            01;32
+*.path             01;33
+*.rules            01;34
+*.socket           00;35
+*.service          00;33
+*.target           01;36
 
 # Below, there should be one TERM entry for each termtype that is colorizable
 TERM Eterm
@@ -283,4 +294,3 @@ TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian 
-TERM xterm-termite
