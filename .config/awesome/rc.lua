@@ -103,7 +103,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = {
                              { "termite", terminal, beautiful.menu_term },
-                             { "Emacs", "emacs", beautiful.menu_emacs },
+                             { "Emacs", "emacsclient -c", beautiful.menu_emacs },
                              { "Firefox", "firefox", beautiful.menu_browser },
                              { "Skype", "skype", beautiful.menu_skype },
                              { "Writer", "lowriter", beautiful.menu_writer },
