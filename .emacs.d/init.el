@@ -314,14 +314,11 @@
   :config
   (progn
     (add-to-list 'erc-modules 'notifications)
-    (add-to-list 'erc-modules 'scrolltobottom)
     (add-to-list 'erc-modules 'smiley)
     (erc-spelling-mode 1)
 
-    (add-hook 'erc-mode-hook
-              (defun fix-scrolling-bug ()
-                "Keep the prompt at bottom"
-                (set (make-local-variable 'scroll-conservatively) 1000)))
+    (add-hook 'erc-mode-hook (lambda ()
+                               (set (make-local-variable 'scroll-conservatively) 1000)))
 
     (setq erc-prompt-for-password nil
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
