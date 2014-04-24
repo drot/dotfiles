@@ -1,8 +1,11 @@
 mpd_music_dir = "/home/drot/Music"
 user_interface = "alternative"
 enable_window_title = "no"
+cyclic_scrolling = "yes"
+centered_cursor = "yes"
+display_bitrate = "yes"
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
 visualizer_sync_interval = "30"
 visualizer_in_stereo = "yes"
-visualizer_type = "spectrum" (spectrum/wave)
+visualizer_type = "spectrum"
