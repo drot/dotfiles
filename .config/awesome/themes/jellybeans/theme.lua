@@ -6,7 +6,7 @@ theme = {}
 
 theme.font = "Terminus 10"
 theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons"
-theme.wallpaper = "/usr/share/awesome/themes/zenburn/zenburn-background.png"
+theme.wallpaper = "/home/drot/Pictures/ghost.jpg"
 
 theme.bg_normal = "#151515"
 theme.bg_focus = "#151515"
@@ -42,6 +42,7 @@ theme.menu_browser = theme.icons_dir .. "/menu/browser.png"
 theme.menu_skype = theme.icons_dir .. "/menu/skype.png"
 theme.menu_writer = theme.icons_dir .. "/menu/writer.png"
 theme.menu_gimp = theme.icons_dir .. "/menu/gimp.png"
+theme.menu_fman = theme.icons_dir .. "/menu/fman.png"
 theme.menu_pavu = theme.icons_dir .. "/menu/pavu.png"
 theme.menu_manual = theme.icons_dir .. "/menu/manual.png"
 theme.menu_edit = theme.icons_dir .. "/menu/edit.png"
