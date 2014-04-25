@@ -9,9 +9,8 @@
   "Store changes from the customize interface in the selected file.")
 
 ;; Package repository selection and activation
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(setq package-enable-at-startup nil)
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
+      package-enable-at-startup nil)
 (package-initialize)
 
 ;; Ensure use-package is installed
@@ -43,11 +42,9 @@
 (set-selection-coding-system 'utf-8)
 
 ;; Store all backup and auto-save files in the saves directory
-(setq backup-directory-alist
-      `((".*" . ,my-saves-dir)))
-(setq auto-save-file-name-transforms
-      `((".*" ,my-saves-dir t)))
-(setq auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir))
+(setq backup-directory-alist `((".*" . ,my-saves-dir))
+      auto-save-file-name-transforms `((".*" ,my-saves-dir t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir))
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
