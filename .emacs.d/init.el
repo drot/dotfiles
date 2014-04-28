@@ -41,6 +41,9 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+;; Specify font for all unicode characters
+(set-fontset-font t 'unicode "Symbola" nil 'prepend)
+
 ;; Store all backup and auto-save files in the saves directory
 (setq backup-directory-alist `((".*" . ,my-saves-dir))
       auto-save-file-name-transforms `((".*" ,my-saves-dir t))
@@ -301,7 +304,7 @@
 (defun my-erc ()
   "Connect to IRC."
   (interactive)
-  (erc-tls :server "adams.freenode.net" :port 6697
+  (erc-tls :server "calvino.freenode.net" :port 6697
            :nick "drot")
   (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))
