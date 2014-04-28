@@ -226,13 +226,11 @@ volbar:buttons(awful.util.table.join(
 ))
 -- }}}
 
--- {{{ Date widget
-dateicon = wibox.widget.imagebox()
-dateicon:set_image(beautiful.widget_date)
--- Initialize widget
-datewidget = wibox.widget.textbox()
+-- {{{ Time widget
+timeicon = wibox.widget.imagebox()
+timeicon:set_image(beautiful.widget_date)
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "%d-%m/%R", 60)
+timewidget = awful.widget.textclock("%d-%m/%R")
 -- }}}
 
 -- {{{ Wibox
@@ -336,8 +334,8 @@ for s = 1, screen.count() do
    right_layout:add(volwidget)
    right_layout:add(volbar)
    right_layout:add(separator)
-   right_layout:add(dateicon)
-   right_layout:add(datewidget)
+   right_layout:add(timeicon)
+   right_layout:add(timewidget)
    right_layout:add(wibox.widget.systray())
 
    -- Now bring it all together (with the tasklist in the middle)
