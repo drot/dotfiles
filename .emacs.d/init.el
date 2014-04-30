@@ -270,7 +270,7 @@
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'eww-browse-url))
+  (setq browse-url-browser-function 'browse-url-firefox))
 
 ;; Saner regex syntax
 (use-package re-builder
