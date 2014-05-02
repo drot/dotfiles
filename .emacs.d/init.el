@@ -308,7 +308,10 @@
     (add-to-list 'erc-modules 'notifications)
     (add-to-list 'erc-modules 'smiley)
     (erc-spelling-mode 1)
-
+    
+    (use-package erc-hl-nicks
+      :ensure t)
+    
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook
               '(lambda ()
@@ -343,11 +346,6 @@
                        (if erc-network
                            (concat "[" (symbol-name erc-network) "]")
                          (concat "[" (car erc-default-recipients) "]"))))))
-
-;; ERC Highlight Nicks
-(use-package erc-hl-nicks
-  :ensure t
-  :defer t)
 
 ;; Lua mode
 (use-package lua-mode
