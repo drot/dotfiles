@@ -90,16 +90,8 @@
 (bind-key "C-M-r" 'isearch-backward)
 
 ;; Color theme
-(use-package alect-themes
-  :ensure t
-  :init
-  (progn
-    (defadvice custom-theme-set-variables
-        (around fix-inhibit-bug activate)
-      "Allow setting of undefined variables in themes."
-      (let (custom--inhibit-theme-enable)
-        ad-do-it))
-    (load-theme 'alect-black t)))
+(use-package naquadah-theme
+  :ensure t)
 
 ;; Save minibuffer history
 (use-package savehist
@@ -317,6 +309,17 @@
     (add-to-list 'erc-modules 'smiley)
     (erc-spelling-mode 1)
 
+    (make-variable-buffer-local 'erc-fill-column)
+    (add-hook 'window-configuration-change-hook
+              '(lambda ()
+                 (save-excursion
+                   (walk-windows
+                    (lambda (w)
+                      (let ((buffer (window-buffer w)))
+                        (set-buffer buffer)
+                        (when (eq major-mode 'erc-mode)
+                          (setq erc-fill-column (- (window-width w) 2)))))))))
+
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
 
@@ -324,9 +327,6 @@
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                         ("forestnet" "#reloaded" "#fo2"))
           erc-server-reconnect-timeout 10
-          erc-fill-function 'erc-fill-static
-          erc-fill-column 120
-          erc-fill-static-center 15
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
           erc-track-exclude-server-buffer t
           erc-track-showcount t
