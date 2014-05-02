@@ -307,11 +307,10 @@
   (progn
     (add-to-list 'erc-modules 'notifications)
     (add-to-list 'erc-modules 'smiley)
-    (erc-spelling-mode 1)
-    
+
     (use-package erc-hl-nicks
       :ensure t)
-    
+
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook
               '(lambda ()
@@ -325,6 +324,8 @@
 
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
+
+    (erc-spelling-mode 1)
 
     (setq erc-prompt-for-password nil
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
