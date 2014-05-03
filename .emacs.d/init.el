@@ -30,8 +30,7 @@
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
-      initial-scratch-message nil
-      gnus-inhibit-startup-message t)
+      initial-scratch-message nil)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -90,8 +89,16 @@
 (bind-key "C-M-r" 'isearch-backward)
 
 ;; Color theme
-(use-package naquadah-theme
-  :ensure t)
+(use-package alect-themes
+  :ensure t
+  :init
+  (progn
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-black t)))
 
 ;; Save minibuffer history
 (use-package savehist
@@ -467,5 +474,6 @@
     (global-undo-tree-mode 1)))
 
 ;; Load changes from the customize interface
+(setq custom-file my-custom-file)
 (if (file-exists-p my-custom-file)
     (load my-custom-file))
