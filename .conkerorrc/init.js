@@ -26,6 +26,9 @@ register_user_stylesheet(
 		" background-color: yellow !important;" +
 		"}"));
 
+// Reduce JavaScript output
+session_pref("browser.dom.window.dump.enabled", false);
+
 // Don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
 

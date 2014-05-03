@@ -440,12 +440,6 @@
     (put 'paredit-doublequote 'delete-selection t)
     (put 'paredit-newline 'delete-selection t)))
 
-;; Rainbow Delimiters
-(use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
 ;; Skeleton mode configuration
 (use-package skeleton
   :config
