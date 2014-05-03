@@ -299,11 +299,9 @@
   (progn
     (setq company-echo-delay 0
           company-show-numbers t
-          company--disabled-backends '(company-eclim
-                                       company-clang
-                                       company-xcode
-                                       company-ropemacs
-                                       company-oddmuse))
+          company-backends '(company-nxml company-css company-eclim company-semantic
+                                          company-capf company-dabbrev-code company-etags
+                                          company-keywords company-files company-dabbrev))
     (global-company-mode 1)))
 
 ;; ERC configuration
