@@ -43,10 +43,15 @@
 ;; Specify font for all unicode characters
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 
-;; Store all backup and auto-save files in the saves directory
+;; Configuration for backup files
 (setq backup-directory-alist `((".*" . ,my-saves-dir))
       auto-save-file-name-transforms `((".*" ,my-saves-dir t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir))
+      auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir)
+      backup-by-copying t
+      delete-old-versions t
+      version-control t
+      kept-new-versions 5
+      kept-old-versions 2)
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -164,7 +169,9 @@
 (use-package tramp
   :defer t
   :config
-  (setq tramp-default-method "ssh"))
+  (setq tramp-default-method "ssh"
+        tramp-backup-directory-alist `((".*" . ,my-saves-dir))
+        tramp-auto-save-directory my-saves-dir))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -456,16 +463,6 @@
   "\n"
   > "return 0;"
   "\n}")
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish "UT"
-  :init
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
 
 ;; Load changes from the customize interface
 (setq custom-file my-custom-file)
