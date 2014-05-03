@@ -50,7 +50,7 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # Prompt look
-export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${RED}${GIT}${CYAN}]${GREEN}%${NIL} "
+export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${RED}${GIT}${CYAN}]${GREEN}\$${NIL} "
 
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
