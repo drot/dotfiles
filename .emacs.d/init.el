@@ -87,12 +87,6 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Swap Isearch with regexp Isearch
-(bind-key "C-s" 'isearch-forward-regexp)
-(bind-key "C-r" 'isearch-backward-regexp)
-(bind-key "C-M-s" 'isearch-forward)
-(bind-key "C-M-r" 'isearch-backward)
-
 ;; Color theme
 (use-package alect-themes
   :ensure t
@@ -278,12 +272,6 @@
   :config
   (setq browse-url-browser-function 'browse-url-firefox))
 
-;; Saner regex syntax
-(use-package re-builder
-  :defer t
-  :config
-  (setq reb-re-syntax 'string))
-
 ;; Icomplete
 (use-package icomplete
   :init
@@ -461,6 +449,16 @@
   "\n"
   > "return 0;"
   "\n}")
+
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish "UT"
+  :init
+  (progn
+    (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
+          undo-tree-auto-save-history t)
+    (global-undo-tree-mode 1)))
 
 ;; Load changes from the customize interface
 (setq custom-file my-custom-file)
