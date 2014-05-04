@@ -117,11 +117,6 @@ mymainmenu = awful.menu({ items = {
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
--- {{{ Separator
-separator = wibox.widget.imagebox()
-separator:set_image(beautiful.widget_sep)
--- }}}
-
 -- {{{ CPU usage widgets
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
@@ -224,6 +219,11 @@ volbar:buttons(awful.util.table.join(
                   awful.button({ }, 5, function ()
                         vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
 ))
+-- }}}
+
+-- {{{ Separator
+separator = wibox.widget.imagebox()
+separator:set_image(beautiful.widget_sep)
 -- }}}
 
 -- {{{ Time widget
