@@ -345,8 +345,8 @@
           erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
                        (if erc-network
-                           (concat "[" (symbol-name erc-network) "]")
-                         (concat "[" (car erc-default-recipients) "]"))))))
+                           (concat (symbol-name erc-network) ">")
+                         (concat (car erc-default-recipients) ">"))))))
 
 ;; Lua mode
 (use-package lua-mode
