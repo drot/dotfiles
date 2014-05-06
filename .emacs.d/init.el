@@ -47,11 +47,10 @@
 (setq backup-directory-alist `((".*" . ,my-saves-dir))
       auto-save-file-name-transforms `((".*" ,my-saves-dir t))
       auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir)
-      backup-by-copying t
-      delete-old-versions t
       version-control t
       kept-new-versions 5
-      kept-old-versions 2)
+      delete-old-versions t
+      backup-by-copying t)
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -329,7 +328,7 @@
 
     (setq erc-prompt-for-password nil
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                        ("forestnet" "#reloaded" "#fo2"))
+                                        ("forestnet" "#fo2"))
           erc-server-reconnect-timeout 10
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
           erc-track-exclude-server-buffer t
