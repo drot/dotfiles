@@ -312,9 +312,10 @@
 
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
+    (add-hook 'erc-mode-hook (lambda
+                               () (erc-fill-mode 0)))
     (add-hook 'erc-mode-hook 'visual-line-mode)
 
-    (erc-fill-mode 0)
     (erc-spelling-mode 1)
 
     (setq erc-prompt-for-password nil
