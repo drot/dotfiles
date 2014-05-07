@@ -1,11 +1,11 @@
-(defvar my-emacs-dir (file-name-directory load-file-name)
+(defvar user/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar my-saves-dir (expand-file-name "saves" my-emacs-dir)
+(defvar user/save-directory (expand-file-name "saves" user/emacs-directory)
   "This directory houses all save files.")
-(make-directory my-saves-dir t)
+(make-directory user/save-directory t)
 
-(defvar my-custom-file (expand-file-name "custom.el" my-saves-dir)
+(defvar user/custom-file (expand-file-name "custom.el" user/save-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Package repository selection and activation
@@ -44,9 +44,9 @@
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 
 ;; Configuration for backup files
-(setq backup-directory-alist `((".*" . ,my-saves-dir))
-      auto-save-file-name-transforms `((".*" ,my-saves-dir t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" my-saves-dir)
+(setq backup-directory-alist `((".*" . ,user/save-directory))
+      auto-save-file-name-transforms `((".*" ,user/save-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" user/save-directory)
       version-control t
       kept-new-versions 5
       delete-old-versions t
@@ -89,7 +89,7 @@
 ;; Color theme
 (use-package alect-themes
   :ensure t
-  :init
+  :config
   (progn
     (defadvice custom-theme-set-variables
         (around fix-inhibit-bug activate)
@@ -104,7 +104,7 @@
   (progn
     (setq savehist-additional-variables '(search-ring regexp-search-ring)
           savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" my-saves-dir))
+          savehist-file (expand-file-name "minbuf.hist" user/save-directory))
     (savehist-mode 1)))
 
 ;; Remember point position in files
@@ -112,20 +112,20 @@
   :init
   (setq-default save-place t)
   :config
-  (setq save-place-file (expand-file-name "saved-places" my-saves-dir)))
+  (setq save-place-file (expand-file-name "saved-places" user/save-directory)))
 
 ;; Bookmarks save directory
 (use-package bookmark
   :defer t
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" my-saves-dir)
+  (setq bookmark-default-file (expand-file-name "bookmarks" user/save-directory)
         bookmark-save-flag 1))
 
 ;; Eshell save directory
 (use-package eshell
   :defer t
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" my-saves-dir)))
+  (setq eshell-directory-name (expand-file-name "eshell" user/save-directory)))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -163,8 +163,8 @@
   :defer t
   :config
   (setq tramp-default-method "ssh"
-        tramp-backup-directory-alist `((".*" . ,my-saves-dir))
-        tramp-auto-save-directory my-saves-dir))
+        tramp-backup-directory-alist `((".*" . ,user/save-directory))
+        tramp-auto-save-directory user/save-directory))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -182,7 +182,7 @@
 (use-package abbrev
   :init
   (progn
-    (setq abbrev-file-name (expand-file-name "abbrev_defs" my-saves-dir)
+    (setq abbrev-file-name (expand-file-name "abbrev_defs" user/save-directory)
           save-abbrevs t)
     (if (file-exists-p abbrev-file-name)
         (quietly-read-abbrev-file))
@@ -218,23 +218,23 @@
   :defer t
   :init
   (progn
-    (defun my-c-mode-hook ()
+    (defun user/c-mode-hook ()
       "C mode setup"
       (unless (or (file-exists-p "makefile")
                   (file-exists-p "Makefile"))
         (set (make-local-variable 'compile-command)
              (concat "gcc " (buffer-file-name) " -o "))))
 
-    (add-hook 'c-mode-hook 'my-c-mode-hook)
+    (add-hook 'c-mode-hook 'user/c-mode-hook)
 
-    (defun my-c++-mode-hook ()
+    (defun user/c++-mode-hook ()
       "C++ mode setup"
       (unless (or (file-exists-p "makefile")
                   (file-exists-p "Makefile"))
         (set (make-local-variable 'compile-command)
              (concat "g++ " (buffer-file-name) " -o "))))
 
-    (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+    (add-hook 'c++-mode-hook 'user/c++-mode-hook)
     (add-hook 'c-mode-common-hook 'auto-fill-mode))
   :config
   (setq c-basic-offset 4
@@ -292,7 +292,7 @@
                                         company-keywords company-files company-dabbrev)))
 
 ;; ERC configuration
-(defun my-erc ()
+(defun user/erc ()
   "Connect to IRC."
   (interactive)
   (erc-tls :server "calvino.freenode.net" :port 6697
@@ -312,7 +312,9 @@
 
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
+    (add-hook 'erc-mode-hook 'visual-line-mode)
 
+    (erc-fill-mode 0)
     (erc-spelling-mode 1)
 
     (setq erc-prompt-for-password nil
@@ -322,7 +324,7 @@
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
           erc-track-exclude-server-buffer t
           erc-track-showcount t
-          erc-track-switch-direction 'importance
+          erc-track-switch-directoryection 'importance
           erc-track-visibility 'selected-visible
           erc-insert-timestamp-function 'erc-insert-timestamp-left
           erc-timestamp-only-if-changed-flag nil
@@ -432,7 +434,7 @@
   :config
   (setq skeleton-further-elements '((abbrev-mode nil))))
 
-(define-skeleton my-cpp-skel
+(define-skeleton user/cpp-skel
   "C++ skeleton"
   nil
   "#include <iostream>\n"
@@ -451,10 +453,10 @@
   :init
   (global-undo-tree-mode 1)
   :config
-  (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
+  (setq undo-tree-history-directory-alist `((".*" . ,user/save-directory))
         undo-tree-auto-save-history t))
 
 ;; Load changes from the customize interface
-(setq custom-file my-custom-file)
-(if (file-exists-p my-custom-file)
-    (load my-custom-file))
+(setq custom-file user/custom-file)
+(if (file-exists-p user/custom-file)
+    (load user/custom-file))
