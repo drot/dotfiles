@@ -324,7 +324,7 @@
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
           erc-track-exclude-server-buffer t
           erc-track-showcount t
-          erc-track-switch-directoryection 'importance
+          erc-track-switch-direction 'importance
           erc-track-visibility 'selected-visible
           erc-insert-timestamp-function 'erc-insert-timestamp-left
           erc-timestamp-only-if-changed-flag nil
