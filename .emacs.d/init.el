@@ -100,7 +100,7 @@
 
 ;; Save minibuffer history
 (use-package savehist
-  :init
+  :config
   (progn
     (setq savehist-additional-variables '(search-ring regexp-search-ring)
           savehist-autosave-interval 60
@@ -283,13 +283,13 @@
   :ensure t
   :diminish "co"
   :init
-  (progn
-    (setq company-echo-delay 0
-          company-show-numbers t
-          company-backends '(company-nxml company-css company-eclim company-semantic
-                                          company-capf company-dabbrev-code company-etags
-                                          company-keywords company-files company-dabbrev))
-    (global-company-mode 1)))
+  (global-company-mode 1)
+  :config
+  (setq company-echo-delay 0
+        company-show-numbers t
+        company-backends '(company-nxml company-css company-eclim company-semantic
+                                        company-capf company-dabbrev-code company-etags
+                                        company-keywords company-files company-dabbrev)))
 
 ;; ERC configuration
 (defun my-erc ()
@@ -309,17 +309,6 @@
 
     (use-package erc-hl-nicks
       :ensure t)
-
-    (make-variable-buffer-local 'erc-fill-column)
-    (add-hook 'window-configuration-change-hook
-              '(lambda ()
-                 (save-excursion
-                   (walk-windows
-                    (lambda (w)
-                      (let ((buffer (window-buffer w)))
-                        (set-buffer buffer)
-                        (when (eq major-mode 'erc-mode)
-                          (setq erc-fill-column (- (window-width w) 2)))))))))
 
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
@@ -460,10 +449,10 @@
   :ensure t
   :diminish "UT"
   :init
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
+  (global-undo-tree-mode 1)
+  :config
+  (setq undo-tree-history-directory-alist `((".*" . ,my-saves-dir))
+        undo-tree-auto-save-history t))
 
 ;; Load changes from the customize interface
 (setq custom-file my-custom-file)
