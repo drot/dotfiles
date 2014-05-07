@@ -203,15 +203,54 @@
                                            try-complete-lisp-symbol-partially
                                            try-complete-lisp-symbol)))
 
-;; Show documentation with ElDoc mode
-(use-package eldoc
+;; Fly Spell mode configuration
+(use-package flyspell
+  :defer t
   :config
   (progn
-    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-    (add-hook 'ielm-mode-hook 'eldoc-mode)
-    (eldoc-add-command 'paredit-backward-delete
-                       'paredit-close-round)))
+    (setq ispell-program-name "aspell"
+          ispell-extra-args '("--sug-mode=ultra")
+          ispell-dictionary "english")
+    (add-hook 'text-mode-hook 'flyspell-mode)))
+
+;; Doc View mode configuration
+(use-package doc-view
+  :defer t
+  :config
+  (setq doc-view-resolution 300
+        doc-view-continuous t))
+
+;; Open URLs in Firefox
+(use-package browse-url
+  :defer t
+  :config
+  (setq browse-url-browser-function 'browse-url-firefox))
+
+;; Use Ibuffer for buffer list
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :config
+  (setq ibuffer-default-sorting-mode 'major-mode))
+
+;; Icomplete
+(use-package icomplete
+  :config
+  (progn
+    (setq icomplete-prospects-height 1)
+    (icomplete-mode 1)))
+
+;; Company mode
+(use-package company
+  :ensure t
+  :diminish "co"
+  :config
+  (progn
+    (setq company-echo-delay 0
+          company-show-numbers t
+          company-backends '(company-nxml company-css company-eclim company-semantic
+                                          company-capf company-dabbrev-code company-etags
+                                          company-keywords company-files company-dabbrev))
+    (global-company-mode 1)))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -242,54 +281,99 @@
                             (awk-mode . "awk")
                             (other . "stroustrup")))))
 
-;; Fly Spell mode configuration
-(use-package flyspell
-  :defer t
-  :config
-  (progn
-    (setq ispell-program-name "aspell"
-          ispell-extra-args '("--sug-mode=ultra")
-          ispell-dictionary "english")
-    (add-hook 'text-mode-hook 'flyspell-mode)))
-
-;; Doc View mode configuration
-(use-package doc-view
-  :defer t
-  :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
-
-;; Use Ibuffer for buffer list
-(use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
-  :config
-  (setq ibuffer-default-sorting-mode 'major-mode))
-
-;; Open URLs in eww
-(use-package browse-url
-  :defer t
-  :config
-  (setq browse-url-browser-function 'browse-url-firefox))
-
-;; Icomplete
-(use-package icomplete
-  :config
-  (progn
-    (setq icomplete-prospects-height 1)
-    (icomplete-mode 1)))
-
-;; Company mode
-(use-package company
+;; Lua mode
+(use-package lua-mode
   :ensure t
-  :diminish "co"
+  :defer t)
+
+;; PKGBUILD mode
+(use-package pkgbuild-mode
+  :ensure t
+  :defer t)
+
+;; ParEdit
+(use-package paredit
+  :ensure t
+  :diminish "PEd"
   :config
   (progn
-    (setq company-echo-delay 0
-          company-show-numbers t
-          company-backends '(company-nxml company-css company-eclim company-semantic
-                                          company-capf company-dabbrev-code company-etags
-                                          company-keywords company-files company-dabbrev))
-    (global-company-mode 1)))
+    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+    (add-hook 'ielm-mode-hook 'paredit-mode)
+    (add-hook 'lisp-mode-hook 'paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
+    (add-hook 'scheme-mode-hook 'paredit-mode)
+
+    (defvar my-paredit-minbuf-commands '(eval-expression
+                                         pp-eval-expression
+                                         eval-expression-with-eldoc
+                                         ibuffer-do-eval
+                                         ibuffer-do-view-and-eval)
+      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+    (defun my-paredit-minbuf ()
+      "Enable ParEdit during lisp-related minibuffer commands."
+      (if (memq this-command my-paredit-minbuf-commands)
+          (paredit-mode)))
+
+    (add-hook 'minibuffer-setup-hook 'my-paredit-minbuf)
+
+    (defun my-paredit-slime-fix ()
+      "Fix ParEdit conflict with SLIME."
+      (define-key slime-repl-mode-map
+        (read-kbd-macro paredit-backward-delete-key) nil))
+
+    (add-hook 'slime-repl-mode-hook 'paredit-mode)
+    (add-hook 'slime-repl-mode-hook 'my-paredit-slime-fix)
+
+    (put 'paredit-forward-delete 'delete-selection 'supersede)
+    (put 'paredit-backward-delete 'delete-selection 'supersede)
+    (put 'paredit-open-round 'delete-selection t)
+    (put 'paredit-open-square 'delete-selection t)
+    (put 'paredit-doublequote 'delete-selection t)
+    (put 'paredit-newline 'delete-selection t)))
+
+;; Show documentation with ElDoc mode
+(use-package eldoc
+  :config
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+    (add-hook 'ielm-mode-hook 'eldoc-mode)
+    (eldoc-add-command 'paredit-backward-delete
+                       'paredit-close-round)))
+
+;; Rainbow Delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;; Skeleton mode configuration
+(use-package skeleton
+  :config
+  (setq skeleton-further-elements '((abbrev-mode nil))))
+
+(define-skeleton my-cpp-skel
+  "C++ skeleton"
+  nil
+  "#include <iostream>\n"
+  "\n"
+  "int main ()\n"
+  "{\n"
+  > _
+  "\n"
+  > "return 0;"
+  "\n}")
+
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish "UT"
+  :config
+  (progn
+    (setq undo-tree-history-directory-alist `((".*" . ,my-save-directory))
+          undo-tree-auto-save-history t)
+    (global-undo-tree-mode 1)))
 
 ;; ERC configuration
 (defun my-erc ()
@@ -339,16 +423,6 @@
                            (concat (symbol-name erc-network) ">")
                          (concat (car erc-default-recipients) ">"))))))
 
-;; Lua mode
-(use-package lua-mode
-  :ensure t
-  :defer t)
-
-;; PKGBUILD mode
-(use-package pkgbuild-mode
-  :ensure t
-  :defer t)
-
 ;; Calendar configuration
 (use-package calendar
   :defer t
@@ -381,80 +455,6 @@
     (setq org-log-done 'time
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
-
-;; ParEdit
-(use-package paredit
-  :ensure t
-  :diminish "PEd"
-  :config
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-    (add-hook 'ielm-mode-hook 'paredit-mode)
-    (add-hook 'lisp-mode-hook 'paredit-mode)
-    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-    (add-hook 'scheme-mode-hook 'paredit-mode)
-
-    (defvar my-paredit-minbuf-commands '(eval-expression
-                                         pp-eval-expression
-                                         eval-expression-with-eldoc
-                                         ibuffer-do-eval
-                                         ibuffer-do-view-and-eval)
-      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
-
-    (defun my-paredit-minbuf ()
-      "Enable ParEdit during lisp-related minibuffer commands."
-      (if (memq this-command my-paredit-minbuf-commands)
-          (paredit-mode)))
-
-    (add-hook 'minibuffer-setup-hook 'my-paredit-minbuf)
-
-    (defun my-paredit-slime-fix ()
-      "Fix ParEdit conflict with SLIME."
-      (define-key slime-repl-mode-map
-        (read-kbd-macro paredit-backward-delete-key) nil))
-
-    (add-hook 'slime-repl-mode-hook 'paredit-mode)
-    (add-hook 'slime-repl-mode-hook 'my-paredit-slime-fix)
-
-    (put 'paredit-forward-delete 'delete-selection 'supersede)
-    (put 'paredit-backward-delete 'delete-selection 'supersede)
-    (put 'paredit-open-round 'delete-selection t)
-    (put 'paredit-open-square 'delete-selection t)
-    (put 'paredit-doublequote 'delete-selection t)
-    (put 'paredit-newline 'delete-selection t)))
-
-;; Rainbow Delimiters
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
-;; Skeleton mode configuration
-(use-package skeleton
-  :config
-  (setq skeleton-further-elements '((abbrev-mode nil))))
-
-(define-skeleton my-cpp-skel
-  "C++ skeleton"
-  nil
-  "#include <iostream>\n"
-  "\n"
-  "int main ()\n"
-  "{\n"
-  > _
-  "\n"
-  > "return 0;"
-  "\n}")
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish "UT"
-  :config
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,my-save-directory))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
 
 ;; Load changes from the customize interface
 (setq custom-file my-custom-file)
