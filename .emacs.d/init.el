@@ -396,8 +396,8 @@
 
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
-    (add-hook 'erc-mode-hook (lambda
-                               () (erc-fill-mode 0)))
+    (add-hook 'erc-mode-hook (lambda ()
+                               (erc-fill-mode 0)))
     (add-hook 'erc-mode-hook 'visual-line-mode)
 
     (erc-spelling-mode 1)
@@ -416,12 +416,12 @@
           erc-timestamp-format "[%H:%M] "
           erc-interpret-mirc-color t
           erc-button-buttonize-nicks nil
+          erc-format-nick-function 'erc-format-@nick
           erc-nick-uniquifier "_"
+          erc-show-my-nick nil
           erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
-                       (if erc-network
-                           (concat (symbol-name erc-network) ">")
-                         (concat (car erc-default-recipients) ">"))))))
+                       (concat (buffer-name) ">")))))
 
 ;; Calendar configuration
 (use-package calendar
