@@ -59,17 +59,17 @@ modkey = "Mod4"
 local layouts =
    {
       awful.layout.suit.tile,
+      awful.layout.suit.max,
+      awful.layout.suit.floating,
+      awful.layout.suit.magnifier,
+      awful.layout.suit.max.fullscreen,
       awful.layout.suit.tile.left,
       awful.layout.suit.tile.bottom,
       awful.layout.suit.tile.top,
-      awful.layout.suit.floating,
       awful.layout.suit.fair,
       awful.layout.suit.fair.horizontal,
       awful.layout.suit.spiral,
-      awful.layout.suit.spiral.dwindle,
-      awful.layout.suit.max,
-      awful.layout.suit.max.fullscreen,
-      awful.layout.suit.magnifier
+      awful.layout.suit.spiral.dwindle
    }
 -- }}}
 
@@ -85,7 +85,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
    names = { "1", "2", "3", "4", "5" },
-   layout = { layouts[1], layouts[10], layouts[1], layouts[5], layouts[10] }
+   layout = { layouts[1], layouts[2], layouts[1], layouts[2], layouts[3] }
 }
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
@@ -516,12 +516,12 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },
    { rule = { class = "libreoffice" },
-     properties = { tag = tags[1][5] } },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "Gimp" },
-     properties = { tag = tags[1][5] } },
-   { rule = { class = "Thunar" },
-     properties = { tag = tags[1][5] } },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "Pavucontrol" },
+     properties = { tag = tags[1][4] } },
+   { rule = { class = "Thunar" },
      properties = { tag = tags[1][5] } },
 }
 -- }}}
