@@ -38,10 +38,9 @@ shopt -s no_empty_cmd_completion # don't search completions in PATH on an empty 
 shopt -s extglob # extended globbing
 
 # Prompt colors
-RED='\[\033[0;33m\]'
-GREEN='\[\033[0;32m\]'
-BLUE='\[\033[0;34m\]'
-CYAN='\[\033[0;36m\]'
+RED='\[\033[1;31m\]'
+GREEN='\[\033[1;32m\]'
+BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
 # Git completion
@@ -50,7 +49,7 @@ NIL='\[\033[00m\]'
 GIT="\$(__git_ps1 \" (%s)\")"
 
 # Prompt look
-export PS1="${CYAN}[${GREEN}\u${CYAN}@${GREEN}\h${CYAN}][${BLUE}\w${RED}${GIT}${CYAN}]${GREEN}\$${NIL} "
+export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
 
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
@@ -62,20 +61,20 @@ alias skype="LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so skype"
 function extract () {
     if [[ -f "$1" ]]; then
         case "$1" in
-            *.tbz2 | *.tar.bz2) tar -xvjf  "$1"     ;;
-            *.txz | *.tar.xz)   tar -xvJf  "$1"     ;;
-            *.tgz | *.tar.gz)   tar -xvzf  "$1"     ;;
-            *.tar | *.cbt)      tar -xvf   "$1"     ;;
-            *.zip | *.cbz)      unzip      "$1"     ;;
-            *.rar | *.cbr)      unrar x    "$1"     ;;
-            *.arj)              unarj x    "$1"     ;;
-            *.ace)              unace x    "$1"     ;;
-            *.bz2)              bunzip2    "$1"     ;;
-            *.xz)               unxz       "$1"     ;;
-            *.gz)               gunzip     "$1"     ;;
-            *.7z)               7z x       "$1"     ;;
-            *.Z)                uncompress "$1"     ;;
-            *.gpg)       gpg2 -d "$1" | tar -xvzf - ;;
+            *.tbz2 | *.tar.bz2) tar -xvjf "$1" ;;
+            *.txz | *.tar.xz) tar -xvJf "$1" ;;
+            *.tgz | *.tar.gz) tar -xvzf "$1" ;;
+            *.tar | *.cbt) tar -xvf "$1" ;;
+            *.zip | *.cbz) unzip "$1" ;;
+            *.rar | *.cbr) unrar x "$1" ;;
+            *.arj) unarj x "$1" ;;
+            *.ace) unace x "$1" ;;
+            *.bz2) bunzip2 "$1" ;;
+            *.xz) unxz "$1" ;;
+            *.gz) gunzip "$1" ;;
+            *.7z) 7z x "$1" ;;
+            *.Z) uncompress "$1" ;;
+            *.gpg) gpg2 -d "$1" | tar -xvzf - ;;
             *) echo "Error: failed to extract $1" ;;
         esac
     else
