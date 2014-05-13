@@ -10,21 +10,19 @@ theme.wallpaper = "/home/drot/Pictures/mountains.jpg"
 
 theme.bg_normal = "#2e3436"
 theme.bg_focus = theme.bg_normal
-theme.bg_urgent = "#ef2929"
+theme.bg_urgent = "#8ae234"
 theme.bg_minimize = theme.bg_normal
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#eeeeec"
-theme.fg_focus = "#4e9a06"
+theme.fg_focus = theme.bg_urgent
 theme.fg_urgent = theme.fg_normal
 theme.fg_minimize = "#555753"
 
 theme.border_width = 1
 theme.border_normal = theme.fg_minimize
-theme.border_focus = theme.fg_focus
+theme.border_focus = "#4e9a06"
 theme.border_marked = theme.bg_urgent
-
-theme.widget_color = "#8ae234"
 
 -- awesome icon
 theme.awesome_icon = theme.icons_dir .. "/awesome.png"
