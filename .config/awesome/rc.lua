@@ -42,7 +42,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
-beautiful.init(themes_dir .. "/jellybeans/theme.lua")
+beautiful.init(themes_dir .. "/tango/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -126,7 +126,7 @@ cpugraph = awful.widget.graph()
 -- Graph properties
 cpugraph:set_width(45)
 cpugraph:set_background_color(beautiful.bg_normal)
-cpugraph:set_color(beautiful.fg_focus)
+cpugraph:set_color(beautiful.widget_color)
 cpugraph:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
@@ -145,7 +145,7 @@ membar = awful.widget.progressbar()
 membar:set_vertical(true):set_ticks(true)
 membar:set_width(15):set_ticks_size(3)
 membar:set_background_color(beautiful.bg_normal)
-membar:set_color(beautiful.fg_focus)
+membar:set_color(beautiful.widget_color)
 membar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
@@ -164,7 +164,7 @@ tempbar = awful.widget.progressbar()
 tempbar:set_vertical(true):set_ticks(true)
 tempbar:set_width(15):set_ticks_size(3)
 tempbar:set_background_color(beautiful.bg_normal)
-tempbar:set_color(beautiful.fg_focus)
+tempbar:set_color(beautiful.widget_color)
 tempbar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
@@ -184,7 +184,7 @@ for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
    dstyle:set_width(7):set_ticks_size(3)
    dstyle:set_background_color(beautiful.bg_normal)
-   dstyle:set_color(beautiful.fg_focus)
+   dstyle:set_color(beautiful.widget_color)
    dstyle:set_border_color(beautiful.border_normal)
 end
 -- Enable caching
@@ -206,7 +206,7 @@ volbar = awful.widget.progressbar()
 volbar:set_vertical(true):set_ticks(true)
 volbar:set_width(15):set_ticks_size(3)
 volbar:set_background_color(beautiful.bg_normal)
-volbar:set_color(beautiful.fg_focus)
+volbar:set_color(beautiful.widget_color)
 volbar:set_border_color(beautiful.border_normal)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
