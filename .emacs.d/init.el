@@ -20,13 +20,13 @@
 (require 'use-package)
 
 ;; Turn off the menu bar
-(menu-bar-mode 0)
+(when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 
 ;; Turn off the toolbar
-(tool-bar-mode 0)
+(when (fboundp 'tool-bar-mode) (tool-bar-mode 0))
 
 ;; Turn off the scrollbar
-(scroll-bar-mode 0)
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
@@ -74,6 +74,9 @@
 
 ;; Show tooltips in echo area
 (tooltip-mode 0)
+
+;; Pretty lambda
+(global-prettify-symbols-mode 1)
 
 ;; Keep point on same position when scrolling
 (setq scroll-preserve-screen-position 1)
@@ -376,7 +379,7 @@
     (global-undo-tree-mode 1)))
 
 ;; ERC configuration
-(defun my-erc ()
+(defun irc ()
   "Connect to IRC."
   (interactive)
   (erc-tls :server "calvino.freenode.net" :port 6697
