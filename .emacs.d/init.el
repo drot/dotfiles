@@ -1,11 +1,11 @@
-(defvar my-emacs-directory (file-name-directory load-file-name)
+(defvar user/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar my-save-directory (expand-file-name "saves" my-emacs-directory)
+(defvar user/save-directory (expand-file-name "saves" user/emacs-directory)
   "This directory houses all save files.")
-(make-directory my-save-directory t)
+(make-directory user/save-directory t)
 
-(defvar my-custom-file (expand-file-name "custom.el" my-save-directory)
+(defvar user/custom-file (expand-file-name "custom.el" user/save-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Package repository selection and activation
@@ -44,9 +44,9 @@
 (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 
 ;; Configuration for backup files
-(setq backup-directory-alist `((".*" . ,my-save-directory))
-      auto-save-file-name-transforms `((".*" ,my-save-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" my-save-directory)
+(setq backup-directory-alist `((".*" . ,user/save-directory))
+      auto-save-file-name-transforms `((".*" ,user/save-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" user/save-directory)
       version-control t
       kept-new-versions 5
       delete-old-versions t
@@ -107,28 +107,28 @@
   (progn
     (setq savehist-additional-variables '(search-ring regexp-search-ring)
           savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" my-save-directory))
+          savehist-file (expand-file-name "minbuf.hist" user/save-directory))
     (savehist-mode 1)))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (progn
-    (setq save-place-file (expand-file-name "saved-places" my-save-directory))
+    (setq save-place-file (expand-file-name "saved-places" user/save-directory))
     (setq-default save-place t)))
 
 ;; Bookmarks save directory
 (use-package bookmark
   :defer t
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" my-save-directory)
+  (setq bookmark-default-file (expand-file-name "bookmarks" user/save-directory)
         bookmark-save-flag 1))
 
 ;; Eshell save directory
 (use-package eshell
   :defer t
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" my-save-directory)))
+  (setq eshell-directory-name (expand-file-name "eshell" user/save-directory)))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -166,8 +166,8 @@
   :defer t
   :config
   (setq tramp-default-method "ssh"
-        tramp-backup-directory-alist `((".*" . ,my-save-directory))
-        tramp-auto-save-directory my-save-directory))
+        tramp-backup-directory-alist `((".*" . ,user/save-directory))
+        tramp-auto-save-directory user/save-directory))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -185,7 +185,7 @@
 (use-package abbrev
   :config
   (progn
-    (setq abbrev-file-name (expand-file-name "abbrev_defs" my-save-directory)
+    (setq abbrev-file-name (expand-file-name "abbrev_defs" user/save-directory)
           save-abbrevs t)
     (if (file-exists-p abbrev-file-name)
         (quietly-read-abbrev-file))
@@ -260,23 +260,23 @@
   :defer t
   :config
   (progn
-    (defun my-c-mode-hook ()
+    (defun user/c-mode-hook ()
       "C mode setup"
       (unless (or (file-exists-p "makefile")
                   (file-exists-p "Makefile"))
         (set (make-local-variable 'compile-command)
              (concat "gcc " (buffer-file-name) " -o "))))
 
-    (add-hook 'c-mode-hook 'my-c-mode-hook)
+    (add-hook 'c-mode-hook 'user/c-mode-hook)
 
-    (defun my-c++-mode-hook ()
+    (defun user/c++-mode-hook ()
       "C++ mode setup"
       (unless (or (file-exists-p "makefile")
                   (file-exists-p "Makefile"))
         (set (make-local-variable 'compile-command)
              (concat "g++ " (buffer-file-name) " -o "))))
 
-    (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+    (add-hook 'c++-mode-hook 'user/c++-mode-hook)
     (add-hook 'c-mode-common-hook 'auto-fill-mode)
 
     (setq c-basic-offset 4
@@ -306,27 +306,27 @@
     (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
     (add-hook 'scheme-mode-hook 'paredit-mode)
 
-    (defvar my-paredit-minbuf-commands '(eval-expression
+    (defvar user/paredit-minbuf-commands '(eval-expression
                                          pp-eval-expression
                                          eval-expression-with-eldoc
                                          ibuffer-do-eval
                                          ibuffer-do-view-and-eval)
       "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-    (defun my-paredit-minbuf ()
+    (defun user/paredit-minbuf ()
       "Enable ParEdit during lisp-related minibuffer commands."
-      (if (memq this-command my-paredit-minbuf-commands)
+      (if (memq this-command user/paredit-minbuf-commands)
           (paredit-mode)))
 
-    (add-hook 'minibuffer-setup-hook 'my-paredit-minbuf)
+    (add-hook 'minibuffer-setup-hook 'user/paredit-minbuf)
 
-    (defun my-paredit-slime-fix ()
+    (defun user/paredit-slime-fix ()
       "Fix ParEdit conflict with SLIME."
       (define-key slime-repl-mode-map
         (read-kbd-macro paredit-backward-delete-key) nil))
 
     (add-hook 'slime-repl-mode-hook 'paredit-mode)
-    (add-hook 'slime-repl-mode-hook 'my-paredit-slime-fix)
+    (add-hook 'slime-repl-mode-hook 'user/paredit-slime-fix)
 
     (put 'paredit-forward-delete 'delete-selection 'supersede)
     (put 'paredit-backward-delete 'delete-selection 'supersede)
@@ -374,7 +374,7 @@
   :diminish "UT"
   :config
   (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,my-save-directory))
+    (setq undo-tree-history-directory-alist `((".*" . ,user/save-directory))
           undo-tree-auto-save-history t)
     (global-undo-tree-mode 1)))
 
@@ -421,7 +421,7 @@
           erc-button-buttonize-nicks nil
           erc-format-nick-function 'erc-format-@nick
           erc-nick-uniquifier "_"
-          erc-show-my-nick nil
+          erc-show-user/nick nil
           erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
                        (concat (buffer-name) ">")))))
@@ -460,6 +460,6 @@
           org-src-tab-acts-natively t)))
 
 ;; Load changes from the customize interface
-(setq custom-file my-custom-file)
-(if (file-exists-p my-custom-file)
-    (load my-custom-file))
+(setq custom-file user/custom-file)
+(if (file-exists-p user/custom-file)
+    (load user/custom-file))
