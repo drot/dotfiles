@@ -356,7 +356,7 @@
   :config
   (setq skeleton-further-elements '((abbrev-mode nil))))
 
-(define-skeleton my-cpp-skel
+(define-skeleton cpp-skeleton
   "C++ skeleton"
   nil
   "#include <iostream>\n"
