@@ -421,7 +421,7 @@
           erc-button-buttonize-nicks nil
           erc-format-nick-function 'erc-format-@nick
           erc-nick-uniquifier "_"
-          erc-show-user/nick nil
+          erc-show-my-nick nil
           erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
                        (concat (buffer-name) ">")))))
