@@ -75,6 +75,9 @@
 ;; Show tooltips in echo area
 (tooltip-mode 0)
 
+;; Indicate buffer boundaries
+(setq-default indicate-buffer-boundaries 'right)
+
 ;; Pretty lambda
 (global-prettify-symbols-mode 1)
 
