@@ -141,7 +141,7 @@ STICKY 00;34
 .curlrc 00;34
 .deb 00;36
 .diff 01;33
-.dir_colors 01;33
+.dircolors 01;33
 .dmenurc 00;32
 .dmenu_cache 00;32
 .dmenu-short 00;32
@@ -157,6 +157,7 @@ STICKY 00;34
 .git 00;36
 .gitconfig 00;35
 .gitignore 00;36
+.gpg 01;31
 .hgrc 00;35
 .hgignore 00;35
 .go 00;34
@@ -196,6 +197,7 @@ STICKY 00;34
 .nfo 00;33
 .notify-osd 00;36
 .netrc 01;31
+.newsrc 00;33
 .notmuch-config 00;33
 .nvidia-settings-rc 00;36
 .offlineimaprc 00;33
