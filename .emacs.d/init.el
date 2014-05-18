@@ -8,17 +8,6 @@
 (defvar user/custom-file (expand-file-name "custom.el" user/save-directory)
   "Store changes from the customize interface in the selected file.")
 
-;; Package repository selection and activation
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
-      package-enable-at-startup nil)
-(package-initialize)
-
-;; Ensure use-package is installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-
 ;; Turn off the menu bar
 (when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 
@@ -31,6 +20,17 @@
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
+
+;; Package repository selection and activation
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
+      package-enable-at-startup nil)
+(package-initialize)
+
+;; Ensure use-package is installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -307,10 +307,10 @@
     (add-hook 'scheme-mode-hook 'paredit-mode)
 
     (defvar user/paredit-minbuf-commands '(eval-expression
-                                         pp-eval-expression
-                                         eval-expression-with-eldoc
-                                         ibuffer-do-eval
-                                         ibuffer-do-view-and-eval)
+                                           pp-eval-expression
+                                           eval-expression-with-eldoc
+                                           ibuffer-do-eval
+                                           ibuffer-do-view-and-eval)
       "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
     (defun user/paredit-minbuf ()
@@ -391,16 +391,17 @@
   :defer t
   :config
   (progn
+    (use-package erc-hl-nicks
+      :ensure t)
     (add-to-list 'erc-modules 'notifications)
     (add-to-list 'erc-modules 'smiley)
 
-    (use-package erc-hl-nicks
-      :ensure t)
-
     (add-hook 'erc-mode-hook (lambda ()
                                (set (make-local-variable 'scroll-conservatively) 1000)))
+
     (add-hook 'erc-mode-hook (lambda ()
                                (erc-fill-mode 0)))
+
     (add-hook 'erc-mode-hook 'visual-line-mode)
 
     (erc-spelling-mode 1)
