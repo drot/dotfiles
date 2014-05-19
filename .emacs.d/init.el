@@ -212,11 +212,9 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :defer t
   :config
   (progn
-    (setq ispell-program-name "aspell"
-          ispell-extra-args '("--sug-mode=ultra")
+    (setq ispell-extra-args '("--sug-mode=ultra")
           ispell-dictionary "english")
     (add-hook 'text-mode-hook 'flyspell-mode)))
 
@@ -360,7 +358,7 @@
   :config
   (progn
     (add-hook 'c-mode-common-hook 'hs-minor-mode)
-    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)    
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
     (add-hook 'python-mode-hook 'hs-minor-mode)))
 
 ;; Skeleton mode configuration
