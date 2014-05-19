@@ -8,19 +8,6 @@
 (defvar user/custom-file (expand-file-name "custom.el" user/save-directory)
   "Store changes from the customize interface in the selected file.")
 
-;; Turn off the menu bar
-(when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
-
-;; Turn off the toolbar
-(when (fboundp 'tool-bar-mode) (tool-bar-mode 0))
-
-;; Turn off the scrollbar
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
-
-;; Don't show the welcome messages
-(setq inhibit-startup-screen t
-      initial-scratch-message nil)
-
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
       package-enable-at-startup nil)
@@ -31,6 +18,19 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+;; Turn off the menu bar
+(menu-bar-mode 0)
+
+;; Turn off the toolbar
+(tool-bar-mode 0)
+
+;; Turn off the scrollbar
+(scroll-bar-mode 0)
+
+;; Don't show the welcome messages
+(setq inhibit-startup-screen t
+      initial-scratch-message nil)
 
 ;; Encoding
 (prefer-coding-system 'utf-8)
@@ -76,7 +76,8 @@
 (tooltip-mode 0)
 
 ;; Indicate buffer boundaries
-(setq-default indicate-buffer-boundaries 'right)
+(setq-default indicate-buffer-boundaries 'right
+              indicate-empty-lines t)
 
 ;; Pretty lambda
 (global-prettify-symbols-mode 1)
@@ -354,6 +355,11 @@
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+;; Hide Show mode
+(use-package hideshow
+  :config
+  (add-hook 'prog-mode-hook 'hs-minor-mode))
+
 ;; Skeleton mode configuration
 (use-package skeleton
   :config
@@ -421,12 +427,12 @@
           erc-insert-timestamp-function 'erc-insert-timestamp-left
           erc-timestamp-only-if-changed-flag nil
           erc-timestamp-format "[%H:%M] "
+          erc-header-line-format "%t: %o"
           erc-interpret-mirc-color t
           erc-button-buttonize-nicks nil
           erc-format-nick-function 'erc-format-@nick
           erc-nick-uniquifier "_"
           erc-show-my-nick nil
-          erc-header-line-format "%t: %o"
           erc-prompt (lambda ()
                        (concat (buffer-name) ">")))))
 
