@@ -358,7 +358,10 @@
 ;; Hide Show mode
 (use-package hideshow
   :config
-  (add-hook 'prog-mode-hook 'hs-minor-mode))
+  (progn
+    (add-hook 'c-mode-common-hook 'hs-minor-mode)
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)    
+    (add-hook 'python-mode-hook 'hs-minor-mode)))
 
 ;; Skeleton mode configuration
 (use-package skeleton
