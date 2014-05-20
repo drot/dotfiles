@@ -9,18 +9,18 @@ theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons"
 theme.wallpaper = "/home/drot/Pictures/mountains.jpg"
 
 theme.bg_normal = "#2e3436"
-theme.bg_focus = theme.bg_normal
-theme.bg_urgent = "#8ae234"
+theme.bg_focus = "#555753"
+theme.bg_urgent = "#cc0000"
 theme.bg_minimize = theme.bg_normal
-theme.bg_systray = theme.bg_normal
+theme.bg_systray = theme.bg_focus
 
 theme.fg_normal = "#eeeeec"
-theme.fg_focus = theme.bg_urgent
-theme.fg_urgent = theme.bg_normal
-theme.fg_minimize = "#555753"
+theme.fg_focus = "#8ae234"
+theme.fg_urgent = theme.fg_normal
+theme.fg_minimize = theme.bg_focus
 
 theme.border_width = 1
-theme.border_normal = theme.fg_minimize
+theme.border_normal = theme.bg_focus
 theme.border_focus = "#4e9a06"
 theme.border_marked = theme.bg_urgent
 
@@ -52,7 +52,7 @@ theme.menu_quit = theme.icons_dir .. "/menu/quit.png"
 -- Tasklist
 theme.tasklist_floating = ""
 theme.tasklist_maximized_horizontal = ""
-theme.tasklist_maximized_vertical = "" 
+theme.tasklist_maximized_vertical = ""
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = theme.icons_dir .. "/layouts/fairh.png"
