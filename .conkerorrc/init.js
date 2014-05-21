@@ -16,7 +16,7 @@ theme_load("tango");
 homepage = "about:blank";
 
 // Improve hinting keys
-hint_digits = "aoeuhtns";
+hint_digits = "asdfghjkl";
 
 // Display selected hint URL
 hints_display_url_panel = true;

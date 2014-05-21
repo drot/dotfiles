@@ -8,6 +8,8 @@
     margin: 2px 0px 0px 2px;
     padding: 0px;
     height: 22px;
+    border-style: solid;
+    border-width: 1px;
     background: #2e3436;
     color: #eeeeec;
     min-width: 200px;
