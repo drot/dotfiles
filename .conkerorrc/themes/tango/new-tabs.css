@@ -41,10 +41,9 @@
 }
 
 .tab2-icon {
-    width: 16px;
-    height: 16px;
-    -moz-margin-start: 4pt;
-    -moz-margin-end: 3pt;
+    width: 20px;
+    height: 15px;
+    max-height: 15px;
     background: #555753;
     color: #eeeeec;
     font-family: Terminus;
