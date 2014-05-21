@@ -1,10 +1,16 @@
 // -*- mode: Javascript -*-
 
 // Modules
+require("favicon");
 require("new-tabs.js");
+require("mode-line.js");
 require("clicks-in-new-buffer.js");
 require("block-content-focus-change.js");
-require("favicon");
+
+// Theme
+theme_load_paths.unshift("~/.conkerorrc/themes/");
+theme_unload("default");
+theme_load("tango");
 
 // The default page for new buffers.
 homepage = "about:blank";
@@ -14,6 +20,7 @@ hint_digits = "aoeuhtns";
 
 // Display selected hint URL
 hints_display_url_panel = true;
+hints_minibuffer_annotation_mode(true);
 
 // Hinting color
 hint_background_color = "transparent";
@@ -29,8 +36,17 @@ register_user_stylesheet(
 // Reduce JavaScript output
 session_pref("browser.dom.window.dump.enabled", false);
 
+// Delete history after 30 days
+session_pref('browser.history_expire_days', 30);
+
+// Don't check compatibility for extensions
+session_pref('extensions.checkCompatibility', false);
+
 // Don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
+
+// Check for security updates
+user_pref("extensions.checkUpdateSecurity", true);
 
 // Default directory for downloads and shell commands
 cwd = get_home_directory();
@@ -50,9 +66,10 @@ clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND;
 clicks_in_new_buffer_button = 1;
 
 // Auto completion in the minibuffer
-minibuffer_auto_complete_default = true;
 url_completion_use_history = true;
 url_completion_use_bookmarks = true;
+url_completion_use_webjumps = true;
+minibuffer_auto_complete_default = true;
 
 // Load download buffers in the background
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
@@ -63,14 +80,14 @@ url_remoting_fn = load_url_in_new_buffer;
 // Prevent quitting by accident
 can_kill_last_buffer = false;
 
-// Display number of buffers being loaded
-add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
-
-// Display number of present buffers and which is the current
-add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
-
-// Remove the clock
+// Remove the clock and set the modeline
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
+add_hook("mode_line_hook", mode_line_adder(zoom_widget));
+add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
+read_buffer_show_icons = true;
 
 // External editor
 editor_shell_command = "emacsclient";
@@ -78,19 +95,19 @@ editor_shell_command = "emacsclient";
 // View source in external editor
 view_source_use_external_editor = true;
 
-// Favicons
-add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
-read_buffer_show_icons = true;
-
 // Delete existing webjumps
-existing_webjumps = ['answers', 'bugzilla', 'buildd', 'buildd-ports', 'clhs',
-                     'cliki', 'clusty', 'debbugs', 'debfile', 'debpopcon',
-                     'debpts', 'debqa', 'duckduckgo', 'ebay', 'freshmeat',
-                     'image', 'kuro5hin', 'lucky', 'maps', 'mdc',
-                     'ratpoisonwiki', 'savannah', 'slang', 'slashdot', 'sourceforge',
-                     'stumpwmwiki', 'ubuntubugs','ubuntufile', 'ubuntupkg', 'yahoo'];
-for (x in existing_webjumps) {
-    delete webjumps[existing_webjumps[x]];
+var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
+                       'clusty','creativecommons','debbugs','debfile','debpkg',
+                       'debpopcon','debpts','debqa','freshmeat','kuro5hin',
+                       'launchpad','lucky','ratpoisonwiki','sadelicious',
+                       'scholar','sdelicious','slashdot','sourceforge',
+                       'stumpwmwiki','ubuntubugs','ubuntufile','ubuntupkg',
+                       'wiktionary','yahoo','bugzilla','ebay'
+                      ];
+
+for (var i=0; i<unused_webjumps.length; i++)
+{
+    delete webjumps[unused_webjumps[i]];
 }
 
 // Webjumps
@@ -103,4 +120,5 @@ function clear_history () {
         .getService(Ci.nsIBrowserHistory);
     history.removeAllPages();
 };
+
 interactive("clear-history", "Clear the history.", clear_history);
