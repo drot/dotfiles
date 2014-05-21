@@ -104,7 +104,7 @@ myawesomemenu = {
 mymainmenu = awful.menu({ items = {
                              { "termite", terminal, beautiful.menu_term },
                              { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-                             { "Firefox", "firefox", beautiful.menu_browser },
+                             { "Conkeror", "conkeror", beautiful.menu_browser },
                              { "Skype", "skype", beautiful.menu_skype },
                              { "Writer", "lowriter", beautiful.menu_writer },
                              { "GIMP", "gimp", beautiful.menu_gimp },
@@ -511,7 +511,7 @@ awful.rules.rules = {
    { rule = { class = "mpv" },
      properties = { floating = true } },
    -- Set applications to always map on specified tags
-   { rule = { class = "Firefox" },
+   { rule = { class = "Conkeror" },
      properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },

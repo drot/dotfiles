@@ -225,11 +225,12 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Firefox
+;; Open URLs in Conkeror
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-firefox))
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "conkeror"))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
@@ -392,7 +393,7 @@
 (defun irc ()
   "Connect to IRC."
   (interactive)
-  (erc-tls :server "calvino.freenode.net" :port 6697
+  (erc-tls :server "adams.freenode.net" :port 6697
            :nick "drot")
   (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))

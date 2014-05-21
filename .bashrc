@@ -3,7 +3,7 @@ export EDITOR=emacsclient
 export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export PAGER=less
-export BROWSER=firefox
+export BROWSER=conkeror
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 # History
