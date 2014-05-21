@@ -23,15 +23,24 @@ hints_display_url_panel = true;
 hints_minibuffer_annotation_mode(true);
 
 // Hinting color
-hint_background_color = "transparent";
+hint_background_color = "#3465a4";
+active_hint_background_color = "8ae234";
 register_user_stylesheet(
     "data:text/css," +
-	escape (
-	    "span.__conkeror_hint {" +
-		" border: 1px solid black !important;" +
-		" color: #333 !important;" +
-		" background-color: yellow !important;" +
-		"}"));
+        escape(
+	    "@namespace url(\"http://www.w3.org/1999/xhtml\");\n" +
+                "span.__conkeror_hint {\n"+
+                " font-size: 14px !important;\n"+
+                " line-height: 14px !important;\n"+
+                "}"));
+register_user_stylesheet(
+    "data:text/css," +
+        escape (
+            "span.__conkeror_hint {" +
+                " border: 1px solid #cc0000 !important;" +
+                " color: #2e3436 !important;" +
+                " background-color: #8ae234 !important;" +
+                "}"));
 
 // Reduce JavaScript output
 session_pref("browser.dom.window.dump.enabled", false);

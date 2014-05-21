@@ -1,0 +1,53 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#tab2-bar {
+    background: #2e3436;
+}
+
+.tab2 {
+    margin: 2px 0px 0px 2px;
+    padding: 0px;
+    height: 22px;
+    background: #2e3436;
+    color: #eeeeec;
+    min-width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    font-family: Terminus;
+    font-size: 14px;
+}
+
+.tab2[selected=true] {
+    background: #555753;
+    color: #8ae234;
+    font-family: Terminus;
+    font-size: 14px;
+}
+
+.tab2:hover {
+    background: #3465a4;
+}
+
+.tab2-label {
+    margin-left: 4px;
+    padding-top: 1px;
+    color: #eeeeeec;
+    font-family: Terminus;
+    font-size: 14px;
+}
+
+.tab2-label[selected=true] {
+    color: #8ae234;
+}
+
+.tab2-icon {
+    width: 16px;
+    height: 16px;
+    -moz-margin-start: 4pt;
+    -moz-margin-end: 3pt;
+    background: #555753;
+    color: #eeeeec;
+    font-family: Terminus;
+    font-size: 14px;
+    text-align: center;
+}
