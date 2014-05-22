@@ -18,6 +18,9 @@ homepage = "about:blank";
 // Improve hinting keys
 hint_digits = "asdfghjkl";
 
+// Enable automatic selection
+hints_auto_exit_delay = 500;
+
 // Display selected hint URL
 hints_display_url_panel = true;
 hints_minibuffer_annotation_mode(true);
