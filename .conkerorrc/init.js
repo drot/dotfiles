@@ -19,7 +19,7 @@ homepage = "about:blank";
 hint_digits = "asdfghjkl";
 
 // Enable automatic selection
-hints_auto_exit_delay = 500;
+hints_auto_exit_delay = 200;
 
 // Display selected hint URL
 hints_display_url_panel = true;
@@ -69,6 +69,9 @@ session_pref("general.useragent.compatMode.firefox", true);
 
 // Don't enable formfill
 session_pref("browser.formfill.enable", false);
+
+// Resize images automatically
+session_pref("browser.enable_automatic_image_resizing", true);
 
 // Block auto focus
 block_content_focus_change_duration = 20;
