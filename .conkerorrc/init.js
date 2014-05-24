@@ -74,9 +74,6 @@ session_pref("browser.formfill.enable", false);
 // Resize images automatically
 session_pref("browser.enable_automatic_image_resizing", true);
 
-// Block auto focus
-block_content_focus_change_duration = 20;
-
 // Open clicks in buffers in the background
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
 clicks_in_new_buffer_button = 1;
@@ -105,10 +102,8 @@ add_hook("mode_line_hook", mode_line_adder(zoom_widget));
 add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
 read_buffer_show_icons = true;
 
-// External editor
-editor_shell_command = "emacsclient";
-
 // View source in external editor
+editor_shell_command = "emacsclient";
 view_source_use_external_editor = true;
 
 // Delete existing webjumps
@@ -127,17 +122,23 @@ for (var i=0; i<unused_webjumps.length; i++)
 }
 
 // Webjumps
+define_webjump("archwiki", "http://wiki.archlinux.org/index.php?search=%s");
+define_webjump("aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
+define_webjump("archpkg", "https://www.archlinux.org/packages/?sort=&q=%s&limit=50",
+               $alternative="https://packages.archlinux.org");
 define_webjump("imdb", "http://imdb.com/find?q=%s");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 
-// Clear history
-function clear_history () {
+// Clear history function
+function history_clear () {
     var history = Cc["@mozilla.org/browser/nav-history-service;1"]
         .getService(Ci.nsIBrowserHistory);
     history.removeAllPages();
-};
+}
 
-interactive("clear-history", "Clear the history.", clear_history);
+interactive("history-clear",
+            "Clear the history.",
+            history_clear);
 
 // Eye guide keybindings
 define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
