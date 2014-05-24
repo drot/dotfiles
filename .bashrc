@@ -54,8 +54,6 @@ export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
 alias eckd="emacsclient -e '(kill-emacs)'"
-alias conkeror="GTK2_RC_FILES=~/.conkerorrc/gtkrc conkeror"
-alias skype="LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so skype"
 
 # Extract - archive extractor
 # Usage: extract <file>
