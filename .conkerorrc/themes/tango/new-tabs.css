@@ -8,7 +8,7 @@
     margin: 2px 0px 0px 2px;
     padding: 0px;
     height: 22px;
-    border-style: solid;
+    border-style: dashed;
     border-width: 1px;
     background: #2e3436;
     color: #eeeeec;
@@ -22,6 +22,7 @@
 .tab2[selected=true] {
     background: #555753;
     color: #8ae234;
+    border-style: solid;
     font-family: Terminus;
     font-size: 14px;
 }
