@@ -5,15 +5,14 @@
 }
 
 .tab2 {
-    margin: 2px 0px 0px 2px;
-    padding: 0px;
-    height: 22px;
+    -moz-box-align: center;
+    margin: 3px 3px 3px 3px;
+    min-width: 10em;
+    max-width: 15em;
     border-style: dashed;
     border-width: 1px;
     background: #2e3436;
     color: #eeeeec;
-    min-width: 200px;
-    max-width: 200px;
     overflow: hidden;
     font-family: Terminus;
     font-size: 14px;
@@ -32,8 +31,9 @@
 }
 
 .tab2-label {
-    margin-left: 4px;
-    padding-top: 1px;
+    -moz-box-flex: 100;
+    margin-left: 4pt;
+    padding-top: 1pt;
     color: #eeeeeec;
     font-family: Terminus;
     font-size: 14px;
@@ -44,9 +44,10 @@
 }
 
 .tab2-icon {
-    width: 20px;
-    height: 15px;
-    max-height: 15px;
+    width: 16px;
+    height: 16px;
+    -moz-margin-start: 4pt;
+    -moz-margin-end: 3pt;
     background: #555753;
     color: #eeeeec;
     font-family: Terminus;
