@@ -6,6 +6,7 @@ require("new-tabs.js");
 require("mode-line.js");
 require("clicks-in-new-buffer.js");
 require("block-content-focus-change.js");
+require('eye-guide.js');
 
 // Theme
 theme_load_paths.unshift("~/.conkerorrc/themes/");
@@ -137,3 +138,7 @@ function clear_history () {
 };
 
 interactive("clear-history", "Clear the history.", clear_history);
+
+// Eye guide keybindings
+define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
+define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");

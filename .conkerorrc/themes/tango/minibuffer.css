@@ -2,11 +2,13 @@
 
 #minibuffer {
     background-color: #2e3436 !important;
-    border-top: 0 !important;
     color: #eeeeec !important;
     font-family: Terminus;
     font-size: 14px;
-    padding: 1px;
+}
+
+#minibuffer-input {
+    color: #eeeeec !important;
 }
 
 #minibuffer-prompt {
@@ -14,29 +16,25 @@
     font-weight: bold;
 }
 
-#minibuffer-input {
-    color: #eeeeec !important;
-}
-
 /* Completions display */
-tree.completions treechildren { border: none !important; }
 
-tree.completions treecol { -moz-binding: none !important; }
 tree.completions {
     -moz-appearance: none !important;
     margin: 0px !important;
     border: 0px none !important;
     background-color: #2e3436 !important;
-    -moz-border-top-colors: -moz-initial !important;
     color: #eeeeec !important;
     font-family: Terminus;
     font-size: 14px;
     font-style: normal !Important;
 }
 
+tree.completions treechildren { border: none !important; }
+
+tree.completions treecol { -moz-binding: none !important; }
+
 tree.completions treechildren::-moz-tree-row {
     background-color: #2e3436 !important;
-    border: none;
 }
 
 tree.completions treechildren::-moz-tree-row(current) {
@@ -50,4 +48,10 @@ tree.completions treechildren::-moz-tree-cell-text(completion-description) {
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
     color: #8ae234 !important;
+}
+
+tree.completions[hasicons="true"] treechildren::-moz-tree-image {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
 }

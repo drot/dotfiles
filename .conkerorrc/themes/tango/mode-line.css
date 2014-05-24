@@ -3,10 +3,8 @@
 .mode-line {
     font-family: Terminus;
     font-size: 14px !important;
-    padding: 0px !important;
-     -moz-appearance: none;
-    background-color: #555753 !important;
     font-weight: bold !important;
+    background-color: #555753 !important;
 }
 
 .mode-line label {
