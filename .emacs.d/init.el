@@ -86,29 +86,26 @@
 (use-package alect-themes
   :ensure t
   :config
-  (progn
-    (defadvice custom-theme-set-variables
-        (around fix-inhibit-bug activate)
-      "Allow setting of undefined variables in themes."
-      (let (custom--inhibit-theme-enable)
-        ad-do-it))
-    (load-theme 'alect-black t)))
+  (defadvice custom-theme-set-variables
+      (around fix-inhibit-bug activate)
+    "Allow setting of undefined variables in themes."
+    (let (custom--inhibit-theme-enable)
+      ad-do-it))
+  (load-theme 'alect-black t))
 
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (progn
-    (setq savehist-additional-variables '(search-ring regexp-search-ring)
-          savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" user/save-directory))
-    (savehist-mode 1)))
+  (setq savehist-additional-variables '(search-ring regexp-search-ring)
+        savehist-autosave-interval 60
+        savehist-file (expand-file-name "minbuf.hist" user/save-directory))
+  (savehist-mode 1))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
-  (progn
-    (setq save-place-file (expand-file-name "saved-places" user/save-directory))
-    (setq-default save-place t)))
+  (setq save-place-file (expand-file-name "saved-places" user/save-directory))
+  (setq-default save-place t))
 
 ;; Bookmarks save directory
 (use-package bookmark
@@ -126,9 +123,8 @@
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (progn
-    (setq show-paren-delay 0)
-    (show-paren-mode 1)))
+  (setq show-paren-delay 0)
+  (show-paren-mode 1))
 
 ;; Delete a selection with a keypress
 (use-package delsel
@@ -177,12 +173,11 @@
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
   :config
-  (progn
-    (setq abbrev-file-name (expand-file-name "abbrev_defs" user/save-directory)
-          save-abbrevs t)
-    (if (file-exists-p abbrev-file-name)
-        (quietly-read-abbrev-file))
-    (setq-default abbrev-mode t)))
+  (setq abbrev-file-name (expand-file-name "abbrev_defs" user/save-directory)
+        save-abbrevs t)
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file))
+  (setq-default abbrev-mode t))
 
 ;; Hippie expand is an improved dabbrev expand
 (use-package hippie-exp
@@ -202,10 +197,9 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :config
-  (progn
-    (setq ispell-extra-args '("--sug-mode=ultra")
-          ispell-dictionary "english")
-    (add-hook 'text-mode-hook 'flyspell-mode)))
+  (setq ispell-extra-args '("--sug-mode=ultra")
+        ispell-dictionary "english")
+  (add-hook 'text-mode-hook 'flyspell-mode))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -230,50 +224,47 @@
 ;; Icomplete
 (use-package icomplete
   :config
-  (progn
-    (setq icomplete-prospects-height 1)
-    (icomplete-mode 1)))
+  (setq icomplete-prospects-height 1)
+  (icomplete-mode 1))
 
 ;; Company mode
 (use-package company
   :ensure t
   :diminish "co"
   :config
-  (progn
-    (setq company-echo-delay 0
-          company-show-numbers t
-          company-backends '(company-nxml company-css company-eclim company-semantic
-                                          company-capf company-dabbrev-code company-etags
-                                          company-keywords company-files company-dabbrev))
-    (global-company-mode 1)))
+  (setq company-echo-delay 0
+        company-show-numbers t
+        company-backends '(company-nxml company-css company-eclim company-semantic
+                                        company-capf company-dabbrev-code company-etags
+                                        company-keywords company-files company-dabbrev))
+  (global-company-mode 1))
 
 ;; CC mode configuration
 (use-package cc-mode
   :defer t
   :config
-  (progn
-    (defun user/c-mode-hook ()
-      "C mode setup"
-      (unless (or (file-exists-p "makefile")
-                  (file-exists-p "Makefile"))
-        (set (make-local-variable 'compile-command)
-             (concat "gcc " (buffer-file-name) " -o "))))
+  (defun user/c-mode-hook ()
+    "C mode setup"
+    (unless (or (file-exists-p "makefile")
+                (file-exists-p "Makefile"))
+      (set (make-local-variable 'compile-command)
+           (concat "gcc " (buffer-file-name) " -o "))))
 
-    (defun user/c++-mode-hook ()
-      "C++ mode setup"
-      (unless (or (file-exists-p "makefile")
-                  (file-exists-p "Makefile"))
-        (set (make-local-variable 'compile-command)
-             (concat "g++ " (buffer-file-name) " -o "))))
+  (defun user/c++-mode-hook ()
+    "C++ mode setup"
+    (unless (or (file-exists-p "makefile")
+                (file-exists-p "Makefile"))
+      (set (make-local-variable 'compile-command)
+           (concat "g++ " (buffer-file-name) " -o "))))
 
-    (add-hook 'c-mode-hook 'user/c-mode-hook)
-    (add-hook 'c++-mode-hook 'user/c++-mode-hook)
-    (add-hook 'c-mode-common-hook 'auto-fill-mode)
+  (add-hook 'c-mode-hook 'user/c-mode-hook)
+  (add-hook 'c++-mode-hook 'user/c++-mode-hook)
+  (add-hook 'c-mode-common-hook 'auto-fill-mode)
 
-    (setq c-basic-offset 4
-          c-default-style '((java-mode . "java")
-                            (awk-mode . "awk")
-                            (other . "stroustrup")))))
+  (setq c-basic-offset 4
+        c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "stroustrup"))))
 
 ;; Lua mode
 (use-package lua-mode
@@ -290,51 +281,49 @@
   :ensure t
   :diminish "PEd"
   :config
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-    (add-hook 'ielm-mode-hook 'paredit-mode)
-    (add-hook 'lisp-mode-hook 'paredit-mode)
-    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-    (add-hook 'scheme-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  (add-hook 'ielm-mode-hook 'paredit-mode)
+  (add-hook 'lisp-mode-hook 'paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
+  (add-hook 'scheme-mode-hook 'paredit-mode)
 
-    (defvar user/paredit-minbuf-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+  (defvar user/paredit-minbuf-commands '(eval-expression
+                                         pp-eval-expression
+                                         eval-expression-with-eldoc
+                                         ibuffer-do-eval
+                                         ibuffer-do-view-and-eval)
+    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-    (defun user/paredit-minbuf ()
-      "Enable ParEdit during lisp-related minibuffer commands."
-      (if (memq this-command user/paredit-minbuf-commands)
-          (paredit-mode)))
+  (defun user/paredit-minbuf ()
+    "Enable ParEdit during lisp-related minibuffer commands."
+    (if (memq this-command user/paredit-minbuf-commands)
+        (paredit-mode)))
 
-    (add-hook 'minibuffer-setup-hook 'user/paredit-minbuf)
+  (add-hook 'minibuffer-setup-hook 'user/paredit-minbuf)
 
-    (defun user/paredit-slime-fix ()
-      "Fix ParEdit conflict with SLIME."
-      (define-key slime-repl-mode-map
-        (read-kbd-macro paredit-backward-delete-key) nil))
+  (defun user/paredit-slime-fix ()
+    "Fix ParEdit conflict with SLIME."
+    (define-key slime-repl-mode-map
+      (read-kbd-macro paredit-backward-delete-key) nil))
 
-    (add-hook 'slime-repl-mode-hook 'paredit-mode)
-    (add-hook 'slime-repl-mode-hook 'user/paredit-slime-fix)
+  (add-hook 'slime-repl-mode-hook 'paredit-mode)
+  (add-hook 'slime-repl-mode-hook 'user/paredit-slime-fix)
 
-    (put 'paredit-forward-delete 'delete-selection 'supersede)
-    (put 'paredit-backward-delete 'delete-selection 'supersede)
-    (put 'paredit-open-round 'delete-selection t)
-    (put 'paredit-open-square 'delete-selection t)
-    (put 'paredit-doublequote 'delete-selection t)
-    (put 'paredit-newline 'delete-selection t)))
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-open-round 'delete-selection t)
+  (put 'paredit-open-square 'delete-selection t)
+  (put 'paredit-doublequote 'delete-selection t)
+  (put 'paredit-newline 'delete-selection t))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
   :config
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-    (add-hook 'ielm-mode-hook 'eldoc-mode)
-    (eldoc-add-command 'paredit-backward-delete
-                       'paredit-close-round)))
+  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+  (add-hook 'ielm-mode-hook 'eldoc-mode)
+  (eldoc-add-command 'paredit-backward-delete
+                     'paredit-close-round))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -345,10 +334,9 @@
 ;; Hide Show mode
 (use-package hideshow
   :config
-  (progn
-    (add-hook 'c-mode-common-hook 'hs-minor-mode)
-    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-    (add-hook 'python-mode-hook 'hs-minor-mode)))
+  (add-hook 'c-mode-common-hook 'hs-minor-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+  (add-hook 'python-mode-hook 'hs-minor-mode))
 
 ;; Skeleton mode configuration
 (use-package skeleton
@@ -372,10 +360,9 @@
   :ensure t
   :diminish "UT"
   :config
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,user/save-directory))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
+  (setq undo-tree-history-directory-alist `((".*" . ,user/save-directory))
+        undo-tree-auto-save-history t)
+  (global-undo-tree-mode 1))
 
 ;; ERC configuration
 (defun irc ()
@@ -389,42 +376,41 @@
 (use-package erc
   :defer t
   :config
-  (progn
-    (use-package erc-hl-nicks
-      :ensure t)
-    (add-to-list 'erc-modules 'notifications)
-    (add-to-list 'erc-modules 'smiley)
+  (use-package erc-hl-nicks
+    :ensure t)
+  (add-to-list 'erc-modules 'notifications)
+  (add-to-list 'erc-modules 'smiley)
 
-    (add-hook 'erc-mode-hook (lambda ()
-                               (set (make-local-variable 'scroll-conservatively) 1000)))
+  (add-hook 'erc-mode-hook (lambda ()
+                             (set (make-local-variable 'scroll-conservatively) 1000)))
 
-    (add-hook 'erc-mode-hook (lambda ()
-                               (erc-fill-mode 0)))
+  (add-hook 'erc-mode-hook (lambda ()
+                             (erc-fill-mode 0)))
 
-    (add-hook 'erc-mode-hook 'visual-line-mode)
+  (add-hook 'erc-mode-hook 'visual-line-mode)
 
-    (erc-spelling-mode 1)
+  (erc-spelling-mode 1)
 
-    (setq erc-prompt-for-password nil
-          erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                        ("forestnet" "#fo2"))
-          erc-server-reconnect-timeout 10
-          erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
-          erc-track-exclude-server-buffer t
-          erc-track-showcount t
-          erc-track-switch-direction 'importance
-          erc-track-visibility 'selected-visible
-          erc-insert-timestamp-function 'erc-insert-timestamp-left
-          erc-timestamp-only-if-changed-flag nil
-          erc-timestamp-format "[%H:%M] "
-          erc-header-line-format "%t: %o"
-          erc-interpret-mirc-color t
-          erc-button-buttonize-nicks nil
-          erc-format-nick-function 'erc-format-@nick
-          erc-nick-uniquifier "_"
-          erc-show-my-nick nil
-          erc-prompt (lambda ()
-                       (concat (buffer-name) ">")))))
+  (setq erc-prompt-for-password nil
+        erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
+                                      ("forestnet" "#fo2"))
+        erc-server-reconnect-timeout 10
+        erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
+        erc-track-exclude-server-buffer t
+        erc-track-showcount t
+        erc-track-switch-direction 'importance
+        erc-track-visibility 'selected-visible
+        erc-insert-timestamp-function 'erc-insert-timestamp-left
+        erc-timestamp-only-if-changed-flag nil
+        erc-timestamp-format "[%H:%M] "
+        erc-header-line-format "%t: %o"
+        erc-interpret-mirc-color t
+        erc-button-buttonize-nicks nil
+        erc-format-nick-function 'erc-format-@nick
+        erc-nick-uniquifier "_"
+        erc-show-my-nick nil
+        erc-prompt (lambda ()
+                     (concat (buffer-name) ">"))))
 
 ;; Calendar configuration
 (use-package calendar
@@ -443,21 +429,21 @@
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org mode configuration
-(bind-key "\C-cl" 'org-store-link)
-(bind-key "\C-ca" 'org-agenda)
+(bind-keys*
+ ("\C-cl" . org-store-link)
+ ("\C-ca" . org-agenda))
 
 (use-package org
   :defer t
   :config
-  (progn
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((C . t)
-       (emacs-lisp . t)
-       (sh . t)))
-    (setq org-log-done 'time
-          org-src-fontify-natively t
-          org-src-tab-acts-natively t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (emacs-lisp . t)
+     (sh . t)))
+  (setq org-log-done 'time
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t))
 
 ;; Load changes from the customize interface
 (setq custom-file user/custom-file)
