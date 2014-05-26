@@ -32,17 +32,6 @@
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
 
-;; Encoding
-(prefer-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-
-;; Specify font for all unicode characters
-(set-fontset-font t 'unicode "Symbola" nil 'prepend)
-
 ;; Configuration for backup files
 (setq backup-directory-alist `((".*" . ,user/save-directory))
       auto-save-file-name-transforms `((".*" ,user/save-directory t))
@@ -270,8 +259,6 @@
         (set (make-local-variable 'compile-command)
              (concat "gcc " (buffer-file-name) " -o "))))
 
-    (add-hook 'c-mode-hook 'user/c-mode-hook)
-
     (defun user/c++-mode-hook ()
       "C++ mode setup"
       (unless (or (file-exists-p "makefile")
@@ -279,6 +266,7 @@
         (set (make-local-variable 'compile-command)
              (concat "g++ " (buffer-file-name) " -o "))))
 
+    (add-hook 'c-mode-hook 'user/c-mode-hook)
     (add-hook 'c++-mode-hook 'user/c++-mode-hook)
     (add-hook 'c-mode-common-hook 'auto-fill-mode)
 
@@ -393,7 +381,7 @@
 (defun irc ()
   "Connect to IRC."
   (interactive)
-  (erc-tls :server "adams.freenode.net" :port 6697
+  (erc-tls :server "orwell.freenode.net" :port 6697
            :nick "drot")
   (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))
