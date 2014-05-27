@@ -374,10 +374,9 @@
            :nick "drot"))
 
 (use-package erc
+  :ensure erc-hl-nicks
   :defer t
   :config
-  (use-package erc-hl-nicks
-    :ensure t)
   (add-to-list 'erc-modules 'notifications)
   (add-to-list 'erc-modules 'smiley)
 
