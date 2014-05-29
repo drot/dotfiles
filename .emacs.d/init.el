@@ -380,13 +380,19 @@
   (add-to-list 'erc-modules 'notifications)
   (add-to-list 'erc-modules 'smiley)
 
+  (make-variable-buffer-local 'erc-fill-column)
+  (add-hook 'window-configuration-change-hook
+            '(lambda ()
+               (save-excursion
+                 (walk-windows
+                  (lambda (w)
+                    (let ((buffer (window-buffer w)))
+                      (set-buffer buffer)
+                      (when (eq major-mode 'erc-mode)
+                        (setq erc-fill-column (- (window-width w) 2)))))))))
+
   (add-hook 'erc-mode-hook (lambda ()
                              (set (make-local-variable 'scroll-conservatively) 1000)))
-
-  (add-hook 'erc-mode-hook (lambda ()
-                             (erc-fill-mode 0)))
-
-  (add-hook 'erc-mode-hook 'visual-line-mode)
 
   (erc-spelling-mode 1)
 
