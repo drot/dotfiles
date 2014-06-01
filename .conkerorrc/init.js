@@ -22,10 +22,6 @@ hint_digits = "asdfghjkl";
 // Enable automatic selection
 hints_auto_exit_delay = 200;
 
-// Display selected hint URL
-hints_display_url_panel = true;
-hints_minibuffer_annotation_mode(true);
-
 // Hinting color
 hint_background_color = "#3465a4";
 active_hint_background_color = "8ae234";
@@ -73,6 +69,9 @@ session_pref("browser.formfill.enable", false);
 
 // Resize images automatically
 session_pref("browser.enable_automatic_image_resizing", true);
+
+// Enable spellchecking
+session_pref("layout.spellcheckDefault", 1);
 
 // Open clicks in buffers in the background
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
