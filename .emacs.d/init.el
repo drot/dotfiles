@@ -111,14 +111,16 @@
 (use-package bookmark
   :defer t
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
-        bookmark-save-flag 1))
+  (progn
+    (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
+          bookmark-save-flag 1)))
 
 ;; Eshell save directory
 (use-package eshell
   :defer t
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory)))
+  (progn
+    (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory))))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -130,46 +132,53 @@
 ;; Delete a selection with a keypress
 (use-package delsel
   :config
-  (delete-selection-mode 1))
+  (progn
+    (delete-selection-mode 1)))
 
 ;; Scroll compilation buffer to first error
 (use-package compile
   :defer t
   :config
-  (setq compilation-scroll-output 'first-error))
+  (progn
+    (setq compilation-scroll-output 'first-error)))
 
 ;; Use Unified diff format
 (use-package diff
   :defer t
   :config
-  (setq diff-switches "-u"))
+  (progn
+    (setq diff-switches "-u")))
 
 ;; Ediff window split
 (use-package ediff
   :defer t
   :config
-  (setq ediff-split-window-function 'split-window-horizontally
-        ediff-window-setup-function 'ediff-setup-windows-plain))
+  (progn
+    (setq ediff-split-window-function 'split-window-horizontally
+          ediff-window-setup-function 'ediff-setup-windows-plain)))
 
 ;; TRAMP configuration
 (use-package tramp
   :defer t
   :config
-  (setq tramp-default-method "ssh"
-        tramp-backup-directory-alist `((".*" . ,drot/save-directory))
-        tramp-auto-save-directory drot/save-directory))
+  (progn
+    (setq tramp-default-method "ssh"
+          tramp-backup-directory-alist `((".*" . ,drot/save-directory))
+          tramp-auto-save-directory drot/save-directory)))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
   :defer t
   :config
-  (setq gnutls-min-prime-bits 1024))
+  (progn
+    (setq gnutls-min-prime-bits 1024)))
 
 ;; Use ANSI colors within shell-mode
 (use-package shell
   :defer t
   :config
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+  (progn
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
@@ -185,16 +194,17 @@
 (use-package hippie-exp
   :bind ("M-/" . hippie-expand)
   :config
-  (setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                           try-expand-dabbrev-all-buffers
-                                           try-expand-dabbrev-from-kill
-                                           try-complete-file-name-partially
-                                           try-complete-file-name
-                                           try-expand-all-abbrevs
-                                           try-expand-list
-                                           try-expand-line
-                                           try-complete-lisp-symbol-partially
-                                           try-complete-lisp-symbol)))
+  (progn
+    (setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                             try-expand-dabbrev-all-buffers
+                                             try-expand-dabbrev-from-kill
+                                             try-complete-file-name-partially
+                                             try-complete-file-name
+                                             try-expand-all-abbrevs
+                                             try-expand-list
+                                             try-expand-line
+                                             try-complete-lisp-symbol-partially
+                                             try-complete-lisp-symbol))))
 
 ;; Fly Spell mode configuration
 (use-package flyspell
@@ -209,21 +219,24 @@
 (use-package doc-view
   :defer t
   :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
+  (progn
+    (setq doc-view-resolution 300
+          doc-view-continuous t)))
 
 ;; Open URLs in Conkeror
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "conkeror"))
+  (progn
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "conkeror")))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
-  (setq ibuffer-default-sorting-mode 'major-mode))
+  (progn
+    (setq ibuffer-default-sorting-mode 'major-mode)))
 
 ;; Icomplete
 (use-package icomplete
@@ -338,7 +351,8 @@
 (use-package rainbow-delimiters
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  (progn
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -351,7 +365,8 @@
 ;; Skeleton mode configuration
 (use-package skeleton
   :config
-  (setq skeleton-further-elements '((abbrev-mode nil))))
+  (progn
+    (setq skeleton-further-elements '((abbrev-mode nil)))))
 
 (define-skeleton cpp-skeleton
   "C++ skeleton"
@@ -433,17 +448,18 @@
 (use-package calendar
   :defer t
   :config
-  (setq calendar-mark-holidays-flag t
-        holiday-general-holidays nil
-        holiday-bahai-holidays nil
-        holiday-oriental-holidays nil
-        holiday-solar-holidays nil
-        holiday-islamic-holidays nil
-        holiday-hebrew-holidays nil
-        calendar-date-style 'european
-        calendar-latitude 43.20
-        calendar-longitude 17.48
-        calendar-location-name "Mostar, Bosnia and Herzegovina"))
+  (progn
+    (setq calendar-mark-holidays-flag t
+          holiday-general-holidays nil
+          holiday-bahai-holidays nil
+          holiday-oriental-holidays nil
+          holiday-solar-holidays nil
+          holiday-islamic-holidays nil
+          holiday-hebrew-holidays nil
+          calendar-date-style 'european
+          calendar-latitude 43.20
+          calendar-longitude 17.48
+          calendar-location-name "Mostar, Bosnia and Herzegovina")))
 
 ;; Org mode configuration
 (bind-keys*
