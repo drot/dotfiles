@@ -281,10 +281,10 @@
   (add-hook 'scheme-mode-hook 'paredit-mode)
 
   (defvar my-paredit-minbuf-commands '(eval-expression
-                                         pp-eval-expression
-                                         eval-expression-with-eldoc
-                                         ibuffer-do-eval
-                                         ibuffer-do-view-and-eval)
+                                       pp-eval-expression
+                                       eval-expression-with-eldoc
+                                       ibuffer-do-eval
+                                       ibuffer-do-view-and-eval)
     "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
   (defun my-paredit-minbuf ()
