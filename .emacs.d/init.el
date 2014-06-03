@@ -1,11 +1,11 @@
-(defvar my-emacs-directory (file-name-directory load-file-name)
+(defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar my-save-directory (expand-file-name "saves" my-emacs-directory)
+(defvar drot/save-directory (expand-file-name "saves" drot/emacs-directory)
   "This directory houses all save files.")
-(make-directory my-save-directory t)
+(make-directory drot/save-directory t)
 
-(defvar my-custom-file (expand-file-name "custom.el" my-save-directory)
+(defvar drot/custom-file (expand-file-name "custom.el" drot/save-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Package repository selection and activation
@@ -33,16 +33,17 @@
       initial-scratch-message nil)
 
 ;; Configuration for backup files
-(setq backup-directory-alist `((".*" . ,my-save-directory))
-      auto-save-file-name-transforms `((".*" ,my-save-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" my-save-directory)
+(setq backup-directory-alist `((".*" . ,drot/save-directory))
+      auto-save-file-name-transforms `((".*" ,drot/save-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" drot/save-directory)
       version-control t
       kept-new-versions 5
       delete-old-versions t
       backup-by-copying t)
 
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
+;; Use spaces instead of tabs and set default tab width
+(setq-default indent-tabs-mode nil
+              tab-width 4)
 
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -60,6 +61,10 @@
 ;; Show column number and buffer size on the modeline
 (column-number-mode 1)
 (size-indication-mode 1)
+
+;; Enable recursive minibuffers and indicate depth
+(setq enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode 1)
 
 ;; Show tooltips in echo area
 (tooltip-mode 0)
@@ -89,35 +94,38 @@
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (setq savehist-additional-variables '(search-ring regexp-search-ring)
-        savehist-autosave-interval 60
-        savehist-file (expand-file-name "minbuf.hist" my-save-directory))
-  (savehist-mode 1))
+  (progn
+    (setq savehist-additional-variables '(search-ring regexp-search-ring)
+          savehist-autosave-interval 60
+          savehist-file (expand-file-name "minbuf.hist" drot/save-directory))
+    (savehist-mode 1)))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
-  (setq save-place-file (expand-file-name "saved-places" my-save-directory))
-  (setq-default save-place t))
+  (progn
+    (setq save-place-file (expand-file-name "saved-places" drot/save-directory))
+    (setq-default save-place t)))
 
 ;; Bookmarks save directory
 (use-package bookmark
   :defer t
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" my-save-directory)
+  (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
         bookmark-save-flag 1))
 
 ;; Eshell save directory
 (use-package eshell
   :defer t
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" my-save-directory)))
+  (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory)))
 
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (setq show-paren-delay 0)
-  (show-paren-mode 1))
+  (progn
+    (setq show-paren-delay 0)
+    (show-paren-mode 1)))
 
 ;; Delete a selection with a keypress
 (use-package delsel
@@ -148,8 +156,8 @@
   :defer t
   :config
   (setq tramp-default-method "ssh"
-        tramp-backup-directory-alist `((".*" . ,my-save-directory))
-        tramp-auto-save-directory my-save-directory))
+        tramp-backup-directory-alist `((".*" . ,drot/save-directory))
+        tramp-auto-save-directory drot/save-directory))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -166,11 +174,12 @@
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
   :config
-  (setq abbrev-file-name (expand-file-name "abbrev_defs" my-save-directory)
-        save-abbrevs t)
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t))
+  (progn
+    (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/save-directory)
+          save-abbrevs t)
+    (if (file-exists-p abbrev-file-name)
+        (quietly-read-abbrev-file))
+    (setq-default abbrev-mode t)))
 
 ;; Hippie expand is an improved dabbrev expand
 (use-package hippie-exp
@@ -190,9 +199,11 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :config
-  (setq ispell-extra-args '("--sug-mode=ultra")
-        ispell-dictionary "english")
-  (add-hook 'text-mode-hook 'flyspell-mode))
+  (progn
+    (setq ispell-extra-args '("--sug-mode=ultra")
+          ispell-dictionary "english")
+    (add-hook 'text-mode-hook 'flyspell-mode)
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -217,47 +228,50 @@
 ;; Icomplete
 (use-package icomplete
   :config
-  (setq icomplete-prospects-height 1)
-  (icomplete-mode 1))
+  (progn
+    (setq icomplete-prospects-height 1)
+    (icomplete-mode 1)))
 
 ;; Company mode
 (use-package company
   :ensure t
   :diminish "co"
   :config
-  (setq company-echo-delay 0
-        company-show-numbers t
-        company-backends '(company-nxml company-css company-eclim company-semantic
-                                        company-capf company-dabbrev-code company-etags
-                                        company-keywords company-files company-dabbrev))
-  (global-company-mode 1))
+  (progn
+    (setq company-echo-delay 0
+          company-show-numbers t
+          company-backends '(company-nxml company-css company-eclim company-semantic
+                                          company-capf company-dabbrev-code company-etags
+                                          company-keywords company-files company-dabbrev))
+    (global-company-mode 1)))
 
 ;; CC mode configuration
 (use-package cc-mode
   :defer t
   :config
-  (defun my-c-mode-hook ()
-    "C mode setup"
-    (unless (or (file-exists-p "makefile")
-                (file-exists-p "Makefile"))
-      (set (make-local-variable 'compile-command)
-           (concat "gcc " (buffer-file-name) " -o "))))
+  (progn
+    (defun drot/c-mode-hook ()
+      "C mode setup"
+      (unless (or (file-exists-p "makefile")
+                  (file-exists-p "Makefile"))
+        (set (make-local-variable 'compile-command)
+             (concat "gcc " (buffer-file-name) " -o "))))
 
-  (defun my-c++-mode-hook ()
-    "C++ mode setup"
-    (unless (or (file-exists-p "makefile")
-                (file-exists-p "Makefile"))
-      (set (make-local-variable 'compile-command)
-           (concat "g++ " (buffer-file-name) " -o "))))
+    (defun drot/c++-mode-hook ()
+      "C++ mode setup"
+      (unless (or (file-exists-p "makefile")
+                  (file-exists-p "Makefile"))
+        (set (make-local-variable 'compile-command)
+             (concat "g++ " (buffer-file-name) " -o "))))
 
-  (add-hook 'c-mode-hook 'my-c-mode-hook)
-  (add-hook 'c++-mode-hook 'my-c++-mode-hook)
-  (add-hook 'c-mode-common-hook 'auto-fill-mode)
+    (add-hook 'c-mode-hook 'drot/c-mode-hook)
+    (add-hook 'c++-mode-hook 'drot/c++-mode-hook)
+    (add-hook 'c-mode-common-hook 'auto-fill-mode)
 
-  (setq c-basic-offset 4
-        c-default-style '((java-mode . "java")
-                          (awk-mode . "awk")
-                          (other . "stroustrup"))))
+    (setq c-basic-offset 4
+          c-default-style '((java-mode . "java")
+                            (awk-mode . "awk")
+                            (other . "stroustrup")))))
 
 ;; Lua mode
 (use-package lua-mode
@@ -274,49 +288,51 @@
   :ensure t
   :diminish "PEd"
   :config
-  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-  (add-hook 'ielm-mode-hook 'paredit-mode)
-  (add-hook 'lisp-mode-hook 'paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-  (add-hook 'scheme-mode-hook 'paredit-mode)
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+    (add-hook 'ielm-mode-hook 'paredit-mode)
+    (add-hook 'lisp-mode-hook 'paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
+    (add-hook 'scheme-mode-hook 'paredit-mode)
 
-  (defvar my-paredit-minbuf-commands '(eval-expression
-                                       pp-eval-expression
-                                       eval-expression-with-eldoc
-                                       ibuffer-do-eval
-                                       ibuffer-do-view-and-eval)
-    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+    (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                               pp-eval-expression
+                                               eval-expression-with-eldoc
+                                               ibuffer-do-eval
+                                               ibuffer-do-view-and-eval)
+      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-  (defun my-paredit-minbuf ()
-    "Enable ParEdit during lisp-related minibuffer commands."
-    (if (memq this-command my-paredit-minbuf-commands)
-        (paredit-mode)))
+    (defun drot/paredit-minibuffer ()
+      "Enable ParEdit during lisp-related minibuffer commands."
+      (if (memq this-command drot/paredit-minibuffer-commands)
+          (paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook 'my-paredit-minbuf)
+    (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
 
-  (defun my-paredit-slime-fix ()
-    "Fix ParEdit conflict with SLIME."
-    (define-key slime-repl-mode-map
-      (read-kbd-macro paredit-backward-delete-key) nil))
+    (defun drot/paredit-slime-fix ()
+      "Fix ParEdit conflict with SLIME."
+      (define-key slime-repl-mode-map
+        (read-kbd-macro paredit-backward-delete-key) nil))
 
-  (add-hook 'slime-repl-mode-hook 'paredit-mode)
-  (add-hook 'slime-repl-mode-hook 'my-paredit-slime-fix)
+    (add-hook 'slime-repl-mode-hook 'paredit-mode)
+    (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
 
-  (put 'paredit-forward-delete 'delete-selection 'supersede)
-  (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-open-round 'delete-selection t)
-  (put 'paredit-open-square 'delete-selection t)
-  (put 'paredit-doublequote 'delete-selection t)
-  (put 'paredit-newline 'delete-selection t))
+    (put 'paredit-forward-delete 'delete-selection 'supersede)
+    (put 'paredit-backward-delete 'delete-selection 'supersede)
+    (put 'paredit-open-round 'delete-selection t)
+    (put 'paredit-open-square 'delete-selection t)
+    (put 'paredit-doublequote 'delete-selection t)
+    (put 'paredit-newline 'delete-selection t)))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
   :config
-  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-  (add-hook 'ielm-mode-hook 'eldoc-mode)
-  (eldoc-add-command 'paredit-backward-delete
-                     'paredit-close-round))
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+    (add-hook 'ielm-mode-hook 'eldoc-mode)
+    (eldoc-add-command 'paredit-backward-delete
+                       'paredit-close-round)))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -327,9 +343,10 @@
 ;; Hide Show mode
 (use-package hideshow
   :config
-  (add-hook 'c-mode-common-hook 'hs-minor-mode)
-  (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-  (add-hook 'python-mode-hook 'hs-minor-mode))
+  (progn
+    (add-hook 'c-mode-common-hook 'hs-minor-mode)
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+    (add-hook 'python-mode-hook 'hs-minor-mode)))
 
 ;; Skeleton mode configuration
 (use-package skeleton
@@ -353,9 +370,10 @@
   :ensure t
   :diminish "UT"
   :config
-  (setq undo-tree-history-directory-alist `((".*" . ,my-save-directory))
-        undo-tree-auto-save-history t)
-  (global-undo-tree-mode 1))
+  (progn
+    (setq undo-tree-history-directory-alist `((".*" . ,drot/save-directory))
+          undo-tree-auto-save-history t)
+    (global-undo-tree-mode 1)))
 
 ;; ERC configuration
 (defun irc ()
@@ -370,45 +388,46 @@
   :ensure erc-hl-nicks
   :defer t
   :config
-  (add-to-list 'erc-modules 'notifications)
-  (add-to-list 'erc-modules 'smiley)
+  (progn
+    (add-to-list 'erc-modules 'notifications)
+    (add-to-list 'erc-modules 'smiley)
 
-  (make-variable-buffer-local 'erc-fill-column)
-  (add-hook 'window-configuration-change-hook
-            '(lambda ()
-               (save-excursion
-                 (walk-windows
-                  (lambda (w)
-                    (let ((buffer (window-buffer w)))
-                      (set-buffer buffer)
-                      (when (eq major-mode 'erc-mode)
-                        (setq erc-fill-column (- (window-width w) 2)))))))))
+    (make-variable-buffer-local 'erc-fill-column)
+    (add-hook 'window-configuration-change-hook
+              '(lambda ()
+                 (save-excursion
+                   (walk-windows
+                    (lambda (w)
+                      (let ((buffer (window-buffer w)))
+                        (set-buffer buffer)
+                        (when (eq major-mode 'erc-mode)
+                          (setq erc-fill-column (- (window-width w) 2)))))))))
 
-  (add-hook 'erc-mode-hook (lambda ()
-                             (set (make-local-variable 'scroll-conservatively) 1000)))
+    (add-hook 'erc-mode-hook (lambda ()
+                               (set (make-local-variable 'scroll-conservatively) 1000)))
 
-  (erc-spelling-mode 1)
+    (erc-spelling-mode 1)
 
-  (setq erc-prompt-for-password nil
-        erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                      ("forestnet" "#fo2"))
-        erc-server-reconnect-timeout 10
-        erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
-        erc-track-exclude-server-buffer t
-        erc-track-showcount t
-        erc-track-switch-direction 'importance
-        erc-track-visibility 'selected-visible
-        erc-insert-timestamp-function 'erc-insert-timestamp-left
-        erc-timestamp-only-if-changed-flag nil
-        erc-timestamp-format "[%H:%M] "
-        erc-header-line-format "%t: %o"
-        erc-interpret-mirc-color t
-        erc-button-buttonize-nicks nil
-        erc-format-nick-function 'erc-format-@nick
-        erc-nick-uniquifier "_"
-        erc-show-my-nick nil
-        erc-prompt (lambda ()
-                     (concat (buffer-name) ">"))))
+    (setq erc-prompt-for-password nil
+          erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
+                                        ("forestnet" "#fo2"))
+          erc-server-reconnect-timeout 10
+          erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
+          erc-track-exclude-server-buffer t
+          erc-track-showcount t
+          erc-track-switch-direction 'importance
+          erc-track-visibility 'selected-visible
+          erc-insert-timestamp-function 'erc-insert-timestamp-left
+          erc-timestamp-only-if-changed-flag nil
+          erc-timestamp-format "[%H:%M] "
+          erc-header-line-format "%t: %o"
+          erc-interpret-mirc-color t
+          erc-button-buttonize-nicks nil
+          erc-format-nick-function 'erc-format-@nick
+          erc-nick-uniquifier "_"
+          erc-show-my-nick nil
+          erc-prompt (lambda ()
+                       (concat (buffer-name) ">")))))
 
 ;; Calendar configuration
 (use-package calendar
@@ -434,16 +453,17 @@
 (use-package org
   :defer t
   :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((C . t)
-     (emacs-lisp . t)
-     (sh . t)))
-  (setq org-log-done 'time
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+  (progn
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((C . t)
+       (emacs-lisp . t)
+       (sh . t)))
+    (setq org-log-done 'time
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t)))
 
 ;; Load changes from the customize interface
-(setq custom-file my-custom-file)
-(if (file-exists-p my-custom-file)
-    (load my-custom-file))
+(setq custom-file drot/custom-file)
+(if (file-exists-p drot/custom-file)
+    (load drot/custom-file))
