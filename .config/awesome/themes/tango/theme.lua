@@ -6,7 +6,7 @@ theme = {}
 
 theme.font = "Terminus 10"
 theme.icons_dir = os.getenv("HOME") .. "/.config/awesome/icons"
-theme.wallpaper = "/home/drot/Pictures/mountains.jpg"
+theme.wallpaper = "/home/drot/Pictures/cathedral.jpg"
 
 theme.bg_normal = "#2e3436"
 theme.bg_focus = "#555753"
@@ -17,7 +17,7 @@ theme.bg_systray = theme.bg_focus
 theme.fg_normal = "#eeeeec"
 theme.fg_focus = "#8ae234"
 theme.fg_urgent = theme.fg_normal
-theme.fg_minimize = theme.bg_focus
+theme.fg_minimize = "#06989a"
 
 theme.border_width = 1
 theme.border_normal = theme.bg_focus
