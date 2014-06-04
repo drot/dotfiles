@@ -69,9 +69,12 @@
 ;; Show tooltips in echo area
 (tooltip-mode 0)
 
-;; Indicate buffer boundaries
+;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'right
               indicate-empty-lines t)
+
+;; Display read-only buffers in view mode
+(setq view-read-only t)
 
 ;; Pretty lambda
 (global-prettify-symbols-mode 1)
@@ -128,12 +131,6 @@
   (progn
     (setq show-paren-delay 0)
     (show-paren-mode 1)))
-
-;; Delete a selection with a keypress
-(use-package delsel
-  :config
-  (progn
-    (delete-selection-mode 1)))
 
 ;; Scroll compilation buffer to first error
 (use-package compile
