@@ -69,12 +69,16 @@
 ;; Show tooltips in echo area
 (tooltip-mode 0)
 
+;; Delete duplicates from minibuffer history
+(setq history-delete-duplicates t)
+
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'right
               indicate-empty-lines t)
 
 ;; Display read-only buffers in view mode
-(setq view-read-only t)
+(setq view-read-only t
+      view-inhibit-help-message t)
 
 ;; Pretty lambda
 (global-prettify-symbols-mode 1)
