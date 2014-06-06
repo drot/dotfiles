@@ -28,6 +28,9 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode 0)
 
+;; Disable cursor blinking
+(blink-cursor-mode 0)
+
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
@@ -95,8 +98,16 @@
 (setq mouse-yank-at-point t)
 
 ;; Color theme
-(use-package naquadah-theme
-  :ensure t)
+(use-package alect-themes
+  :ensure t
+  :config
+  (progn
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-black t)))
 
 ;; Save minibuffer history
 (use-package savehist
