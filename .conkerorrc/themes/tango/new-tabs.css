@@ -13,7 +13,7 @@
     border-width: 1px;
     background: #2e3436;
     color: #eeeeec;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
 }
 
@@ -21,7 +21,7 @@
     background: #555753;
     color: #8ae234;
     border-style: solid;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
 }
 
@@ -35,7 +35,7 @@
     margin-left: 4pt;
     padding-top: 1pt;
     color: #eeeeeec;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
 }
 
@@ -50,7 +50,7 @@
     -moz-margin-end: 3pt;
     background: #555753;
     color: #eeeeec;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
     text-align: center;
 }

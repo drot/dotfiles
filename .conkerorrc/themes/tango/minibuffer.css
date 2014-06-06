@@ -3,7 +3,7 @@
 #minibuffer {
     background-color: #2e3436 !important;
     color: #eeeeec !important;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
 }
 
@@ -25,7 +25,7 @@ tree.completions {
     border: 0px none !important;
     background-color: #2e3436 !important;
     color: #eeeeec !important;
-    font-family: Terminus;
+    font-family: Gohufont;
     font-size: 14px;
     font-style: normal !Important;
 }

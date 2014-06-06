@@ -1,7 +1,7 @@
 ! Cursor
 Xcursor.theme: Neutral
 
-Emacs.font: Terminus-10
+Emacs.font: Gohufont-10
 
 ! URXVT
 ! General
