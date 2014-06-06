@@ -28,12 +28,47 @@
 ;; Turn off the scrollbar
 (scroll-bar-mode 0)
 
+;; Show tooltips in the echo area
+(tooltip-mode 0)
+
 ;; Disable cursor blinking
 (blink-cursor-mode 0)
+
+;; Show column number and buffer size on the modeline
+(column-number-mode 1)
+(size-indication-mode 1)
+
+;; Indicate buffer boundaries and empty lines
+(setq-default indicate-buffer-boundaries 'right
+              indicate-empty-lines t)
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
+
+;; Answer y or n instead of yes or no at prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Show unfinished keystrokes early
+(setq echo-keystrokes 0.1)
+
+;; Enable recursive minibuffers and indicate depth
+(setq enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode 1)
+
+;; Delete duplicates from minibuffer history
+(setq history-delete-duplicates t)
+
+;; Ignore case on completion
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
+;; Use spaces instead of tabs and set default tab width
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
+;; Enable all disabled commands
+(setq disabled-command-function nil)
 
 ;; Configuration for backup files
 (setq backup-directory-alist `((".*" . ,drot/save-directory))
@@ -44,70 +79,25 @@
       delete-old-versions t
       backup-by-copying t)
 
-;; Use spaces instead of tabs and set default tab width
-(setq-default indent-tabs-mode nil
-              tab-width 4)
+;; Keep point on same position when scrolling
+(setq scroll-preserve-screen-position 1)
 
-;; Enable all disabled commands
-(setq disabled-command-function nil)
-
-;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
-
-;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
-
-;; Show column number and buffer size on the modeline
-(column-number-mode 1)
-(size-indication-mode 1)
-
-;; Enable recursive minibuffers and indicate depth
-(setq enable-recursive-minibuffers t)
-(minibuffer-depth-indicate-mode 1)
-
-;; Show tooltips in echo area
-(tooltip-mode 0)
-
-;; Delete duplicates from minibuffer history
-(setq history-delete-duplicates t)
-
-;; Indicate buffer boundaries and empty lines
-(setq-default indicate-buffer-boundaries 'right
-              indicate-empty-lines t)
+;; Mouse yank at point instead of click
+(setq mouse-yank-at-point t)
 
 ;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
 
-;; Pretty lambda
+;; Pretty lambdas
 (global-prettify-symbols-mode 1)
 
-;; Keep point on same position when scrolling
-(setq scroll-preserve-screen-position 1)
-
-;; Enable X clipboard usage
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t
-      save-interprogram-paste-before-kill t)
-
-;; Mouse yank at point instead of click
-(setq mouse-yank-at-point t)
-
 ;; Color theme
-(use-package alect-themes
+(use-package naquadah-theme
   :ensure t
   :config
   (progn
-    (defadvice custom-theme-set-variables
-        (around fix-inhibit-bug activate)
-      "Allow setting of undefined variables in themes."
-      (let (custom--inhibit-theme-enable)
-        ad-do-it))
-    (load-theme 'alect-black t)))
+    (load-theme 'naquadah t)))
 
 ;; Save minibuffer history
 (use-package savehist
