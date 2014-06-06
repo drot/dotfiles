@@ -288,6 +288,11 @@
                             (awk-mode . "awk")
                             (other . "stroustrup")))))
 
+;; Magit
+(use-package magit
+  :ensure t
+  :defer t)
+
 ;; Lua mode
 (use-package lua-mode
   :ensure t
