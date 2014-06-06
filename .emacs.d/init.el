@@ -59,6 +59,9 @@
 ;; Delete duplicates from minibuffer history
 (setq history-delete-duplicates t)
 
+;; Enable all disabled commands
+(setq disabled-command-function nil)
+
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
@@ -67,8 +70,12 @@
 (setq-default indent-tabs-mode nil
               tab-width 4)
 
-;; Enable all disabled commands
-(setq disabled-command-function nil)
+;; Pretty lambdas
+(global-prettify-symbols-mode 1)
+
+;; Display read-only buffers in view mode
+(setq view-read-only t
+      view-inhibit-help-message t)
 
 ;; Configuration for backup files
 (setq backup-directory-alist `((".*" . ,drot/save-directory))
@@ -84,13 +91,6 @@
 
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
-
-;; Display read-only buffers in view mode
-(setq view-read-only t
-      view-inhibit-help-message t)
-
-;; Pretty lambdas
-(global-prettify-symbols-mode 1)
 
 ;; Color theme
 (use-package naquadah-theme
@@ -158,6 +158,20 @@
   (progn
     (setq ediff-split-window-function 'split-window-horizontally
           ediff-window-setup-function 'ediff-setup-windows-plain)))
+
+
+;; Highlight regexps interactively
+(use-package hi-lock
+  :config
+  (progn
+    (global-hi-lock-mode 1)))
+
+;; Regexp builder
+(use-package re-builder
+  :defer t
+  :config
+  (progn
+    (setq reb-re-syntax 'string)))
 
 ;; TRAMP configuration
 (use-package tramp
