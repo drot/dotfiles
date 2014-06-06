@@ -4,7 +4,7 @@
 
 theme = {}
 
-theme.font = "Gohufont 10"
+theme.font = "Terminus 10"
 theme.icons_dir = themes_dir .. "tango/icons/"
 theme.wallpaper = themes_dir .. "tango/tango.png"
 
