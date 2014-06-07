@@ -440,7 +440,8 @@
                           (setq erc-fill-column (- (window-width w) 2)))))))))
 
     (add-hook 'erc-mode-hook (lambda ()
-                               (set (make-local-variable 'scroll-conservatively) 1000)))
+                               (set (make-local-variable 'scroll-conservatively) 1000)
+                               (company-mode 0)))
 
     (erc-spelling-mode 1)
 
