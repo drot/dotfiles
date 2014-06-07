@@ -428,20 +428,24 @@
     (add-to-list 'erc-modules 'notifications)
     (add-to-list 'erc-modules 'smiley)
 
-    (make-variable-buffer-local 'erc-fill-column)
-    (add-hook 'window-configuration-change-hook
-              '(lambda ()
-                 (save-excursion
-                   (walk-windows
-                    (lambda (w)
-                      (let ((buffer (window-buffer w)))
-                        (set-buffer buffer)
-                        (when (eq major-mode 'erc-mode)
-                          (setq erc-fill-column (- (window-width w) 2)))))))))
+    (defun drot/erc-fill-hook ()
+      "Set fill width to be dynamic in ERC buffers."
+      (save-excursion
+        (walk-windows
+         (lambda (w)
+           (let ((buffer (window-buffer w)))
+             (set-buffer buffer)
+             (when (eq major-mode 'erc-mode)
+               (setq erc-fill-column (- (window-width w) 2))))))))
 
-    (add-hook 'erc-mode-hook (lambda ()
-                               (set (make-local-variable 'scroll-conservatively) 1000)
-                               (company-mode 0)))
+    (defun drot/erc-mode-hook ()
+      "Keep prompt at bottom and disable Company mode."
+      (set (make-local-variable 'scroll-conservatively) 1000)
+      (company-mode 0))
+
+    (make-variable-buffer-local 'erc-fill-column)
+    (add-hook 'window-configuration-change-hook 'drot/erc-fill-hook)
+    (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
 
     (erc-spelling-mode 1)
 
