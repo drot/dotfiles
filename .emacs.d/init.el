@@ -123,6 +123,12 @@
     (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
           bookmark-save-flag 1)))
 
+;; Find file at point
+(use-package ffap
+  :config
+  (progn
+    (ffap-bindings)))
+
 ;; Eshell save directory
 (use-package eshell
   :defer t
