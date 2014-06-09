@@ -41,8 +41,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-themes_dir = os.getenv("HOME") .. "/.config/awesome/themes"
-beautiful.init(themes_dir .. "/tango/theme.lua")
+themes_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
+beautiful.init(themes_dir .. "tango/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -213,12 +213,6 @@ vicious.cache(vicious.contrib.pulse)
 -- Register widgets
 vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
 vicious.register(volbar, vicious.contrib.pulse, "$1", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
-volbar:buttons(awful.util.table.join(
-                  awful.button({ }, 4, function ()
-                        vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
-                  awful.button({ }, 5, function ()
-                        vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end)
-))
 -- }}}
 
 -- {{{ Separator
@@ -409,6 +403,10 @@ globalkeys = awful.util.table.join(
 
    -- Scratchpad
    awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 600, 300) end),
+
+   -- Volume control
+   awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
+   awful.key({ modkey }, "-", function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
 
    awful.key({ modkey }, "x",
       function ()
