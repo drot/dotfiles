@@ -4,6 +4,7 @@ export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export PAGER=less
 export BROWSER=conkeror
+export PULSE_LATENCY_MSEC=60
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 # History
@@ -14,7 +15,7 @@ export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 
 # Color grep and man pages
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;39;41' # beautify grep
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32;41' # beautify grep
 export GROFF_NO_SGR=1 # output ANSI color escape sequences in raw form
 export LESS_TERMCAP_mb=$'\E[1;31m' # blinking
 export LESS_TERMCAP_md=$'\E[1;32m' # bold, used for headings
