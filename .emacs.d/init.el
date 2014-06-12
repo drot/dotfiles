@@ -289,8 +289,7 @@
                              company-keywords
                              company-files
                              company-dabbrev))
-    (add-hook 'prog-mode-hook 'company-mode)
-    (bind-key "C-c y" 'company-yasnippet)))
+    (global-company-mode 1)))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -446,8 +445,9 @@
                (setq erc-fill-column (- (window-width w) 2))))))))
 
     (defun drot/erc-mode-hook ()
-      "Keep prompt at bottom."
-      (set (make-local-variable 'scroll-conservatively) 1000))
+      "Keep prompt at bottom and disable Company mode."
+      (set (make-local-variable 'scroll-conservatively) 1000)
+      (company-mode 0))
 
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook 'drot/erc-fill-hook)
@@ -496,10 +496,6 @@
           calendar-location-name "Mostar, Bosnia and Herzegovina")))
 
 ;; Org mode configuration
-(bind-keys*
- ("C-c l" . org-store-link)
- ("C-c a" . org-agenda))
-
 (use-package org
   :defer t
   :config
@@ -512,6 +508,12 @@
     (setq org-log-done 'time
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
+
+;; Custom keybindings
+(bind-keys*
+ ("C-c l" . org-store-link)
+ ("C-c a" . org-agenda)
+ ("C-c y" . company-yasnippet))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
