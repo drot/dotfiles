@@ -8,6 +8,10 @@
 (defvar drot/custom-file (expand-file-name "custom.el" drot/save-directory)
   "Store changes from the customize interface in the selected file.")
 
+(defvar drot/yas-directory (expand-file-name "snippets" drot/emacs-directory)
+  "This directory houses all snippets.")
+(make-directory drot/yas-directory t)
+
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
       package-enable-at-startup nil)
@@ -275,10 +279,18 @@
   (progn
     (setq company-echo-delay 0
           company-show-numbers t
-          company-backends '(company-nxml company-css company-eclim company-semantic
-                                          company-capf company-dabbrev-code company-etags
-                                          company-keywords company-files company-dabbrev))
-    (global-company-mode 1)))
+          company-backends '(company-nxml
+                             company-css
+                             company-eclim
+                             company-semantic
+                             company-capf
+                             company-dabbrev-code
+                             company-etags
+                             company-keywords
+                             company-files
+                             company-dabbrev))
+    (add-hook 'prog-mode-hook 'company-mode)
+    (bind-key "C-c y" 'company-yasnippet)))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -389,23 +401,12 @@
     (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
     (add-hook 'python-mode-hook 'hs-minor-mode)))
 
-;; Skeleton mode configuration
-(use-package skeleton
+;; YASnippet
+(use-package yasnippet
+  :ensure t
   :config
   (progn
-    (setq skeleton-further-elements '((abbrev-mode nil)))))
-
-(define-skeleton cpp-skeleton
-  "C++ skeleton"
-  nil
-  "#include <iostream>\n"
-  "\n"
-  "int main ()\n"
-  "{\n"
-  > _
-  "\n"
-  > "return 0;"
-  "\n}")
+    (yas-global-mode 1)))
 
 ;; Undo Tree
 (use-package undo-tree
@@ -445,9 +446,8 @@
                (setq erc-fill-column (- (window-width w) 2))))))))
 
     (defun drot/erc-mode-hook ()
-      "Keep prompt at bottom and disable Company mode."
-      (set (make-local-variable 'scroll-conservatively) 1000)
-      (company-mode 0))
+      "Keep prompt at bottom."
+      (set (make-local-variable 'scroll-conservatively) 1000))
 
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook 'drot/erc-fill-hook)
@@ -497,8 +497,8 @@
 
 ;; Org mode configuration
 (bind-keys*
- ("\C-cl" . org-store-link)
- ("\C-ca" . org-agenda))
+ ("C-c l" . org-store-link)
+ ("C-c a" . org-agenda))
 
 (use-package org
   :defer t
