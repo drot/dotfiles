@@ -452,6 +452,7 @@
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook 'drot/erc-fill-hook)
     (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
+    (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
 
     (erc-spelling-mode 1)
 
@@ -460,6 +461,7 @@
                                         ("forestnet" "#fo2"))
           erc-server-reconnect-timeout 10
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
+          erc-truncate-buffer-on-save t
           erc-track-exclude-server-buffer t
           erc-track-showcount t
           erc-track-switch-direction 'importance
