@@ -384,6 +384,16 @@
     (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
     (add-hook 'python-mode-hook 'hs-minor-mode)))
 
+;; Lua mode
+(use-package lua-mode
+  :ensure t
+  :defer t)
+
+;; Magit
+(use-package magit
+  :ensure t
+  :defer t)
+
 ;; Org mode configuration
 (use-package org
   :defer t
@@ -397,16 +407,6 @@
     (setq org-log-done 'time
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
-
-;; Lua mode
-(use-package lua-mode
-  :ensure t
-  :defer t)
-
-;; Magit
-(use-package magit
-  :ensure t
-  :defer t)
 
 ;; ParEdit
 (use-package paredit
