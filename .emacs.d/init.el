@@ -486,7 +486,12 @@
   :config
   (progn
     (setq company-echo-delay 0
-          company-show-numbers t)
+          company-show-numbers t
+          company-backends '(company-nxml
+                             company-css
+                             company-capf (company-dabbrev-code company-keywords)
+                             company-files
+                             company-dabbrev))
     (global-company-mode 1)))
 
 ;; Undo Tree
