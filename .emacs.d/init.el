@@ -333,7 +333,7 @@
 (defun irc ()
   "Connect to IRC."
   (interactive)
-  (erc-tls :server "orwell.freenode.net" :port 6697
+  (erc-tls :server "adams.freenode.net" :port 6697
            :nick "drot")
   (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))
