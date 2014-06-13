@@ -244,6 +244,20 @@
     (setq doc-view-resolution 300
           doc-view-continuous t)))
 
+;; Org mode configuration
+(use-package org
+  :defer t
+  :config
+  (progn
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((C . t)
+       (emacs-lisp . t)
+       (sh . t)))
+    (setq org-log-done 'time
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t)))
+
 ;; Open URLs in Conkeror
 (use-package browse-url
   :defer t
@@ -393,20 +407,6 @@
 (use-package magit
   :ensure t
   :defer t)
-
-;; Org mode configuration
-(use-package org
-  :defer t
-  :config
-  (progn
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((C . t)
-       (emacs-lisp . t)
-       (sh . t)))
-    (setq org-log-done 'time
-          org-src-fontify-natively t
-          org-src-tab-acts-natively t)))
 
 ;; ParEdit
 (use-package paredit
