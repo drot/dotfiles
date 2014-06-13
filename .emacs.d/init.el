@@ -103,6 +103,13 @@
   (progn
     (load-theme 'naquadah t)))
 
+;; Icomplete
+(use-package icomplete
+  :config
+  (progn
+    (setq icomplete-prospects-height 1)
+    (icomplete-mode 1)))
+
 ;; Save minibuffer history
 (use-package savehist
   :config
@@ -119,26 +126,11 @@
     (setq save-place-file (expand-file-name "saved-places" drot/save-directory))
     (setq-default save-place t)))
 
-;; Bookmarks save directory
-(use-package bookmark
-  :defer t
-  :config
-  (progn
-    (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
-          bookmark-save-flag 1)))
-
 ;; Find file at point
 (use-package ffap
   :config
   (progn
     (ffap-bindings)))
-
-;; Eshell save directory
-(use-package eshell
-  :defer t
-  :config
-  (progn
-    (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory))))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -147,12 +139,40 @@
     (setq show-paren-delay 0)
     (show-paren-mode 1)))
 
-;; Scroll compilation buffer to first error
-(use-package compile
+;; Highlight regexps interactively
+(use-package hi-lock
+  :config
+  (progn
+    (global-hi-lock-mode 1)))
+
+;; Regexp builder
+(use-package re-builder
   :defer t
   :config
   (progn
-    (setq compilation-scroll-output 'first-error)))
+    (setq reb-re-syntax 'string)))
+
+;; Bookmarks save directory
+(use-package bookmark
+  :defer t
+  :config
+  (progn
+    (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
+          bookmark-save-flag 1)))
+
+;; Eshell save directory
+(use-package eshell
+  :defer t
+  :config
+  (progn
+    (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory))))
+
+;; Use ANSI colors within shell-mode
+(use-package shell
+  :defer t
+  :config
+  (progn
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
 
 ;; Use Unified diff format
 (use-package diff
@@ -169,19 +189,19 @@
     (setq ediff-split-window-function 'split-window-horizontally
           ediff-window-setup-function 'ediff-setup-windows-plain)))
 
-
-;; Highlight regexps interactively
-(use-package hi-lock
+;; Use Ibuffer for buffer list
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
   :config
   (progn
-    (global-hi-lock-mode 1)))
+    (setq ibuffer-default-sorting-mode 'major-mode)))
 
-;; Regexp builder
-(use-package re-builder
+;; Scroll compilation buffer to first error
+(use-package compile
   :defer t
   :config
   (progn
-    (setq reb-re-syntax 'string)))
+    (setq compilation-scroll-output 'first-error)))
 
 ;; TRAMP configuration
 (use-package tramp
@@ -199,12 +219,38 @@
   (progn
     (setq gnutls-min-prime-bits 1024)))
 
-;; Use ANSI colors within shell-mode
-(use-package shell
+;; Calendar configuration
+(use-package calendar
   :defer t
   :config
   (progn
-    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
+    (setq calendar-mark-holidays-flag t
+          holiday-general-holidays nil
+          holiday-bahai-holidays nil
+          holiday-oriental-holidays nil
+          holiday-solar-holidays nil
+          holiday-islamic-holidays nil
+          holiday-hebrew-holidays nil
+          calendar-date-style 'european
+          calendar-latitude 43.20
+          calendar-longitude 17.48
+          calendar-location-name "Mostar, Bosnia and Herzegovina")))
+
+;; Doc View mode configuration
+(use-package doc-view
+  :defer t
+  :config
+  (progn
+    (setq doc-view-resolution 300
+          doc-view-continuous t)))
+
+;; Open URLs in Conkeror
+(use-package browse-url
+  :defer t
+  :config
+  (progn
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "conkeror")))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
@@ -241,56 +287,6 @@
     (add-hook 'text-mode-hook 'flyspell-mode)
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 
-;; Doc View mode configuration
-(use-package doc-view
-  :defer t
-  :config
-  (progn
-    (setq doc-view-resolution 300
-          doc-view-continuous t)))
-
-;; Open URLs in Conkeror
-(use-package browse-url
-  :defer t
-  :config
-  (progn
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program "conkeror")))
-
-;; Use Ibuffer for buffer list
-(use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
-  :config
-  (progn
-    (setq ibuffer-default-sorting-mode 'major-mode)))
-
-;; Icomplete
-(use-package icomplete
-  :config
-  (progn
-    (setq icomplete-prospects-height 1)
-    (icomplete-mode 1)))
-
-;; Company mode
-(use-package company
-  :ensure t
-  :diminish "co"
-  :config
-  (progn
-    (setq company-echo-delay 0
-          company-show-numbers t
-          company-backends '(company-nxml
-                             company-css
-                             company-eclim
-                             company-semantic
-                             company-capf
-                             company-dabbrev-code
-                             company-etags
-                             company-keywords
-                             company-files
-                             company-dabbrev))
-    (global-company-mode 1)))
-
 ;; CC mode configuration
 (use-package cc-mode
   :defer t
@@ -318,105 +314,6 @@
           c-default-style '((java-mode . "java")
                             (awk-mode . "awk")
                             (other . "stroustrup")))))
-
-;; Magit
-(use-package magit
-  :ensure t
-  :defer t)
-
-;; Lua mode
-(use-package lua-mode
-  :ensure t
-  :defer t)
-
-;; PKGBUILD mode
-(use-package pkgbuild-mode
-  :ensure t
-  :defer t)
-
-;; ParEdit
-(use-package paredit
-  :ensure t
-  :diminish "PEd"
-  :config
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-    (add-hook 'ielm-mode-hook 'paredit-mode)
-    (add-hook 'lisp-mode-hook 'paredit-mode)
-    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-    (add-hook 'scheme-mode-hook 'paredit-mode)
-
-    (defvar drot/paredit-minibuffer-commands '(eval-expression
-                                               pp-eval-expression
-                                               eval-expression-with-eldoc
-                                               ibuffer-do-eval
-                                               ibuffer-do-view-and-eval)
-      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
-
-    (defun drot/paredit-minibuffer ()
-      "Enable ParEdit during lisp-related minibuffer commands."
-      (if (memq this-command drot/paredit-minibuffer-commands)
-          (paredit-mode)))
-
-    (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
-
-    (defun drot/paredit-slime-fix ()
-      "Fix ParEdit conflict with SLIME."
-      (define-key slime-repl-mode-map
-        (read-kbd-macro paredit-backward-delete-key) nil))
-
-    (add-hook 'slime-repl-mode-hook 'paredit-mode)
-    (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
-
-    (put 'paredit-forward-delete 'delete-selection 'supersede)
-    (put 'paredit-backward-delete 'delete-selection 'supersede)
-    (put 'paredit-open-round 'delete-selection t)
-    (put 'paredit-open-square 'delete-selection t)
-    (put 'paredit-doublequote 'delete-selection t)
-    (put 'paredit-newline 'delete-selection t)))
-
-;; Show documentation with ElDoc mode
-(use-package eldoc
-  :config
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-    (add-hook 'ielm-mode-hook 'eldoc-mode)
-    (eldoc-add-command 'paredit-backward-delete
-                       'paredit-close-round)))
-
-;; Rainbow Delimiters
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (progn
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
-
-;; Hide Show mode
-(use-package hideshow
-  :config
-  (progn
-    (add-hook 'c-mode-common-hook 'hs-minor-mode)
-    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-    (add-hook 'python-mode-hook 'hs-minor-mode)))
-
-;; YASnippet
-(use-package yasnippet
-  :ensure t
-  :config
-  (progn
-    (setq yas-verbosity 1)
-    (yas-global-mode 1)))
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish "UT"
-  :config
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,drot/save-directory))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
 
 ;; ERC configuration
 (defun irc ()
@@ -479,22 +376,13 @@
           erc-prompt (lambda ()
                        (concat (buffer-name) ">")))))
 
-;; Calendar configuration
-(use-package calendar
-  :defer t
+;; Hide Show mode
+(use-package hideshow
   :config
   (progn
-    (setq calendar-mark-holidays-flag t
-          holiday-general-holidays nil
-          holiday-bahai-holidays nil
-          holiday-oriental-holidays nil
-          holiday-solar-holidays nil
-          holiday-islamic-holidays nil
-          holiday-hebrew-holidays nil
-          calendar-date-style 'european
-          calendar-latitude 43.20
-          calendar-longitude 17.48
-          calendar-location-name "Mostar, Bosnia and Herzegovina")))
+    (add-hook 'c-mode-common-hook 'hs-minor-mode)
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+    (add-hook 'python-mode-hook 'hs-minor-mode)))
 
 ;; Org mode configuration
 (use-package org
@@ -509,6 +397,107 @@
     (setq org-log-done 'time
           org-src-fontify-natively t
           org-src-tab-acts-natively t)))
+
+;; Lua mode
+(use-package lua-mode
+  :ensure t
+  :defer t)
+
+;; Magit
+(use-package magit
+  :ensure t
+  :defer t)
+
+;; ParEdit
+(use-package paredit
+  :ensure t
+  :diminish "PEd"
+  :config
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+    (add-hook 'ielm-mode-hook 'paredit-mode)
+    (add-hook 'lisp-mode-hook 'paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
+    (add-hook 'scheme-mode-hook 'paredit-mode)
+
+    (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                               pp-eval-expression
+                                               eval-expression-with-eldoc
+                                               ibuffer-do-eval
+                                               ibuffer-do-view-and-eval)
+      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+    (defun drot/paredit-minibuffer ()
+      "Enable ParEdit during lisp-related minibuffer commands."
+      (if (memq this-command drot/paredit-minibuffer-commands)
+          (paredit-mode)))
+
+    (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
+
+    (defun drot/paredit-slime-fix ()
+      "Fix ParEdit conflict with SLIME."
+      (define-key slime-repl-mode-map
+        (read-kbd-macro paredit-backward-delete-key) nil))
+
+    (add-hook 'slime-repl-mode-hook 'paredit-mode)
+    (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
+
+    (put 'paredit-forward-delete 'delete-selection 'supersede)
+    (put 'paredit-backward-delete 'delete-selection 'supersede)
+    (put 'paredit-open-round 'delete-selection t)
+    (put 'paredit-open-square 'delete-selection t)
+    (put 'paredit-doublequote 'delete-selection t)
+    (put 'paredit-newline 'delete-selection t)))
+
+;; Show documentation with ElDoc mode
+(use-package eldoc
+  :config
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+    (add-hook 'ielm-mode-hook 'eldoc-mode)
+    (eldoc-add-command 'paredit-backward-delete
+                       'paredit-close-round)))
+
+;; PKGBUILD mode
+(use-package pkgbuild-mode
+  :ensure t
+  :defer t)
+
+;; Rainbow Delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (progn
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+
+;; YASnippet
+(use-package yasnippet
+  :ensure t
+  :config
+  (progn
+    (setq yas-verbosity 1)
+    (yas-global-mode 1)))
+
+;; Company mode
+(use-package company
+  :ensure t
+  :diminish "co"
+  :config
+  (progn
+    (setq company-echo-delay 0
+          company-show-numbers t)
+    (global-company-mode 1)))
+
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish "UT"
+  :config
+  (progn
+    (setq undo-tree-history-directory-alist `((".*" . ,drot/save-directory))
+          undo-tree-auto-save-history t)
+    (global-undo-tree-mode 1)))
 
 ;; Custom keybindings
 (bind-keys*
