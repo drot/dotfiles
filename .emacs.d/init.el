@@ -405,6 +405,7 @@
   :ensure t
   :config
   (progn
+    (setq yas-verbosity 1)
     (yas-global-mode 1)))
 
 ;; Undo Tree
