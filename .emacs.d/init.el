@@ -390,14 +390,6 @@
           erc-prompt (lambda ()
                        (concat (buffer-name) ">")))))
 
-;; Hide Show mode
-(use-package hideshow
-  :config
-  (progn
-    (add-hook 'c-mode-common-hook 'hs-minor-mode)
-    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-    (add-hook 'python-mode-hook 'hs-minor-mode)))
-
 ;; Lua mode
 (use-package lua-mode
   :ensure t
@@ -458,6 +450,14 @@
     (add-hook 'ielm-mode-hook 'eldoc-mode)
     (eldoc-add-command 'paredit-backward-delete
                        'paredit-close-round)))
+
+;; Hide Show mode
+(use-package hideshow
+  :config
+  (progn
+    (add-hook 'c-mode-common-hook 'hs-minor-mode)
+    (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+    (add-hook 'python-mode-hook 'hs-minor-mode)))
 
 ;; PKGBUILD mode
 (use-package pkgbuild-mode
