@@ -42,7 +42,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 themes_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
-beautiful.init(themes_dir .. "tango/theme.lua")
+beautiful.init(themes_dir .. "zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -125,9 +125,9 @@ cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
 cpugraph:set_width(45)
-cpugraph:set_background_color(beautiful.bg_normal)
-cpugraph:set_color(beautiful.fg_focus)
-cpugraph:set_border_color(beautiful.border_normal)
+cpugraph:set_background_color(beautiful.bg_widget)
+cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
+                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
@@ -144,9 +144,9 @@ membar = awful.widget.progressbar()
 -- Progressbar properties
 membar:set_vertical(true):set_ticks(true)
 membar:set_width(15):set_ticks_size(3)
-membar:set_background_color(beautiful.bg_normal)
-membar:set_color(beautiful.fg_focus)
-membar:set_border_color(beautiful.border_normal)
+membar:set_background_color(beautiful.bg_widget)
+membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
+                      {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
@@ -163,9 +163,9 @@ tempbar = awful.widget.progressbar()
 -- Graph properties
 tempbar:set_vertical(true):set_ticks(true)
 tempbar:set_width(15):set_ticks_size(3)
-tempbar:set_background_color(beautiful.bg_normal)
-tempbar:set_color(beautiful.fg_focus)
-tempbar:set_border_color(beautiful.border_normal)
+tempbar:set_background_color(beautiful.bg_widget)
+tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
+                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
@@ -183,9 +183,9 @@ dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
 for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
    dstyle:set_width(7):set_ticks_size(3)
-   dstyle:set_background_color(beautiful.bg_normal)
-   dstyle:set_color(beautiful.fg_focus)
-   dstyle:set_border_color(beautiful.border_normal)
+   dstyle:set_background_color(beautiful.bg_widget)
+   dstyle:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
+                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 end
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
@@ -205,9 +205,9 @@ volbar = awful.widget.progressbar()
 -- Graph properties
 volbar:set_vertical(true):set_ticks(true)
 volbar:set_width(15):set_ticks_size(3)
-volbar:set_background_color(beautiful.bg_normal)
-volbar:set_color(beautiful.fg_focus)
-volbar:set_border_color(beautiful.border_normal)
+volbar:set_background_color(beautiful.bg_widget)
+volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
+                      {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
