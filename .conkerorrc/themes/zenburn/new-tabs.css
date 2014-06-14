@@ -16,6 +16,8 @@
     -moz-border-left-colors: #888 #555;
     -moz-border-right-colors: #000 #171717;
     -moz-border-top-colors: #888 #555;
+    min-width: 10em;
+    max-width: 15em;
     background: #383838;
     color: #E0CF9F;
     font-family: Terminus;
