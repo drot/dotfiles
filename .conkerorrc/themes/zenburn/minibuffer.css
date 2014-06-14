@@ -14,6 +14,7 @@
 }
 
 #minibuffer-prompt {
+    background-color: #2B2B2B !important;
     color: #E0CF9F !important;
     font-weight: bold;
 }
@@ -49,7 +50,7 @@ tree.completions treechildren::-moz-tree-cell-text(completion-description) {
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
-    color: #DCDCCD !important;
+    color: #E0CF9F !important;
 }
 
 tree.completions[hasicons="true"] treechildren::-moz-tree-image {
