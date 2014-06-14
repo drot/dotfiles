@@ -97,11 +97,16 @@
 (setq mouse-yank-at-point t)
 
 ;; Color theme
-(use-package naquadah-theme
+(use-package alect-themes
   :ensure t
   :config
   (progn
-    (load-theme 'naquadah t)))
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-black t)))
 
 ;; Icomplete
 (use-package icomplete
