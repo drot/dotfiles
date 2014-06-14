@@ -12,8 +12,6 @@ clickable_url = true
 font = Terminus 12
 scrollback_lines = 1000
 search_wrap = true
-#icon_name = terminal
-#geometry = 640x480
 
 # 0.0: opaque, 1.0: transparent
 transparency = 0.0
@@ -25,46 +23,37 @@ cursor_blink = off
 # "block", "underline" or "ibeam"
 cursor_shape = block
 
-# $BROWSER is used by default
-#browser = firefox
-
-# word characters used for word selection
-# (default if unset: all graphic non-punctuation/space characters)
-#word_chars = -A-Za-z0-9,./?%&#:_=+@~
-
 [colors]
-foreground = #FFFFFF
-#foreground_bold = #ffffff
-#foreground_dim = #888888
-background = #261515
-cursor = #E25454
+foreground = #DCDCCC
+background = #3F3F3F
+cursor = #DCDCCC
 
 # if unset, will reverse foreground and background
-highlight = #757575
+highlight = #5F5F5F
 
 # colors from color0 to color254 can be set
-color0 = #757575
-color1 = #FF5F5F
-color2 = #DE8A36
-color3 = #D78787
-color4 = #AF5FD7
-color5 = #FF87D7
-color6 = #DEA3E5
-color7 = #B8B8B8
-color8 = #B8B8B8
-color9 = #D78787
-color10 = #FF9F6F
-color11 = #FF5F5F
-color12 = #DEA3E5
-color13 = #D7AFAF
-color14 = #AF5FD7
-color15 = #757575
+color0 = #3F3F3F
+color1 = #BC8383
+color2 = #5F7F5F
+color3 = #E0CF9F
+color4 = #7CB8BB
+color5 = #DC8CC3
+color6 = #93E0E3
+color7 = #DCDCCC
+color8 = #5F5F5F
+color9 = #CC9393
+color10 = #7F9F7F
+color11 = #F0DFAF
+color12 = #8CD0D3
+color13 = #DC8CC3
+color14 = #93E0E3
+color15 = #FFFFFF
 
 [hints]
 font = Terminus 12
-foreground = #261515
-background = #AF5FD7
+foreground = #3F3F3F
+background = #F0DFAF
 padding = 1
-border = #DE8A36
+border = #5F5F5F
 border_width = 2.0
 roundness = 2.0

@@ -11,7 +11,7 @@ require('eye-guide.js');
 // Theme
 theme_load_paths.unshift("~/.conkerorrc/themes/");
 theme_unload("default");
-theme_load("tango");
+theme_load("zenburn");
 
 // The default page for new buffers.
 homepage = "about:blank";

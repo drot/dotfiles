@@ -1,19 +1,20 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 #minibuffer {
-    background-color: #2e3436 !important;
-    color: #eeeeec !important;
+    background-color: #3F3F3F !important;
+    border-top: 0 !important;
+    color: #DCDCCD !important;
     font-family: Terminus;
     font-size: 14px;
+    padding: 1px;
 }
 
 #minibuffer-input {
-    color: #eeeeec !important;
+    color: #DCDCCD !important;
 }
 
 #minibuffer-prompt {
-    background-color: #555753 !important;
-    color: #8ae234 !important;
+    color: #E0CF9F !important;
     font-weight: bold;
 }
 
@@ -23,8 +24,8 @@ tree.completions {
     -moz-appearance: none !important;
     margin: 0px !important;
     border: 0px none !important;
-    background-color: #2e3436 !important;
-    color: #eeeeec !important;
+    background-color: #3F3F3F !important;
+    color: #DCDCCD !important;
     font-family: Terminus;
     font-size: 14px;
     font-style: normal !Important;
@@ -35,20 +36,20 @@ tree.completions treechildren { border: none !important; }
 tree.completions treecol { -moz-binding: none !important; }
 
 tree.completions treechildren::-moz-tree-row {
-    background-color: #2e3436 !important;
+    background-color: #3F3F3F !important;
 }
 
 tree.completions treechildren::-moz-tree-row(current) {
-    background-color: #555753 !important;
-    color: #8ae234 !important;
+    background-color: #2B2B2B !important;
+    color: #DCDCCD !important;
 }
 
 tree.completions treechildren::-moz-tree-cell-text(completion-description) {
-    color: #8ae234 !important;
+    color: #808080 !important;
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
-    color: #8ae234 !important;
+    color: #DCDCCD !important;
 }
 
 tree.completions[hasicons="true"] treechildren::-moz-tree-image {

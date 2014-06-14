@@ -1,0 +1,18 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+.mode-line {
+    font-family: Terminus;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    padding: 0px !important;
+    -moz-appearance: none;
+    background-color: #2B2B2B !important;
+    border-top: 1px solid #656565;
+    border-bottom: 1px solid #111;
+    border-left: 1px solid #656565;
+    border-right: 1px solid #111;
+}
+
+.mode-line label {
+    color: #E0CF9F !important;
+}
