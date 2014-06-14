@@ -9,7 +9,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Terminus 10
+font = Terminus 12
 scrollback_lines = 1000
 search_wrap = true
 #icon_name = terminal
@@ -33,38 +33,38 @@ cursor_shape = block
 #word_chars = -A-Za-z0-9,./?%&#:_=+@~
 
 [colors]
-foreground = #eeeeec
+foreground = #FFFFFF
 #foreground_bold = #ffffff
 #foreground_dim = #888888
-background = #2e3436
-cursor = #cc0000
+background = #261515
+cursor = #E25454
 
 # if unset, will reverse foreground and background
-highlight = #555753
+highlight = #757575
 
 # colors from color0 to color254 can be set
-color0 = #2e3436
-color1 = #cc0000
-color2 = #4e9a06
-color3 = #c4a000
-color4 = #3465a4
-color5 = #75507b
-color6 = #06989a
-color7 = #d3d7cf
-color8 = #555753
-color9 = #ef2929
-color10 = #8ae234
-color11 = #fce94f
-color12 = #729fcf
-color13 = #ad7fa8
-color14 = #34e2e2
-color15 = #eeeeec
+color0 = #757575
+color1 = #FF5F5F
+color2 = #DE8A36
+color3 = #D78787
+color4 = #AF5FD7
+color5 = #FF87D7
+color6 = #DEA3E5
+color7 = #B8B8B8
+color8 = #B8B8B8
+color9 = #D78787
+color10 = #FF9F6F
+color11 = #FF5F5F
+color12 = #DEA3E5
+color13 = #D7AFAF
+color14 = #AF5FD7
+color15 = #757575
 
 [hints]
-font = Terminus 10
-foreground = #eeeeec
-background = #ef2929
+font = Terminus 12
+foreground = #261515
+background = #AF5FD7
 padding = 1
-border = #eeeeec
+border = #DE8A36
 border_width = 2.0
 roundness = 2.0
