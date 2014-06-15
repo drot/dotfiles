@@ -9,6 +9,7 @@ URxvt.loginShell: true
 URxvt.termName: rxvt-unicode-256color
 URxvt.saveLines: 80000
 URxvt.urgentOnBell: true
+URxvt.internalBorder: 0
 
 ! Scrolling
 URxvt.scrollBar: false
@@ -16,10 +17,15 @@ URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 
-! Extensions
-URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: conkeror
-URxvt.matcher.button: 1
+! Mouseless URL selection
+URxvt.perl-ext-common: default,url-select
+URxvt.url-select.launcher: conkeror
+URxvt.url-select.underline: true
+URxvt.keysym.C-i: perl:url-select:select_next
+
+! Disable extra functionality
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! Font
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
