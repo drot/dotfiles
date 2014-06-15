@@ -105,7 +105,7 @@ mymainmenu = awful.menu({ items = {
                              { "termite", terminal, beautiful.menu_term },
                              { "Emacs", "emacsclient -c", beautiful.menu_emacs },
                              { "Conkeror", "conkeror-start", beautiful.menu_browser },
-                             { "Skype", "skype-start", beautiful.menu_skype },
+                             { "Skype", "skype", beautiful.menu_skype },
                              { "Writer", "lowriter", beautiful.menu_writer },
                              { "GIMP", "gimp", beautiful.menu_gimp },
                              { "Thunar", "thunar", beautiful.menu_fman },
@@ -345,6 +345,7 @@ for s = 1, screen.count() do
    right_layout:add(diskicon)
    right_layout:add(dperc.r)
    right_layout:add(dusage.rmargin)
+   right_layout:add(separator)
    right_layout:add(dperc.h)
    right_layout:add(dusage.hmargin)
    right_layout:add(separator)
