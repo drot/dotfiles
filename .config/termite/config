@@ -9,7 +9,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Terminus 12
+font = Terminus 10
 scrollback_lines = 1000
 search_wrap = true
 
@@ -50,7 +50,7 @@ color14 = #93E0E3
 color15 = #FFFFFF
 
 [hints]
-font = Terminus 12
+font = Terminus 10
 foreground = #3F3F3F
 background = #F0DFAF
 padding = 1
