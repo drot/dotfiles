@@ -9,8 +9,6 @@ URxvt.loginShell: true
 URxvt.termName: rxvt-unicode-256color
 URxvt.saveLines: 80000
 URxvt.urgentOnBell: true
-URxvt.underlineURLs: true
-URxvt.internalBorder: 0
 
 ! Scrolling
 URxvt.scrollBar: false
