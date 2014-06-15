@@ -124,10 +124,14 @@ cpuicon:set_image(beautiful.widget_cpu)
 cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
-cpugraph:set_width(45)
+cpugraph:set_width(45):set_height(15)
 cpugraph:set_background_color(beautiful.bg_widget)
 cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
+cpumargin = wibox.layout.margin()
+cpumargin:set_widget(cpugraph)
+cpumargin:set_top(3)
+cpumargin:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
@@ -143,10 +147,14 @@ memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
 -- Progressbar properties
 membar:set_vertical(true):set_ticks(true)
-membar:set_width(15):set_ticks_size(3)
+membar:set_width(15):set_ticks_size(3):set_height(15)
 membar:set_background_color(beautiful.bg_widget)
 membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
+memmargin = wibox.layout.margin()
+memmargin:set_widget(membar)
+memmargin:set_top(3)
+memmargin:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
@@ -162,10 +170,14 @@ tempwidget = wibox.widget.textbox()
 tempbar = awful.widget.progressbar()
 -- Graph properties
 tempbar:set_vertical(true):set_ticks(true)
-tempbar:set_width(15):set_ticks_size(3)
+tempbar:set_width(15):set_ticks_size(3):set_height(15)
 tempbar:set_background_color(beautiful.bg_widget)
 tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
+tempmargin = wibox.layout.margin()
+tempmargin:set_widget(tempbar)
+tempmargin:set_top(3)
+tempmargin:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
@@ -182,11 +194,19 @@ dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
 -- Progressbar properties
 for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
-   dstyle:set_width(7):set_ticks_size(3)
+   dstyle:set_width(7):set_ticks_size(3):set_height(15)
    dstyle:set_background_color(beautiful.bg_widget)
    dstyle:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                          {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 end
+dusage.rmargin = wibox.layout.margin()
+dusage.rmargin:set_widget(dusage.r)
+dusage.rmargin:set_top(3)
+dusage.rmargin:set_bottom(3)
+dusage.hmargin = wibox.layout.margin()
+dusage.hmargin:set_widget(dusage.h)
+dusage.hmargin:set_top(3)
+dusage.hmargin:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widgets
@@ -204,10 +224,14 @@ volwidget = wibox.widget.textbox()
 volbar = awful.widget.progressbar()
 -- Graph properties
 volbar:set_vertical(true):set_ticks(true)
-volbar:set_width(15):set_ticks_size(3)
+volbar:set_width(15):set_ticks_size(3):set_height(15)
 volbar:set_background_color(beautiful.bg_widget)
 volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
+volmargin = wibox.layout.margin()
+volmargin:set_widget(volbar)
+volmargin:set_top(3)
+volmargin:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
@@ -308,25 +332,25 @@ for s = 1, screen.count() do
    local right_layout = wibox.layout.fixed.horizontal()
    right_layout:add(cpuicon)
    right_layout:add(cpuwidget)
-   right_layout:add(cpugraph)
+   right_layout:add(cpumargin)
    right_layout:add(separator)
    right_layout:add(memicon)
    right_layout:add(memwidget)
-   right_layout:add(membar)
+   right_layout:add(memmargin)
    right_layout:add(separator)
    right_layout:add(tempicon)
    right_layout:add(tempwidget)
-   right_layout:add(tempbar)
+   right_layout:add(tempmargin)
    right_layout:add(separator)
    right_layout:add(diskicon)
    right_layout:add(dperc.r)
-   right_layout:add(dusage.r)
+   right_layout:add(dusage.rmargin)
    right_layout:add(dperc.h)
-   right_layout:add(dusage.h)
+   right_layout:add(dusage.hmargin)
    right_layout:add(separator)
    right_layout:add(volicon)
    right_layout:add(volwidget)
-   right_layout:add(volbar)
+   right_layout:add(volmargin)
    right_layout:add(separator)
    right_layout:add(timeicon)
    right_layout:add(timewidget)
