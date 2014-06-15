@@ -5,78 +5,60 @@ Emacs.font: Terminus-10
 
 ! URXVT
 ! General
+URxvt.loginShell: true
 URxvt.termName: rxvt-unicode-256color
-URxvt.scrollBar: false
 URxvt.saveLines: 80000
 URxvt.urgentOnBell: true
 URxvt.underlineURLs: true
-URxvt.colorUL: #AF5FD7
-URxvt.cursorColor: #E25454
 URxvt.internalBorder: 0
 
+! Scrolling
+URxvt.scrollBar: false
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
 ! Extensions
-URxvt.perl-lib: /usr/lib/urxvt/perl/
 URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: /usr/bin/conkeror
+URxvt.url-launcher: conkeror
 URxvt.matcher.button: 1
-URxvt.cutchars: '"'()*<>[]{|}
 
 ! Font
 URxvt.font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 URxvt.boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
 
-! Erebus color theme
-URxvt.background: #261515
-URxvt.foreground: #FFFFFF
+! Zenburn color theme
+URxvt.colorUL: #8CD0D3
+URxvt.cursorColor: #DCDCCC
+URxvt.cursorColor2: #3F3F3F
+URxvt.underlineColor: #F0DFAF
+URxvt.colorBD: #E0CF9F
+URxvt.colorIT: #656555
 
-URxvt.color0: #757575
-URxvt.color1: #FF5F5F
-URxvt.color2: #DE8A36
-URxvt.color3: #D78787
-URxvt.color4: #AF5FD7
-URxvt.color5: #FF87D7
-URxvt.color6: #DEA3E5
-URxvt.color7: #B8B8B8
-URxvt.color8: #B8B8B8
-URxvt.color9: #D78787
-URxvt.color10: #FF9F6F
-URxvt.color11: #FF5F5F
-URxvt.color12: #DEA3E5
-URxvt.color13: #D7AFAF
-URxvt.color14: #AF5FD7
-URxvt.color15: #757575
+URxvt.background: #3F3F3F
+URxvt.foreground: #DCDCCC
 
-! XTERM
-! General
-XTerm*termName: xterm-256color
-XTerm*locale: true
-XTerm*metaSendsEscape: true
-XTerm*saveLines: 80000
-XTerm*fastScroll: true
-XTerm*highlightSelection: true
-XTerm*cursorColor: #E25454
-
-! Font
-XTerm*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
-XTerm*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-2
-
-! Erebus color theme
-XTerm*background: #261515
-XTerm*foreground: #FFFFFF
-
-XTerm*color0: #757575
-XTerm*color1: #FF5F5F
-XTerm*color2: #DE8A36
-XTerm*color3: #D78787
-XTerm*color4: #AF5FD7
-XTerm*color5: #FF87D7
-XTerm*color6: #DEA3E5
-XTerm*color7: #B8B8B8
-XTerm*color8: #B8B8B8
-XTerm*color9: #D78787
-XTerm*color10: #FF9F6F
-XTerm*color11: #FF5F5F
-XTerm*color12: #DEA3E5
-XTerm*color13: #D7AFAF
-XTerm*color14: #AF5FD7
-XTerm*color15: #757575
+!! black dark/light
+URxvt.color0: #3F3F3F
+URxvt.color8: #5F5F5F
+!! red dark/light
+URxvt.color1: #BC8383
+URxvt.color9: #CC9393
+!! green dark/light
+URxvt.color2: #5F7F5F
+URxvt.color10: #7F9F7F
+!! yellow dark/light
+URxvt.color3: #E0CF9F
+URxvt.color11: #F0DFAF
+!! blue dark/light
+URxvt.color4: #7CB8BB
+URxvt.color12: #8CD0D3
+!! magenta dark/light
+URxvt.color5: #DC8CC3
+URxvt.color13: #DC8CC3
+!! cyan dark/light
+URxvt.color6: #93E0E3
+URxvt.color14: #93E0E3
+!! white dark/light
+URxvt.color7: #DCDCCC
+URxvt.color15: #FFFFFF
