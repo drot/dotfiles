@@ -43,7 +43,7 @@
 (size-indication-mode 1)
 
 ;; Indicate buffer boundaries and empty lines
-(setq-default indicate-buffer-boundaries 'right
+(setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
 ;; Don't show the welcome messages
