@@ -106,7 +106,7 @@
       "Allow setting of undefined variables in themes."
       (let (custom--inhibit-theme-enable)
         ad-do-it))
-    (load-theme 'alect-black t)))
+    (load-theme 'alect-dark t)))
 
 ;; Icomplete
 (use-package icomplete
@@ -375,7 +375,7 @@
 
     (setq erc-prompt-for-password nil
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
-                                        ("forestnet" "#fo2"))
+                                        ("forestnet" "#reloaded" "#fo2"))
           erc-server-reconnect-timeout 10
           erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
           erc-truncate-buffer-on-save t
