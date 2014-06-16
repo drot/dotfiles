@@ -59,11 +59,6 @@ theme.taglist_squares_sel = theme.icons_dir .. "taglist/squaref.png"
 theme.taglist_squares_unsel = theme.icons_dir .. "taglist/squareu.png"
 -- }}}
 
--- {{{ Misc
-theme.awesome_icon = theme.icons_dir .. "awesome.png"
-theme.menu_submenu_icon = theme.icons_dir .. "submenu.png"
--- }}}
-
 -- {{{ Layout
 theme.layout_fairh = theme.icons_dir .. "layouts/fairh.png"
 theme.layout_fairv = theme.icons_dir .. "layouts/fairv.png"
@@ -77,6 +72,16 @@ theme.layout_tile = theme.icons_dir .. "layouts/tile.png"
 theme.layout_tiletop = theme.icons_dir .. "layouts/tiletop.png"
 theme.layout_spiral = theme.icons_dir .. "layouts/spiral.png"
 theme.layout_dwindle = theme.icons_dir .. "layouts/dwindle.png"
+-- }}}
+
+-- {{{ Widgets
+theme.widget_cpu = theme.icons_dir .. "widgets/cpu.png"
+theme.widget_mem = theme.icons_dir .. "widgets/mem.png"
+theme.widget_temp = theme.icons_dir .. "widgets/temp.png"
+theme.widget_disk = theme.icons_dir .. "widgets/disk.png"
+theme.widget_date = theme.icons_dir .. "widgets/date.png"
+theme.widget_vol = theme.icons_dir .. "widgets/vol.png"
+theme.widget_sep = theme.icons_dir .. "separator.png"
 -- }}}
 
 -- {{{ Menu
@@ -95,14 +100,8 @@ theme.menu_restart = theme.icons_dir .. "menu/restart.png"
 theme.menu_quit = theme.icons_dir .. "menu/quit.png"
 --}}}
 
--- {{{ Widgets
-theme.widget_cpu = theme.icons_dir .. "widgets/cpu.png"
-theme.widget_mem = theme.icons_dir .. "widgets/mem.png"
-theme.widget_temp = theme.icons_dir .. "widgets/temp.png"
-theme.widget_disk = theme.icons_dir .. "widgets/disk.png"
-theme.widget_date = theme.icons_dir .. "widgets/date.png"
-theme.widget_vol = theme.icons_dir .. "widgets/vol.png"
-theme.widget_sep = theme.icons_dir .. "separator.png"
+-- {{{ Misc
+theme.awesome_icon = theme.icons_dir .. "awesome.png"
 -- }}}
 
 return theme
