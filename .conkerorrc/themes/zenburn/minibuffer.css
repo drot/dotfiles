@@ -46,7 +46,7 @@ tree.completions treechildren::-moz-tree-row(current) {
 }
 
 tree.completions treechildren::-moz-tree-cell-text(completion-description) {
-    color: #808080 !important;
+    color: #E0CF9F !important;
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
