@@ -427,7 +427,7 @@
     (defun drot/paredit-minibuffer ()
       "Enable ParEdit during lisp-related minibuffer commands."
       (if (memq this-command drot/paredit-minibuffer-commands)
-          (paredit-mode)))
+          (paredit-mode 1)))
 
     (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
 
