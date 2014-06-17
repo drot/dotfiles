@@ -100,6 +100,10 @@ add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(zoom_widget));
 read_buffer_show_icons = true;
 
+// View source in external editor
+editor_shell_command = "emacsclient";
+view_source_use_external_editor = true;
+
 // Delete existing webjumps
 var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
                        'clusty','creativecommons','debbugs','debfile','debpkg',
