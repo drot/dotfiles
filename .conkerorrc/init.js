@@ -43,6 +43,10 @@ require("block-content-focus-change.js");
 cwd = get_home_directory();
 cwd.append('Downloads');
 
+// View source in external editor
+editor_shell_command = "emacsclient";
+view_source_use_external_editor = true;
+
 // Improve hinting keys
 hint_digits = "asdfghjkl";
 
@@ -74,12 +78,6 @@ require("clicks-in-new-buffer.js");
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
 clicks_in_new_buffer_button = 1;
 
-// Auto completion in the minibuffer
-url_completion_use_history = true;
-url_completion_use_bookmarks = true;
-url_completion_use_webjumps = true;
-minibuffer_auto_complete_default = true;
-
 // Load download buffers in the background
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
@@ -99,9 +97,11 @@ add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(zoom_widget));
 read_buffer_show_icons = true;
 
-// View source in external editor
-editor_shell_command = "emacsclient";
-view_source_use_external_editor = true;
+// Auto completion in the minibuffer
+url_completion_use_history = true;
+url_completion_use_bookmarks = true;
+url_completion_use_webjumps = true;
+minibuffer_auto_complete_default = true;
 
 // Delete existing webjumps
 var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
