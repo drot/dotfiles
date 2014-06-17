@@ -1,20 +1,47 @@
 // -*- mode: Javascript -*-
 
-// Modules
-require("favicon");
-require("new-tabs.js");
-require("mode-line.js");
-require("clicks-in-new-buffer.js");
-require("block-content-focus-change.js");
-require('eye-guide.js');
-
 // Theme
+require("new-tabs.js");
 theme_load_paths.unshift("~/.conkerorrc/themes/");
 theme_unload("default");
 theme_load("zenburn");
 
 // The default page for new buffers.
 homepage = "about:blank";
+
+// Reduce JavaScript output
+session_pref("browser.dom.window.dump.enabled", false);
+
+// Delete history after 30 days
+session_pref('browser.history_expire_days', 30);
+
+// Don't check compatibility for extensions
+session_pref('extensions.checkCompatibility', false);
+
+// Don't require a whitelist to install extensions
+session_pref("xpinstall.whitelist.required", false);
+
+// Check for security updates
+user_pref("extensions.checkUpdateSecurity", true);
+
+// Firefox user agent
+session_pref("general.useragent.compatMode.firefox", true);
+
+// Don't enable formfill
+session_pref("browser.formfill.enable", false);
+
+// Resize images automatically
+session_pref("browser.enable_automatic_image_resizing", true);
+
+// Enable spell checking
+session_pref("layout.spellcheckDefault", 1);
+
+// Prevent web pages from stealing focus
+require("block-content-focus-change.js");
+
+// Default directory for downloads and shell commands
+cwd = get_home_directory();
+cwd.append('Downloads');
 
 // Improve hinting keys
 hint_digits = "asdfghjkl";
@@ -42,38 +69,8 @@ register_user_stylesheet(
                 " background-color: #8ae234 !important;" +
                 "}"));
 
-// Reduce JavaScript output
-session_pref("browser.dom.window.dump.enabled", false);
-
-// Delete history after 30 days
-session_pref('browser.history_expire_days', 30);
-
-// Don't check compatibility for extensions
-session_pref('extensions.checkCompatibility', false);
-
-// Don't require a whitelist to install extensions
-session_pref("xpinstall.whitelist.required", false);
-
-// Check for security updates
-user_pref("extensions.checkUpdateSecurity", true);
-
-// Default directory for downloads and shell commands
-cwd = get_home_directory();
-cwd.append('Downloads');
-
-// Firefox user agent
-session_pref("general.useragent.compatMode.firefox", true);
-
-// Don't enable formfill
-session_pref("browser.formfill.enable", false);
-
-// Resize images automatically
-session_pref("browser.enable_automatic_image_resizing", true);
-
-// Enable spellchecking
-session_pref("layout.spellcheckDefault", 1);
-
 // Open clicks in buffers in the background
+require("clicks-in-new-buffer.js");
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
 clicks_in_new_buffer_button = 1;
 
@@ -86,13 +83,15 @@ minibuffer_auto_complete_default = true;
 // Load download buffers in the background
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-// Open new urls in new buffer
+// Open external links in a new buffer
 url_remoting_fn = load_url_in_new_buffer;
 
 // Prevent quitting by accident
 can_kill_last_buffer = false;
 
 // Remove the clock and set the modeline
+require("mode-line.js");
+require("favicon");
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
@@ -171,6 +170,7 @@ interactive("restore-killed-buffer-url", "Loads url from a previously killed buf
 
 define_key(content_buffer_normal_keymap, "C-x u", "restore-killed-buffer-url");
 
-// Eye guide keybindings
+// Eye guide
+require('eye-guide.js');
 define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
 define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
