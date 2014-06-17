@@ -53,9 +53,13 @@ hint_digits = "asdfghjkl";
 // Enable automatic selection
 hints_auto_exit_delay = 200;
 
-// Hinting color
-hint_background_color = "#3465a4";
-active_hint_background_color = "8ae234";
+// Hint colors
+hint_background_color = "#5F7F5F";
+active_hint_background_color = "#DCDCCC";
+img_hint_background_color = "#5F7F5F";
+active_img_hint_background_color = "#DCDCCC";
+
+// Big hints
 register_user_stylesheet(
     "data:text/css," +
         escape(
@@ -68,9 +72,9 @@ register_user_stylesheet(
     "data:text/css," +
         escape (
             "span.__conkeror_hint {" +
-                " border: 1px solid #cc0000 !important;" +
-                " color: #2e3436 !important;" +
-                " background-color: #8ae234 !important;" +
+                " border: 1px solid #DCDCCC !important;" +
+                " color: #E0CF9F !important;" +
+                " background-color: #2B2B2B !important;" +
                 "}"));
 
 // Open clicks in buffers in the background
@@ -87,14 +91,16 @@ url_remoting_fn = load_url_in_new_buffer;
 // Prevent quitting by accident
 can_kill_last_buffer = false;
 
-// Remove the clock and set the modeline
+// Remove the clock and set the mode line
 require("mode-line.js");
-require("favicon");
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
-add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(zoom_widget));
+
+// Display favicons on the mode line
+require("favicon.js");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 read_buffer_show_icons = true;
 
 // Auto completion in the minibuffer
