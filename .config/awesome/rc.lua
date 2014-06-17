@@ -104,7 +104,7 @@ myawesomemenu = {
 mymainmenu = awful.menu({ items = {
                              { "urxvtc", terminal, beautiful.menu_term },
                              { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-                             { "Conkeror", "conkeror-start", beautiful.menu_browser },
+                             { "Conkeror", "conkeror", beautiful.menu_browser },
                              { "Skype", "skype", beautiful.menu_skype },
                              { "Writer", "lowriter", beautiful.menu_writer },
                              { "GIMP", "gimp", beautiful.menu_gimp },
