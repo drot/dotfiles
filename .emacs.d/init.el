@@ -437,14 +437,7 @@
         (read-kbd-macro paredit-backward-delete-key) nil))
 
     (add-hook 'slime-repl-mode-hook 'paredit-mode)
-    (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
-
-    (put 'paredit-forward-delete 'delete-selection 'supersede)
-    (put 'paredit-backward-delete 'delete-selection 'supersede)
-    (put 'paredit-open-round 'delete-selection t)
-    (put 'paredit-open-square 'delete-selection t)
-    (put 'paredit-doublequote 'delete-selection t)
-    (put 'paredit-newline 'delete-selection t)))
+    (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
