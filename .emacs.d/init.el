@@ -90,9 +90,6 @@
       delete-old-versions t
       backup-by-copying t)
 
-;; Keep point on same position when scrolling
-(setq scroll-preserve-screen-position 1)
-
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
