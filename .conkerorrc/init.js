@@ -109,29 +109,6 @@ url_completion_use_bookmarks = true;
 url_completion_use_webjumps = true;
 minibuffer_auto_complete_default = true;
 
-// Delete existing webjumps
-var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
-                       'clusty','creativecommons','debbugs','debfile','debpkg',
-                       'debpopcon','debpts','debqa','freshmeat','kuro5hin',
-                       'launchpad','lucky','ratpoisonwiki','sadelicious',
-                       'scholar','sdelicious','slashdot','sourceforge',
-                       'stumpwmwiki','ubuntubugs','ubuntufile','ubuntupkg',
-                       'wiktionary','yahoo','bugzilla','ebay'
-                      ];
-
-for (var i=0; i<unused_webjumps.length; i++)
-{
-    delete webjumps[unused_webjumps[i]];
-}
-
-// Webjumps
-define_webjump("archwiki", "http://wiki.archlinux.org/index.php?search=%s");
-define_webjump("aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
-define_webjump("archpkg", "https://www.archlinux.org/packages/?sort=&q=%s&limit=50",
-               $alternative="https://packages.archlinux.org");
-define_webjump("imdb", "http://imdb.com/find?q=%s");
-define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
-
 // Clear history function
 function history_clear () {
     var history = Cc["@mozilla.org/browser/nav-history-service;1"]
@@ -145,7 +122,6 @@ interactive("history-clear",
 
 // Restore killed buffer function
 var kill_buffer_original = kill_buffer_original || kill_buffer;
-
 var killed_buffer_urls = [];
 
 kill_buffer = function (buffer, force) {
@@ -180,3 +156,26 @@ define_key(content_buffer_normal_keymap, "C-x u", "restore-killed-buffer-url");
 require('eye-guide.js');
 define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
 define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
+
+
+// Delete existing webjumps
+var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
+                       'clusty','creativecommons','debbugs','debfile','debpkg',
+                       'debpopcon','debpts','debqa','freshmeat','kuro5hin',
+                       'launchpad','lucky','ratpoisonwiki','sadelicious',
+                       'scholar','sdelicious','slashdot','sourceforge',
+                       'stumpwmwiki','ubuntubugs','ubuntufile','ubuntupkg',
+                       'wiktionary','yahoo','bugzilla','ebay'
+                      ];
+
+for (var i=0; i<unused_webjumps.length; i++)
+{
+    delete webjumps[unused_webjumps[i]];
+}
+
+// Webjumps
+define_webjump("archwiki", "http://wiki.archlinux.org/index.php?search=%s");
+define_webjump("aur", "http://aur.archlinux.org/packages.php?O=0&K=%s");
+define_webjump("archpkg", "https://www.archlinux.org/packages/?sort=&q=%s&limit=50");
+define_webjump("imdb", "http://imdb.com/find?q=%s");
+define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
