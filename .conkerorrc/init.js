@@ -1,5 +1,3 @@
-// -*- mode: Javascript -*-
-
 // Theme
 require("new-tabs.js");
 theme_load_paths.unshift("~/.conkerorrc/themes/");
