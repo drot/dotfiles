@@ -51,7 +51,7 @@ STICKY_OTHER_WRITABLE 01;33
 OTHER_WRITABLE 01;35
 
 # dir with the sticky bit set (+t) and not other-writable
-STICKY 00;34
+STICKY 00;35
 
 # executables (bright green)
 .cmd 01;32
@@ -138,7 +138,7 @@ STICKY 00;34
 .cs 00;36
 .css 00;36
 .csv 00;36
-.curlrc 00;34
+.curlrc 00;35
 .deb 00;36
 .diff 01;33
 .dircolors 01;33
@@ -160,28 +160,28 @@ STICKY 00;34
 .gpg 01;31
 .hgrc 00;35
 .hgignore 00;35
-.go 00;34
+.go 00;35
 .gpg-agent-info 01;31
-.gtk-bookmarks 00;34
-.gtkrc-2.0 00;34
-.h 00;34
-.hs 00;34
-.htm 00;34
-.html 00;34
-.htoprc 00;34
-.info 00;34
+.gtk-bookmarks 00;35
+.gtkrc-2.0 00;35
+.h 00;35
+.hs 00;35
+.htm 00;35
+.html 00;35
+.htoprc 00;35
+.info 00;35
 .inputrc 00;36
-.ini 00;34
-.java 00;34
-.jhtm 00;34
-.js 00;34
-.jsm 00;34
-.jsm 00;34
-.json 00;34
-.jsp 00;34
-.lisp 00;34
-.lesshst 00;34
-.log 00;34
+.ini 00;35
+.java 00;35
+.jhtm 00;35
+.js 00;35
+.jsm 00;35
+.jsm 00;35
+.json 00;35
+.jsp 00;35
+.lisp 00;35
+.lesshst 00;35
+.log 00;35
 .lua 00;33
 .map 00;33
 .markdown 00;33
@@ -244,7 +244,7 @@ STICKY 00;34
 .urlview 01;35
 .vim 01;35
 .vimrc 00;32
-.xbindkeysrc 00;34
+.xbindkeysrc 00;35
 .xinitrc 00;33
 .Xauthority 01;31
 .Xmodmap 00;36
@@ -259,7 +259,7 @@ STICKY 00;34
 # sysd file types
 *.mount 01;32
 *.path 01;33
-*.rules 00;34
+*.rules 00;35
 *.socket 00;35
 *.service 00;33
 *.target 01;36
@@ -312,3 +312,4 @@ TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM xterm-termite
