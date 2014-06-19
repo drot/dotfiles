@@ -4,18 +4,16 @@ scroll_on_output = false
 scroll_on_keystroke = true
 audible_bell = false
 visible_bell = false
-mouse_autohide = true
+mouse_autohide = false
 allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
 font = Terminus 10
-scrollback_lines = 1000
+scrollback_lines = 10000
 search_wrap = true
-
-# 0.0: opaque, 1.0: transparent
-transparency = 0.0
-pseudo_transparency = false
+#icon_name = terminal
+#geometry = 640x480
 
 # "system", "on" or "off"
 cursor_blink = off
@@ -23,37 +21,52 @@ cursor_blink = off
 # "block", "underline" or "ibeam"
 cursor_shape = block
 
+# $BROWSER is used by default
+#browser = firefox
+
+# word characters used for word selection
+# (default if unset: all graphic non-punctuation/space characters)
+#word_chars = -A-Za-z0-9,./?%&#:_=+@~
+
+# set size hints for the window
+#size_hints = false
+
+# emit escape sequences for other keys modified by Control
+#modify_other_keys = false
+
 [colors]
-foreground = #DCDCCC
-background = #3F3F3F
-cursor = #DCDCCC
+foreground = #dcdccc
+foreground_bold = #ffffff
+#foreground_dim = #888888
+background = #3f3f3f
+#cursor = #dcdccc
 
 # if unset, will reverse foreground and background
-highlight = #5F5F5F
+highlight = #2f2f2f
 
 # colors from color0 to color254 can be set
-color0 = #3F3F3F
-color1 = #BC8383
-color2 = #5F7F5F
-color3 = #E0CF9F
-color4 = #7CB8BB
-color5 = #DC8CC3
-color6 = #93E0E3
-color7 = #DCDCCC
-color8 = #5F5F5F
-color9 = #CC9393
-color10 = #7F9F7F
-color11 = #F0DFAF
-color12 = #8CD0D3
-color13 = #DC8CC3
-color14 = #93E0E3
-color15 = #FFFFFF
+color0 = #3f3f3f
+color1 = #705050
+color2 = #60b48a
+color3 = #dfaf8f
+color4 = #506070
+color5 = #dc8cc3
+color6 = #8cd0d3
+color7 = #dcdccc
+color8 = #709080
+color9 = #dca3a3
+color10 = #c3bf9f
+color11 = #f0dfaf
+color12 = #94bff3
+color13 = #ec93d3
+color14 = #93e0e3
+color15 = #ffffff
 
 [hints]
 font = Terminus 10
-foreground = #3F3F3F
-background = #F0DFAF
-padding = 1
-border = #5F5F5F
-border_width = 2.0
+foreground = #dcdccc
+background = #3f3f3f
+padding = 2
+border = #3f3f3f
+border_width = 0.5
 roundness = 2.0
