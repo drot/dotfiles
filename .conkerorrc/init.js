@@ -91,14 +91,12 @@ can_kill_last_buffer = false;
 
 // Remove the clock and set the mode line
 require("mode-line.js");
+require("favicon.js");
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(zoom_widget));
-
-// Display favicons on the mode line
-require("favicon.js");
-add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 read_buffer_show_icons = true;
 
 // Auto completion in the minibuffer
