@@ -52,9 +52,9 @@ hint_digits = "asdfghjkl";
 hints_auto_exit_delay = 200;
 
 // Hint colors
-hint_background_color = "#5F7F5F";
+hint_background_color = "#705050";
 active_hint_background_color = "#DCDCCC";
-img_hint_background_color = "#5F7F5F";
+img_hint_background_color = "#705050";
 active_img_hint_background_color = "#DCDCCC";
 
 // Big hints
@@ -70,9 +70,9 @@ register_user_stylesheet(
     "data:text/css," +
         escape (
             "span.__conkeror_hint {" +
-                " border: 1px solid #DCDCCC !important;" +
-                " color: #E0CF9F !important;" +
-                " background-color: #2B2B2B !important;" +
+                " border: 1px solid #5f5f5f !important;" +
+                " color: #dfaf8f !important;" +
+                " background-color: #2f2f2f !important;" +
                 "}"));
 
 // Open clicks in buffers in the background
