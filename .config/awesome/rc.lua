@@ -45,7 +45,7 @@ themes_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init(themes_dir .. "zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "termite"
 editor = os.getenv("EDITOR")
 
 -- Default modkey.
@@ -102,7 +102,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = {
-                             { "urxvtc", terminal, beautiful.menu_term },
+                             { "termite", terminal, beautiful.menu_term },
                              { "Emacs", "emacsclient -c", beautiful.menu_emacs },
                              { "Conkeror", "conkeror", beautiful.menu_browser },
                              { "Skype", "skype", beautiful.menu_skype },
@@ -128,10 +128,10 @@ cpugraph:set_width(45):set_height(15)
 cpugraph:set_background_color(beautiful.bg_widget)
 cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
-cpumargin = wibox.layout.margin()
-cpumargin:set_widget(cpugraph)
-cpumargin:set_top(3)
-cpumargin:set_bottom(3)
+cpudisplay = wibox.layout.margin()
+cpudisplay:set_widget(cpugraph)
+cpudisplay:set_top(3)
+cpudisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
@@ -151,10 +151,10 @@ membar:set_width(15):set_ticks_size(3):set_height(15)
 membar:set_background_color(beautiful.bg_widget)
 membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
-memmargin = wibox.layout.margin()
-memmargin:set_widget(membar)
-memmargin:set_top(3)
-memmargin:set_bottom(3)
+memdisplay = wibox.layout.margin()
+memdisplay:set_widget(membar)
+memdisplay:set_top(3)
+memdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
@@ -174,10 +174,10 @@ tempbar:set_width(15):set_ticks_size(3):set_height(15)
 tempbar:set_background_color(beautiful.bg_widget)
 tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
-tempmargin = wibox.layout.margin()
-tempmargin:set_widget(tempbar)
-tempmargin:set_top(3)
-tempmargin:set_bottom(3)
+tempdisplay = wibox.layout.margin()
+tempdisplay:set_widget(tempbar)
+tempdisplay:set_top(3)
+tempdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
@@ -199,14 +199,14 @@ for _, dstyle in pairs(dusage) do
    dstyle:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                          {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 end
-dusage.rmargin = wibox.layout.margin()
-dusage.rmargin:set_widget(dusage.r)
-dusage.rmargin:set_top(3)
-dusage.rmargin:set_bottom(3)
-dusage.hmargin = wibox.layout.margin()
-dusage.hmargin:set_widget(dusage.h)
-dusage.hmargin:set_top(3)
-dusage.hmargin:set_bottom(3)
+dusage.rdisplay = wibox.layout.margin()
+dusage.rdisplay:set_widget(dusage.r)
+dusage.rdisplay:set_top(3)
+dusage.rdisplay:set_bottom(3)
+dusage.hdisplay = wibox.layout.margin()
+dusage.hdisplay:set_widget(dusage.h)
+dusage.hdisplay:set_top(3)
+dusage.hdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widgets
@@ -228,10 +228,10 @@ volbar:set_width(15):set_ticks_size(3):set_height(15)
 volbar:set_background_color(beautiful.bg_widget)
 volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
-volmargin = wibox.layout.margin()
-volmargin:set_widget(volbar)
-volmargin:set_top(3)
-volmargin:set_bottom(3)
+voldisplay = wibox.layout.margin()
+voldisplay:set_widget(volbar)
+voldisplay:set_top(3)
+voldisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
@@ -332,26 +332,26 @@ for s = 1, screen.count() do
    local right_layout = wibox.layout.fixed.horizontal()
    right_layout:add(cpuicon)
    right_layout:add(cpuwidget)
-   right_layout:add(cpumargin)
+   right_layout:add(cpudisplay)
    right_layout:add(separator)
    right_layout:add(memicon)
    right_layout:add(memwidget)
-   right_layout:add(memmargin)
+   right_layout:add(memdisplay)
    right_layout:add(separator)
    right_layout:add(tempicon)
    right_layout:add(tempwidget)
-   right_layout:add(tempmargin)
+   right_layout:add(tempdisplay)
    right_layout:add(separator)
    right_layout:add(diskicon)
    right_layout:add(dperc.r)
-   right_layout:add(dusage.rmargin)
+   right_layout:add(dusage.rdisplay)
    right_layout:add(separator)
    right_layout:add(dperc.h)
-   right_layout:add(dusage.hmargin)
+   right_layout:add(dusage.hdisplay)
    right_layout:add(separator)
    right_layout:add(volicon)
    right_layout:add(volwidget)
-   right_layout:add(volmargin)
+   right_layout:add(voldisplay)
    right_layout:add(separator)
    right_layout:add(timeicon)
    right_layout:add(timewidget)
