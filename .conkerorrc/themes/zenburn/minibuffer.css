@@ -12,7 +12,11 @@
 }
 
 #minibuffer-prompt {
-    background-color: #1E2320 !important;
+    margin: 0px 4px 0px 0px !important;
+    border-style: solid; !important;
+    border-width: 1px; !important;
+    border-color: #6f6f6f; !important;
+    background-color: #1e2320 !important;
     color: #dfaf8f !important;
     font-weight: bold;
 }
@@ -27,7 +31,6 @@ tree.completions {
     color: #dcdccc !important;
     font-family: Terminus;
     font-size: 14px;
-    font-style: normal !Important;
 }
 
 tree.completions treechildren { border: none !important; }
@@ -39,7 +42,7 @@ tree.completions treechildren::-moz-tree-row {
 }
 
 tree.completions treechildren::-moz-tree-row(current) {
-    background-color: #1E2320 !important;
+    background-color: #1e2320 !important;
     color: #dcdccc !important;
 }
 
