@@ -12,7 +12,7 @@
 }
 
 #minibuffer-prompt {
-    background-color: #2f2f2f !important;
+    background-color: #1E2320 !important;
     color: #dfaf8f !important;
     font-weight: bold;
 }
@@ -39,7 +39,7 @@ tree.completions treechildren::-moz-tree-row {
 }
 
 tree.completions treechildren::-moz-tree-row(current) {
-    background-color: #2f2f2f !important;
+    background-color: #1E2320 !important;
     color: #dcdccc !important;
 }
 

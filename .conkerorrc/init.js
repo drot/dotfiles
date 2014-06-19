@@ -70,9 +70,9 @@ register_user_stylesheet(
     "data:text/css," +
         escape (
             "span.__conkeror_hint {" +
-                " border: 1px solid #5f5f5f !important;" +
+                " border: 1px solid #6f6f6f !important;" +
                 " color: #dfaf8f !important;" +
-                " background-color: #2f2f2f !important;" +
+                " background-color: #3f3f3f !important;" +
                 "}"));
 
 // Open clicks in buffers in the background

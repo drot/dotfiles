@@ -2,10 +2,10 @@
 
 .mode-line {
     -moz-appearance: none;
-    background-color: #2f2f2f !important;
+    background-color: #3f3f3f !important;
     border-style: solid;
     border-width: 1px;
-    border-color: #5f5f5f;
+    border-color: #6f6f6f;
     font-family: Terminus;
     font-size: 14px !important;
     font-weight: bold !important;

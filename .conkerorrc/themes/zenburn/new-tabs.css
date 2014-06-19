@@ -11,9 +11,9 @@
     max-width: 12em;
     border-style: solid;
     border-width: 1px;
-    border-color: #5f5f5f;
-    background: #2f2f2f;
-    color: #5f5f5f;
+    border-color: #6f6f6f;
+    background: #3f3f3f;
+    color: #6f6f6f;
     font-family: Terminus;
     font-size: 14px;
 }
@@ -23,9 +23,9 @@
 }
 
 .tab2:hover {
-    border-color: #2f2f2f;
-    background: #5f5f5f;
-    color: #2f2f2f;
+    border-color: #3f3f3f;
+    background: #6f6f6f;
+    color: #3f3f3f;
 }
 
 .tab2-label {
