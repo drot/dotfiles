@@ -94,8 +94,16 @@
 (setq mouse-yank-at-point t)
 
 ;; Color theme
-(use-package zenburn-theme
-  :ensure t)
+(use-package alect-themes
+  :ensure t
+  :config
+  (progn
+    (defadvice custom-theme-set-variables
+        (around fix-inhibit-bug activate)
+      "Allow setting of undefined variables in themes."
+      (let (custom--inhibit-theme-enable)
+        ad-do-it))
+    (load-theme 'alect-dark t)))
 
 ;; Icomplete
 (use-package icomplete

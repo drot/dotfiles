@@ -71,7 +71,7 @@ register_user_stylesheet(
         escape (
             "span.__conkeror_hint {" +
                 " border: 1px solid #6f6f6f !important;" +
-                " color: #dfaf8f !important;" +
+                " color: #f0dfaf !important;" +
                 " background-color: #3f3f3f !important;" +
                 "}"));
 
