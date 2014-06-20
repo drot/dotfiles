@@ -19,7 +19,7 @@
     padding-left: 8px;
     padding-right: 8px;
     background-color: #1e2320 !important;
-    color: #dfaf8f !important;
+    color: #f0dfaf !important;
     font-weight: bold;
 }
 
@@ -53,7 +53,7 @@ tree.completions treechildren::-moz-tree-cell-text(completion-description) {
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
-    color: #dfaf8f !important;
+    color: #f0dfaf !important;
 }
 
 tree.completions[hasicons="true"] treechildren::-moz-tree-image {

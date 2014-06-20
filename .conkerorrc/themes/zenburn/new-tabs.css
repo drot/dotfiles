@@ -19,13 +19,13 @@
 }
 
 .tab2[selected=true] {
-    color: #dfaf8f;
+    color: #f0dfaf;
 }
 
 .tab2:hover {
     border-color: #3f3f3f;
     background: #6f6f6f;
-    color: #dfaf8f;
+    color: #f0dfaf;
 }
 
 .tab2-label {
