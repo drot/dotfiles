@@ -12,10 +12,11 @@
 }
 
 #minibuffer-prompt {
-    margin: 0px 8px 0px 8px !important;
+    margin: 0px 8px 0px 0px !important;
     border-style: solid; !important;
     border-width: 1px; !important;
     border-color: #6f6f6f; !important;
+    padding-left: 8px;
     background-color: #1e2320 !important;
     color: #dfaf8f !important;
     font-weight: bold;
