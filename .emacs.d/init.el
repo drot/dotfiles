@@ -278,22 +278,6 @@
         (quietly-read-abbrev-file))
     (setq-default abbrev-mode t)))
 
-;; Hippie expand is an improved dabbrev expand
-(use-package hippie-exp
-  :bind ("M-/" . hippie-expand)
-  :config
-  (progn
-    (setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                             try-expand-dabbrev-all-buffers
-                                             try-expand-dabbrev-from-kill
-                                             try-complete-file-name-partially
-                                             try-complete-file-name
-                                             try-expand-all-abbrevs
-                                             try-expand-list
-                                             try-expand-line
-                                             try-complete-lisp-symbol-partially
-                                             try-complete-lisp-symbol))))
-
 ;; Fly Spell mode configuration
 (use-package flyspell
   :config
@@ -337,7 +321,7 @@
   (interactive)
   (erc-tls :server "adams.freenode.net" :port 6697
            :nick "drot")
-  (erc-tls :server "pine.forestnet.org" :port 6697
+  (erc-tls :server "pine.forestnet.org" :port +7325
            :nick "drot"))
 
 (use-package erc
@@ -501,9 +485,10 @@
 
 ;; Custom keybindings
 (bind-keys*
- ("C-c l" . org-store-link)
+ ("C-c y" . company-yasnippet)
  ("C-c a" . org-agenda)
- ("C-c y" . company-yasnippet))
+ ("C-c l" . org-store-link)
+ ("M-/" . hippie-expand))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
