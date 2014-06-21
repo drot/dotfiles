@@ -1,8 +1,5 @@
 ! Cursor
 Xcursor.theme: Neutral
 
-! Emacs font
-Emacs.Fontset-0: -*-Terminus-*-*-*-*-14-*-*-*-*-*-fontset-terminus14,\
-latin:-*-Terminus-*-*-*-*-14-*-*-*-*-*-*,\
-symbol:-*-Symbola-*-*-*-*-14-*-*-*-*-*-*
-Emacs.font: fontset-terminus14
+! Emacs
+Emacs.font: Terminus-10
