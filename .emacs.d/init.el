@@ -321,7 +321,7 @@
   (interactive)
   (erc-tls :server "adams.freenode.net" :port 6697
            :nick "drot")
-  (erc-tls :server "pine.forestnet.org" :port +7325
+  (erc-tls :server "pine.forestnet.org" :port 6697
            :nick "drot"))
 
 (use-package erc
