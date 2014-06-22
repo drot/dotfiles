@@ -1,3 +1,7 @@
+set window-title-basename true
+
+set adjust-open width
+
 set font "Terminus 10"
 
 set statusbar-fg "#f0dfaf"
