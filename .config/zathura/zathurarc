@@ -6,7 +6,7 @@ set statusbar-bg "#1e2320"
 set inputbar-fg "#1e2320"
 
 set notification-bg "#3f3f3f"
-set notification-fg "#151515"
+set notification-fg "#dfaf8f"
 
 set notification-error-bg "#3f3f3f"
 set notification-error-fg "#cc9393"
