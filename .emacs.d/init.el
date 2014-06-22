@@ -161,12 +161,21 @@
   (progn
     (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory))))
 
-;; Use ANSI colors within shell-mode
+;; Shell mode configuration
 (use-package shell
   :defer t
   :config
   (progn
-    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+    (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)))
+
+;; Disable YASnippet in term mode
+(use-package term
+  :defer t
+  :config
+  (progn
+    (add-hook 'term-mode-hook (lambda ()
+                                (yas-minor-mode 0)))))
 
 ;; Use Unified diff format
 (use-package diff
@@ -190,12 +199,13 @@
   (progn
     (setq ibuffer-default-sorting-mode 'major-mode)))
 
-;; Scroll compilation buffer to first error
+;; Compilation configuration
 (use-package compile
   :defer t
   :config
   (progn
-    (setq compilation-scroll-output 'first-error)))
+    (setq compilation-scroll-output 'first-error
+          compilation-ask-about-save nil)))
 
 ;; TRAMP configuration
 (use-package tramp
