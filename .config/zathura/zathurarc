@@ -1,0 +1,49 @@
+set font "Terminus 10"
+
+set statusbar-fg "#f0dfaf"
+set statusbar-bg "#1e2320"
+
+set inputbar-fg "#1e2320"
+
+set notification-bg "#3f3f3f"
+set notification-fg "#151515"
+
+set notification-error-bg "#3f3f3f"
+set notification-error-fg "#cc9393"
+
+set notification-warning-bg "#3f3f3f"
+set notification-warning-fg "#f0dfaf"
+
+set highlight-color "#f0dfaf"
+set highlight-active-color "#705050"
+
+set completion-highlight-fg "#f0dfaf"
+set completion-highlight-bg "#1e2320"
+
+set completion-bg "#3f3f3f"
+set completion-fg "#dfaf8f"
+
+map \< goto top
+map \> goto bottom
+map b navigate previous
+map e follow
+map f navigate next
+map p goto top
+
+map <C-+> zoom in
+map <C--> zoom out
+map <C-=> zoom in
+map <C-)> adjust_window best-fit
+map <C-0> adjust_window width
+map <C-a> scroll full-left
+map <C-b> scroll left
+map <C-e> scroll full-right
+map <C-f> scroll right
+map <C-g> abort
+map <C-n> scroll down
+map <C-p> scroll up
+map <C-v> scroll full-down
+
+map <A-\<> goto top
+map <A-\>> goto bottom
+map <A-v> scroll full-up
