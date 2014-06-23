@@ -2,6 +2,8 @@ set window-title-basename true
 
 set adjust-open width
 
+set scroll-full-overlap 0.1
+
 set font "Terminus 10"
 
 set statusbar-fg "#f0dfaf"
