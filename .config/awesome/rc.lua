@@ -94,6 +94,27 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
+myworkmenu = {
+   { "termite", terminal, beautiful.menu_term },
+   { "Emacs", "emacsclient -c", beautiful.menu_emacs }
+}
+
+mywebmenu = {
+   { "Conkeror", "conkeror", beautiful.menu_browser },
+   { "Skype", "skype", beautiful.menu_skype }
+}
+
+myofficemenu = {
+   { "Writer", "lowriter", beautiful.menu_writer },
+   { "GIMP", "gimp", beautiful.menu_gimp },
+   { "Zathura", "zathura", beautiful.menu_zathura }
+}
+
+myutilmenu = {
+   { "Thunar", "thunar", beautiful.menu_fman },
+   { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
+}
+
 myawesomemenu = {
    { "Manual", terminal .. " -e 'man awesome'", beautiful.menu_manual },
    { "Edit config", editor .. " " .. awesome.conffile, beautiful.menu_edit },
@@ -102,14 +123,10 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = {
-                             { "termite", terminal, beautiful.menu_term },
-                             { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-                             { "Conkeror", "conkeror", beautiful.menu_browser },
-                             { "Skype", "skype", beautiful.menu_skype },
-                             { "Writer", "lowriter", beautiful.menu_writer },
-                             { "GIMP", "gimp", beautiful.menu_gimp },
-                             { "Thunar", "thunar", beautiful.menu_fman },
-                             { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
+                             { "Work", myworkmenu, beautiful.menu_work },
+                             { "Web", mywebmenu, beautiful.menu_web },
+                             { "Office", myofficemenu, beautiful.menu_office },
+                             { "Utilities", myutilmenu, beautiful.menu_util },
                              { "awesome", myawesomemenu, beautiful.awesome_icon }
 }
                        })
@@ -538,6 +555,8 @@ awful.rules.rules = {
      properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },
+   { rule = { class = "Zathura" },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "libreoffice" },
      properties = { tag = tags[1][4] } },
    { rule = { class = "Gimp" },

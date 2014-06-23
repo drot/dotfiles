@@ -86,10 +86,15 @@ theme.widget_sep = theme.icons_dir .. "separator.png"
 
 -- {{{ Menu
 theme.menu_submenu_icon = theme.icons_dir .. "submenu.png"
+theme.menu_work = theme.icons_dir .. "menu/work.png"
+theme.menu_web = theme.icons_dir .. "menu/web.png"
+theme.menu_office = theme.icons_dir .. "menu/office.png"
+theme.menu_util = theme.icons_dir .. "menu/util.png"
 theme.menu_term = theme.icons_dir .. "menu/term.png"
 theme.menu_emacs = theme.icons_dir .. "menu/emacs.png"
 theme.menu_browser = theme.icons_dir .. "menu/browser.png"
 theme.menu_skype = theme.icons_dir .. "menu/skype.png"
+theme.menu_zathura = theme.icons_dir .. "menu/zathura.png"
 theme.menu_writer = theme.icons_dir .. "menu/writer.png"
 theme.menu_gimp = theme.icons_dir .. "menu/gimp.png"
 theme.menu_fman = theme.icons_dir .. "menu/fman.png"
@@ -100,7 +105,7 @@ theme.menu_restart = theme.icons_dir .. "menu/restart.png"
 theme.menu_quit = theme.icons_dir .. "menu/quit.png"
 --}}}
 
--- {{{ Misc
+-- {{{ Awesome icon
 theme.awesome_icon = theme.icons_dir .. "awesome.png"
 -- }}}
 
