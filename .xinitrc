@@ -18,8 +18,5 @@ fi
 xset -dpms &
 xset s off &
 
-# Start rxvt-unicode daemon
-urxvtd -q -f -o &
-
 # Start awesome
 exec awesome
