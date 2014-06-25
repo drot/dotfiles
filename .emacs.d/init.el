@@ -345,9 +345,10 @@
                (setq erc-fill-column (- (window-width w) 2))))))))
 
     (defun drot/erc-mode-hook ()
-      "Keep prompt at bottom and disable Company mode."
+      "Keep prompt at bottom and disable Company and YASnippet."
       (set (make-local-variable 'scroll-conservatively) 1000)
-      (company-mode 0))
+      (company-mode 0)
+      (yas-minor-mode 0))
 
     (make-variable-buffer-local 'erc-fill-column)
     (add-hook 'window-configuration-change-hook 'drot/erc-fill-hook)
