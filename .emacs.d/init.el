@@ -1,11 +1,11 @@
 (defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar drot/save-directory (expand-file-name "saves" drot/emacs-directory)
-  "This directory houses all save files.")
-(make-directory drot/save-directory t)
+(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
+  "This directory houses all cache files.")
+(make-directory drot/cache-directory t)
 
-(defvar drot/custom-file (expand-file-name "custom.el" drot/save-directory)
+(defvar drot/custom-file (expand-file-name "custom.el" drot/cache-directory)
   "Store changes from the customize interface in the selected file.")
 
 (defvar drot/yas-directory (expand-file-name "snippets" drot/emacs-directory)
@@ -82,9 +82,9 @@
       view-inhibit-help-message t)
 
 ;; Configuration for backup files
-(setq backup-directory-alist `((".*" . ,drot/save-directory))
-      auto-save-file-name-transforms `((".*" ,drot/save-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" drot/save-directory)
+(setq backup-directory-alist `((".*" . ,drot/cache-directory))
+      auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
       version-control t
       kept-new-versions 5
       delete-old-versions t
@@ -110,14 +110,14 @@
   (progn
     (setq savehist-additional-variables '(search-ring regexp-search-ring)
           savehist-autosave-interval 60
-          savehist-file (expand-file-name "minbuf.hist" drot/save-directory))
+          savehist-file (expand-file-name "minbuf.hist" drot/cache-directory))
     (savehist-mode 1)))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (progn
-    (setq save-place-file (expand-file-name "saved-places" drot/save-directory))
+    (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
     (setq-default save-place t)))
 
 ;; Find file at point
@@ -151,7 +151,7 @@
   :defer t
   :config
   (progn
-    (setq bookmark-default-file (expand-file-name "bookmarks" drot/save-directory)
+    (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
           bookmark-save-flag 1)))
 
 ;; Eshell save directory
@@ -159,7 +159,7 @@
   :defer t
   :config
   (progn
-    (setq eshell-directory-name (expand-file-name "eshell" drot/save-directory))))
+    (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory))))
 
 ;; Shell mode configuration
 (use-package shell
@@ -213,8 +213,8 @@
   :config
   (progn
     (setq tramp-default-method "ssh"
-          tramp-backup-directory-alist `((".*" . ,drot/save-directory))
-          tramp-auto-save-directory drot/save-directory)))
+          tramp-backup-directory-alist `((".*" . ,drot/cache-directory))
+          tramp-auto-save-directory drot/cache-directory)))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -274,7 +274,7 @@
 (use-package abbrev
   :config
   (progn
-    (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/save-directory)
+    (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/cache-directory)
           save-abbrevs t)
     (if (file-exists-p abbrev-file-name)
         (quietly-read-abbrev-file))
@@ -482,7 +482,7 @@
   :diminish "UT"
   :config
   (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,drot/save-directory))
+    (setq undo-tree-history-directory-alist `((".*" . ,drot/cache-directory))
           undo-tree-auto-save-history t)
     (global-undo-tree-mode 1)))
 
