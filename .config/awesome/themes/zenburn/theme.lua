@@ -44,10 +44,6 @@ theme.center_widget = "#88A175"
 theme.end_widget = "#FF5656"
 -- }}}
 
--- {{{ Mouse finder
-theme.mouse_finder_color = "#CC9393"
--- }}}
-
 -- {{{ Menu
 theme.menu_height = 21
 theme.menu_width  = 126

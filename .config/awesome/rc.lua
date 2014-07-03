@@ -19,7 +19,7 @@ local scratch = require("scratch")
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
    naughty.notify({ preset = naughty.config.presets.critical,
-                    title = "Oops, there were errors during startup!",
+                    title = "There were errors during startup!",
                     text = awesome.startup_errors })
 end
 
@@ -32,7 +32,7 @@ do
                              in_error = true
 
                              naughty.notify({ preset = naughty.config.presets.critical,
-                                              title = "Oops, an error happened!",
+                                              title = "An error happened!",
                                               text = err })
                              in_error = false
    end)
@@ -444,7 +444,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "p", function () mypromptbox[mouse.screen]:run() end),
 
    -- Scratchpad
-   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 600, 300) end),
+   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e cmus", "center", "center", 586, 338) end),
 
    -- Volume control
    awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
