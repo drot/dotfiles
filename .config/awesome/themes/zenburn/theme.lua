@@ -56,6 +56,10 @@ theme.taglist_squares_sel = theme.icons_dir .. "taglist/squaref.png"
 theme.taglist_squares_unsel = theme.icons_dir .. "taglist/squareu.png"
 -- }}}
 
+-- {{{ Separator
+theme.widget_sep = theme.icons_dir .. "separator.png"
+-- }}}
+
 -- {{{ Layout
 theme.layout_fairh = theme.icons_dir .. "layouts/fairh.png"
 theme.layout_fairv = theme.icons_dir .. "layouts/fairv.png"
@@ -78,11 +82,10 @@ theme.widget_temp = theme.icons_dir .. "widgets/temp.png"
 theme.widget_disk = theme.icons_dir .. "widgets/disk.png"
 theme.widget_date = theme.icons_dir .. "widgets/date.png"
 theme.widget_vol = theme.icons_dir .. "widgets/vol.png"
-theme.widget_sep = theme.icons_dir .. "separator.png"
 -- }}}
 
 -- {{{ Menu
-theme.menu_submenu_icon = theme.icons_dir .. "submenu.png"
+theme.menu_submenu_icon = theme.icons_dir .. "menu/submenu.png"
 theme.menu_work = theme.icons_dir .. "menu/work.png"
 theme.menu_web = theme.icons_dir .. "menu/web.png"
 theme.menu_office = theme.icons_dir .. "menu/office.png"
