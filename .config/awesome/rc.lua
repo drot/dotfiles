@@ -143,6 +143,7 @@ cpugraph = awful.widget.graph()
 -- Graph properties
 cpugraph:set_width(45):set_height(15)
 cpugraph:set_background_color(beautiful.bg_widget)
+cpugraph:set_border_color(beautiful.border_widget)
 cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 cpudisplay = wibox.layout.margin()
@@ -166,6 +167,7 @@ membar = awful.widget.progressbar()
 membar:set_vertical(true):set_ticks(true)
 membar:set_width(15):set_ticks_size(3):set_height(15)
 membar:set_background_color(beautiful.bg_widget)
+membar:set_border_color(beautiful.border_widget)
 membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 memdisplay = wibox.layout.margin()
@@ -189,6 +191,7 @@ tempbar = awful.widget.progressbar()
 tempbar:set_vertical(true):set_ticks(true)
 tempbar:set_width(15):set_ticks_size(3):set_height(15)
 tempbar:set_background_color(beautiful.bg_widget)
+tempbar:set_border_color(beautiful.border_widget)
 tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 tempdisplay = wibox.layout.margin()
@@ -213,6 +216,7 @@ for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
    dstyle:set_width(7):set_ticks_size(3):set_height(15)
    dstyle:set_background_color(beautiful.bg_widget)
+   dstyle:set_border_color(beautiful.border_widget)
    dstyle:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                          {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 end
@@ -243,6 +247,7 @@ volbar = awful.widget.progressbar()
 volbar:set_vertical(true):set_ticks(true)
 volbar:set_width(15):set_ticks_size(3):set_height(15)
 volbar:set_background_color(beautiful.bg_widget)
+volbar:set_border_color(beautiful.border_widget)
 volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 voldisplay = wibox.layout.margin()
