@@ -45,6 +45,9 @@ cwd.append('Downloads');
 editor_shell_command = "emacsclient";
 view_source_use_external_editor = true;
 
+// View PDFs in Zathura
+external_content_handlers.set("application/pdf", "zathura");
+
 // Improve hinting keys
 hint_digits = "asdfghjkl";
 
