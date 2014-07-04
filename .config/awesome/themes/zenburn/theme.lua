@@ -42,6 +42,7 @@ theme.fg_widget = "#AECF96"
 theme.bg_widget = "#494B4F"
 theme.center_widget = "#88A175"
 theme.end_widget = "#FF5656"
+theme.border_widget = "#6f6f6f"
 -- }}}
 
 -- {{{ Menu
