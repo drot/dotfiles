@@ -14,20 +14,20 @@ theme.font = "Terminus 10"
 -- }}}
 
 -- {{{ Colors
-theme.fg_normal  = "#DCDCCC"
-theme.fg_focus   = "#F0DFAF"
-theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#3F3F3F"
-theme.bg_focus   = "#1E2320"
-theme.bg_urgent  = "#3F3F3F"
+theme.fg_normal = "#dcdccc"
+theme.fg_focus = "#f0dfaf"
+theme.fg_urgent = "#cc9393"
+theme.bg_normal = "#3f3f3f"
+theme.bg_focus = "#1e2320"
+theme.bg_urgent = "#3f3f3f"
 theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.border_width  = 1
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#6F6F6F"
-theme.border_marked = "#CC9393"
+theme.border_width = 1
+theme.border_normal = "#3f3f3f"
+theme.border_focus = "#6f6f6f"
+theme.border_marked = "#cc9393"
 -- }}}
 
 -- {{{ Tasklist
@@ -38,16 +38,16 @@ theme.tasklist_maximized_vertical = ""
 -- }}}
 
 -- {{{ Widgets
-theme.fg_widget = "#AECF96"
-theme.bg_widget = "#494B4F"
-theme.center_widget = "#88A175"
-theme.end_widget = "#FF5656"
+theme.fg_widget = "#aecf96"
+theme.bg_widget = "#494b4f"
+theme.center_widget = "#88a175"
+theme.end_widget = "#ff5656"
 theme.border_widget = "#6f6f6f"
 -- }}}
 
 -- {{{ Menu
 theme.menu_height = 21
-theme.menu_width  = 126
+theme.menu_width = 126
 -- }}}
 
 -- {{{ Icons
