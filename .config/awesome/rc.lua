@@ -449,7 +449,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "p", function () mypromptbox[mouse.screen]:run() end),
 
    -- Scratchpad
-   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e cmus", "center", "center", 586, 338) end),
+   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 586, 338) end),
 
    -- Volume control
    awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
