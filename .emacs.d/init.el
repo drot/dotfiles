@@ -272,6 +272,7 @@
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
+  :diminish " α"
   :config
   (progn
     (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/cache-directory)
@@ -282,6 +283,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
+  :diminish " φ"
   :config
   (progn
     (setq ispell-extra-args '("--sug-mode=ultra")
@@ -392,7 +394,7 @@
 ;; ParEdit
 (use-package paredit
   :ensure t
-  :diminish "PEd"
+  :diminish " π"
   :config
   (progn
     (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
@@ -425,6 +427,7 @@
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
+  :diminish " ε"
   :config
   (progn
     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
@@ -435,6 +438,7 @@
 
 ;; Hide Show mode
 (use-package hideshow
+  :diminish (hs-minor-mode . " σ")
   :config
   (progn
     (add-hook 'c-mode-common-hook 'hs-minor-mode)
@@ -451,11 +455,12 @@
   :ensure t
   :config
   (progn
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+    (global-rainbow-delimiters-mode)))
 
 ;; YASnippet
 (use-package yasnippet
   :ensure t
+  :diminish (yas-minor-mode . " γ")
   :config
   (progn
     (setq yas-verbosity 1)
@@ -464,7 +469,7 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish "co"
+  :diminish " κ"
   :config
   (progn
     (setq company-echo-delay 0
@@ -479,7 +484,7 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish "UT"
+  :diminish " υ"
   :config
   (progn
     (setq undo-tree-history-directory-alist `((".*" . ,drot/cache-directory))
