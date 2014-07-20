@@ -6,7 +6,7 @@
 -- {{{ Main
 theme = {}
 theme.icons_dir = themes_dir .. "zenburn/icons/"
-theme.wallpaper = themes_dir .. "zenburn/tango.png"
+theme.wallpaper = themes_dir .. "zenburn/zenburn.png"
 -- }}}
 
 -- {{{ Font
