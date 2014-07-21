@@ -84,7 +84,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names = { "α", "β", "γ", "δ", "ε" },
+   names = { "1", "2", "3", "4", "5" },
    layout = { layouts[1], layouts[2], layouts[1], layouts[2], layouts[3] }
 }
 for s = 1, screen.count() do
@@ -341,7 +341,7 @@ for s = 1, screen.count() do
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
    -- Create the wibox
-   mywibox[s] = awful.wibox({ position = "top", screen = s })
+   mywibox[s] = awful.wibox({ position = "top", height = 21, screen = s })
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
@@ -354,25 +354,31 @@ for s = 1, screen.count() do
    local right_layout = wibox.layout.fixed.horizontal()
    right_layout:add(cpuicon)
    right_layout:add(cpuwidget)
+   right_layout:add(separator)
    right_layout:add(cpudisplay)
    right_layout:add(separator)
    right_layout:add(memicon)
    right_layout:add(memwidget)
+   right_layout:add(separator)
    right_layout:add(memdisplay)
    right_layout:add(separator)
    right_layout:add(tempicon)
    right_layout:add(tempwidget)
+   right_layout:add(separator)
    right_layout:add(tempdisplay)
    right_layout:add(separator)
    right_layout:add(diskicon)
    right_layout:add(dperc.r)
+   right_layout:add(separator)
    right_layout:add(dusage.rdisplay)
    right_layout:add(separator)
    right_layout:add(dperc.h)
+   right_layout:add(separator)
    right_layout:add(dusage.hdisplay)
    right_layout:add(separator)
    right_layout:add(volicon)
    right_layout:add(volwidget)
+   right_layout:add(separator)
    right_layout:add(voldisplay)
    right_layout:add(separator)
    right_layout:add(timeicon)
