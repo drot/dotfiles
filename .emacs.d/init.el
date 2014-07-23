@@ -451,7 +451,7 @@
   :ensure t
   :config
   (progn
-    (global-rainbow-delimiters-mode)))
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
 ;; YASnippet
 (use-package yasnippet
