@@ -12,17 +12,6 @@
   "This directory houses all snippets.")
 (make-directory drot/yas-directory t)
 
-;; Package repository selection and activation
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
-      package-enable-at-startup nil)
-(package-initialize)
-
-;; Ensure use-package is installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-
 ;; Turn off the menu bar
 (menu-bar-mode 0)
 
@@ -92,6 +81,21 @@
 
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
+
+;; Set fallback font
+(set-fontset-font "fontset-default" nil
+                  (font-spec :size 16 :name "Symbola"))
+
+;; Package repository selection and activation
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
+      package-enable-at-startup nil)
+(package-initialize)
+
+;; Ensure use-package is installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 ;; Color theme
 (use-package zenburn-theme
