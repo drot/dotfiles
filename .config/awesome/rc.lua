@@ -141,15 +141,15 @@ cpuicon:set_image(beautiful.widget_cpu)
 cpuwidget = wibox.widget.textbox()
 cpugraph = awful.widget.graph()
 -- Graph properties
-cpugraph:set_width(45):set_height(15)
+cpugraph:set_width(45)
 cpugraph:set_background_color(beautiful.bg_widget)
 cpugraph:set_border_color(beautiful.border_widget)
 cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 cpudisplay = wibox.layout.margin()
 cpudisplay:set_widget(cpugraph)
-cpudisplay:set_top(3)
-cpudisplay:set_bottom(3)
+cpudisplay:set_top(5)
+cpudisplay:set_bottom(5)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
@@ -165,15 +165,15 @@ memwidget = wibox.widget.textbox()
 membar = awful.widget.progressbar()
 -- Progressbar properties
 membar:set_vertical(true):set_ticks(true)
-membar:set_width(15):set_ticks_size(3):set_height(15)
+membar:set_width(15):set_ticks_size(3)
 membar:set_background_color(beautiful.bg_widget)
 membar:set_border_color(beautiful.border_widget)
 membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 memdisplay = wibox.layout.margin()
 memdisplay:set_widget(membar)
-memdisplay:set_top(3)
-memdisplay:set_bottom(3)
+memdisplay:set_top(5)
+memdisplay:set_bottom(5)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
@@ -189,15 +189,15 @@ tempwidget = wibox.widget.textbox()
 tempbar = awful.widget.progressbar()
 -- Graph properties
 tempbar:set_vertical(true):set_ticks(true)
-tempbar:set_width(15):set_ticks_size(3):set_height(15)
+tempbar:set_width(15):set_ticks_size(3)
 tempbar:set_background_color(beautiful.bg_widget)
 tempbar:set_border_color(beautiful.border_widget)
 tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 tempdisplay = wibox.layout.margin()
 tempdisplay:set_widget(tempbar)
-tempdisplay:set_top(3)
-tempdisplay:set_bottom(3)
+tempdisplay:set_top(5)
+tempdisplay:set_bottom(5)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
@@ -214,7 +214,7 @@ dusage = { r = awful.widget.progressbar(), h = awful.widget.progressbar() }
 -- Progressbar properties
 for _, dstyle in pairs(dusage) do
    dstyle:set_vertical(true):set_ticks(true)
-   dstyle:set_width(7):set_ticks_size(3):set_height(15)
+   dstyle:set_width(7):set_ticks_size(3)
    dstyle:set_background_color(beautiful.bg_widget)
    dstyle:set_border_color(beautiful.border_widget)
    dstyle:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
@@ -222,12 +222,12 @@ for _, dstyle in pairs(dusage) do
 end
 dusage.rdisplay = wibox.layout.margin()
 dusage.rdisplay:set_widget(dusage.r)
-dusage.rdisplay:set_top(3)
-dusage.rdisplay:set_bottom(3)
+dusage.rdisplay:set_top(5)
+dusage.rdisplay:set_bottom(5)
 dusage.hdisplay = wibox.layout.margin()
 dusage.hdisplay:set_widget(dusage.h)
-dusage.hdisplay:set_top(3)
-dusage.hdisplay:set_bottom(3)
+dusage.hdisplay:set_top(5)
+dusage.hdisplay:set_bottom(5)
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widgets
@@ -245,15 +245,15 @@ volwidget = wibox.widget.textbox()
 volbar = awful.widget.progressbar()
 -- Graph properties
 volbar:set_vertical(true):set_ticks(true)
-volbar:set_width(15):set_ticks_size(3):set_height(15)
+volbar:set_width(15):set_ticks_size(3)
 volbar:set_background_color(beautiful.bg_widget)
 volbar:set_border_color(beautiful.border_widget)
 volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 voldisplay = wibox.layout.margin()
 voldisplay:set_widget(volbar)
-voldisplay:set_top(3)
-voldisplay:set_bottom(3)
+voldisplay:set_top(5)
+voldisplay:set_bottom(5)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
@@ -312,8 +312,8 @@ netdnwidget = wibox.widget.textbox()
 -- Enable caching
 vicious.cache(vicious.widgets.net)
 -- Register widget
-vicious.register(netupwidget, vicious.widgets.net, "${enp0s7 up_kb}", 3)
-vicious.register(netdnwidget, vicious.widgets.net, "${enp0s7 down_kb}", 3)
+vicious.register(netupwidget, vicious.widgets.net, "${enp0s7 up_kb}kb/s", 3)
+vicious.register(netdnwidget, vicious.widgets.net, "${enp0s7 down_kb}kb/s", 3)
 -- }}}
 
 -- {{{ Separator
@@ -390,8 +390,8 @@ for s = 1, screen.count() do
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
    -- Create the wiboxen
-   wibox_top[s] = awful.wibox({ position = "top", screen = s })
-   wibox_bottom[s] = awful.wibox({ position = "bottom", screen = s })
+   wibox_top[s] = awful.wibox({ position = "top", height = 25, screen = s })
+   wibox_bottom[s] = awful.wibox({ position = "bottom", height= 25, screen = s })
 
    -- Top widgets that are aligned to the left
    local top_left_layout = wibox.layout.fixed.horizontal()
