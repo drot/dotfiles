@@ -438,6 +438,7 @@ for s = 1, screen.count() do
    -- Now bring it all together (with the tasklist in the middle)
    local top_layout = wibox.layout.align.horizontal()
    top_layout:set_left(top_left_layout)
+   top_layout:set_middle(mytasklist[s])
    top_layout:set_right(top_right_layout)
 
    wibox_top[s]:set_widget(top_layout)
