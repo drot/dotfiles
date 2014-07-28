@@ -148,8 +148,8 @@ cpugraph:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                         {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 cpudisplay = wibox.layout.margin()
 cpudisplay:set_widget(cpugraph)
-cpudisplay:set_top(5)
-cpudisplay:set_bottom(5)
+cpudisplay:set_top(3)
+cpudisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
@@ -172,8 +172,8 @@ membar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 memdisplay = wibox.layout.margin()
 memdisplay:set_widget(membar)
-memdisplay:set_top(5)
-memdisplay:set_bottom(5)
+memdisplay:set_top(3)
+memdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
@@ -196,8 +196,8 @@ tempbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                        {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 tempdisplay = wibox.layout.margin()
 tempdisplay:set_widget(tempbar)
-tempdisplay:set_top(5)
-tempdisplay:set_bottom(5)
+tempdisplay:set_top(3)
+tempdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
@@ -222,12 +222,12 @@ for _, dstyle in pairs(dusage) do
 end
 dusage.rdisplay = wibox.layout.margin()
 dusage.rdisplay:set_widget(dusage.r)
-dusage.rdisplay:set_top(5)
-dusage.rdisplay:set_bottom(5)
+dusage.rdisplay:set_top(3)
+dusage.rdisplay:set_bottom(3)
 dusage.hdisplay = wibox.layout.margin()
 dusage.hdisplay:set_widget(dusage.h)
-dusage.hdisplay:set_top(5)
-dusage.hdisplay:set_bottom(5)
+dusage.hdisplay:set_top(3)
+dusage.hdisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.widgets.fs)
 -- Register widgets
@@ -252,8 +252,8 @@ volbar:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = {
                       {0, beautiful.end_widget}, {0.5, beautiful.center_widget}, {1, beautiful.fg_widget }}})
 voldisplay = wibox.layout.margin()
 voldisplay:set_widget(volbar)
-voldisplay:set_top(5)
-voldisplay:set_bottom(5)
+voldisplay:set_top(3)
+voldisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
@@ -390,8 +390,8 @@ for s = 1, screen.count() do
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
    -- Create the wiboxen
-   wibox_top[s] = awful.wibox({ position = "top", height = 25, screen = s })
-   wibox_bottom[s] = awful.wibox({ position = "bottom", height= 25, screen = s })
+   wibox_top[s] = awful.wibox({ position = "top", height = 21, screen = s })
+   wibox_bottom[s] = awful.wibox({ position = "bottom", height = 21, screen = s })
 
    -- Top widgets that are aligned to the left
    local top_left_layout = wibox.layout.fixed.horizontal()
