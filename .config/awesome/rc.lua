@@ -268,17 +268,6 @@ timeicon:set_image(beautiful.widget_date)
 timewidget = awful.widget.textclock("%d-%m/%R")
 -- }}}
 
--- {{{ Weather widget
-weathericon = wibox.widget.imagebox()
-weathericon:set_image(beautiful.widget_weather)
--- Initialize widget
-weatherwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.weather)
--- Register widget
-vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}° - ${sky}", 3600, "LQMO")
--- }}}
-
 -- {{{ Pkg update widget
 pkgicon = wibox.widget.imagebox()
 pkgicon:set_image(beautiful.widget_pkg)
@@ -287,18 +276,30 @@ pkgwidget = wibox.widget.textbox()
 -- Enable caching
 vicious.cache(vicious.widgets.pkg)
 -- Register widget
-vicious.register(pkgwidget, vicious.widgets.pkg, "$1 updates", 3700, "Arch C")
+vicious.register(pkgwidget, vicious.widgets.pkg, "$1 Updates", 3700, "Arch C")
 -- }}}
 
--- {{{ Uptime widget
-uptimeicon = wibox.widget.imagebox()
-uptimeicon:set_image(beautiful.widget_uptime)
+-- {{{ GMail widget
 -- Initialize widget
-uptimewidget = wibox.widget.textbox()
+gmailicon = wibox.widget.imagebox()
+gmailicon:set_image(beautiful.widget_mail)
+-- Initialize widget
+gmailwidget = wibox.widget.textbox()
 -- Enable caching
-vicious.cache(vicious.widgets.uptime)
+vicious.cache(vicious.widgets.gmail)
 -- Register widget
-vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 - UP:$1d $2:$3", 61)
+vicious.register(gmailwidget, vicious.widgets.gmail, "${count} Messages", 300)
+-- }}}
+
+-- {{{ Weather widget
+weathericon = wibox.widget.imagebox()
+weathericon:set_image(beautiful.widget_weather)
+-- Initialize widget
+weatherwidget = wibox.widget.textbox()
+-- Enable caching
+vicious.cache(vicious.widgets.weather)
+-- Register widget
+vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}° (${sky})", 3600, "LQMO")
 -- }}}
 
 -- {{{ Network usage
@@ -314,6 +315,17 @@ vicious.cache(vicious.widgets.net)
 -- Register widget
 vicious.register(netupwidget, vicious.widgets.net, "${enp0s7 up_kb}kb/s", 3)
 vicious.register(netdnwidget, vicious.widgets.net, "${enp0s7 down_kb}kb/s", 3)
+-- }}}
+
+-- {{{ Uptime widget
+uptimeicon = wibox.widget.imagebox()
+uptimeicon:set_image(beautiful.widget_uptime)
+-- Initialize widget
+uptimewidget = wibox.widget.textbox()
+-- Enable caching
+vicious.cache(vicious.widgets.uptime)
+-- Register widget
+vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 (UP:$1d $2:$3)", 61)
 -- }}}
 
 -- {{{ Separator
@@ -447,6 +459,9 @@ for s = 1, screen.count() do
    local bottom_left_layout = wibox.layout.fixed.horizontal()
    bottom_left_layout:add(pkgicon)
    bottom_left_layout:add(pkgwidget)
+   bottom_left_layout:add(separator)
+   bottom_left_layout:add(gmailicon)
+   bottom_left_layout:add(gmailwidget)
    bottom_left_layout:add(separator)
    bottom_left_layout:add(weathericon)
    bottom_left_layout:add(weatherwidget)
