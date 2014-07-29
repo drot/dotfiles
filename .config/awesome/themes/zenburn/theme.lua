@@ -80,13 +80,14 @@ theme.widget_cpu = theme.icons_dir .. "widgets/cpu.png"
 theme.widget_mem = theme.icons_dir .. "widgets/mem.png"
 theme.widget_temp = theme.icons_dir .. "widgets/temp.png"
 theme.widget_disk = theme.icons_dir .. "widgets/disk.png"
-theme.widget_date = theme.icons_dir .. "widgets/date.png"
 theme.widget_vol = theme.icons_dir .. "widgets/vol.png"
+theme.widget_date = theme.icons_dir .. "widgets/date.png"
 theme.widget_pkg = theme.icons_dir .. "widgets/pacman.png"
 theme.widget_weather = theme.icons_dir .. "widgets/weather.png"
-theme.widget_uptime = theme.icons_dir .. "widgets/uptime.png"
-theme.widget_netdn = theme.icons_dir .. "widgets/netdn.png"
+theme.widget_music = theme.icons_dir .. "widgets/music.png"
 theme.widget_netup = theme.icons_dir .. "widgets/netup.png"
+theme.widget_netdn = theme.icons_dir .. "widgets/netdn.png"
+theme.widget_uptime = theme.icons_dir .. "widgets/uptime.png"
 -- }}}
 
 -- {{{ Menu

@@ -316,6 +316,20 @@ vicious.cache(vicious.widgets.uptime)
 vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 (UP:$1d $2:$3)", 61)
 -- }}}
 
+-- {{{ MPD widget
+mpdicon = wibox.widget.imagebox()
+mpdicon:set_image(beautiful.widget_music)
+-- Initialize widget
+mpdwidget = wibox.widget.textbox()
+-- Enable caching
+vicious.cache(vicious.widgets.mpd)
+-- Register widget
+vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}")
+musicwidget = wibox.layout.flex.horizontal()
+musicwidget:add(mpdwidget)
+musicwidget:set_max_widget_size(315, 21)
+-- }}}
+
 -- {{{ Separator
 separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
@@ -450,6 +464,9 @@ for s = 1, screen.count() do
    bottom_left_layout:add(separator)
    bottom_left_layout:add(weathericon)
    bottom_left_layout:add(weatherwidget)
+   bottom_left_layout:add(separator)
+   bottom_left_layout:add(mpdicon)
+   bottom_left_layout:add(musicwidget)
 
    -- Bottom widgets that are aligned to the right
    local bottom_right_layout = wibox.layout.fixed.horizontal()
