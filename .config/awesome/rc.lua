@@ -279,18 +279,6 @@ vicious.cache(vicious.widgets.pkg)
 vicious.register(pkgwidget, vicious.widgets.pkg, "$1 Updates", 3700, "Arch C")
 -- }}}
 
--- {{{ GMail widget
--- Initialize widget
-gmailicon = wibox.widget.imagebox()
-gmailicon:set_image(beautiful.widget_mail)
--- Initialize widget
-gmailwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.gmail)
--- Register widget
-vicious.register(gmailwidget, vicious.widgets.gmail, "${count} Messages", 300)
--- }}}
-
 -- {{{ Weather widget
 weathericon = wibox.widget.imagebox()
 weathericon:set_image(beautiful.widget_weather)
@@ -459,9 +447,6 @@ for s = 1, screen.count() do
    local bottom_left_layout = wibox.layout.fixed.horizontal()
    bottom_left_layout:add(pkgicon)
    bottom_left_layout:add(pkgwidget)
-   bottom_left_layout:add(separator)
-   bottom_left_layout:add(gmailicon)
-   bottom_left_layout:add(gmailwidget)
    bottom_left_layout:add(separator)
    bottom_left_layout:add(weathericon)
    bottom_left_layout:add(weatherwidget)
