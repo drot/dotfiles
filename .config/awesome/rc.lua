@@ -327,7 +327,7 @@ vicious.cache(vicious.widgets.mpd)
 vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}")
 musicwidget = wibox.layout.flex.horizontal()
 musicwidget:add(mpdwidget)
-musicwidget:set_max_widget_size(315, 21)
+musicwidget:set_max_widget_size(273, 21)
 -- }}}
 
 -- {{{ Separator
