@@ -3,8 +3,8 @@
 #minibuffer {
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Inconsolata-zi4;
-    font-size: 16px;
+    font-family: Source Code Pro;
+    font-size: 14px;
 }
 
 #minibuffer-input {
@@ -31,8 +31,8 @@ tree.completions {
     border: 0px none !important;
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Inconsolata-zi4;
-    font-size: 16px;
+    font-family: Source Code Pro;
+    font-size: 14px;
 }
 
 tree.completions treechildren { border: none !important; }
@@ -50,6 +50,7 @@ tree.completions treechildren::-moz-tree-row(current) {
 
 tree.completions treechildren::-moz-tree-cell-text(completion-description) {
     color: #dfaf8f !important;
+    font-weight: bold !important;
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {

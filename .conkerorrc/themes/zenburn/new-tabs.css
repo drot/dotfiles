@@ -14,13 +14,14 @@
     border-color: #6f6f6f;
     background: #3f3f3f;
     color: #dcdccc;
-    font-family: Inconsolata-zi4;
-    font-size: 16px;
+    font-family: Source Code Pro;
+    font-size: 14px;
 }
 
 .tab2[selected=true] {
     background: #1e2320;
     color: #f0dfaf;
+    font-weight: bold;
 }
 
 .tab2:hover {

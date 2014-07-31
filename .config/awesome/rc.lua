@@ -324,7 +324,7 @@ mpdwidget = wibox.widget.textbox()
 -- Enable caching
 vicious.cache(vicious.widgets.mpd)
 -- Register widget
-vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}")
+vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}", 2)
 musicwidget = wibox.layout.flex.horizontal()
 musicwidget:add(mpdwidget)
 musicwidget:set_max_widget_size(273, 21)
