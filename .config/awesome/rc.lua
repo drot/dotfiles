@@ -313,7 +313,7 @@ uptimewidget = wibox.widget.textbox()
 -- Enable caching
 vicious.cache(vicious.widgets.uptime)
 -- Register widget
-vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 (UP:$1d $2:$3)", 61)
+vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 (UP:$1d $2h:$3m)", 61)
 -- }}}
 
 -- {{{ MPD widget
