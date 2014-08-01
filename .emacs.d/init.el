@@ -84,7 +84,7 @@
 
 ;; Set fallback font
 (set-fontset-font "fontset-default" nil
-                  (font-spec :size 16 :name "Symbola"))
+                  (font-spec :size 14 :name "Symbola"))
 
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -149,6 +149,12 @@
   :config
   (progn
     (setq reb-re-syntax 'string)))
+
+;; Enable rectangle selection with CUA mode
+(use-package cua-base
+  :config
+  (progn
+    (cua-selection-mode 1)))
 
 ;; Bookmarks save directory
 (use-package bookmark
@@ -365,7 +371,7 @@
           erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                         ("forestnet" "#reloaded" "#fo2"))
           erc-server-reconnect-timeout 10
-          erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "AWAY")
+          erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY")
           erc-truncate-buffer-on-save t
           erc-track-exclude-server-buffer t
           erc-track-showcount t
