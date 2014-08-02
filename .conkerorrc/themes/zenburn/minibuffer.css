@@ -3,7 +3,7 @@
 #minibuffer {
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Source Code Pro;
+    font-family: Source Code Pro Medium;
     font-size: 14px;
 }
 
@@ -20,6 +20,7 @@
     padding-right: 8px;
     background-color: #1e2320 !important;
     color: #f0dfaf !important;
+    font-family: Source Code Pro;
     font-weight: bold;
 }
 
@@ -31,7 +32,7 @@ tree.completions {
     border: 0px none !important;
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Source Code Pro;
+    font-family: Source Code Pro Medium;
     font-size: 14px;
 }
 
@@ -50,7 +51,8 @@ tree.completions treechildren::-moz-tree-row(current) {
 
 tree.completions treechildren::-moz-tree-cell-text(completion-description) {
     color: #dfaf8f !important;
-    font-weight: bold !important;
+    font-family: Source Code Pro;
+    font-weight: bold;
 }
 
 tree.completions treechildren::-moz-tree-cell-text(current) {
