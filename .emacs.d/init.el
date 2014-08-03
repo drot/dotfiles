@@ -84,7 +84,7 @@
 
 ;; Set fallback font
 (set-fontset-font "fontset-default" nil
-                  (font-spec :size 14 :name "Symbola"))
+                  (font-spec :size 16 :name "Symbola"))
 
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
