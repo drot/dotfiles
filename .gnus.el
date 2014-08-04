@@ -1,25 +1,29 @@
 ;; User information
-(setq user-full-name "Davor Rotim")
-(setq user-mail-address "mlinfo@cock.li")
+(setq user-full-name "Davor Rotim"
+      user-mail-address "mlinfo@cock.li")
 
 ;; Incoming mail
 (setq gnus-select-method '(nnimap "cock"
-				  (nnimap-address "mail.cock.li")
-				  (nnimap-server-port 993)
-				  (nnimap-stream ssl)))
+                                  (nnimap-address "mail.cock.li")
+                                  (nnimap-server-port 993)
+                                  (nnimap-stream ssl)))
 
 ;; Outgoing mail
 (setq send-mail-function 'smtpmail-send-it
       smtpmail-smtp-server "mail.cock.li"
       smtpmail-smtp-service 587)
 
+;; Confirm to send and kill the buffer after
+(setq message-confirm-send t
+      message-kill-buffer-on-exit t)
+
 ;; Change Gnus default directories
-(setq gnus-directory "~/.gnus")
-(setq message-directory "~/.gnus/mail")
-(setq nnml-directory "~/.gnus/nnml-mail")
-(setq gnus-article-save-directory "~/.gnus/saved")
-(setq gnus-kill-files-directory "~/.gnus/scores")
-(setq gnus-cache-directory "~/.gnus/cache")
+(setq gnus-directory "~/.gnus"
+      message-directory "~/.gnus/mail"
+      nnml-directory "~/.gnus/nnml-mail"
+      gnus-article-save-directory "~/.gnus/saved"
+      gnus-kill-files-directory "~/.gnus/scores"
+      gnus-cache-directory "~/.gnus/cache")
 
 ;; Group topics
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
@@ -27,42 +31,30 @@
 ;; Group format
 (setq gnus-group-line-format "%M\%S\%p\%P\%5y:%B%(%g%)\n")
 
-;; Message date format
-(setq gnus-user-date-format-alist
-      '(((gnus-seconds-today) . "Today, %H:%M")
-        ((+ 86400 (gnus-seconds-today)) . "Yesterday, %H:%M")
-        (604800 . "%A %H:%M")
-        ((gnus-seconds-month) . "%A %d")
-        ((gnus-seconds-year) . "%B %d")
-        (t . "%B %d '%y")))
-
 ;; Summary format
-(setq gnus-summary-line-format
-      (concat "%U%R %~(max-right 17)~(pad-right 17)&user-date; "
-	      "%~(max-right 20)~(pad-right 20)n %B%s\n"))
+(setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+      gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+      gnus-thread-sort-functions '(gnus-thread-sort-by-date))
 
 ;; Summary tree format
-(setq gnus-sum-thread-tree-indent "  ")
-(setq gnus-sum-thread-tree-root "")
-(setq gnus-sum-thread-tree-false-root "o ")
-(setq gnus-sum-thread-tree-single-indent "")
-(setq gnus-sum-thread-tree-leaf-with-other "+-> ")
-(setq gnus-sum-thread-tree-vertical "| ") 
-(setq gnus-sum-thread-tree-single-leaf "`-> ")
-
-;; Kill the message buffer after sending a message
-(setq message-kill-buffer-on-exit t)
+(setq gnus-sum-thread-tree-root "● "
+      gnus-sum-thread-tree-false-root "▷ "
+      gnus-sum-thread-tree-single-indent ""
+      gnus-sum-thread-tree-leaf-with-other "├─►"
+      gnus-sum-thread-tree-vertical "│ "
+      gnus-sum-thread-tree-single-leaf "└─►")
 
 ;; Display images in messages
 (setq gnus-blocked-images nil)
 
 ;; Display attached images
-(setq mm-inline-large-images 'resize)
-(setq mm-attachment-override-types '("image/.*"))
+(setq mm-inline-large-images 'resize
+      mm-attachment-override-types '("image/.*"))
 
 ;; Display GnuPG signatures
-(setq gnus-buttonized-mime-types '("multipart/signed" "multipart/alternative"))
-(setq mm-verify-option 'always)
+(setq gnus-buttonized-mime-types '("multipart/signed" "multipart/alternative")
+      mm-verify-option 'always)
 
 ;; Prefer plain text over HTML
 (setq mm-discouraged-alternatives '("text/html" "text/richtext"))
