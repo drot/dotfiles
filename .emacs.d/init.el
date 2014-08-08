@@ -15,17 +15,6 @@
   "This directory houses all snippets.")
 (make-directory drot/yas-directory t)
 
-;; Package repository selection and activation
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
-      package-enable-at-startup nil)
-(package-initialize)
-
-;; Ensure use-package is installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-
 ;; Load configuraton file with Org-mode
 (require 'ob-tangle)
 (org-babel-load-file drot/startup-file)

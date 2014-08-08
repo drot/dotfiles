@@ -106,6 +106,21 @@
                   (font-spec :size 16 :name "Symbola"))
 #+end_src
 
+* Package repository selection and activation
+#+begin_src emacs-lisp
+(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
+      package-enable-at-startup nil)
+(package-initialize)
+#+end_src
+
+* Ensure use-package is installed
+#+begin_src emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+#+end_src
+
 * Color theme
 #+begin_src emacs-lisp
 (use-package zenburn-theme

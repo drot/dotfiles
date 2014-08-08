@@ -240,6 +240,7 @@ STICKY 00;34
 .yml 01;35
 .zsh 01;35
 .txt 01;35
+.org 01;35
 .ttytterkey 01;31
 .ttytterrc 01;35
 .urlview 01;35
