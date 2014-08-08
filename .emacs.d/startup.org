@@ -586,14 +586,12 @@
 
 * Undo Tree
 #+begin_src emacs-lisp
-(use-package undo-tree
-  :ensure t
-  :diminish "UT"
-  :config
-  (progn
-    (setq undo-tree-history-directory-alist `((".*" . ,drot/cache-directory))
-          undo-tree-auto-save-history t)
-    (global-undo-tree-mode 1)))
+  (use-package undo-tree
+    :ensure t
+    :diminish "UT"
+    :config
+    (progn    
+      (global-undo-tree-mode 1)))
 #+end_src
 
 * Custom keybindings
