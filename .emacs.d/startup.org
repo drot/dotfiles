@@ -190,7 +190,7 @@
     (setq reb-re-syntax 'string)))
 #+end_src
 
-* Enable rectangle selection with CUA mode
+* Enable rectangular selection with CUA mode
 #+begin_src emacs-lisp
 (use-package cua-base
   :config
@@ -346,6 +346,11 @@
     (setq-default abbrev-mode t)))
 #+end_src
 
+* Replace dabbrev-expand with hippie-expand
+#+begin_src emacs-lisp
+(bind-key "M-/" 'hippie-expand)
+#+end_src
+
 * Fly Spell mode configuration
 #+begin_src emacs-lisp
 (use-package flyspell
@@ -360,6 +365,8 @@
 * Org mode configuration
 #+begin_src emacs-lisp
   (use-package org
+    :bind (("C-c a" . org-agenda)
+           ("C-c l" . org-store-link))
     :config
     (progn
       (org-babel-do-load-languages
@@ -569,38 +576,31 @@
 
 * Company mode
 #+begin_src emacs-lisp
-(use-package company
-  :ensure t
-  :diminish "co"
-  :config
-  (progn
-    (setq company-echo-delay 0
-          company-show-numbers t
-          company-backends '(company-nxml
-                             company-css
-                             company-capf (company-dabbrev-code company-keywords)
-                             company-files
-                             company-dabbrev))
-    (global-company-mode 1)))
+  (use-package company
+    :ensure t
+    :diminish "co"
+    :bind ("C-c y" . company-yasnippet)
+    :config
+    (progn
+      (setq company-echo-delay 0
+            company-show-numbers t
+            company-backends '(company-nxml
+                               company-css
+                               company-capf (company-dabbrev-code company-keywords)
+                               company-files
+                               company-dabbrev))
+      (global-company-mode 1)))
 #+end_src
-
 * Undo Tree
 #+begin_src emacs-lisp
   (use-package undo-tree
     :ensure t
     :diminish "UT"
     :config
-    (progn    
+    (progn
+      (setq undo-tree-history-directory-alist `((".*" . ,drot/cache-directory))
+            undo-tree-auto-save-history t)
       (global-undo-tree-mode 1)))
-#+end_src
-
-* Custom keybindings
-#+begin_src emacs-lisp
-(bind-keys*
- ("C-c y" . company-yasnippet)
- ("C-c a" . org-agenda)
- ("C-c l" . org-store-link)
- ("M-/" . hippie-expand))
 #+end_src
 
 * Load changes from the customize interface
