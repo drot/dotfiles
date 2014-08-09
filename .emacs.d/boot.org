@@ -1,4 +1,4 @@
-#+TITLE: drot Emacs configuration
+#+title: drot Emacs configuration
 
 * Disable unnecessary GUI elements
 #+begin_src emacs-lisp
@@ -351,7 +351,7 @@
       (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 #+end_src
 
-* Org mode configuration
+* Org-mode configuration
 #+begin_src emacs-lisp
   (use-package org
     :bind (("C-c a" . org-agenda)
@@ -361,6 +361,7 @@
       (org-babel-do-load-languages
        'org-babel-load-languages
        '((C . t)
+         (cpp . t)
          (emacs-lisp . t)
          (sh . t)))
       (setq org-log-done 'time
