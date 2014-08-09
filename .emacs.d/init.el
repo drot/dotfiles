@@ -1,8 +1,8 @@
 (defconst drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defconst drot/startup-file (expand-file-name "startup.org" drot/emacs-directory)
-  "Main configuration file loaded by Org-mode")
+(defconst drot/bootstrap-file (expand-file-name "boot.org" drot/emacs-directory)
+  "Emacs configuration file written and loaded with Org-mode")
 
 (defconst drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
@@ -27,5 +27,4 @@
 (require 'use-package)
 
 ;; Load configuraton file with Org-mode
-(require 'ob-tangle)
-(org-babel-load-file drot/startup-file)
+(org-babel-load-file drot/bootstrap-file)
