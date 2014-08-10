@@ -155,6 +155,7 @@
   (use-package ffap
     :config
     (progn
+      (setq ffap-require-prefix t)
       (ffap-bindings)))
 #+end_src
 
