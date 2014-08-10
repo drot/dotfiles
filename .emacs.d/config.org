@@ -1,99 +1,100 @@
 #+title: drot Emacs configuration
 
-* Disable unnecessary GUI elements
+* General options
+** Disable unnecessary GUI elements
 #+begin_src emacs-lisp
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
 #+end_src
 
-* Show tooltips in the echo area
+** Show tooltips in the echo area
 #+begin_src emacs-lisp
   (tooltip-mode 0)
 #+end_src
 
-* Disable cursor blinking
+** Disable cursor blinking
 #+begin_src emacs-lisp
   (blink-cursor-mode 0)
 #+end_src
 
-* Show column number and buffer size on the modeline
+** Show column number and buffer size on the modeline
 #+begin_src emacs-lisp
   (column-number-mode 1)
   (size-indication-mode 1)
 #+end_src
 
-* Indicate buffer boundaries and empty lines
+** Indicate buffer boundaries and empty lines
 #+begin_src emacs-lisp
   (setq-default indicate-buffer-boundaries 'left
                 indicate-empty-lines t)
 #+end_src
 
-* Don't show the welcome messages
+** Don't show the welcome messages
 #+begin_src emacs-lisp
   (setq inhibit-startup-screen t
         initial-scratch-message nil)
 #+end_src
 
-* Answer y or n instead of yes or no at prompts
+** Answer y or n instead of yes or no at prompts
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
-* Show unfinished keystrokes early
+** Show unfinished keystrokes early
 #+begin_src emacs-lisp
   (setq echo-keystrokes 0.1)
 #+end_src
 
-* Enable recursive minibuffers and indicate depth
+** Enable recursive minibuffers and indicate depth
 #+begin_src emacs-lisp
   (setq enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1)
 #+end_src
 
-* Delete duplicates from minibuffer history
+** Delete duplicates from minibuffer history
 #+begin_src emacs-lisp
   (setq history-delete-duplicates t)
 #+end_src
 
-* Show minibuffer completion only on second failed attempt
+** Show minibuffer completion only on second failed attempt
 #+begin_src emacs-lisp
   (setq completion-auto-help 'lazy)
 #+end_src
-* Enable all disabled commands
+** Enable all disabled commands
 #+begin_src emacs-lisp
   (setq disabled-command-function nil)
 #+end_src
 
-* Ignore case on completion
+** Ignore case on completion
 #+begin_src emacs-lisp
   (setq read-file-name-completion-ignore-case t
         read-buffer-completion-ignore-case t)
 #+end_src
 
-* Use spaces instead of tabs and set default tab width
+** Use spaces instead of tabs and set default tab width
 #+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil
                 tab-width 4)
 #+end_src
 
-* Increase default fill width
+** Increase default fill width
 #+begin_src emacs-lisp
   (setq-default fill-column 80)
 #+end_src
 
-* Pretty lambdas
+** Pretty lambdas
 #+begin_src emacs-lisp
   (global-prettify-symbols-mode 1)
 #+end_src
 
-* Display read-only buffers in view mode
+** Display read-only buffers in view mode
 #+begin_src emacs-lisp
   (setq view-read-only t
         view-inhibit-help-message t)
 #+end_src
 
-* Configuration for backup files
+** Configuration for backup files
 #+begin_src emacs-lisp
   (setq backup-directory-alist `((".*" . ,drot/cache-directory))
         auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
@@ -104,24 +105,18 @@
         backup-by-copying t)
 #+end_src
 
-* Mouse yank at point instead of click
+** Mouse yank at point instead of click
 #+begin_src emacs-lisp
   (setq mouse-yank-at-point t)
 #+end_src
 
-* Set fallback font
+** Set fallback font
 #+begin_src emacs-lisp
   (set-fontset-font "fontset-default" nil
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
-* Color theme
-#+begin_src emacs-lisp
-  (use-package zenburn-theme
-    :ensure t)
-#+end_src
-
-* Icomplete
+** Icomplete
 #+begin_src emacs-lisp
   (use-package icomplete
     :config
@@ -130,7 +125,7 @@
       (icomplete-mode 1)))
 #+end_src
 
-* Save minibuffer history
+** Save minibuffer history
 #+begin_src emacs-lisp
   (use-package savehist
     :config
@@ -141,7 +136,7 @@
       (savehist-mode 1)))
 #+end_src
 
-* Remember point position in files
+** Remember point position in files
 #+begin_src emacs-lisp
   (use-package saveplace
     :config
@@ -150,7 +145,7 @@
       (setq-default save-place t)))
 #+end_src
 
-* Find file at point
+** Find file at point
 #+begin_src emacs-lisp
   (use-package ffap
     :config
@@ -159,7 +154,7 @@
       (ffap-bindings)))
 #+end_src
 
-* Highlight matching parentheses
+** Highlight matching parentheses
 #+begin_src emacs-lisp
   (use-package paren
     :config
@@ -168,7 +163,7 @@
       (show-paren-mode 1)))
 #+end_src
 
-* Highlight regexps interactively
+** Highlight regexps interactively
 #+begin_src emacs-lisp
   (use-package hi-lock
     :config
@@ -176,7 +171,7 @@
       (global-hi-lock-mode 1)))
 #+end_src
 
-* Regexp builder
+** Regexp builder
 #+begin_src emacs-lisp
   (use-package re-builder
     :defer t
@@ -185,7 +180,7 @@
       (setq reb-re-syntax 'string)))
 #+end_src
 
-* Enable rectangular selection with CUA mode
+** Enable rectangular selection with CUA mode
 #+begin_src emacs-lisp
   (use-package cua-base
     :config
@@ -193,7 +188,7 @@
       (cua-selection-mode 1)))
 #+end_src
 
-* Bookmarks save directory
+** Bookmarks save directory
 #+begin_src emacs-lisp
   (use-package bookmark
     :defer t
@@ -203,7 +198,7 @@
             bookmark-save-flag 1)))
 #+end_src
 
-* Eshell save directory
+** Eshell save directory
 #+begin_src emacs-lisp
   (use-package eshell
     :defer t
@@ -212,7 +207,7 @@
       (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory))))
 #+end_src
 
-* Shell mode configuration
+** Shell mode configuration
 #+begin_src emacs-lisp
   (use-package shell
     :defer t
@@ -222,7 +217,7 @@
       (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)))
 #+end_src
 
-* Disable YASnippet in term mode
+** Disable YASnippet in term mode
 #+begin_src emacs-lisp
   (use-package term
     :defer t
@@ -232,7 +227,7 @@
                                   (yas-minor-mode 0)))))
 #+end_src
 
-* Use Unified diff format
+** Use Unified diff format
 #+begin_src emacs-lisp
   (use-package diff
     :defer t
@@ -241,7 +236,7 @@
       (setq diff-switches "-u")))
 #+end_src
 
-* Ediff window split
+** Ediff window split
 #+begin_src emacs-lisp
   (use-package ediff
     :defer t
@@ -251,7 +246,7 @@
             ediff-window-setup-function 'ediff-setup-windows-plain)))
 #+end_src
 
-* Use Ibuffer for buffer list
+** Use Ibuffer for buffer list
 #+begin_src emacs-lisp
   (use-package ibuffer
     :bind ("C-x C-b" . ibuffer)
@@ -260,7 +255,7 @@
       (setq ibuffer-default-sorting-mode 'major-mode)))
 #+end_src
 
-* Compilation configuration
+** Compilation configuration
 #+begin_src emacs-lisp
   (use-package compile
     :defer t
@@ -270,7 +265,7 @@
             compilation-ask-about-save nil)))
 #+end_src
 
-* TRAMP configuration
+** TRAMP configuration
 #+begin_src emacs-lisp
   (use-package tramp
     :defer t
@@ -281,7 +276,7 @@
             tramp-auto-save-directory drot/cache-directory)))
 #+end_src
 
-* Prevent GnuTLS warnings
+** Prevent GnuTLS warnings
 #+begin_src emacs-lisp
   (use-package gnutls
     :defer t
@@ -290,7 +285,7 @@
       (setq gnutls-min-prime-bits 1024)))
 #+end_src
 
-* Calendar configuration
+** Calendar configuration
 #+begin_src emacs-lisp
   (use-package calendar
     :defer t
@@ -309,7 +304,7 @@
             calendar-location-name "Mostar, Bosnia and Herzegovina")))
 #+end_src
 
-* Doc View mode configuration
+** Doc View mode configuration
 #+begin_src emacs-lisp
   (use-package doc-view
     :defer t
@@ -319,7 +314,7 @@
             doc-view-continuous t)))
 #+end_src
 
-* Open URLs in Conkeror
+** Open URLs in Conkeror
 #+begin_src emacs-lisp
   (use-package browse-url
     :defer t
@@ -329,7 +324,7 @@
             browse-url-generic-program "conkeror")))
 #+end_src
 
-* Load abbrevs and enable Abbrev Mode
+** Load abbrevs and enable Abbrev Mode
 #+begin_src emacs-lisp
   (use-package abbrev
     :config
@@ -341,12 +336,12 @@
       (setq-default abbrev-mode t)))
 #+end_src
 
-* Replace dabbrev-expand with hippie-expand
+** Replace dabbrev-expand with hippie-expand
 #+begin_src emacs-lisp
   (bind-key "M-/" 'hippie-expand)
 #+end_src
 
-* Fly Spell mode configuration
+** Fly Spell mode configuration
 #+begin_src emacs-lisp
   (use-package flyspell
     :config
@@ -357,7 +352,7 @@
       (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 #+end_src
 
-* Org-mode configuration
+** Org-mode configuration
 #+begin_src emacs-lisp
   (use-package org
     :bind (("C-c a" . org-agenda)
@@ -374,7 +369,7 @@
             org-src-tab-acts-natively t)))
 #+end_src
 
-* CC mode configuration
+** CC mode configuration
 #+begin_src emacs-lisp
   (use-package cc-mode
     :defer t
@@ -404,7 +399,14 @@
                               (other . "stroustrup")))))
 #+end_src
 
-* ERC configuration
+* Packages
+** Color theme
+#+begin_src emacs-lisp
+  (use-package zenburn-theme
+    :ensure t)
+#+end_src
+
+** ERC configuration
 #+begin_src emacs-lisp
   (use-package erc
     :ensure erc-hl-nicks
@@ -459,21 +461,21 @@
       (erc-spelling-mode 1)))
 #+end_src
   
-* Lua mode
+** Lua mode
 #+begin_src emacs-lisp
   (use-package lua-mode
     :ensure t
     :defer t)
 #+end_src
 
-* Magit
+** Magit
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t
     :defer t)
 #+end_src
 
-* ParEdit
+** ParEdit
 #+begin_src emacs-lisp
   (use-package paredit
     :ensure t
@@ -509,7 +511,7 @@
       (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
 #+end_src
 
-* Show documentation with ElDoc mode
+** Show documentation with ElDoc mode
 #+begin_src emacs-lisp
   (use-package eldoc
     :config
@@ -521,7 +523,7 @@
                          'paredit-close-round)))
 #+end_src
 
-* Hide Show mode
+** Hide Show mode
 #+begin_src emacs-lisp
   (use-package hideshow
     :config
@@ -531,14 +533,14 @@
       (add-hook 'python-mode-hook 'hs-minor-mode)))
 #+end_src
 
-* PKGBUILD mode
+** PKGBUILD mode
 #+begin_src emacs-lisp
   (use-package pkgbuild-mode
     :ensure t
     :defer t)
 #+end_src
 
-* Rainbow Delimiters
+** Rainbow Delimiters
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
     :ensure t
@@ -547,7 +549,7 @@
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 #+end_src
 
-* YASnippet
+** YASnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
     :ensure t
@@ -557,7 +559,7 @@
       (yas-global-mode 1)))
 #+end_src
 
-* Company mode
+** Company mode
 #+begin_src emacs-lisp
   (use-package company
     :ensure t
@@ -577,7 +579,7 @@
                                company-dabbrev))))
 #+end_src
 
-* Undo Tree
+** Undo Tree
 #+begin_src emacs-lisp
   (use-package undo-tree
     :ensure t
@@ -589,7 +591,8 @@
       (global-undo-tree-mode 1)))
 #+end_src
 
-* Load changes from the customize interface
+* Customize
+** Load changes from the customize interface
 #+begin_src emacs-lisp
   (setq custom-file drot/custom-file)
   (if (file-exists-p drot/custom-file)
