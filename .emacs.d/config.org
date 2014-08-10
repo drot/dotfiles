@@ -116,6 +116,7 @@
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
+* Configuration of various modes
 ** Icomplete
 #+begin_src emacs-lisp
   (use-package icomplete
