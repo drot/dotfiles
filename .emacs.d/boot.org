@@ -560,7 +560,9 @@
 #+begin_src emacs-lisp
   (use-package company
     :ensure t
-    :init (add-hook 'after-init-hook 'global-company-mode)
+    :init
+    (progn
+      (add-hook 'after-init-hook 'global-company-mode))
     :diminish "co"
     :bind ("C-c y" . company-yasnippet)
     :config
