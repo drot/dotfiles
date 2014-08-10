@@ -361,7 +361,6 @@
       (org-babel-do-load-languages
        'org-babel-load-languages
        '((C . t)
-         (cpp . t)
          (emacs-lisp . t)
          (sh . t)))
       (setq org-log-done 'time
@@ -417,16 +416,6 @@
       (add-to-list 'erc-modules 'notifications)
       (add-to-list 'erc-modules 'smiley)
 
-      (defun drot/erc-mode-hook ()
-        "Keep prompt at bottom, disable Company and YASnippet."
-        (set (make-local-variable 'scroll-conservatively) 1000)
-        (company-mode 0)
-        (yas-minor-mode 0))
-
-      (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
-      (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-      (erc-spelling-mode 1)
-
       (setq erc-prompt-for-password nil
             erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs")
                                           ("forestnet" "#reloaded" "#fo2"))
@@ -450,7 +439,17 @@
             erc-nick-uniquifier "_"
             erc-show-my-nick nil
             erc-prompt (lambda ()
-                         (concat (buffer-name) ">")))))
+                         (concat (buffer-name) ">")))
+
+      (defun drot/erc-mode-hook ()
+        "Keep prompt at bottom, disable Company and YASnippet."
+        (set (make-local-variable 'scroll-conservatively) 100)
+        (company-mode 0)
+        (yas-minor-mode 0))
+
+      (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
+      (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
+      (erc-spelling-mode 1)))
 #+end_src
   
 * Lua mode
