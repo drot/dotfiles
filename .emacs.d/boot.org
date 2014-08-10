@@ -77,6 +77,11 @@
                 tab-width 4)
 #+end_src
 
+* Increase default fill width
+#+begin_src emacs-lisp
+  (setq-default fill-column 80)
+#+end_src
+
 * Pretty lambdas
 #+begin_src emacs-lisp
   (global-prettify-symbols-mode 1)
