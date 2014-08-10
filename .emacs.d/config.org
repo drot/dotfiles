@@ -116,7 +116,7 @@
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
-* Configuration of modes that are loaded immediately
+* Loaded modes
 ** Save minibuffer history
 #+begin_src emacs-lisp
   (use-package savehist
@@ -255,7 +255,7 @@
       (add-hook 'python-mode-hook 'hs-minor-mode)))
 #+end_src
 
-* Configuration of modes that are deferred
+* Deferred modes
 ** Regexp builder
 #+begin_src emacs-lisp
   (use-package re-builder
