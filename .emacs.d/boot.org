@@ -406,17 +406,18 @@
 
 * ERC configuration
 #+begin_src emacs-lisp
-  (defun irc ()
+  (use-package erc
+    :ensure erc-hl-nicks
+    :defer t
+    :init
+    (progn
+      (defun irc ()
     "Connect to IRC."
     (interactive)
     (erc-tls :server "adams.freenode.net" :port 6697
              :nick "drot")
     (erc-tls :server "pine.forestnet.org" :port 6697
-             :nick "drot"))
-
-  (use-package erc
-    :ensure erc-hl-nicks
-    :defer t
+             :nick "drot")))
     :config
     (progn
       (add-to-list 'erc-modules 'notifications)
