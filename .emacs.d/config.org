@@ -116,16 +116,7 @@
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
-* Configuration of various modes
-** Icomplete
-#+begin_src emacs-lisp
-  (use-package icomplete
-    :config
-    (progn
-      (setq icomplete-prospects-height 1)
-      (icomplete-mode 1)))
-#+end_src
-
+* Configuration of modes that are loaded immediately
 ** Save minibuffer history
 #+begin_src emacs-lisp
   (use-package savehist
@@ -155,6 +146,23 @@
       (ffap-bindings)))
 #+end_src
 
+** Icomplete
+#+begin_src emacs-lisp
+  (use-package icomplete
+    :config
+    (progn
+      (setq icomplete-prospects-height 1)
+      (icomplete-mode 1)))
+#+end_src
+
+** Use Ibuffer for buffer list
+#+begin_src emacs-lisp
+  (use-package ibuffer
+    :bind ("C-x C-b" . ibuffer)
+    :config
+    (progn
+      (setq ibuffer-default-sorting-mode 'major-mode)))
+#+end_src
 ** Highlight matching parentheses
 #+begin_src emacs-lisp
   (use-package paren
@@ -162,6 +170,46 @@
     (progn
       (setq show-paren-delay 0)
       (show-paren-mode 1)))
+#+end_src
+
+** Show documentation with ElDoc mode
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :config
+    (progn
+      (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+      (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+      (add-hook 'ielm-mode-hook 'eldoc-mode)
+      (eldoc-add-command 'paredit-backward-delete
+                         'paredit-close-round)))
+#+end_src
+
+** Load abbrevs and enable Abbrev Mode
+#+begin_src emacs-lisp
+  (use-package abbrev
+    :config
+    (progn
+      (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/cache-directory)
+            save-abbrevs t)
+      (if (file-exists-p abbrev-file-name)
+          (quietly-read-abbrev-file))
+      (setq-default abbrev-mode t)))
+#+end_src
+
+** Replace dabbrev-expand with hippie-expand
+#+begin_src emacs-lisp
+  (bind-key "M-/" 'hippie-expand)
+#+end_src
+
+** Fly Spell mode configuration
+#+begin_src emacs-lisp
+  (use-package flyspell
+    :config
+    (progn
+      (setq ispell-extra-args '("--sug-mode=ultra")
+            ispell-dictionary "english")
+      (add-hook 'text-mode-hook 'flyspell-mode)
+      (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
 #+end_src
 
 ** Highlight regexps interactively
@@ -172,13 +220,21 @@
       (global-hi-lock-mode 1)))
 #+end_src
 
-** Regexp builder
+** Org-mode configuration
 #+begin_src emacs-lisp
-  (use-package re-builder
-    :defer t
+  (use-package org
+    :bind (("C-c a" . org-agenda)
+           ("C-c l" . org-store-link))
     :config
     (progn
-      (setq reb-re-syntax 'string)))
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((C . t)
+         (emacs-lisp . t)
+         (sh . t)))
+      (setq org-log-done 'time
+            org-src-fontify-natively t
+            org-src-tab-acts-natively t)))
 #+end_src
 
 ** Enable rectangular selection with CUA mode
@@ -187,6 +243,26 @@
     :config
     (progn
       (cua-selection-mode 1)))
+#+end_src
+
+** Hide Show mode
+#+begin_src emacs-lisp
+  (use-package hideshow
+    :config
+    (progn
+      (add-hook 'c-mode-common-hook 'hs-minor-mode)
+      (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+      (add-hook 'python-mode-hook 'hs-minor-mode)))
+#+end_src
+
+* Configuration of modes that are deferred
+** Regexp builder
+#+begin_src emacs-lisp
+  (use-package re-builder
+    :defer t
+    :config
+    (progn
+      (setq reb-re-syntax 'string)))
 #+end_src
 
 ** Bookmarks save directory
@@ -247,15 +323,6 @@
             ediff-window-setup-function 'ediff-setup-windows-plain)))
 #+end_src
 
-** Use Ibuffer for buffer list
-#+begin_src emacs-lisp
-  (use-package ibuffer
-    :bind ("C-x C-b" . ibuffer)
-    :config
-    (progn
-      (setq ibuffer-default-sorting-mode 'major-mode)))
-#+end_src
-
 ** Compilation configuration
 #+begin_src emacs-lisp
   (use-package compile
@@ -264,6 +331,36 @@
     (progn
       (setq compilation-scroll-output 'first-error
             compilation-ask-about-save nil)))
+#+end_src
+
+** CC mode configuration
+#+begin_src emacs-lisp
+  (use-package cc-mode
+    :defer t
+    :config
+    (progn
+      (defun drot/c-mode-hook ()
+        "C mode setup"
+        (unless (or (file-exists-p "makefile")
+                    (file-exists-p "Makefile"))
+          (set (make-local-variable 'compile-command)
+               (concat "gcc " (buffer-file-name) " -o "))))
+
+      (defun drot/c++-mode-hook ()
+        "C++ mode setup"
+        (unless (or (file-exists-p "makefile")
+                    (file-exists-p "Makefile"))
+          (set (make-local-variable 'compile-command)
+               (concat "g++ " (buffer-file-name) " -o "))))
+
+      (add-hook 'c-mode-hook 'drot/c-mode-hook)
+      (add-hook 'c++-mode-hook 'drot/c++-mode-hook)
+      (add-hook 'c-mode-common-hook 'auto-fill-mode)
+
+      (setq c-basic-offset 4
+            c-default-style '((java-mode . "java")
+                              (awk-mode . "awk")
+                              (other . "stroustrup")))))
 #+end_src
 
 ** TRAMP configuration
@@ -323,81 +420,6 @@
     (progn
       (setq browse-url-browser-function 'browse-url-generic
             browse-url-generic-program "conkeror")))
-#+end_src
-
-** Load abbrevs and enable Abbrev Mode
-#+begin_src emacs-lisp
-  (use-package abbrev
-    :config
-    (progn
-      (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/cache-directory)
-            save-abbrevs t)
-      (if (file-exists-p abbrev-file-name)
-          (quietly-read-abbrev-file))
-      (setq-default abbrev-mode t)))
-#+end_src
-
-** Replace dabbrev-expand with hippie-expand
-#+begin_src emacs-lisp
-  (bind-key "M-/" 'hippie-expand)
-#+end_src
-
-** Fly Spell mode configuration
-#+begin_src emacs-lisp
-  (use-package flyspell
-    :config
-    (progn
-      (setq ispell-extra-args '("--sug-mode=ultra")
-            ispell-dictionary "english")
-      (add-hook 'text-mode-hook 'flyspell-mode)
-      (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
-#+end_src
-
-** Org-mode configuration
-#+begin_src emacs-lisp
-  (use-package org
-    :bind (("C-c a" . org-agenda)
-           ("C-c l" . org-store-link))
-    :config
-    (progn
-      (org-babel-do-load-languages
-       'org-babel-load-languages
-       '((C . t)
-         (emacs-lisp . t)
-         (sh . t)))
-      (setq org-log-done 'time
-            org-src-fontify-natively t
-            org-src-tab-acts-natively t)))
-#+end_src
-
-** CC mode configuration
-#+begin_src emacs-lisp
-  (use-package cc-mode
-    :defer t
-    :config
-    (progn
-      (defun drot/c-mode-hook ()
-        "C mode setup"
-        (unless (or (file-exists-p "makefile")
-                    (file-exists-p "Makefile"))
-          (set (make-local-variable 'compile-command)
-               (concat "gcc " (buffer-file-name) " -o "))))
-
-      (defun drot/c++-mode-hook ()
-        "C++ mode setup"
-        (unless (or (file-exists-p "makefile")
-                    (file-exists-p "Makefile"))
-          (set (make-local-variable 'compile-command)
-               (concat "g++ " (buffer-file-name) " -o "))))
-
-      (add-hook 'c-mode-hook 'drot/c-mode-hook)
-      (add-hook 'c++-mode-hook 'drot/c++-mode-hook)
-      (add-hook 'c-mode-common-hook 'auto-fill-mode)
-
-      (setq c-basic-offset 4
-            c-default-style '((java-mode . "java")
-                              (awk-mode . "awk")
-                              (other . "stroustrup")))))
 #+end_src
 
 * Packages
@@ -510,28 +532,6 @@
 
       (add-hook 'slime-repl-mode-hook 'paredit-mode)
       (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
-#+end_src
-
-** Show documentation with ElDoc mode
-#+begin_src emacs-lisp
-  (use-package eldoc
-    :config
-    (progn
-      (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-      (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-      (add-hook 'ielm-mode-hook 'eldoc-mode)
-      (eldoc-add-command 'paredit-backward-delete
-                         'paredit-close-round)))
-#+end_src
-
-** Hide Show mode
-#+begin_src emacs-lisp
-  (use-package hideshow
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook 'hs-minor-mode)
-      (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-      (add-hook 'python-mode-hook 'hs-minor-mode)))
 #+end_src
 
 ** PKGBUILD mode
