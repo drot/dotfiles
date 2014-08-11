@@ -46,6 +46,11 @@
   (setq echo-keystrokes 0.1)
 #+end_src
 
+** Lessen GC frequency
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold 20000000)
+#+end_src
+
 ** Enable recursive minibuffers and indicate depth
 #+begin_src emacs-lisp
   (setq enable-recursive-minibuffers t)
@@ -61,6 +66,7 @@
 #+begin_src emacs-lisp
   (setq completion-auto-help 'lazy)
 #+end_src
+
 ** Enable all disabled commands
 #+begin_src emacs-lisp
   (setq disabled-command-function nil)
@@ -146,15 +152,6 @@
       (ffap-bindings)))
 #+end_src
 
-** Icomplete
-#+begin_src emacs-lisp
-  (use-package icomplete
-    :config
-    (progn
-      (setq icomplete-prospects-height 1)
-      (icomplete-mode 1)))
-#+end_src
-
 ** Use Ibuffer for buffer list
 #+begin_src emacs-lisp
   (use-package ibuffer
@@ -218,23 +215,6 @@
     :config
     (progn
       (global-hi-lock-mode 1)))
-#+end_src
-
-** Org-mode configuration
-#+begin_src emacs-lisp
-  (use-package org
-    :bind (("C-c a" . org-agenda)
-           ("C-c l" . org-store-link))
-    :config
-    (progn
-      (org-babel-do-load-languages
-       'org-babel-load-languages
-       '((C . t)
-         (emacs-lisp . t)
-         (sh . t)))
-      (setq org-log-done 'time
-            org-src-fontify-natively t
-            org-src-tab-acts-natively t)))
 #+end_src
 
 ** Enable rectangular selection with CUA mode
@@ -429,6 +409,112 @@
     :ensure t)
 #+end_src
 
+** IDO
+#+begin_src emacs-lisp
+  (use-package ido
+    :config
+    (progn
+      (setq ido-create-new-buffer 'always
+            ido-use-filename-at-point 'guess
+            ido-max-prospects 10
+            ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
+            ido-default-file-method 'selected-window)
+      (ido-mode 1)
+      (ido-everywhere 1)))
+#+end_src
+
+** Flx IDO
+#+begin_src emacs-lisp
+  (use-package flx-ido
+    :ensure t
+    :config
+    (progn
+      (flx-ido-mode 1)
+      (setq ido-enable-flex-matching t
+            ido-use-faces nil)))
+#+end_src
+
+** IDO Vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :ensure t
+    :config
+    (progn
+      (ido-vertical-mode 1)))
+#+end_src
+
+** IDO Ubiquitous
+#+begin_src emacs-lisp
+  (defvar predicate nil)
+  (defvar inherit-input-method nil)
+  (defvar ido-cur-item nil)
+  (defvar ido-default-item nil)
+  (defvar ido-cur-list nil)
+
+  (use-package ido-ubiquitous
+    :ensure t
+    :init
+    (progn
+      (ido-ubiquitous-mode 1)
+      (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
+        `(eval-after-load ,package
+           '(defadvice ,cmd (around ido-ubiquitous-new activate)
+              (let ((ido-ubiquitous-enable-compatibility nil))
+                ad-do-it)))))
+    :config
+    (progn
+      (ido-ubiquitous-use-new-completing-read yas-expand 'yasnippet)
+      (ido-ubiquitous-use-new-completing-read yas-visit-snippet-file 'yasnippet)))
+#+end_src
+** Smex
+#+begin_src emacs-lisp
+  (use-package smex
+    :ensure t
+    :init
+    (progn
+      (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory))
+      (smex-initialize))
+    :bind (("M-x" . smex)
+           ("M-X" . smex-major-mode-commands)
+           ("C-c C-c M-x" . execute-extended-command)))
+#+end_src
+
+** Lua mode
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :ensure t
+    :defer t)
+#+end_src
+
+** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq magit-completing-read-function 'magit-ido-completing-read)))
+#+end_src
+
+** Org-mode
+#+begin_src emacs-lisp
+  (use-package org
+    :bind (("C-c a" . org-agenda)
+           ("C-c l" . org-store-link))
+    :config
+    (progn
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((C . t)
+         (emacs-lisp . t)
+         (sh . t)))
+      (setq org-log-done 'time
+            org-src-fontify-natively t
+            org-src-tab-acts-natively t
+            org-completion-use-ido t
+            org-outline-path-complete-in-steps nil)))
+#+end_src
+
 ** ERC configuration
 #+begin_src emacs-lisp
   (use-package erc
@@ -484,20 +570,6 @@
       (erc-spelling-mode 1)))
 #+end_src
   
-** Lua mode
-#+begin_src emacs-lisp
-  (use-package lua-mode
-    :ensure t
-    :defer t)
-#+end_src
-
-** Magit
-#+begin_src emacs-lisp
-  (use-package magit
-    :ensure t
-    :defer t)
-#+end_src
-
 ** ParEdit
 #+begin_src emacs-lisp
   (use-package paredit
@@ -596,6 +668,6 @@
 ** Load changes from the customize interface
 #+begin_src emacs-lisp
   (setq custom-file drot/custom-file)
-  (if (file-exists-p drot/custom-file)
-      (load drot/custom-file))
+  (when (file-exists-p drot/custom-file)
+    (load drot/custom-file))
 #+end_src
