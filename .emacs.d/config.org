@@ -1,5 +1,3 @@
-#+title: drot Emacs configuration
-
 * General options
 ** Disable unnecessary GUI elements
 #+begin_src emacs-lisp
@@ -44,11 +42,6 @@
 ** Show unfinished keystrokes early
 #+begin_src emacs-lisp
   (setq echo-keystrokes 0.1)
-#+end_src
-
-** Lessen GC frequency
-#+begin_src emacs-lisp
-  (setq gc-cons-threshold 20000000)
 #+end_src
 
 ** Enable recursive minibuffers and indicate depth

@@ -15,6 +15,9 @@
   "This directory houses all snippets.")
 (make-directory drot/yas-directory t)
 
+;; Reduce GC frequency
+(setq gc-cons-threshold 20000000)
+
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
       package-enable-at-startup nil)
