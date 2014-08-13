@@ -134,6 +134,11 @@ mymainmenu = awful.menu({ items = {
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
+-- {{{ Separator
+separator = wibox.widget.imagebox()
+separator:set_image(beautiful.widget_sep)
+-- }}}
+
 -- {{{ CPU usage widgets
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
@@ -268,77 +273,9 @@ timeicon:set_image(beautiful.widget_date)
 timewidget = awful.widget.textclock("%d-%m/%R")
 -- }}}
 
--- {{{ Pkg update widget
-pkgicon = wibox.widget.imagebox()
-pkgicon:set_image(beautiful.widget_pkg)
--- Initialize widget
-pkgwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.pkg)
--- Register widget
-vicious.register(pkgwidget, vicious.widgets.pkg, "$1 Updates", 3700, "Arch C")
--- }}}
-
--- {{{ Weather widget
-weathericon = wibox.widget.imagebox()
-weathericon:set_image(beautiful.widget_weather)
--- Initialize widget
-weatherwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.weather)
--- Register widget
-vicious.register(weatherwidget, vicious.widgets.weather, "${tempc}° (${sky})", 3600, "LQMO")
--- }}}
-
--- {{{ Network usage
-upicon = wibox.widget.imagebox()
-dnicon = wibox.widget.imagebox()
-upicon:set_image(beautiful.widget_netup)
-dnicon:set_image(beautiful.widget_netdn)
--- Initialize widget
-netupwidget = wibox.widget.textbox()
-netdnwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.net)
--- Register widget
-vicious.register(netupwidget, vicious.widgets.net, "${enp0s7 up_kb}kb/s", 3)
-vicious.register(netdnwidget, vicious.widgets.net, "${enp0s7 down_kb}kb/s", 3)
--- }}}
-
--- {{{ Uptime widget
-uptimeicon = wibox.widget.imagebox()
-uptimeicon:set_image(beautiful.widget_uptime)
--- Initialize widget
-uptimewidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.uptime)
--- Register widget
-vicious.register(uptimewidget, vicious.widgets.uptime, "$4/$5/$6 (UP: $1d/$2h:$3m)", 30)
--- }}}
-
--- {{{ MPD widget
-mpdicon = wibox.widget.imagebox()
-mpdicon:set_image(beautiful.widget_music)
--- Initialize widget
-mpdwidget = wibox.widget.textbox()
--- Enable caching
-vicious.cache(vicious.widgets.mpd)
--- Register widget
-vicious.register(mpdwidget, vicious.widgets.mpd, "${Artist} - ${Title}", 2)
-musicwidget = wibox.layout.flex.horizontal()
-musicwidget:add(mpdwidget)
-musicwidget:set_max_widget_size(273, 21)
--- }}}
-
--- {{{ Separator
-separator = wibox.widget.imagebox()
-separator:set_image(beautiful.widget_sep)
--- }}}
-
--- {{{ Wiboxen
+-- {{{ Wibox
 -- Create a wibox for each screen and add it
-wibox_top = {}
-wibox_bottom = {}
+mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -403,87 +340,58 @@ for s = 1, screen.count() do
    -- Create a tasklist widget
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
-   -- Create the wiboxen
-   wibox_top[s] = awful.wibox({ position = "top", height = 21, screen = s })
-   wibox_bottom[s] = awful.wibox({ position = "bottom", height = 21, screen = s })
+   -- Create the wibox
+   mywibox[s] = awful.wibox({ position = "top", height = 21, screen = s })
 
-   -- Top widgets that are aligned to the left
-   local top_left_layout = wibox.layout.fixed.horizontal()
-   top_left_layout:add(mylauncher)
-   top_left_layout:add(mytaglist[s])
-   top_left_layout:add(mylayoutbox[s])
-   top_left_layout:add(mypromptbox[s])
+   -- Widgets that are aligned to the left
+   local left_layout = wibox.layout.fixed.horizontal()
+   left_layout:add(mylauncher)
+   left_layout:add(mytaglist[s])
+   left_layout:add(mylayoutbox[s])
+   left_layout:add(mypromptbox[s])
 
-   -- Top widgets that are aligned to the right
-   local top_right_layout = wibox.layout.fixed.horizontal()
-   top_right_layout:add(cpuicon)
-   top_right_layout:add(cpuwidget)
-   top_right_layout:add(separator)
-   top_right_layout:add(cpudisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(memicon)
-   top_right_layout:add(memwidget)
-   top_right_layout:add(separator)
-   top_right_layout:add(memdisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(tempicon)
-   top_right_layout:add(tempwidget)
-   top_right_layout:add(separator)
-   top_right_layout:add(tempdisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(diskicon)
-   top_right_layout:add(dperc.r)
-   top_right_layout:add(separator)
-   top_right_layout:add(dusage.rdisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(dperc.h)
-   top_right_layout:add(separator)
-   top_right_layout:add(dusage.hdisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(volicon)
-   top_right_layout:add(volwidget)
-   top_right_layout:add(separator)
-   top_right_layout:add(voldisplay)
-   top_right_layout:add(separator)
-   top_right_layout:add(timeicon)
-   top_right_layout:add(timewidget)
-   top_right_layout:add(wibox.widget.systray())
+   -- Widgets that are aligned to the right
+   local right_layout = wibox.layout.fixed.horizontal()
+   right_layout:add(cpuicon)
+   right_layout:add(cpuwidget)
+   right_layout:add(separator)
+   right_layout:add(cpudisplay)
+   right_layout:add(separator)
+   right_layout:add(memicon)
+   right_layout:add(memwidget)
+   right_layout:add(separator)
+   right_layout:add(memdisplay)
+   right_layout:add(separator)
+   right_layout:add(tempicon)
+   right_layout:add(tempwidget)
+   right_layout:add(separator)
+   right_layout:add(tempdisplay)
+   right_layout:add(separator)
+   right_layout:add(diskicon)
+   right_layout:add(dperc.r)
+   right_layout:add(separator)
+   right_layout:add(dusage.rdisplay)
+   right_layout:add(separator)
+   right_layout:add(dperc.h)
+   right_layout:add(separator)
+   right_layout:add(dusage.hdisplay)
+   right_layout:add(separator)
+   right_layout:add(volicon)
+   right_layout:add(volwidget)
+   right_layout:add(separator)
+   right_layout:add(voldisplay)
+   right_layout:add(separator)
+   right_layout:add(timeicon)
+   right_layout:add(timewidget)
+   right_layout:add(wibox.widget.systray())
 
    -- Now bring it all together (with the tasklist in the middle)
-   local top_layout = wibox.layout.align.horizontal()
-   top_layout:set_left(top_left_layout)
-   top_layout:set_middle(mytasklist[s])
-   top_layout:set_right(top_right_layout)
+   local layout = wibox.layout.align.horizontal()
+   layout:set_left(left_layout)
+   layout:set_middle(mytasklist[s])
+   layout:set_right(right_layout)
 
-   wibox_top[s]:set_widget(top_layout)
-
-   -- Bottom widgets that are aligned to the left
-   local bottom_left_layout = wibox.layout.fixed.horizontal()
-   bottom_left_layout:add(pkgicon)
-   bottom_left_layout:add(pkgwidget)
-   bottom_left_layout:add(separator)
-   bottom_left_layout:add(weathericon)
-   bottom_left_layout:add(weatherwidget)
-   bottom_left_layout:add(separator)
-   bottom_left_layout:add(mpdicon)
-   bottom_left_layout:add(musicwidget)
-
-   -- Bottom widgets that are aligned to the right
-   local bottom_right_layout = wibox.layout.fixed.horizontal()
-   bottom_right_layout:add(upicon)
-   bottom_right_layout:add(netupwidget)
-   bottom_right_layout:add(dnicon)
-   bottom_right_layout:add(netdnwidget)
-   bottom_right_layout:add(separator)
-   bottom_right_layout:add(uptimeicon)
-   bottom_right_layout:add(uptimewidget)
-
-   -- Now bring it all together
-   local bottom_layout = wibox.layout.align.horizontal()
-   bottom_layout:set_left(bottom_left_layout)
-   bottom_layout:set_right(bottom_right_layout)
-
-   wibox_bottom[s]:set_widget(bottom_layout)
+   mywibox[s]:set_widget(layout)
 end
 -- }}}
 
