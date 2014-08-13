@@ -55,6 +55,12 @@
   (setq history-delete-duplicates t)
 #+end_src
 
+** Ignore case on completion
+#+begin_src emacs-lisp
+  (setq read-file-name-completion-ignore-case t
+        read-buffer-completion-ignore-case t)
+#+end_src
+
 ** Show minibuffer completion only on second failed attempt
 #+begin_src emacs-lisp
   (setq completion-auto-help 'lazy)
@@ -63,12 +69,6 @@
 ** Enable all disabled commands
 #+begin_src emacs-lisp
   (setq disabled-command-function nil)
-#+end_src
-
-** Ignore case on completion
-#+begin_src emacs-lisp
-  (setq read-file-name-completion-ignore-case t
-        read-buffer-completion-ignore-case t)
 #+end_src
 
 ** Use spaces instead of tabs and set default tab width
@@ -80,6 +80,17 @@
 ** Increase default fill width
 #+begin_src emacs-lisp
   (setq-default fill-column 80)
+#+end_src
+
+** Mouse yank at point instead of click
+#+begin_src emacs-lisp
+  (setq mouse-yank-at-point t)
+#+end_src
+
+** Set fallback font
+#+begin_src emacs-lisp
+  (set-fontset-font "fontset-default" nil
+                    (font-spec :size 14 :name "Symbola"))
 #+end_src
 
 ** Pretty lambdas
@@ -102,17 +113,6 @@
         kept-new-versions 5
         delete-old-versions t
         backup-by-copying t)
-#+end_src
-
-** Mouse yank at point instead of click
-#+begin_src emacs-lisp
-  (setq mouse-yank-at-point t)
-#+end_src
-
-** Set fallback font
-#+begin_src emacs-lisp
-  (set-fontset-font "fontset-default" nil
-                    (font-spec :size 16 :name "Symbola"))
 #+end_src
 
 * Loaded modes

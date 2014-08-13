@@ -38,12 +38,14 @@
       gnus-thread-sort-functions '(gnus-thread-sort-by-date))
 
 ;; Summary tree format
-(setq gnus-sum-thread-tree-root "● "
-      gnus-sum-thread-tree-false-root "▷ "
+;; Summary tree format
+(setq gnus-sum-thread-tree-indent " "
+      gnus-sum-thread-tree-root ""
+      gnus-sum-thread-tree-false-root "o "
       gnus-sum-thread-tree-single-indent ""
-      gnus-sum-thread-tree-leaf-with-other "├─►"
-      gnus-sum-thread-tree-vertical "│ "
-      gnus-sum-thread-tree-single-leaf "└─►")
+      gnus-sum-thread-tree-leaf-with-other "+-> "
+      gnus-sum-thread-tree-vertical "| "
+      gnus-sum-thread-tree-single-leaf "`-> ")
 
 ;; Display images in messages
 (setq gnus-blocked-images nil)

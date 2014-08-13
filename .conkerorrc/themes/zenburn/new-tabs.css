@@ -14,14 +14,13 @@
     border-color: #6f6f6f;
     background: #3f3f3f;
     color: #dcdccc;
-    font-family: Source Code Pro Medium;
-    font-size: 13px;
+    font-family: Terminus;
+    font-size: 14px;
 }
 
 .tab2[selected=true] {
     background: #1e2320;
     color: #f0dfaf;
-    font-family: Source Code Pro;
     font-weight: bold;
 }
 
