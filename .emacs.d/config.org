@@ -90,7 +90,7 @@
 ** Set fallback font
 #+begin_src emacs-lisp
   (set-fontset-font "fontset-default" nil
-                    (font-spec :size 14 :name "Symbola"))
+                    (font-spec :size 16 :name "Symbola"))
 #+end_src
 
 ** Pretty lambdas
