@@ -179,7 +179,7 @@
   (use-package abbrev
     :config
     (progn
-      (setq abbrev-file-name (expand-file-name "abbrev_defs" drot/cache-directory)
+      (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
             save-abbrevs t)
       (if (file-exists-p abbrev-file-name)
           (quietly-read-abbrev-file))
@@ -343,7 +343,7 @@
     :config
     (progn
       (setq tramp-default-method "ssh"
-            tramp-backup-directory-alist (quote (("." . "~/.emacs.d/cache/")))
+            tramp-backup-directory-alist backup-directory-alist
             tramp-auto-save-directory drot/cache-directory)))
 #+end_src
 
@@ -405,13 +405,12 @@
 ** IDO
 #+begin_src emacs-lisp
   (use-package ido
-    :config
+    :init
     (progn
-      (setq ido-create-new-buffer 'always
+      (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
+            ido-create-new-buffer 'always
             ido-use-filename-at-point 'guess
-            ido-max-prospects 10
-            ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
-            ido-default-file-method 'selected-window)
+            ido-max-prospects 10)
       (ido-mode 1)
       (ido-everywhere 1)))
 #+end_src
@@ -420,7 +419,7 @@
 #+begin_src emacs-lisp
   (use-package flx-ido
     :ensure t
-    :config
+    :init
     (progn
       (flx-ido-mode 1)
       (setq ido-enable-flex-matching t
@@ -431,7 +430,7 @@
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
     :ensure t
-    :config
+    :init
     (progn
       (ido-vertical-mode 1)))
 #+end_src
@@ -459,6 +458,7 @@
       (ido-ubiquitous-use-new-completing-read yas-expand 'yasnippet)
       (ido-ubiquitous-use-new-completing-read yas-visit-snippet-file 'yasnippet)))
 #+end_src
+
 ** Smex
 #+begin_src emacs-lisp
   (use-package smex
@@ -619,6 +619,9 @@
 #+begin_src emacs-lisp
   (use-package yasnippet
     :ensure t
+    :init
+    (progn
+      (make-directory "~/.emacs.d/snippets" t))
     :config
     (progn
       (setq yas-verbosity 1)
@@ -652,7 +655,7 @@
     :diminish "UT"
     :config
     (progn
-      (setq undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/cache/")))
+      (setq undo-tree-history-directory-alist backup-directory-alist
             undo-tree-auto-save-history t)
       (global-undo-tree-mode 1)))
 #+end_src
