@@ -7,7 +7,7 @@
 (defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
-(defvar drot/cache-directory (expand-file-name "cache/" drot/emacs-directory)
+(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
 
