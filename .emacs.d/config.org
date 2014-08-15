@@ -343,7 +343,7 @@
     :config
     (progn
       (setq tramp-default-method "ssh"
-            tramp-backup-directory-alist backup-directory-alist
+            tramp-backup-directory-alist (quote (("." . "~/.emacs.d/cache/")))
             tramp-auto-save-directory drot/cache-directory)))
 #+end_src
 
@@ -655,7 +655,7 @@
     :diminish "UT"
     :config
     (progn
-      (setq undo-tree-history-directory-alist backup-directory-alist
+      (setq undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/cache/")))
             undo-tree-auto-save-history t)
       (global-undo-tree-mode 1)))
 #+end_src
