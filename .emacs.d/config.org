@@ -106,11 +106,11 @@
 
 ** Configuration for backup files
 #+begin_src emacs-lisp
-  (setq auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/cache/" t)))
+  (setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
         auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-        backup-directory-alist (quote (("." . "~/.emacs.d/cache/")))
+        backup-directory-alist `(("." . ,drot/cache-directory))
         version-control t
-        kept-new-versions 5
+        kept-new-versions 2
         delete-old-versions t
         backup-by-copying t)
 #+end_src
@@ -153,6 +153,7 @@
     (progn
       (setq ibuffer-default-sorting-mode 'major-mode)))
 #+end_src
+
 ** Highlight matching parentheses
 #+begin_src emacs-lisp
   (use-package paren
@@ -343,7 +344,7 @@
     :config
     (progn
       (setq tramp-default-method "ssh"
-            tramp-backup-directory-alist (quote (("." . "~/.emacs.d/cache/")))
+            tramp-backup-directory-alist backup-directory-alist
             tramp-auto-save-directory drot/cache-directory)))
 #+end_src
 
@@ -405,7 +406,7 @@
 ** IDO
 #+begin_src emacs-lisp
   (use-package ido
-    :init
+    :config
     (progn
       (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
             ido-create-new-buffer 'always
@@ -419,7 +420,7 @@
 #+begin_src emacs-lisp
   (use-package flx-ido
     :ensure t
-    :init
+    :config
     (progn
       (flx-ido-mode 1)
       (setq ido-enable-flex-matching t
@@ -430,7 +431,7 @@
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
     :ensure t
-    :init
+    :config
     (progn
       (ido-vertical-mode 1)))
 #+end_src
@@ -445,7 +446,7 @@
 
   (use-package ido-ubiquitous
     :ensure t
-    :init
+    :config
     (progn
       (ido-ubiquitous-mode 1)
       (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
@@ -470,6 +471,26 @@
     :bind (("M-x" . smex)
            ("M-X" . smex-major-mode-commands)
            ("C-c C-c M-x" . execute-extended-command)))
+#+end_src
+
+** Anzu
+#+begin_src emacs-lisp
+  (use-package anzu
+    :ensure t
+    :init
+    (progn
+      (global-anzu-mode 1))
+    :bind (("M-%" . anzu-query-replace)
+           ("C-M-%" . anzu-query-replace-regexp)))
+#+end_src
+
+** Browse kill ring
+#+begin_src emacs-lisp
+  (use-package browse-kill-ring
+    :ensure t
+    :init
+    (progn
+      (browse-kill-ring-default-keybindings)))
 #+end_src
 
 ** Lua mode
@@ -655,7 +676,7 @@
     :diminish "UT"
     :config
     (progn
-      (setq undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/cache/")))
+      (setq undo-tree-history-directory-alist backup-directory-alist
             undo-tree-auto-save-history t)
       (global-undo-tree-mode 1)))
 #+end_src
