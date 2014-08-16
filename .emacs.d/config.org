@@ -406,7 +406,7 @@
 ** IDO
 #+begin_src emacs-lisp
   (use-package ido
-    :config
+    :init
     (progn
       (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
             ido-create-new-buffer 'always
@@ -420,7 +420,7 @@
 #+begin_src emacs-lisp
   (use-package flx-ido
     :ensure t
-    :config
+    :init
     (progn
       (flx-ido-mode 1)
       (setq ido-enable-flex-matching t
@@ -431,7 +431,7 @@
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
     :ensure t
-    :config
+    :init
     (progn
       (ido-vertical-mode 1)))
 #+end_src
@@ -446,7 +446,7 @@
 
   (use-package ido-ubiquitous
     :ensure t
-    :config
+    :init
     (progn
       (ido-ubiquitous-mode 1)
       (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
