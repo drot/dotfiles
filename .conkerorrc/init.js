@@ -64,7 +64,7 @@ active_img_hint_background_color = "#DCDCCC";
 register_user_stylesheet(
     "data:text/css," +
         escape(
-	    "@namespace url(\"http://www.w3.org/1999/xhtml\");\n" +
+            "@namespace url(\"http://www.w3.org/1999/xhtml\");\n" +
                 "span.__conkeror_hint {\n"+
                 " font-size: 14px !important;\n"+
                 " line-height: 14px !important;\n"+
@@ -80,7 +80,7 @@ register_user_stylesheet(
 
 // Open clicks in buffers in the background
 require("clicks-in-new-buffer.js");
-clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; 
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND;
 clicks_in_new_buffer_button = 1;
 
 // Load download buffers in the background
@@ -133,7 +133,7 @@ kill_buffer = function (buffer, force) {
 
 interactive("restore-killed-buffer-url", "Loads url from a previously killed buffer",
             function restore_killed_buffer_url (I) {
-                if (killed_buffer_urls.length !== 0) {                
+                if (killed_buffer_urls.length !== 0) {
                     var url = yield I.minibuffer.read(
                         $prompt = "Restore killed url:",
                         $completer = new all_word_completer($completions = killed_buffer_urls),
@@ -142,7 +142,7 @@ interactive("restore-killed-buffer-url", "Loads url from a previously killed buf
                         $auto_complete_initial = true,
                         $auto_complete_delay = 0,
                         $require_match = true);
-                    
+
                     load_url_in_new_buffer(url);
                 } else {
                     I.window.minibuffer.message("No killed buffer urls");
