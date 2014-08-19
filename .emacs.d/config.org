@@ -391,16 +391,48 @@
 * Packages
 ** Color theme
 #+begin_src emacs-lisp
-  (use-package alect-themes
+  (use-package zenburn-theme
+    :ensure t)
+#+end_src
+
+** Anzu
+#+begin_src emacs-lisp
+  (use-package anzu
     :ensure t
     :init
     (progn
-      (defadvice custom-theme-set-variables
-          (around fix-inhibit-bug activate)
-        "Allow setting of undefined variables in themes."
-        (let (custom--inhibit-theme-enable)
-          ad-do-it))
-      (load-theme 'alect-dark t)))
+      (global-anzu-mode 1))
+    :bind (("M-%" . anzu-query-replace)
+           ("C-M-%" . anzu-query-replace-regexp)))
+#+end_src
+
+** Browse kill ring
+#+begin_src emacs-lisp
+  (use-package browse-kill-ring
+    :ensure t
+    :init
+    (progn
+      (browse-kill-ring-default-keybindings)))
+#+end_src
+
+** Company mode
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (progn
+      (add-hook 'after-init-hook 'global-company-mode))
+    :diminish "co"
+    :bind ("C-c y" . company-yasnippet)
+    :config
+    (progn
+      (setq company-echo-delay 0
+            company-show-numbers t
+            company-backends '(company-nxml
+                               company-css
+                               company-capf (company-dabbrev-code company-keywords)
+                               company-files
+                               company-dabbrev))))
 #+end_src
 
 ** IDO
@@ -471,15 +503,6 @@
     :bind (("M-x" . smex)
            ("M-X" . smex-major-mode-commands)
            ("C-c C-c M-x" . execute-extended-command)))
-#+end_src
-
-** Browse kill ring
-#+begin_src emacs-lisp
-  (use-package browse-kill-ring
-    :ensure t
-    :init
-    (progn
-      (browse-kill-ring-default-keybindings)))
 #+end_src
 
 ** Lua mode
@@ -638,26 +661,6 @@
       (yas-global-mode 1)))
 #+end_src
 
-** Company mode
-#+begin_src emacs-lisp
-  (use-package company
-    :ensure t
-    :init
-    (progn
-      (add-hook 'after-init-hook 'global-company-mode))
-    :diminish "co"
-    :bind ("C-c y" . company-yasnippet)
-    :config
-    (progn
-      (setq company-echo-delay 0
-            company-show-numbers t
-            company-backends '(company-nxml
-                               company-css
-                               company-capf (company-dabbrev-code company-keywords)
-                               company-files
-                               company-dabbrev))))
-#+end_src
-
 ** Undo Tree
 #+begin_src emacs-lisp
   (use-package undo-tree
@@ -677,4 +680,3 @@
   (when (file-exists-p drot/custom-file)
     (load drot/custom-file))
 #+end_src
-
