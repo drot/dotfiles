@@ -1,4 +1,5 @@
 * General options
+
 ** Disable unnecessary GUI elements
 #+begin_src emacs-lisp
   (menu-bar-mode 0)
@@ -116,6 +117,7 @@
 #+end_src
 
 * Loaded modes
+
 ** Save minibuffer history
 #+begin_src emacs-lisp
   (use-package savehist
@@ -222,6 +224,7 @@
 #+end_src
 
 * Deferred modes
+
 ** Regexp builder
 #+begin_src emacs-lisp
   (use-package re-builder
@@ -389,6 +392,7 @@
 #+end_src
 
 * Packages
+
 ** Color theme
 #+begin_src emacs-lisp
   (use-package zenburn-theme
@@ -674,9 +678,11 @@
 #+end_src
 
 * Customize
+
 ** Load changes from the customize interface
 #+begin_src emacs-lisp
   (setq custom-file drot/custom-file)
   (when (file-exists-p drot/custom-file)
     (load drot/custom-file))
 #+end_src
+
