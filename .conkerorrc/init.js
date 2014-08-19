@@ -7,7 +7,7 @@ theme_load("zenburn");
 // The default page for new buffers.
 homepage = "about:blank";
 
-// Reduce JavaScript output
+// Don't send messages to console
 session_pref("browser.dom.window.dump.enabled", false);
 
 // Delete history after 30 days
