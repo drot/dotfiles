@@ -12,7 +12,7 @@
 (make-directory drot/cache-directory t)
 
 ;; Reduce GC frequency
-(setq gc-cons-threshold 20000000)
+(setq gc-cons-threshold (* 20 (expt 2 20)))
 
 ;; Package repository selection and activation
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))

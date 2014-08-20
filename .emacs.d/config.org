@@ -94,11 +94,6 @@
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
-** Pretty lambdas
-#+begin_src emacs-lisp
-  (global-prettify-symbols-mode 1)
-#+end_src
-
 ** Display read-only buffers in view mode
 #+begin_src emacs-lisp
   (setq view-read-only t
@@ -116,77 +111,81 @@
         backup-by-copying t)
 #+end_src
 
-* Loaded modes
-
 ** Save minibuffer history
 #+begin_src emacs-lisp
-  (use-package savehist
-    :config
-    (progn
-      (setq savehist-additional-variables '(search-ring regexp-search-ring)
-            savehist-autosave-interval 60
-            savehist-file (expand-file-name "minbuf.hist" drot/cache-directory))
-      (savehist-mode 1)))
+  (setq savehist-additional-variables '(search-ring regexp-search-ring)
+        savehist-autosave-interval 60
+        savehist-file (expand-file-name "minbuf.hist" drot/cache-directory))
+  (savehist-mode 1)
 #+end_src
 
 ** Remember point position in files
 #+begin_src emacs-lisp
-  (use-package saveplace
-    :config
-    (progn
-      (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-      (setq-default save-place t)))
+  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
+  (setq-default save-place t)
+#+end_src
+
+** IDO
+#+begin_src emacs-lisp
+  (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-max-prospects 10)
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]"
+                                " [No Match]" " [Matched]" " [Not Readable]"
+                                " [Too Big]" " [Confirm]")))
+  (defun ido-disable-line-truncation ()
+    (set (make-local-variable 'truncate-lines) nil))
+  (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+  (defun ido-define-keys ()
+    "C-(n|p) is more intuitive in vertical layout."
+    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+  (add-hook 'ido-setup-hook 'ido-define-keys)
 #+end_src
 
 ** Find file at point
 #+begin_src emacs-lisp
-  (use-package ffap
-    :config
-    (progn
-      (setq ffap-require-prefix t)
-      (ffap-bindings)))
+  (setq ffap-require-prefix t)
+  (ffap-bindings)
 #+end_src
 
 ** Use Ibuffer for buffer list
 #+begin_src emacs-lisp
-  (use-package ibuffer
-    :bind ("C-x C-b" . ibuffer)
-    :config
-    (progn
-      (setq ibuffer-default-sorting-mode 'major-mode)))
+  (bind-key "C-x C-b" 'ibuffer)
+  (setq ibuffer-default-sorting-mode 'major-mode)
 #+end_src
 
 ** Highlight matching parentheses
 #+begin_src emacs-lisp
-  (use-package paren
-    :config
-    (progn
-      (setq show-paren-delay 0)
-      (show-paren-mode 1)))
+  (setq show-paren-delay 0)
+  (show-paren-mode 1)
 #+end_src
 
-** Show documentation with ElDoc mode
+** Pretty lambdas
 #+begin_src emacs-lisp
-  (use-package eldoc
-    :config
-    (progn
-      (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-      (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-      (add-hook 'ielm-mode-hook 'eldoc-mode)
-      (eldoc-add-command 'paredit-backward-delete
-                         'paredit-close-round)))
+  (global-prettify-symbols-mode 1)
+#+end_src
+
+** Highlight regexps interactively
+#+begin_src emacs-lisp
+  (global-hi-lock-mode 1)
+#+end_src
+
+** Undo and redo the window configuration
+#+begin_src emacs-lisp
+  (winner-mode 1)
 #+end_src
 
 ** Load abbrevs and enable Abbrev Mode
 #+begin_src emacs-lisp
-  (use-package abbrev
-    :config
-    (progn
-      (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
-            save-abbrevs t)
-      (if (file-exists-p abbrev-file-name)
-          (quietly-read-abbrev-file))
-      (setq-default abbrev-mode t)))
+  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
+        save-abbrevs t)
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file))
+  (setq-default abbrev-mode t)
 #+end_src
 
 ** Replace dabbrev-expand with hippie-expand
@@ -196,31 +195,17 @@
 
 ** Fly Spell mode configuration
 #+begin_src emacs-lisp
-  (use-package flyspell
-    :config
-    (progn
-      (setq ispell-extra-args '("--sug-mode=ultra")
-            ispell-dictionary "english")
-      (add-hook 'text-mode-hook 'flyspell-mode)
-      (add-hook 'prog-mode-hook 'flyspell-prog-mode)))
-#+end_src
-
-** Highlight regexps interactively
-#+begin_src emacs-lisp
-  (use-package hi-lock
-    :config
-    (progn
-      (global-hi-lock-mode 1)))
+  (setq ispell-extra-args '("--sug-mode=ultra")
+        ispell-dictionary "english")
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 #+end_src
 
 ** Hide Show mode
 #+begin_src emacs-lisp
-  (use-package hideshow
-    :config
-    (progn
-      (add-hook 'c-mode-common-hook 'hs-minor-mode)
-      (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-      (add-hook 'python-mode-hook 'hs-minor-mode)))
+  (add-hook 'c-mode-common-hook 'hs-minor-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+  (add-hook 'python-mode-hook 'hs-minor-mode)
 #+end_src
 
 * Deferred modes
@@ -414,9 +399,7 @@
 #+begin_src emacs-lisp
   (use-package browse-kill-ring
     :ensure t
-    :init
-    (progn
-      (browse-kill-ring-default-keybindings)))
+    :defer t)
 #+end_src
 
 ** Company mode
@@ -439,19 +422,6 @@
                                company-dabbrev))))
 #+end_src
 
-** IDO
-#+begin_src emacs-lisp
-  (use-package ido
-    :init
-    (progn
-      (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
-            ido-create-new-buffer 'always
-            ido-use-filename-at-point 'guess
-            ido-max-prospects 10)
-      (ido-mode 1)
-      (ido-everywhere 1)))
-#+end_src
-
 ** Flx IDO
 #+begin_src emacs-lisp
   (use-package flx-ido
@@ -461,15 +431,6 @@
       (flx-ido-mode 1)
       (setq ido-enable-flex-matching t
             ido-use-faces nil)))
-#+end_src
-
-** IDO Vertical
-#+begin_src emacs-lisp
-  (use-package ido-vertical-mode
-    :ensure t
-    :init
-    (progn
-      (ido-vertical-mode 1)))
 #+end_src
 
 ** IDO Ubiquitous
@@ -636,6 +597,18 @@
       (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
 #+end_src
 
+** Show documentation with ElDoc mode
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :config
+    (progn
+      (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+      (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+      (add-hook 'ielm-mode-hook 'eldoc-mode)
+      (eldoc-add-command 'paredit-backward-delete
+                         'paredit-close-round)))
+#+end_src
+
 ** PKGBUILD mode
 #+begin_src emacs-lisp
   (use-package pkgbuild-mode
@@ -685,4 +658,3 @@
   (when (file-exists-p drot/custom-file)
     (load drot/custom-file))
 #+end_src
-
