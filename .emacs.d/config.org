@@ -130,12 +130,14 @@
   (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
         ido-create-new-buffer 'always
         ido-use-filename-at-point 'guess
-        ido-max-prospects 10)
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]"
+        ido-max-prospects 10
+        ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]"
                                 " [No Match]" " [Matched]" " [Not Readable]"
                                 " [Too Big]" " [Confirm]")))
+
+  (ido-mode 1)
+  (ido-everywhere 1)
+
   (defun ido-disable-line-truncation ()
     (set (make-local-variable 'truncate-lines) nil))
   (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
