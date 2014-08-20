@@ -203,9 +203,10 @@
 
 ** Hide Show mode
 #+begin_src emacs-lisp
-  (add-hook 'c-mode-common-hook 'hs-minor-mode)
-  (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-  (add-hook 'python-mode-hook 'hs-minor-mode)
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook 'hs-minor-mode))
 #+end_src
 
 * Deferred modes
@@ -568,11 +569,12 @@
     :diminish "PE"
     :config
     (progn
-      (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-      (add-hook 'ielm-mode-hook 'paredit-mode)
-      (add-hook 'lisp-mode-hook 'paredit-mode)
-      (add-hook 'lisp-interaction-mode-hook 'paredit-mode)
-      (add-hook 'scheme-mode-hook 'paredit-mode)
+      (dolist (hook '(emacs-lisp-mode-hook
+                      ielm-mode-hook
+                      lisp-mode-hook
+                      lisp-interaction-mode-hook
+                      scheme-mode-hook))
+        (add-hook hook 'paredit-mode))
 
       (defvar drot/paredit-minibuffer-commands '(eval-expression
                                                  pp-eval-expression
@@ -602,9 +604,10 @@
   (use-package eldoc
     :config
     (progn
-      (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-      (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-      (add-hook 'ielm-mode-hook 'eldoc-mode)
+      (dolist (hook '(emacs-lisp-mode-hook
+                      lisp-interaction-mode-hook
+                      ielm-mode-hook))
+        (add-hook hook 'eldoc-mode))
       (eldoc-add-command 'paredit-backward-delete
                          'paredit-close-round)))
 #+end_src
