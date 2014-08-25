@@ -393,16 +393,6 @@
     :defer t)
 #+end_src
 
-** Color identifiers mode
-#+begin_src emacs-lisp
-  (use-package color-identifiers-mode
-    :ensure t
-    :diminish (color-identifiers-mode . "CId")
-    :init
-    (progn)
-    (add-hook 'after-init-hook 'global-color-identifiers-mode))
-#+end_src
-
 ** Company mode
 #+begin_src emacs-lisp
   (use-package company
