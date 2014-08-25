@@ -125,29 +125,6 @@
   (setq-default save-place t)
 #+end_src
 
-** IDO
-#+begin_src emacs-lisp
-  (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-max-prospects 10
-        ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]"
-                                " [No Match]" " [Matched]" " [Not Readable]"
-                                " [Too Big]" " [Confirm]")))
-
-  (ido-mode 1)
-  (ido-everywhere 1)
-
-  (defun ido-disable-line-truncation ()
-    (set (make-local-variable 'truncate-lines) nil))
-  (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
-  (defun ido-define-keys ()
-    "C-(n|p) is more intuitive in vertical layout."
-    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
-  (add-hook 'ido-setup-hook 'ido-define-keys)
-#+end_src
-
 ** Find file at point
 #+begin_src emacs-lisp
   (setq ffap-require-prefix t)
@@ -158,6 +135,19 @@
 #+begin_src emacs-lisp
   (bind-key "C-x C-b" 'ibuffer)
   (setq ibuffer-default-sorting-mode 'major-mode)
+#+end_src
+
+** Icomplete
+#+begin_src emacs-lisp
+  (setq icomplete-prospects-height 1)
+  (icomplete-mode 1)
+#+end_src
+
+
+** Highlight matching parentheses
+#+begin_src emacs-lisp
+  (setq show-paren-delay 0)
+  (show-paren-mode 1)
 #+end_src
 
 ** Pretty lambdas
@@ -197,20 +187,17 @@
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 #+end_src
 
-** Show documentation with ElDoc mode
-#+begin_src emacs-lisp
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-interaction-mode-hook
-                  ielm-mode-hook))
-    (add-hook hook 'eldoc-mode))
-#+end_src
-
 ** Hide Show mode
 #+begin_src emacs-lisp
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
     (add-hook hook 'hs-minor-mode))
+#+end_src
+
+** Electric pair mode
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'electric-pair-mode)
 #+end_src
 
 * Deferred modes
@@ -437,54 +424,6 @@
                                company-dabbrev))))
 #+end_src
 
-** Flx IDO
-#+begin_src emacs-lisp
-  (use-package flx-ido
-    :ensure t
-    :init
-    (progn
-      (flx-ido-mode 1)
-      (setq ido-enable-flex-matching t
-            ido-use-faces nil)))
-#+end_src
-
-** IDO Ubiquitous
-#+begin_src emacs-lisp
-  (defvar predicate nil)
-  (defvar inherit-input-method nil)
-  (defvar ido-cur-item nil)
-  (defvar ido-default-item nil)
-  (defvar ido-cur-list nil)
-
-  (use-package ido-ubiquitous
-    :ensure t
-    :init
-    (progn
-      (ido-ubiquitous-mode 1)
-      (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
-        `(eval-after-load ,package
-           '(defadvice ,cmd (around ido-ubiquitous-new activate)
-              (let ((ido-ubiquitous-enable-compatibility nil))
-                ad-do-it)))))
-    :config
-    (progn
-      (ido-ubiquitous-use-new-completing-read yas-expand 'yasnippet)
-      (ido-ubiquitous-use-new-completing-read yas-visit-snippet-file 'yasnippet)))
-#+end_src
-
-** Smex
-#+begin_src emacs-lisp
-  (use-package smex
-    :ensure t
-    :init
-    (progn
-      (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory))
-      (smex-initialize))
-    :bind (("M-x" . smex)
-           ("M-X" . smex-major-mode-commands)
-           ("C-c C-c M-x" . execute-extended-command)))
-#+end_src
-
 ** Lua mode
 #+begin_src emacs-lisp
   (use-package lua-mode
@@ -496,10 +435,7 @@
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t
-    :defer t
-    :config
-    (progn
-      (setq magit-completing-read-function 'magit-ido-completing-read)))
+    :defer t)
 #+end_src
 
 ** Org-mode
@@ -516,9 +452,7 @@
          (sh . t)))
       (setq org-log-done 'time
             org-src-fontify-natively t
-            org-src-tab-acts-natively t
-            org-completion-use-ido t
-            org-outline-path-complete-in-steps nil)))
+            org-src-tab-acts-natively t)))
 #+end_src
 
 ** ERC configuration
@@ -576,6 +510,56 @@
       (erc-spelling-mode 1)))
 #+end_src
 
+** ParEdit
+#+begin_src emacs-lisp
+  (use-package paredit
+    :ensure t
+    :diminish "PE"
+    :config
+    (progn
+      (dolist (hook '(emacs-lisp-mode-hook
+                      ielm-mode-hook
+                      lisp-mode-hook
+                      lisp-interaction-mode-hook
+                      scheme-mode-hook))
+        (add-hook hook 'paredit-mode))
+
+      (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                                 pp-eval-expression
+                                                 eval-expression-with-eldoc
+                                                 ibuffer-do-eval
+                                                 ibuffer-do-view-and-eval)
+        "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+      (defun drot/paredit-minibuffer ()
+        "Enable ParEdit during lisp-related minibuffer commands."
+        (if (memq this-command drot/paredit-minibuffer-commands)
+            (paredit-mode 1)))
+
+      (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
+
+      (defun drot/paredit-slime-fix ()
+        "Fix ParEdit conflict with SLIME."
+        (define-key slime-repl-mode-map
+          (read-kbd-macro paredit-backward-delete-key) nil))
+
+      (add-hook 'slime-repl-mode-hook 'paredit-mode)
+      (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
+#+end_src
+
+** Show documentation with ElDoc mode
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :config
+    (progn
+      (dolist (hook '(emacs-lisp-mode-hook
+                      lisp-interaction-mode-hook
+                      ielm-mode-hook))
+        (add-hook hook 'eldoc-mode))
+      (eldoc-add-command 'paredit-backward-delete
+                         'paredit-close-round)))
+#+end_src
+
 ** PKGBUILD mode
 #+begin_src emacs-lisp
   (use-package pkgbuild-mode
@@ -590,41 +574,6 @@
     :config
     (progn
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
-#+end_src
-
-** Smartparens
-#+begin_src emacs-lisp
-  (use-package smartparens
-    :ensure t
-    :config
-    (progn
-      (require 'smartparens-config)
-      (setq sp-base-key-bindings 'paredit
-            sp-autoskip-closing-pair 'always)
-      
-      (sp-use-paredit-bindings)
-      (show-smartparens-global-mode 1)
-
-      (add-hook 'prog-mode-hook 'smartparens-mode)
-
-      (dolist (hook '(emacs-lisp-mode-hook
-                      lisp-interaction-mode-hook
-                      ielm-mode-hook))
-        (add-hook hook 'smartparens-strict-mode))
-
-      (defvar drot/sp-minibuffer-commands '(eval-expression
-                                            pp-eval-expression
-                                            eval-expression-with-eldoc
-                                            ibuffer-do-eval
-                                            ibuffer-do-view-and-eval)
-        "Interactive commands for which SP should be enabled in the minibuffer.")
-
-      (defun drot/sp-minibuffer ()
-        "Enable SP during lisp-related minibuffer commands."
-        (if (memq this-command drot/sp-minibuffer-commands)
-            (smartparens-strict-mode 1)))
-
-      (add-hook 'minibuffer-setup-hook 'drot/sp-minibuffer)))
 #+end_src
 
 ** YASnippet
