@@ -143,7 +143,6 @@
   (icomplete-mode 1)
 #+end_src
 
-
 ** Highlight matching parentheses
 #+begin_src emacs-lisp
   (setq show-paren-delay 0)
@@ -544,7 +543,10 @@
           (read-kbd-macro paredit-backward-delete-key) nil))
 
       (add-hook 'slime-repl-mode-hook 'paredit-mode)
-      (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)))
+      (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
+
+      (add-hook 'paredit-mode-hook (lambda ()
+                                     (electric-pair-mode 0)))))
 #+end_src
 
 ** Show documentation with ElDoc mode
