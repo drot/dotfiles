@@ -278,6 +278,18 @@
             compilation-ask-about-save nil)))
 #+end_src
 
+** Display ANSI colors in the compilation buffer
+#+begin_src emacs-lisp
+  (use-package ansi-color
+    :defer t
+    :config
+    (progn
+      (defun drot/colorize-compilation-buffer ()
+        (when (eq major-mode compilation-mode)
+          (ansi-color-apply-on-region compilation-filter-start (point-max))))
+      (add-hook 'compilation-filter-hook 'drot/colorize-compilation-buffer)))
+#+end_src
+
 ** CC mode configuration
 #+begin_src emacs-lisp
   (use-package cc-mode
@@ -456,7 +468,7 @@
     (interactive)
     (erc-tls :server "adams.freenode.net" :port 6697
              :nick "drot")
-    (erc-tls :server "pine.forestnet.org" :port 6697
+    (erc-tls :server "pine.forestnet.org" :port +7325
              :nick "drot")))
     :config
     (progn
