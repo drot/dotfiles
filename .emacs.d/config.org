@@ -425,6 +425,13 @@
                                company-dabbrev))))
 #+end_src
 
+** Expand region
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :ensure t
+    :bind ("C-=" . er/expand-region))
+#+end_src
+
 ** Lua mode
 #+begin_src emacs-lisp
   (use-package lua-mode
@@ -466,7 +473,7 @@
       (defun irc ()
     "Connect to IRC."
     (interactive)
-    (erc-tls :server "adams.freenode.net" :port 6697
+    (erc-tls :server "orwell.freenode.net" :port 6697
              :nick "drot")
     (erc-tls :server "pine.forestnet.org" :port +7325
              :nick "drot")))
