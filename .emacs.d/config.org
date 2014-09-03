@@ -587,6 +587,15 @@
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 #+end_src
 
+** Rainbow identifiers
+#+begin_src emacs-lisp
+  (use-package rainbow-identifiers
+    :ensure t
+    :config
+    (progn
+      (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)))
+#+end_src
+
 ** YASnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
