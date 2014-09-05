@@ -51,11 +51,6 @@
   (minibuffer-depth-indicate-mode 1)
 #+end_src
 
-** Delete duplicates from minibuffer history
-#+begin_src emacs-lisp
-  (setq history-delete-duplicates t)
-#+end_src
-
 ** Ignore case on completion
 #+begin_src emacs-lisp
   (setq read-file-name-completion-ignore-case t
@@ -94,10 +89,10 @@
                     (font-spec :size 16 :name "Symbola"))
 #+end_src
 
-** Display read-only buffers in view mode
+** Do not save duplicates
 #+begin_src emacs-lisp
-  (setq view-read-only t
-        view-inhibit-help-message t)
+  (setq history-delete-duplicates t
+        kill-do-not-save-duplicates t)
 #+end_src
 
 ** Configuration for backup files
@@ -135,6 +130,12 @@
 #+begin_src emacs-lisp
   (bind-key "C-x C-b" 'ibuffer)
   (setq ibuffer-default-sorting-mode 'major-mode)
+#+end_src
+
+** Display read-only buffers in view mode
+#+begin_src emacs-lisp
+  (setq view-read-only t
+        view-inhibit-help-message t)
 #+end_src
 
 ** Icomplete
