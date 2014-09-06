@@ -62,11 +62,6 @@
   (setq completion-auto-help 'lazy)
 #+end_src
 
-** Do not save duplicates in history
-#+begin_src emacs-lisp
-  (setq history-delete-duplicates t)
-#+end_src
-
 ** Enable all disabled commands
 #+begin_src emacs-lisp
   (setq disabled-command-function nil)
@@ -92,6 +87,12 @@
 #+begin_src emacs-lisp
   (set-fontset-font "fontset-default" nil
                     (font-spec :size 16 :name "Symbola"))
+#+end_src
+
+** Do not save duplicates
+#+begin_src emacs-lisp
+  (setq history-delete-duplicates t
+        kill-do-not-save-duplicates t)
 #+end_src
 
 ** Configuration for backup files
@@ -590,15 +591,6 @@
     :config
     (progn
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
-#+end_src
-
-** Rainbow identifiers
-#+begin_src emacs-lisp
-  (use-package rainbow-identifiers
-    :ensure t
-    :config
-    (progn
-      (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)))
 #+end_src
 
 ** YASnippet
