@@ -390,31 +390,20 @@
 ** Color theme
 #+begin_src emacs-lisp
   (use-package zenburn-theme
-    :ensure t)
-#+end_src
-
-** Anzu
-#+begin_src emacs-lisp
-  (use-package anzu
-    :ensure t
-    :init
-    (progn
-      (global-anzu-mode 1))
-    :bind (("M-%" . anzu-query-replace)
-           ("C-M-%" . anzu-query-replace-regexp)))
+    :ensure zenburn-theme)
 #+end_src
 
 ** Browse kill ring
 #+begin_src emacs-lisp
   (use-package browse-kill-ring
-    :ensure t
+    :ensure browse-kill-ring
     :defer t)
 #+end_src
 
 ** Company mode
 #+begin_src emacs-lisp
   (use-package company
-    :ensure t
+    :ensure company
     :init
     (progn
       (add-hook 'after-init-hook 'global-company-mode))
@@ -434,21 +423,21 @@
 ** Expand region
 #+begin_src emacs-lisp
   (use-package expand-region
-    :ensure t
+    :ensure expand-region
     :bind ("C-=" . er/expand-region))
 #+end_src
 
 ** Lua mode
 #+begin_src emacs-lisp
   (use-package lua-mode
-    :ensure t
+    :ensure lua-mode
     :defer t)
 #+end_src
 
 ** Magit
 #+begin_src emacs-lisp
   (use-package magit
-    :ensure t
+    :ensure magit
     :defer t)
 #+end_src
 
@@ -524,10 +513,19 @@
       (erc-spelling-mode 1)))
 #+end_src
 
+** Multiple cursors
+#+begin_src emacs-lisp
+  (use-package multiple-cursors
+    :ensure multiple-cursors
+    :bind (("C->" . mc/mark-next-like-this)
+           ("C-<" . mc/mark-previous-like-this)
+           ("C-*" . mc/mark-all-like-this)))
+#+end_src
+
 ** ParEdit
 #+begin_src emacs-lisp
   (use-package paredit
-    :ensure t
+    :ensure paredit
     :diminish "PE"
     :config
     (progn
@@ -580,14 +578,14 @@
 ** PKGBUILD mode
 #+begin_src emacs-lisp
   (use-package pkgbuild-mode
-    :ensure t
+    :ensure pkgbuild-mode
     :defer t)
 #+end_src
 
 ** Rainbow Delimiters
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
-    :ensure t
+    :ensure rainbow-delimiters
     :config
     (progn
       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
@@ -596,7 +594,7 @@
 ** YASnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
-    :ensure t
+    :ensure yasnippet
     :init
     (progn
       (make-directory "~/.emacs.d/snippets" t))
@@ -609,7 +607,7 @@
 ** Undo Tree
 #+begin_src emacs-lisp
   (use-package undo-tree
-    :ensure t
+    :ensure undo-tree
     :diminish "UT"
     :config
     (progn
