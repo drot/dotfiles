@@ -170,15 +170,6 @@
   (winner-mode 1)
 #+end_src
 
-** Load abbrevs and enable Abbrev Mode
-#+begin_src emacs-lisp
-  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
-        save-abbrevs t)
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t)
-#+end_src
-
 ** Replace dabbrev-expand with hippie-expand
 #+begin_src emacs-lisp
   (bind-key "M-/" 'hippie-expand)
@@ -385,7 +376,20 @@
             browse-url-generic-program "conkeror")))
 #+end_src
 
-* Packages
+* Loaded modes and packages
+
+** Load abbrevs and enable Abbrev Mode
+#+begin_src emacs-lisp
+  (use-package abbrev
+    :diminish "Abr"
+    :config
+    (progn
+      (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
+            save-abbrevs t)
+      (if (file-exists-p abbrev-file-name)
+          (quietly-read-abbrev-file))
+      (setq-default abbrev-mode t)))
+#+end_src
 
 ** Color theme
 #+begin_src emacs-lisp
@@ -565,6 +569,7 @@
 ** Show documentation with ElDoc mode
 #+begin_src emacs-lisp
   (use-package eldoc
+    :diminish "ElD"
     :config
     (progn
       (dolist (hook '(emacs-lisp-mode-hook
@@ -616,7 +621,7 @@
       (global-undo-tree-mode 1)))
 #+end_src
 
-* Customize
+* Customize interface
 
 ** Load changes from the customize interface
 #+begin_src emacs-lisp
