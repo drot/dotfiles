@@ -3,8 +3,8 @@
 #minibuffer {
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Terminus;
-    font-size: 14px;
+    font-family: Ttyp0;
+    font-size: 15px;
 }
 
 #minibuffer-input {
@@ -31,8 +31,8 @@ tree.completions {
     border: 0px none !important;
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Terminus;
-    font-size: 14px;
+    font-family: Ttyp0;
+    font-size: 15px;
 }
 
 tree.completions treechildren { border: none !important; }

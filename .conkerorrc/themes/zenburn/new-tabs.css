@@ -14,8 +14,8 @@
     border-color: #6f6f6f;
     background: #3f3f3f;
     color: #dcdccc;
-    font-family: Terminus;
-    font-size: 14px;
+    font-family: Ttyp0;
+    font-size: 15px;
 }
 
 .tab2[selected=true] {
@@ -26,8 +26,8 @@
 
 .tab2:hover {
     border-color: #1e2320;
-    background: #6f6f6f;
-    color: #f0dfaf;
+    background: #f0dfaf;
+    color: #1e2320;
 }
 
 .tab2-label {
