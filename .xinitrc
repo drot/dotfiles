@@ -18,5 +18,8 @@ fi
 xset -dpms &
 xset s off &
 
+# Set wallpaper
+display -size 1024x768 -window root ~/dotfiles/.config/awesome/themes/zenburn/zenburn.png &
+
 # Start awesome
-exec awesome
+exec i3
