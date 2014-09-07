@@ -1,0 +1,55 @@
+[global]
+    font = Ttyp0 12
+    allow_markup = yes
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = right
+    bounce_freq = 0
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    geometry = "300x5-30+20"
+    shrink = no
+    transparency = 0
+    idle_threshold = 120
+    monitor = 0
+    follow = mouse
+    sticky_history = yes
+    history_length = 20
+    show_indicators = yes
+    line_height = 0
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    separator_color = frame
+    startup_notification = false
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /home/drot/bin/conkeror
+    icon_position = left
+    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+[frame]
+    width = 1
+    color = "#6f6f6f"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#1e2320"
+    foreground = "#dcdccc"
+    timeout = 10
+
+[urgency_normal]
+    background = "#1e2320"
+    foreground = "#f0dfaf"
+    timeout = 10
+
+[urgency_critical]
+    background = "#1e2320"
+    foreground = "#bc8383"
+    timeout = 10

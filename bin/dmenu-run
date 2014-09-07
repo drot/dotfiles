@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Font
+FONT="-*-ttyp0-medium-r-*-*-15-*-*-*-*-*-*-*"
+
+# Colors
+NORMAL_BACKGROUND="#3f3f3f"
+NORMAL_FOREGROUND="#dcdccc"
+SELECTED_BACKGROUND="#f0dfaf"
+SELECTED_FOREGROUND="#1e2320"
+
+# Run dmenu:
+dmenu_run -i -p "Run:" \
+          -nb $NORMAL_BACKGROUND \
+          -nf $NORMAL_FOREGROUND \
+          -sb $SELECTED_BACKGROUND \
+          -sf $SELECTED_FOREGROUND \
+          -fn $FONT
