@@ -341,7 +341,7 @@ for s = 1, screen.count() do
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
    -- Create the wibox
-   mywibox[s] = awful.wibox({ position = "top", screen = s })
+   mywibox[s] = awful.wibox({ position = "top", height = 21, screen = s })
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
@@ -455,7 +455,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "p", function () mypromptbox[mouse.screen]:run() end),
 
    -- Scratchpad
-   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 586, 338) end),
+   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 800, 600) end),
 
    -- Volume control
    awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
