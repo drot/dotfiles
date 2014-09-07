@@ -175,11 +175,14 @@ assign [class="Gimp"] 4
 assign [class="Pavucontrol"] 4
 for_window [class="Thunar"] floating enable, move container to workspace 5
 
+# disable mouse focus switching
+focus_follows_mouse no
+
 # Window colors
 client.focused #6f6f6f #1e2320 #f0dfaf #f0dfaf
 client.focused_inactive #6f6f6f #3f3f3f #dcdccc #f0dfaf
 client.unfocused #6f6f6f #3f3f3f #dcdccc #f0dfaf
-client.urgent #6f6f6f #3f3f3f #cc9393 #f0dfaf
+client.urgent #1e2320 #f0dfaf #1e2320 #6f6f6f
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -192,6 +195,6 @@ bar {
            focused_workspace #6f6f6f #1e2320 #f0dfaf
            active_workspace #6f6f6f #3f3f3f #dcdccc
            inactive_workspace #6f6f6f #3f3f3f #dcdccc
-           urgent_workspace #6f6f6f #3f3f3f #cc9393
+           urgent_workspace #1e2320 #f0dfaf #1e2320
     }
 }
