@@ -13,7 +13,7 @@ total_run_times 0
 TEXT
 
 [{ "full_text" : "CPU: ${cpu}% " , "color" : ${if_match ${cpu}<50}"\#f0dfaf"${else}"\#cc9393"${endif} },
-   { "full_text" : " RAM: ${memperc}% " , "color" : ${if_match ${memperc}<50}"\#f0dfaf"${else}"\#cc9393"${endif} },
+   { "full_text" : " RAM: ${memperc}% " , "color" : ${if_match ${memperc}<50}"\#8cd0d3"${else}"\#cc9393"${endif} },
    { "full_text" : " TEMP: ${acpitemp}°C " , "color" : ${if_match ${acpitemp}<50}"\#f0dfaf"${else}"\#cc9393"${endif} },
-   { "full_text" : " VOL: ${execp ponymix get-volume}% " , "color" : "\#f0dfaf" },
+   { "full_text" : " VOL: ${execp ponymix get-volume}% " , "color" : "\#8cd0d3" },
    { "full_text" : " ${time %d-%m/%R}", "color" : "\#f0dfaf" }],
