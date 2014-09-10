@@ -138,7 +138,6 @@ bindsym $mod+minus exec --no-startup-id ponymix decrease 5
 bindsym $mod+plus exec --no-startup-id ponymix increase 5
 
 # list of floating applications
-for_window [class="pinentry"] floating enable
 for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Wine"] floating enable
