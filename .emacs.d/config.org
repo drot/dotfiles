@@ -165,6 +165,12 @@
   (global-hi-lock-mode 1)
 #+end_src
 
+** Which function mode
+#+begin_src emacs-lisp
+  (setq which-func-unknown "n/a")
+  (which-function-mode 1)
+#+end_src
+
 ** Undo and redo the window configuration
 #+begin_src emacs-lisp
   (winner-mode 1)
