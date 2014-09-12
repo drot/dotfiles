@@ -124,7 +124,7 @@ bindsym $mod+r mode "RESIZE MODE"
 # control MPD
 mode "MPD CONTROL" {
      bindsym s exec --no-startup-id mpc stop
-     bindsym p exec --no-startup-id mpc toggle
+     bindsym space exec --no-startup-id mpc toggle
      bindsym n exec --no-startup-id mpc next
      bindsym p exec --no-startup-id mpc prev
      bindsym minus exec --no-startup-id mpc volume -5
