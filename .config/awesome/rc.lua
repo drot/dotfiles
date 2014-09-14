@@ -262,8 +262,8 @@ voldisplay:set_bottom(3)
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 -- Register widgets
-vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
-vicious.register(volbar, vicious.contrib.pulse, "$1", 2, "alsa_output.pci-0000_00_11.5.analog-stereo")
+vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, 1)
+vicious.register(volbar, vicious.contrib.pulse, "$1", 2, 1)
 -- }}}
 
 -- {{{ Time widget
@@ -458,8 +458,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 800, 600) end),
 
    -- Volume control
-   awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
-   awful.key({ modkey }, "-", function () vicious.contrib.pulse.add(-5,"alsa_output.pci-0000_00_11.5.analog-stereo") end),
+   awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5, 1) end),
+   awful.key({ modkey }, "-", function () vicious.contrib.pulse.add(-5, 1) end),
+   awful.key({ modkey }, ".", function () vicious.contrib.pulse.toggle(1) end),
 
    awful.key({ modkey }, "x",
       function ()
