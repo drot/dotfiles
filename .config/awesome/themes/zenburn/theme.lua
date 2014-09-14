@@ -10,7 +10,7 @@ theme.wallpaper = themes_dir .. "zenburn/zenburn.png"
 -- }}}
 
 -- {{{ Font
-theme.font = "Source Code Pro Bold 10"
+theme.font = "Ttyp0 11"
 -- }}}
 
 -- {{{ Colors
