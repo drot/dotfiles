@@ -3,7 +3,6 @@ resize_grip = false
 scroll_on_output = false
 scroll_on_keystroke = true
 audible_bell = false
-visible_bell = false
 mouse_autohide = false
 allow_bold = true
 dynamic_title = true
@@ -24,10 +23,6 @@ cursor_shape = block
 # $BROWSER is used by default
 #browser = firefox
 
-# word characters used for word selection
-# (default if unset: all graphic non-punctuation/space characters)
-#word_chars = -A-Za-z0-9,./?%&#:_=+@~
-
 # set size hints for the window
 #size_hints = false
 
@@ -37,7 +32,6 @@ cursor_shape = block
 [colors]
 foreground = #dcdccc
 #foreground_bold = #ffffff
-#foreground_dim = #888888
 background = #3f3f3f
 #cursor = #dcdccc
 
@@ -63,10 +57,12 @@ color14 = #93e0e3
 color15 = #ffffff
 
 [hints]
-font = Terminus 10
-foreground = #dcdccc
-background = #3f3f3f
+font = Ttyp0 11
+foreground = #f0dfaf
+background = #1e2320
+active_foreground = #1e2320
+active_background = #f0dfaf
 padding = 2
-border = #3f3f3f
-border_width = 0.5
+border = #f0dfaf
+border_width = 1.0
 roundness = 2.0
