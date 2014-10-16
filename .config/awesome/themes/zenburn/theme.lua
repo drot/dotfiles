@@ -10,7 +10,7 @@ theme.wallpaper = themes_dir .. "zenburn/zenburn.png"
 -- }}}
 
 -- {{{ Font
-theme.font = "Ttyp0 11"
+theme.font = "Terminus 10"
 -- }}}
 
 -- {{{ Colors

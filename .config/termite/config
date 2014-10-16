@@ -8,7 +8,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Ttyp0 11
+font = Terminus 10
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
@@ -57,7 +57,7 @@ color14 = #93e0e3
 color15 = #ffffff
 
 [hints]
-font = Ttyp0 11
+font = Terminus 10
 foreground = #f0dfaf
 background = #1e2320
 active_foreground = #1e2320
