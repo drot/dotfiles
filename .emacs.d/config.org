@@ -83,12 +83,6 @@
   (setq mouse-yank-at-point t)
 #+end_src
 
-** Set fallback font
-#+begin_src emacs-lisp
-  (set-fontset-font "fontset-default" nil
-                    (font-spec :size 16 :name "Symbola"))
-#+end_src
-
 ** Do not save duplicates
 #+begin_src emacs-lisp
   (setq history-delete-duplicates t
@@ -457,12 +451,7 @@
     :bind (("C-c a" . org-agenda)
            ("C-c l" . org-store-link))
     :config
-    (progn
-      (org-babel-do-load-languages
-       'org-babel-load-languages
-       '((C . t)
-         (emacs-lisp . t)
-         (sh . t)))
+    (progn    
       (setq org-log-done 'time
             org-src-fontify-natively t
             org-src-tab-acts-natively t)))
@@ -480,7 +469,7 @@
     (interactive)
     (erc-tls :server "orwell.freenode.net" :port 6697
              :nick "drot")
-    (erc-tls :server "pine.forestnet.org" :port +7325
+    (erc-tls :server "pine.forestnet.org" :port 6697
              :nick "drot")))
     :config
     (progn
@@ -494,7 +483,7 @@
             erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY")
             erc-truncate-buffer-on-save t
             erc-fill-function 'erc-fill-static
-            erc-fill-column 125
+            erc-fill-column 155
             erc-fill-static-center 15
             erc-track-exclude-server-buffer t
             erc-track-showcount t
@@ -570,20 +559,6 @@
 
       (add-hook 'paredit-mode-hook (lambda ()
                                      (electric-pair-mode 0)))))
-#+end_src
-
-** Show documentation with ElDoc mode
-#+begin_src emacs-lisp
-  (use-package eldoc
-    :diminish "ElD"
-    :config
-    (progn
-      (dolist (hook '(emacs-lisp-mode-hook
-                      lisp-interaction-mode-hook
-                      ielm-mode-hook))
-        (add-hook hook 'eldoc-mode))
-      (eldoc-add-command 'paredit-backward-delete
-                         'paredit-close-round)))
 #+end_src
 
 ** PKGBUILD mode
