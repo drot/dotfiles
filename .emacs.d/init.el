@@ -12,7 +12,7 @@
 (make-directory drot/cache-directory t)
 
 ;; Package repository selection and activation
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/"))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/"))
       package-enable-at-startup nil)
 (package-initialize)
 
