@@ -403,6 +403,24 @@
     :ensure zenburn-theme)
 #+end_src
 
+** Ace Jump mode
+#+begin_src emacs-lisp
+  (use-package ace-jump-mode
+    :ensure ace-jump-mode
+    :bind ("C-c SPC" . ace-jump-mode))
+#+end_src
+
+** Anzu
+#+begin_src emacs-lisp
+  (use-package anzu
+    :ensure anzu
+    :init
+    (progn
+      (global-anzu-mode 1))
+    :bind (("M-%" . anzu-query-replace)
+           ("C-M-%" . anzu-query-replace-regexp)))
+#+end_src
+
 ** Browse kill ring
 #+begin_src emacs-lisp
   (use-package browse-kill-ring
