@@ -83,6 +83,12 @@
   (setq mouse-yank-at-point t)
 #+end_src
 
+** Set fallback font
+#+begin_src emacs-lisp
+  (set-fontset-font "fontset-default" nil
+                    (font-spec :size 16 :name "Symbola"))
+#+end_src
+
 ** Do not save duplicates
 #+begin_src emacs-lisp
   (setq history-delete-duplicates t
@@ -559,6 +565,21 @@
 
       (add-hook 'paredit-mode-hook (lambda ()
                                      (electric-pair-mode 0)))))
+#+end_src
+
+** Show documentation with ElDoc mode
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :diminish "ElD"
+    :config
+    (progn
+      (dolist (hook '(eval-expression-minibuffer-setup-hook
+                      lisp-interaction-mode-hook
+                      emacs-lisp-mode-hook
+                      ielm-mode-hook))
+        (add-hook hook 'eldoc-mode))
+      (eldoc-add-command 'paredit-backward-delete
+                         'paredit-close-round)))
 #+end_src
 
 ** PKGBUILD mode
