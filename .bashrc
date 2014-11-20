@@ -4,7 +4,7 @@ export ALTERNATE_EDITOR=""
 export VISUAL=${EDITOR}
 export PAGER=less
 export BROWSER=conkeror
-export PATH=$PATH:$HOME/bin:$HOME/emacs/bin
+export PATH=$PATH:$HOME/bin
 
 # History
 export HISTIGNORE="\&:ls:ll:la:cd:fg:bg:exit:clear" # don't append consecutive duplicates of these
