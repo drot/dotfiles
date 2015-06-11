@@ -178,6 +178,7 @@
 (bind-key "M-/" 'hippie-expand)
 
 ;; Fly Spell mode configuration
+(setq ispell-program-name "hunspell")
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
@@ -491,8 +492,8 @@
 
 ;; Volatile Highlights
 (use-package volatile-highlights
-  :config
-  (volatile-highlights-mode 1))
+  :init
+  (volatile-highlights-mode t))
 
 ;; YASnippet
 (use-package yasnippet
