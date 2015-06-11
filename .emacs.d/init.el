@@ -492,8 +492,8 @@
 
 ;; Volatile Highlights
 (use-package volatile-highlights
-  :init
-  (volatile-highlights-mode t))
+  :config
+  (volatile-highlights-mode 1))
 
 ;; YASnippet
 (use-package yasnippet
