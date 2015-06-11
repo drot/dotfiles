@@ -1,0 +1,4 @@
+(:name alect-themes
+       :type github
+       :description "Configurable color themes for GNU Emacs 24"
+       :pkgname "alezost/alect-themes")

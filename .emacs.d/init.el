@@ -33,8 +33,8 @@
 
 (defvar drot/package-list
   '(ace-jump-mode
+    alect-themes
     browse-kill-ring
-    color-theme-zenburn
     company-mode
     diminish
     el-get
@@ -178,7 +178,8 @@
 (bind-key "M-/" 'hippie-expand)
 
 ;; Fly Spell mode configuration
-(setq ispell-program-name "hunspell")
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
@@ -335,7 +336,14 @@
   (setq-default abbrev-mode t))
 
 ;; Color theme
-(use-package zenburn-theme)
+(use-package alect-themes
+  :config
+  (defadvice custom-theme-set-variables
+      (around fix-inhibit-bug activate)
+    "Allow setting of undefined variables in themes."
+    (let (custom--inhibit-theme-enable)
+      ad-do-it))
+  (load-theme 'alect-dark t))
 
 ;; Ace Jump mode
 (use-package ace-jump-mode
