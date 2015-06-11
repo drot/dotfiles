@@ -33,8 +33,8 @@
 
 (defvar drot/package-list
   '(ace-jump-mode
-    alect-themes
     browse-kill-ring
+    color-theme-zenburn
     company-mode
     diminish
     el-get
@@ -336,14 +336,7 @@
   (setq-default abbrev-mode t))
 
 ;; Color theme
-(use-package alect-themes
-  :config
-  (defadvice custom-theme-set-variables
-      (around fix-inhibit-bug activate)
-    "Allow setting of undefined variables in themes."
-    (let (custom--inhibit-theme-enable)
-      ad-do-it))
-  (load-theme 'alect-dark t))
+(use-package zenburn-theme)
 
 ;; Ace Jump mode
 (use-package ace-jump-mode
