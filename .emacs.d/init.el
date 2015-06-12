@@ -108,6 +108,9 @@
 ;; Increase default fill width
 (setq-default fill-column 80)
 
+;; Draw block cursor as wide as the glyph under it
+(setq x-stretch-cursor t)
+
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
@@ -166,6 +169,9 @@
 
 ;; Highlight regexps interactively
 (global-hi-lock-mode 1)
+
+;; Remove text in active region if inserting text
+(delete-selection-mode 1)
 
 ;; Which function mode
 (setq which-func-unknown "n/a")
@@ -344,7 +350,9 @@
 
 ;; Browse kill ring
 (use-package browse-kill-ring
-  :defer t)
+  :defer t
+  :config
+  (setq browse-kill-ring-highlight-current-entry t))
 
 ;; Company mode
 (use-package company
