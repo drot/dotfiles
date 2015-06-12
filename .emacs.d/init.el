@@ -101,6 +101,9 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
+;; Apropos commands will search more extensively
+(setq apropos-do-all t)
+
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
@@ -136,10 +139,6 @@
       savehist-autosave-interval 60
       savehist-file (expand-file-name "minbuf.hist" drot/cache-directory))
 (savehist-mode 1)
-
-;; Remember point position in files
-(setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-(setq-default save-place t)
 
 ;; Find file at point
 (setq ffap-require-prefix t)
@@ -324,12 +323,17 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Conkeror
+;; Open URLs in Firefox
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "conkeror"))
+  (setq browse-url-browser-function 'browse-url-firefox))
+
+;; Remember point position in files
+(use-package saveplace
+  :config
+  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
+  (setq-default save-place t))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
