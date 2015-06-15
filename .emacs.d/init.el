@@ -11,46 +11,34 @@
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
 
-(defvar drot/el-get-directory (expand-file-name "el-get" drot/emacs-directory)
-  "El-Get package manager directory")
+;; Bootstrap Quelpa
+(package-initialize)
+(if (require 'quelpa nil t)
+    (quelpa-self-upgrade)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
-(add-to-list 'load-path (expand-file-name "el-get" drot/el-get-directory))
-
-(defvar drot/el-get-recipes-directory (expand-file-name "recipes" drot/emacs-directory)
-  "El-Get package manager recipes directory")
-(make-directory drot/el-get-recipes-directory t)
-
-;; Bootstrap El-Get
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-;; Additional El-Get recipes directory
-(add-to-list 'el-get-recipe-path drot/el-get-recipes-directory)
-
-(defvar drot/package-list
-  '(ace-jump-mode
-    browse-kill-ring
-    color-theme-zenburn
-    company-mode
-    diminish
-    el-get
-    erc-hl-nicks
-    expand-region
-    magit
-    multiple-cursors
-    paredit
-    rainbow-delimiters
-    undo-tree
-    use-package
-    volatile-highlights
-    yasnippet)
-  "A list of packages to be installed automatically.")
-
-(el-get 'sync drot/package-list)
+;; Make sure the following packages are installed
+(quelpa 'ace-jump-mode)
+(quelpa 'anzu)
+(quelpa 'browse-kill-ring)
+(quelpa 'company)
+(quelpa 'erc-hl-nicks)
+(quelpa 'expand-region)
+(quelpa 'flx-ido)
+(quelpa 'ido-ubiquitous)
+(quelpa 'ido-vertical-mode)
+(quelpa 'magit)
+(quelpa 'multiple-cursors)
+(quelpa 'paredit)
+(quelpa 'rainbow-delimiters)
+(quelpa 'smex)
+(quelpa 'undo-tree)
+(quelpa 'use-package)
+(quelpa 'volatile-highlights)
+(quelpa 'yasnippet)
+(quelpa 'zenburn-theme)
 
 ;; Load use-package
 (eval-when-compile
@@ -154,10 +142,6 @@
 
 ;; Allow scrolling with Isearch
 (setq isearch-allow-scroll t)
-
-;; Icomplete
-(setq icomplete-prospects-height 1)
-(icomplete-mode 1)
 
 ;; Highlight matching parentheses
 (setq show-paren-delay 0)
@@ -348,9 +332,55 @@
 ;; Color theme
 (use-package zenburn-theme)
 
+;; IDO
+(use-package ido
+  :config
+  (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-max-prospects 10)
+  (ido-mode 1)
+  (ido-everywhere 1))
+
+;; IDO Ubiquitous
+(use-package ido-ubiquitous
+  :config
+  (ido-ubiquitous-mode 1))
+
+;; Flx IDO
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces nil))
+
+;; Vertical IDO
+(use-package ido-vertical-mode
+  :config
+  (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right
+        ido-vertical-show-count t)
+  (ido-vertical-mode 1))
+
+;; Smex
+(use-package smex
+  :init
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory))
+  (smex-initialize)
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)
+         ("C-c C-c M-x" . execute-extended-command)))
+
 ;; Ace Jump mode
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
+
+;; Anzu
+(use-package anzu
+  :diminish "AZ"
+  :init
+  (global-anzu-mode 1)
+  :bind (("M-%" . anzu-query-replace)
+         ("C-M-%" . anzu-query-replace-regexp)))
 
 ;; Browse kill ring
 (use-package browse-kill-ring
@@ -379,7 +409,11 @@
 
 ;; Magit
 (use-package magit
-  :defer t)
+  :defer t
+  :config
+  (setq magit-last-seen-setup-instructions "1.4.0"
+        magit-auto-revert-mode nil
+        magit-completing-read-function 'magit-ido-completing-read))
 
 ;; Org-mode
 (use-package org
@@ -388,7 +422,8 @@
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+        org-src-tab-acts-natively t
+        org-completion-use-ido t))
 
 ;; ERC configuration
 (use-package erc
