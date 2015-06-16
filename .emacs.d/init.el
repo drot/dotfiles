@@ -117,9 +117,13 @@
       backup-by-copying t)
 
 ;; Save minibuffer history
-(setq savehist-additional-variables '(search-ring regexp-search-ring)
+(setq savehist-additional-variables '(search-ring
+                                      regexp-search-ring
+                                      file-name-history
+                                      extended-command-history
+                                      kill-ring)
       savehist-autosave-interval 60
-      savehist-file (expand-file-name "minbuf.hist" drot/cache-directory))
+      savehist-file (expand-file-name "saved-history" drot/cache-directory))
 (savehist-mode 1)
 
 ;; Find file at point
@@ -383,7 +387,6 @@
   :config
   (use-package erc-hl-nicks)
   (add-to-list 'erc-modules 'notifications)
-  (add-to-list 'erc-modules 'smiley)
 
   (setq erc-prompt-for-password nil
         erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
@@ -411,8 +414,8 @@
                      (concat (buffer-name) ">")))
 
   (defun drot/erc-mode-hook ()
-    "Keep prompt at bottom, disable Company and YASnippet."
-    (set (make-local-variable 'scroll-conservatively) 100)
+    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0)
     (yas-minor-mode 0))
 
