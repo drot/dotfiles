@@ -22,18 +22,15 @@
 ;; Make sure the following packages are installed
 (quelpa 'ace-jump-mode)
 (quelpa 'anzu)
-(quelpa 'browse-kill-ring)
 (quelpa 'company)
 (quelpa 'erc-hl-nicks)
 (quelpa 'expand-region)
-(quelpa 'flx-ido)
-(quelpa 'ido-ubiquitous)
-(quelpa 'ido-vertical-mode)
+(quelpa 'helm)
+(quelpa 'helm-descbinds)
 (quelpa 'magit)
 (quelpa 'multiple-cursors)
 (quelpa 'paredit)
 (quelpa 'rainbow-delimiters)
-(quelpa 'smex)
 (quelpa 'undo-tree)
 (quelpa 'use-package)
 (quelpa 'volatile-highlights)
@@ -89,9 +86,6 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
-;; Apropos commands will search more extensively
-(setq apropos-do-all t)
-
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
@@ -131,10 +125,6 @@
 ;; Find file at point
 (setq ffap-require-prefix t)
 (ffap-bindings)
-
-;; Use Ibuffer for buffer list
-(bind-key "C-x C-b" 'ibuffer)
-(setq ibuffer-default-sorting-mode 'major-mode)
 
 ;; Display read-only buffers in view mode
 (setq view-read-only t
@@ -332,44 +322,6 @@
 ;; Color theme
 (use-package zenburn-theme)
 
-;; IDO
-(use-package ido
-  :config
-  (setq ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-max-prospects 10)
-  (ido-mode 1)
-  (ido-everywhere 1))
-
-;; IDO Ubiquitous
-(use-package ido-ubiquitous
-  :config
-  (ido-ubiquitous-mode 1))
-
-;; Flx IDO
-(use-package flx-ido
-  :config
-  (flx-ido-mode 1)
-  (setq ido-enable-flex-matching t
-        ido-use-faces nil))
-
-;; Vertical IDO
-(use-package ido-vertical-mode
-  :config
-  (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right
-        ido-vertical-show-count t)
-  (ido-vertical-mode 1))
-
-;; Smex
-(use-package smex
-  :init
-  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory))
-  (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c C-c M-x" . execute-extended-command)))
-
 ;; Ace Jump mode
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
@@ -381,12 +333,6 @@
   (global-anzu-mode 1)
   :bind (("M-%" . anzu-query-replace)
          ("C-M-%" . anzu-query-replace-regexp)))
-
-;; Browse kill ring
-(use-package browse-kill-ring
-  :defer t
-  :config
-  (setq browse-kill-ring-highlight-current-entry t))
 
 ;; Company mode
 (use-package company
@@ -412,8 +358,7 @@
   :defer t
   :config
   (setq magit-last-seen-setup-instructions "1.4.0"
-        magit-auto-revert-mode nil
-        magit-completing-read-function 'magit-ido-completing-read))
+        magit-auto-revert-mode nil))
 
 ;; Org-mode
 (use-package org
@@ -422,8 +367,7 @@
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
-        org-src-tab-acts-natively t
-        org-completion-use-ido t))
+        org-src-tab-acts-natively t))
 
 ;; ERC configuration
 (use-package erc
@@ -437,6 +381,7 @@
     (erc-tls :server "pine.forestnet.org" :port 6697
              :nick "drot"))
   :config
+  (use-package erc-hl-nicks)
   (add-to-list 'erc-modules 'notifications)
   (add-to-list 'erc-modules 'smiley)
 
@@ -447,7 +392,7 @@
         erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY")
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
-        erc-fill-column 155
+        erc-fill-column 140
         erc-fill-static-center 15
         erc-track-exclude-server-buffer t
         erc-track-showcount t
@@ -475,9 +420,22 @@
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
   (erc-spelling-mode 1))
 
-;; ERC highlight nicknames module
-(use-package erc-hl-nicks
-  :defer t)
+;; Helm
+(use-package helm
+  :init
+  (require 'helm-config)
+  (helm-mode 1)
+  :bind (("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-h a" . helm-apropos)
+         ("C-x C-b" . helm-buffers-list)
+         ("C-x c o" . helm-occur)
+         ("C-c i" . helm-imenu-in-all-buffers)))
+
+;; Helm describe bindings
+(use-package helm-descbinds
+  :defer t
+  :bind ("C-h b" . helm-descbinds))
 
 ;; Multiple cursors
 (use-package multiple-cursors
