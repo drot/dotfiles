@@ -11,31 +11,9 @@
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
 
-;; Bootstrap Quelpa
-(package-initialize)
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
-
-;; Make sure the following packages are installed
-(quelpa 'ace-jump-mode)
-(quelpa 'anzu)
-(quelpa 'company)
-(quelpa 'erc-hl-nicks)
-(quelpa 'expand-region)
-(quelpa 'helm)
-(quelpa 'helm-descbinds)
-(quelpa 'magit)
-(quelpa 'multiple-cursors)
-(quelpa 'paredit)
-(quelpa 'rainbow-delimiters)
-(quelpa 'undo-tree)
-(quelpa 'use-package)
-(quelpa 'volatile-highlights)
-(quelpa 'yasnippet)
-(quelpa 'zenburn-theme)
+;; Load Cask
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 
 ;; Load use-package
 (eval-when-compile
@@ -326,10 +304,6 @@
 ;; Color theme
 (use-package zenburn-theme)
 
-;; Ace Jump mode
-(use-package ace-jump-mode
-  :bind ("C-c SPC" . ace-jump-mode))
-
 ;; Anzu
 (use-package anzu
   :diminish "AZ"
@@ -337,6 +311,15 @@
   (global-anzu-mode 1)
   :bind (("M-%" . anzu-query-replace)
          ("C-M-%" . anzu-query-replace-regexp)))
+
+;; Avy
+(use-package avy
+  :defer t
+  :bind (("C-c SPC" . avy-goto-char)
+         ("C-'" . avy-goto-char-2)
+         ("M-g g" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)
+         ("M-g e" . avy-goto-word-0)))
 
 ;; Company mode
 (use-package company
@@ -395,7 +378,7 @@
         erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY")
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
-        erc-fill-column 140
+        erc-fill-column 155
         erc-fill-static-center 15
         erc-track-exclude-server-buffer t
         erc-track-showcount t
