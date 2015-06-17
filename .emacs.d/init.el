@@ -343,7 +343,7 @@
 ;; Magit
 (use-package magit
   :defer t
-  :config
+  :init
   (setq magit-last-seen-setup-instructions "1.4.0"
         magit-auto-revert-mode nil))
 
@@ -411,6 +411,11 @@
   :init
   (require 'helm-config)
   (helm-mode 1)
+  (add-to-list 'helm-mode-no-completion-in-region-in-modes 'erc-mode)
+  (setq helm-buffers-fuzzy-matching t
+        helm-M-x-fuzzy-match t
+        helm-apropos-fuzzy-match t
+        helm-lisp-fuzzy-completion t)
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-h a" . helm-apropos)
