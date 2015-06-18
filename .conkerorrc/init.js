@@ -108,17 +108,6 @@ url_completion_use_bookmarks = true;
 url_completion_use_webjumps = true;
 minibuffer_auto_complete_default = true;
 
-// Clear history function
-function history_clear () {
-    var history = Cc["@mozilla.org/browser/nav-history-service;1"]
-        .getService(Ci.nsIBrowserHistory);
-    history.removeAllPages();
-};
-
-interactive("history-clear",
-            "Clear the history.",
-            history_clear);
-
 // Restore killed buffer function
 var kill_buffer_original = kill_buffer_original || kill_buffer;
 var killed_buffer_urls = [];
