@@ -104,6 +104,11 @@
       savehist-file (expand-file-name "saved-history" drot/cache-directory))
 (savehist-mode 1)
 
+;; Save recent files list
+(recentf-mode 1)
+(setq recentf-max-menu-items 20
+      recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
+
 ;; Find file at point
 (setq ffap-require-prefix t)
 (ffap-bindings)
@@ -415,13 +420,15 @@
   (setq helm-buffers-fuzzy-matching t
         helm-M-x-fuzzy-match t
         helm-apropos-fuzzy-match t
-        helm-lisp-fuzzy-completion t)
+        helm-lisp-fuzzy-completion t
+        helm-recentf-fuzzy-match t)
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-h a" . helm-apropos)
          ("C-x C-b" . helm-buffers-list)
          ("C-x c o" . helm-occur)
-         ("C-c i" . helm-imenu-in-all-buffers)))
+         ("C-c i" . helm-imenu-in-all-buffers)
+         ("C-c f" . helm-recentf)))
 
 ;; Helm describe bindings
 (use-package helm-descbinds
