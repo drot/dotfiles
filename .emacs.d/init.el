@@ -105,10 +105,10 @@
 (savehist-mode 1)
 
 ;; Save recent files list
-(recentf-mode 1)
 (setq recentf-max-saved-items 100
       recentf-max-menu-items 20
       recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
+(recentf-mode 1)
 
 ;; Find file at point
 (setq ffap-require-prefix t)
