@@ -380,6 +380,8 @@
 ;; Ace-window
 (use-package ace-window
   :defer t
+  :config
+  (setq aw-dispatch-always t)
   :bind ("C-č" . ace-window))
 
 ;; Anzu
