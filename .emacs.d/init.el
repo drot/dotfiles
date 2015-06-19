@@ -1,15 +1,12 @@
 (defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar drot/configuration-file (expand-file-name "config.org" drot/emacs-directory)
-  "Emacs configuration file written and loaded with Org-mode")
-
-(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
-  "Store changes from the customize interface in the selected file.")
-
 (defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
+
+(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
+  "Store changes from the customize interface in the selected file.")
 
 ;; Load Cask
 (require 'cask "~/.cask/cask.el")
@@ -33,8 +30,8 @@
 (blink-cursor-mode 0)
 
 ;; Show column number and buffer size on the modeline
-(column-number-mode 1)
-(size-indication-mode 1)
+(column-number-mode)
+(size-indication-mode)
 
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left
@@ -50,16 +47,15 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
-;; Enable recursive minibuffers and indicate depth
-(setq enable-recursive-minibuffers t)
-(minibuffer-depth-indicate-mode 1)
-
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
 
 ;; Show minibuffer completion only on second failed attempt
 (setq completion-auto-help 'lazy)
+
+;; Enable recursive minibuffers
+(setq enable-recursive-minibuffers t)
 
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -94,70 +90,99 @@
       delete-old-versions t
       backup-by-copying t)
 
-;; Save minibuffer history
-(setq savehist-additional-variables '(search-ring
-                                      regexp-search-ring
-                                      file-name-history
-                                      extended-command-history
-                                      kill-ring)
-      savehist-autosave-interval 60
-      savehist-file (expand-file-name "saved-history" drot/cache-directory))
-(savehist-mode 1)
-
-;; Save recent files list
-(setq recentf-max-saved-items 100
-      recentf-max-menu-items 20
-      recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
-(recentf-mode 1)
-
-;; Find file at point
-(setq ffap-require-prefix t)
-(ffap-bindings)
-
 ;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
 
-;; Allow scrolling with Isearch
-(setq isearch-allow-scroll t)
-
-;; Highlight matching parentheses
-(setq show-paren-delay 0)
-(show-paren-mode 1)
-
-;; Pretty lambdas
-(global-prettify-symbols-mode 1)
-
-;; Highlight regexps interactively
-(global-hi-lock-mode 1)
-
-;; Remove text in active region if inserting text
-(delete-selection-mode 1)
-
-;; Which function mode
-(setq which-func-unknown "n/a")
-(which-function-mode 1)
-
-;; Undo and redo the window configuration
-(winner-mode 1)
-
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key "M-/" 'hippie-expand)
 
+;; Allow scrolling with Isearch
+(setq isearch-allow-scroll t)
+
+;; Pretty lambdas
+(global-prettify-symbols-mode)
+
+;; Save minibuffer history
+(use-package savehist
+  :init
+  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory))
+  (savehist-mode)
+  :config
+  (setq savehist-additional-variables '(search-ring
+                                        regexp-search-ring
+                                        file-name-history
+                                        extended-command-history
+                                        kill-ring)
+        savehist-autosave-interval 60))
+
+;; Save recent files list
+(use-package recentf
+  :init
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
+  (recentf-mode)
+  :config
+  (setq recentf-max-saved-items 100
+        recentf-max-menu-items 20))
+
+;; Highlight matching parentheses
+(use-package paren
+  :init
+  (show-paren-mode)
+  :config
+  (setq show-paren-delay 0))
+
+;; Highlight regexps interactively
+(use-package hi-lock
+  :init
+  (global-hi-lock-mode))
+
+;; Remove text in active region if inserting text
+(use-package delsel
+  :init
+  (delete-selection-mode))
+
+;; Which function mode
+(use-package which-func
+  :init
+  (which-function-mode)
+  :config
+  (setq which-func-unknown "n/a"))
+
+;; Indicate minibuffer recursion depth
+(use-package mb-depth
+  :init
+  (minibuffer-depth-indicate-mode))
+
+;; Undo and redo the window configuration
+(use-package winner
+  :init
+  (winner-mode))
+
+;; Ispell configuration
+(use-package ispell
+  :config
+  (setq ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra")))
+
 ;; Fly Spell mode configuration
-(setq ispell-program-name "aspell"
-      ispell-extra-args '("--sug-mode=ultra"))
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(use-package flyspell
+  :init
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;; Hide Show mode
-(dolist (hook '(c-mode-common-hook
-                emacs-lisp-mode-hook
-                python-mode-hook))
-  (add-hook hook 'hs-minor-mode))
+(use-package hideshow
+  :init
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook 'hs-minor-mode)))
 
 ;; Electric pair mode
-(add-hook 'prog-mode-hook 'electric-pair-mode)
+(use-package elec-pair
+  :init
+  (add-hook 'prog-mode-hook 'electric-pair-mode))
 
 ;; Regexp builder
 (use-package re-builder
@@ -314,14 +339,14 @@
 (use-package anzu
   :diminish "AZ"
   :init
-  (global-anzu-mode 1)
+  (global-anzu-mode)
   :bind (("M-%" . anzu-query-replace)
          ("C-M-%" . anzu-query-replace-regexp)))
 
 ;; Avy
 (use-package avy
   :defer t
-  :bind (("C-c SPC" . avy-goto-char)
+  :bind (("C-." . avy-goto-char)
          ("C-'" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
          ("M-g w" . avy-goto-word-1)
@@ -381,7 +406,6 @@
         erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
                                       ("forestnet" "#reloaded" "#fo2"))
         erc-server-reconnect-timeout 10
-        erc-lurker-hide-list '("JOIN" "PART" "QUIT" "AWAY")
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
         erc-fill-column 155
@@ -410,13 +434,13 @@
 
   (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-  (erc-spelling-mode 1))
+  (erc-spelling-mode))
 
 ;; Helm
 (use-package helm
   :init
   (require 'helm-config)
-  (helm-mode 1)
+  (helm-mode)
   (add-to-list 'helm-mode-no-completion-in-region-in-modes 'erc-mode)
   (setq helm-buffers-fuzzy-matching t
         helm-M-x-fuzzy-match t
@@ -426,6 +450,7 @@
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-h a" . helm-apropos)
+         ("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
          ("C-x c o" . helm-occur)
          ("C-c i" . helm-imenu-in-all-buffers)
@@ -463,7 +488,7 @@
   (defun drot/paredit-minibuffer ()
     "Enable ParEdit during lisp-related minibuffer commands."
     (if (memq this-command drot/paredit-minibuffer-commands)
-        (paredit-mode 1)))
+        (paredit-mode)))
 
   (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
 
@@ -498,7 +523,7 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :config
-  (volatile-highlights-mode 1))
+  (volatile-highlights-mode))
 
 ;; YASnippet
 (use-package yasnippet
@@ -506,7 +531,7 @@
   (make-directory "~/.emacs.d/snippets" t)
   :config
   (setq yas-verbosity 1)
-  (yas-global-mode 1))
+  (yas-global-mode))
 
 ;; Undo Tree
 (use-package undo-tree
@@ -514,7 +539,7 @@
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t)
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
