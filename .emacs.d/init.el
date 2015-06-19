@@ -8,9 +8,49 @@
 (defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
-;; Load Cask
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
+(defvar drot/el-get-directory (expand-file-name "el-get" drot/emacs-directory)
+  "El-Get package manager directory")
+
+(add-to-list 'load-path (expand-file-name "el-get" drot/el-get-directory))
+
+(defvar drot/el-get-recipes-directory (expand-file-name "recipes" drot/emacs-directory)
+  "El-Get package manager recipes directory")
+(make-directory drot/el-get-recipes-directory t)
+
+;; Bootstrap El-Get
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+;; Additional El-Get recipes directory
+(add-to-list 'el-get-recipe-path drot/el-get-recipes-directory)
+
+(defvar drot/package-list
+  '(ace-window
+    anzu
+    color-theme-zenburn
+    company-mode
+    diminish
+    el-get
+    erc-hl-nicks
+    expand-region
+    helm
+    helm-descbinds
+    magit
+    multiple-cursors
+    paredit
+    rainbow-delimiters
+    undo-tree
+    use-package
+    volatile-highlights
+    yasnippet)
+  "A list of packages to be installed automatically.")
+
+;; Ensure that packages are installed
+(el-get 'sync drot/package-list)
 
 ;; Load use-package
 (eval-when-compile
@@ -169,7 +209,9 @@
 (use-package flyspell
   :init
   (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  :config
+  (unbind-key "C-." flyspell-mode-map))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -334,6 +376,11 @@
 
 ;; Color theme
 (use-package zenburn-theme)
+
+;; Ace-window
+(use-package ace-window
+  :defer t
+  :bind ("C-č" . ace-window))
 
 ;; Anzu
 (use-package anzu
