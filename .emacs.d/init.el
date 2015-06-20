@@ -30,23 +30,23 @@
 
 (defvar drot/package-list
   '(ace-window
-    anzu
+    browse-kill-ring
     color-theme-zenburn
     company-mode
     diminish
     el-get
     erc-hl-nicks
     expand-region
-    helm
-    helm-descbinds
     magit
     multiple-cursors
     paredit
     rainbow-delimiters
+    swiper
     undo-tree
     use-package
     volatile-highlights
-    yasnippet)
+    yasnippet
+    zop-to-char)
   "A list of packages to be installed automatically.")
 
 ;; Ensure that packages are installed
@@ -137,9 +137,6 @@
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key "M-/" 'hippie-expand)
 
-;; Allow scrolling with Isearch
-(setq isearch-allow-scroll t)
-
 ;; Pretty lambdas
 (global-prettify-symbols-mode)
 
@@ -151,8 +148,6 @@
   :config
   (setq savehist-additional-variables '(search-ring
                                         regexp-search-ring
-                                        file-name-history
-                                        extended-command-history
                                         kill-ring)
         savehist-autosave-interval 60))
 
@@ -194,6 +189,13 @@
   :init
   (minibuffer-depth-indicate-mode))
 
+;; Find file at point
+(use-package ffap
+  :init
+  (ffap-bindings)
+  :config
+  (setq ffap-require-prefix t))
+
 ;; Undo and redo the window configuration
 (use-package winner
   :init
@@ -225,6 +227,12 @@
 (use-package elec-pair
   :init
   (add-hook 'prog-mode-hook 'electric-pair-mode))
+
+;; Use Ibuffer for buffer list
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :config
+  (setq ibuffer-default-sorting-mode 'major-mode))
 
 ;; Regexp builder
 (use-package re-builder
@@ -379,34 +387,29 @@
 
 ;; Ace-window
 (use-package ace-window
-  :defer t
+  :bind ("C-č" . ace-window)
   :config
-  (setq aw-dispatch-always t)
-  :bind ("C-č" . ace-window))
-
-;; Anzu
-(use-package anzu
-  :diminish "AZ"
-  :init
-  (global-anzu-mode)
-  :bind (("M-%" . anzu-query-replace)
-         ("C-M-%" . anzu-query-replace-regexp)))
+  (setq aw-dispatch-always t))
 
 ;; Avy
 (use-package avy
-  :defer t
   :bind (("C-." . avy-goto-char)
          ("C-'" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
 
+;; Browse kill ring
+(use-package browse-kill-ring
+  :bind ("C-c y" . browse-kill-ring)
+  :config)
+
 ;; Company mode
 (use-package company
   :diminish "co"
   :init
   (add-hook 'after-init-hook 'global-company-mode)
-  :bind ("C-c y" . company-yasnippet)
+  :bind ("C-c c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
         company-show-numbers t
@@ -485,30 +488,16 @@
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
   (erc-spelling-mode))
 
-;; Helm
-(use-package helm
+;; Swiper
+(use-package swiper
   :init
-  (require 'helm-config)
-  (helm-mode)
-  (add-to-list 'helm-mode-no-completion-in-region-in-modes 'erc-mode)
-  (setq helm-buffers-fuzzy-matching t
-        helm-M-x-fuzzy-match t
-        helm-apropos-fuzzy-match t
-        helm-lisp-fuzzy-completion t
-        helm-recentf-fuzzy-match t)
-  :bind (("M-x" . helm-M-x)
-         ("M-y" . helm-show-kill-ring)
-         ("C-h a" . helm-apropos)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-b" . helm-buffers-list)
-         ("C-x c o" . helm-occur)
-         ("C-c i" . helm-imenu-in-all-buffers)
-         ("C-c f" . helm-recentf)))
-
-;; Helm describe bindings
-(use-package helm-descbinds
-  :defer t
-  :bind ("C-h b" . helm-descbinds))
+  (ivy-mode)
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)
+         ("C-c f" . ivy-recentf)
+         ("C-c C-r" . ivy-resume))
+  :config
+  (setq ivy-use-virtual-buffers t))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -589,6 +578,10 @@
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t)
   (global-undo-tree-mode))
+
+;; Zop-to-char
+(use-package zop-to-char
+  :bind ("M-z" . zop-to-char))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
