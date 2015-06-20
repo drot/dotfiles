@@ -140,6 +140,9 @@
 ;; Pretty lambdas
 (global-prettify-symbols-mode)
 
+;; Allow scrolling during Isearch
+(setq isearch-allow-scroll t)
+
 ;; Save minibuffer history
 (use-package savehist
   :init
@@ -492,8 +495,7 @@
 (use-package swiper
   :init
   (ivy-mode)
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)
+  :bind (("C-c s" . swiper)
          ("C-c f" . ivy-recentf)
          ("C-c C-r" . ivy-resume))
   :config
