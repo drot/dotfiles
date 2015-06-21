@@ -1,4 +1,0 @@
-(:name erc-hl-nicks
-       :type github
-       :description "ERC module to highlight nicknames"
-       :pkgname "leathekd/erc-hl-nicks")

@@ -8,49 +8,34 @@
 (defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
-(defvar drot/el-get-directory (expand-file-name "el-get" drot/emacs-directory)
-  "El-Get package manager directory")
+;; Activate packages
+(package-initialize)
 
-(add-to-list 'load-path (expand-file-name "el-get" drot/el-get-directory))
+;; Bootstrap quelpa
+(if (require 'quelpa nil t)
+    (quelpa-self-upgrade)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
-(defvar drot/el-get-recipes-directory (expand-file-name "recipes" drot/emacs-directory)
-  "El-Get package manager recipes directory")
-(make-directory drot/el-get-recipes-directory t)
-
-;; Bootstrap El-Get
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-;; Additional El-Get recipes directory
-(add-to-list 'el-get-recipe-path drot/el-get-recipes-directory)
-
-(defvar drot/package-list
-  '(ace-window
-    browse-kill-ring
-    color-theme-zenburn
-    company-mode
-    diminish
-    el-get
-    erc-hl-nicks
-    expand-region
-    magit
-    multiple-cursors
-    paredit
-    rainbow-delimiters
-    swiper
-    undo-tree
-    use-package
-    volatile-highlights
-    yasnippet
-    zop-to-char)
-  "A list of packages to be installed automatically.")
-
-;; Ensure that packages are installed
-(el-get 'sync drot/package-list)
+;; Install the following packages
+(quelpa 'ace-window)
+(quelpa 'browse-kill-ring)
+(quelpa 'company)
+(quelpa 'erc-hl-nicks)
+(quelpa 'expand-region)
+(quelpa 'hydra)
+(quelpa 'magit)
+(quelpa 'multiple-cursors)
+(quelpa 'paredit)
+(quelpa 'rainbow-delimiters)
+(quelpa 'swiper)
+(quelpa 'undo-tree)
+(quelpa 'use-package)
+(quelpa 'volatile-highlights)
+(quelpa 'yasnippet)
+(quelpa 'zenburn-theme)
+(quelpa 'zop-to-char)
 
 ;; Load use-package
 (eval-when-compile
