@@ -109,7 +109,7 @@
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
       auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-      backup-directory-alist `(("." . ,drot/cache-directory))
+      backup-directory-alist `((".*" . ,drot/cache-directory))
       version-control t
       kept-new-versions 2
       delete-old-versions t
