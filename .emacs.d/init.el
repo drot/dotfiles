@@ -413,10 +413,9 @@
 
 ;; Magit
 (use-package magit
-  :defer t
-  :init
-  (setq magit-last-seen-setup-instructions "1.4.0"
-        magit-auto-revert-mode nil))
+  :bind ("C-c g" . magit-status)
+  :config
+  (setq magit-auto-revert-mode nil))
 
 ;; Org-mode
 (use-package org
