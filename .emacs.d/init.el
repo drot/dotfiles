@@ -389,8 +389,7 @@
 
 ;; Browse kill ring
 (use-package browse-kill-ring
-  :bind ("C-c y" . browse-kill-ring)
-  :config)
+  :bind ("C-c y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
@@ -479,11 +478,10 @@
 (use-package swiper
   :init
   (ivy-mode)
+  (setq ivy-use-virtual-buffers t)
   :bind (("C-c s" . swiper)
          ("C-c f" . ivy-recentf)
-         ("C-c C-r" . ivy-resume))
-  :config
-  (setq ivy-use-virtual-buffers t))
+         ("C-c C-r" . ivy-resume)))
 
 ;; Multiple cursors
 (use-package multiple-cursors
