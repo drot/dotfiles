@@ -352,7 +352,7 @@
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-firefox))
+  (setq browse-url-browser-function 'browse-url-chromium))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -446,7 +446,7 @@
         erc-server-reconnect-timeout 10
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
-        erc-fill-column 155
+        erc-fill-column 140
         erc-fill-static-center 15
         erc-track-exclude-server-buffer t
         erc-track-showcount t
