@@ -15,7 +15,6 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-
 (package-initialize)
 
 ;; Bootstrap use-package
@@ -554,6 +553,16 @@
   :config
   (volatile-highlights-mode))
 
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish "UT"
+  :init
+  (global-undo-tree-mode)
+  :config
+  (setq undo-tree-history-directory-alist backup-directory-alist
+        undo-tree-auto-save-history t))
+
 ;; YASnippet
 (use-package yasnippet
   :ensure t
@@ -562,15 +571,6 @@
   :config
   (setq yas-verbosity 1)
   (yas-global-mode))
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish "UT"
-  :init
-  (setq undo-tree-history-directory-alist backup-directory-alist
-        undo-tree-auto-save-history t)
-  (global-undo-tree-mode))
 
 ;; Zop-to-char
 (use-package zop-to-char
