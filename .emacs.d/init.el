@@ -22,6 +22,7 @@
 (quelpa 'ace-window)
 (quelpa 'browse-kill-ring)
 (quelpa 'company)
+(quelpa 'gotham-theme)
 (quelpa 'erc-hl-nicks)
 (quelpa 'expand-region)
 (quelpa 'hydra)
@@ -34,7 +35,6 @@
 (quelpa 'use-package)
 (quelpa 'volatile-highlights)
 (quelpa 'yasnippet)
-(quelpa 'zenburn-theme)
 (quelpa 'zop-to-char)
 
 ;; Load use-package
@@ -47,6 +47,11 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+
+;; Color theme
+(use-package gotham-theme
+  :config
+  (load-theme 'gotham t))
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -176,13 +181,6 @@
 (use-package mb-depth
   :init
   (minibuffer-depth-indicate-mode))
-
-;; Find file at point
-(use-package ffap
-  :init
-  (ffap-bindings)
-  :config
-  (setq ffap-require-prefix t))
 
 ;; Undo and redo the window configuration
 (use-package winner
@@ -370,9 +368,6 @@
       (quietly-read-abbrev-file))
   (setq-default abbrev-mode t))
 
-;; Color theme
-(use-package zenburn-theme)
-
 ;; Ace-window
 (use-package ace-window
   :bind ("C-č" . ace-window)
@@ -474,7 +469,7 @@
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
   (erc-spelling-mode))
 
-;; Swiper
+;; Swiper and ivy
 (use-package swiper
   :init
   (ivy-mode)
@@ -486,7 +481,11 @@
 ;; Counsel
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)))
+         ("C-x C-f" . counsel-find-file)
+         ("C-h v" . counsel-describe-variable)
+         ("C-h f" . counsel-describe-function))
+  :config
+  (setq counsel-find-file-at-point t))
 
 ;; Multiple cursors
 (use-package multiple-cursors
