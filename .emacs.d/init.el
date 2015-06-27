@@ -25,11 +25,11 @@
 (quelpa 'erc-hl-nicks)
 (quelpa 'expand-region)
 (quelpa 'hydra)
+(quelpa 'counsel)
 (quelpa 'magit)
 (quelpa 'multiple-cursors)
 (quelpa 'paredit)
 (quelpa 'rainbow-delimiters)
-(quelpa 'swiper)
 (quelpa 'undo-tree)
 (quelpa 'use-package)
 (quelpa 'volatile-highlights)
@@ -348,7 +348,7 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Firefox
+;; Open URLs in Chromium
 (use-package browse-url
   :defer t
   :config
@@ -482,6 +482,11 @@
   :bind (("C-c s" . swiper)
          ("C-c f" . ivy-recentf)
          ("C-c C-r" . ivy-resume)))
+
+;; Counsel
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)))
 
 ;; Multiple cursors
 (use-package multiple-cursors
