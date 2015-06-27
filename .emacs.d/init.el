@@ -8,34 +8,20 @@
 (defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
+;; Prefer newest version of a file
+(setq load-prefer-newer t)
+
 ;; Activate packages
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
 (package-initialize)
 
-;; Bootstrap quelpa
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
-
-;; Install the following packages
-(quelpa 'ace-window)
-(quelpa 'browse-kill-ring)
-(quelpa 'company)
-(quelpa 'gotham-theme)
-(quelpa 'erc-hl-nicks)
-(quelpa 'expand-region)
-(quelpa 'hydra)
-(quelpa 'counsel)
-(quelpa 'magit)
-(quelpa 'multiple-cursors)
-(quelpa 'paredit)
-(quelpa 'rainbow-delimiters)
-(quelpa 'undo-tree)
-(quelpa 'use-package)
-(quelpa 'volatile-highlights)
-(quelpa 'yasnippet)
-(quelpa 'zop-to-char)
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;; Load use-package
 (eval-when-compile
@@ -50,6 +36,7 @@
 
 ;; Color theme
 (use-package gotham-theme
+  :ensure t
   :config
   (load-theme 'gotham t))
 
@@ -370,12 +357,14 @@
 
 ;; Ace-window
 (use-package ace-window
+  :ensure t
   :bind ("C-č" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
 ;; Avy
 (use-package avy
+  :ensure t
   :bind (("C-." . avy-goto-char)
          ("C-'" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
@@ -384,10 +373,12 @@
 
 ;; Browse kill ring
 (use-package browse-kill-ring
+  :ensure t
   :bind ("C-c y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
+  :ensure t
   :diminish "co"
   :init
   (add-hook 'after-init-hook 'global-company-mode)
@@ -402,11 +393,13 @@
                            company-dabbrev)))
 
 ;; Expand region
+:ensure t
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
 ;; Magit
 (use-package magit
+  :ensure t
   :bind ("C-c g" . magit-status)
   :config
   (setq magit-auto-revert-mode nil))
@@ -422,6 +415,7 @@
 
 ;; ERC configuration
 (use-package erc
+  :ensure erc-hl-nicks
   :defer t
   :init
   (defun irc ()
@@ -432,7 +426,6 @@
     (erc-tls :server "pine.forestnet.org" :port 6697
              :nick "drot"))
   :config
-  (use-package erc-hl-nicks)
   (add-to-list 'erc-modules 'notifications)
 
   (setq erc-prompt-for-password nil
@@ -469,8 +462,13 @@
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
   (erc-spelling-mode))
 
+;; Hydra
+(use-package hydra
+  :ensure t)
+
 ;; Swiper and ivy
 (use-package swiper
+  :ensure t
   :init
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
@@ -480,6 +478,7 @@
 
 ;; Counsel
 (use-package counsel
+  :ensure t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-h v" . counsel-describe-variable)
@@ -489,12 +488,14 @@
 
 ;; Multiple cursors
 (use-package multiple-cursors
+  :ensure t
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-*" . mc/mark-all-like-this)))
 
 ;; ParEdit
 (use-package paredit
+  :ensure t
   :diminish "PE"
   :config
   (dolist (hook '(emacs-lisp-mode-hook
@@ -543,16 +544,19 @@
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
+  :ensure t
   :config
   (volatile-highlights-mode))
 
 ;; YASnippet
 (use-package yasnippet
+  :ensure t
   :init
   (make-directory "~/.emacs.d/snippets" t)
   :config
@@ -561,14 +565,16 @@
 
 ;; Undo Tree
 (use-package undo-tree
+  :ensure t
   :diminish "UT"
-  :config
+  :init
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t)
   (global-undo-tree-mode))
 
 ;; Zop-to-char
 (use-package zop-to-char
+  :ensure t
   :bind ("M-z" . zop-to-char))
 
 ;; Load changes from the customize interface
