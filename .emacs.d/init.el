@@ -405,7 +405,9 @@
 
 ;; Multiple cursors
 (use-package multiple-cursors
-  :ensure t)
+  :ensure t
+  :config
+  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
 ;; Org-mode
 (use-package org
