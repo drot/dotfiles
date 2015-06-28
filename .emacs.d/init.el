@@ -439,7 +439,7 @@
         erc-server-reconnect-timeout 10
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
-        erc-fill-column 140
+        erc-fill-column 155
         erc-fill-static-center 15
         erc-track-exclude-server-buffer t
         erc-track-showcount t
@@ -478,7 +478,8 @@
 ---------------------------------------------------------
 [_m_]  Mark Next    [_M_]  Mark Previous    [_l_] Edit lines
 [_s_]  Skip Next    [_S_]  Skip previous    [_a_] Mark all
-[_u_]  Unmark Next  [_U_]  Unmark Previous  [_q_] Quit"
+[_u_]  Unmark Next  [_U_]  Unmark Previous  [_q_] Quit
+"
   ("l" mc/edit-lines :exit t)
   ("a" mc/mark-all-like-this :exit t)
   ("m" mc/mark-next-like-this)
