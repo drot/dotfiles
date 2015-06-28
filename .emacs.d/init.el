@@ -492,7 +492,7 @@
 
 ;; Swiper and ivy
 (use-package swiper
-  :ensure
+  :ensure t
   :init
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
