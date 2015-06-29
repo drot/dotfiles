@@ -474,7 +474,7 @@
   :config
   (defhydra multiple-cursors-hydra (:hint nil)
     "
-     ^Up^                ^Down^                 ^Miscellaneous^
+     ^Down^              ^Up^                 ^Miscellaneous^
 ---------------------------------------------------------
 [_m_]  Mark Next    [_M_]  Mark Previous    [_l_] Edit lines
 [_s_]  Skip Next    [_S_]  Skip previous    [_a_] Mark all
