@@ -34,7 +34,7 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package zenburn-theme
+(use-package gotham-theme
   :ensure t)
 
 ;; Show tooltips in the echo area
@@ -181,9 +181,7 @@
 (use-package flyspell
   :init
   (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  :config
-  (unbind-key "C-." flyspell-mode-map))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -355,15 +353,15 @@
 ;; Ace-window
 (use-package ace-window
   :ensure t
-  :bind ("C-č" . ace-window)
+  :bind ("C-c o" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
 ;; Avy
 (use-package avy
   :ensure t
-  :bind (("C-." . avy-goto-char)
-         ("C-'" . avy-goto-char-2)
+  :bind (("C-'" . avy-goto-char)
+         ("C-+" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
