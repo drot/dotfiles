@@ -34,10 +34,8 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package gotham-theme
-  :ensure t
-  :config
-  (load-theme 'gotham t))
+(use-package zenburn-theme
+  :ensure t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -435,7 +433,7 @@
 
   (setq erc-prompt-for-password nil
         erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
-                                      ("forestnet" "#reloaded" "#fo2"))
+                                      ("forestnet" "#reloaded" "#fo2" "#rawhide"))
         erc-server-reconnect-timeout 10
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
@@ -453,7 +451,6 @@
         erc-button-buttonize-nicks nil
         erc-format-nick-function 'erc-format-@nick
         erc-nick-uniquifier "_"
-        erc-show-my-nick nil
         erc-prompt (lambda ()
                      (concat (buffer-name) ">")))
 
