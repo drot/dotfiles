@@ -494,7 +494,7 @@
 ;; Swiper and ivy
 (use-package swiper
   :ensure t
-  :init
+  :config
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
   :bind (("C-c s" . swiper)
@@ -530,7 +530,7 @@
     "Interactive commands for which lispy should be enabled in the minibuffer.")
 
   (defun drot/lispy-minibuffer ()
-    "Enable Lispy during lisp-related minibuffer commands."
+    "Enable lispy during lisp-related minibuffer commands."
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
