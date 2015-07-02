@@ -163,10 +163,9 @@
 
 ;; Which function mode
 (use-package which-func
-  :init
-  (which-function-mode)
   :config
-  (setq which-func-unknown "n/a"))
+  (setq which-func-unknown "n/a")
+  (which-function-mode))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
