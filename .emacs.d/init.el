@@ -34,7 +34,7 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package gotham-theme
+(use-package grandshell-theme
   :ensure t)
 
 ;; Show tooltips in the echo area
