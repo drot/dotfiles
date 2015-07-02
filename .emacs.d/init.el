@@ -34,8 +34,18 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package grandshell-theme
-  :ensure t)
+(use-package alect-themes
+  :ensure t
+  :config
+  (defadvice custom-theme-set-variables
+      (around fix-inhibit-bug activate)
+    "Allow setting of undefined variables in themes."
+    (let (custom--inhibit-theme-enable)
+      ad-do-it))
+  (setq alect-multiple-titles-height 1.0
+        alect-single-title-height 1.0
+        alect-header-height 1.0)
+  (alect-create-theme dark))
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -119,56 +129,52 @@
 
 ;; Save minibuffer history
 (use-package savehist
-  :init
-  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory))
-  (savehist-mode)
   :config
-  (setq savehist-additional-variables '(search-ring
+  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
+        savehist-autosave-interval 60
+        savehist-additional-variables '(search-ring
                                         regexp-search-ring
-                                        kill-ring)
-        savehist-autosave-interval 60))
+                                        kill-ring))
+  (savehist-mode))
 
 ;; Save recent files list
 (use-package recentf
-  :init
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
-  (recentf-mode)
   :config
-  (setq recentf-max-saved-items 100
-        recentf-max-menu-items 20))
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
+        recentf-max-saved-items 100
+        recentf-max-menu-items 20)
+  (recentf-mode))
 
 ;; Highlight matching parentheses
 (use-package paren
-  :init
-  (show-paren-mode)
   :config
-  (setq show-paren-delay 0))
+  (setq show-paren-delay 0)
+  (show-paren-mode))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
-  :init
+  :config
   (global-hi-lock-mode))
 
 ;; Remove text in active region if inserting text
 (use-package delsel
-  :init
+  :config
   (delete-selection-mode))
 
 ;; Which function mode
 (use-package which-func
-  :init
-  (which-function-mode)
   :config
-  (setq which-func-unknown "n/a"))
+  (setq which-func-unknown "n/a")
+  (which-function-mode))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
-  :init
+  :config
   (minibuffer-depth-indicate-mode))
 
 ;; Undo and redo the window configuration
 (use-package winner
-  :init
+  :config
   (winner-mode))
 
 ;; Ispell configuration
@@ -179,13 +185,13 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :init
+  :config
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;; Hide Show mode
 (use-package hideshow
-  :init
+  :config
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
@@ -193,7 +199,7 @@
 
 ;; Electric pair mode
 (use-package elec-pair
-  :init
+  :config
   (add-hook 'prog-mode-hook 'electric-pair-mode))
 
 ;; Use Ibuffer for buffer list
@@ -540,7 +546,11 @@
   (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
 
   (add-hook 'paredit-mode-hook (lambda ()
-                                 (electric-pair-mode 0))))
+                                 (electric-pair-mode 0)))
+
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-newline 'delete-selection t))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -570,11 +580,10 @@
 (use-package undo-tree
   :ensure t
   :diminish "UT"
-  :init
-  (global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
-        undo-tree-auto-save-history t))
+        undo-tree-auto-save-history t)
+  (global-undo-tree-mode))
 
 ;; YASnippet
 (use-package yasnippet
