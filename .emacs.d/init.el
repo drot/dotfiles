@@ -163,9 +163,10 @@
 
 ;; Which function mode
 (use-package which-func
+  :init
+  (which-function-mode)
   :config
-  (setq which-func-unknown "n/a")
-  (which-function-mode))
+  (setq which-func-unknown "n/a"))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
@@ -323,7 +324,7 @@
         holiday-islamic-holidays nil
         holiday-hebrew-holidays nil
         calendar-date-style 'european
-        calendar-latitude 43.20
+        calendar-latitude 43.2
         calendar-longitude 17.48
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
@@ -481,15 +482,15 @@
 [_s_]  Skip Next    [_S_]  Skip previous    [_a_] Mark all
 [_u_]  Unmark Next  [_U_]  Unmark Previous  [_q_] Quit
 "
-  ("l" mc/edit-lines :exit t)
-  ("a" mc/mark-all-like-this :exit t)
-  ("m" mc/mark-next-like-this)
-  ("s" mc/skip-to-next-like-this)
-  ("u" mc/unmark-next-like-this)
-  ("M" mc/mark-previous-like-this)
-  ("S" mc/skip-to-previous-like-this)
-  ("U" mc/unmark-previous-like-this)
-  ("q" nil)))
+    ("l" mc/edit-lines :exit t)
+    ("a" mc/mark-all-like-this :exit t)
+    ("m" mc/mark-next-like-this)
+    ("s" mc/skip-to-next-like-this)
+    ("u" mc/unmark-next-like-this)
+    ("M" mc/mark-previous-like-this)
+    ("S" mc/skip-to-previous-like-this)
+    ("U" mc/unmark-previous-like-this)
+    ("q" nil)))
 
 ;; Swiper and ivy
 (use-package swiper
@@ -511,46 +512,30 @@
   :config
   (setq counsel-find-file-at-point t))
 
-;; ParEdit
-(use-package paredit
+;; Lispy
+(use-package lispy
   :ensure t
-  :diminish "PE"
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   ielm-mode-hook
                   lisp-mode-hook
                   lisp-interaction-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'paredit-mode))
+    (add-hook hook 'lispy-mode))
 
-  (defvar drot/paredit-minibuffer-commands '(eval-expression
-                                             pp-eval-expression
-                                             eval-expression-with-eldoc
-                                             ibuffer-do-eval
-                                             ibuffer-do-view-and-eval)
-    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+  (defvar drot/lispy-minibuffer-commands '(eval-expression
+                                           pp-eval-expression
+                                           eval-expression-with-eldoc
+                                           ibuffer-do-eval
+                                           ibuffer-do-view-and-eval)
+    "Interactive commands for which lispy should be enabled in the minibuffer.")
 
-  (defun drot/paredit-minibuffer ()
-    "Enable ParEdit during lisp-related minibuffer commands."
-    (if (memq this-command drot/paredit-minibuffer-commands)
-        (paredit-mode)))
+  (defun drot/lispy-minibuffer ()
+    "Enable Lispy during lisp-related minibuffer commands."
+    (if (memq this-command drot/lispy-minibuffer-commands)
+        (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
-
-  (defun drot/paredit-slime-fix ()
-    "Fix ParEdit conflict with SLIME."
-    (define-key slime-repl-mode-map
-      (read-kbd-macro paredit-backward-delete-key) nil))
-
-  (add-hook 'slime-repl-mode-hook 'paredit-mode)
-  (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix)
-
-  (add-hook 'paredit-mode-hook (lambda ()
-                                 (electric-pair-mode 0)))
-
-  (put 'paredit-forward-delete 'delete-selection 'supersede)
-  (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-newline 'delete-selection t))
+  (add-hook 'minibuffer-setup-hook 'drot/lispy-minibuffer))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -560,9 +545,7 @@
                   lisp-interaction-mode-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
-    (add-hook hook 'eldoc-mode))
-  (eldoc-add-command 'paredit-backward-delete
-                     'paredit-close-round))
+    (add-hook hook 'eldoc-mode)))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
