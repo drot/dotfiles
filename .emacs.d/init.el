@@ -394,16 +394,14 @@
                            company-dabbrev)))
 
 ;; Expand region
-:ensure t
 (use-package expand-region
+  :ensure t
   :bind ("C-=" . er/expand-region))
 
 ;; Magit
 (use-package magit
   :ensure t
-  :bind ("C-c g" . magit-status)
-  :config
-  (setq magit-auto-revert-mode nil))
+  :bind ("C-c g" . magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
