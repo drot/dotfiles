@@ -42,7 +42,6 @@
       gnus-thread-sort-functions '(gnus-thread-sort-by-date))
 
 ;; Summary tree format
-;; Summary tree format
 (setq gnus-sum-thread-tree-indent " "
       gnus-sum-thread-tree-root ""
       gnus-sum-thread-tree-false-root "o "
