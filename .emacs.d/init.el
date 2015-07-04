@@ -208,6 +208,9 @@
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
+;; Dired-x
+(use-package dired-x)
+
 ;; Regexp builder
 (use-package re-builder
   :defer t
