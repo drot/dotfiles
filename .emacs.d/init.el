@@ -461,7 +461,7 @@
 
   (defun drot/erc-mode-hook ()
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
-    (set (make-local-variable 'scroll-conservatively) 100)
+    (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0)
     (yas-minor-mode 0))
 
