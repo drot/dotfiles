@@ -438,7 +438,7 @@
 
   (setq erc-prompt-for-password nil
         erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
-                                      ("forestnet" "#reloaded" "#fo2" "#rawhide"))
+                                      ("forestnet" "#reloaded" "#rawhide"))
         erc-server-reconnect-timeout 10
         erc-truncate-buffer-on-save t
         erc-fill-function 'erc-fill-static
