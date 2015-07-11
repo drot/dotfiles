@@ -75,9 +75,6 @@
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
 
-;; Show minibuffer completion only on second failed attempt
-(setq completion-auto-help 'lazy)
-
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
@@ -90,9 +87,6 @@
 
 ;; Increase default fill width
 (setq-default fill-column 80)
-
-;; Draw block cursor as wide as the glyph under it
-(setq x-stretch-cursor t)
 
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
@@ -362,7 +356,7 @@
 ;; Ace-window
 (use-package ace-window
   :ensure t
-  :bind ("C-c o" . ace-window)
+  :bind ("C-č" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
@@ -421,53 +415,47 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
-;; ERC configuration
-(use-package erc
-  :ensure erc-hl-nicks
+;; rcirc configuration
+(use-package rcirc
   :defer t
-  :init
-  (defun irc ()
-    "Connect to IRC."
-    (interactive)
-    (erc-tls :server "adams.freenode.net" :port 6697
-             :nick "drot")
-    (erc-tls :server "pine.forestnet.org" :port 6697
-             :nick "drot"))
   :config
-  (add-to-list 'erc-modules 'notifications)
+  (setq rcirc-server-alist
+        '(("adams.freenode.net" :channels ("#debian" "#emacs")
+           :port 7000 :encryption tls)
+          ("pine.forestnet.org" :channels ("#reloaded" "#fo2")
+           :port 6697 :encryption tls)))
 
-  (setq erc-prompt-for-password nil
-        erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
-                                      ("forestnet" "#reloaded" "#rawhide"))
-        erc-server-reconnect-timeout 10
-        erc-truncate-buffer-on-save t
-        erc-fill-function 'erc-fill-static
-        erc-fill-column 155
-        erc-fill-static-center 15
-        erc-track-exclude-server-buffer t
-        erc-track-showcount t
-        erc-track-switch-direction 'importance
-        erc-track-visibility 'selected-visible
-        erc-insert-timestamp-function 'erc-insert-timestamp-left
-        erc-timestamp-only-if-changed-flag nil
-        erc-timestamp-format "[%H:%M] "
-        erc-header-line-format "%t: %o"
-        erc-interpret-mirc-color t
-        erc-button-buttonize-nicks nil
-        erc-format-nick-function 'erc-format-@nick
-        erc-nick-uniquifier "_"
-        erc-prompt (lambda ()
-                     (concat (buffer-name) ">")))
+  (when (file-exists-p "~/.ircpass")
+    (load-file "~/.ircpass")
+    (setq rcirc-authinfo
+          `(("freenode" nickserv "drot" ,freenode-password)
+            ("forestnet" nickserv "drot" ,freenode-password))))
 
-  (defun drot/erc-mode-hook ()
-    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
-    (set (make-local-variable 'scroll-conservatively) 1000)
+  (setq rcirc-fill-flag t
+        rcirc-fill-column 'frame-width
+        rcirc-buffer-maximum-lines 1024)
+
+  (use-package rcirc-color
+    :ensure t
+    :config
+    (setq rcirc-colors '("#1fb3b3" "#3390dc" "#f8ffa0"
+                         "#abab3a" "#8ce096" "#099709"
+                         "#be59d8" "#62b6ea" "#e353b9")))
+
+  (defun drot/rcirc-mode-hook ()
+    "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
 
-  (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
-  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-  (erc-spelling-mode))
+  (add-hook 'rcirc-mode-hook 'drot/rcirc-mode-hook)
+
+  (use-package rcirc-notify
+    :ensure t
+    :config
+    (rcirc-notify-add-hooks))
+
+  (add-hook 'rcirc-mode-hook 'flyspell-mode)
+  (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode))
 
 ;; Hydra
 (use-package hydra
@@ -517,7 +505,6 @@
   :ensure t
   :config
   (dolist (hook '(emacs-lisp-mode-hook
-                  ielm-mode-hook
                   lisp-mode-hook
                   lisp-interaction-mode-hook
                   scheme-mode-hook))
@@ -585,4 +572,4 @@
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (when (file-exists-p drot/custom-file)
-  (load drot/custom-file))
+  (load-file drot/custom-file))
