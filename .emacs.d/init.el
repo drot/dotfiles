@@ -422,7 +422,7 @@
   (setq rcirc-server-alist
         '(("adams.freenode.net" :channels ("#debian" "#emacs")
            :port 7000 :encryption tls)
-          ("pine.forestnet.org" :channels ("#reloaded" "#fo2")
+          ("pine.forestnet.org" :channels ("#reloaded" "#rawhide")
            :port 6697 :encryption tls)))
 
   (when (file-exists-p "~/.ircpass")
