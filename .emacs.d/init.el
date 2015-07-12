@@ -415,47 +415,53 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
-;; rcirc configuration
-(use-package rcirc
+;; ERC configuration
+(use-package erc
+  :ensure erc-hl-nicks
   :defer t
+  :init
+  (defun irc ()
+    "Connect to IRC."
+    (interactive)
+    (erc-tls :server "adams.freenode.net" :port 6697
+             :nick "drot")
+    (erc-tls :server "pine.forestnet.org" :port 6697
+             :nick "drot"))
   :config
-  (setq rcirc-server-alist
-        '(("adams.freenode.net" :channels ("#debian" "#emacs")
-           :port 7000 :encryption tls)
-          ("pine.forestnet.org" :channels ("#reloaded" "#rawhide")
-           :port 6697 :encryption tls)))
+  (add-to-list 'erc-modules 'notifications)
 
-  (when (file-exists-p "~/.ircpass")
-    (load-file "~/.ircpass")
-    (setq rcirc-authinfo
-          `(("freenode" nickserv "drot" ,freenode-password)
-            ("forestnet" nickserv "drot" ,freenode-password))))
+  (setq erc-prompt-for-password nil
+        erc-autojoin-channels-alist '(("freenode" "#debian" "#emacs")
+                                      ("forestnet" "#reloaded" "#rawhide"))
+        erc-server-reconnect-timeout 10
+        erc-truncate-buffer-on-save t
+        erc-fill-function 'erc-fill-static
+        erc-fill-column 155
+        erc-fill-static-center 15
+        erc-track-exclude-server-buffer t
+        erc-track-showcount t
+        erc-track-switch-direction 'importance
+        erc-track-visibility 'selected-visible
+        erc-insert-timestamp-function 'erc-insert-timestamp-left
+        erc-timestamp-only-if-changed-flag nil
+        erc-timestamp-format "[%H:%M] "
+        erc-header-line-format "%t: %o"
+        erc-interpret-mirc-color t
+        erc-button-buttonize-nicks nil
+        erc-format-nick-function 'erc-format-@nick
+        erc-nick-uniquifier "_"
+        erc-prompt (lambda ()
+                     (concat (buffer-name) ">")))
 
-  (setq rcirc-fill-flag t
-        rcirc-fill-column 'frame-width
-        rcirc-buffer-maximum-lines 1024)
-
-  (use-package rcirc-color
-    :ensure t
-    :config
-    (setq rcirc-colors '("#1fb3b3" "#3390dc" "#f8ffa0"
-                         "#abab3a" "#8ce096" "#099709"
-                         "#be59d8" "#62b6ea" "#e353b9")))
-
-  (defun drot/rcirc-mode-hook ()
-    "Disable company and YASnippet in rcirc buffers."
+  (defun drot/erc-mode-hook ()
+    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0)
     (yas-minor-mode 0))
 
-  (add-hook 'rcirc-mode-hook 'drot/rcirc-mode-hook)
-
-  (use-package rcirc-notify
-    :ensure t
-    :config
-    (rcirc-notify-add-hooks))
-
-  (add-hook 'rcirc-mode-hook 'flyspell-mode)
-  (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode))
+  (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
+  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
+  (erc-spelling-mode))
 
 ;; Hydra
 (use-package hydra
