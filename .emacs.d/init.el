@@ -421,7 +421,7 @@
   :config
   (setq rcirc-server-alist
         '(("adams.freenode.net" :port 7000 :encryption tls
-           :channels ("#debian" "#emacs"))
+           :channels ("#archlinux" "#emacs"))
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
 
