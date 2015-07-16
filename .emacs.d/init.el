@@ -356,7 +356,7 @@
 ;; Ace-window
 (use-package ace-window
   :ensure t
-  :bind ("C-č" . ace-window)
+  :bind ("C-c o" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
