@@ -1,14 +1,6 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
-# Global
-export EDITOR=emacsclient
-export ALTERNATE_EDITOR=""
-export VISUAL=${EDITOR}
-export PAGER=less
-export BROWSER=conkeror
-export PATH=$PATH:$HOME/bin
-
 # History
 export HISTIGNORE="&:ls:[bf]g:exit:reset:clear:cd *"
 export HISTCONTROL="ignoreboth:erasedups"
@@ -17,7 +9,7 @@ export HISTFILESIZE=${HISTSIZE}
 export HISTTIMEFORMAT="%F %T "
 
 # Bash options
-shopt -s cdspell dirspell cmdhist histappend no_empty_cmd_completion extglob
+shopt -s cdspell dirspell histverify cmdhist histappend no_empty_cmd_completion extglob
 
 # Apply colors to listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
