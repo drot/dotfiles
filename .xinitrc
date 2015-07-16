@@ -50,7 +50,6 @@ fi
 
 xset -dpms &
 xset s off &
-setxkbmap -option 'ctrl:nocaps' &
 dunst &
 display -size 1280x1024 -window root ~/Pictures/desert.jpg &
 exec i3
