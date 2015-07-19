@@ -258,41 +258,16 @@
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil))
 
-;; Display ANSI colors in the compilation buffer
-(use-package ansi-color
-  :defer t
-  :config
-  (defun drot/colorize-compilation-buffer ()
-    (when (eq major-mode compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
-  (add-hook 'compilation-filter-hook 'drot/colorize-compilation-buffer))
-
 ;; CC mode configuration
 (use-package cc-mode
   :defer t
   :config
-  (defun drot/c-mode-hook ()
-    "C mode setup"
-    (unless (or (file-exists-p "makefile")
-                (file-exists-p "Makefile"))
-      (set (make-local-variable 'compile-command)
-           (concat "gcc " (buffer-file-name) " -o "))))
-
-  (defun drot/c++-mode-hook ()
-    "C++ mode setup"
-    (unless (or (file-exists-p "makefile")
-                (file-exists-p "Makefile"))
-      (set (make-local-variable 'compile-command)
-           (concat "g++ " (buffer-file-name) " -o "))))
-
-  (add-hook 'c-mode-hook 'drot/c-mode-hook)
-  (add-hook 'c++-mode-hook 'drot/c++-mode-hook)
-  (add-hook 'c-mode-common-hook 'auto-fill-mode)
-
   (setq c-basic-offset 4
         c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
-                          (other . "stroustrup"))))
+                          (other . "stroustrup")))
+
+  (add-hook 'c-mode-common-hook 'auto-fill-mode))
 
 ;; TRAMP configuration
 (use-package tramp
