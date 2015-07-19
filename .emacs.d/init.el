@@ -331,11 +331,11 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Firefox
+;; Open URLs in Chromium
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-firefox))
+  (setq browse-url-browser-function 'browse-url-chromium))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -432,14 +432,13 @@
       (with-temp-buffer
         (insert-file-contents-literally drot/credentials-file)
         (plist-get (read (buffer-string)) :nickserv-password)))
-    
+
     (setq rcirc-authinfo
           `(("freenode" nickserv "drot" ,(drot/nickserv-password))
             ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
 
   (setq rcirc-fill-flag t
-        rcirc-fill-column 'frame-width
-        rcirc-buffer-maximum-lines 1024)
+        rcirc-fill-column 'frame-width)
 
   (use-package rcirc-color
     :ensure t
