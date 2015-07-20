@@ -29,7 +29,7 @@ export LESS_TERMCAP_me=$'\E[0m'
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
 alias grep="grep --color=auto"
-alias eckd="emacsclient -e '(kill-emacs)'"
+alias eckd="emacsclient -e '(client-save-kill-emacs)'"
 
 # Prompt colors
 RED='\[\033[1;31m\]'
