@@ -34,18 +34,8 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package alect-themes
-  :ensure t
-  :config
-  (defadvice custom-theme-set-variables
-      (around fix-inhibit-bug activate)
-    "Allow setting of undefined variables in themes."
-    (let (custom--inhibit-theme-enable)
-      ad-do-it))
-  (setq alect-multiple-titles-height 1.0
-        alect-single-title-height 1.0
-        alect-header-height 1.0)
-  (alect-create-theme dark))
+(use-package zenburn-theme
+  :ensure t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -128,6 +118,8 @@
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
+                                        file-name-history
+                                        extended-command-history
                                         kill-ring))
   (savehist-mode))
 
@@ -195,12 +187,6 @@
 (use-package elec-pair
   :config
   (add-hook 'prog-mode-hook 'electric-pair-mode))
-
-;; Use Ibuffer for buffer list
-(use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
-  :config
-  (setq ibuffer-default-sorting-mode 'major-mode))
 
 ;; Dired-x
 (use-package dired-x)
@@ -344,10 +330,14 @@
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
 
-;; Browse kill ring
-(use-package browse-kill-ring
+;; Anzu
+(use-package anzu
   :ensure t
-  :bind ("C-c y" . browse-kill-ring))
+  :diminish "AZ"
+  :init
+  (global-anzu-mode)
+  :bind (("M-%" . anzu-query-replace)
+         ("C-M-%" . anzu-query-replace-regexp)))
 
 ;; Company mode
 (use-package company
@@ -460,25 +450,30 @@
     ("U" mc/unmark-previous-like-this)
     ("q" nil)))
 
-;; Swiper and ivy
-(use-package swiper
+;; Helm
+(use-package helm
   :ensure t
-  :config
-  (ivy-mode)
-  (setq ivy-use-virtual-buffers t)
-  :bind (("C-c s" . swiper)
-         ("C-c f" . ivy-recentf)
-         ("C-c C-r" . ivy-resume)))
+  :init
+  (require 'helm-config)
+  (helm-mode)
+  (setq helm-buffers-fuzzy-matching t
+        helm-M-x-fuzzy-match t
+        helm-apropos-fuzzy-match t
+        helm-lisp-fuzzy-completion t
+        helm-recentf-fuzzy-match t)
+  :bind (("M-x" . helm-M-x)
+         ("C-c y" . helm-show-kill-ring)
+         ("C-h a" . helm-apropos)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-b" . helm-buffers-list)
+         ("C-x c o" . helm-occur)
+         ("C-c i" . helm-imenu-in-all-buffers)
+         ("C-c f" . helm-recentf)))
 
-;; Counsel
-(use-package counsel
-  :ensure t
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h v" . counsel-describe-variable)
-         ("C-h f" . counsel-describe-function))
-  :config
-  (setq counsel-find-file-at-point t))
+;; Helm describe bindings
+(use-package helm-descbinds
+  :defer t
+  :bind ("C-h b" . helm-descbinds))
 
 ;; Lispy
 (use-package lispy
