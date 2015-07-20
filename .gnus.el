@@ -28,10 +28,6 @@
 ;; Group topics
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
-;; Disable widget buttons
-(add-hook 'gnus-article-mode-hook (lambda ()
-                                    (setq-local widget-button-face nil)))
-
 ;; Group format
 (setq gnus-group-line-format "%M\%S\%p\%P\%5y:%B%(%g%)\n")
 
