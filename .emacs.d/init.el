@@ -188,6 +188,12 @@
   :config
   (add-hook 'prog-mode-hook 'electric-pair-mode))
 
+;; Use Ibuffer for buffer list
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :config
+  (setq ibuffer-default-sorting-mode 'major-mode))
+
 ;; Dired-x
 (use-package dired-x)
 
@@ -408,9 +414,9 @@
   (use-package rcirc-color
     :ensure t
     :config
-    (setq rcirc-colors '("#1fb3b3" "#3390dc" "#f8ffa0"
-                         "#abab3a" "#8ce096" "#099709"
-                         "#be59d8" "#62b6ea" "#e353b9")))
+    (setq rcirc-colors '("#CC9393" "#DFAF8F" "#F0DFAF"
+                         "#7F9F7F" "#93E0E3" "#8CD0D3"
+                         "#DC8CC3")))
 
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
@@ -460,12 +466,16 @@
         helm-M-x-fuzzy-match t
         helm-apropos-fuzzy-match t
         helm-lisp-fuzzy-completion t
-        helm-recentf-fuzzy-match t)
+        helm-recentf-fuzzy-match t
+        helm-mini-default-sources '(helm-source-buffers-list
+                                    helm-source-recentf
+                                    helm-source-bookmarks
+                                    helm-source-buffer-not-found))
   :bind (("M-x" . helm-M-x)
          ("C-c y" . helm-show-kill-ring)
          ("C-h a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
-         ("C-x C-b" . helm-buffers-list)
+         ("C-x b" . helm-mini)
          ("C-x c o" . helm-occur)
          ("C-c i" . helm-imenu-in-all-buffers)
          ("C-c f" . helm-recentf)))
