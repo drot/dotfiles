@@ -118,8 +118,6 @@
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
-                                        file-name-history
-                                        extended-command-history
                                         kill-ring))
   (savehist-mode))
 
@@ -141,11 +139,6 @@
 (use-package hi-lock
   :config
   (global-hi-lock-mode))
-
-;; Remove text in active region if inserting text
-(use-package delsel
-  :config
-  (delete-selection-mode))
 
 ;; Which function mode
 (use-package which-func
@@ -182,11 +175,6 @@
                   emacs-lisp-mode-hook
                   python-mode-hook))
     (add-hook hook 'hs-minor-mode)))
-
-;; Electric pair mode
-(use-package elec-pair
-  :config
-  (add-hook 'prog-mode-hook 'electric-pair-mode))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
@@ -259,13 +247,15 @@
                           (awk-mode . "awk")
                           (other . "stroustrup")))
 
-  (add-hook 'c-mode-common-hook 'auto-fill-mode))
+  (add-hook 'c-mode-common-hook 'auto-fill-mode)
+  (add-hook 'c-mode-common-hook 'electric-pair-mode))
 
 ;; TRAMP configuration
 (use-package tramp
   :defer t
   :config
   (setq tramp-default-method "ssh"
+        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
         tramp-backup-directory-alist backup-directory-alist
         tramp-auto-save-directory drot/cache-directory))
 
@@ -336,14 +326,10 @@
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
 
-;; Anzu
-(use-package anzu
+;; Browse kill ring
+(use-package browse-kill-ring
   :ensure t
-  :diminish "AZ"
-  :init
-  (global-anzu-mode)
-  :bind (("M-%" . anzu-query-replace)
-         ("C-M-%" . anzu-query-replace-regexp)))
+  :bind ("C-c y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
@@ -456,34 +442,25 @@
     ("U" mc/unmark-previous-like-this)
     ("q" nil)))
 
-;; Helm
-(use-package helm
+;; Swiper and ivy
+(use-package swiper
   :ensure t
-  :init
-  (require 'helm-config)
-  (helm-mode)
-  (setq helm-buffers-fuzzy-matching t
-        helm-M-x-fuzzy-match t
-        helm-apropos-fuzzy-match t
-        helm-lisp-fuzzy-completion t
-        helm-recentf-fuzzy-match t
-        helm-mini-default-sources '(helm-source-buffers-list
-                                    helm-source-recentf
-                                    helm-source-bookmarks
-                                    helm-source-buffer-not-found))
-  :bind (("M-x" . helm-M-x)
-         ("C-c y" . helm-show-kill-ring)
-         ("C-h a" . helm-apropos)
-         ("C-x C-f" . helm-find-files)
-         ("C-x b" . helm-mini)
-         ("C-x c o" . helm-occur)
-         ("C-c i" . helm-imenu-in-all-buffers)
-         ("C-c f" . helm-recentf)))
+  :config
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t)
+  :bind (("C-c s" . swiper)
+         ("C-c f" . ivy-recentf)
+         ("C-c C-r" . ivy-resume)))
 
-;; Helm describe bindings
-(use-package helm-descbinds
-  :defer t
-  :bind ("C-h b" . helm-descbinds))
+;; Counsel
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h v" . counsel-describe-variable)
+         ("C-h f" . counsel-describe-function))
+  :config
+  (setq counsel-find-file-at-point t))
 
 ;; Lispy
 (use-package lispy
