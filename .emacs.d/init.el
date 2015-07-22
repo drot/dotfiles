@@ -404,17 +404,20 @@
                          "#7F9F7F" "#93E0E3" "#8CD0D3"
                          "#DC8CC3")))
 
-  (defun drot/rcirc-mode-hook ()
+  (use-package rcirc-styles
+    :ensure t)
+  
+  (use-package rcirc-notify
+    :ensure t
+    :config
+    (rcirc-notify-add-hooks))
+
+    (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook 'drot/rcirc-mode-hook)
-
-  (use-package rcirc-notify
-    :ensure t
-    :config
-    (rcirc-notify-add-hooks))
 
   (add-hook 'rcirc-mode-hook 'flyspell-mode)
   (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode))
