@@ -397,22 +397,25 @@
   (setq rcirc-fill-flag t
         rcirc-fill-column 'frame-width)
 
+  (use-package rcirc-styles
+    :ensure t
+    :config
+    (setq rcirc-styles-color-vector ["#5F5F5F" "#CC9393" "#7F9F7F" "#D0BF8F"
+                                     "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
+                                     "#6F6F6F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
+                                     "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
+
   (use-package rcirc-color
     :ensure t
     :config
-    (setq rcirc-colors '("#CC9393" "#DFAF8F" "#F0DFAF"
-                         "#7F9F7F" "#93E0E3" "#8CD0D3"
-                         "#DC8CC3")))
+    (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
-  (use-package rcirc-styles
-    :ensure t)
-  
   (use-package rcirc-notify
     :ensure t
     :config
     (rcirc-notify-add-hooks))
 
-    (defun drot/rcirc-mode-hook ()
+  (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
