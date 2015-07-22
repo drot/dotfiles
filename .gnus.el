@@ -25,6 +25,11 @@
       gnus-kill-files-directory "~/.gnus/scores"
       gnus-cache-directory "~/.gnus/cache")
 
+;; Disable newsrc file generation
+(setq gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil
+      gnus-always-read-dribble-file t)
+
 ;; Group topics
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
