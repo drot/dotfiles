@@ -125,6 +125,7 @@
 (use-package recentf
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
+        recentf-exclude (append recentf-exclude '("autoloads.el"))
         recentf-max-saved-items 100
         recentf-max-menu-items 20)
   (recentf-mode))
