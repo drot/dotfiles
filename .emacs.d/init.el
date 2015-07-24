@@ -243,10 +243,8 @@
 (use-package cc-mode
   :defer t
   :config
-  (setq c-basic-offset 4
-        c-default-style '((java-mode . "java")
-                          (awk-mode . "awk")
-                          (other . "stroustrup")))
+  (setq c-basic-offset 4)
+  (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
 
   (add-hook 'c-mode-common-hook 'auto-fill-mode)
   (add-hook 'c-mode-common-hook 'electric-pair-mode))
