@@ -2,7 +2,6 @@
 [[ $- != *i* ]] && return
 
 # History
-export HISTIGNORE="&:ls:[bf]g:exit:reset:clear:cd *"
 export HISTCONTROL="ignoreboth:erasedups"
 export HISTSIZE=20000
 export HISTFILESIZE=${HISTSIZE}
