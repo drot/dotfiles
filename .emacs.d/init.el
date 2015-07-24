@@ -431,23 +431,17 @@
   :ensure t
   :bind ("C-c m" . multiple-cursors-hydra/body)
   :config
-  (defhydra multiple-cursors-hydra (:hint nil)
-    "
-     ^Down^              ^Up^                   ^Miscellaneous^
----------------------------------------------------------
-[_m_]  Mark Next    [_M_]  Mark Previous    [_l_] Edit lines
-[_s_]  Skip Next    [_S_]  Skip previous    [_a_] Mark all
-[_u_]  Unmark Next  [_U_]  Unmark Previous  [_q_] Quit
-"
-    ("l" mc/edit-lines :exit t)
-    ("a" mc/mark-all-like-this :exit t)
-    ("m" mc/mark-next-like-this)
-    ("s" mc/skip-to-next-like-this)
-    ("u" mc/unmark-next-like-this)
-    ("M" mc/mark-previous-like-this)
-    ("S" mc/skip-to-previous-like-this)
-    ("U" mc/unmark-previous-like-this)
-    ("q" nil)))
+  (defhydra multiple-cursors-hydra (:columns 3)
+    "Multiple Cursors"
+    ("m" mc/mark-next-like-this "Mark Next")
+    ("s" mc/skip-to-next-like-this "Skip Next")
+    ("u" mc/unmark-next-like-this "Unmark Next")
+    ("M" mc/mark-previous-like-this "Mark Previous")
+    ("S" mc/skip-to-previous-like-this "Skip Previous")
+    ("U" mc/unmark-previous-like-this "Unmark Previous")
+    ("l" mc/edit-lines "Edit lines" :exit t)
+    ("a" mc/mark-all-like-this "Mark all" :exit t)
+    ("q" nil "Quit")))
 
 ;; Swiper and ivy
 (use-package swiper
