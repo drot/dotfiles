@@ -11,16 +11,36 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Activate packages
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;; Bootstrap quelpa
 (package-initialize)
+(if (require 'quelpa nil t)
+    (quelpa-self-upgrade)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; Install the following packages
+(quelpa 'ace-window)
+(quelpa 'avy)
+(quelpa 'browse-kill-ring)
+(quelpa 'company)
+(quelpa 'counsel)
+(quelpa 'expand-region)
+(quelpa 'hydra)
+(quelpa 'lispy)
+(quelpa 'magit)
+(quelpa 'multiple-cursors)
+(quelpa 'rainbow-delimiters)
+(quelpa 'rcirc-color)
+(quelpa 'rcirc-notify)
+(quelpa 'rcirc-styles)
+(quelpa 'swiper)
+(quelpa 'undo-tree)
+(quelpa 'use-package)
+(quelpa 'volatile-highlights)
+(quelpa 'yasnippet)
+(quelpa 'zenburn-theme)
+(quelpa 'zop-to-char)
 
 ;; Load use-package
 (eval-when-compile
@@ -34,8 +54,7 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package zenburn-theme
-  :ensure t)
+(use-package zenburn-theme)
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -311,14 +330,12 @@
 
 ;; Ace-window
 (use-package ace-window
-  :ensure t
   :bind ("C-c o" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
 ;; Avy
 (use-package avy
-  :ensure t
   :bind (("C-'" . avy-goto-char)
          ("C-+" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
@@ -327,12 +344,10 @@
 
 ;; Browse kill ring
 (use-package browse-kill-ring
-  :ensure t
   :bind ("C-c y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
-  :ensure t
   :diminish "co"
   :init
   (add-hook 'after-init-hook 'global-company-mode)
@@ -348,17 +363,14 @@
 
 ;; Expand region
 (use-package expand-region
-  :ensure t
   :bind ("C-=" . er/expand-region))
 
 ;; Magit
 (use-package magit
-  :ensure t
   :bind ("C-c g" . magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
-  :ensure t
   :config
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
@@ -397,7 +409,6 @@
         rcirc-fill-column 'frame-width)
 
   (use-package rcirc-styles
-    :ensure t
     :config
     (setq rcirc-styles-color-vector ["#5F5F5F" "#CC9393" "#7F9F7F" "#D0BF8F"
                                      "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
@@ -405,12 +416,10 @@
                                      "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
 
   (use-package rcirc-color
-    :ensure t
     :config
     (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
   (use-package rcirc-notify
-    :ensure t
     :config
     (rcirc-notify-add-hooks))
 
@@ -426,7 +435,6 @@
 
 ;; Hydra
 (use-package hydra
-  :ensure t
   :bind ("C-c m" . multiple-cursors-hydra/body)
   :config
   (defhydra multiple-cursors-hydra (:columns 3)
@@ -443,7 +451,6 @@
 
 ;; Swiper and ivy
 (use-package swiper
-  :ensure t
   :config
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
@@ -453,7 +460,6 @@
 
 ;; Counsel
 (use-package counsel
-  :ensure t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-h v" . counsel-describe-variable)
@@ -463,7 +469,6 @@
 
 ;; Lispy
 (use-package lispy
-  :ensure t
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -497,19 +502,20 @@
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
-  :ensure t
   :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  lisp-interaction-mode-hook
+                  scheme-mode-hook))
+    (add-hook hook 'rainbow-delimiters-mode)))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
-  :ensure t
   :config
   (volatile-highlights-mode))
 
 ;; Undo Tree
 (use-package undo-tree
-  :ensure t
   :diminish "UT"
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
@@ -518,7 +524,6 @@
 
 ;; YASnippet
 (use-package yasnippet
-  :ensure t
   :init
   (make-directory "~/.emacs.d/snippets" t)
   :config
@@ -527,7 +532,6 @@
 
 ;; Zop-to-char
 (use-package zop-to-char
-  :ensure t
   :bind ("M-z" . zop-to-char))
 
 ;; Load changes from the customize interface
