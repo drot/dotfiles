@@ -435,7 +435,8 @@
 
 ;; Hydra
 (use-package hydra
-  :bind ("C-c m" . multiple-cursors-hydra/body)
+  :bind (("C-c m" . multiple-cursors-hydra/body)
+         ("C-c w" . hydra-window-resize/body))
   :config
   (defhydra multiple-cursors-hydra (:columns 3)
     "Multiple Cursors"
@@ -447,6 +448,15 @@
     ("U" mc/unmark-previous-like-this "Unmark Previous")
     ("l" mc/edit-lines "Edit lines" :exit t)
     ("a" mc/mark-all-like-this "Mark all" :exit t)
+    ("q" nil "Quit"))
+
+  (defhydra hydra-window-resize (:columns 2)
+    "Resize Windows"
+    ("j" enlarge-window "Enlarge Window")
+    ("k" shrink-window "Shrink Window")
+    ("h" shrink-window-horizontally "Shrink Window Horizontally")
+    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
+    ("b" balance-windows "Balance Windows" :exit t)
     ("q" nil "Quit")))
 
 ;; Swiper and ivy
