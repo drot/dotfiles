@@ -410,9 +410,9 @@
 
   (use-package rcirc-styles
     :config
-    (setq rcirc-styles-color-vector ["#5F5F5F" "#CC9393" "#7F9F7F" "#D0BF8F"
+    (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
                                      "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
-                                     "#6F6F6F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
+                                     "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
                                      "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
 
   (use-package rcirc-color
