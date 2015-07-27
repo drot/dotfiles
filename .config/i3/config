@@ -120,7 +120,7 @@ for_window [class="mpv"] floating enable
 for_window [class="Wine"] floating enable
 
 # assing applications to certain workspaces
-assign [class="Chromium"] 2
+assign [class="Firefox"] 2
 assign [class="Emacs"] 3
 assign [class="Zathura"] 4
 assign [class="libreoffice"] 4

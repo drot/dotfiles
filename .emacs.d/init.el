@@ -306,11 +306,11 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Chromium
+;; Open URLs in Firefox
 (use-package browse-url
   :defer t
   :config
-  (setq browse-url-browser-function 'browse-url-chromium))
+  (setq browse-url-browser-function 'browse-url-firefox))
 
 ;; Remember point position in files
 (use-package saveplace
