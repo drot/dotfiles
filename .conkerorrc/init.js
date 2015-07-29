@@ -7,8 +7,8 @@ theme_load("zenburn");
 // The default page for new buffers.
 homepage = "about:blank";
 
-// Don't send messages to console
-session_pref("browser.dom.window.dump.enabled", false);
+// Disable some spurious Javascript debugger warnings
+session_pref("javascript.options.strict", false);
 
 // Delete history after 30 days
 session_pref('browser.history_expire_days', 30);
@@ -25,11 +25,21 @@ user_pref("extensions.checkUpdateSecurity", true);
 // Firefox user agent
 session_pref("general.useragent.compatMode.firefox", true);
 
-// Don't enable formfill
-session_pref("browser.formfill.enable", false);
+// Enable tracking protection
+session_pref("privacy.trackingprotection.enabled", true)
+
+// Disable geolocation
+session_pref("geo.enabled", false)
 
 // Resize images automatically
 session_pref("browser.enable_automatic_image_resizing", true);
+
+// Decrease RAM usage when opening large images
+session_pref("image.mem.max_decoded_image_kb", 51200);
+
+// Reduce Javascript memory usage
+session_pref("javascript.options.mem.max", 51200);
+session_pref("javascript.options.mem.high_water_mark", 30);
 
 // Enable spell checking
 session_pref("layout.spellcheckDefault", 1);
