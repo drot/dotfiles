@@ -159,6 +159,11 @@
   (setq show-paren-delay 0)
   (show-paren-mode))
 
+;; Electric pair mode
+(use-package elec-pair
+  :config
+  (electric-pair-mode))
+
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
@@ -269,8 +274,7 @@
   (setq c-basic-offset 4)
   (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
 
-  (add-hook 'c-mode-common-hook 'auto-fill-mode)
-  (add-hook 'c-mode-common-hook 'electric-pair-mode))
+  (add-hook 'c-mode-common-hook 'auto-fill-mode))
 
 ;; TRAMP configuration
 (use-package tramp
