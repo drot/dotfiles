@@ -539,7 +539,7 @@
 ;; YASnippet
 (use-package yasnippet
   :init
-  (make-directory "~/.emacs.d/snippets" t)
+  (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   :config
   (setq yas-verbosity 1)
   (yas-global-mode))
