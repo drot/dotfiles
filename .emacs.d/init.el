@@ -101,8 +101,12 @@
 (setq mouse-yank-at-point t)
 
 ;; Set fallback font
-(set-fontset-font "fontset-default" nil
-                  (font-spec :size 16 :name "Symbola"))
+(defun drot/fix-emojis (&optional frame)
+  (set-fontset-font "fontset-default" nil "Symbola" frame 'append))
+
+(drot/fix-emojis)
+
+(add-hook 'after-make-frame-functions 'drot/fix-emojis)
 
 ;; Do not save duplicates
 (setq history-delete-duplicates t
