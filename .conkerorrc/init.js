@@ -53,7 +53,6 @@ cwd.append('Downloads');
 
 // View source in external editor
 editor_shell_command = "emacsclient";
-view_source_use_external_editor = true;
 
 // View PDFs in Zathura
 external_content_handlers.set("application/pdf", "zathura");
@@ -63,6 +62,9 @@ hint_digits = "asdfghjkl";
 
 // Enable automatic selection
 hints_auto_exit_delay = 200;
+
+// Use center scrolling for Isearch
+isearch_scroll_center_vertically = true;
 
 // Hint colors
 hint_background_color = "#705050";
