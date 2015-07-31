@@ -372,6 +372,11 @@
                            company-files
                            company-dabbrev)))
 
+;; Easy-kill
+(use-package easy-kill
+  :ensure t
+  :bind ([remap kill-ring-save] . easy-kill))
+
 ;; Expand region
 (use-package expand-region
   :ensure t
@@ -570,5 +575,4 @@
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
-(when (file-exists-p drot/custom-file)
-  (load-file drot/custom-file))
+(load drot/custom-file 'noerror 'nomessage)
