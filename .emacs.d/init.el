@@ -55,6 +55,9 @@
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
 
+;; Disable site default settings
+(setq inhibit-default-init t)
+
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -64,12 +67,12 @@
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
-;; Disable site default settings
-(setq inhibit-default-init t)
-
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
+
+;; Cycle completion on smaller number of candidates
+(setq completion-cycle-threshold 5)
 
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
@@ -197,7 +200,8 @@
   :config
   (require 'dired-x)
   (setq dired-listing-switches "-alh"
-        dired-recursive-copies 'always))
+        dired-recursive-copies 'always
+        dired-dwim-target t))
 
 ;; Dired-x
 (use-package dired-x
@@ -336,9 +340,7 @@
 ;; Ace-window
 (use-package ace-window
   :ensure t
-  :bind ("C-c o" . ace-window)
-  :config
-  (setq aw-dispatch-always t))
+  :bind ([remap other-window] . ace-window))
 
 ;; Avy
 (use-package avy
