@@ -62,7 +62,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
+(setq echo-keystrokes 0)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -549,6 +549,13 @@
 (use-package volatile-highlights
   :config
   (volatile-highlights-mode))
+
+;; Which key
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (which-key-setup-minibuffer))
 
 ;; Undo Tree
 (use-package undo-tree
