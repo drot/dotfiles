@@ -11,36 +11,16 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Bootstrap quelpa
+;; Activate packages
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
 
-;; Install the following packages
-(quelpa 'ace-window)
-(quelpa 'avy)
-(quelpa 'browse-kill-ring)
-(quelpa 'company)
-(quelpa 'counsel)
-(quelpa 'expand-region)
-(quelpa 'hydra)
-(quelpa 'lispy)
-(quelpa 'magit)
-(quelpa 'multiple-cursors)
-(quelpa 'rainbow-delimiters)
-(quelpa 'rcirc-color)
-(quelpa 'rcirc-notify)
-(quelpa 'rcirc-styles)
-(quelpa 'swiper)
-(quelpa 'undo-tree)
-(quelpa 'use-package)
-(quelpa 'volatile-highlights)
-(quelpa 'yasnippet)
-(quelpa 'zenburn-theme)
-(quelpa 'zop-to-char)
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;; Load use-package
 (eval-when-compile
@@ -54,7 +34,8 @@
 (scroll-bar-mode 0)
 
 ;; Color theme
-(use-package zenburn-theme)
+(use-package zenburn-theme
+  :ensure t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -80,6 +61,12 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
+;; Don't use dialogs for minibuffer input
+(setq use-dialog-box nil)
+
+;; Disable site default settings
+(setq inhibit-default-init t)
+
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t)
@@ -101,12 +88,7 @@
 (setq mouse-yank-at-point t)
 
 ;; Set fallback font
-(defun drot/fix-emojis (&optional frame)
-  (set-fontset-font "fontset-default" nil "Symbola" frame 'append))
-
-(drot/fix-emojis)
-
-(add-hook 'after-make-frame-functions 'drot/fix-emojis)
+(set-fontset-font t nil (font-spec :family "Symbola") nil 'append)
 
 ;; Do not save duplicates
 (setq history-delete-duplicates t
@@ -124,9 +106,6 @@
 ;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
-
-;; Replace dabbrev-expand with hippie-expand
-(bind-key "M-/" 'hippie-expand)
 
 ;; Pretty lambdas
 (global-prettify-symbols-mode)
@@ -207,12 +186,30 @@
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
+  :defer t
+  :bind ([remap list-buffers] . ibuffer)
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
+;; Dired
+(use-package dired
+  :defer t
+  :config
+  (require 'dired-x)
+  (setq dired-listing-switches "-alh"
+        dired-recursive-copies 'always))
+
 ;; Dired-x
-(use-package dired-x)
+(use-package dired-x
+  :bind ("C-x C-j" . dired-jump))
+
+;; Indent region
+(use-package indent
+  :bind ("C-c x i" . indent-region))
+
+;; Replace dabbrev-expand with hippie-expand
+(use-package hippie-exp
+  :bind ([remap dabbrev-expand] . hippie-expand))
 
 ;; Regexp builder
 (use-package re-builder
@@ -338,12 +335,14 @@
 
 ;; Ace-window
 (use-package ace-window
+  :ensure t
   :bind ("C-c o" . ace-window)
   :config
   (setq aw-dispatch-always t))
 
 ;; Avy
 (use-package avy
+  :ensure t
   :bind (("C-'" . avy-goto-char)
          ("C-+" . avy-goto-char-2)
          ("M-g g" . avy-goto-line)
@@ -352,10 +351,12 @@
 
 ;; Browse kill ring
 (use-package browse-kill-ring
+  :ensure t
   :bind ("C-c y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
+  :ensure t
   :diminish "co"
   :init
   (add-hook 'after-init-hook 'global-company-mode)
@@ -371,14 +372,17 @@
 
 ;; Expand region
 (use-package expand-region
+  :ensure t
   :bind ("C-=" . er/expand-region))
 
 ;; Magit
 (use-package magit
+  :ensure t
   :bind ("C-c g" . magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
+  :ensure t
   :config
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
@@ -417,6 +421,7 @@
         rcirc-fill-column 'frame-width)
 
   (use-package rcirc-styles
+    :ensure t
     :config
     (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
                                      "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
@@ -424,10 +429,12 @@
                                      "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
 
   (use-package rcirc-color
+    :ensure t
     :config
     (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
   (use-package rcirc-notify
+    :ensure t
     :config
     (rcirc-notify-add-hooks))
 
@@ -443,6 +450,7 @@
 
 ;; Hydra
 (use-package hydra
+  :ensure t
   :bind (("C-c m" . multiple-cursors-hydra/body)
          ("C-c w" . hydra-window-resize/body))
   :config
@@ -478,15 +486,17 @@
 
 ;; Counsel
 (use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h v" . counsel-describe-variable)
-         ("C-h f" . counsel-describe-function))
+  :ensure t
+  :bind (([remap execute-extended-command] . counsel-M-x)
+         ([remap find-file] . counsel-find-file)
+         ([remap describe-variable] . counsel-describe-variable)
+         ([remap describe-function] . counsel-describe-function))
   :config
   (setq counsel-find-file-at-point t))
 
 ;; Lispy
 (use-package lispy
+  :ensure t
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -520,6 +530,7 @@
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -534,6 +545,7 @@
 
 ;; Undo Tree
 (use-package undo-tree
+  :ensure t
   :diminish "UT"
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
@@ -542,6 +554,7 @@
 
 ;; YASnippet
 (use-package yasnippet
+  :ensure t
   :init
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   :config
@@ -550,7 +563,8 @@
 
 ;; Zop-to-char
 (use-package zop-to-char
-  :bind ("M-z" . zop-to-char))
+  :ensure t
+  :bind ([remap zap-to-char]. zop-to-char))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
