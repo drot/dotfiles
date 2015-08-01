@@ -123,6 +123,26 @@
 ;; Allow scrolling during Isearch
 (setq isearch-allow-scroll t)
 
+;; Define prefix commands for personal keybindings
+(defmacro drot/define-group (prefix name &optional map)
+  "Define a group at PREFIX with NAME in MAP."
+  (let ((command (intern (format "group:%s" name))))
+    `(progn
+       (define-prefix-command ',command)
+       (bind-key ,prefix #',command ,map))))
+
+(drot/define-group "C-c a" applications)
+(drot/define-group "C-c c" compile-and-comments)
+(drot/define-group "C-c f" files)
+(drot/define-group "C-c h" help)
+(drot/define-group "C-c i" insertion)
+(drot/define-group "C-c n" navigation)
+(drot/define-group "C-c s" search-and-symbols)
+(drot/define-group "C-c t" toggles)
+(drot/define-group "C-c v" version-control)
+(drot/define-group "C-c w" windows-and-frames)
+(drot/define-group "C-c x" text)
+
 ;; Save minibuffer history
 (use-package savehist
   :config
@@ -233,8 +253,15 @@
 (use-package indent
   :bind ("C-c x i" . indent-region))
 
+;; Align
+(use-package align
+  :bind ("C-c x a" . align))
+
 ;; Display personal bindings
 (bind-key "C-c h b" 'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" 'toggle-debug-on-error)
 
 ;; Replace dabbrev-expand with hippie-expand
 (use-package hippie-exp
@@ -248,7 +275,7 @@
 
 ;; Bookmarks save directory
 (use-package bookmark
-  :defer t
+  :bind ("C-c f b" . list-bookmarks)
   :config
   (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
         bookmark-save-flag 1))
@@ -261,14 +288,14 @@
 
 ;; Shell mode configuration
 (use-package shell
-  :defer t
+  :bind ("C-c a t" . shell)
   :config
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook 'compilation-shell-minor-mode))
 
 ;; Disable YASnippet in term mode
 (use-package term
-  :defer t
+  :bind ("C-c a T" . ansi-term)
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode 0))))
@@ -288,7 +315,8 @@
 
 ;; Compilation configuration
 (use-package compile
-  :defer t
+  :bind (("C-c c c" . compile)
+         ("C-c c r" . recompile))
   :config
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
@@ -336,7 +364,7 @@
 
 ;; Calendar configuration
 (use-package calendar
-  :defer t
+  :bind ("C-c a c" . calendar)
   :config
   (setq calendar-week-start-day 1
         calendar-mark-holidays-flag t
@@ -368,7 +396,7 @@
 
 ;; Open URLs in Firefox
 (use-package browse-url
-  :defer t
+  :bind ("C-c a u" . browse-url)
   :config
   (setq browse-url-browser-function 'browse-url-firefox))
 
@@ -390,16 +418,17 @@
 ;; Avy
 (use-package avy
   :ensure t
-  :bind (("C-'" . avy-goto-char)
-         ("C-+" . avy-goto-char-2)
-         ("M-g g" . avy-goto-line)
-         ("M-g w" . avy-goto-word-1)
-         ("M-g e" . avy-goto-word-0)))
+  :bind (("C-c n s" . avy-isearch)
+         ("C-c n c" . avy-goto-char)
+         ("C-c n j" . avy-goto-char-2)
+         ("C-c l" . avy-goto-line)
+         ("C-c j" . avy-goto-word-1)
+         ("C-c n w" . avy-goto-word-0)))
 
 ;; Browse kill ring
 (use-package browse-kill-ring
   :ensure t
-  :bind ("C-c y" . browse-kill-ring))
+  :bind ("C-c i y" . browse-kill-ring))
 
 ;; Company mode
 (use-package company
@@ -407,7 +436,7 @@
   :diminish "co"
   :init
   (add-hook 'after-init-hook 'global-company-mode)
-  :bind ("C-c c" . company-yasnippet)
+  :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
         company-show-numbers t
@@ -431,7 +460,7 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :bind ("C-c g" . magit-status))
+  :bind ("C-c v v" . magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -441,8 +470,8 @@
 
 ;; Org-mode
 (use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-store-link))
+  :bind (("C-c a a" . org-agenda)
+         ("C-c a l" . org-store-link))
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
@@ -504,8 +533,8 @@
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c m" . multiple-cursors-hydra/body)
-         ("C-c w" . hydra-window-resize/body))
+  :bind (("C-c x m" . multiple-cursors-hydra/body)
+         ("C-c w r" . hydra-window-resize/body))
   :config
   (defhydra multiple-cursors-hydra (:columns 3)
     "Multiple Cursors"
@@ -533,9 +562,9 @@
   :config
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
-  :bind (("C-c s" . swiper)
-         ("C-c f" . ivy-recentf)
-         ("C-c C-r" . ivy-resume)))
+  :bind (("C-c s s" . swiper)
+         ("C-c f r" . ivy-recentf)
+         ("C-c c b" . ivy-resume)))
 
 ;; Counsel
 (use-package counsel
@@ -580,6 +609,11 @@
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
     (add-hook hook 'eldoc-mode)))
+
+;; nLinum mode
+(use-package nlinum
+  :ensure t
+  :bind ("C-c t l" . nlinum-mode))
 
 ;; Page break lines mode
 (use-package page-break-lines
