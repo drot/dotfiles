@@ -282,20 +282,20 @@
 
 ;; Eshell save directory
 (use-package eshell
-  :defer t
+  :bind ("C-c a e" . eshell)
   :config
   (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory)))
 
 ;; Shell mode configuration
 (use-package shell
-  :bind ("C-c a t" . shell)
+  :bind ("C-c a s" . shell)
   :config
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook 'compilation-shell-minor-mode))
 
 ;; Disable YASnippet in term mode
 (use-package term
-  :bind ("C-c a T" . ansi-term)
+  :bind ("C-c a t" . ansi-term)
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode 0))))
