@@ -25,6 +25,9 @@
       gnus-kill-files-directory "~/.gnus/scores"
       gnus-cache-directory "~/.gnus/cache")
 
+;; Use IDO for completion
+(setq gnus-completing-read-function 'gnus-ido-completing-read)
+
 ;; Group topics
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 

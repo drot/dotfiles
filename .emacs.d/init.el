@@ -61,6 +61,9 @@
 ;; Disable site default settings
 (setq inhibit-default-init t)
 
+;; Delay garbage collection
+(setq gc-cons-threshold 20000000)
+
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -185,6 +188,11 @@
   :config
   (global-hi-lock-mode))
 
+;; Delete selection mode
+(use-package delsel
+  :config
+  (delete-selection-mode))
+
 ;; Which function mode
 (use-package which-func
   :config
@@ -256,6 +264,11 @@
 ;; Align
 (use-package align
   :bind ("C-c x a" . align))
+
+;; Whitespace mode
+(use-package whitespace
+  :bind (("C-c x w" . whitespace-cleanup)
+         ("C-c t w" . whitespace-mode)))
 
 ;; Display personal bindings
 (bind-key "C-c h b" 'describe-personal-keybindings)
@@ -425,6 +438,15 @@
          ("C-c j" . avy-goto-word-1)
          ("C-c n w" . avy-goto-word-0)))
 
+;; Anzu
+(use-package anzu
+  :ensure t
+  :diminish "AZ"
+  :config
+  (global-anzu-mode)
+  :bind (("C-c s r" . anzu-query-replace)
+         ("C-c s R" . anzu-query-replace-regexp)))
+
 ;; Browse kill ring
 (use-package browse-kill-ring
   :ensure t
@@ -455,12 +477,14 @@
 ;; Expand region
 (use-package expand-region
   :ensure t
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-c x e" . er/expand-region))
 
 ;; Magit
 (use-package magit
   :ensure t
-  :bind ("C-c v v" . magit-status))
+  :bind ("C-c v v" . magit-status)
+  :config
+  (setq magit-completing-read-function 'magit-ido-completing-read))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -475,7 +499,8 @@
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+        org-src-tab-acts-natively t
+        org-completion-use-ido t))
 
 ;; rcirc configuration
 (use-package rcirc
@@ -550,56 +575,83 @@
 
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
-    ("j" enlarge-window "Enlarge Window")
-    ("k" shrink-window "Shrink Window")
-    ("h" shrink-window-horizontally "Shrink Window Horizontally")
-    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("b" balance-windows "Balance Windows" :exit t)
+    ("n" enlarge-window "Enlarge Window")
+    ("p" shrink-window "Shrink Window")
+    ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
+    ("b" shrink-window-horizontally "Shrink Window Horizontally")
+    ("a" balance-windows "Balance Windows" :exit t)
     ("q" nil "Quit")))
 
-;; Swiper and ivy
-(use-package swiper
+;; IDO
+(use-package ido
   :config
-  (ivy-mode)
-  (setq ivy-use-virtual-buffers t)
-  :bind (("C-c s s" . swiper)
-         ("C-c f r" . ivy-recentf)
-         ("C-c t r" . ivy-resume)))
+  (setq ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-max-prospects 10
+        ido-save-directory-list-file (expand-file-name "ido.hist" drot/cache-directory)
+        ido-use-virtual-buffers t)
+  (ido-mode 1)
+  (ido-everywhere 1))
 
-;; Counsel
-(use-package counsel
+;; Flx IDO
+(use-package flx-ido
   :ensure t
-  :init
-  (bind-keys* ([remap execute-extended-command] . counsel-M-x)
-              ([remap find-file] . counsel-find-file)
-              ([remap describe-variable] . counsel-describe-variable)
-              ([remap describe-function] . counsel-describe-function))
   :config
-  (setq counsel-find-file-at-point t))
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces nil))
 
-;; Lispy
-(use-package lispy
+;; IDO Vertical mode
+(use-package ido-vertical-mode
   :ensure t
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only
+        ido-vertical-show-count t))
+
+;; IDO Ubiquitous
+(use-package ido-ubiquitous
+  :ensure t
+  :config
+  (ido-ubiquitous-mode))
+
+;; Smex
+(use-package smex
+  :ensure t
+  :config
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory))
+  (smex-initialize)
+  :bind ([remap execute-extended-command] . smex))
+
+;; Paredit
+(use-package paredit
+  :ensure t
+  :diminish "PE"
   :config
   (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook
                   lisp-mode-hook
                   lisp-interaction-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'lispy-mode))
+    (add-hook hook 'paredit-mode))
 
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which lispy should be enabled in the minibuffer.")
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-  (defun drot/lispy-minibuffer ()
-    "Enable lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
+  (defun drot/paredit-minibuffer ()
+    "Enable ParEdit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook 'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook 'drot/paredit-minibuffer)
+
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-newline 'delete-selection t))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
