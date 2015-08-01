@@ -51,6 +51,9 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
+;; Require a final new line
+(setq require-final-newline t)
+
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
@@ -86,6 +89,10 @@
 
 ;; Increase default fill width
 (setq-default fill-column 80)
+
+;; Kill and yank clipboard options
+(setq x-select-enable-primary t
+      save-interprogram-paste-before-kill t)
 
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
@@ -131,9 +138,16 @@
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude (append recentf-exclude '("autoloads.el"))
+        recentf-auto-cleanup 300
         recentf-max-saved-items 100
         recentf-max-menu-items 20)
   (recentf-mode))
+
+;; Remember point position in files
+(use-package saveplace
+  :config
+  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
+  (setq-default save-place t))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -176,8 +190,16 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :config
+  (setq flyspell-use-meta-tab nil)
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+
+;; Outline mode
+(use-package outline
+  :config
+  (dolist (hook '(text-mode-hook
+                  prog-mode-hook))
+    (add-hook hook 'outline-minor-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -210,6 +232,9 @@
 ;; Indent region
 (use-package indent
   :bind ("C-c x i" . indent-region))
+
+;; Display personal bindings
+(bind-key "C-c h b" 'describe-personal-keybindings)
 
 ;; Replace dabbrev-expand with hippie-expand
 (use-package hippie-exp
@@ -266,7 +291,17 @@
   :defer t
   :config
   (setq compilation-scroll-output 'first-error
-        compilation-ask-about-save nil))
+        compilation-ask-about-save nil)
+
+  (require 'ansi-color)
+  (defun drot/colorize-compilation-buffer ()
+    "Colorize a compilation mode buffer."
+    (interactive)
+    (when (eq major-mode 'compilation-mode)
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (point-min) (point-max)))))
+
+  (add-hook 'compilation-filter-hook 'drot/colorize-compilation-buffer))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -276,6 +311,13 @@
   (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
 
   (add-hook 'c-mode-common-hook 'auto-fill-mode))
+
+;; NXML mode
+(use-package nxml-mode
+  :defer t
+  :config
+  (setq nxml-slash-auto-complete-flag t
+        nxml-auto-insert-xml-declaration-flag t))
 
 ;; TRAMP configuration
 (use-package tramp
@@ -296,7 +338,8 @@
 (use-package calendar
   :defer t
   :config
-  (setq calendar-mark-holidays-flag t
+  (setq calendar-week-start-day 1
+        calendar-mark-holidays-flag t
         holiday-general-holidays nil
         holiday-bahai-holidays nil
         holiday-oriental-holidays nil
@@ -307,6 +350,14 @@
         calendar-latitude 43.2
         calendar-longitude 17.48
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
+
+;; World time
+(use-package time
+  :defer t
+  :config
+  (setq display-time-world-list '(("Europe/Berlin" "Berlin")
+                                  ("America/Los_Angeles" "Los Angeles")
+                                  ("Canada/Eastern" "Quebec"))))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -320,12 +371,6 @@
   :defer t
   :config
   (setq browse-url-browser-function 'browse-url-firefox))
-
-;; Remember point position in files
-(use-package saveplace
-  :config
-  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-  (setq-default save-place t))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
@@ -375,7 +420,8 @@
 ;; Easy-kill
 (use-package easy-kill
   :ensure t
-  :bind ([remap kill-ring-save] . easy-kill))
+  :bind (([remap kill-ring-save] . easy-kill)
+         ([remap mark-sexp] . easy-mark)))
 
 ;; Expand region
 (use-package expand-region
@@ -535,6 +581,12 @@
                   ielm-mode-hook))
     (add-hook hook 'eldoc-mode)))
 
+;; Page break lines mode
+(use-package page-break-lines
+  :ensure t
+  :config
+  (global-page-break-lines-mode))
+
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
@@ -547,6 +599,7 @@
 
 ;; Volatile Highlights
 (use-package volatile-highlights
+  :ensure t
   :config
   (volatile-highlights-mode))
 
