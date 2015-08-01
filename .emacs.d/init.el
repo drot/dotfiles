@@ -381,9 +381,9 @@
 
 ;; World time
 (use-package time
-  :defer t
+  :bind ("C-c a w" . display-time-world)
   :config
-  (setq display-time-world-list '(("Europe/Berlin" "Berlin")
+  (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
                                   ("Canada/Eastern" "Quebec"))))
 
@@ -564,15 +564,16 @@
   (setq ivy-use-virtual-buffers t)
   :bind (("C-c s s" . swiper)
          ("C-c f r" . ivy-recentf)
-         ("C-c c b" . ivy-resume)))
+         ("C-c t r" . ivy-resume)))
 
 ;; Counsel
 (use-package counsel
   :ensure t
-  :bind (([remap execute-extended-command] . counsel-M-x)
-         ([remap find-file] . counsel-find-file)
-         ([remap describe-variable] . counsel-describe-variable)
-         ([remap describe-function] . counsel-describe-function))
+  :init
+  (bind-keys* ([remap execute-extended-command] . counsel-M-x)
+              ([remap find-file] . counsel-find-file)
+              ([remap describe-variable] . counsel-describe-variable)
+              ([remap describe-function] . counsel-describe-function))
   :config
   (setq counsel-find-file-at-point t))
 
