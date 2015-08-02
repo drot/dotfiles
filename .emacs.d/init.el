@@ -720,6 +720,7 @@
   :config
   (setq which-key-separator " > "
         which-key-special-keys nil
+        which-key-show-prefix 'top
         which-key-show-remaining-keys t)
   (which-key-mode))
 
