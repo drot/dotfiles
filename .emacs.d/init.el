@@ -268,6 +268,9 @@
   :bind (("C-c c k" . comment-region)
          ("C-c c u" . uncomment-region)))
 
+;; Cycle spacing
+(bind-key [remap just-one-space] 'cycle-spacing)
+
 ;; Display personal bindings
 (bind-key "C-c h b" 'describe-personal-keybindings)
 
