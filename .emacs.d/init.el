@@ -226,7 +226,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish "OM"
+  :diminish (outline-minor-mode . "OM")
   :config
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
@@ -425,7 +425,7 @@
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
-  :diminish "Abr"
+  :diminish (abbrev-mode . "Abr")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
@@ -456,7 +456,7 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish "co"
+  :diminish (company-mode . "co")
   :init
   (add-hook 'after-init-hook 'global-company-mode)
   :bind ("C-c i c" . company-yasnippet)
@@ -678,7 +678,7 @@
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
-  :diminish "ElD"
+  :diminish (eldoc-mode . "ElD")
   :config
   (dolist (hook '(eval-expression-minibuffer-setup-hook
                   lisp-interaction-mode-hook
@@ -694,7 +694,7 @@
 ;; Page break lines mode
 (use-package page-break-lines
   :ensure t
-  :diminish "PB"
+  :diminish (page-break-lines-mode . "PB")
   :config
   (global-page-break-lines-mode))
 
@@ -718,13 +718,12 @@
 (use-package which-key
   :ensure t
   :config
-  (which-key-mode)
-  (which-key-setup-minibuffer))
+  (which-key-mode))
 
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish "UT"
+  :diminish (undo-tree-mode . "UT")
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t)
