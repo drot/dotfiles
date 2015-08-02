@@ -172,7 +172,8 @@
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (setq show-paren-delay 0)
+  (setq show-paren-delay 0
+        show-paren-style 'mixed)
   (show-paren-mode))
 
 ;; Electric pair mode
@@ -184,11 +185,6 @@
 (use-package hi-lock
   :config
   (global-hi-lock-mode))
-
-;; Delete selection mode
-(use-package delsel
-  :config
-  (delete-selection-mode))
 
 ;; Which function mode
 (use-package which-func
@@ -560,29 +556,73 @@
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c x m" . multiple-cursors-hydra/body)
-         ("C-c w r" . hydra-window-resize/body))
+  :bind (("C-c x m" . hydra-multiple-cursors/body)
+         ("C-c w r" . hydra-window-resize/body)
+         ("C-c x o" . hydra-outline/body))
   :config
-  (defhydra multiple-cursors-hydra (:columns 3)
-    "Multiple Cursors"
-    ("m" mc/mark-next-like-this "Mark Next")
-    ("s" mc/skip-to-next-like-this "Skip Next")
-    ("u" mc/unmark-next-like-this "Unmark Next")
-    ("M" mc/mark-previous-like-this "Mark Previous")
-    ("S" mc/skip-to-previous-like-this "Skip Previous")
-    ("U" mc/unmark-previous-like-this "Unmark Previous")
-    ("l" mc/edit-lines "Edit lines" :exit t)
-    ("a" mc/mark-all-like-this "Mark all" :exit t)
+  (defhydra hydra-multiple-cursors (:hint nil)
+    "
+
+^Up^                ^Down^                  ^Miscellaneous^
+-------------------------------------------------------
+[_m_]: Mark Next    [_M_]: Mark Previous    [_l_]: Edit Lines
+[_s_]: Skip Next    [_S_]: Skip Previous    [_a_]: Mark All
+[_u_]: Unmark Next  [_U_]: Unmark Previous
+
+"
+    ("m" mc/mark-next-like-this)
+    ("s" mc/skip-to-next-like-this)
+    ("u" mc/unmark-next-like-this)
+
+    ("M" mc/mark-previous-like-this)
+    ("S" mc/skip-to-previous-like-this)
+    ("U" mc/unmark-previous-like-this)
+
+    ("l" mc/edit-lines :exit t)
+    ("a" mc/mark-all-like-this :exit t)
     ("q" nil "Quit"))
 
-  (defhydra hydra-window-resize (:columns 2)
+  (defhydra hydra-window-resize (:hint nil)
     "Resize Windows"
     ("j" enlarge-window "Enlarge Window")
     ("k" shrink-window "Shrink Window")
     ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
     ("h" shrink-window-horizontally "Shrink Window Horizontally")
     ("b" balance-windows "Balance Windows" :exit t)
-    ("q" nil "Quit")))
+    ("q" nil "Quit"))
+
+  (defhydra hydra-outline (:hint nil)
+    "
+
+^Hide^             ^Show^           ^Move^
+-------------------------------------------------------
+[_q_]: Sub-levels  [_a_]: All       [_u_]: Up
+[_t_]: Body        [_e_]: Entry     [_n_]: Next Visible
+[_o_]: Other       [_i_]: Children  [_p_]: Previous Visible
+[_c_]: Entry       [_k_]: Branches  [_f_]: Forward Same Level
+[_l_]: Leaves      [_s_]: Sub-tree  [_b_]: Backward Same Level
+[_d_]: Sub-tree
+
+"
+    ("q" hide-sublevels)
+    ("t" hide-body)
+    ("o" hide-other)
+    ("c" hide-entry)
+    ("l" hide-leaves)
+    ("d" hide-subtree)
+
+    ("a" show-all)
+    ("e" show-entry)
+    ("i" show-children)
+    ("k" show-branches)
+    ("s" show-subtree)
+
+    ("u" outline-up-heading)
+    ("n" outline-next-visible-heading)
+    ("p" outline-previous-visible-heading)
+    ("f" outline-forward-same-level)
+    ("b" outline-backward-same-level)
+    ("z" nil "Quit")))
 
 ;; Swiper
 (use-package swiper
