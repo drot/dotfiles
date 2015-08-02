@@ -582,7 +582,7 @@
     ("a" mc/mark-all-like-this :exit t)
     ("q" nil "Quit"))
 
-  (defhydra hydra-window-resize (:hint nil)
+  (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("j" enlarge-window "Enlarge Window")
     ("k" shrink-window "Shrink Window")
