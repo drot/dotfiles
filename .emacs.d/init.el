@@ -718,6 +718,9 @@
 (use-package which-key
   :ensure t
   :config
+  (setq which-key-separator " > "
+        which-key-special-keys nil
+        which-key-show-remaining-keys t)
   (which-key-mode))
 
 ;; Undo Tree
