@@ -67,6 +67,35 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0)
 
+;; Define prefix commands for personal keybindings
+(defmacro drot/define-group (prefix name &optional map)
+  "Define a group at PREFIX with NAME in MAP."
+  (let ((command (intern (format "group:%s" name))))
+    `(progn
+       (define-prefix-command ',command)
+       (bind-key ,prefix #',command ,map))))
+
+(drot/define-group "C-c a" applications)
+(drot/define-group "C-c c" compile-and-comments)
+(drot/define-group "C-c f" files)
+(drot/define-group "C-c h" help)
+(drot/define-group "C-c i" insertion)
+(drot/define-group "C-c n" navigation)
+(drot/define-group "C-c s" search-and-symbols)
+(drot/define-group "C-c t" toggles)
+(drot/define-group "C-c v" version-control)
+(drot/define-group "C-c w" windows-and-frames)
+(drot/define-group "C-c x" text)
+
+;; Cycle spacing
+(bind-key [remap just-one-space] 'cycle-spacing)
+
+;; Display personal bindings
+(bind-key "C-c h b" 'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" 'toggle-debug-on-error)
+
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
@@ -122,26 +151,6 @@
 
 ;; Allow scrolling during Isearch
 (setq isearch-allow-scroll t)
-
-;; Define prefix commands for personal keybindings
-(defmacro drot/define-group (prefix name &optional map)
-  "Define a group at PREFIX with NAME in MAP."
-  (let ((command (intern (format "group:%s" name))))
-    `(progn
-       (define-prefix-command ',command)
-       (bind-key ,prefix #',command ,map))))
-
-(drot/define-group "C-c a" applications)
-(drot/define-group "C-c c" compile-and-comments)
-(drot/define-group "C-c f" files)
-(drot/define-group "C-c h" help)
-(drot/define-group "C-c i" insertion)
-(drot/define-group "C-c n" navigation)
-(drot/define-group "C-c s" search-and-symbols)
-(drot/define-group "C-c t" toggles)
-(drot/define-group "C-c v" version-control)
-(drot/define-group "C-c w" windows-and-frames)
-(drot/define-group "C-c x" text)
 
 ;; Save minibuffer history
 (use-package savehist
@@ -217,6 +226,7 @@
 
 ;; Outline mode
 (use-package outline
+  :diminish "OM"
   :config
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
@@ -267,15 +277,6 @@
 (use-package newcomment
   :bind (("C-c c k" . comment-region)
          ("C-c c u" . uncomment-region)))
-
-;; Cycle spacing
-(bind-key [remap just-one-space] 'cycle-spacing)
-
-;; Display personal bindings
-(bind-key "C-c h b" 'describe-personal-keybindings)
-
-;; Toggle debug on error
-(bind-key "C-c t d" 'toggle-debug-on-error)
 
 ;; Find function and variable definitions
 (use-package find-func
@@ -566,7 +567,7 @@
   (defhydra hydra-multiple-cursors (:hint nil)
     "
 
-^Up^                ^Down^                  ^Miscellaneous^
+^Down^              ^Up^                    ^Miscellaneous^
 -------------------------------------------------------
 [_m_]: Mark Next    [_M_]: Mark Previous    [_l_]: Edit Lines
 [_s_]: Skip Next    [_S_]: Skip Previous    [_a_]: Mark All
@@ -693,6 +694,7 @@
 ;; Page break lines mode
 (use-package page-break-lines
   :ensure t
+  :diminish "PB"
   :config
   (global-page-break-lines-mode))
 
