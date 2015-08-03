@@ -28,6 +28,26 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; Define prefix commands for personal keybindings
+(defmacro drot/define-group (prefix name &optional map)
+  "Define a group at PREFIX with NAME in MAP."
+  (let ((command (intern (format "group:%s" name))))
+    `(progn
+       (define-prefix-command ',command)
+       (bind-key ,prefix #',command ,map))))
+
+(drot/define-group "C-c a" applications)
+(drot/define-group "C-c c" compile-and-comments)
+(drot/define-group "C-c f" files)
+(drot/define-group "C-c h" help)
+(drot/define-group "C-c i" insertion)
+(drot/define-group "C-c n" navigation)
+(drot/define-group "C-c s" search-and-symbols)
+(drot/define-group "C-c t" toggles)
+(drot/define-group "C-c v" version-control)
+(drot/define-group "C-c w" windows-and-frames)
+(drot/define-group "C-c x" text)
+
 ;; Disable unnecessary GUI elements
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -62,39 +82,10 @@
 (setq inhibit-default-init t)
 
 ;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0)
-
-;; Define prefix commands for personal keybindings
-(defmacro drot/define-group (prefix name &optional map)
-  "Define a group at PREFIX with NAME in MAP."
-  (let ((command (intern (format "group:%s" name))))
-    `(progn
-       (define-prefix-command ',command)
-       (bind-key ,prefix ',command ,map))))
-
-(drot/define-group "C-c a" applications)
-(drot/define-group "C-c c" compile-and-comments)
-(drot/define-group "C-c f" files)
-(drot/define-group "C-c h" help)
-(drot/define-group "C-c i" insertion)
-(drot/define-group "C-c n" navigation)
-(drot/define-group "C-c s" search-and-symbols)
-(drot/define-group "C-c t" toggles)
-(drot/define-group "C-c v" version-control)
-(drot/define-group "C-c w" windows-and-frames)
-(drot/define-group "C-c x" text)
-
-;; Cycle spacing
-(bind-key [remap just-one-space] 'cycle-spacing)
-
-;; Display personal bindings
-(bind-key "C-c h b" 'describe-personal-keybindings)
-
-;; Toggle debug on error
-(bind-key "C-c t d" 'toggle-debug-on-error)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -154,6 +145,15 @@
 
 ;; Allow scrolling during Isearch
 (setq isearch-allow-scroll t)
+
+;; Cycle spacing
+(bind-key [remap just-one-space] #'cycle-spacing)
+
+;; Display personal bindings
+(bind-key "C-c h b" #'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Save minibuffer history
 (use-package savehist
@@ -224,8 +224,8 @@
 (use-package flyspell
   :config
   (setq flyspell-use-meta-tab nil)
-  (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
 
 ;; Outline mode
 (use-package outline
@@ -233,7 +233,7 @@
   :config
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
-    (add-hook hook 'outline-minor-mode)))
+    (add-hook hook #'outline-minor-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -241,7 +241,7 @@
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
-    (add-hook hook 'hs-minor-mode)))
+    (add-hook hook #'hs-minor-mode)))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
@@ -323,8 +323,8 @@
 (use-package shell
   :bind ("C-c a s" . shell)
   :config
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-  (add-hook 'shell-mode-hook 'compilation-shell-minor-mode))
+  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
+  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; Disable YASnippet in term mode
 (use-package term
@@ -343,8 +343,8 @@
 (use-package ediff
   :defer t
   :config
-  (setq ediff-split-window-function 'split-window-horizontally
-        ediff-window-setup-function 'ediff-setup-windows-plain))
+  (setq ediff-split-window-function #'split-window-horizontally
+        ediff-window-setup-function #'ediff-setup-windows-plain))
 
 ;; Compilation configuration
 (use-package compile
@@ -362,7 +362,7 @@
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
-  (add-hook 'compilation-filter-hook 'drot/colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -371,7 +371,7 @@
   (setq c-basic-offset 4)
   (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
 
-  (add-hook 'c-mode-common-hook 'auto-fill-mode))
+  (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; NXML mode
 (use-package nxml-mode
@@ -432,7 +432,7 @@
 (use-package browse-url
   :bind ("C-c a u" . browse-url)
   :config
-  (setq browse-url-browser-function 'browse-url-generic
+  (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "conkeror"))
 
 ;; Load abbrevs and enable Abbrev Mode
@@ -470,7 +470,7 @@
   :ensure t
   :diminish (company-mode . "co")
   :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  (add-hook 'after-init-hook #'global-company-mode)
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
@@ -480,7 +480,7 @@
                            company-capf (company-dabbrev-code company-keywords)
                            company-files
                            company-dabbrev))
-  (bind-key [remap indent-for-tab-command] 'company-indent-or-complete-common company-mode-map))
+  (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
 
 ;; Easy-kill
 (use-package easy-kill
@@ -565,10 +565,10 @@
     (company-mode 0)
     (yas-minor-mode 0))
 
-  (add-hook 'rcirc-mode-hook 'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
 
-  (add-hook 'rcirc-mode-hook 'flyspell-mode)
-  (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode))
+  (add-hook 'rcirc-mode-hook #'flyspell-mode)
+  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode))
 
 ;; Systemd mode
 (use-package systemd
@@ -677,7 +677,7 @@
                   lisp-mode-hook
                   lisp-interaction-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'lispy-mode))
+    (add-hook hook #'lispy-mode))
 
   (defvar drot/lispy-minibuffer-commands '(eval-expression
                                            pp-eval-expression
@@ -691,7 +691,7 @@
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook 'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -701,7 +701,7 @@
                   lisp-interaction-mode-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
-    (add-hook hook 'eldoc-mode)))
+    (add-hook hook #'eldoc-mode)))
 
 ;; nLinum mode
 (use-package nlinum
@@ -723,7 +723,7 @@
                   lisp-mode-hook
                   lisp-interaction-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'rainbow-delimiters-mode)))
+    (add-hook hook #'rainbow-delimiters-mode)))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
