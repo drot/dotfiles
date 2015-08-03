@@ -724,7 +724,6 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :demand t
   :bind ("C-c t r" . rainbow-mode))
 
 ;; Volatile Highlights
