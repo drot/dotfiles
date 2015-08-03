@@ -583,6 +583,11 @@
   (add-hook 'rcirc-mode-hook 'flyspell-mode)
   (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode))
 
+;; Systemd mode
+(use-package systemd
+  :ensure t
+  :defer t)
+
 ;; Hydra
 (use-package hydra
   :ensure t
