@@ -668,6 +668,26 @@
   :config
   (setq counsel-find-file-at-point t))
 
+;; Highlight Numbers
+(use-package highlight-numbers
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
+
+;; Highlight Symbol
+(use-package highlight-symbol
+  :ensure t
+  :demand t
+  :bind (("C-c s %" . highlight-symbol-query-replace)
+         ("C-c n n" . highlight-symbol-next-in-defun)
+         ("C-c n p" . highlight-symbol-prev-in-defun))
+  :config
+  (setq highlight-symbol-idle-delay 0.5
+        highlight-symbol-on-navigation-p t)
+
+  (add-hook 'prog-mode-hook #'highlight-symbol-mode)
+  (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode))
+
 ;; Lispy
 (use-package lispy
   :ensure t
@@ -724,7 +744,12 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :bind ("C-c t r" . rainbow-mode))
+  :demand t
+  :bind ("C-c t r" . rainbow-mode)
+  :config
+  (dolist (hook '(css-mode-hook
+                  html-mode-hook))
+    (add-hook hook #'rainbow-mode)))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
@@ -732,7 +757,7 @@
   :config
   (volatile-highlights-mode))
 
-;; Which key
+;; Which Key
 (use-package which-key
   :ensure t
   :config
