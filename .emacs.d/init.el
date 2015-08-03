@@ -260,6 +260,13 @@
 (use-package dired-x
   :bind ("C-x C-j" . dired-jump))
 
+;; Wind Move
+(use-package windmove
+  :bind (("C-c w <left>" . windmove-left)
+         ("C-c w <right>" . windmove-right)
+         ("C-c w <up>" . windmove-up)
+         ("C-c w <down>" . windmove-down)))
+
 ;; Indent region
 (use-package indent
   :bind ("C-c x i" . indent-region))
@@ -443,7 +450,7 @@
 ;; Avy
 (use-package avy
   :ensure t
-  :bind (("C-c n s" . avy-isearch)
+  :bind (("C-c s a" . avy-isearch)
          ("C-c n c" . avy-goto-char)
          ("C-c n j" . avy-goto-char-2)
          ("C-c l" . avy-goto-line)
@@ -594,7 +601,6 @@
     ("k" shrink-window "Shrink Window")
     ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
     ("h" shrink-window-horizontally "Shrink Window Horizontally")
-    ("b" balance-windows "Balance Windows" :exit t)
     ("q" nil "Quit"))
 
   (defhydra hydra-outline (:hint nil)
