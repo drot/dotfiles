@@ -73,7 +73,7 @@
   (let ((command (intern (format "group:%s" name))))
     `(progn
        (define-prefix-command ',command)
-       (bind-key ,prefix #',command ,map))))
+       (bind-key ,prefix ',command ,map))))
 
 (drot/define-group "C-c a" applications)
 (drot/define-group "C-c c" compile-and-comments)
@@ -115,6 +115,9 @@
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
+
+;; Make TAB complete if the line is indented
+(setq tab-always-indent 'complete)
 
 ;; Increase default fill width
 (setq-default fill-column 80)
@@ -477,23 +480,7 @@
                            company-capf (company-dabbrev-code company-keywords)
                            company-files
                            company-dabbrev))
-
-  (define-key company-mode-map [remap indent-for-tab-command]
-    'company-indent-for-tab-command)
-
-  (setq tab-always-indent 'complete)
-
-  (defvar completion-at-point-functions-saved nil)
-
-  (defun company-indent-for-tab-command (&optional arg)
-    (interactive "P")
-    (let ((completion-at-point-functions-saved completion-at-point-functions)
-          (completion-at-point-functions '(company-complete-common-wrapper)))
-      (indent-for-tab-command arg)))
-
-  (defun company-complete-common-wrapper ()
-    (let ((completion-at-point-functions completion-at-point-functions-saved))
-      (company-complete-common))))
+  (bind-key [remap indent-for-tab-command] 'company-indent-or-complete-common company-mode-map))
 
 ;; Easy-kill
 (use-package easy-kill
