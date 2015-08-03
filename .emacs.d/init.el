@@ -278,6 +278,10 @@
 (use-package align
   :bind ("C-c x a" . align))
 
+;; Auto Insert
+(use-package auto-insert
+  :bind ("C-c i a" . auto-insert))
+
 ;; Whitespace mode
 (use-package whitespace
   :bind (("C-c x w" . whitespace-cleanup)
@@ -471,6 +475,8 @@
   :diminish (company-mode . "co")
   :init
   (add-hook 'after-init-hook #'global-company-mode)
+  (with-eval-after-load 'company
+    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
@@ -479,8 +485,7 @@
                            company-css
                            company-capf (company-dabbrev-code company-keywords)
                            company-files
-                           company-dabbrev))
-  (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
+                           company-dabbrev)))
 
 ;; Easy-kill
 (use-package easy-kill
