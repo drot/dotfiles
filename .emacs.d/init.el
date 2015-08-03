@@ -473,7 +473,7 @@
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   (with-eval-after-load 'company
-      (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
+    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-idle-delay nil
