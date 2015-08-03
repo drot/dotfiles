@@ -545,6 +545,7 @@
   (setq rcirc-fill-flag t
         rcirc-fill-column 'frame-width)
 
+  ;; rcirc color code support
   (use-package rcirc-styles
     :ensure t
     :config
@@ -553,11 +554,13 @@
                                      "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
                                      "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
 
+  ;; rcirc colored nicknames
   (use-package rcirc-color
     :ensure t
     :config
     (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
+  ;; rcirc notifications
   (use-package rcirc-notify
     :ensure t
     :config
@@ -671,7 +674,6 @@
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
-                  lisp-interaction-mode-hook
                   scheme-mode-hook))
     (add-hook hook #'lispy-mode))
 
@@ -694,7 +696,6 @@
   :diminish (eldoc-mode . "ElD")
   :config
   (dolist (hook '(eval-expression-minibuffer-setup-hook
-                  lisp-interaction-mode-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
     (add-hook hook #'eldoc-mode)))
@@ -717,7 +718,6 @@
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
-                  lisp-interaction-mode-hook
                   scheme-mode-hook))
     (add-hook hook #'rainbow-delimiters-mode)))
 
