@@ -167,7 +167,7 @@
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude (append recentf-exclude '("autoloads.el"))
-        recentf-auto-cleanup 300
+        recentf-auto-cleanup 600
         recentf-max-saved-items 100
         recentf-max-menu-items 20)
   (recentf-mode))
@@ -408,7 +408,8 @@
   :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
-                                  ("Canada/Eastern" "Quebec"))))
+                                  ("Canada/Eastern" "Quebec")
+                                  ("Asia/Saigon" "Saigon"))))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -417,11 +418,12 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Open URLs in Firefox
+;; Open URLs in Conkeror
 (use-package browse-url
   :bind ("C-c a u" . browse-url)
   :config
-  (setq browse-url-browser-function 'browse-url-firefox))
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "conkeror"))
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
