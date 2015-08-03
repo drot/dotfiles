@@ -332,10 +332,7 @@
 
 ;; Disable YASnippet in term mode
 (use-package term
-  :bind ("C-c a t" . ansi-term)
-  :config
-  (add-hook 'term-mode-hook (lambda ()
-                              (yas-minor-mode 0))))
+  :bind ("C-c a t" . ansi-term))
 
 ;; Use Unified diff format
 (use-package diff
@@ -476,10 +473,11 @@
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   (with-eval-after-load 'company
-    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
+      (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   :bind ("C-c i c" . company-yasnippet)
   :config
-  (setq company-echo-delay 0
+  (setq company-idle-delay nil
+        company-echo-delay 0
         company-show-numbers t
         company-backends '(company-nxml
                            company-css
@@ -564,13 +562,6 @@
     :ensure t
     :config
     (rcirc-notify-add-hooks))
-
-  (defun drot/rcirc-mode-hook ()
-    "Disable company and YASnippet in rcirc buffers."
-    (company-mode 0)
-    (yas-minor-mode 0))
-
-  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
 
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode))
@@ -730,6 +721,12 @@
                   scheme-mode-hook))
     (add-hook hook #'rainbow-delimiters-mode)))
 
+;; Rainbow mode
+(use-package rainbow-mode
+  :ensure t
+  :demand t
+  :bind ("C-c t r" . rainbow-mode))
+
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
@@ -759,6 +756,10 @@
   :ensure t
   :init
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
+  (with-eval-after-load 'yasnippet
+    (unbind-key "<tab>" yas-minor-mode-map)
+    (unbind-key "TAB" yas-minor-mode-map)
+    (bind-key "C-c ." #'yas-expand yas-minor-mode-map))
   :config
   (setq yas-verbosity 1)
   (yas-global-mode))
