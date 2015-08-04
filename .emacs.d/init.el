@@ -1,3 +1,33 @@
+;;; init.el --- My Emacs configuration -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2009-2015 drot
+
+;; Author: drot
+;; URL: https://gihub.com/drot/.emacs.d
+;; Keywords: convenience
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; Collection of Emacs configuration options I've accumulated over the years.
+
+;;; Code:
+
+;; Set some variables
 (defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
@@ -42,6 +72,7 @@
 (drot/define-group "C-c h" help)
 (drot/define-group "C-c i" insertion)
 (drot/define-group "C-c n" navigation)
+(drot/define-group "C-c o" multiple-cursors)
 (drot/define-group "C-c s" search-and-symbols)
 (drot/define-group "C-c t" toggles)
 (drot/define-group "C-c v" version-control)
@@ -85,7 +116,7 @@
 (fset 'yes-or-no-p #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
-(setq echo-keystrokes 0)
+(setq echo-keystrokes 0.1)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -106,9 +137,6 @@
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
-
-;; Make TAB complete if the line is indented
-(setq tab-always-indent 'complete)
 
 ;; Increase default fill width
 (setq-default fill-column 80)
@@ -165,16 +193,6 @@
                                         kill-ring))
   (savehist-mode))
 
-;; Save recent files list
-(use-package recentf
-  :config
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
-        recentf-exclude (append recentf-exclude '("autoloads.el"))
-        recentf-auto-cleanup 600
-        recentf-max-saved-items 100
-        recentf-max-menu-items 20)
-  (recentf-mode))
-
 ;; Remember point position in files
 (use-package saveplace
   :config
@@ -198,12 +216,6 @@
   :config
   (global-hi-lock-mode))
 
-;; Which function mode
-(use-package which-func
-  :config
-  (setq which-func-unknown "n/a")
-  (which-function-mode))
-
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
   :config
@@ -216,20 +228,30 @@
 
 ;; Ispell configuration
 (use-package ispell
+  :defer t
   :config
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra")))
 
 ;; Fly Spell mode configuration
 (use-package flyspell
+  :defer 5
   :config
   (setq flyspell-use-meta-tab nil)
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode))
 
+;; Which function mode
+(use-package which-func
+  :defer 5
+  :config
+  (setq which-func-unknown "n/a")
+  (which-function-mode))
+
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
+  :defer 5
   :config
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
@@ -237,6 +259,7 @@
 
 ;; Hide Show mode
 (use-package hideshow
+  :defer 5
   :config
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
@@ -249,6 +272,17 @@
   :bind ([remap list-buffers] . ibuffer)
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
+
+;; Save recent files list
+(use-package recentf
+  :defer 3
+  :config
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
+        recentf-exclude (append recentf-exclude '("autoloads.el"))
+        recentf-auto-cleanup 600
+        recentf-max-saved-items 100
+        recentf-max-menu-items 20)
+  (recentf-mode))
 
 ;; Dired
 (use-package dired
@@ -330,9 +364,12 @@
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
-;; Disable YASnippet in term mode
+;; ANSI term
 (use-package term
-  :bind ("C-c a t" . ansi-term))
+  :bind ("C-c a t" . ansi-term)
+  :config
+  (add-hook 'term-mode-hook (lambda ()
+                              (yas-minor-mode 0))))
 
 ;; Use Unified diff format
 (use-package diff
@@ -469,21 +506,18 @@
 ;; Company mode
 (use-package company
   :ensure t
+  :defer 3
   :diminish (company-mode . "co")
-  :init
-  (add-hook 'after-init-hook #'global-company-mode)
-  (with-eval-after-load 'company
-    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   :bind ("C-c i c" . company-yasnippet)
   :config
-  (setq company-idle-delay nil
-        company-echo-delay 0
+  (setq company-echo-delay 0
         company-show-numbers t
         company-backends '(company-nxml
                            company-css
                            company-capf (company-dabbrev-code company-keywords)
                            company-files
-                           company-dabbrev)))
+                           company-dabbrev))
+  (global-company-mode))
 
 ;; Easy-kill
 (use-package easy-kill
@@ -508,6 +542,16 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
+  :bind (("C-c o <SPC>" . mc/vertical-align-with-space)
+         ("C-c o a" . mc/vertical-align)
+         ("C-c o e" . mc/mark-more-like-this-extended)
+         ("C-c o h" . mc/mark-all-like-this-dwim)
+         ("C-c o l" . mc/edit-lines)
+         ("C-c o n" . mc/mark-next-like-this)
+         ("C-c o p" . mc/mark-previous-like-this)
+         ("C-c o C-a" . mc/edit-beginnings-of-lines)
+         ("C-c o C-e" . mc/edit-ends-of-lines)
+         ("C-c o C-s" . mc/mark-all-in-region))
   :config
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
@@ -566,6 +610,13 @@
     :config
     (rcirc-notify-add-hooks))
 
+  (defun drot/rcirc-mode-hook ()
+    "Disable company and YASnippet in rcirc buffers."
+    (company-mode 0)
+    (yas-minor-mode 0))
+
+  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode))
 
@@ -581,28 +632,6 @@
          ("C-c w r" . hydra-window-resize/body)
          ("C-c x o" . hydra-outline/body))
   :config
-  (defhydra hydra-multiple-cursors (:hint nil)
-    "
-
-^Down^              ^Up^                    ^Miscellaneous^
--------------------------------------------------------
-[_m_]: Mark Next    [_M_]: Mark Previous    [_l_]: Edit Lines
-[_s_]: Skip Next    [_S_]: Skip Previous    [_a_]: Mark All
-[_u_]: Unmark Next  [_U_]: Unmark Previous
-
-"
-    ("m" mc/mark-next-like-this)
-    ("s" mc/skip-to-next-like-this)
-    ("u" mc/unmark-next-like-this)
-
-    ("M" mc/mark-previous-like-this)
-    ("S" mc/skip-to-previous-like-this)
-    ("U" mc/unmark-previous-like-this)
-
-    ("l" mc/edit-lines :exit t)
-    ("a" mc/mark-all-like-this :exit t)
-    ("q" nil "Quit"))
-
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("j" enlarge-window "Enlarge Window")
@@ -651,11 +680,11 @@
 
 ;; ivy
 (use-package ivy
+  :bind (("C-c f r" . ivy-recentf)
+         ("C-c t r" . ivy-resume))
   :config
   (ivy-mode)
-  (setq ivy-use-virtual-buffers t)
-  :bind (("C-c f r" . ivy-recentf)
-         ("C-c t r" . ivy-resume)))
+  (setq ivy-use-virtual-buffers t))
 
 ;; Counsel
 (use-package counsel
@@ -671,13 +700,14 @@
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
+  :defer 5
   :config
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
 ;; Highlight Symbol
 (use-package highlight-symbol
   :ensure t
-  :demand t
+  :defer 5
   :bind (("C-c s %" . highlight-symbol-query-replace)
          ("C-c n n" . highlight-symbol-next-in-defun)
          ("C-c n p" . highlight-symbol-prev-in-defun))
@@ -691,6 +721,8 @@
 ;; Lispy
 (use-package lispy
   :ensure t
+  :defer 3
+  :bind ("C-c t l" . lispy-mode)
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -714,6 +746,8 @@
 ;; Show documentation with ElDoc mode
 (use-package eldoc
   :diminish (eldoc-mode . "ElD")
+  :defer 3
+  :bind ("C-c t e" . eldoc-mode)
   :config
   (dolist (hook '(eval-expression-minibuffer-setup-hook
                   emacs-lisp-mode-hook
@@ -728,6 +762,7 @@
 ;; Page break lines mode
 (use-package page-break-lines
   :ensure t
+  :defer 3
   :diminish (page-break-lines-mode . "PB")
   :config
   (global-page-break-lines-mode))
@@ -735,6 +770,7 @@
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
+  :defer 3
   :config
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -744,7 +780,7 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :demand t
+  :defer 5
   :bind ("C-c t r" . rainbow-mode)
   :config
   (dolist (hook '(css-mode-hook
@@ -754,12 +790,14 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
+  :defer 3
   :config
   (volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
   :ensure t
+  :defer 3
   :config
   (setq which-key-separator " > "
         which-key-special-keys nil
@@ -769,6 +807,7 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
+  :defer 3
   :diminish (undo-tree-mode . "UT")
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
@@ -778,13 +817,9 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :init
-  (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
-  (with-eval-after-load 'yasnippet
-    (unbind-key "<tab>" yas-minor-mode-map)
-    (unbind-key "TAB" yas-minor-mode-map)
-    (bind-key "C-c ." #'yas-expand yas-minor-mode-map))
+  :defer 5
   :config
+  (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   (setq yas-verbosity 1)
   (yas-global-mode))
 
@@ -796,3 +831,5 @@
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
+
+;;; init.el ends here
