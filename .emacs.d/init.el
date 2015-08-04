@@ -138,6 +138,9 @@
 (setq-default indent-tabs-mode nil
               tab-width 4)
 
+;; Make TAB complete if the line is indented
+(setq tab-always-indent 'complete)
+
 ;; Increase default fill width
 (setq-default fill-column 80)
 
@@ -510,6 +513,8 @@
   :diminish (company-mode . "co")
   :bind ("C-c i c" . company-yasnippet)
   :config
+  (with-eval-after-load 'company
+    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   (setq company-echo-delay 0
         company-show-numbers t
         company-backends '(company-nxml
@@ -707,6 +712,7 @@
 ;; Highlight Symbol
 (use-package highlight-symbol
   :ensure t
+  :diminish (highlight-symbol-mode . "H-S")
   :defer 5
   :bind (("C-c s %" . highlight-symbol-query-replace)
          ("C-c n n" . highlight-symbol-next-in-defun)
