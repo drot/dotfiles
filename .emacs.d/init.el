@@ -478,7 +478,8 @@
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
-  :diminish (abbrev-mode . "Abr")
+  :defer 5
+  :diminish (abbrev-mode . "AV")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
@@ -510,7 +511,7 @@
 (use-package company
   :ensure t
   :defer 3
-  :diminish (company-mode . "co")
+  :diminish (company-mode . "CY")
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
@@ -683,6 +684,7 @@
 
 ;; ivy
 (use-package ivy
+  :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
          ("C-c t r" . ivy-resume))
   :config
@@ -710,7 +712,7 @@
 ;; Highlight Symbol
 (use-package highlight-symbol
   :ensure t
-  :diminish (highlight-symbol-mode . "H-S")
+  :diminish (highlight-symbol-mode . "HL")
   :defer 5
   :bind (("C-c s %" . highlight-symbol-query-replace)
          ("C-c n n" . highlight-symbol-next-in-defun)
@@ -749,7 +751,7 @@
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
-  :diminish (eldoc-mode . "ElD")
+  :diminish (eldoc-mode . "ED")
   :defer 3
   :bind ("C-c t e" . eldoc-mode)
   :config
@@ -794,6 +796,7 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
+  :diminish (volatile-highlights-mode . "VH")
   :defer 3
   :config
   (volatile-highlights-mode))
@@ -821,6 +824,7 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
+  :diminish (yas-minor-mode . "YS")
   :defer 5
   :config
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
