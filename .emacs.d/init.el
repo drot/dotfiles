@@ -782,6 +782,7 @@
 (use-package rainbow-mode
   :ensure t
   :defer 5
+  :diminish (rainbow-mode . "RW")
   :bind ("C-c t r" . rainbow-mode)
   :config
   (dolist (hook '(css-mode-hook
