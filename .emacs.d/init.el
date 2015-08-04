@@ -513,8 +513,6 @@
   :diminish (company-mode . "co")
   :bind ("C-c i c" . company-yasnippet)
   :config
-  (with-eval-after-load 'company
-    (bind-key [remap indent-for-tab-command] #'company-indent-or-complete-common company-mode-map))
   (setq company-echo-delay 0
         company-show-numbers t
         company-backends '(company-nxml
