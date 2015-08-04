@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009-2015 drot
 
 ;; Author: drot
-;; URL: https://gihub.com/drot/.emacs.d
+;; URL: https://github.com/drot/.emacs.d
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
