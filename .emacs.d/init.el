@@ -79,11 +79,6 @@
 (drot/define-group "C-c w" windows-and-frames)
 (drot/define-group "C-c x" text)
 
-;; Disable unnecessary GUI elements
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
@@ -478,7 +473,6 @@
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
-  :defer 5
   :diminish (abbrev-mode . "AV")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
