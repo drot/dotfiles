@@ -763,7 +763,7 @@
 ;; nLinum mode
 (use-package nlinum
   :ensure t
-  :bind ("C-c t l" . nlinum-mode))
+  :bind ("C-c t n" . nlinum-mode))
 
 ;; Page break lines mode
 (use-package page-break-lines
