@@ -234,6 +234,7 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :defer 5
+  :diminish (flyspell-mode . "FS")
   :config
   (setq flyspell-use-meta-tab nil)
   (add-hook 'text-mode-hook #'flyspell-mode)
