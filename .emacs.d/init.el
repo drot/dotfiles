@@ -678,7 +678,7 @@
 (use-package ivy
   :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
-         ("C-c t r" . ivy-resume))
+         ("C-c t i" . ivy-resume))
   :config
   (ivy-mode)
   (setq ivy-use-virtual-buffers t))
