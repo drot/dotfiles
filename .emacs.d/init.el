@@ -1,4 +1,4 @@
-;;; init.el --- My Emacs configuration -*- lexical-binding: t; -*-
+;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2009-2015 drot
 
@@ -686,12 +686,12 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :init
+  :defer 5
+  :config
   (bind-keys* ([remap execute-extended-command] . counsel-M-x)
               ([remap find-file] . counsel-find-file)
               ([remap describe-variable] . counsel-describe-variable)
               ([remap describe-function] . counsel-describe-function))
-  :config
   (setq counsel-find-file-at-point t))
 
 ;; Highlight Numbers
