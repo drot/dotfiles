@@ -133,9 +133,6 @@
 (setq-default indent-tabs-mode nil
               tab-width 4)
 
-;; Make TAB complete if the line is indented
-(setq tab-always-indent 'complete)
-
 ;; Increase default fill width
 (setq-default fill-column 80)
 
