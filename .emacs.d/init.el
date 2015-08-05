@@ -97,15 +97,15 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
-;; Require a final new line
-(setq require-final-newline t)
+;; Disable site default settings
+(setq inhibit-default-init t)
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
 
-;; Disable site default settings
-(setq inhibit-default-init t)
+;; Disable startup echo area message
+(fset 'display-startup-echo-area-message #'ignore)
 
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
@@ -136,6 +136,9 @@
 ;; Increase default fill width
 (setq-default fill-column 80)
 
+;; Require a final new line
+(setq require-final-newline t)
+
 ;; Kill and yank clipboard options
 (setq x-select-enable-primary t
       save-interprogram-paste-before-kill t)
@@ -145,19 +148,6 @@
 
 ;; Set fallback font
 (set-fontset-font t nil (font-spec :family "Symbola") nil 'append)
-
-;; Do not save duplicates
-(setq history-delete-duplicates t
-      kill-do-not-save-duplicates t)
-
-;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-      backup-directory-alist `((".*" . ,drot/cache-directory))
-      version-control t
-      kept-new-versions 2
-      delete-old-versions t
-      backup-by-copying t)
 
 ;; Display read-only buffers in view mode
 (setq view-read-only t
@@ -177,6 +167,19 @@
 
 ;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
+
+;; Do not save duplicates
+(setq history-delete-duplicates t
+      kill-do-not-save-duplicates t)
+
+;; Configuration for backup files
+(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
+      backup-directory-alist `((".*" . ,drot/cache-directory))
+      version-control t
+      kept-new-versions 2
+      delete-old-versions t
+      backup-by-copying t)
 
 ;; Save minibuffer history
 (use-package savehist
@@ -282,16 +285,13 @@
 
 ;; Dired
 (use-package dired
-  :defer t
+  :commands dired-jump
   :config
   (require 'dired-x)
   (setq dired-listing-switches "-alh"
         dired-recursive-copies 'always
+        dired-recursive-deletes 'always
         dired-dwim-target t))
-
-;; Dired-x
-(use-package dired-x
-  :bind ("C-x C-j" . dired-jump))
 
 ;; Wind Move
 (use-package windmove
@@ -484,6 +484,13 @@
   :ensure t
   :bind ([remap other-window] . ace-window))
 
+;; Ace-link
+(use-package ace-link
+  :ensure t
+  :defer 5
+  :config
+  (ace-link-setup-default))
+
 ;; Avy
 (use-package avy
   :ensure t
@@ -493,6 +500,16 @@
          ("C-c l" . avy-goto-line)
          ("C-c j" . avy-goto-word-1)
          ("C-c n w" . avy-goto-word-0)))
+
+;; Anzu
+(use-package anzu
+  :ensure t
+  :defer 3
+  :diminish (anzu-mode . "AZ")
+  :bind (("C-c s q" . anzu-query-replace)
+         ("C-c s r" . anzu-query-replace-regexp))
+  :config
+  (global-anzu-mode))
 
 ;; Browse kill ring
 (use-package browse-kill-ring
@@ -678,10 +695,11 @@
 (use-package ivy
   :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
-         ("C-c t i" . ivy-resume))
+         ("C-c t c" . ivy-resume))
   :config
   (ivy-mode)
-  (setq ivy-use-virtual-buffers t))
+  (setq ivy-use-virtual-buffers t
+        ivy-format-function #'ivy-format-function-arrow))
 
 ;; Counsel
 (use-package counsel
