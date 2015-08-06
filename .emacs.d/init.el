@@ -284,13 +284,17 @@
 
 ;; Dired
 (use-package dired
-  :commands dired-jump
+  :defer t
   :config
   (require 'dired-x)
   (setq dired-listing-switches "-alh"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
         dired-dwim-target t))
+
+;; Dired-x
+(use-package dired-x
+  :commands dired-jump)
 
 ;; Wind Move
 (use-package windmove
@@ -503,10 +507,11 @@
 (use-package anzu
   :ensure t
   :diminish (anzu-mode . "AZ")
+  :commands global-anzu-mode
+  :init
+  (global-anzu-mode)
   :bind (("C-c s q" . anzu-query-replace)
-         ("C-c s r" . anzu-query-replace-regexp))
-  :config
-  (global-anzu-mode))
+         ("C-c s r" . anzu-query-replace-regexp)))
 
 ;; Browse kill ring
 (use-package browse-kill-ring
@@ -517,6 +522,9 @@
 (use-package company
   :ensure t
   :diminish (company-mode . "CY")
+  :commands global-company-mode
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-echo-delay 0
@@ -525,8 +533,7 @@
                            company-css
                            company-capf (company-dabbrev-code company-keywords)
                            company-files
-                           company-dabbrev))
-  (global-company-mode))
+                           company-dabbrev)))
 
 ;; Easy-kill
 (use-package easy-kill
