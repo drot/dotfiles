@@ -700,11 +700,11 @@
 ;; Counsel
 (use-package counsel
   :ensure t
+  :bind* (([remap execute-extended-command] . counsel-M-x)
+          ([remap find-file] . counsel-find-file)
+          ([remap describe-variable] . counsel-describe-variable)
+          ([remap describe-function] . counsel-describe-function))
   :config
-  (bind-keys* ([remap execute-extended-command] . counsel-M-x)
-              ([remap find-file] . counsel-find-file)
-              ([remap describe-variable] . counsel-describe-variable)
-              ([remap describe-function] . counsel-describe-function))
   (setq counsel-find-file-at-point t))
 
 ;; Highlight Numbers
