@@ -705,9 +705,9 @@
   :bind (("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
   :config
-  (ivy-mode)
   (setq ivy-use-virtual-buffers t
-        ivy-format-function #'ivy-format-function-arrow))
+        ivy-format-function #'ivy-format-function-arrow)
+  (ivy-mode))
 
 ;; Counsel
 (use-package counsel
