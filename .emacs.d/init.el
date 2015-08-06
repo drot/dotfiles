@@ -706,16 +706,17 @@
          ("C-c t c" . ivy-resume))
   :config
   (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow)
   (ivy-mode))
 
 ;; Counsel
 (use-package counsel
   :ensure t
-  :bind* (([remap execute-extended-command] . counsel-M-x)
-          ([remap find-file] . counsel-find-file)
-          ([remap describe-variable] . counsel-describe-variable)
-          ([remap describe-function] . counsel-describe-function))
+  :bind* (("M-x" . counsel-M-x)
+          ("C-x C-f" . counsel-find-file)
+          ("C-h v" . counsel-describe-variable)
+          ("C-h f" . counsel-describe-function))
   :config
   (setq counsel-find-file-at-point t))
 
