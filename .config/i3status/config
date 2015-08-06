@@ -1,0 +1,33 @@
+general {
+colors = true
+interval = 3
+color_good = "#f0dfaf"
+color_degraded = "#8cd0d3"
+color_bad = "#cc9393"
+}
+
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "volume master"
+order += "time"
+
+cpu_usage {
+format = "CPU: %usage "
+}
+
+cpu_temperature 0 {
+format = " TEMP: %degrees °C "
+max_threshold = "50"
+path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+volume master {
+format = " VOL: %volume "
+format_muted = " VOL: muted (%volume) "
+device = "default"
+mixer = "Master"
+}
+
+time {
+format = " %d-%m/%H:%M"
+}
