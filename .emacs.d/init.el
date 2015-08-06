@@ -83,6 +83,11 @@
 (use-package zenburn-theme
   :ensure t)
 
+;; Disable unnecessary GUI elements
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
 
