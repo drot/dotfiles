@@ -191,6 +191,16 @@
                                         kill-ring))
   (savehist-mode))
 
+;; Save recent files list
+(use-package recentf
+  :config
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
+        recentf-exclude (append recentf-exclude '("autoloads.el"))
+        recentf-auto-cleanup 600
+        recentf-max-saved-items 100
+        recentf-max-menu-items 20)
+  (recentf-mode))
+
 ;; Remember point position in files
 (use-package saveplace
   :config
@@ -233,16 +243,16 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :defer 5
   :diminish (flyspell-mode . "FS")
-  :config
-  (setq flyspell-use-meta-tab nil)
+  :commands flyspell-mode flyspell-prog-mode
+  :init
   (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  :config
+  (setq flyspell-use-meta-tab nil))
 
 ;; Which function mode
 (use-package which-func
-  :defer 5
   :config
   (setq which-func-unknown "n/a")
   (which-function-mode))
@@ -250,16 +260,16 @@
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
-  :defer 5
-  :config
+  :commands outline-minor-mode
+  :init
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
     (add-hook hook #'outline-minor-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
-  :defer 5
-  :config
+  :commands hs-minor-mode
+  :init
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
@@ -271,17 +281,6 @@
   :bind ([remap list-buffers] . ibuffer)
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
-
-;; Save recent files list
-(use-package recentf
-  :defer 3
-  :config
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
-        recentf-exclude (append recentf-exclude '("autoloads.el"))
-        recentf-auto-cleanup 600
-        recentf-max-saved-items 100
-        recentf-max-menu-items 20)
-  (recentf-mode))
 
 ;; Dired
 (use-package dired
@@ -487,7 +486,6 @@
 ;; Ace-link
 (use-package ace-link
   :ensure t
-  :defer 5
   :config
   (ace-link-setup-default))
 
@@ -504,7 +502,6 @@
 ;; Anzu
 (use-package anzu
   :ensure t
-  :defer 3
   :diminish (anzu-mode . "AZ")
   :bind (("C-c s q" . anzu-query-replace)
          ("C-c s r" . anzu-query-replace-regexp))
@@ -519,7 +516,6 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :defer 3
   :diminish (company-mode . "CY")
   :bind ("C-c i c" . company-yasnippet)
   :config
@@ -704,7 +700,6 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :defer 5
   :config
   (bind-keys* ([remap execute-extended-command] . counsel-M-x)
               ([remap find-file] . counsel-find-file)
@@ -715,31 +710,30 @@
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
-  :defer 5
-  :config
+  :commands highlight-numbers-mode
+  :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
 ;; Highlight Symbol
 (use-package highlight-symbol
   :ensure t
   :diminish (highlight-symbol-mode . "HL")
-  :defer 5
+  :commands highlight-symbol-mode highlight-symbol-nav-mode
+  :init
+  (add-hook 'prog-mode-hook #'highlight-symbol-mode)
+  (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode)
   :bind (("C-c s %" . highlight-symbol-query-replace)
          ("C-c n n" . highlight-symbol-next-in-defun)
          ("C-c n p" . highlight-symbol-prev-in-defun))
   :config
   (setq highlight-symbol-idle-delay 0.5
-        highlight-symbol-on-navigation-p t)
-
-  (add-hook 'prog-mode-hook #'highlight-symbol-mode)
-  (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode))
+        highlight-symbol-on-navigation-p t))
 
 ;; Lispy
 (use-package lispy
   :ensure t
-  :defer 3
-  :bind ("C-c t l" . lispy-mode)
-  :config
+  :commands lispy-mode
+  :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
                   scheme-mode-hook))
@@ -757,18 +751,19 @@
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer)
+  :bind ("C-c t l" . lispy-mode))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
   :diminish (eldoc-mode . "ED")
-  :defer 3
-  :bind ("C-c t e" . eldoc-mode)
-  :config
+  :commands eldoc-mode
+  :init
   (dolist (hook '(eval-expression-minibuffer-setup-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
-    (add-hook hook #'eldoc-mode)))
+    (add-hook hook #'eldoc-mode))
+  :bind ("C-c t e" . eldoc-mode))
 
 ;; nLinum mode
 (use-package nlinum
@@ -778,7 +773,6 @@
 ;; Page break lines mode
 (use-package page-break-lines
   :ensure t
-  :defer 3
   :diminish (page-break-lines-mode . "PB")
   :config
   (global-page-break-lines-mode))
@@ -786,8 +780,8 @@
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
-  :defer 3
-  :config
+  :commands rainbow-delimiters-mode
+  :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
                   scheme-mode-hook))
@@ -796,26 +790,24 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :defer 5
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-mode)
-  :config
+  :commands rainbow-mode
+  :init
   (dolist (hook '(css-mode-hook
                   html-mode-hook))
-    (add-hook hook #'rainbow-mode)))
+    (add-hook hook #'rainbow-mode))
+  :bind ("C-c t r" . rainbow-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
   :diminish (volatile-highlights-mode . "VH")
-  :defer 3
   :config
   (volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
   :ensure t
-  :defer 3
   :config
   (setq which-key-separator " > "
         which-key-special-keys nil
@@ -825,7 +817,6 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :defer 3
   :diminish (undo-tree-mode . "UT")
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
@@ -836,7 +827,6 @@
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . "YS")
-  :defer 5
   :config
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   (setq yas-verbosity 1)
