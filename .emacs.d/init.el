@@ -540,6 +540,11 @@
                            company-files
                            company-dabbrev)))
 
+;; Discover my major
+(use-package discover-my-major
+  :ensure t
+  :bind ("C-c h m" . discover-my-major))
+
 ;; Easy-kill
 (use-package easy-kill
   :ensure t
@@ -713,10 +718,10 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :bind* (("M-x" . counsel-M-x)
-          ("C-x C-f" . counsel-find-file)
-          ("C-h v" . counsel-describe-variable)
-          ("C-h f" . counsel-describe-function))
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h v" . counsel-describe-variable)
+         ("C-h f" . counsel-describe-function))
   :config
   (setq counsel-find-file-at-point t))
 
