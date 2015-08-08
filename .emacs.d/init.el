@@ -28,14 +28,14 @@
 ;;; Code:
 
 ;; Set some variables
-(defvar drot/emacs-directory (file-name-directory load-file-name)
+(defconst drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
+(defconst drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
 
-(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
+(defconst drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Prefer newest version of a file
@@ -789,6 +789,19 @@
 (use-package nlinum
   :ensure t
   :bind ("C-c t n" . nlinum-mode))
+
+;; Key chord
+(use-package key-chord
+  :ensure t
+  :config
+  (key-chord-define-global "jj" 'avy-goto-word-1)
+  (key-chord-define-global "jl" 'avy-goto-line)
+  (key-chord-define-global "jk" 'avy-goto-char)
+  (key-chord-define-global "js" 'swiper)
+  (key-chord-define-global "uu" 'undo-tree-visualize)
+  (key-chord-define-global "xx" 'execute-extended-command)
+  (key-chord-define-global "yy" 'browse-kill-ring)
+  (key-chord-mode 1))
 
 ;; Page break lines mode
 (use-package page-break-lines
