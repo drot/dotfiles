@@ -200,10 +200,12 @@
 (use-package recentf
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
-        recentf-exclude (append recentf-exclude '("autoloads.el"))
-        recentf-auto-cleanup 600
+        recentf-exclude (list "/\\.git/.*\\'"
+                              "/elpa/.*\\'"
+                              ".*\\.gz\\'")
         recentf-max-saved-items 100
-        recentf-max-menu-items 20)
+        recentf-max-menu-items 20
+        recentf-auto-cleanup 600)
   (recentf-mode))
 
 ;; Remember point position in files
