@@ -284,6 +284,20 @@
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode)))
 
+;; Bug references
+(use-package bug-reference
+  :commands (bug-reference-mode bug-reference-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'bug-reference-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
+
+;; Go-to address
+(use-package goto-addr
+  :commands (goto-address-mode goto-address-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
+
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
   :defer t
@@ -304,6 +318,10 @@
 ;; Dired-x
 (use-package dired-x
   :commands dired-jump)
+
+;; Proced
+(use-package proced
+  :bind ("C-x p" . proced))
 
 ;; Wind Move
 (use-package windmove
