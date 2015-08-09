@@ -79,6 +79,10 @@
 (drot/define-group "C-c w" windows-and-frames)
 (drot/define-group "C-c x" text)
 
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load drot/custom-file 'noerror 'nomessage)
+
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
@@ -797,8 +801,7 @@
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer)
-  :bind ("C-c t l" . lispy-mode))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -811,10 +814,21 @@
     (add-hook hook #'eldoc-mode))
   :bind ("C-c t e" . eldoc-mode))
 
-;; nLinum mode
+;; NeoTree
+(use-package neotree
+  :ensure t
+  :bind ("C-c t n" . neotree-toggle)
+  :config
+  (setq neo-banner-message nil
+        neo-create-file-auto-open t
+        neo-smart-open t
+        neo-show-hidden-files t
+        neo-auto-indent-point t))
+
+;; Nlinum mode
 (use-package nlinum
   :ensure t
-  :bind ("C-c t n" . nlinum-mode))
+  :bind ("C-c t l" . nlinum-mode))
 
 ;; Page break lines mode
 (use-package page-break-lines
@@ -882,9 +896,5 @@
 (use-package zop-to-char
   :ensure t
   :bind ([remap zap-to-char]. zop-to-char))
-
-;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
