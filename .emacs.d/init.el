@@ -84,9 +84,11 @@
   :ensure t)
 
 ;; Disable unnecessary GUI elements
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+(dolist (mode '(menu-bar-mode
+                tool-bar-mode
+                scroll-bar-mode))
+  (when (fboundp mode)
+    (funcall mode 0)))
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
@@ -433,6 +435,12 @@
         tramp-backup-directory-alist backup-directory-alist
         tramp-auto-save-directory drot/cache-directory))
 
+;; Find file at point
+(use-package ffap
+  :defer t
+  :config
+  (setq ffap-machine-p-known 'reject))
+
 ;; Prevent GnuTLS warnings
 (use-package gnutls
   :defer t
@@ -570,6 +578,8 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
+  :init
+  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory))
   :bind (("C-c o <SPC>" . mc/vertical-align-with-space)
          ("C-c o a" . mc/vertical-align)
          ("C-c o e" . mc/mark-more-like-this-extended)
@@ -579,9 +589,7 @@
          ("C-c o p" . mc/mark-previous-like-this)
          ("C-c o C-a" . mc/edit-beginnings-of-lines)
          ("C-c o C-e" . mc/edit-ends-of-lines)
-         ("C-c o C-s" . mc/mark-all-in-region))
-  :config
-  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
+         ("C-c o C-s" . mc/mark-all-in-region)))
 
 ;; Org-mode
 (use-package org
