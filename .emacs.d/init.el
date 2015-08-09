@@ -80,8 +80,15 @@
 (drot/define-group "C-c x" text)
 
 ;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
+(use-package cus-edit
+  :init
+  (load drot/custom-file 'noerror 'nomessage)
+  :config
+  (setq custom-file drot/custom-file
+        custom-buffer-done-kill t
+        custom-buffer-verbose-help nil
+        custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
 
 ;; Color theme
 (use-package zenburn-theme
@@ -744,7 +751,8 @@
   :config
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
-        ivy-format-function #'ivy-format-function-arrow)
+        ivy-format-function #'ivy-format-function-arrow
+        ivy-wrap t)
   (ivy-mode))
 
 ;; Counsel
