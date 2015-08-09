@@ -80,15 +80,8 @@
 (drot/define-group "C-c x" text)
 
 ;; Load changes from the customize interface
-(use-package cus-edit
-  :init
-  (load drot/custom-file 'noerror 'nomessage)
-  :config
-  (setq custom-file drot/custom-file
-        custom-buffer-done-kill t
-        custom-buffer-verbose-help nil
-        custom-unlispify-tag-names nil
-        custom-unlispify-menu-entries nil))
+(setq custom-file drot/custom-file)
+(load drot/custom-file 'noerror 'nomessage)
 
 ;; Color theme
 (use-package zenburn-theme
@@ -253,6 +246,15 @@
 (use-package winner
   :config
   (winner-mode))
+
+;; Customize interface options
+(use-package cus-edit
+  :defer t
+  :config
+  (setq custom-buffer-done-kill t
+        custom-buffer-verbose-help nil
+        custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
 
 ;; Ispell configuration
 (use-package ispell
