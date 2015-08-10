@@ -41,11 +41,10 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Activate packages
-(require 'package)
+;; Activate packages and add MELPA
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
