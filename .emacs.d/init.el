@@ -820,8 +820,7 @@
   (dolist (hook '(eval-expression-minibuffer-setup-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
-    (add-hook hook #'eldoc-mode))
-  :bind ("C-c t e" . eldoc-mode))
+    (add-hook hook #'eldoc-mode)))
 
 ;; NeoTree
 (use-package neotree
