@@ -512,7 +512,8 @@
 
 ;; Open URLs in Conkeror
 (use-package browse-url
-  :bind ("C-c a u" . browse-url)
+  :bind (("C-c a u" . browse-url)
+         ("C-c n u" . browse-url-at-point))
   :config
   (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "conkeror"))
