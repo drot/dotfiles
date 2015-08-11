@@ -270,7 +270,9 @@
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
-  (setq flyspell-use-meta-tab nil))
+  (setq flyspell-use-meta-tab nil
+        flyspell-issue-message-flag nil
+        flyspell-issue-welcome-flag nil))
 
 ;; Which function mode
 (use-package which-func
@@ -324,7 +326,6 @@
   (require 'dired-x)
   (setq dired-listing-switches "-alh"
         dired-recursive-copies 'always
-        dired-recursive-deletes 'always
         dired-dwim-target t))
 
 ;; Dired-x
@@ -745,7 +746,7 @@
   :bind (("C-c s s" . swiper)
          ("C-c s i" . swiper-from-isearch)))
 
-;; ivy
+;; Ivy
 (use-package ivy
   :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
