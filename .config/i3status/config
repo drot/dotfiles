@@ -8,6 +8,7 @@ color_bad = "#cc9393"
 
 order += "cpu_usage"
 order += "cpu_temperature 0"
+order += "load"
 order += "volume master"
 order += "time"
 
@@ -19,6 +20,10 @@ cpu_temperature 0 {
 format = " TEMP: %degrees °C "
 max_threshold = "50"
 path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+load {
+format = " LOAD: %1min %5min %15min "
 }
 
 volume master {
