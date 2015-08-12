@@ -70,8 +70,9 @@
 (drot/define-group "C-c f" files)
 (drot/define-group "C-c h" help)
 (drot/define-group "C-c i" insertion)
+(drot/define-group "C-c m" multiple-cursors)
 (drot/define-group "C-c n" navigation)
-(drot/define-group "C-c o" multiple-cursors)
+(drot/define-group "C-c o" org)
 (drot/define-group "C-c s" search-and-symbols)
 (drot/define-group "C-c t" toggles)
 (drot/define-group "C-c v" version-control)
@@ -377,6 +378,10 @@
 (use-package hippie-exp
   :bind ([remap dabbrev-expand] . hippie-expand))
 
+;; EWW
+(use-package eww
+  :bind (("C-c a w" . eww)))
+
 ;; Regexp builder
 (use-package re-builder
   :defer t
@@ -405,7 +410,7 @@
 
 ;; ANSI term
 (use-package term
-  :bind ("C-c a t" . ansi-term)
+  :bind ("C-c a a" . ansi-term)
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode 0))))
@@ -497,7 +502,7 @@
 
 ;; World time
 (use-package time
-  :bind ("C-c a w" . display-time-world)
+  :bind ("C-c a t" . display-time-world)
   :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
@@ -612,21 +617,24 @@
   :ensure t
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory))
-  :bind (("C-c o <SPC>" . mc/vertical-align-with-space)
-         ("C-c o a" . mc/vertical-align)
-         ("C-c o e" . mc/mark-more-like-this-extended)
-         ("C-c o h" . mc/mark-all-like-this-dwim)
-         ("C-c o l" . mc/edit-lines)
-         ("C-c o n" . mc/mark-next-like-this)
-         ("C-c o p" . mc/mark-previous-like-this)
-         ("C-c o C-a" . mc/edit-beginnings-of-lines)
-         ("C-c o C-e" . mc/edit-ends-of-lines)
-         ("C-c o C-s" . mc/mark-all-in-region)))
+  :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
+         ("C-c m a" . mc/vertical-align)
+         ("C-c m e" . mc/mark-more-like-this-extended)
+         ("C-c m h" . mc/mark-all-like-this-dwim)
+         ("C-c m l" . mc/edit-lines)
+         ("C-c m n" . mc/mark-next-like-this)
+         ("C-c m p" . mc/mark-previous-like-this)
+         ("C-c m C-a" . mc/edit-beginnings-of-lines)
+         ("C-c m C-e" . mc/edit-ends-of-lines)
+         ("C-c m C-s" . mc/mark-all-in-region)))
 
 ;; Org-mode
 (use-package org
-  :bind (("C-c a a" . org-agenda)
-         ("C-c f l" . org-store-link))
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o c" . org-capture)
+         ("C-c o t" . org-todo-list)
+         ("C-c o s" . org-search-view)
+         ("C-c o l" . org-store-link))
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
