@@ -626,7 +626,7 @@
 ;; Org-mode
 (use-package org
   :bind (("C-c a a" . org-agenda)
-         ("C-c a l" . org-store-link))
+         ("C-c f l" . org-store-link))
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t
