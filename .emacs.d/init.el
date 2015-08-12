@@ -685,7 +685,23 @@
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
 
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
-  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode))
+  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+
+  (defun-rcirc-command chanserv (arg)
+    "Send a private message to the ChanServ service."
+    (rcirc-send-string process (concat "chanserv " arg)))
+
+  (defun-rcirc-command mystery (arg)
+    "Send a private message to the Mystery service."
+    (rcirc-send-string process (concat "mystery " arg)))
+
+  (defun-rcirc-command memoserv (arg)
+    "Send a private message to the MemoServ service."
+    (rcirc-send-string process (concat "memoserv " arg)))
+
+  (defun-rcirc-command nickserv (arg)
+    "Send a private message to the NickServ service."
+    (rcirc-send-string process (concat "nickserv " arg))))
 
 ;; Systemd mode
 (use-package systemd
