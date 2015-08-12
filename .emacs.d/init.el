@@ -634,7 +634,7 @@
 
 ;; rcirc configuration
 (use-package rcirc
-  :defer t
+  :bind ("C-c a i" . irc)
   :config
   (setq rcirc-server-alist
         '(("adams.freenode.net" :port 7000 :encryption tls
@@ -654,8 +654,7 @@
           `(("freenode" nickserv "drot" ,(drot/nickserv-password))
             ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
 
-  (setq rcirc-fill-flag t
-        rcirc-fill-column 'frame-width)
+  (setq rcirc-fill-column 'frame-width)
 
   ;; rcirc color code support
   (use-package rcirc-styles
