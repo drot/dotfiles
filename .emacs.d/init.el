@@ -422,11 +422,11 @@
   (setq diff-switches "-u"))
 
 ;; Ediff window split
-(use-package ediff
+(use-package ediff-wind
   :defer t
   :config
-  (setq ediff-split-window-function #'split-window-horizontally
-        ediff-window-setup-function #'ediff-setup-windows-plain))
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain
+        ediff-split-window-function #'split-window-horizontally))
 
 ;; Compilation configuration
 (use-package compile
