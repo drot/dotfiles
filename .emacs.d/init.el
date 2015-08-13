@@ -372,7 +372,8 @@
          ("C-c h 4 f" . find-function-other-window)
          ("C-c h k" . find-function-on-key)
          ("C-c h v" . find-variable)
-         ("C-c h 4 v" . find-variable-other-window)))
+         ("C-c h 4 v" . find-variable-other-window)
+         ("C-c h l" . find-library)))
 
 ;; Replace dabbrev-expand with hippie-expand
 (use-package hippie-exp
@@ -518,8 +519,8 @@
 
 ;; Open URLs in Conkeror
 (use-package browse-url
-  :bind (("C-c a u" . browse-url)
-         ("C-c n u" . browse-url-at-point))
+  :bind (("C-c a b" . browse-url)
+         ("C-c n b" . browse-url-at-point))
   :config
   (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "conkeror"))
@@ -649,18 +650,22 @@
            :channels ("#archlinux" "#emacs"))
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
-
-  (when (file-exists-p "~/.private.el")
-    (setq drot/credentials-file "~/.private.el")
-
-    (defun drot/nickserv-password ()
-      (with-temp-buffer
-        (insert-file-contents-literally drot/credentials-file)
-        (plist-get (read (buffer-string)) :nickserv-password)))
-
-    (setq rcirc-authinfo
-          `(("freenode" nickserv "drot" ,(drot/nickserv-password))
-            ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
+  
+  (defadvice rcirc (before rcirc-read-from-authinfo activate)
+    "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
+This doesn't support the chanserv auth method"
+    (unless arg
+      (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet")
+                                     :require '(:port :user :secret)))
+        (let ((secret (plist-get p :secret))
+              (method (intern (plist-get p :port))))
+          (add-to-list 'rcirc-authinfo
+                       (list (plist-get p :host)
+                             method
+                             (plist-get p :user)
+                             (if (functionp secret)
+                                 (funcall secret)
+                               secret)))))))
 
   (setq rcirc-fill-column 'frame-width)
 
@@ -691,9 +696,8 @@
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
-
-  (add-hook 'rcirc-mode-hook #'flyspell-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
   (defun-rcirc-command chanserv (arg)
     "Send a private message to the ChanServ service."
