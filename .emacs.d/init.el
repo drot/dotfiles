@@ -650,7 +650,8 @@
            :channels ("#archlinux" "#emacs"))
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
-  
+
+  (require 'auth-source)
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
