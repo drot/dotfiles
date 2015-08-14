@@ -134,9 +134,6 @@
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
-;; Search more extensively with apropos
-(setq apropos-do-all t)
-
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
@@ -166,9 +163,6 @@
 ;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
-
-;; Pretty lambdas
-(global-prettify-symbols-mode)
 
 ;; Allow scrolling during Isearch
 (setq isearch-allow-scroll t)
@@ -239,6 +233,11 @@
 (use-package hi-lock
   :config
   (global-hi-lock-mode))
+
+;; Pretty lambdas
+(use-package prog-mode
+  :config
+  (global-prettify-symbols-mode))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
@@ -381,6 +380,12 @@
 ;; Replace dabbrev-expand with hippie-expand
 (use-package hippie-exp
   :bind ([remap dabbrev-expand] . hippie-expand))
+
+;; Search more extensively with apropos
+(use-package apropos
+  :bind ("C-c h a" . apropos)
+  :config
+  (setq apropos-do-all t))
 
 ;; EWW
 (use-package eww
