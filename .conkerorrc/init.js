@@ -178,7 +178,6 @@ define_webjump("archwiki", "https://wiki.archlinux.org/index.php?search=%s",
                $alternative="http://www.archlinux.org");
 define_webjump("arch-package", "https://www.archlinux.org/packages/?sort=&q=%s&maintainer=&flagged=",
                $alternative="https://www.archlinux.org/packages");
-define_webjump("github", "http://github.com/search?q=%s&type=Everything");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
 
@@ -214,7 +213,6 @@ create_selection_search("archwiki", "C-c a");
 create_selection_search("arch-package", "C-c p");
 create_selection_search("dictionary", "C-c d");
 create_selection_search("image", "C-c i");
-create_selection_search("github", "C-c h");
 create_selection_search("google", "C-c g");
 create_selection_search("slang", "C-c s");
 create_selection_search("wikipedia", "C-c w");
