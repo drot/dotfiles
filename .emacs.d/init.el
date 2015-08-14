@@ -134,6 +134,9 @@
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
+;; Search more extensively with apropos
+(setq apropos-do-all t)
+
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
