@@ -2,7 +2,7 @@
 Xcursor.theme: Adwaita
 
 ! Emacs
-Emacs.font: Terminus-10
+Emacs*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2
 Emacs.menuBar: off
 Emacs.toolBar: off
 Emacs.verticalScrollBars: off
