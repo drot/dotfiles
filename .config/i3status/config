@@ -17,8 +17,8 @@ format = "CPU: %usage "
 }
 
 cpu_temperature 0 {
-format = " TEMP: %degrees °C "
-max_threshold = "50"
+format = " TEMP: %degrees°C "
+max_threshold = "60"
 path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
