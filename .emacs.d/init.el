@@ -461,7 +461,6 @@
   :config
   (setq c-basic-offset 4)
   (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
-
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; NXML mode
@@ -588,8 +587,10 @@
   (add-hook 'after-init-hook #'global-company-mode)
   :bind ("C-c i c" . company-yasnippet)
   :config
-  (setq company-echo-delay 0
+  (setq company-minimum-prefix-length 2
+        company-echo-delay 0
         company-show-numbers t
+        company-selection-wrap-around t
         company-backends '(company-nxml
                            company-css
                            company-capf (company-dabbrev-code company-keywords)
