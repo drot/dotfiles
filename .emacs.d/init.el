@@ -88,11 +88,9 @@
   :ensure t)
 
 ;; Disable unnecessary GUI elements
-(dolist (mode '(menu-bar-mode
-                tool-bar-mode
-                scroll-bar-mode))
-  (when (fboundp mode)
-    (funcall mode 0)))
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; Show tooltips in the echo area
 (tooltip-mode 0)
