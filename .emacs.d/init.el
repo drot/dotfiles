@@ -215,6 +215,11 @@
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
   (setq-default save-place t))
 
+;; Uniquify buffer names
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward))
+
 ;; Highlight matching parentheses
 (use-package paren
   :config
@@ -327,6 +332,7 @@
   (require 'dired-x)
   (setq dired-listing-switches "-alh"
         dired-recursive-copies 'always
+        dired-recursive-deletes 'always
         dired-dwim-target t))
 
 ;; Dired-x
@@ -655,7 +661,7 @@
   (setq rcirc-server-alist
         '(("adams.freenode.net" :port 7000 :encryption tls
            :channels ("#archlinux" "#emacs"))
-          ("pine.forestnet.org" :port 6697 :encryption tls
+          ("pine.forestnet.org" :port 6662 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
 
   (require 'auth-source)
