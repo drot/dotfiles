@@ -57,6 +57,27 @@
 (require 'diminish)
 (require 'bind-key)
 
+(defmacro drot/define-group (prefix name &optional map)
+  "Define a group at PREFIX with NAME in MAP."
+  (let ((command (intern (format "group:%s" name))))
+    `(progn
+       (define-prefix-command ',command)
+       (bind-key ,prefix #',command ,map))))
+
+(drot/define-group "C-c a" applications)
+(drot/define-group "C-c c" compile-and-comments)
+(drot/define-group "C-c f" files)
+(drot/define-group "C-c h" help)
+(drot/define-group "C-c i" insertion)
+(drot/define-group "C-c m" multiple-cursors)
+(drot/define-group "C-c n" navigation)
+(drot/define-group "C-c o" org)
+(drot/define-group "C-c s" search-and-symbols)
+(drot/define-group "C-c t" toggles)
+(drot/define-group "C-c v" version-control)
+(drot/define-group "C-c w" windows-and-frames)
+(drot/define-group "C-c x" text)
+
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
@@ -92,10 +113,10 @@
       initial-scratch-message nil)
 
 ;; Disable startup echo area message
-(fset 'display-startup-echo-area-message 'ignore)
+(fset 'display-startup-echo-area-message #'ignore)
 
 ;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
@@ -144,13 +165,13 @@
 (setq isearch-allow-scroll t)
 
 ;; Cycle spacing
-(bind-key [remap just-one-space] 'cycle-spacing)
+(bind-key [remap just-one-space] #'cycle-spacing)
 
 ;; Display personal bindings
-(bind-key "C-c h b" 'describe-personal-keybindings)
+(bind-key "C-c h b" #'describe-personal-keybindings)
 
 ;; Toggle debug on error
-(bind-key "C-c t d" 'toggle-debug-on-error)
+(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Do not save duplicates
 (setq history-delete-duplicates t
@@ -251,8 +272,8 @@
   :diminish (flyspell-mode . "FS")
   :commands flyspell-mode flyspell-prog-mode
   :init
-  (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
@@ -271,7 +292,7 @@
   :init
   (dolist (hook '(text-mode-hook
                   prog-mode-hook))
-    (add-hook hook 'outline-minor-mode)))
+    (add-hook hook #'outline-minor-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -280,21 +301,21 @@
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
-    (add-hook hook 'hs-minor-mode)))
+    (add-hook hook #'hs-minor-mode)))
 
 ;; Bug references
 (use-package bug-reference
   :commands (bug-reference-mode bug-reference-prog-mode)
   :init
-  (add-hook 'text-mode-hook 'bug-reference-mode)
-  (add-hook 'prog-mode-hook 'bug-reference-prog-mode))
+  (add-hook 'text-mode-hook #'bug-reference-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
 
 ;; Go-to address
 (use-package goto-addr
   :commands (goto-address-mode goto-address-prog-mode)
   :init
-  (add-hook 'text-mode-hook 'goto-address-mode)
-  (add-hook 'prog-mode-hook 'goto-address-prog-mode))
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
@@ -396,8 +417,8 @@
 (use-package shell
   :bind ("C-c a s" . shell)
   :config
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-  (add-hook 'shell-mode-hook 'compilation-shell-minor-mode))
+  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
+  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; ANSI term
 (use-package term
@@ -416,8 +437,8 @@
 (use-package ediff-wind
   :defer t
   :config
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain
-        ediff-split-window-function 'split-window-horizontally))
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain
+        ediff-split-window-function #'split-window-horizontally))
 
 ;; Compilation configuration
 (use-package compile
@@ -435,7 +456,7 @@
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
-  (add-hook 'compilation-filter-hook 'drot/colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -443,7 +464,7 @@
   :config
   (setq c-basic-offset 4)
   (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
-  (add-hook 'c-mode-common-hook 'auto-fill-mode))
+  (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; NXML mode
 (use-package nxml-mode
@@ -511,7 +532,7 @@
   :bind (("C-c a b" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function 'browse-url-generic
+  (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "conkeror"))
 
 ;; Load abbrevs and enable Abbrev Mode
@@ -566,7 +587,7 @@
   :diminish (company-mode . "CY")
   :commands global-company-mode
   :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  (add-hook 'after-init-hook #'global-company-mode)
   :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-minimum-prefix-length 2
@@ -687,9 +708,9 @@ This doesn't support the chanserv auth method"
     (company-mode 0)
     (yas-minor-mode 0))
 
-  (add-hook 'rcirc-mode-hook 'drot/rcirc-mode-hook)
-  (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
-  (add-hook 'rcirc-mode-hook 'flyspell-mode)
+  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
   (defun-rcirc-command chanserv (arg)
     "Send a private message to the ChanServ service."
@@ -773,7 +794,7 @@ This doesn't support the chanserv auth method"
   :config
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
-        ivy-format-function 'ivy-format-function-arrow
+        ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t)
   (ivy-mode))
 
@@ -792,7 +813,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands highlight-numbers-mode
   :init
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
 ;; Highlight Symbol
 (use-package highlight-symbol
@@ -800,8 +821,8 @@ This doesn't support the chanserv auth method"
   :diminish (highlight-symbol-mode . "HL")
   :commands highlight-symbol-mode highlight-symbol-nav-mode
   :init
-  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
-  (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
+  (add-hook 'prog-mode-hook #'highlight-symbol-mode)
+  (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode)
   :bind (("C-c s %" . highlight-symbol-query-replace)
          ("C-c n n" . highlight-symbol-next-in-defun)
          ("C-c n p" . highlight-symbol-prev-in-defun))
@@ -817,7 +838,7 @@ This doesn't support the chanserv auth method"
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'lispy-mode))
+    (add-hook hook #'lispy-mode))
 
   (defvar drot/lispy-minibuffer-commands '(eval-expression
                                            pp-eval-expression
@@ -831,7 +852,7 @@ This doesn't support the chanserv auth method"
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook 'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
@@ -841,7 +862,7 @@ This doesn't support the chanserv auth method"
   (dolist (hook '(eval-expression-minibuffer-setup-hook
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
-    (add-hook hook 'eldoc-mode)))
+    (add-hook hook #'eldoc-mode)))
 
 ;; NeoTree
 (use-package neotree
@@ -874,7 +895,7 @@ This doesn't support the chanserv auth method"
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
                   scheme-mode-hook))
-    (add-hook hook 'rainbow-delimiters-mode)))
+    (add-hook hook #'rainbow-delimiters-mode)))
 
 ;; Rainbow mode
 (use-package rainbow-mode
@@ -884,7 +905,7 @@ This doesn't support the chanserv auth method"
   :init
   (dolist (hook '(css-mode-hook
                   html-mode-hook))
-    (add-hook hook 'rainbow-mode))
+    (add-hook hook #'rainbow-mode))
   :bind ("C-c t r" . rainbow-mode))
 
 ;; Volatile Highlights
