@@ -653,6 +653,13 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
+;; Better package selection menu
+(use-package paradox
+  :ensure t
+  :bind ("C-c a p" . paradox-list-packages)
+  :config
+  (setq paradox-github-token t))
+
 ;; rcirc configuration
 (use-package rcirc
   :bind ("C-c a i" . irc)
