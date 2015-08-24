@@ -82,6 +82,12 @@
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
 
+;; Bug hunter
+(use-package bug-hunter
+  :ensure t
+  :bind (("C-c a h" . bug-hunter-init-file)
+         ("C-c a H" . bug-hunter-file)))
+
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
@@ -338,6 +344,10 @@
 (use-package dired-x
   :commands dired-jump)
 
+;; Revert buffer
+(use-package files
+  :bind ("C-c f z" . revert-buffer))
+
 ;; Proced
 (use-package proced
   :bind ("C-x p" . proced))
@@ -462,8 +472,10 @@
 (use-package cc-mode
   :defer t
   :config
-  (setq c-basic-offset 4)
-  (setcar (nthcdr 2 c-default-style) '(other . "k&r"))
+  (setq c-basic-offset 4
+        c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; NXML mode
