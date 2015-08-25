@@ -755,8 +755,7 @@ This doesn't support the chanserv auth method"
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c x m" . hydra-multiple-cursors/body)
-         ("C-c w r" . hydra-window-resize/body)
+  :bind (("C-c w r" . hydra-window-resize/body)
          ("C-c x o" . hydra-outline/body))
   :config
   (defhydra hydra-window-resize (:columns 2)
