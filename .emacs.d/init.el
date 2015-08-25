@@ -619,7 +619,15 @@
                            company-files
                            company-dabbrev)))
 
-;; Discover my major
+;; Company Statistics
+(use-package company-statistics
+  :ensure t
+  :commands company-statistics-mode
+  :init (add-hook 'after-init-hook #'company-statistics-mode)
+  :config
+  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
+
+;; Discover My Major
 (use-package discover-my-major
   :ensure t
   :bind ("C-c h m" . discover-my-major))
@@ -806,7 +814,7 @@ This doesn't support the chanserv auth method"
     ("b" outline-backward-same-level)
     ("z" nil "Quit")))
 
-;; Swiper and ivy
+;; Swiper and Ivy
 (use-package swiper
   :ensure t
   :diminish (ivy-mode . "IY")
