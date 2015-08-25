@@ -352,6 +352,10 @@
 (use-package proced
   :bind ("C-x p" . proced))
 
+;; EWW
+(use-package eww
+  :bind (("C-c a w" . eww)))
+
 ;; Wind Move
 (use-package windmove
   :bind (("C-c w <left>" . windmove-left)
@@ -400,9 +404,12 @@
   :config
   (setq apropos-do-all t))
 
-;; EWW
-(use-package eww
-  :bind (("C-c a w" . eww)))
+;; Copyright
+(use-package copyright
+  :bind ("C-c i r" . copyright-update)
+  :config
+  (setq copyright-year-ranges t
+        copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Regexp builder
 (use-package re-builder
