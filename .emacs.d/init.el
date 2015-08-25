@@ -806,15 +806,13 @@ This doesn't support the chanserv auth method"
     ("b" outline-backward-same-level)
     ("z" nil "Quit")))
 
-;; Swiper
+;; Swiper and ivy
 (use-package swiper
-  :bind (("C-c s s" . swiper)
-         ("C-c s i" . swiper-from-isearch)))
-
-;; Ivy
-(use-package ivy
+  :ensure t
   :diminish (ivy-mode . "IY")
-  :bind (("C-c f r" . ivy-recentf)
+  :bind (("C-c s s" . swiper)
+         ("C-c s i" . swiper-from-isearch)
+         ("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
   :config
   (setq ivy-use-virtual-buffers t
