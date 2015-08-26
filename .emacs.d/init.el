@@ -585,6 +585,13 @@
          ("C-c j" . avy-goto-word-1)
          ("C-c n w" . avy-goto-word-0)))
 
+;; Adaptive Wrap
+(use-package adaptive-wrap
+  :ensure t
+  :commands adaptive-wrap-prefix-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
+
 ;; Anzu
 (use-package anzu
   :ensure t
@@ -623,7 +630,8 @@
 (use-package company-statistics
   :ensure t
   :commands company-statistics-mode
-  :init (add-hook 'after-init-hook #'company-statistics-mode)
+  :init
+  (add-hook 'after-init-hook #'company-statistics-mode)
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
@@ -714,8 +722,6 @@ This doesn't support the chanserv auth method"
                                  (funcall secret)
                                secret)))))))
 
-  (setq rcirc-fill-column 'frame-width)
-
   ;; rcirc color code support
   (use-package rcirc-styles
     :ensure t
@@ -741,6 +747,10 @@ This doesn't support the chanserv auth method"
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
+
+  ;; Use Visual Line mode for filling
+  (setq rcirc-fill-flag nil)
+  (add-hook 'rcirc-mode-hook #'visual-line-mode)
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
@@ -976,6 +986,13 @@ This doesn't support the chanserv auth method"
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t)
   (global-undo-tree-mode))
+
+;; Visual fill column
+(use-package visual-fill-column
+  :ensure t
+  :commands visual-fill-column-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
 ;; YASnippet
 (use-package yasnippet
