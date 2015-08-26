@@ -743,14 +743,14 @@ This doesn't support the chanserv auth method"
     :config
     (rcirc-notify-add-hooks))
 
+  ;; Use Visual Line mode for filling
+  (setq rcirc-fill-flag nil)
+  (add-hook 'rcirc-mode-hook #'visual-line-mode)
+
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
-
-  ;; Use Visual Line mode for filling
-  (setq rcirc-fill-flag nil)
-  (add-hook 'rcirc-mode-hook #'visual-line-mode)
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
@@ -987,7 +987,7 @@ This doesn't support the chanserv auth method"
         undo-tree-auto-save-history t)
   (global-undo-tree-mode))
 
-;; Visual fill column
+;; Visual Fill Column
 (use-package visual-fill-column
   :ensure t
   :commands visual-fill-column-mode
