@@ -745,14 +745,15 @@ This doesn't support the chanserv auth method"
 
   ;; Use Visual Line mode for filling
   (setq rcirc-fill-flag nil)
-  (add-hook 'rcirc-mode-hook #'visual-line-mode)
 
   (defun drot/rcirc-mode-hook ()
-    "Disable company and YASnippet in rcirc buffers."
+    "Set fill collumn, disable company and YASnippet in rcirc buffers."
+    (set-fill-column 155)
     (company-mode 0)
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'visual-line-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
