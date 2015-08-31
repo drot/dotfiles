@@ -208,6 +208,7 @@
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude (list "/\\.git/.*\\'"
                               "/elpa/.*\\'"
+                              "/cache/.*\\'"
                               ".*\\.gz\\'")
         recentf-max-saved-items 100
         recentf-max-menu-items 20
