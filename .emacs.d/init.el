@@ -44,7 +44,7 @@
 ;; Activate packages and add MELPA
 (setq package-enable-at-startup nil)
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -458,6 +458,12 @@
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
         ediff-split-window-function #'split-window-horizontally))
 
+;;; Version control
+(use-package vc-hooks
+  :defer t
+  :config
+  (setq vc-follow-symlinks t))
+
 ;; Compilation configuration
 (use-package compile
   :bind (("C-c c c" . compile)
@@ -635,6 +641,15 @@
   (add-hook 'after-init-hook #'company-statistics-mode)
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
+
+;; Diff-hl
+(use-package diff-hl
+  :ensure t
+  :config
+  (global-diff-hl-mode)
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode)))
 
 ;; Discover My Major
 (use-package discover-my-major
@@ -857,21 +872,6 @@ This doesn't support the chanserv auth method"
   :commands highlight-numbers-mode
   :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
-
-;; Highlight Symbol
-(use-package highlight-symbol
-  :ensure t
-  :diminish (highlight-symbol-mode . "HL")
-  :commands highlight-symbol-mode highlight-symbol-nav-mode
-  :init
-  (add-hook 'prog-mode-hook #'highlight-symbol-mode)
-  (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode)
-  :bind (("C-c s %" . highlight-symbol-query-replace)
-         ("C-c n n" . highlight-symbol-next-in-defun)
-         ("C-c n p" . highlight-symbol-prev-in-defun))
-  :config
-  (setq highlight-symbol-idle-delay 0.5
-        highlight-symbol-on-navigation-p t))
 
 ;; Lispy
 (use-package lispy
