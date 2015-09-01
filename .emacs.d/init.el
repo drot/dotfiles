@@ -579,7 +579,8 @@
 ;; Ace-link
 (use-package ace-link
   :ensure t
-  :config
+  :commands ace-link-setup-default
+  :init
   (ace-link-setup-default))
 
 ;; Avy
@@ -929,7 +930,8 @@ This doesn't support the chanserv auth method"
 (use-package page-break-lines
   :ensure t
   :diminish (page-break-lines-mode . "PB")
-  :config
+  :commands global-page-break-lines-mode
+  :init
   (global-page-break-lines-mode))
 
 ;; Rainbow Delimiters
@@ -957,7 +959,8 @@ This doesn't support the chanserv auth method"
 (use-package volatile-highlights
   :ensure t
   :diminish (volatile-highlights-mode . "VH")
-  :config
+  :commands volatile-highlights-mode
+  :init
   (volatile-highlights-mode))
 
 ;; Which Key
@@ -986,10 +989,12 @@ This doesn't support the chanserv auth method"
 (use-package undo-tree
   :ensure t
   :diminish (undo-tree-mode . "UT")
+  :commands global-undo-tree-mode
+  :init
+  (global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
-        undo-tree-auto-save-history t)
-  (global-undo-tree-mode))
+        undo-tree-auto-save-history t))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
@@ -1002,7 +1007,8 @@ This doesn't support the chanserv auth method"
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . "YS")
-  :config
+  :commands yas-global-mode
+  :init
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   (setq yas-verbosity 1)
   (yas-global-mode))
