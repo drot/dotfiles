@@ -642,12 +642,14 @@
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
-;; Diff-hl
+;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :config
+  :commands global-diff-hl-mode diff-hl-dired-mode
+  :init
   (global-diff-hl-mode)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  :config
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
