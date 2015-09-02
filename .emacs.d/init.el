@@ -357,6 +357,10 @@
 (use-package eww
   :bind (("C-c a w" . eww)))
 
+;; Gnus
+(use-package gnus
+  :bind ("C-c a g" . gnus))
+
 ;; Wind Move
 (use-package windmove
   :bind (("C-c w <left>" . windmove-left)
@@ -546,6 +550,18 @@
                                   ("Canada/Eastern" "Quebec")
                                   ("Asia/Saigon" "Saigon"))))
 
+;; Org-mode
+(use-package org
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o c" . org-capture)
+         ("C-c o t" . org-todo-list)
+         ("C-c o s" . org-search-view)
+         ("C-c o l" . org-store-link))
+  :config
+  (setq org-log-done 'time
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t))
+
 ;; Doc View mode configuration
 (use-package doc-view
   :defer t
@@ -695,19 +711,7 @@
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region)))
 
-;; Org-mode
-(use-package org
-  :bind (("C-c o a" . org-agenda)
-         ("C-c o c" . org-capture)
-         ("C-c o t" . org-todo-list)
-         ("C-c o s" . org-search-view)
-         ("C-c o l" . org-store-link))
-  :config
-  (setq org-log-done 'time
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t))
-
-;; Better package selection menu
+;; Paradox
 (use-package paradox
   :ensure t
   :bind ("C-c a p" . paradox-list-packages)
@@ -969,7 +973,9 @@ This doesn't support the chanserv auth method"
   :config
   (setq which-key-separator " > "
         which-key-special-keys nil
-        which-key-show-prefix 'top)
+        which-key-show-prefix 'top
+        which-key-use-C-h-for-paging t
+        which-key-prevent-C-h-from-cycling t)
   (which-key-add-prefix-title "C-c a" "applications")
   (which-key-add-prefix-title "C-c c" "compile-and-comments")
   (which-key-add-prefix-title "C-c f" "files")
