@@ -57,27 +57,6 @@
 (require 'diminish)
 (require 'bind-key)
 
-(defmacro drot/define-group (prefix name &optional map)
-  "Define a group at PREFIX with NAME in MAP."
-  (let ((command (intern (format "group:%s" name))))
-    `(progn
-       (define-prefix-command ',command)
-       (bind-key ,prefix #',command ,map))))
-
-(drot/define-group "C-c a" applications)
-(drot/define-group "C-c c" compile-and-comments)
-(drot/define-group "C-c f" files)
-(drot/define-group "C-c h" help)
-(drot/define-group "C-c i" insertion)
-(drot/define-group "C-c m" multiple-cursors)
-(drot/define-group "C-c n" navigation)
-(drot/define-group "C-c o" org)
-(drot/define-group "C-c s" search-and-symbols)
-(drot/define-group "C-c t" toggles)
-(drot/define-group "C-c v" version-control)
-(drot/define-group "C-c w" windows-and-frames)
-(drot/define-group "C-c x" text)
-
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
@@ -973,9 +952,20 @@ This doesn't support the chanserv auth method"
   :config
   (setq which-key-separator " > "
         which-key-special-keys nil
-        which-key-show-prefix 'top
-        which-key-use-C-h-for-paging t
-        which-key-prevent-C-h-from-cycling t)
+        which-key-show-prefix 'top)
+  (which-key-declare-prefix-names "C-c a" "applications")
+  (which-key-declare-prefix-names "C-c c" "compile-and-comments")
+  (which-key-declare-prefix-names "C-c f" "files")
+  (which-key-declare-prefix-names "C-c h" "help")
+  (which-key-declare-prefix-names "C-c i" "insertion")
+  (which-key-declare-prefix-names "C-c m" "multiple-cursors")
+  (which-key-declare-prefix-names "C-c n" "navigation")
+  (which-key-declare-prefix-names "C-c o" "org")
+  (which-key-declare-prefix-names "C-c s" "search-and-symbols")
+  (which-key-declare-prefix-names "C-c t" "toggles")
+  (which-key-declare-prefix-names "C-c v" "version-control")
+  (which-key-declare-prefix-names "C-c w" "windows-and-frames")
+  (which-key-declare-prefix-names "C-c x" "text")
   (which-key-add-prefix-title "C-c a" "applications")
   (which-key-add-prefix-title "C-c c" "compile-and-comments")
   (which-key-add-prefix-title "C-c f" "files")
