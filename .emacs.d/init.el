@@ -860,6 +860,7 @@ This doesn't support the chanserv auth method"
   (ivy-mode)
   :config
   (setq ivy-use-virtual-buffers t
+        ivy-display-style 'fancy
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t))
@@ -972,7 +973,7 @@ This doesn't support the chanserv auth method"
 (use-package which-key
   :ensure t
   :config
-  (which-key-declare-prefix-names
+  (which-key-declare-prefixes
     "C-x n" "narrow"
     "C-x r" "register"
     "C-c @" "hs-and-outline"
