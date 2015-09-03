@@ -173,16 +173,21 @@
 
 ;; Save minibuffer history
 (use-package savehist
+  :commands savehist-mode
+  :init
+  (savehist-mode)
   :config
   (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
-                                        kill-ring))
-  (savehist-mode))
+                                        kill-ring)))
 
 ;; Save recent files list
 (use-package recentf
+  :commands recentf-mode
+  :init
+  (recentf-mode)
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude (list "/\\.git/.*\\'"
@@ -191,8 +196,7 @@
                               ".*\\.gz\\'")
         recentf-max-saved-items 100
         recentf-max-menu-items 20
-        recentf-auto-cleanup 600)
-  (recentf-mode))
+        recentf-auto-cleanup 600))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -214,27 +218,32 @@
 
 ;; Electric pair mode
 (use-package elec-pair
-  :config
+  :commands electric-pair-mode
+  :init
   (electric-pair-mode))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
-  :config
+  :commands global-hi-lock-mode
+  :init
   (global-hi-lock-mode))
 
 ;; Pretty lambdas
 (use-package prog-mode
-  :config
+  :commands global-prettify-symbols-mode
+  :init
   (global-prettify-symbols-mode))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
-  :config
+  :commands minibuffer-depth-indicate-mode
+  :init
   (minibuffer-depth-indicate-mode))
 
 ;; Undo and redo the window configuration
 (use-package winner
-  :config
+  :commands winner-mode
+  :init
   (winner-mode))
 
 ;; Customize interface options
@@ -267,9 +276,11 @@
 
 ;; Which function mode
 (use-package which-func
+  :commands which-function-mode
+  :init
+  (which-function-mode)
   :config
-  (setq which-func-unknown "n/a")
-  (which-function-mode))
+  (setq which-func-unknown "n/a"))
 
 ;; Outline mode
 (use-package outline
@@ -599,11 +610,11 @@
 (use-package anzu
   :ensure t
   :diminish (anzu-mode . "AZ")
+  :bind (("C-c s q" . anzu-query-replace)
+         ("C-c s r" . anzu-query-replace-regexp))
   :commands global-anzu-mode
   :init
-  (global-anzu-mode)
-  :bind (("C-c s q" . anzu-query-replace)
-         ("C-c s r" . anzu-query-replace-regexp)))
+  (global-anzu-mode))
 
 ;; Browse kill ring
 (use-package browse-kill-ring
@@ -614,10 +625,10 @@
 (use-package company
   :ensure t
   :diminish (company-mode . "CY")
+  :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
   :init
   (add-hook 'after-init-hook #'global-company-mode)
-  :bind ("C-c i c" . company-yasnippet)
   :config
   (setq company-minimum-prefix-length 2
         company-echo-delay 0
@@ -665,6 +676,15 @@
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
+;; Hardhat mode
+(use-package hardhat
+  :ensure t
+  :commands global-hardhat-mode
+  :init
+  (global-hardhat-mode)
+  :config
+  (setq hardhat-mode-lighter " HH"))
+
 ;; Magit
 (use-package magit
   :ensure t
@@ -677,8 +697,6 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
-  :init
-  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory))
   :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
          ("C-c m a" . mc/vertical-align)
          ("C-c m e" . mc/mark-more-like-this-extended)
@@ -688,7 +706,9 @@
          ("C-c m p" . mc/mark-previous-like-this)
          ("C-c m C-a" . mc/edit-beginnings-of-lines)
          ("C-c m C-e" . mc/edit-ends-of-lines)
-         ("C-c m C-s" . mc/mark-all-in-region)))
+         ("C-c m C-s" . mc/mark-all-in-region))
+  :init
+  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
 ;; Paradox
 (use-package paradox
@@ -835,12 +855,14 @@ This doesn't support the chanserv auth method"
          ("C-c s i" . swiper-from-isearch)
          ("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
+  :commands ivy-mode
+  :init
+  (ivy-mode)
   :config
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
-        ivy-wrap t)
-  (ivy-mode))
+        ivy-wrap t))
 
 ;; Counsel
 (use-package counsel
@@ -931,12 +953,12 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
+  :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
   (dolist (hook '(css-mode-hook
                   html-mode-hook))
-    (add-hook hook #'rainbow-mode))
-  :bind ("C-c t r" . rainbow-mode))
+    (add-hook hook #'rainbow-mode)))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
