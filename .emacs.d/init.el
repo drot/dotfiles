@@ -950,24 +950,25 @@ This doesn't support the chanserv auth method"
 (use-package which-key
   :ensure t
   :config
+  (which-key-declare-prefix-names
+    "C-c @" "hs-and-outline"
+    "C-c &" "yasnippet"
+    "C-c a" "applications"
+    "C-c c" "compile-and-comments"
+    "C-c f" "files"
+    "C-c h" "help"
+    "C-c i" "insertion"
+    "C-c m" "multiple-cursors"
+    "C-c n" "navigation"
+    "C-c o" "org"
+    "C-c s" "search-and-symbols"
+    "C-c t" "toggles"
+    "C-c v" "version-control"
+    "C-c w" "windows-and-frames"
+    "C-c x" "text")
   (setq which-key-separator " > "
         which-key-special-keys nil
         which-key-show-prefix 'top
-        which-key-prefix-name-alist '(((3 120) . "text")
-                                      ((3 119) . "windows-and-frames")
-                                      ((3 118) . "version-control")
-                                      ((3 116) . "toggles")
-                                      ((3 115) . "search-and-symbols")
-                                      ((3 111) . "org")
-                                      ((3 110) . "navigation")
-                                      ((3 109) . "multiple-cursors")
-                                      ((3 105) . "insertion")
-                                      ((3 104) . "help")
-                                      ((3 102) . "files")
-                                      ((3 99) . "compile-and-comments")
-                                      ((3 97) . "applications")
-                                      ((3 64) . "hs-and-outline")
-                                      ((3 38) . "yasnippet"))
         which-key-prefix-title-alist which-key-prefix-name-alist)
   (which-key-mode))
 
