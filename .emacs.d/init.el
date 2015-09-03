@@ -41,6 +41,9 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
+;; Disable site default settings
+(setq inhibit-default-init t)
+
 ;; Activate packages and add MELPA
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -89,9 +92,6 @@
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
-
-;; Disable site default settings
-(setq inhibit-default-init t)
 
 ;; Don't show the welcome messages
 (setq inhibit-startup-screen t
@@ -951,6 +951,8 @@ This doesn't support the chanserv auth method"
   :ensure t
   :config
   (which-key-declare-prefix-names
+    "C-x n" "narrow"
+    "C-x r" "register"
     "C-c @" "hs-and-outline"
     "C-c &" "yasnippet"
     "C-c a" "applications"
