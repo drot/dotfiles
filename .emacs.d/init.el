@@ -246,22 +246,6 @@
   :init
   (winner-mode))
 
-;; Customize interface options
-(use-package cus-edit
-  :defer t
-  :config
-  (setq custom-buffer-done-kill t
-        custom-buffer-verbose-help nil
-        custom-unlispify-tag-names nil
-        custom-unlispify-menu-entries nil))
-
-;; Ispell configuration
-(use-package ispell
-  :defer t
-  :config
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra")))
-
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FS")
@@ -406,12 +390,6 @@
   (setq copyright-year-ranges t
         copyright-names-regexp (regexp-quote user-login-name)))
 
-;; Regexp builder
-(use-package re-builder
-  :defer t
-  :config
-  (setq reb-re-syntax 'string))
-
 ;; Bookmarks save directory
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
@@ -438,6 +416,28 @@
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode 0))))
+
+;; Regexp builder
+(use-package re-builder
+  :defer t
+  :config
+  (setq reb-re-syntax 'string))
+
+;; Customize interface options
+(use-package cus-edit
+  :defer t
+  :config
+  (setq custom-buffer-done-kill t
+        custom-buffer-verbose-help nil
+        custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
+
+;; Ispell configuration
+(use-package ispell
+  :defer t
+  :config
+  (setq ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra")))
 
 ;; Use Unified diff format
 (use-package diff
@@ -475,6 +475,14 @@
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+
+;; Python mode
+(use-package python
+  :defer t
+  :config
+  (add-hook 'python-mode-hook (lambda ()
+                                (setq fill-column 79)))
+  (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -770,7 +778,7 @@ This doesn't support the chanserv auth method"
 
   (defun drot/rcirc-mode-hook ()
     "Set fill collumn, disable company and YASnippet in rcirc buffers."
-    (set-fill-column 155)
+    (setq fill-column 155)
     (company-mode 0)
     (yas-minor-mode 0))
 
@@ -973,6 +981,9 @@ This doesn't support the chanserv auth method"
 (use-package which-key
   :ensure t
   :config
+  (setq which-key-separator " > "
+        which-key-special-keys nil
+        which-key-show-prefix 'top)
   (which-key-declare-prefixes
     "C-x n" "narrow"
     "C-x r" "register"
@@ -991,9 +1002,6 @@ This doesn't support the chanserv auth method"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
     "C-c x" "text")
-  (setq which-key-separator " > "
-        which-key-special-keys nil
-        which-key-show-prefix 'top)
   (which-key-mode))
 
 ;; Undo Tree
