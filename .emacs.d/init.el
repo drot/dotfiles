@@ -298,131 +298,6 @@
   (add-hook 'text-mode-hook #'goto-address-mode)
   (add-hook 'prog-mode-hook #'goto-address-prog-mode))
 
-;; Use Ibuffer for buffer list
-(use-package ibuffer
-  :defer t
-  :bind ([remap list-buffers] . ibuffer)
-  :config
-  (setq ibuffer-default-sorting-mode 'major-mode))
-
-;; Dired
-(use-package dired
-  :defer t
-  :config
-  (require 'dired-x)
-  (setq dired-listing-switches "-alh"
-        dired-recursive-copies 'always
-        dired-recursive-deletes 'always
-        dired-dwim-target t))
-
-;; Dired-x
-(use-package dired-x
-  :commands dired-jump)
-
-;; Revert buffer
-(use-package files
-  :bind ("C-c f z" . revert-buffer))
-
-;; Proced
-(use-package proced
-  :bind ("C-x p" . proced))
-
-;; EWW
-(use-package eww
-  :bind (("C-c a w" . eww)))
-
-;; Gnus
-(use-package gnus
-  :bind ("C-c a g" . gnus))
-
-;; Wind Move
-(use-package windmove
-  :bind (("C-c w <left>" . windmove-left)
-         ("C-c w <right>" . windmove-right)
-         ("C-c w <up>" . windmove-up)
-         ("C-c w <down>" . windmove-down)))
-
-;; Indent region
-(use-package indent
-  :bind ("C-c x i" . indent-region))
-
-;; Align
-(use-package align
-  :bind ("C-c x a" . align))
-
-;; Auto Insert
-(use-package auto-insert
-  :bind ("C-c i a" . auto-insert))
-
-;; Whitespace mode
-(use-package whitespace
-  :bind (("C-c x w" . whitespace-cleanup)
-         ("C-c t w" . whitespace-mode)))
-
-;; Comment region
-(use-package newcomment
-  :bind (("C-c c k" . comment-region)
-         ("C-c c u" . uncomment-region)))
-
-;; Find function and variable definitions
-(use-package find-func
-  :bind (("C-c h f" . find-function)
-         ("C-c h 4 f" . find-function-other-window)
-         ("C-c h k" . find-function-on-key)
-         ("C-c h v" . find-variable)
-         ("C-c h 4 v" . find-variable-other-window)
-         ("C-c h l" . find-library)))
-
-;; Replace dabbrev-expand with hippie-expand
-(use-package hippie-exp
-  :bind ([remap dabbrev-expand] . hippie-expand))
-
-;; Search more extensively with apropos
-(use-package apropos
-  :bind ("C-c h a" . apropos)
-  :config
-  (setq apropos-do-all t))
-
-;; Copyright
-(use-package copyright
-  :bind ("C-c i r" . copyright-update)
-  :config
-  (setq copyright-year-ranges t
-        copyright-names-regexp (regexp-quote user-login-name)))
-
-;; Bookmarks save directory
-(use-package bookmark
-  :bind ("C-c f b" . list-bookmarks)
-  :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
-        bookmark-save-flag 1))
-
-;; Eshell save directory
-(use-package eshell
-  :bind ("C-c a e" . eshell)
-  :config
-  (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory)))
-
-;; Shell mode configuration
-(use-package shell
-  :bind ("C-c a s" . shell)
-  :config
-  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
-  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
-
-;; ANSI term
-(use-package term
-  :bind ("C-c a a" . ansi-term)
-  :config
-  (add-hook 'term-mode-hook (lambda ()
-                              (yas-minor-mode 0))))
-
-;; Regexp builder
-(use-package re-builder
-  :defer t
-  :config
-  (setq reb-re-syntax 'string))
-
 ;; Customize interface options
 (use-package cus-edit
   :defer t
@@ -452,29 +327,24 @@
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
         ediff-split-window-function #'split-window-horizontally))
 
+;; Use Ibuffer for buffer list
+(use-package ibuffer
+  :defer t
+  :bind ([remap list-buffers] . ibuffer)
+  :config
+  (setq ibuffer-default-sorting-mode 'major-mode))
+
 ;;; Version control
 (use-package vc-hooks
   :defer t
   :config
   (setq vc-follow-symlinks t))
 
-;; Compilation configuration
-(use-package compile
-  :bind (("C-c c c" . compile)
-         ("C-c c r" . recompile))
+;; Regexp builder
+(use-package re-builder
+  :defer t
   :config
-  (setq compilation-scroll-output 'first-error
-        compilation-ask-about-save nil)
-
-  (require 'ansi-color)
-  (defun drot/colorize-compilation-buffer ()
-    "Colorize a compilation mode buffer."
-    (interactive)
-    (when (eq major-mode 'compilation-mode)
-      (let ((inhibit-read-only t))
-        (ansi-color-apply-on-region (point-min) (point-max)))))
-
-  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+  (setq reb-re-syntax 'string))
 
 ;; Python mode
 (use-package python
@@ -501,6 +371,20 @@
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t))
 
+;; Dired
+(use-package dired
+  :defer t
+  :config
+  (require 'dired-x)
+  (setq dired-listing-switches "-alh"
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'always
+        dired-dwim-target t))
+
+;; Dired-x
+(use-package dired-x
+  :commands dired-jump)
+
 ;; TRAMP configuration
 (use-package tramp
   :defer t
@@ -521,6 +405,137 @@
   :defer t
   :config
   (setq gnutls-min-prime-bits 1024))
+
+;; Doc View mode configuration
+(use-package doc-view
+  :defer t
+  :config
+  (setq doc-view-resolution 300
+        doc-view-continuous t))
+
+;; Open URLs in Conkeror
+(use-package browse-url
+  :bind (("C-c a b" . browse-url)
+         ("C-c n b" . browse-url-at-point))
+  :config
+  (setq browse-url-browser-function #'browse-url-generic
+        browse-url-generic-program "conkeror"))
+
+;; Revert buffer
+(use-package files
+  :bind ("C-c f z" . revert-buffer))
+
+;; Proced
+(use-package proced
+  :bind ("C-x p" . proced))
+
+;; EWW
+(use-package eww
+  :bind (("C-c a w" . eww)))
+
+;; Gnus
+(use-package gnus
+  :bind ("C-c a g" . gnus))
+
+;; Wind Move
+(use-package windmove
+  :bind (("C-c w <left>" . windmove-left)
+         ("C-c w <right>" . windmove-right)
+         ("C-c w <up>" . windmove-up)
+         ("C-c w <down>" . windmove-down)))
+
+;; Find function and variable definitions
+(use-package find-func
+  :bind (("C-c h f" . find-function)
+         ("C-c h 4 f" . find-function-other-window)
+         ("C-c h k" . find-function-on-key)
+         ("C-c h v" . find-variable)
+         ("C-c h 4 v" . find-variable-other-window)
+         ("C-c h l" . find-library)))
+
+;; Indent region
+(use-package indent
+  :bind ("C-c x i" . indent-region))
+
+;; Whitespace mode
+(use-package whitespace
+  :bind (("C-c x w" . whitespace-cleanup)
+         ("C-c t w" . whitespace-mode)))
+
+;; Align
+(use-package align
+  :bind ("C-c x a" . align))
+
+;; Auto Insert
+(use-package auto-insert
+  :bind ("C-c i a" . auto-insert))
+
+;; Copyright
+(use-package copyright
+  :bind ("C-c i r" . copyright-update)
+  :config
+  (setq copyright-year-ranges t
+        copyright-names-regexp (regexp-quote user-login-name)))
+
+;; Comment region
+(use-package newcomment
+  :bind (("C-c c k" . comment-region)
+         ("C-c c u" . uncomment-region)))
+
+;; Replace dabbrev-expand with hippie-expand
+(use-package hippie-exp
+  :bind ([remap dabbrev-expand] . hippie-expand))
+
+;; Search more extensively with apropos
+(use-package apropos
+  :bind ("C-c h a" . apropos)
+  :config
+  (setq apropos-do-all t))
+
+;; Bookmarks save directory
+(use-package bookmark
+  :bind ("C-c f b" . list-bookmarks)
+  :config
+  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
+        bookmark-save-flag 1))
+
+;; Eshell save directory
+(use-package eshell
+  :bind ("C-c a e" . eshell)
+  :config
+  (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory)))
+
+;; Shell mode configuration
+(use-package shell
+  :bind ("C-c a s" . shell)
+  :config
+  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
+  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
+
+;; ANSI term
+(use-package term
+  :bind ("C-c a a" . ansi-term)
+  :config
+  (add-hook 'term-mode-hook (lambda ()
+                              (yas-minor-mode 0))))
+
+;; Compilation configuration
+(use-package compile
+  :bind (("C-c c c" . compile)
+         ("C-c c r" . recompile))
+  :config
+  (setq compilation-scroll-output 'first-error
+        compilation-ask-about-save nil)
+
+  (require 'ansi-color)
+  (defun drot/colorize-compilation-buffer ()
+    "Colorize a compilation mode buffer."
+    (interactive)
+    (when (eq major-mode 'compilation-mode)
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (point-min) (point-max)))))
+
+  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; Calendar configuration
 (use-package calendar
@@ -560,21 +575,6 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
-;; Doc View mode configuration
-(use-package doc-view
-  :defer t
-  :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
-
-;; Open URLs in Conkeror
-(use-package browse-url
-  :bind (("C-c a b" . browse-url)
-         ("C-c n b" . browse-url-at-point))
-  :config
-  (setq browse-url-browser-function #'browse-url-generic
-        browse-url-generic-program "conkeror"))
-
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
@@ -607,66 +607,10 @@
          ("C-c j" . avy-goto-word-1)
          ("C-c n w" . avy-goto-word-0)))
 
-;; Adaptive Wrap
-(use-package adaptive-wrap
-  :ensure t
-  :commands adaptive-wrap-prefix-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
-
-;; Anzu
-(use-package anzu
-  :ensure t
-  :diminish (anzu-mode . "AZ")
-  :bind (("C-c s q" . anzu-query-replace)
-         ("C-c s r" . anzu-query-replace-regexp))
-  :commands global-anzu-mode
-  :init
-  (global-anzu-mode))
-
 ;; Browse kill ring
 (use-package browse-kill-ring
   :ensure t
   :bind ("C-c i y" . browse-kill-ring))
-
-;; Company mode
-(use-package company
-  :ensure t
-  :diminish (company-mode . "CY")
-  :bind ("C-c i c" . company-yasnippet)
-  :commands global-company-mode
-  :init
-  (add-hook 'after-init-hook #'global-company-mode)
-  :config
-  (setq company-minimum-prefix-length 2
-        company-echo-delay 0
-        company-show-numbers t
-        company-selection-wrap-around t
-        company-backends '(company-nxml
-                           company-css
-                           company-capf (company-dabbrev-code company-keywords)
-                           company-files
-                           company-dabbrev)))
-
-;; Company Statistics
-(use-package company-statistics
-  :ensure t
-  :commands company-statistics-mode
-  :init
-  (add-hook 'after-init-hook #'company-statistics-mode)
-  :config
-  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
-
-;; Diff-Hl
-(use-package diff-hl
-  :ensure t
-  :commands global-diff-hl-mode diff-hl-dired-mode
-  :init
-  (global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  :config
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
 
 ;; Discover My Major
 (use-package discover-my-major
@@ -679,19 +623,57 @@
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
 
-;; Expand region
+;; Expand region                       
 (use-package expand-region
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
-;; Hardhat mode
-(use-package hardhat
+;; Hydra
+(use-package hydra
   :ensure t
-  :commands global-hardhat-mode
-  :init
-  (global-hardhat-mode)
+  :bind (("C-c w r" . hydra-window-resize/body)
+         ("C-c x o" . hydra-outline/body))
   :config
-  (setq hardhat-mode-lighter " HH"))
+  (defhydra hydra-window-resize (:columns 2)
+    "Resize Windows"
+    ("j" enlarge-window "Enlarge Window")
+    ("k" shrink-window "Shrink Window")
+    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
+    ("h" shrink-window-horizontally "Shrink Window Horizontally")
+    ("q" nil "Quit"))
+
+  (defhydra hydra-outline (:hint nil)
+    "
+
+^Hide^             ^Show^           ^Move^
+-------------------------------------------------------
+[_q_]: Sub-levels  [_a_]: All       [_u_]: Up
+[_t_]: Body        [_e_]: Entry     [_n_]: Next Visible
+[_o_]: Other       [_i_]: Children  [_p_]: Previous Visible
+[_c_]: Entry       [_k_]: Branches  [_f_]: Forward Same Level
+[_l_]: Leaves      [_s_]: Sub-tree  [_b_]: Backward Same Level
+[_d_]: Sub-tree
+
+"
+    ("q" hide-sublevels)
+    ("t" hide-body)
+    ("o" hide-other)
+    ("c" hide-entry)
+    ("l" hide-leaves)
+    ("d" hide-subtree)
+
+    ("a" show-all)
+    ("e" show-entry)
+    ("i" show-children)
+    ("k" show-branches)
+    ("s" show-subtree)
+
+    ("u" outline-up-heading)
+    ("n" outline-next-visible-heading)
+    ("p" outline-previous-visible-heading)
+    ("f" outline-forward-same-level)
+    ("b" outline-backward-same-level)
+    ("z" nil "Quit")))
 
 ;; Magit
 (use-package magit
@@ -702,21 +684,21 @@
          ("C-c v l" . magit-log-buffer-file)
          ("C-c v p" . magit-pull)))
 
-;; Multiple cursors
-(use-package multiple-cursors
+;; NeoTree
+(use-package neotree
   :ensure t
-  :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
-         ("C-c m a" . mc/vertical-align)
-         ("C-c m e" . mc/mark-more-like-this-extended)
-         ("C-c m h" . mc/mark-all-like-this-dwim)
-         ("C-c m l" . mc/edit-lines)
-         ("C-c m n" . mc/mark-next-like-this)
-         ("C-c m p" . mc/mark-previous-like-this)
-         ("C-c m C-a" . mc/edit-beginnings-of-lines)
-         ("C-c m C-e" . mc/edit-ends-of-lines)
-         ("C-c m C-s" . mc/mark-all-in-region))
-  :init
-  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
+  :bind ("C-c t n" . neotree-toggle)
+  :config
+  (setq neo-banner-message nil
+        neo-create-file-auto-open t
+        neo-smart-open t
+        neo-show-hidden-files t
+        neo-auto-indent-point t))
+
+;; Nlinum mode
+(use-package nlinum
+  :ensure t
+  :bind ("C-c t l" . nlinum-mode))
 
 ;; Paradox
 (use-package paradox
@@ -775,15 +757,16 @@ This doesn't support the chanserv auth method"
 
   ;; Use Visual Line mode for filling
   (setq rcirc-fill-flag nil)
+  (add-hook 'rcirc-mode-hook (lambda ()
+                               (setq fill-column 155)))
+  (add-hook 'rcirc-mode-hook #'visual-line-mode)
 
   (defun drot/rcirc-mode-hook ()
-    "Set fill collumn, disable company and YASnippet in rcirc buffers."
-    (setq fill-column 155)
+    "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
-  (add-hook 'rcirc-mode-hook #'visual-line-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
@@ -808,52 +791,98 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
-;; Hydra
-(use-package hydra
+;; Zop-to-char
+(use-package zop-to-char
   :ensure t
-  :bind (("C-c w r" . hydra-window-resize/body)
-         ("C-c x o" . hydra-outline/body))
+  :bind ([remap zap-to-char]. zop-to-char))
+
+;; Adaptive Wrap
+(use-package adaptive-wrap
+  :ensure t
+  :commands adaptive-wrap-prefix-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
+
+;; Anzu
+(use-package anzu
+  :ensure t
+  :diminish (anzu-mode . "AZ")
+  :bind (("C-c s q" . anzu-query-replace)
+         ("C-c s r" . anzu-query-replace-regexp))
+  :commands global-anzu-mode
+  :init
+  (global-anzu-mode))
+
+;; Company mode
+(use-package company
+  :ensure t
+  :diminish (company-mode . "CY")
+  :bind ("C-c i c" . company-yasnippet)
+  :commands global-company-mode
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
   :config
-  (defhydra hydra-window-resize (:columns 2)
-    "Resize Windows"
-    ("j" enlarge-window "Enlarge Window")
-    ("k" shrink-window "Shrink Window")
-    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("h" shrink-window-horizontally "Shrink Window Horizontally")
-    ("q" nil "Quit"))
+  (setq company-minimum-prefix-length 2
+        company-echo-delay 0
+        company-show-numbers t
+        company-selection-wrap-around t
+        company-backends '(company-nxml
+                           company-css
+                           company-capf (company-dabbrev-code company-keywords)
+                           company-files
+                           company-dabbrev)))
 
-  (defhydra hydra-outline (:hint nil)
-    "
+;; Company Statistics
+(use-package company-statistics
+  :ensure t
+  :commands company-statistics-mode
+  :init
+  (add-hook 'after-init-hook #'company-statistics-mode)
+  :config
+  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
-^Hide^             ^Show^           ^Move^
--------------------------------------------------------
-[_q_]: Sub-levels  [_a_]: All       [_u_]: Up
-[_t_]: Body        [_e_]: Entry     [_n_]: Next Visible
-[_o_]: Other       [_i_]: Children  [_p_]: Previous Visible
-[_c_]: Entry       [_k_]: Branches  [_f_]: Forward Same Level
-[_l_]: Leaves      [_s_]: Sub-tree  [_b_]: Backward Same Level
-[_d_]: Sub-tree
+;; Diff-Hl
+(use-package diff-hl
+  :ensure t
+  :commands global-diff-hl-mode diff-hl-dired-mode
+  :init
+  (global-diff-hl-mode)
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  :config
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode)))
 
-"
-    ("q" hide-sublevels)
-    ("t" hide-body)
-    ("o" hide-other)
-    ("c" hide-entry)
-    ("l" hide-leaves)
-    ("d" hide-subtree)
+;; Hardhat mode
+(use-package hardhat
+  :ensure t
+  :commands global-hardhat-mode
+  :init
+  (global-hardhat-mode)
+  :config
+  (setq hardhat-mode-lighter " HH"))
 
-    ("a" show-all)
-    ("e" show-entry)
-    ("i" show-children)
-    ("k" show-branches)
-    ("s" show-subtree)
+;; Highlight Numbers
+(use-package highlight-numbers
+  :ensure t
+  :commands highlight-numbers-mode
+  :init
+  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
-    ("u" outline-up-heading)
-    ("n" outline-next-visible-heading)
-    ("p" outline-previous-visible-heading)
-    ("f" outline-forward-same-level)
-    ("b" outline-backward-same-level)
-    ("z" nil "Quit")))
+;; Multiple cursors
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
+         ("C-c m a" . mc/vertical-align)
+         ("C-c m e" . mc/mark-more-like-this-extended)
+         ("C-c m h" . mc/mark-all-like-this-dwim)
+         ("C-c m l" . mc/edit-lines)
+         ("C-c m n" . mc/mark-next-like-this)
+         ("C-c m p" . mc/mark-previous-like-this)
+         ("C-c m C-a" . mc/edit-beginnings-of-lines)
+         ("C-c m C-e" . mc/edit-ends-of-lines)
+         ("C-c m C-s" . mc/mark-all-in-region))
+  :init
+  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
 ;; Swiper and Ivy
 (use-package swiper
@@ -882,13 +911,6 @@ This doesn't support the chanserv auth method"
          ("C-h f" . counsel-describe-function))
   :config
   (setq counsel-find-file-at-point t))
-
-;; Highlight Numbers
-(use-package highlight-numbers
-  :ensure t
-  :commands highlight-numbers-mode
-  :init
-  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
 ;; Lispy
 (use-package lispy
@@ -923,22 +945,6 @@ This doesn't support the chanserv auth method"
                   emacs-lisp-mode-hook
                   ielm-mode-hook))
     (add-hook hook #'eldoc-mode)))
-
-;; NeoTree
-(use-package neotree
-  :ensure t
-  :bind ("C-c t n" . neotree-toggle)
-  :config
-  (setq neo-banner-message nil
-        neo-create-file-auto-open t
-        neo-smart-open t
-        neo-show-hidden-files t
-        neo-auto-indent-point t))
-
-;; Nlinum mode
-(use-package nlinum
-  :ensure t
-  :bind ("C-c t l" . nlinum-mode))
 
 ;; Page break lines mode
 (use-package page-break-lines
@@ -977,6 +983,24 @@ This doesn't support the chanserv auth method"
   :init
   (volatile-highlights-mode))
 
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish (undo-tree-mode . "UT")
+  :commands global-undo-tree-mode
+  :init
+  (global-undo-tree-mode)
+  :config
+  (setq undo-tree-history-directory-alist backup-directory-alist
+        undo-tree-auto-save-history t))
+
+;; Visual Fill Column
+(use-package visual-fill-column
+  :ensure t
+  :commands visual-fill-column-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+
 ;; Which Key
 (use-package which-key
   :ensure t
@@ -1004,24 +1028,6 @@ This doesn't support the chanserv auth method"
     "C-c x" "text")
   (which-key-mode))
 
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish (undo-tree-mode . "UT")
-  :commands global-undo-tree-mode
-  :init
-  (global-undo-tree-mode)
-  :config
-  (setq undo-tree-history-directory-alist backup-directory-alist
-        undo-tree-auto-save-history t))
-
-;; Visual Fill Column
-(use-package visual-fill-column
-  :ensure t
-  :commands visual-fill-column-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
-
 ;; YASnippet
 (use-package yasnippet
   :ensure t
@@ -1031,10 +1037,5 @@ This doesn't support the chanserv auth method"
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
   (setq yas-verbosity 1)
   (yas-global-mode))
-
-;; Zop-to-char
-(use-package zop-to-char
-  :ensure t
-  :bind ([remap zap-to-char]. zop-to-char))
 
 ;;; init.el ends here
