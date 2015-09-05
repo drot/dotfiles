@@ -209,6 +209,12 @@
   :config
   (setq uniquify-buffer-name-style 'forward))
 
+;; Indicate minibuffer recursion depth
+(use-package mb-depth
+  :commands minibuffer-depth-indicate-mode
+  :init
+  (minibuffer-depth-indicate-mode))
+
 ;; Highlight matching parentheses
 (use-package paren
   :config
@@ -216,47 +222,23 @@
         show-paren-style 'mixed)
   (show-paren-mode))
 
-;; Electric pair mode
-(use-package elec-pair
-  :commands electric-pair-mode
-  :init
-  (electric-pair-mode))
-
 ;; Highlight regexps interactively
 (use-package hi-lock
   :commands global-hi-lock-mode
   :init
   (global-hi-lock-mode))
 
+;; Electric pair mode
+(use-package elec-pair
+  :commands electric-pair-mode
+  :init
+  (electric-pair-mode))
+
 ;; Pretty lambdas
 (use-package prog-mode
   :commands global-prettify-symbols-mode
   :init
   (global-prettify-symbols-mode))
-
-;; Indicate minibuffer recursion depth
-(use-package mb-depth
-  :commands minibuffer-depth-indicate-mode
-  :init
-  (minibuffer-depth-indicate-mode))
-
-;; Undo and redo the window configuration
-(use-package winner
-  :commands winner-mode
-  :init
-  (winner-mode))
-
-;; Fly Spell mode configuration
-(use-package flyspell
-  :diminish (flyspell-mode . "FS")
-  :commands flyspell-mode flyspell-prog-mode
-  :init
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  :config
-  (setq flyspell-use-meta-tab nil
-        flyspell-issue-message-flag nil
-        flyspell-issue-welcome-flag nil))
 
 ;; Which function mode
 (use-package which-func
@@ -297,6 +279,24 @@
   :init
   (add-hook 'text-mode-hook #'goto-address-mode)
   (add-hook 'prog-mode-hook #'goto-address-prog-mode))
+
+;; Fly Spell mode configuration
+(use-package flyspell
+  :diminish (flyspell-mode . "FS")
+  :commands flyspell-mode flyspell-prog-mode
+  :init
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  :config
+  (setq flyspell-use-meta-tab nil
+        flyspell-issue-message-flag nil
+        flyspell-issue-welcome-flag nil))
+
+;; Undo and redo the window configuration
+(use-package winner
+  :commands winner-mode
+  :init
+  (winner-mode))
 
 ;; Customize interface options
 (use-package cus-edit
