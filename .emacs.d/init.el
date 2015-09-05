@@ -993,8 +993,7 @@ This doesn't support the chanserv auth method"
     "C-c x" "text")
   (setq which-key-separator " > "
         which-key-special-keys nil
-        which-key-show-prefix 'top
-        which-key-prefix-title-alist which-key-prefix-name-alist)
+        which-key-show-prefix 'top)
   (which-key-mode))
 
 ;; Undo Tree
