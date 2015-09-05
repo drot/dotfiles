@@ -623,7 +623,7 @@
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
 
-;; Expand region                       
+;; Expand region
 (use-package expand-region
   :ensure t
   :bind ("C-c x e" . er/expand-region))
@@ -689,8 +689,7 @@
   :ensure t
   :bind ("C-c t n" . neotree-toggle)
   :config
-  (setq neo-banner-message nil
-        neo-create-file-auto-open t
+  (setq neo-create-file-auto-open t
         neo-smart-open t
         neo-show-hidden-files t
         neo-auto-indent-point t))
