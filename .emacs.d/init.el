@@ -173,21 +173,16 @@
 
 ;; Save minibuffer history
 (use-package savehist
-  :commands savehist-mode
-  :init
-  (savehist-mode)
   :config
   (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
-                                        kill-ring)))
+                                        kill-ring))
+  (savehist-mode))
 
 ;; Save recent files list
 (use-package recentf
-  :commands recentf-mode
-  :init
-  (recentf-mode)
   :config
   (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude (list "/\\.git/.*\\'"
@@ -196,7 +191,8 @@
                               ".*\\.gz\\'")
         recentf-max-saved-items 100
         recentf-max-menu-items 20
-        recentf-auto-cleanup 600))
+        recentf-auto-cleanup 600)
+  (recentf-mode))
 
 ;; Remember point position in files
 (use-package saveplace
@@ -211,8 +207,7 @@
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
-  :commands minibuffer-depth-indicate-mode
-  :init
+  :config
   (minibuffer-depth-indicate-mode))
 
 ;; Highlight matching parentheses
@@ -224,78 +219,28 @@
 
 ;; Highlight regexps interactively
 (use-package hi-lock
-  :commands global-hi-lock-mode
-  :init
+  :config
   (global-hi-lock-mode))
 
 ;; Electric pair mode
 (use-package elec-pair
-  :commands electric-pair-mode
-  :init
+  :config
   (electric-pair-mode))
 
 ;; Pretty lambdas
 (use-package prog-mode
-  :commands global-prettify-symbols-mode
-  :init
+  :config
   (global-prettify-symbols-mode))
 
 ;; Which function mode
 (use-package which-func
-  :commands which-function-mode
-  :init
-  (which-function-mode)
   :config
-  (setq which-func-unknown "n/a"))
-
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OM")
-  :commands outline-minor-mode
-  :init
-  (dolist (hook '(text-mode-hook
-                  prog-mode-hook))
-    (add-hook hook #'outline-minor-mode)))
-
-;; Hide Show mode
-(use-package hideshow
-  :commands hs-minor-mode
-  :init
-  (dolist (hook '(c-mode-common-hook
-                  emacs-lisp-mode-hook
-                  python-mode-hook))
-    (add-hook hook #'hs-minor-mode)))
-
-;; Bug references
-(use-package bug-reference
-  :commands (bug-reference-mode bug-reference-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'bug-reference-mode)
-  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
-
-;; Go-to address
-(use-package goto-addr
-  :commands (goto-address-mode goto-address-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'goto-address-mode)
-  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
-
-;; Fly Spell mode configuration
-(use-package flyspell
-  :diminish (flyspell-mode . "FS")
-  :commands flyspell-mode flyspell-prog-mode
-  :init
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  :config
-  (setq flyspell-use-meta-tab nil
-        flyspell-issue-message-flag nil
-        flyspell-issue-welcome-flag nil))
+  (setq which-func-unknown "n/a")
+  (which-function-mode))
 
 ;; Undo and redo the window configuration
 (use-package winner
-  :commands winner-mode
-  :init
+  :config
   (winner-mode))
 
 ;; Customize interface options
@@ -371,6 +316,34 @@
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t))
 
+;; Doc View mode configuration
+(use-package doc-view
+  :defer t
+  :config
+  (setq doc-view-resolution 300
+        doc-view-continuous t))
+
+;; TRAMP configuration
+(use-package tramp
+  :defer t
+  :config
+  (setq tramp-default-method "ssh"
+        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
+        tramp-backup-directory-alist backup-directory-alist
+        tramp-auto-save-directory drot/cache-directory))
+
+;; Prevent GnuTLS warnings
+(use-package gnutls
+  :defer t
+  :config
+  (setq gnutls-min-prime-bits 1024))
+
+;; Find file at point
+(use-package ffap
+  :defer t
+  :config
+  (setq ffap-machine-p-known 'reject))
+
 ;; Dired
 (use-package dired
   :defer t
@@ -385,33 +358,49 @@
 (use-package dired-x
   :commands dired-jump)
 
-;; TRAMP configuration
-(use-package tramp
-  :defer t
-  :config
-  (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
-        tramp-backup-directory-alist backup-directory-alist
-        tramp-auto-save-directory drot/cache-directory))
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OM")
+  :commands outline-minor-mode
+  :init
+  (dolist (hook '(text-mode-hook
+                  prog-mode-hook))
+    (add-hook hook #'outline-minor-mode)))
 
-;; Find file at point
-(use-package ffap
-  :defer t
-  :config
-  (setq ffap-machine-p-known 'reject))
+;; Hide Show mode
+(use-package hideshow
+  :commands hs-minor-mode
+  :init
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook #'hs-minor-mode)))
 
-;; Prevent GnuTLS warnings
-(use-package gnutls
-  :defer t
-  :config
-  (setq gnutls-min-prime-bits 1024))
+;; Bug references
+(use-package bug-reference
+  :commands (bug-reference-mode bug-reference-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'bug-reference-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
 
-;; Doc View mode configuration
-(use-package doc-view
-  :defer t
+;; Go-to address
+(use-package goto-addr
+  :commands (goto-address-mode goto-address-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
+
+;; Fly Spell mode configuration
+(use-package flyspell
+  :diminish (flyspell-mode . "FS")
+  :commands flyspell-mode flyspell-prog-mode
+  :init
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
+  (setq flyspell-use-meta-tab nil
+        flyspell-issue-message-flag nil
+        flyspell-issue-welcome-flag nil))
 
 ;; Open URLs in Conkeror
 (use-package browse-url
