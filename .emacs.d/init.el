@@ -200,11 +200,6 @@
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
   (setq-default save-place t))
 
-;; Uniquify buffer names
-(use-package uniquify
-  :config
-  (setq uniquify-buffer-name-style 'forward))
-
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
   :config
@@ -271,6 +266,12 @@
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
         ediff-split-window-function #'split-window-horizontally))
+
+;; Uniquify buffer names
+(use-package uniquify
+  :defer t
+  :config
+  (setq uniquify-buffer-name-style 'forward))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
