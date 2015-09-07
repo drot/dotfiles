@@ -579,13 +579,6 @@
   :ensure t
   :bind ([remap other-window] . ace-window))
 
-;; Ace-link
-(use-package ace-link
-  :ensure t
-  :commands ace-link-setup-default
-  :init
-  (ace-link-setup-default))
-
 ;; Avy
 (use-package avy
   :ensure t
@@ -784,6 +777,13 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ([remap zap-to-char]. zop-to-char))
 
+;; Ace-link
+(use-package ace-link
+  :ensure t
+  :commands ace-link-setup-default
+  :init
+  (ace-link-setup-default))
+
 ;; Adaptive Wrap
 (use-package adaptive-wrap
   :ensure t
@@ -839,6 +839,13 @@ This doesn't support the chanserv auth method"
   :config
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
+
+;; Ignoramus
+(use-package ignoramus
+  :ensure t
+  :commands ignoramus-setup
+  :init
+  (ignoramus-setup))
 
 ;; Hardhat mode
 (use-package hardhat
