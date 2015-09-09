@@ -357,7 +357,9 @@
 
 ;; Dired-x
 (use-package dired-x
-  :commands dired-jump)
+  :commands dired-jump
+  :config
+  (setq dired-omit-verbose nil))
 
 ;; Outline mode
 (use-package outline
@@ -687,7 +689,8 @@
   :ensure t
   :bind ("C-c a p" . paradox-list-packages)
   :config
-  (setq paradox-github-token t))
+  (setq paradox-github-token t
+        paradox-execute-asynchronously nil))
 
 ;; rcirc configuration
 (use-package rcirc
