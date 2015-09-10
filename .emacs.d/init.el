@@ -743,7 +743,7 @@ This doesn't support the chanserv auth method"
   ;; Use Visual Line mode for filling
   (setq rcirc-fill-flag nil)
   (add-hook 'rcirc-mode-hook (lambda ()
-                               (setq fill-column 155)))
+                               (setq fill-column 156)))
   (add-hook 'rcirc-mode-hook #'visual-line-mode)
 
   (defun drot/rcirc-mode-hook ()
@@ -843,6 +843,15 @@ This doesn't support the chanserv auth method"
   :config
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
+
+;; Geiser
+(use-package geiser
+  :ensure t
+  :defer t
+  :config
+  (setq geiser-active-implementations '(racket)
+        geiser-mode-start-repl-p t
+        geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
 ;; Ignoramus
 (use-package ignoramus
