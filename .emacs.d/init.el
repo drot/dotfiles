@@ -821,7 +821,6 @@ This doesn't support the chanserv auth method"
   (add-hook 'after-init-hook #'global-company-mode)
   :config
   (setq company-minimum-prefix-length 2
-        company-echo-delay 0
         company-show-numbers t
         company-selection-wrap-around t
         company-backends '(company-nxml
