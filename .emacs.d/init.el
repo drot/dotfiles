@@ -200,6 +200,12 @@
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
   (setq-default save-place t))
 
+;; Server mode
+(use-package server
+  :diminish (server-buffer-clients . "Sr")
+  :config
+  (server-mode))
+
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
   :config
@@ -363,7 +369,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "OM")
+  :diminish (outline-minor-mode . "Om")
   :commands outline-minor-mode
   :init
   (dolist (hook '(text-mode-hook
@@ -395,8 +401,8 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "FS")
-  :commands flyspell-mode flyspell-prog-mode
+  :diminish (flyspell-mode . "Fs")
+  :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
@@ -569,7 +575,7 @@
 
 ;; Load abbrevs and enable Abbrev Mode
 (use-package abbrev
-  :diminish (abbrev-mode . "AV")
+  :diminish (abbrev-mode . "Av")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
@@ -798,7 +804,7 @@ This doesn't support the chanserv auth method"
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "AZ")
+  :diminish (anzu-mode . "Az")
   :bind (("C-c s q" . anzu-query-replace)
          ("C-c s r" . anzu-query-replace-regexp))
   :commands global-anzu-mode
@@ -808,7 +814,7 @@ This doesn't support the chanserv auth method"
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "CY")
+  :diminish (company-mode . "Cy")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -836,11 +842,10 @@ This doesn't support the chanserv auth method"
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :commands global-diff-hl-mode diff-hl-dired-mode
+  :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
   (global-diff-hl-mode)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  :config
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
@@ -867,7 +872,7 @@ This doesn't support the chanserv auth method"
   :init
   (global-hardhat-mode)
   :config
-  (setq hardhat-mode-lighter " HH"))
+  (setq hardhat-mode-lighter " Hh"))
 
 ;; Highlight Numbers
 (use-package highlight-numbers
@@ -895,7 +900,7 @@ This doesn't support the chanserv auth method"
 ;; Swiper and Ivy
 (use-package swiper
   :ensure t
-  :diminish (ivy-mode . "IY")
+  :diminish (ivy-mode . "Iy")
   :bind (("C-c s s" . swiper)
          ("C-c s i" . swiper-from-isearch)
          ("C-c f r" . ivy-recentf)
@@ -946,7 +951,7 @@ This doesn't support the chanserv auth method"
 
 ;; Show documentation with ElDoc mode
 (use-package eldoc
-  :diminish (eldoc-mode . "ED")
+  :diminish (eldoc-mode . "Ed")
   :commands eldoc-mode
   :init
   (dolist (hook '(eval-expression-minibuffer-setup-hook
@@ -957,7 +962,7 @@ This doesn't support the chanserv auth method"
 ;; Page break lines mode
 (use-package page-break-lines
   :ensure t
-  :diminish (page-break-lines-mode . "PB")
+  :diminish (page-break-lines-mode . "Pb")
   :commands global-page-break-lines-mode
   :init
   (global-page-break-lines-mode))
@@ -975,7 +980,7 @@ This doesn't support the chanserv auth method"
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "RW")
+  :diminish (rainbow-mode . "Rw")
   :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
@@ -986,7 +991,7 @@ This doesn't support the chanserv auth method"
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
-  :diminish (volatile-highlights-mode . "VH")
+  :diminish (volatile-highlights-mode . "Vh")
   :commands volatile-highlights-mode
   :init
   (volatile-highlights-mode))
@@ -994,7 +999,7 @@ This doesn't support the chanserv auth method"
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "UT")
+  :diminish (undo-tree-mode . "Ut")
   :commands global-undo-tree-mode
   :init
   (global-undo-tree-mode)
@@ -1039,7 +1044,7 @@ This doesn't support the chanserv auth method"
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "YS")
+  :diminish (yas-minor-mode . "Ys")
   :commands yas-global-mode
   :init
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
