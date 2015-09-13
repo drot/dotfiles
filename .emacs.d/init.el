@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+;; Delay garbage collection
+(setq gc-cons-threshold 20000000)
+
 ;; Set some variables
 (defconst drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
