@@ -701,6 +701,11 @@
   (setq paradox-github-token t
         paradox-execute-asynchronously nil))
 
+;; PKGBUILD mode
+(use-package pkgbuild-mode
+  :ensure t
+  :defer t)
+
 ;; rcirc configuration
 (use-package rcirc
   :bind ("C-c a i" . irc)
