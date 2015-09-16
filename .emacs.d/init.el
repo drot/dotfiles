@@ -460,7 +460,7 @@
            ("C-c h l" . find-library)))
 
   ;; Indent region
-  (use-package indent
+  (use-package "indent"
     :bind ("C-c x i" . indent-region))
 
   ;; Whitespace mode
