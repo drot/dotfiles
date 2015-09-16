@@ -154,9 +154,6 @@
   (setq view-read-only t
         view-inhibit-help-message t)
 
-  ;; Allow scrolling during Isearch
-  (setq isearch-allow-scroll t)
-
   ;; Do not save duplicates
   (setq history-delete-duplicates t
         kill-do-not-save-duplicates t)
@@ -243,14 +240,12 @@
     :config
     (winner-mode))
 
-  ;; Customize interface options
-  (use-package cus-edit
+  ;; Allow scrolling during Isearch
+  (use-package "isearch"
     :defer t
+    :diminish (isearch-mode . "Is")
     :config
-    (setq custom-buffer-done-kill t
-          custom-buffer-verbose-help nil
-          custom-unlispify-tag-names nil
-          custom-unlispify-menu-entries nil))
+    (setq isearch-allow-scroll t))
 
   ;; Ispell configuration
   (use-package ispell
@@ -296,6 +291,15 @@
     :defer t
     :config
     (setq reb-re-syntax 'string))
+
+  ;; Customize interface options
+  (use-package cus-edit
+    :defer t
+    :config
+    (setq custom-buffer-done-kill t
+          custom-buffer-verbose-help nil
+          custom-unlispify-tag-names nil
+          custom-unlispify-menu-entries nil))
 
   ;; Python mode
   (use-package python
@@ -410,6 +414,9 @@
           flyspell-issue-message-flag nil
           flyspell-issue-welcome-flag nil))
 
+  ;; Indent region
+  (bind-key "C-c x i" #'indent-region)
+
   ;; Cycle spacing
   (bind-key [remap just-one-space] #'cycle-spacing)
 
@@ -450,10 +457,6 @@
            ("C-c h v" . find-variable)
            ("C-c h 4 v" . find-variable-other-window)
            ("C-c h l" . find-library)))
-
-  ;; Indent region
-  (use-package "indent"
-    :bind ("C-c x i" . indent-region))
 
   ;; Whitespace mode
   (use-package whitespace
@@ -581,7 +584,7 @@
           org-src-fontify-natively t
           org-src-tab-acts-natively t))
 
-  ;; Load abbrevs and enable Abbrev Mode
+  ;; Abbrev Mode
   (use-package abbrev
     :diminish (abbrev-mode . "Av")
     :config
@@ -606,7 +609,7 @@
            ("C-c j" . avy-goto-word-1)
            ("C-c n w" . avy-goto-word-0)))
 
-  ;; Browse kill ring
+  ;; Browse Kill Ring
   (use-package browse-kill-ring
     :ensure t
     :bind ("C-c i y" . browse-kill-ring))
@@ -641,40 +644,27 @@
       ("h" shrink-window-horizontally "Shrink Window Horizontally")
       ("q" nil "Quit"))
 
-    (defhydra hydra-outline (:hint nil)
-      "
-
-^Hide^             ^Show^           ^Move^
--------------------------------------------------------
-[_q_]: Sub-levels  [_a_]: All       [_u_]: Up
-[_t_]: Body        [_e_]: Entry     [_n_]: Next Visible
-[_o_]: Other       [_i_]: Children  [_p_]: Previous Visible
-[_c_]: Entry       [_k_]: Branches  [_f_]: Forward Same Level
-[_l_]: Leaves      [_s_]: Sub-tree  [_b_]: Backward Same Level
-[_d_]: Sub-tree
-
-"
-      ("q" hide-sublevels)
-      ("t" hide-body)
-      ("o" hide-other)
-      ("c" hide-entry)
-      ("l" hide-leaves)
-      ("d" hide-subtree)
-
-      ("a" show-all)
-      ("e" show-entry)
-      ("i" show-children)
-      ("k" show-branches)
-      ("s" show-subtree)
-
-      ("u" outline-up-heading)
-      ("n" outline-next-visible-heading)
-      ("p" outline-previous-visible-heading)
-      ("f" outline-forward-same-level)
-      ("b" outline-backward-same-level)
+    (defhydra hydra-outline (:columns 4)
+      "Outline Mode"
+      ("q" hide-sublevels "Hide Sub-levels")
+      ("t" hide-body "Hide Body")
+      ("o" hide-other "Hide Other")
+      ("c" hide-entry "Hide Entry")
+      ("l" hide-leaves "Hide Leaves")
+      ("d" hide-subtree "Hide Sub-tree")
+      ("a" show-all "Show All")
+      ("e" show-entry "Show Entry")
+      ("i" show-children "Show Children")
+      ("k" show-branches "Show Branches")
+      ("s" show-subtree "Show Sub-tree")
+      ("u" outline-up-heading "Up Heading")
+      ("n" outline-next-visible-heading "Next Visible Heading")
+      ("p" outline-previous-visible-heading "Previous Visible Heading")
+      ("f" outline-forward-same-level "Forward Same Level")
+      ("b" outline-backward-same-level "Backward Same Level")
       ("z" nil "Quit")))
 
-;; Magit
+  ;; Magit
   (use-package magit
     :ensure t
     :bind (("C-c v v" . magit-status)
@@ -683,7 +673,7 @@
            ("C-c v l" . magit-log-buffer-file)
            ("C-c v p" . magit-pull)))
 
-;; NeoTree
+  ;; NeoTree
   (use-package neotree
     :ensure t
     :bind ("C-c t n" . neotree-toggle)
@@ -693,12 +683,12 @@
           neo-show-hidden-files t
           neo-auto-indent-point t))
 
-;; Nlinum mode
+  ;; Nlinum Mode
   (use-package nlinum
     :ensure t
     :bind ("C-c t l" . nlinum-mode))
 
-;; Paradox
+  ;; Paradox
   (use-package paradox
     :ensure t
     :bind ("C-c a p" . paradox-list-packages)
@@ -706,12 +696,12 @@
     (setq paradox-github-token t
           paradox-execute-asynchronously nil))
 
-;; PKGBUILD mode
+  ;; PKGBUILD Mode
   (use-package pkgbuild-mode
     :ensure t
     :defer t)
 
-;; rcirc configuration
+  ;; rcirc Mode
   (use-package rcirc
     :bind ("C-c a i" . irc)
     :config
@@ -738,7 +728,7 @@ This doesn't support the chanserv auth method"
                                    (funcall secret)
                                  secret)))))))
 
-  ;; rcirc color code support
+    ;; rcirc color code support
     (use-package rcirc-styles
       :ensure t
       :config
@@ -747,19 +737,19 @@ This doesn't support the chanserv auth method"
                                        "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
                                        "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
 
-  ;; rcirc colored nicknames
+    ;; rcirc colored nicknames
     (use-package rcirc-color
       :ensure t
       :config
       (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
-  ;; rcirc notifications
+    ;; rcirc notifications
     (use-package rcirc-notify
       :ensure t
       :config
       (rcirc-notify-add-hooks))
 
-  ;; Use Visual Line mode for filling
+    ;; Use Visual Line mode for filling
     (setq rcirc-fill-flag nil)
     (add-hook 'rcirc-mode-hook (lambda ()
                                  (setq fill-column 156)))
@@ -790,31 +780,31 @@ This doesn't support the chanserv auth method"
       "Send a private message to the NickServ service."
       (rcirc-send-string process (concat "nickserv " arg))))
 
-;; Systemd mode
+  ;; Systemd mode
   (use-package systemd
     :ensure t
     :defer t)
 
-;; Zop-to-char
+  ;; Zop-to-char
   (use-package zop-to-char
     :ensure t
     :bind ([remap zap-to-char]. zop-to-char))
 
-;; Ace-link
+  ;; Ace-link
   (use-package ace-link
     :ensure t
     :commands ace-link-setup-default
     :init
     (ace-link-setup-default))
 
-;; Adaptive Wrap
+  ;; Adaptive Wrap
   (use-package adaptive-wrap
     :ensure t
     :commands adaptive-wrap-prefix-mode
     :init
     (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
 
-;; Anzu
+  ;; Anzu
   (use-package anzu
     :ensure t
     :diminish (anzu-mode . "Az")
@@ -824,7 +814,7 @@ This doesn't support the chanserv auth method"
     :init
     (global-anzu-mode))
 
-;; Company mode
+  ;; Company mode
   (use-package company
     :ensure t
     :diminish (company-mode . "Cy")
@@ -844,7 +834,7 @@ This doesn't support the chanserv auth method"
                              company-files
                              company-dabbrev)))
 
-;; Company Statistics
+  ;; Company Statistics
   (use-package company-statistics
     :ensure t
     :commands company-statistics-mode
@@ -853,7 +843,7 @@ This doesn't support the chanserv auth method"
     :config
     (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
-;; Diff-Hl
+  ;; Diff-Hl
   (use-package diff-hl
     :ensure t
     :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
@@ -863,7 +853,7 @@ This doesn't support the chanserv auth method"
     (unless (display-graphic-p)
       (diff-hl-margin-mode)))
 
-;; Geiser
+  ;; Geiser
   (use-package geiser
     :ensure t
     :defer t
@@ -872,14 +862,14 @@ This doesn't support the chanserv auth method"
           geiser-mode-start-repl-p t
           geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
-;; Ignoramus
+  ;; Ignoramus
   (use-package ignoramus
     :ensure t
     :commands ignoramus-setup
     :init
     (ignoramus-setup))
 
-;; Hardhat mode
+  ;; Hardhat Mode
   (use-package hardhat
     :ensure t
     :commands global-hardhat-mode
@@ -888,14 +878,14 @@ This doesn't support the chanserv auth method"
     :config
     (setq hardhat-mode-lighter " Hh"))
 
-;; Highlight Numbers
+  ;; Highlight Numbers
   (use-package highlight-numbers
     :ensure t
     :commands highlight-numbers-mode
     :init
     (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
-;; Multiple cursors
+  ;; Multiple cursors
   (use-package multiple-cursors
     :ensure t
     :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
@@ -911,7 +901,7 @@ This doesn't support the chanserv auth method"
     :init
     (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
-;; Swiper and Ivy
+  ;; Swiper and Ivy
   (use-package swiper
     :ensure t
     :diminish (ivy-mode . "Iy")
@@ -929,7 +919,7 @@ This doesn't support the chanserv auth method"
           ivy-format-function #'ivy-format-function-arrow
           ivy-wrap t))
 
-;; Counsel
+  ;; Counsel
   (use-package counsel
     :ensure t
     :bind (("M-x" . counsel-M-x)
@@ -939,31 +929,43 @@ This doesn't support the chanserv auth method"
     :config
     (setq counsel-find-file-at-point t))
 
-;; Lispy
-  (use-package lispy
+
+  ;; Page Break Lines Mode
+  (use-package page-break-lines
     :ensure t
-    :commands lispy-mode
+    :diminish (page-break-lines-mode . "Pb")
+    :commands global-page-break-lines-mode
+    :init
+    (global-page-break-lines-mode))
+
+  ;; ParEdit
+  (use-package paredit
+    :ensure t
+    :diminish (paredit-mode . "Pe")
+    :commands paredit-mode
     :init
     (dolist (hook '(emacs-lisp-mode-hook
+                    ielm-mode-hook
                     lisp-mode-hook
+                    lisp-interaction-mode-hook
                     scheme-mode-hook))
-      (add-hook hook #'lispy-mode))
+      (add-hook hook #'paredit-mode))
 
-    (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                             pp-eval-expression
-                                             eval-expression-with-eldoc
-                                             ibuffer-do-eval
-                                             ibuffer-do-view-and-eval)
-      "Interactive commands for which lispy should be enabled in the minibuffer.")
+    (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                               pp-eval-expression
+                                               eval-expression-with-eldoc
+                                               ibuffer-do-eval
+                                               ibuffer-do-view-and-eval)
+      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-    (defun drot/lispy-minibuffer ()
-      "Enable lispy during lisp-related minibuffer commands."
-      (if (memq this-command drot/lispy-minibuffer-commands)
-          (lispy-mode)))
+    (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
 
-    (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
+    (defun drot/paredit-minibuffer ()
+      "Enable ParEdit during lisp-related minibuffer commands."
+      (if (memq this-command drot/paredit-minibuffer-commands)
+          (paredit-mode))))
 
-;; Show documentation with ElDoc mode
+  ;; Show documentation with ElDoc mode
   (use-package eldoc
     :diminish (eldoc-mode . "Ed")
     :commands eldoc-mode
@@ -973,15 +975,7 @@ This doesn't support the chanserv auth method"
                     ielm-mode-hook))
       (add-hook hook #'eldoc-mode)))
 
-;; Page break lines mode
-  (use-package page-break-lines
-    :ensure t
-    :diminish (page-break-lines-mode . "Pb")
-    :commands global-page-break-lines-mode
-    :init
-    (global-page-break-lines-mode))
-
-;; Rainbow Delimiters
+  ;; Rainbow Delimiters
   (use-package rainbow-delimiters
     :ensure t
     :commands rainbow-delimiters-mode
@@ -991,7 +985,7 @@ This doesn't support the chanserv auth method"
                     scheme-mode-hook))
       (add-hook hook #'rainbow-delimiters-mode)))
 
-;; Rainbow mode
+  ;; Rainbow Mode
   (use-package rainbow-mode
     :ensure t
     :diminish (rainbow-mode . "Rw")
@@ -1002,7 +996,7 @@ This doesn't support the chanserv auth method"
                     html-mode-hook))
       (add-hook hook #'rainbow-mode)))
 
-;; Volatile Highlights
+  ;; Volatile Highlights
   (use-package volatile-highlights
     :ensure t
     :diminish (volatile-highlights-mode . "Vh")
@@ -1010,7 +1004,7 @@ This doesn't support the chanserv auth method"
     :init
     (volatile-highlights-mode))
 
-;; Undo Tree
+  ;; Undo Tree
   (use-package undo-tree
     :ensure t
     :diminish (undo-tree-mode . "Ut")
@@ -1021,14 +1015,14 @@ This doesn't support the chanserv auth method"
     (setq undo-tree-history-directory-alist backup-directory-alist
           undo-tree-auto-save-history t))
 
-;; Visual Fill Column
+  ;; Visual Fill Column
   (use-package visual-fill-column
     :ensure t
     :commands visual-fill-column-mode
     :init
     (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
-;; Which Key
+  ;; Which Key
   (use-package which-key
     :ensure t
     :config
@@ -1055,7 +1049,7 @@ This doesn't support the chanserv auth method"
       "C-c x" "text")
     (which-key-mode))
 
-;; YASnippet
+  ;; YASnippet
   (use-package yasnippet
     :ensure t
     :diminish (yas-minor-mode . "Ys")
