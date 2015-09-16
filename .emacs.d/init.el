@@ -157,15 +157,6 @@
   ;; Allow scrolling during Isearch
   (setq isearch-allow-scroll t)
 
-  ;; Cycle spacing
-  (bind-key [remap just-one-space] #'cycle-spacing)
-
-  ;; Display personal bindings
-  (bind-key "C-c h b" #'describe-personal-keybindings)
-
-  ;; Toggle debug on error
-  (bind-key "C-c t d" #'toggle-debug-on-error)
-
   ;; Do not save duplicates
   (setq history-delete-duplicates t
         kill-do-not-save-duplicates t)
@@ -419,13 +410,14 @@
           flyspell-issue-message-flag nil
           flyspell-issue-welcome-flag nil))
 
-  ;; Open URLs in Conkeror
-  (use-package browse-url
-    :bind (("C-c a b" . browse-url)
-           ("C-c n b" . browse-url-at-point))
-    :config
-    (setq browse-url-browser-function #'browse-url-generic
-          browse-url-generic-program "conkeror"))
+  ;; Cycle spacing
+  (bind-key [remap just-one-space] #'cycle-spacing)
+
+  ;; Display personal bindings
+  (bind-key "C-c h b" #'describe-personal-keybindings)
+
+  ;; Toggle debug on error
+  (bind-key "C-c t d" #'toggle-debug-on-error)
 
   ;; Revert buffer
   (use-package files
@@ -497,6 +489,14 @@
     :bind ("C-c h a" . apropos)
     :config
     (setq apropos-do-all t))
+
+  ;; Open URLs in Conkeror
+  (use-package browse-url
+    :bind (("C-c a b" . browse-url)
+           ("C-c n b" . browse-url-at-point))
+    :config
+    (setq browse-url-browser-function #'browse-url-generic
+          browse-url-generic-program "conkeror"))
 
   ;; Bookmarks save directory
   (use-package bookmark
