@@ -30,7 +30,7 @@
 ;; Don't run regexps against filenames
 (let ((file-name-handler-alist nil))
 
-  ;; Temporally delay garbage collection
+  ;; Temporarily delay garbage collection
   (setq gc-cons-threshold 20000000)
   (run-with-idle-timer 2 nil (lambda ()
                                (setq gc-cons-threshold 400000)))
