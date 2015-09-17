@@ -114,6 +114,9 @@ mode "RESIZE MODE" {
 
 bindsym $mod+r mode "RESIZE MODE"
 
+# default layout
+workspace_layout tabbed
+
 # list of floating applications
 for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
