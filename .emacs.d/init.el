@@ -198,7 +198,7 @@
 
   ;; Server mode
   (use-package server
-    :diminish (server-buffer-clients . "Sr")
+    :diminish (server-buffer-clients . "SR")
     :config
     (server-mode))
 
@@ -243,7 +243,7 @@
   ;; Allow scrolling during Isearch
   (use-package "isearch"
     :defer t
-    :diminish (isearch-mode . "Is")
+    :diminish (isearch-mode . "IS")
     :config
     (setq isearch-allow-scroll t))
 
@@ -372,7 +372,7 @@
 
   ;; Outline mode
   (use-package outline
-    :diminish (outline-minor-mode . "Om")
+    :diminish (outline-minor-mode . "OM")
     :commands outline-minor-mode
     :init
     (dolist (hook '(text-mode-hook
@@ -404,7 +404,7 @@
 
   ;; Fly Spell mode configuration
   (use-package flyspell
-    :diminish (flyspell-mode . "Fs")
+    :diminish (flyspell-mode . "FS")
     :commands (flyspell-mode flyspell-prog-mode)
     :init
     (add-hook 'text-mode-hook #'flyspell-mode)
@@ -586,7 +586,7 @@
 
   ;; Abbrev Mode
   (use-package abbrev
-    :diminish (abbrev-mode . "Av")
+    :diminish (abbrev-mode . "AV")
     :config
     (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
           save-abbrevs t)
@@ -613,6 +613,16 @@
   (use-package browse-kill-ring
     :ensure t
     :bind ("C-c i y" . browse-kill-ring))
+
+  ;; Counsel
+  (use-package counsel
+    :ensure t
+    :bind (("M-x" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           ("C-h v" . counsel-describe-variable)
+           ("C-h f" . counsel-describe-function))
+    :config
+    (setq counsel-find-file-at-point t))
 
   ;; Discover My Major
   (use-package discover-my-major
@@ -780,6 +790,12 @@ This doesn't support the chanserv auth method"
       "Send a private message to the NickServ service."
       (rcirc-send-string process (concat "nickserv " arg))))
 
+  ;; Swiper
+  (use-package swiper
+    :ensure t
+    :bind (("C-c s s" . swiper)
+           ("C-c s i" . swiper-from-isearch)))
+
   ;; Systemd mode
   (use-package systemd
     :ensure t
@@ -807,7 +823,7 @@ This doesn't support the chanserv auth method"
   ;; Anzu
   (use-package anzu
     :ensure t
-    :diminish (anzu-mode . "Az")
+    :diminish (anzu-mode . "AZ")
     :bind (("C-c s q" . anzu-query-replace)
            ("C-c s r" . anzu-query-replace-regexp))
     :commands global-anzu-mode
@@ -817,7 +833,7 @@ This doesn't support the chanserv auth method"
   ;; Company mode
   (use-package company
     :ensure t
-    :diminish (company-mode . "Cy")
+    :diminish (company-mode . "CY")
     :bind ("C-c i c" . company-yasnippet)
     :commands global-company-mode
     :init
@@ -876,7 +892,7 @@ This doesn't support the chanserv auth method"
     :init
     (global-hardhat-mode)
     :config
-    (setq hardhat-mode-lighter " Hh"))
+    (setq hardhat-mode-lighter " HH"))
 
   ;; Highlight Numbers
   (use-package highlight-numbers
@@ -884,6 +900,21 @@ This doesn't support the chanserv auth method"
     :commands highlight-numbers-mode
     :init
     (add-hook 'prog-mode-hook #'highlight-numbers-mode))
+
+  ;; Ivy
+  (use-package ivy
+    :diminish (ivy-mode . "IY")
+    :bind (("C-c f r" . ivy-recentf)
+           ("C-c t c" . ivy-resume))
+    :commands ivy-mode
+    :init
+    (ivy-mode)
+    :config
+    (setq ivy-use-virtual-buffers t
+          ivy-display-style 'fancy
+          ivy-count-format "(%d/%d) "
+          ivy-format-function #'ivy-format-function-arrow
+          ivy-wrap t))
 
   ;; Multiple cursors
   (use-package multiple-cursors
@@ -901,39 +932,10 @@ This doesn't support the chanserv auth method"
     :init
     (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
-  ;; Swiper and Ivy
-  (use-package swiper
-    :ensure t
-    :diminish (ivy-mode . "Iy")
-    :bind (("C-c s s" . swiper)
-           ("C-c s i" . swiper-from-isearch)
-           ("C-c f r" . ivy-recentf)
-           ("C-c t c" . ivy-resume))
-    :commands ivy-mode
-    :init
-    (ivy-mode)
-    :config
-    (setq ivy-use-virtual-buffers t
-          ivy-display-style 'fancy
-          ivy-count-format "(%d/%d) "
-          ivy-format-function #'ivy-format-function-arrow
-          ivy-wrap t))
-
-  ;; Counsel
-  (use-package counsel
-    :ensure t
-    :bind (("M-x" . counsel-M-x)
-           ("C-x C-f" . counsel-find-file)
-           ("C-h v" . counsel-describe-variable)
-           ("C-h f" . counsel-describe-function))
-    :config
-    (setq counsel-find-file-at-point t))
-
-
   ;; Page Break Lines Mode
   (use-package page-break-lines
     :ensure t
-    :diminish (page-break-lines-mode . "Pb")
+    :diminish (page-break-lines-mode . "PB")
     :commands global-page-break-lines-mode
     :init
     (global-page-break-lines-mode))
@@ -941,15 +943,15 @@ This doesn't support the chanserv auth method"
   ;; ParEdit
   (use-package paredit
     :ensure t
-    :diminish (paredit-mode . "Pe")
-    :commands paredit-mode
+    :diminish (paredit-mode . "PE")
+    :commands enable-paredit-mode
     :init
     (dolist (hook '(emacs-lisp-mode-hook
                     ielm-mode-hook
                     lisp-mode-hook
                     lisp-interaction-mode-hook
                     scheme-mode-hook))
-      (add-hook hook #'paredit-mode))
+      (add-hook hook #'enable-paredit-mode))
 
     (defvar drot/paredit-minibuffer-commands '(eval-expression
                                                pp-eval-expression
@@ -963,11 +965,11 @@ This doesn't support the chanserv auth method"
     (defun drot/paredit-minibuffer ()
       "Enable ParEdit during lisp-related minibuffer commands."
       (if (memq this-command drot/paredit-minibuffer-commands)
-          (paredit-mode))))
+          (enable-paredit-mode))))
 
   ;; Show documentation with ElDoc mode
   (use-package eldoc
-    :diminish (eldoc-mode . "Ed")
+    :diminish (eldoc-mode . "ED")
     :commands eldoc-mode
     :init
     (dolist (hook '(eval-expression-minibuffer-setup-hook
@@ -988,7 +990,7 @@ This doesn't support the chanserv auth method"
   ;; Rainbow Mode
   (use-package rainbow-mode
     :ensure t
-    :diminish (rainbow-mode . "Rw")
+    :diminish (rainbow-mode . "RW")
     :bind ("C-c t r" . rainbow-mode)
     :commands rainbow-mode
     :init
@@ -999,7 +1001,7 @@ This doesn't support the chanserv auth method"
   ;; Volatile Highlights
   (use-package volatile-highlights
     :ensure t
-    :diminish (volatile-highlights-mode . "Vh")
+    :diminish (volatile-highlights-mode . "VH")
     :commands volatile-highlights-mode
     :init
     (volatile-highlights-mode))
@@ -1007,7 +1009,7 @@ This doesn't support the chanserv auth method"
   ;; Undo Tree
   (use-package undo-tree
     :ensure t
-    :diminish (undo-tree-mode . "Ut")
+    :diminish (undo-tree-mode . "UT")
     :commands global-undo-tree-mode
     :init
     (global-undo-tree-mode)
@@ -1052,7 +1054,7 @@ This doesn't support the chanserv auth method"
   ;; YASnippet
   (use-package yasnippet
     :ensure t
-    :diminish (yas-minor-mode . "Ys")
+    :diminish (yas-minor-mode . "YS")
     :commands yas-global-mode
     :init
     (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
