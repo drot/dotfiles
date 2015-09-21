@@ -370,6 +370,16 @@
     :config
     (setq dired-omit-verbose nil))
 
+  ;; ElDoc mode
+  (use-package eldoc
+    :diminish (eldoc-mode . "ED")
+    :commands eldoc-mode
+    :init
+    (dolist (hook '(eval-expression-minibuffer-setup-hook
+                    emacs-lisp-mode-hook
+                    ielm-mode-hook))
+      (add-hook hook #'eldoc-mode)))
+
   ;; Outline mode
   (use-package outline
     :diminish (outline-minor-mode . "OM")
@@ -966,16 +976,6 @@ This doesn't support the chanserv auth method"
       "Enable ParEdit during lisp-related minibuffer commands."
       (if (memq this-command drot/paredit-minibuffer-commands)
           (enable-paredit-mode))))
-
-  ;; Show documentation with ElDoc mode
-  (use-package eldoc
-    :diminish (eldoc-mode . "ED")
-    :commands eldoc-mode
-    :init
-    (dolist (hook '(eval-expression-minibuffer-setup-hook
-                    emacs-lisp-mode-hook
-                    ielm-mode-hook))
-      (add-hook hook #'eldoc-mode)))
 
   ;; Rainbow Delimiters
   (use-package rainbow-delimiters
