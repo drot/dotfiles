@@ -130,6 +130,9 @@
   ;; Enable all disabled commands
   (setq disabled-command-function nil)
 
+  ;; Set fallback font
+  (set-fontset-font t nil (font-spec :family "Symbola") nil 'append)
+
   ;; Use spaces instead of tabs and set default tab width
   (setq-default indent-tabs-mode nil
                 tab-width 4)
@@ -147,9 +150,6 @@
   ;; Mouse yank at point instead of click
   (setq mouse-yank-at-point t)
 
-  ;; Set fallback font
-  (set-fontset-font t nil (font-spec :family "Symbola") nil 'append)
-
   ;; Display read-only buffers in view mode
   (setq view-read-only t
         view-inhibit-help-message t)
@@ -166,6 +166,10 @@
         kept-new-versions 2
         delete-old-versions t
         backup-by-copying t)
+
+  ;; Diminish already loaded modes
+  (diminish 'visual-line-mode " WP")
+  (diminish 'auto-fill-function " FL")
 
   ;; Save minibuffer history
   (use-package savehist
@@ -370,16 +374,6 @@
     :config
     (setq dired-omit-verbose nil))
 
-  ;; ElDoc mode
-  (use-package eldoc
-    :diminish (eldoc-mode . "ED")
-    :commands eldoc-mode
-    :init
-    (dolist (hook '(eval-expression-minibuffer-setup-hook
-                    emacs-lisp-mode-hook
-                    ielm-mode-hook))
-      (add-hook hook #'eldoc-mode)))
-
   ;; Outline mode
   (use-package outline
     :diminish (outline-minor-mode . "OM")
@@ -391,12 +385,23 @@
 
   ;; Hide Show mode
   (use-package hideshow
+    :diminish (hs-minor-mode . "HS")
     :commands hs-minor-mode
     :init
     (dolist (hook '(c-mode-common-hook
                     emacs-lisp-mode-hook
                     python-mode-hook))
       (add-hook hook #'hs-minor-mode)))
+
+  ;; ElDoc mode
+  (use-package eldoc
+    :diminish (eldoc-mode . "ED")
+    :commands eldoc-mode
+    :init
+    (dolist (hook '(eval-expression-minibuffer-setup-hook
+                    emacs-lisp-mode-hook
+                    ielm-mode-hook))
+      (add-hook hook #'eldoc-mode)))
 
   ;; Bug references
   (use-package bug-reference
@@ -888,22 +893,6 @@ This doesn't support the chanserv auth method"
           geiser-mode-start-repl-p t
           geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
-  ;; Ignoramus
-  (use-package ignoramus
-    :ensure t
-    :commands ignoramus-setup
-    :init
-    (ignoramus-setup))
-
-  ;; Hardhat Mode
-  (use-package hardhat
-    :ensure t
-    :commands global-hardhat-mode
-    :init
-    (global-hardhat-mode)
-    :config
-    (setq hardhat-mode-lighter " HH"))
-
   ;; Highlight Numbers
   (use-package highlight-numbers
     :ensure t
@@ -925,6 +914,30 @@ This doesn't support the chanserv auth method"
           ivy-count-format "(%d/%d) "
           ivy-format-function #'ivy-format-function-arrow
           ivy-wrap t))
+
+  ;; Lispy
+  (use-package lispy
+    :ensure t
+    :commands lispy-mode
+    :init
+    (dolist (hook '(emacs-lisp-mode-hook
+                    lisp-mode-hook
+                    scheme-mode-hook))
+      (add-hook hook #'lispy-mode))
+
+    (defvar drot/lispy-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+      "Interactive commands for which lispy should be enabled in the minibuffer.")
+
+    (defun drot/lispy-minibuffer ()
+      "Enable lispy during lisp-related minibuffer commands."
+      (if (memq this-command drot/lispy-minibuffer-commands)
+          (lispy-mode)))
+
+    (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
   ;; Multiple cursors
   (use-package multiple-cursors
@@ -949,33 +962,6 @@ This doesn't support the chanserv auth method"
     :commands global-page-break-lines-mode
     :init
     (global-page-break-lines-mode))
-
-  ;; ParEdit
-  (use-package paredit
-    :ensure t
-    :diminish (paredit-mode . "PE")
-    :commands enable-paredit-mode
-    :init
-    (dolist (hook '(emacs-lisp-mode-hook
-                    ielm-mode-hook
-                    lisp-mode-hook
-                    lisp-interaction-mode-hook
-                    scheme-mode-hook))
-      (add-hook hook #'enable-paredit-mode))
-
-    (defvar drot/paredit-minibuffer-commands '(eval-expression
-                                               pp-eval-expression
-                                               eval-expression-with-eldoc
-                                               ibuffer-do-eval
-                                               ibuffer-do-view-and-eval)
-      "Interactive commands for which ParEdit should be enabled in the minibuffer.")
-
-    (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
-
-    (defun drot/paredit-minibuffer ()
-      "Enable ParEdit during lisp-related minibuffer commands."
-      (if (memq this-command drot/paredit-minibuffer-commands)
-          (enable-paredit-mode))))
 
   ;; Rainbow Delimiters
   (use-package rainbow-delimiters
