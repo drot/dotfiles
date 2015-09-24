@@ -647,6 +647,15 @@
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
+;; Geiser
+(use-package geiser
+  :ensure t
+  :defer t
+  :config
+  (setq geiser-active-implementations '(racket)
+        geiser-mode-start-repl-p t
+        geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
+
 ;; Hydra
 (use-package hydra
   :ensure t
@@ -876,15 +885,6 @@ This doesn't support the chanserv auth method"
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
-;; Geiser
-(use-package geiser
-  :ensure t
-  :defer t
-  :config
-  (setq geiser-active-implementations '(racket)
-        geiser-mode-start-repl-p t
-        geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
-
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
@@ -1005,7 +1005,8 @@ This doesn't support the chanserv auth method"
 ;; Which Key
 (use-package which-key
   :ensure t
-  :config
+  :commands (which-key-declare-prefixes which-key-mode)
+  :init
   (setq which-key-separator " > "
         which-key-special-keys nil
         which-key-show-prefix 'top)
