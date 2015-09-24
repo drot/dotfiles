@@ -806,6 +806,13 @@ This doesn't support the chanserv auth method"
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
 
+;; Smex
+(use-package smex
+  :ensure t
+  :defer t
+  :config
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
+
 ;; Swiper
 (use-package swiper
   :ensure t
