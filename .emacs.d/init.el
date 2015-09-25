@@ -699,6 +699,26 @@
          ("C-c v l" . magit-log-buffer-file)
          ("C-c v p" . magit-pull)))
 
+;; Modalka
+(use-package modalka
+  :ensure t
+  :diminish (modalka-mode . "MA")
+  :bind ("C-c t m" . modalka-mode)
+  :config
+  (setq modalka-cursor-type 'bar)
+  (modalka-define-kbd "W" "M-w")
+  (modalka-define-kbd "Y" "M-y")
+  (modalka-define-kbd "a" "C-a")
+  (modalka-define-kbd "b" "C-b")
+  (modalka-define-kbd "e" "C-e")
+  (modalka-define-kbd "f" "C-f")
+  (modalka-define-kbd "g" "C-g")
+  (modalka-define-kbd "n" "C-n")
+  (modalka-define-kbd "p" "C-p")
+  (modalka-define-kbd "w" "C-w")
+  (modalka-define-kbd "y" "C-y")
+  (modalka-define-kbd "SPC" "C-SPC"))
+
 ;; NeoTree
 (use-package neotree
   :ensure t
