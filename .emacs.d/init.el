@@ -1038,8 +1038,10 @@ This doesn't support the chanserv auth method"
         which-key-special-keys nil
         which-key-show-prefix 'top)
   (which-key-declare-prefixes
+    "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
+    "C-x w" "highlight"
     "C-c @" "hs-and-outline"
     "C-c &" "yasnippet"
     "C-c a" "applications"
