@@ -922,6 +922,7 @@ This doesn't support the chanserv auth method"
 
 ;; Ivy
 (use-package ivy
+  :ensure nil
   :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
