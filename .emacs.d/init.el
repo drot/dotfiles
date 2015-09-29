@@ -355,7 +355,7 @@
   :defer t
   :config
   (require 'dired-x)
-  (setq dired-listing-switches "-alh"
+  (setq dired-listing-switches "-alh --group-directories-first"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
         dired-dwim-target t))
