@@ -713,6 +713,7 @@
   (modalka-define-kbd "e" "C-e")
   (modalka-define-kbd "f" "C-f")
   (modalka-define-kbd "g" "C-g")
+  (modalka-define-kbd "k" "C-k")
   (modalka-define-kbd "n" "C-n")
   (modalka-define-kbd "p" "C-p")
   (modalka-define-kbd "w" "C-w")
