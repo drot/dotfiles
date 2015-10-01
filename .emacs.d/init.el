@@ -647,6 +647,11 @@
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
+;; Flx
+(use-package flx
+  :ensure t
+  :defer t)
+
 ;; Geiser
 (use-package geiser
   :ensure t
@@ -930,7 +935,8 @@ This doesn't support the chanserv auth method"
   :init
   (ivy-mode)
   :config
-  (setq ivy-use-virtual-buffers t
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ivy-use-virtual-buffers t
         ivy-display-style 'fancy
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
