@@ -354,17 +354,14 @@
 (use-package dired
   :defer t
   :config
-  (require 'dired-x)
+  (use-package dired-x
+    :config
+    (add-hook 'dired-mode-hook #'dired-omit-mode)
+    (setq dired-omit-verbose nil))
   (setq dired-listing-switches "-alhv"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
         dired-dwim-target t))
-
-;; Dired-x
-(use-package dired-x
-  :commands dired-jump
-  :config
-  (setq dired-omit-verbose nil))
 
 ;; Outline mode
 (use-package outline
@@ -543,7 +540,7 @@
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
 
-  (require 'ansi-color)
+  (use-package ansi-color)
   (defun drot/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
@@ -719,7 +716,7 @@
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
 
-  (require 'auth-source)
+  (use-package auth-source)
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
