@@ -920,7 +920,6 @@ This doesn't support the chanserv auth method"
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         ivy-use-virtual-buffers t
-        ivy-display-style 'fancy
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t))
