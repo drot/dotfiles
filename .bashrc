@@ -1,19 +1,14 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
+# Bash options
+shopt -s cdspell dirspell histverify cmdhist histappend no_empty_cmd_completion extglob
+
 # History
 export HISTCONTROL="ignoreboth:erasedups"
 export HISTSIZE=20000
 export HISTFILESIZE=${HISTSIZE}
 export HISTTIMEFORMAT="%F %T "
-
-# Bash options
-shopt -s cdspell dirspell histverify cmdhist histappend no_empty_cmd_completion extglob
-
-# Apply colors to listings
-if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
-    eval $(dircolors -b "$HOME/.dircolors")
-fi
 
 # Less options
 export LESS=-R
@@ -25,10 +20,10 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_me=$'\E[0m'
 
-# Aliases
-alias ls="ls -h --group-directories-first --color=auto"
-alias grep="grep --color=auto"
-alias eckd="emacsclient -e '(kill-emacs)'"
+# Apply colors to listings
+if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
+    eval $(dircolors -b "$HOME/.dircolors")
+fi
 
 # Prompt colors
 RED='\[\033[1;31m\]'
@@ -47,3 +42,8 @@ GIT="\$(__git_ps1 \" (%s)\")"
 
 # Prompt look
 export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
+
+# Aliases
+alias ls="ls -h --group-directories-first --color=auto"
+alias grep="grep --color=auto"
+alias eckd="emacsclient -e '(kill-emacs)'"
