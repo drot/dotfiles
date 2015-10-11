@@ -634,11 +634,6 @@
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
-;; Flx
-(use-package flx
-  :ensure t
-  :defer t)
-
 ;; Geiser
 (use-package geiser
   :ensure t
@@ -785,13 +780,6 @@ This doesn't support the chanserv auth method"
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
 
-;; Smex
-(use-package smex
-  :ensure t
-  :defer t
-  :config
-  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
-
 ;; Systemd mode
 (use-package systemd
   :ensure t
@@ -871,6 +859,18 @@ This doesn't support the chanserv auth method"
   :commands highlight-numbers-mode
   :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
+
+;; Flx
+(use-package flx
+  :ensure t
+  :defer t)
+
+;; Smex
+(use-package smex
+  :ensure t
+  :defer t
+  :config
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
 
 ;; Hydra
 (use-package hydra
