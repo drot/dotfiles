@@ -143,8 +143,8 @@ client.urgent #1e2320 #f0dfaf #1e2320 #6f6f6f
 
 # start i3bar to display a workspace bar
 bar {
-    wheel_up_cmd nop
-    wheel_down_cmd nop
+    bindsym button4 nop
+    bindsym button5 nop
     status_command i3status
     colors {
            background #3f3f3f
