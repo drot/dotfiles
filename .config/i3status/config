@@ -1,4 +1,5 @@
 general {
+output_format = "i3bar"
 colors = true
 interval = 3
 color_good = "#f0dfaf"
