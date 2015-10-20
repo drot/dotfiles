@@ -150,7 +150,7 @@ bar {
     colors {
            background #3f3f3f
            statusline #dcdccc
-           separator #6f6f6f
+           separator #f0dfaf
            focused_workspace #6f6f6f #1e2320 #f0dfaf
            active_workspace #6f6f6f #f0dfaf #dcdccc
            inactive_workspace #6f6f6f #3f3f3f #dcdccc
