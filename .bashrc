@@ -39,7 +39,7 @@ GIT="\$(__git_ps1 \" (%s)\")"
 # Prompt colors
 RED='\[\033[1;31m\]'
 GREEN='\[\033[1;32m\]'
-BLUE='\[\033[1;34m\]'
+BLUE='\[\033[1;36m\]'
 NIL='\[\033[00m\]'
 
 # Prompt look
