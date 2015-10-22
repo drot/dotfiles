@@ -29,7 +29,7 @@ NORMAL 00
 FILE 00;37
 
 # directory
-DIR 01;36
+DIR 01;34
 # symbolic link
 LINK 01;35
 # pipe

@@ -30,41 +30,41 @@ cursor_shape = block
 
 [colors]
 #cursor = #dcdccc
-foreground = #9C9A94
+foreground = #dcdccc
 #foreground_bold = #ffffff
-background = #111111
+background = #3f3f3f
 
 # 20% background transparency (requires a compositor)
 #background = rgba(63, 63, 63, 0.8)
 
 # if unset, will reverse foreground and background
-highlight = #404040
+highlight = #1e2320
 
 # colors from color0 to color254 can be set
-color0 = #111111
-color1 = #DA5F5F
-color2 = #95C749
-color3 = #B5E15D
-color4 = #778798
-color5 = #AEA4BF
-color6 = #CCCA9A
-color7 = #ECEAE0
-color8 = #404040
-color9 = #E17A6B
-color10 = #B8D68C
-color11 = #F0BB6E
-color12 = #D2B48C
-color13 = #5AF4B5
-color14 = #42717B
-color15 = #dddddd
+color0 = #3f3f3f
+color1 = #bc8383
+color2 = #5f7f5f
+color3 = #e0cf9f
+color4 = #7cb8bb
+color5 = #dc8cc3
+color6 = #93e0e3
+color7 = #dcdccc
+color8 = #5f5f5f
+color9 = #cc9393
+color10 = #7f9f7f
+color11 = #f0dfaf
+color12 = #8cd0d3
+color13 = #dc8cc3
+color14 = #93e0e3
+color15 = #ffffff
 
 [hints]
 font = Terminus Bold 10
-foreground = #95C749
-background = #404040
-active_foreground = #9C9A94
-active_background = #95C749
+foreground = #f0dfaf
+background = #1e2320
+active_foreground = #1e2320
+active_background = #f0dfaf
 padding = 2
-border = #95C749
+border = #f0dfaf
 border_width = 2.0
 roundness = 0.0

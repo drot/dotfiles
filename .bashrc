@@ -21,9 +21,9 @@ man() {
         LESS_TERMCAP_md=$'\E[01;32;5;74m' \
         LESS_TERMCAP_me=$'\E[0m' \
         LESS_TERMCAP_se=$'\E[0m' \
-        LESS_TERMCAP_so=$'\E[1;32;41m' \
+        LESS_TERMCAP_so=$'\E[1;37;42m' \
         LESS_TERMCAP_ue=$'\E[0m' \
-        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        LESS_TERMCAP_us=$'\E[04;34;5;146m' \
         man "$@"
 }
 
@@ -39,7 +39,7 @@ GIT="\$(__git_ps1 \" (%s)\")"
 # Prompt colors
 RED='\[\033[1;31m\]'
 GREEN='\[\033[1;32m\]'
-BLUE='\[\033[1;36m\]'
+BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
 # Prompt look
