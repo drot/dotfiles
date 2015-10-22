@@ -10,26 +10,22 @@ export HISTSIZE=20000
 export HISTFILESIZE=${HISTSIZE}
 export HISTTIMEFORMAT="%F %T "
 
-# Less options
-export LESS=-R
-export LESS_TERMCAP_mb=$'\E[1;31m'
-export LESS_TERMCAP_md=$'\E[1;32m'
-export LESS_TERMCAP_us=$'\E[1;34m'
-export LESS_TERMCAP_so=$'\E[1;37;42m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_me=$'\E[0m'
-
-# Apply colors to listings
+# Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b "$HOME/.dircolors")
 fi
 
-# Prompt colors
-RED='\[\033[1;31m\]'
-GREEN='\[\033[1;32m\]'
-BLUE='\[\033[1;34m\]'
-NIL='\[\033[00m\]'
+# Colored man pages
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;32;5;74m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[1;32;41m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        man "$@"
+}
 
 # Git prompt
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
@@ -39,6 +35,12 @@ else
 fi
 
 GIT="\$(__git_ps1 \" (%s)\")"
+
+# Prompt colors
+RED='\[\033[1;31m\]'
+GREEN='\[\033[1;32m\]'
+BLUE='\[\033[1;34m\]'
+NIL='\[\033[00m\]'
 
 # Prompt look
 export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
