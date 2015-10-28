@@ -1,8 +1,13 @@
-# default modifier key
-set $mod Mod4
-
 # font for window titles and the status bar
 font pango:Terminus 10
+
+# general settings
+workspace_layout tabbed
+workspace_auto_back_and_forth yes
+focus_follows_mouse no
+
+# default modifier key
+set $mod Mod4
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -114,27 +119,6 @@ mode "RESIZE MODE" {
 
 bindsym $mod+r mode "RESIZE MODE"
 
-# default layout
-workspace_layout tabbed
-
-# list of floating applications
-for_window [class="Skype"] floating enable
-for_window [class="mpv"] floating enable
-for_window [class="Wine"] floating enable
-
-# assing applications to certain workspaces
-assign [class="Firefox"] 2
-assign [class="Conkeror"] 2
-assign [class="Emacs"] 3
-assign [class="Zathura"] 4
-assign [class="libreoffice"] 4
-assign [class="Gimp"] 4
-assign [class="Pavucontrol"] 4
-for_window [class="Thunar"] floating enable, move container to workspace 5
-
-# focus doesn't follow mouse
-focus_follows_mouse no
-
 # window colors
 client.focused #6f6f6f #1e2320 #f0dfaf #f0dfaf
 client.focused_inactive #6f6f6f #3f3f3f #f0dfaf #f0dfaf
@@ -157,3 +141,18 @@ bar {
            urgent_workspace #1e2320 #f0dfaf #1e2320
            }
 }
+
+# list of floating applications
+for_window [class="Skype"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="Wine"] floating enable
+
+# assing applications to certain workspaces
+assign [class="Firefox"] 2
+assign [class="Conkeror"] 2
+assign [class="Emacs"] 3
+assign [class="Zathura"] 4
+assign [class="libreoffice"] 4
+assign [class="Gimp"] 4
+assign [class="Pavucontrol"] 4
+for_window [class="Thunar"] floating enable, move container to workspace 5
