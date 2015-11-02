@@ -178,6 +178,8 @@ define_webjump("archwiki", "https://wiki.archlinux.org/index.php?search=%s",
                $alternative="http://www.archlinux.org");
 define_webjump("arch-package", "https://www.archlinux.org/packages/?sort=&q=%s&maintainer=&flagged=",
                $alternative="https://www.archlinux.org/packages");
+define_webjump("google", "https://encrypted.google.com/#q=%s",
+               $alternative="https://encrypted.google.com");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
 
