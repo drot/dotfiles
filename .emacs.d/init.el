@@ -192,12 +192,6 @@
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
   (setq-default save-place t))
 
-;; Server mode
-(use-package server
-  :diminish (server-buffer-clients . "SR")
-  :config
-  (server-mode))
-
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
   :config
@@ -849,9 +843,7 @@ This doesn't support the chanserv auth method"
   :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
   (global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
 
 ;; Highlight Numbers
 (use-package highlight-numbers
