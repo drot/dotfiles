@@ -743,11 +743,17 @@ This doesn't support the chanserv auth method"
     :config
     (rcirc-notify-add-hooks))
 
-  ;; Use Visual Line mode for filling
-  (setq rcirc-fill-flag nil)
-  (add-hook 'rcirc-mode-hook (lambda ()
-                               (setq fill-column 156)))
-  (add-hook 'rcirc-mode-hook #'visual-line-mode)
+  ;; Use built in filling when in term mode
+  (unless (display-graphic-p)
+    (setq rcirc-fill-flag t
+          rcirc-fill-column 'frame-width))
+
+  ;; Use Visual Line mode for filling in GUI mode
+  (when (display-graphic-p)
+    (setq rcirc-fill-flag nil)
+    (add-hook 'rcirc-mode-hook (lambda ()
+                                 (setq fill-column 156)))
+    (add-hook 'rcirc-mode-hook #'visual-line-mode))
 
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
@@ -843,7 +849,9 @@ This doesn't support the chanserv auth method"
   :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
   (global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode)))
 
 ;; Highlight Numbers
 (use-package highlight-numbers
