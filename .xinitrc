@@ -34,6 +34,7 @@ fi
 
 xset -dpms &
 xset s off &
+urxvtd -q -o -f &
 dunst &
-display -size 1280x1024 -window root ~/Pictures/zenburn.jpg &
+display -size 1280x1024 -window root ~/Pictures/tile.png &
 exec i3
