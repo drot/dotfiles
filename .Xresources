@@ -14,6 +14,10 @@ URxvt.urgentOnBell: true
 URxvt.internalBorder: 0
 URxvt.saveLines: 65535
 
+! Release Ctrl/Shift bindings
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 ! Scrolling
 URxvt.scrollBar: false
 URxvt.scrollTtyOutput: false
@@ -24,6 +28,7 @@ URxvt.scrollTtyKeypress: true
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher: conkeror
 URxvt.url-select.underline: true
+URxvt.matcher.button: 1
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
