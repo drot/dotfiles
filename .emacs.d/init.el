@@ -348,14 +348,17 @@
 (use-package dired
   :defer t
   :config
-  (use-package dired-x
-    :config
-    (add-hook 'dired-mode-hook #'dired-omit-mode)
-    (setq dired-omit-verbose nil))
   (setq dired-listing-switches "-alhv"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
         dired-dwim-target t))
+
+;; Dired-x
+(use-package dired-x
+  :after dired
+  :config
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+  (setq dired-omit-verbose nil))
 
 ;; Outline mode
 (use-package outline
@@ -722,27 +725,6 @@ This doesn't support the chanserv auth method"
                                  (funcall secret)
                                secret)))))))
 
-  ;; rcirc color code support
-  (use-package rcirc-styles
-    :ensure t
-    :config
-    (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
-                                     "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
-                                     "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
-                                     "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
-
-  ;; rcirc colored nicknames
-  (use-package rcirc-color
-    :ensure t
-    :config
-    (setq rcirc-colors (append rcirc-styles-color-vector nil)))
-
-  ;; rcirc notifications
-  (use-package rcirc-notify
-    :ensure t
-    :config
-    (rcirc-notify-add-hooks))
-
   ;; Use built in filling when in term mode
   (unless (display-graphic-p)
     (setq rcirc-fill-flag t
@@ -779,6 +761,30 @@ This doesn't support the chanserv auth method"
   (defun-rcirc-command nickserv (arg)
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
+
+;; rcirc color codes support
+(use-package rcirc-styles
+  :ensure t
+  :after rcirc
+  :config
+  (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
+                                   "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
+                                   "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
+                                   "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
+
+;; rcirc colored nicknames
+(use-package rcirc-color
+  :ensure t
+  :after rcirc
+  :config
+  (setq rcirc-colors (append rcirc-styles-color-vector nil)))
+
+;; rcirc notifications
+(use-package rcirc-notify
+  :ensure t
+  :after rcirc
+  :config
+  (rcirc-notify-add-hooks))
 
 ;; Systemd mode
 (use-package systemd
