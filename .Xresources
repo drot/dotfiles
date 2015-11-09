@@ -12,7 +12,6 @@ Emacs.verticalScrollBars: off
 
 ! General
 URxvt*urgentOnBell: true
-URxvt*internalBorder: 0
 URxvt*saveLines: 65535
 
 ! Release Ctrl/Shift bindings
@@ -82,8 +81,7 @@ URxvt*color15: #FFFFFF
 XTerm*locale: true
 XTerm*termName: xterm-256color
 XTerm*bellIsUrgent: true
-XTerm*internalBorder: 0
-XTerm*saveLines: 9000
+XTerm*saveLines: 65535
 
 ! Release Meta binding
 XTerm*fullscreen: never
@@ -92,6 +90,9 @@ XTerm*metaSendsEscape: true
 ! Scrolling
 XTerm*ScrollBar: false
 XTerm*ScrollKey: true
+
+! Dabbrev expand
+XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
 XTerm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
