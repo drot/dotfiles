@@ -937,7 +937,12 @@ This doesn't support the chanserv auth method"
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-h v" . counsel-describe-variable)
-         ("C-h f" . counsel-describe-function))
+         ("C-h f" . counsel-describe-function)
+         ("C-c f l" . counsel-load-library)
+         ("C-c f g" . counsel-git)
+         ("C-c s l" . counsel-info-lookup-symbol)
+         ("C-c s g" . counsel-git-grep)
+         ("C-c i u" . counsel-unicode-char))
   :config
   (setq counsel-find-file-at-point t))
 
@@ -1039,6 +1044,7 @@ This doesn't support the chanserv auth method"
 ;; Which Key
 (use-package which-key
   :ensure t
+  :bind ("C-c h w" . which-key-show-top-level)
   :commands (which-key-declare-prefixes which-key-mode)
   :init
   (setq which-key-separator " > "
