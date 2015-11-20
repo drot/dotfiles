@@ -103,9 +103,6 @@
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
 
-;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
-
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
@@ -1047,9 +1044,10 @@ This doesn't support the chanserv auth method"
   :bind ("C-c h w" . which-key-show-top-level)
   :commands (which-key-declare-prefixes which-key-mode)
   :init
-  (setq which-key-separator " > "
+  (setq which-key-popup-type 'minibuffer
+        which-key-echo-keystrokes 0.1
         which-key-special-keys nil
-        which-key-show-prefix 'top)
+        which-key-separator " > ")
   (which-key-declare-prefixes
     "C-x a" "abbrev"
     "C-x n" "narrow"
