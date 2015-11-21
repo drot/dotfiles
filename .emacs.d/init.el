@@ -669,6 +669,12 @@
   (modalka-define-kbd "y" "C-y")
   (modalka-define-kbd "SPC" "C-SPC"))
 
+;; Move-text
+(use-package move-text
+  :ensure t
+  :bind (("M-<up>" . move-text-up)
+         ("M-<down>" . move-text-down)))
+
 ;; NeoTree
 (use-package neotree
   :ensure t
