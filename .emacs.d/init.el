@@ -200,8 +200,7 @@
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (setq show-paren-delay 0
-        show-paren-style 'mixed)
+  (setq show-paren-delay 0)
   (show-paren-mode))
 
 ;; Highlight regexps interactively
