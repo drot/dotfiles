@@ -32,8 +32,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-xset -dpms &
-xset s off &
+xset s off -dpms &
 urxvtd -q -o -f &
 dunst &
 display -size 1280x1024 -window root ~/Pictures/tile.png &
