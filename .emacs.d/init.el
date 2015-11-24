@@ -635,8 +635,7 @@
   :ensure t
   :defer t
   :config
-  (setq geiser-active-implementations '(racket)
-        geiser-mode-start-repl-p t
+  (setq geiser-mode-start-repl-p t
         geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
 ;; Magit
