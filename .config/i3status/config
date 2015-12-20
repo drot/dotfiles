@@ -10,6 +10,7 @@ color_bad = "#cc9393"
 order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "load"
+order += "disk /home"
 order += "volume master"
 order += "time"
 
@@ -25,6 +26,10 @@ path = "/sys/class/thermal/thermal_zone0/temp"
 
 load {
 format = " LOAD: %1min %5min %15min "
+}
+
+disk "/home" {
+format = " HOME: %percentage_used "
 }
 
 volume master {
