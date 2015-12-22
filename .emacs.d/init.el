@@ -944,6 +944,7 @@ This doesn't support the chanserv auth method"
          ("C-h f" . counsel-describe-function)
          ("C-c f l" . counsel-load-library)
          ("C-c f g" . counsel-git)
+         ("C-c n i" . counsel-imenu)
          ("C-c s l" . counsel-info-lookup-symbol)
          ("C-c s g" . counsel-git-grep)
          ("C-c i u" . counsel-unicode-char))
