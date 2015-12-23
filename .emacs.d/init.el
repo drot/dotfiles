@@ -47,7 +47,8 @@
 ;; Activate packages and add MELPA
 (setq package-enable-at-startup nil)
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
