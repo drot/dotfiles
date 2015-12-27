@@ -94,12 +94,13 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
-;; Don't show the welcome messages
-(setq inhibit-startup-screen t
-      initial-scratch-message nil)
+;; Don't show startup welcome messages
+(put 'inhibit-startup-echo-area-message 'saved-value
+     (setq inhibit-startup-echo-area-message (user-login-name)))
+(setq inhibit-startup-screen t)
 
-;; Disable startup echo area message
-(fset 'display-startup-echo-area-message #'ignore)
+;; Disable scratch buffer info text
+(setq initial-scratch-message nil)
 
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
