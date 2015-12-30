@@ -649,6 +649,11 @@
          ("C-c v l" . magit-log-buffer-file)
          ("C-c v p" . magit-pull)))
 
+;; Markdown mode
+(use-package markdown-mode
+  :ensure t
+  :defer t)
+
 ;; Modalka
 (use-package modalka
   :ensure t
