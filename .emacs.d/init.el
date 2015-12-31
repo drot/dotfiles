@@ -640,6 +640,13 @@
   (setq geiser-mode-start-repl-p t
         geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
+;; Haskell mode
+(use-package haskell-mode
+  :ensure t
+  :defer t
+  :config
+  (add-hook 'haskell-mode-hook #'haskell-indent-mode))
+
 ;; Magit
 (use-package magit
   :ensure t

@@ -147,7 +147,7 @@ for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Wine"] floating enable
 
-# assing applications to certain workspaces
+# assign applications to certain workspaces
 assign [class="Firefox"] 2
 assign [class="Conkeror"] 2
 assign [class="Emacs"] 3
