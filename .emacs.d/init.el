@@ -640,13 +640,6 @@
   (setq geiser-mode-start-repl-p t
         geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
-;; Haskell mode
-(use-package haskell-mode
-  :ensure t
-  :defer t
-  :config
-  (add-hook 'haskell-mode-hook #'haskell-indent-mode))
-
 ;; Magit
 (use-package magit
   :ensure t
@@ -877,6 +870,13 @@ This doesn't support the chanserv auth method"
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
+;; Eyebrowse
+(use-package eyebrowse
+  :ensure t
+  :commands eyebrowse-mode
+  :init
+  (eyebrowse-mode))
+
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
@@ -1089,6 +1089,7 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
+    "C-c C-w" "eyebrowse"
     "C-c x" "text")
   (which-key-mode))
 
