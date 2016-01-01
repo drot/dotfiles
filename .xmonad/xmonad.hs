@@ -21,7 +21,6 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 
 -- Font and colors
---
 myFont = "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-2"
 myBGColor = "#3f3f3f"
 myFGColor = "#dcdccc"
@@ -31,24 +30,20 @@ myGreenColor = "#60b48a"
 myPurpleColor = "#ec93d3"
 
 -- Launch xmonad
---
+main :: IO ()
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myUhook
 
 -- Override defaults
-myConfig = defaultConfig {
-             terminal = "urxvtc"
-           , focusFollowsMouse = False
-           , borderWidth = 2
-           , modMask = mod4Mask
-           , normalBorderColor = myBlackColor
-           , focusedBorderColor = myGreenColor
-           , layoutHook = myLayoutHook
-           , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
-           }
+myConfig = def { terminal = "urxvtc"
+               , focusFollowsMouse = False
+               , borderWidth = 2
+               , modMask = mod4Mask
+               , normalBorderColor = myBlackColor
+               , focusedBorderColor = myGreenColor
+               , layoutHook = myLayoutHook
+               , manageHook = myManageHook <+> namedScratchpadManageHook myScratch
+               }
            `additionalKeysP` myKeys
-
--- Status bar
---
 
 -- Spawn status bar
 myBar = "xmobar ~/.xmonad/xmobarrc"
@@ -62,18 +57,16 @@ myUrgentWrap = wrap ("<fc=" ++ myGreenColor ++ ">[</fc>") ("<fc=" ++ myGreenColo
 myUhook = withUrgencyHookC NoUrgencyHook myUrgent myConfig
 
 -- Status bar output
-myPP = defaultPP {
-         ppTitle = xmobarColor myRedColor "" . myTitleWrap . shorten 50
-       , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
-       , ppUrgent = xmobarColor myPurpleColor "" . myUrgentWrap
-       , ppSep = "<fc=" ++ myRedColor ++ ">:</fc>"
-       , ppWsSep = "<fc=" ++ myRedColor ++ ">:</fc>"
-       , ppLayout = xmobarColor myGreenColor ""
-       , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
-       }
+myPP = def { ppTitle = xmobarColor myRedColor "" . myTitleWrap . shorten 50
+           , ppCurrent = xmobarColor myGreenColor "" . myWorkspaceWrap
+           , ppUrgent = xmobarColor myPurpleColor "" . myUrgentWrap
+           , ppSep = "<fc=" ++ myRedColor ++ ">:</fc>"
+           , ppWsSep = "<fc=" ++ myRedColor ++ ">:</fc>"
+           , ppLayout = xmobarColor myGreenColor ""
+           , ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
+           }
 
 -- Layout configuration
---
 myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
                tabs ||| tile ||| mtile ||| full ||| float
     where
@@ -84,62 +77,50 @@ myLayoutHook = onWorkspace "3" tile $ onWorkspace "4" float $
       float = renamed [Replace "><>"] $ smartBorders simplestFloat
 
 -- Window rules
---
-myManageHook = composeAll [
-                isFullscreen --> doFullFloat
-               , className =? "mpv" --> doFloat
-               , className =? "Gimp" --> doFloat
-               , className =? "Conkeror" --> doShift "2"
-               , className =? "Emacs" --> doShift "3"
-               ]
+myManageHook = composeAll [ isFullscreen --> doFullFloat
+                          , className =? "mpv" --> doFloat
+                          , className =? "Gimp" --> doFloat
+                          , className =? "Conkeror" --> doShift "2"
+                          , className =? "Emacs" --> doShift "3"
+                          ]
 
 -- Urgent notification
---
-myUrgent = urgencyConfig {
-             suppressWhen = Focused
-           , remindWhen = Dont
-           }
+myUrgent = urgencyConfig { suppressWhen = Focused
+                         , remindWhen = Dont
+                         }
 
 -- Scratchpad
---
 myScratch = [ NS "music" "urxvtc -e ncmpcpp" (title =? "ncmpcpp")
               (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
             ]
 
 -- Tab style
---
-myTabConfig = defaultTheme {
-                fontName = myFont
-              , decoHeight = 28
-              , activeColor = myBGColor
-              , activeBorderColor = myGreenColor
-              , activeTextColor = myGreenColor
-              , inactiveColor = myBGColor
-              , inactiveBorderColor = myBlackColor
-              , inactiveTextColor = myFGColor
-              , urgentColor = myBGColor
-              , urgentBorderColor = myPurpleColor
-              , urgentTextColor = myPurpleColor
-              }
+myTabConfig = def { fontName = myFont
+                  , decoHeight = 28
+                  , activeColor = myBGColor
+                  , activeBorderColor = myGreenColor
+                  , activeTextColor = myGreenColor
+                  , inactiveColor = myBGColor
+                  , inactiveBorderColor = myBlackColor
+                  , inactiveTextColor = myFGColor
+                  , urgentColor = myBGColor
+                  , urgentBorderColor = myPurpleColor
+                  , urgentTextColor = myPurpleColor
+                  }
 
 -- Prompt style
---
-myXPConfig = defaultXPConfig {
-               font = myFont
-             , fgColor = myFGColor
-             , bgColor = myBGColor
-             , bgHLight = myBGColor
-             , fgHLight = myGreenColor
-             , position = Bottom
-             }
-
--- Key bindings
---
+myXPConfig = def { font = myFont
+                 , fgColor = myFGColor
+                 , bgColor = myBGColor
+                 , bgHLight = myBGColor
+                 , fgHLight = myGreenColor
+                 , position = Bottom
+                 }
 
 -- Toggle struts
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
--- Override defaults
+-- Override default keybindings
 myKeys = [ ("M-<Return>", spawn $ XMonad.terminal myConfig)
          , ("M-s", namedScratchpadAction myScratch "music")
          , ("M-p", shellPrompt myXPConfig)
