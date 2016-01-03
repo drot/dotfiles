@@ -6,8 +6,12 @@ workspace_layout tabbed
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
-# default modifier key
+# default modifier and movement keys
 set $mod Mod4
+set $up l
+set $down k
+set $left j
+set $right semicolon
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -22,10 +26,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+p exec dmenu-run
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -34,10 +38,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -70,6 +74,12 @@ bindsym $mod+a focus parent
 
 # focus the child container
 bindsym $mod+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+apostrophe move scratchpad
+
+# show the next scratchpad window or hide the focused scratchpad window.
+bindsym Mod1+apostrophe scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -108,16 +118,22 @@ bindsym $mod+minus exec --no-startup-id ponymix decrease 5
 bindsym $mod+plus exec --no-startup-id ponymix increase 5
 
 # resize window (you can also use the mouse for that)
-mode "RESIZE MODE" {
-     bindsym f resize grow width 10 px or 10 ppt
-     bindsym b resize shrink width 10 px or 10 ppt
-     bindsym n resize grow height 10 px or 10 ppt
-     bindsym p resize shrink height 10 px or 10 ppt
-     bindsym q mode "default"
+mode "RESIZE" {
+     bindsym $left resize shrink width 10 px or 10 ppt
+     bindsym $down resize grow height 10 px or 10 ppt
+     bindsym $up resize shrink height 10 px or 10 ppt
+     bindsym $right resize grow width 10 px or 10 ppt
+     # same bindings, but for the arrow keys
+     bindsym Left resize shrink width 10 px or 10 ppt
+     bindsym Down resize grow height 10 px or 10 ppt
+     bindsym Up resize shrink height 10 px or 10 ppt
+     bindsym Right resize grow width 10 px or 10 ppt
+     # back to normal: Enter or Escape
+     bindsym Return mode "default"
      bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "RESIZE MODE"
+bindsym $mod+r mode "RESIZE"
 
 # window colors
 client.focused #6f6f6f #1e2320 #f0dfaf #f0dfaf
