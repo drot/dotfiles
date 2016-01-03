@@ -35,8 +35,7 @@ format = " HOME: %percentage_used "
 volume master {
 format = " VOL: %volume "
 format_muted = " VOL: muted (%volume) "
-device = "default"
-mixer = "Master"
+device = "pulse"
 }
 
 time {
