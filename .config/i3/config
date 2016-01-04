@@ -136,10 +136,10 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # window colors
-client.focused #6f6f6f #1e2320 #f0dfaf #f0dfaf
-client.focused_inactive #6f6f6f #3f3f3f #f0dfaf #f0dfaf
-client.unfocused #6f6f6f #3f3f3f #dcdccc #f0dfaf
-client.urgent #1e2320 #f0dfaf #1e2320 #6f6f6f
+client.focused #5f5f5f #1e2320 #f0dfaf #f0dfaf
+client.focused_inactive #1e2320 #5f5f5f #f0dfaf #f0dfaf
+client.unfocused #1e2320 #5f5f5f #dcdccc #f0dfaf
+client.urgent #1e2320 #f0dfaf #1e2320 #5f5f5f
 
 # start i3bar to display a workspace bar
 bar {
@@ -151,9 +151,9 @@ bar {
            background #3f3f3f
            statusline #dcdccc
            separator #f0dfaf
-           focused_workspace #6f6f6f #1e2320 #f0dfaf
-           active_workspace #6f6f6f #f0dfaf #dcdccc
-           inactive_workspace #6f6f6f #3f3f3f #dcdccc
+           focused_workspace #5f5f5f #1e2320 #f0dfaf
+           active_workspace #5f5f5f #f0dfaf #dcdccc
+           inactive_workspace #5f5f5f #3f3f3f #dcdccc
            urgent_workspace #1e2320 #f0dfaf #1e2320
            }
 }
