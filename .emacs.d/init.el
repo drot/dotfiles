@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009-2015 drot
 
 ;; Author: drot
-;; URL: https://github.com/drot/.emacs.d
+;; URL: https://github.com/drot/dotfiles/tree/master/.emacs.d
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
@@ -722,7 +722,7 @@
   :config
   (setq rcirc-server-alist
         '(("adams.freenode.net" :port 7000 :encryption tls
-           :channels ("#archlinux" "#emacs"))
+           :channels ("#archlinux" "#emacs" "#haskell" "#xmonad"))
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
 
@@ -817,6 +817,7 @@ This doesn't support the chanserv auth method"
 ;; Ace-link
 (use-package ace-link
   :ensure t
+  :bind ("C-c n o" . ace-link-addr)
   :commands ace-link-setup-default
   :init
   (ace-link-setup-default))
