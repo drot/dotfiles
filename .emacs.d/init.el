@@ -761,7 +761,9 @@ This doesn't support the chanserv auth method"
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
   (defun-rcirc-command chanserv (arg)
