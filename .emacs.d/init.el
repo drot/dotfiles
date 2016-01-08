@@ -743,6 +743,9 @@ This doesn't support the chanserv auth method"
                                  (funcall secret)
                                secret)))))))
 
+  ;; Truncate buffer output
+  (setq rcirc-buffer-maximum-lines 1024)
+
   ;; Use built in filling when in term mode
   (unless (display-graphic-p)
     (setq rcirc-fill-flag t
