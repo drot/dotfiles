@@ -79,7 +79,7 @@ bindsym $mod+d focus child
 bindsym $mod+Shift+apostrophe move scratchpad
 
 # show the next scratchpad window or hide the focused scratchpad window.
-bindsym Mod1+apostrophe scratchpad show
+bindsym $mod+apostrophe scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
