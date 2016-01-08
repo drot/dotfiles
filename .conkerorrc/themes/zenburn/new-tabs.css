@@ -11,8 +11,8 @@
     max-width: 12em;
     border-style: solid;
     border-width: 1px;
-    border-color: #5f5f5f;
-    background: #3f3f3f;
+    border-color: #1e2320;
+    background: #5f5f5f;
     color: #dcdccc;
     font-family: Terminus;
     font-size: 14px;
@@ -20,6 +20,7 @@
 
 .tab2[selected=true] {
     background: #1e2320;
+    border-color: #5f5f5f;
     color: #f0dfaf;
     font-weight: bold;
 }
