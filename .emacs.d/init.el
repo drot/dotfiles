@@ -640,6 +640,21 @@
   (setq geiser-mode-start-repl-p t
         geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
+;; Key Chord
+(use-package key-chord
+  :ensure t
+  :commands key-chord-mode
+  :init
+  (key-chord-mode 1)
+  :config
+  (key-chord-define-global "8w" #'avy-goto-word-1)
+  (key-chord-define-global "3l" #'avy-goto-line)
+  (key-chord-define-global "8c" #'avy-goto-char)
+  (key-chord-define-global "3u" #'undo-tree-visualize)
+  (key-chord-define-global "8f" #'counsel-find-file)
+  (key-chord-define-global "8x" #'counsel-M-x)
+  (key-chord-define-global "8y" #'browse-kill-ring))
+
 ;; Haskell mode
 (use-package haskell-mode
   :ensure t
@@ -660,27 +675,6 @@
 (use-package markdown-mode
   :ensure t
   :defer t)
-
-;; Modalka
-(use-package modalka
-  :ensure t
-  :diminish (modalka-mode . "MA")
-  :bind ("C-c t m" . modalka-mode)
-  :config
-  (setq modalka-cursor-type 'bar)
-  (modalka-define-kbd "W" "M-w")
-  (modalka-define-kbd "Y" "M-y")
-  (modalka-define-kbd "a" "C-a")
-  (modalka-define-kbd "b" "C-b")
-  (modalka-define-kbd "e" "C-e")
-  (modalka-define-kbd "f" "C-f")
-  (modalka-define-kbd "g" "C-g")
-  (modalka-define-kbd "k" "C-k")
-  (modalka-define-kbd "n" "C-n")
-  (modalka-define-kbd "p" "C-p")
-  (modalka-define-kbd "w" "C-w")
-  (modalka-define-kbd "y" "C-y")
-  (modalka-define-kbd "SPC" "C-SPC"))
 
 ;; Move-text
 (use-package move-text
