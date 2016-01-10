@@ -145,7 +145,6 @@ client.urgent #1e2320 #f0dfaf #1e2320 #5f5f5f
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol ">>"
     status_command i3status
     colors {
            background #3f3f3f
@@ -171,4 +170,4 @@ assign [class="Zathura"] 4
 assign [class="libreoffice"] 4
 assign [class="Gimp"] 4
 assign [class="Pavucontrol"] 4
-for_window [class="Thunar"] floating enable, move container to workspace 5
+for_window [class="Spacefm"] floating enable, move container to workspace 5
