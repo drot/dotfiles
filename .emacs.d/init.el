@@ -647,11 +647,14 @@
   :init
   (key-chord-mode 1)
   :config
-  (key-chord-define-global "8w" #'avy-goto-word-1)
+  (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
-  (key-chord-define-global "8c" #'avy-goto-char)
   (key-chord-define-global "3u" #'undo-tree-visualize)
+  (key-chord-define-global "8w" #'avy-goto-word-1)
+  (key-chord-define-global "8c" #'avy-goto-char)
   (key-chord-define-global "8f" #'counsel-find-file)
+  (key-chord-define-global "8q" #'query-replace)
+  (key-chord-define-global "8r" #'replace-string)
   (key-chord-define-global "8x" #'counsel-M-x)
   (key-chord-define-global "8y" #'browse-kill-ring))
 
