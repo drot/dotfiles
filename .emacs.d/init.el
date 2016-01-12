@@ -894,6 +894,11 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
+;; JavaScript mode
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'")
+
 ;; Flx
 (use-package flx
   :ensure t
