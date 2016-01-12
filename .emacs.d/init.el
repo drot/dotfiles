@@ -1,6 +1,6 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2015 drot
+;; Copyright (C) 2009-2016 drot
 
 ;; Author: drot
 ;; URL: https://github.com/drot/dotfiles/tree/master/.emacs.d
@@ -897,7 +897,9 @@ This doesn't support the chanserv auth method"
 ;; JavaScript mode
 (use-package js2-mode
   :ensure t
-  :mode "\\.js\\'")
+  :mode "\\.js\\'"
+  :config
+  (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; Flx
 (use-package flx
