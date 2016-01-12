@@ -26,10 +26,10 @@ user_pref("extensions.checkUpdateSecurity", true);
 session_pref("general.useragent.compatMode.firefox", true);
 
 // Enable tracking protection
-session_pref("privacy.trackingprotection.enabled", true)
+session_pref("privacy.trackingprotection.enabled", true);
 
 // Disable geolocation
-session_pref("geo.enabled", false)
+session_pref("geo.enabled", false);
 
 // Resize images automatically
 session_pref("browser.enable_automatic_image_resizing", true);
