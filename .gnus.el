@@ -1,17 +1,28 @@
 ;; User information
 (setq user-full-name "Davor Rotim"
-      user-mail-address "mlinfo@cock.li")
+      user-mail-address "augerbow@gmail.com")
 
 ;; Incoming mail
-(setq gnus-select-method '(nnimap "cock"
-                                  (nnimap-address "mail.cock.li")
+(setq gnus-select-method '(nnimap "gmail"
+                                  (nnimap-address "imap.gmail.com")
                                   (nnimap-server-port 993)
                                   (nnimap-stream ssl)))
 
 ;; Outgoing mail
 (setq send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-server "mail.cock.li"
+      smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587)
+
+;; Archive outgoing email in Sent folder on imap.gmail.com:
+(setq gnus-message-archive-method '(nnimap "imap.gmail.com")
+      gnus-message-archive-group "[Gmail]/Sent Mail")
+
+;; Set return email address based on incoming email address
+(setq gnus-posting-styles
+      '(((header "to" "address@outlook.com")
+         (address "address@outlook.com"))
+        ((header "to" "address@gmail.com")
+         (address "address@gmail.com"))))
 
 ;; Confirm to send and kill the buffer after
 (setq message-confirm-send t
