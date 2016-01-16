@@ -547,7 +547,7 @@
 
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
-;; Colorize the compilation mode buffer
+;; Colorize ANSI escape sequences
 (use-package ansi-color
   :after compile)
 
@@ -841,7 +841,9 @@ This doesn't support the chanserv auth method"
          ("C-c s r" . anzu-query-replace-regexp))
   :commands global-anzu-mode
   :init
-  (global-anzu-mode))
+  (global-anzu-mode)
+  :config
+  (setq anzu-replace-to-string-separator " => "))
 
 ;; Company mode
 (use-package company
