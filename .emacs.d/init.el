@@ -538,7 +538,6 @@
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
 
-  (use-package ansi-color)
   (defun drot/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
@@ -547,6 +546,10 @@
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+
+;; Colorize the compilation mode buffer
+(use-package ansi-color
+  :after compile)
 
 ;; Calendar configuration
 (use-package calendar
@@ -723,7 +726,6 @@
           ("pine.forestnet.org" :port 6697 :encryption tls
            :channels ("#reloaded" "#rawhide"))))
 
-  (use-package auth-source)
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
