@@ -62,10 +62,10 @@
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
       gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]"
-      gnus-sum-thread-tree-false-root ""
+      gnus-sum-thread-tree-false-root "o "
       gnus-sum-thread-tree-indent " "
-      gnus-sum-thread-tree-leaf-with-other "├► "
+      gnus-sum-thread-tree-leaf-with-other "+-> "
       gnus-sum-thread-tree-root ""
-      gnus-sum-thread-tree-single-leaf "╰► "
-      gnus-sum-thread-tree-vertical "│"
+      gnus-sum-thread-tree-single-leaf "`-> "
+      gnus-sum-thread-tree-vertical "| "
       smiley-style 'medium)
