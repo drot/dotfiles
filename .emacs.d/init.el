@@ -401,11 +401,11 @@
 (add-hook 'text-mode-hook #'bug-reference-mode)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
-;; Go-to address
+;; Goto Address mode
 (use-package goto-addr
   :commands (goto-address-mode goto-address-prog-mode))
 
-;; Add Go-to address hook
+;; Add Goto Address mode hook
 (add-hook 'text-mode-hook #'goto-address-mode)
 (add-hook 'prog-mode-hook #'goto-address-prog-mode)
 
