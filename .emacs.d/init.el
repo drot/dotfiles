@@ -364,57 +364,63 @@
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
-  :commands outline-minor-mode
-  :init
-  (dolist (hook '(text-mode-hook
-                  prog-mode-hook))
-    (add-hook hook #'outline-minor-mode)))
+  :commands outline-minor-mode)
+
+;; Add Outline mode hook
+(dolist (hook '(text-mode-hook
+                prog-mode-hook))
+  (add-hook hook #'outline-minor-mode))
 
 ;; Hide Show mode
 (use-package hideshow
   :diminish (hs-minor-mode . "HS")
-  :commands hs-minor-mode
-  :init
-  (dolist (hook '(c-mode-common-hook
+  :commands hs-minor-mode)
+
+;; Add Hide Show mode hook
+(dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
-    (add-hook hook #'hs-minor-mode)))
+    (add-hook hook #'hs-minor-mode))
 
 ;; ElDoc mode
 (use-package eldoc
   :diminish (eldoc-mode . "ED")
-  :commands eldoc-mode
-  :init
-  (dolist (hook '(eval-expression-minibuffer-setup-hook
-                  emacs-lisp-mode-hook
-                  ielm-mode-hook))
-    (add-hook hook #'eldoc-mode)))
+  :commands eldoc-mode)
+
+;; Add ElDoc mode hook
+(dolist (hook '(eval-expression-minibuffer-setup-hook
+                emacs-lisp-mode-hook
+                ielm-mode-hook))
+  (add-hook hook #'eldoc-mode))
 
 ;; Bug references
 (use-package bug-reference
-  :commands (bug-reference-mode bug-reference-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'bug-reference-mode)
-  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
+  :commands (bug-reference-mode bug-reference-prog-mode))
+
+;; Add Bug references hook
+(add-hook 'text-mode-hook #'bug-reference-mode)
+(add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
 ;; Go-to address
 (use-package goto-addr
-  :commands (goto-address-mode goto-address-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'goto-address-mode)
-  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
+  :commands (goto-address-mode goto-address-prog-mode))
+
+;; Add Go-to address hook
+(add-hook 'text-mode-hook #'goto-address-mode)
+(add-hook 'prog-mode-hook #'goto-address-prog-mode)
 
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FS")
   :commands (flyspell-mode flyspell-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil))
+
+;; Add Fly Spell mode hook
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
 ;; Indent region
 (bind-key "C-c x i" #'indent-region)
@@ -647,8 +653,6 @@
 (use-package key-chord
   :ensure t
   :commands key-chord-mode
-  :init
-  (key-chord-mode 1)
   :config
   (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
@@ -660,6 +664,9 @@
   (key-chord-define-global "8r" #'replace-string)
   (key-chord-define-global "8x" #'counsel-M-x)
   (key-chord-define-global "8y" #'browse-kill-ring))
+
+;; Enable Key Chord mode
+(key-chord-mode 1)
 
 ;; Haskell mode
 (use-package haskell-mode
@@ -822,16 +829,18 @@ This doesn't support the chanserv auth method"
 (use-package ace-link
   :ensure t
   :bind ("C-c n o" . ace-link-addr)
-  :commands ace-link-setup-default
-  :init
-  (ace-link-setup-default))
+  :commands ace-link-setup-default)
+
+;; Enable Ace-link mode
+(ace-link-setup-default)
 
 ;; Adaptive Wrap
 (use-package adaptive-wrap
   :ensure t
-  :commands adaptive-wrap-prefix-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
+  :commands adaptive-wrap-prefix-mode)
+
+;; Add Adaptive Wrap mode hook
+(add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode)
 
 ;; Anzu
 (use-package anzu
@@ -840,10 +849,11 @@ This doesn't support the chanserv auth method"
   :bind (("C-c s q" . anzu-query-replace)
          ("C-c s r" . anzu-query-replace-regexp))
   :commands global-anzu-mode
-  :init
-  (global-anzu-mode)
   :config
   (setq anzu-replace-to-string-separator " => "))
+
+;; Enable Anzu mode
+(global-anzu-mode)
 
 ;; Company mode
 (use-package company
@@ -851,8 +861,6 @@ This doesn't support the chanserv auth method"
   :diminish (company-mode . "CY")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
-  :init
-  (add-hook 'after-init-hook #'global-company-mode)
   :config
   (setq company-minimum-prefix-length 2
         company-tooltip-align-annotations t
@@ -865,38 +873,45 @@ This doesn't support the chanserv auth method"
                            company-files
                            company-dabbrev)))
 
+;; Enable Company mode
+(add-hook 'after-init-hook #'global-company-mode)
+
 ;; Company Statistics
 (use-package company-statistics
   :ensure t
   :commands company-statistics-mode
-  :init
-  (add-hook 'after-init-hook #'company-statistics-mode)
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
+
+;; Enable Company Statistics mode
+(add-hook 'after-init-hook #'company-statistics-mode)
 
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
-  :init
-  (global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
+  :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode))
+
+;; Enable Diff-Hl mode
+(global-diff-hl-mode)
+(add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+(unless (display-graphic-p)
+  (diff-hl-margin-mode))
 
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
-  :commands eyebrowse-mode
-  :init
-  (eyebrowse-mode))
+  :commands eyebrowse-mode)
+
+;; Enable Eyebrowse mode
+(eyebrowse-mode)
 
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
-  :commands highlight-numbers-mode
-  :init
-  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
+  :commands highlight-numbers-mode)
+
+;; Add Highlight Numbers mode hook
+(add-hook 'prog-mode-hook #'highlight-numbers-mode)
 
 ;; JavaScript mode
 (use-package js2-mode
@@ -960,8 +975,6 @@ This doesn't support the chanserv auth method"
          ("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
   :commands ivy-mode
-  :init
-  (ivy-mode)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         ivy-use-virtual-buffers t
@@ -969,6 +982,9 @@ This doesn't support the chanserv auth method"
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t))
+
+;; Enable Ivy mode
+(ivy-mode)
 
 ;; Counsel
 (use-package counsel
@@ -990,12 +1006,7 @@ This doesn't support the chanserv auth method"
 (use-package lispy
   :ensure t
   :commands lispy-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook #'lispy-mode))
-
+  :config
   (defvar drot/lispy-minibuffer-commands '(eval-expression
                                            pp-eval-expression
                                            eval-expression-with-eldoc
@@ -1009,6 +1020,12 @@ This doesn't support the chanserv auth method"
         (lispy-mode)))
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
+
+;; Add Lispy mode hook
+(dolist (hook '(emacs-lisp-mode-hook
+                lisp-mode-hook
+                scheme-mode-hook))
+  (add-hook hook #'lispy-mode))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1030,63 +1047,69 @@ This doesn't support the chanserv auth method"
 (use-package page-break-lines
   :ensure t
   :diminish (page-break-lines-mode . "PB")
-  :commands global-page-break-lines-mode
-  :init
-  (global-page-break-lines-mode))
+  :commands global-page-break-lines-mode)
+
+;; Enable Page Break Lines mode
+(global-page-break-lines-mode)
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
-  :commands rainbow-delimiters-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook #'rainbow-delimiters-mode)))
+  :commands rainbow-delimiters-mode)
 
-;; Rainbow Mode
+;; Add Rainbow Delimiters mode hook
+(dolist (hook '(emacs-lisp-mode-hook
+                lisp-mode-hook
+                scheme-mode-hook))
+  (add-hook hook #'rainbow-delimiters-mode))
+
+;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
   :bind ("C-c t r" . rainbow-mode)
-  :commands rainbow-mode
-  :init
-  (dolist (hook '(css-mode-hook
-                  html-mode-hook))
-    (add-hook hook #'rainbow-mode)))
+  :commands rainbow-mode)
+
+;; Add Rainbow mode hook
+(dolist (hook '(css-mode-hook
+                html-mode-hook))
+  (add-hook hook #'rainbow-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
   :diminish (volatile-highlights-mode . "VH")
-  :commands volatile-highlights-mode
-  :init
-  (volatile-highlights-mode))
+  :commands volatile-highlights-mode)
+
+;; Enable Volatile Highlights mode
+(volatile-highlights-mode)
 
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
   :diminish (undo-tree-mode . "UT")
   :commands global-undo-tree-mode
-  :init
-  (global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
 
+;; Enable Undo Tree mode
+(global-undo-tree-mode)
+
 ;; Visual Fill Column
 (use-package visual-fill-column
   :ensure t
-  :commands visual-fill-column-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+  :commands visual-fill-column-mode)
+
+;; Add Visual Fill Column hook
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
 ;; Which Key
 (use-package which-key
   :ensure t
   :bind ("C-c h w" . which-key-show-top-level)
-  :commands (which-key-declare-prefixes which-key-mode)
-  :init
+  :commands which-key-mode
+  :config
   (setq which-key-show-prefix 'bottom
         which-key-special-keys nil
         which-key-separator " > ")
@@ -1111,17 +1134,21 @@ This doesn't support the chanserv auth method"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
     "C-c C-w" "eyebrowse"
-    "C-c x" "text")
-  (which-key-mode))
+    "C-c x" "text"))
+
+;; Enable Which Key mode
+(which-key-mode)
 
 ;; YASnippet
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . "YS")
   :commands yas-global-mode
-  :init
+  :config
   (make-directory (expand-file-name "snippets" drot/emacs-directory) t)
-  (setq yas-verbosity 1)
-  (yas-global-mode))
+  (setq yas-verbosity 1))
+
+;; Enable YASnippet mode
+(yas-global-mode)
 
 ;;; init.el ends here
