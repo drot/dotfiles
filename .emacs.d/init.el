@@ -393,11 +393,11 @@
                 ielm-mode-hook))
   (add-hook hook #'eldoc-mode))
 
-;; Bug references
+;; Bug References
 (use-package bug-reference
   :commands (bug-reference-mode bug-reference-prog-mode))
 
-;; Add Bug references hook
+;; Add Bug References mode hook
 (add-hook 'text-mode-hook #'bug-reference-mode)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 
@@ -1101,7 +1101,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands visual-fill-column-mode)
 
-;; Add Visual Fill Column hook
+;; Add Visual Fill Column mode hook
 (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
 ;; Which Key
@@ -1113,6 +1113,7 @@ This doesn't support the chanserv auth method"
   (setq which-key-show-prefix 'bottom
         which-key-special-keys nil
         which-key-separator " > ")
+
   (which-key-declare-prefixes
     "C-x a" "abbrev"
     "C-x n" "narrow"
