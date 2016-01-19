@@ -304,13 +304,6 @@
                           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
-;; CSS mode configuration
-(use-package css-mode
-  :defer t
-  :config
-  (add-hook 'css-mode-hook (lambda ()
-                             (run-hooks 'prog-mode-hook))))
-
 ;; NXML mode configuration
 (use-package nxml-mode
   :defer t
