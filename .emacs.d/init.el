@@ -430,6 +430,10 @@
 (use-package proced
   :bind ("C-x p" . proced))
 
+;; Ediff
+(use-package ediff
+  :bind ("C-c f e" . ediff))
+
 ;; EWW
 (use-package eww
   :bind (("C-c a w" . eww)))
@@ -982,7 +986,8 @@ This doesn't support the chanserv auth method"
          ("C-c n i" . counsel-imenu)
          ("C-c s l" . counsel-info-lookup-symbol)
          ("C-c s g" . counsel-git-grep)
-         ("C-c i u" . counsel-unicode-char))
+         ("C-c i u" . counsel-unicode-char)
+         ("C-c i p" . counsel-yank-pop))
   :config
   (setq counsel-find-file-at-point t))
 
