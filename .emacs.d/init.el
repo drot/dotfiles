@@ -277,12 +277,6 @@
   :config
   (setq vc-follow-symlinks t))
 
-;; Regexp builder
-(use-package re-builder
-  :defer t
-  :config
-  (setq reb-re-syntax 'string))
-
 ;; Customize interface options
 (use-package cus-edit
   :defer t
@@ -292,7 +286,7 @@
         custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
 
-;; Python mode
+;; Python mode configuration
 (use-package python
   :defer t
   :config
@@ -310,14 +304,14 @@
                           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
-;; CSS mode
+;; CSS mode configuration
 (use-package css-mode
   :defer t
   :config
   (add-hook 'css-mode-hook (lambda ()
                              (run-hooks 'prog-mode-hook))))
 
-;; NXML mode
+;; NXML mode configuration
 (use-package nxml-mode
   :defer t
   :config
@@ -501,6 +495,12 @@
   :bind ("C-c h a" . apropos)
   :config
   (setq apropos-do-all t))
+
+;; Regexp builder
+(use-package re-builder
+  :bind ("C-c a r" . re-builder)
+  :config
+  (setq reb-re-syntax 'string))
 
 ;; Open URLs in Conkeror
 (use-package browse-url
@@ -908,7 +908,7 @@ This doesn't support the chanserv auth method"
 ;; JavaScript mode
 (use-package js2-mode
   :ensure t
-  :mode "\\.js\\'"
+  :mode ("\\.js\\'" . js2-mode)
   :config
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
@@ -1017,6 +1017,11 @@ This doesn't support the chanserv auth method"
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
+;; Lua mode
+(use-package lua-mode
+  :ensure t
+  :defer t)
+
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1055,12 +1060,7 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-mode)
-  :commands rainbow-mode
-  :init
-  (dolist (hook '(css-mode-hook
-                  html-mode-hook))
-    (add-hook hook #'rainbow-mode)))
+  :bind ("C-c t r" . rainbow-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
@@ -1087,6 +1087,12 @@ This doesn't support the chanserv auth method"
   :commands visual-fill-column-mode
   :init
   (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+
+;; Web mode
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)))
 
 ;; Which Key
 (use-package which-key
