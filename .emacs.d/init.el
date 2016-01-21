@@ -295,7 +295,11 @@
   :config
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode))
+  (add-hook 'python-mode-hook #'subword-mode)
+
+  (let ((ipython (executable-find "ipython")))
+    (when ipython
+      (setq python-shell-interpreter ipython))))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -687,7 +691,10 @@
 ;; Markdown mode
 (use-package markdown-mode
   :ensure t
-  :defer t)
+  :mode (("\\.markdown\\'" . gfm-mode)
+         ("\\.md\\'" . gfm-mode))
+  :config
+  (add-hook 'gfm-mode-hook #'whitespace-mode))
 
 ;; Move-text
 (use-package move-text
@@ -904,6 +911,13 @@ This doesn't support the chanserv auth method"
   :commands highlight-numbers-mode
   :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
+
+;; Hl-Todo
+(use-package hl-todo
+  :ensure t
+  :commands hl-todo-mode
+  :init
+  (add-hook 'prog-mode-hook #'hl-todo-mode))
 
 ;; JavaScript mode
 (use-package js2-mode
