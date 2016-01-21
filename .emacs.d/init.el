@@ -1136,9 +1136,7 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (setq yas-verbosity 1)
-  (yas-global-mode)
-  :config
-  (make-directory (expand-file-name "snippets" drot/emacs-directory) t))
+  (yas-global-mode))
 
 ;; Reset garbage collection threshold
 (setq gc-cons-threshold 400000)
