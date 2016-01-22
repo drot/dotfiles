@@ -229,6 +229,11 @@
   (setq which-func-unknown "n/a")
   (which-function-mode))
 
+;; Highlight current line
+(use-package hl-line
+  :config
+  (global-hl-line-mode))
+
 ;; Undo and redo the window configuration
 (use-package winner
   :config
@@ -467,6 +472,7 @@
 
 ;; Whitespace mode
 (use-package whitespace
+  :diminish (whitespace-mode . "WS")
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
@@ -694,7 +700,8 @@
   :mode (("\\.markdown\\'" . gfm-mode)
          ("\\.md\\'" . gfm-mode))
   :config
-  (add-hook 'gfm-mode-hook #'whitespace-mode))
+  (add-hook 'gfm-mode-hook #'whitespace-mode)
+  (add-hook 'gfm-mode-hook #'visual-line-mode))
 
 ;; Move-text
 (use-package move-text
@@ -759,17 +766,8 @@ This doesn't support the chanserv auth method"
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
 
-  ;; Use built in filling when in term mode
-  (unless (display-graphic-p)
-    (setq rcirc-fill-flag t
-          rcirc-fill-column 'frame-width))
-
-  ;; Use Visual Line mode for filling in GUI mode
-  (when (display-graphic-p)
-    (setq rcirc-fill-flag nil)
-    (add-hook 'rcirc-mode-hook (lambda ()
-                                 (setq fill-column 156)))
-    (add-hook 'rcirc-mode-hook #'visual-line-mode))
+  ;; Set fill column value to frame width
+  (setq rcirc-fill-column 'frame-width)
 
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
@@ -777,7 +775,6 @@ This doesn't support the chanserv auth method"
     (yas-minor-mode 0))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
-  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
@@ -839,13 +836,6 @@ This doesn't support the chanserv auth method"
   :commands ace-link-setup-default
   :init
   (ace-link-setup-default))
-
-;; Adaptive Wrap
-(use-package adaptive-wrap
-  :ensure t
-  :commands adaptive-wrap-prefix-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
 
 ;; Anzu
 (use-package anzu
@@ -1095,13 +1085,6 @@ This doesn't support the chanserv auth method"
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
-
-;; Visual Fill Column
-(use-package visual-fill-column
-  :ensure t
-  :commands visual-fill-column-mode
-  :init
-  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
 ;; Web mode
 (use-package web-mode
