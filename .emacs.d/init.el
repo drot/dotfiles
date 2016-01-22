@@ -636,6 +636,13 @@
   :ensure t
   :bind ("C-c i y" . browse-kill-ring))
 
+;; Dash
+(use-package dash
+  :ensure t
+  :defer t
+  :config
+  (dash-enable-font-lock))
+
 ;; Discover My Major
 (use-package discover-my-major
   :ensure t
@@ -660,6 +667,13 @@
   (setq geiser-mode-start-repl-p t
         geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
+;; JavaScript mode
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config
+  (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
+
 ;; Key Chord
 (use-package key-chord
   :ensure t
@@ -677,6 +691,11 @@
   (key-chord-define-global "8r" #'replace-string)
   (key-chord-define-global "8x" #'counsel-M-x)
   (key-chord-define-global "8y" #'browse-kill-ring))
+
+;; Lua mode
+(use-package lua-mode
+  :ensure t
+  :defer t)
 
 ;; Haskell mode
 (use-package haskell-mode
@@ -824,6 +843,12 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
+;; Web mode
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)))
+
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
@@ -908,13 +933,6 @@ This doesn't support the chanserv auth method"
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
-
-;; JavaScript mode
-(use-package js2-mode
-  :ensure t
-  :mode ("\\.js\\'" . js2-mode)
-  :config
-  (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; Flx
 (use-package flx
@@ -1023,11 +1041,6 @@ This doesn't support the chanserv auth method"
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
-;; Lua mode
-(use-package lua-mode
-  :ensure t
-  :defer t)
-
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1086,12 +1099,6 @@ This doesn't support the chanserv auth method"
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
-
-;; Web mode
-(use-package web-mode
-  :ensure t
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'" . web-mode)))
 
 ;; Which Key
 (use-package which-key
