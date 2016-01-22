@@ -975,6 +975,7 @@ This doesn't support the chanserv auth method"
   (ivy-mode)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ivy-initial-inputs-alist nil
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'full
         ivy-count-format "(%d/%d) "
