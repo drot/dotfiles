@@ -1100,6 +1100,13 @@ This doesn't support the chanserv auth method"
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
 
+;; Visual Fill Column
+(use-package visual-fill-column
+  :ensure t
+  :commands visual-fill-column-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+
 ;; Which Key
 (use-package which-key
   :ensure t
