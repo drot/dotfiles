@@ -700,9 +700,7 @@
 ;; Haskell mode
 (use-package haskell-mode
   :ensure t
-  :defer t
-  :config
-  (add-hook 'haskell-mode-hook #'haskell-indent-mode))
+  :defer t)
 
 ;; Magit
 (use-package magit
