@@ -753,11 +753,10 @@
 ;; Markdown mode
 (use-package markdown-mode
   :ensure t
-  :mode (("\\.markdown\\'" . gfm-mode)
-         ("\\.md\\'" . gfm-mode))
+  :defer t
   :config
-  (add-hook 'gfm-mode-hook #'whitespace-mode)
-  (add-hook 'gfm-mode-hook #'visual-line-mode))
+  (add-hook 'markdown-mode-hook #'whitespace-mode)
+  (add-hook 'markdown-mode-hook #'visual-line-mode))
 
 ;; Move-text
 (use-package move-text
