@@ -213,6 +213,16 @@
   :config
   (global-hi-lock-mode))
 
+;; Abbrev Mode
+(use-package abbrev
+  :diminish (abbrev-mode . "AV")
+  :config
+  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
+        save-abbrevs t)
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file))
+  (setq-default abbrev-mode t))
+
 ;; Electric pair mode
 (use-package elec-pair
   :config
@@ -606,16 +616,6 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
-;; Abbrev Mode
-(use-package abbrev
-  :diminish (abbrev-mode . "AV")
-  :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
-        save-abbrevs t)
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t))
-
 ;; Ace-window
 (use-package ace-window
   :ensure t
@@ -659,6 +659,11 @@
   :ensure t
   :bind ("C-c x e" . er/expand-region))
 
+;; Flx
+(use-package flx
+  :ensure t
+  :defer t)
+
 ;; Geiser
 (use-package geiser
   :ensure t
@@ -701,6 +706,40 @@
 (use-package haskell-mode
   :ensure t
   :defer t)
+
+;; Hydra
+(use-package hydra
+  :ensure t
+  :bind (("C-c w r" . hydra-window-resize/body)
+         ("C-c x o" . hydra-outline/body))
+  :config
+  (defhydra hydra-window-resize (:columns 2)
+    "Resize Windows"
+    ("j" enlarge-window "Enlarge Window")
+    ("k" shrink-window "Shrink Window")
+    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
+    ("h" shrink-window-horizontally "Shrink Window Horizontally")
+    ("q" nil "Quit"))
+
+  (defhydra hydra-outline (:columns 4)
+    "Outline Mode"
+    ("q" hide-sublevels "Hide Sub-levels")
+    ("t" hide-body "Hide Body")
+    ("o" hide-other "Hide Other")
+    ("c" hide-entry "Hide Entry")
+    ("l" hide-leaves "Hide Leaves")
+    ("d" hide-subtree "Hide Sub-tree")
+    ("a" show-all "Show All")
+    ("e" show-entry "Show Entry")
+    ("i" show-children "Show Children")
+    ("k" show-branches "Show Branches")
+    ("s" show-subtree "Show Sub-tree")
+    ("u" outline-up-heading "Up Heading")
+    ("n" outline-next-visible-heading "Next Visible Heading")
+    ("p" outline-previous-visible-heading "Previous Visible Heading")
+    ("f" outline-forward-same-level "Forward Same Level")
+    ("b" outline-backward-same-level "Backward Same Level")
+    ("z" nil "Quit")))
 
 ;; Magit
 (use-package magit
@@ -836,6 +875,13 @@ This doesn't support the chanserv auth method"
   :config
   (rcirc-notify-add-hooks))
 
+;; Smex
+(use-package smex
+  :ensure t
+  :defer t
+  :config
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
+
 ;; Systemd mode
 (use-package systemd
   :ensure t
@@ -931,52 +977,6 @@ This doesn't support the chanserv auth method"
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
-
-;; Flx
-(use-package flx
-  :ensure t
-  :defer t)
-
-;; Smex
-(use-package smex
-  :ensure t
-  :defer t
-  :config
-  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
-
-;; Hydra
-(use-package hydra
-  :ensure t
-  :bind (("C-c w r" . hydra-window-resize/body)
-         ("C-c x o" . hydra-outline/body))
-  :config
-  (defhydra hydra-window-resize (:columns 2)
-    "Resize Windows"
-    ("j" enlarge-window "Enlarge Window")
-    ("k" shrink-window "Shrink Window")
-    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("h" shrink-window-horizontally "Shrink Window Horizontally")
-    ("q" nil "Quit"))
-
-  (defhydra hydra-outline (:columns 4)
-    "Outline Mode"
-    ("q" hide-sublevels "Hide Sub-levels")
-    ("t" hide-body "Hide Body")
-    ("o" hide-other "Hide Other")
-    ("c" hide-entry "Hide Entry")
-    ("l" hide-leaves "Hide Leaves")
-    ("d" hide-subtree "Hide Sub-tree")
-    ("a" show-all "Show All")
-    ("e" show-entry "Show Entry")
-    ("i" show-children "Show Children")
-    ("k" show-branches "Show Branches")
-    ("s" show-subtree "Show Sub-tree")
-    ("u" outline-up-heading "Up Heading")
-    ("n" outline-next-visible-heading "Next Visible Heading")
-    ("p" outline-previous-visible-heading "Previous Visible Heading")
-    ("f" outline-forward-same-level "Forward Same Level")
-    ("b" outline-backward-same-level "Backward Same Level")
-    ("z" nil "Quit")))
 
 ;; Swiper
 (use-package swiper
@@ -1079,14 +1079,6 @@ This doesn't support the chanserv auth method"
   :diminish (rainbow-mode . "RW")
   :bind ("C-c t r" . rainbow-mode))
 
-;; Volatile Highlights
-(use-package volatile-highlights
-  :ensure t
-  :diminish (volatile-highlights-mode . "VH")
-  :commands volatile-highlights-mode
-  :init
-  (volatile-highlights-mode))
-
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
@@ -1104,6 +1096,14 @@ This doesn't support the chanserv auth method"
   :commands visual-fill-column-mode
   :init
   (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+
+;; Volatile Highlights
+(use-package volatile-highlights
+  :ensure t
+  :diminish (volatile-highlights-mode . "VH")
+  :commands volatile-highlights-mode
+  :init
+  (volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
