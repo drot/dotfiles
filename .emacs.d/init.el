@@ -340,32 +340,17 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; TRAMP configuration
-(use-package tramp
-  :defer t
-  :config
-  (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
-        tramp-backup-directory-alist backup-directory-alist
-        tramp-auto-save-directory drot/cache-directory))
-
 ;; Prevent GnuTLS warnings
 (use-package gnutls
   :defer t
   :config
   (setq gnutls-min-prime-bits 1024))
 
-;; Find file at point
-(use-package ffap
-  :defer t
-  :config
-  (setq ffap-machine-p-known 'reject))
-
 ;; Dired
 (use-package dired
   :defer t
   :config
-  (setq dired-listing-switches "-alhv"
+  (setq dired-listing-switches "-ahlF"
         dired-recursive-copies 'always
         dired-recursive-deletes 'always
         dired-dwim-target t))
@@ -376,6 +361,21 @@
   :config
   (add-hook 'dired-mode-hook #'dired-omit-mode)
   (setq dired-omit-verbose nil))
+
+;; Find file at point
+(use-package ffap
+  :defer t
+  :config
+  (setq ffap-machine-p-known 'reject))
+
+;; TRAMP configuration
+(use-package tramp
+  :defer t
+  :config
+  (setq tramp-default-method "ssh"
+        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
+        tramp-backup-directory-alist backup-directory-alist
+        tramp-auto-save-directory drot/cache-directory))
 
 ;; Outline mode
 (use-package outline
