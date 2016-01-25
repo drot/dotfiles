@@ -905,6 +905,13 @@ This doesn't support the chanserv auth method"
   :init
   (ace-link-setup-default))
 
+;; Adaptive Wrap
+(use-package adaptive-wrap
+  :ensure t
+  :commands adaptive-wrap-prefix-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
+
 ;; Anzu
 (use-package anzu
   :ensure t
