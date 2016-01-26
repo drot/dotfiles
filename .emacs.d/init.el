@@ -423,6 +423,7 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FS")
+  :bind ("C-c x f" . flyspell-buffer)
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
@@ -527,8 +528,7 @@
   :bind (("C-c a b" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-generic
-        browse-url-generic-program "conkeror"))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Bookmarks save directory
 (use-package bookmark
