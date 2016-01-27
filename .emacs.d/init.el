@@ -523,13 +523,12 @@
   :config
   (setq reb-re-syntax 'string))
 
-;; Open URLs in Conkeror
+;; Open URLs in Firefox
 (use-package browse-url
   :bind (("C-c a b" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-generic
-        browse-url-generic-program "conkeror"))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Bookmarks save directory
 (use-package bookmark
