@@ -528,7 +528,8 @@
   :bind (("C-c a b" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-generic
+        browse-url-generic-program "conkeror"))
 
 ;; Bookmarks save directory
 (use-package bookmark
