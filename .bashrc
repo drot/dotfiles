@@ -46,7 +46,7 @@ NIL='\[\033[00m\]'
 export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
 
 # Aliases
-alias ls="ls -hF --group-directories-first --color=auto"
+alias ls="ls -h --group-directories-first --color=auto"
 alias grep="grep --color=auto"
 alias eckd="emacsclient -e '(kill-emacs)'"
 alias startx="ssh-agent startx"
