@@ -713,6 +713,8 @@
   :bind (("C-c w r" . hydra-window-resize/body)
          ("C-c x o" . hydra-outline/body))
   :config
+  (hydra-add-font-lock)
+
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("j" enlarge-window "Enlarge Window")
