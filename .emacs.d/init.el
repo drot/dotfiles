@@ -121,6 +121,9 @@
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
+;; Try completion after indentation
+(setq tab-always-indent 'complete)
+
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
