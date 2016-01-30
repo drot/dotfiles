@@ -26,7 +26,7 @@ URxvt*scrollTtyKeypress: true
 
 ! Mouseless URL selection
 URxvt*perl-ext-common: default,clipboard,url-select,keyboard-select
-URxvt*url-select.launcher: conkeror
+URxvt*url-select.launcher: firefox
 URxvt*url-select.underline: true
 URxvt*matcher.button: 1
 URxvt*keysym.M-u: perl:url-select:select_next

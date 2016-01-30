@@ -826,6 +826,9 @@ This doesn't support the chanserv auth method"
   ;; Set fill column value to frame width
   (setq rcirc-fill-column 'frame-width)
 
+  ;; Enable logging
+  (setq rcirc-log-flag t)
+
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
@@ -836,6 +839,7 @@ This doesn't support the chanserv auth method"
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
+  ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
     "Send a private message to the ChanServ service."
     (rcirc-send-string process (concat "chanserv " arg)))
