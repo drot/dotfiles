@@ -781,26 +781,27 @@
   :bind ("C-c a i" . irc)
   :config
   (setq rcirc-server-alist
-        '(("adams.freenode.net" :port 7000 :encryption tls
+        '(("adams.freenode.net"
+           :port 7000
+           :encryption tls
            :channels ("#archlinux" "#emacs" "#haskell" "#xmonad"))
-          ("pine.forestnet.org" :port 6697 :encryption tls
-           :channels ("#reloaded" "#rawhide"))))
+          ("pine.forestnet.org"
+           :port 6697
+           :encryption tls
+           :channels ("#reloaded" "#rawhide" "#fo2"))))
 
-  (defadvice rcirc (before rcirc-read-from-authinfo activate)
-    "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
-This doesn't support the chanserv auth method"
-    (unless arg
-      (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet")
-                                     :require '(:port :user :secret)))
-        (let ((secret (plist-get p :secret))
-              (method (intern (plist-get p :port))))
-          (add-to-list 'rcirc-authinfo
-                       (list (plist-get p :host)
-                             method
-                             (plist-get p :user)
-                             (if (functionp secret)
-                                 (funcall secret)
-                               secret)))))))
+  (when (file-exists-p "~/.private.el")
+    (setq drot/credentials-file "~/.private.el")
+
+    (defun drot/nickserv-password ()
+      "Read the passwords from the credientials file"
+      (with-temp-buffer
+        (insert-file-contents-literally drot/credentials-file)
+        (plist-get (read (buffer-string)) :nickserv-password)))
+
+    (setq rcirc-authinfo
+          `(("freenode" nickserv "drot" ,(drot/nickserv-password))
+            ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
