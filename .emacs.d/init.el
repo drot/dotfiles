@@ -94,8 +94,7 @@
               indicate-empty-lines t)
 
 ;; Don't show startup welcome messages
-(put 'inhibit-startup-echo-area-message 'saved-value
-     (setq inhibit-startup-echo-area-message (user-login-name)))
+(setq inhibit-startup-echo-area-message (user-login-name))
 (setq inhibit-startup-screen t)
 
 ;; Disable scratch buffer info text
