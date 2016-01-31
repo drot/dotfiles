@@ -27,9 +27,6 @@
 
 ;;; Code:
 
-;; Delay garbage collection
-(setq gc-cons-threshold most-positive-fixnum)
-
 ;; Set some variables
 (defconst drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
@@ -48,7 +45,6 @@
 (setq inhibit-default-init t)
 
 ;; Activate packages and add MELPA
-(setq package-enable-at-startup nil)
 (package-initialize)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -130,9 +126,6 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
-;; Set fallback font
-(set-fontset-font t nil (font-spec :family "Symbola") nil 'append)
-
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
@@ -144,7 +137,7 @@
 (setq require-final-newline t)
 
 ;; Kill and yank clipboard options
-(setq x-select-enable-primary t
+(setq select-enable-primary t
       save-interprogram-paste-before-kill t)
 
 ;; Mouse yank at point instead of click
@@ -198,7 +191,7 @@
 (use-package saveplace
   :config
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-  (setq-default save-place t))
+  (save-place-mode))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
@@ -208,7 +201,9 @@
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (setq show-paren-delay 0)
+  (setq show-paren-delay 0
+        show-paren-when-point-inside-paren t
+        show-paren-when-point-in-periphery t)
   (show-paren-mode))
 
 ;; Highlight regexps interactively
@@ -234,6 +229,7 @@
 ;; Pretty lambdas
 (use-package prog-mode
   :config
+  (setq prettify-symbols-unprettify-at-point t)
   (global-prettify-symbols-mode))
 
 ;; Which function mode
@@ -265,12 +261,6 @@
   :config
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra")))
-
-;; Use Unified diff format
-(use-package diff
-  :defer t
-  :config
-  (setq diff-switches "-u"))
 
 ;; Ediff window split
 (use-package ediff-wind
@@ -398,16 +388,6 @@
                   emacs-lisp-mode-hook
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode)))
-
-;; ElDoc mode
-(use-package eldoc
-  :diminish (eldoc-mode . "ED")
-  :commands eldoc-mode
-  :init
-  (dolist (hook '(eval-expression-minibuffer-setup-hook
-                  emacs-lisp-mode-hook
-                  ielm-mode-hook))
-    (add-hook hook #'eldoc-mode)))
 
 ;; Bug References
 (use-package bug-reference
@@ -1162,8 +1142,5 @@ This doesn't support the chanserv auth method"
   :init
   (setq yas-verbosity 1)
   (yas-global-mode))
-
-;; Reset garbage collection threshold
-(setq gc-cons-threshold 400000)
 
 ;;; init.el ends here
