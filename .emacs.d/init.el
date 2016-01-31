@@ -48,6 +48,9 @@
 ;; Disable site default settings
 (setq inhibit-default-init t)
 
+;; Toggle debug on error
+(setq debug-on-error t)
+
 ;; Activate packages and add MELPA
 (package-initialize)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -423,9 +426,6 @@
 
 ;; Display personal bindings
 (bind-key "C-c h b" #'describe-personal-keybindings)
-
-;; Toggle debug on error
-(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
 (use-package files
