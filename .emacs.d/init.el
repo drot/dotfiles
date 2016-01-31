@@ -41,20 +41,17 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
-
 ;; Disable site default settings
 (setq inhibit-default-init t)
-
-;; Toggle debug on error
-(setq debug-on-error t)
 
 ;; Activate packages and add MELPA
 (package-initialize)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
+
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load drot/custom-file 'noerror 'nomessage)
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -67,7 +64,7 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; Bug hunter
+;; Bug Hunter
 (use-package bug-hunter
   :ensure t
   :bind (("C-c a h" . bug-hunter-init-file)
@@ -227,6 +224,11 @@
 (use-package elec-pair
   :config
   (electric-pair-mode))
+
+;; Electric quote mode
+(use-package electric
+  :config
+  (electric-quote-mode))
 
 ;; Pretty lambdas
 (use-package prog-mode
@@ -426,6 +428,9 @@
 
 ;; Display personal bindings
 (bind-key "C-c h b" #'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
 (use-package files
@@ -776,93 +781,6 @@
   :ensure t
   :defer t)
 
-;; rcirc Mode
-(use-package rcirc
-  :bind ("C-c a i" . irc)
-  :config
-  (setq rcirc-server-alist
-        '(("adams.freenode.net"
-           :port 7000
-           :encryption tls
-           :channels ("#archlinux" "#emacs" "#haskell" "#conkeror"))
-          ("pine.forestnet.org"
-           :port 6697
-           :encryption tls
-           :channels ("#reloaded" "#rawhide" "#fo2"))))
-
-  (when (file-exists-p "~/.private.el")
-    (setq drot/credentials-file "~/.private.el")
-
-    (defun drot/nickserv-password ()
-      "Read the passwords from the credientials file"
-      (with-temp-buffer
-        (insert-file-contents-literally drot/credentials-file)
-        (plist-get (read (buffer-string)) :nickserv-password)))
-
-    (setq rcirc-authinfo
-          `(("freenode" nickserv "drot" ,(drot/nickserv-password))
-            ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
-
-  ;; Truncate buffer output
-  (setq rcirc-buffer-maximum-lines 1024)
-
-  ;; Set fill column value to frame width
-  (setq rcirc-fill-column 'frame-width)
-
-  ;; Enable logging
-  (setq rcirc-log-flag t)
-
-  (defun drot/rcirc-mode-hook ()
-    "Disable company and YASnippet in rcirc buffers."
-    (company-mode 0)
-    (yas-minor-mode 0))
-
-  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
-  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
-  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
-  (add-hook 'rcirc-mode-hook #'flyspell-mode)
-
-  ;; Add some custom commands
-  (defun-rcirc-command chanserv (arg)
-    "Send a private message to the ChanServ service."
-    (rcirc-send-string process (concat "chanserv " arg)))
-
-  (defun-rcirc-command mystery (arg)
-    "Send a private message to the Mystery service."
-    (rcirc-send-string process (concat "mystery " arg)))
-
-  (defun-rcirc-command memoserv (arg)
-    "Send a private message to the MemoServ service."
-    (rcirc-send-string process (concat "memoserv " arg)))
-
-  (defun-rcirc-command nickserv (arg)
-    "Send a private message to the NickServ service."
-    (rcirc-send-string process (concat "nickserv " arg))))
-
-;; rcirc color codes support
-(use-package rcirc-styles
-  :ensure t
-  :after rcirc
-  :config
-  (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
-                                   "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
-                                   "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
-                                   "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
-
-;; rcirc colored nicknames
-(use-package rcirc-color
-  :ensure t
-  :after rcirc
-  :config
-  (setq rcirc-colors (append rcirc-styles-color-vector nil)))
-
-;; rcirc notifications
-(use-package rcirc-notify
-  :ensure t
-  :after rcirc
-  :config
-  (rcirc-notify-add-hooks))
-
 ;; Smex
 (use-package smex
   :ensure t
@@ -952,6 +870,79 @@
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
+;; ERC configuration
+(use-package erc
+  :ensure erc-hl-nicks
+  :bind ("C-c a i" . irc)
+  :commands irc
+  :init
+  (defun irc ()
+    "Connect to IRC."
+    (interactive)
+    (erc-tls :server "adams.freenode.net" :port 6697
+             :nick "drot")
+    (erc-tls :server "pine.forestnet.org" :port 6697
+             :nick "drot"))
+  :config
+  ;; Enable notifications
+  (add-to-list 'erc-modules 'notifications)
+
+  ;; Enable spell-checking
+  (add-to-list 'erc-modules 'spelling)
+
+  ;; Connect to specified servers
+  (setq erc-prompt-for-password nil
+        erc-autojoin-timing 'ident
+        erc-autojoin-channels-alist '(("freenode" "#archlinux" "#emacs" "#haskell" "#conkeror")
+                                      ("forestnet" "#reloaded" "#rawhide" "#fo2"))
+        erc-server-reconnect-timeout 30
+        erc-join-buffer 'bury)
+
+  ;; Configure text filling
+  (setq erc-fill-function 'erc-fill-static
+        erc-fill-column 155
+        erc-fill-static-center 15)
+
+  ;; Timestap formatting
+  (setq erc-insert-timestamp-function 'erc-insert-timestamp-left
+        erc-timestamp-only-if-changed-flag nil
+        erc-timestamp-format "[%H:%M] ")
+
+  ;; Text formatting
+  (setq erc-header-line-format "%t: %o"
+        erc-interpret-mirc-color t
+        erc-button-buttonize-nicks nil
+        erc-format-nick-function 'erc-format-@nick
+        erc-nick-uniquifier "_"
+        erc-prompt (lambda ()
+                     (concat (buffer-name) ">")))
+
+  ;; Channel tracking options
+  (setq erc-track-exclude-server-buffer t
+        erc-track-showcount t
+        erc-track-switch-direction 'importance
+        erc-track-visibility 'selected-visible)
+
+  ;; Hide lurker activity
+  (setq erc-lurker-threshold-time 3600
+        erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+
+  ;; Prevent accidental paste
+  (setq erc-accidental-paste-threshold-seconds 0.5)
+
+  ;; Disable some conflicting modes
+  (defun drot/erc-mode-hook ()
+    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000)
+    (company-mode 0)
+    (yas-minor-mode 0))
+
+  (add-hook 'erc-mode-hook 'drot/erc-mode-hook)
+
+  ;; Truncate buffer
+  (setq erc-truncate-buffer-on-save t)
+  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer))
+
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
@@ -1010,30 +1001,6 @@
   :config
   (setq counsel-find-file-at-point t))
 
-;; Lispy
-(use-package lispy
-  :ensure t
-  :commands lispy-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook #'lispy-mode))
-  :config
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which lispy should be enabled in the minibuffer.")
-
-  (defun drot/lispy-minibuffer ()
-    "Enable lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
-
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
-
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1057,6 +1024,32 @@
   :commands global-page-break-lines-mode
   :init
   (global-page-break-lines-mode))
+
+;; ParEdit
+(use-package paredit
+  :ensure t
+  :diminish (paredit-mode . "PE")
+  :commands enable-paredit-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook
+                  lisp-mode-hook
+                  scheme-mode-hook))
+    (add-hook hook #'enable-paredit-mode))
+  :config
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+  (defun drot/paredit-minibuffer ()
+    "Enable ParEdit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
+
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
