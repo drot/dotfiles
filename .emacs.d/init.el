@@ -41,6 +41,10 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load drot/custom-file 'noerror 'nomessage)
+
 ;; Disable site default settings
 (setq inhibit-default-init t)
 
@@ -59,10 +63,6 @@
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
-
-;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
 
 ;; Bug hunter
 (use-package bug-hunter
@@ -784,7 +784,7 @@
         '(("adams.freenode.net"
            :port 7000
            :encryption tls
-           :channels ("#archlinux" "#emacs" "#haskell" "#xmonad"))
+           :channels ("#archlinux" "#emacs" "#haskell" "#conkeror"))
           ("pine.forestnet.org"
            :port 6697
            :encryption tls
