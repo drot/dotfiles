@@ -603,7 +603,9 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
   :config
-  (setq org-log-done 'time
+  (setq org-directory (expand-file-name "org" drot/emacs-directory)
+        org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-log-done 'time
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
 
