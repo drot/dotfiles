@@ -379,9 +379,7 @@
   :diminish (outline-minor-mode . "OM")
   :commands outline-minor-mode
   :init
-  (dolist (hook '(text-mode-hook
-                  prog-mode-hook))
-    (add-hook hook #'outline-minor-mode)))
+  (add-hook 'text-mode-hook #'outline-minor-mode))
 
 ;; Hide Show mode
 (use-package hideshow
