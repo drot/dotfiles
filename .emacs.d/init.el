@@ -474,6 +474,10 @@
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
+;; Tildify mode
+(use-package tildify
+  :bind ("C-c x t" . tildify-region))
+
 ;; Align
 (use-package align
   :bind ("C-c x a" . align))
@@ -689,11 +693,6 @@
   :ensure t
   :defer t)
 
-;; Haskell mode
-(use-package haskell-mode
-  :ensure t
-  :defer t)
-
 ;; Hydra
 (use-package hydra
   :ensure t
@@ -745,6 +744,7 @@
   :defer t
   :config
   (add-hook 'markdown-mode-hook #'whitespace-mode)
+  (add-hook 'markdown-mode-hook #'tildify-mode)
   (add-hook 'markdown-mode-hook #'visual-line-mode))
 
 ;; Move-text
@@ -789,7 +789,7 @@
         '(("adams.freenode.net"
            :port 7000
            :encryption tls
-           :channels ("#archlinux" "#emacs" "#haskell" "#conkeror"))
+           :channels ("#archlinux" "#emacs" "#scheme"))
           ("pine.forestnet.org"
            :port 6697
            :encryption tls
@@ -818,6 +818,7 @@
   ;; Enable logging
   (setq rcirc-log-flag t)
 
+  ;; Enable additional modes
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode 0)
