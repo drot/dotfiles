@@ -851,10 +851,23 @@
   :ensure t
   :after rcirc
   :config
-  (setq rcirc-styles-color-vector ["#7F7F7F" "#CC9393" "#7F9F7F" "#D0BF8F"
-                                   "#6CA0A3" "#DC8CC3" "#93E0E3" "#DCDCCC"
-                                   "#9F9F9F" "#DCA3A3" "#BFEBBF" "#F0DFAF"
-                                   "#8CD0D3" "#DC8CC3" "#93E0E3" "#FFFFEF"]))
+  (setq rcirc-styles-color-vector
+        ["#7F7F7F"
+         "#CC9393"
+         "#7F9F7F"
+         "#D0BF8F"
+         "#6CA0A3"
+         "#DC8CC3"
+         "#93E0E3"
+         "#DCDCCC"
+         "#9F9F9F"
+         "#DCA3A3"
+         "#BFEBBF"
+         "#F0DFAF"
+         "#8CD0D3"
+         "#DC8CC3"
+         "#93E0E3"
+         "#FFFFEF"]))
 
 ;; rcirc colored nicknames
 (use-package rcirc-color
