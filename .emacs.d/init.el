@@ -383,7 +383,6 @@
 
 ;; Hide Show mode
 (use-package hideshow
-  :diminish (hs-minor-mode . "HS")
   :commands hs-minor-mode
   :init
   (dolist (hook '(c-mode-common-hook
