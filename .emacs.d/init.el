@@ -1054,6 +1054,19 @@
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
+;; Form-feed
+(use-package form-feed
+  :ensure t
+  :commands form-feed-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  scheme-mode-hook
+                  compilation-mode
+                  outline-mode-hook-hook
+                  help-mode-hook))
+    (add-hook hook #'form-feed-mode)))
+
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1069,14 +1082,6 @@
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
-
-;; Page Break Lines Mode
-(use-package page-break-lines
-  :ensure t
-  :diminish (page-break-lines-mode . "PB")
-  :commands global-page-break-lines-mode
-  :init
-  (global-page-break-lines-mode))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
