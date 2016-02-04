@@ -1061,8 +1061,8 @@
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
                   scheme-mode-hook
-                  compilation-mode
-                  outline-mode-hook-hook
+                  compilation-mode-hook
+                  outline-mode-hook
                   help-mode-hook))
     (add-hook hook #'form-feed-mode)))
 
