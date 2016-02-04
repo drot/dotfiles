@@ -49,10 +49,6 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
-;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
-
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -570,14 +566,14 @@
 (use-package calendar
   :bind ("C-c a c" . calendar)
   :config
-  (setq calendar-week-start-day 1
-        calendar-mark-holidays-flag t
-        holiday-general-holidays nil
+  (setq holiday-general-holidays nil
+        holiday-solar-holidays nil
         holiday-bahai-holidays nil
         holiday-oriental-holidays nil
-        holiday-solar-holidays nil
         holiday-islamic-holidays nil
         holiday-hebrew-holidays nil
+        calendar-week-start-day 1
+        calendar-mark-holidays-flag t
         calendar-date-style 'european
         calendar-latitude 43.2
         calendar-longitude 17.48
@@ -609,7 +605,9 @@
 ;; Ace-window
 (use-package ace-window
   :ensure t
-  :bind ([remap other-window] . ace-window))
+  :bind ([remap other-window] . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Avy
 (use-package avy
@@ -978,6 +976,19 @@
   :init
   (eyebrowse-mode))
 
+;; Form-feed
+(use-package form-feed
+  :ensure t
+  :commands form-feed-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  scheme-mode-hook
+                  compilation-mode-hook
+                  outline-mode-hook
+                  help-mode-hook))
+    (add-hook hook #'form-feed-mode)))
+
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
@@ -1052,19 +1063,6 @@
         (lispy-mode)))
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
-
-;; Form-feed
-(use-package form-feed
-  :ensure t
-  :commands form-feed-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook
-                  compilation-mode-hook
-                  outline-mode-hook
-                  help-mode-hook))
-    (add-hook hook #'form-feed-mode)))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1166,5 +1164,9 @@
   :init
   (setq yas-verbosity 1)
   (yas-global-mode))
+
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load drot/custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
