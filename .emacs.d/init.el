@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+;; Delay garbage collection
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;; Set some variables
 (defconst drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
@@ -1168,5 +1171,8 @@
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
+
+;; Reset garbage collection threshold
+(setq gc-cons-threshold 400000)
 
 ;;; init.el ends here
