@@ -63,6 +63,14 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; Disable unnecessary GUI elements
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
 ;; Bug Hunter
 (use-package bug-hunter
   :ensure t
@@ -73,16 +81,11 @@
 (use-package zenburn-theme
   :ensure t)
 
-;; Disable unnecessary GUI elements
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-
 ;; Show tooltips in the echo area
-(tooltip-mode 0)
+(tooltip-mode -1)
 
 ;; Disable cursor blinking
-(blink-cursor-mode 0)
+(blink-cursor-mode -1)
 
 ;; Show column number and buffer size on the modeline
 (column-number-mode)
@@ -542,7 +545,7 @@
   :bind ("C-c a a" . ansi-term)
   :config
   (add-hook 'term-mode-hook (lambda ()
-                              (yas-minor-mode 0))))
+                              (yas-minor-mode -1))))
 
 ;; Compilation configuration
 (use-package compile
@@ -821,8 +824,8 @@
   ;; Enable additional modes
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
-    (company-mode 0)
-    (yas-minor-mode 0))
+    (company-mode -1)
+    (yas-minor-mode -1))
 
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
