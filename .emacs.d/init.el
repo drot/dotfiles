@@ -952,8 +952,9 @@
         company-selection-wrap-around t
         company-backends '(company-nxml
                            company-css
-                           company-capf (company-dabbrev-code company-keywords)
+                           company-capf
                            company-files
+                           (company-dabbrev-code company-keywords)
                            company-dabbrev)))
 
 ;; Company Statistics
