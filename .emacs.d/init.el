@@ -936,6 +936,15 @@
   :config
   (setq anzu-replace-to-string-separator " => "))
 
+;; Beacon
+(use-package beacon
+  :ensure t
+  :commands beacon-mode
+  :init
+  (beacon-mode)
+  :config
+  (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode))
+
 ;; Company mode
 (use-package company
   :ensure t
