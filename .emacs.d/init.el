@@ -993,7 +993,10 @@
   :ensure t
   :commands eyebrowse-mode
   :init
-  (eyebrowse-mode 1))
+  (eyebrowse-mode 1)
+  :config
+  (setq eyebrowse-wrap-around t
+        eyebrowse-switch-back-and-forth t))
 
 ;; Form-feed
 (use-package form-feed
