@@ -232,7 +232,7 @@
   :config
   (electric-quote-mode 1))
 
-;; Pretty lambdas
+;; Prettify certain symbols
 (use-package prog-mode
   :config
   (setq prettify-symbols-unprettify-at-point t)
@@ -254,14 +254,15 @@
   :config
   (winner-mode 1))
 
-;; Allow scrolling during Isearch
+;; Enable character folding in Isearch and allow scrolling
 (use-package "isearch"
   :defer t
   :diminish (isearch-mode . "IS")
   :config
-  (setq isearch-allow-scroll t))
+  (setq search-default-mode #'character-fold-to-regexp
+        isearch-allow-scroll t))
 
-;; Ispell configuration
+;; Ispell default program
 (use-package ispell
   :defer t
   :config
@@ -358,8 +359,8 @@
 (use-package dired-x
   :after dired
   :config
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
-  (setq dired-omit-verbose nil))
+  (setq dired-omit-verbose nil)
+  (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 ;; Find file at point
 (use-package ffap
