@@ -88,8 +88,8 @@
 (blink-cursor-mode -1)
 
 ;; Show column number and buffer size on the modeline
-(column-number-mode)
-(size-indication-mode)
+(column-number-mode 1)
+(size-indication-mode 1)
 
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left
@@ -173,7 +173,7 @@
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
                                         kill-ring))
-  (savehist-mode))
+  (savehist-mode 1))
 
 ;; Save recent files list
 (use-package recentf
@@ -186,18 +186,18 @@
         recentf-max-saved-items 100
         recentf-max-menu-items 20
         recentf-auto-cleanup 600)
-  (recentf-mode))
+  (recentf-mode 1))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-  (save-place-mode))
+  (save-place-mode 1))
 
 ;; Indicate minibuffer recursion depth
 (use-package mb-depth
   :config
-  (minibuffer-depth-indicate-mode))
+  (minibuffer-depth-indicate-mode 1))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -205,12 +205,12 @@
   (setq show-paren-delay 0
         show-paren-when-point-inside-paren t
         show-paren-when-point-in-periphery t)
-  (show-paren-mode))
+  (show-paren-mode 1))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
-  (global-hi-lock-mode))
+  (global-hi-lock-mode 1))
 
 ;; Abbrev Mode
 (use-package abbrev
@@ -225,34 +225,34 @@
 ;; Electric pair mode
 (use-package elec-pair
   :config
-  (electric-pair-mode))
+  (electric-pair-mode 1))
 
 ;; Electric quote mode
 (use-package electric
   :config
-  (electric-quote-mode))
+  (electric-quote-mode 1))
 
 ;; Pretty lambdas
 (use-package prog-mode
   :config
   (setq prettify-symbols-unprettify-at-point t)
-  (global-prettify-symbols-mode))
+  (global-prettify-symbols-mode 1))
 
 ;; Which function mode
 (use-package which-func
   :config
   (setq which-func-unknown "n/a")
-  (which-function-mode))
+  (which-function-mode 1))
 
 ;; Highlight current line
 (use-package hl-line
   :config
-  (global-hl-line-mode))
+  (global-hl-line-mode 1))
 
 ;; Undo and redo the window configuration
 (use-package winner
   :config
-  (winner-mode))
+  (winner-mode 1))
 
 ;; Allow scrolling during Isearch
 (use-package "isearch"
@@ -739,7 +739,9 @@
          ("C-c v c" . magit-clone)
          ("C-c v b" . magit-blame)
          ("C-c v l" . magit-log-buffer-file)
-         ("C-c v p" . magit-pull)))
+         ("C-c v p" . magit-pull))
+  :config
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
 ;; Markdown mode
 (use-package markdown-mode
@@ -932,7 +934,7 @@
          ("C-c s r" . anzu-query-replace-regexp))
   :commands global-anzu-mode
   :init
-  (global-anzu-mode)
+  (global-anzu-mode 1)
   :config
   (setq anzu-replace-to-string-separator " => "))
 
@@ -941,7 +943,7 @@
   :ensure t
   :commands beacon-mode
   :init
-  (beacon-mode)
+  (beacon-mode 1)
   :config
   (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode))
 
@@ -980,17 +982,17 @@
   :ensure t
   :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
-  (global-diff-hl-mode)
+  (global-diff-hl-mode 1)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
+    (diff-hl-margin-mode 1)))
 
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
   :commands eyebrowse-mode
   :init
-  (eyebrowse-mode))
+  (eyebrowse-mode 1))
 
 ;; Form-feed
 (use-package form-feed
@@ -1029,7 +1031,7 @@
          ("C-c t c" . ivy-resume))
   :commands ivy-mode
   :init
-  (ivy-mode)
+  (ivy-mode 1)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         ivy-initial-inputs-alist nil
@@ -1076,7 +1078,7 @@
   (defun drot/lispy-minibuffer ()
     "Enable lispy during lisp-related minibuffer commands."
     (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
+        (lispy-mode 1)))
 
   (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
@@ -1118,7 +1120,7 @@
   :diminish (undo-tree-mode . "UT")
   :commands global-undo-tree-mode
   :init
-  (global-undo-tree-mode)
+  (global-undo-tree-mode 1)
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
@@ -1136,7 +1138,7 @@
   :diminish (volatile-highlights-mode . "VH")
   :commands volatile-highlights-mode
   :init
-  (volatile-highlights-mode))
+  (volatile-highlights-mode 1))
 
 ;; Which Key
 (use-package which-key
@@ -1147,7 +1149,7 @@
   (setq which-key-show-prefix 'bottom
         which-key-special-keys nil
         which-key-separator " > ")
-  (which-key-mode)
+  (which-key-mode 1)
   :config
   (which-key-declare-prefixes
     "C-x a" "abbrev"
@@ -1179,7 +1181,7 @@
   :commands yas-global-mode
   :init
   (setq yas-verbosity 1)
-  (yas-global-mode))
+  (yas-global-mode 1))
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
