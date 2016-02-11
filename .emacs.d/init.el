@@ -254,13 +254,12 @@
   :config
   (winner-mode 1))
 
-;; Enable character folding in Isearch and allow scrolling
+;; Allow scrolling while Isearch is active
 (use-package "isearch"
   :defer t
   :diminish (isearch-mode . "IS")
   :config
-  (setq search-default-mode #'character-fold-to-regexp
-        isearch-allow-scroll t))
+  (setq isearch-allow-scroll t))
 
 ;; Ispell default program
 (use-package ispell
