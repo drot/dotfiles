@@ -345,6 +345,22 @@
   :config
   (setq gnutls-min-prime-bits 1024))
 
+;; Set mail sending options
+(use-package message
+  :defer t
+  :config
+  (setq message-send-mail-function #'smtpmail-send-it
+        message-confirm-send t
+        message-kill-buffer-on-exit t))
+
+;; Outgoing mail server
+(use-package smtpmail
+  :defer t
+  :config
+  (setq smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'ssl))
+
 ;; Dired
 (use-package dired
   :defer t
@@ -445,7 +461,7 @@
 
 ;; EWW
 (use-package eww
-  :bind (("C-c a w" . eww)))
+  :bind ("C-c a w" . eww))
 
 ;; Gnus
 (use-package gnus
