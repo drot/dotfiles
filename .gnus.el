@@ -1,23 +1,11 @@
-;; Change Gnus default directories
-(setq gnus-directory "~/.gnus"
-      message-directory "~/.gnus/mail"
-      nnml-directory "~/.gnus/nnml-mail"
-      gnus-article-save-directory "~/.gnus/saved"
-      gnus-kill-files-directory "~/.gnus/scores"
-      gnus-cache-directory "~/.gnus/cache")
-
-;; Incoming mail
-(setq gnus-select-method '(nnimap "gmail"
-                                  (nnimap-address "imap.gmail.com")
-                                  (nnimap-server-port 993)
-                                  (nnimap-stream ssl)))
+;; Configure news server
+(setq gnus-select-method '(nnnil)
+      gnus-secondary-select-methods '((nntp "news.gwene.org")))
 
 ;; Article fetching options
 (setq gnus-article-browse-delete-temp t
-      gnus-fetch-old-headers t
       gnus-treat-strip-trailing-blank-lines 'last
-      gnus-mime-display-multipart-related-as-mixed t
-      gnus-auto-select-first nil)
+      gnus-mime-display-multipart-related-as-mixed t)
 
 ;; Group topics
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
@@ -30,10 +18,6 @@
 (setq gnus-sorted-header-list
       '("^From:" "^Reply-To" "^Organization:" "^To:" "^Cc:" "^Newsgroups:"
         "^Subject:" "^Date:" "^Gnus"))
-
-;; Archive outgoing email in Sent folder on imap.gmail.com:
-(setq gnus-message-archive-method '(nnimap "imap.gmail.com")
-      gnus-message-archive-group "[Gmail]/Sent Mail")
 
 ;; Set return email address based on incoming email address
 (setq gnus-posting-styles
