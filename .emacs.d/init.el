@@ -808,15 +808,14 @@
   :config
   ;; User defaults
   (setq rcirc-default-user-name "drot"
-        rcirc-reconnect-delay 10
-        rcirc-kill-channel-buffers t)
+        rcirc-reconnect-delay 10)
 
   ;; Connect to specified servers
   (setq rcirc-server-alist
         '(("irc.freenode.net"
            :port 6697
            :encryption tls)
-          ("irc.forestnet.org"
+          ("irc.oftc.net"
            :port 6697
            :encryption tls)))
 
