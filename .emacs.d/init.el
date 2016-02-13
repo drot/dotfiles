@@ -806,38 +806,40 @@
 (use-package rcirc
   :bind ("C-c a i" . irc)
   :config
-  (setq rcirc-server-alist
-        '(("adams.freenode.net"
-           :port "7000"
-           :encryption tls
-           :channels ("#archlinux" "#emacs" "#scheme"))
-          ("pine.forestnet.org"
-           :port "6697"
-           :encryption tls
-           :channels ("#reloaded" "#rawhide" "#fo2"))))
-
-  ;; Authentication via separate file
-  (when (file-exists-p "~/.private.el")
-    (setq drot/credentials-file "~/.private.el")
-
-    (defun drot/freenode-password ()
-      "Read the NickServ password for Freenode."
-      (with-temp-buffer
-        (insert-file-contents-literally drot/credentials-file)
-        (plist-get (read (buffer-string)) :freenode-password)))
-
-    (defun drot/forestnet-password ()
-      "Read the NickServ password for ForestNet."
-      (with-temp-buffer
-        (insert-file-contents-literally drot/credentials-file)
-        (plist-get (read (buffer-string)) :forestnet-password)))
-
-    (setq rcirc-authinfo
-          `(("freenode" nickserv "drot" ,(drot/freenode-password))
-            ("forestnet" nickserv "drot" ,(drot/forestnet-password)))))
-
   ;; User defaults
-  (setq rcirc-default-user-name "drot")
+  (setq rcirc-default-user-name "drot"
+        rcirc-reconnect-delay 10
+        rcirc-kill-channel-buffers t)
+
+  ;; Connect to specified servers
+  (setq rcirc-server-alist
+        '(("irc.freenode.net"
+           :port 6697
+           :encryption tls)
+          ("irc.forestnet.org"
+           :port 6697
+           :encryption tls)))
+
+  (defun drot/rcirc-cache-authinfo (arg)
+    "Read authinfo from `auth-sources' via the auth-source API."
+    (auth-source-search :port '("irc-nickserv")
+                        :require '(:user :secret)))
+
+  (defun drot/authenticate-using-authinfo (next-method &rest args)
+    "Allow rcirc to read authinfo from `auth-sources' via the auth-source API."
+    (let ((rcirc-authinfo rcirc-authinfo)
+          (credentials (auth-source-search :port '("irc-nickserv")
+                                           :require '(:user :secret))))
+      (dolist (p credentials)
+        (let ((host (plist-get p :host))
+              (user (plist-get p :user))
+              (secret (plist-get p :secret)))
+          (let ((real-secret (if (functionp secret) (funcall secret) secret)))
+            (add-to-list 'rcirc-authinfo (list host 'nickserv user real-secret)))))
+      (apply next-method args)))
+  
+  (advice-add 'rcirc :before #'drot/rcirc-cache-authinfo)
+  (advice-add 'rcirc-authenticate :around #'drot/authenticate-using-authinfo)
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
