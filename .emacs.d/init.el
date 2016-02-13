@@ -815,19 +815,19 @@
         '(("irc.freenode.net"
            :port 6697
            :encryption tls)
-          ("irc.oftc.net"
+          ("irc.forestnet.org"
            :port 6697
            :encryption tls)))
 
   (defun drot/rcirc-cache-authinfo (arg)
     "Read authinfo from `auth-sources' via the auth-source API."
-    (auth-source-search :port '("irc-nickserv")
+    (auth-source-search :port '("irc-nickserv") :max 2
                         :require '(:user :secret)))
 
   (defun drot/authenticate-using-authinfo (next-method &rest args)
     "Allow rcirc to read authinfo from `auth-sources' via the auth-source API."
     (let ((rcirc-authinfo rcirc-authinfo)
-          (credentials (auth-source-search :port '("irc-nickserv")
+          (credentials (auth-source-search :port '("irc-nickserv") :max 2
                                            :require '(:user :secret))))
       (dolist (p credentials)
         (let ((host (plist-get p :host))
