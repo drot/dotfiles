@@ -810,14 +810,16 @@
   (setq rcirc-default-user-name "drot"
         rcirc-reconnect-delay 10)
 
-  ;; Connect to specified servers
+  ;; Connect to specified servers and channels
   (setq rcirc-server-alist
         '(("irc.freenode.net"
            :port 6697
-           :encryption tls)
+           :encryption tls
+           :channels ("#archlinux" "#emacs" "#scheme"))
           ("irc.forestnet.org"
            :port 6697
-           :encryption tls)))
+           :encryption tls
+           :channels ("#reloaded" "#rawhide" "#fo2"))))
 
   (defun drot/rcirc-cache-authinfo (arg)
     "Read authinfo from `auth-sources' via the auth-source API."
