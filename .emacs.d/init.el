@@ -808,11 +808,11 @@
   :config
   (setq rcirc-server-alist
         '(("adams.freenode.net"
-           :port 7000
+           :port "7000"
            :encryption tls
            :channels ("#archlinux" "#emacs" "#scheme"))
           ("pine.forestnet.org"
-           :port 6697
+           :port "6697"
            :encryption tls
            :channels ("#reloaded" "#rawhide" "#fo2"))))
 
@@ -820,15 +820,24 @@
   (when (file-exists-p "~/.private.el")
     (setq drot/credentials-file "~/.private.el")
 
-    (defun drot/nickserv-password ()
-      "Read the passwords from the credientials file"
+    (defun drot/freenode-password ()
+      "Read the NickServ password for Freenode."
       (with-temp-buffer
         (insert-file-contents-literally drot/credentials-file)
-        (plist-get (read (buffer-string)) :nickserv-password)))
+        (plist-get (read (buffer-string)) :freenode-password)))
+
+    (defun drot/forestnet-password ()
+      "Read the NickServ password for ForestNet."
+      (with-temp-buffer
+        (insert-file-contents-literally drot/credentials-file)
+        (plist-get (read (buffer-string)) :forestnet-password)))
 
     (setq rcirc-authinfo
-          `(("freenode" nickserv "drot" ,(drot/nickserv-password))
-            ("forestnet" nickserv "drot" ,(drot/nickserv-password)))))
+          `(("freenode" nickserv "drot" ,(drot/freenode-password))
+            ("forestnet" nickserv "drot" ,(drot/forestnet-password)))))
+
+  ;; User defaults
+  (setq rcirc-default-user-name "drot")
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
@@ -839,7 +848,7 @@
   ;; Enable logging
   (setq rcirc-log-flag t)
 
-  ;; Enable additional modes
+  ;; Enable additional modes and disable some offending ones
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode -1)
@@ -1166,6 +1175,7 @@
   :commands which-key-mode
   :init
   (setq which-key-show-prefix 'bottom
+        which-key-idle-delay 2
         which-key-special-keys nil
         which-key-separator " > ")
   (which-key-mode 1)
