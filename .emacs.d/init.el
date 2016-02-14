@@ -830,10 +830,10 @@ This doesn't support the chanserv auth method"
                                      :require '(:port :user :secret)))
         (let ((secret (plist-get p :secret))
               (method (intern (plist-get p :port))))
-          (add-to-list
-           'rcirc-authinfo
+          (add-to-list 'rcirc-authinfo
            (list (plist-get p :host) method (plist-get p :user)
-                 (if (functionp secret) (funcall secret) secret)))))))
+                 (if (functionp secret)
+                     (funcall secret) secret)))))))
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
