@@ -825,17 +825,15 @@
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
     (unless arg
-      (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet") :max 2
+      (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet")
+                                     :max 2
                                      :require '(:port :user :secret)))
         (let ((secret (plist-get p :secret))
               (method (intern (plist-get p :port))))
-          (add-to-list 'rcirc-authinfo
-                       (list (plist-get p :host)
-                             method
-                             (plist-get p :user)
-                             (if (functionp secret)
-                                 (funcall secret)
-                               secret)))))))
+          (add-to-list
+           'rcirc-authinfo
+           (list (plist-get p :host) method (plist-get p :user)
+                 (if (functionp secret) (funcall secret) secret)))))))
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
