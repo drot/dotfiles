@@ -644,7 +644,10 @@
 ;; Browse Kill Ring
 (use-package browse-kill-ring
   :ensure t
-  :bind ("C-c i y" . browse-kill-ring))
+  :bind ("C-c i y" . browse-kill-ring)
+  :config
+  (setq browse-kill-ring-separator "---------------------"
+        browse-kill-ring-display-duplicates nil))
 
 ;; Dash
 (use-package dash
