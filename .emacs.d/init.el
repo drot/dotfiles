@@ -812,11 +812,11 @@
 
   ;; Connect to specified servers and channels
   (setq rcirc-server-alist
-        '(("irc.freenode.net"
+        '(("adams.freenode.net"
            :port 6697
            :encryption tls
            :channels ("#archlinux" "#emacs" "#scheme"))
-          ("irc.forestnet.org"
+          ("pine.forestnet.org"
            :port 6697
            :encryption tls
            :channels ("#reloaded" "#rawhide" "#fo2"))))
