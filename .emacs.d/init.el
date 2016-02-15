@@ -799,7 +799,9 @@
   :bind ("C-c a p" . paradox-list-packages)
   :config
   (setq paradox-github-token t
-        paradox-execute-asynchronously nil))
+        paradox-execute-asynchronously t
+        paradox-spinner-type 'moon
+        paradox-display-download-count t))
 
 ;; PKGBUILD Mode
 (use-package pkgbuild-mode
