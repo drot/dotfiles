@@ -1136,7 +1136,7 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-modef)
+  :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
   (add-hook 'css-mode-hook #'rainbow-mode))
