@@ -1048,10 +1048,14 @@ This doesn't support the chanserv auth method"
 ;; Swiper
 (use-package swiper
   :ensure t
-  :diminish (ivy-mode . "IY")
   :bind (("C-c s s" . swiper)
-         ("C-c s i" . swiper-from-isearch)
-         ("C-c f r" . ivy-recentf)
+         ("C-c s i" . swiper-from-isearch)))
+
+;; Ivy
+(use-package ivy
+  :ensure swiper
+  :diminish (ivy-mode . "IY")
+  :bind (("C-c f r" . ivy-recentf)
          ("C-c t c" . ivy-resume))
   :commands ivy-mode
   :init
@@ -1144,11 +1148,26 @@ This doesn't support the chanserv auth method"
 ;; Skewer
 (use-package skewer-mode
   :ensure t
+  :diminish (skewer-mode . "SKW")
   :bind ("C-c a w" . run-skewer)
-  :commands (skewer-mode skewer-css-mode skewer-html-mode)
+  :commands skewer-mode
   :init
-  (add-hook 'js2-mode-hook 'skewer-mode)
-  (add-hook 'css-mode-hook 'skewer-css-mode)
+  (add-hook 'js2-mode-hook 'skewer-mode))
+
+;; Skewer CSS
+(use-package skewer-css
+  :ensure skewer-mode
+  :diminish (skewer-css-mode . "SKW-CSS")
+  :commands skewer-css-mode
+  :init
+  (add-hook 'css-mode-hook 'skewer-css-mode))
+
+;; Skewer HTML
+(use-package skewer-html
+  :ensure skewer-mode
+  :diminish (skewer-html-mode . "SKW-HTML")
+  :commands skewer-html-mode
+  :init
   (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Undo Tree
