@@ -461,7 +461,7 @@
 
 ;; EWW
 (use-package eww
-  :bind ("C-c a w" . eww))
+  :bind ("C-c a u" . eww))
 
 ;; Gnus
 (use-package gnus
@@ -800,7 +800,7 @@
   :config
   (setq paradox-github-token t
         paradox-execute-asynchronously t
-        paradox-spinner-type 'moon
+        paradox-spinner-type 'rotating-line
         paradox-display-download-count t))
 
 ;; PKGBUILD Mode
@@ -926,12 +926,6 @@ This doesn't support the chanserv auth method"
 (use-package systemd
   :ensure t
   :defer t)
-
-;; Web mode
-(use-package web-mode
-  :ensure t
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'" . web-mode)))
 
 ;; Zop-to-char
 (use-package zop-to-char
@@ -1142,7 +1136,20 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-mode))
+  :bind ("C-c t r" . rainbow-modef)
+  :commands rainbow-mode
+  :init
+  (add-hook 'css-mode-hook #'rainbow-mode))
+
+;; Skewer
+(use-package skewer-mode
+  :ensure t
+  :bind ("C-c a w" . run-skewer)
+  :commands (skewer-mode skewer-css-mode skewer-html-mode)
+  :init
+  (add-hook 'js2-mode-hook 'skewer-mode)
+  (add-hook 'css-mode-hook 'skewer-css-mode)
+  (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Undo Tree
 (use-package undo-tree
