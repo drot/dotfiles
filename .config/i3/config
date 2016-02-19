@@ -117,6 +117,10 @@ bindsym $mod+period exec --no-startup-id ponymix toggle
 bindsym $mod+minus exec --no-startup-id ponymix decrease 5
 bindsym $mod+plus exec --no-startup-id ponymix increase 5
 
+# screenshot keys
+bindsym Print exec scrot -e 'mv $f /tmp/'
+bindsym --release $mod+Print exec scrot -s -e 'mv $f /tmp/'
+
 # resize window (you can also use the mouse for that)
 mode "RESIZE" {
      bindsym $left resize shrink width 10 px or 10 ppt
