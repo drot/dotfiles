@@ -49,8 +49,7 @@
 
 ;; Activate packages and add MELPA
 (package-initialize)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -816,7 +815,7 @@
   (setq rcirc-default-user-name "drot"
         rcirc-reconnect-delay 10)
 
-  ;; Connect to specified servers and channels
+  ;; Connect to thespecified servers and channels
   (setq rcirc-server-alist
         '(("adams.freenode.net"
            :port 6697
@@ -957,7 +956,9 @@ This doesn't support the chanserv auth method"
   :init
   (global-anzu-mode 1)
   :config
-  (setq anzu-replace-to-string-separator " => "))
+  (setq anzu-search-threshold 1000
+        anzu-replace-threshold 50
+        anzu-replace-to-string-separator " => "))
 
 ;; Beacon
 (use-package beacon
@@ -981,6 +982,9 @@ This doesn't support the chanserv auth method"
         company-tooltip-align-annotations t
         company-tooltip-flip-when-above t
         company-show-numbers t
+        company-require-match 'never
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case t
         company-selection-wrap-around t
         company-backends '(company-nxml
                            company-css
