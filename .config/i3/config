@@ -58,7 +58,7 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# change container layout
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -78,7 +78,7 @@ bindsym $mod+d focus child
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+apostrophe move scratchpad
 
-# show the next scratchpad window or hide the focused scratchpad window.
+# show the next scratchpad window or hide the focused scratchpad window
 bindsym $mod+apostrophe scratchpad show
 
 # switch to workspace
@@ -107,9 +107,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart i3 inplace
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
+# exit i3
 bindsym $mod+Shift+e exit
 
 # volume keys
@@ -121,7 +121,7 @@ bindsym $mod+plus exec --no-startup-id ponymix increase 5
 bindsym Print exec scrot -e 'mv $f /tmp/'
 bindsym --release $mod+Print exec scrot -s -e 'mv $f /tmp/'
 
-# resize window (you can also use the mouse for that)
+# resize window
 mode "RESIZE" {
      bindsym $left resize shrink width 10 px or 10 ppt
      bindsym $down resize grow height 10 px or 10 ppt
@@ -139,7 +139,7 @@ mode "RESIZE" {
 
 bindsym $mod+r mode "RESIZE"
 
-# window colors
+# window colors - border background text indicator
 client.focused #5f5f5f #1e2320 #f0dfaf #f0dfaf
 client.focused_inactive #1e2320 #5f5f5f #f0dfaf #f0dfaf
 client.unfocused #1e2320 #5f5f5f #dcdccc #f0dfaf
