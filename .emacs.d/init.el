@@ -562,6 +562,12 @@
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode -1))))
 
+;; Scheme mode configuration
+(use-package scheme
+  :bind ("C-c t s" . run-scheme)
+  :config
+  (setq scheme-program-name "guile"))
+
 ;; Compilation configuration
 (use-package compile
   :bind (("C-c c c" . compile)
@@ -682,8 +688,7 @@
   :ensure t
   :defer t
   :config
-  (setq geiser-mode-start-repl-p t
-        geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
+  (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
 ;; JavaScript mode
 (use-package js2-mode
