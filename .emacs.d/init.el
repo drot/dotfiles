@@ -73,8 +73,8 @@
 ;; Bug Hunter
 (use-package bug-hunter
   :ensure t
-  :bind (("C-c a h" . bug-hunter-init-file)
-         ("C-c a H" . bug-hunter-file)))
+  :bind (("C-c f i" . bug-hunter-init-file)
+         ("C-c f h" . bug-hunter-file)))
 
 ;; Color theme
 (use-package zenburn-theme
@@ -460,7 +460,7 @@
 
 ;; EWW
 (use-package eww
-  :bind ("C-c a u" . eww))
+  :bind ("C-c a w" . eww))
 
 ;; Gnus
 (use-package gnus
@@ -1165,7 +1165,7 @@ This doesn't support the chanserv auth method"
 (use-package skewer-mode
   :ensure t
   :diminish (skewer-mode . "SKW")
-  :bind ("C-c a w" . run-skewer)
+  :bind ("C-c t w" . run-skewer)
   :commands skewer-mode
   :init
   (add-hook 'js2-mode-hook 'skewer-mode))
