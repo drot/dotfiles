@@ -118,10 +118,10 @@ bindsym $mod+minus exec --no-startup-id ponymix decrease 5
 bindsym $mod+plus exec --no-startup-id ponymix increase 5
 
 # screenshot keys
-bindsym Print exec scrot -e 'mv $f /tmp/'
-bindsym --release $mod+Print exec scrot -s -e 'mv $f /tmp/'
+bindsym Print exec --no-startup-id scrot -e 'mv $f /tmp/'
+bindsym --release $mod+Print exec --no-startup-id scrot -s -e 'mv $f /tmp/'
 
-# resize window
+# resize window mode
 mode "RESIZE" {
      bindsym $left resize shrink width 10 px or 10 ppt
      bindsym $down resize grow height 10 px or 10 ppt
@@ -132,8 +132,8 @@ mode "RESIZE" {
      bindsym Down resize grow height 10 px or 10 ppt
      bindsym Up resize shrink height 10 px or 10 ppt
      bindsym Right resize grow width 10 px or 10 ppt
-     # back to normal: Enter or Escape
-     bindsym Return mode "default"
+     # back to normal
+     bindsym q mode "default"
      bindsym Escape mode "default"
 }
 

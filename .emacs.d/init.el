@@ -967,7 +967,8 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode 1)
   :config
-  (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode))
+  (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode))
 
 ;; Company mode
 (use-package company
