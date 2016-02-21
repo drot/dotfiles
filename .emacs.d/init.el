@@ -836,9 +836,9 @@ This doesn't support the chanserv auth method"
         (let ((secret (plist-get p :secret))
               (method (intern (plist-get p :port))))
           (add-to-list 'rcirc-authinfo
-           (list (plist-get p :host) method (plist-get p :user)
-                 (if (functionp secret)
-                     (funcall secret) secret)))))))
+                       (list (plist-get p :host) method (plist-get p :user)
+                             (if (functionp secret)
+                                 (funcall secret) secret)))))))
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
@@ -967,8 +967,14 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode 1)
   :config
+  (setq beacon-color "#f0dfaf")
   (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode))
+  (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'geiser-repl-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'shell-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'eshell-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'compilation-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'skewer-repl-mode))
 
 ;; Company mode
 (use-package company
