@@ -75,6 +75,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+d focus child
 
+# focus the latest urgent window.
+bindsym $mod+u [urgent="latest"] focus
+
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+apostrophe move scratchpad
 
@@ -105,13 +108,6 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace
-bindsym $mod+Shift+r restart
-# exit i3
-bindsym $mod+Shift+e exit
-
 # volume keys
 bindsym $mod+period exec --no-startup-id ponymix toggle
 bindsym $mod+minus exec --no-startup-id ponymix decrease 5
@@ -120,6 +116,13 @@ bindsym $mod+plus exec --no-startup-id ponymix increase 5
 # screenshot keys
 bindsym Print exec --no-startup-id scrot -e 'mv $f /tmp/'
 bindsym --release $mod+Print exec --no-startup-id scrot -s -e 'mv $f /tmp/'
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+# exit i3
+bindsym $mod+Shift+e exit
 
 # resize window mode
 mode "RESIZE" {
