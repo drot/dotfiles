@@ -72,22 +72,22 @@ STICKY 00;34
 .tgz 00;33
 .xz 00;33
 
-# image formats (cyan)
-.jpg 00;36
-.gif 00;36
-.bmp 00;36
-.xbm 00;36
-.xpm 00;36
-.tif 00;36
-.tga 00;36
-.png 00;36
-.jpeg 00;36
-.tiff 00;36
-.xcf 00;36
-.xcf.gz 00;36
-.blend 00;36
-.pcx 00;36
-.ppm 00;36
+# image formats (red)
+.jpg 00;31
+.gif 00;31
+.bmp 00;31
+.xbm 00;31
+.xpm 00;31
+.tif 00;31
+.tga 00;31
+.png 00;31
+.jpeg 00;31
+.tiff 00;31
+.xcf 00;31
+.xcf.gz 00;31
+.blend 00;31
+.pcx 00;31
+.ppm 00;31
 
 # media (green)
 .mp3 00;32
@@ -146,7 +146,7 @@ STICKY 00;34
 .dmenurc 00;32
 .dmenu_cache 00;32
 .dmenu-short 00;32
-.el 00;36
+.el 00;35
 .enc 00;36
 .eps 00;36
 .etx 00;36
@@ -156,7 +156,7 @@ STICKY 00;34
 .fonts 00;36
 .gemrc 00;32
 .git 00;36
-.gitconfig 00;35
+.gitconfig 00;33
 .gitignore 00;36
 .gpg 01;31
 .hgrc 00;35
@@ -214,12 +214,14 @@ STICKY 00;34
 .pod 00;36
 .pulse-cookie 00;36
 .py 00;36
-.rc 00;33
-.recently-used 00;35
 .rb 00;36
+.rc 00;33
 .rdf 00;36
+.recently-used 00;35
+.rsa 01;31
 .ru 00;36
 .ruby-version 00;32
+.scm 00;35
 .sdcv_history 00;32
 .sed 00;36
 .sfv 00;36
