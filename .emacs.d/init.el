@@ -921,8 +921,8 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ("C-c t i" . slime)
   :config
-  (setq inferior-lisp-program "sbcl"
-        slime-contribs '(slime-fancy)))
+  (setq inferior-lisp-program "sbcl")
+  (slime-setup '(slime-fancy)))
 
 ;; Smex
 (use-package smex
@@ -982,7 +982,8 @@ This doesn't support the chanserv auth method"
   (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'eshell-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'compilation-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'comint-mode))
+  (add-to-list 'beacon-dont-blink-major-modes #'comint-mode)
+  (add-to-list 'beacon-dont-blink-major-modes #'slime-repl-mode))
 
 ;; Company mode
 (use-package company
