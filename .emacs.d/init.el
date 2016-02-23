@@ -916,6 +916,14 @@ This doesn't support the chanserv auth method"
   :config
   (rcirc-notify-add-hooks))
 
+;; SLIME
+(use-package slime
+  :ensure t
+  :bind ("C-c t i" . slime)
+  :config
+  (setq inferior-lisp-program "sbcl"
+        slime-contribs '(slime-fancy)))
+
 ;; Smex
 (use-package smex
   :ensure t
@@ -972,11 +980,9 @@ This doesn't support the chanserv auth method"
   (setq beacon-color "#f0dfaf")
   (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'geiser-repl-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'shell-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'eshell-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'compilation-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'skewer-repl-mode))
+  (add-to-list 'beacon-dont-blink-major-modes #'comint-mode))
 
 ;; Company mode
 (use-package company
