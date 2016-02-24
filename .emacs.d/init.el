@@ -921,7 +921,8 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ("C-c t s" . slime)
   :config
-  (setq inferior-lisp-program "sbcl"))
+  (setq inferior-lisp-program "sbcl"
+        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
 
 ;; SLIME Company
 (use-package slime-company
