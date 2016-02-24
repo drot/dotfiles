@@ -928,6 +928,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :after slime
   :config
+  (setq slime-company-completion 'fuzzy)
   (slime-setup '(slime-fancy slime-company)))
 
 ;; Smex
