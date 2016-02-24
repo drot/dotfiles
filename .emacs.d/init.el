@@ -28,14 +28,14 @@
 ;;; Code:
 
 ;; Set some variables
-(defconst drot/emacs-directory (file-name-directory load-file-name)
+(defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defconst drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
+(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
 (make-directory drot/cache-directory t)
 
-(defconst drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
+(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Prefer newest version of a file
@@ -921,8 +921,14 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ("C-c t s" . slime)
   :config
-  (setq inferior-lisp-program "sbcl")
-  (slime-setup '(slime-fancy)))
+  (setq inferior-lisp-program "sbcl"))
+
+;; SLIME Company
+(use-package slime-company
+  :ensure t
+  :after slime
+  :config
+  (slime-setup '(slime-fancy slime-company)))
 
 ;; Smex
 (use-package smex
