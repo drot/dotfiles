@@ -561,7 +561,7 @@
 
 ;; Scheme mode configuration
 (use-package scheme
-  :bind ("C-c t s" . run-scheme)
+  :bind ("C-c t e" . run-scheme)
   :config
   (setq scheme-program-name "guile"))
 
@@ -919,7 +919,7 @@ This doesn't support the chanserv auth method"
 ;; SLIME
 (use-package slime
   :ensure t
-  :bind ("C-c t i" . slime)
+  :bind ("C-c t s" . slime)
   :config
   (setq inferior-lisp-program "sbcl")
   (slime-setup '(slime-fancy)))
