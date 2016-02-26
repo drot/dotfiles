@@ -391,6 +391,13 @@
         tramp-backup-directory-alist backup-directory-alist
         tramp-auto-save-directory drot/cache-directory))
 
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OM")
+  :commands outline-minor-mode
+  :init
+  (add-hook 'text-mode-hook #'outline-minor-mode))
+
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
