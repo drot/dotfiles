@@ -59,13 +59,8 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; Disable unnecessary GUI elements
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+;; Try to extract docstrings from special forms
+(setq bind-key-describe-special-forms t)
 
 ;; Bug Hunter
 (use-package bug-hunter
@@ -76,6 +71,14 @@
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
+
+;; Disable unnecessary GUI elements
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
 ;; Show tooltips in the echo area
 (tooltip-mode -1)
@@ -388,13 +391,6 @@
         tramp-backup-directory-alist backup-directory-alist
         tramp-auto-save-directory drot/cache-directory))
 
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OM")
-  :commands outline-minor-mode
-  :init
-  (add-hook 'text-mode-hook #'outline-minor-mode))
-
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
@@ -404,7 +400,7 @@
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode)))
 
-;; Bug References
+;; Bug References mode
 (use-package bug-reference
   :commands (bug-reference-mode bug-reference-prog-mode)
   :init
@@ -561,7 +557,7 @@
 
 ;; Scheme mode configuration
 (use-package scheme
-  :bind ("C-c t e" . run-scheme)
+  :bind ("C-c t k" . run-scheme)
   :config
   (setq scheme-program-name "guile"))
 
@@ -1177,7 +1173,7 @@ This doesn't support the chanserv auth method"
 (use-package skewer-mode
   :ensure t
   :diminish (skewer-mode . "SKW")
-  :bind ("C-c t w" . run-skewer)
+  :bind ("C-c t e" . run-skewer)
   :commands skewer-mode
   :init
   (add-hook 'js2-mode-hook 'skewer-mode))
