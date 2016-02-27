@@ -1124,7 +1124,9 @@ This doesn't support the chanserv auth method"
   :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
-                  scheme-mode-hook))
+                  scheme-mode-hook
+                  slime-repl-mode-hook
+                  geiser-repl-mode-hook))
     (add-hook hook #'lispy-mode))
   :config
   (defvar drot/lispy-minibuffer-commands '(eval-expression
