@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+;; Delay garbage collection during startup
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;; Set some variables
 (defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
@@ -403,12 +406,25 @@
   :diminish (outline-minor-mode . "OM")
   :commands outline-minor-mode
   :init
-  (add-hook 'text-mode-hook #'outline-minor-mode))
+  (dolist (hook '(text-mode-hook
+                  prog-mode-hook))
+    (add-hook hook #'outline-minor-mode)))
 
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
   :init
+  (setq hs-minor-mode-map
+        (let ((map (make-sparse-keymap)))
+          (define-key map (kbd "C-c @ h") #'hs-hide-block)
+          (define-key map (kbd "C-c @ s") #'hs-show-block)
+          (define-key map (kbd "C-c @ M-h") #'hs-hide-all)
+          (define-key map (kbd "C-c @ M-s") #'hs-show-all)
+          (define-key map (kbd "C-c @ l") #'hs-hide-level)
+          (define-key map (kbd "C-c @ c") #'hs-toggle-hiding)
+          (define-key map [(shift mouse-2)] #'hs-mouse-toggle-hiding)
+          map))
+
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
@@ -1281,5 +1297,8 @@ This doesn't support the chanserv auth method"
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
 (load drot/custom-file 'noerror 'nomessage)
+
+;; Reset garbage collection threshold
+(setq gc-cons-threshold 400000)
 
 ;;; init.el ends here
