@@ -143,6 +143,12 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
+;; Increase maximum size of the mark ring
+(setq mark-ring-max 30)
+
+;; Repeat mark popping
+(setq set-mark-command-repeat-pop t)
+
 ;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
@@ -267,12 +273,13 @@
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra")))
 
-;; Ediff window split
+;; Ediff windows configuration
 (use-package ediff-wind
   :defer t
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
-        ediff-split-window-function #'split-window-horizontally))
+        ediff-split-window-function #'split-window-horizontally
+        ediff-grab-mouse nil))
 
 ;; Uniquify buffer names
 (use-package uniquify
@@ -342,7 +349,7 @@
 (use-package gnutls
   :defer t
   :config
-  (setq gnutls-min-prime-bits 1024))
+  (setq gnutls-min-prime-bits nil))
 
 ;; Set mail sending options
 (use-package message
