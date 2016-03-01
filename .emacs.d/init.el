@@ -401,15 +401,6 @@
         tramp-backup-directory-alist backup-directory-alist
         tramp-auto-save-directory drot/cache-directory))
 
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OM")
-  :commands outline-minor-mode
-  :init
-  (dolist (hook '(text-mode-hook
-                  prog-mode-hook))
-    (add-hook hook #'outline-minor-mode)))
-
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
@@ -504,6 +495,11 @@
          ("C-c h v" . find-variable)
          ("C-c h 4 v" . find-variable-other-window)
          ("C-c h l" . find-library)))
+
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OM")
+  :bind ("C-c t o" . outline-minor-mode))
 
 ;; Whitespace mode
 (use-package whitespace
@@ -1140,30 +1136,6 @@ This doesn't support the chanserv auth method"
   :config
   (setq counsel-find-file-at-point t))
 
-;; Lispy
-(use-package lispy
-  :ensure t
-  :commands lispy-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook #'lispy-mode))
-  :config
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which lispy should be enabled in the minibuffer.")
-
-  (defun drot/lispy-minibuffer ()
-    "Enable lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode 1)))
-
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
-
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1179,6 +1151,42 @@ This doesn't support the chanserv auth method"
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
+
+;; ParEdit
+(use-package paredit
+  :ensure t
+  :diminish (paredit-mode . "PE")
+  :commands enable-paredit-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook
+                  lisp-mode-hook
+                  scheme-mode-hook
+                  slime-repl-mode-hook
+                  geiser-repl-mode-hook))
+    (add-hook hook #'enable-paredit-mode))
+  :config
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+  (defun drot/paredit-minibuffer ()
+    "Enable ParEdit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
+
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
+
+
+  (defun drot/paredit-slime-fix ()
+    "Fix ParEdit conflict with SLIME."
+    (define-key slime-repl-mode-map
+      (read-kbd-macro paredit-backward-delete-key) nil))
+
+  (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
