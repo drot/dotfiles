@@ -31,14 +31,14 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Set some variables
-(defvar drot/emacs-directory (file-name-directory load-file-name)
+(defvar dr/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
+(defvar dr/cache-directory (expand-file-name "cache" dr/emacs-directory)
   "This directory houses all cache files.")
-(make-directory drot/cache-directory t)
+(make-directory dr/cache-directory t)
 
-(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
+(defvar dr/custom-file (expand-file-name "custom.el" dr/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Prefer newest version of a file
@@ -161,9 +161,9 @@
       kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-      backup-directory-alist `((".*" . ,drot/cache-directory))
+(setq auto-save-file-name-transforms `((".*" ,dr/cache-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" dr/cache-directory)
+      backup-directory-alist `((".*" . ,dr/cache-directory))
       version-control t
       kept-new-versions 2
       delete-old-versions t
@@ -176,7 +176,7 @@
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
+  (setq savehist-file (expand-file-name "saved-history" dr/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring
                                         regexp-search-ring
@@ -186,7 +186,7 @@
 ;; Save recent files list
 (use-package recentf
   :config
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
+  (setq recentf-save-file (expand-file-name "recent-files" dr/cache-directory)
         recentf-exclude '("/\\.git/.*\\'"
                           "/elpa/.*\\'"
                           "/cache/.*\\'"
@@ -199,7 +199,7 @@
 ;; Remember point position in files
 (use-package saveplace
   :config
-  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
+  (setq save-place-file (expand-file-name "saved-places" dr/cache-directory))
   (save-place-mode 1))
 
 ;; Indicate minibuffer recursion depth
@@ -224,7 +224,7 @@
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
   :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
+  (setq abbrev-file-name (expand-file-name "abbrevs" dr/cache-directory)
         save-abbrevs t)
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
@@ -397,9 +397,9 @@
   :defer t
   :config
   (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
+        tramp-persistency-file-name (expand-file-name "tramp" dr/cache-directory)
         tramp-backup-directory-alist backup-directory-alist
-        tramp-auto-save-directory drot/cache-directory))
+        tramp-auto-save-directory dr/cache-directory))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -558,14 +558,14 @@
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
+  (setq bookmark-default-file (expand-file-name "bookmarks" dr/cache-directory)
         bookmark-save-flag 1))
 
 ;; Eshell save directory
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" drot/cache-directory)))
+  (setq eshell-directory-name (expand-file-name "eshell" dr/cache-directory)))
 
 ;; Shell mode configuration
 (use-package shell
@@ -595,14 +595,14 @@
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
 
-  (defun drot/colorize-compilation-buffer ()
+  (defun dr/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
     (when (eq major-mode 'compilation-mode)
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
-  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'dr/colorize-compilation-buffer))
 
 ;; Colorize ANSI escape sequences
 (use-package ansi-color
@@ -642,7 +642,7 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
   :config
-  (setq org-directory (expand-file-name "org" drot/emacs-directory)
+  (setq org-directory (expand-file-name "org" dr/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-log-done 'time
         org-src-fontify-natively t
@@ -707,7 +707,7 @@
   :ensure t
   :defer t
   :config
-  (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
+  (setq geiser-repl-history-filename (expand-file-name "geiser-history" dr/cache-directory)))
 
 ;; JavaScript mode
 (use-package js2-mode
@@ -874,12 +874,12 @@ This doesn't support the chanserv auth method"
   (setq rcirc-log-flag t)
 
   ;; Enable additional modes and disable some offending ones
-  (defun drot/rcirc-mode-hook ()
+  (defun dr/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode -1)
     (yas-minor-mode -1))
 
-  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'dr/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
@@ -944,7 +944,7 @@ This doesn't support the chanserv auth method"
   :bind ("C-c t s" . slime)
   :config
   (setq inferior-lisp-program "sbcl"
-        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
+        slime-repl-history-file (expand-file-name "slime-history.eld" dr/cache-directory)))
 
 ;; SLIME Company
 (use-package slime-company
@@ -959,7 +959,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t
   :config
-  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
+  (setq smex-save-file (expand-file-name "smex-items" dr/cache-directory)))
 
 ;; Systemd mode
 (use-package systemd
@@ -1046,7 +1046,7 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'after-init-hook #'company-statistics-mode)
   :config
-  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
+  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" dr/cache-directory)))
 
 ;; Diff-Hl
 (use-package diff-hl
@@ -1150,7 +1150,7 @@ This doesn't support the chanserv auth method"
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
-  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
+  (setq mc/list-file (expand-file-name "mc-lists.el" dr/cache-directory)))
 
 ;; ParEdit
 (use-package paredit
@@ -1166,27 +1166,27 @@ This doesn't support the chanserv auth method"
                   geiser-repl-mode-hook))
     (add-hook hook #'enable-paredit-mode))
   :config
-  (defvar drot/paredit-minibuffer-commands '(eval-expression
+  (defvar dr/paredit-minibuffer-commands '(eval-expression
                                              pp-eval-expression
                                              eval-expression-with-eldoc
                                              ibuffer-do-eval
                                              ibuffer-do-view-and-eval)
     "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
-  (defun drot/paredit-minibuffer ()
+  (defun dr/paredit-minibuffer ()
     "Enable ParEdit during lisp-related minibuffer commands."
-    (if (memq this-command drot/paredit-minibuffer-commands)
+    (if (memq this-command dr/paredit-minibuffer-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
+  (add-hook 'minibuffer-setup-hook #'dr/paredit-minibuffer)
 
 
-  (defun drot/paredit-slime-fix ()
+  (defun dr/paredit-slime-fix ()
     "Fix ParEdit conflict with SLIME."
     (define-key slime-repl-mode-map
       (read-kbd-macro paredit-backward-delete-key) nil))
 
-  (add-hook 'slime-repl-mode-hook 'drot/paredit-slime-fix))
+  (add-hook 'slime-repl-mode-hook 'dr/paredit-slime-fix))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -1303,8 +1303,8 @@ This doesn't support the chanserv auth method"
   (yas-global-mode 1))
 
 ;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load drot/custom-file 'noerror 'nomessage)
+(setq custom-file dr/custom-file)
+(load dr/custom-file 'noerror 'nomessage)
 
 ;; Reset garbage collection threshold
 (setq gc-cons-threshold 400000)
