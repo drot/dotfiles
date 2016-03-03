@@ -1122,17 +1122,10 @@ This doesn't support the chanserv auth method"
 ;; Counsel
 (use-package counsel
   :ensure t
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h v" . counsel-describe-variable)
-         ("C-h f" . counsel-describe-function)
-         ("C-c f l" . counsel-load-library)
-         ("C-c f g" . counsel-git)
-         ("C-c n i" . counsel-imenu)
-         ("C-c s l" . counsel-info-lookup-symbol)
-         ("C-c s g" . counsel-git-grep)
-         ("C-c i u" . counsel-unicode-char)
-         ("C-c i p" . counsel-yank-pop))
+  :diminish (counsel-mode . "CL")
+  :commands counsel-mode
+  :init
+  (counsel-mode 1)
   :config
   (setq counsel-find-file-at-point t))
 
@@ -1167,10 +1160,10 @@ This doesn't support the chanserv auth method"
     (add-hook hook #'enable-paredit-mode))
   :config
   (defvar dr/paredit-minibuffer-commands '(eval-expression
-                                             pp-eval-expression
-                                             eval-expression-with-eldoc
-                                             ibuffer-do-eval
-                                             ibuffer-do-view-and-eval)
+                                           pp-eval-expression
+                                           eval-expression-with-eldoc
+                                           ibuffer-do-eval
+                                           ibuffer-do-view-and-eval)
     "Interactive commands for which ParEdit should be enabled in the minibuffer.")
 
   (defun dr/paredit-minibuffer ()
