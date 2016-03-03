@@ -225,6 +225,7 @@
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
+  (setq hi-lock-auto-select-face t)
   (global-hi-lock-mode 1))
 
 ;; Abbrev Mode
@@ -256,7 +257,7 @@
 ;; Which function mode
 (use-package which-func
   :config
-  (setq which-func-unknown "n/a")
+  (setq which-func-unknown "(Top Level)")
   (which-function-mode 1))
 
 ;; Highlight current line
@@ -383,7 +384,6 @@
   :config
   (setq dired-listing-switches "-ahlF"
         dired-recursive-copies 'always
-        dired-recursive-deletes 'always
         dired-dwim-target t))
 
 ;; Dired-x
@@ -405,24 +405,20 @@
   :config
   (setq tramp-default-method "ssh"
         tramp-persistency-file-name (expand-file-name "tramp" dr/cache-directory)
-        tramp-backup-directory-alist backup-directory-alist
-        tramp-auto-save-directory dr/cache-directory))
+        tramp-backup-directory-alist `((".*" . ,temporary-file-directory))
+        tramp-auto-save-directory temporary-file-directory))
+
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OM")
+  :bind ("C-c t o" . outline-minor-mode)
+  :init
+  (setq outline-minor-mode-prefix (kbd "C-c C-o")))
 
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
   :init
-  (setq hs-minor-mode-map
-        (let ((map (make-sparse-keymap)))
-          (define-key map (kbd "C-c @ h") #'hs-hide-block)
-          (define-key map (kbd "C-c @ s") #'hs-show-block)
-          (define-key map (kbd "C-c @ M-h") #'hs-hide-all)
-          (define-key map (kbd "C-c @ M-s") #'hs-show-all)
-          (define-key map (kbd "C-c @ l") #'hs-hide-level)
-          (define-key map (kbd "C-c @ c") #'hs-toggle-hiding)
-          (define-key map [(shift mouse-2)] #'hs-mouse-toggle-hiding)
-          map))
-
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
@@ -507,11 +503,6 @@
          ("C-c h 4 v" . find-variable-other-window)
          ("C-c h l" . find-library)))
 
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OM")
-  :bind ("C-c t o" . outline-minor-mode))
-
 ;; Whitespace mode
 (use-package whitespace
   :diminish (whitespace-mode . "WS")
@@ -557,6 +548,12 @@
   :bind ("C-c a r" . re-builder)
   :config
   (setq reb-re-syntax 'string))
+
+;; GDB
+(use-package gdb-mi
+  :bind ("C-c a d" . gdb)
+  :config
+  (setq gdb-many-windows t))
 
 ;; Open URLs in Firefox
 (use-package browse-url
@@ -968,6 +965,7 @@ This doesn't support the chanserv auth method"
   :bind ("C-c t s" . slime)
   :config
   (setq inferior-lisp-program "sbcl"
+        slime-protocol-version 'ignore
         slime-repl-history-file (expand-file-name "slime-history.eld" dr/cache-directory)))
 
 ;; SLIME Company
@@ -1298,7 +1296,7 @@ This doesn't support the chanserv auth method"
     "C-x r" "register"
     "C-x w" "highlight"
     "C-x C-a" "edebug"
-    "C-c @" "hs-and-outline"
+    "C-c @" "hide-show"
     "C-c &" "yasnippet"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
@@ -1312,6 +1310,7 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
+    "C-c C-o" "outline"
     "C-c C-w" "eyebrowse"
     "C-c x" "text"))
 
