@@ -129,6 +129,10 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
+;; No limit when printing values.
+(setq eval-expression-print-length nil
+      eval-expression-print-level nil)
+
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
@@ -169,8 +173,11 @@
       delete-old-versions t
       backup-by-copying t)
 
-;; Diminish already loaded modes
+;; Visual Line mode configuration
 (diminish 'visual-line-mode " WP")
+(setq visual-line-fringe-indicators '(nil vertical-bar))
+
+;; Diminish Auto Fill mode
 (diminish 'auto-fill-function " FL")
 
 ;; Save minibuffer history
@@ -464,13 +471,17 @@
 (use-package files
   :bind ("C-c f z" . revert-buffer))
 
-;; Proced
-(use-package proced
-  :bind ("C-x p" . proced))
+;; Ruler mode
+(use-package ruler
+  :bind ("C-c t r" . ruler-mode))
 
 ;; Ediff
 (use-package ediff
   :bind ("C-c f e" . ediff))
+
+;; Proced
+(use-package proced
+  :bind ("C-x p" . proced))
 
 ;; EWW
 (use-package eww
@@ -565,7 +576,14 @@
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" dr/cache-directory)))
+  (setq eshell-directory-name (expand-file-name "eshell" dr/cache-directory)
+        eshell-hist-ignoredups t))
+
+;; Eshell smart display
+(use-package em-smart
+  :after eshell
+  :config
+  (eshell-smart-initialize))
 
 ;; Shell mode configuration
 (use-package shell
@@ -580,6 +598,12 @@
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode -1))))
+
+;; IELM
+(use-package ielm
+  :bind ("C-c t i" . ielm)
+  :config
+  (setq ielm-prompt "EL> "))
 
 ;; Scheme mode configuration
 (use-package scheme
@@ -1198,10 +1222,12 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-mode)
+  :bind ("C-c t b" . rainbow-mode)
   :commands rainbow-mode
   :init
-  (add-hook 'css-mode-hook #'rainbow-mode))
+  (add-hook 'css-mode-hook #'rainbow-mode)
+  :config
+  (setq rainbow-x-colors t))
 
 ;; Skewer
 (use-package skewer-mode
