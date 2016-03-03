@@ -449,7 +449,8 @@
   :config
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
-        flyspell-issue-welcome-flag nil))
+        flyspell-issue-welcome-flag nil
+        flyspell-consider-dash-as-word-delimiter-flag t))
 
 ;; Indent region
 (bind-key "C-c x i" #'indent-region)
