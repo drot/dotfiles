@@ -488,6 +488,10 @@
 (use-package gnus
   :bind ("C-c a g" . gnus))
 
+;; Xwidget WebKit browser
+(use-package xwidget
+  :bind ("C-c a b" . xwidget-webkit-browse-url))
+
 ;; Wind Move
 (use-package windmove
   :bind (("C-c w <left>" . windmove-left)
@@ -558,7 +562,7 @@
 
 ;; Open URLs in Firefox
 (use-package browse-url
-  :bind (("C-c a b" . browse-url)
+  :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
   (setq browse-url-browser-function #'browse-url-firefox))
@@ -692,7 +696,7 @@
   :ensure t
   :bind ("C-c i y" . browse-kill-ring)
   :config
-  (setq browse-kill-ring-separator "---------------------"
+  (setq browse-kill-ring-separator "-------8<-------8<-------8<-------"
         browse-kill-ring-highlight-current-entry t
         browse-kill-ring-display-duplicates nil))
 
