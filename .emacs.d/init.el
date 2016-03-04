@@ -971,7 +971,11 @@ This doesn't support the chanserv auth method"
   :config
   (setq inferior-lisp-program "sbcl"
         slime-protocol-version 'ignore
-        slime-repl-history-file (expand-file-name "slime-history.eld" dr/cache-directory)))
+        slime-repl-history-file (expand-file-name "slime-history.eld" dr/cache-directory))
+
+  ;; Don’t reserve the backspace key
+  (add-hook 'slime-repl-mode-hook (lambda ()
+                                    (define-key slime-repl-mode-map (kbd "DEL") nil))))
 
 ;; SLIME Company
 (use-package slime-company
@@ -1187,13 +1191,7 @@ This doesn't support the chanserv auth method"
     (if (memq this-command dr/lispy-minibuffer-commands)
         (lispy-mode 1)))
 
-  (add-hook 'minibuffer-setup-hook #'dr/lispy-minibuffer)
-
-  (defun dr/lispy-slime-fix ()
-    "Fix Lispy conflict with SLIME."
-    (define-key slime-repl-mode-map (kbd "DEL") nil))
-
-  (add-hook 'slime-repl-mode-hook 'dr/lispy-slime-fix))
+  (add-hook 'minibuffer-setup-hook #'dr/lispy-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
