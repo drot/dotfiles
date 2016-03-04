@@ -1159,6 +1159,42 @@ This doesn't support the chanserv auth method"
   :config
   (setq counsel-find-file-at-point t))
 
+;; Lispy
+(use-package lispy
+  :ensure t
+  :commands lispy-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  ielm-mode-hook
+                  scheme-mode-hook
+                  slime-repl-mode-hook
+                  geiser-repl-mode-hook))
+    (add-hook hook #'lispy-mode))
+  :config
+  (setq lispy-safe-delete t
+        lispy-safe-copy t)
+
+  (defvar dr/lispy-minibuffer-commands '(eval-expression
+                                         pp-eval-expression
+                                         eval-expression-with-eldoc
+                                         ibuffer-do-eval
+                                         ibuffer-do-view-and-eval)
+    "Interactive commands for which Lispy should be enabled in the minibuffer.")
+
+  (defun dr/lispy-minibuffer ()
+    "Enable Lispy during lisp-related minibuffer commands."
+    (if (memq this-command dr/lispy-minibuffer-commands)
+        (lispy-mode 1)))
+
+  (add-hook 'minibuffer-setup-hook #'dr/lispy-minibuffer)
+
+  (defun dr/lispy-slime-fix ()
+    "Fix Lispy conflict with SLIME."
+    (define-key slime-repl-mode-map (kbd "DEL") nil))
+
+  (add-hook 'slime-repl-mode-hook 'dr/lispy-slime-fix))
+
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1174,42 +1210,6 @@ This doesn't support the chanserv auth method"
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" dr/cache-directory)))
-
-;; ParEdit
-(use-package paredit
-  :ensure t
-  :diminish (paredit-mode . "PE")
-  :commands enable-paredit-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  ielm-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook
-                  slime-repl-mode-hook
-                  geiser-repl-mode-hook))
-    (add-hook hook #'enable-paredit-mode))
-  :config
-  (defvar dr/paredit-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
-
-  (defun dr/paredit-minibuffer ()
-    "Enable ParEdit during lisp-related minibuffer commands."
-    (if (memq this-command dr/paredit-minibuffer-commands)
-        (enable-paredit-mode)))
-
-  (add-hook 'minibuffer-setup-hook #'dr/paredit-minibuffer)
-
-
-  (defun dr/paredit-slime-fix ()
-    "Fix ParEdit conflict with SLIME."
-    (define-key slime-repl-mode-map
-      (read-kbd-macro paredit-backward-delete-key) nil))
-
-  (add-hook 'slime-repl-mode-hook 'dr/paredit-slime-fix))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
