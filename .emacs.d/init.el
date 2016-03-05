@@ -974,7 +974,7 @@ This doesn't support the chanserv auth method"
         slime-protocol-version 'ignore
         slime-repl-history-file (expand-file-name "slime-history.eld" dr/cache-directory))
 
-  ;; Don’t reserve the backspace key
+  ;; Don’t reserve the Backspace key
   (add-hook 'slime-repl-mode-hook (lambda ()
                                     (define-key slime-repl-mode-map (kbd "DEL") nil))))
 
