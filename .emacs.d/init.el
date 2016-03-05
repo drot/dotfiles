@@ -697,7 +697,7 @@
   :ensure t
   :bind ("C-c i y" . browse-kill-ring)
   :config
-  (setq browse-kill-ring-separator "-------8<-------8<-------8<-------"
+  (setq browse-kill-ring-separator "------------------------ >8 ------------------------"
         browse-kill-ring-highlight-current-entry t
         browse-kill-ring-display-duplicates nil))
 
