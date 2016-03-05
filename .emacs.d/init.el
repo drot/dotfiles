@@ -99,7 +99,7 @@
 
 ;; Don't show startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
-      setq inhibit-startup-screen t)
+      inhibit-startup-screen t)
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
