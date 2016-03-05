@@ -61,6 +61,7 @@ STICKY 00;34
 .bat 01;32
 
 # archives or compressed (bright yellow)
+.7z 00;33
 .rar 00;33
 .tar 00;33
 .tgz 00;33
