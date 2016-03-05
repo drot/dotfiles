@@ -98,8 +98,8 @@
               indicate-empty-lines t)
 
 ;; Don't show startup welcome messages
-(setq inhibit-startup-echo-area-message (user-login-name))
-(setq inhibit-startup-screen t)
+(setq inhibit-startup-echo-area-message (user-login-name)
+      setq inhibit-startup-screen t)
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
@@ -174,8 +174,8 @@
       backup-by-copying t)
 
 ;; Visual Line mode configuration
-(diminish 'visual-line-mode " WP")
 (setq visual-line-fringe-indicators '(nil vertical-bar))
+(diminish 'visual-line-mode " WP")
 
 ;; Diminish Auto Fill mode
 (diminish 'auto-fill-function " FL")
