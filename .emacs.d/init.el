@@ -1178,7 +1178,8 @@ This doesn't support the chanserv auth method"
     (add-hook hook #'lispy-mode))
   :config
   (setq lispy-safe-delete t
-        lispy-safe-copy t)
+        lispy-safe-copy t
+        lispy-safe-paste t)
 
   (defvar dr/lispy-minibuffer-commands '(eval-expression
                                          pp-eval-expression
