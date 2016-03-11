@@ -1291,7 +1291,6 @@ This doesn't support the chanserv auth method"
   :init
   (setq which-key-show-prefix 'bottom
         which-key-idle-delay 2
-        which-key-special-keys nil
         which-key-separator " > ")
   (which-key-mode 1)
   :config
