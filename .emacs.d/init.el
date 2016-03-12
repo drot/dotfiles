@@ -802,6 +802,11 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("z" nil "Quit")))
 
+;; Macrostep
+(use-package macrostep
+  :ensure t
+  :bind ("C-c e" . macrostep-expand))
+
 ;; Magit
 (use-package magit
   :ensure t
