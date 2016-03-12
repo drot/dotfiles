@@ -73,7 +73,13 @@
 
 ;; Color theme
 (use-package zenburn-theme
+  :disabled t
   :ensure t)
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :init
+  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Disable unnecessary GUI elements
 (when (fboundp 'tool-bar-mode)
@@ -1295,7 +1301,6 @@ This doesn't support the chanserv auth method"
   :commands which-key-mode
   :init
   (setq which-key-show-prefix 'bottom
-        which-key-idle-delay 2
         which-key-separator " > ")
   (which-key-mode 1)
   :config
