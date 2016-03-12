@@ -68,6 +68,6 @@ background = #1e2320
 active_foreground = #1e2320
 active_background = #f0dfaf
 padding = 2
-border = #f0dfaf
+border = #ffffff
 border_width = 2.0
 roundness = 0.0
