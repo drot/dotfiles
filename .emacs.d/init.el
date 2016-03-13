@@ -305,11 +305,15 @@
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
-;;; Version control
+;; Version control
 (use-package vc-hooks
   :defer t
   :config
-  (setq vc-follow-symlinks t))
+  (setq vc-ignore-dir-regexp
+        (format "\\(%s\\)\\|\\(%s\\)"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp)
+        vc-follow-symlinks t))
 
 ;; Customize interface options
 (use-package cus-edit
