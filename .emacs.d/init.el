@@ -73,13 +73,7 @@
 
 ;; Color theme
 (use-package zenburn-theme
-  :disabled t
   :ensure t)
-
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :init
-  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Disable unnecessary GUI elements
 (when (fboundp 'tool-bar-mode)
