@@ -470,7 +470,7 @@
 
 ;; Ruler mode
 (use-package ruler
-  :bind ("C-c t r" . ruler-mode))
+  :bind ("C-c t u" . ruler-mode))
 
 ;; Ediff
 (use-package ediff
@@ -1230,7 +1230,7 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t b" . rainbow-mode)
+  :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
   (add-hook 'css-mode-hook #'rainbow-mode)
