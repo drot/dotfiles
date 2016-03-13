@@ -1,18 +1,3 @@
-# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
-# pipes. 'all' adds color characters to all output. 'none' shuts colorization
-# off.
-COLOR all
-
-# Extra command line options for ls go here.
-# Basically these ones are:
-#  -F = show '/' for dirs, '*' for executables, etc.
-#  -T 0 = don't trust tab spacing when formatting ls output.
-# -b = better support for special characters
-OPTIONS -F -b -T 0
-
-# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
-EIGHTBIT 1
-
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:
 # Attribute codes:
