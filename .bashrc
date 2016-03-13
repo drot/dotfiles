@@ -43,7 +43,7 @@ BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
 # Prompt look
-export PS1="${BLUE}\w${RED}${GIT}${CYAN}${GREEN} > ${NIL}"
+export PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
 
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
