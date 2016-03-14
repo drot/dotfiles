@@ -412,6 +412,12 @@
         tramp-backup-directory-alist `((".*" . ,temporary-file-directory))
         tramp-auto-save-directory temporary-file-directory))
 
+;; SHR configuration
+(use-package shr
+  :defer t
+  :config
+  (setq shr-use-fonts nil))
+
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
