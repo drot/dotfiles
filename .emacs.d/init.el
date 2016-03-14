@@ -1197,10 +1197,10 @@ This doesn't support the chanserv auth method"
         lispy-safe-paste t)
 
   (defvar dot/lispy-minibuffer-commands '(eval-expression
-                                         pp-eval-expression
-                                         eval-expression-with-eldoc
-                                         ibuffer-do-eval
-                                         ibuffer-do-view-and-eval)
+                                          pp-eval-expression
+                                          eval-expression-with-eldoc
+                                          ibuffer-do-eval
+                                          ibuffer-do-view-and-eval)
     "Interactive commands for which Lispy should be enabled in the minibuffer.")
 
   (defun dot/lispy-minibuffer ()
