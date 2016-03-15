@@ -700,7 +700,9 @@
          ("C-c n j" . avy-goto-char-2)
          ("C-c l" . avy-goto-line)
          ("C-c j" . avy-goto-word-1)
-         ("C-c n w" . avy-goto-word-0)))
+         ("C-c n w" . avy-goto-word-0))
+  :config
+  (setq avy-background t))
 
 ;; Browse Kill Ring
 (use-package browse-kill-ring
