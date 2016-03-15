@@ -393,6 +393,8 @@
 ;; Dired-x
 (use-package dired-x
   :after dired
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window))
   :config
   (setq dired-omit-verbose nil)
   (add-hook 'dired-mode-hook #'dired-omit-mode))
