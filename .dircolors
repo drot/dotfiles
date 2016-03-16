@@ -101,6 +101,7 @@ STICKY 00;34
 .mpg 01;35
 .mpeg 01;35
 .ogv 01;35
+.webm 01;35
 
 # all of the rest
 .PL 00;36
