@@ -852,7 +852,8 @@
   :ensure t
   :bind ("C-c t n" . neotree-toggle)
   :config
-  (setq neo-create-file-auto-open t
+  (setq neo-theme 'ascii
+        neo-create-file-auto-open t
         neo-smart-open t
         neo-show-hidden-files t
         neo-auto-indent-point t))
