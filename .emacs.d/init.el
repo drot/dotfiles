@@ -679,7 +679,6 @@
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
-  :commands org-narrow-to-subtree
   :config
   (setq org-directory (expand-file-name "org" dot/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -994,9 +993,10 @@ This doesn't support the chanserv auth method"
         slime-protocol-version 'ignore
         slime-repl-history-file (expand-file-name "slime-history.eld" dot/cache-directory))
 
-  ;; Don’t reserve the Backspace key
+  ;; Fix REPL keybinding conflict with ParEdit
   (add-hook 'slime-repl-mode-hook (lambda ()
-                                    (define-key slime-repl-mode-map (kbd "DEL") nil))))
+                                    (define-key slime-repl-mode-map
+                                      (read-kbd-macro paredit-backward-delete-key) nil))))
 
 ;; SLIME Company
 (use-package slime-company
@@ -1184,37 +1184,6 @@ This doesn't support the chanserv auth method"
   :config
   (setq counsel-find-file-at-point t))
 
-;; Lispy
-(use-package lispy
-  :ensure t
-  :commands lispy-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  ielm-mode-hook
-                  scheme-mode-hook
-                  slime-repl-mode-hook
-                  geiser-repl-mode-hook))
-    (add-hook hook #'lispy-mode))
-  :config
-  (setq lispy-safe-delete t
-        lispy-safe-copy t
-        lispy-safe-paste t)
-
-  (defvar dot/lispy-minibuffer-commands '(eval-expression
-                                          pp-eval-expression
-                                          eval-expression-with-eldoc
-                                          ibuffer-do-eval
-                                          ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
-
-  (defun dot/lispy-minibuffer ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command dot/lispy-minibuffer-commands)
-        (lispy-mode 1)))
-
-  (add-hook 'minibuffer-setup-hook #'dot/lispy-minibuffer))
-
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -1230,6 +1199,33 @@ This doesn't support the chanserv auth method"
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" dot/cache-directory)))
+
+;; ParEdit
+(use-package paredit
+  :ensure t
+  :commands enable-paredit-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  ielm-mode-hook
+                  scheme-mode-hook
+                  slime-repl-mode-hook
+                  geiser-repl-mode-hook))
+    (add-hook hook #'enable-paredit-mode))
+  :config
+  (defvar dot/paredit-minibuffer-commands '(eval-expression
+                                            pp-eval-expression
+                                            eval-expression-with-eldoc
+                                            ibuffer-do-eval
+                                            ibuffer-do-view-and-eval)
+    "Interactive commands for which ParEdit should be enabled in the minibuffer.")
+
+  (defun dot/paredit-minibuffer ()
+    "Enable ParEdit during lisp-related minibuffer commands."
+    (if (memq this-command dot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
+
+  (add-hook 'minibuffer-setup-hook #'dot/paredit-minibuffer))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
