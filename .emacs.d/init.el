@@ -886,7 +886,7 @@
   (setq rcirc-default-user-name "drot"
         rcirc-reconnect-delay 10)
 
-  ;; Connect to thespecified servers and channels
+  ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
         '(("adams.freenode.net"
            :port 6697
