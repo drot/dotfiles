@@ -1203,6 +1203,7 @@ This doesn't support the chanserv auth method"
 ;; ParEdit
 (use-package paredit
   :ensure t
+  :diminish (paredit-mode . "PE")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
