@@ -1060,6 +1060,7 @@ This doesn't support the chanserv auth method"
   (beacon-mode 1)
   :config
   (setq beacon-color "#f0dfaf")
+  
   (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode)
   (add-to-list 'beacon-dont-blink-major-modes #'eshell-mode)
