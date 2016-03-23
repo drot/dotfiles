@@ -480,6 +480,10 @@
 (use-package files
   :bind ("C-c f z" . revert-buffer))
 
+;; Linum Mode
+(use-package linum
+  :bind ("C-c t l" . linum-mode))
+
 ;; Ruler mode
 (use-package ruler
   :bind ("C-c t u" . ruler-mode))
@@ -857,11 +861,6 @@
         neo-smart-open t
         neo-show-hidden-files t
         neo-auto-indent-point t))
-
-;; Nlinum Mode
-(use-package nlinum
-  :ensure t
-  :bind ("C-c t l" . nlinum-mode))
 
 ;; Paradox
 (use-package paradox
