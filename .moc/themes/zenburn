@@ -1,0 +1,37 @@
+# MOC Zenburn theme by drot
+
+background = default default
+frame = green default
+window_title = yellow default
+directory = blue default bold
+selected_directory = default green bold
+playlist = white blue bold
+selected_playlist = default green bold
+file = white default
+selected_file = default green
+marked_file = yellow default bold
+marked_selected_file = yellow green bold
+info = blue default bold
+selected_info = black yellow bold
+marked_info = black yellow bold
+marked_selected_info = black yellow bold
+status = yellow default bold
+title = white default bold
+state = yellow default bold
+current_time = blue default bold
+time_left = yellow default bold
+total_time = white default bold
+time_total_frames = blue default
+sound_parameters = white default bold
+legend = yellow default
+disabled = white default
+enabled = blue default bold
+empty_mixer_bar = default green
+filled_mixer_bar = default yellow
+empty_time_bar = default green
+filled_time_bar = default yellow
+entry = white default
+entry_title = blue default
+error = red default bold
+message = green default bold
+plist_time = white default
