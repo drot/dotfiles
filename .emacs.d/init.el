@@ -736,6 +736,17 @@
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
 
+;; Elfeed
+(use-package elfeed
+  :ensure t
+  :bind ("C-c a f" . elfeed)
+  :config
+  (setq elfeed-feeds '("http://hnrss.org/newest?points=100"
+                       "https://www.reddit.com/r/emacs/.rss"
+                       "https://www.reddit.com/r/linux/.rss")
+        elfeed-db-directory (expand-file-name "elfeed" dot/emacs-directory)
+        elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
+
 ;; Expand region
 (use-package expand-region
   :ensure t
