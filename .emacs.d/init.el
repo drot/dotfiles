@@ -741,7 +741,7 @@
   :ensure t
   :bind ("C-c a f" . elfeed)
   :config
-  (setq elfeed-feeds '(("http://hnrss.org/newest?points=100" hnews)
+  (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
                        ("https://www.reddit.com/r/linux/.rss" linux))
         elfeed-db-directory (expand-file-name "elfeed" dot/emacs-directory)
