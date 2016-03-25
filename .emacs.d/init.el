@@ -594,8 +594,7 @@
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
-  (setq eshell-directory-name (expand-file-name "eshell" dot/cache-directory)
-        eshell-hist-ignoredups t))
+  (setq eshell-hist-ignoredups t))
 
 ;; Eshell smart display
 (use-package em-smart
