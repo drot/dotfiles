@@ -741,9 +741,9 @@
   :ensure t
   :bind ("C-c a f" . elfeed)
   :config
-  (setq elfeed-feeds '("http://hnrss.org/newest?points=100"
-                       "https://www.reddit.com/r/emacs/.rss"
-                       "https://www.reddit.com/r/linux/.rss")
+  (setq elfeed-feeds '(("http://hnrss.org/newest?points=100" hnews)
+                       ("https://www.reddit.com/r/emacs/.rss" emacs)
+                       ("https://www.reddit.com/r/linux/.rss" linux))
         elfeed-db-directory (expand-file-name "elfeed" dot/emacs-directory)
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
