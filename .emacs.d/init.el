@@ -506,7 +506,7 @@
 
 ;; Xwidget WebKit browser
 (use-package xwidget
-  :bind ("C-c a b" . xwidget-webkit-browse-url))
+  :bind ("C-c n x" . xwidget-webkit-browse-url))
 
 ;; Wind Move
 (use-package windmove
