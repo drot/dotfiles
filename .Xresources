@@ -86,6 +86,7 @@ XTerm*saveLines: 65535
 ! Release Meta binding
 XTerm*fullscreen: never
 XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
 
 ! Scrolling
 XTerm*ScrollBar: false
