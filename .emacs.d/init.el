@@ -399,6 +399,13 @@
   (setq dired-omit-verbose nil)
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
+;; Dired Async
+(use-package dired-async
+  :ensure async
+  :after dired-x
+  :config
+  (dired-async-mode 1))
+
 ;; Find file at point
 (use-package ffap
   :defer t
