@@ -334,7 +334,7 @@
 
   (let ((ipython (executable-find "ipython")))
     (when ipython
-      (setq python-shell-interpreter ipython))))
+      (setq python-shell-interpreter "ipython"))))
 
 ;; CC mode configuration
 (use-package cc-mode
