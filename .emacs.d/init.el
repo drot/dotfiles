@@ -1034,6 +1034,11 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
+;; YAML mode
+(use-package yaml-mode
+  :ensure t
+  :defer t)
+
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
