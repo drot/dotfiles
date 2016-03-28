@@ -597,7 +597,15 @@
   (setq bookmark-default-file (expand-file-name "bookmarks" dot/cache-directory)
         bookmark-save-flag 1))
 
-;; Eshell save directory
+;; Speedbar configuration
+(use-package speedbar
+  :bind (("C-c f s" . speedbar)
+         :map speedbar-mode-map
+         ("a" . speedbar-toggle-show-all-files))
+  :config
+  (setq speedbar-use-images nil))
+
+;; Eshell configuration
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
