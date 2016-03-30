@@ -26,7 +26,7 @@ BLK 01;33;40
 # character device driver
 CHR 01;35;40
 
-ORPHAN 01;30
+ORPHAN 01;31
 EXEC 01;31
 
 # dir that is sticky and other-writable (+t,o+w)
