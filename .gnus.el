@@ -2,6 +2,10 @@
 (setq gnus-select-method '(nnnil)
       gnus-secondary-select-methods '((nntp "news.gwene.org")))
 
+;; Don’t save or load a newsrc file
+(setq gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil)
+
 ;; Article fetching options
 (setq gnus-article-browse-delete-temp t
       gnus-treat-strip-trailing-blank-lines 'last
@@ -33,10 +37,13 @@
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
       gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]"
-      gnus-sum-thread-tree-false-root "o "
-      gnus-sum-thread-tree-indent " "
-      gnus-sum-thread-tree-leaf-with-other "+-> "
-      gnus-sum-thread-tree-root ""
-      gnus-sum-thread-tree-single-leaf "`-> "
-      gnus-sum-thread-tree-vertical "| "
       smiley-style 'medium)
+
+;; Display of message threading
+(setq gnus-sum-thread-tree-root ""
+      gnus-sum-thread-tree-false-root ""
+      gnus-sum-thread-tree-single-indent ""
+      gnus-sum-thread-tree-indent "    "
+      gnus-sum-thread-tree-vertical "│   "
+      gnus-sum-thread-tree-leaf-with-other "├──>"
+      gnus-sum-thread-tree-single-leaf "└──>")
