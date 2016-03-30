@@ -18,12 +18,12 @@ fi
 # Colored man pages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
-        LESS_TERMCAP_md=$'\E[01;32;74m' \
+        LESS_TERMCAP_md=$'\E[01;32m' \
         LESS_TERMCAP_me=$'\E[0m' \
         LESS_TERMCAP_se=$'\E[0m' \
         LESS_TERMCAP_so=$'\E[1;37;42m' \
         LESS_TERMCAP_ue=$'\E[0m' \
-        LESS_TERMCAP_us=$'\E[04;34;146m' \
+        LESS_TERMCAP_us=$'\E[04;34m' \
         man "$@"
 }
 
@@ -38,7 +38,7 @@ GIT="\$(__git_ps1 \" (%s)\")"
 
 # Prompt colors
 RED='\[\033[1;31m\]'
-GREEN='\[\033[1;32m\]'
+GREEN='\[\033[1;33m\]'
 BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
