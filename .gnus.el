@@ -1,6 +1,10 @@
-;; Configure news server
-(setq gnus-select-method '(nnnil)
-      gnus-secondary-select-methods '((nntp "news.gwene.org")))
+;; Configure mail and news server
+(setq gnus-select-method '(nnimap "cock"
+                                  (nnimap-address "mail.cock.li")
+                                  (nnimap-server-port 993)
+                                  (nnimap-stream ssl)))
+
+(add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
 
 ;; Don’t save or load a newsrc file
 (setq gnus-save-newsrc-file nil

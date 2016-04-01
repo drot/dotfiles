@@ -8,7 +8,7 @@ export VISUAL=${EDITOR}
 export PAGER=less
 export BROWSER=firefox
 export NAME="Davor Rotim"
-export EMAIL="augerbow@gmail.com"
+export EMAIL="drot@firemail.cc"
 export PATH=$HOME/.local/bin:$PATH
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

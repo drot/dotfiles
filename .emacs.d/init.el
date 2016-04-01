@@ -378,7 +378,7 @@
 (use-package smtpmail
   :defer t
   :config
-  (setq smtpmail-smtp-server "smtp.gmail.com"
+  (setq smtpmail-smtp-server "mail.cock.li"
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
