@@ -1050,7 +1050,7 @@ This doesn't support the chanserv auth method"
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
-  :bind ([remap zap-to-char]. zop-to-char))
+  :bind ([remap zap-to-char] . zop-to-char))
 
 ;; Ace-link
 (use-package ace-link
