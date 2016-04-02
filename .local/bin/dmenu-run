@@ -10,7 +10,7 @@ SELECTED_BACKGROUND="#f0dfaf"
 SELECTED_FOREGROUND="#1e2320"
 
 # Run dmenu:
-dmenu_run -i -p "Run:" \
+dmenu_run -i -p ">" \
           -nb $NORMAL_BACKGROUND \
           -nf $NORMAL_FOREGROUND \
           -sb $SELECTED_BACKGROUND \
