@@ -9,6 +9,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
+local menubar = require("menubar")
 -- Vicious widget library
 local vicious = require("vicious")
 -- Scratchpad manager
@@ -100,18 +101,18 @@ myworkmenu = {
 }
 
 mywebmenu = {
-   { "Conkeror", "conkeror", beautiful.menu_browser },
+   { "Firefox", "firefox", beautiful.menu_browser },
    { "Skype", "skype", beautiful.menu_skype }
 }
 
 myofficemenu = {
    { "Writer", "lowriter", beautiful.menu_writer },
    { "GIMP", "gimp", beautiful.menu_gimp },
-   { "Zathura", "zathura", beautiful.menu_zathura }
+   { "llpp", "llpp", beautiful.menu_pdf }
 }
 
 myutilmenu = {
-   { "Thunar", "thunar", beautiful.menu_fman },
+   { "PCManFM", "pcmanfm", beautiful.menu_fman },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
 }
 
@@ -134,12 +135,16 @@ mymainmenu = awful.menu({ items = {
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
--- {{{ Separator
-separator = wibox.widget.imagebox()
-separator:set_image(beautiful.widget_sep)
+-- Menubar configuration
+menubar.utils.terminal = terminal
 -- }}}
 
--- {{{ CPU usage widgets
+-- {{{ Widgets
+-- Separator
+separator = wibox.widget.imagebox()
+separator:set_image(beautiful.widget_sep)
+
+-- CPU usage widgets
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
 -- Initialize widgets
@@ -160,9 +165,8 @@ vicious.cache(vicious.widgets.cpu)
 -- Register widgets
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 2)
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
--- }}}
 
--- {{{ Memory usage widgets
+-- Memory usage widgets
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
 -- Initialize widgets
@@ -184,9 +188,8 @@ vicious.cache(vicious.widgets.mem)
 -- Register widgets
 vicious.register(memwidget, vicious.widgets.mem, "$1%", 4)
 vicious.register(membar, vicious.widgets.mem, "$1", 4)
--- }}}
 
--- {{{ CPU temperature widgets
+-- CPU temperature widgets
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
 --Initialize widgets
@@ -208,9 +211,8 @@ vicious.cache(vicious.widgets.thermal)
 -- Register widgets
 vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
 vicious.register(tempbar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
--- }}}
 
--- {{{ Disk usage widgets
+-- Disk usage widgets
 diskicon = wibox.widget.imagebox()
 diskicon:set_image(beautiful.widget_disk)
 -- Initialize widgets
@@ -240,9 +242,8 @@ vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 300)
 vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 300)
 vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 300)
 vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 300)
--- }}}
 
--- {{{ Volume widgets
+-- Volume widgets
 volicon = wibox.widget.imagebox()
 volicon:set_image(beautiful.widget_vol)
 -- Initialize widgets
@@ -264,9 +265,8 @@ vicious.cache(vicious.contrib.pulse)
 -- Register widgets
 vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, 1)
 vicious.register(volbar, vicious.contrib.pulse, "$1", 2, 1)
--- }}}
 
--- {{{ Time widget
+-- Time widget
 timeicon = wibox.widget.imagebox()
 timeicon:set_image(beautiful.widget_date)
 -- Register widget
@@ -452,15 +452,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey }, "p", function () mypromptbox[mouse.screen]:run() end),
-
-   -- Scratchpad
-   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e ncmpcpp", "center", "center", 800, 600) end),
-
-   -- Volume control
-   awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5, 1) end),
-   awful.key({ modkey }, "-", function () vicious.contrib.pulse.add(-5, 1) end),
-   awful.key({ modkey }, ".", function () vicious.contrib.pulse.toggle(1) end),
+   awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
 
    awful.key({ modkey }, "x",
       function ()
@@ -468,7 +460,18 @@ globalkeys = awful.util.table.join(
             mypromptbox[mouse.screen].widget,
             awful.util.eval, nil,
             awful.util.getdir("cache") .. "/history_eval")
-   end)
+   end),
+
+   -- Menubar
+   awful.key({ modkey }, "p", function() menubar.show() end),
+
+   -- Scratchpad
+   awful.key({ modkey }, "s", function () scratch.drop(terminal .. " -e mocp", "center", "center", 1024, 768) end),
+
+   -- Volume control
+   awful.key({ modkey }, "+", function () vicious.contrib.pulse.add(5, 1) end),
+   awful.key({ modkey }, "-", function () vicious.contrib.pulse.add(-5, 1) end),
+   awful.key({ modkey }, ".", function () vicious.contrib.pulse.toggle(1) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -563,11 +566,11 @@ awful.rules.rules = {
    { rule = { class = "mpv" },
      properties = { floating = true } },
    -- Set applications to always map on specified tags
-   { rule = { class = "Conkeror" },
+   { rule = { class = "Firefox" },
      properties = { tag = tags[1][2] } },
    { rule = { class = "Emacs" },
      properties = { tag = tags[1][3] } },
-   { rule = { class = "Zathura" },
+   { rule = { class = "llpp" },
      properties = { tag = tags[1][4] } },
    { rule = { class = "libreoffice" },
      properties = { tag = tags[1][4] } },
@@ -575,7 +578,7 @@ awful.rules.rules = {
      properties = { tag = tags[1][4] } },
    { rule = { class = "Pavucontrol" },
      properties = { tag = tags[1][4] } },
-   { rule = { class = "Thunar" },
+   { rule = { class = "Pcmanfm" },
      properties = { tag = tags[1][5] } },
 }
 -- }}}
@@ -584,7 +587,6 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
                          if not startup then
-
                             -- Put windows in a smart way, only if they do not set an initial position.
                             if not c.size_hints.user_position and not c.size_hints.program_position then
                                awful.placement.no_overlap(c)
