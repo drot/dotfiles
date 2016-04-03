@@ -715,14 +715,14 @@
 ;; Avy
 (use-package avy
   :ensure t
-  :bind (("C-c s a" . avy-isearch)
-         ("C-c n c" . avy-goto-char)
+  :bind (("C-c n c" . avy-goto-char)
          ("C-c n j" . avy-goto-char-2)
+         ("C-c n w" . avy-goto-word-0)
          ("C-c l" . avy-goto-line)
-         ("C-c j" . avy-goto-word-1)
-         ("C-c n w" . avy-goto-word-0))
+         ("C-c j" . avy-goto-word-1))
   :config
-  (setq avy-background t))
+  (setq avy-background t)
+  (avy-setup-default))
 
 ;; Browse Kill Ring
 (use-package browse-kill-ring
