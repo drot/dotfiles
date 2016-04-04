@@ -16,8 +16,7 @@ local vicious = require("vicious")
 local scratch = require("scratch")
 
 -- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+-- Check if awesome encountered an error during startup
 if awesome.startup_errors then
    naughty.notify({ preset = naughty.config.presets.critical,
                     title = "There were errors during startup!",
@@ -41,7 +40,7 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
+-- Themes define colors, icons, and wallpapers
 themes_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init(themes_dir .. "zenburn/theme.lua")
 
@@ -50,10 +49,6 @@ terminal = "termite"
 editor = os.getenv("EDITOR")
 
 -- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -144,7 +139,7 @@ menubar.utils.terminal = terminal
 separator = wibox.widget.imagebox()
 separator:set_image(beautiful.widget_sep)
 
--- CPU usage widgets
+-- {{{ CPU usage widgets
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
 -- Initialize widgets
@@ -165,8 +160,9 @@ vicious.cache(vicious.widgets.cpu)
 -- Register widgets
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 2)
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
+-- }}}
 
--- Memory usage widgets
+-- {{{ Memory usage widgets
 memicon = wibox.widget.imagebox()
 memicon:set_image(beautiful.widget_mem)
 -- Initialize widgets
@@ -188,8 +184,9 @@ vicious.cache(vicious.widgets.mem)
 -- Register widgets
 vicious.register(memwidget, vicious.widgets.mem, "$1%", 4)
 vicious.register(membar, vicious.widgets.mem, "$1", 4)
+-- }}}
 
--- CPU temperature widgets
+-- {{{ CPU temperature widgets
 tempicon = wibox.widget.imagebox()
 tempicon:set_image(beautiful.widget_temp)
 --Initialize widgets
@@ -211,8 +208,9 @@ vicious.cache(vicious.widgets.thermal)
 -- Register widgets
 vicious.register(tempwidget, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
 vicious.register(tempbar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
+-- }}}
 
--- Disk usage widgets
+-- {{{ Disk usage widgets
 diskicon = wibox.widget.imagebox()
 diskicon:set_image(beautiful.widget_disk)
 -- Initialize widgets
@@ -242,8 +240,9 @@ vicious.register(dperc.r, vicious.widgets.fs, "${/ used_p}%", 300)
 vicious.register(dperc.h, vicious.widgets.fs, "${/home used_p}%", 300)
 vicious.register(dusage.r, vicious.widgets.fs, "${/ used_p}", 300)
 vicious.register(dusage.h, vicious.widgets.fs, "${/home used_p}", 300)
+-- }}}
 
--- Volume widgets
+-- {{{ Volume widgets
 volicon = wibox.widget.imagebox()
 volicon:set_image(beautiful.widget_vol)
 -- Initialize widgets
@@ -265,12 +264,14 @@ vicious.cache(vicious.contrib.pulse)
 -- Register widgets
 vicious.register(volwidget, vicious.contrib.pulse, "$1%", 2, 1)
 vicious.register(volbar, vicious.contrib.pulse, "$1", 2, 1)
+-- }}}
 
--- Time widget
+-- {{{ Time widget
 timeicon = wibox.widget.imagebox()
 timeicon:set_image(beautiful.widget_date)
 -- Register widget
 timewidget = awful.widget.textclock("%d-%m/%R")
+-- }}}
 -- }}}
 
 -- {{{ Wibox
@@ -495,8 +496,6 @@ clientkeys = awful.util.table.join(
 )
 
 -- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
    globalkeys = awful.util.table.join(globalkeys,
                                       -- View tag only.

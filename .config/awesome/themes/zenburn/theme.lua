@@ -108,5 +108,6 @@ theme.menu_quit = theme.icons_dir .. "menu/quit.png"
 -- {{{ Awesome icon
 theme.awesome_icon = theme.icons_dir .. "awesome.png"
 -- }}}
+-- }}}
 
 return theme
