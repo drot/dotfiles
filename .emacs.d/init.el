@@ -1072,7 +1072,10 @@ This doesn't support the chanserv auth method"
   :ensure t
   :diminish (anzu-mode . "AZ")
   :bind (("C-c s q" . anzu-query-replace)
-         ("C-c s r" . anzu-query-replace-regexp))
+         ("C-c s r" . anzu-query-replace-regexp)
+         :map isearch-mode-map
+         ("M-%" . anzu-isearch-query-replace)
+         ("C-M-%" . anzu-isearch-query-replace-regexp))
   :commands global-anzu-mode
   :init
   (global-anzu-mode 1)
