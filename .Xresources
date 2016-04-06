@@ -3,7 +3,7 @@ Xcursor.theme: Adwaita
 
 ! Emacs
 Emacs.font: Terminus-10
-Emacs.background: #3F3F3F
+Emacs.background: #3f3f3f
 Emacs.menuBar: off
 Emacs.toolBar: off
 Emacs.verticalScrollBars: off
@@ -38,42 +38,42 @@ URxvt*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
 URxvt*boldFont: -*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*
 
 ! Colors
-URxvt*background: #3F3F3F
-URxvt*foreground: #DCDCCC
+URxvt*background: #3f3f3f
+URxvt*foreground: #dcdccc
 
-URxvt*cursorColor: #DCDCCC
-URxvt*cursorColor2: #3F3F3F
+URxvt*cursorColor: #dcdccc
+URxvt*cursorColor2: #3f3f3f
 
-URxvt*colorUL: #8CD0D3
-URxvt*underlineColor: #F0DFAF
+URxvt*colorUL: #8cd0d3
+URxvt*underlineColor: #f0dfaf
 
-URxvt*colorBD: #E0CF9F
+URxvt*colorBD: #e0cf9f
 URxvt*colorIT: #656555
 
 ! Black Dark/Light
-URxvt*color0: #3F3F3F
-URxvt*color8: #5F5F5F
+URxvt*color0: #3f3f3f
+URxvt*color8: #5f5f5f
 ! Red Dark/Light
-URxvt*color1: #BC8383
-URxvt*color9: #CC9393
+URxvt*color1: #bc8383
+URxvt*color9: #cc9393
 ! Green Dark/Light
-URxvt*color2: #5F7F5F
-URxvt*color10: #7F9F7F
+URxvt*color2: #5f7f5f
+URxvt*color10: #7f9f7f
 ! Yellow Dark/Light
-URxvt*color3: #E0CF9F
-URxvt*color11: #F0DFAF
+URxvt*color3: #e0cf9f
+URxvt*color11: #f0dfaf
 ! Blue Dark/Light
-URxvt*color4: #7CB8BB
-URxvt*color12: #8CD0D3
+URxvt*color4: #7cb8bb
+URxvt*color12: #8cd0d3
 ! Magenta Dark/Light
-URxvt*color5: #DC8CC3
-URxvt*color13: #DC8CC3
+URxvt*color5: #dc8cc3
+URxvt*color13: #dc8cc3
 ! Cyan Dark/Light
-URxvt*color6: #93E0E3
-URxvt*color14: #93E0E3
+URxvt*color6: #93e0e3
+URxvt*color14: #93e0e3
 ! White Dark/Light
-URxvt*color7: #DCDCCC
-URxvt*color15: #FFFFFF
+URxvt*color7: #dcdccc
+URxvt*color15: #ffffff
 
 ! XTerm
 
@@ -100,40 +100,40 @@ XTerm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
 XTerm*boldFont: -*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*
 
 ! Colors
-XTerm*background: #3F3F3F
-XTerm*foreground: #DCDCCC
+XTerm*background: #3f3f3f
+XTerm*foreground: #dcdccc
 
-XTerm*cursorColor: #DCDCCC
+XTerm*cursorColor: #dcdccc
 
-XTerm*colorUL: #8CD0D3
+XTerm*colorUL: #8cd0d3
 
-XTerm*colorBD: #E0CF9F
+XTerm*colorBD: #e0cf9f
 XTerm*colorIT: #656555
 
 ! Black Dark/Light
-XTerm*color0: #3F3F3F
-XTerm*color8: #5F5F5F
+XTerm*color0: #3f3f3f
+XTerm*color8: #5f5f5f
 ! Red Dark/Light
-XTerm*color1: #BC8383
-XTerm*color9: #CC9393
+XTerm*color1: #bc8383
+XTerm*color9: #cc9393
 ! Green Dark/Light
-XTerm*color2: #5F7F5F
-XTerm*color10: #7F9F7F
+XTerm*color2: #5f7f5f
+XTerm*color10: #7f9f7f
 ! Yellow Dark/Light
-XTerm*color3: #E0CF9F
-XTerm*color11: #F0DFAF
+XTerm*color3: #e0cf9f
+XTerm*color11: #f0dfaf
 ! Blue Dark/Light
-XTerm*color4: #7CB8BB
-XTerm*color12: #8CD0D3
+XTerm*color4: #7cb8bb
+XTerm*color12: #8cd0d3
 ! Magenta Dark/Light
-XTerm*color5: #DC8CC3
-XTerm*color13: #DC8CC3
+XTerm*color5: #dc8cc3
+XTerm*color13: #dc8cc3
 ! Cyan Dark/Light
-XTerm*color6: #93E0E3
-XTerm*color14: #93E0E3
+XTerm*color6: #93e0e3
+XTerm*color14: #93e0e3
 ! White Dark/Light
-XTerm*color7: #DCDCCC
-XTerm*color15: #FFFFFF
+XTerm*color7: #dcdccc
+XTerm*color15: #ffffff
 
 ! XMessage
 Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
