@@ -63,16 +63,6 @@
 ;; Try to extract docstrings from special forms
 (setq bind-key-describe-special-forms t)
 
-;; Bug Hunter
-(use-package bug-hunter
-  :ensure t
-  :bind (("C-c f i" . bug-hunter-init-file)
-         ("C-c f h" . bug-hunter-file)))
-
-;; Color theme
-(use-package zenburn-theme
-  :ensure t)
-
 ;; Disable unnecessary GUI elements
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -80,6 +70,10 @@
   (menu-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
+
+;; Color theme
+(use-package zenburn-theme
+  :ensure t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode -1)
@@ -170,6 +164,12 @@
       kept-new-versions 2
       delete-old-versions t
       backup-by-copying t)
+
+;; Put underline below the font bottom line
+(setq x-underline-at-descent-line t)
+
+;; Draw block cursor as wide as the glyph under it
+(setq x-stretch-cursor t)
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
@@ -716,6 +716,12 @@
         browse-kill-ring-highlight-current-entry t
         browse-kill-ring-display-duplicates nil))
 
+;; Bug Hunter
+(use-package bug-hunter
+  :ensure t
+  :bind (("C-c f i" . bug-hunter-init-file)
+         ("C-c f h" . bug-hunter-file)))
+
 ;; Dash
 (use-package dash
   :ensure t
@@ -1194,7 +1200,7 @@ This doesn't support the chanserv auth method"
   :diminish (counsel-mode . "CL")
   :bind (("C-c f g" . counsel-git)
          ("C-c s g" . counsel-git-grep)
-         ("C-c s p" . counsel-grep)
+         ("C-c s r" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
   :init
