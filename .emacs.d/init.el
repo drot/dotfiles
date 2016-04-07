@@ -59,8 +59,6 @@
 ;; Load use-package
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
 
 ;; Try to extract docstrings from special forms
 (setq bind-key-describe-special-forms t)
@@ -558,7 +556,7 @@
 
 ;; Comment region
 (use-package newcomment
-  :bind (("C-c c k" . comment-region)
+  :bind (("C-c c r" . comment-region)
          ("C-c c u" . uncomment-region)))
 
 ;; Replace dabbrev-expand with hippie-expand
@@ -646,7 +644,7 @@
 ;; Compilation configuration
 (use-package compile
   :bind (("C-c c c" . compile)
-         ("C-c c r" . recompile))
+         ("C-c c g" . recompile))
   :config
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
@@ -1071,11 +1069,11 @@ This doesn't support the chanserv auth method"
 (use-package anzu
   :ensure t
   :diminish (anzu-mode . "AZ")
-  :bind (("C-c s q" . anzu-query-replace)
-         ("C-c s r" . anzu-query-replace-regexp)
+  :bind (([remap query-replace] . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
-         ("M-%" . anzu-isearch-query-replace)
-         ("C-M-%" . anzu-isearch-query-replace-regexp))
+         ([remap isearch-query-replace] . anzu-isearch-query-replace)
+         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   :commands global-anzu-mode
   :init
   (global-anzu-mode 1)
@@ -1345,6 +1343,7 @@ This doesn't support the chanserv auth method"
   :commands which-key-mode
   :init
   (setq which-key-show-prefix 'bottom
+        which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
   (which-key-mode 1)
   :config
