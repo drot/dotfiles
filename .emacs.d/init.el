@@ -469,83 +469,11 @@
         flyspell-issue-welcome-flag nil
         flyspell-consider-dash-as-word-delimiter-flag t))
 
-;; Indent region
-(bind-key "C-c x i" #'indent-region)
-
-;; Cycle spacing
-(bind-key [remap just-one-space] #'cycle-spacing)
-
-;; Display personal bindings
-(bind-key "C-c h b" #'describe-personal-keybindings)
-
-;; Toggle debug on error
-(bind-key "C-c t d" #'toggle-debug-on-error)
-
-;; Revert buffer
-(use-package files
-  :bind ("C-c f z" . revert-buffer))
-
-;; Linum Mode
-(use-package linum
-  :bind ("C-c t l" . linum-mode))
-
-;; Ruler mode
-(use-package ruler
-  :bind ("C-c t u" . ruler-mode))
-
-;; Ediff
-(use-package ediff
-  :bind ("C-c f e" . ediff))
-
-;; Proced
-(use-package proced
-  :bind ("C-x p" . proced))
-
-;; EWW
-(use-package eww
-  :bind ("C-c a w" . eww))
-
-;; Gnus
-(use-package gnus
-  :bind ("C-c a g" . gnus))
-
-;; Xwidget WebKit browser
-(use-package xwidget
-  :bind ("C-c n x" . xwidget-webkit-browse-url))
-
-;; Wind Move
-(use-package windmove
-  :bind (("C-c w <left>" . windmove-left)
-         ("C-c w <right>" . windmove-right)
-         ("C-c w <up>" . windmove-up)
-         ("C-c w <down>" . windmove-down)))
-
-;; Find function and variable definitions
-(use-package find-func
-  :bind (("C-c h f" . find-function)
-         ("C-c h 4 f" . find-function-other-window)
-         ("C-c h k" . find-function-on-key)
-         ("C-c h v" . find-variable)
-         ("C-c h 4 v" . find-variable-other-window)
-         ("C-c h l" . find-library)))
-
-;; Whitespace mode
-(use-package whitespace
-  :diminish (whitespace-mode . "WS")
-  :bind (("C-c x w" . whitespace-cleanup)
-         ("C-c t w" . whitespace-mode)))
-
-;; Tildify mode
-(use-package tildify
-  :bind ("C-c x t" . tildify-region))
-
-;; Align
-(use-package align
-  :bind ("C-c x a" . align))
-
-;; Auto Insert
-(use-package auto-insert
-  :bind ("C-c i a" . auto-insert))
+;; Search more extensively with apropos
+(use-package apropos
+  :bind ("C-c h a" . apropos)
+  :config
+  (setq apropos-do-all t))
 
 ;; Copyright
 (use-package copyright
@@ -554,20 +482,11 @@
   (setq copyright-year-ranges t
         copyright-names-regexp (regexp-quote user-login-name)))
 
-;; Comment region
-(use-package newcomment
-  :bind (("C-c c r" . comment-region)
-         ("C-c c u" . uncomment-region)))
-
-;; Replace dabbrev-expand with hippie-expand
-(use-package hippie-exp
-  :bind ([remap dabbrev-expand] . hippie-expand))
-
-;; Search more extensively with apropos
-(use-package apropos
-  :bind ("C-c h a" . apropos)
-  :config
-  (setq apropos-do-all t))
+;; Whitespace mode
+(use-package whitespace
+  :diminish (whitespace-mode . "WS")
+  :bind (("C-c x w" . whitespace-cleanup)
+         ("C-c t w" . whitespace-mode)))
 
 ;; Regexp builder
 (use-package re-builder
@@ -702,6 +621,72 @@
         org-log-done 'time
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
+
+;; Indent region
+(bind-key "C-c x i" #'indent-region)
+
+;; Cycle spacing
+(bind-key [remap just-one-space] #'cycle-spacing)
+
+;; Display personal bindings
+(bind-key "C-c h b" #'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" #'toggle-debug-on-error)
+
+;; Revert buffer
+(bind-key "C-c f z" #'revert-buffer)
+
+;; Linum Mode
+(bind-key "C-c t l" #'linum-mode)
+
+;; Ruler mode
+(bind-key "C-c t u" #'ruler-mode)
+
+;; Ediff
+(bind-key "C-c f e" #'ediff)
+
+;; Proced
+(bind-key "C-x p" #'proced)
+
+;; EWW
+(bind-key "C-c a w" #'eww)
+
+;; Gnus
+(bind-key "C-c a g" #'gnus)
+
+;; Xwidget WebKit browser
+(bind-key "C-c n x" #'xwidget-webkit-browse-url)
+
+;; Wind Move
+(bind-key "C-c w <left>" #'windmove-left)
+(bind-key "C-c w <right>" #'windmove-right)
+(bind-key "C-c w <up>" #'windmove-up)
+(bind-key "C-c w <down>" #'windmove-down)
+
+;; Find function and variable definitions
+(bind-key "C-c h f" #'find-function)
+(bind-key "C-c h 4 f" #'find-function-other-window)
+(bind-key "C-c h k" #'find-function-on-key)
+(bind-key "C-c h v" #'find-variable)
+(bind-key "C-c h 4 v" #'find-variable-other-window)
+(bind-key "C-c h l" #'find-library)
+
+;; Tildify mode
+(bind-key "C-c x t" #'tildify-region)
+
+;; Align
+(bind-key "C-c x a" #'align)
+
+;; Auto Insert
+(bind-key "C-c i a" #'auto-insert)
+
+;; Comment region
+(bind-key "C-c c r" #'comment-region)
+(bind-key "C-c c u" #'uncomment-region)
+
+;; Replace dabbrev-expand with hippie-expand
+(bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Ace-window
 (use-package ace-window
