@@ -89,6 +89,12 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
+;; Put underline below the font bottom line
+(setq x-underline-at-descent-line t)
+
+;; Draw block cursor as wide as the glyph under it
+(setq x-stretch-cursor t)
+
 ;; Don't show startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
       inhibit-startup-screen t)
@@ -164,12 +170,6 @@
       kept-new-versions 2
       delete-old-versions t
       backup-by-copying t)
-
-;; Put underline below the font bottom line
-(setq x-underline-at-descent-line t)
-
-;; Draw block cursor as wide as the glyph under it
-(setq x-stretch-cursor t)
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
