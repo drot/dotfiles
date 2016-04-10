@@ -34,5 +34,6 @@ fi
 
 xset s off -dpms &
 dunst &
-display -size 1280x1024 -window root ~/Pictures/tile.png &
+urxvtd -q -o -f &
+sh ~/.fehbg &
 exec i3

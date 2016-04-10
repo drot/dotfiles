@@ -1,5 +1,5 @@
 # font for window titles and the status bar
-font pango:Terminus 10
+font pango:Iosevka Term Bold 11
 
 # general settings
 workspace_layout tabbed
@@ -17,7 +17,7 @@ set $right semicolon
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
