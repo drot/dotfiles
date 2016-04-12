@@ -1078,16 +1078,17 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode 1)
   :config
-  (setq beacon-color "#f0dfaf")
-
-  (add-to-list 'beacon-dont-blink-major-modes #'dired-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'rcirc-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'undo-tree-visualizer-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'eshell-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'term-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'compilation-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'comint-mode)
-  (add-to-list 'beacon-dont-blink-major-modes #'slime-repl-mode))
+  (setq beacon-color "#f0dfaf"
+        beacon-dont-blink-major-modes
+        (append beacon-dont-blink-major-modes
+                '(dired-mode
+                  rcirc-mode
+                  undo-tree-visualizer-mode
+                  eshell-mode
+                  term-mode
+                  compilation-mode
+                  comint-mode
+                  slime-repl-mode))))
 
 ;; Company mode
 (use-package company
