@@ -1156,6 +1156,22 @@ This doesn't support the chanserv auth method"
                   help-mode-hook))
     (add-hook hook #'form-feed-mode)))
 
+;; Golden Ratio
+(use-package golden-ratio
+  :ensure t
+  :diminish (golden-ratio-mode . "GR")
+  :bind ("C-c t g" . golden-ratio-mode)
+  :commands golden-ratio-mode
+  :init
+  (golden-ratio-mode 1)
+  :config
+  (setq golden-ratio-exclude-modes '("calc-mode"
+                                     "dired-mode"
+                                     "ediff-mode"))
+
+  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
+  (add-to-list 'golden-ratio-extra-commands #'ace-window))
+
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
