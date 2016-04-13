@@ -73,10 +73,7 @@
 
 ;; Color theme
 (use-package zenburn-theme
-  :disabled t
   :ensure t)
-
-(load-theme 'gotham t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode -1)
@@ -85,8 +82,8 @@
 (blink-cursor-mode -1)
 
 ;; Show column number and buffer size on the modeline
-(column-number-mode 1)
-(size-indication-mode 1)
+(column-number-mode)
+(size-indication-mode)
 
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left
@@ -126,6 +123,9 @@
 
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
+
+;; Indicate minibuffer recursion depth
+(minibuffer-depth-indicate-mode)
 
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -181,13 +181,25 @@
 ;; Diminish Auto Fill mode
 (diminish 'auto-fill-function " FL")
 
+;; Highlight current line
+(global-hl-line-mode)
+
+;; Electric pair mode
+(electric-pair-mode)
+
+;; Electric quote mode
+(electric-quote-mode)
+
+;; Undo and redo the window configuration
+(winner-mode)
+
 ;; Save minibuffer history
 (use-package savehist
   :config
   (setq savehist-file (expand-file-name "saved-history" dot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
-  (savehist-mode 1))
+  (savehist-mode))
 
 ;; Save recent files list
 (use-package recentf
@@ -200,18 +212,13 @@
         recentf-max-saved-items 100
         recentf-max-menu-items 20
         recentf-auto-cleanup 600)
-  (recentf-mode 1))
+  (recentf-mode))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (setq save-place-file (expand-file-name "saved-places" dot/cache-directory))
-  (save-place-mode 1))
-
-;; Indicate minibuffer recursion depth
-(use-package mb-depth
-  :config
-  (minibuffer-depth-indicate-mode 1))
+  (save-place-mode))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -219,13 +226,13 @@
   (setq show-paren-delay 0
         show-paren-when-point-inside-paren t
         show-paren-when-point-in-periphery t)
-  (show-paren-mode 1))
+  (show-paren-mode))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
   (setq hi-lock-auto-select-face t)
-  (global-hi-lock-mode 1))
+  (global-hi-lock-mode))
 
 ;; Abbrev Mode
 (use-package abbrev
@@ -237,37 +244,17 @@
       (quietly-read-abbrev-file))
   (setq-default abbrev-mode t))
 
-;; Electric pair mode
-(use-package elec-pair
-  :config
-  (electric-pair-mode 1))
-
-;; Electric quote mode
-(use-package electric
-  :config
-  (electric-quote-mode 1))
-
 ;; Prettify certain symbols
 (use-package prog-mode
   :config
   (setq prettify-symbols-unprettify-at-point t)
-  (global-prettify-symbols-mode 1))
+  (global-prettify-symbols-mode))
 
 ;; Which function mode
 (use-package which-func
   :config
   (setq which-func-unknown "(Top Level)")
-  (which-function-mode 1))
-
-;; Highlight current line
-(use-package hl-line
-  :config
-  (global-hl-line-mode 1))
-
-;; Undo and redo the window configuration
-(use-package winner
-  :config
-  (winner-mode 1))
+  (which-function-mode))
 
 ;; Allow scrolling while Isearch is active
 (use-package "isearch"
@@ -403,7 +390,7 @@
   :ensure async
   :after dired-x
   :config
-  (dired-async-mode 1))
+  (dired-async-mode))
 
 ;; Find file at point
 (use-package ffap
@@ -1069,7 +1056,7 @@ This doesn't support the chanserv auth method"
          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   :commands global-anzu-mode
   :init
-  (global-anzu-mode 1)
+  (global-anzu-mode)
   :config
   (setq anzu-search-threshold 1000
         anzu-replace-threshold 50
@@ -1080,7 +1067,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands beacon-mode
   :init
-  (beacon-mode 1)
+  (beacon-mode)
   :config
   (setq beacon-color "#f0dfaf"
         beacon-dont-blink-major-modes
@@ -1132,17 +1119,17 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
-  (global-diff-hl-mode 1)
+  (global-diff-hl-mode)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (unless (display-graphic-p)
-    (diff-hl-margin-mode 1)))
+    (diff-hl-margin-mode)))
 
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
   :commands eyebrowse-mode
   :init
-  (eyebrowse-mode 1)
+  (eyebrowse-mode)
   :config
   (setq eyebrowse-wrap-around t
         eyebrowse-switch-back-and-forth t))
@@ -1164,10 +1151,19 @@ This doesn't support the chanserv auth method"
 (use-package golden-ratio
   :ensure t
   :diminish (golden-ratio-mode . "GR")
-  :bind ("C-c t g" . golden-ratio-mode)
-  :commands golden-ratio-mode
+  :bind ("C-c t g" . drot/toggle-golden-ratio)
+  :commands (drot/toggle-golden-ratio golden-ratio-mode)
   :init
-  (golden-ratio-mode 1)
+  (defun drot/toggle-golden-ratio ()
+    (interactive)
+    (if (bound-and-true-p golden-ratio-mode)
+        (progn
+          (golden-ratio-mode -1)
+          (balance-windows))
+      (golden-ratio-mode)
+      (golden-ratio)))
+
+  (golden-ratio-mode)
   :config
   (setq golden-ratio-exclude-modes '("calc-mode"
                                      "dired-mode"
@@ -1217,7 +1213,7 @@ This doesn't support the chanserv auth method"
          ("C-c t c" . ivy-resume))
   :commands ivy-mode
   :init
-  (ivy-mode 1)
+  (ivy-mode)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         ivy-initial-inputs-alist nil
@@ -1237,7 +1233,7 @@ This doesn't support the chanserv auth method"
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
   :init
-  (counsel-mode 1)
+  (counsel-mode)
   :config
   (setq counsel-find-file-at-point t))
 
@@ -1268,7 +1264,7 @@ This doesn't support the chanserv auth method"
   (defun dot/lispy-minibuffer ()
     "Enable Lispy during lisp-related minibuffer commands."
     (if (memq this-command dot/lispy-minibuffer-commands)
-        (lispy-mode 1)))
+        (lispy-mode)))
 
   (add-hook 'minibuffer-setup-hook #'dot/lispy-minibuffer))
 
@@ -1340,7 +1336,7 @@ This doesn't support the chanserv auth method"
   :diminish (undo-tree-mode . "UT")
   :commands global-undo-tree-mode
   :init
-  (global-undo-tree-mode 1)
+  (global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist backup-directory-alist
         undo-tree-auto-save-history t))
@@ -1358,7 +1354,7 @@ This doesn't support the chanserv auth method"
   :diminish (volatile-highlights-mode . "VH")
   :commands volatile-highlights-mode
   :init
-  (volatile-highlights-mode 1))
+  (volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
@@ -1369,7 +1365,7 @@ This doesn't support the chanserv auth method"
   (setq which-key-show-prefix 'bottom
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
-  (which-key-mode 1)
+  (which-key-mode)
   :config
   (which-key-declare-prefixes
     "C-x a" "abbrev"
@@ -1402,7 +1398,7 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (setq yas-verbosity 1)
-  (yas-global-mode 1))
+  (yas-global-mode))
 
 ;; Load changes from the customize interface
 (setq custom-file dot/custom-file)
