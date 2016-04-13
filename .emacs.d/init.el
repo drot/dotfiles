@@ -1383,6 +1383,7 @@ This doesn't support the chanserv auth method"
   (setq which-key-show-prefix 'bottom
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
+
   (which-key-mode)
   :config
   (which-key-declare-prefixes
