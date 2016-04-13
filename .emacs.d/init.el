@@ -49,6 +49,7 @@
 
 ;; Activate packages and add MELPA
 (package-initialize)
+
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;; Bootstrap use-package
