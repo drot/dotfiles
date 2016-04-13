@@ -83,7 +83,7 @@
 ;; Disable cursor blinking
 (blink-cursor-mode -1)
 
-;; Show column number and buffer size on the modeline
+;; Show column number and buffer size on the mode line
 (column-number-mode)
 
 (size-indication-mode)
