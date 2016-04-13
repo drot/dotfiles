@@ -66,8 +66,10 @@
 ;; Disable unnecessary GUI elements
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
+
 (when (fboundp 'menu-bar-mode)
   (menu-bar-mode -1))
+
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
@@ -83,6 +85,7 @@
 
 ;; Show column number and buffer size on the modeline
 (column-number-mode)
+
 (size-indication-mode)
 
 ;; Indicate buffer boundaries and empty lines
@@ -199,6 +202,7 @@
   (setq savehist-file (expand-file-name "saved-history" dot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
+
   (savehist-mode))
 
 ;; Save recent files list
@@ -212,12 +216,14 @@
         recentf-max-saved-items 100
         recentf-max-menu-items 20
         recentf-auto-cleanup 600)
+
   (recentf-mode))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (setq save-place-file (expand-file-name "saved-places" dot/cache-directory))
+
   (save-place-mode))
 
 ;; Highlight matching parentheses
@@ -226,12 +232,14 @@
   (setq show-paren-delay 0
         show-paren-when-point-inside-paren t
         show-paren-when-point-in-periphery t)
+
   (show-paren-mode))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
   (setq hi-lock-auto-select-face t)
+
   (global-hi-lock-mode))
 
 ;; Abbrev Mode
@@ -240,20 +248,24 @@
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" dot/cache-directory)
         save-abbrevs t)
+
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
+
   (setq-default abbrev-mode t))
 
 ;; Prettify certain symbols
 (use-package prog-mode
   :config
   (setq prettify-symbols-unprettify-at-point t)
+
   (global-prettify-symbols-mode))
 
 ;; Which function mode
 (use-package which-func
   :config
   (setq which-func-unknown "(Top Level)")
+
   (which-function-mode))
 
 ;; Allow scrolling while Isearch is active
@@ -330,6 +342,7 @@
         c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
+
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; NXML mode configuration
@@ -383,6 +396,7 @@
          ("C-x 4 C-j" . dired-jump-other-window))
   :config
   (setq dired-omit-verbose nil)
+
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 ;; Dired Async
@@ -694,6 +708,7 @@
          ("C-c j" . avy-goto-word-1))
   :config
   (setq avy-background t)
+
   (avy-setup-default))
 
 ;; Browse Kill Ring
@@ -1006,6 +1021,7 @@ This doesn't support the chanserv auth method"
   :after slime
   :config
   (setq slime-company-completion 'fuzzy)
+
   (slime-setup '(slime-fancy slime-company)))
 
 ;; Smex
@@ -1120,7 +1136,9 @@ This doesn't support the chanserv auth method"
   :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
   :init
   (global-diff-hl-mode)
+
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+
   (unless (display-graphic-p)
     (diff-hl-margin-mode)))
 
@@ -1151,10 +1169,10 @@ This doesn't support the chanserv auth method"
 (use-package golden-ratio
   :ensure t
   :diminish (golden-ratio-mode . "GR")
-  :bind ("C-c t g" . drot/toggle-golden-ratio)
-  :commands (drot/toggle-golden-ratio golden-ratio-mode)
+  :bind ("C-c t g" . dot/toggle-golden-ratio)
+  :commands (dot/toggle-golden-ratio golden-ratio-mode)
   :init
-  (defun drot/toggle-golden-ratio ()
+  (defun dot/toggle-golden-ratio ()
     (interactive)
     (if (bound-and-true-p golden-ratio-mode)
         (progn
@@ -1398,10 +1416,12 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (setq yas-verbosity 1)
+
   (yas-global-mode))
 
 ;; Load changes from the customize interface
 (setq custom-file dot/custom-file)
+
 (load dot/custom-file 'noerror 'nomessage)
 
 ;; Reset garbage collection threshold
