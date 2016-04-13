@@ -73,7 +73,10 @@
 
 ;; Color theme
 (use-package zenburn-theme
+  :disabled t
   :ensure t)
+
+(load-theme 'gotham t)
 
 ;; Show tooltips in the echo area
 (tooltip-mode -1)
@@ -699,6 +702,7 @@
   :bind (("C-c n c" . avy-goto-char)
          ("C-c n j" . avy-goto-char-2)
          ("C-c n w" . avy-goto-word-0)
+         ("C-c n SPC" . avy-pop-mark)
          ("C-c l" . avy-goto-line)
          ("C-c j" . avy-goto-word-1))
   :config
@@ -1167,10 +1171,23 @@ This doesn't support the chanserv auth method"
   :config
   (setq golden-ratio-exclude-modes '("calc-mode"
                                      "dired-mode"
-                                     "ediff-mode"))
+                                     "ediff-mode"
+                                     "calendar-mode"
+                                     "gnus-group-mode"
+                                     "gnus-topic-mode"
+                                     "gnus-summary-mode"
+                                     "gnus-article-mode")
+        golden-ratio-extra-commands
+        (append golden-ratio-extra-commands
+                '(ace-window
+                  avy-goto-word-0
+                  avy-goto-word-1
+                  avy-goto-char
+                  avy-goto-char-2
+                  avy-pop-mark
+                  avy-goto-line)))
 
-  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
-  (add-to-list 'golden-ratio-extra-commands #'ace-window))
+  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*"))
 
 ;; Highlight Numbers
 (use-package highlight-numbers
