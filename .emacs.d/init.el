@@ -31,14 +31,14 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Set some variables
-(defvar dot/emacs-directory (file-name-directory load-file-name)
+(defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
 
-(defvar dot/cache-directory (expand-file-name "cache" dot/emacs-directory)
+(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
   "This directory houses all cache files.")
-(make-directory dot/cache-directory t)
+(make-directory drot/cache-directory t)
 
-(defvar dot/custom-file (expand-file-name "custom.el" dot/emacs-directory)
+(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
   "Store changes from the customize interface in the selected file.")
 
 ;; Prefer newest version of a file
@@ -170,9 +170,9 @@
       kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,dot/cache-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" dot/cache-directory)
-      backup-directory-alist `((".*" . ,dot/cache-directory))
+(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
+      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
+      backup-directory-alist `((".*" . ,drot/cache-directory))
       version-control t
       kept-new-versions 2
       delete-old-versions t
@@ -200,7 +200,7 @@
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (setq savehist-file (expand-file-name "saved-history" dot/cache-directory)
+  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 
@@ -209,7 +209,7 @@
 ;; Save recent files list
 (use-package recentf
   :config
-  (setq recentf-save-file (expand-file-name "recent-files" dot/cache-directory)
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
         recentf-exclude '("/\\.git/.*\\'"
                           "/elpa/.*\\'"
                           "/cache/.*\\'"
@@ -223,7 +223,7 @@
 ;; Remember point position in files
 (use-package saveplace
   :config
-  (setq save-place-file (expand-file-name "saved-places" dot/cache-directory))
+  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
 
   (save-place-mode))
 
@@ -247,7 +247,7 @@
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
   :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" dot/cache-directory)
+  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
 
   (if (file-exists-p abbrev-file-name)
@@ -418,7 +418,7 @@
   :defer t
   :config
   (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (expand-file-name "tramp" dot/cache-directory)
+        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
         tramp-backup-directory-alist `((".*" . ,temporary-file-directory))
         tramp-auto-save-directory temporary-file-directory))
 
@@ -514,7 +514,7 @@
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" dot/cache-directory)
+  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
         bookmark-save-flag 1))
 
 ;; Speedbar configuration
@@ -571,14 +571,14 @@
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
 
-  (defun dot/colorize-compilation-buffer ()
+  (defun drot/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
     (when (eq major-mode 'compilation-mode)
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
-  (add-hook 'compilation-filter-hook #'dot/colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; Colorize ANSI escape sequences
 (use-package ansi-color
@@ -619,7 +619,7 @@
          ("C-c o l" . org-store-link))
   :commands org-narrow-to-subtree
   :config
-  (setq org-directory (expand-file-name "org" dot/emacs-directory)
+  (setq org-directory (expand-file-name "org" drot/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-log-done 'time
         org-src-fontify-natively t
@@ -753,7 +753,7 @@
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
                        ("https://www.reddit.com/r/linux/.rss" linux))
-        elfeed-db-directory (expand-file-name "elfeed" dot/emacs-directory)
+        elfeed-db-directory (expand-file-name "elfeed" drot/emacs-directory)
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
 ;; Expand region
@@ -771,7 +771,7 @@
   :ensure t
   :defer t
   :config
-  (setq geiser-repl-history-filename (expand-file-name "geiser-history" dot/cache-directory)))
+  (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
 ;; JavaScript mode
 (use-package js2-mode
@@ -939,12 +939,12 @@ This doesn't support the chanserv auth method"
   (setq rcirc-log-flag t)
 
   ;; Enable additional modes and disable some offending ones
-  (defun dot/rcirc-mode-hook ()
+  (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode -1)
     (yas-minor-mode -1))
 
-  (add-hook 'rcirc-mode-hook #'dot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
@@ -1010,7 +1010,7 @@ This doesn't support the chanserv auth method"
   :config
   (setq inferior-lisp-program "sbcl"
         slime-protocol-version 'ignore
-        slime-repl-history-file (expand-file-name "slime-history.eld" dot/cache-directory))
+        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory))
 
   ;; Don’t reserve the Backspace key
   (add-hook 'slime-repl-mode-hook (lambda ()
@@ -1030,7 +1030,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t
   :config
-  (setq smex-save-file (expand-file-name "smex-items" dot/cache-directory)))
+  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
 
 ;; Systemd mode
 (use-package systemd
@@ -1129,7 +1129,7 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'after-init-hook #'company-statistics-mode)
   :config
-  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" dot/cache-directory)))
+  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
 ;; Diff-Hl
 (use-package diff-hl
@@ -1170,10 +1170,10 @@ This doesn't support the chanserv auth method"
 (use-package golden-ratio
   :ensure t
   :diminish (golden-ratio-mode . "GR")
-  :bind ("C-c t g" . dot/toggle-golden-ratio)
-  :commands (dot/toggle-golden-ratio golden-ratio-mode)
+  :bind ("C-c t g" . drot/toggle-golden-ratio)
+  :commands (drot/toggle-golden-ratio golden-ratio-mode)
   :init
-  (defun dot/toggle-golden-ratio ()
+  (defun drot/toggle-golden-ratio ()
     (interactive)
     (if (bound-and-true-p golden-ratio-mode)
         (progn
@@ -1273,19 +1273,19 @@ This doesn't support the chanserv auth method"
         lispy-safe-copy t
         lispy-safe-paste t)
 
-  (defvar dot/lispy-minibuffer-commands '(eval-expression
+  (defvar drot/lispy-minibuffer-commands '(eval-expression
                                           pp-eval-expression
                                           eval-expression-with-eldoc
                                           ibuffer-do-eval
                                           ibuffer-do-view-and-eval)
     "Interactive commands for which Lispy should be enabled in the minibuffer.")
 
-  (defun dot/lispy-minibuffer ()
+  (defun drot/lispy-minibuffer ()
     "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command dot/lispy-minibuffer-commands)
+    (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'dot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1301,7 +1301,7 @@ This doesn't support the chanserv auth method"
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region))
   :init
-  (setq mc/list-file (expand-file-name "mc-lists.el" dot/cache-directory)))
+  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -1422,9 +1422,9 @@ This doesn't support the chanserv auth method"
   (yas-global-mode))
 
 ;; Load changes from the customize interface
-(setq custom-file dot/custom-file)
+(setq custom-file drot/custom-file)
 
-(load dot/custom-file 'noerror 'nomessage)
+(load drot/custom-file 'noerror 'nomessage)
 
 ;; Reset garbage collection threshold
 (setq gc-cons-threshold 400000)
