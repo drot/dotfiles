@@ -23,6 +23,9 @@ export LESS_TERMCAP_so=$'\E[1;37;42m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;34m'
 
+# Grep options
+export GREP_COLORS="mt=01;37;42"
+
 # Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b "$HOME/.dircolors")
