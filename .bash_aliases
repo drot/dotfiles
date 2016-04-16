@@ -1,4 +1,4 @@
-#!/bin/Bash
+#!/bin/bash
 
 # Aliases
 alias ls="ls -h --group-directories-first --color=auto"
