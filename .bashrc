@@ -28,6 +28,11 @@ if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b "$HOME/.dircolors")
 fi
 
+# Load aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # Git prompt
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
     . /usr/share/git/git-prompt.sh
@@ -45,9 +50,3 @@ NIL='\[\033[00m\]'
 
 # Prompt look
 export PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
-
-# Aliases
-alias ls="ls -h --group-directories-first --color=auto"
-alias grep="grep --color=auto"
-alias eckd="emacsclient -e '(kill-emacs)'"
-alias startx="ssh-agent startx"

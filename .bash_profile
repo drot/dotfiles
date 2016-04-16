@@ -8,5 +8,5 @@ export BROWSER=firefox
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 
-# Initialize bash
+# Initialize Bash
 [[ -f ~/.bashrc ]] && . ~/.bashrc
