@@ -842,7 +842,7 @@
 ;; Macrostep
 (use-package macrostep
   :ensure t
-  :bind ("C-c e" . macrostep-expand))
+  :bind ("C-c n e" . macrostep-expand))
 
 ;; Magit
 (use-package magit
