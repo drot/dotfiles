@@ -503,12 +503,12 @@
   :config
   (setq gdb-many-windows t))
 
-;; Open URLs in Firefox
+;; Open URLs with the specified browser
 (use-package browse-url
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Bookmarks save directory
 (use-package bookmark
