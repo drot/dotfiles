@@ -794,12 +794,10 @@
   (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
   (key-chord-define-global "3u" #'undo-tree-visualize)
-  (key-chord-define-global "8w" #'avy-goto-word-1)
+  (key-chord-define-global "8w" #'avy-goto-word-or-subword-1)
   (key-chord-define-global "8c" #'avy-goto-char)
-  (key-chord-define-global "8f" #'counsel-find-file)
   (key-chord-define-global "8q" #'query-replace)
   (key-chord-define-global "8r" #'replace-string)
-  (key-chord-define-global "8x" #'counsel-M-x)
   (key-chord-define-global "8y" #'browse-kill-ring))
 
 ;; Lua mode
@@ -1210,7 +1208,6 @@ This doesn't support the chanserv auth method"
         (append golden-ratio-extra-commands
                 '(ace-window
                   avy-goto-word-0
-                  avy-goto-word-1
                   avy-goto-word-or-subword-1
                   avy-goto-char
                   avy-goto-char-2
