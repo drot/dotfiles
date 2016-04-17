@@ -1203,8 +1203,11 @@ This doesn't support the chanserv auth method"
                                      "gdb-frames-mode"
                                      "gdb-inferior-io-mode"
                                      "gdb-disassembly-mode"
-                                     "gdb-memory-mode")
-        golden-ratio-extra-commands
+                                     "gdb-memory-mode"))
+
+  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
+
+  (setq golden-ratio-extra-commands
         (append golden-ratio-extra-commands
                 '(ace-window
                   avy-goto-word-0
@@ -1212,9 +1215,7 @@ This doesn't support the chanserv auth method"
                   avy-goto-char
                   avy-goto-char-2
                   avy-pop-mark
-                  avy-goto-line)))
-
-  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*"))
+                  avy-goto-line))))
 
 ;; Highlight Numbers
 (use-package highlight-numbers
