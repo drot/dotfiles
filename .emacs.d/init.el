@@ -461,12 +461,16 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FS")
-  :bind ("C-c x f" . flyspell-buffer)
+  :bind (("C-c l f" . flyspell-buffer)
+         :map flyspell-mode-map
+         ("C-c x c" . flyspell-correct-word-before-point))
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
+  (unbind-key "C-c $" flyspell-mode-map)
+
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil
@@ -842,7 +846,7 @@
 ;; Macrostep
 (use-package macrostep
   :ensure t
-  :bind ("C-c n e" . macrostep-expand))
+  :bind ("C-c e" . macrostep-expand))
 
 ;; Magit
 (use-package magit
