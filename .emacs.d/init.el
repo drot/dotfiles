@@ -550,7 +550,7 @@
 
 ;; ANSI term
 (use-package term
-  :bind ("C-c a a" . ansi-term)
+  :bind ("C-c a t" . ansi-term)
   :config
   (add-hook 'term-mode-hook (lambda ()
                               (yas-minor-mode -1))))
@@ -607,7 +607,7 @@
 
 ;; World time
 (use-package time
-  :bind ("C-c a t" . display-time-world)
+  :bind ("C-c a w" . display-time-world)
   :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
@@ -657,13 +657,13 @@
 (bind-key "C-x p" #'proced)
 
 ;; EWW
-(bind-key "C-c a w" #'eww)
+(bind-key "C-c a b" #'eww)
 
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
 
 ;; Xwidget WebKit browser
-(bind-key "C-c n x" #'xwidget-webkit-browse-url)
+(bind-key "C-c a x" #'xwidget-webkit-browse-url)
 
 ;; Wind Move
 (bind-key "C-c w <left>" #'windmove-left)
@@ -706,11 +706,11 @@
 (use-package avy
   :ensure t
   :bind (("C-c n c" . avy-goto-char)
-         ("C-c n j" . avy-goto-char-2)
-         ("C-c n w" . avy-goto-word-0)
+         ("C-c n k" . avy-goto-char-2)
+         ("C-c n j" . avy-goto-word-0)
          ("C-c n SPC" . avy-pop-mark)
          ("C-c l" . avy-goto-line)
-         ("C-c j" . avy-goto-word-1))
+         ("C-c j" . avy-goto-word-or-subword-1))
   :config
   (setq avy-background t)
 
@@ -1191,16 +1191,27 @@ This doesn't support the chanserv auth method"
   (setq golden-ratio-exclude-modes '("calc-mode"
                                      "dired-mode"
                                      "ediff-mode"
+                                     "eshell-mode"
                                      "calendar-mode"
                                      "gnus-group-mode"
                                      "gnus-topic-mode"
                                      "gnus-summary-mode"
-                                     "gnus-article-mode")
+                                     "gnus-article-mode"
+                                     "gud-mode"
+                                     "gdb-locals-mode"
+                                     "gdb-registers-mode"
+                                     "gdb-breakpoints-mode"
+                                     "gdb-threads-mode"
+                                     "gdb-frames-mode"
+                                     "gdb-inferior-io-mode"
+                                     "gdb-disassembly-mode"
+                                     "gdb-memory-mode")
         golden-ratio-extra-commands
         (append golden-ratio-extra-commands
                 '(ace-window
                   avy-goto-word-0
                   avy-goto-word-1
+                  avy-goto-word-or-subword-1
                   avy-goto-char
                   avy-goto-char-2
                   avy-pop-mark
@@ -1233,7 +1244,7 @@ This doesn't support the chanserv auth method"
   :ensure swiper
   :diminish (ivy-mode . "IY")
   :bind (("C-c f r" . ivy-recentf)
-         ("C-c t c" . ivy-resume))
+         ("C-c n i" . ivy-resume))
   :commands ivy-mode
   :init
   (ivy-mode)
