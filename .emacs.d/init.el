@@ -469,6 +469,7 @@
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
+  ;; Disable cumbersome key binding
   (unbind-key "C-c $" flyspell-mode-map)
 
   (setq flyspell-use-meta-tab nil
@@ -1015,11 +1016,15 @@ This doesn't support the chanserv auth method"
   :config
   (setq inferior-lisp-program "sbcl"
         slime-protocol-version 'ignore
-        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory))
+        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
 
+;; SLIME REPL
+(use-package slime-repl
+  :ensure slime
+  :defer t
+  :config
   ;; Don’t reserve the Backspace key
-  (add-hook 'slime-repl-mode-hook (lambda ()
-                                    (define-key slime-repl-mode-map (kbd "DEL") nil))))
+  (unbind-key "DEL" slime-repl-mode-map))
 
 ;; SLIME Company
 (use-package slime-company
@@ -1028,6 +1033,7 @@ This doesn't support the chanserv auth method"
   :config
   (setq slime-company-completion 'fuzzy)
 
+  ;; Load all contrib modules and the Company backend
   (slime-setup '(slime-fancy slime-company)))
 
 ;; Smex
