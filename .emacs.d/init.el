@@ -1172,55 +1172,6 @@ This doesn't support the chanserv auth method"
                   help-mode-hook))
     (add-hook hook #'form-feed-mode)))
 
-;; Golden Ratio
-(use-package golden-ratio
-  :ensure t
-  :diminish (golden-ratio-mode . "GR")
-  :bind ("C-c t g" . drot/toggle-golden-ratio)
-  :commands (drot/toggle-golden-ratio golden-ratio-mode)
-  :init
-  (defun drot/toggle-golden-ratio ()
-    (interactive)
-    (if (bound-and-true-p golden-ratio-mode)
-        (progn
-          (golden-ratio-mode -1)
-          (balance-windows))
-      (golden-ratio-mode)
-      (golden-ratio)))
-
-  (golden-ratio-mode)
-  :config
-  (setq golden-ratio-exclude-modes '("calc-mode"
-                                     "dired-mode"
-                                     "ediff-mode"
-                                     "eshell-mode"
-                                     "calendar-mode"
-                                     "gnus-group-mode"
-                                     "gnus-topic-mode"
-                                     "gnus-summary-mode"
-                                     "gnus-article-mode"
-                                     "gud-mode"
-                                     "gdb-locals-mode"
-                                     "gdb-registers-mode"
-                                     "gdb-breakpoints-mode"
-                                     "gdb-threads-mode"
-                                     "gdb-frames-mode"
-                                     "gdb-inferior-io-mode"
-                                     "gdb-disassembly-mode"
-                                     "gdb-memory-mode"))
-
-  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
-
-  (setq golden-ratio-extra-commands
-        (append golden-ratio-extra-commands
-                '(ace-window
-                  avy-goto-word-0
-                  avy-goto-word-or-subword-1
-                  avy-goto-char
-                  avy-goto-char-2
-                  avy-pop-mark
-                  avy-goto-line))))
-
 ;; Highlight Numbers
 (use-package highlight-numbers
   :ensure t
