@@ -513,7 +513,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-chromium))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Bookmarks save directory
 (use-package bookmark
