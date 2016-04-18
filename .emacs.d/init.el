@@ -590,7 +590,7 @@
 
 ;; Calendar configuration
 (use-package calendar
-  :bind ("C-c a c" . calendar)
+  :bind ("C-c a k" . calendar)
   :config
   (setq holiday-general-holidays nil
         holiday-solar-holidays nil
@@ -652,6 +652,9 @@
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
+
+;; Calculator
+(bind-key "C-c a c" #'calc)
 
 ;; Proced
 (bind-key "C-x p" #'proced)
@@ -1092,6 +1095,7 @@ This doesn't support the chanserv auth method"
         beacon-dont-blink-major-modes
         (append beacon-dont-blink-major-modes
                 '(dired-mode
+                  calc-mode
                   rcirc-mode
                   undo-tree-visualizer-mode
                   eshell-mode
