@@ -1,3 +1,0 @@
-#!/bin/bash
-
-GTK2_RC_FILES=~/.conkerorrc/gtkrc xulrunner --app ~/conkeror/application.ini "$@"
