@@ -1,6 +1,6 @@
 $include /etc/inputrc
 
-set show-all-if-ambiguous on
 set colored-stats on
+
 "\ep":history-search-backward
 "\en":history-search-forward
