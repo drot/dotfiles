@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 
 # Bash options
-shopt -s cdspell dirspell histverify cmdhist histappend no_empty_cmd_completion extglob
+shopt -s cdspell dirspell extglob no_empty_cmd_completion histverify cmdhist histappend
 
 # Notify of completed background jobs
 set -o notify

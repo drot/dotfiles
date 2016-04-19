@@ -139,6 +139,7 @@ STICKY 00;34
 .awk 00;36
 .bash 00;36
 .bashrc 00;36
+.bash_aliases 00;36
 .bash_history 00;36
 .bash_logout 00;36
 .bash_profile 00;36
