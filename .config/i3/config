@@ -1,5 +1,5 @@
 # font for window titles and the status bar
-font pango:Terminus 10
+font pango:Hack Bold 11
 
 # general settings
 workspace_layout tabbed
@@ -171,7 +171,6 @@ for_window [class="mpv"] floating enable
 for_window [class="Wine"] floating enable
 
 # assign applications to certain workspaces
-assign [class="chromium"] 2
 assign [class="Firefox"] 2
 assign [class="Conkeror"] 2
 assign [class="Emacs"] 3

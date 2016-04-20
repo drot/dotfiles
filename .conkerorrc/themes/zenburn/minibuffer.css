@@ -3,7 +3,7 @@
 #minibuffer {
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Iosevka Term;
+    font-family: Hack;
     font-size: 15px;
 }
 
@@ -31,7 +31,7 @@ tree.completions {
     border: 0px none !important;
     background-color: #3f3f3f !important;
     color: #dcdccc !important;
-    font-family: Iosevka Term;
+    font-family: Hack;
     font-size: 15px;
 }
 
