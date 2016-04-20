@@ -14,10 +14,10 @@ shopt -s histappend
 set -o notify
 
 # History
-HISTCONTROL="ignoreboth:erasedups"
-HISTSIZE=20000
-HISTFILESIZE=${HISTSIZE}
-HISTTIMEFORMAT="%F %T "
+export HISTCONTROL="ignoreboth:erasedups"
+export HISTSIZE=20000
+export HISTFILESIZE=${HISTSIZE}
+export HISTTIMEFORMAT="%F %T "
 
 # Less options
 export LESS=-R
