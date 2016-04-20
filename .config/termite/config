@@ -62,7 +62,7 @@ color14 = #93e0e3
 color15 = #ffffff
 
 [hints]
-font = Terminus Bold 10
+font = Hack Bold 11
 foreground = #f0dfaf
 background = #1e2320
 active_foreground = #1e2320
