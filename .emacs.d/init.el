@@ -643,7 +643,7 @@
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
-(bind-key "C-c f z" #'revert-buffer)
+(bind-key "C-c f r" #'revert-buffer)
 
 ;; Linum Mode
 (bind-key "C-c t l" #'linum-mode)
@@ -1202,7 +1202,7 @@ This doesn't support the chanserv auth method"
 (use-package ivy
   :ensure swiper
   :diminish (ivy-mode . "IY")
-  :bind (("C-c f r" . ivy-recentf)
+  :bind (("C-c f f" . ivy-recentf)
          ("C-c n i" . ivy-resume))
   :commands ivy-mode
   :init
