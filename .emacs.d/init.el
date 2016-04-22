@@ -93,13 +93,7 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
-;; Put underline below the font bottom line
-(setq x-underline-at-descent-line t)
-
-;; Draw block cursor as wide as the glyph under it
-(setq x-stretch-cursor t)
-
-;; Don't show startup welcome messages
+;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
       inhibit-startup-screen t)
 
@@ -134,7 +128,7 @@
 ;; Enable all disabled commands
 (setq disabled-command-function nil)
 
-;; No limit when printing values.
+;; No length limit when printing values
 (setq eval-expression-print-length nil
       eval-expression-print-level nil)
 
@@ -144,6 +138,15 @@
 
 ;; Increase default fill width
 (setq-default fill-column 80)
+
+;; Put underline below the font bottom line
+(setq x-underline-at-descent-line t)
+
+;; Draw block cursor as wide as the glyph under it
+(setq x-stretch-cursor t)
+
+;; Set Emoji font fallback
+(set-fontset-font t nil (font-spec :family "Noto Emoji") nil 'append)
 
 ;; Require a final new line
 (setq require-final-newline t)
