@@ -145,8 +145,16 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
-;; Set Emoji font fallback
-(set-fontset-font t nil (font-spec :family "Noto Emoji") nil 'append)
+;; Set emoji font fallback
+(defun drot/set-emoji-font (frame)
+  "Adjust the font settings of FRAME so Emacs can display emoji properly."
+  (set-fontset-font t 'symbol (font-spec :family "Noto Emoji") frame 'prepend))
+
+;; For when Emacs is started in GUI mode
+(drot/set-emoji-font nil)
+
+;; Hook for when a frame is created with emacsclient
+(add-hook 'after-make-frame-functions #'drot/set-emoji-font)
 
 ;; Require a final new line
 (setq require-final-newline t)
