@@ -3,7 +3,7 @@ ao=pulse
 vo=xv
 
 # Disable unneeded modules
-nojoystick = yes
+nojoystick=yes
 nolirc=yes
 
 # Colorize messages
