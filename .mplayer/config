@@ -1,0 +1,14 @@
+# Audio and video output
+ao=pulse
+vo=xv
+
+# Disable unneeded modules
+nojoystick = yes
+nolirc=yes
+
+# Colorize messages
+msgmodule=1
+msgcolor=1
+
+# Smart subtitle search
+sub-fuzziness=1
