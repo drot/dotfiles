@@ -42,6 +42,11 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Load custom functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 # Git prompt
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
     . /usr/share/git/git-prompt.sh
