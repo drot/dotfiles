@@ -660,7 +660,7 @@
 (bind-key "C-c t l" #'linum-mode)
 
 ;; Ruler mode
-(bind-key "C-c t u" #'ruler-mode)
+(bind-key "C-c t c" #'ruler-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
@@ -1157,17 +1157,12 @@ This doesn't support the chanserv auth method"
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :commands (global-diff-hl-mode diff-hl-dired-mode diff-hl-margin-mode)
+  :bind ("C-c t m" . diff-hl-margin-mode)
+  :commands (global-diff-hl-mode diff-hl-dired-mode)
   :init
   (global-diff-hl-mode)
 
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-
-  (defun drot/diff-hl-check
-      (unless (display-graphic-p frame)
-        (diff-hl-margin-mode)))
-
-  (add-hook 'after-make-frame-functions #'drot/diff-hl-check))
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
 
 ;; Eyebrowse
 (use-package eyebrowse
