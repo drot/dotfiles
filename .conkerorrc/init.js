@@ -1,5 +1,6 @@
 // Theme
 require("new-tabs.js");
+
 theme_load_paths.unshift("~/.conkerorrc/themes/");
 theme_unload("default");
 theme_load("zenburn");
@@ -54,8 +55,8 @@ cwd.append('Downloads');
 // View source in external editor
 editor_shell_command = "emacsclient";
 
-// View PDFs in Zathura
-external_content_handlers.set("application/pdf", "zathura");
+// Default PDF viewer
+external_content_handlers.set("application/pdf", "llpp");
 
 // Improve hinting keys
 hint_digits = "asdfghjkl";
@@ -81,6 +82,7 @@ register_user_stylesheet(
                 " font-size: 14px !important;\n"+
                 " line-height: 14px !important;\n"+
                 "}"));
+
 register_user_stylesheet(
     "data:text/css," +
         escape (
@@ -92,6 +94,7 @@ register_user_stylesheet(
 
 // Open clicks in buffers in the background
 require("clicks-in-new-buffer.js");
+
 clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND;
 clicks_in_new_buffer_button = 1;
 
@@ -107,12 +110,15 @@ can_kill_last_buffer = false;
 // Remove the clock and set the mode line
 require("mode-line.js");
 require("favicon.js");
+
+read_buffer_show_icons = true;
+
 remove_hook("mode_line_hook", mode_line_adder(clock_widget));
+
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 add_hook("mode_line_hook", mode_line_adder(zoom_widget));
-read_buffer_show_icons = true;
 
 // Auto completion in the minibuffer
 url_completion_use_history = true;
@@ -154,18 +160,19 @@ define_key(content_buffer_normal_keymap, "C-x u", "restore-killed-buffer-url");
 
 // Eye guide
 require('eye-guide.js');
+
 define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
 define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
 
 
 // Delete existing webjumps
-var unused_webjumps = ['answers', 'buildd','buildd-ports','clhs','cliki',
-                       'clusty','creativecommons','debbugs','debfile','debpkg',
-                       'debpopcon','debpts','debqa','freshmeat','kuro5hin',
-                       'launchpad','lucky','ratpoisonwiki','sadelicious',
-                       'scholar','sdelicious','slashdot','sourceforge',
-                       'stumpwmwiki','ubuntubugs','ubuntufile','ubuntupkg',
-                       'wiktionary','yahoo','bugzilla','ebay'
+var unused_webjumps = ['answers', 'buildd', 'buildd-ports', 'clhs', 'cliki',
+                       'clusty', 'creativecommons', 'debbugs', 'debfile', 'debpkg',
+                       'debpopcon', 'debpts', 'debqa', 'freshmeat', 'kuro5hin',
+                       'launchpad', 'lucky', 'ratpoisonwiki', 'sadelicious',
+                       'scholar', 'sdelicious', 'slashdot', 'sourceforge',
+                       'stumpwmwiki', 'ubuntubugs', 'ubuntufile', 'ubuntupkg',
+                       'wiktionary', 'yahoo', 'bugzilla', 'ebay', 'duckduckgo'
                       ];
 
 for (var i = 0; i < unused_webjumps.length; i++)
@@ -211,6 +218,7 @@ function create_selection_search(webjump, key) {
         });
 }
 
+// Quick search key bindings
 create_selection_search("archwiki", "C-c a");
 create_selection_search("arch-package", "C-c p");
 create_selection_search("dictionary", "C-c d");
