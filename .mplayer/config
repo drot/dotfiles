@@ -1,6 +1,6 @@
 # Audio and video output
 ao=pulse
-vo=gl
+vo=gl:yuv=2:rectangle=2
 
 # Disable unneeded modules
 nojoystick=yes
