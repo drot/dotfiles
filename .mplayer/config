@@ -7,8 +7,11 @@ nojoystick=yes
 nolirc=yes
 
 # Colorize messages
-msgmodule=1
-msgcolor=1
+msgmodule=yes
+msgcolor=yes
 
 # Smart subtitle search
 sub-fuzziness=1
+
+# Set filename as window title
+use-filename-title=yes
