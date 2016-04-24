@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Send to pastebin
+# Paste to sprunge
 sprunge() {
-    cat $1 | curl -F 'sprunge=<-' http://sprunge.us
+    curl -F 'sprunge=<-' http://sprunge.us
 }
 
 # Watch online videos with MPlayer
-function ytwatch() {
+tube() {
     youtube-dl -q -o- $1 | mplayer -cache 8192 -
 }
