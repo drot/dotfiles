@@ -1163,8 +1163,11 @@ This doesn't support the chanserv auth method"
 
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
 
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
+  (defun drot/diff-hl-check
+      (unless (display-graphic-p frame)
+        (diff-hl-margin-mode)))
+
+  (add-hook 'after-make-frame-functions #'drot/diff-hl-check))
 
 ;; Eyebrowse
 (use-package eyebrowse

@@ -9,3 +9,8 @@ sprunge() {
 tube() {
     youtube-dl -q -o- $1 | mplayer -cache 8192 -
 }
+
+# Find process
+pids() {
+    ps aux | grep -i $1
+}
