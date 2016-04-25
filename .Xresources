@@ -34,9 +34,9 @@ URxvt*keysym.M-Escape: perl:keyboard-select:activate
 URxvt*keysym.M-s: perl:keyboard-select:search
 
 ! Font
-URxvt*font: xft:Hack:size=11,xft:Symbola:size=10
-URxvt*boldFont: xft:Hack:bold:size=11,xft:Symbola:size=10
-URxvt*letterSpace: -1
+URxvt*font: xft:Hack:size=11,xft:Noto Emoji:size=7
+URxvt*boldFont: xft:Hack:bold:size=11,xft:Noto Emoji:size=7
+URxvt*letterSpace: -2
 
 ! Colors
 URxvt*background: #3f3f3f
