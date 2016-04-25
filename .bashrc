@@ -13,24 +13,23 @@ shopt -s histappend
 # Notify of completed background jobs
 set -o notify
 
-# History
-export HISTCONTROL="ignoreboth:erasedups"
-export HISTSIZE=20000
-export HISTFILESIZE=${HISTSIZE}
-export HISTTIMEFORMAT="%F %T "
+# History configuration
+HISTCONTROL=ignoreboth:erasedups
+HISTSIZE=20000
+HISTFILESIZE=${HISTSIZE}
+HISTTIMEFORMAT="%F %T "
 
-# Less options
-export LESS=-R
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;32m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[1;37;42m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[04;34m'
-
-# Grep options
-export GREP_COLORS="mt=01;37;42"
+# Man pages colorization
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;32m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[1;37;42m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;34m' \
+        man "$@"
+}
 
 # Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
