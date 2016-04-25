@@ -17,7 +17,7 @@ set $right semicolon
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -168,6 +168,7 @@ bar {
 # list of floating applications
 for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
+for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
 
 # assign applications to certain workspaces

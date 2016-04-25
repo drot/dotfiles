@@ -34,5 +34,6 @@ fi
 
 xset s off -dpms &
 dunst &
+urxvtd -q -o -f &
 sh ~/.fehbg &
 exec i3
