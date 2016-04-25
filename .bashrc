@@ -62,4 +62,4 @@ BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
 # Prompt look
-export PS1="${BLUE}\W${RED}${GIT}${GREEN} \$ ${NIL}"
+PS1="${BLUE}\W${RED}${GIT}${GREEN} \$ ${NIL}"
