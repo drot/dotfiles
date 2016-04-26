@@ -1108,7 +1108,7 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode)
   :config
-  (setq beacon-color "#d26937"
+  (setq beacon-color "#f0dfaf"
         beacon-dont-blink-major-modes
         (append beacon-dont-blink-major-modes
                 '(dired-mode
