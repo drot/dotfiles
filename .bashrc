@@ -65,5 +65,4 @@ BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
 
 # Prompt look
-#PS1='\[\e]2;new title\a\]prompt > '
 PS1="${TITLE}${BLUE}\W${RED}${GIT}${GREEN} \$ ${NIL}"
