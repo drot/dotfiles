@@ -46,6 +46,16 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
+# Window title
+case ${TERM} in
+  xterm*|rxvt*|st*|kterm|gnome*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+    ;;
+  screen*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+    ;;
+esac
+
 # Git prompt
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
     . /usr/share/git/git-prompt.sh
