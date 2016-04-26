@@ -83,6 +83,7 @@ XTerm*locale: true
 XTerm*termName: xterm-256color
 XTerm*bellIsUrgent: true
 XTerm*saveLines: 65535
+XTerm*borderWidth: 0
 
 ! Release Meta binding
 XTerm*fullscreen: never
@@ -97,8 +98,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
-XTerm*boldFont: -*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*
+XTerm*faceName: Hack:size=11
 
 ! Colors
 XTerm*background: #3f3f3f
