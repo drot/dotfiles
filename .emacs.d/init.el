@@ -1108,7 +1108,7 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode)
   :config
-  (setq beacon-color "#f0dfaf"
+  (setq beacon-color "#d26937"
         beacon-dont-blink-major-modes
         (append beacon-dont-blink-major-modes
                 '(dired-mode
@@ -1201,15 +1201,9 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
 
-;; Swiper
-(use-package swiper
-  :ensure t
-  :bind (("C-c s s" . swiper)
-         ("C-c s i" . swiper-from-isearch)))
-
 ;; Ivy
 (use-package ivy
-  :ensure swiper
+  :ensure t
   :diminish (ivy-mode . "IY")
   :bind (("C-c f f" . ivy-recentf)
          ("C-c n i" . ivy-resume))
@@ -1238,6 +1232,12 @@ This doesn't support the chanserv auth method"
   (counsel-mode)
   :config
   (setq counsel-find-file-at-point t))
+
+;; Swiper
+(use-package swiper
+  :ensure t
+  :bind (("C-c s s" . swiper)
+         ("C-c s i" . swiper-from-isearch)))
 
 ;; Lispy
 (use-package lispy
