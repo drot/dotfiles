@@ -46,16 +46,6 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
-# Window title
-case ${TERM} in
-  xterm*|rxvt*|st*|kterm|gnome*)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
-    ;;
-  screen*)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
-    ;;
-esac
-
 # Git prompt
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
     . /usr/share/git/git-prompt.sh
@@ -65,11 +55,15 @@ fi
 
 GIT="\$(__git_ps1 \" (%s)\")"
 
+# Prompt window title
+TITLE="\[\e]2;\u@\h:\W\a\]"
+
 # Prompt colors
-RED='\[\033[1;31m\]'
-GREEN='\[\033[1;33m\]'
-BLUE='\[\033[1;34m\]'
-NIL='\[\033[00m\]'
+RED="\[\033[1;31m\]"
+GREEN="\[\033[1;33m\]"
+BLUE="\[\033[1;34m\]"
+NIL="\[\033[00m\]"
 
 # Prompt look
-PS1="${BLUE}\W${RED}${GIT}${GREEN} \$ ${NIL}"
+#PS1='\[\e]2;new title\a\]prompt > '
+PS1="${TITLE}${BLUE}\W${RED}${GIT}${GREEN} \$ ${NIL}"
