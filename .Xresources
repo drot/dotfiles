@@ -45,11 +45,10 @@ URxvt*foreground: #dcdccc
 URxvt*cursorColor: #dcdccc
 URxvt*cursorColor2: #3f3f3f
 
-URxvt*colorUL: #8cd0d3
-URxvt*underlineColor: #f0dfaf
-
 URxvt*colorBD: #e0cf9f
 URxvt*colorIT: #656555
+URxvt*colorUL: #8cd0d3
+URxvt*underlineColor: #f0dfaf
 
 ! Black Dark/Light
 URxvt*color0: #3f3f3f
@@ -106,10 +105,9 @@ XTerm*foreground: #dcdccc
 
 XTerm*cursorColor: #dcdccc
 
-XTerm*colorUL: #8cd0d3
-
-XTerm*colorBD: #e0cf9f
 XTerm*colorIT: #656555
+XTerm*colorBD: #e0cf9f
+XTerm*colorUL: #8cd0d3
 
 ! Black Dark/Light
 XTerm*color0: #3f3f3f

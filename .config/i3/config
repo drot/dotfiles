@@ -17,7 +17,7 @@ set $right semicolon
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -175,7 +175,7 @@ for_window [class="Wine"] floating enable
 assign [class="Firefox"] 2
 assign [class="Conkeror"] 2
 assign [class="Emacs"] 3
-assign [class="llpp"] 4
+assign [class="Zathura"] 4
 assign [class="libreoffice"] 4
 assign [class="Gimp"] 4
 assign [class="Pavucontrol"] 4

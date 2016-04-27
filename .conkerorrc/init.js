@@ -56,7 +56,7 @@ cwd.append('Downloads');
 editor_shell_command = "emacsclient";
 
 // Default PDF viewer
-external_content_handlers.set("application/pdf", "llpp");
+external_content_handlers.set("application/pdf", "zathura");
 
 // Improve hinting keys
 hint_digits = "asdfghjkl";
