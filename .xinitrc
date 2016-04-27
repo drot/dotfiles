@@ -34,5 +34,5 @@ fi
 
 xset s off -dpms &
 dunst &
-sh ~/.fehbg &
+display -window root ~/Pictures/zenburn.png &
 exec i3
