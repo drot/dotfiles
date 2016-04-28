@@ -715,8 +715,7 @@
   :ensure t
   :bind ([remap other-window] . ace-window)
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-        aw-dispatch-always t))
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Avy
 (use-package avy
