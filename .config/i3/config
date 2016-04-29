@@ -170,6 +170,7 @@ for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
+for_window [class="Pcmanfm"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Firefox"] 2
@@ -179,4 +180,3 @@ assign [class="Zathura"] 4
 assign [class="libreoffice"] 4
 assign [class="Gimp"] 4
 assign [class="Pavucontrol"] 4
-for_window [class="Pcmanfm"] floating enable, move container to workspace 5
