@@ -9,7 +9,7 @@ set window-title-basename true
 # More natural scrolling
 set scroll-full-overlap 0.1
 
-# Colors
+# Interface colors
 set statusbar-fg "#f0dfaf"
 set statusbar-bg "#1e2320"
 
@@ -33,6 +33,10 @@ set completion-highlight-bg "#1e2320"
 
 set completion-bg "#3f3f3f"
 set completion-fg "#dfaf8f"
+
+# Recolor colors
+set recolor-darkcolor "#dcdccc"
+set recolor-lightcolor "#3f3f3f"
 
 # Emulate Emacs keybindings
 map f navigate next
