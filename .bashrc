@@ -25,7 +25,7 @@ man() {
         LESS_TERMCAP_md=$'\E[01;32m' \
         LESS_TERMCAP_me=$'\E[0m' \
         LESS_TERMCAP_se=$'\E[0m' \
-        LESS_TERMCAP_so=$'\E[1;37;42m' \
+        LESS_TERMCAP_so=$'\E[1;37;41m' \
         LESS_TERMCAP_ue=$'\E[0m' \
         LESS_TERMCAP_us=$'\E[04;34m' \
         man "$@"
@@ -60,7 +60,7 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Prompt colors
 RED="\[\033[1;31m\]"
-GREEN="\[\033[1;33m\]"
+GREEN="\[\033[1;32m\]"
 BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
 
