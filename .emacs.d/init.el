@@ -472,7 +472,7 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FS")
-  :bind (("C-c l f" . flyspell-buffer)
+  :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c x c" . flyspell-correct-word-before-point))
   :commands (flyspell-mode flyspell-prog-mode)
