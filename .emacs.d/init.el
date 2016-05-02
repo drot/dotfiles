@@ -44,9 +44,6 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Disable site default settings
-(setq inhibit-default-init t)
-
 ;; Activate packages and add MELPA
 (package-initialize)
 
