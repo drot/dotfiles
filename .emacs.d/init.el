@@ -1398,8 +1398,6 @@ This doesn't support the chanserv auth method"
   :diminish (yas-minor-mode . "YS")
   :commands yas-global-mode
   :init
-  (setq yas-verbosity 1)
-
   (yas-global-mode))
 
 ;; Load changes from the customize interface
