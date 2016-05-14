@@ -30,6 +30,10 @@
 ;; Delay garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
+;; Reset gc threshold value to default after startup
+(add-hook 'after-init-hook (lambda ()
+                             (setq gc-cons-threshold 800000)))
+
 ;; Set some variables
 (defvar drot/emacs-directory (file-name-directory load-file-name)
   "Emacs root directory.")
@@ -1404,8 +1408,5 @@ This doesn't support the chanserv auth method"
 (setq custom-file drot/custom-file)
 
 (load drot/custom-file 'noerror 'nomessage)
-
-;; Reset garbage collection threshold
-(setq gc-cons-threshold 400000)
 
 ;;; init.el ends here
