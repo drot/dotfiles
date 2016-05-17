@@ -74,24 +74,17 @@ active_hint_background_color = "#DCDCCC";
 img_hint_background_color = "#705050";
 active_img_hint_background_color = "#DCDCCC";
 
-// Big hint font
+// Override hint size and colors
 register_user_stylesheet(
     "data:text/css," +
         escape(
             "@namespace url(\"http://www.w3.org/1999/xhtml\");\n" +
-                "span.__conkeror_hint {\n"+
-                " font-size: 14px !important;\n"+
-                " line-height: 14px !important;\n"+
-                "}"));
-
-// Hint colors
-register_user_stylesheet(
-    "data:text/css," +
-        escape (
-            "span.__conkeror_hint {" +
-                " border: 1px solid #6f6f6f !important;" +
-                " color: #f0dfaf !important;" +
-                " background-color: #3f3f3f !important;" +
+                "span.__conkeror_hint {\n" +
+                "background-color: #3f3f3f !important;\n" +
+                "color: #f0dfaf !important;\n" +
+                "border: 1px solid #6f6f6f !important;\n" +
+                "font-size: 14px !important;\n" +
+                "line-height: 14px !important;\n" +
                 "}"));
 
 // Open clicks in buffers in the background
