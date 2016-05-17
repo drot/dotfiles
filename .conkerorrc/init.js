@@ -83,8 +83,8 @@ register_user_stylesheet(
                 "background-color: #3f3f3f !important;\n" +
                 "color: #f0dfaf !important;\n" +
                 "border: 1px solid #6f6f6f !important;\n" +
-                "font-size: 14px !important;\n" +
-                "line-height: 14px !important;\n" +
+                "font-size: 15px !important;\n" +
+                "line-height: 15px !important;\n" +
                 "}"));
 
 // Open clicks in buffers in the background
