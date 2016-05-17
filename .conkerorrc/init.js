@@ -74,7 +74,7 @@ active_hint_background_color = "#DCDCCC";
 img_hint_background_color = "#705050";
 active_img_hint_background_color = "#DCDCCC";
 
-// Big hints
+// Big hint font
 register_user_stylesheet(
     "data:text/css," +
         escape(
@@ -84,6 +84,7 @@ register_user_stylesheet(
                 " line-height: 14px !important;\n"+
                 "}"));
 
+// Hint colors
 register_user_stylesheet(
     "data:text/css," +
         escape (
