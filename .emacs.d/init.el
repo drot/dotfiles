@@ -140,6 +140,9 @@
 ;; Increase default fill width
 (setq-default fill-column 80)
 
+;; Require a final new line
+(setq require-final-newline t)
+
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
@@ -151,14 +154,11 @@
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
   (set-fontset-font t 'symbol (font-spec :family "Noto Emoji") frame 'prepend))
 
-;; For when Emacs is started in GUI mode
+;; Set font fallback  when Emacs is started in GUI mode
 (drot/set-emoji-font nil)
 
-;; Hook for when a frame is created with emacsclient
+;; Hook for the font fallback when a frame is created with emacsclient
 (add-hook 'after-make-frame-functions #'drot/set-emoji-font)
-
-;; Require a final new line
-(setq require-final-newline t)
 
 ;; Kill and yank clipboard options
 (setq select-enable-primary t
@@ -172,6 +172,9 @@
 
 ;; Repeat mark popping
 (setq set-mark-command-repeat-pop t)
+
+;; Keep window point when switching buffers
+(setq switch-to-buffer-preserve-window-point t)
 
 ;; Display read-only buffers in view mode
 (setq view-read-only t
