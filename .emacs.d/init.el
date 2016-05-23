@@ -1222,7 +1222,8 @@ This doesn't support the chanserv auth method"
         ivy-virtual-abbreviate 'full
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
-        ivy-wrap t))
+        ivy-wrap t
+        ivy-action-wrap t))
 
 ;; Counsel
 (use-package counsel
