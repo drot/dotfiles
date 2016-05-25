@@ -1206,6 +1206,12 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
 
+;; Iedit
+(use-package iedit
+  :ensure t
+  :init
+  (setq iedit-toggle-key-default (kbd "C-:")))
+
 ;; Ivy
 (use-package ivy
   :ensure t
