@@ -160,6 +160,16 @@
 ;; Hook for the font fallback when a frame is created with emacsclient
 (add-hook 'after-make-frame-functions #'drot/set-emoji-font)
 
+;; Resize windows proportionally
+(setq window-combination-resize t)
+
+;; Keep window point when switching buffers
+(setq switch-to-buffer-preserve-window-point t)
+
+;; Display read-only buffers in view mode
+(setq view-read-only t
+      view-inhibit-help-message t)
+
 ;; Kill and yank clipboard options
 (setq select-enable-primary t
       save-interprogram-paste-before-kill t)
@@ -172,13 +182,6 @@
 
 ;; Repeat mark popping
 (setq set-mark-command-repeat-pop t)
-
-;; Keep window point when switching buffers
-(setq switch-to-buffer-preserve-window-point t)
-
-;; Display read-only buffers in view mode
-(setq view-read-only t
-      view-inhibit-help-message t)
 
 ;; Do not save duplicates
 (setq history-delete-duplicates t
