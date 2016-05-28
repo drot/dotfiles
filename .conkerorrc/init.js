@@ -225,3 +225,5 @@ create_selection_search("slang", "C-c s");
 create_selection_search("wikipedia", "C-c w");
 create_selection_search("youtube", "C-c y");
 create_selection_search("youtube-user", "C-c u");
+create_selection_search("imdb", "C-c m");
+create_selection_search("kat", "C-c t");
