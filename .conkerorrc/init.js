@@ -184,6 +184,8 @@ define_webjump("google", "https://encrypted.google.com/#q=%s",
                $alternative="https://encrypted.google.com");
 define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search=Search");
 define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
+define_webjump("imdb", "http://www.imdb.com/find?q=%s&s=all");
+define_webjump("kat", "http://kat.cr/usearch/%s");
 
 // Selection searches
 function create_selection_search(webjump, key) {
