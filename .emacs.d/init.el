@@ -678,6 +678,9 @@
 ;; Proced
 (bind-key "C-x p" #'proced)
 
+;; Remember
+(bind-key "C-c o r" #'remember)
+
 ;; EWW
 (bind-key "C-c a b" #'eww)
 
@@ -1400,7 +1403,7 @@ This doesn't support the chanserv auth method"
     "C-c i" "insertion"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
-    "C-c o" "org"
+    "C-c o" "organisation"
     "C-c s" "search/symbols"
     "C-c t" "toggles"
     "C-c v" "version-control"
