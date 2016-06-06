@@ -121,6 +121,28 @@ url_completion_use_bookmarks = true;
 url_completion_use_webjumps = true;
 minibuffer_auto_complete_default = true;
 
+// Switch and kill buffers with the number keys
+function define_switch_buffer_key (key, buf_num) {
+    define_key(default_global_keymap, key,
+               function (I) {
+                   switch_to_buffer(I.window,
+                                    I.window.buffers.get_buffer(buf_num));
+               });
+}
+
+function define_kill_buffer_key (key, buf_num) {
+    define_key(default_global_keymap, key,
+               function (I) {
+                   kill_buffer(I.window.buffers.get_buffer(buf_num));
+               });
+}
+
+for (let i = 0; i < 10; ++i) {
+    var num = String((i+1) % 10);
+    define_switch_buffer_key(num, i);
+    define_kill_buffer_key  ("k " + num, i);
+}
+
 // Restore killed buffer function
 var kill_buffer_original = kill_buffer_original || kill_buffer;
 var killed_buffer_urls = [];
@@ -129,25 +151,25 @@ kill_buffer = function (buffer, force) {
     if (buffer.display_uri_string) {
         killed_buffer_urls.push(buffer.display_uri_string);
     }
-
     kill_buffer_original(buffer,force);
 };
 
-interactive("restore-killed-buffer-url", "Loads url from a previously killed buffer",
+interactive("restore-killed-buffer-url",
+            "Restore a previously killed buffer",
             function restore_killed_buffer_url (I) {
                 if (killed_buffer_urls.length !== 0) {
                     var url = yield I.minibuffer.read(
                         $prompt = "Restore killed url:",
-                        $completer = new all_word_completer($completions = killed_buffer_urls),
+                        $completer = new all_word_completer($completions = killed_buffer_urls, $require_match = true),
                         $default_completion = killed_buffer_urls[killed_buffer_urls.length - 1],
                         $auto_complete = "url",
                         $auto_complete_initial = true,
                         $auto_complete_delay = 0,
                         $require_match = true);
-
                     load_url_in_new_buffer(url);
-                } else {
-                    I.window.minibuffer.message("No killed buffer urls");
+                }
+                else {
+                    I.window.minibuffer.message("No killed buffers");
                 }
             });
 
