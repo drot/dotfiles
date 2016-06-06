@@ -562,7 +562,7 @@
 
 ;; Shell mode configuration
 (use-package shell
-  :bind ("C-c a s" . shell)
+  :bind ("C-c a l" . shell)
   :config
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
@@ -667,7 +667,7 @@
 (bind-key "C-c t l" #'linum-mode)
 
 ;; Ruler mode
-(bind-key "C-c t c" #'ruler-mode)
+(bind-key "C-c t u" #'ruler-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
@@ -1033,8 +1033,14 @@ This doesn't support the chanserv auth method"
 ;; SLIME
 (use-package slime
   :ensure t
-  :bind ("C-c t s" . slime)
+  :bind (("C-c a s" . slime)
+         ("C-c t s" . slime-connect)
+         :map slime-mode-indirect-map
+         ("C-c $" . slime-export-symbol-at-point))
   :config
+  ;; Disable conflicting key binding
+  (unbind-key "C-c x" slime-mode-indirect-map)
+
   (setq inferior-lisp-program "sbcl"
         slime-protocol-version 'ignore
         slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
