@@ -55,21 +55,20 @@
       *message-window-gravity* :bottom-right
       *input-history-ignore-duplicates* 1)
 
-;; Mode-line colors
+;; Mode line colors
 (setf *mode-line-background-color* "gray10"
       *mode-line-foreground-color* "honeydew4"
       *mode-line-border-color* "gray5")
 
-;; Mode-line format
+;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *group-format* "%n %s %t"
       *screen-mode-line-format* (list "^5*%n^n %W ^> "
                                       "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
       *mode-line-border-width* 0
-      *mode-line-position* :top
       *mode-line-timeout* 5)
 
-;; Show mode-line for current screen
+;; Show the mode line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
 
