@@ -2,7 +2,7 @@
 
 ;; Load swank
 (require 'swank)
-(swank:create-server) 
+(swank:create-server)
 
 ;; Contrib modules
 (set-contrib-dir "~/stumpwm/contrib/")
@@ -13,20 +13,20 @@
 ;; Font
 (set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
-;; Change color map
-(setf *colors* (list "gray10"            ; 0
-		     "PaleVioletRed3"    ; 1
-		     "medium sea green"  ; 2
-		     "LightGoldenrod3"   ; 3
-		     "SkyBlue"           ; 4
-		     "wheat"             ; 5
-		     "honeydew"          ; 6
-		     "honeydew2"         ; 7
-		     "honeydew3"         ; 8
-		     "gray15"))          ; 9
+;; Change default color map
+(setf *colors* (list "gray10"           ; 0
+                     "PaleVioletRed3"   ; 1
+                     "medium sea green" ; 2
+                     "LightGoldenrod3"  ; 3
+                     "SkyBlue"          ; 4
+                     "wheat"            ; 5
+                     "honeydew"         ; 6
+                     "honeydew2"        ; 7
+                     "honeydew3"        ; 8
+                     "gray15"))         ; 9
 (update-color-map (current-screen))
 
-;; Change highlight function format
+;; Change default highlight function format
 (defun fmt-highlight (s)
   (format nil "^6*~A^n" s))
 
@@ -34,63 +34,61 @@
 (setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-border-color "honeydew4")
 (set-win-bg-color "gray10")
 (set-focus-color "honeydew2")
-(set-fg-color "honeydew")
-(set-bg-color "gray10")
 (set-unfocus-color "honeydew4")
 (set-float-focus-color "honeydew2")
 (set-float-unfocus-color "gray5")
 
-;; Mode-line colors
-(setf *mode-line-background-color* "gray10"
-      *mode-line-foreground-color* "honeydew4"
-      *mode-line-border-color* "gray5"
-      *background* "gray10")
+;; Message and input prompt colors
+(set-border-color "honeydew4")
+(set-fg-color "honeydew")
+(set-bg-color "gray10")
 
 ;; Window style
 (setf *window-border-style* :thin
       *maxsize-border-width* 1
       *mouse-focus-policy* :click)
 
-;; Input and message prompt style
+;; Message and input prompt style
 (setf *input-window-gravity* :center
-      *message-window-gravity* :center
+      *message-window-gravity* :bottom-right
       *input-history-ignore-duplicates* 1)
+
+;; Mode-line colors
+(setf *mode-line-background-color* "gray10"
+      *mode-line-foreground-color* "honeydew4"
+      *mode-line-border-color* "gray5")
 
 ;; Mode-line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *group-format* "%n %s %t"
       *screen-mode-line-format* (list "^5*%n^n %W ^> "
-				      "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
+                                      "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
       *mode-line-border-width* 0
       *mode-line-position* :top
-      *mode-line-timeout* 1)
+      *mode-line-timeout* 5)
 
 ;; Show mode-line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
-			  (stumpwm:current-head))
+                          (stumpwm:current-head))
 
 ;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
 (run-commands "gnewbg www" "gnewbg emacs" "gnewbg misc")
 
 ;; Run or raise
-;; Emacs Client
 (defcommand eclient () ()
-	    "Run/Raise Emacs Client"
-	    (run-or-raise "emacsclient -c" '(:class "Emacs")))
+            "Run/Raise Emacsclient"
+            (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
-;; Conkeror
 (defcommand conkeror () ()
-	    "Run/Raise Conkeror"
-	    (run-or-raise "conkeror" '(:class "Conkeror")))
+            "Run/Raise Conkeror"
+            (run-or-raise "conkeror" '(:class "Conkeror")))
 
-;; GIMP
 (defcommand gimp () ()
-	    "Run/Raise GIMP"
-	    (run-or-raise "gimp" '(:class "Gimp")))
+            "Run/Raise GIMP"
+            (run-or-raise "gimp" '(:class "Gimp")))
 
 ;; Window placement
 (clear-window-placement-rules)
@@ -104,14 +102,12 @@
 (define-frame-preference "misc"
     (0 t t :class "Gimp"))
 
-
-;; Keybindings
 ;; Prefix key
 (set-prefix-key (kbd "C-i"))
 
 ;; Swap defaults
 (define-key *root-map* (kbd "C-c") "conkeror")
-(define-key *root-map* (kbd "c") "exec termite")
+(define-key *root-map* (kbd "c") "exec st")
 (define-key *root-map* (kbd "e") "eclient")
 
 ;; Fast group switching
