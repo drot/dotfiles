@@ -576,7 +576,7 @@
 
 ;; IELM
 (use-package ielm
-  :bind ("C-c t i" . ielm)
+  :bind ("C-c a m" . ielm)
   :config
   (setq ielm-prompt "EL> "))
 
@@ -626,7 +626,7 @@
 
 ;; World time
 (use-package time
-  :bind ("C-c a w" . display-time-world)
+  :bind ("C-c t t" . display-time-world)
   :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
@@ -1033,8 +1033,8 @@ This doesn't support the chanserv auth method"
 ;; SLIME
 (use-package slime
   :ensure t
-  :bind (("C-c a s" . slime)
-         ("C-c t s" . slime-connect)
+  :bind (("C-c t s" . slime)
+         ("C-c t c" . slime-connect)
          :map slime-mode-indirect-map
          ("C-c $" . slime-export-symbol-at-point))
   :config
