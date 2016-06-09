@@ -1,4 +1,3 @@
-;; -*-lisp-*-
 (in-package :stumpwm)
 
 ;; Load swank
