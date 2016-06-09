@@ -73,6 +73,17 @@
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
 
+;; Show incomplete key sequences
+(defun key-seq-msg (key key-seq cmd)
+  "Show a message with current incomplete key sequence."
+  (declare (ignore key))
+  (or (eq *top-map* *resize-map*)
+      (stringp cmd)
+      (let ((*message-window-gravity* :bottom-left))
+        (message "~A" (print-key-seq (reverse key-seq))))))
+
+(add-hook *key-press-hook* 'key-seq-msg)
+
 ;; First group name and group creation
 (setf (group-name (first (screen-groups (current-screen)))) "term")
 (run-commands "gnewbg www" "gnewbg emacs" "gnewbg misc")
