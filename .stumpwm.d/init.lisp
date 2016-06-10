@@ -72,8 +72,7 @@
 ;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *screen-mode-line-format* '("^7*%n^n %W ^3%u^n ^> "
-                                  "^2*%c^n> ^4*%M^n> ^7*%l^n> %d")
-      *mode-line-timeout* 5)
+                                  "^3*%c^n> ^4*%M^n> ^7*%l^n> %d"))
 
 ;; Show the mode line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
