@@ -19,32 +19,36 @@
 (set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
 ;; Change default color map
-(setf *colors* (list "gray10"           ; 0
-                     "PaleVioletRed3"   ; 1
-                     "medium sea green" ; 2
-                     "LightGoldenrod3"  ; 3
-                     "SkyBlue"          ; 4
-                     "wheat"            ; 5
-                     "honeydew"         ; 6
-                     "honeydew2"        ; 7
-                     "honeydew3"        ; 8
-                     "gray15"))         ; 9
+(setf *colors* '("#5f5f5f"              ; 0 black
+                 "#dca3a3"              ; 1 red
+                 "#9fc59f"              ; 2 green
+                 "#f0dfaf"              ; 3 yellow
+                 "#8cd0d3"              ; 4 blue
+                 "#dc8cc3"              ; 5 magenta
+                 "#93e0e3"              ; 6 cyan
+                 "#dcdccc"))            ; 7 white
 (update-color-map (current-screen))
 
 ;; Startup message
-(setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
+(setf *startup-message* "^4*StumpWM^n ^2*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-win-bg-color "gray10")
-(set-focus-color "honeydew2")
-(set-unfocus-color "honeydew4")
-(set-float-focus-color "honeydew2")
-(set-float-unfocus-color "gray5")
+(set-win-bg-color "#3f3f3f")
+(set-focus-color "#5f5f5f")
+(set-unfocus-color "#1e2320")
+(set-float-focus-color "#5f5f5f")
+(set-float-unfocus-color "#1e2320")
 
 ;; Message and input prompt colors
-(set-border-color "honeydew4")
-(set-fg-color "honeydew")
-(set-bg-color "gray10")
+(set-border-color "#5f5f5f")
+(set-fg-color "#dcdccc")
+(set-bg-color "#1e2320")
+
+;; Grabbed pointer style
+(setq *grab-pointer-character* 40
+      *grab-pointer-character-mask* 41
+      *grab-pointer-foreground* (hex-to-xlib-color "#1e2320")
+      *grab-pointer-background* (hex-to-xlib-color "#f0dfaf"))
 
 ;; Window style
 (setf *window-border-style* :thin
@@ -57,15 +61,15 @@
       *input-history-ignore-duplicates* 1)
 
 ;; Mode line colors
-(setf *mode-line-background-color* "gray10"
-      *mode-line-foreground-color* "honeydew4"
-      *mode-line-border-color* "gray5")
+(setf *mode-line-foreground-color* "#dcdccc"
+      *mode-line-background-color* "#3f3f3f"
+      *mode-line-border-color* "#5f5f5f")
 
 ;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *group-format* "%n %s %t"
-      *screen-mode-line-format* (list "^5*%n^n %W ^> "
-                                      "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
+      *screen-mode-line-format* '("^3*%n^n %W ^> "
+                                  "^2*%c^n> ^4*%M^n> ^7*%l^n> %d")
       *mode-line-timeout* 5)
 
 ;; Show the mode line for current screen
@@ -83,22 +87,25 @@
 
 (add-hook *key-press-hook* 'key-seq-msg)
 
-;; First group name and group creation
-(setf (group-name (first (screen-groups (current-screen)))) "term")
-(run-commands "gnewbg www" "gnewbg emacs" "gnewbg misc")
+;; First group name and other group creation
+(setf (group-name (car (screen-groups (current-screen)))) "term")
+
+(gnewbg "www")
+(gnewbg "emacs")
+(gnewbg-float "float")
 
 ;; Run or raise
 (defcommand eclient () ()
-            "Run/Raise Emacsclient"
-            (run-or-raise "emacsclient -c" '(:class "Emacs")))
+  "Run/Raise Emacsclient"
+  (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
 (defcommand conkeror () ()
-            "Run/Raise Conkeror"
-            (run-or-raise "conkeror" '(:class "Conkeror")))
+  "Run/Raise Conkeror"
+  (run-or-raise "conkeror" '(:class "Conkeror")))
 
 (defcommand gimp () ()
-            "Run/Raise GIMP"
-            (run-or-raise "gimp" '(:class "Gimp")))
+  "Run/Raise GIMP"
+  (run-or-raise "gimp" '(:class "Gimp")))
 
 ;; Window placement
 (clear-window-placement-rules)
