@@ -29,6 +29,10 @@
                  "#dcdccc"))            ; 7 white
 (update-color-map (current-screen))
 
+;; Change default highlight format
+(defun fmt-highlight (s)
+  (format nil "^6*~A^n" s))
+
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^2*has^n ^3*initialized^n^6*.^n")
 
@@ -67,8 +71,7 @@
 
 ;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
-      *group-format* "%n %s %t"
-      *screen-mode-line-format* '("^3*%n^n %W ^> "
+      *screen-mode-line-format* '("^7*%n^n %W ^3%u^n ^> "
                                   "^2*%c^n> ^4*%M^n> ^7*%l^n> %d")
       *mode-line-timeout* 5)
 
