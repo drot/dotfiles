@@ -37,10 +37,10 @@
 (setf *startup-message* "^4*StumpWM^n ^2*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-win-bg-color "#3f3f3f")
-(set-focus-color "#5f5f5f")
+(set-win-bg-color "#5f5f5f")
+(set-focus-color "#9fc59f")
 (set-unfocus-color "#1e2320")
-(set-float-focus-color "#5f5f5f")
+(set-float-focus-color "#9fc59f")
 (set-float-unfocus-color "#1e2320")
 
 ;; Message and input prompt colors
@@ -94,6 +94,7 @@
 
 (gnewbg "www")
 (gnewbg "emacs")
+(gnewbg "misc")
 (gnewbg-float "float")
 
 ;; Run or raise
@@ -128,15 +129,3 @@
 (define-key *root-map* (kbd "C-c") "conkeror")
 (define-key *root-map* (kbd "c") "exec st")
 (define-key *root-map* (kbd "e") "eclient")
-
-;; Fast group switching
-(define-key *top-map* (kbd "s-1") "gselect 1")
-(define-key *top-map* (kbd "s-2") "gselect 2")
-(define-key *top-map* (kbd "s-3") "gselect 3")
-(define-key *top-map* (kbd "s-4") "gselect 4")
-(define-key *top-map* (kbd "s-5") "gselect 5")
-(define-key *top-map* (kbd "s-6") "gselect 6")
-(define-key *top-map* (kbd "s-7") "gselect 7")
-(define-key *top-map* (kbd "s-8") "gselect 8")
-(define-key *top-map* (kbd "s-9") "gselect 9")
-(define-key *top-map* (kbd "s-0") "gselect 10")
