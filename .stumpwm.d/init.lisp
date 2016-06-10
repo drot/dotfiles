@@ -1,8 +1,14 @@
 (in-package :stumpwm)
 
 ;; Load swank
-(require 'swank)
-(swank:create-server)
+(load (car (directory "~/.emacs.d/elpa/slime-*/swank-loader.lisp")))
+
+(swank-loader:init)
+
+(swank:create-server
+ :port 4666
+ :style swank:*communication-style*
+ :dont-close t)
 
 ;; Contrib modules
 (set-contrib-dir "~/stumpwm/contrib/")
@@ -25,10 +31,6 @@
                      "honeydew3"        ; 8
                      "gray15"))         ; 9
 (update-color-map (current-screen))
-
-;; Change default highlight function format
-(defun fmt-highlight (s)
-  (format nil "^6*~A^n" s))
 
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^6*has^n ^3*initialized^n^6*.^n")
@@ -65,7 +67,6 @@
       *group-format* "%n %s %t"
       *screen-mode-line-format* (list "^5*%n^n %W ^> "
                                       "^3*%c^n| ^4*%M^n| ^5*%l^n| %d")
-      *mode-line-border-width* 0
       *mode-line-timeout* 5)
 
 ;; Show the mode line for current screen
