@@ -10,8 +10,7 @@
  :style swank:*communication-style*
  :dont-close t)
 
-;; Contrib modules
-(set-contrib-dir "~/stumpwm/contrib/")
+;; Load contrib modules
 (load-module "cpu")
 (load-module "mem")
 (load-module "net")
