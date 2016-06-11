@@ -35,7 +35,7 @@
                  "#9fc59f"              ; 2 green
                  "#f0dfaf"              ; 3 yellow
                  "#8cd0d3"              ; 4 blue
-                 "#93e0e3"              ; 5 magenta
+                 "#dc8cc3"              ; 5 magenta
                  "#93e0e3"              ; 6 cyan
                  "#dcdccc"))            ; 7 white
 (update-color-map (current-screen))
