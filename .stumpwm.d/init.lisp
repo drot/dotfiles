@@ -16,7 +16,7 @@
 (load-module "net")
 
 ;; Font
-(set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
+(set-font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*")
 
 ;; Change default color map
 (setf *colors* '("#5f5f5f"              ; 0 black
@@ -69,6 +69,10 @@
       *mode-line-background-color* "#3f3f3f"
       *mode-line-border-color* "#5f5f5f")
 
+;; Group and window format
+(setf *group-format* "%s [%n] %t "
+      *window-format* "%m%n%s%c")
+
 ;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
       *screen-mode-line-format* '("^7*%n^n %W ^3%u^n ^> "
@@ -110,6 +114,11 @@
   "Run/Raise GIMP"
   (run-or-raise "gimp" '(:class "Gimp")))
 
+;; Default terminal
+(defcommand terminal () ()
+  "Start a terminal session."
+  (run-shell-command "st"))
+
 ;; Window placement
 (clear-window-placement-rules)
 
@@ -125,7 +134,7 @@
 ;; Prefix key
 (set-prefix-key (kbd "C-i"))
 
-;; Swap defaults
+;; Swap default key bindings
 (define-key *root-map* (kbd "C-c") "conkeror")
-(define-key *root-map* (kbd "c") "exec st")
+(define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
