@@ -5,15 +5,13 @@
 
 (swank-loader:init)
 
-(defun swank-start ()
-  "Creates a SWANK server in the StumpWM Lisp process."
-  (echo-string (current-screen) "Starting SWANK.")
+(defcommand swank () ()
+  "Creates a Swank server in the StumpWM Lisp process."
   (swank:create-server
    :port 4666
    :style swank:*communication-style*
-   :dont-close t))
-
-(swank-start)
+   :dont-close t)
+  (echo-string (current-screen) "Starting Swank..."))
 
 ;; Load contrib modules
 (load-module "cpu")
@@ -87,17 +85,6 @@
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
 
-;; Show incomplete key sequences
-(defun key-seq-msg (key key-seq cmd)
-  "Show a message with current incomplete key sequence."
-  (declare (ignore key))
-  (or (eq *top-map* *resize-map*)
-      (stringp cmd)
-      (let ((*message-window-gravity* :bottom-left))
-        (message "~A" (print-key-seq (reverse key-seq))))))
-
-(add-hook *key-press-hook* 'key-seq-msg)
-
 ;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
 
@@ -143,3 +130,19 @@
 (define-key *root-map* (kbd "C-c") "conkeror")
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
+
+;; Show incomplete key sequences
+(defun key-press-hook (key key-seq cmd)
+  "Show a message with current incomplete key sequence."
+  (declare (ignore key))
+  (unless (eq *top-map* *resize-map*)
+    (let ((*message-window-gravity* :bottom-left))
+      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
+    (when (stringp cmd)
+      (sleep 0.1))))
+
+(defmacro replace-hook (hook fn)
+  `(remove-hook ,hook ,fn)
+  `(add-hook ,hook ,fn))
+
+(replace-hook *key-press-hook* #'key-press-hook)
