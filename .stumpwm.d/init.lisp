@@ -5,10 +5,15 @@
 
 (swank-loader:init)
 
-(swank:create-server
- :port 4666
- :style swank:*communication-style*
- :dont-close t)
+(defun swank-start ()
+  "Creates a SWANK server in the StumpWM Lisp process."
+  (echo-string (current-screen) "Starting SWANK.")
+  (swank:create-server
+   :port 4666
+   :style swank:*communication-style*
+   :dont-close t))
+
+(swank-start)
 
 ;; Load contrib modules
 (load-module "cpu")
