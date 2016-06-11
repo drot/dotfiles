@@ -1,3 +1,14 @@
+;;; init.lisp --- StumpWM user configuration
+
+;; Author: drot
+;; Created 30-01-2011
+
+;;; Commentary:
+
+;; Zenburn themed, mostly default key bindings.
+
+;;; Code:
+
 (in-package :stumpwm)
 
 ;; Load swank
@@ -18,9 +29,6 @@
 (load-module "mem")
 (load-module "net")
 
-;; Font
-(set-font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*")
-
 ;; Change default color map
 (setf *colors* '("#5f5f5f"              ; 0 black
                  "#dca3a3"              ; 1 red
@@ -35,6 +43,9 @@
 ;; Change default highlight format
 (defun fmt-highlight (s)
   (format nil "^6*~A^n" s))
+
+;; Font
+(set-font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*")
 
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^2*has^n ^3*initialized^n^6*.^n")
@@ -123,7 +134,7 @@
 (define-frame-preference "misc"
     (0 t t :class "Gimp"))
 
-;; Prefix key
+;; Change default prefix key
 (set-prefix-key (kbd "C-i"))
 
 ;; Swap default key bindings
@@ -131,18 +142,4 @@
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
 
-;; Show incomplete key sequences
-(defun key-press-hook (key key-seq cmd)
-  "Show a message with current incomplete key sequence."
-  (declare (ignore key))
-  (unless (eq *top-map* *resize-map*)
-    (let ((*message-window-gravity* :bottom-left))
-      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
-    (when (stringp cmd)
-      (sleep 0.1))))
-
-(defmacro replace-hook (hook fn)
-  `(remove-hook ,hook ,fn)
-  `(add-hook ,hook ,fn))
-
-(replace-hook *key-press-hook* #'key-press-hook)
+;;; init.lisp ends here
