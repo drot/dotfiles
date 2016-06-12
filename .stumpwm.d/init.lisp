@@ -63,8 +63,8 @@
 (set-bg-color "#1e2320")
 
 ;; Grabbed pointer style
-(setq *grab-pointer-character* 50
-      *grab-pointer-character-mask* 51
+(setq *grab-pointer-character* 40
+      *grab-pointer-character-mask* 41
       *grab-pointer-foreground* (hex-to-xlib-color "#1e2320")
       *grab-pointer-background* (hex-to-xlib-color "#f0dfaf"))
 
