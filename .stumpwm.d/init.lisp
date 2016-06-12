@@ -42,10 +42,6 @@
                  "#dcdccc"))            ; 7 white
 (update-color-map (current-screen))
 
-;; Change default highlight format
-(defun fmt-highlight (s)
-  (format nil "^6*~A^n" s))
-
 ;; Font
 (set-font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*")
 
@@ -85,12 +81,13 @@
       *mode-line-background-color* "#3f3f3f"
       *mode-line-border-color* "#5f5f5f")
 
-;; Group format
-(setf *group-format* "%s [%n] %t ")
+;; Group and window format
+(setf *group-format* "%n%s<%t>"
+      *window-format* "%m%n%s[%50t]")
 
 ;; Mode line format
-(setf *time-modeline-string* "^3*%d-%m %H:%M^n"
-      *screen-mode-line-format* '("^7[%n]^n %W ^3%u^n ^> "
+(setf *time-modeline-string* "^4*%d-%m^n ^3*%H:%M^n"
+      *screen-mode-line-format* '("^7*<%n>^n ^30%W^n ^06%u^n ^>"
                                   "^3*%c^n> ^4*%M^n> ^7*%l^n> %d"))
 
 ;; Show the mode line for current screen
