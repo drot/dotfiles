@@ -24,10 +24,12 @@
    :dont-close t)
   (echo-string (current-screen) "Starting Swank..."))
 
+(define-key *root-map* (kbd "C-s") "swank")
+
 ;; Load contrib modules
-(load-module "cpu")
-(load-module "mem")
-(load-module "net")
+(mapcar #'load-module '("cpu"
+                        "mem"
+                        "net"))
 
 ;; Change default color map
 (setf *colors* '("#5f5f5f"              ; 0 black
@@ -83,9 +85,8 @@
       *mode-line-background-color* "#3f3f3f"
       *mode-line-border-color* "#5f5f5f")
 
-;; Group and window format
-(setf *group-format* "%s [%n] %t "
-      *window-format* "%m%n%s%c")
+;; Group format
+(setf *group-format* "%s [%n] %t ")
 
 ;; Mode line format
 (setf *time-modeline-string* "^3*%d-%m %H:%M^n"
@@ -98,11 +99,10 @@
 
 ;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
-
-(gnewbg "www")
-(gnewbg "emacs")
-(gnewbg "misc")
-(gnewbg-float "float")
+(run-commands "gnewbg www"
+              "gnewbg emacs"
+              "gnewbg misc"
+              "gnewbg-float float")
 
 ;; Default terminal
 (defcommand terminal () ()
