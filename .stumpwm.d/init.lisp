@@ -104,6 +104,11 @@
 (gnewbg "misc")
 (gnewbg-float "float")
 
+;; Default terminal
+(defcommand terminal () ()
+  "Start a terminal session."
+  (run-shell-command "st"))
+
 ;; Run or raise
 (defcommand eclient () ()
   "Run/Raise Emacsclient"
@@ -116,11 +121,6 @@
 (defcommand gimp () ()
   "Run/Raise GIMP"
   (run-or-raise "gimp" '(:class "Gimp")))
-
-;; Default terminal
-(defcommand terminal () ()
-  "Start a terminal session."
-  (run-shell-command "st"))
 
 ;; Window placement
 (clear-window-placement-rules)
