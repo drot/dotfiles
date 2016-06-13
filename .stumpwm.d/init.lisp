@@ -46,7 +46,7 @@
 (set-font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-iso10646-*")
 
 ;; Startup message
-(setf *startup-message* "^4*StumpWM^n ^2*has^n ^3*initialized^n^6*.^n")
+(setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
 (set-win-bg-color "#5f5f5f")
