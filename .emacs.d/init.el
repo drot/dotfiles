@@ -58,6 +58,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; Enable Imenu support for use-package
+(setq use-package-enable-imenu-support t)
+
 ;; Load use-package
 (eval-when-compile
   (require 'use-package))
