@@ -650,7 +650,6 @@
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
-  :commands org-narrow-to-subtree
   :config
   (setq org-directory (expand-file-name "org" drot/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
