@@ -283,6 +283,13 @@
 
   (global-prettify-symbols-mode))
 
+;; ElDoc mode
+(use-package eldoc
+  :config
+  (eldoc-add-command
+   'paredit-backward-delete
+   'paredit-close-round))
+
 ;; Which function mode
 (use-package which-func
   :config
