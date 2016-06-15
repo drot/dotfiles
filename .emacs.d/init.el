@@ -1173,6 +1173,15 @@ This doesn't support the chanserv auth method"
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
+;; Composable
+(use-package composable
+  :ensure t
+  :diminish (composable-mode . "CE")
+  :commands (composable-mode composable-mark-mode)
+  :init
+  (composable-mode)
+  (composable-mark-mode))
+
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
