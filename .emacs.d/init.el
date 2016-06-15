@@ -1229,12 +1229,6 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
 
-;; Iedit
-(use-package iedit
-  :ensure t
-  :init
-  (setq iedit-toggle-key-default (kbd "C-:")))
-
 ;; Ivy
 (use-package ivy
   :ensure t
@@ -1274,10 +1268,10 @@ This doesn't support the chanserv auth method"
   :bind (("C-c s s" . swiper)
          ("C-c s i" . swiper-from-isearch)))
 
-;; Lispy
-(use-package lispy
+;; Paredit
+(use-package paredit
   :ensure t
-  :commands lispy-mode
+  :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -1285,25 +1279,21 @@ This doesn't support the chanserv auth method"
                   scheme-mode-hook
                   slime-repl-mode-hook
                   geiser-repl-mode-hook))
-    (add-hook hook #'lispy-mode))
+    (add-hook hook #'enable-paredit-mode))
   :config
-  (setq lispy-safe-delete t
-        lispy-safe-copy t
-        lispy-safe-paste t)
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                          pp-eval-expression
-                                          eval-expression-with-eldoc
-                                          ibuffer-do-eval
-                                          ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
+  (defun drot/paredit-minibuffer ()
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
 
-  (defun drot/lispy-minibuffer ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
-
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
