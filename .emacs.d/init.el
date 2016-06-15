@@ -1280,6 +1280,7 @@ This doesn't support the chanserv auth method"
                   geiser-repl-mode-hook))
     (add-hook hook #'enable-paredit-mode))
   :config
+  ;; Implement extreme barfage and slurpage commands
   (defun paredit-barf-all-the-way-backward ()
     (interactive)
     (paredit-split-sexp)
@@ -1340,6 +1341,7 @@ This doesn't support the chanserv auth method"
   (paredit-annotate-mode-with-examples)
   (paredit-annotate-functions-with-examples)
 
+  ;; Enable Paredit in suitable modes
   (defvar drot/paredit-minibuffer-commands '(eval-expression
                                              pp-eval-expression
                                              eval-expression-with-eldoc
