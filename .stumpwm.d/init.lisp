@@ -140,7 +140,7 @@
 (set-prefix-key (kbd "C-i"))
 
 ;; Swap default key bindings
-(define-key *root-map* (kbd "C-c") "conkeror")
+(define-key *root-map* (kbd "C-b") "conkeror")
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
 
