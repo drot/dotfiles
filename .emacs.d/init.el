@@ -1369,6 +1369,7 @@ This doesn't support the chanserv auth method"
          ("C-c m C-a" . mc/edit-beginnings-of-lines)
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region))
+  :commands (activate-cursor-for-undo deactivate-cursor-after-undo)
   :init
   (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
 
