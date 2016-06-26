@@ -32,12 +32,12 @@ set wildignorecase
 " Enable auto indentation
 set autoindent
 
-" Insert spaces instead of tabs
-set expandtab
-
 " Use indentation with 4 spaces
 set shiftwidth=4
 set softtabstop=4
+
+" Insert spaces instead of tabs
+set expandtab
 
 " More powerful backspace
 set backspace=indent,eol,start
