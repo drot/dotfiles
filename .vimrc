@@ -7,8 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'sjl/gundo.vim/', { 'on': 'GundoToggle' }
 Plug 'xero/sourcerer.vim'
 
 call plug#end()
@@ -60,7 +59,6 @@ set ruler
 
 " Enable crosshair cursor
 set cursorline
-set cursorcolumn
 
 " Show line numbers
 set number
@@ -80,8 +78,5 @@ if &t_Co > 255 || has('gui_running')
     colorscheme sourcerer
 endif
 
-" Toggle the NERD tree
-nnoremap <F4> :NERDTreeToggle<cr>
-
-" Toggle the undo tree
-nnoremap <F5> :UndotreeToggle<cr>
+" Toggle undo visualization
+nnoremap <F5> :GundoToggle<CR>
