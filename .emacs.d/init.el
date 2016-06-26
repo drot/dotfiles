@@ -747,7 +747,8 @@
          ("C-c l" . avy-goto-line)
          ("C-c j" . avy-goto-word-or-subword-1))
   :config
-  (setq avy-background t)
+  (setq avy-all-windows 'all-frames
+        avy-background t)
 
   (avy-setup-default))
 
