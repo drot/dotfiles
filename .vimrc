@@ -26,7 +26,6 @@ set undofile
 set undodir=~/.vim/undo
 
 " Lazy file name tab completion
-set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
 
