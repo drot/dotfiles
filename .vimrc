@@ -7,8 +7,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'sjl/gundo.vim/', { 'on': 'GundoToggle' }
-Plug 'xero/sourcerer.vim'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'jnurmine/Zenburn'
 
 call plug#end()
 
@@ -33,10 +33,12 @@ set wildignorecase
 " Enable auto indentation
 set autoindent
 
+" Insert spaces instead of tabs
+set expandtab
+
 " Use indentation with 4 spaces
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 
 " More powerful backspace
 set backspace=indent,eol,start
@@ -75,8 +77,8 @@ set laststatus=2
 " Set colorscheme
 if &t_Co > 255 || has('gui_running')
     set background=dark
-    colorscheme sourcerer
+    colorscheme zenburn
 endif
 
 " Toggle undo visualization
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
