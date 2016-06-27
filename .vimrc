@@ -12,12 +12,6 @@ Plug 'jnurmine/Zenburn'
 
 call plug#end()
 
-" Use correct indentation
-filetype indent plugin on
-
-" Enable syntax highlighting
-syntax on
-
 " Hide buffers
 set hidden
 
@@ -28,6 +22,12 @@ set undodir=~/.vim/undo
 " Lazy file name tab completion
 set wildmenu
 set wildignorecase
+
+" Use correct indentation
+filetype indent plugin on
+
+" Enable syntax highlighting
+syntax on
 
 " Enable auto indentation
 set autoindent
@@ -45,24 +45,27 @@ set backspace=indent,eol,start
 " Paste without auto indentation
 set paste
 
-" Use smart case insensitive search
+" Use case insensitive search
 set ignorecase
 set smartcase
+
+" Immediate search
+set incsearch
 
 " Disable the startup message
 set shortmess+=I
 
-" Show partial commands
-set showcmd
-
 " Show current cursor position
 set ruler
 
-" Enable crosshair cursor
-set cursorline
-
 " Show line numbers
 set number
+
+" Show partial commands
+set showcmd
+
+" Highlight cursor line
+set cursorline
 
 " Highlight searches
 set hlsearch
