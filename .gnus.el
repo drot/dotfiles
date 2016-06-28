@@ -16,7 +16,7 @@
       gnus-mime-display-multipart-related-as-mixed t)
 
 ;; Group topics
-(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+(add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
 
 ;; Configure visible headers
 (setq gnus-visible-headers
