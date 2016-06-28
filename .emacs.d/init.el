@@ -478,7 +478,9 @@
   :commands (bug-reference-mode bug-reference-prog-mode)
   :init
   (add-hook 'text-mode-hook #'bug-reference-mode)
-  (add-hook 'prog-mode-hook #'bug-reference-prog-mode))
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  :config
+  (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
 
 ;; Goto Address mode
 (use-package goto-addr
