@@ -473,7 +473,7 @@
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode)))
 
-;; Bug References mode
+;; Bug Reference mode
 (use-package bug-reference
   :commands (bug-reference-mode bug-reference-prog-mode)
   :init
