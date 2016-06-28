@@ -65,37 +65,9 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Try to extract docstrings from special forms
-(setq bind-key-describe-special-forms t)
-
-;; Disable unnecessary GUI elements
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-(when (fboundp 'menu-bar-mode)
-  (menu-bar-mode -1))
-
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
-
-;; Show tooltips in the echo area
-(tooltip-mode -1)
-
-;; Disable cursor blinking
-(blink-cursor-mode -1)
-
-;; Show column number and buffer size on the mode line
-(column-number-mode)
-
-(size-indication-mode)
-
-;; Indicate buffer boundaries and empty lines
-(setq-default indicate-buffer-boundaries 'left
-              indicate-empty-lines t)
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
@@ -109,6 +81,10 @@
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
+
+;; Indicate buffer boundaries and empty lines
+(setq-default indicate-buffer-boundaries 'left
+              indicate-empty-lines t)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -135,6 +111,9 @@
 ;; No length limit when printing values
 (setq eval-expression-print-length nil
       eval-expression-print-level nil)
+
+;; Try to extract docstrings from special forms
+(setq bind-key-describe-special-forms t)
 
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
@@ -205,6 +184,14 @@
 
 ;; Diminish Auto Fill mode
 (diminish 'auto-fill-function " FL")
+
+;; Show tooltips in the echo area
+(tooltip-mode -1)
+
+;; Show column number and buffer size on the mode line
+(column-number-mode)
+
+(size-indication-mode)
 
 ;; Highlight current line
 (global-hl-line-mode)
@@ -698,9 +685,6 @@
 
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
-
-;; Xwidget WebKit browser
-(bind-key "C-c a x" #'xwidget-webkit-browse-url)
 
 ;; Wind Move
 (bind-key "C-c w <left>" #'windmove-left)

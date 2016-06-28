@@ -7,6 +7,7 @@ Emacs.background: #3f3f3f
 Emacs.menuBar: off
 Emacs.toolBar: off
 Emacs.verticalScrollBars: off
+Emacs.cursorBlink: off
 
 ! URXVT
 
