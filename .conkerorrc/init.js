@@ -121,6 +121,12 @@ url_completion_use_bookmarks = true;
 url_completion_use_webjumps = true;
 minibuffer_auto_complete_default = true;
 
+// Eye guide
+require('eye-guide.js');
+
+define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
+define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
+
 // Switch and kill buffers with the number keys
 function define_switch_buffer_key (key, buf_num) {
     define_key(default_global_keymap, key,
@@ -175,12 +181,33 @@ interactive("restore-killed-buffer-url",
 
 define_key(content_buffer_normal_keymap, "C-x u", "restore-killed-buffer-url");
 
-// Eye guide
-require('eye-guide.js');
+// Toggle javascript on/off
+interactive("enable_js",
+            "enable js",
+            function (I) {
+                session_pref("javascript.enabled", true);
+                I.minibuffer.message("JS enabled");
 
-define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
-define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
+                check_buffer(I.buffer, content_buffer);
+                var element = yield read_browser_object(I);
+                reload(I.buffer, I.P, element, I.forced_charset || null);
+            },
+            $browser_object = null);
 
+interactive("disable_js",
+            "disable js",
+            function (I) {
+                session_pref("javascript.enabled", false);
+                I.minibuffer.message("JS disabled");
+
+                check_buffer(I.buffer, content_buffer);
+                var element = yield read_browser_object(I);
+                reload(I.buffer, I.P, element, I.forced_charset || null);
+            },
+            $browser_object = null);
+
+define_key(content_buffer_normal_keymap, "j", "enable_js");
+define_key(content_buffer_normal_keymap, "J", "disable_js");
 
 // Delete existing webjumps
 var unused_webjumps = ['answers', 'buildd', 'buildd-ports', 'clhs', 'cliki',
