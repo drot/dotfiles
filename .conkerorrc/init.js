@@ -127,6 +127,22 @@ require('eye-guide.js');
 define_key(content_buffer_normal_keymap, "space", "eye-guide-scroll-down");
 define_key(content_buffer_normal_keymap, "S-space", "eye-guide-scroll-up");
 
+// uBlock dashboard
+interactive(
+    "ublock", "Open uBlock dashboard in a new buffer",
+    function (I) {
+        var ublock_branch;
+        if ("@ublock0/content-policy;1" in Cc) {
+            ublock_branch = "ublock0";
+        } else if ("@ublock/content-policy;1" in Cc) {
+            ublock_branch = "ublock";
+        } else {
+            throw interactive_error("uBlock not found");
+        }
+        load_url_in_new_buffer("chrome://"+ublock_branch+"/content/dashboard.html");
+    }
+);
+
 // Switch and kill buffers with the number keys
 function define_switch_buffer_key (key, buf_num) {
     define_key(default_global_keymap, key,
