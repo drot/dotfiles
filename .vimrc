@@ -58,8 +58,8 @@ set shortmess+=I
 " Show current cursor position
 set ruler
 
-" Show line numbers
-set number
+" Show relative line numbers
+set relativenumber
 
 " Show partial commands
 set showcmd
