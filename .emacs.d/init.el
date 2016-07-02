@@ -335,12 +335,14 @@
 (use-package custom
   :defer t
   :config
-  (setq custom-safe-theme t))
+  (setq custom-safe-themes t))
 
 ;; ElDoc mode configuration
 (use-package eldoc
   :defer t
   :config
+  (setq eldoc-idle-delay 0.1)
+
   (eldoc-add-command
    #'paredit-backward-delete
    #'paredit-close-round))
@@ -367,6 +369,12 @@
                           (other . "k&r")))
 
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
+
+;; CSS mode configuration
+(use-package css-mode
+  :defer t
+  :config
+  (setq css-indent-offset 2))
 
 ;; NXML mode configuration
 (use-package nxml-mode
