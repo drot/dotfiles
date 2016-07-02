@@ -650,7 +650,9 @@
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-log-done 'time
         org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+        org-src-tab-acts-natively t
+        org-catch-invisible-edits 'error
+        org-startup-indented t))
 
 ;; World time
 (use-package time
