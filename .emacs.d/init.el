@@ -331,6 +331,12 @@
         custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
 
+;; Treat all themes as safe
+(use-package custom
+  :defer t
+  :config
+  (setq custom-safe-theme t))
+
 ;; ElDoc mode configuration
 (use-package eldoc
   :defer t
@@ -624,15 +630,6 @@
         calendar-longitude 17.48
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
-;; World time
-(use-package time
-  :bind ("C-c t t" . display-time-world)
-  :config
-  (setq display-time-world-list '(("Europe/Riga" "Riga")
-                                  ("America/Los_Angeles" "Los Angeles")
-                                  ("Canada/Eastern" "Quebec")
-                                  ("Asia/Saigon" "Saigon"))))
-
 ;; Org-mode
 (use-package org
   :bind (("C-c o a" . org-agenda)
@@ -646,6 +643,24 @@
         org-log-done 'time
         org-src-fontify-natively t
         org-src-tab-acts-natively t))
+
+;; World time
+(use-package time
+  :bind ("C-c t t" . display-time-world)
+  :config
+  (setq display-time-world-list '(("Europe/Riga" "Riga")
+                                  ("America/Los_Angeles" "Los Angeles")
+                                  ("Canada/Eastern" "Quebec")
+                                  ("Asia/Saigon" "Saigon"))))
+
+;; Wind Move
+(use-package windmove
+  :bind (("C-c w b" . windmove-left)
+         ("C-c w f" . windmove-right)
+         ("C-c w p" . windmove-up)
+         ("C-c w n" . windmove-down))
+  :config
+  (setq windmove-wrap-around t))
 
 ;; Indent region
 (bind-key "C-c x i" #'indent-region)
@@ -685,12 +700,6 @@
 
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
-
-;; Wind Move
-(bind-key "C-c w <left>" #'windmove-left)
-(bind-key "C-c w <right>" #'windmove-right)
-(bind-key "C-c w <up>" #'windmove-up)
-(bind-key "C-c w <down>" #'windmove-down)
 
 ;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
@@ -837,10 +846,10 @@
 
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
-    ("j" enlarge-window "Enlarge Window")
-    ("k" shrink-window "Shrink Window")
-    ("l" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("h" shrink-window-horizontally "Shrink Window Horizontally")
+    ("n" enlarge-window "Enlarge Window")
+    ("p" shrink-window "Shrink Window")
+    ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
+    ("b" shrink-window-horizontally "Shrink Window Horizontally")
     ("q" nil "Quit"))
 
   (defhydra hydra-outline (:columns 4)
