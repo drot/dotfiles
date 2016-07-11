@@ -203,9 +203,6 @@
 ;; Electric pair mode
 (electric-pair-mode)
 
-;; Electric quote mode
-(electric-quote-mode)
-
 ;; Undo and redo the window configuration
 (winner-mode)
 
