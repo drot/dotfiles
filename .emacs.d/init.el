@@ -159,6 +159,10 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
+;; Make pointer visible and move it when close to point
+(setq make-pointer-invisible nil)
+(mouse-avoidance-mode 'cat-and-mouse)
+
 ;; Increase maximum size of the mark ring
 (setq mark-ring-max 30)
 
@@ -341,11 +345,7 @@
 (use-package eldoc
   :defer t
   :config
-  (setq eldoc-idle-delay 0.1)
-
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round))
+  (setq eldoc-idle-delay 0.1))
 
 ;; Python mode configuration
 (use-package python
@@ -645,6 +645,7 @@
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
+  :commands org-narrow-to-subtree
   :config
   (setq org-directory (expand-file-name "org" drot/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -1233,6 +1234,12 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
 
+;; Iedit
+(use-package iedit
+  :ensure t
+  :init
+  (setq iedit-toggle-key-default (kbd "C-:")))
+
 ;; Ivy
 (use-package ivy
   :ensure t
@@ -1272,11 +1279,10 @@ This doesn't support the chanserv auth method"
   :bind (("C-c s s" . swiper)
          ("C-c s i" . swiper-from-isearch)))
 
-;; Paredit
-(use-package paredit
+;; Lispy
+(use-package lispy
   :ensure t
-  :diminish (paredit-mode . "PE")
-  :commands enable-paredit-mode
+  :commands lispy-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -1284,83 +1290,25 @@ This doesn't support the chanserv auth method"
                   scheme-mode-hook
                   slime-repl-mode-hook
                   geiser-repl-mode-hook))
-    (add-hook hook #'enable-paredit-mode))
+    (add-hook hook #'lispy-mode))
   :config
-  ;; Implement extreme barfage and slurpage commands
-  (defun paredit-barf-all-the-way-backward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-backward-down)
-    (paredit-splice-sexp))
+  (setq lispy-safe-delete t
+        lispy-safe-copy t
+        lispy-safe-paste t)
 
-  (defun paredit-barf-all-the-way-forward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-forward-down)
-    (paredit-splice-sexp)
-    (if (eolp) (delete-horizontal-space)))
+  (defvar drot/lispy-minibuffer-commands '(eval-expression
+                                           pp-eval-expression
+                                           eval-expression-with-eldoc
+                                           ibuffer-do-eval
+                                           ibuffer-do-view-and-eval)
+    "Interactive commands for which Lispy should be enabled in the minibuffer.")
 
-  (defun paredit-slurp-all-the-way-backward ()
-    (interactive)
-    (catch 'done
-      (while (not (bobp))
-        (save-excursion
-          (paredit-backward-up)
-          (if (eq (char-before) ?\()
-              (throw 'done t)))
-        (paredit-backward-slurp-sexp))))
+  (defun drot/lispy-minibuffer ()
+    "Enable Lispy during lisp-related minibuffer commands."
+    (if (memq this-command drot/lispy-minibuffer-commands)
+        (lispy-mode)))
 
-  (defun paredit-slurp-all-the-way-forward ()
-    (interactive)
-    (catch 'done
-      (while (not (eobp))
-        (save-excursion
-          (paredit-forward-up)
-          (if (eq (char-after) ?\))
-              (throw 'done t)))
-        (paredit-forward-slurp-sexp))))
-
-  (nconc paredit-commands
-         '("Extreme Barfage & Slurpage"
-           (("C-M-)")
-            paredit-slurp-all-the-way-forward
-            ("(foo (bar |baz) quux zot)"
-             "(foo (bar |baz quux zot))")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-}" "M-F")
-            paredit-barf-all-the-way-forward
-            ("(foo (bar |baz quux) zot)"
-             "(foo (bar|) baz quux zot)"))
-           (("C-M-(")
-            paredit-slurp-all-the-way-backward
-            ("(foo bar (baz| quux) zot)"
-             "((foo bar baz| quux) zot)")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-{" "M-B")
-            paredit-barf-all-the-way-backward
-            ("(foo (bar baz |quux) zot)"
-             "(foo bar baz (|quux) zot)"))))
-
-  (paredit-define-keys)
-  (paredit-annotate-mode-with-examples)
-  (paredit-annotate-functions-with-examples)
-
-  ;; Enable Paredit in suitable modes
-  (defvar drot/paredit-minibuffer-commands '(eval-expression
-                                             pp-eval-expression
-                                             eval-expression-with-eldoc
-                                             ibuffer-do-eval
-                                             ibuffer-do-view-and-eval)
-    "Interactive commands for which Paredit should be enabled in the minibuffer.")
-
-  (defun drot/paredit-minibuffer ()
-    "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot/paredit-minibuffer-commands)
-        (enable-paredit-mode)))
-
-  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
