@@ -161,7 +161,7 @@
 
 ;; Make pointer visible and move it when close to point
 (setq make-pointer-invisible nil)
-(mouse-avoidance-mode 'cat-and-mouse)
+(mouse-avoidance-mode #'cat-and-mouse)
 
 ;; Increase maximum size of the mark ring
 (setq mark-ring-max 30)
@@ -1403,6 +1403,7 @@ This doesn't support the chanserv auth method"
   :commands which-key-mode
   :init
   (setq which-key-show-prefix 'bottom
+        which-key-allow-imprecise-window-fit nil
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
 
