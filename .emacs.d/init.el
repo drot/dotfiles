@@ -1403,7 +1403,7 @@ This doesn't support the chanserv auth method"
   :commands which-key-mode
   :init
   (setq which-key-show-prefix 'bottom
-        which-key-allow-imprecise-window-fit nil
+        which-key-allow-imprecise-window-fit t
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
 
