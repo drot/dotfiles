@@ -159,10 +159,6 @@
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Make pointer visible and move it when close to point
-(setq make-pointer-invisible nil)
-(mouse-avoidance-mode #'cat-and-mouse)
-
 ;; Increase maximum size of the mark ring
 (setq mark-ring-max 30)
 
