@@ -1089,7 +1089,7 @@ This doesn't support the chanserv auth method"
 (use-package ace-link
   :ensure t
   :bind (("C-c n l" . ace-link)
-         ("C-c n o" . ace-link-addr))
+         ("C-c n a" . ace-link-addr))
   :commands ace-link-setup-default
   :init
   (ace-link-setup-default))
