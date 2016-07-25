@@ -751,15 +751,6 @@
 
   (avy-setup-default))
 
-;; Browse Kill Ring
-(use-package browse-kill-ring
-  :ensure t
-  :bind ("C-c i y" . browse-kill-ring)
-  :config
-  (setq browse-kill-ring-separator "———————————————————————————————————"
-        browse-kill-ring-highlight-current-entry t
-        browse-kill-ring-display-duplicates nil))
-
 ;; Bug Hunter
 (use-package bug-hunter
   :ensure t
