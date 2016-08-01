@@ -1248,6 +1248,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :diminish (counsel-mode . "CL")
   :bind (("C-c f g" . counsel-git)
+         ("C-c f j" . counsel-dired-jump)
          ("C-c s g" . counsel-git-grep)
          ("C-c s r" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
