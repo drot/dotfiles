@@ -1167,7 +1167,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands company-statistics-mode
   :init
-  (add-hook 'after-init-hook #'company-statistics-mode)
+  (add-hook 'global-company-mode-hook #'company-statistics-mode)
   :config
   (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
 
