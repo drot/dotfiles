@@ -1214,6 +1214,10 @@ This doesn't support the chanserv auth method"
 ;; Hl-Todo
 (use-package hl-todo
   :ensure t
+  :bind (:map hl-todo-mode-map
+              ("C-c C-t p" . hl-todo-previous)
+              ("C-c C-t n" . hl-todo-next)
+              ("C-c C-t o" . hl-todo-occur))
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
@@ -1418,6 +1422,7 @@ This doesn't support the chanserv auth method"
     "C-c v" "version-control"
     "C-c w" "windows/frames"
     "C-c C-o" "outline"
+    "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
     "C-c x" "text"))
 
