@@ -34,17 +34,11 @@ use_udp_trackers = yes
 # Enable encryption
 encryption = allow_incoming,try_outgoing,enable_retry
 
-# Enable DHT
-dht = auto
+# Enable/disable DHT
+dht = disable
 
 # UDP port to use for DHT
 dht_port = 6881
 
 # Enable peer exchange (for torrents not marked private)
 peer_exchange = yes
-
-# Untie torrents upon completion
-system.method.set_key = event.download.finished,remove_torrent,"execute=rm,$d.get_tied_to_file="
-
-# Remove untied (closed) torrents
-schedule = untied_directory,5,5,remove_untied=
