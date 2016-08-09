@@ -20,7 +20,7 @@ directory = /home/drot/Downloads
 session = /home/drot/.session
 
 # Watch a directory for new torrents, and stop those that have been deleted.
-schedule = watch_directory,5,5,load_start=/home/drot/Downloads/*.torrent
+schedule = watch_directory,10,10,load_start=/home/drot/Downloads/*.torrent
 
 # Port range to use for listening.
 port_range = 49164-49164
