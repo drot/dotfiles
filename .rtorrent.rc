@@ -15,18 +15,18 @@ method.insert = cfg.logfile, private|const|string, (cat,(cfg.logs),"rtorrent-",(
 
 # Maximum and minimum number of peers to connect to per torrent
 #throttle.min_peers.normal.set = 40
-throttle.max_peers.normal.set = 455
+throttle.max_peers.normal.set = 447
 
 # Same as above but for seeding completed torrents (-1 = same as downloading)
 #throttle.min_peers.seed.set = 10
-throttle.max_peers.seed.set = 455
+throttle.max_peers.seed.set = 447
 
 # Maximum number of simultanious uploads per torrent
-throttle.max_uploads.set = 59
+throttle.max_uploads.set = 58
 
 # Global upload and download rate in KiB. "0" for unlimited
-throttle.global_down.max_rate.set_kb = 3700
-throttle.global_up.max_rate.set_kb = 280
+throttle.global_down.max_rate.set_kb = 4522
+throttle.global_up.max_rate.set_kb = 275
 
 # Default directory to save the downloaded torrents
 directory.default.set = (cat,(cfg.basedir),"download")
