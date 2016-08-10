@@ -1,44 +1,92 @@
 # -*- mode: Conf -*-
+#############################################################################
+# A minimal rTorrent configuration that provides the basic features
+# you want to have in addition to the built-in defaults
+#
+# See https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template
+# for an up-to-date version
+#############################################################################
 
-# Maximum and minimum number of peers to connect to per torrent.
-max_peers = 52
+# Instance layout (base paths)
+method.insert = cfg.basedir, private|const|string, (cat,"/home/drot/.rtorrent/")
+method.insert = cfg.watch, private|const|string, (cat,"/home/drot/Downloads/")
+method.insert = cfg.logs, private|const|string, (cat,(cfg.basedir),"log/")
+method.insert = cfg.logfile, private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
+
+# Maximum and minimum number of peers to connect to per torrent
+#throttle.min_peers.normal.set = 40
+throttle.max_peers.normal.set = 455
 
 # Same as above but for seeding completed torrents (-1 = same as downloading)
-max_peers_seed = 52
+#throttle.min_peers.seed.set = 10
+throttle.max_peers.seed.set = 455
 
 # Maximum number of simultanious uploads per torrent
-max_uploads = 8
+throttle.max_uploads.set = 59
 
-# Global upload and download rate in KiB
-download_rate = 0
-upload_rate = 20
+# Global upload and download rate in KiB. "0" for unlimited
+throttle.global_down.max_rate.set_kb = 3700
+throttle.global_up.max_rate.set_kb = 280
 
 # Default directory to save the downloaded torrents
-directory = /home/drot/Downloads
+directory.default.set = (cat,(cfg.basedir),"download")
 
 # Default session directory
-session = /home/drot/.session
+session.path.set = (cat,(cfg.basedir),".session")
 
-# Watch a directory for new torrents, and stop those that have been deleted.
-schedule = watch_directory,10,10,load_start=/home/drot/Downloads/*.torrent
+# Watch a directory for new torrents
+schedule = watch_start,10,10,((load.start,(cat,(cfg.watch),"/*.torrent")))
+
+# Close torrents when diskspace is low.
+#schedule2 = low_diskspace,5,60,close_low_diskspace=100M
+
+# The ip address reported to the tracker.
+#network.local_address.set = 127.0.0.1
+#network.local_address.set = rakshasa.no
+
+# The ip address the listening socket and outgoing connections is bound to.
+#network.bind_address.set = 127.0.0.1
+#network.bind_address.set = rakshasa.no
 
 # Port range to use for listening.
-port_range = 49164-49164
+network.port_range.set = 49164-49164
+
+# Start opening ports at a random position within the port range.
+#network.port_random.set = no
 
 # Check hash for finished torrents.
-check_hash = yes
+pieces.hash.on_completion.set = yes
 
 # Set whetever the client should try to connect to UDP trackers.
-use_udp_trackers = yes
+trackers.use_udp.set = no
 
-# Enable encryption
-encryption = allow_incoming,try_outgoing,enable_retry
+# Alternative calls to bind and ip that should handle dynamic ip's.
+#schedule2 = ip_tick,0,1800,ip=rakshasa
+#schedule2 = bind_tick,0,1800,bind=rakshasa
 
-# Enable/disable DHT
-dht = disable
+# Encryption options, set to none (default) or any combination of the following:
+# allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
-# UDP port to use for DHT
-dht_port = 6881
+# Enable DHT support for trackerless torrents or when all trackers are down.
+# May be set to "disable" (completely disable DHT), "off" (do not start DHT)
+dht.mode.set = disable
+
+# UDP port to use for DHT.
+#dht.port.set = 6881
 
 # Enable peer exchange (for torrents not marked private)
-peer_exchange = yes
+protocol.pex.set = no
+
+# Set downlad list layout style. ("full", "compact")
+#torrent_list_layout = "full"
+
+# Logging:
+# Levels = critical error warn notice info debug
+# Groups = connection_* dht_* peer_* rpc_* storage_* thread_* tracker_* torrent_*
+print = (cat,"Logging to ",(cfg.logfile))
+log.open_file = "log", (cfg.logfile)
+log.add_output = "info", "log"
+#log.add_output = "tracker_debug", "log"
+
+### END of rtorrent.rc ###
