@@ -13,15 +13,20 @@ method.insert = cfg.watch, private|const|string, (cat,(cfg.basedir),"watch/")
 method.insert = cfg.logs, private|const|string, (cat,(cfg.basedir),"log/")
 method.insert = cfg.logfile, private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
 
+# Maximum number of simultaneous downloads and uploads slots (global slots!)
+throttle.max_downloads.global.set = 50
+throttle.max_uploads.global.set = 50
+
 # Maximum and minimum number of peers to connect to per torrent
-throttle.min_peers.normal.set = 40
-throttle.max_peers.normal.set = 100
+throttle.min_peers.normal.set = 49
+throttle.max_peers.normal.set = 50
 
 # Same as above but for seeding completed torrents (-1 = same as downloading)
 throttle.min_peers.seed.set = -1
 throttle.max_peers.seed.set = -1
 
-# Maximum number of simultaneous uploads per torrent
+# Maximum number of simultaneous downloads and uploads per torrent
+throttle.max_downloads.set = 25
 throttle.max_uploads.set = 25
 
 # Global upload and download rate in KiB. "0" for unlimited
