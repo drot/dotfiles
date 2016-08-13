@@ -196,9 +196,6 @@
 ;; Highlight current line
 (global-hl-line-mode)
 
-;; Electric pair mode
-(electric-pair-mode)
-
 ;; Undo and redo the window configuration
 (winner-mode)
 
@@ -259,6 +256,13 @@
       (quietly-read-abbrev-file))
 
   (setq-default abbrev-mode t))
+
+;; Electric pair mode
+(use-package elec-pair
+  :config
+  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+
+  (electric-pair-mode))
 
 ;; Prettify certain symbols
 (use-package prog-mode
