@@ -107,6 +107,7 @@ STICKY_OTHER_WRITABLE 48;5;180;38;5;234
 .BAT 00;38;5;151
 .dircolors 00;38;5;151
 .inputrc 00;38;5;151
+.pam_environment 00;38;5;151
 .profile 00;38;5;151
 .sed 00;38;5;151
 .sh 00;38;5;151
@@ -146,6 +147,7 @@ STICKY_OTHER_WRITABLE 48;5;180;38;5;234
 # documents
 .css 04;38;5;188
 .csv 04;38;5;188
+.epub 04;38;5;188
 .txt 04;38;5;188
 .tex 04;38;5;188
 .textile 04;38;5;188
@@ -190,7 +192,6 @@ STICKY_OTHER_WRITABLE 48;5;180;38;5;234
 
 # logs and backups
 .log 00;38;5;234
-.lesshst 00;38;5;234
 .bak 00;38;5;234
 .aux 00;38;5;234
 .toc 00;38;5;234
