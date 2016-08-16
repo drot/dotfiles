@@ -1,4 +1,4 @@
-# Below, there should be one TERM entry for each termtype that is colorizable
+# TERM entries for each termtype that is colorizable
 TERM Eterm
 TERM ansi
 TERM color-xterm
@@ -49,237 +49,282 @@ TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
 
-# Defaults
-NORMAL 00
-FILE 00;37
-DIR 01;34
-LINK 01;35
-FIFO 00;33
-SOCK 01;35
-DOOR 01;35
-BLK 01;33;40
-CHR 01;35;40
-ORPHAN 01;31
-EXEC 01;31
-STICKY_OTHER_WRITABLE 01;33
-OTHER_WRITABLE 01;35
-STICKY 00;34
+# block device driver
+BLK 48;5;108;38;5;223;01
 
-# Executables (bright green)
-.cmd 01;32
-.exe 01;32
-.com 01;32
-.btm 01;32
-.bat 01;32
+# file with capability
+CAPABILITY 01;38;5;95
 
-# Archives or compressed (bright yellow)
-.7z 00;33
-.rar 00;33
-.tar 00;33
-.tgz 00;33
-.zip 00;33
-.gz 00;33
-.bz2 00;33
-.tar.xz 00;33
-.tar.gz 00;33
-.tgz 00;33
-.xz 00;33
+# character device driver
+CHR 48;5;108;38;5;223;01
 
-# Images (red)
-.jpg 00;31
-.gif 00;31
-.bmp 00;31
-.xbm 00;31
-.xpm 00;31
-.tif 00;31
-.tga 00;31
-.png 00;31
-.jpeg 00;31
-.tiff 00;31
-.xcf 00;31
-.xcf.gz 00;31
-.blend 00;31
-.pcx 00;31
-.ppm 00;31
+# directory
+DIR 01;38;5;223
 
-# Music (green)
-.mp3 00;32
-.flac 00;32
-.mid 00;32
-.wav 00;32
-.au 00;32
-.nes 00;32
-.smc 00;32
-.fig 00;32
-.sfc 00;32
-.smc.gz 00;32
-.fig.gz 00;32
-.sfc.gz 00;32
+# door
+DOOR 48;5;234;38;5;180;01
 
-# Movies (magenta)
-.avi 01;35
-.flc 01;35
-.fli 01;35
-.flv 01;35
-.mkv 01;35
-.m4v 01;35
-.mp4 01;35
-.mov 01;35
-.mpg 01;35
-.mpeg 01;35
-.ogv 01;35
-.webm 01;35
+# files with execute permission
+EXEC 01;38;5;108
 
-# All of the rest
-.PL 00;36
-.asm 00;36
-.apvlvrc 00;32
-.apvlvinfo 00;32
-.asoundrc 00;36
-.asunder 01;36
-.awk 00;36
-.bash 00;36
-.bashrc 00;36
-.bash_aliases 00;36
-.bash_history 00;36
-.bash_functions 00;36
-.bash_logout 00;36
-.bash_profile 00;36
-.profile 00;36
-.bak 01;31
-.c 00;36
-.cfg 00;36
-.coffee 00;36
-.conf 00;36
-.cpp 00;36
-.cs 00;36
-.css 00;36
-.csv 00;36
-.curlrc 00;34
-.deb 00;36
-.diff 01;33
-.dircolors 01;33
-.dmenurc 00;32
-.dmenu_cache 00;32
-.dmenu-short 00;32
-.el 00;35
-.enc 00;36
-.eps 00;36
-.etx 00;36
-.ex 00;36
-.example 00;36
-.fehbg 00;36
-.fonts 00;36
-.gemrc 00;32
-.git 00;36
-.gitconfig 00;33
-.gitignore 00;36
-.gpg 01;31
-.hgrc 00;35
-.hgignore 00;35
-.go 00;34
-.gpg-agent-info 01;31
-.gtk-bookmarks 00;34
-.gtkrc-2.0 00;34
-.h 00;34
-.hs 00;34
-.htm 00;34
-.html 00;34
-.htoprc 00;34
-.info 00;34
-.inputrc 00;36
-.ini 00;34
-.java 00;34
-.jhtm 00;34
-.js 00;34
-.jsm 00;34
-.jsm 00;34
-.json 00;34
-.jsp 00;34
-.lisp 00;34
-.lesshst 00;34
-.log 00;34
-.lua 00;33
-.map 00;33
-.markdown 00;33
-.md 00;33
-.mf 00;33
-.mfasl 00;33
-.mi 00;33
-.mkd 00;33
-.msmtprc 01;31
-.mtx 00;33
-.muttrc 00;33
-.muttprintrc 00;33
-.nfo 00;33
-.notify-osd 00;36
-.netrc 01;31
-.newsrc 00;33
-.notmuch-config 00;33
-.nvidia-settings-rc 00;36
-.offlineimaprc 00;33
-.pacnew 00;33
-.pam_environment 00;36
-.patch 00;36
-.pc 00;36
-.pfa 00;36
-.php 00;36
-.pid 00;36
-.pl 00;36
-.pm 00;36
-.pod 00;36
-.pulse-cookie 00;36
-.py 00;36
-.rb 00;36
-.rc 00;33
-.rdf 00;36
-.recently-used 00;35
-.rsa 01;31
-.ru 00;36
-.ruby-version 00;32
-.scm 00;35
-.sdcv_history 00;32
-.sed 00;36
-.sfv 00;36
-.sh 00;36
-.signature 00;36
-.sty 01;35
-.sug 01;35
-.t 01;35
-.tcl 01;35
-.tdy 01;35
-.tex 01;35
-.textile 01;35
-.tfm 01;35
-.tfnt 01;35
-.theme 01;35
-.viminfo 00;32
-.xml 01;35
-.yml 01;35
-.zsh 01;35
-.txt 01;35
-.org 01;35
-.ttytterkey 01;31
-.ttytterrc 01;35
-.urlview 01;35
-.vim 01;35
-.vimrc 00;32
-.xbindkeysrc 00;34
-.xinitrc 00;33
-.Xauthority 01;31
-.Xmodmap 00;36
-.Xresources 01;33
-.zcompdump 00;36
-.zlogin 00;36
-.zprofile 00;36
-.zsh_history 00;36
-.zshenv 00;36
-.zshrc 00;36
+# pipe
+FIFO 48;5;234;38;5;180;01
 
-# Systemd file types
-*.mount 01;32
-*.path 01;33
-*.rules 00;34
-*.socket 00;35
-*.service 00;33
-*.target 01;36
+# symbolic link
+LINK 48;5;234;38;5;223
+
+# orphaned symbolic link
+ORPHAN 48;5;234;38;5;187
+
+# directory that is other-writable (o+w) and not sticky
+OTHER_WRITABLE 48;5;234;38;5;180
+
+# file that is setuid (u+s)
+SETUID 48;5;234;38;5;66
+
+# file that is setgid (g+s)
+SETGID 48;5;234;38;5;66
+
+# socket
+SOCK 48;5;234;38;5;180;01
+
+# directory with the sticky bit set (+t) and not other-writable
+STICKY 48;5;180;38;5;234
+
+# dir that is sticky and other-writable (+t,o+w)
+STICKY_OTHER_WRITABLE 48;5;180;38;5;234
+
+# shell files
+.awk 00;38;5;151
+.bash 00;38;5;151
+.bashrc 00;38;5;151
+.bash_aliases 00;38;5;151
+.bash_functions 00;38;5;151
+.bash_history 00;38;5;151
+.bash_logout 00;38;5;151
+.bash_profile 00;38;5;151
+.bat 00;38;5;151
+.BAT 00;38;5;151
+.dircolors 00;38;5;151
+.inputrc 00;38;5;151
+.lesshst 00;38;5;151
+.profile 00;38;5;151
+.sed 00;38;5;151
+.sh 00;38;5;151
+.zcompdump 00;38;5;151
+.zlogin 00;38;5;151
+.zprofile 00;38;5;151
+.zsh 00;38;5;151
+.zshenv 00;38;5;151
+.zshrc 00;38;5;151
+.zsh_history 00;38;5;151
+
+# source files
+.asm 01;38;5;187
+.c 01;38;5;187
+.coffee 01;38;5;187
+.diff 01;38;5;187
+.h 01;38;5;187
+.s 01;38;5;187
+.cs 01;38;5;187
+.el 01;38;5;187
+.java 01;38;5;187
+.scala 01;38;5;187
+.hs 01;38;5;187
+.py 01;38;5;187
+.rb 01;38;5;187
+.patch 01;38;5;187
+.php 01;38;5;187
+.pl 01;38;5;187
+.tcl 01;38;5;187
+.vim 01;38;5;187
+.js 01;38;5;187
+.go 01;38;5;187
+.lisp 01;38;5;187
+.lua 01;38;5;187
+.scm 01;38;5;187
+
+# documents
+.css 04;38;5;188
+.csv 04;38;5;188
+.txt 04;38;5;188
+.tex 04;38;5;188
+.textile 04;38;5;188
+.htm 04;38;5;188
+.html 04;38;5;188
+.info 04;38;5;188
+.nfo 04;38;5;188
+.xhtml 04;38;5;188
+.xml 04;38;5;188
+.json 04;38;5;188
+.md 04;38;5;188
+.mkd 04;38;5;188
+.markdown 04;38;5;188
+.odt 04;38;5;188
+.org 04;38;5;188
+.pandoc 04;38;5;188
+.pdc 04;38;5;188
+.pdf 04;38;5;188
+.signature 04;38;5;188
+.yml 04;38;5;188
+
+# configuration files
+.cfg 04;38;5;180
+.conf 04;38;5;180
+.gtkrc-2.0 04;38;5;180
+.ini 04;38;5;180
+*rc 04;38;5;180
+*Dockerfile 04;38;5;180
+.Xresources 04;38;5;180
+
+# help files
+*README 04;38;5;187
+*LICENSE 04;38;5;187
+*AUTHORS 04;38;5;187
+
+# version control
+.gitconfig 00;38;5;248
+.gitignore 00;38;5;248
+.gitmodules 00;38;5;248
+.hgignore 00;38;5;248
+
+# logs and backups
+.log 00;38;5;234
+.bak 00;38;5;234
+.aux 00;38;5;234
+.toc 00;38;5;234
+*~ 00;38;5;234
+*# 00;38;5;234
+.swp 00;38;5;234
+.tmp 00;38;5;234
+.temp 00;38;5;234
+.o 00;38;5;234
+.pid 00;38;5;234
+.pyc 00;38;5;234
+.class 00;38;5;234
+.cache 00;38;5;234
+
+# pacman files
+.pacnew 48;5;95;38;5;108
+.pacsave 48;5;95;38;5;108
+.pacorig 48;5;95;38;5;108
+*PKGBUILD 00;38;5;110
+
+# rpm files
+.rpmsave 48;5;95;38;5;108
+.rpmorig 48;5;95;38;5;108
+.rpmnew 48;5;95;38;5;108
+.spec 00;38;5;110
+
+# compressed file formats
+.tar 01;38;5;174
+.tgz 01;38;5;174
+.arj 01;38;5;174
+.taz 01;38;5;174
+.lzh 01;38;5;174
+.lzma 01;38;5;174
+.tlz 01;38;5;174
+.txz 01;38;5;174
+.zip 01;38;5;174
+.z 01;38;5;174
+.Z 01;38;5;174
+.dz 01;38;5;174
+.gz 01;38;5;174
+.lz 01;38;5;174
+.xz 01;38;5;174
+.bz2 01;38;5;174
+.bz 01;38;5;174
+.tbz 01;38;5;174
+.tbz2 01;38;5;174
+.tz 01;38;5;174
+.deb 01;38;5;174
+.rpm 01;38;5;174
+.jar 01;38;5;174
+.rar 01;38;5;174
+.ace 01;38;5;174
+.zoo 01;38;5;174
+.cpio 01;38;5;174
+.7z 01;38;5;174
+.rz 01;38;5;174
+.apk 01;38;5;174
+.gem 01;38;5;174
+.gpg 01;38;5;174
+
+# image formats
+.jpg 00;38;5;109
+.JPG 00;38;5;109
+.jpeg 00;38;5;109
+.gif 00;38;5;109
+.bmp 00;38;5;109
+.pbm 00;38;5;109
+.pgm 00;38;5;109
+.ppm 00;38;5;109
+.tga 00;38;5;109
+.xbm 00;38;5;109
+.xpm 00;38;5;109
+.tif 00;38;5;109
+.tiff 00;38;5;109
+.png 00;38;5;109
+.PNG 00;38;5;109
+.svg 00;38;5;109
+.svgz 00;38;5;109
+.mng 00;38;5;109
+.pcx 00;38;5;109
+.dl 00;38;5;109
+.xcf 00;38;5;109
+.xwd 00;38;5;109
+.yuv 00;38;5;109
+.cgm 00;38;5;109
+.emf 00;38;5;109
+.eps 00;38;5;109
+.CR2 00;38;5;109
+
+# audio formats
+.aac 00;38;5;66
+.au 00;38;5;66
+.flac 00;38;5;66
+.mid 00;38;5;66
+.midi 00;38;5;66
+.mka 00;38;5;66
+.mp3 00;38;5;66
+.mpc 00;38;5;66
+.ogg 00;38;5;66
+.opus 00;38;5;66
+.ra 00;38;5;66
+.wav 00;38;5;66
+.m4a 00;38;5;66
+.axa 00;38;5;66
+.oga 00;38;5;66
+.spx 00;38;5;66
+.xspf 00;38;5;66
+
+# video formats
+.mov 00;38;5;66
+.MOV 00;38;5;66
+.mpg 00;38;5;66
+.mpeg 00;38;5;66
+.m2v 00;38;5;66
+.mkv 00;38;5;66
+.ogm 00;38;5;66
+.mp4 00;38;5;66
+.m4v 00;38;5;66
+.mp4v 00;38;5;66
+.vob 00;38;5;66
+.qt 00;38;5;66
+.nuv 00;38;5;66
+.wmv 00;38;5;66
+.asf 00;38;5;66
+.rm 00;38;5;66
+.rmvb 00;38;5;66
+.flc 00;38;5;66
+.avi 00;38;5;66
+.fli 00;38;5;66
+.flv 00;38;5;66
+.gl 00;38;5;66
+.m2ts 00;38;5;66
+.divx 00;38;5;66
+.webm 00;38;5;66
+.axv 00;38;5;66
+.anx 00;38;5;66
+.ogv 00;38;5;66
+.ogx 00;38;5;66
