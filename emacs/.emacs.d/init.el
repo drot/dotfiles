@@ -313,7 +313,7 @@
   :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
-;; Version control
+;; Version control configuration
 (use-package vc-hooks
   :defer t
   :config
