@@ -1269,7 +1269,8 @@ This doesn't support the chanserv auth method"
 ;; Swiper
 (use-package swiper
   :ensure t
-  :bind (("C-c s s" . swiper)
+  :bind (("C-c s a" . swiper-all)
+         ("C-c s s" . swiper)
          ("C-c s i" . swiper-from-isearch)))
 
 ;; Lispy
