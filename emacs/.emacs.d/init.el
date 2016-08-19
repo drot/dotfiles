@@ -1219,6 +1219,10 @@ This doesn't support the chanserv auth method"
         ivy-wrap t
         ivy-action-wrap t))
 
+;; Ivy Hydra
+(use-package ivy-hydra
+  :ensure t)
+
 ;; Counsel
 (use-package counsel
   :ensure t
