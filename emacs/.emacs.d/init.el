@@ -1205,8 +1205,7 @@ This doesn't support the chanserv auth method"
 (use-package ivy
   :ensure t
   :diminish (ivy-mode . "IY")
-  :bind (("C-c f f" . ivy-recentf)
-         ("C-c n i" . ivy-resume))
+  :bind (("C-c n i" . ivy-resume))
   :commands ivy-mode
   :init
   (ivy-mode)
@@ -1226,6 +1225,7 @@ This doesn't support the chanserv auth method"
   :diminish (counsel-mode . "CL")
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
+         ("C-c f f" . counsel-recentf)
          ("C-c s g" . counsel-git-grep)
          ("C-c s r" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
