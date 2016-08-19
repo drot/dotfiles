@@ -205,7 +205,6 @@
   (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
         savehist-autosave-interval 60
         savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
-
   (savehist-mode))
 
 ;; Save recent files list
@@ -219,14 +218,12 @@
         recentf-max-saved-items 100
         recentf-max-menu-items 20
         recentf-auto-cleanup 600)
-
   (recentf-mode))
 
 ;; Remember point position in files
 (use-package saveplace
   :config
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
-
   (save-place-mode))
 
 ;; Highlight matching parentheses
@@ -235,14 +232,12 @@
   (setq show-paren-delay 0
         show-paren-when-point-inside-paren t
         show-paren-when-point-in-periphery t)
-
   (show-paren-mode))
 
 ;; Highlight regexps interactively
 (use-package hi-lock
   :config
   (setq hi-lock-auto-select-face t)
-
   (global-hi-lock-mode))
 
 ;; Abbrev Mode
@@ -251,31 +246,26 @@
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
-
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
-
   (setq-default abbrev-mode t))
 
 ;; Electric pair mode
 (use-package elec-pair
   :config
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
-
   (electric-pair-mode))
 
 ;; Prettify certain symbols
 (use-package prog-mode
   :config
   (setq prettify-symbols-unprettify-at-point t)
-
   (global-prettify-symbols-mode))
 
 ;; Which function mode
 (use-package which-func
   :config
   (setq which-func-unknown "(Top Level)")
-
   (which-function-mode))
 
 ;; Allow scrolling while Isearch is active
@@ -351,7 +341,6 @@
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
-
   (let ((ipython (executable-find "ipython")))
     (when ipython
       (setq python-shell-interpreter "ipython"))))
@@ -364,7 +353,6 @@
         c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
-
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; CSS mode configuration
@@ -424,7 +412,6 @@
          ("C-x 4 C-j" . dired-jump-other-window))
   :config
   (setq dired-omit-verbose nil)
-
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 ;; Dired Async
@@ -500,7 +487,6 @@
   :config
   ;; Disable cumbersome key binding
   (unbind-key "C-c $" flyspell-mode-map)
-
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil
@@ -604,14 +590,12 @@
   :config
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
-
   (defun drot/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
     (when (eq major-mode 'compilation-mode)
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
-
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; Colorize ANSI escape sequences
@@ -752,7 +736,6 @@
   :config
   (setq avy-all-windows 'all-frames
         avy-background t)
-
   (avy-setup-default))
 
 ;; Bug Hunter
@@ -842,7 +825,6 @@
          ("C-c x o" . hydra-outline/body))
   :config
   (hydra-add-font-lock)
-
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("n" enlarge-window "Enlarge Window")
@@ -850,7 +832,6 @@
     ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
     ("b" shrink-window-horizontally "Shrink Window Horizontally")
     ("q" nil "Quit"))
-
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
     ("q" hide-sublevels "Hide Sub-Levels")
@@ -935,7 +916,6 @@
   ;; User defaults
   (setq rcirc-default-user-name "drot"
         rcirc-reconnect-delay 10)
-
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
         '(("adams.freenode.net"
@@ -946,7 +926,6 @@
            :port 6697
            :encryption tls
            :channels ("#reloaded" "#rawhide" "#fo2"))))
-
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
@@ -960,40 +939,32 @@ This doesn't support the chanserv auth method"
                        (list (plist-get p :host) method (plist-get p :user)
                              (if (functionp secret)
                                  (funcall secret) secret)))))))
-
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
-
   ;; Set fill column value to frame width
   (setq rcirc-fill-column 'frame-width)
-
   ;; Enable logging
   (setq rcirc-log-flag t)
-
-  ;; Enable additional modes and disable some offending ones
+  ;; Disable conflicting modes
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode -1)
     (yas-minor-mode -1))
-
+  ;; Enable additional modes
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
-
   ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
     "Send a private message to the ChanServ service."
     (rcirc-send-string process (concat "chanserv " arg)))
-
   (defun-rcirc-command mystery (arg)
     "Send a private message to the Mystery service."
     (rcirc-send-string process (concat "mystery " arg)))
-
   (defun-rcirc-command memoserv (arg)
     "Send a private message to the MemoServ service."
     (rcirc-send-string process (concat "memoserv " arg)))
-
   (defun-rcirc-command nickserv (arg)
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
@@ -1045,7 +1016,6 @@ This doesn't support the chanserv auth method"
   :config
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
-
   (setq inferior-lisp-program "sbcl"
         slime-contribs '(slime-fancy)
         slime-protocol-version 'ignore
@@ -1182,7 +1152,6 @@ This doesn't support the chanserv auth method"
   :commands (global-diff-hl-mode diff-hl-dired-mode)
   :init
   (global-diff-hl-mode)
-
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
 
 ;; Eyebrowse
@@ -1287,23 +1256,21 @@ This doesn't support the chanserv auth method"
                   geiser-repl-mode-hook))
     (add-hook hook #'lispy-mode))
   :config
-  (setq lispy-safe-delete t
-        lispy-safe-copy t
-        lispy-safe-paste t)
-
   (defvar drot/lispy-minibuffer-commands '(eval-expression
                                            pp-eval-expression
                                            eval-expression-with-eldoc
                                            ibuffer-do-eval
                                            ibuffer-do-view-and-eval)
     "Interactive commands for which Lispy should be enabled in the minibuffer.")
-
   (defun drot/lispy-minibuffer ()
     "Enable Lispy during lisp-related minibuffer commands."
     (if (memq this-command drot/lispy-minibuffer-commands)
         (lispy-mode)))
-
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer)
+  ;; Enable additional balance safeguards
+  (setq lispy-safe-delete t
+        lispy-safe-copy t
+        lispy-safe-paste t))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1404,7 +1371,6 @@ This doesn't support the chanserv auth method"
         which-key-allow-imprecise-window-fit t
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
-
   (which-key-mode)
   :config
   (which-key-declare-prefixes
@@ -1442,7 +1408,6 @@ This doesn't support the chanserv auth method"
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
-
 (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
