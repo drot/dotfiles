@@ -190,7 +190,6 @@
 
 ;; Show column number and buffer size on the mode line
 (column-number-mode)
-
 (size-indication-mode)
 
 ;; Highlight current line
