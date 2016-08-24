@@ -30,7 +30,7 @@
 ;; Delay garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Reset gc threshold value to default after startup
+;; Reset garbage collection threshold value to default after startup
 (add-hook 'after-init-hook (lambda ()
                              (setq gc-cons-threshold 800000)))
 
