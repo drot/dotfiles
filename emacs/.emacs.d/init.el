@@ -50,7 +50,6 @@
 
 ;; Activate packages and add MELPA
 (package-initialize)
-
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;; Bootstrap use-package
@@ -136,10 +135,7 @@
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
   (set-fontset-font t 'symbol (font-spec :family "Noto Emoji") frame 'prepend))
 
-;; Set font fallback  when Emacs is started in GUI mode
 (drot/set-emoji-font nil)
-
-;; Hook for the font fallback when a frame is created with emacsclient
 (add-hook 'after-make-frame-functions #'drot/set-emoji-font)
 
 ;; Resize windows proportionally
