@@ -664,6 +664,9 @@
 ;; Display personal bindings
 (bind-key "C-c h b" #'describe-personal-keybindings)
 
+;; List packages
+(bind-key "C-c a p" #'list-packages)
+
 ;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
