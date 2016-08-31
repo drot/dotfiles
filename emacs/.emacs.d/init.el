@@ -895,16 +895,6 @@
         neo-show-hidden-files t
         neo-auto-indent-point t))
 
-;; Paradox
-(use-package paradox
-  :quelpa t
-  :bind ("C-c a p" . paradox-list-packages)
-  :config
-  (setq paradox-github-token t
-        paradox-execute-asynchronously t
-        paradox-spinner-type 'rotating-line
-        paradox-display-download-count t))
-
 ;; PKGBUILD Mode
 (use-package pkgbuild-mode
   :quelpa t
