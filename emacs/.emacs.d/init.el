@@ -48,14 +48,20 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Activate packages and add MELPA
+;; Bootstrap quelpa
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(if (require 'quelpa nil t)
+    (quelpa-self-upgrade)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; Install use-package
+(quelpa
+ '(quelpa-use-package
+   :fetcher github
+   :repo "quelpa/quelpa-use-package"))
+(require 'quelpa-use-package)
 
 ;; Enable Imenu support for use-package
 (setq use-package-enable-imenu-support t)
@@ -66,7 +72,7 @@
 
 ;; Color theme
 (use-package zenburn-theme
-  :ensure t)
+  :quelpa t)
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
@@ -411,7 +417,7 @@
 
 ;; Dired Async
 (use-package dired-async
-  :ensure async
+  :quelpa async
   :after dired-x
   :config
   (dired-async-mode))
@@ -714,14 +720,14 @@
 
 ;; Ace-window
 (use-package ace-window
-  :ensure t
+  :quelpa t
   :bind ([remap other-window] . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Avy
 (use-package avy
-  :ensure t
+  :quelpa t
   :bind (("C-c n c" . avy-goto-char)
          ("C-c n k" . avy-goto-char-2)
          ("C-c n j" . avy-goto-word-0)
@@ -741,25 +747,25 @@
 
 ;; Dash
 (use-package dash
-  :ensure t
+  :quelpa t
   :defer t
   :config
   (dash-enable-font-lock))
 
 ;; Discover My Major
 (use-package discover-my-major
-  :ensure t
+  :quelpa t
   :bind ("C-c h m" . discover-my-major))
 
 ;; Easy-kill
 (use-package easy-kill
-  :ensure t
+  :quelpa t
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
 
 ;; Elfeed
 (use-package elfeed
-  :ensure t
+  :quelpa t
   :bind ("C-c a f" . elfeed)
   :config
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
@@ -770,31 +776,31 @@
 
 ;; Expand region
 (use-package expand-region
-  :ensure t
+  :quelpa t
   :bind ("C-c x e" . er/expand-region))
 
 ;; Flx
 (use-package flx
-  :ensure t
+  :quelpa t
   :defer t)
 
 ;; Geiser
 (use-package geiser
-  :ensure t
+  :quelpa t
   :defer t
   :config
   (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
 ;; JavaScript mode
 (use-package js2-mode
-  :ensure t
+  :quelpa t
   :mode ("\\.js\\'" . js2-mode)
   :config
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; Key Chord
 (use-package key-chord
-  :ensure t
+  :quelpa t
   :commands key-chord-mode
   :init
   (key-chord-mode 1)
@@ -810,12 +816,12 @@
 
 ;; Lua mode
 (use-package lua-mode
-  :ensure t
+  :quelpa t
   :defer t)
 
 ;; Hydra
 (use-package hydra
-  :ensure t
+  :quelpa t
   :bind (("C-c w r" . hydra-window-resize/body)
          ("C-c x o" . hydra-outline/body))
   :config
@@ -849,12 +855,12 @@
 
 ;; Macrostep
 (use-package macrostep
-  :ensure t
+  :quelpa t
   :bind ("C-c e" . macrostep-expand))
 
 ;; Magit
 (use-package magit
-  :ensure t
+  :quelpa t
   :bind (("C-c v v" . magit-status)
          ("C-c v c" . magit-clone)
          ("C-c v b" . magit-blame)
@@ -865,7 +871,7 @@
 
 ;; Markdown mode
 (use-package markdown-mode
-  :ensure t
+  :quelpa t
   :defer t
   :config
   (add-hook 'markdown-mode-hook #'whitespace-mode)
@@ -874,13 +880,13 @@
 
 ;; Move-text
 (use-package move-text
-  :ensure t
+  :quelpa t
   :bind (("M-<up>" . move-text-up)
          ("M-<down>" . move-text-down)))
 
 ;; NeoTree
 (use-package neotree
-  :ensure t
+  :quelpa t
   :bind ("C-c t n" . neotree-toggle)
   :config
   (setq neo-theme 'ascii
@@ -891,7 +897,7 @@
 
 ;; Paradox
 (use-package paradox
-  :ensure t
+  :quelpa t
   :bind ("C-c a p" . paradox-list-packages)
   :config
   (setq paradox-github-token t
@@ -901,7 +907,7 @@
 
 ;; PKGBUILD Mode
 (use-package pkgbuild-mode
-  :ensure t
+  :quelpa t
   :defer t)
 
 ;; rcirc Mode
@@ -966,7 +972,7 @@ This doesn't support the chanserv auth method"
 
 ;; rcirc color codes support
 (use-package rcirc-styles
-  :ensure t
+  :quelpa t
   :after rcirc
   :config
   (setq rcirc-styles-color-vector
@@ -989,21 +995,21 @@ This doesn't support the chanserv auth method"
 
 ;; rcirc colored nicknames
 (use-package rcirc-color
-  :ensure t
+  :quelpa t
   :after rcirc
   :config
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
 ;; rcirc notifications
 (use-package rcirc-notify
-  :ensure t
+  :quelpa t
   :after rcirc
   :config
   (rcirc-notify-add-hooks))
 
 ;; SLIME
 (use-package slime
-  :ensure t
+  :quelpa t
   :bind (("C-c t s" . slime)
          ("C-c t c" . slime-connect)
          :map slime-mode-indirect-map
@@ -1018,7 +1024,7 @@ This doesn't support the chanserv auth method"
 
 ;; SLIME REPL
 (use-package slime-repl
-  :ensure slime
+  :quelpa slime
   :defer t
   :config
   ;; Don’t reserve the Backspace key
@@ -1026,7 +1032,7 @@ This doesn't support the chanserv auth method"
 
 ;; SLIME Company
 (use-package slime-company
-  :ensure t
+  :quelpa t
   :after slime
   :config
   (setq slime-company-completion 'fuzzy
@@ -1034,29 +1040,29 @@ This doesn't support the chanserv auth method"
 
 ;; Smex
 (use-package smex
-  :ensure t
+  :quelpa t
   :defer t
   :config
   (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
 
 ;; Systemd mode
 (use-package systemd
-  :ensure t
+  :quelpa t
   :defer t)
 
 ;; YAML mode
 (use-package yaml-mode
-  :ensure t
+  :quelpa t
   :defer t)
 
 ;; Zop-to-char
 (use-package zop-to-char
-  :ensure t
+  :quelpa t
   :bind ([remap zap-to-char] . zop-to-char))
 
 ;; Ace-link
 (use-package ace-link
-  :ensure t
+  :quelpa t
   :bind (("C-c n l" . ace-link)
          ("C-c n a" . ace-link-addr))
   :commands ace-link-setup-default
@@ -1072,7 +1078,7 @@ This doesn't support the chanserv auth method"
 
 ;; Anzu
 (use-package anzu
-  :ensure t
+  :quelpa t
   :diminish (anzu-mode . "AZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
@@ -1089,7 +1095,7 @@ This doesn't support the chanserv auth method"
 
 ;; Beacon
 (use-package beacon
-  :ensure t
+  :quelpa t
   :commands beacon-mode
   :init
   (beacon-mode)
@@ -1109,7 +1115,7 @@ This doesn't support the chanserv auth method"
 
 ;; Company mode
 (use-package company
-  :ensure t
+  :quelpa t
   :diminish (company-mode . "CY")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
@@ -1142,7 +1148,7 @@ This doesn't support the chanserv auth method"
 
 ;; Diff-Hl
 (use-package diff-hl
-  :ensure t
+  :quelpa t
   :bind ("C-c t m" . diff-hl-margin-mode)
   :commands (global-diff-hl-mode diff-hl-dired-mode)
   :init
@@ -1151,7 +1157,7 @@ This doesn't support the chanserv auth method"
 
 ;; Eyebrowse
 (use-package eyebrowse
-  :ensure t
+  :quelpa t
   :commands eyebrowse-mode
   :init
   (eyebrowse-mode)
@@ -1161,7 +1167,7 @@ This doesn't support the chanserv auth method"
 
 ;; Form-feed
 (use-package form-feed
-  :ensure t
+  :quelpa t
   :commands form-feed-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1174,14 +1180,14 @@ This doesn't support the chanserv auth method"
 
 ;; Highlight Numbers
 (use-package highlight-numbers
-  :ensure t
+  :quelpa t
   :commands highlight-numbers-mode
   :init
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
 ;; Hl-Todo
 (use-package hl-todo
-  :ensure t
+  :quelpa t
   :bind (:map hl-todo-mode-map
               ("C-c C-t p" . hl-todo-previous)
               ("C-c C-t n" . hl-todo-next)
@@ -1192,13 +1198,13 @@ This doesn't support the chanserv auth method"
 
 ;; Iedit
 (use-package iedit
-  :ensure t
+  :quelpa t
   :init
   (setq iedit-toggle-key-default (kbd "C-:")))
 
 ;; Ivy
 (use-package ivy
-  :ensure t
+  :quelpa t
   :diminish (ivy-mode . "IY")
   :bind (("C-c n i" . ivy-resume))
   :commands ivy-mode
@@ -1216,11 +1222,11 @@ This doesn't support the chanserv auth method"
 
 ;; Ivy Hydra
 (use-package ivy-hydra
-  :ensure t)
+  :quelpa t)
 
 ;; Counsel
 (use-package counsel
-  :ensure t
+  :quelpa t
   :diminish (counsel-mode . "CL")
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
@@ -1236,7 +1242,7 @@ This doesn't support the chanserv auth method"
 
 ;; Swiper
 (use-package swiper
-  :ensure t
+  :quelpa t
   :bind (("C-c s a" . swiper-all)
          ("C-c s s" . swiper)
          :map isearch-mode-map
@@ -1244,7 +1250,7 @@ This doesn't support the chanserv auth method"
 
 ;; Lispy
 (use-package lispy
-  :ensure t
+  :quelpa t
   :commands lispy-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1273,7 +1279,7 @@ This doesn't support the chanserv auth method"
 
 ;; Multiple cursors
 (use-package multiple-cursors
-  :ensure t
+  :quelpa t
   :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
          ("C-c m a" . mc/vertical-align)
          ("C-c m e" . mc/mark-more-like-this-extended)
@@ -1290,7 +1296,7 @@ This doesn't support the chanserv auth method"
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
-  :ensure t
+  :quelpa t
   :commands rainbow-delimiters-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1311,7 +1317,7 @@ This doesn't support the chanserv auth method"
 
 ;; Skewer
 (use-package skewer-mode
-  :ensure t
+  :quelpa t
   :diminish (skewer-mode . "SKW")
   :bind ("C-c t e" . run-skewer)
   :commands skewer-mode
@@ -1320,7 +1326,7 @@ This doesn't support the chanserv auth method"
 
 ;; Skewer CSS
 (use-package skewer-css
-  :ensure skewer-mode
+  :quelpa skewer-mode
   :diminish (skewer-css-mode . "SKW-CSS")
   :commands skewer-css-mode
   :init
@@ -1328,7 +1334,7 @@ This doesn't support the chanserv auth method"
 
 ;; Skewer HTML
 (use-package skewer-html
-  :ensure skewer-mode
+  :quelpa skewer-mode
   :diminish (skewer-html-mode . "SKW-HTML")
   :commands skewer-html-mode
   :init
@@ -1336,7 +1342,7 @@ This doesn't support the chanserv auth method"
 
 ;; Undo Tree
 (use-package undo-tree
-  :ensure t
+  :quelpa t
   :diminish (undo-tree-mode . "UT")
   :commands global-undo-tree-mode
   :init
@@ -1347,14 +1353,14 @@ This doesn't support the chanserv auth method"
 
 ;; Visual Fill Column
 (use-package visual-fill-column
-  :ensure t
+  :quelpa t
   :commands visual-fill-column-mode
   :init
   (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
-  :ensure t
+  :quelpa t
   :diminish (volatile-highlights-mode . "VH")
   :commands volatile-highlights-mode
   :init
@@ -1362,7 +1368,7 @@ This doesn't support the chanserv auth method"
 
 ;; Which Key
 (use-package which-key
-  :ensure t
+  :quelpa t
   :bind ("C-c h w" . which-key-show-top-level)
   :commands which-key-mode
   :init
@@ -1399,7 +1405,7 @@ This doesn't support the chanserv auth method"
 
 ;; YASnippet
 (use-package yasnippet
-  :ensure t
+  :quelpa t
   :diminish (yas-minor-mode . "YS")
   :commands yas-global-mode
   :init
