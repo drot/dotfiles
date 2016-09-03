@@ -251,6 +251,18 @@ define_webjump("youtube", "http://www.youtube.com/results?search_query=%s&search
 define_webjump("youtube-user", "http://youtube.com/profile_videos?user=%s");
 define_webjump("imdb", "http://www.imdb.com/find?q=%s&s=all");
 
+// Webjump key bindings
+create_selection_search("archwiki", "C-c a");
+create_selection_search("arch-package", "C-c p");
+create_selection_search("dictionary", "C-c d");
+create_selection_search("image", "C-c i");
+create_selection_search("google", "C-c g");
+create_selection_search("slang", "C-c s");
+create_selection_search("wikipedia", "C-c w");
+create_selection_search("youtube", "C-c y");
+create_selection_search("youtube-user", "C-c u");
+create_selection_search("imdb", "C-c m");
+
 // Selection searches
 function create_selection_search(webjump, key) {
     interactive(
@@ -279,14 +291,37 @@ function create_selection_search(webjump, key) {
         });
 }
 
-// Quick search key bindings
-create_selection_search("archwiki", "C-c a");
-create_selection_search("arch-package", "C-c p");
-create_selection_search("dictionary", "C-c d");
-create_selection_search("image", "C-c i");
-create_selection_search("google", "C-c g");
-create_selection_search("slang", "C-c s");
-create_selection_search("wikipedia", "C-c w");
-create_selection_search("youtube", "C-c y");
-create_selection_search("youtube-user", "C-c u");
-create_selection_search("imdb", "C-c m");
+// Play link hints with mpv
+var mpv_default_command = "mpv";
+var mpv_last_command = mpv_last_command || mpv_default_command;
+
+interactive("mpv",
+            "Play url in mpv",
+            function (I) {
+                var cwd = I.local.cwd;
+                var element = yield read_browser_object(I);
+                var spec = load_spec(element);
+                var uri = load_spec_uri_string(spec);
+
+                var panel = create_info_panel(
+                    I.window,
+                    "download-panel",
+                    [["downloading",
+                      element_get_operation_label(element, "Running on", "URI"),
+                      load_spec_uri_string(spec)],
+                     ["mime-type", "Mime type:", load_spec_mime_type(spec)]]);
+
+                try {
+                    var cmd = yield I.minibuffer.read_shell_command(
+                        $cwd = cwd,
+                        $initial_value = mpv_last_command);
+                    mpv_last_command = cmd;
+                } finally {
+                    panel.destroy();
+                }
+
+                shell_command_with_argument_blind(cmd+" {}", uri, $cwd = cwd);
+            },
+            $browser_object = browser_object_links);
+
+define_key(content_buffer_normal_keymap, "a", "mpv");
