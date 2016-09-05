@@ -1117,6 +1117,7 @@ This doesn't support the chanserv auth method"
   (add-hook 'after-init-hook #'global-company-mode)
   :config
   (setq company-minimum-prefix-length 2
+        company-idle-delay 1.0
         company-tooltip-align-annotations t
         company-tooltip-flip-when-above t
         company-show-numbers t
