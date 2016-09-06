@@ -1167,6 +1167,7 @@ This doesn't support the chanserv auth method"
 ;; Emacs Lisp Slime-style navigation
 (use-package elisp-slime-nav
   :ensure t
+  :diminish (elisp-slime-nav-mode . "SN")
   :commands turn-on-elisp-slime-nav-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
