@@ -241,6 +241,7 @@
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
         save-abbrevs t)
+
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
   (setq-default abbrev-mode t))
@@ -327,7 +328,10 @@
 (use-package eldoc
   :defer t
   :config
-  (setq eldoc-idle-delay 0.1))
+  (setq eldoc-idle-delay 0.1)
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round))
 
 ;; Python mode configuration
 (use-package python
@@ -336,6 +340,7 @@
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
+
   (let ((ipython (executable-find "ipython")))
     (when ipython
       (setq python-shell-interpreter "ipython"))))
@@ -585,12 +590,14 @@
   :config
   (setq compilation-scroll-output 'first-error
         compilation-ask-about-save nil)
+
   (defun drot/colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
     (when (eq major-mode 'compilation-mode)
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
+
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
 ;; Colorize ANSI escape sequences
@@ -621,7 +628,6 @@
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
-  :commands org-narrow-to-subtree
   :config
   (setq org-directory (expand-file-name "org" drot/emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -820,6 +826,7 @@
          ("C-c x o" . hydra-outline/body))
   :config
   (hydra-add-font-lock)
+
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("n" enlarge-window "Enlarge Window")
@@ -827,6 +834,7 @@
     ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
     ("b" shrink-window-horizontally "Shrink Window Horizontally")
     ("q" nil "Quit"))
+
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
     ("q" hide-sublevels "Hide Sub-Levels")
@@ -921,6 +929,7 @@
            :port 6697
            :encryption tls
            :channels ("#reloaded" "#rawhide" "#fo2"))))
+
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
 This doesn't support the chanserv auth method"
@@ -934,32 +943,38 @@ This doesn't support the chanserv auth method"
                        (list (plist-get p :host) method (plist-get p :user)
                              (if (functionp secret)
                                  (funcall secret) secret)))))))
+
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
   ;; Set fill column value to frame width
   (setq rcirc-fill-column 'frame-width)
   ;; Enable logging
   (setq rcirc-log-flag t)
-  ;; Disable conflicting modes
+
   (defun drot/rcirc-mode-hook ()
     "Disable company and YASnippet in rcirc buffers."
     (company-mode -1)
     (yas-minor-mode -1))
+
   ;; Enable additional modes
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
+
   ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
     "Send a private message to the ChanServ service."
     (rcirc-send-string process (concat "chanserv " arg)))
+
   (defun-rcirc-command mystery (arg)
     "Send a private message to the Mystery service."
     (rcirc-send-string process (concat "mystery " arg)))
+
   (defun-rcirc-command memoserv (arg)
     "Send a private message to the MemoServ service."
     (rcirc-send-string process (concat "memoserv " arg)))
+
   (defun-rcirc-command nickserv (arg)
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
@@ -1116,8 +1131,7 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   :config
-  (setq company-minimum-prefix-length 2
-        company-idle-delay 1.0
+  (setq company-idle-delay 1.0
         company-tooltip-align-annotations t
         company-tooltip-flip-when-above t
         company-show-numbers t
@@ -1149,6 +1163,15 @@ This doesn't support the chanserv auth method"
   :init
   (global-diff-hl-mode)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
+
+;; Emacs Lisp Slime-style navigation
+(use-package elisp-slime-nav
+  :ensure t
+  :commands turn-on-elisp-slime-nav-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook))
+    (add-hook hook #'turn-on-elisp-slime-nav-mode)))
 
 ;; Eyebrowse
 (use-package eyebrowse
@@ -1190,12 +1213,6 @@ This doesn't support the chanserv auth method"
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
-
-;; Iedit
-(use-package iedit
-  :ensure t
-  :init
-  (setq iedit-toggle-key-default (kbd "C-:")))
 
 ;; Ivy
 (use-package ivy
@@ -1243,10 +1260,11 @@ This doesn't support the chanserv auth method"
          :map isearch-mode-map
          ("C-c s i" . swiper-from-isearch)))
 
-;; Lispy
-(use-package lispy
+;; Paredit
+(use-package paredit
   :ensure t
-  :commands lispy-mode
+  :diminish (paredit-mode . "PE")
+  :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -1254,23 +1272,83 @@ This doesn't support the chanserv auth method"
                   scheme-mode-hook
                   slime-repl-mode-hook
                   geiser-repl-mode-hook))
-    (add-hook hook #'lispy-mode))
+    (add-hook hook #'enable-paredit-mode))
   :config
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
-  (defun drot/lispy-minibuffer ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer)
-  ;; Enable additional balance safeguards
-  (setq lispy-safe-delete t
-        lispy-safe-copy t
-        lispy-safe-paste t))
+  ;; Implement extreme barfage and slurpage commands
+  (defun paredit-barf-all-the-way-backward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-backward-down)
+    (paredit-splice-sexp))
+
+  (defun paredit-barf-all-the-way-forward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-forward-down)
+    (paredit-splice-sexp)
+    (if (eolp) (delete-horizontal-space)))
+
+  (defun paredit-slurp-all-the-way-backward ()
+    (interactive)
+    (catch 'done
+      (while (not (bobp))
+        (save-excursion
+          (paredit-backward-up)
+          (if (eq (char-before) ?\()
+              (throw 'done t)))
+        (paredit-backward-slurp-sexp))))
+
+  (defun paredit-slurp-all-the-way-forward ()
+    (interactive)
+    (catch 'done
+      (while (not (eobp))
+        (save-excursion
+          (paredit-forward-up)
+          (if (eq (char-after) ?\))
+              (throw 'done t)))
+        (paredit-forward-slurp-sexp))))
+
+  (nconc paredit-commands
+         '("Extreme Barfage & Slurpage"
+           (("C-M-)")
+            paredit-slurp-all-the-way-forward
+            ("(foo (bar |baz) quux zot)"
+             "(foo (bar |baz quux zot))")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-}" "M-F")
+            paredit-barf-all-the-way-forward
+            ("(foo (bar |baz quux) zot)"
+             "(foo (bar|) baz quux zot)"))
+           (("C-M-(")
+            paredit-slurp-all-the-way-backward
+            ("(foo bar (baz| quux) zot)"
+             "((foo bar baz| quux) zot)")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-{" "M-B")
+            paredit-barf-all-the-way-backward
+            ("(foo (bar baz |quux) zot)"
+             "(foo bar baz (|quux) zot)"))))
+
+  (paredit-define-keys)
+  (paredit-annotate-mode-with-examples)
+  (paredit-annotate-functions-with-examples)
+
+  ;; Enable Paredit in suitable modes
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which Paredit should be enabled in the minibuffer.")
+
+  (defun drot/paredit-minibuffer ()
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
+
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1395,6 +1473,7 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows/frames"
+    "C-c C-d" "elisp-slime-nav"
     "C-c C-o" "outline"
     "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
