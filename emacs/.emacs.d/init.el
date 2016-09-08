@@ -1026,6 +1026,7 @@ This doesn't support the chanserv auth method"
   :config
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
+
   (setq inferior-lisp-program "sbcl"
         slime-contribs '(slime-fancy)
         slime-protocol-version 'ignore
@@ -1035,9 +1036,14 @@ This doesn't support the chanserv auth method"
 (use-package slime-repl
   :ensure slime
   :defer t
+  :bind (:map slime-repl-mode-map
+              ("C-c M-r" . slime-repl-previous-matching-input)
+              ("C-c M-s" . slime-repl-next-matching-input))
   :config
-  ;; Don’t reserve the Backspace key
-  (unbind-key "DEL" slime-repl-mode-map))
+  ;; Disable conflicting key bindings with ParEdit
+  (unbind-key "DEL" slime-repl-mode-map)
+  (unbind-key "M-r" slime-repl-mode-map)
+  (unbind-key "M-s" slime-repl-mode-map))
 
 ;; SLIME Company
 (use-package slime-company
