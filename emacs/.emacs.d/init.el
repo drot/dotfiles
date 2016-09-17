@@ -138,11 +138,17 @@
 (drot/set-emoji-font nil)
 (add-hook 'after-make-frame-functions #'drot/set-emoji-font)
 
+;; Enable faster scrolling
+(setq fast-but-imprecise-scrolling t)
+
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
 ;; Keep window point when switching buffers
 (setq switch-to-buffer-preserve-window-point t)
+
+;; Prompt for buffer switch in strongly dedicated windows
+(setq switch-to-buffer-in-dedicated-window 'prompt)
 
 ;; Display read-only buffers in view mode
 (setq view-read-only t
