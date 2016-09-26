@@ -109,7 +109,7 @@
 ;; Default terminal
 (defcommand terminal () ()
   "Start a terminal session."
-  (run-shell-command "st"))
+  (run-shell-command "termite"))
 
 ;; Run or raise
 (defcommand eclient () ()
