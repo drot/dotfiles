@@ -1130,7 +1130,6 @@ This doesn't support the chanserv auth method"
                   undo-tree-visualizer-mode
                   eshell-mode
                   term-mode
-                  compilation-mode
                   comint-mode
                   slime-repl-mode))))
 
