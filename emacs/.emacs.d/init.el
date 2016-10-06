@@ -1465,7 +1465,7 @@ This doesn't support the chanserv auth method"
         which-key-separator " > ")
   (which-key-mode)
   :config
-  (which-key-declare-prefixes
+  (which-key-add-key-based-replacements
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
