@@ -263,6 +263,9 @@ create_selection_search("youtube", "C-c y");
 create_selection_search("youtube-user", "C-c u");
 create_selection_search("imdb", "C-c m");
 
+// Default webjump
+read_url_handler_list = [read_url_make_default_webjump_handler("google")];
+
 // Selection searches
 function create_selection_search(webjump, key) {
     interactive(
