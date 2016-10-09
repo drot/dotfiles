@@ -256,7 +256,6 @@ create_selection_search("archwiki", "C-c a");
 create_selection_search("arch-package", "C-c p");
 create_selection_search("dictionary", "C-c d");
 create_selection_search("image", "C-c i");
-create_selection_search("google", "C-c g");
 create_selection_search("slang", "C-c s");
 create_selection_search("wikipedia", "C-c w");
 create_selection_search("youtube", "C-c y");
