@@ -1457,8 +1457,7 @@ This doesn't support the chanserv auth method"
   :bind ("C-c h w" . which-key-show-top-level)
   :commands which-key-mode
   :init
-  (setq which-key-show-prefix 'bottom
-        which-key-idle-delay 2.0
+  (setq which-key-idle-delay 2.0
         which-key-idle-secondary-delay 1.0
         which-key-allow-imprecise-window-fit t
         which-key-sort-order #'which-key-prefix-then-key-order
