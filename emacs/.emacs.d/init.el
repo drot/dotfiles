@@ -1497,6 +1497,7 @@ This doesn't support the chanserv auth method"
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
-(load custom-file 'noerror 'nomessage)
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;;; init.el ends here
