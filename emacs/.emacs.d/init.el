@@ -35,15 +35,12 @@
                              (setq gc-cons-threshold 800000)))
 
 ;; Set some variables
-(defvar drot/emacs-directory (file-name-directory load-file-name)
-  "Emacs root directory.")
-
-(defvar drot/cache-directory (expand-file-name "cache" drot/emacs-directory)
-  "This directory houses all cache files.")
+(defvar drot/cache-directory (expand-file-name "cache" user-emacs-directory)
+  "All cache files from packages are stored in this directory.")
 (make-directory drot/cache-directory t)
 
-(defvar drot/custom-file (expand-file-name "custom.el" drot/emacs-directory)
-  "Store changes from the customize interface in the selected file.")
+(defvar drot/custom-file (expand-file-name "custom.el" user-emacs-directory)
+  "Changes from the customize interface are stored in this file.")
 
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
@@ -635,7 +632,7 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
   :config
-  (setq org-directory (expand-file-name "org" drot/emacs-directory)
+  (setq org-directory (expand-file-name "org" user-emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-log-done 'time
         org-src-fontify-natively t
@@ -777,7 +774,7 @@
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
                        ("https://www.reddit.com/r/linux/.rss" linux))
-        elfeed-db-directory (expand-file-name "elfeed" drot/emacs-directory)
+        elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
 ;; Expand region
