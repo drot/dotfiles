@@ -171,7 +171,7 @@
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
       auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-      backup-directory-alist `((".*" . ,drot/cache-directory))
+      backup-directory-alist `(("." . ,drot/cache-directory))
       version-control t
       kept-new-versions 2
       delete-old-versions t
@@ -1038,7 +1038,6 @@ This doesn't support the chanserv auth method"
 ;; SLIME REPL
 (use-package slime-repl
   :ensure slime
-  :defer t
   :bind (:map slime-repl-mode-map
               ("C-c M-r" . slime-repl-previous-matching-input)
               ("C-c M-s" . slime-repl-next-matching-input))
