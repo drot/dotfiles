@@ -870,9 +870,7 @@
          ("C-c v c" . magit-clone)
          ("C-c v b" . magit-blame)
          ("C-c v l" . magit-log-buffer-file)
-         ("C-c v p" . magit-pull))
-  :config
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+         ("C-c v p" . magit-pull)))
 
 ;; Markdown mode
 (use-package markdown-mode
@@ -1166,10 +1164,12 @@ This doesn't support the chanserv auth method"
 (use-package diff-hl
   :ensure t
   :bind ("C-c t m" . diff-hl-margin-mode)
-  :commands (global-diff-hl-mode diff-hl-dired-mode)
+  :commands global-diff-hl-mode
   :init
   (global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode))
+  :config
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
 ;; Emacs Lisp Slime-style navigation
 (use-package elisp-slime-nav
