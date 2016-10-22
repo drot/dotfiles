@@ -884,8 +884,8 @@
 ;; Move-text
 (use-package move-text
   :ensure t
-  :bind (("M-<up>" . move-text-up)
-         ("M-<down>" . move-text-down)))
+  :bind (("C-c x p" . move-text-up)
+         ("C-c x n" . move-text-down)))
 
 ;; NeoTree
 (use-package neotree
@@ -1408,7 +1408,7 @@ This doesn't support the chanserv auth method"
     "C-c @" "hide-show"
     "C-c &" "yasnippet"
     "C-c a" "applications"
-    "C-c c" "compile-comments"
+    "C-c c" "compile-and-comments"
     "C-c f" "files"
     "C-c h" "help"
     "C-c i" "insertion"
