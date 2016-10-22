@@ -1281,7 +1281,7 @@ This doesn't support the chanserv auth method"
                   slime-repl-mode-hook
                   geiser-repl-mode-hook))
     (add-hook hook #'enable-paredit-mode))
-  :config  
+  :config
   ;; Enable Paredit in suitable modes
   (defvar drot/paredit-minibuffer-commands '(eval-expression
                                              pp-eval-expression
