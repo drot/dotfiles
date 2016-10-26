@@ -1224,7 +1224,7 @@ This doesn't support the chanserv auth method"
 
 ;; Ivy
 (use-package ivy
-  :ensure t
+  :ensure ivy-hydra
   :diminish (ivy-mode . "IY")
   :bind (("C-c n i" . ivy-resume))
   :commands ivy-mode
@@ -1239,10 +1239,6 @@ This doesn't support the chanserv auth method"
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t
         ivy-action-wrap t))
-
-;; Ivy Hydra
-(use-package ivy-hydra
-  :ensure t)
 
 ;; Counsel
 (use-package counsel

@@ -78,12 +78,6 @@ bindsym $mod+d focus child
 # focus the latest urgent window.
 bindsym $mod+u [urgent="latest"] focus
 
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+apostrophe move scratchpad
-
-# show the next scratchpad window or hide the focused scratchpad window
-bindsym $mod+apostrophe scratchpad show
-
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
