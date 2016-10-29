@@ -10,14 +10,14 @@ shopt -s extglob
 shopt -s no_empty_cmd_completion
 
 # History configuration
-shopt -s histverify
-shopt -s cmdhist
-shopt -s histappend
-
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=20000
 HISTFILESIZE=${HISTSIZE}
 HISTTIMEFORMAT="%F %T "
+
+shopt -s histverify
+shopt -s cmdhist
+shopt -s histappend
 
 # Man page colorization
 man() {
