@@ -21,12 +21,12 @@ HISTTIMEFORMAT="%F %T "
 
 # Man pages colorization
 man() {
-    LESS_TERMCAP_md=$"\E[01;32m" \
-                   LESS_TERMCAP_me=$"\E[0m" \
-                   LESS_TERMCAP_se=$"\E[0m" \
-                   LESS_TERMCAP_so=$"\E[1;37;41m" \
-                   LESS_TERMCAP_ue=$"\E[0m" \
-                   LESS_TERMCAP_us=$"\E[04;34m" \
+    LESS_TERMCAP_md=$'\E[01;32m' \
+                   LESS_TERMCAP_me=$'\E[0m' \
+                   LESS_TERMCAP_se=$'\E[0m' \
+                   LESS_TERMCAP_so=$'\E[1;37;41m' \
+                   LESS_TERMCAP_ue=$'\E[0m' \
+                   LESS_TERMCAP_us=$'\E[04;34m' \
                    command man "$@"
 }
 
