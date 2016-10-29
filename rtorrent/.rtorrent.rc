@@ -54,7 +54,7 @@ network.port_range.set = 49164-49164
 #network.port_random.set = no
 
 # Check hash for finished torrents
-pieces.hash.on_completion.set = yes
+#pieces.hash.on_completion.set = no
 
 # Set whetever the client should try to connect to UDP trackers
 trackers.use_udp.set = no
