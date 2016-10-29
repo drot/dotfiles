@@ -6,6 +6,8 @@ set -o notify
 
 # Bash options
 shopt -s cdspell
+shopt -s direxpand
+shopt -s dirspell
 shopt -s extglob
 shopt -s no_empty_cmd_completion
 
