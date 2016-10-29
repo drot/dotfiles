@@ -17,7 +17,7 @@ set -o notify
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=20000
 HISTFILESIZE=${HISTSIZE}
-HISTTIMEFORMAT='%F %T '
+HISTTIMEFORMAT="%F %T "
 
 # Man page colorization
 man() {
