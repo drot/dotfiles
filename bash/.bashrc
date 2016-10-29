@@ -15,6 +15,7 @@ HISTSIZE=20000
 HISTFILESIZE=${HISTSIZE}
 HISTTIMEFORMAT="%F %T "
 
+# Bash history options
 shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
