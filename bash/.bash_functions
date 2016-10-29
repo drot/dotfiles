@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Paste to sprunge
-sprunge() {
-    curl -F 'sprunge=<-' http://sprunge.us
+# Paste to 0x0.st
+0x0() {
+    curl -F "file=@${1:--}" https://0x0.st
 }
 
-# Watch online videos with MPlayer
-tube() {
-    youtube-dl -q -o- $1 | mplayer -cache 8192 -
+# Paste to sprunge.us
+sprunge() {
+    curl -F "sprunge=<-" http://sprunge.us
 }
 
 # Find process

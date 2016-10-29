@@ -8,6 +8,8 @@ export GREP_COLORS="mt=01;37;41"
 export BROWSER="conkeror"
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
+export WINEPREFIX=$HOME/.config/wine/
+export WINEARCH=win32
 
 # Initialize Bash
 [[ -f ~/.bashrc ]] && . ~/.bashrc
