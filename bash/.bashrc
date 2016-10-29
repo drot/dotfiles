@@ -1,19 +1,20 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
+# Notify of completed background jobs
+set -o notify
+
 # Bash options
 shopt -s cdspell
-shopt -s dirspell
 shopt -s extglob
 shopt -s no_empty_cmd_completion
+
+# History configuration
 shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
 
-# Notify of completed background jobs
-set -o notify
-
-# History configuration
+PROMPT_COMMAND="history -a"
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=20000
 HISTFILESIZE=${HISTSIZE}
