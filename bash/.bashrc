@@ -14,7 +14,6 @@ shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
 
-PROMPT_COMMAND="history -a"
 HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=20000
 HISTFILESIZE=${HISTSIZE}
