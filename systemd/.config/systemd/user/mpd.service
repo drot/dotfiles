@@ -1,0 +1,13 @@
+[Unit]
+Description=Music Player Daemon
+
+[Service]
+ExecStart=/usr/bin/mpd --no-daemon
+ExecStop=/usr/bin/mpd --kill
+
+# allow MPD to use real-time priority 50
+LimitRTPRIO=50
+LimitRTTIME=infinity
+
+[Install]
+Also=mpd.socket
