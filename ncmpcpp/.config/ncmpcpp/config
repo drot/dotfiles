@@ -129,7 +129,7 @@ visualizer_in_stereo = yes
 #
 ## Defines how long messages are supposed to be visible.
 ##
-#message_delay_time = 5
+message_delay_time = 2
 #
 ##### song format #####
 ##
