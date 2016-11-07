@@ -1204,13 +1204,6 @@ This doesn't support the chanserv auth method"
                   help-mode-hook))
     (add-hook hook #'form-feed-mode)))
 
-;; Highlight Numbers
-(use-package highlight-numbers
-  :ensure t
-  :commands highlight-numbers-mode
-  :init
-  (add-hook 'prog-mode-hook #'highlight-numbers-mode))
-
 ;; Hl-Todo
 (use-package hl-todo
   :ensure t
