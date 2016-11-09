@@ -242,7 +242,7 @@
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
   :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" drot/cache-directory)
+  (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
         save-abbrevs t)
 
   (if (file-exists-p abbrev-file-name)
@@ -550,7 +550,7 @@
 
 ;; Eshell configuration
 (use-package eshell
-  :bind ("C-c a e" . eshell)
+  :bind ("C-c a s" . eshell)
   :config
   (setq eshell-hist-ignoredups t))
 
@@ -692,7 +692,7 @@
 (bind-key "C-c o r" #'remember)
 
 ;; EWW
-(bind-key "C-c a b" #'eww)
+(bind-key "C-c a e" #'eww)
 
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
@@ -1108,6 +1108,15 @@ This doesn't support the chanserv auth method"
         anzu-replace-threshold 50
         anzu-replace-to-string-separator " => "))
 
+;; BBDB
+(use-package bbdb
+  :ensure t
+  :bind (("C-c o b" . bbdb)
+         ("C-c o k" . bbdb-create))
+  :commands bbdb-initialize
+  :init
+  (bbdb-initialize 'gnus 'message))
+
 ;; Beacon
 (use-package beacon
   :ensure t
@@ -1144,7 +1153,8 @@ This doesn't support the chanserv auth method"
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t
         company-selection-wrap-around t
-        company-backends '(company-nxml
+        company-backends '(company-bbdb
+                           company-nxml
                            company-css
                            company-capf
                            company-files
