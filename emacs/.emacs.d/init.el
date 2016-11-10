@@ -482,14 +482,17 @@
   :diminish (flyspell-mode . "FS")
   :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
-         ("C-c x c" . flyspell-correct-word-before-point))
+         ("C-c x c" . flyspell-auto-correct-word)
+         ("C-c i f" . flyspell-correct-word-before-point))
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :config
-  ;; Disable cumbersome key binding
+  ;; Disable conflicting key bindings
   (unbind-key "C-c $" flyspell-mode-map)
+  (unbind-key "C-M-i" flyspell-mode-map)
+
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil
@@ -1120,7 +1123,12 @@ This doesn't support the chanserv auth method"
   :config
   (setq bbdb-update-records-p 'create
         bbdb-mua-pop-up nil
-        bbdb-phone-style nil))
+        bbdb-phone-style nil
+        bbdb-complete-mail-allow-cycling t
+        bbdb-ignore-message-alist '(("From" . "noreply")
+                                    ("From" . "no-reply")
+                                    ("From" . "donotreply")
+                                    ("From" . "mailer-daemon"))))
 
 ;; Beacon
 (use-package beacon
