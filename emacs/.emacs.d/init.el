@@ -1113,9 +1113,14 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind (("C-c o b" . bbdb)
          ("C-c o k" . bbdb-create))
-  :commands bbdb-initialize
+  :commands (bbdb-initialize bbdb-mua-auto-update-p)
   :init
-  (bbdb-initialize 'gnus 'message))
+  (bbdb-initialize 'gnus 'message)
+  (bbdb-mua-auto-update-init 'gnus 'message)
+  :config
+  (setq bbdb-update-records-p 'create
+        bbdb-mua-pop-up nil
+        bbdb-phone-style nil))
 
 ;; Beacon
 (use-package beacon
