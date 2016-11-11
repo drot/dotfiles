@@ -146,7 +146,7 @@ client.urgent #1e2320 #f0dfaf #1e2320 #5f5f5f
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol " / "
+    separator_symbol " :: "
     status_command i3status
     colors {
            background #3f3f3f
