@@ -23,7 +23,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu
-bindsym $mod+p exec dmenu-run
+bindsym $mod+p exec rofi -show run
 
 # change focus
 bindsym $mod+$left focus left
