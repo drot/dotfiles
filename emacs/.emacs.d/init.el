@@ -173,7 +173,7 @@
       auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
       backup-directory-alist `((".*" . ,drot/cache-directory))
       version-control t
-      kept-new-versions 2
+      kept-new-versions 6
       delete-old-versions t
       backup-by-copying t)
 
