@@ -310,7 +310,8 @@
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
                 tramp-file-name-regexp)
-        vc-follow-symlinks t))
+        vc-follow-symlinks t
+        vc-make-backup-files t))
 
 ;; Customize interface options
 (use-package cus-edit
