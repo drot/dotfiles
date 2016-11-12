@@ -22,8 +22,11 @@ bindsym $mod+Return exec termite
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu
+# rofi launcher
 bindsym $mod+p exec rofi -show run
+
+# rofi window switcher
+bindsym $mod+Tab exec rofi -show window
 
 # change focus
 bindsym $mod+$left focus left
