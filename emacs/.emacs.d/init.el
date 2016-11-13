@@ -310,8 +310,7 @@
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
                 tramp-file-name-regexp)
-        vc-follow-symlinks t
-        vc-make-backup-files t))
+        vc-follow-symlinks t))
 
 ;; Customize interface options
 (use-package cus-edit
@@ -1129,7 +1128,8 @@ This doesn't support the chanserv auth method"
         bbdb-ignore-message-alist '(("From" . "noreply")
                                     ("From" . "no-reply")
                                     ("From" . "donotreply")
-                                    ("From" . "mailer-daemon"))))
+                                    ("From" . "mailer-daemon")
+                                    ("From" . "arch-general"))))
 
 ;; Beacon
 (use-package beacon
