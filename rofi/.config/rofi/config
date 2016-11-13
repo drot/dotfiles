@@ -1,5 +1,5 @@
 ! Enabled modi
-rofi.modi: run, window, ssh
+!rofi.modi: run, window, ssh
 
 ! Font to use
 rofi.font: Hack 11
