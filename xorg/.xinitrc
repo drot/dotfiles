@@ -33,6 +33,5 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 xset s off -dpms &
-dunst &
 display -window root ~/Pictures/zenburn.png &
 exec i3

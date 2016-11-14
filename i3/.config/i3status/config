@@ -15,29 +15,29 @@ order += "volume master"
 order += "time"
 
 cpu_usage {
-format = "CPU: %usage"
+format = " %usage"
 }
 
 cpu_temperature 0 {
-format = "TEMP: %degrees°C"
+format = " %degrees°C"
 max_threshold = "60"
 path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 load {
-format = "LOAD: %1min %5min %15min"
+format = " %1min %5min %15min"
 }
 
 disk "/home" {
-format = "HOME: %percentage_used"
+format = " %percentage_used"
 }
 
 volume master {
-format = "VOL: %volume"
-format_muted = "VOL: muted (%volume)"
+format = " %volume"
+format_muted = " %volume"
 device = "pulse"
 }
 
 time {
-format = "%d-%m %H:%M"
+format = " %d-%m %H:%M"
 }
