@@ -1,14 +1,13 @@
 ! Font to use
 rofi.font: Hack 11
 
-! Color scheme for normal row
-rofi.color-normal: #3f3f3f, #dcdccc, #383838, #4f4f4f, #ffffff
-! Color scheme for urgent row
-rofi.color-urgent: #8c5353, #dcdccc, #7c4343, #9c6363, #ffffff
-! Color scheme for active row
-rofi.color-active: #4c7073, #dcdccc, #366060, #5c888b, #ffffff
 ! Color scheme window
-rofi.color-window: #3f3f3f, #1e2320
+rofi.color-window: #3f3f3f,#1e2320
+
+! State:           bg,      fg       bgalt    hlbg     hlfg
+rofi.color-normal: #3f3f3f, #dcdccc, #383838, #4f4f4f, #ffffff
+rofi.color-active: #4c7073, #dcdccc, #366060, #5c888b, #ffffff
+rofi.color-urgent: #8c5353, #dcdccc, #7c4343, #9c6363, #ffffff
 
 ! Hide scroll-bar
 rofi.hide-scrollbar: true
