@@ -39,5 +39,5 @@ device = "pulse"
 }
 
 time {
-format = " %d-%m %H:%M"
+format = " %d-%m  %H:%M"
 }
