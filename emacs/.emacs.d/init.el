@@ -39,6 +39,10 @@
   "All cache files from packages are stored in this directory.")
 (make-directory drot/cache-directory t)
 
+(defvar drot/undo-directory (expand-file-name "undo" user-emacs-directory)
+  "All undo files are stored in this directory.")
+(make-directory drot/undo-directory t)
+
 (defvar drot/custom-file (expand-file-name "custom.el" user-emacs-directory)
   "Changes from the customize interface are stored in this file.")
 
@@ -1382,7 +1386,7 @@ This doesn't support the chanserv auth method"
   :init
   (global-undo-tree-mode)
   :config
-  (setq undo-tree-history-directory-alist backup-directory-alist
+  (setq undo-tree-history-directory-alist `((".*" . ,drot/undo-directory))
         undo-tree-auto-save-history t))
 
 ;; Visual Fill Column
