@@ -1,10 +1,10 @@
 general {
-output_format = "i3bar"
-colors = true
-interval = 3
-color_good = "#f0dfaf"
-color_degraded = "#8cd0d3"
-color_bad = "#cc9393"
+        output_format = "i3bar"
+        colors = true
+        interval = 3
+        color_good = "#5f7f5f"
+        color_degraded = "#7cb8bb"
+        color_bad = "#bc8383"
 }
 
 order += "cpu_usage"
@@ -15,29 +15,29 @@ order += "volume master"
 order += "time"
 
 cpu_usage {
-format = " %usage"
+          format = " %usage"
 }
 
 cpu_temperature 0 {
-format = " %degrees°C"
-max_threshold = "60"
-path = "/sys/class/thermal/thermal_zone0/temp"
+                format = " %degrees°C"
+                max_threshold = "60"
+                path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 load {
-format = " %1min %5min %15min"
+     format = " %1min %5min %15min"
 }
 
 disk "/home" {
-format = " %percentage_used"
+     format = " %percentage_used"
 }
 
 volume master {
-format = " %volume"
-format_muted = " %volume"
-device = "pulse"
+       format = " %volume"
+       format_muted = " %volume"
+       device = "pulse"
 }
 
 time {
-format = " %d-%m  %H:%M"
+     format = " %d-%m  %H:%M"
 }
