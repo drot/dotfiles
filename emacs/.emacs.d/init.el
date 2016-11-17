@@ -539,7 +539,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-conkeror))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Bookmarks save directory
 (use-package bookmark
@@ -1192,10 +1192,11 @@ This doesn't support the chanserv auth method"
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :bind ("C-c t m" . diff-hl-margin-mode)
-  :commands global-diff-hl-mode
+  :bind (("C-c v d" . diff-hl-margin-mode))
+  :commands (global-diff-hl-mode diff-hl-flydiff-mode)
   :init
   (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
   :config
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
