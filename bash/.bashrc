@@ -71,4 +71,11 @@ BLUE='\[\033[1;34m\]'
 NIL='\[\033[00m\]'
 
 # Prompt format
-PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
+case $TERM in
+    xterm*|rxvt*)
+        PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
+        ;;
+    *)
+        PS1="${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
+        ;;
+esac

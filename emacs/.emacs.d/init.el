@@ -558,7 +558,7 @@
 
 ;; Eshell configuration
 (use-package eshell
-  :bind ("C-c a s" . eshell)
+  :bind ("C-c a l" . eshell)
   :config
   (setq eshell-hist-ignoredups t))
 
@@ -570,7 +570,7 @@
 
 ;; Shell mode configuration
 (use-package shell
-  :bind ("C-c a l" . shell)
+  :bind ("C-c a s" . shell)
   :config
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
