@@ -195,9 +195,6 @@
 (column-number-mode)
 (size-indication-mode)
 
-;; Highlight current line
-(global-hl-line-mode)
-
 ;; Undo and redo the window configuration
 (winner-mode)
 
@@ -227,6 +224,19 @@
   :config
   (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
   (save-place-mode))
+
+;; Highlight current line
+(use-package hl-line
+  :config
+  (global-hl-line-mode)
+  ;; Disable `hl-line-mode' in special buffers
+  (dolist (hook '(undo-tree-visualizer-mode-hook
+                  eshell-mode-hook
+                  shell-mode-hook
+                  term-mode-hook
+                  comint-mode-hook))
+    (add-hook hook (lambda ()
+                     (setq-local global-hl-line-mode nil)))))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -560,7 +570,9 @@
 (use-package eshell
   :bind ("C-c a l" . eshell)
   :config
-  (setq eshell-hist-ignoredups t))
+  (setq eshell-hist-ignoredups t)
+  (add-hook 'eshell-mode-hook (lambda ()
+                                (setq-local global-hl-line-mode nil))))
 
 ;; Eshell smart display
 (use-package em-smart
