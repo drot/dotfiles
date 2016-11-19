@@ -72,7 +72,7 @@ NIL='\[\033[00m\]'
 
 # Prompt format
 case $TERM in
-    xterm*|rxvt*)
+    xterm*|rxvt*|screen*)
         PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
         ;;
     *)
