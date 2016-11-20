@@ -15,9 +15,6 @@ session_pref("javascript.options.strict", false);
 // Delete history after 30 days
 session_pref('browser.history_expire_days', 30);
 
-// Don't check compatibility for extensions
-session_pref('extensions.checkCompatibility', false);
-
 // Don't require a whitelist to install extensions
 session_pref("xpinstall.whitelist.required", false);
 
