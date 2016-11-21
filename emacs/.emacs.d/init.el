@@ -504,7 +504,7 @@
   ;; Disable conflicting key bindings
   (unbind-key "C-c $" flyspell-mode-map)
   (unbind-key "C-M-i" flyspell-mode-map)
-
+  ;; Configure package
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil
@@ -1045,7 +1045,7 @@ This doesn't support the chanserv auth method"
   :config
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
-
+  ;; Configure package
   (setq inferior-lisp-program "sbcl"
         slime-contribs '(slime-fancy)
         slime-protocol-version 'ignore
