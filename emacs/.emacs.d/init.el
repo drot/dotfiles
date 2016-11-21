@@ -356,6 +356,7 @@
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
 
+  ;; Use IPython if possible
   (let ((ipython (executable-find "ipython")))
     (when ipython
       (setq python-shell-interpreter "ipython"))))
@@ -902,8 +903,8 @@
 ;; Move-text
 (use-package move-text
   :ensure t
-  :bind (("C-c x p" . move-text-up)
-         ("C-c x n" . move-text-down)))
+  :bind (("M-<up>" . move-text-up)
+         ("M-<down>" . move-text-down)))
 
 ;; NeoTree
 (use-package neotree
