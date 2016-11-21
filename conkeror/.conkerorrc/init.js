@@ -324,3 +324,18 @@ interactive("mpv",
             $browser_object = browser_object_links);
 
 define_key(content_buffer_normal_keymap, "a", "mpv");
+
+// Load custom CSS
+site_css_dir = "~/.conkerorrc/site-css/";
+
+function site_css(filename, url_prefixes) {
+    var styles = read_text_file(make_file(site_css_dir+filename+".css"));
+    var stylesheet = make_css_data_uri([styles], $url_prefixes = url_prefixes);
+    register_user_stylesheet(stylesheet);
+    interactive("toggle-"+filename,"", function() {
+        unregister_user_stylesheet(stylesheet);
+    });
+}
+
+site_css("wikipedia-dark", ["https://en.wikipedia.org"]);
+site_css("hackernews-dark", ["https://news.ycombinator.com"]);
