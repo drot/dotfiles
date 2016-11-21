@@ -337,5 +337,4 @@ function site_css(filename, url_prefixes) {
     });
 }
 
-site_css("wikipedia-dark", ["https://en.wikipedia.org"]);
 site_css("hackernews-dark", ["https://news.ycombinator.com"]);
