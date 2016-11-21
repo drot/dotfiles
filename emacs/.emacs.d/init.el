@@ -1048,7 +1048,7 @@ This doesn't support the chanserv auth method"
   (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Configure package
   (setq inferior-lisp-program "sbcl"
-        slime-contribs '(slime-fancy)
+        slime-contribs '(slime-fancy slime-company)
         slime-protocol-version 'ignore
         slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
 
@@ -1063,10 +1063,9 @@ This doesn't support the chanserv auth method"
 ;; SLIME Company
 (use-package slime-company
   :ensure t
-  :after slime
+  :defer t
   :config
-  (setq slime-company-completion 'fuzzy
-        slime-contribs (append slime-contribs '(slime-company))))
+  (setq slime-company-completion 'fuzzy))
 
 ;; Smex
 (use-package smex
