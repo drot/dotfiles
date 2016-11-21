@@ -690,7 +690,7 @@
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
-(bind-key "C-c f r" #'revert-buffer)
+(bind-key "C-c f x" #'revert-buffer)
 
 ;; Linum Mode
 (bind-key "C-c t l" #'linum-mode)
@@ -1271,7 +1271,7 @@ This doesn't support the chanserv auth method"
   :diminish (counsel-mode . "CL")
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
-         ("C-c f c" . counsel-recentf)
+         ("C-c f r" . counsel-recentf)
          ("C-c s g" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
          ("C-c s r" . counsel-grep)
