@@ -734,7 +734,7 @@
 (bind-key "C-c i a" #'auto-insert)
 
 ;; Comment region
-(bind-key "C-c c r" #'comment-region)
+(bind-key "C-c c k" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
 
 ;; Replace dabbrev-expand with hippie-expand
@@ -1273,6 +1273,7 @@ This doesn't support the chanserv auth method"
          ("C-c f j" . counsel-dired-jump)
          ("C-c f c" . counsel-recentf)
          ("C-c s g" . counsel-git-grep)
+         ("C-c s i" . counsel-imenu)
          ("C-c s r" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
