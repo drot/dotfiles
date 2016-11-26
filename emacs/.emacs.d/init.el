@@ -463,7 +463,7 @@
   :diminish (outline-minor-mode . "OM")
   :bind ("C-c t o" . outline-minor-mode)
   :init
-  (setq outline-minor-mode-prefix (kbd "C-c C-o")))
+  (setq outline-minor-mode-prefix (kbd "C-c x o")))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -677,68 +677,7 @@
   :config
   (setq windmove-wrap-around t))
 
-;; Indent region
-(bind-key "C-c x i" #'indent-region)
-
-;; Cycle spacing
-(bind-key [remap just-one-space] #'cycle-spacing)
-
-;; Display personal bindings
-(bind-key "C-c h b" #'describe-personal-keybindings)
-
-;; Toggle debug on error
-(bind-key "C-c t d" #'toggle-debug-on-error)
-
-;; Revert buffer
-(bind-key "C-c f x" #'revert-buffer)
-
-;; Linum Mode
-(bind-key "C-c t l" #'linum-mode)
-
-;; Ruler mode
-(bind-key "C-c t u" #'ruler-mode)
-
-;; Ediff
-(bind-key "C-c f e" #'ediff)
-
-;; Calculator
-(bind-key "C-c a c" #'calc)
-
-;; Proced
-(bind-key "C-x p" #'proced)
-
-;; Remember
-(bind-key "C-c o r" #'remember)
-
-;; EWW
-(bind-key "C-c a e" #'eww)
-
-;; Gnus
-(bind-key "C-c a g" #'gnus)
-
-;; Find function and variable definitions
-(bind-key "C-c h f" #'find-function)
-(bind-key "C-c h 4 f" #'find-function-other-window)
-(bind-key "C-c h k" #'find-function-on-key)
-(bind-key "C-c h v" #'find-variable)
-(bind-key "C-c h 4 v" #'find-variable-other-window)
-(bind-key "C-c h l" #'find-library)
-
-;; Tildify mode
-(bind-key "C-c x t" #'tildify-region)
-
-;; Align
-(bind-key "C-c x a" #'align)
-
-;; Auto Insert
-(bind-key "C-c i a" #'auto-insert)
-
-;; Comment region
-(bind-key "C-c c k" #'comment-region)
-(bind-key "C-c c u" #'uncomment-region)
-
-;; Replace dabbrev-expand with hippie-expand
-(bind-key [remap dabbrev-expand] #'hippie-expand)
+;;; Third-party deferred packages
 
 ;; Ace-window
 (use-package ace-window
@@ -1079,6 +1018,11 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
+;; Wgrep
+(use-package wgrep
+  :ensure t
+  :defer t)
+
 ;; YAML mode
 (use-package yaml-mode
   :ensure t
@@ -1088,6 +1032,8 @@ This doesn't support the chanserv auth method"
 (use-package zop-to-char
   :ensure t
   :bind ([remap zap-to-char] . zop-to-char))
+
+;;; Third-party activated packages
 
 ;; Ace-link
 (use-package ace-link
@@ -1272,9 +1218,9 @@ This doesn't support the chanserv auth method"
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
-         ("C-c s g" . counsel-git-grep)
+         ("C-c s v" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
-         ("C-c s r" . counsel-grep)
+         ("C-c s g" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
   :init
@@ -1444,7 +1390,7 @@ This doesn't support the chanserv auth method"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
     "C-c C-d" "elisp-slime-nav"
-    "C-c C-o" "outline"
+    "C-c x o" "outline"
     "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
     "C-c x" "text"))
@@ -1456,6 +1402,71 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (yas-global-mode))
+
+;;; Custom key bindings
+
+;; Indent region
+(bind-key "C-c x i" #'indent-region)
+
+;; Cycle spacing
+(bind-key [remap just-one-space] #'cycle-spacing)
+
+;; Display personal bindings
+(bind-key "C-c h b" #'describe-personal-keybindings)
+
+;; Toggle debug on error
+(bind-key "C-c t d" #'toggle-debug-on-error)
+
+;; Revert buffer
+(bind-key "C-c f x" #'revert-buffer)
+
+;; Linum Mode
+(bind-key "C-c t l" #'linum-mode)
+
+;; Ruler mode
+(bind-key "C-c t u" #'ruler-mode)
+
+;; Ediff
+(bind-key "C-c f e" #'ediff)
+
+;; Calculator
+(bind-key "C-c a c" #'calc)
+
+;; Proced
+(bind-key "C-x p" #'proced)
+
+;; Remember
+(bind-key "C-c o r" #'remember)
+
+;; EWW
+(bind-key "C-c a e" #'eww)
+
+;; Gnus
+(bind-key "C-c a g" #'gnus)
+
+;; Find function and variable definitions
+(bind-key "C-c h f" #'find-function)
+(bind-key "C-c h 4 f" #'find-function-other-window)
+(bind-key "C-c h k" #'find-function-on-key)
+(bind-key "C-c h v" #'find-variable)
+(bind-key "C-c h 4 v" #'find-variable-other-window)
+(bind-key "C-c h l" #'find-library)
+
+;; Tildify mode
+(bind-key "C-c x t" #'tildify-region)
+
+;; Align
+(bind-key "C-c x a" #'align)
+
+;; Auto Insert
+(bind-key "C-c i a" #'auto-insert)
+
+;; Comment region
+(bind-key "C-c c k" #'comment-region)
+(bind-key "C-c c u" #'uncomment-region)
+
+;; Replace dabbrev-expand with hippie-expand
+(bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Load changes from the customize interface
 (setq custom-file drot/custom-file)
