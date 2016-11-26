@@ -1033,7 +1033,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ([remap zap-to-char] . zop-to-char))
 
-;;; Third-party activated packages
+;;; Third-party initialized packages
 
 ;; Ace-link
 (use-package ace-link
@@ -1220,7 +1220,7 @@ This doesn't support the chanserv auth method"
          ("C-c f r" . counsel-recentf)
          ("C-c s v" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
-         ("C-c s g" . counsel-grep)
+         ("C-c s f" . counsel-grep)
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
   :init
@@ -1431,6 +1431,9 @@ This doesn't support the chanserv auth method"
 
 ;; Calculator
 (bind-key "C-c a c" #'calc)
+
+;; Grep
+(bind-key "C-c s g" #'grep)
 
 ;; Proced
 (bind-key "C-x p" #'proced)
