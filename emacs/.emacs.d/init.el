@@ -463,7 +463,7 @@
   :diminish (outline-minor-mode . "OM")
   :bind ("C-c t o" . outline-minor-mode)
   :init
-  (setq outline-minor-mode-prefix (kbd "C-c x o")))
+  (setq outline-minor-mode-prefix (kbd "C-c c o")))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -1389,8 +1389,8 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
+    "C-c c o" "outline"
     "C-c C-d" "elisp-slime-nav"
-    "C-c x o" "outline"
     "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
     "C-c x" "text"))
