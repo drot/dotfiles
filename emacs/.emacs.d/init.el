@@ -1221,6 +1221,7 @@ This doesn't support the chanserv auth method"
          ("C-c s v" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
          ("C-c s f" . counsel-grep)
+         ("C-c h l" . counsel-find-library)
          ("C-c i u" . counsel-unicode-char))
   :commands counsel-mode
   :init
@@ -1453,7 +1454,6 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c h k" #'find-function-on-key)
 (bind-key "C-c h v" #'find-variable)
 (bind-key "C-c h 4 v" #'find-variable-other-window)
-(bind-key "C-c h l" #'find-library)
 
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
