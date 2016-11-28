@@ -203,7 +203,7 @@
   :config
   (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
         savehist-autosave-interval 60
-        savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
+        savehist-additional-variables '(search-ring regexp-search-ring))
   (savehist-mode))
 
 ;; Save recent files list
