@@ -1,4 +1,4 @@
-gtk-theme-name = "Adwaita"
-gtk-icon-theme-name = "gnome"
+gtk-theme-name = "Arc-Dark"
+gtk-icon-theme-name = "Arc"
 gtk-key-theme-name = "Emacs"
 gtk-font-name = "Cantarell 11"
