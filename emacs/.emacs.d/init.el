@@ -251,6 +251,7 @@
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
         save-abbrevs t)
 
+  ;; Load abbrevs if they exist
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
   (setq-default abbrev-mode t))
@@ -258,7 +259,7 @@
 ;; Electric pair mode
 (use-package elec-pair
   :config
-  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+  (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
   (electric-pair-mode))
 
 ;; Prettify certain symbols
@@ -273,12 +274,13 @@
   (setq which-func-unknown "(Top Level)")
   (which-function-mode))
 
-;; Allow scrolling while Isearch is active
+;; Isearch configuration
 (use-package "isearch"
   :defer t
   :diminish (isearch-mode . "IS")
   :config
-  (setq isearch-allow-scroll t))
+  (setq isearch-allow-scroll t
+        search-default-mode #'char-fold-to-regexp))
 
 ;; Ispell default program
 (use-package ispell
@@ -338,7 +340,10 @@
 (use-package eldoc
   :defer t
   :config
-  (setq eldoc-idle-delay 0.1))
+  (setq eldoc-idle-delay 0.1)
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round))
 
 ;; Python mode configuration
 (use-package python
@@ -641,7 +646,6 @@
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
-  :commands org-narrow-to-subtree
   :config
   (setq org-directory (expand-file-name "org" user-emacs-directory)
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -986,10 +990,15 @@ This doesn't support the chanserv auth method"
 ;; SLIME REPL
 (use-package slime-repl
   :ensure slime
+  :bind (:map slime-repl-mode-map
+              ("C-c M-r" . slime-repl-previous-matching-input)
+              ("C-c M-s" . slime-repl-next-matching-input))
   :defer t
   :config
-  ;; Disable conflicting key binding
-  (unbind-key "DEL" slime-repl-mode-map))
+  ;; Disable conflicting key bindings
+  (unbind-key "DEL" slime-repl-mode-map)
+  (unbind-key "M-r" slime-repl-mode-map)
+  (unbind-key "M-s" slime-repl-mode-map))
 
 ;; SLIME Company
 (use-package slime-company
@@ -1145,6 +1154,16 @@ This doesn't support the chanserv auth method"
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
+;; Emacs Lisp Slime-style navigation
+(use-package elisp-slime-nav
+  :ensure t
+  :diminish (elisp-slime-nav-mode . "SN")
+  :commands turn-on-elisp-slime-nav-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook))
+    (add-hook hook #'turn-on-elisp-slime-nav-mode)))
+
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
@@ -1178,12 +1197,6 @@ This doesn't support the chanserv auth method"
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
-
-;; Iedit
-(use-package iedit
-  :ensure t
-  :init
-  (setq iedit-toggle-key-default (kbd "C-:")))
 
 ;; Ivy
 (use-package ivy
@@ -1229,10 +1242,11 @@ This doesn't support the chanserv auth method"
          :map isearch-mode-map
          ("C-c s i" . swiper-from-isearch)))
 
-;; Lispy
-(use-package lispy
+;; Paredit
+(use-package paredit
   :ensure t
-  :commands lispy-mode
+  :diminish (paredit-mode . "PE")
+  :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
                   lisp-mode-hook
@@ -1240,25 +1254,22 @@ This doesn't support the chanserv auth method"
                   scheme-mode-hook
                   slime-repl-mode-hook
                   geiser-repl-mode-hook))
-    (add-hook hook #'lispy-mode))
+    (add-hook hook #'enable-paredit-mode))
   :config
-  (defvar drot/lispy-minibuffer-commands '(eval-expression
-                                           pp-eval-expression
-                                           eval-expression-with-eldoc
-                                           ibuffer-do-eval
-                                           ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
-  (defun drot/lispy-minibuffer ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-commands)
-        (lispy-mode)))
+  ;; Enable Paredit in suitable modes
+  (defvar drot/paredit-minibuffer-commands '(eval-expression
+                                             pp-eval-expression
+                                             eval-expression-with-eldoc
+                                             ibuffer-do-eval
+                                             ibuffer-do-view-and-eval)
+    "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer)
+  (defun drot/paredit-minibuffer ()
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-commands)
+        (enable-paredit-mode)))
 
-  ;; Enable additional balance safeguards
-  (setq lispy-safe-delete t
-        lispy-safe-copy t
-        lispy-safe-paste t))
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
 
 ;; Multiple cursors
 (use-package multiple-cursors
