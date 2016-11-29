@@ -780,9 +780,16 @@
 (use-package hydra
   :ensure t
   :bind (("C-c w r" . hydra-window-resize/body)
-         ("C-c x o" . hydra-outline/body))
+         ("C-c x o" . hydra-outline/body)
+         ("C-c x m" . hydra-move-text/body))
   :config
   (hydra-add-font-lock)
+
+  (defhydra hydra-move-text (:columns 2)
+    "Move Text"
+    ("p" move-text-up "Move Text Up")
+    ("n" move-text-down "Move Text Down")
+    ("q" nil "Quit"))
 
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
@@ -794,7 +801,7 @@
 
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
-    ("q" hide-sublevels "Hide Sub-Levels")
+    ("z" hide-sublevels "Hide Sub-Levels")
     ("t" hide-body "Hide Body")
     ("o" hide-other "Hide Other")
     ("c" hide-entry "Hide Entry")
@@ -810,7 +817,7 @@
     ("p" outline-previous-visible-heading "Previous Visible Heading")
     ("f" outline-forward-same-level "Forward Same Level")
     ("b" outline-backward-same-level "Backward Same Level")
-    ("z" nil "Quit")))
+    ("q" nil "Quit")))
 
 ;; Macrostep
 (use-package macrostep
@@ -838,8 +845,7 @@
 ;; Move-text
 (use-package move-text
   :ensure t
-  :bind (("M-<up>" . move-text-up)
-         ("M-<down>" . move-text-down)))
+  :defer t)
 
 ;; NeoTree
 (use-package neotree
