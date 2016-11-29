@@ -131,14 +131,6 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
-;; Set emoji font fallback
-(defun drot/set-emoji-font (frame)
-  "Adjust the font settings of FRAME so Emacs can display emoji properly."
-  (set-fontset-font t 'symbol (font-spec :family "Noto Emoji") frame 'prepend))
-
-(drot/set-emoji-font nil)
-(add-hook 'after-make-frame-functions #'drot/set-emoji-font)
-
 ;; Enable faster scrolling
 (setq fast-but-imprecise-scrolling t)
 
