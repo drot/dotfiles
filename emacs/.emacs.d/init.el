@@ -1091,6 +1091,7 @@ This doesn't support the chanserv auth method"
         bbdb-complete-mail-allow-cycling t
         bbdb-ignore-message-alist '(("From" . "noreply")
                                     ("From" . "no-reply")
+                                    ("From" . "gmane.org")
                                     ("From" . "donotreply")
                                     ("From" . "mailer-daemon")
                                     ("From" . "arch-general"))))
@@ -1378,7 +1379,6 @@ This doesn't support the chanserv auth method"
         which-key-sort-order #'which-key-prefix-then-key-order
         which-key-separator " > ")
   (which-key-mode)
-  :config
   (which-key-add-key-based-replacements
     "C-x a" "abbrev"
     "C-x n" "narrow"

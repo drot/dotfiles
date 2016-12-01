@@ -1,6 +1,4 @@
 $include /etc/inputrc
 
-set colored-stats on
-
 "\ep":history-search-backward
 "\en":history-search-forward
