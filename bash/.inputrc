@@ -1,4 +1,8 @@
 $include /etc/inputrc
 
+$if Bash
+set colored-stats on
+$endif
+
 "\ep":history-search-backward
 "\en":history-search-forward
