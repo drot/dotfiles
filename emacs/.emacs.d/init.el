@@ -1157,7 +1157,9 @@ This doesn't support the chanserv auth method"
                                     ("From" . "gmane.org")
                                     ("From" . "donotreply")
                                     ("From" . "mailer-daemon")
-                                    ("From" . "arch-general"))))
+                                    ("From" . "arch-general")))
+  ;; Save the database after exiting Gnus
+  (add-hook 'gnus-exit-gnus-hook #'bbdb-save))
 
 ;; Beacon
 (use-package beacon
