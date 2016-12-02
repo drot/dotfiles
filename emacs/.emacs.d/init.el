@@ -624,7 +624,7 @@
 
 ;; Gnus
 (use-package gnus
-  :defer t
+  :bind ("C-c a g" . gnus)
   :config
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "cock"
@@ -1516,9 +1516,6 @@ This doesn't support the chanserv auth method"
 
 ;; EWW
 (bind-key "C-c a e" #'eww)
-
-;; Gnus
-(bind-key "C-c a g" #'gnus)
 
 ;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
