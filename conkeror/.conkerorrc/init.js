@@ -229,7 +229,7 @@ var unused_webjumps = ['answers', 'buildd', 'buildd-ports', 'clhs', 'cliki',
                        'launchpad', 'lucky', 'ratpoisonwiki', 'sadelicious',
                        'scholar', 'sdelicious', 'slashdot', 'sourceforge',
                        'stumpwmwiki', 'ubuntubugs', 'ubuntufile', 'ubuntupkg',
-                       'wiktionary', 'yahoo', 'bugzilla', 'ebay', 'duckduckgo'
+                       'wiktionary', 'yahoo', 'bugzilla', 'ebay'
                       ];
 
 for (var i = 0; i < unused_webjumps.length; i++)
