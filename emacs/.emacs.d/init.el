@@ -409,6 +409,7 @@
          ("C-x 4 C-j" . dired-jump-other-window))
   :config
   (setq dired-omit-verbose nil)
+  ;; Ignore uninteresting files
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 ;; Dired Async
@@ -594,11 +595,9 @@
         compilation-ask-about-save nil)
 
   (defun drot/colorize-compilation-buffer ()
-    "Colorize a compilation mode buffer."
-    (interactive)
+    "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
-      (let ((inhibit-read-only t))
-        (ansi-color-apply-on-region (point-min) (point-max)))))
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
 
   (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
 
