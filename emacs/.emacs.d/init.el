@@ -612,7 +612,9 @@
   :config
   (setq message-send-mail-function #'smtpmail-send-it
         message-confirm-send t
-        message-kill-buffer-on-exit t))
+        message-kill-buffer-on-exit t)
+  ;; Save the BBDB database on every exit action
+  (message-add-action #'bbdb-save 'exit 'postpone 'kill))
 
 ;; Outgoing mail server
 (use-package smtpmail
