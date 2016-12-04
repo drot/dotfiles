@@ -140,6 +140,9 @@
 ;; Keep window point when switching buffers
 (setq switch-to-buffer-preserve-window-point t)
 
+;; Change recenter initial position
+(setq recenter-positions '(top middle bottom))
+
 ;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 
