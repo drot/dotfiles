@@ -70,8 +70,8 @@
   :ensure t)
 
 ;; Don't show the startup welcome messages
-(setq inhibit-startup-echo-area-message (user-login-name)
-      inhibit-startup-screen t)
+(setq inhibit-startup-echo-area-message (user-login-name))
+(setq inhibit-startup-screen t)
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
@@ -83,15 +83,15 @@
 (setq echo-keystrokes 0.1)
 
 ;; Indicate buffer boundaries and empty lines
-(setq-default indicate-buffer-boundaries 'left
-              indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'left)
+(setq-default indicate-empty-lines t)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
 ;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+(setq read-buffer-completion-ignore-case t)
 
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
@@ -109,15 +109,15 @@
 (setq disabled-command-function nil)
 
 ;; No length limit when printing values
-(setq eval-expression-print-length nil
-      eval-expression-print-level nil)
+(setq eval-expression-print-length nil)
+(setq eval-expression-print-level nil)
 
 ;; Try to extract docstrings from special forms
 (setq bind-key-describe-special-forms t)
 
 ;; Use spaces instead of tabs and set default tab width
-(setq-default indent-tabs-mode nil
-              tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; Increase default fill width
 (setq-default fill-column 80)
@@ -144,12 +144,12 @@
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 
 ;; Display read-only buffers in view mode
-(setq view-read-only t
-      view-inhibit-help-message t)
+(setq view-read-only t)
+(setq view-inhibit-help-message t)
 
 ;; Kill and yank clipboard options
-(setq select-enable-primary t
-      save-interprogram-paste-before-kill t)
+(setq select-enable-primary t)
+(setq save-interprogram-paste-before-kill t)
 
 ;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
@@ -161,17 +161,17 @@
 (setq set-mark-command-repeat-pop t)
 
 ;; Do not save duplicates
-(setq history-delete-duplicates t
-      kill-do-not-save-duplicates t)
+(setq history-delete-duplicates t)
+(setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t))
-      auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory)
-      backup-directory-alist `((".*" . ,drot/cache-directory))
-      version-control t
-      kept-new-versions 6
-      delete-old-versions t
-      backup-by-copying t)
+(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t)))
+(setq auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory))
+(setq backup-directory-alist `((".*" . ,drot/cache-directory)))
+(setq version-control t)
+(setq kept-new-versions 6)
+(setq delete-old-versions t)
+(setq backup-by-copying t)
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
@@ -193,22 +193,22 @@
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory)
-        savehist-autosave-interval 60
-        savehist-additional-variables '(search-ring regexp-search-ring))
+  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory))
+  (setq savehist-autosave-interval 60)
+  (setq savehist-additional-variables '(search-ring regexp-search-ring))
   (savehist-mode))
 
 ;; Save recent files list
 (use-package recentf
   :config
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory)
-        recentf-exclude '("/\\.git/.*\\'"
+  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
+  (setq recentf-exclude '("/\\.git/.*\\'"
                           "/elpa/.*\\'"
                           "/cache/.*\\'"
-                          ".*\\.gz\\'")
-        recentf-max-saved-items 100
-        recentf-max-menu-items 20
-        recentf-auto-cleanup 600)
+                          ".*\\.gz\\'"))
+  (setq recentf-max-saved-items 100)
+  (setq recentf-max-menu-items 20)
+  (setq recentf-auto-cleanup 600)
   (recentf-mode))
 
 ;; Remember point position in files
@@ -233,9 +233,9 @@
 ;; Highlight matching parentheses
 (use-package paren
   :config
-  (setq show-paren-delay 0
-        show-paren-when-point-inside-paren t
-        show-paren-when-point-in-periphery t)
+  (setq show-paren-delay 0)
+  (setq show-paren-when-point-inside-paren t)
+  (setq show-paren-when-point-in-periphery t)
   (show-paren-mode))
 
 ;; Highlight regexps interactively
@@ -248,9 +248,8 @@
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
   :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
-        save-abbrevs t)
-
+  (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
+  (setq save-abbrevs t)
   ;; Load abbrevs if they exist
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
@@ -279,8 +278,8 @@
   :defer t
   :diminish (isearch-mode . "IS")
   :config
-  (setq isearch-allow-scroll t
-        search-default-mode #'char-fold-to-regexp))
+  (setq isearch-allow-scroll t)
+  (setq search-default-mode #'char-fold-to-regexp))
 
 ;; Ispell default program
 (use-package ispell
@@ -293,9 +292,9 @@
 (use-package ediff-wind
   :defer t
   :config
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain
-        ediff-split-window-function #'split-window-horizontally
-        ediff-grab-mouse nil))
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain)
+  (setq ediff-split-window-function #'split-window-horizontally)
+  (setq ediff-grab-mouse nil))
 
 ;; Uniquify buffer names
 (use-package uniquify
@@ -317,18 +316,18 @@
   (setq vc-ignore-dir-regexp
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
-                tramp-file-name-regexp)
-        vc-follow-symlinks t
-        vc-make-backup-files t))
+                tramp-file-name-regexp))
+  (setq vc-follow-symlinks t)
+  (setq vc-make-backup-files t))
 
 ;; Customize interface options
 (use-package cus-edit
   :defer t
   :config
-  (setq custom-buffer-done-kill t
-        custom-buffer-verbose-help nil
-        custom-unlispify-tag-names nil
-        custom-unlispify-menu-entries nil))
+  (setq custom-buffer-done-kill t)
+  (setq custom-buffer-verbose-help nil)
+  (setq custom-unlispify-tag-names nil)
+  (setq custom-unlispify-menu-entries nil))
 
 ;; Treat all themes as safe
 (use-package custom
@@ -341,6 +340,7 @@
   :defer t
   :config
   (setq eldoc-idle-delay 0.1)
+  ;; Paredit compatiblity
   (eldoc-add-command
    #'paredit-backward-delete
    #'paredit-close-round))
@@ -352,7 +352,6 @@
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
-
   ;; Use IPython if possible
   (let ((ipython (executable-find "ipython")))
     (when ipython
@@ -362,8 +361,8 @@
 (use-package cc-mode
   :defer t
   :config
-  (setq c-basic-offset 4
-        c-default-style '((java-mode . "java")
+  (setq c-basic-offset 4)
+  (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
@@ -378,15 +377,15 @@
 (use-package nxml-mode
   :defer t
   :config
-  (setq nxml-slash-auto-complete-flag t
-        nxml-auto-insert-xml-declaration-flag t))
+  (setq nxml-slash-auto-complete-flag t)
+  (setq nxml-auto-insert-xml-declaration-flag t))
 
 ;; Doc View mode configuration
 (use-package doc-view
   :defer t
   :config
-  (setq doc-view-resolution 300
-        doc-view-continuous t))
+  (setq doc-view-resolution 300)
+  (setq doc-view-continuous t))
 
 ;; Prevent GnuTLS warnings
 (use-package gnutls
@@ -398,9 +397,9 @@
 (use-package dired
   :defer t
   :config
-  (setq dired-listing-switches "-ahlF"
-        dired-recursive-copies 'always
-        dired-dwim-target t))
+  (setq dired-listing-switches "-ahlF")
+  (setq dired-recursive-copies 'always)
+  (setq dired-dwim-target t))
 
 ;; Dired-x
 (use-package dired-x
@@ -429,10 +428,10 @@
 (use-package tramp
   :defer t
   :config
-  (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory)
-        tramp-backup-directory-alist `((".*" . ,temporary-file-directory))
-        tramp-auto-save-directory temporary-file-directory))
+  (setq tramp-default-method "ssh")
+  (setq tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory))
+  (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
+  (setq tramp-auto-save-directory temporary-file-directory))
 
 ;; SHR configuration
 (use-package shr
@@ -488,10 +487,10 @@
   (unbind-key "C-c $" flyspell-mode-map)
   (unbind-key "C-M-i" flyspell-mode-map)
   ;; Configure package
-  (setq flyspell-use-meta-tab nil
-        flyspell-issue-message-flag nil
-        flyspell-issue-welcome-flag nil
-        flyspell-consider-dash-as-word-delimiter-flag t))
+  (setq flyspell-use-meta-tab nil)
+  (setq flyspell-issue-message-flag nil)
+  (setq flyspell-issue-welcome-flag nil)
+  (setq flyspell-consider-dash-as-word-delimiter-flag t))
 
 ;; Search more extensively with apropos
 (use-package apropos
@@ -503,8 +502,8 @@
 (use-package copyright
   :bind ("C-c i r" . copyright-update)
   :config
-  (setq copyright-year-ranges t
-        copyright-names-regexp (regexp-quote user-login-name)))
+  (setq copyright-year-ranges t)
+  (setq copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
 (use-package whitespace
@@ -535,8 +534,8 @@
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory)
-        bookmark-save-flag 1))
+  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory))
+  (setq bookmark-save-flag 1))
 
 ;; Speedbar configuration
 (use-package speedbar
@@ -591,8 +590,8 @@
   :bind (("C-c c c" . compile)
          ("C-c c g" . recompile))
   :config
-  (setq compilation-scroll-output 'first-error
-        compilation-ask-about-save nil)
+  (setq compilation-scroll-output 'first-error)
+  (setq compilation-ask-about-save nil)
 
   (defun drot/colorize-compilation-buffer ()
     "Colorize the compilation mode buffer"
@@ -609,9 +608,9 @@
 (use-package message
   :defer t
   :config
-  (setq message-send-mail-function #'smtpmail-send-it
-        message-confirm-send t
-        message-kill-buffer-on-exit t)
+  (setq message-send-mail-function #'smtpmail-send-it)
+  (setq message-confirm-send t)
+  (setq message-kill-buffer-on-exit t)
   ;; Save the BBDB database on every exit action
   (message-add-action #'bbdb-save 'exit 'postpone 'kill))
 
@@ -619,9 +618,9 @@
 (use-package smtpmail
   :defer t
   :config
-  (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-service 465
-        smtpmail-stream-type 'ssl))
+  (setq smtpmail-smtp-server "mail.cock.li")
+  (setq smtpmail-smtp-service 465)
+  (setq smtpmail-stream-type 'ssl))
 
 ;; Gnus
 (use-package gnus
@@ -636,13 +635,13 @@
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
 
   ;; Don’t save or load a newsrc file
-  (setq gnus-save-newsrc-file nil
-        gnus-read-newsrc-file nil)
+  (setq gnus-save-newsrc-file nil)
+  (setq gnus-read-newsrc-file nil)
 
   ;; Article fetching options
-  (setq gnus-article-browse-delete-temp t
-        gnus-treat-strip-trailing-blank-lines 'last
-        gnus-mime-display-multipart-related-as-mixed t)
+  (setq gnus-article-browse-delete-temp t)
+  (setq gnus-treat-strip-trailing-blank-lines 'last)
+  (setq gnus-mime-display-multipart-related-as-mixed t)
 
   ;; Group topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
@@ -664,21 +663,21 @@
            (address "address@gmail.com"))))
 
   ;; Display of the summary buffer
-  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n"
-        gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M"))
-        gnus-group-line-format "%M%S%p%P%5y:%B %G\n" ;;"%B%(%g%)"
-        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
+  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n")
+  (setq gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M")))
+  (setq gnus-group-line-format "%M%S%p%P%5y:%B %G\n")
+  (setq gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references)
+  (setq gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
+  (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
 
   ;; Display of message threading
-  (setq gnus-sum-thread-tree-root ""
-        gnus-sum-thread-tree-false-root ""
-        gnus-sum-thread-tree-single-indent ""
-        gnus-sum-thread-tree-indent "    "
-        gnus-sum-thread-tree-vertical "│   "
-        gnus-sum-thread-tree-leaf-with-other "├──>"
-        gnus-sum-thread-tree-single-leaf "└──>"))
+  (setq gnus-sum-thread-tree-root "")
+  (setq gnus-sum-thread-tree-false-root "")
+  (setq gnus-sum-thread-tree-single-indent "")
+  (setq gnus-sum-thread-tree-indent "    ")
+  (setq gnus-sum-thread-tree-vertical "│   ")
+  (setq gnus-sum-thread-tree-leaf-with-other "├──>")
+  (setq gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Smiley configuration
 (use-package smiley
@@ -690,18 +689,18 @@
 (use-package calendar
   :bind ("C-c a k" . calendar)
   :config
-  (setq holiday-general-holidays nil
-        holiday-solar-holidays nil
-        holiday-bahai-holidays nil
-        holiday-oriental-holidays nil
-        holiday-islamic-holidays nil
-        holiday-hebrew-holidays nil
-        calendar-week-start-day 1
-        calendar-mark-holidays-flag t
-        calendar-date-style 'european
-        calendar-latitude 43.2
-        calendar-longitude 17.48
-        calendar-location-name "Mostar, Bosnia and Herzegovina"))
+  setq holiday-general-holidays nil
+  (setq holiday-solar-holidays nil)
+  (setq holiday-bahai-holidays nil)
+  (setq holiday-oriental-holidays nil)
+  (setq holiday-islamic-holidays nil)
+  (setq holiday-hebrew-holidays nil)
+  (setq calendar-week-start-day 1)
+  (setq calendar-mark-holidays-flag t)
+  (setq calendar-date-style 'european)
+  (setq calendar-latitude 43.2)
+  (setq calendar-longitude 17.48)
+  (setq calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org-mode configuration
 (use-package org
@@ -711,13 +710,13 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
   :config
-  (setq org-directory (expand-file-name "org" user-emacs-directory)
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-log-done 'time
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t
-        org-catch-invisible-edits 'error
-        org-startup-indented t))
+  (setq org-directory (expand-file-name "org" user-emacs-directory))
+  (setq org-default-notes-file (expand-file-name "notes.org" org-directory))
+  (setq org-log-done 'time)
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-catch-invisible-edits 'error)
+  (setq org-startup-indented t))
 
 ;; World time
 (use-package time
@@ -756,8 +755,8 @@
          ("C-c l" . avy-goto-line)
          ("C-c j" . avy-goto-word-or-subword-1))
   :config
-  (setq avy-all-windows 'all-frames
-        avy-background t)
+  (setq avy-all-windows 'all-frames)
+  (setq avy-background t)
   (avy-setup-default))
 
 ;; Bug Hunter
@@ -791,9 +790,9 @@
   :config
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
-                       ("https://www.reddit.com/r/linux/.rss" linux))
-        elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)
-        elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
+                       ("https://www.reddit.com/r/linux/.rss" linux)))
+  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
+  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
 ;; Expand region
 (use-package expand-region
@@ -916,21 +915,21 @@
   :ensure t
   :bind ("C-c t n" . neotree-toggle)
   :config
-  (setq neo-theme 'nerd
-        neo-create-file-auto-open t
-        neo-smart-open t
-        neo-show-hidden-files t
-        neo-auto-indent-point t))
+  (setq neo-theme 'nerd)
+  (setq neo-create-file-auto-open t)
+  (setq neo-smart-open t)
+  (setq neo-show-hidden-files t)
+  (setq neo-auto-indent-point t))
 
 ;; Paradox
 (use-package paradox
   :ensure t
   :bind ("C-c a p" . paradox-list-packages)
   :config
-  (setq paradox-github-token t
-        paradox-execute-asynchronously t
-        paradox-spinner-type 'rotating-line
-        paradox-display-download-count t))
+  (setq paradox-github-token t)
+  (setq paradox-execute-asynchronously t)
+  (setq paradox-spinner-type 'rotating-line)
+  (setq paradox-display-download-count t))
 
 ;; PKGBUILD Mode
 (use-package pkgbuild-mode
@@ -942,8 +941,8 @@
   :bind ("C-c a i" . irc)
   :config
   ;; User defaults
-  (setq rcirc-default-user-name "drot"
-        rcirc-reconnect-delay 10)
+  (setq rcirc-default-user-name "drot")
+  (setq rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
         '(("adams.freenode.net"
@@ -1052,10 +1051,10 @@ This doesn't support the chanserv auth method"
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Configure package
-  (setq inferior-lisp-program "sbcl"
-        slime-contribs '(slime-fancy slime-company)
-        slime-protocol-version 'ignore
-        slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
+  (setq inferior-lisp-program "sbcl")
+  (setq slime-contribs '(slime-fancy slime-company))
+  (setq slime-protocol-version 'ignore)
+  (setq slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
 
 ;; SLIME REPL
 (use-package slime-repl
@@ -1135,9 +1134,9 @@ This doesn't support the chanserv auth method"
   :init
   (global-anzu-mode)
   :config
-  (setq anzu-search-threshold 1000
-        anzu-replace-threshold 50
-        anzu-replace-to-string-separator " => "))
+  (setq anzu-search-threshold 1000)
+  (setq anzu-replace-threshold 50)
+  (setq anzu-replace-to-string-separator " => "))
 
 ;; BBDB
 (use-package bbdb
@@ -1149,11 +1148,11 @@ This doesn't support the chanserv auth method"
   (bbdb-initialize 'gnus 'message)
   (bbdb-mua-auto-update-init 'gnus 'message)
   :config
-  (setq bbdb-update-records-p 'create
-        bbdb-mua-pop-up nil
-        bbdb-phone-style nil
-        bbdb-complete-mail-allow-cycling t
-        bbdb-ignore-message-alist '(("From" . "noreply")
+  (setq bbdb-update-records-p 'create)
+  (setq bbdb-mua-pop-up nil)
+  (setq bbdb-phone-style nil)
+  (setq bbdb-complete-mail-allow-cycling t)
+  (setq bbdb-ignore-message-alist '(("From" . "noreply")
                                     ("From" . "no-reply")
                                     ("From" . "gmane.org")
                                     ("From" . "donotreply")
@@ -1169,8 +1168,8 @@ This doesn't support the chanserv auth method"
   :init
   (beacon-mode)
   :config
-  (setq beacon-color "#f0dfaf"
-        beacon-dont-blink-major-modes
+  (setq beacon-color "#f0dfaf")
+  (setq beacon-dont-blink-major-modes
         (append beacon-dont-blink-major-modes
                 '(dired-mode
                   calc-mode
@@ -1190,15 +1189,15 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   :config
-  (setq company-idle-delay 1.0
-        company-tooltip-align-annotations t
-        company-tooltip-flip-when-above t
-        company-show-numbers t
-        company-require-match 'never
-        company-dabbrev-downcase nil
-        company-dabbrev-ignore-case t
-        company-selection-wrap-around t
-        company-backends '(company-bbdb
+  (setq company-idle-delay 1.0)
+  (setq company-tooltip-align-annotations t)
+  (setq company-tooltip-flip-when-above t)
+  (setq company-show-numbers t)
+  (setq company-require-match 'never)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-ignore-case t)
+  (setq company-selection-wrap-around t)
+  (setq company-backends '(company-bbdb
                            company-nxml
                            company-css
                            company-capf
@@ -1244,8 +1243,8 @@ This doesn't support the chanserv auth method"
   :init
   (eyebrowse-mode)
   :config
-  (setq eyebrowse-wrap-around t
-        eyebrowse-switch-back-and-forth t))
+  (setq eyebrowse-wrap-around t)
+  (setq eyebrowse-switch-back-and-forth t))
 
 ;; Form-feed
 (use-package form-feed
@@ -1280,14 +1279,14 @@ This doesn't support the chanserv auth method"
   :init
   (ivy-mode)
   :config
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-        ivy-initial-inputs-alist nil
-        ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'full
-        ivy-count-format "(%d/%d) "
-        ivy-format-function #'ivy-format-function-arrow
-        ivy-wrap t
-        ivy-action-wrap t))
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-initial-inputs-alist nil)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-virtual-abbreviate 'full)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-format-function #'ivy-format-function-arrow)
+  (setq ivy-wrap t)
+  (setq ivy-action-wrap t))
 
 ;; Counsel
 (use-package counsel
@@ -1415,8 +1414,8 @@ This doesn't support the chanserv auth method"
   :init
   (global-undo-tree-mode)
   :config
-  (setq undo-tree-history-directory-alist `((".*" . ,drot/undo-directory))
-        undo-tree-auto-save-history t))
+  (setq undo-tree-history-directory-alist `((".*" . ,drot/undo-directory)))
+  (setq undo-tree-auto-save-history t))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
@@ -1439,11 +1438,11 @@ This doesn't support the chanserv auth method"
   :bind ("C-c h w" . which-key-show-top-level)
   :commands which-key-mode
   :init
-  (setq which-key-idle-delay 2.0
-        which-key-idle-secondary-delay 1.0
-        which-key-allow-imprecise-window-fit t
-        which-key-sort-order #'which-key-prefix-then-key-order
-        which-key-separator " > ")
+  (setq which-key-idle-delay 2.0)
+  (setq which-key-idle-secondary-delay 1.0)
+  (setq which-key-allow-imprecise-window-fit t)
+  (setq which-key-sort-order #'which-key-prefix-then-key-order)
+  (setq which-key-separator " > ")
   (which-key-mode)
   (which-key-add-key-based-replacements
     "C-x a" "abbrev"
