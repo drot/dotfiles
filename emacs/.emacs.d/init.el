@@ -285,8 +285,8 @@
 (use-package ispell
   :defer t
   :config
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra")))
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=ultra")))
 
 ;; Ediff windows configuration
 (use-package ediff-wind
@@ -689,7 +689,7 @@
 (use-package calendar
   :bind ("C-c a k" . calendar)
   :config
-  setq holiday-general-holidays nil
+  (setq holiday-general-holidays nil)
   (setq holiday-solar-holidays nil)
   (setq holiday-bahai-holidays nil)
   (setq holiday-oriental-holidays nil)
