@@ -445,9 +445,10 @@
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
-  :bind ("C-c t o" . outline-minor-mode)
+  :commands outline-minor-mode
   :init
-  (setq outline-minor-mode-prefix (kbd "C-c c o")))
+  (setq outline-minor-mode-prefix (kbd "C-c c o"))
+  (add-hook 'prog-mode-hook #'outline-minor-mode))
 
 ;; Hide Show mode
 (use-package hideshow
