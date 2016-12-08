@@ -294,13 +294,19 @@
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra")))
 
-;; Ediff windows configuration
+;; Ediff window split configuration
 (use-package ediff-wind
   :defer t
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function #'split-window-horizontally)
   (setq ediff-grab-mouse nil))
+
+;; Ediff restore window configuration
+(use-package ediff-util
+  :defer t
+  :config
+  (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;; Uniquify buffer names
 (use-package uniquify
