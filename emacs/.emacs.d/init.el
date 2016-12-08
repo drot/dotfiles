@@ -86,6 +86,9 @@
 (setq-default indicate-buffer-boundaries 'left)
 (setq-default indicate-empty-lines t)
 
+;; Flash frame instead of beeping
+(setq visible-bell t)
+
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
