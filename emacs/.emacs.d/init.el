@@ -34,17 +34,10 @@
 (add-hook 'after-init-hook (lambda ()
                              (setq gc-cons-threshold 800000)))
 
-;; Set some variables
+;; Set default directory for save files
 (defvar drot/cache-directory (expand-file-name "cache" user-emacs-directory)
-  "All cache files from packages are stored in this directory.")
+  "All cache files from libraries are stored in this directory.")
 (make-directory drot/cache-directory t)
-
-(defvar drot/undo-directory (expand-file-name "undo" user-emacs-directory)
-  "All undo files are stored in this directory.")
-(make-directory drot/undo-directory t)
-
-(defvar drot/custom-file (expand-file-name "custom.el" user-emacs-directory)
-  "Changes from the customize interface are stored in this file.")
 
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
@@ -1418,7 +1411,7 @@ This doesn't support the chanserv auth method"
   :init
   (global-undo-tree-mode)
   :config
-  (setq undo-tree-history-directory-alist `((".*" . ,drot/undo-directory)))
+  (setq undo-tree-history-directory-alist '((".*" . "~/.emacs.d/undo")))
   (setq undo-tree-auto-save-history t))
 
 ;; Visual Fill Column
@@ -1547,8 +1540,7 @@ This doesn't support the chanserv auth method"
 (bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(when (file-exists-p custom-file)
-  (load custom-file))
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;;; init.el ends here
