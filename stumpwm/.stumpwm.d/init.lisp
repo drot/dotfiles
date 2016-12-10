@@ -83,7 +83,7 @@
 
 ;; Group and window format
 (setf *group-format* "%n%s<%t>")
-(setf *window-format* "%m%n%s[%50t]")
+(setf *window-format* "%m%n%s(%50t) ")
 
 ;; Mode line format
 (setf *time-modeline-string* "^6*%d-%m^n ^3*%H:%M^n")
