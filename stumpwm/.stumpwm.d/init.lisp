@@ -66,29 +66,29 @@
 (set-bg-color "#1e2320")
 
 ;; Grabbed pointer style
-(setq *grab-pointer-character* 40
-      *grab-pointer-character-mask* 41
-      *grab-pointer-foreground* (hex-to-xlib-color "#1e2320")
-      *grab-pointer-background* (hex-to-xlib-color "#f0dfaf"))
+(setf *grab-pointer-character* 40)
+(setf *grab-pointer-character-mask* 41)
+(setf *grab-pointer-foreground* (hex-to-xlib-color "#1e2320"))
+(setf *grab-pointer-background* (hex-to-xlib-color "#f0dfaf"))
 
 ;; Message and input prompt style
-(setf *input-window-gravity* :center
-      *message-window-gravity* :bottom-right
-      *input-history-ignore-duplicates* 1)
+(setf *input-window-gravity* :center)
+(setf *message-window-gravity* :bottom-right)
+(setf *input-history-ignore-duplicates* 1)
 
 ;; Mode line colors
-(setf *mode-line-foreground-color* "#dcdccc"
-      *mode-line-background-color* "#3f3f3f"
-      *mode-line-border-color* "#5f5f5f")
+(setf *mode-line-foreground-color* "#dcdccc")
+(setf *mode-line-background-color* "#3f3f3f")
+(setf *mode-line-border-color* "#5f5f5f")
 
 ;; Group and window format
-(setf *group-format* "%n%s<%t>"
-      *window-format* "%m%n%s[%50t]")
+(setf *group-format* "%n%s<%t>")
+(setf *window-format* "%m%n%s[%50t]")
 
 ;; Mode line format
-(setf *time-modeline-string* "^6*%d-%m^n ^3*%H:%M^n"
-      *screen-mode-line-format* '("^7*<%n>^n ^06%u^n ^30%W^n ^>"
-                                  "^2*%c^n> ^4*%M^n> ^7*%l^n> %d"))
+(setf *time-modeline-string* "^6*%d-%m^n ^3*%H:%M^n")
+(setf *screen-mode-line-format* '("^7*<%n>^n ^06%u^n ^30%W^n ^>"
+                                  " ^2*%c^n> ^4*%M^n> ^7*%l^n> %d"))
 
 ;; Show the mode line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
@@ -106,17 +106,30 @@
   "Start a terminal session."
   (run-shell-command "termite"))
 
+;; Volume control functions
+(defcommand voltoggle () ()
+  "Toggle volume."
+  (run-shell-command "ponymix -N toggle"))
+
+(defcommand volplus () ()
+  "Increase volume."
+  (run-shell-command "ponymix -N increase 5"))
+
+(defcommand volminus () ()
+  "Decrease volume"
+  (run-shell-command "ponymix -N decrease 5"))
+
 ;; Run or raise
 (defcommand eclient () ()
-  "Run/Raise Emacsclient"
+  "Run/Raise Emacsclient."
   (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
 (defcommand conkeror () ()
-  "Run/Raise Conkeror"
+  "Run/Raise Conkeror."
   (run-or-raise "conkeror" '(:class "Conkeror")))
 
 (defcommand gimp () ()
-  "Run/Raise GIMP"
+  "Run/Raise GIMP."
   (run-or-raise "gimp" '(:class "Gimp")))
 
 ;; Window placement
@@ -143,6 +156,11 @@
 ;; Swap default key bindings
 (define-key *root-map* (kbd "C-b") "conkeror")
 (define-key *root-map* (kbd "c") "terminal")
-(define-key *root-map* (kbd "e") "eclient")
+(define-key *root-map* (kbd "C-e") "eclient")
+
+;; Volume control key bindings
+(define-key *top-map* (kbd "s-period") "voltoggle")
+(define-key *top-map* (kbd "s-plus") "volplus")
+(define-key *top-map* (kbd "s-minus") "volminus")
 
 ;;; init.lisp ends here
