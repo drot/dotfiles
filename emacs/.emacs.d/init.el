@@ -223,7 +223,6 @@
   ;; Disable `hl-line-mode' in special buffers
   (dolist (hook '(undo-tree-visualizer-mode-hook
                   eshell-mode-hook
-                  shell-mode-hook
                   term-mode-hook
                   comint-mode-hook))
     (add-hook hook (lambda ()
