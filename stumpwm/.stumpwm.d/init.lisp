@@ -82,13 +82,13 @@
 (setf *mode-line-border-color* "#5f5f5f")
 
 ;; Group and window format
-(setf *group-format* "%n%s<%t>")
+(setf *group-format* "%n%s(%t)")
 (setf *window-format* "%m%n%s(%50t) ")
 
 ;; Mode line format
 (setf *time-modeline-string* "^6*%d-%m^n ^3*%H:%M^n")
-(setf *screen-mode-line-format* '("^7*<%n>^n ^06%u^n ^30%W^n ^>"
-                                  " ^2*%c^n> ^4*%M^n> ^7*%l^n> %d"))
+(setf *screen-mode-line-format* '("(^7*%n^n) ^06%u^n ^30%W^n ^>"
+                                  " (^2*%c^n)(^4*%M^n)(^7*%l^n)(%d)"))
 
 ;; Show the mode line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
