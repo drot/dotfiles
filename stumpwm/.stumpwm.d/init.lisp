@@ -27,8 +27,7 @@
 (define-key *root-map* (kbd "C-s") "swank")
 
 ;; Load contrib modules
-(mapcar #'load-module '("ttf-fonts"
-                        "cpu"
+(mapcar #'load-module '("cpu"
                         "mem"
                         "net"))
 
@@ -44,11 +43,7 @@
 (update-color-map (current-screen))
 
 ;; Font
-(xft:cache-fonts)
-(set-font (make-instance 'xft:font
-                         :family "Hack"
-                         :subfamily "Bold"
-                         :size 12))
+(set-font "-xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-1")
 
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
