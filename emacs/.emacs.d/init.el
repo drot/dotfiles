@@ -1487,6 +1487,9 @@ This doesn't support the chanserv auth method"
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
 
+;; Sort lines alphabetically
+(bind-key "C-c x l" #'sort-lines)
+
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
 
