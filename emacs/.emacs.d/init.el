@@ -646,7 +646,7 @@
   (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n")
   (setq gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M")))
   (setq gnus-group-line-format "%M%S%p%P%5y:%B %G\n")
-  (setq gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references)
+  (setq gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references)
   (setq gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
   ;; Display of message threading
@@ -1130,8 +1130,9 @@ This doesn't support the chanserv auth method"
   (setq bbdb-complete-mail-allow-cycling t)
   (setq bbdb-ignore-message-alist '(("From" . "noreply")
                                     ("From" . "no-reply")
-                                    ("From" . "gmane.org")
                                     ("From" . "donotreply")
+                                    ("From" . "subscription")
+                                    ("From" . "gmane.org")
                                     ("From" . "mailer-daemon")
                                     ("From" . "arch-general")))
   ;; Save the database after exiting Gnus
