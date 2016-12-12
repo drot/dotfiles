@@ -1416,7 +1416,6 @@ This doesn't support the chanserv auth method"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
     "C-c @ o" "outline"
-    "C-c C-d" "elisp-slime-nav"
     "C-c C-t" "hl-todo"
     "C-c x" "text"))
 
