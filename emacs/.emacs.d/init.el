@@ -430,6 +430,12 @@
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
+;; SHR configuration
+(use-package shr
+  :defer t
+  :config
+  (setq shr-use-fonts nil))
+
 ;; Prevent GnuTLS warnings
 (use-package gnutls
   :defer t
@@ -476,19 +482,13 @@
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
 
-;; SHR configuration
-(use-package shr
-  :defer t
-  :config
-  (setq shr-use-fonts nil))
-
 ;; Search more extensively with apropos
 (use-package apropos
   :bind ("C-c h a" . apropos)
   :config
   (setq apropos-do-all t))
 
-;; Copyright
+;; Copyright insertion
 (use-package copyright
   :bind ("C-c i r" . copyright-update)
   :config
@@ -737,12 +737,6 @@
   (setq avy-background t)
   (avy-setup-default))
 
-;; Bug Hunter
-(use-package bug-hunter
-  :ensure t
-  :bind (("C-c f i" . bug-hunter-init-file)
-         ("C-c f h" . bug-hunter-file)))
-
 ;; Dash
 (use-package dash
   :ensure t
@@ -809,8 +803,7 @@
   (key-chord-define-global "8w" #'avy-goto-word-or-subword-1)
   (key-chord-define-global "8c" #'avy-goto-char)
   (key-chord-define-global "8q" #'query-replace)
-  (key-chord-define-global "8r" #'replace-string)
-  (key-chord-define-global "8y" #'browse-kill-ring))
+  (key-chord-define-global "8r" #'replace-string))
 
 ;; Lua mode
 (use-package lua-mode
@@ -887,17 +880,6 @@
 (use-package move-text
   :ensure t
   :defer t)
-
-;; NeoTree
-(use-package neotree
-  :ensure t
-  :bind ("C-c t n" . neotree-toggle)
-  :config
-  (setq neo-theme 'nerd)
-  (setq neo-create-file-auto-open t)
-  (setq neo-smart-open t)
-  (setq neo-show-hidden-files t)
-  (setq neo-auto-indent-point t))
 
 ;; Paradox
 (use-package paradox
@@ -1203,16 +1185,6 @@ This doesn't support the chanserv auth method"
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
-;; Eyebrowse
-(use-package eyebrowse
-  :ensure t
-  :commands eyebrowse-mode
-  :init
-  (eyebrowse-mode)
-  :config
-  (setq eyebrowse-wrap-around t)
-  (setq eyebrowse-switch-back-and-forth t))
-
 ;; Form-feed
 (use-package form-feed
   :ensure t
@@ -1438,6 +1410,7 @@ This doesn't support the chanserv auth method"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
     "C-c o" "organisation"
+    "C-c p" "project"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
     "C-c v" "version-control"
@@ -1445,7 +1418,6 @@ This doesn't support the chanserv auth method"
     "C-c @ o" "outline"
     "C-c C-d" "elisp-slime-nav"
     "C-c C-t" "hl-todo"
-    "C-c C-w" "eyebrowse"
     "C-c x" "text"))
 
 ;; YASnippet
@@ -1455,12 +1427,6 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (yas-global-mode))
-
-;; Indent region
-(bind-key "C-c x i" #'indent-region)
-
-;; Cycle spacing
-(bind-key [remap just-one-space] #'cycle-spacing)
 
 ;; Display personal bindings
 (bind-key "C-c h b" #'describe-personal-keybindings)
@@ -1486,6 +1452,10 @@ This doesn't support the chanserv auth method"
 ;; Grep
 (bind-key "C-c s g" #'grep)
 
+;; Project
+(bind-key "C-c p f" #'project-find-file)
+(bind-key "C-c p r" #'project-find-regexp)
+
 ;; Proced
 (bind-key "C-x p" #'proced)
 
@@ -1498,6 +1468,12 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c h k" #'find-function-on-key)
 (bind-key "C-c h v" #'find-variable)
 (bind-key "C-c h 4 v" #'find-variable-other-window)
+
+;; Indent region
+(bind-key "C-c x i" #'indent-region)
+
+;; Cycle spacing
+(bind-key [remap just-one-space] #'cycle-spacing)
 
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
