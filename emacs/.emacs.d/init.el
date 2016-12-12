@@ -73,7 +73,7 @@
 (fset 'yes-or-no-p #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
-(setq echo-keystrokes 0.1)
+(setq echo-keystrokes 0.01)
 
 ;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left)
@@ -506,6 +506,13 @@
   :bind ("C-c a r" . re-builder)
   :config
   (setq reb-re-syntax 'string))
+
+;; Proced
+(use-package proced
+  :bind ("C-x p" . proced)
+  :config
+  (setq-default proced-sort 'start)
+  (setq-default proced-tree-flag t))
 
 ;; GDB
 (use-package gdb-mi
@@ -1058,6 +1065,14 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
+;; Visual regexp
+(use-package visual-regexp
+  :ensure t
+  :bind (("C-c s r" . vr/replace)
+         ("C-c s q" . vr/query-replace))
+  :config
+  (setq vr/match-separator-use-custom-face t))
+
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
@@ -1303,6 +1318,7 @@ This doesn't support the chanserv auth method"
          ("C-c m l" . mc/edit-lines)
          ("C-c m n" . mc/mark-next-like-this)
          ("C-c m p" . mc/mark-previous-like-this)
+         ("C-c m r" . vr/mc-mark)
          ("C-c m C-a" . mc/edit-beginnings-of-lines)
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region))
@@ -1454,9 +1470,6 @@ This doesn't support the chanserv auth method"
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
-
-;; Proced
-(bind-key "C-x p" #'proced)
 
 ;; EWW
 (bind-key "C-c a e" #'eww)
