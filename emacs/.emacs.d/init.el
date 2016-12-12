@@ -622,14 +622,12 @@
                                     (nnimap-server-port 993)
                                     (nnimap-stream ssl)))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
-  ;; Don’t save or load a newsrc file
-  (setq gnus-save-newsrc-file nil)
-  (setq gnus-read-newsrc-file nil)
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t)
   (setq gnus-treat-strip-trailing-blank-lines 'last)
   (setq gnus-mime-display-multipart-related-as-mixed t)
-  ;; Group topics
+  (setq gnus-auto-select-first nil)
+  ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Configure visible headers
   (setq gnus-visible-headers
@@ -654,7 +652,6 @@
   ;; Display of message threading
   (setq gnus-sum-thread-tree-root "")
   (setq gnus-sum-thread-tree-false-root "")
-  (setq gnus-sum-thread-tree-single-indent "")
   (setq gnus-sum-thread-tree-indent "    ")
   (setq gnus-sum-thread-tree-vertical "│   ")
   (setq gnus-sum-thread-tree-leaf-with-other "├──>")
