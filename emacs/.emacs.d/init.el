@@ -355,11 +355,7 @@
   :config
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode)
-  ;; Use IPython if possible
-  (let ((ipython (executable-find "ipython")))
-    (when ipython
-      (setq python-shell-interpreter "ipython"))))
+  (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode configuration
 (use-package cc-mode
