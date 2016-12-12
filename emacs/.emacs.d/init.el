@@ -271,6 +271,59 @@
   (setq which-func-unknown "(Top Level)")
   (which-function-mode))
 
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OM")
+  :bind ("C-c t o" . outline-minor-mode)
+  :init
+  (setq outline-minor-mode-prefix (kbd "C-c @ o")))
+
+;; Hide Show mode
+(use-package hideshow
+  :commands hs-minor-mode
+  :init
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook #'hs-minor-mode)))
+
+;; Bug Reference mode
+(use-package bug-reference
+  :commands (bug-reference-mode bug-reference-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'bug-reference-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  :config
+  (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
+
+;; Goto Address mode
+(use-package goto-addr
+  :commands (goto-address-mode goto-address-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
+
+;; Fly Spell mode configuration
+(use-package flyspell
+  :diminish (flyspell-mode . "FS")
+  :bind (("C-c x f" . flyspell-buffer)
+         :map flyspell-mode-map
+         ("C-c x c" . flyspell-auto-correct-word)
+         ("C-c i f" . flyspell-correct-word-before-point))
+  :commands (flyspell-mode flyspell-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  :config
+  ;; Disable conflicting key bindings
+  (unbind-key "C-c $" flyspell-mode-map)
+  (unbind-key "C-M-i" flyspell-mode-map)
+  ;; Configure package
+  (setq flyspell-use-meta-tab nil)
+  (setq flyspell-issue-message-flag nil)
+  (setq flyspell-issue-welcome-flag nil)
+  (setq flyspell-consider-dash-as-word-delimiter-flag t))
+
 ;; Isearch configuration
 (use-package "isearch"
   :defer t
@@ -428,60 +481,6 @@
   :defer t
   :config
   (setq shr-use-fonts nil))
-
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OM")
-  :commands outline-minor-mode
-  :init
-  (setq outline-minor-mode-prefix (kbd "C-c c o"))
-  (add-hook 'prog-mode-hook #'outline-minor-mode))
-
-;; Hide Show mode
-(use-package hideshow
-  :commands hs-minor-mode
-  :init
-  (dolist (hook '(c-mode-common-hook
-                  emacs-lisp-mode-hook
-                  python-mode-hook))
-    (add-hook hook #'hs-minor-mode)))
-
-;; Bug Reference mode
-(use-package bug-reference
-  :commands (bug-reference-mode bug-reference-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'bug-reference-mode)
-  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
-  :config
-  (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
-
-;; Goto Address mode
-(use-package goto-addr
-  :commands (goto-address-mode goto-address-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'goto-address-mode)
-  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
-
-;; Fly Spell mode configuration
-(use-package flyspell
-  :diminish (flyspell-mode . "FS")
-  :bind (("C-c x f" . flyspell-buffer)
-         :map flyspell-mode-map
-         ("C-c x c" . flyspell-auto-correct-word)
-         ("C-c i f" . flyspell-correct-word-before-point))
-  :commands (flyspell-mode flyspell-prog-mode)
-  :init
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  :config
-  ;; Disable conflicting key bindings
-  (unbind-key "C-c $" flyspell-mode-map)
-  (unbind-key "C-M-i" flyspell-mode-map)
-  ;; Configure package
-  (setq flyspell-use-meta-tab nil)
-  (setq flyspell-issue-message-flag nil)
-  (setq flyspell-issue-welcome-flag nil)
-  (setq flyspell-consider-dash-as-word-delimiter-flag t))
 
 ;; Search more extensively with apropos
 (use-package apropos
@@ -719,8 +718,6 @@
          ("C-c w n" . windmove-down))
   :config
   (setq windmove-wrap-around t))
-
-;;; Third-party deferred packages
 
 ;; Ace-window
 (use-package ace-window
@@ -1087,8 +1084,6 @@ This doesn't support the chanserv auth method"
   :ensure t
   :bind ([remap zap-to-char] . zop-to-char))
 
-;;; Third-party initialized packages
-
 ;; Ace-link
 (use-package ace-link
   :ensure t
@@ -1449,7 +1444,7 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
-    "C-c c o" "outline"
+    "C-c @ o" "outline"
     "C-c C-d" "elisp-slime-nav"
     "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
@@ -1462,8 +1457,6 @@ This doesn't support the chanserv auth method"
   :commands yas-global-mode
   :init
   (yas-global-mode))
-
-;;; Custom key bindings
 
 ;; Indent region
 (bind-key "C-c x i" #'indent-region)
