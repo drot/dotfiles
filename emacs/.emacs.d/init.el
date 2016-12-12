@@ -708,6 +708,7 @@
   :config
   (setq org-directory (expand-file-name "org" user-emacs-directory))
   (setq org-default-notes-file (expand-file-name "notes.org" org-directory))
+  (setq org-agenda-files '("~/.emacs.d/org"))
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
