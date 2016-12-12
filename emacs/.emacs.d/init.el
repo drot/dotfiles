@@ -1509,9 +1509,6 @@ This doesn't support the chanserv auth method"
 ;; Proced
 (bind-key "C-x p" #'proced)
 
-;; Remember
-(bind-key "C-c o r" #'remember)
-
 ;; EWW
 (bind-key "C-c a e" #'eww)
 
