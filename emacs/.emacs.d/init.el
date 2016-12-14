@@ -809,6 +809,7 @@
   (key-chord-define-global "3u" #'undo-tree-visualize)
   (key-chord-define-global "8w" #'avy-goto-word-or-subword-1)
   (key-chord-define-global "8c" #'avy-goto-char)
+  (key-chord-define-global "8e" #'er/expand-region)
   (key-chord-define-global "8q" #'query-replace)
   (key-chord-define-global "8r" #'replace-string))
 
