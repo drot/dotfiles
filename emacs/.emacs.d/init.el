@@ -1421,13 +1421,11 @@ This doesn't support the chanserv auth method"
   (setq which-key-separator " > ")
   (which-key-mode)
   (which-key-add-key-based-replacements
-    "C-x a" "abbrev"
-    "C-x n" "narrow"
-    "C-x r" "register"
-    "C-x w" "highlight"
-    "C-x C-a" "edebug"
-    "C-c @" "hide-show"
     "C-c &" "yasnippet"
+    "C-c @ o" "outline"
+    "C-c @" "hide-show"
+    "C-c C-t" "hl-todo"
+    "C-c C-w" "eyebrowse"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
@@ -1441,10 +1439,12 @@ This doesn't support the chanserv auth method"
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows-and-frames"
-    "C-c @ o" "outline"
-    "C-c C-t" "hl-todo"
-    "C-c C-w" "eyebrowse"
-    "C-c x" "text"))
+    "C-c x" "text"
+    "C-x C-a" "edebug"
+    "C-x a" "abbrev"
+    "C-x n" "narrow"
+    "C-x r" "register"
+    "C-x w" "highlight"))
 
 ;; YASnippet
 (use-package yasnippet
