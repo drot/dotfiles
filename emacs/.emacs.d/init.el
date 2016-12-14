@@ -1200,6 +1200,16 @@ This doesn't support the chanserv auth method"
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
+;; Eyebrowse
+(use-package eyebrowse
+  :ensure t
+  :commands eyebrowse-mode
+  :init
+  (eyebrowse-mode)
+  :config
+  (setq eyebrowse-wrap-around t)
+  (setq eyebrowse-switch-back-and-forth t))
+
 ;; Form-feed
 (use-package form-feed
   :ensure t
@@ -1433,6 +1443,7 @@ This doesn't support the chanserv auth method"
     "C-c w" "windows-and-frames"
     "C-c @ o" "outline"
     "C-c C-t" "hl-todo"
+    "C-c C-w" "eyebrowse"
     "C-c x" "text"))
 
 ;; YASnippet
