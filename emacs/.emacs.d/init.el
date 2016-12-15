@@ -805,6 +805,12 @@
   :config
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
+;; JSON mode
+(use-package json-mode
+  :ensure t
+  :pin gnu
+  :defer t)
+
 ;; Key Chord
 (use-package key-chord
   :ensure t
