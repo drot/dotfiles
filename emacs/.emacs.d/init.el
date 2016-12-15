@@ -1464,7 +1464,7 @@ This doesn't support the chanserv auth method"
 ;; Revert buffer
 (bind-key "C-c f x" #'revert-buffer)
 
-;; Linum Mode
+;; Linum mode
 (bind-key "C-c t l" #'linum-mode)
 
 ;; Ruler mode
