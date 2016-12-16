@@ -563,7 +563,7 @@
 
 ;; Eshell configuration
 (use-package eshell
-  :bind ("C-c a l" . eshell)
+  :bind ("C-c a S" . eshell)
   :config
   (setq eshell-hist-ignoredups t)
   (add-hook 'eshell-mode-hook (lambda ()
@@ -591,7 +591,7 @@
 
 ;; IELM
 (use-package ielm
-  :bind ("C-c a m" . ielm)
+  :bind ("C-c a I" . ielm)
   :config
   (setq ielm-prompt "EL> "))
 
@@ -603,8 +603,8 @@
 
 ;; Compilation configuration
 (use-package compile
-  :bind (("C-c c c" . compile)
-         ("C-c c g" . recompile))
+  :bind (("C-c c C" . compile)
+         ("C-c c r" . recompile))
   :config
   (setq compilation-scroll-output 'first-error)
   (setq compilation-ask-about-save nil)
@@ -691,7 +691,7 @@
 
 ;; Calendar configuration
 (use-package calendar
-  :bind ("C-c a k" . calendar)
+  :bind ("C-c a C" . calendar)
   :config
   (setq holiday-general-holidays nil)
   (setq holiday-solar-holidays nil)
@@ -846,8 +846,8 @@
 (use-package hydra
   :ensure t
   :bind (("C-c w R" . hydra-window-resize/body)
-         ("C-c x o" . hydra-outline/body)
-         ("C-c x m" . hydra-move-text/body))
+         ("C-c x O" . hydra-outline/body)
+         ("C-c x M" . hydra-move-text/body))
   :config
   (hydra-add-font-lock)
 
@@ -1138,8 +1138,8 @@ This doesn't support the chanserv auth method"
 ;; BBDB
 (use-package bbdb
   :ensure t
-  :bind (("C-c o b" . bbdb)
-         ("C-c o k" . bbdb-create))
+  :bind (("C-c o B" . bbdb)
+         ("C-c o b" . bbdb-create))
   :commands (bbdb-initialize bbdb-mua-auto-update-p)
   :init
   (bbdb-initialize 'gnus 'message)
@@ -1453,6 +1453,7 @@ This doesn't support the chanserv auth method"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
     "C-c h" "help"
+    "C-c h 4" "help-other-window"
     "C-c i" "insertion"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
@@ -1534,7 +1535,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c i a" #'auto-insert)
 
 ;; Comment region
-(bind-key "C-c c k" #'comment-region)
+(bind-key "C-c c c" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
 
 ;; Replace dabbrev-expand with hippie-expand
