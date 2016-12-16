@@ -186,9 +186,6 @@
 (column-number-mode)
 (size-indication-mode)
 
-;; Undo and redo the window configuration
-(winner-mode)
-
 ;; Save minibuffer history
 (use-package savehist
   :config
@@ -271,6 +268,19 @@
   (setq which-func-unknown "(Top Level)")
   (which-function-mode))
 
+;; Undo and redo the window configuration
+(use-package winner
+  :bind (:map winner-mode-map
+              ("C-c w u" . winner-undo)
+              ("C-c w r" . winner-redo))
+  :commands winner-mode
+  :init
+  (winner-mode)
+  :config
+  ;; Disable conflicting key bindings
+  (unbind-key "C-c <left>" winner-mode-map)
+  (unbind-key "C-c <right>" winner-mode-map))
+
 ;; Outline mode
 (use-package outline
   :diminish (outline-minor-mode . "OM")
@@ -309,7 +319,7 @@
   :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c x c" . flyspell-auto-correct-word)
-         ("C-c i f" . flyspell-correct-word-before-point))
+         ("C-c x C" . flyspell-correct-word-before-point))
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
@@ -743,10 +753,10 @@
   :ensure t
   :bind (("C-c n c" . avy-goto-char)
          ("C-c n k" . avy-goto-char-2)
-         ("C-c n j" . avy-goto-word-0)
+         ("C-c n J" . avy-goto-word-0)
          ("C-c n SPC" . avy-pop-mark)
-         ("C-c l" . avy-goto-line)
-         ("C-c j" . avy-goto-word-or-subword-1))
+         ("C-c n l" . avy-goto-line)
+         ("C-c n j" . avy-goto-word-or-subword-1))
   :config
   (setq avy-all-windows 'all-frames)
   (setq avy-background t)
@@ -835,7 +845,7 @@
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c w r" . hydra-window-resize/body)
+  :bind (("C-c w R" . hydra-window-resize/body)
          ("C-c x o" . hydra-outline/body)
          ("C-c x m" . hydra-move-text/body))
   :config
@@ -878,7 +888,7 @@
 ;; Macrostep
 (use-package macrostep
   :ensure t
-  :bind ("C-c e" . macrostep-expand))
+  :bind ("C-c i e" . macrostep-expand))
 
 ;; Magit
 (use-package magit
@@ -1096,8 +1106,7 @@ This doesn't support the chanserv auth method"
 ;; Ace-link
 (use-package ace-link
   :ensure t
-  :bind (("C-c n l" . ace-link)
-         ("C-c n a" . ace-link-addr))
+  :bind (("C-c n a" . ace-link-addr))
   :commands ace-link-setup-default
   :init
   (ace-link-setup-default))
