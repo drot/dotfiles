@@ -689,6 +689,15 @@
   :config
   (setq smiley-style 'medium))
 
+;; Newsticker
+(use-package newst-backend
+  :bind ("C-c a n" . newsticker-treeview)
+  :config
+  (setq newsticker-url-list-defaults nil)
+  (setq newsticker-url-list '(("Hacker News" "https://news.ycombinator.com/rss")
+                              ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
+                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss"))))
+
 ;; Calendar configuration
 (use-package calendar
   :bind ("C-c a C" . calendar)
@@ -779,17 +788,6 @@
   :ensure t
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
-
-;; Elfeed
-(use-package elfeed
-  :ensure t
-  :bind ("C-c a f" . elfeed)
-  :config
-  (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
-                       ("https://www.reddit.com/r/emacs/.rss" emacs)
-                       ("https://www.reddit.com/r/linux/.rss" linux)))
-  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
-  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
 ;; Expand region
 (use-package expand-region
