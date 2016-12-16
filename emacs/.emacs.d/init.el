@@ -695,8 +695,10 @@
   :config
   (setq newsticker-url-list-defaults nil)
   (setq newsticker-url-list '(("Hacker News" "https://news.ycombinator.com/rss")
+                              ("LWN" "https://lwn.net/headlines/rss")
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
-                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss"))))
+                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
+                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss"))))
 
 ;; Calendar configuration
 (use-package calendar
