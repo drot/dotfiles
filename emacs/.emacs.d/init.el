@@ -691,14 +691,18 @@
 
 ;; Newsticker
 (use-package newst-backend
-  :bind ("C-c a n" . newsticker-treeview)
+  :bind ("C-c a n" . newsticker-show-news)
   :config
+  ;; Setup news sources
   (setq newsticker-url-list-defaults nil)
-  (setq newsticker-url-list '(("Hacker News" "https://news.ycombinator.com/rss")
+  (setq newsticker-url-list '(("Bljesak.info" "http://bljesak.info/rss")
+                              ("Hacker News" "https://news.ycombinator.com/rss")
                               ("LWN" "https://lwn.net/headlines/rss")
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
                               ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
-                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss"))))
+                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
+  ;; Enable Imenu for Plainview
+  (add-hook 'newsticker-mode-hook #'imenu-add-menubar-index))
 
 ;; Calendar configuration
 (use-package calendar
