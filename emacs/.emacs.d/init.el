@@ -704,8 +704,6 @@
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
                               ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
                               ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
-  ;; Retrieve news only explicitly
-  (setq newsticker-retrieval-interval 0)
   ;; Enable Imenu for Plainview
   (add-hook 'newsticker-mode-hook #'imenu-add-menubar-index))
 
