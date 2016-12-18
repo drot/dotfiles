@@ -239,7 +239,7 @@
   (setq hi-lock-auto-select-face t)
   (global-hi-lock-mode))
 
-;; Abbrev Mode
+;; Abbrev mode
 (use-package abbrev
   :diminish (abbrev-mode . "AV")
   :config
@@ -417,7 +417,10 @@
   :config
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode))
+  (add-hook 'python-mode-hook #'subword-mode)
+  ;; Add Company JEDI backend
+  (add-hook 'python-mode-hook (lambda ()
+                                (add-to-list 'company-backends #'company-jedi))))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -929,12 +932,17 @@
   (setq paradox-spinner-type 'rotating-line)
   (setq paradox-display-download-count t))
 
-;; PKGBUILD Mode
+;; PKGBUILD mode
 (use-package pkgbuild-mode
   :ensure t
   :defer t)
 
-;; rcirc Mode
+;; Python JEDI Company backend
+(use-package company-jedi
+  :ensure t
+  :defer t)
+
+;; rcirc mode
 (use-package rcirc
   :bind ("C-c a i" . irc)
   :config
