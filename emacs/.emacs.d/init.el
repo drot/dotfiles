@@ -286,7 +286,7 @@
   :diminish (outline-minor-mode . "OM")
   :bind ("C-c t o" . outline-minor-mode)
   :init
-  (setq outline-minor-mode-prefix (kbd "C-c @ o")))
+  (setq outline-minor-mode-prefix (kbd "C-c O")))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -1457,15 +1457,15 @@ This doesn't support the chanserv auth method"
   (which-key-mode)
   (which-key-add-key-based-replacements
     "C-c &" "yasnippet"
-    "C-c @ o" "outline"
     "C-c @" "hide-show"
     "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
+    "C-c O" "outline"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
-    "C-c h" "help"
     "C-c h 4" "help-other-window"
+    "C-c h" "help"
     "C-c i" "insertion"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
