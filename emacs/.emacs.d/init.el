@@ -568,9 +568,7 @@
 (use-package eshell
   :bind ("C-c a S" . eshell)
   :config
-  (setq eshell-hist-ignoredups t)
-  (add-hook 'eshell-mode-hook (lambda ()
-                                (setq-local global-hl-line-mode nil))))
+  (setq eshell-hist-ignoredups t))
 
 ;; Eshell smart display
 (use-package em-smart
