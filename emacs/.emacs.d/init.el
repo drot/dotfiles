@@ -598,7 +598,7 @@
 
 ;; Scheme mode configuration
 (use-package scheme
-  :bind ("C-c t k" . run-scheme)
+  :bind ("C-c t S" . run-scheme)
   :config
   (setq scheme-program-name "guile"))
 
@@ -1046,7 +1046,7 @@ This doesn't support the chanserv auth method"
 (use-package slime
   :ensure t
   :bind (("C-c t s" . slime)
-         ("C-c t c" . slime-connect)
+         ("C-c t C" . slime-connect)
          :map slime-mode-indirect-map
          ("C-c $" . slime-export-symbol-at-point))
   :config
@@ -1234,16 +1234,6 @@ This doesn't support the chanserv auth method"
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
-;; Emacs Lisp Slime-style navigation
-(use-package elisp-slime-nav
-  :ensure t
-  :diminish (elisp-slime-nav-mode . "SN")
-  :commands turn-on-elisp-slime-nav-mode
-  :init
-  (dolist (hook '(emacs-lisp-mode-hook
-                  ielm-mode-hook))
-    (add-hook hook #'turn-on-elisp-slime-nav-mode)))
-
 ;; Eyebrowse
 (use-package eyebrowse
   :ensure t
@@ -1394,7 +1384,7 @@ This doesn't support the chanserv auth method"
 (use-package skewer-mode
   :ensure t
   :diminish (skewer-mode . "SKW")
-  :bind ("C-c t e" . run-skewer)
+  :bind ("C-c t W" . run-skewer)
   :commands skewer-mode
   :init
   (add-hook 'js2-mode-hook 'skewer-mode))
