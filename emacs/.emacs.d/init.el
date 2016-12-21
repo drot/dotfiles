@@ -1434,7 +1434,7 @@ This doesn't support the chanserv auth method"
 ;; Which Key
 (use-package which-key
   :ensure t
-  :bind ("C-c h w" . which-key-show-top-level)
+  :bind ("C-c h K" . which-key-show-top-level)
   :commands which-key-mode
   :init
   (setq which-key-idle-delay 2.0)
