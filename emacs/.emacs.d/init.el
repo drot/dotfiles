@@ -785,11 +785,6 @@
   :config
   (dash-enable-font-lock))
 
-;; Discover My Major
-(use-package discover-my-major
-  :ensure t
-  :bind ("C-c h m" . discover-my-major))
-
 ;; Easy-kill
 (use-package easy-kill
   :ensure t
