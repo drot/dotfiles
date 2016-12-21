@@ -1368,12 +1368,10 @@ This doesn't support the chanserv auth method"
 (use-package rainbow-mode
   :ensure t
   :diminish (rainbow-mode . "RW")
-  :bind ("C-c t r" . rainbow-mode)
+  :bind ("C-c t R" . rainbow-mode)
   :commands rainbow-mode
   :init
-  (add-hook 'css-mode-hook #'rainbow-mode)
-  :config
-  (setq rainbow-x-colors t))
+  (add-hook 'css-mode-hook #'rainbow-mode))
 
 ;; Skewer
 (use-package skewer-mode
@@ -1485,7 +1483,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c t l" #'linum-mode)
 
 ;; Ruler mode
-(bind-key "C-c t u" #'ruler-mode)
+(bind-key "C-c t r" #'ruler-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
