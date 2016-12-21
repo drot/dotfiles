@@ -1441,7 +1441,6 @@ This doesn't support the chanserv auth method"
   (setq which-key-idle-secondary-delay 1.0)
   (setq which-key-allow-imprecise-window-fit t)
   (setq which-key-sort-order #'which-key-prefix-then-key-order)
-  (setq which-key-separator " > ")
   (which-key-mode)
   (which-key-add-key-based-replacements
     "C-c &" "yasnippet"
