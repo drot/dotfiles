@@ -72,7 +72,7 @@ NIL='\[\033[00m\]'
 
 # Prompt format
 case $TERM in
-    xterm*|rxvt*|st*|screen*)
+    xterm*|rxvt*|st*|tmux*|screen*)
         PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
         ;;
     *)
