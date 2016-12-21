@@ -1256,9 +1256,9 @@ This doesn't support the chanserv auth method"
 (use-package hl-todo
   :ensure t
   :bind (:map hl-todo-mode-map
-              ("C-c C-t p" . hl-todo-previous)
-              ("C-c C-t n" . hl-todo-next)
-              ("C-c C-t o" . hl-todo-occur))
+              ("C-c T p" . hl-todo-previous)
+              ("C-c T n" . hl-todo-next)
+              ("C-c T o" . hl-todo-occur))
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
@@ -1438,9 +1438,9 @@ This doesn't support the chanserv auth method"
   (which-key-add-key-based-replacements
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
-    "C-c C-t" "hl-todo"
     "C-c C-w" "eyebrowse"
     "C-c O" "outline"
+    "C-c T" "hl-todo"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
