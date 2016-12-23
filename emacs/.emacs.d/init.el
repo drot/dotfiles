@@ -127,6 +127,9 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
+;; Highlight region even in non-selected windows
+(setq highlight-nonselected-windows t)
+
 ;; Enable faster scrolling
 (setq fast-but-imprecise-scrolling t)
 
@@ -367,7 +370,8 @@
 (use-package uniquify
   :defer t
   :config
-  (setq uniquify-buffer-name-style 'forward))
+  (setq uniquify-buffer-name-style 'forward)
+  (setq uniquify-ignore-buffers-re "^\\*"))
 
 ;; Use Ibuffer for buffer list
 (use-package ibuffer
