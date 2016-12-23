@@ -456,6 +456,41 @@
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
+;; Colorize ANSI escape sequences
+(use-package ansi-color
+  :defer t
+  :config
+  (defun drot/colorize-compilation-buffer ()
+    "Colorize the compilation mode buffer"
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+
+  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+
+;; Mail sending configuration
+(use-package message
+  :defer t
+  :config
+  (setq message-send-mail-function #'smtpmail-send-it)
+  (setq message-confirm-send t)
+  (setq message-kill-buffer-on-exit t)
+  ;; Save the BBDB database on every exit action
+  (message-add-action #'bbdb-save 'exit 'postpone 'kill))
+
+;; Outgoing mail server
+(use-package smtpmail
+  :defer t
+  :config
+  (setq smtpmail-smtp-server "mail.cock.li")
+  (setq smtpmail-smtp-service 465)
+  (setq smtpmail-stream-type 'ssl))
+
+;; Smiley configuration
+(use-package smiley
+  :defer t
+  :config
+  (setq smiley-style 'medium))
+
 ;; SHR configuration
 (use-package shr
   :defer t
@@ -609,39 +644,10 @@
 ;; Compilation configuration
 (use-package compile
   :bind (("C-c c C" . compile)
-         ("C-c c r" . recompile))
+         ("C-c c R" . recompile))
   :config
   (setq compilation-scroll-output 'first-error)
-  (setq compilation-ask-about-save nil)
-
-  (defun drot/colorize-compilation-buffer ()
-    "Colorize the compilation mode buffer"
-    (when (eq major-mode 'compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
-
-  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
-
-;; Colorize ANSI escape sequences
-(use-package ansi-color
-  :after compile)
-
-;; Mail sending configuration
-(use-package message
-  :defer t
-  :config
-  (setq message-send-mail-function #'smtpmail-send-it)
-  (setq message-confirm-send t)
-  (setq message-kill-buffer-on-exit t)
-  ;; Save the BBDB database on every exit action
-  (message-add-action #'bbdb-save 'exit 'postpone 'kill))
-
-;; Outgoing mail server
-(use-package smtpmail
-  :defer t
-  :config
-  (setq smtpmail-smtp-server "mail.cock.li")
-  (setq smtpmail-smtp-service 465)
-  (setq smtpmail-stream-type 'ssl))
+  (setq compilation-ask-about-save nil))
 
 ;; Gnus
 (use-package gnus
@@ -687,12 +693,6 @@
   (setq gnus-sum-thread-tree-vertical "│   ")
   (setq gnus-sum-thread-tree-leaf-with-other "├──>")
   (setq gnus-sum-thread-tree-single-leaf "└──>"))
-
-;; Smiley configuration
-(use-package smiley
-  :defer t
-  :config
-  (setq smiley-style 'medium))
 
 ;; Newsticker
 (use-package newst-backend
