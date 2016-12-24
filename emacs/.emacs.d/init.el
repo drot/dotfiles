@@ -58,6 +58,11 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Disable needless GUI elements
+(dolist (mode '(tool-bar-mode menu-bar-mode))
+  (when (fboundp mode)
+    (funcall mode -1)))
+
 ;; Color theme
 (use-package zenburn-theme
   :ensure t)
@@ -68,6 +73,13 @@
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
+
+;; Show tooltips in the echo area
+(tooltip-mode -1)
+
+;; Show column number and buffer size on the mode line
+(column-number-mode)
+(size-indication-mode)
 
 ;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
@@ -120,6 +132,13 @@
 
 ;; Require a final new line
 (setq require-final-newline t)
+
+;; Set Text mode as the default major mode
+(setq-default major-mode #'text-mode)
+
+;; Enable Auto Fill mode for Text mode
+(add-hook 'text-mode-hook #'auto-fill-mode)
+(diminish 'auto-fill-function " FL")
 
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
@@ -178,16 +197,6 @@
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
 (diminish 'visual-line-mode " WP")
-
-;; Diminish Auto Fill mode
-(diminish 'auto-fill-function " FL")
-
-;; Show tooltips in the echo area
-(tooltip-mode -1)
-
-;; Show column number and buffer size on the mode line
-(column-number-mode)
-(size-indication-mode)
 
 ;; Save minibuffer history
 (use-package savehist
