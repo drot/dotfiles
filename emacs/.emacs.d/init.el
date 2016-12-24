@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009-2016 drot
 
 ;; Author: drot
-;; URL: https://github.com/drot/dotfiles/tree/master/.emacs.d
+;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.emacs.d
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
@@ -537,12 +537,6 @@
   :config
   (dired-async-mode))
 
-;; Find file at point
-(use-package ffap
-  :defer t
-  :config
-  (setq ffap-machine-p-known 'reject))
-
 ;; TRAMP configuration
 (use-package tramp
   :defer t
@@ -551,6 +545,12 @@
   (setq tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory))
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
+
+;; Find file at point
+(use-package ffap
+  :bind ("C-c f f" . find-file-at-point)
+  :config
+  (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
 (use-package apropos
