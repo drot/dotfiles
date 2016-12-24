@@ -1533,6 +1533,9 @@ This doesn't support the chanserv auth method"
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
 
+;; Auto Fill mode
+(bind-key "C-c t f" #'auto-fill-mode)
+
 ;; Align
 (bind-key "C-c x a" #'align)
 
