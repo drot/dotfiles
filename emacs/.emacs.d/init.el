@@ -1280,7 +1280,7 @@ This doesn't support the chanserv auth method"
 (use-package ivy
   :ensure ivy-hydra
   :diminish (ivy-mode . "IY")
-  :bind (("C-c n i" . ivy-resume))
+  :bind (("C-c n R" . ivy-resume))
   :commands ivy-mode
   :init
   (ivy-mode)
