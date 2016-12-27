@@ -610,7 +610,13 @@
          :map speedbar-mode-map
          ("a" . speedbar-toggle-show-all-files))
   :config
-  (setq speedbar-use-images nil))
+  ;; Emulate NERDTree behavior
+  (setq speedbar-use-images nil)
+  (setq speedbar-show-unknown-files t)
+  (setq speedbar-directory-unshown-regexp "^$")
+  (speedbar-add-supported-extension
+   '("PKGBUILD" ".lisp" ".lua" ".css" ".patch"
+     ".conf" ".diff" ".sh" ".org" ".md")))
 
 ;; Eshell configuration
 (use-package eshell
