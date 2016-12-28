@@ -1177,6 +1177,7 @@ This doesn't support the chanserv auth method"
                                     ("From" . "no-reply")
                                     ("From" . "donotreply")
                                     ("From" . "subscription")
+                                    ("From" . "newsletter")
                                     ("From" . "gmane.org")
                                     ("From" . "mailer-daemon")
                                     ("From" . "arch-general")))
