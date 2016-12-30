@@ -32,7 +32,7 @@
 
 ;; Reset garbage collection threshold value to default after startup
 (add-hook 'after-init-hook (lambda ()
-                             (setq gc-cons-threshold 800000)))
+                             (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
 (defvar drot/cache-directory (expand-file-name "cache" user-emacs-directory)

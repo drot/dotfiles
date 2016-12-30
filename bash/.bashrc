@@ -48,18 +48,15 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
-# Git prompt
-if [[ -f /usr/share/git/git-prompt.sh ]]; then
-    . /usr/share/git/git-prompt.sh
-else
-    __git_ps1() { :; }
-fi
-
-# Show modified state
-GIT_PS1_SHOWDIRTYSTATE=yes
+# Bash completion
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 
 # Git prompt format
 GIT="\$(__git_ps1 \" (%s)\")"
+
+# Show modified git state
+GIT_PS1_SHOWDIRTYSTATE=yes
 
 # Prompt window title
 TITLE='\[\e]2;\u@\h:\W\a\]'
