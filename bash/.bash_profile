@@ -9,6 +9,7 @@ export BROWSER=firefox
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export WINEPREFIX=$HOME/.config/wine/
+# export WINEARCH=win32
 
 # Set PATH so it includes private bin if it exists
 if [ -d $HOME/.local/bin ] ; then
