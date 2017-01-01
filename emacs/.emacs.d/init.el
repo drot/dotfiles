@@ -428,6 +428,9 @@
 (use-package python
   :defer t
   :config
+  ;; Use Python 3 as default
+  (setq python-shell-interpreter "python3")
+  ;; PEP8 conformance
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
