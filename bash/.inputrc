@@ -1,8 +1,10 @@
 $include /etc/inputrc
 
+# Colorize Tab completion
 $if Bash
 set colored-stats on
 $endif
 
+# Use Emacs-style history search keys
 "\ep":history-search-backward
 "\en":history-search-forward
