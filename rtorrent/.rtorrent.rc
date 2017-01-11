@@ -51,7 +51,7 @@ schedule = watch_start,10,10,((load.start,(cat,(cfg.watch),"*.torrent")))
 network.port_range.set = 49164-49164
 
 # Start opening ports at a random position within the port range
-#network.port_random.set = no
+network.port_random.set = no
 
 # Check hash for finished torrents
 #pieces.hash.on_completion.set = no
