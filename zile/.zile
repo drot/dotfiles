@@ -1,0 +1,16 @@
+;; Zile configuration
+
+; Disable startup messages
+(setq inhibit-splash-screen t)
+
+; Column beyond which automatic line-wrapping should happen
+(setq fill-column 80)
+
+; Disable terminal bell on error
+(setq ring-bell nil)
+
+; Highlight region even in nonselected windows.
+(setq highlight-nonselected-windows t)
+
+; Set backup directory
+(setq backup-directory "~/.zile-backup")
