@@ -598,7 +598,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Bookmarks save directory
 (use-package bookmark
@@ -1162,6 +1162,25 @@ This doesn't support the chanserv auth method"
   (setq anzu-replace-threshold 50)
   (setq anzu-replace-to-string-separator " => "))
 
+;; Beacon
+(use-package beacon
+  :ensure t
+  :commands beacon-mode
+  :init
+  (beacon-mode)
+  :config
+  (setq beacon-color "#f0dfaf")
+  (setq beacon-dont-blink-major-modes
+        (append beacon-dont-blink-major-modes
+                '(dired-mode
+                  calc-mode
+                  rcirc-mode
+                  undo-tree-visualizer-mode
+                  eshell-mode
+                  term-mode
+                  comint-mode
+                  slime-repl-mode))))
+
 ;; BBDB
 (use-package bbdb
   :ensure t
@@ -1186,25 +1205,6 @@ This doesn't support the chanserv auth method"
                                     ("From" . "arch-general")))
   ;; Save the database after exiting Gnus
   (add-hook 'gnus-exit-gnus-hook #'bbdb-save))
-
-;; Beacon
-(use-package beacon
-  :ensure t
-  :commands beacon-mode
-  :init
-  (beacon-mode)
-  :config
-  (setq beacon-color "#f0dfaf")
-  (setq beacon-dont-blink-major-modes
-        (append beacon-dont-blink-major-modes
-                '(dired-mode
-                  calc-mode
-                  rcirc-mode
-                  undo-tree-visualizer-mode
-                  eshell-mode
-                  term-mode
-                  comint-mode
-                  slime-repl-mode))))
 
 ;; Company mode
 (use-package company

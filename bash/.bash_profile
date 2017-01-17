@@ -5,7 +5,7 @@ export VISUAL=${EDITOR}
 export PAGER=less
 export LESS=-Ri
 export GREP_COLORS="mt=01;90;43"
-export BROWSER=firefox
+export BROWSER=chromium
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export WINEPREFIX=$HOME/.config/wine/
