@@ -640,13 +640,6 @@
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
-;; ANSI term
-(use-package term
-  :bind ("C-c a t" . ansi-term)
-  :config
-  (add-hook 'term-mode-hook (lambda ()
-                              (yas-minor-mode -1))))
-
 ;; IELM
 (use-package ielm
   :bind ("C-c a I" . ielm)
@@ -1514,6 +1507,9 @@ This doesn't support the chanserv auth method"
 
 ;; Calculator
 (bind-key "C-c a c" #'calc)
+
+;; ANSI term
+(bind-key "C-c a t" #'ansi-term)
 
 ;; Grep
 (bind-key "C-c s g" #'grep)
