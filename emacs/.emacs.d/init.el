@@ -104,9 +104,6 @@
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
-;; Try completion after indentation
-(setq tab-always-indent 'complete)
-
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
@@ -619,7 +616,7 @@
   (setq speedbar-directory-unshown-regexp "^$")
   (speedbar-add-supported-extension
    '("PKGBUILD" ".lisp" ".lua" ".css" ".patch"
-     ".conf" ".diff" ".sh" ".org" ".md")))
+     ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell configuration
 (use-package eshell
