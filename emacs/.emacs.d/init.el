@@ -484,7 +484,7 @@
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
   ;; Save the BBDB database on every exit action
-  (message-add-action #'bbdb-save 'exit 'postpone 'kill))
+  (message-add-action #'bbdb-save 'exit 'postpone 'kill 'send))
 
 ;; Outgoing mail server
 (use-package smtpmail
