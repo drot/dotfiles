@@ -1107,14 +1107,6 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t)
 
-;; Visual regexp
-(use-package visual-regexp
-  :ensure t
-  :bind (("C-c s r" . vr/replace)
-         ("C-c s q" . vr/query-replace))
-  :config
-  (setq vr/match-separator-use-custom-face t))
-
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
@@ -1301,9 +1293,9 @@ This doesn't support the chanserv auth method"
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
-         ("C-c s v" . counsel-git-grep)
+         ("C-c s G" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
-         ("C-c s f" . counsel-grep)
+         ("C-c s r" . counsel-grep)
          ("C-c n m" . counsel-mark-ring)
          ("C-c h l" . counsel-find-library)
          ("C-c i u" . counsel-unicode-char))
@@ -1316,7 +1308,7 @@ This doesn't support the chanserv auth method"
 ;; Swiper
 (use-package swiper
   :ensure t
-  :bind (("C-c s a" . swiper-all)
+  :bind (("C-c s S" . swiper-all)
          ("C-c s s" . swiper)
          :map isearch-mode-map
          ("C-c s i" . swiper-from-isearch)))
