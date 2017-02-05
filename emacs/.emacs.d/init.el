@@ -1295,7 +1295,7 @@ This doesn't support the chanserv auth method"
          ("C-c f r" . counsel-recentf)
          ("C-c s G" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
-         ("C-c s r" . counsel-grep)
+         ("C-c s g" . counsel-grep)
          ("C-c n m" . counsel-mark-ring)
          ("C-c h l" . counsel-find-library)
          ("C-c i u" . counsel-unicode-char))
@@ -1501,7 +1501,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c a t" #'ansi-term)
 
 ;; Grep
-(bind-key "C-c s g" #'grep)
+(bind-key "C-c s p" #'grep)
 
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
