@@ -414,6 +414,7 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
+  :diminish (eldoc-mode . "ElD")
   :defer t
   :config
   ;; Paredit compatiblity
@@ -431,9 +432,12 @@
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode)
-  ;; Add Company JEDI backend
+  ;; Enable Anaconda mode in Python buffers
+  (add-hook 'python-mode-hook #'anaconda-mode)
+  (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
+  ;; Enable Company support for Anaconda mode
   (add-hook 'python-mode-hook (lambda ()
-                                (add-to-list 'company-backends #'company-jedi))))
+                                (add-to-list 'company-backends #'company-anaconda))))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -595,7 +599,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-chromium))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Bookmarks save directory
 (use-package bookmark
@@ -776,6 +780,16 @@
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+;; Anaconda mode
+(use-package anaconda-mode
+  :ensure t
+  :defer t)
+
+;; Company Anaconda
+(use-package company-anaconda
+  :ensure t
+  :defer t)
+
 ;; Avy
 (use-package avy
   :ensure t
@@ -937,11 +951,6 @@
 
 ;; PKGBUILD mode
 (use-package pkgbuild-mode
-  :ensure t
-  :defer t)
-
-;; Python JEDI Company backend
-(use-package company-jedi
   :ensure t
   :defer t)
 
@@ -1497,7 +1506,7 @@ This doesn't support the chanserv auth method"
 ;; Calculator
 (bind-key "C-c a c" #'calc)
 
-;; ANSI term
+;; ANSI Term
 (bind-key "C-c a t" #'ansi-term)
 
 ;; Grep
