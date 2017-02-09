@@ -789,7 +789,7 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :diminish (anaconda-mode . "AnA")
+  :diminish (anaconda-mode . "AnC")
   :defer t)
 
 ;; Company Anaconda
@@ -1287,7 +1287,6 @@ This doesn't support the chanserv auth method"
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
-  :diminish (ivy-mode . "IvY")
   :bind (("C-c n R" . ivy-resume))
   :commands ivy-mode
   :init
