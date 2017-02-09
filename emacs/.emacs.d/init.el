@@ -42,9 +42,15 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Activate packages and add MELPA
+;; Activate packages and add the MELPA package archive
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
+;; Package archive priorities
+(setq package-archive-priorities
+      '(("gnu" . 10)
+        ("melpa" . 20)))
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -135,7 +141,7 @@
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(diminish 'auto-fill-function " FL")
+(diminish 'auto-fill-function " FiL")
 
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
@@ -193,7 +199,7 @@
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
-(diminish 'visual-line-mode " WP")
+(diminish 'visual-line-mode " ViL")
 
 ;; Save minibuffer history
 (use-package savehist
@@ -250,7 +256,7 @@
 
 ;; Abbrev mode
 (use-package abbrev
-  :diminish (abbrev-mode . "AV")
+  :diminish (abbrev-mode . "AbR")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
@@ -292,7 +298,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "OM")
+  :diminish (outline-minor-mode . "OuT")
   :bind ("C-c t o" . outline-minor-mode)
   :init
   (setq outline-minor-mode-prefix (kbd "C-c O")))
@@ -324,7 +330,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "FS")
+  :diminish (flyspell-mode . "FlS")
   :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c x c" . flyspell-auto-correct-word)
@@ -346,7 +352,7 @@
 ;; Isearch configuration
 (use-package "isearch"
   :defer t
-  :diminish (isearch-mode . "IS")
+  :diminish (isearch-mode . "IsH")
   :config
   (setq isearch-allow-scroll t)
   (setq search-default-mode #'char-fold-to-regexp))
@@ -571,7 +577,7 @@
 
 ;; Whitespace mode
 (use-package whitespace
-  :diminish (whitespace-mode . "WS")
+  :diminish (whitespace-mode . "WhS")
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
@@ -782,6 +788,7 @@
 
 ;; Anaconda mode
 (use-package anaconda-mode
+  :diminish (anaconda-mode . "AnA")
   :ensure t
   :defer t)
 
@@ -1139,7 +1146,7 @@ This doesn't support the chanserv auth method"
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "AZ")
+  :diminish (anzu-mode . "AnZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1200,7 +1207,7 @@ This doesn't support the chanserv auth method"
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "CY")
+  :diminish (company-mode . "CmP")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1280,7 +1287,7 @@ This doesn't support the chanserv auth method"
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
-  :diminish (ivy-mode . "IY")
+  :diminish (ivy-mode . "IvY")
   :bind (("C-c n R" . ivy-resume))
   :commands ivy-mode
   :init
@@ -1298,7 +1305,7 @@ This doesn't support the chanserv auth method"
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "CL")
+  :diminish (counsel-mode . "CsL")
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1325,7 +1332,7 @@ This doesn't support the chanserv auth method"
 ;; Paredit
 (use-package paredit
   :ensure t
-  :diminish (paredit-mode . "PE")
+  :diminish (paredit-mode . "PaR")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1382,7 +1389,7 @@ This doesn't support the chanserv auth method"
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "RW")
+  :diminish (rainbow-mode . "RbW")
   :bind ("C-c t R" . rainbow-mode)
   :commands rainbow-mode
   :init
@@ -1391,7 +1398,7 @@ This doesn't support the chanserv auth method"
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :diminish (skewer-mode . "SKW")
+  :diminish (skewer-mode . "SkW")
   :bind ("C-c t W" . run-skewer)
   :commands skewer-mode
   :init
@@ -1400,7 +1407,7 @@ This doesn't support the chanserv auth method"
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
-  :diminish (skewer-css-mode . "SKW-CSS")
+  :diminish (skewer-css-mode . "SkW-CSS")
   :commands skewer-css-mode
   :init
   (add-hook 'css-mode-hook 'skewer-css-mode))
@@ -1408,7 +1415,7 @@ This doesn't support the chanserv auth method"
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
-  :diminish (skewer-html-mode . "SKW-HTML")
+  :diminish (skewer-html-mode . "SkW-HTML")
   :commands skewer-html-mode
   :init
   (add-hook 'html-mode-hook 'skewer-html-mode))
@@ -1416,7 +1423,7 @@ This doesn't support the chanserv auth method"
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "UT")
+  :diminish (undo-tree-mode . "UnT")
   :commands global-undo-tree-mode
   :init
   (global-undo-tree-mode)
@@ -1480,7 +1487,7 @@ This doesn't support the chanserv auth method"
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "YS")
+  :diminish (yas-minor-mode . "YaS")
   :commands yas-global-mode
   :init
   (yas-global-mode))
