@@ -1277,9 +1277,9 @@ This doesn't support the chanserv auth method"
 (use-package hl-todo
   :ensure t
   :bind (:map hl-todo-mode-map
-              ("C-c T p" . hl-todo-previous)
-              ("C-c T n" . hl-todo-next)
-              ("C-c T o" . hl-todo-occur))
+              ("C-c p t p" . hl-todo-previous)
+              ("C-c p t n" . hl-todo-next)
+              ("C-c p t o" . hl-todo-occur))
   :commands hl-todo-mode
   :init
   (add-hook 'prog-mode-hook #'hl-todo-mode))
@@ -1461,7 +1461,6 @@ This doesn't support the chanserv auth method"
     "C-c @" "hide-show"
     "C-c C-w" "eyebrowse"
     "C-c O" "outline"
-    "C-c T" "hl-todo"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
@@ -1471,6 +1470,7 @@ This doesn't support the chanserv auth method"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
     "C-c o" "organisation"
+    "C-c p t" "hl-todo"
     "C-c p" "project"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
