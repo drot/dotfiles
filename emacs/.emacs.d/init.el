@@ -788,8 +788,8 @@
 
 ;; Anaconda mode
 (use-package anaconda-mode
-  :diminish (anaconda-mode . "AnA")
   :ensure t
+  :diminish (anaconda-mode . "AnA")
   :defer t)
 
 ;; Company Anaconda
