@@ -1255,6 +1255,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands eyebrowse-mode
   :init
+  (setq eyebrowse-keymap-prefix (kbd "C-c W"))
   (eyebrowse-mode)
   :config
   (setq eyebrowse-wrap-around t)
@@ -1459,7 +1460,7 @@ This doesn't support the chanserv auth method"
   (which-key-add-key-based-replacements
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
-    "C-c C-w" "eyebrowse"
+    "C-c W" "eyebrowse"
     "C-c O" "outline"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
