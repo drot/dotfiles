@@ -1487,7 +1487,6 @@ This doesn't support the chanserv auth method"
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "YaS")
   :commands yas-global-mode
   :init
   (yas-global-mode))
