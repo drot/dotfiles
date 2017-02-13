@@ -532,9 +532,9 @@
 
 ;; Dired-x
 (use-package dired-x
-  :after dired
   :bind (("C-x C-j" . dired-jump)
          ("C-x 4 C-j" . dired-jump-other-window))
+  :after dired
   :config
   (setq dired-omit-verbose nil)
   ;; Ignore uninteresting files
@@ -850,8 +850,8 @@
 
 ;; JSON mode
 (use-package json-mode
-  :ensure t
   :pin gnu
+  :ensure t
   :defer t)
 
 ;; Key Chord
