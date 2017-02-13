@@ -256,14 +256,14 @@
 
 ;; Abbrev mode
 (use-package abbrev
-  :diminish (abbrev-mode . "AbR")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
   ;; Load abbrevs if they exist
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t))
+  (setq-default abbrev-mode t)
+  :diminish (abbrev-mode . "AbR"))
 
 ;; Electric pair mode
 (use-package elec-pair
@@ -298,10 +298,10 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "OuT")
   :bind ("C-c t o" . outline-minor-mode)
   :init
-  (setq outline-minor-mode-prefix (kbd "C-c O")))
+  (setq outline-minor-mode-prefix (kbd "C-c O"))
+  :diminish (outline-minor-mode . "OuT"))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -330,7 +330,6 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "FlS")
   :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c x c" . flyspell-auto-correct-word)
@@ -347,15 +346,16 @@
   (setq flyspell-use-meta-tab nil)
   (setq flyspell-issue-message-flag nil)
   (setq flyspell-issue-welcome-flag nil)
-  (setq flyspell-consider-dash-as-word-delimiter-flag t))
+  (setq flyspell-consider-dash-as-word-delimiter-flag t)
+  :diminish (flyspell-mode . "FlS"))
 
 ;; Isearch configuration
 (use-package "isearch"
   :defer t
-  :diminish (isearch-mode . "IsH")
   :config
   (setq isearch-allow-scroll t)
-  (setq search-default-mode #'char-fold-to-regexp))
+  (setq search-default-mode #'char-fold-to-regexp)
+  :diminish (isearch-mode . "IsH"))
 
 ;; Ispell default program
 (use-package ispell
@@ -420,13 +420,13 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
-  :diminish (eldoc-mode . "ElD")
   :defer t
   :config
   ;; Paredit compatiblity
   (eldoc-add-command
    #'paredit-backward-delete
-   #'paredit-close-round))
+   #'paredit-close-round)
+  :diminish (eldoc-mode . "ElD"))
 
 ;; Python mode configuration
 (use-package python
@@ -577,9 +577,9 @@
 
 ;; Whitespace mode
 (use-package whitespace
-  :diminish (whitespace-mode . "WhS")
   :bind (("C-c x w" . whitespace-cleanup)
-         ("C-c t w" . whitespace-mode)))
+         ("C-c t w" . whitespace-mode))
+  :diminish (whitespace-mode . "WhS"))
 
 ;; Regexp builder
 (use-package re-builder
@@ -789,8 +789,8 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :diminish (anaconda-mode . "AnC")
-  :defer t)
+  :defer t
+  :diminish (anaconda-mode . "AnC"))
 
 ;; Company Anaconda
 (use-package company-anaconda
@@ -1146,7 +1146,6 @@ This doesn't support the chanserv auth method"
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "AnZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1158,7 +1157,8 @@ This doesn't support the chanserv auth method"
   :config
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
-  (setq anzu-replace-to-string-separator " => "))
+  (setq anzu-replace-to-string-separator " => ")
+  :diminish (anzu-mode . "AnZ"))
 
 ;; Beacon
 (use-package beacon
@@ -1207,7 +1207,6 @@ This doesn't support the chanserv auth method"
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "CmP")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1227,7 +1226,8 @@ This doesn't support the chanserv auth method"
                            company-capf
                            company-files
                            (company-dabbrev-code company-keywords)
-                           company-dabbrev)))
+                           company-dabbrev))
+  :diminish (company-mode . "CmP"))
 
 ;; Company Statistics
 (use-package company-statistics
@@ -1305,7 +1305,6 @@ This doesn't support the chanserv auth method"
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "CsL")
   :bind (("C-c f g" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1319,7 +1318,8 @@ This doesn't support the chanserv auth method"
   :init
   (counsel-mode)
   :config
-  (setq counsel-find-file-at-point t))
+  (setq counsel-find-file-at-point t)
+  :diminish (counsel-mode . "CsL"))
 
 ;; Swiper
 (use-package swiper
@@ -1332,7 +1332,6 @@ This doesn't support the chanserv auth method"
 ;; Paredit
 (use-package paredit
   :ensure t
-  :diminish (paredit-mode . "PaR")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1356,7 +1355,8 @@ This doesn't support the chanserv auth method"
     (if (memq this-command drot/paredit-minibuffer-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
+  :diminish (paredit-mode . "PaR"))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -1389,47 +1389,47 @@ This doesn't support the chanserv auth method"
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "RbW")
   :bind ("C-c t R" . rainbow-mode)
   :commands rainbow-mode
   :init
-  (add-hook 'css-mode-hook #'rainbow-mode))
+  (add-hook 'css-mode-hook #'rainbow-mode)
+  :diminish (rainbow-mode . "RbW"))
 
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :diminish (skewer-mode . "SkW")
   :bind ("C-c t W" . run-skewer)
   :commands skewer-mode
   :init
-  (add-hook 'js2-mode-hook 'skewer-mode))
+  (add-hook 'js2-mode-hook 'skewer-mode)
+  :diminish (skewer-mode . "SkW"))
 
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
-  :diminish (skewer-css-mode . "SkW-CSS")
   :commands skewer-css-mode
   :init
-  (add-hook 'css-mode-hook 'skewer-css-mode))
+  (add-hook 'css-mode-hook 'skewer-css-mode)
+  :diminish (skewer-css-mode . "SkW-CSS"))
 
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
-  :diminish (skewer-html-mode . "SkW-HTML")
   :commands skewer-html-mode
   :init
-  (add-hook 'html-mode-hook 'skewer-html-mode))
+  (add-hook 'html-mode-hook 'skewer-html-mode)
+  :diminish (skewer-html-mode . "SkW-HTML"))
 
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "UnT")
   :commands global-undo-tree-mode
   :init
   (global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist '((".*" . "~/.emacs.d/undo")))
-  (setq undo-tree-auto-save-history t))
+  (setq undo-tree-auto-save-history t)
+  :diminish (undo-tree-mode . "UnT"))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
@@ -1441,10 +1441,10 @@ This doesn't support the chanserv auth method"
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
-  :diminish (volatile-highlights-mode . "VH")
   :commands volatile-highlights-mode
   :init
-  (volatile-highlights-mode))
+  (volatile-highlights-mode)
+  :diminish (volatile-highlights-mode . "VH"))
 
 ;; Which Key
 (use-package which-key
