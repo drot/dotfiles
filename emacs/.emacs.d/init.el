@@ -1000,16 +1000,15 @@ This doesn't support the chanserv auth method"
   ;; Enable logging
   (setq rcirc-log-flag t)
 
-  (defun drot/rcirc-mode-hook ()
-    "Disable company and YASnippet in rcirc buffers."
-    (company-mode -1)
-    (yas-minor-mode -1))
-
   ;; Enable additional modes
   (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
+
+  ;; Disable company mode in rcirc buffers
+  (add-hook 'rcirc-mode-hook (lambda ()
+                               company-mode -1))
 
   ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
