@@ -763,7 +763,7 @@
 
 ;; World time
 (use-package time
-  :bind ("C-c t t" . display-time-world)
+  :bind ("C-c a T" . display-time-world)
   :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
@@ -945,6 +945,17 @@
 (use-package move-text
   :ensure t
   :defer t)
+
+;; NeoTree
+(use-package neotree
+  :ensure t
+  :bind ("C-c t n" . neotree-toggle)
+  :config
+  (setq neo-theme 'nerd)
+  (setq neo-create-file-auto-open t)
+  (setq neo-smart-open t)
+  (setq neo-show-hidden-files t)
+  (setq neo-auto-indent-point t))
 
 ;; Paradox
 (use-package paradox
