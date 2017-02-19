@@ -422,7 +422,7 @@
 (use-package eldoc
   :defer t
   :config
-  ;; Paredit compatiblity
+  ;; Paredit compatibility
   (eldoc-add-command
    #'paredit-backward-delete
    #'paredit-close-round)
@@ -583,7 +583,7 @@
 
 ;; Regexp builder
 (use-package re-builder
-  :bind ("C-c a r" . re-builder)
+  :bind ("C-c s r" . re-builder)
   :config
   (setq reb-re-syntax 'string))
 
@@ -596,7 +596,7 @@
 
 ;; GDB
 (use-package gdb-mi
-  :bind ("C-c a d" . gdb)
+  :bind ("C-c a D" . gdb)
   :config
   (setq gdb-many-windows t))
 
@@ -616,7 +616,7 @@
 
 ;; Speedbar configuration
 (use-package speedbar
-  :bind (("C-c f s" . speedbar)
+  :bind (("C-c p s" . speedbar)
          :map speedbar-mode-map
          ("a" . speedbar-toggle-show-all-files))
   :config
@@ -649,7 +649,7 @@
 
 ;; IELM
 (use-package ielm
-  :bind ("C-c a I" . ielm)
+  :bind ("C-c a e" . ielm)
   :config
   (setq ielm-prompt "EL> "))
 
@@ -818,6 +818,19 @@
   :config
   (dash-enable-font-lock))
 
+;; Debbugs
+(use-package debbugs
+  :ensure t
+  :bind (("C-c d g" . debbugs-gnu)
+         ("C-c d s" . debbugs-gnu-search)
+         ("C-c d t" . debbugs-gnu-usertags)
+         ("C-c d p" . debbugs-gnu-patches)
+         ("C-c d b" . debbugs-gnu-bugs)
+         ("C-c d O" . debbugs-org)
+         ("C-c d S" . debbugs-org-search)
+         ("C-c d P" . debbugs-org-patches)
+         ("C-c d B" . debbugs-org-bugs)))
+
 ;; Easy-kill
 (use-package easy-kill
   :ensure t
@@ -949,7 +962,7 @@
 ;; NeoTree
 (use-package neotree
   :ensure t
-  :bind ("C-c t n" . neotree-toggle)
+  :bind ("C-c f n" . neotree-toggle)
   :config
   (setq neo-theme 'nerd)
   (setq neo-create-file-auto-open t)
@@ -1470,8 +1483,9 @@ This doesn't support the chanserv auth method"
   (which-key-add-key-based-replacements
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
-    "C-c W" "eyebrowse"
     "C-c O" "outline"
+    "C-c W" "eyebrowse"
+    "C-c d" "debbugs"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c f" "files"
@@ -1533,7 +1547,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c p r" #'project-find-regexp)
 
 ;; EWW
-(bind-key "C-c a e" #'eww)
+(bind-key "C-c a b" #'eww)
 
 ;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
