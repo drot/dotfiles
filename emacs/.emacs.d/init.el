@@ -1222,10 +1222,11 @@ This doesn't support the chanserv auth method"
                                     ("From" . "subscription")
                                     ("From" . "newsletter")
                                     ("From" . "gmane.org")
+                                    ("From" . "debbugs.gnu.org")
                                     ("From" . "mailer-daemon")
                                     ("From" . "arch-general")))
   ;; Save the database after exiting Gnus
-  (add-hook 'gnus-exit-gnus-hook #'bbdb-save))
+  (add-hook 'gnus-summary-exit-hook #'bbdb-save))
 
 ;; Company mode
 (use-package company
