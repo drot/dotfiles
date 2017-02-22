@@ -570,7 +570,7 @@
 
 ;; Copyright insertion
 (use-package copyright
-  :bind ("C-c i r" . copyright-update)
+  :bind ("C-c i C" . copyright-update)
   :config
   (setq copyright-year-ranges t)
   (setq copyright-names-regexp (regexp-quote user-login-name)))
@@ -1337,7 +1337,7 @@ This doesn't support the chanserv auth method"
          ("C-c s g" . counsel-grep)
          ("C-c n m" . counsel-mark-ring)
          ("C-c h l" . counsel-find-library)
-         ("C-c i u" . counsel-unicode-char))
+         ("C-c i U" . counsel-unicode-char))
   :commands counsel-mode
   :init
   (counsel-mode)
