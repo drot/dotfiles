@@ -1579,7 +1579,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c i a" #'auto-insert)
 
 ;; Comment region
-(bind-key "C-c c c" #'comment-region)
+(bind-key "C-c c r" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
 
 ;; Replace dabbrev-expand with hippie-expand
