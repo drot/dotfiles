@@ -434,6 +434,8 @@
   :config
   ;; Use Python 3 as default
   (setq python-shell-interpreter "python3")
+  ;; Disable indent offset guessing
+  (setq python-indent-guess-indent-offset nil)
   ;; PEP8 conformance
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
@@ -454,6 +456,12 @@
                           (awk-mode . "awk")
                           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
+
+;; Scheme mode configuration
+(use-package scheme
+  :defer t
+  :config
+  (setq scheme-program-name "guile"))
 
 ;; CSS mode configuration
 (use-package css-mode
@@ -652,12 +660,6 @@
   :bind ("C-c a e" . ielm)
   :config
   (setq ielm-prompt "EL> "))
-
-;; Scheme mode configuration
-(use-package scheme
-  :bind ("C-c t S" . run-scheme)
-  :config
-  (setq scheme-program-name "guile"))
 
 ;; Compilation configuration
 (use-package compile
@@ -859,6 +861,7 @@
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
   :config
+  (setq js2-basic-offset 2)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; JSON mode
@@ -1422,7 +1425,7 @@ This doesn't support the chanserv auth method"
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :bind ("C-c t W" . run-skewer)
+  :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
   (add-hook 'js2-mode-hook 'skewer-mode)
