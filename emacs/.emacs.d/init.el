@@ -283,6 +283,12 @@
   (setq which-func-unknown "(Top Level)")
   (which-function-mode))
 
+;; Fast window switching
+(use-package windmove
+  :config
+  (windmove-default-keybindings)
+  (setq windmove-wrap-around t))
+
 ;; Undo and redo the window configuration
 (use-package winner
   :bind (:map winner-mode-map
@@ -761,7 +767,12 @@
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-catch-invisible-edits 'error)
-  (setq org-startup-indented t))
+  (setq org-startup-indented t)
+  ;; Avoid Wind Move conflict
+  (add-hook 'org-shiftup-final-hook 'windmove-up)
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)
+  (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
 (use-package time
@@ -771,15 +782,6 @@
                                   ("America/Los_Angeles" "Los Angeles")
                                   ("Canada/Eastern" "Quebec")
                                   ("Asia/Saigon" "Saigon"))))
-
-;; Wind Move
-(use-package windmove
-  :bind (("C-c w b" . windmove-left)
-         ("C-c w f" . windmove-right)
-         ("C-c w p" . windmove-up)
-         ("C-c w n" . windmove-down))
-  :config
-  (setq windmove-wrap-around t))
 
 ;; Ace-window
 (use-package ace-window
@@ -1340,7 +1342,7 @@ This doesn't support the chanserv auth method"
          ("C-c s g" . counsel-grep)
          ("C-c n m" . counsel-mark-ring)
          ("C-c h l" . counsel-find-library)
-         ("C-c i U" . counsel-unicode-char))
+         ("C-c i 8" . counsel-unicode-char))
   :commands counsel-mode
   :init
   (counsel-mode)
