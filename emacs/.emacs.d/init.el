@@ -286,8 +286,8 @@
 ;; Fast window switching
 (use-package windmove
   :config
-  (windmove-default-keybindings)
-  (setq windmove-wrap-around t))
+  (setq windmove-wrap-around t)
+  (windmove-default-keybindings))
 
 ;; Undo and redo the window configuration
 (use-package winner
