@@ -48,13 +48,6 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
-# Git prompt
-# if [[ -f /usr/share/git/git-prompt.sh ]]; then
-#     . /usr/share/git/git-prompt.sh
-# else
-#     __git_ps1() { :; }
-# fi
-
 # Bash completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
