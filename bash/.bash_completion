@@ -1,0 +1,4 @@
+# Add completions from user installs
+for bcfile in ~/.local/etc/bash_completion.d/*; do
+    . $bcfile
+done
