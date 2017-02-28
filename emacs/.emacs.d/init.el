@@ -35,9 +35,13 @@
                              (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
-(defvar drot/cache-directory (expand-file-name "cache" user-emacs-directory)
-  "All cache files from libraries are stored in this directory.")
+(defconst drot/cache-directory (expand-file-name "cache" user-emacs-directory)
+  "All cache files from packages are stored in this directory.")
 (make-directory drot/cache-directory t)
+
+;; Use separate file for customization interface changes
+(defconst drot/custom-file (locate-user-emacs-file "custom.el")
+  "File used to store changes made in the customization interface.")
 
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
@@ -63,6 +67,10 @@
 ;; Load use-package
 (eval-when-compile
   (require 'use-package))
+
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load custom-file 'noerror)
 
 ;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
@@ -191,7 +199,7 @@
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t)))
 (setq auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory))
-(setq backup-directory-alist `((".*" . ,drot/cache-directory)))
+(setq backup-directory-alist `(("." . ,drot/cache-directory)))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -1589,9 +1597,5 @@ This doesn't support the chanserv auth method"
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
-
-;; Load changes from the customize interface
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
 
 ;;; init.el ends here
