@@ -618,7 +618,7 @@
 
 ;; Proced
 (use-package proced
-  :bind ("C-x p" . proced)
+  :bind ("C-c a P" . proced)
   :config
   (setq-default proced-sort 'start)
   (setq-default proced-tree-flag t))
@@ -636,12 +636,17 @@
   :config
   (setq browse-url-browser-function #'browse-url-firefox))
 
-;; Bookmarks save directory
+;; Bookmark configuration
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
   (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory))
   (setq bookmark-save-flag 1))
+
+;; Bookmark+
+(use-package bookmark+
+  :ensure t
+  :after bookmark)
 
 ;; Speedbar configuration
 (use-package speedbar
