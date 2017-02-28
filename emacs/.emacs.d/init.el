@@ -562,10 +562,17 @@
   ;; Ignore uninteresting files
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
+;; Dired+
+(use-package dired+
+  :ensure t
+  :init
+  (setq diredp-hide-details-initially-flag nil)
+  :after dired-x)
+
 ;; Dired Async
 (use-package dired-async
   :ensure async
-  :after dired-x
+  :after dired+
   :config
   (dired-async-mode))
 
@@ -866,6 +873,11 @@
   :config
   (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
 
+;; Info+
+(use-package info+
+  :ensure t
+  :after info)
+
 ;; JavaScript mode
 (use-package js2-mode
   :ensure t
@@ -982,6 +994,11 @@
   (setq neo-smart-open t)
   (setq neo-show-hidden-files t)
   (setq neo-auto-indent-point t))
+
+;; nLinum mode
+(use-package nlinum
+  :ensure t
+  :bind ("C-c t l" . nlinum-mode))
 
 ;; Paradox
 (use-package paradox
@@ -1541,9 +1558,6 @@ This doesn't support the chanserv auth method"
 
 ;; Revert buffer
 (bind-key "C-c f x" #'revert-buffer)
-
-;; Linum mode
-(bind-key "C-c t l" #'linum-mode)
 
 ;; Ruler mode
 (bind-key "C-c t r" #'ruler-mode)
