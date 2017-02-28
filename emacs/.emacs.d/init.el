@@ -1393,6 +1393,10 @@ This doesn't support the chanserv auth method"
         (enable-paredit-mode)))
 
   (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
+
+  ;; Disable Electric Pair mode when Paredit is active
+  (add-hook 'paredit-mode-hook (lambda ()
+                                 (setq-local electric-pair-mode nil)))
   :diminish (paredit-mode . "PaR"))
 
 ;; Multiple cursors
