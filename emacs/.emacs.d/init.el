@@ -68,10 +68,6 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
-(load custom-file 'noerror)
-
 ;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
   (when (fboundp mode)
@@ -1620,5 +1616,9 @@ This doesn't support the chanserv auth method"
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
+
+;; Load changes from the customize interface
+(setq custom-file drot/custom-file)
+(load custom-file 'noerror)
 
 ;;; init.el ends here
