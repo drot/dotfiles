@@ -35,13 +35,7 @@
                              (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
-(defvar drot/cache-directory (locate-user-emacs-file "cache")
-  "All cache files from packages are stored in this directory.")
-(make-directory drot/cache-directory t)
-
-;; Use separate file for customization interface changes
-(defvar drot/custom-file (locate-user-emacs-file "custom.el")
-  "File used to store changes made in the customization interface.")
+(make-directory (locate-user-emacs-file "cache") t)
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
@@ -196,9 +190,9 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,drot/cache-directory t)))
-(setq auto-save-list-file-prefix (expand-file-name ".saves-" drot/cache-directory))
-(setq backup-directory-alist `(("." . ,drot/cache-directory)))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
+(setq auto-save-list-file-prefix (locate-user-emacs-file "cache/.saves-"))
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "cache"))))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -211,7 +205,7 @@
 ;; Save minibuffer history
 (use-package savehist
   :config
-  (setq savehist-file (expand-file-name "saved-history" drot/cache-directory))
+  (setq savehist-file (locate-user-emacs-file "cache/saved-history"))
   (setq savehist-autosave-interval 60)
   (setq savehist-additional-variables '(search-ring regexp-search-ring))
   (savehist-mode))
@@ -219,7 +213,7 @@
 ;; Save recent files list
 (use-package recentf
   :config
-  (setq recentf-save-file (expand-file-name "recent-files" drot/cache-directory))
+  (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
   (setq recentf-exclude '("/\\.git/.*\\'"
                           "/elpa/.*\\'"
                           "/cache/.*\\'"
@@ -232,7 +226,7 @@
 ;; Remember point position in files
 (use-package saveplace
   :config
-  (setq save-place-file (expand-file-name "saved-places" drot/cache-directory))
+  (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
   (save-place-mode))
 
 ;; Highlight current line
@@ -574,7 +568,7 @@
   :defer t
   :config
   (setq tramp-default-method "ssh")
-  (setq tramp-persistency-file-name (expand-file-name "tramp" drot/cache-directory))
+  (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
 
@@ -640,8 +634,8 @@
   :ensure t
   :after bookmark
   :config
-  (setq bmkp-bmenu-state-file (expand-file-name "bmkp-bmenu-state.el" drot/cache-directory))
-  (setq bmkp-bmenu-commands-file (expand-file-name "bmkp-bmenu-commands.el" drot/cache-directory)))
+  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
+  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el")))
 
 ;; Speedbar configuration
 (use-package speedbar
@@ -877,7 +871,7 @@
   :ensure t
   :defer t
   :config
-  (setq geiser-repl-history-filename (expand-file-name "geiser-history" drot/cache-directory)))
+  (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; Info+
 (use-package info+
@@ -1139,7 +1133,7 @@ This doesn't support the chanserv auth method"
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy slime-company))
   (setq slime-protocol-version 'ignore)
-  (setq slime-repl-history-file (expand-file-name "slime-history.eld" drot/cache-directory)))
+  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")))
 
 ;; SLIME REPL
 (use-package slime-repl
@@ -1166,7 +1160,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :defer t
   :config
-  (setq smex-save-file (expand-file-name "smex-items" drot/cache-directory)))
+  (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
 ;; Systemd mode
 (use-package systemd
@@ -1297,7 +1291,7 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'global-company-mode-hook #'company-statistics-mode)
   :config
-  (setq company-statistics-file (expand-file-name "company-statistics-cache.el" drot/cache-directory)))
+  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
 
 ;; Diff-Hl
 (use-package diff-hl
@@ -1439,7 +1433,7 @@ This doesn't support the chanserv auth method"
          ("C-c m C-s" . mc/mark-all-in-region))
   :commands (activate-cursor-for-undo deactivate-cursor-after-undo)
   :init
-  (setq mc/list-file (expand-file-name "mc-lists.el" drot/cache-directory)))
+  (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el")))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -1624,7 +1618,7 @@ This doesn't support the chanserv auth method"
 (bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Load changes from the customize interface
-(setq custom-file drot/custom-file)
+(setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
 
 ;;; init.el ends here
