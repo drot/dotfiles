@@ -35,12 +35,12 @@
                              (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
-(defconst drot/cache-directory (locate-user-emacs-file "cache")
+(defvar drot/cache-directory (locate-user-emacs-file "cache")
   "All cache files from packages are stored in this directory.")
 (make-directory drot/cache-directory t)
 
 ;; Use separate file for customization interface changes
-(defconst drot/custom-file (locate-user-emacs-file "custom.el")
+(defvar drot/custom-file (locate-user-emacs-file "custom.el")
   "File used to store changes made in the customization interface.")
 
 ;; Prefer newest version of a file
@@ -149,6 +149,9 @@
 
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
+
+;; Use Emacs own tooltip implementation
+(setq x-gtk-use-system-tooltips nil)
 
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
