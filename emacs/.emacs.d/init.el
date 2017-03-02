@@ -1487,7 +1487,7 @@ This doesn't support the chanserv auth method"
   :init
   (global-undo-tree-mode)
   :config
-  (setq undo-tree-history-directory-alist '((".*" . "~/.emacs.d/undo")))
+  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
   :diminish (undo-tree-mode . "UnT"))
 
