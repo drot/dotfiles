@@ -888,6 +888,7 @@
   :mode ("\\.js\\'" . js2-mode)
   :config
   (setq js2-basic-offset 2)
+  (setq js2-highlight-level 3)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; JSON mode
@@ -1561,7 +1562,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
-(bind-key "C-c f x" #'revert-buffer)
+(bind-key "C-c f R" #'revert-buffer)
 
 ;; Ruler mode
 (bind-key "C-c t r" #'ruler-mode)
