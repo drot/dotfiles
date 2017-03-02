@@ -629,17 +629,19 @@
   :config
   (setq browse-url-browser-function #'browse-url-chromium))
 
-;; Bookmark configuration
+;; Bookmarks
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
-  (setq bookmark-default-file (expand-file-name "bookmarks" drot/cache-directory))
   (setq bookmark-save-flag 1))
 
 ;; Bookmark+
 (use-package bookmark+
   :ensure t
-  :after bookmark)
+  :after bookmark
+  :config
+  (setq bmkp-bmenu-state-file (expand-file-name "bmkp-bmenu-state.el" drot/cache-directory))
+  (setq bmkp-bmenu-commands-file (expand-file-name "bmkp-bmenu-commands.el" drot/cache-directory)))
 
 ;; Speedbar configuration
 (use-package speedbar
