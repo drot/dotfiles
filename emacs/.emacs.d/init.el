@@ -627,6 +627,7 @@
 (use-package bookmark
   :bind ("C-c f b" . list-bookmarks)
   :config
+  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
 
 ;; Bookmark+
