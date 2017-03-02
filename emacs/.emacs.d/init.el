@@ -854,7 +854,8 @@
                        ("https://www.reddit.com/r/linux/.rss" programming)
                        ("http://bljesak.info/rss" bljesak)))
   (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
-  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
+  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
+  (setq elfeed-search-filter "@1-week-ago +unread"))
 
 ;; Expand region
 (use-package expand-region
