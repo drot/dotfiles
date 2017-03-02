@@ -627,7 +627,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Bookmark configuration
 (use-package bookmark
@@ -849,9 +849,9 @@
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
                        ("https://www.reddit.com/r/linux/.rss" linux)
                        ("https://www.reddit.com/r/linux/.rss" programming)
-                       ("http://bljesak.info/rss" bljesak))
+                       ("http://bljesak.info/rss" bljesak)))
   (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
-  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))))
+  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)))
 
 ;; Expand region
 (use-package expand-region
