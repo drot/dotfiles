@@ -452,13 +452,7 @@
   ;; PEP8 conformance
   (add-hook 'python-mode-hook (lambda ()
                                 (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode)
-  ;; Enable Anaconda mode in Python buffers
-  (add-hook 'python-mode-hook #'anaconda-mode)
-  (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
-  ;; Enable Company support for Anaconda mode
-  (add-hook 'python-mode-hook (lambda ()
-                                (add-to-list 'company-backends #'company-anaconda))))
+  (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode configuration
 (use-package cc-mode
@@ -797,13 +791,19 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :defer t
+  :commands (anaconda-mode anaconda-eldoc-mode)
+  :init
+  (add-hook 'python-mode-hook #'anaconda-mode)
+  (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
   :diminish (anaconda-mode . "AnC"))
 
 ;; Company Anaconda
 (use-package company-anaconda
   :ensure t
-  :defer t)
+  :commands company-anaconda
+  :init
+  (add-hook 'python-mode-hook (lambda ()
+                                (add-to-list 'company-backends #'company-anaconda))))
 
 ;; Avy
 (use-package avy
@@ -1463,7 +1463,7 @@ This doesn't support the chanserv auth method"
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
-  (add-hook 'js2-mode-hook 'skewer-mode)
+  (add-hook 'js2-mode-hook #'skewer-mode)
   :diminish (skewer-mode . "SkW"))
 
 ;; Skewer CSS
@@ -1471,7 +1471,7 @@ This doesn't support the chanserv auth method"
   :ensure skewer-mode
   :commands skewer-css-mode
   :init
-  (add-hook 'css-mode-hook 'skewer-css-mode)
+  (add-hook 'css-mode-hook #'skewer-css-mode)
   :diminish (skewer-css-mode . "SkW-CSS"))
 
 ;; Skewer HTML
@@ -1479,7 +1479,7 @@ This doesn't support the chanserv auth method"
   :ensure skewer-mode
   :commands skewer-html-mode
   :init
-  (add-hook 'html-mode-hook 'skewer-html-mode)
+  (add-hook 'html-mode-hook #'skewer-html-mode)
   :diminish (skewer-html-mode . "SkW-HTML"))
 
 ;; Undo Tree
