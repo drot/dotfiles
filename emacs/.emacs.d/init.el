@@ -35,7 +35,7 @@
                              (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
-(defconst drot/cache-directory (expand-file-name "cache" user-emacs-directory)
+(defconst drot/cache-directory (locate-user-emacs-file "cache")
   "All cache files from packages are stored in this directory.")
 (make-directory drot/cache-directory t)
 
@@ -83,9 +83,6 @@
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
-
-;; Show tooltips in the echo area
-(tooltip-mode -1)
 
 ;; Show column number and buffer size on the mode line
 (column-number-mode)
@@ -736,21 +733,6 @@
   (setq gnus-sum-thread-tree-leaf-with-other "├──>")
   (setq gnus-sum-thread-tree-single-leaf "└──>"))
 
-;; Newsticker
-(use-package newst-backend
-  :bind ("C-c a n" . newsticker-show-news)
-  :config
-  ;; Setup news sources
-  (setq newsticker-url-list-defaults nil)
-  (setq newsticker-url-list '(("Bljesak.info" "http://bljesak.info/rss")
-                              ("Hacker News" "https://news.ycombinator.com/rss")
-                              ("LWN" "https://lwn.net/headlines/rss")
-                              ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
-                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
-                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
-  ;; Enable Imenu for Plainview
-  (add-hook 'newsticker-mode-hook #'imenu-add-menubar-index))
-
 ;; Calendar configuration
 (use-package calendar
   :bind ("C-c a C" . calendar)
@@ -856,6 +838,20 @@
   :ensure t
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
+
+;; Elfeed
+(use-package elfeed
+  :ensure t
+  :bind ("C-c a f" . elfeed)
+  :config
+  (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
+                       ("https://lwn.net/headlines/rss" lwn)
+                       ("https://www.reddit.com/r/emacs/.rss" emacs)
+                       ("https://www.reddit.com/r/linux/.rss" linux)
+                       ("https://www.reddit.com/r/linux/.rss" programming)
+                       ("http://bljesak.info/rss" bljesak))
+  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
+  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))))
 
 ;; Expand region
 (use-package expand-region
