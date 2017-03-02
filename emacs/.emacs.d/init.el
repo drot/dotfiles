@@ -43,6 +43,9 @@
 (defvar drot/custom-file (locate-user-emacs-file "custom.el")
   "File used to store changes made in the customization interface.")
 
+;; Disable the site default settings
+(setq inhibit-default-init t)
+
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
