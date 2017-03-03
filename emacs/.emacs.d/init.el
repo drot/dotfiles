@@ -877,8 +877,12 @@
 ;; IEdit
 (use-package iedit
   :ensure t
-  :bind ("C-c i i" . iedit-mode)
-  :init
+  :bind (("C-c i i" . iedit-mode)
+         :map isearch-mode-map
+         ("C-i" . iedit-mode-from-isearch)
+         :map esc-map
+         ("C-:" . iedit-execute-last-modification))
+  :config
   (setq iedit-toggle-key-default nil))
 
 ;; Info+
