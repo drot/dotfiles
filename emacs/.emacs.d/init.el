@@ -874,6 +874,13 @@
   :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
+;; IEdit
+(use-package iedit
+  :ensure t
+  :bind ("C-c i i" . iedit-mode)
+  :init
+  (setq iedit-toggle-key-default nil))
+
 ;; Info+
 (use-package info+
   :ensure t
@@ -1417,24 +1424,6 @@ This doesn't support the chanserv auth method"
   (add-hook 'paredit-mode-hook (lambda ()
                                  (setq-local electric-pair-mode nil)))
   :diminish (paredit-mode . "PaR"))
-
-;; Multiple cursors
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
-         ("C-c m a" . mc/vertical-align)
-         ("C-c m e" . mc/mark-more-like-this-extended)
-         ("C-c m h" . mc/mark-all-like-this-dwim)
-         ("C-c m l" . mc/edit-lines)
-         ("C-c m n" . mc/mark-next-like-this)
-         ("C-c m p" . mc/mark-previous-like-this)
-         ("C-c m r" . vr/mc-mark)
-         ("C-c m C-a" . mc/edit-beginnings-of-lines)
-         ("C-c m C-e" . mc/edit-ends-of-lines)
-         ("C-c m C-s" . mc/mark-all-in-region))
-  :commands (activate-cursor-for-undo deactivate-cursor-after-undo)
-  :init
-  (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el")))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
