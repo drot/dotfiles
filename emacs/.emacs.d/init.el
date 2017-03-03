@@ -860,7 +860,7 @@
 ;; Expand region
 (use-package expand-region
   :ensure t
-  :bind ("C-c x e" . er/expand-region))
+  :bind ("C-c x r" . er/expand-region))
 
 ;; Flx
 (use-package flx
@@ -874,14 +874,14 @@
   :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
-;; IEdit
+;; Edit
 (use-package iedit
   :ensure t
   :bind (("C-c i i" . iedit-mode)
          :map isearch-mode-map
          ("C-i" . iedit-mode-from-isearch)
          :map esc-map
-         ("C-:" . iedit-execute-last-modification))
+         ("C-;" . iedit-execute-last-modification))
   :config
   (setq iedit-toggle-key-default nil))
 
@@ -1394,7 +1394,7 @@ This doesn't support the chanserv auth method"
   :bind (("C-c s S" . swiper-all)
          ("C-c s s" . swiper)
          :map isearch-mode-map
-         ("C-c s i" . swiper-from-isearch)))
+         ("C-c S" . swiper-from-isearch)))
 
 ;; Paredit
 (use-package paredit
