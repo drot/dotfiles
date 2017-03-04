@@ -874,7 +874,7 @@
   :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
-;; Edit
+;;IEdit
 (use-package iedit
   :ensure t
   :bind (("C-c i i" . iedit-mode)
