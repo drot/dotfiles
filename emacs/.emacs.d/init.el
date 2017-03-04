@@ -237,6 +237,7 @@
   (dolist (hook '(undo-tree-visualizer-mode-hook
                   eshell-mode-hook
                   term-mode-hook
+                  ediff-mode-hook
                   comint-mode-hook))
     (add-hook hook (lambda ()
                      (setq-local global-hl-line-mode nil)))))
