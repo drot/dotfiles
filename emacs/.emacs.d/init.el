@@ -881,7 +881,10 @@
          :map isearch-mode-map
          ("C-i" . iedit-mode-from-isearch)
          :map esc-map
-         ("C-;" . iedit-execute-last-modification))
+         ("C-;" . iedit-execute-last-modification)
+         :map help-map
+         ("C-;" . iedit-mode-toggle-on-function))
+  :functions iedit-mode-toggle-on-function
   :config
   (setq iedit-toggle-key-default nil))
 
