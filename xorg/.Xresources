@@ -50,6 +50,7 @@ URxvt*letterSpace: -2
 URxvt*foreground: #c2c2b0
 URxvt*background: #222222
 URxvt*cursorColor: #c2c2b0
+
 ! Stylized
 URxvt*colorIT: #719611
 URxvt*colorBD: #d3d3d3
@@ -107,6 +108,7 @@ XTerm*faceName: Hack:size=11
 XTerm*foreground: #c2c2b0
 XTerm*background: #222222
 XTerm*cursorColor: #c2c2b0
+
 ! Stylized
 XTerm*colorIT: #719611
 XTerm*colorBD: #d3d3d3
