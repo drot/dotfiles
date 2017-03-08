@@ -1332,6 +1332,13 @@ This doesn't support the chanserv auth method"
   (setq eyebrowse-wrap-around t)
   (setq eyebrowse-switch-back-and-forth t))
 
+;; FlyCheck
+(use-package flycheck
+  :ensure t
+  :commands global-flycheck-mode
+  :init
+  (global-flycheck-mode))
+
 ;; Form-feed
 (use-package form-feed
   :ensure t
@@ -1515,13 +1522,14 @@ This doesn't support the chanserv auth method"
   (setq which-key-sort-order #'which-key-prefix-then-key-order)
   (which-key-mode)
   (which-key-add-key-based-replacements
+    "C-c !" "flycheck"
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c W" "eyebrowse"
-    "C-c d" "debbugs"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
+    "C-c d" "debbugs"
     "C-c f" "files"
     "C-c h 4" "help-other-window"
     "C-c h" "help"

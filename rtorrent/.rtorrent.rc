@@ -48,7 +48,7 @@ schedule = watch_start,10,10,((load.start,(cat,(cfg.watch),"*.torrent")))
 #network.bind_address.set = rakshasa.no
 
 # Port range to use for listening
-network.port_range.set = 49164-49164
+network.port_range.set = 55956-55956
 
 # Start opening ports at a random position within the port range
 network.port_random.set = no
