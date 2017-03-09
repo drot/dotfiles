@@ -1262,8 +1262,10 @@ This doesn't support the chanserv auth method"
          ("C-c o b" . bbdb-create))
   :commands (bbdb-initialize bbdb-mua-auto-update-p)
   :init
-  (bbdb-initialize 'gnus 'message)
-  (bbdb-mua-auto-update-init 'gnus 'message)
+  (add-hook 'after-init-hook (lambda ()
+                               (bbdb-initialize 'gnus 'message)))
+  (add-hook 'after-init-hook (lambda ()
+                               (bbdb-mua-auto-update-init 'gnus 'message)))
   :config
   (setq bbdb-update-records-p 'create)
   (setq bbdb-mua-pop-up nil)
