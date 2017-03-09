@@ -282,7 +282,7 @@
 ;; Which function mode
 (use-package which-func
   :config
-  (setq which-func-unknown "(Top Level)")
+  (setq which-func-unknown "⊥")
   (which-function-mode))
 
 ;; Fast window switching
@@ -537,6 +537,7 @@
   :defer t
   :config
   (setq dired-listing-switches "-ahlF")
+  (setq dired-ls-F-marks-symlinks t)
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t))
 
@@ -683,8 +684,10 @@
   :bind (("C-c c C" . compile)
          ("C-c c R" . recompile))
   :config
+  (setq compilation-ask-about-save nil)
+  (setq compilation-always-kill t)
   (setq compilation-scroll-output 'first-error)
-  (setq compilation-ask-about-save nil))
+  (setq compilation-context-lines 3))
 
 ;; Gnus
 (use-package gnus
@@ -861,7 +864,7 @@
 ;; Expand region
 (use-package expand-region
   :ensure t
-  :bind ("C-c x r" . er/expand-region))
+  :bind ("C-c x e" . er/expand-region))
 
 ;; Flx
 (use-package flx
@@ -1196,7 +1199,8 @@ This doesn't support the chanserv auth method"
 ;; Zop-to-char
 (use-package zop-to-char
   :ensure t
-  :bind ([remap zap-to-char] . zop-to-char))
+  :bind (([remap zap-to-char] . zop-to-char)
+         ("M-Z" . zop-up-to-char)))
 
 ;; Ace-link
 (use-package ace-link
@@ -1337,7 +1341,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands global-flycheck-mode
   :init
-  (global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 ;; Form-feed
 (use-package form-feed
@@ -1530,6 +1534,7 @@ This doesn't support the chanserv auth method"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
+    "C-c f v" "variables"
     "C-c f" "files"
     "C-c h 4" "help-other-window"
     "C-c h" "help"
@@ -1611,14 +1616,22 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "C-c x a" #'align)
+(bind-key "C-c x A" #'align)
+(bind-key "C-c x a" #'align-current)
+(bind-key "C-c x r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
 
-;; Comment region
+;; Commenting
+(bind-key "C-c c d" #'comment-dwim)
 (bind-key "C-c c r" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
+
+;; Local variable insertion
+(bind-key "C-c f v d" #'add-dir-local-variable)
+(bind-key "C-c f v f" #'add-file-local-variable)
+(bind-key "C-c f v p" #'add-file-local-variable-prop-line)
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
