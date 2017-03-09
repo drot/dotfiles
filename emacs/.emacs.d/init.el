@@ -309,6 +309,7 @@
   :bind ("C-c t o" . outline-minor-mode)
   :init
   (setq outline-minor-mode-prefix (kbd "C-c O"))
+  (add-hook 'text-mode-hook #'outline-minor-mode)
   :diminish (outline-minor-mode . "OuT"))
 
 ;; Hide Show mode
