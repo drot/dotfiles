@@ -917,7 +917,8 @@
   :ensure t
   :commands key-chord-mode
   :init
-  (key-chord-mode 1)
+  (add-hook 'after-init-hook (lambda ()
+                               (key-chord-mode 1)))
   :config
   (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
@@ -1208,7 +1209,7 @@ This doesn't support the chanserv auth method"
   :bind (("C-c n a" . ace-link-addr))
   :commands ace-link-setup-default
   :init
-  (ace-link-setup-default))
+  (add-hook 'after-init-hook #'ace-link-setup-default))
 
 ;; Adaptive Wrap
 (use-package adaptive-wrap
@@ -1227,7 +1228,7 @@ This doesn't support the chanserv auth method"
          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   :commands global-anzu-mode
   :init
-  (global-anzu-mode)
+  (add-hook 'after-init-hook #'global-anzu-mode)
   :config
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
@@ -1239,7 +1240,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands beacon-mode
   :init
-  (beacon-mode)
+  (add-hook 'after-init-hook #'beacon-mode)
   :config
   (setq beacon-color "#f0dfaf")
   (setq beacon-dont-blink-major-modes
@@ -1317,11 +1318,11 @@ This doesn't support the chanserv auth method"
 (use-package diff-hl
   :ensure t
   :bind (("C-c v d" . diff-hl-margin-mode))
-  :commands (global-diff-hl-mode diff-hl-flydiff-mode)
+  :commands global-diff-hl-mode
   :init
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
+  (add-hook 'after-init-hook #'global-diff-hl-mode)
   :config
+  (diff-hl-flydiff-mode)
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
@@ -1331,7 +1332,7 @@ This doesn't support the chanserv auth method"
   :commands eyebrowse-mode
   :init
   (setq eyebrowse-keymap-prefix (kbd "C-c W"))
-  (eyebrowse-mode)
+  (add-hook 'after-init-hook #'eyebrowse-mode)
   :config
   (setq eyebrowse-wrap-around t)
   (setq eyebrowse-switch-back-and-forth t))
@@ -1342,6 +1343,13 @@ This doesn't support the chanserv auth method"
   :commands global-flycheck-mode
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
+
+;; FlyCheck GUI popups
+(use-package flycheck-pos-tip
+  :ensure t
+  :after flycheck
+  :config
+  (flycheck-pos-tip-mode))
 
 ;; Form-feed
 (use-package form-feed
@@ -1373,7 +1381,7 @@ This doesn't support the chanserv auth method"
   :bind (("C-c n R" . ivy-resume))
   :commands ivy-mode
   :init
-  (ivy-mode)
+  (add-hook 'after-init-hook #'ivy-mode)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
@@ -1398,7 +1406,7 @@ This doesn't support the chanserv auth method"
          ("C-c i 8" . counsel-unicode-char))
   :commands counsel-mode
   :init
-  (counsel-mode)
+  (add-hook 'after-init-hook #'counsel-mode)
   :config
   (setq counsel-find-file-at-point t)
   :diminish (counsel-mode . "CsL"))
@@ -1493,7 +1501,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands global-undo-tree-mode
   :init
-  (global-undo-tree-mode)
+  (add-hook 'after-init-hook #'global-undo-tree-mode)
   :config
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
@@ -1511,8 +1519,8 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands volatile-highlights-mode
   :init
-  (volatile-highlights-mode)
-  :diminish (volatile-highlights-mode . "VH"))
+  (add-hook 'after-init-hook #'volatile-highlights-mode)
+  :diminish (volatile-highlights-mode . "VlH"))
 
 ;; Which Key
 (use-package which-key
@@ -1524,7 +1532,8 @@ This doesn't support the chanserv auth method"
   (setq which-key-idle-secondary-delay 1.0)
   (setq which-key-allow-imprecise-window-fit t)
   (setq which-key-sort-order #'which-key-prefix-then-key-order)
-  (which-key-mode)
+  (add-hook 'after-init-hook #'which-key-mode)
+  :config
   (which-key-add-key-based-replacements
     "C-c !" "flycheck"
     "C-c &" "yasnippet"
@@ -1560,7 +1569,7 @@ This doesn't support the chanserv auth method"
   :ensure t
   :commands yas-global-mode
   :init
-  (yas-global-mode))
+  (add-hook 'after-init-hook #'yas-global-mode))
 
 ;; Display personal bindings
 (bind-key "C-c h b" #'describe-personal-keybindings)
