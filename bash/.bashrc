@@ -53,7 +53,7 @@ fi
     . /usr/share/bash-completion/bash_completion
 
 # Git prompt format
-GIT="\$(__git_ps1 \" (%s)\")"
+GIT="\$(__git_ps1 ' %s')"
 
 # Show modified git state
 GIT_PS1_SHOWDIRTYSTATE=yes
@@ -69,7 +69,7 @@ NIL='\[\033[00m\]'
 
 # Prompt format
 case $TERM in
-    xterm*|rxvt*|st*|screen*)
+    xterm*|rxvt*|st*|screen*|tmux*)
         PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
         ;;
     *)
