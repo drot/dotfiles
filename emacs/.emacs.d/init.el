@@ -95,6 +95,9 @@
 (setq-default indicate-buffer-boundaries 'left)
 (setq-default indicate-empty-lines t)
 
+;; Move point all the way when scrolling to buffer boundaries
+(setq scroll-error-top-bottom t)
+
 ;; Flash frame instead of beeping
 (setq visible-bell t)
 
