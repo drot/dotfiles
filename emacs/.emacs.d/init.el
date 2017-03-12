@@ -1236,25 +1236,6 @@ This doesn't support the chanserv auth method"
   (setq anzu-replace-to-string-separator " => ")
   :diminish (anzu-mode . "AnZ"))
 
-;; Beacon
-(use-package beacon
-  :ensure t
-  :commands beacon-mode
-  :init
-  (add-hook 'after-init-hook #'beacon-mode)
-  :config
-  (setq beacon-color "#f0dfaf")
-  (setq beacon-dont-blink-major-modes
-        (append beacon-dont-blink-major-modes
-                '(dired-mode
-                  calc-mode
-                  rcirc-mode
-                  undo-tree-visualizer-mode
-                  eshell-mode
-                  term-mode
-                  comint-mode
-                  slime-repl-mode))))
-
 ;; BBDB
 (use-package bbdb
   :ensure t
