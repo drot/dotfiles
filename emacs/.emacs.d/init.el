@@ -322,7 +322,18 @@
   (dolist (hook '(c-mode-common-hook
                   emacs-lisp-mode-hook
                   python-mode-hook))
-    (add-hook hook #'hs-minor-mode)))
+    (add-hook hook #'hs-minor-mode))
+  :config
+  (defun drot/display-code-line-counts (ov)
+    "Unique overlay function to be applied in `hs-minor-mode'."
+    (when (eq 'code (overlay-get ov 'hs))
+      (overlay-put ov 'display
+                   (format "... / %d"
+                           (count-lines (overlay-start ov)
+                                        (overlay-end ov))))))
+  ;; Configure package
+  (setq hs-set-up-overlay #'drot/display-code-line-counts)
+  (setq hs-isearch-open t))
 
 ;; Bug Reference mode
 (use-package bug-reference
@@ -359,6 +370,7 @@
   (setq flyspell-issue-message-flag nil)
   (setq flyspell-issue-welcome-flag nil)
   (setq flyspell-consider-dash-as-word-delimiter-flag t)
+  (setq flyspell-duplicate-distance 12000)
   :diminish (flyspell-mode . "FlS"))
 
 ;; Isearch configuration
@@ -430,14 +442,17 @@
   :config
   (setq custom-safe-themes t))
 
+;; Imenu configuration
+(use-package imenu
+  :defer t
+  :config
+  (setq imenu-auto-rescan t))
+
 ;; ElDoc mode configuration
 (use-package eldoc
   :defer t
   :config
-  ;; Paredit compatibility
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round)
+  (setq eldoc-idle-delay 0.2)
   :diminish (eldoc-mode . "ElD"))
 
 ;; Python mode configuration
@@ -536,16 +551,16 @@
   :config
   (setq gnutls-min-prime-bits nil))
 
-;; Dired
+;; Dired configuration
 (use-package dired
   :defer t
   :config
   (setq dired-listing-switches "-ahlF")
-  (setq dired-ls-F-marks-symlinks t)
+  (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t))
 
-;; Dired-x
+;; Additional features with dired-x
 (use-package dired-x
   :bind (("C-x C-j" . dired-jump)
          ("C-x 4 C-j" . dired-jump-other-window))
@@ -555,19 +570,11 @@
   ;; Ignore uninteresting files
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
-;; Dired+
-(use-package dired+
-  :ensure t
-  :init
-  (setq diredp-hide-details-initially-flag nil)
-  :after dired-x)
-
-;; Dired Async
-(use-package dired-async
-  :ensure async
-  :after dired+
+;; Allow permission editing in Wdired
+(use-package wdired
+  :defer t
   :config
-  (dired-async-mode))
+  (setq wdired-allow-to-change-permissions t))
 
 ;; TRAMP configuration
 (use-package tramp
@@ -635,14 +642,6 @@
   :config
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
-
-;; Bookmark+
-(use-package bookmark+
-  :ensure t
-  :after bookmark
-  :config
-  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
-  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el")))
 
 ;; Speedbar configuration
 (use-package speedbar
@@ -802,6 +801,14 @@
   (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
   :diminish (anaconda-mode . "AnC"))
 
+;; Bookmark+
+(use-package bookmark+
+  :ensure t
+  :after bookmark
+  :config
+  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
+  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el")))
+
 ;; Company Anaconda
 (use-package company-anaconda
   :ensure t
@@ -822,6 +829,7 @@
   :config
   (setq avy-all-windows 'all-frames)
   (setq avy-background t)
+  (setq avy-highlight-first t)
   (avy-setup-default))
 
 ;; Dash
@@ -843,6 +851,20 @@
          ("C-c d S" . debbugs-org-search)
          ("C-c d P" . debbugs-org-patches)
          ("C-c d B" . debbugs-org-bugs)))
+
+;; Dired+
+(use-package dired+
+  :ensure t
+  :init
+  (setq diredp-hide-details-initially-flag nil)
+  :after dired-x)
+
+;; Dired Async
+(use-package dired-async
+  :ensure async
+  :after dired+
+  :config
+  (dired-async-mode))
 
 ;; Easy-kill
 (use-package easy-kill
@@ -1282,6 +1304,7 @@ This doesn't support the chanserv auth method"
   (setq company-require-match 'never)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-ignore-case t)
+  (setq company-dabbrev-code-everywhere t)
   (setq company-selection-wrap-around t)
   (setq company-backends '(company-bbdb
                            company-nxml
@@ -1437,6 +1460,11 @@ This doesn't support the chanserv auth method"
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook (lambda ()
                                  (setq-local electric-pair-mode nil)))
+
+  ;; Add ElDoc workaround
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round)
   :diminish (paredit-mode . "PaR"))
 
 ;; Rainbow Delimiters
@@ -1492,6 +1520,8 @@ This doesn't support the chanserv auth method"
   :config
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-relative-timestamps t)
   :diminish (undo-tree-mode . "UnT"))
 
 ;; Visual Fill Column
