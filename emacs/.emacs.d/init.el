@@ -1095,7 +1095,6 @@ This doesn't support the chanserv auth method"
   (setq rcirc-log-flag t)
 
   ;; Enable additional modes
-  (add-hook 'rcirc-mode-hook #'drot|rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
@@ -1437,19 +1436,20 @@ This doesn't support the chanserv auth method"
     (add-hook hook #'enable-paredit-mode))
   :config
   ;; Enable Paredit in other related modes
-  (defvar drot|paredit-minibuffer-commands '(eval-expression
-                                             pp-eval-expression
-                                             eval-expression-with-eldoc
-                                             ibuffer-do-eval
-                                             ibuffer-do-view-and-eval)
+  (defvar drot|paredit-minibuffer-setup-commands
+    '(eval-expression
+      pp-eval-expression
+      eval-expression-with-eldoc
+      ibuffer-do-eval
+      ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot|paredit-minibuffer ()
+  (defun drot|paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot|paredit-minibuffer-commands)
+    (if (memq this-command drot|paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer)
+  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
 
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
