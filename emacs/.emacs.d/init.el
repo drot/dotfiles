@@ -205,6 +205,9 @@
 (setq visual-line-fringe-indicators '(nil vertical-bar))
 (diminish 'visual-line-mode " ViL")
 
+;; Enable current line highlight in programming modes
+(add-hook 'prog-mode-hook #'hl-line-mode)
+
 ;; Save minibuffer history
 (use-package savehist
   :config
@@ -231,19 +234,6 @@
   :config
   (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
   (save-place-mode))
-
-;; Highlight current line
-(use-package hl-line
-  :config
-  (global-hl-line-mode)
-  ;; Disable `hl-line-mode' in special buffers
-  (dolist (hook '(undo-tree-visualizer-mode-hook
-                  eshell-mode-hook
-                  term-mode-hook
-                  ediff-mode-hook
-                  comint-mode-hook))
-    (add-hook hook (lambda ()
-                     (setq-local global-hl-line-mode nil)))))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -379,7 +369,7 @@
   :config
   (setq isearch-allow-scroll t)
   (setq search-default-mode #'char-fold-to-regexp)
-  :diminish (isearch-mode . "IsH"))
+  :diminish (isearch-mode . "IsR"))
 
 ;; Ispell default program
 (use-package ispell
@@ -804,10 +794,13 @@
 ;; Bookmark+
 (use-package bookmark+
   :ensure t
+  :bind ("C-x j j" . bookmark-jump)
   :after bookmark
   :config
   (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
-  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el")))
+  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el"))
+  (setq bmkp-auto-light-when-set 'all-in-buffer)
+  (setq bmkp-auto-light-when-jump 'all-in-buffer))
 
 ;; Company Anaconda
 (use-package company-anaconda
