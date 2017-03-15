@@ -31,8 +31,8 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Reset garbage collection threshold value to default after startup
-(add-hook 'after-init-hook (lambda ()
-                             (setq gc-cons-threshold 400000)))
+(add-hook 'after-init-hook
+          (lambda () (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
 (make-directory (locate-user-emacs-file "cache") t)
@@ -314,15 +314,15 @@
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode))
   :config
-  (defun drot/display-code-line-counts (ov)
-    "Unique overlay function to be applied in `hs-minor-mode'."
+  (defun drot|display-code-line-counts (ov)
+    "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
                    (format "... / %d"
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Configure package
-  (setq hs-set-up-overlay #'drot/display-code-line-counts)
+  (setq hs-set-up-overlay #'drot|display-code-line-counts)
   (setq hs-isearch-open t))
 
 ;; Bug Reference mode
@@ -454,8 +454,8 @@
   ;; Disable indent offset guessing
   (setq python-indent-guess-indent-offset nil)
   ;; PEP8 conformance
-  (add-hook 'python-mode-hook (lambda ()
-                                (setq fill-column 79)))
+  (add-hook 'python-mode-hook
+            (lambda () (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode configuration
@@ -498,12 +498,12 @@
 (use-package ansi-color
   :defer t
   :config
-  (defun drot/colorize-compilation-buffer ()
+  (defun drot|colorize-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
 
-  (add-hook 'compilation-filter-hook #'drot/colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'drot|colorize-compilation-buffer))
 
 ;; Mail sending configuration
 (use-package message
@@ -807,8 +807,8 @@
   :ensure t
   :commands company-anaconda
   :init
-  (add-hook 'python-mode-hook (lambda ()
-                                (add-to-list 'company-backends #'company-anaconda))))
+  (add-hook 'python-mode-hook
+            (lambda () (add-to-list 'company-backends #'company-anaconda))))
 
 ;; Avy
 (use-package avy
@@ -936,8 +936,8 @@
   :ensure t
   :commands key-chord-mode
   :init
-  (add-hook 'after-init-hook (lambda ()
-                               (key-chord-mode 1)))
+  (add-hook 'after-init-hook
+            (lambda () (key-chord-mode 1)))
   :config
   (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
@@ -1095,14 +1095,14 @@ This doesn't support the chanserv auth method"
   (setq rcirc-log-flag t)
 
   ;; Enable additional modes
-  (add-hook 'rcirc-mode-hook #'drot/rcirc-mode-hook)
+  (add-hook 'rcirc-mode-hook #'drot|rcirc-mode-hook)
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
 
   ;; Disable company mode in rcirc buffers
-  (add-hook 'rcirc-mode-hook (lambda ()
-                               company-mode -1))
+  (add-hook 'rcirc-mode-hook
+            (lambda () (company-mode -1)))
 
   ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
@@ -1261,10 +1261,10 @@ This doesn't support the chanserv auth method"
          ("C-c o b" . bbdb-create))
   :commands (bbdb-initialize bbdb-mua-auto-update-p)
   :init
-  (add-hook 'after-init-hook (lambda ()
-                               (bbdb-initialize 'gnus 'message)))
-  (add-hook 'after-init-hook (lambda ()
-                               (bbdb-mua-auto-update-init 'gnus 'message)))
+  (add-hook 'after-init-hook
+            (lambda () (bbdb-initialize 'gnus 'message)))
+  (add-hook 'after-init-hook
+            (lambda () (bbdb-mua-auto-update-init 'gnus 'message)))
   :config
   (setq bbdb-update-records-p 'create)
   (setq bbdb-mua-pop-up nil)
@@ -1320,12 +1320,13 @@ This doesn't support the chanserv auth method"
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :bind (("C-c v d" . diff-hl-margin-mode))
   :commands global-diff-hl-mode
   :init
   (add-hook 'after-init-hook #'global-diff-hl-mode)
   :config
+  ;; Update diffs immediately
   (diff-hl-flydiff-mode)
+  ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
@@ -1436,23 +1437,23 @@ This doesn't support the chanserv auth method"
     (add-hook hook #'enable-paredit-mode))
   :config
   ;; Enable Paredit in other related modes
-  (defvar drot/paredit-minibuffer-commands '(eval-expression
+  (defvar drot|paredit-minibuffer-commands '(eval-expression
                                              pp-eval-expression
                                              eval-expression-with-eldoc
                                              ibuffer-do-eval
                                              ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot/paredit-minibuffer ()
+  (defun drot|paredit-minibuffer ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot/paredit-minibuffer-commands)
+    (if (memq this-command drot|paredit-minibuffer-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer)
+  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer)
 
   ;; Disable Electric Pair mode when Paredit is active
-  (add-hook 'paredit-mode-hook (lambda ()
-                                 (setq-local electric-pair-mode nil)))
+  (add-hook 'paredit-mode-hook
+            (lambda () (setq-local electric-pair-mode nil)))
 
   ;; Add ElDoc workaround
   (eldoc-add-command
