@@ -802,14 +802,6 @@
   (setq bmkp-auto-light-when-set 'all-in-buffer)
   (setq bmkp-auto-light-when-jump 'all-in-buffer))
 
-;; Company Anaconda
-(use-package company-anaconda
-  :ensure t
-  :commands company-anaconda
-  :init
-  (add-hook 'python-mode-hook
-            (lambda () (add-to-list 'company-backends #'company-anaconda))))
-
 ;; Avy
 (use-package avy
   :ensure t
@@ -1306,6 +1298,14 @@ This doesn't support the chanserv auth method"
                            (company-dabbrev-code company-keywords)
                            company-dabbrev))
   :diminish (company-mode . "CmP"))
+
+;; Company Anaconda
+(use-package company-anaconda
+  :ensure t
+  :commands company-anaconda
+  :init
+  (add-hook 'python-mode-hook
+            (lambda () (add-to-list 'company-backends #'company-anaconda))))
 
 ;; Company Statistics
 (use-package company-statistics
