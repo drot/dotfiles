@@ -1473,7 +1473,7 @@ This doesn't support the chanserv auth method"
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :bind ("C-c t R" . rainbow-mode)
+  :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
   (add-hook 'css-mode-hook #'rainbow-mode)
@@ -1591,7 +1591,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c f R" #'revert-buffer)
 
 ;; Ruler mode
-(bind-key "C-c t r" #'ruler-mode)
+(bind-key "C-c t R" #'ruler-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
