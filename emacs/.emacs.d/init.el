@@ -442,7 +442,10 @@
 (use-package eldoc
   :defer t
   :config
-  (setq eldoc-idle-delay 0.2)
+  ;; Make compatible with ParEdit
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round)
   :diminish (eldoc-mode . "ElD"))
 
 ;; Python mode configuration
@@ -1455,10 +1458,6 @@ This doesn't support the chanserv auth method"
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil)))
 
-  ;; Add ElDoc workaround
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round)
   :diminish (paredit-mode . "PaR"))
 
 ;; Rainbow Delimiters
