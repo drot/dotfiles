@@ -48,11 +48,6 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Package archive priorities
-(setq package-archive-priorities
-      '(("gnu" . 10)
-        ("melpa" . 20)))
-
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
