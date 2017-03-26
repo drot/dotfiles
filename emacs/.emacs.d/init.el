@@ -831,6 +831,7 @@
   :ensure t
   :defer t
   :config
+  ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
 
 ;; Debbugs
@@ -961,6 +962,7 @@
          ("C-c x O" . hydra-outline/body)
          ("C-c x M" . hydra-move-text/body))
   :config
+  ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock)
 
   (defhydra hydra-move-text (:columns 2)
