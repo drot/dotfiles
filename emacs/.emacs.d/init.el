@@ -761,8 +761,8 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link))
   :config
-  (setq org-directory (expand-file-name "org" user-emacs-directory))
-  (setq org-default-notes-file (expand-file-name "notes.org" org-directory))
+  (setq org-directory (locate-user-emacs-file "org"))
+  (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
   (setq org-agenda-files '("~/.emacs.d/org"))
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
