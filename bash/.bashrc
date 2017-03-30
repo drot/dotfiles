@@ -35,7 +35,7 @@ man() {
 
 # Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
-    eval $(dircolors -b "$HOME/.dircolors")
+    eval "$(dircolors -b "$HOME/.dircolors")"
 fi
 
 # Load aliases
@@ -56,7 +56,7 @@ fi
 GIT="\$(__git_ps1 ' %s')"
 
 # Show modified git state
-GIT_PS1_SHOWDIRTYSTATE=yes
+export GIT_PS1_SHOWDIRTYSTATE=yes
 
 # Prompt window title
 TITLE='\[\e]2;\u@\h:\W\a\]'
