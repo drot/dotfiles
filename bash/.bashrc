@@ -55,9 +55,6 @@ fi
 # Git prompt format
 GIT="\$(__git_ps1 ' %s')"
 
-# Show modified git state
-export GIT_PS1_SHOWDIRTYSTATE=yes
-
 # Prompt window title
 TITLE='\[\e]2;\u@\h:\W\a\]'
 
