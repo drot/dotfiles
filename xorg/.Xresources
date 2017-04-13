@@ -66,8 +66,8 @@ URxvt*color9: #ff6a6a
 URxvt*color2: #719611
 URxvt*color10: #b1d631
 ! Yellow Dark/Light
-URxvt*color3: #cc8800
-URxvt*color11: #ff9800
+URxvt*color3: #ff9800
+URxvt*color11: #87875f
 ! Blue Dark/Light
 URxvt*color4: #6688aa
 URxvt*color12: #90b0d1
@@ -124,8 +124,8 @@ XTerm*color9: #ff6a6a
 XTerm*color2: #719611
 XTerm*color10: #b1d631
 ! Yellow Dark/Light
-XTerm*color3: #cc8800
-XTerm*color11: #ff9800
+XTerm*color3: #ff9800
+XTerm*color11: #87875f
 ! Blue Dark/Light
 XTerm*color4: #6688aa
 XTerm*color12: #90b0d1
