@@ -1448,7 +1448,9 @@ This doesn't support the chanserv auth method"
   :bind (("C-c s S" . swiper-all)
          ("C-c s s" . swiper)
          :map isearch-mode-map
-         ("C-c S" . swiper-from-isearch)))
+         ("C-c S" . swiper-from-isearch))
+  :config
+  (setq swiper-include-line-number-in-search t))
 
 ;; Paredit
 (use-package paredit
