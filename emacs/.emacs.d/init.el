@@ -1433,6 +1433,7 @@ This doesn't support the chanserv auth method"
          ("C-c s i" . counsel-imenu)
          ("C-c s g" . counsel-grep)
          ("C-c n m" . counsel-mark-ring)
+         ("C-c h c" . counsel-command-history)
          ("C-c h l" . counsel-find-library)
          ("C-c i 8" . counsel-unicode-char))
   :commands counsel-mode
