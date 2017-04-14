@@ -1,2 +1,2 @@
 # Prompt
-set cmd:prompt "\[\e[1;33m\]\s \[\e[1;31m\]\S\? \u\@\h \[\e[1;34m\]\w \[\e[1;33m\]>\[\e[00m\] "
+set cmd:prompt "\[\e[1;32m\]\s \[\e[1;31m\]\S\? \u\@\h \[\e[1;34m\]\w \[\e[1;32m\]>\[\e[00m\] "
