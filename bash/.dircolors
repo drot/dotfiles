@@ -986,3 +986,5 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .vcard 38;5;7
 .vcf 38;5;7
 .xln 38;5;7
+# X resources
+.Xresources 38;5;180;04
