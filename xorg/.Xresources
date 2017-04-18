@@ -53,7 +53,7 @@ URxvt*cursorColor: #c5c8c6
 
 ! Stylized
 URxvt*colorIT: #b5bd68
-URxvt*colorBD: #f0c674
+URxvt*colorBD: #c5c8c6
 URxvt*colorUL: #81a2be
 
 ! Black Dark/Light
@@ -111,7 +111,7 @@ XTerm*cursorColor: #c5c8c6
 
 ! Stylized
 XTerm*colorIT: #b5bd68
-XTerm*colorBD: #f0c674
+XTerm*colorBD: #c5c8c6
 XTerm*colorUL: #81a2be
 
 ! Black Dark/Light
