@@ -47,39 +47,39 @@ URxvt*boldFont: xft:Hack:bold:size=11,xft:Noto Emoji:size=7
 URxvt*letterSpace: -2
 
 ! Colors
-URxvt*foreground: #c2c2b0
-URxvt*background: #222222
-URxvt*cursorColor: #c2c2b0
+URxvt*foreground: #c5c8c6
+URxvt*background: #1d1f21
+URxvt*cursorColor: #c5c8c6
 
 ! Stylized
-URxvt*colorIT: #719611
-URxvt*colorBD: #d3d3d3
-URxvt*colorUL: #528b8b
+URxvt*colorIT: #b5bd68
+URxvt*colorBD: #f0c674
+URxvt*colorUL: #81a2be
 
 ! Black Dark/Light
-URxvt*color0: #111111
-URxvt*color8: #181818
+URxvt*color0: #1d1f21
+URxvt*color8: #969896
 ! Red Dark/Light
-URxvt*color1: #aa4450
-URxvt*color9: #ff6a6a
+URxvt*color1: #cc6666
+URxvt*color9: #cc6666
 ! Green Dark/Light
-URxvt*color2: #719611
-URxvt*color10: #b1d631
+URxvt*color2: #b5bd68
+URxvt*color10: #b5bd68
 ! Yellow Dark/Light
-URxvt*color3: #ff9800
-URxvt*color11: #87875f
+URxvt*color3: #f0c674
+URxvt*color11: #f0c674
 ! Blue Dark/Light
-URxvt*color4: #6688aa
-URxvt*color12: #90b0d1
+URxvt*color4: #81a2be
+URxvt*color12: #81a2be
 ! Magenta Dark/Light
-URxvt*color5: #8f6f8f
-URxvt*color13: #8181a6
+URxvt*color5: #b294bb
+URxvt*color13: #b294bb
 ! Cyan Dark/Light
-URxvt*color6: #528b8b
-URxvt*color14: #87ceeb
+URxvt*color6: #8abeb7
+URxvt*color14: #8abeb7
 ! White Dark/Light
-URxvt*color7: #d3d3d3
-URxvt*color15: #c1cdc1
+URxvt*color7: #c5c8c6
+URxvt*color15: #ffffff
 
 ! XTerm
 ! General
@@ -105,39 +105,39 @@ XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 XTerm*faceName: Hack:size=11
 
 ! Colors
-XTerm*foreground: #c2c2b0
-XTerm*background: #222222
-XTerm*cursorColor: #c2c2b0
+XTerm*foreground: #c5c8c6
+XTerm*background: #1d1f21
+XTerm*cursorColor: #c5c8c6
 
 ! Stylized
-XTerm*colorIT: #719611
-XTerm*colorBD: #d3d3d3
-XTerm*colorUL: #528b8b
+XTerm*colorIT: #b5bd68
+XTerm*colorBD: #f0c674
+XTerm*colorUL: #81a2be
 
 ! Black Dark/Light
-XTerm*color0: #111111
-XTerm*color8: #181818
+XTerm*color0: #1d1f21
+XTerm*color8: #969896
 ! Red Dark/Light
-XTerm*color1: #aa4450
-XTerm*color9: #ff6a6a
+XTerm*color1: #cc6666
+XTerm*color9: #cc6666
 ! Green Dark/Light
-XTerm*color2: #719611
-XTerm*color10: #b1d631
+XTerm*color2: #b5bd68
+XTerm*color10: #b5bd68
 ! Yellow Dark/Light
-XTerm*color3: #ff9800
-XTerm*color11: #87875f
+XTerm*color3: #f0c674
+XTerm*color11: #f0c674
 ! Blue Dark/Light
-XTerm*color4: #6688aa
-XTerm*color12: #90b0d1
+XTerm*color4: #81a2be
+XTerm*color12: #81a2be
 ! Magenta Dark/Light
-XTerm*color5: #8f6f8f
-XTerm*color13: #8181a6
+XTerm*color5: #b294bb
+XTerm*color13: #b294bb
 ! Cyan Dark/Light
-XTerm*color6: #528b8b
-XTerm*color14: #87ceeb
+XTerm*color6: #8abeb7
+XTerm*color14: #8abeb7
 ! White Dark/Light
-XTerm*color7: #d3d3d3
-XTerm*color15: #c1cdc1
+XTerm*color7: #c5c8c6
+XTerm*color15: #ffffff
 
 ! XMessage
 Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
