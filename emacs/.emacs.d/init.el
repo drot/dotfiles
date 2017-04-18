@@ -66,8 +66,10 @@
     (funcall mode -1)))
 
 ;; Color theme
-(use-package zenburn-theme
-  :ensure t)
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
