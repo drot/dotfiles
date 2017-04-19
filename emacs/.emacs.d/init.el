@@ -1428,7 +1428,7 @@ This doesn't support the chanserv auth method"
 ;; Counsel
 (use-package counsel
   :ensure t
-  :bind (("C-c f g" . counsel-git)
+  :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
          ("C-c s G" . counsel-git-grep)
@@ -1618,7 +1618,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Revert buffer
-(bind-key "C-c f R" #'revert-buffer)
+(bind-key "C-c f g" #'revert-buffer)
 
 ;; Ruler mode
 (bind-key "C-c t R" #'ruler-mode)
