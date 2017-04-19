@@ -121,9 +121,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # volume keys
-bindsym $mod+period exec --no-startup-id ponymix toggle
-bindsym $mod+minus exec --no-startup-id ponymix decrease 5
-bindsym $mod+plus exec --no-startup-id ponymix increase 5
+bindsym $mod+plus exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym $mod+minus exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym $mod+period exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # screenshot keys
 bindsym Print exec --no-startup-id scrot -e 'mv $f /tmp/'
