@@ -4,39 +4,45 @@
 set font "Hack 11"
 
 # Display filename as title
-set window-title-basename true
+set window-title-basename "true"
 
 # More natural scrolling
 set scroll-full-overlap 0.1
 
 # Interface colors
-set statusbar-fg "#f0dfaf"
-set statusbar-bg "#1e2320"
+set default-bg "#1d1f21"
+set default-fg "#282a2e"
 
-set inputbar-fg "#dcdccc"
+set statusbar-fg "#b4b7b4"
+set statusbar-bg "#282a2e"
 
-set notification-bg "#3f3f3f"
-set notification-fg "#dfaf8f"
+set inputbar-bg "#1d1f21"
+set inputbar-fg "#c5c8c6"
 
-set notification-error-bg "#3f3f3f"
-set notification-error-fg "#cc9393"
+set notification-error-bg "#cc6666"
+set notification-error-fg "#1d1f21"
 
-set notification-warning-bg "#3f3f3f"
-set notification-warning-fg "#f0dfaf"
+set notification-warning-bg "#cc6666"
+set notification-warning-fg "#1d1f21"
 
-set highlight-color "#f0dfaf"
+set highlight-color "#f0c674"
+set highlight-active-color "#81a2be"
 
-set highlight-active-color "#705050"
+set index-active-bg "#81a2be"
 
-set completion-highlight-fg "#f0dfaf"
-set completion-highlight-bg "#1e2320"
+set completion-highlight-fg "#373b41"
+set completion-highlight-bg "#8abeb7"
 
-set completion-bg "#3f3f3f"
-set completion-fg "#dfaf8f"
+set completion-bg "#373b41"
+set completion-fg "#8abeb7"
+
+set notification-bg "#b5bd68"
+set notification-fg "#1d1f21"
 
 # Recolor colors
-set recolor-darkcolor "#dcdccc"
-set recolor-lightcolor "#3f3f3f"
+set recolor-lightcolor "#1d1f21"
+set recolor-darkcolor "#e0e0e0"
+set recolor-keephue "true"
 
 # Emulate Emacs keybindings
 map f navigate next
