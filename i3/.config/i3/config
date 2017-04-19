@@ -158,7 +158,7 @@ bindsym $mod+r mode "RESIZE"
 client.focused $base03 $base01 $base0D $base01
 client.focused_inactive $base03 $base02 $base03 $base01
 client.unfocused $base03 $base02 $base03 $base01
-client.urgent $base00 $base08 $base07 $base08
+client.urgent $base02 $base08 $base07 $base08
 
 # start i3bar to display a workspace bar
 bar {
