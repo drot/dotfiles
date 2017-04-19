@@ -155,10 +155,10 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # window colors - border background text indicator
-client.focused $base0D $base0D $base00 $base01
-client.focused_inactive $base02 $base02 $base03 $base01
-client.unfocused $base01 $base01 $base03 $base01
-client.urgent $base02 $base08 $base07 $base08
+client.focused $base03 $base01 $base0D $base01
+client.focused_inactive $base03 $base02 $base03 $base01
+client.unfocused $base03 $base02 $base03 $base01
+client.urgent $base00 $base08 $base07 $base08
 
 # start i3bar to display a workspace bar
 bar {
