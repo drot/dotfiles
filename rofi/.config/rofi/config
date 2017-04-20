@@ -29,7 +29,7 @@ rofi.color-window: #1d1f21,#ffffff
 ! "Always show number of lines" Set from: Default
 ! rofi.fixed-num-lines:                true
 ! "Terminal to use" Set from: Default
-! rofi.terminal:                       rofi-sensible-terminal
+rofi.terminal: st
 ! "Ssh client to use" Set from: Default
 ! rofi.ssh-client:                     ssh
 ! "Ssh command to execute" Set from: Default
@@ -45,7 +45,7 @@ rofi.color-window: #1d1f21,#ffffff
 ! "Disable history in run/ssh" Set from: Default
 ! rofi.disable-history:                false
 ! "Use levenshtein sorting" Set from: Default
-! rofi.levenshtein-sort:               false
+rofi.levenshtein-sort: true
 ! "Set case-sensitivity" Set from: Default
 ! rofi.case-sensitive:                 false
 ! "Cycle through the results list" Set from: Default
@@ -63,7 +63,7 @@ rofi.color-window: #1d1f21,#ffffff
 ! "Set the modi to combine in combi mode" Set from: Default
 ! rofi.combi-modi:                     window,run
 ! "Set the matching algorithm. (normal, regex, glob, fuzzy)" Set from: Default
-! rofi.matching:                       normal
+rofi.matching: fuzzy
 ! "Tokenize input string" Set from: Default
 ! rofi.tokenize:                       true
 ! "Monitor id to show on" Set from: Default

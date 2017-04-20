@@ -40,8 +40,8 @@ bindsym $mod+Return exec st
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu
-bindsym $mod+p exec dmenu-run
+# start rofi
+bindsym $mod+p exec rofi -show run
 
 # change focus
 bindsym $mod+$left focus left
