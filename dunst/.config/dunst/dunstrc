@@ -30,7 +30,7 @@
 
 [frame]
     width = 1
-    color = "#6f6f6f"
+    color = "#969896"
 
 [shortcuts]
     close = mod4+Delete
@@ -39,16 +39,16 @@
     context = mod4+Home
 
 [urgency_low]
-    background = "#1e2320"
-    foreground = "#dcdccc"
+    background = "#1d1f21"
+    foreground = "#ffffff"
     timeout = 10
 
 [urgency_normal]
-    background = "#1e2320"
-    foreground = "#f0dfaf"
+    background = "#1d1f21"
+    foreground = "#81a2be"
     timeout = 10
 
 [urgency_critical]
-    background = "#1e2320"
-    foreground = "#bc8383"
+    background = "#1d1f21"
+    foreground = "#cc6666"
     timeout = 10
