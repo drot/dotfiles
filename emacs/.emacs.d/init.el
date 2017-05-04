@@ -198,6 +198,10 @@
 (setq delete-old-versions t)
 (setq backup-by-copying t)
 
+;; Use Gnus as the default mail program
+(setq mail-user-agent 'gnus-user-agent)
+(setq read-mail-command 'gnus)
+
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
 (diminish 'visual-line-mode " ViL")
