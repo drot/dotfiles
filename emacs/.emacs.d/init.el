@@ -67,9 +67,9 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-night t))
+  (load-theme 'sanityinc-tomorrow-night t)
+  :load-path "~/color-theme-sanityinc-tomorrow")
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
@@ -259,14 +259,14 @@
 
 ;; Abbrev mode
 (use-package abbrev
+  :diminish (abbrev-mode . "AbR")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
   ;; Load abbrevs if they exist
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t)
-  :diminish (abbrev-mode . "AbR"))
+  (setq-default abbrev-mode t))
 
 ;; Electric pair mode
 (use-package elec-pair
@@ -307,11 +307,11 @@
 
 ;; Outline mode
 (use-package outline
+  :diminish (outline-minor-mode . "OuT")
   :bind ("C-c t o" . outline-minor-mode)
   :init
   (setq outline-minor-mode-prefix (kbd "C-c O"))
-  (add-hook 'text-mode-hook #'outline-minor-mode)
-  :diminish (outline-minor-mode . "OuT"))
+  (add-hook 'text-mode-hook #'outline-minor-mode))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -351,6 +351,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
+  :diminish (flyspell-mode . "FlS")
   :bind (("C-c x f" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c x c" . flyspell-auto-correct-word)
@@ -368,16 +369,15 @@
   (setq flyspell-issue-message-flag nil)
   (setq flyspell-issue-welcome-flag nil)
   (setq flyspell-consider-dash-as-word-delimiter-flag t)
-  (setq flyspell-duplicate-distance 12000)
-  :diminish (flyspell-mode . "FlS"))
+  (setq flyspell-duplicate-distance 12000))
 
 ;; Isearch configuration
 (use-package "isearch"
+  :diminish (isearch-mode . "IsR")
   :defer t
   :config
   (setq isearch-allow-scroll t)
-  (setq search-default-mode #'char-fold-to-regexp)
-  :diminish (isearch-mode . "IsR"))
+  (setq search-default-mode #'char-fold-to-regexp))
 
 ;; Ispell default program
 (use-package ispell
@@ -448,13 +448,13 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
+  :diminish (eldoc-mode . "ElD")
   :defer t
   :config
   ;; Make compatible with ParEdit
   (eldoc-add-command
    #'paredit-backward-delete
-   #'paredit-close-round)
-  :diminish (eldoc-mode . "ElD"))
+   #'paredit-close-round))
 
 ;; Python mode configuration
 (use-package python
@@ -607,9 +607,9 @@
 
 ;; Whitespace mode
 (use-package whitespace
+  :diminish (whitespace-mode . "WhS")
   :bind (("C-c x w" . whitespace-cleanup)
-         ("C-c t w" . whitespace-mode))
-  :diminish (whitespace-mode . "WhS"))
+         ("C-c t w" . whitespace-mode)))
 
 ;; Regexp builder
 (use-package re-builder
@@ -796,11 +796,11 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
+  :diminish (anaconda-mode . "AnC")
   :commands (anaconda-mode anaconda-eldoc-mode)
   :init
   (add-hook 'python-mode-hook #'anaconda-mode)
-  (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
-  :diminish (anaconda-mode . "AnC"))
+  (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
 ;; Bookmark+
 (use-package bookmark+
@@ -1069,14 +1069,9 @@
   (setq rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
-        '(("adams.freenode.net"
+        '(("irc.freenode.net"
            :port 6697
-           :encryption tls
-           :channels ("#archlinux" "#emacs" "#scheme"))
-          ("pine.forestnet.org"
-           :port 6697
-           :encryption tls
-           :channels ("#reloaded" "#rawhide" "#fo2"))))
+           :encryption tls)))
 
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
@@ -1131,22 +1126,22 @@ This doesn't support the chanserv auth method"
   :after rcirc
   :config
   (setq rcirc-styles-color-vector
-        ["#7F7F7F"
-         "#CC9393"
-         "#7F9F7F"
-         "#D0BF8F"
-         "#6CA0A3"
-         "#DC8CC3"
-         "#93E0E3"
-         "#DCDCCC"
-         "#9F9F9F"
-         "#DCA3A3"
-         "#BFEBBF"
-         "#F0DFAF"
-         "#8CD0D3"
-         "#DC8CC3"
-         "#93E0E3"
-         "#FFFFEF"]))
+        ["#cc6666"
+         "#b5bd68"
+         "#f0c674"
+         "#81a2be"
+         "#b294bb"
+         "#8abeb7"
+         "#c5c8c6"
+         "#969896"
+         "#cc6666"
+         "#de935f"
+         "#f0c674"
+         "#81a2be"
+         "#b294bb"
+         "#8abeb7"
+         "#ffffff"
+         "#8e908c"]))
 
 ;; rcirc colored nicknames
 (use-package rcirc-color
@@ -1244,6 +1239,7 @@ This doesn't support the chanserv auth method"
 ;; Anzu
 (use-package anzu
   :ensure t
+  :diminish (anzu-mode . "AnZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1255,8 +1251,7 @@ This doesn't support the chanserv auth method"
   :config
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
-  (setq anzu-replace-to-string-separator " => ")
-  :diminish (anzu-mode . "AnZ"))
+  (setq anzu-replace-to-string-separator " => "))
 
 ;; BBDB
 (use-package bbdb
@@ -1289,6 +1284,7 @@ This doesn't support the chanserv auth method"
 ;; Company mode
 (use-package company
   :ensure t
+  :diminish (company-mode . "CmP")
   :bind ("C-c i c" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1309,8 +1305,7 @@ This doesn't support the chanserv auth method"
                            company-capf
                            company-files
                            (company-dabbrev-code company-keywords)
-                           company-dabbrev))
-  :diminish (company-mode . "CmP"))
+                           company-dabbrev)))
 
 ;; Company Anaconda
 (use-package company-anaconda
@@ -1428,6 +1423,7 @@ This doesn't support the chanserv auth method"
 ;; Counsel
 (use-package counsel
   :ensure t
+  :diminish (counsel-mode . "CsL")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1442,8 +1438,7 @@ This doesn't support the chanserv auth method"
   :init
   (add-hook 'after-init-hook #'counsel-mode)
   :config
-  (setq counsel-find-file-at-point t)
-  :diminish (counsel-mode . "CsL"))
+  (setq counsel-find-file-at-point t))
 
 ;; Swiper
 (use-package swiper
@@ -1458,6 +1453,7 @@ This doesn't support the chanserv auth method"
 ;; Paredit
 (use-package paredit
   :ensure t
+  :diminish (paredit-mode . "PaR")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1486,9 +1482,7 @@ This doesn't support the chanserv auth method"
 
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil)))
-
-  :diminish (paredit-mode . "PaR"))
+            (lambda () (setq-local electric-pair-mode nil))))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -1503,40 +1497,41 @@ This doesn't support the chanserv auth method"
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
+  :diminish (rainbow-mode . "RbW")
   :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
-  (add-hook 'css-mode-hook #'rainbow-mode)
-  :diminish (rainbow-mode . "RbW"))
+  (add-hook 'css-mode-hook #'rainbow-mode))
 
 ;; Skewer
 (use-package skewer-mode
   :ensure t
+  :diminish (skewer-mode . "SkW")
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
-  (add-hook 'js2-mode-hook #'skewer-mode)
-  :diminish (skewer-mode . "SkW"))
+  (add-hook 'js2-mode-hook #'skewer-mode))
 
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
+  :diminish (skewer-css-mode . "SkW-CSS")
   :commands skewer-css-mode
   :init
-  (add-hook 'css-mode-hook #'skewer-css-mode)
-  :diminish (skewer-css-mode . "SkW-CSS"))
+  (add-hook 'css-mode-hook #'skewer-css-mode))
 
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
+  :diminish (skewer-html-mode . "SkW-HTML")
   :commands skewer-html-mode
   :init
-  (add-hook 'html-mode-hook #'skewer-html-mode)
-  :diminish (skewer-html-mode . "SkW-HTML"))
+  (add-hook 'html-mode-hook #'skewer-html-mode))
 
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
+  :diminish (undo-tree-mode . "UnT")
   :commands global-undo-tree-mode
   :init
   (add-hook 'after-init-hook #'global-undo-tree-mode)
@@ -1544,8 +1539,7 @@ This doesn't support the chanserv auth method"
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t)
-  :diminish (undo-tree-mode . "UnT"))
+  (setq undo-tree-visualizer-relative-timestamps t))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
@@ -1557,10 +1551,10 @@ This doesn't support the chanserv auth method"
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
+  :diminish (volatile-highlights-mode . "VlH")
   :commands volatile-highlights-mode
   :init
-  (add-hook 'after-init-hook #'volatile-highlights-mode)
-  :diminish (volatile-highlights-mode . "VlH"))
+  (add-hook 'after-init-hook #'volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
