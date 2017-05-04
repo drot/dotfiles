@@ -67,9 +67,9 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
+  :load-path "~/color-theme-sanityinc-tomorrow"
   :config
-  (load-theme 'sanityinc-tomorrow-night t)
-  :load-path "~/color-theme-sanityinc-tomorrow")
+  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
@@ -520,7 +520,6 @@
 (use-package message
   :defer t
   :config
-  (setq message-send-mail-function #'smtpmail-send-it)
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
   ;; Save the BBDB database on every exit action
@@ -1199,6 +1198,13 @@ This doesn't support the chanserv auth method"
   :defer t
   :config
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
+
+;; Async SMTPmail
+(use-package smtpmail-async
+  :ensure async
+  :after message
+  :config
+  (setq message-send-mail-function #'async-smtpmail-send-it))
 
 ;; Systemd mode
 (use-package systemd
