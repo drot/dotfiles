@@ -12,11 +12,7 @@ export EMAIL="drot@firemail.cc"
 export WINEPREFIX=$HOME/.config/wine/
 # export WINEARCH=win32
 
-# Set PATH so it includes user directories
-if [ -d "$HOME/bin" ] ; then
-    export PATH=$HOME/bin:$PATH
-fi
-
+# Set PATH so it includes the user directory
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH=$HOME/.local/bin:$PATH
 fi
