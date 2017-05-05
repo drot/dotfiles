@@ -575,11 +575,12 @@
   ;; Ignore uninteresting files
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
-;; Allow permission editing in Wdired
+;; Wdired movement and editable parts
 (use-package wdired
   :defer t
   :config
-  (setq wdired-allow-to-change-permissions t))
+  (setq wdired-allow-to-change-permissions t)
+  (setq wdired-use-dired-vertical-movement 'sometimes))
 
 ;; TRAMP configuration
 (use-package tramp
