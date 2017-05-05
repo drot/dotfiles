@@ -333,7 +333,7 @@
                    (format "... / %d"
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
-  ;; Configure package
+  ;; Unfold when search is active and apply custom overlay
   (setq hs-set-up-overlay #'drot|display-code-line-counts)
   (setq hs-isearch-open t))
 
@@ -368,7 +368,7 @@
   ;; Disable conflicting key bindings
   (unbind-key "C-c $" flyspell-mode-map)
   (unbind-key "C-M-i" flyspell-mode-map)
-  ;; Configure package
+  ;; Correct some annoying defaults
   (setq flyspell-use-meta-tab nil)
   (setq flyspell-issue-message-flag nil)
   (setq flyspell-issue-welcome-flag nil)
@@ -1172,7 +1172,7 @@ This doesn't support the chanserv auth method"
   :config
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
-  ;; Configure package
+  ;; Use all accessible features and SBCL by default
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy slime-company))
   (setq slime-protocol-version 'ignore)
