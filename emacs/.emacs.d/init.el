@@ -1182,7 +1182,6 @@ This doesn't support the chanserv auth method"
   :bind (:map slime-repl-mode-map
               ("C-c M-r" . slime-repl-previous-matching-input)
               ("C-c M-s" . slime-repl-next-matching-input))
-  :defer t
   :config
   ;; Disable conflicting key bindings
   (unbind-key "DEL" slime-repl-mode-map)
