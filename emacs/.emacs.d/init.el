@@ -1040,11 +1040,12 @@
   :ensure t
   :bind ("C-c f n" . neotree-toggle)
   :config
-  (setq neo-theme 'nerd)
+  (setq neo-theme 'ascii)
   (setq neo-create-file-auto-open t)
   (setq neo-smart-open t)
   (setq neo-show-hidden-files t)
-  (setq neo-auto-indent-point t))
+  (setq neo-auto-indent-point t)
+  (setq neo-vc-integration '(face char)))
 
 ;; nLinum mode
 (use-package nlinum
