@@ -857,9 +857,10 @@
 ;; Dired+
 (use-package dired+
   :ensure t
-  :init
+  :after dired-x
+  :config
   (setq diredp-hide-details-initially-flag nil)
-  :after dired-x)
+  (setq diredp-hide-details-propagate-flag nil))
 
 ;; Dired Async
 (use-package dired-async
