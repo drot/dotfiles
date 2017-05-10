@@ -1291,7 +1291,7 @@ This doesn't support the chanserv auth method"
                                     ("From" . "debbugs.gnu.org")
                                     ("From" . "mailer-daemon")
                                     ("From" . "arch-general")))
-  ;; Save the database after exiting Gnus
+  ;; Save the database after exiting summary view
   (add-hook 'gnus-summary-exit-hook #'bbdb-save))
 
 ;; Company mode
