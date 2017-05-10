@@ -1641,7 +1641,7 @@ This doesn't support the chanserv auth method"
 (bind-key "C-c a t" #'ansi-term)
 
 ;; Grep
-(bind-key "C-c s p" #'grep)
+(bind-key "C-c s f" #'grep)
 
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
