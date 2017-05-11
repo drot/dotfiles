@@ -1373,8 +1373,8 @@ This doesn't support the chanserv auth method"
   :ensure t
   :after flycheck
   :config
-  (flycheck-pos-tip-mode)
-  (setq flycheck-pos-tip-max-width 80))
+  (setq flycheck-pos-tip-max-width 80)
+  (flycheck-pos-tip-mode))
 
 ;; Form-feed
 (use-package form-feed
