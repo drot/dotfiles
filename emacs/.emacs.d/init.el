@@ -1633,6 +1633,7 @@ This doesn't support the chanserv auth method"
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
+(bind-key "C-c f E" #'ediff3)
 
 ;; Calculator
 (bind-key "C-c a c" #'calc)
