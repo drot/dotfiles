@@ -1644,6 +1644,9 @@ This doesn't support the chanserv auth method"
 ;; Grep
 (bind-key "C-c s f" #'grep)
 
+;; Grep results as a dired buffer
+(bind-key "C-c s d" #'find-grep-dired)
+
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
