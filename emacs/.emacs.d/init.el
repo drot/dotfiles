@@ -220,6 +220,7 @@
   (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
   (setq recentf-exclude '("/\\.git/.*\\'"
                           "/elpa/.*\\'"
+                          "/elfeed/.*\\'"
                           "/cache/.*\\'"
                           ".*\\.gz\\'"))
   (setq recentf-max-saved-items 100)
