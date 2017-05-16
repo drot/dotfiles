@@ -592,6 +592,13 @@
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
 
+;; Bookmarks
+(use-package bookmark
+  :defer t
+  :config
+  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
+  (setq bookmark-save-flag 1))
+
 ;; Find file at point
 (use-package ffap
   :bind ("C-c f f" . find-file-at-point)
@@ -642,13 +649,6 @@
          ("C-c n b" . browse-url-at-point))
   :config
   (setq browse-url-browser-function #'browse-url-chromium))
-
-;; Bookmarks
-(use-package bookmark
-  :bind ("C-c f b" . list-bookmarks)
-  :config
-  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
-  (setq bookmark-save-flag 1))
 
 ;; Speedbar configuration
 (use-package speedbar
