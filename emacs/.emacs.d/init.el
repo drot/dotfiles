@@ -1349,7 +1349,10 @@ This doesn't support the chanserv auth method"
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+  ;; Use margin display when in terminal
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode)))
 
 ;; Eyebrowse
 (use-package eyebrowse
