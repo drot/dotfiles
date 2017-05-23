@@ -1596,6 +1596,7 @@ This doesn't support the chanserv auth method."
   (setq which-key-sort-order #'which-key-prefix-then-key-order)
   (add-hook 'after-init-hook #'which-key-mode)
   :config
+  ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flycheck"
     "C-c &" "yasnippet"
@@ -1624,7 +1625,10 @@ This doesn't support the chanserv auth method."
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
-    "C-x w" "highlight"))
+    "C-x w" "highlight")
+  ;; Major mode replacements
+  (which-key-add-major-mode-key-based-replacements 'rcirc-mode
+  "C-c C-e" "rcirc-styles"))
 
 ;; YASnippet
 (use-package yasnippet
