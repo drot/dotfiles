@@ -377,7 +377,7 @@
   (setq flyspell-duplicate-distance 12000))
 
 ;; Isearch configuration
-(use-package "isearch"
+(use-package isearch
   :diminish (isearch-mode . "IsR")
   :defer t
   :config
@@ -1077,23 +1077,26 @@
   (setq rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
-        '(("irc.freenode.net"
+        '(("irc.rizon.net"
            :port 6697
-           :encryption tls)))
+           :encryption tls
+           )))
 
   (defadvice rcirc (before rcirc-read-from-authinfo activate)
     "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
-This doesn't support the chanserv auth method"
+This doesn't support the chanserv auth method."
     (unless arg
       (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet")
-                                     :max 2
                                      :require '(:port :user :secret)))
         (let ((secret (plist-get p :secret))
               (method (intern (plist-get p :port))))
           (add-to-list 'rcirc-authinfo
-                       (list (plist-get p :host) method (plist-get p :user)
+                       (list (plist-get p :host)
+                             method
+                             (plist-get p :user)
                              (if (functionp secret)
-                                 (funcall secret) secret)))))))
+                                 (funcall secret)
+                               secret)))))))
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
@@ -1110,6 +1113,9 @@ This doesn't support the chanserv auth method"
   ;; Disable company mode in rcirc buffers
   (add-hook 'rcirc-mode-hook
             (lambda () (company-mode -1)))
+
+  ;; Exclude text properties when yanking text in rcirc buffers
+  (add-to-list 'yank-excluded-properties 'rcirc-text)
 
   ;; Add some custom commands
   (defun-rcirc-command chanserv (arg)
@@ -1133,8 +1139,12 @@ This doesn't support the chanserv auth method"
   :ensure t
   :after rcirc
   :config
+  ;; Bind convenience functions
+  (define-key rcirc-mode-map (kbd "C-c C-e") rcirc-styles-map)
+  ;; Use custom colors
   (setq rcirc-styles-color-vector
-        ["#cc6666"
+        ["#373b41"
+         "#cc6666"
          "#b5bd68"
          "#f0c674"
          "#81a2be"
@@ -1143,19 +1153,19 @@ This doesn't support the chanserv auth method"
          "#c5c8c6"
          "#969896"
          "#cc6666"
-         "#de935f"
+         "#b5bd68"
          "#f0c674"
          "#81a2be"
          "#b294bb"
          "#8abeb7"
-         "#ffffff"
-         "#8e908c"]))
+         "#ffffff"]))
 
 ;; rcirc colored nicknames
 (use-package rcirc-color
   :ensure t
-  :after rcirc
+  :after rcirc-styles
   :config
+  ;; Inherit nick colors from rcirc-styles colors
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
 ;; rcirc notifications
