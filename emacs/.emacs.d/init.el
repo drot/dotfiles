@@ -1138,9 +1138,11 @@ This doesn't support the chanserv auth method."
 (use-package rcirc-styles
   :ensure t
   :after rcirc
+  :bind (:map rcirc-mode-map
+              ("C-c C-e p" . rcirc-styles-toggle-preview)
+              ("C-c C-e a" . rcirc-styles-insert-attribute)
+              ("C-c C-e c" . rcirc-styles-insert-color))
   :config
-  ;; Bind convenience functions
-  (define-key rcirc-mode-map (kbd "C-c C-e") rcirc-styles-map)
   ;; Use custom colors
   (setq rcirc-styles-color-vector
         ["#373b41"
