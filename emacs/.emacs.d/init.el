@@ -1219,7 +1219,7 @@ This doesn't support the chanserv auth method."
   :config
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
-;; Async SMTPmail
+;; Asynchronous SMTP mail sending
 (use-package smtpmail-async
   :ensure async
   :after message
