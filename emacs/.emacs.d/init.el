@@ -141,6 +141,14 @@
 (add-hook 'text-mode-hook #'auto-fill-mode)
 (diminish 'auto-fill-function " FiL")
 
+;; Visual Line mode configuration
+(setq visual-line-fringe-indicators '(nil vertical-bar))
+(diminish 'visual-line-mode " ViL")
+
+;; Use Gnus as the default mail program
+(setq mail-user-agent 'gnus-user-agent)
+(setq read-mail-command 'gnus)
+
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
@@ -210,14 +218,6 @@
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
 (setq backup-by-copying t)
-
-;; Use Gnus as the default mail program
-(setq mail-user-agent 'gnus-user-agent)
-(setq read-mail-command 'gnus)
-
-;; Visual Line mode configuration
-(setq visual-line-fringe-indicators '(nil vertical-bar))
-(diminish 'visual-line-mode " ViL")
 
 ;; Save minibuffer history
 (use-package savehist
