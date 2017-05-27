@@ -189,6 +189,19 @@
 (setq history-delete-duplicates t)
 (setq kill-do-not-save-duplicates t)
 
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :diminish (undo-tree-mode . "UnT")
+  :commands global-undo-tree-mode
+  :init
+  (add-hook 'after-init-hook #'global-undo-tree-mode)
+  :config
+  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-relative-timestamps t))
+
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "cache/.saves-"))
@@ -1557,19 +1570,6 @@ This doesn't support the chanserv auth method."
   :commands skewer-html-mode
   :init
   (add-hook 'html-mode-hook #'skewer-html-mode))
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :diminish (undo-tree-mode . "UnT")
-  :commands global-undo-tree-mode
-  :init
-  (add-hook 'after-init-hook #'global-undo-tree-mode)
-  :config
-  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
-  (setq undo-tree-auto-save-history t)
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
