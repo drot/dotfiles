@@ -1263,7 +1263,7 @@ This doesn't support the chanserv auth method."
 ;; Ace-link
 (use-package ace-link
   :ensure t
-  :bind (("C-c n a" . ace-link-addr))
+  :bind ("C-c n a" . ace-link-addr)
   :commands ace-link-setup-default
   :init
   (add-hook 'after-init-hook #'ace-link-setup-default))
@@ -1449,7 +1449,7 @@ This doesn't support the chanserv auth method."
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
-  :bind (("C-c n R" . ivy-resume))
+  :bind ("C-c n R" . ivy-resume)
   :commands ivy-mode
   :init
   (add-hook 'after-init-hook #'ivy-mode)
