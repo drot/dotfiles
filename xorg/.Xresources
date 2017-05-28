@@ -10,7 +10,7 @@ Xft.rgba: rgb
 Xcursor.theme: Adwaita
 
 ! Emacs
-Emacs.font: Hack-11.5
+Emacs.font: Input-12
 Emacs.background: #222222
 Emacs.menuBar: off
 Emacs.toolBar: off
