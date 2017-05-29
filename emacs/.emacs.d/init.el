@@ -1414,6 +1414,7 @@ This doesn't support the chanserv auth method."
                   lisp-mode-hook
                   scheme-mode-hook
                   compilation-mode-hook
+                  special-mode-hook
                   outline-mode-hook
                   help-mode-hook))
     (add-hook hook #'form-feed-mode)))
