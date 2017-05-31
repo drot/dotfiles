@@ -208,7 +208,11 @@
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t))
+  (setq undo-tree-visualizer-relative-timestamps t)
+
+  ;; Compress Undo Tree history files by default
+  (advice-add 'undo-tree-make-history-save-file-name :filter-return
+              (lambda (return-value) (concat return-value ".gz"))))
 
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
