@@ -1099,21 +1099,26 @@
            :encryption tls
            )))
 
-  (defadvice rcirc (before rcirc-read-from-authinfo activate)
-    "Allow rcirc to read authinfo from ~/.authinfo.gpg via the auth-source API.
-This doesn't support the chanserv auth method."
-    (unless arg
-      (dolist (p (auth-source-search :port '("nickserv" "bitlbee" "quakenet")
-                                     :require '(:port :user :secret)))
-        (let ((secret (plist-get p :secret))
-              (method (intern (plist-get p :port))))
-          (add-to-list 'rcirc-authinfo
-                       (list (plist-get p :host)
-                             method
-                             (plist-get p :user)
-                             (if (functionp secret)
-                                 (funcall secret)
-                               secret)))))))
+  (defun rcirc--cache-authinfo (arg)
+    "Read authinfo from `auth-sources' via the auth-source API."
+    (auth-source-search :port '("irc-nickserv")
+                        :require '(:user :secret)))
+
+  (defun rcirc--authenticate-using-authinfo (next-method &rest args)
+    "Allow rcirc to read authinfo from `auth-sources' via the auth-source API."
+    (let ((rcirc-authinfo rcirc-authinfo)
+          (credentials (auth-source-search :port '("irc-nickserv")
+                                           :require '(:user :secret))))
+      (dolist (p credentials)
+        (let ((host (plist-get p :host))
+              (user (plist-get p :user))
+              (secret (plist-get p :secret)))
+          (let ((real-secret (if (functionp secret) (funcall secret) secret)))
+            (add-to-list 'rcirc-authinfo (list host 'nickserv user real-secret)))))
+      (apply next-method args)))
+
+  (advice-add 'rcirc :before #'rcirc--cache-authinfo)
+  (advice-add 'rcirc-authenticate :around #'rcirc--authenticate-using-authinfo)
 
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 1024)
@@ -1634,7 +1639,7 @@ This doesn't support the chanserv auth method."
     "C-x w" "highlight")
   ;; Major mode replacements
   (which-key-add-major-mode-key-based-replacements 'rcirc-mode
-  "C-c C-e" "rcirc-styles"))
+    "C-c C-e" "rcirc-styles"))
 
 ;; YASnippet
 (use-package yasnippet
