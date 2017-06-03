@@ -683,7 +683,7 @@
 
 ;; Eshell configuration
 (use-package eshell
-  :bind ("C-c a S" . eshell)
+  :bind ("C-c a e" . eshell)
   :config
   (setq eshell-hist-ignoredups t))
 
@@ -702,7 +702,7 @@
 
 ;; IELM
 (use-package ielm
-  :bind ("C-c a e" . ielm)
+  :bind ("C-c a I" . ielm)
   :config
   (setq ielm-prompt "EL> "))
 
