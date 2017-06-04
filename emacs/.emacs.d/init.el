@@ -468,6 +468,12 @@
   :config
   (setq imenu-auto-rescan t))
 
+;; Ignore case sensitivity with Pcomplete
+(use-package pcomplete
+  :defer t
+  :config
+  (setq pcomplete-ignore-case t))
+
 ;; ElDoc mode configuration
 (use-package eldoc
   :diminish (eldoc-mode . "ElD")
@@ -685,13 +691,16 @@
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
-  (setq eshell-hist-ignoredups t))
+  (setq eshell-hist-ignoredups t)
+  (setq eshell-cmpl-ignore-case t))
 
 ;; Eshell smart display
 (use-package em-smart
   :after eshell
   :config
-  (eshell-smart-initialize))
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (eshell-smart-initialize))))
 
 ;; Shell mode configuration
 (use-package shell
