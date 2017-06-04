@@ -698,9 +698,7 @@
 (use-package em-smart
   :after eshell
   :config
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (eshell-smart-initialize))))
+  (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
 ;; Shell mode configuration
 (use-package shell
