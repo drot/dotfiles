@@ -1075,7 +1075,9 @@
 ;; nLinum mode
 (use-package nlinum
   :ensure t
-  :bind ("C-c t l" . nlinum-mode))
+  :bind ("C-c t l" . nlinum-mode)
+  :config
+  (setq nlinum-highlight-current-line t))
 
 ;; Paradox
 (use-package paradox
