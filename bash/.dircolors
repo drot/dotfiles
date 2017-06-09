@@ -44,6 +44,7 @@ TERM screen.rxvt
 TERM st-256color
 TERM terminator
 TERM tmux
+TERM tmux-256color
 TERM vt100
 TERM xterm
 TERM xterm-16color
