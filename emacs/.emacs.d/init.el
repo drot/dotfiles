@@ -67,7 +67,7 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
-  :load-path "~/color-theme-sanityinc-tomorrow"
+  :ensure t
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
