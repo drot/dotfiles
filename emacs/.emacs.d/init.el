@@ -1060,18 +1060,6 @@
   :ensure t
   :defer t)
 
-;; NeoTree
-(use-package neotree
-  :ensure t
-  :bind ("C-c f n" . neotree-toggle)
-  :config
-  (setq neo-theme 'ascii)
-  (setq neo-create-file-auto-open t)
-  (setq neo-smart-open t)
-  (setq neo-show-hidden-files t)
-  (setq neo-auto-indent-point t)
-  (setq neo-vc-integration '(face char)))
-
 ;; nLinum mode
 (use-package nlinum
   :ensure t
@@ -1261,6 +1249,19 @@
 (use-package systemd
   :ensure t
   :defer t)
+
+;; Treemacs
+(use-package treemacs
+  :ensure t
+  :bind ("C-c f t" . treemacs-toggle)
+  :config
+  (setq treemacs-width 25)
+  (setq treemacs-git-integration t)
+  (setq treemacs--persist-file (locate-user-emacs-file "cache/treemacs-persist"))
+  ;; Follow currently opened file
+  (treemacs-follow-mode)
+  ;; Keep notice of file changes
+  (treemacs-filewatch-mode))
 
 ;; Wgrep
 (use-package wgrep
