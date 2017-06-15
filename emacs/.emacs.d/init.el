@@ -993,17 +993,43 @@
   :ensure t
   :bind (("C-c w R" . hydra-window-resize/body)
          ("C-c x O" . hydra-outline/body)
-         ("C-c x M" . hydra-move-text/body))
+         ("C-c x M" . hydra-move-text/body)
+         ("C-c x m" . hydra-mark-text/body))
   :config
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock)
 
+  ;; Hydra for the move-text package
   (defhydra hydra-move-text (:columns 2)
     "Move Text"
     ("p" move-text-up "Move Text Up")
     ("n" move-text-down "Move Text Down")
     ("q" nil "Quit"))
 
+  ;; Hydra for various text marking operations
+  (defhydra hydra-mark-text (:exit t :columns 4)
+    "Mark Text"
+    ("e" mark-sexp "S-Expression")
+    ("f" er/mark-defun "Function")
+    ("w" er/mark-word "Word")
+    ("u" er/mark-url "URL")
+    ("E" er/mark-email "Email")
+    ("p" er/mark-text-paragraph "Paragraph")
+    ("s" er/mark-symbol "Symbol")
+    ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
+    ("q" er/mark-inside-quotes "Inside Quotes")
+    ("Q" er/mark-outside-quotes "Outside Quotes")
+    ("(" er/mark-inside-pairs "Inside Pairs")
+    ("[" er/mark-inside-pairs "Inside Pairs")
+    ("{" er/mark-inside-pairs "Inside Pairs")
+    (")" er/mark-outside-pairs "Outside Pairs")
+    ("]" er/mark-outside-pairs "Outside Pairs")
+    ("}" er/mark-outside-pairs "Outside Pairs")
+    ("c" er/mark-comment "Comment")
+    ("." er/expand-region "Expand Region" :exit nil)
+    ("," er/contract-region "Contract Region" :exit nil))
+
+  ;; Hydra for more convenient window resizing
   (defhydra hydra-window-resize (:columns 2)
     "Resize Windows"
     ("n" enlarge-window "Enlarge Window")
@@ -1012,19 +1038,20 @@
     ("b" shrink-window-horizontally "Shrink Window Horizontally")
     ("q" nil "Quit"))
 
+  ;; Hydra for Outline mode
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
-    ("z" hide-sublevels "Hide Sub-Levels")
-    ("t" hide-body "Hide Body")
-    ("o" hide-other "Hide Other")
-    ("c" hide-entry "Hide Entry")
-    ("l" hide-leaves "Hide Leaves")
-    ("d" hide-subtree "Hide Sub-Tree")
-    ("a" show-all "Show All")
-    ("e" show-entry "Show Entry")
-    ("i" show-children "Show Children")
-    ("k" show-branches "Show Branches")
-    ("s" show-subtree "Show Sub-Tree")
+    ("z" outline-hide-sublevels "Hide Sub-Levels")
+    ("t" outline-hide-body "Hide Body")
+    ("o" outline-hide-other "Hide Other")
+    ("c" outline-hide-entry "Hide Entry")
+    ("l" outline-hide-leaves "Hide Leaves")
+    ("d" outline-hide-subtree "Hide Sub-Tree")
+    ("a" outline-show-all "Show All")
+    ("e" outline-show-entry "Show Entry")
+    ("i" outline-show-children "Show Children")
+    ("k" outline-show-branches "Show Branches")
+    ("s" outline-show-subtree "Show Sub-Tree")
     ("u" outline-up-heading "Up Heading")
     ("n" outline-next-visible-heading "Next Visible Heading")
     ("p" outline-previous-visible-heading "Previous Visible Heading")
