@@ -1420,10 +1420,7 @@
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
-  ;; Use margin display when in terminal
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode)))
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
 ;; Eyebrowse
 (use-package eyebrowse
@@ -1554,7 +1551,7 @@
     (add-hook hook #'enable-paredit-mode))
   :config
   ;; Enable Paredit in other related modes
-  (defvar drot|paredit-minibuffer-setup-commands
+  (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
@@ -1564,7 +1561,7 @@
 
   (defun drot|paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot|paredit-minibuffer-setup-commands)
+    (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
