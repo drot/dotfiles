@@ -1412,6 +1412,7 @@
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
+  :bind ("C-c t D" . diff-hl-margin-mode)
   :commands global-diff-hl-mode
   :init
   (add-hook 'after-init-hook #'global-diff-hl-mode)
