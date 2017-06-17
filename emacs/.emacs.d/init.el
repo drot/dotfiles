@@ -1412,7 +1412,7 @@
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :bind ("C-c t D" . diff-hl-margin-mode)
+  :bind ("C-c t d" . diff-hl-margin-mode)
   :commands global-diff-hl-mode
   :init
   (add-hook 'after-init-hook #'global-diff-hl-mode)
@@ -1687,7 +1687,7 @@
 (bind-key "C-c h b" #'describe-personal-keybindings)
 
 ;; Toggle debug on error
-(bind-key "C-c t d" #'toggle-debug-on-error)
+(bind-key "C-c t D" #'toggle-debug-on-error)
 
 ;; Revert buffer
 (bind-key "C-c f g" #'revert-buffer)
