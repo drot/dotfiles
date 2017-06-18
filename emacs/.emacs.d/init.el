@@ -994,7 +994,8 @@
   :bind (("C-c w R" . hydra-window-resize/body)
          ("C-c x O" . hydra-outline/body)
          ("C-c x M" . hydra-move-text/body)
-         ("C-c x m" . hydra-mark-text/body))
+         ("C-c x m" . hydra-mark-text/body)
+         ("C-c m h" . hydra-multiple-cursors/body))
   :config
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock)
@@ -1028,6 +1029,29 @@
     ("c" er/mark-comment "Comment")
     ("." er/expand-region "Expand Region" :exit nil)
     ("," er/contract-region "Contract Region" :exit nil))
+
+  ;; Hydra for Multiple Cursors
+  (defhydra hydra-multiple-cursors (:columns 3)
+    "Multiple Cursors"
+    ("l" mc/edit-lines "Edit Lines In Region" :exit t)
+    ("b" mc/edit-beginnings-of-lines "Edit Beginnings Of Lines In Region" :Exit t)
+    ("e" mc/edit-ends-of-lines "Edit Ends Of Lines In Region" :exit t)
+    ("a" mc/mark-all-dwim "Mark All Dwim" :exit t)
+    ("S" mc/mark-all-symbols-like-this "Mark All Symbols Likes This" :exit t)
+    ("w" mc/mark-all-words-like-this "Mark All Words Like This" :exit t)
+    ("r" mc/mark-all-in-region "Mark All In Region" :exit t)
+    ("R" mc/mark-all-in-region-regexp "Mark All In Region (regexp)" :exit t)
+    ("d" mc/mark-all-like-this-in-defun "Mark All Like This In defun" :exit t)
+    ("s" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Like This In defun" :exit t)
+    ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Like This In defun" :exit t)
+    ("i" mc/insert-numbers "Insert Numbers" :exit t)
+    ("n" mc/mark-next-like-this "Mark Next Like This")
+    ("N" mc/skip-to-next-like-this "Skip To Next Like This")
+    ("M-n" mc/unmark-next-like-this "Unmark Next Like This")
+    ("p" mc/mark-previous-like-this "Mark Previous Like This")
+    ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
+    ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
+    ("q" nil "Quit" :exit t))
 
   ;; Hydra for more convenient window resizing
   (defhydra hydra-window-resize (:columns 2)
@@ -1479,7 +1503,7 @@
   :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
          ("C-c m a" . mc/vertical-align)
          ("C-c m e" . mc/mark-more-like-this-extended)
-         ("C-c m h" . mc/mark-all-like-this-dwim)
+         ("C-c m m" . mc/mark-all-like-this-dwim)
          ("C-c m l" . mc/edit-lines)
          ("C-c m n" . mc/mark-next-like-this)
          ("C-c m p" . mc/mark-previous-like-this)
@@ -1672,6 +1696,7 @@
     "C-x n" "narrow"
     "C-x r" "register"
     "C-x w" "highlight")
+
   ;; Major mode replacements
   (which-key-add-major-mode-key-based-replacements 'rcirc-mode
     "C-c C-e" "rcirc-styles"))
