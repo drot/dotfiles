@@ -21,11 +21,7 @@ export LESS_TERMCAP_so=$'\e[1;37;41m' # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\e[0m' # end underline
 export LESS_TERMCAP_us=$'\e[04;34m' # begin underline
 
-# Set PATH so it includes user directories
-if [ -d "$HOME/bin" ] ; then
-    export PATH=$HOME/bin:$PATH
-fi
-
+# Set PATH so it includes user directory
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH=$HOME/.local/bin:$PATH
 fi
