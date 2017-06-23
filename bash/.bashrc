@@ -22,6 +22,18 @@ shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
 
+# Man page colorization
+man() {
+    LESS_TERMCAP_mb=$'\e[01;31m' \
+    LESS_TERMCAP_md=$'\e[01;32m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[1;37;41m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[04;34m' \
+    command man "$@"
+}
+
 # Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
     eval "$(dircolors -b "$HOME/.dircolors")"
