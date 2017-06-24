@@ -1394,7 +1394,7 @@
 (use-package company
   :ensure t
   :diminish (company-mode . "CmP")
-  :bind ("C-c i c" . company-yasnippet)
+  :bind ("C-c i y" . company-yasnippet)
   :commands global-company-mode
   :init
   (add-hook 'after-init-hook #'global-company-mode)
