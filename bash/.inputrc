@@ -1,8 +1,5 @@
 $include /etc/inputrc
 
-# Case-insensitive completion
-set completion-ignore-case on
-
 # Colorize Tab completion
 $if Bash
 set colored-stats on
