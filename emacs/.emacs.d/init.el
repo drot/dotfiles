@@ -261,8 +261,8 @@
                   term-mode-hook
                   ediff-mode-hook
                   comint-mode-hook))
-    (add-hook hook (lambda ()
-                     (setq-local global-hl-line-mode nil)))))
+    (add-hook hook
+              (lambda () (setq-local global-hl-line-mode nil)))))
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -691,7 +691,12 @@
   :bind ("C-c a e" . eshell)
   :config
   (setq eshell-hist-ignoredups t)
-  (setq eshell-cmpl-ignore-case t))
+  (setq eshell-cmpl-ignore-case t)
+  ;; Use pcomplete alternate completion
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (define-key eshell-mode-map (kbd "<tab>")
+                (lambda () (interactive) (pcomplete-std-complete))))))
 
 ;; Eshell smart display
 (use-package em-smart
