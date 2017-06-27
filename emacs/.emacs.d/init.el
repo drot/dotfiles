@@ -690,7 +690,8 @@
 (use-package eshell
   :bind ("C-c a e" . eshell)
   :config
-  (setq eshell-hist-ignoredups t))
+  (setq eshell-hist-ignoredups t)
+  (setq eshell-cmpl-ignore-case t))
 
 ;; Eshell smart display
 (use-package em-smart
