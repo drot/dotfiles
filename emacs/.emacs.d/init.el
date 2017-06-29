@@ -694,9 +694,8 @@
   (setq eshell-cmpl-ignore-case t)
   ;; Use pcomplete alternate completion
   (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map (kbd "<tab>")
-                (lambda () (interactive) (pcomplete-std-complete))))))
+            (lambda () (define-key eshell-mode-map (kbd "<tab>")
+                    (lambda () (interactive) (pcomplete-std-complete))))))
 
 ;; Eshell smart display
 (use-package em-smart
@@ -932,7 +931,7 @@
 ;; Geiser
 (use-package geiser
   :ensure t
-  :defer t
+  :bind ("C-c t g" . run-geiser)
   :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
