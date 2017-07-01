@@ -682,6 +682,7 @@
   (setq speedbar-use-images nil)
   (setq speedbar-show-unknown-files t)
   (setq speedbar-directory-unshown-regexp "^$")
+  ;; Don't ignore the following extensions
   (speedbar-add-supported-extension
    '("PKGBUILD" ".lisp" ".lua" ".css" ".patch"
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
