@@ -670,7 +670,7 @@
   :bind (("C-c n u" . browse-url)
          ("C-c n b" . browse-url-at-point))
   :config
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Speedbar configuration
 (use-package speedbar

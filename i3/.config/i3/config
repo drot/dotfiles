@@ -1,5 +1,5 @@
 # font for window titles and the status bar
-font pango:Input Bold 12
+font pango:Hack Bold 11
 
 # general settings
 workspace_layout tabbed

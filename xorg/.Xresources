@@ -10,7 +10,7 @@ Xft.rgba: rgb
 Xcursor.theme: Adwaita
 
 ! Emacs
-Emacs.font: Input-12
+Emacs.font: Hack-11.5
 Emacs.background: #222222
 Emacs.menuBar: off
 Emacs.toolBar: off
@@ -34,7 +34,7 @@ URxvt*scrollTtyKeypress: true
 
 ! Mouseless URL selection
 URxvt*perl-ext-common: default,clipboard,url-select,keyboard-select
-URxvt*url-select.launcher: conkeror
+URxvt*url-select.launcher: chromium
 URxvt*url-select.underline: true
 URxvt*matcher.button: 1
 URxvt*keysym.M-u: perl:url-select:select_next
@@ -102,7 +102,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Hack:size=11
+XTerm*faceName: Hack:size=11.5
 
 ! Colors
 XTerm*foreground: #c5c8c6
