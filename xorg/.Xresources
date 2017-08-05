@@ -10,7 +10,7 @@ Xft.rgba: rgb
 Xcursor.theme: Adwaita
 
 ! Emacs
-Emacs.font: Hack-11.5
+Emacs.font: Input-12
 Emacs.background: #222222
 Emacs.menuBar: off
 Emacs.toolBar: off
@@ -42,8 +42,8 @@ URxvt*keysym.M-Escape: perl:keyboard-select:activate
 URxvt*keysym.M-s: perl:keyboard-select:search
 
 ! Font
-URxvt*font: xft:Hack:size=11,xft:Noto Emoji:size=7
-URxvt*boldFont: xft:Hack:bold:size=11,xft:Noto Emoji:size=7
+URxvt*font: xft:Input:size=12,xft:Noto Emoji:size=7
+URxvt*boldFont: xft:Input:bold:size=12,xft:Noto Emoji:size=7
 URxvt*letterSpace: -2
 
 ! Colors
@@ -102,7 +102,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Hack:size=11.5
+XTerm*faceName: Input:size=12
 
 ! Colors
 XTerm*foreground: #c5c8c6
