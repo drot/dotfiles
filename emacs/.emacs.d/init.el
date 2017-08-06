@@ -253,7 +253,7 @@
   (global-hl-line-mode)
   ;; Disable `hl-line-mode' in special buffers
   (dolist (hook '(undo-tree-visualizer-mode-hook
-                  rcirc-mode-hook
+                  lui-mode-hook
                   eshell-mode-hook
                   term-mode-hook
                   ediff-mode-hook
@@ -693,7 +693,7 @@
   ;; Use pcomplete alternate completion
   (add-hook 'eshell-mode-hook
             (lambda () (define-key eshell-mode-map (kbd "<tab>")
-                    (lambda () (interactive) (pcomplete-std-complete))))))
+                         (lambda () (interactive) (pcomplete-std-complete))))))
 
 ;; Eshell smart display
 (use-package em-smart
@@ -833,17 +833,6 @@
   (add-hook 'python-mode-hook #'anaconda-mode)
   (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
-;; Bookmark+
-(use-package bookmark+
-  :ensure t
-  :bind ("C-x j j" . bookmark-jump)
-  :after bookmark
-  :config
-  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
-  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el"))
-  (setq bmkp-auto-light-when-set 'all-in-buffer)
-  (setq bmkp-auto-light-when-jump 'all-in-buffer))
-
 ;; Avy
 (use-package avy
   :ensure t
@@ -858,6 +847,119 @@
   (setq avy-background t)
   (setq avy-highlight-first t)
   (avy-setup-default))
+
+;; Bookmark+
+(use-package bookmark+
+  :ensure t
+  :bind ("C-x j j" . bookmark-jump)
+  :after bookmark
+  :config
+  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
+  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el"))
+  (setq bmkp-auto-light-when-set 'all-in-buffer)
+  (setq bmkp-auto-light-when-jump 'all-in-buffer))
+
+;; Circe IRC client
+(use-package circe
+  :ensure t
+  :bind ("C-c a i" . circe)
+  :config
+  ;; Default user info
+  (setq circe-default-nick "drot")
+  (setq circe-default-user "drot")
+  (setq circe-default-realname "drot")
+
+  ;; Securely fetch passwords
+  (defun drot|circe-fetch-password (&rest params)
+    "Fetch password from an encrypted source."
+    (let ((match (car (apply 'auth-source-search params))))
+      (if match
+          (let ((secret (plist-get match :secret)))
+            (if (functionp secret)
+                (funcall secret)
+              secret))
+        (error "Password not found for %S" params))))
+
+  (defun drot|circe-nickserv-password (server)
+    "Fetch password for the specified server."
+    (drot|circe-fetch-password :user "drot" :host "irc.rizon.net"))
+
+  ;; Default networks to connect to
+  (setq circe-network-options
+        '(("Rizon"
+           :host "irc.rizon.net"
+           :port 6697
+           :tls t
+           :sasl-username "drot"
+           :sasl-password drot|circe-nickserv-password)))
+
+  ;; Cycle nick completion
+  (setq circe-use-cycle-completion t)
+
+  ;; Hide irrelevant messages from lurkers
+  (setq circe-reduce-lurker-spam t)
+
+  ;; Default format for various text
+  (setq circe-format-self-say "<{nick}> {body}")
+  (setq circe-format-server-topic "*** Topic Change by {userhost}: {topic-diff}")
+  (setq circe-server-buffer-name "{network}")
+  (setq circe-prompt-string (propertize ">>> " 'face 'circe-prompt-face))
+
+  ;; Adjust time stamp position and disable filling
+  (setq lui-time-stamp-position 'right-margin)
+  (setq lui-fill-type nil)
+
+  (defun drot|lui-setup ()
+    "Customized setup for Circe Lui."
+    (setf (cdr (assoc 'continuation fringe-indicator-alist)) nil)
+    (setq fringes-outside-margins t)
+    (setq right-margin-width 7)
+    (setq word-wrap t)
+    (setq wrap-prefix "    "))
+
+  (add-hook 'lui-mode-hook #'drot|lui-setup)
+
+  ;; Enable spell checking
+  (setq lui-flyspell-p t)
+  (setq lui-flyspell-alist '((".*" "american")))
+
+  ;; Track channel activity
+  (enable-lui-track-bar)
+
+  ;; Display lag information
+  (circe-lagmon-mode)
+
+  ;; Prevent accidental paste of long messages
+  (enable-lui-autopaste))
+
+;; Circe CHANOP commands
+(use-package circe-chanop
+  :ensure circe
+  :after circe)
+
+;; Circe nick colorization
+(use-package circe-color-nicks
+  :ensure circe
+  :after circe
+  :config
+  (setq circe-nick-color-pool
+        '("#373b41"
+          "#cc6666"
+          "#b5bd68"
+          "#f0c674"
+          "#81a2be"
+          "#b294bb"
+          "#8abeb7"
+          "#c5c8c6"
+          "#969896"
+          "#cc6666"
+          "#b5bd68"
+          "#f0c674"
+          "#81a2be"
+          "#b294bb"
+          "#8abeb7"
+          "#ffffff"))
+  (circe-color-nicks))
 
 ;; Dash
 (use-package dash
@@ -1133,120 +1235,6 @@
 (use-package pkgbuild-mode
   :ensure t
   :defer t)
-
-;; rcirc mode
-(use-package rcirc
-  :bind ("C-c a i" . irc)
-  :config
-  ;; User defaults
-  (setq rcirc-default-user-name "drot")
-  (setq rcirc-reconnect-delay 10)
-  ;; Connect to the specified servers and channels
-  (setq rcirc-server-alist
-        '(("irc.rizon.net"
-           :port 6697
-           :encryption tls
-           )))
-
-  (defun rcirc--cache-authinfo (arg)
-    "Read authinfo from `auth-sources' via the auth-source API."
-    (auth-source-search :port '("irc-nickserv")
-                        :require '(:user :secret)))
-
-  (defun rcirc--authenticate-using-authinfo (next-method &rest args)
-    "Allow rcirc to read authinfo from `auth-sources' via the auth-source API."
-    (let ((rcirc-authinfo rcirc-authinfo)
-          (credentials (auth-source-search :port '("irc-nickserv")
-                                           :require '(:user :secret))))
-      (dolist (p credentials)
-        (let ((host (plist-get p :host))
-              (user (plist-get p :user))
-              (secret (plist-get p :secret)))
-          (let ((real-secret (if (functionp secret) (funcall secret) secret)))
-            (add-to-list 'rcirc-authinfo (list host 'nickserv user real-secret)))))
-      (apply next-method args)))
-
-  (advice-add 'rcirc :before #'rcirc--cache-authinfo)
-  (advice-add 'rcirc-authenticate :around #'rcirc--authenticate-using-authinfo)
-
-  ;; Truncate buffer output
-  (setq rcirc-buffer-maximum-lines 1024)
-  ;; Set fill column value to frame width
-  (setq rcirc-fill-column 'frame-width)
-  ;; Enable logging
-  (setq rcirc-log-flag t)
-
-  ;; Enable additional modes
-  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
-  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
-  (add-hook 'rcirc-mode-hook #'flyspell-mode)
-
-  ;; Disable company mode in rcirc buffers
-  (add-hook 'rcirc-mode-hook
-            (lambda () (company-mode -1)))
-
-  ;; Exclude text properties when yanking text in rcirc buffers
-  (add-to-list 'yank-excluded-properties 'rcirc-text)
-
-  ;; Add some custom commands
-  (defun-rcirc-command chanserv (arg)
-    "Send a private message to the ChanServ service."
-    (rcirc-send-string process (concat "chanserv " arg)))
-
-  (defun-rcirc-command mystery (arg)
-    "Send a private message to the Mystery service."
-    (rcirc-send-string process (concat "mystery " arg)))
-
-  (defun-rcirc-command memoserv (arg)
-    "Send a private message to the MemoServ service."
-    (rcirc-send-string process (concat "memoserv " arg)))
-
-  (defun-rcirc-command nickserv (arg)
-    "Send a private message to the NickServ service."
-    (rcirc-send-string process (concat "nickserv " arg))))
-
-;; rcirc color codes support
-(use-package rcirc-styles
-  :ensure t
-  :after rcirc
-  :bind (:map rcirc-mode-map
-              ("C-c C-e p" . rcirc-styles-toggle-preview)
-              ("C-c C-e a" . rcirc-styles-insert-attribute)
-              ("C-c C-e c" . rcirc-styles-insert-color))
-  :config
-  ;; Use custom colors
-  (setq rcirc-styles-color-vector
-        ["#373b41"
-         "#cc6666"
-         "#b5bd68"
-         "#f0c674"
-         "#81a2be"
-         "#b294bb"
-         "#8abeb7"
-         "#c5c8c6"
-         "#969896"
-         "#cc6666"
-         "#b5bd68"
-         "#f0c674"
-         "#81a2be"
-         "#b294bb"
-         "#8abeb7"
-         "#ffffff"]))
-
-;; rcirc colored nicknames
-(use-package rcirc-color
-  :ensure t
-  :after rcirc-styles
-  :config
-  ;; Inherit nick colors from rcirc-styles colors
-  (setq rcirc-colors (append rcirc-styles-color-vector nil)))
-
-;; rcirc notifications
-(use-package rcirc-notify
-  :ensure t
-  :after rcirc
-  :config
-  (rcirc-notify-add-hooks))
 
 ;; SLIME
 (use-package slime
@@ -1696,11 +1684,7 @@
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
-    "C-x w" "highlight")
-
-  ;; Major mode replacements
-  (which-key-add-major-mode-key-based-replacements 'rcirc-mode
-    "C-c C-e" "rcirc-styles"))
+    "C-x w" "highlight"))
 
 ;; YASnippet
 (use-package yasnippet
