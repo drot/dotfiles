@@ -928,12 +928,6 @@
     (erc-tls :server "irc.rizon.net" :port 6697
              :nick "drot"))
 
-  ;; Enable notifications
-  (add-to-list 'erc-modules 'notifications)
-
-  ;; Enable spell-checking
-  (add-to-list 'erc-modules 'spelling)
-
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
   (setq erc-autojoin-timing 'ident)
@@ -979,6 +973,12 @@
     (company-mode 0))
 
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
+
+  ;; Enable notifications
+  (add-to-list 'erc-modules 'notifications)
+
+  ;; Enable spell-checking
+  (add-to-list 'erc-modules 'spelling)
 
   ;; Truncate buffer
   (setq erc-truncate-buffer-on-save t)
