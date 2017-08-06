@@ -907,6 +907,7 @@
   (setq lui-time-stamp-position 'right-margin)
   (setq lui-fill-type nil)
 
+  ;; Lui custom functions
   (defun drot|lui-setup ()
     "Customized setup for Circe Lui."
     (setf (cdr (assoc 'continuation fringe-indicator-alist)) nil)
@@ -921,6 +922,7 @@
     "Face for greentext detected in Circe.")
 
   (defun drot|circe-color-greentext ()
+    "Colorize greentext lines in Circe."
     (when (memq major-mode '(circe-channel-mode circe-query-mode))
       (let ((body-beg (text-property-any (point-min) (point-max)
                                          'lui-format-argument 'body))
