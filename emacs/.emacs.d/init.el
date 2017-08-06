@@ -936,8 +936,7 @@
   (add-hook 'lui-pre-output-hook #'drot|circe-color-greentext)
 
   ;; Enable spell checking
-  (setq lui-flyspell-p t)
-  (setq lui-flyspell-alist '((".*" "american")))
+  (add-hook 'circe-channel-mode-hook #'flyspell-mode)
 
   ;; Track channel activity
   (enable-lui-track-bar)
