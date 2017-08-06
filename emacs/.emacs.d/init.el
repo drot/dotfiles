@@ -155,9 +155,6 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
-;; Use Emacs own tooltip implementation
-(setq x-gtk-use-system-tooltips nil)
-
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
 
