@@ -253,7 +253,7 @@
   (global-hl-line-mode)
   ;; Disable `hl-line-mode' in special buffers
   (dolist (hook '(undo-tree-visualizer-mode-hook
-                  lui-mode-hook
+                  erc-mode-hook
                   eshell-mode-hook
                   term-mode-hook
                   ediff-mode-hook
@@ -859,123 +859,6 @@
   (setq bmkp-auto-light-when-set 'all-in-buffer)
   (setq bmkp-auto-light-when-jump 'all-in-buffer))
 
-;; Circe IRC client
-(use-package circe
-  :ensure t
-  :bind ("C-c a i" . circe)
-  :config
-  ;; Default user info
-  (setq circe-default-realname "drot")
-
-  ;; Securely fetch passwords
-  (defun drot|circe-fetch-password (&rest params)
-    "Fetch password from an encrypted source."
-    (let ((match (car (apply 'auth-source-search params))))
-      (if match
-          (let ((secret (plist-get match :secret)))
-            (if (functionp secret)
-                (funcall secret)
-              secret))
-        (error "Password not found for %S" params))))
-
-  (defun drot|circe-nickserv-password (server)
-    "Fetch password for the specified server."
-    (drot|circe-fetch-password :user "drot" :host "irc.rizon.net"))
-
-  ;; Default networks to connect to
-  (setq circe-network-options
-        '(("Rizon"
-           :host "irc.rizon.net"
-           :port 6697
-           :tls t
-           :sasl-username "drot"
-           :sasl-password drot|circe-nickserv-password)))
-
-  ;; Cycle nick completion
-  (setq circe-use-cycle-completion t)
-
-  ;; Hide irrelevant messages from lurkers
-  (setq circe-reduce-lurker-spam t)
-
-  ;; Default format for various text
-  (setq circe-format-self-say "<{nick}> {body}")
-  (setq circe-format-server-topic "*** Topic Change by {userhost}: {topic-diff}")
-  (setq circe-server-buffer-name "{network}")
-  (setq circe-prompt-string (propertize ">>> " 'face 'circe-prompt-face))
-
-  ;; Adjust time stamp position and disable filling
-  (setq lui-time-stamp-position 'right-margin)
-  (setq lui-fill-type nil)
-
-  ;; Lui custom functions
-  (defun drot|lui-setup ()
-    "Customized setup for Circe Lui."
-    (setf (cdr (assoc 'continuation fringe-indicator-alist)) nil)
-    (setq fringes-outside-margins t)
-    (setq right-margin-width 7)
-    (setq word-wrap t)
-    (setq wrap-prefix "    "))
-
-  (add-hook 'lui-mode-hook #'drot|lui-setup)
-
-  (defface drot|circe-greentext-face '((t (:foreground "spring green")))
-    "Face for greentext detected in Circe.")
-
-  (defun drot|circe-color-greentext ()
-    "Colorize greentext lines in Circe."
-    (when (memq major-mode '(circe-channel-mode circe-query-mode))
-      (let ((body-beg (text-property-any (point-min) (point-max)
-                                         'lui-format-argument 'body))
-            (greentext-regex "\\([^[:space:]]+?: \\)?\\(>[[:word:][:space:]]\\)"))
-        (when body-beg
-          (goto-char body-beg)
-          (when (looking-at greentext-regex)
-            (add-text-properties (match-beginning 2) (point-max)
-                                 '(face drot|circe-greentext-face)))))))
-
-  (add-hook 'lui-pre-output-hook #'drot|circe-color-greentext)
-
-  ;; Enable spell checking
-  (add-hook 'circe-channel-mode-hook #'flyspell-mode)
-
-  ;; Track channel activity
-  (enable-lui-track-bar)
-
-  ;; Display lag information
-  (circe-lagmon-mode)
-
-  ;; Prevent accidental paste of long messages
-  (enable-lui-autopaste))
-
-;; Circe CHANOP commands
-(use-package circe-chanop
-  :ensure circe
-  :after circe)
-
-;; Circe nick colorization
-(use-package circe-color-nicks
-  :ensure circe
-  :after circe
-  :config
-  (setq circe-nick-color-pool
-        '("#373b41"
-          "#cc6666"
-          "#b5bd68"
-          "#f0c674"
-          "#81a2be"
-          "#b294bb"
-          "#8abeb7"
-          "#c5c8c6"
-          "#969896"
-          "#cc6666"
-          "#b5bd68"
-          "#f0c674"
-          "#81a2be"
-          "#b294bb"
-          "#8abeb7"
-          "#ffffff"))
-  (enable-circe-color-nicks))
-
 ;; Dash
 (use-package dash
   :ensure t
@@ -1032,6 +915,74 @@
   (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
   (setq elfeed-search-filter "@1-week-ago +unread"))
+
+;; ERC configuration
+(use-package erc
+  :ensure erc-hl-nicks
+  :bind ("C-c a i" . drot|erc-init)
+  :commands drot|erc-init
+  :config
+  (defun drot|erc-init ()
+    "Connect to IRC."
+    (interactive)
+    (erc-tls :server "irc.rizon.net" :port 6697
+             :nick "drot"))
+
+  ;; Enable notifications
+  (add-to-list 'erc-modules 'notifications)
+
+  ;; Enable spell-checking
+  (add-to-list 'erc-modules 'spelling)
+
+  ;; Connect to specified servers
+  (setq erc-prompt-for-password nil)
+  (setq erc-autojoin-timing 'ident)
+  (setq erc-server-reconnect-timeout 30)
+  (setq erc-join-buffer 'bury)
+
+  ;; Configure text filling
+  (setq erc-fill-function 'erc-fill-static)
+  (setq erc-fill-column 155)
+  (setq erc-fill-static-center 15)
+
+  ;; Timestap formatting
+  (setq erc-insert-timestamp-function 'erc-insert-timestamp-left)
+  (setq erc-timestamp-only-if-changed-flag nil)
+  (setq erc-timestamp-format "[%H:%M] ")
+
+  ;; Text formatting
+  (setq erc-header-line-format "%t: %o")
+  (setq erc-interpret-mirc-color t)
+  (setq erc-button-buttonize-nicks nil)
+  (setq erc-format-nick-function 'erc-format-@nick)
+  (setq erc-nick-uniquifier "_")
+  (setq erc-prompt
+        (lambda () (concat (buffer-name) ">")))
+
+  ;; Channel tracking options
+  (setq erc-track-exclude-server-buffer t)
+  (setq erc-track-showcount t)
+  (setq erc-track-switch-direction 'importance)
+  (setq erc-track-visibility 'selected-visible)
+
+  ;; Hide lurker activity
+  (setq erc-lurker-threshold-time 3600)
+  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+
+  ;; Prevent accidental paste
+  (setq erc-accidental-paste-threshold-seconds 0.5)
+
+  ;; Disable some conflicting modes
+  (defun drot|erc-mode-hook ()
+    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000)
+    (company-mode 0))
+
+  (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
+
+  ;; Truncate buffer
+  (setq erc-truncate-buffer-on-save t)
+  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer))
 
 ;; Expand region
 (use-package expand-region
