@@ -935,12 +935,12 @@
   (setq erc-join-buffer 'bury)
 
   ;; Configure text filling
-  (setq erc-fill-function 'erc-fill-static)
+  (setq erc-fill-function #'erc-fill-static)
   (setq erc-fill-column 155)
   (setq erc-fill-static-center 15)
 
   ;; Timestap formatting
-  (setq erc-insert-timestamp-function 'erc-insert-timestamp-left)
+  (setq erc-insert-timestamp-function #'erc-insert-timestamp-left)
   (setq erc-timestamp-only-if-changed-flag nil)
   (setq erc-timestamp-format "[%H:%M] ")
 
@@ -948,7 +948,7 @@
   (setq erc-header-line-format "%t: %o")
   (setq erc-interpret-mirc-color t)
   (setq erc-button-buttonize-nicks nil)
-  (setq erc-format-nick-function 'erc-format-@nick)
+  (setq erc-format-nick-function #'erc-format-@nick)
   (setq erc-nick-uniquifier "_")
   (setq erc-prompt
         (lambda () (concat (buffer-name) ">")))
