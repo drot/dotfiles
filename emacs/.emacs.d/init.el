@@ -67,7 +67,7 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
+  :load-path "~/color-theme-sanityinc-tomorrow"
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
@@ -865,8 +865,6 @@
   :bind ("C-c a i" . circe)
   :config
   ;; Default user info
-  (setq circe-default-nick "drot")
-  (setq circe-default-user "drot")
   (setq circe-default-realname "drot")
 
   ;; Securely fetch passwords
@@ -919,6 +917,22 @@
 
   (add-hook 'lui-mode-hook #'drot|lui-setup)
 
+  (defface drot|circe-greentext-face '((t (:foreground "spring green")))
+    "Face for greentext detected in Circe.")
+
+  (defun drot|circe-color-greentext ()
+    (when (memq major-mode '(circe-channel-mode circe-query-mode))
+      (let ((body-beg (text-property-any (point-min) (point-max)
+                                         'lui-format-argument 'body))
+            (greentext-regex "\\([^[:space:]]+?: \\)?\\(>[[:word:][:space:]]\\)"))
+        (when body-beg
+          (goto-char body-beg)
+          (when (looking-at greentext-regex)
+            (add-text-properties (match-beginning 2) (point-max)
+                                 '(face drot|circe-greentext-face)))))))
+
+  (add-hook 'lui-pre-output-hook #'drot|circe-color-greentext)
+
   ;; Enable spell checking
   (setq lui-flyspell-p t)
   (setq lui-flyspell-alist '((".*" "american")))
@@ -959,7 +973,7 @@
           "#b294bb"
           "#8abeb7"
           "#ffffff"))
-  (circe-color-nicks))
+  (enable-circe-color-nicks))
 
 ;; Dash
 (use-package dash
