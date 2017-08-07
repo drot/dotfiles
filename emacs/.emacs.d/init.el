@@ -922,6 +922,7 @@
   :bind ("C-c a i" . drot|erc-init)
   :commands drot|erc-init
   :config
+  ;; Use custom function to launch ERC
   (defun drot|erc-init ()
     "Connect to IRC."
     (interactive)
@@ -932,11 +933,10 @@
   (setq erc-prompt-for-password nil)
   (setq erc-autojoin-timing 'ident)
   (setq erc-server-reconnect-timeout 30)
-  (setq erc-join-buffer 'bury)
 
   ;; Configure text filling
   (setq erc-fill-function #'erc-fill-static)
-  (setq erc-fill-column 155)
+  (setq erc-fill-column 130)
   (setq erc-fill-static-center 15)
 
   ;; Timestap formatting
@@ -963,6 +963,14 @@
   (setq erc-lurker-threshold-time 3600)
   (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
 
+  ;; Open query buffers in the current window
+  (setq erc-query-display 'buffer)
+
+  ;; Kill all buffers upon ERC quit
+  (setq erc-kill-buffer-on-part t)
+  (setq erc-kill-queries-on-quit t)  
+  (setq erc-kill-server-buffer-on-quit t)
+
   ;; Prevent accidental paste
   (setq erc-accidental-paste-threshold-seconds 0.5)
 
@@ -975,10 +983,10 @@
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
 
   ;; Enable notifications
-  (add-to-list 'erc-modules 'notifications)
+  (erc-notifications-mode)
 
   ;; Enable spell-checking
-  (add-to-list 'erc-modules 'spelling)
+  (erc-spelling-mode)
 
   ;; Truncate buffer
   (setq erc-truncate-buffer-on-save t)
