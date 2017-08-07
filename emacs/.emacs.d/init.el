@@ -340,7 +340,7 @@
                   python-mode-hook))
     (add-hook hook #'hs-minor-mode))
   :config
-  (defun drot|display-code-line-counts (ov)
+  (defun drot|hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
@@ -348,7 +348,7 @@
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'drot|display-code-line-counts)
+  (setq hs-set-up-overlay #'drot|hs-display-code-line-counts)
   (setq hs-isearch-open t))
 
 ;; Bug Reference mode
@@ -534,12 +534,12 @@
 (use-package ansi-color
   :defer t
   :config
-  (defun drot|colorize-compilation-buffer ()
+  (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
 
-  (add-hook 'compilation-filter-hook #'drot|colorize-compilation-buffer))
+  (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
 ;; Mail sending configuration
 (use-package message
@@ -929,6 +929,28 @@
     (erc-tls :server "irc.rizon.net" :port 6697
              :nick "drot"))
 
+  ;; Workaround for Rizon NickServ authentication
+  (defun drot|erc-fetch-password (&rest params)
+    "Fetch passwords for ERC authentication from an encrypted source."
+    (let ((match (car (apply 'auth-source-search params))))
+      (if match
+          (let ((secret (plist-get match :secret)))
+            (if (functionp secret)
+                (funcall secret)
+              secret))
+        (error "Password not found for %S" params))))
+
+  (defun drot|erc-rizon-nickserv-password ()
+    "Fetch NickServ password for the Rizon IRC network."
+    (drot|erc-fetch-password :user "drot" :host "irc.rizon.net"))
+
+  ;; Load ERC services mode for Rizon authentication
+  (erc-services-mode)
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-nickserv-identify-mode 'autodetect)
+  (setq erc-nickserv-passwords
+        `((Rizon (("drot" . ,(drot|erc-rizon-nickserv-password))))))
+
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
   (setq erc-autojoin-timing 'ident)
@@ -936,8 +958,8 @@
 
   ;; Configure text filling
   (setq erc-fill-function #'erc-fill-static)
-  (setq erc-fill-column 130)
-  (setq erc-fill-static-center 15)
+  (setq erc-fill-column 140)
+  (setq erc-fill-static-center 10)
 
   ;; Timestap formatting
   (setq erc-insert-timestamp-function #'erc-insert-timestamp-left)
@@ -968,7 +990,7 @@
 
   ;; Kill all buffers upon ERC quit
   (setq erc-kill-buffer-on-part t)
-  (setq erc-kill-queries-on-quit t)  
+  (setq erc-kill-queries-on-quit t)
   (setq erc-kill-server-buffer-on-quit t)
 
   ;; Prevent accidental paste
