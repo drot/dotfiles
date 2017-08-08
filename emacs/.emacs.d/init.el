@@ -633,7 +633,8 @@
 
 ;; Copyright insertion
 (use-package copyright
-  :bind ("C-c i C" . copyright-update)
+  :bind (("C-c i c" . copyright)
+         ("C-c i C" . copyright-update))
   :config
   (setq copyright-year-ranges t)
   (setq copyright-names-regexp (regexp-quote user-login-name)))
