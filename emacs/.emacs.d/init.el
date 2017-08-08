@@ -1399,8 +1399,7 @@
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-other-buffers nil)
-  (setq company-dabbrev-ignore-case t)
-  (setq company-dabbrev-code-everywhere t))
+  (setq company-dabbrev-ignore-case t))
 
 ;; Company Anaconda
 (use-package company-anaconda
