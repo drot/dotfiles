@@ -1438,7 +1438,7 @@
   :ensure t
   :commands eyebrowse-mode
   :init
-  (setq eyebrowse-keymap-prefix (kbd "C-c W"))
+  (setq eyebrowse-keymap-prefix (kbd "C-c e"))
   (add-hook 'after-init-hook #'eyebrowse-mode)
   :config
   (setq eyebrowse-wrap-around t)
@@ -1658,7 +1658,7 @@
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
-    "C-c W" "eyebrowse"
+    "C-c e" "eyebrowse"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
