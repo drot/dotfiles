@@ -67,7 +67,7 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
-  :load-path "~/color-theme-sanityinc-tomorrow"
+  :ensure t
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
@@ -204,7 +204,6 @@
   :config
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
-  (setq undo-tree-enable-undo-in-region nil)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-relative-timestamps t)
   ;; Compress Undo Tree history files by default
