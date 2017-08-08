@@ -95,8 +95,8 @@
 ;; Move point all the way when scrolling to buffer boundaries
 (setq scroll-error-top-bottom t)
 
-;; Flash frame instead of beeping
-(setq visible-bell t)
+;; Disable alarm bell
+(setq ring-bell-function #'ignore)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -204,6 +204,7 @@
   :config
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
+  (setq undo-tree-enable-undo-in-region nil)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-relative-timestamps t)
   ;; Compress Undo Tree history files by default
@@ -1384,22 +1385,21 @@
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   :config
-  (setq company-idle-delay 1.0)
-  (setq company-tooltip-align-annotations t)
-  (setq company-tooltip-flip-when-above t)
-  (setq company-show-numbers t)
-  (setq company-require-match 'never)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-ignore-case t)
-  (setq company-dabbrev-code-everywhere t)
-  (setq company-selection-wrap-around t)
   (setq company-backends '(company-bbdb
                            company-nxml
                            company-css
                            company-capf
                            company-files
                            (company-dabbrev-code company-keywords)
-                           company-dabbrev)))
+                           company-dabbrev))
+  (setq company-tooltip-align-annotations t)
+  (setq company-tooltip-flip-when-above t)
+  (setq company-selection-wrap-around t)
+  (setq company-show-numbers t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-other-buffers nil)
+  (setq company-dabbrev-ignore-case t)
+  (setq company-dabbrev-code-everywhere t))
 
 ;; Company Anaconda
 (use-package company-anaconda
