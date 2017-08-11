@@ -25,7 +25,7 @@
     separator_color = frame
     startup_notification = false
     dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/chromium
+    browser = /usr/bin/firefox
     icon_position = off
 
 [frame]
