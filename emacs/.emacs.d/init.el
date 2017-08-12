@@ -393,7 +393,7 @@
   (setq flyspell-duplicate-distance 12000))
 
 ;; Isearch configuration
-(use-package isearch
+(use-package "isearch"
   :diminish (isearch-mode . "IsR")
   :defer t
   :config
