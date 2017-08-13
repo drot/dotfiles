@@ -498,7 +498,7 @@
 
 ;; CC mode configuration
 (use-package cc-mode
-  :defer t
+  :mode ("\\.fos\\'" . c++-mode)
   :config
   (setq c-basic-offset 4)
   (setq c-default-style '((java-mode . "java")
@@ -694,7 +694,7 @@
   :config
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
-  ;; Use pcomplete alternate completion
+  ;; Use Pcomplete alternate completion
   (add-hook 'eshell-mode-hook
             (lambda () (define-key eshell-mode-map (kbd "<tab>")
                          (lambda () (interactive) (pcomplete-std-complete))))))
