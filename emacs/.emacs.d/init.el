@@ -1393,7 +1393,7 @@
                            company-css
                            company-capf
                            company-files
-                           (company-dabbrev-code company-keywords)
+                           (company-dabbrev-code company-gtags company-etags company-keywords)
                            company-dabbrev))
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
