@@ -1402,6 +1402,7 @@
                            (company-dabbrev-code company-gtags company-etags company-keywords)
                            company-dabbrev))
   (setq company-minimum-prefix-length 2)
+  (setq company-require-match 'never)
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t)
   (setq company-selection-wrap-around t)
