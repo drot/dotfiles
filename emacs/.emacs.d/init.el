@@ -506,6 +506,12 @@
                           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
+;; Use a default tag file
+(use-package etags
+  :defer t
+  :config
+  (setq tags-file-name "TAGS"))
+
 ;; Scheme mode configuration
 (use-package scheme
   :defer t
