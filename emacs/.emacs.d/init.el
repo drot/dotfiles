@@ -1741,9 +1741,6 @@
 (bind-key "C-c h v" #'find-variable)
 (bind-key "C-c h 4 v" #'find-variable-other-window)
 
-;; Indent region
-(bind-key "C-c x i" #'indent-region)
-
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
 
