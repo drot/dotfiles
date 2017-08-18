@@ -373,10 +373,10 @@
 ;; Fly Spell mode configuration
 (use-package flyspell
   :diminish (flyspell-mode . "FlS")
-  :bind (("C-c x f" . flyspell-buffer)
+  :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
-         ("C-c x c" . flyspell-auto-correct-word)
-         ("C-c x C" . flyspell-correct-word-before-point))
+         ("C-c l a" . flyspell-auto-correct-word)
+         ("C-c l c" . flyspell-correct-word-before-point))
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
@@ -1676,6 +1676,7 @@
     "C-c h 4" "help-other-window"
     "C-c h" "help"
     "C-c i" "insertion"
+    "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
     "C-c o" "organisation"
