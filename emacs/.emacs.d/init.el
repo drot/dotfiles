@@ -375,8 +375,8 @@
   :diminish (flyspell-mode . "FlS")
   :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
-         ("C-c l a" . flyspell-auto-correct-word)
-         ("C-c l c" . flyspell-correct-word-before-point))
+         ("C-c l c" . flyspell-correct-word-before-point)
+         ("C-c l p" . flyspell-check-previous-highlighted-word))
   :commands (flyspell-mode flyspell-prog-mode)
   :init
   (add-hook 'text-mode-hook #'flyspell-mode)
