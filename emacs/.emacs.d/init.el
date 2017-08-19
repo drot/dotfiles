@@ -78,6 +78,12 @@
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
 
+;; Enable window dividers
+(setq window-divider-default-places t)
+(setq window-divider-default-bottom-width 1)
+(setq window-divider-default-right-width 1)
+(window-divider-mode)
+
 ;; Show column number and buffer size on the mode line
 (column-number-mode)
 (size-indication-mode)
@@ -1774,6 +1780,9 @@
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
+
+;; Change Ispell dictionary
+(bind-key "C-c l d" #'ispell-change-dictionary)
 
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
