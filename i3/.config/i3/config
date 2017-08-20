@@ -121,8 +121,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # volume keys
-bindsym $mod+plus exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym $mod+minus exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym $mod+period exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # screenshot keys
@@ -166,7 +166,7 @@ bar {
     bindsym button5 nop
     separator_symbol "  "
     status_command i3status
-    colors {                
+    colors {
            background $base01
            statusline $base05
            separator $base03
@@ -182,7 +182,9 @@ for_window [class="Skype"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="Pcmanfm"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="pinentry"] floating enable
+for_window [class="Pidgin"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Firefox"] 2
