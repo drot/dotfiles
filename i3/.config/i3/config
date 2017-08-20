@@ -183,7 +183,7 @@ for_window [class="mpv"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Thunar"] floating enable
-for_window [class="pinentry"] floating enable
+for_window [class="Pinentry"] floating enable
 for_window [class="Pidgin"] floating enable
 
 # assign applications to certain workspaces
