@@ -742,7 +742,11 @@
 
 ;; Gnus
 (use-package gnus
-  :bind ("C-c a g" . gnus)
+  :bind (("C-c a g" . gnus)
+         :map gnus-summary-mode-map
+         ("M-o" . ace-link-gnus)
+         :map gnus-article-mode-map
+         ("M-o" . ace-link-gnus))
   :config
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "cock"
@@ -808,7 +812,9 @@
          ("C-c o c" . org-capture)
          ("C-c o t" . org-todo-list)
          ("C-c o s" . org-search-view)
-         ("C-c o l" . org-store-link))
+         ("C-c o l" . org-store-link)
+         :map org-mode-map
+         ("M-o" . ace-link-org))
   :config
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
