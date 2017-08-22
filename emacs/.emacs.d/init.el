@@ -1718,6 +1718,12 @@
 ;; Toggle debug on error
 (bind-key "C-c t D" #'toggle-debug-on-error)
 
+;; Bury buffer
+(bind-key "C-c w b" #'bury-buffer)
+
+;; Kill buffer without prompting
+(bind-key "C-c w k" #'kill-this-buffer)
+
 ;; Revert buffer
 (bind-key "C-c f g" #'revert-buffer)
 
