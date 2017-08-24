@@ -913,7 +913,7 @@
 ;; Dired Async
 (use-package dired-async
   :ensure async
-  :diminish (dired-async-mode . "DaS")
+  :diminish (dired-async-mode . "SyN")
   :after dired+
   :config
   (dired-async-mode))
