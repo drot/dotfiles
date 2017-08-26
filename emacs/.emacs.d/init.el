@@ -67,7 +67,7 @@
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
+  :load-path "~/color-theme-sanityinc-tomorrow/"
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
@@ -100,6 +100,9 @@
 
 ;; Move point all the way when scrolling to buffer boundaries
 (setq scroll-error-top-bottom t)
+
+;; Always scroll evenly with the mouse
+(setq mouse-wheel-progressive-speed nil)
 
 ;; Disable alarm bell
 (setq ring-bell-function #'ignore)
