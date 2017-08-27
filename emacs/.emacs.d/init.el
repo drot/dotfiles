@@ -1217,6 +1217,7 @@
 (use-package magit
   :ensure t
   :bind (("C-c v v" . magit-status)
+         ("C-c v d" . magit-dispatch-popup)
          ("C-c v c" . magit-clone)
          ("C-c v b" . magit-blame)
          ("C-c v l" . magit-log-buffer-file)
