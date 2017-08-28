@@ -1059,7 +1059,7 @@
 ;; IEdit
 (use-package iedit
   :ensure t
-  :bind (("C-c i i" . iedit-mode)
+  :bind (("C-c i e" . iedit-mode)
          :map isearch-mode-map
          ("C-i" . iedit-mode-from-isearch)
          :map esc-map
@@ -1205,7 +1205,8 @@
 ;; Macrostep
 (use-package macrostep
   :ensure t
-  :bind ("C-c i e" . macrostep-expand))
+  :bind (:map emacs-lisp-mode-map
+              ("C-c M-e" . macrostep-expand)))
 
 ;; Magit
 (use-package magit
