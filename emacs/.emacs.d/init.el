@@ -1115,10 +1115,10 @@
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c x O" . hydra-outline/body)
+  :bind (("C-c x m" . hydra-mark-text/body)
          ("C-c x M" . hydra-move-text/body)
-         ("C-c x m" . hydra-mark-text/body)
-         ("C-c m h" . hydra-multiple-cursors/body))
+         ("C-c m h" . hydra-multiple-cursors/body)
+         ("C-c x O" . hydra-outline/body))
   :config
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock)
@@ -1453,17 +1453,6 @@
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
-;; Eyebrowse
-(use-package eyebrowse
-  :ensure t
-  :commands eyebrowse-mode
-  :init
-  (setq eyebrowse-keymap-prefix (kbd "C-c e"))
-  (add-hook 'after-init-hook #'eyebrowse-mode)
-  :config
-  (setq eyebrowse-wrap-around t)
-  (setq eyebrowse-switch-back-and-forth t))
-
 ;; FlyCheck
 (use-package flycheck
   :ensure t
@@ -1678,7 +1667,6 @@
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
-    "C-c e" "eyebrowse"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
