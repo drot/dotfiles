@@ -335,14 +335,6 @@
   (unbind-key "C-c <left>" winner-mode-map)
   (unbind-key "C-c <right>" winner-mode-map))
 
-;; Outline mode
-(use-package outline
-  :diminish (outline-minor-mode . "OuT")
-  :bind ("C-c t o" . outline-minor-mode)
-  :init
-  (setq outline-minor-mode-prefix (kbd "C-c O"))
-  (add-hook 'text-mode-hook #'outline-minor-mode))
-
 ;; Hide Show mode
 (use-package hideshow
   :commands hs-minor-mode
@@ -540,6 +532,13 @@
   (setq nxml-slash-auto-complete-flag t)
   (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
+
+;; Outline mode
+(use-package outline
+  :diminish (outline-minor-mode . "OuT")
+  :bind ("C-c t o" . outline-minor-mode)
+  :config
+  (setq outline-minor-mode-prefix (kbd "C-c O")))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -1207,6 +1206,11 @@
     ("f" outline-forward-same-level "Forward Same Level")
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit")))
+
+;; Hyperbole
+(use-package hyperbole
+  :ensure t
+  :defer 1)
 
 ;; Macrostep
 (use-package macrostep
