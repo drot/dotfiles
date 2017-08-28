@@ -1115,8 +1115,7 @@
 ;; Hydra
 (use-package hydra
   :ensure t
-  :bind (("C-c w R" . hydra-window-resize/body)
-         ("C-c x O" . hydra-outline/body)
+  :bind (("C-c x O" . hydra-outline/body)
          ("C-c x M" . hydra-move-text/body)
          ("C-c x m" . hydra-mark-text/body)
          ("C-c m h" . hydra-multiple-cursors/body))
@@ -1176,15 +1175,6 @@
     ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
     ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
     ("q" nil "Quit" :exit t))
-
-  ;; Hydra for more convenient window resizing
-  (defhydra hydra-window-resize (:columns 2)
-    "Resize Windows"
-    ("n" enlarge-window "Enlarge Window")
-    ("p" shrink-window "Shrink Window")
-    ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("b" shrink-window-horizontally "Shrink Window Horizontally")
-    ("q" nil "Quit"))
 
   ;; Hydra for Outline mode
   (defhydra hydra-outline (:columns 4)
@@ -1695,7 +1685,7 @@
     "C-c f v" "variables"
     "C-c f" "files"
     "C-c h 4" "help-other-window"
-    "C-c h" "help"
+    "C-c h" "help-extended"
     "C-c i" "insertion"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
