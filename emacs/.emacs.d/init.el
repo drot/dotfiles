@@ -1119,7 +1119,7 @@
   :bind (("C-c x m" . hydra-mark-text/body)
          ("C-c x M" . hydra-move-text/body)
          ("C-c m h" . hydra-multiple-cursors/body)
-         ("C-c w R" . hydra-window-resize/body)
+         ("C-c w h" . hydra-window-resize/body)
          ("C-c x O" . hydra-outline/body))
   :config
   ;; Enable syntax coloring for Hydra definitions
@@ -1469,7 +1469,8 @@
   (add-hook 'after-init-hook #'eyebrowse-mode)
   :config
   (setq eyebrowse-wrap-around t)
-(setq eyebrowse-switch-back-and-forth t))
+  (setq eyebrowse-switch-back-and-forth t)
+  (setq eyebrowse-new-workspace t))
 
 ;; FlyCheck
 (use-package flycheck
