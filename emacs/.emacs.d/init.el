@@ -247,7 +247,8 @@
                           "/elpa/.*\\'"
                           "/elfeed/.*\\'"
                           "/cache/.*\\'"
-                          ".*\\.gz\\'"))
+                          ".*\\.gz\\'"
+                          "TAGS"))
   (setq recentf-max-saved-items 100)
   (setq recentf-max-menu-items 20)
   (setq recentf-auto-cleanup 600)
