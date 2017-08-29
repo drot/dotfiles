@@ -1086,8 +1086,8 @@
 
 ;; JSON mode
 (use-package json-mode
-  :pin gnu
   :ensure t
+  :pin gnu
   :defer t)
 
 ;; Key Chord
@@ -1696,6 +1696,7 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
+  :pin gnu
   :commands yas-global-mode
   :init
   (add-hook 'after-init-hook #'yas-global-mode))
