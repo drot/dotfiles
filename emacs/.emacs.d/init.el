@@ -209,7 +209,7 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "UnT")
+  :diminish (undo-tree-mode . "UT")
   :commands global-undo-tree-mode
   :init
   (add-hook 'after-init-hook #'global-undo-tree-mode)
@@ -290,7 +290,7 @@
 
 ;; Abbrev mode
 (use-package abbrev
-  :diminish (abbrev-mode . "AbR")
+  :diminish (abbrev-mode . "AB")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
@@ -374,7 +374,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "FlS")
+  :diminish (flyspell-mode . "FS")
   :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c l c" . flyspell-correct-word-before-point)
@@ -396,7 +396,7 @@
 
 ;; Isearch configuration
 (use-package "isearch"
-  :diminish (isearch-mode . "IsR")
+  :diminish (isearch-mode . "IS")
   :defer t
   :config
   (setq isearch-allow-scroll t)
@@ -477,7 +477,7 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
-  :diminish (eldoc-mode . "ElD")
+  :diminish (eldoc-mode . "ED")
   :defer t
   :config
   ;; Make compatible with ParEdit
@@ -536,7 +536,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "OuT")
+  :diminish (outline-minor-mode . "OT")
   :bind ("C-c t o" . outline-minor-mode)
   :config
   (setq outline-minor-mode-prefix (kbd "C-c O")))
@@ -658,7 +658,7 @@
 
 ;; Whitespace mode
 (use-package whitespace
-  :diminish (whitespace-mode . "WhS")
+  :diminish (whitespace-mode . "WS")
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
@@ -852,7 +852,7 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :diminish (anaconda-mode . "AnC")
+  :diminish (anaconda-mode . "AC")
   :commands (anaconda-mode anaconda-eldoc-mode)
   :init
   (add-hook 'python-mode-hook #'anaconda-mode)
@@ -916,7 +916,7 @@
 ;; Dired Async
 (use-package dired-async
   :ensure async
-  :diminish (dired-async-mode . "SyN")
+  :diminish (dired-async-mode . "DS")
   :after dired+
   :config
   (dired-async-mode))
@@ -1361,7 +1361,7 @@
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "AnZ")
+  :diminish (anzu-mode . "AZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1406,7 +1406,7 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "CmP")
+  :diminish (company-mode . "CY")
   :bind ("C-c i y" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1533,6 +1533,7 @@
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
+  :diminish (ivy-mode . "IY")
   :bind ("C-c n R" . ivy-resume)
   :commands ivy-mode
   :init
@@ -1550,7 +1551,7 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "CsL")
+  :diminish (counsel-mode . "CL")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1580,7 +1581,7 @@
 ;; Paredit
 (use-package paredit
   :ensure t
-  :diminish (paredit-mode . "PaR")
+  :diminish (paredit-mode . "PE")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1624,7 +1625,7 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "RbW")
+  :diminish (rainbow-mode . "RW")
   :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
@@ -1633,7 +1634,7 @@
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :diminish (skewer-mode . "SkW")
+  :diminish (skewer-mode . "SK")
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
@@ -1642,7 +1643,7 @@
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
-  :diminish (skewer-css-mode . "SkW-CSS")
+  :diminish (skewer-css-mode . "SK-CSS")
   :commands skewer-css-mode
   :init
   (add-hook 'css-mode-hook #'skewer-css-mode))
@@ -1650,7 +1651,7 @@
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
-  :diminish (skewer-html-mode . "SkW-HTML")
+  :diminish (skewer-html-mode . "SK-HTML")
   :commands skewer-html-mode
   :init
   (add-hook 'html-mode-hook #'skewer-html-mode))
@@ -1665,7 +1666,7 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
-  :diminish (volatile-highlights-mode . "VlH")
+  :diminish (volatile-highlights-mode . "VH")
   :commands volatile-highlights-mode
   :init
   (add-hook 'after-init-hook #'volatile-highlights-mode))
@@ -1717,6 +1718,7 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
+  :diminish (yas-minor-mode . "YS")
   :pin gnu
   :commands yas-global-mode
   :init
