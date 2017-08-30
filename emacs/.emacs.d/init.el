@@ -463,6 +463,11 @@
   :config
   (setq custom-safe-themes t))
 
+;; Auto Revert mode
+(use-package autorevert
+  :diminish (auto-revert-mode . "AR")
+  :defer t)
+
 ;; Imenu configuration
 (use-package imenu
   :defer t
