@@ -1556,7 +1556,7 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "CL")
+  :diminish (counsel-mode . "CS")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
