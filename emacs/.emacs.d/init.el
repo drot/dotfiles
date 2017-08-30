@@ -1470,7 +1470,9 @@
   :config
   (setq eyebrowse-wrap-around t)
   (setq eyebrowse-switch-back-and-forth t)
-  (setq eyebrowse-new-workspace t))
+  (setq eyebrowse-new-workspace t)
+  (setq eyebrowse-mode-line-left-delimiter "<")
+  (setq eyebrowse-mode-line-right-delimiter ">"))
 
 ;; FlyCheck
 (use-package flycheck
