@@ -148,11 +148,11 @@
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(diminish 'auto-fill-function " FiL")
+(diminish 'auto-fill-function " FL")
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
-(diminish 'visual-line-mode " ViL")
+(diminish 'visual-line-mode " VL")
 
 ;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent)
