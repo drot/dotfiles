@@ -485,7 +485,7 @@
   :diminish (eldoc-mode . "ED")
   :defer t
   :config
-  ;; Make compatible with ParEdit
+  ;; Make compatible with Paredit
   (eldoc-add-command
    #'paredit-backward-delete
    #'paredit-close-round))
@@ -845,7 +845,8 @@
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
                                   ("Canada/Eastern" "Quebec")
-                                  ("Asia/Saigon" "Saigon"))))
+                                  ("Asia/Saigon" "Saigon")
+                                  ("UTC" "Universal"))))
 
 ;; Ace-window
 (use-package ace-window
