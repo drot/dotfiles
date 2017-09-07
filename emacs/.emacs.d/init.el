@@ -587,12 +587,6 @@
   :config
   (setq smiley-style 'medium))
 
-;; SHR configuration
-(use-package shr
-  :defer t
-  :config
-  (setq shr-use-fonts nil))
-
 ;; Prevent GnuTLS warnings
 (use-package gnutls
   :defer t
@@ -1213,6 +1207,11 @@
     ("f" outline-forward-same-level "Forward Same Level")
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit")))
+
+;; EPUB format support
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
 
 ;; Macrostep
 (use-package macrostep
