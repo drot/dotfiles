@@ -270,7 +270,8 @@
                   eshell-mode-hook
                   term-mode-hook
                   ediff-mode-hook
-                  comint-mode-hook))
+                  comint-mode-hook
+                  nov-mode-hook))
     (add-hook hook
               (lambda () (setq-local global-hl-line-mode nil)))))
 
@@ -1756,6 +1757,10 @@
 
 ;; ANSI Term
 (bind-key "C-c a t" #'ansi-term)
+
+;; Hexl mode
+(bind-key "C-c t h" #'hexl-mode)
+(bind-key "C-c f h" #'hexl-find-file)
 
 ;; Grep
 (bind-key "C-c s f" #'grep)
