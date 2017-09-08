@@ -148,11 +148,11 @@
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(diminish 'auto-fill-function " FL")
+(diminish 'auto-fill-function " fL")
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
-(diminish 'visual-line-mode " VL")
+(diminish 'visual-line-mode " vL")
 
 ;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent)
@@ -209,7 +209,7 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "UT")
+  :diminish (undo-tree-mode . "uT")
   :commands global-undo-tree-mode
   :init
   (add-hook 'after-init-hook #'global-undo-tree-mode)
@@ -291,7 +291,7 @@
 
 ;; Abbrev mode
 (use-package abbrev
-  :diminish (abbrev-mode . "AB")
+  :diminish (abbrev-mode . "aB")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
@@ -375,7 +375,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "FS")
+  :diminish (flyspell-mode . "fS")
   :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c l c" . flyspell-correct-word-before-point)
@@ -397,7 +397,7 @@
 
 ;; Isearch configuration
 (use-package "isearch"
-  :diminish (isearch-mode . "IS")
+  :diminish (isearch-mode . "iS")
   :defer t
   :config
   (setq isearch-allow-scroll t)
@@ -466,7 +466,7 @@
 
 ;; Auto Revert mode
 (use-package autorevert
-  :diminish (auto-revert-mode . "AR")
+  :diminish (auto-revert-mode . "aR")
   :defer t)
 
 ;; Imenu configuration
@@ -483,7 +483,7 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
-  :diminish (eldoc-mode . "ED")
+  :diminish (eldoc-mode . "eD")
   :defer t
   :config
   ;; Make compatible with Paredit
@@ -542,7 +542,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "OT")
+  :diminish (outline-minor-mode . "oT")
   :bind ("C-c t o" . outline-minor-mode)
   :config
   (setq outline-minor-mode-prefix (kbd "C-c O")))
@@ -658,7 +658,7 @@
 
 ;; Whitespace mode
 (use-package whitespace
-  :diminish (whitespace-mode . "WS")
+  :diminish (whitespace-mode . "wS")
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
@@ -853,7 +853,7 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :diminish (anaconda-mode . "AC")
+  :diminish (anaconda-mode . "aC")
   :commands (anaconda-mode anaconda-eldoc-mode)
   :init
   (add-hook 'python-mode-hook #'anaconda-mode)
@@ -917,7 +917,6 @@
 ;; Dired Async
 (use-package dired-async
   :ensure async
-  :diminish (dired-async-mode . "DS")
   :after dired+
   :config
   (dired-async-mode))
@@ -1367,7 +1366,7 @@
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "AZ")
+  :diminish (anzu-mode . "aZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1412,7 +1411,7 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "CY")
+  :diminish (company-mode . "cY")
   :bind ("C-c i y" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1539,7 +1538,7 @@
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
-  :diminish (ivy-mode . "IY")
+  :diminish (ivy-mode . "iY")
   :bind ("C-c n R" . ivy-resume)
   :commands ivy-mode
   :init
@@ -1557,7 +1556,7 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "CS")
+  :diminish (counsel-mode . "cS")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1587,7 +1586,7 @@
 ;; Paredit
 (use-package paredit
   :ensure t
-  :diminish (paredit-mode . "PE")
+  :diminish (paredit-mode . "pE")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1631,7 +1630,7 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "RW")
+  :diminish (rainbow-mode . "rW")
   :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
@@ -1640,7 +1639,7 @@
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :diminish (skewer-mode . "SK")
+  :diminish (skewer-mode . "sK")
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
@@ -1649,7 +1648,7 @@
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
-  :diminish (skewer-css-mode . "SK-CSS")
+  :diminish (skewer-css-mode . "sKC")
   :commands skewer-css-mode
   :init
   (add-hook 'css-mode-hook #'skewer-css-mode))
@@ -1657,7 +1656,7 @@
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
-  :diminish (skewer-html-mode . "SK-HTML")
+  :diminish (skewer-html-mode . "sKH")
   :commands skewer-html-mode
   :init
   (add-hook 'html-mode-hook #'skewer-html-mode))
@@ -1672,7 +1671,7 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
-  :diminish (volatile-highlights-mode . "VH")
+  :diminish (volatile-highlights-mode . "vH")
   :commands volatile-highlights-mode
   :init
   (add-hook 'after-init-hook #'volatile-highlights-mode))
@@ -1724,7 +1723,7 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "YS")
+  :diminish (yas-minor-mode . "yS")
   :pin gnu
   :commands yas-global-mode
   :init
