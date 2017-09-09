@@ -38,8 +38,9 @@ if [ -f ~/.bash_functions ]; then
 fi
 
 # Bash completion
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
+if [[ -r "/usr/share/bash-completion/bash_completion" ]]; then
+    . "/usr/share/bash-completion/bash_completion"
+fi
 
 # Git prompt format
 GIT="\$(__git_ps1 ' %s')"
