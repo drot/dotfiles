@@ -65,6 +65,10 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
+;; Use Delight for mode name shortening
+(use-package delight
+  :ensure t)
+
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
   :load-path "~/color-theme-sanityinc-tomorrow/"
@@ -148,11 +152,11 @@
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(diminish 'auto-fill-function " fL")
+(delight 'auto-fill-function " fL" t)
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
-(diminish 'visual-line-mode " vL")
+(delight 'visual-line-mode " vL" t)
 
 ;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent)
@@ -209,7 +213,7 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "uT")
+  :delight (undo-tree-mode " uT")
   :commands global-undo-tree-mode
   :init
   (add-hook 'after-init-hook #'global-undo-tree-mode)
@@ -291,7 +295,7 @@
 
 ;; Abbrev mode
 (use-package abbrev
-  :diminish (abbrev-mode . "aB")
+  :delight (abbrev-mode " aB")
   :config
   (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
   (setq save-abbrevs t)
@@ -375,7 +379,7 @@
 
 ;; Fly Spell mode configuration
 (use-package flyspell
-  :diminish (flyspell-mode . "fS")
+  :delight (flyspell-mode " fS")
   :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c l c" . flyspell-correct-word-before-point)
@@ -397,7 +401,7 @@
 
 ;; Isearch configuration
 (use-package "isearch"
-  :diminish (isearch-mode . "iS")
+  :delight (isearch-mode " iS")
   :defer t
   :config
   (setq isearch-allow-scroll t)
@@ -466,7 +470,7 @@
 
 ;; Auto Revert mode
 (use-package autorevert
-  :diminish (auto-revert-mode . "aR")
+  :delight (auto-revert-mode " aR")
   :defer t)
 
 ;; Imenu configuration
@@ -483,7 +487,7 @@
 
 ;; ElDoc mode configuration
 (use-package eldoc
-  :diminish (eldoc-mode . "eD")
+  :delight (eldoc-mode " eD")
   :defer t
   :config
   ;; Make compatible with Paredit
@@ -542,7 +546,7 @@
 
 ;; Outline mode
 (use-package outline
-  :diminish (outline-minor-mode . "oT")
+  :delight (outline-minor-mode " oT")
   :bind ("C-c t o" . outline-minor-mode)
   :config
   (setq outline-minor-mode-prefix (kbd "C-c O")))
@@ -658,7 +662,7 @@
 
 ;; Whitespace mode
 (use-package whitespace
-  :diminish (whitespace-mode . "wS")
+  :delight (whitespace-mode " wS")
   :bind (("C-c x w" . whitespace-cleanup)
          ("C-c t w" . whitespace-mode)))
 
@@ -853,7 +857,7 @@
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
-  :diminish (anaconda-mode . "aC")
+  :delight (anaconda-mode " aC")
   :commands (anaconda-mode anaconda-eldoc-mode)
   :init
   (add-hook 'python-mode-hook #'anaconda-mode)
@@ -917,6 +921,7 @@
 ;; Dired Async
 (use-package dired-async
   :ensure async
+  :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
   :after dired+
   :config
   (dired-async-mode))
@@ -1366,7 +1371,7 @@
 ;; Anzu
 (use-package anzu
   :ensure t
-  :diminish (anzu-mode . "aZ")
+  :delight (anzu-mode " aZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
@@ -1411,7 +1416,7 @@
 ;; Company mode
 (use-package company
   :ensure t
-  :diminish (company-mode . "cY")
+  :delight (company-mode " cY")
   :bind ("C-c i y" . company-yasnippet)
   :commands global-company-mode
   :init
@@ -1484,7 +1489,9 @@
   :ensure t
   :commands global-flycheck-mode
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :config
+  (setq flycheck-mode-line-prefix "fC"))
 
 ;; FlyCheck GUI popups
 (use-package flycheck-pos-tip
@@ -1538,7 +1545,7 @@
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
-  :diminish (ivy-mode . "iY")
+  :delight (ivy-mode " iY")
   :bind ("C-c n R" . ivy-resume)
   :commands ivy-mode
   :init
@@ -1556,7 +1563,7 @@
 ;; Counsel
 (use-package counsel
   :ensure t
-  :diminish (counsel-mode . "cS")
+  :delight (counsel-mode " cS")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
          ("C-c f r" . counsel-recentf)
@@ -1586,7 +1593,7 @@
 ;; Paredit
 (use-package paredit
   :ensure t
-  :diminish (paredit-mode . "pE")
+  :delight (paredit-mode " pE")
   :commands enable-paredit-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1630,7 +1637,7 @@
 ;; Rainbow mode
 (use-package rainbow-mode
   :ensure t
-  :diminish (rainbow-mode . "rW")
+  :delight (rainbow-mode " rW")
   :bind ("C-c t r" . rainbow-mode)
   :commands rainbow-mode
   :init
@@ -1639,7 +1646,7 @@
 ;; Skewer
 (use-package skewer-mode
   :ensure t
-  :diminish (skewer-mode . "sK")
+  :delight (skewer-mode " sK")
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
   :init
@@ -1648,7 +1655,7 @@
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
-  :diminish (skewer-css-mode . "sKC")
+  :delight (skewer-css-mode " sKC")
   :commands skewer-css-mode
   :init
   (add-hook 'css-mode-hook #'skewer-css-mode))
@@ -1656,7 +1663,7 @@
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
-  :diminish (skewer-html-mode . "sKH")
+  :delight (skewer-html-mode " sKH")
   :commands skewer-html-mode
   :init
   (add-hook 'html-mode-hook #'skewer-html-mode))
@@ -1671,7 +1678,7 @@
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
-  :diminish (volatile-highlights-mode . "vH")
+  :delight (volatile-highlights-mode " vH")
   :commands volatile-highlights-mode
   :init
   (add-hook 'after-init-hook #'volatile-highlights-mode))
@@ -1723,7 +1730,7 @@
 ;; YASnippet
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "yS")
+  :delight (yas-minor-mode " yS")
   :pin gnu
   :commands yas-global-mode
   :init
