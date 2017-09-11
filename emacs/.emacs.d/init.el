@@ -546,7 +546,7 @@
 
 ;; Outline mode
 (use-package outline
-  :delight (outline-minor-mode " oT")
+  :delight (outline-minor-mode " oL")
   :bind ("C-c t o" . outline-minor-mode)
   :config
   (setq outline-minor-mode-prefix (kbd "C-c O")))
@@ -615,7 +615,11 @@
   :config
   (setq dired-omit-verbose nil)
   ;; Ignore uninteresting files
-  (add-hook 'dired-mode-hook #'dired-omit-mode))
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+  ;; Shorten the Dired Omit mode lighter
+  (add-function :after (symbol-function 'dired-omit-startup)
+                (lambda () (delight 'dired-omit-mode " oT" t))
+                '((name . dired-omit-mode-delight))))
 
 ;; Wdired movement and editable parts
 (use-package wdired
