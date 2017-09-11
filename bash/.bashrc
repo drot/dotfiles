@@ -57,9 +57,9 @@ NIL='\[\033[00m\]'
 # Prompt format
 case $TERM in
     xterm*|rxvt*|st*|screen*|tmux*)
-        PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} λ ${NIL}"
+        PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
         ;;
     *)
-        PS1="${BLUE}\w${RED}${GIT}${GREEN} λ ${NIL}"
+        PS1="${BLUE}\w${RED}${GIT}${GREEN} \$ ${NIL}"
         ;;
 esac

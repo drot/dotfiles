@@ -319,7 +319,7 @@
 ;; Which function mode
 (use-package which-func
   :config
-  (setq which-func-unknown "⊥")
+  (setq which-func-unknown "n/a")
   (which-function-mode))
 
 ;; Fast window switching
