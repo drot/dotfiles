@@ -65,10 +65,6 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
-;; Use Delight for mode name shortening
-(use-package delight
-  :ensure t)
-
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
   :load-path "~/color-theme-sanityinc-tomorrow/"
@@ -149,6 +145,10 @@
 
 ;; Set Text mode as the default major mode
 (setq-default major-mode #'text-mode)
+
+;; Use Delight for mode name shortening
+(use-package delight
+  :ensure t)
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
