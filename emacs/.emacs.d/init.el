@@ -317,9 +317,9 @@
 
 ;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
-                  emacs-lisp-mode-hook
-                  python-mode-hook))
-    (add-hook hook #'hs-minor-mode))
+                emacs-lisp-mode-hook
+                python-mode-hook))
+  (add-hook hook #'hs-minor-mode))
 ;; Configuration
 (after 'hideshow
   (defun drot|hs-display-code-line-counts (ov)
@@ -588,7 +588,7 @@
   (setq reb-re-syntax 'string))
 
 ;; Proced
- (global-set-key (kbd "C-c a P") #'proced)
+(global-set-key (kbd "C-c a P") #'proced)
 ;; Configuration
 (after 'proced
   (setq-default proced-sort 'start)
@@ -635,6 +635,7 @@
 
 ;; Eshell smart display
 (after 'eshell
+  ;; Initialize mode
   (require 'em-smart)
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
@@ -781,14 +782,15 @@
 
 ;; Avy
 (require-package 'avy)
+;; Initialize mode
+(avy-setup-default)
+;; Set key bindings
 (global-set-key (kbd "C-c n c") #'avy-goto-char)
 (global-set-key (kbd "C-c n k") #'avy-goto-char-2)
 (global-set-key (kbd "C-c n J") #'avy-goto-word-0)
 (global-set-key (kbd "C-c n SPC") #'avy-pop-mark)
 (global-set-key (kbd "C-c n l") #'avy-goto-line)
 (global-set-key (kbd "C-c n j") #'avy-goto-word-or-subword-1)
-;; Initialize mode
-(avy-setup-default)
 ;; Configuration
 (after 'avy
   :ensure t
@@ -831,7 +833,7 @@
 ;; Dired+
 (require-package 'dired+)
 ;; Configuration
-(after 'dired
+(after 'dired-x
   ;; Initialize mode
   (require 'dired+)
   ;; Customize
@@ -872,10 +874,10 @@
 
 ;; ERC
 (defun drot|erc-init ()
-    "Connect to IRC."
-    (interactive)
-    (erc-tls :server "irc.rizon.net" :port 6697
-             :nick "drot"))
+  "Connect to IRC."
+  (interactive)
+  (erc-tls :server "irc.rizon.net" :port 6697
+           :nick "drot"))
 ;; Set key binding
 (global-set-key (kbd "C-c a i") #'drot|erc-init)
 ;; Configuration
@@ -980,7 +982,7 @@
 (require-package 'geiser)
 ;; Set key binding
 (global-set-key (kbd "C-c t g") #'run-geiser)
-;Configuration
+                                        ;Configuration
 (after 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
@@ -1345,7 +1347,7 @@
 (require-package 'company-anaconda)
 ;; Initialize mode
 (add-hook 'python-mode-hook
-            (lambda () (add-to-list 'company-backends #'company-anaconda)))
+          (lambda () (add-to-list 'company-backends #'company-anaconda)))
 
 ;; Company Statistics
 (require-package 'company-statistics)
@@ -1542,10 +1544,8 @@
 
 ;; Skewer
 (require-package 'skewer-mode)
-;; Initialize modes
+;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
-
-
 ;; Set key bindings
 (global-set-key (kbd "C-c t S") #'run-skewer)
 ;; Configuration
