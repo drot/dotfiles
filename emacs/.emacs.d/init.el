@@ -832,7 +832,9 @@
 (require-package 'dired+)
 ;; Configuration
 (after 'dired
+  ;; Initialize mode
   (require 'dired+)
+  ;; Customize
   (setq diredp-hide-details-initially-flag nil)
   (setq diredp-hide-details-propagate-flag nil))
 
@@ -840,7 +842,11 @@
 (require-package 'async)
 ;; Configuration
 (after 'dired+
-  ;;:delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
+  ;; Initialize mode
+  (require 'dired-async)
+  ;; Shorten mode lighter
+  (delight 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")) t)
+  ;; Initialize mode
   (dired-async-mode))
 
 ;; Easy-kill
