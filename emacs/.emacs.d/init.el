@@ -982,7 +982,7 @@
 (require-package 'geiser)
 ;; Set key binding
 (global-set-key (kbd "C-c t g") #'run-geiser)
-;;Configuration
+;; Configuration
 (after 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
