@@ -242,97 +242,76 @@
 (setq backup-by-copying t)
 
 ;; Save minibuffer history
-(use-package savehist
-  :config
-  (setq savehist-file (locate-user-emacs-file "cache/saved-history"))
-  (setq savehist-autosave-interval 60)
-  (setq savehist-additional-variables '(search-ring regexp-search-ring))
-  (savehist-mode))
+(setq savehist-file (locate-user-emacs-file "cache/saved-history"))
+(setq savehist-autosave-interval 60)
+(setq savehist-additional-variables '(search-ring regexp-search-ring))
+(savehist-mode)
 
 ;; Save recent files list
-(use-package recentf
-  :config
-  (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
-  (setq recentf-exclude '("/\\.git/.*\\'"
-                          "/elpa/.*\\'"
-                          "/elfeed/.*\\'"
-                          "/cache/.*\\'"
-                          ".*\\.gz\\'"
-                          "TAGS"))
-  (setq recentf-max-saved-items 100)
-  (setq recentf-max-menu-items 20)
-  (setq recentf-auto-cleanup 600)
-  (recentf-mode))
+(setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
+(setq recentf-exclude '("/\\.git/.*\\'"
+                        "/elpa/.*\\'"
+                        "/elfeed/.*\\'"
+                        "/cache/.*\\'"
+                        ".*\\.gz\\'"
+                        "TAGS"))
+(setq recentf-max-saved-items 100)
+(setq recentf-max-menu-items 20)
+(setq recentf-auto-cleanup 600)
+(recentf-mode)
 
 ;; Remember point position in files
-(use-package saveplace
-  :config
-  (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
-  (save-place-mode))
+(setq save-place-file (locate-user-emacs-file "cache/saved-places"))
+(save-place-mode)
 
 ;; Highlight current line
-(use-package hl-line
-  :config
-  (global-hl-line-mode)
-  ;; Disable `hl-line-mode' in special buffers
-  (dolist (hook '(undo-tree-visualizer-mode-hook
-                  erc-mode-hook
-                  eshell-mode-hook
-                  term-mode-hook
-                  ediff-mode-hook
-                  comint-mode-hook
-                  nov-mode-hook))
-    (add-hook hook
-              (lambda () (setq-local global-hl-line-mode nil)))))
+(global-hl-line-mode)
+;; Disable `hl-line-mode' in special buffers
+(dolist (hook '(undo-tree-visualizer-mode-hook
+                erc-mode-hook
+                eshell-mode-hook
+                term-mode-hook
+                ediff-mode-hook
+                comint-mode-hook
+                nov-mode-hook))
+  (add-hook hook
+            (lambda () (setq-local global-hl-line-mode nil))))
 
 ;; Highlight matching parentheses
-(use-package paren
-  :config
-  (setq show-paren-delay 0)
-  (setq show-paren-when-point-inside-paren t)
-  (setq show-paren-when-point-in-periphery t)
-  (show-paren-mode))
+(setq show-paren-delay 0)
+(setq show-paren-when-point-inside-paren t)
+(setq show-paren-when-point-in-periphery t)
+(show-paren-mode)
 
 ;; Highlight regexps interactively
-(use-package hi-lock
-  :config
-  (setq hi-lock-auto-select-face t)
-  (global-hi-lock-mode))
+(setq hi-lock-auto-select-face t)
+(global-hi-lock-mode)
 
 ;; Abbrev mode
-(use-package abbrev
-  :delight (abbrev-mode " aB")
-  :config
-  (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
-  (setq save-abbrevs t)
-  ;; Load abbrevs if they exist
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  (setq-default abbrev-mode t))
+(delight 'abbrev-mode " aB" t)
+;; Configuration
+(setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
+(setq save-abbrevs t)
+;; Load abbrevs if they exist
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
+(setq-default abbrev-mode t)
 
 ;; Electric pair mode
-(use-package elec-pair
-  :config
-  (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
-  (electric-pair-mode))
+(setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+(electric-pair-mode)
 
 ;; Prettify certain symbols
-(use-package prog-mode
-  :config
-  (setq prettify-symbols-unprettify-at-point t)
-  (global-prettify-symbols-mode))
+(setq prettify-symbols-unprettify-at-point t)
+(global-prettify-symbols-mode)
 
 ;; Which function mode
-(use-package which-func
-  :config
-  (setq which-func-unknown "n/a")
-  (which-function-mode))
+(setq which-func-unknown "n/a")
+(which-function-mode)
 
 ;; Fast window switching
-(use-package windmove
-  :config
-  (setq windmove-wrap-around t)
-  (windmove-default-keybindings))
+(setq windmove-wrap-around t)
+(windmove-default-keybindings)
 
 ;; Undo and redo the window configuration
 (use-package winner
