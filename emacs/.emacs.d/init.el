@@ -48,10 +48,32 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; Helper function for installing packages
+(defun require-package (package)
+  "Ensures that PACKAGE is installed."
+  (unless (or (package-installed-p package)
+              (require package nil 'noerror))
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
+
+;; Undo Tree
+(require-package 'undo-tree)
+;; Initialize mode
+(global-undo-tree-mode)
+;; Shorten mode lighter
+(delight 'undo-tree-mode " uT" t)
+;; Configuration
+(setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-visualizer-timestamps t)
+(setq undo-tree-visualizer-relative-timestamps t)
+;; Compress Undo Tree history files by default
+(advice-add 'undo-tree-make-history-save-file-name :filter-return
+            (lambda (return-value) (concat return-value ".gz")))
+
+;; Install use-package
+(require-package 'use-package)
 
 ;; Enable Imenu support for use-package
 (setq use-package-enable-imenu-support t)
@@ -60,16 +82,16 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Disable needless GUI elements
-(dolist (mode '(tool-bar-mode menu-bar-mode))
-  (when (fboundp mode)
-    (funcall mode -1)))
-
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
   :load-path "~/color-theme-sanityinc-tomorrow/"
   :config
   (load-theme 'sanityinc-tomorrow-night t))
+
+;; Disable needless GUI elements
+(dolist (mode '(tool-bar-mode menu-bar-mode))
+  (when (fboundp mode)
+    (funcall mode -1)))
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
@@ -209,22 +231,6 @@
 ;; Do not save duplicates
 (setq history-delete-duplicates t)
 (setq kill-do-not-save-duplicates t)
-
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :delight (undo-tree-mode " uT")
-  :commands global-undo-tree-mode
-  :init
-  (add-hook 'after-init-hook #'global-undo-tree-mode)
-  :config
-  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
-  (setq undo-tree-auto-save-history t)
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t)
-  ;; Compress Undo Tree history files by default
-  (advice-add 'undo-tree-make-history-save-file-name :filter-return
-              (lambda (return-value) (concat return-value ".gz"))))
 
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
@@ -957,7 +963,7 @@
   :bind ("C-c a i" . drot|erc-init)
   :commands drot|erc-init
   :config
-  ;; Use custom function to launch ERC
+  ;; Use a custom function to launch ERC
   (defun drot|erc-init ()
     "Connect to IRC."
     (interactive)
