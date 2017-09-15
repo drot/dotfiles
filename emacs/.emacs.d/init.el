@@ -523,12 +523,12 @@
   (setq dired-listing-switches "-ahlF")
   (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
-  (setq dired-dwim-target t)
-  ;; Additional features with dired-x
-  (require 'dired-x))
+  (setq dired-dwim-target t))
 
-;; Dired-x
-(after 'dired-x
+;; Additional features with Dired-x
+(after 'dired
+  ;; Initialize mode
+  (require 'dired-x)
   ;; Ignore uninteresting files
   (setq dired-omit-verbose nil)
   (add-hook 'dired-mode-hook #'dired-omit-mode)
@@ -1702,6 +1702,7 @@
 (global-set-key (kbd "C-c c d") #'comment-dwim)
 (global-set-key (kbd "C-c c r") #'comment-region)
 (global-set-key (kbd "C-c c u") #'uncomment-region)
+(global-set-key (kbd "C-c c o") #'comment-or-uncomment-region)
 
 ;; Local variable insertion
 (global-set-key (kbd "C-c f v d") #'add-dir-local-variable)
