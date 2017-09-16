@@ -533,9 +533,10 @@
   (setq dired-omit-verbose nil)
   (add-hook 'dired-mode-hook #'dired-omit-mode)
   ;; Shorten the Dired Omit mode lighter
-  (add-function :after (symbol-function 'dired-omit-startup)
-                (lambda () (delight 'dired-omit-mode " oT" t))
-                '((name . dired-omit-mode-delight))))
+  (after 'dired-x
+    (add-function :after (symbol-function 'dired-omit-startup)
+                  (lambda () (delight 'dired-omit-mode " oT" t))
+                  '((name . dired-omit-mode-delight)))))
 
 ;; Wdired movement and editable parts
 (after 'wdired
