@@ -1,8 +1,10 @@
 [Unit]
 Description=Music Player Daemon
+Documentation=man:mpd(1) man:mpd.conf(5)
 Wants=mpdas.service
 
 [Service]
+Type=notify
 ExecStart=/usr/bin/mpd --no-daemon
 
 # allow MPD to use real-time priority 50
