@@ -625,7 +625,7 @@
   ;; Use Pcomplete alternate completion
   (add-hook 'eshell-mode-hook
             (lambda () (define-key eshell-mode-map (kbd "<tab>")
-                    (lambda () (interactive) (pcomplete-std-complete))))))
+                         (lambda () (interactive) (pcomplete-std-complete))))))
 
 ;; Eshell smart display
 (after 'eshell
@@ -819,8 +819,10 @@
 (after 'dired
   ;; Initialize mode
   (require 'dired-filter)
+  ;; Shorten mode lighter
+  (delight 'dired-filter-mode " fR" t)
   ;; Set key bindings
-  (define-key dired-mode-map (kbd "C-.") dired-filter-mark-map))
+  (define-key dired-mode-map (kbd "\\") dired-filter-mark-map))
 
 ;; Dired Rainbow
 (require-package 'dired-rainbow)
@@ -906,8 +908,10 @@
 (after 'dired-ranger
   ;; Initialize mode
   (require 'dired-narrow)
+  ;; Shorten mode lighter
+  (delight 'dired-narrow-mode " d-N" t)
   ;; Set key binding
-  (define-key dired-mode-map (kbd "\\") #'dired-narrow))
+  (define-key dired-mode-map (kbd "C-.") #'dired-narrow))
 
 ;; Dired Collapse
 (require-package 'dired-collapse)
@@ -1067,8 +1071,10 @@
 ;; IEdit
 (require-package 'iedit)
 ;; Autoload missing functions
-(autoload 'iedit-mode-from-isearch "iedit" nil t)
-(autoload 'iedit-execute-last-modification "iedit" nil t)
+(autoload 'iedit-mode-from-isearch "iedit"
+  "Start Iedit mode using last search string as the regexp." t)
+(autoload 'iedit-execute-last-modification "iedit"
+  "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
 (global-set-key (kbd "C-c i e") #'iedit-mode)
 (define-key isearch-mode-map (kbd "C-i") #'iedit-mode-from-isearch)
