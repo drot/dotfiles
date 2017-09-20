@@ -831,22 +831,22 @@
   ;; Initialize mode
   (require 'dired-rainbow)
   ;; Define faces by file type
-  (dired-rainbow-define compressed "#ad7fa8" ("zip" "bz2" "tgz" "txz" "gz" "xz"
-                                              "z" "Z" "jar" "war" "ear" "rar"
-                                              "sar" "xpi" "apk" "xz" "tar"))
-  (dired-rainbow-define document "#fce94f" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                            "rtf" "djvu" "epub"))
-  (dired-rainbow-define encrypted "LightBlue" ("gpg" "pgp"))
-  (dired-rainbow-define excel "#3465a4" ("xlsx"))
-  (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
-  (dired-rainbow-define html "#4e9a06" ("htm" "html" "xhtml"))
-  (dired-rainbow-define image "#ff4b4b" ("jpg" "png" "jpeg" "gif"))
-  (dired-rainbow-define log "#c17d11" ("log"))
-  (dired-rainbow-define packaged "#e6a8df" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "#fcaf3e" ("py" "c" "cc" "h" "java" "pl"
-                                              "rb" "R" "php" "el" "scm" "cpp"
-                                              "fos" "lisp"))
-  (dired-rainbow-define xml "#b4fa70" ("xml" "xsd" "xsl" "xslt" "wsdl"))
+  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz" "xz"
+                                             "z" "Z" "jar" "war" "ear" "rar"
+                                             "sar" "xpi" "apk" "xz" "tar"))
+  (dired-rainbow-define document "peru" ("doc" "docx" "odt" "pdb" "pdf" "ps"
+                                         "rtf" "djvu" "epub"))
+  (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
+  (dired-rainbow-define excel "turquise" ("xlsx"))
+  (dired-rainbow-define executable "Gold" ("exe" "msi"))
+  (dired-rainbow-define html "Wheat" ("htm" "html" "xhtml"))
+  (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
+  (dired-rainbow-define log "gray" ("log"))
+  (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
+  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
+                                                 "rb" "R" "php" "el" "scm" "cpp"
+                                                 "fos" "lisp"))
+  (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
   ;; Custom file types
   (defconst dired-audio-files-extensions
     '("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV")
@@ -860,7 +860,9 @@
     "Dired Video files extensions.")
   (dired-rainbow-define video "#B3CCFF" dired-video-files-extensions)
   ;; Define faces by file permission
-  (dired-rainbow-define-chmod executable-unix "Green" "-.*x.*"))
+  (dired-rainbow-define-chmod executable-unix "Gold" "-[rw-]+x.*")
+  (dired-rainbow-define-chmod directory-unix "DeepSkyBlue" "d[rw-]+x.*")
+  (dired-rainbow-define-chmod symlink-unix "SpringGreen" "l[rw-]+x.*"))
 
 ;; Dired Subtree
 (require-package 'dired-subtree)
@@ -1223,6 +1225,9 @@
 (require-package 'nov)
 ;; Initialize package
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+;; Configuration
+(after 'nov
+  (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places")))
 
 ;; Macrostep
 (require-package 'macrostep)
