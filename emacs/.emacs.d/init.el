@@ -530,6 +530,11 @@
 ;; Set key bindings
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 (global-set-key (kbd "C-x 4 C-j") #'dired-jump-other-window)
+;; Shorten Dired Omit mode lighter
+(after 'dired-x
+  (add-function :after (symbol-function 'dired-omit-startup)
+                (lambda () (delight 'dired-omit-mode " oT" t))
+                '((name . dired-omit-mode-delight))))
 
 ;; Wdired movement and editable parts
 (after 'wdired
