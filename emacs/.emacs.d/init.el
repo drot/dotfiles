@@ -841,7 +841,9 @@
   (dired-rainbow-define image "#ff4b4b" ("jpg" "png" "jpeg" "gif"))
   (dired-rainbow-define log "#c17d11" ("log"))
   (dired-rainbow-define packaged "#e6a8df" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "#fcaf3e" ("py" "c" "cc" "h" "java" "pl" "rb" "R" "php"))
+  (dired-rainbow-define sourcefile "#fcaf3e" ("py" "c" "cc" "h" "java" "pl"
+                                              "rb" "R" "php" "el" "scm" "cpp"
+                                              "fos" "lisp"))
   (dired-rainbow-define xml "#b4fa70" ("xml" "xsd" "xsl" "xslt" "wsdl"))
   ;; Custom file types
   (defconst dired-audio-files-extensions
