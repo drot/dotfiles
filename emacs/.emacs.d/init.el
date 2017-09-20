@@ -708,7 +708,6 @@
 (global-set-key (kbd "C-c a C") #'calendar)
 ;; Configuration
 (after 'calendar
-  :config
   (setq holiday-general-holidays nil)
   (setq holiday-solar-holidays nil)
   (setq holiday-bahai-holidays nil)
@@ -732,7 +731,7 @@
 (after 'org
   ;; Set key binding
   (define-key org-mode-map (kbd "M-o") #'ace-link-org)
-  :config
+  ;; Customize
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
   (setq org-agenda-files '("~/.emacs.d/org"))
@@ -787,8 +786,6 @@
 (global-set-key (kbd "C-c n j") #'avy-goto-word-or-subword-1)
 ;; Configuration
 (after 'avy
-  :ensure t
-  :config
   (setq avy-all-windows 'all-frames)
   (setq avy-background t)
   (setq avy-highlight-first t))
@@ -1318,20 +1315,6 @@
 
 ;; Systemd mode
 (require-package 'systemd)
-
-;; Treemacs
-(require-package 'treemacs)
-;; Set key binding
-(global-set-key (kbd "C-c f t") #'treemacs-toggle)
-;; Configuration
-(after 'treemacs
-  (setq treemacs-width 25)
-  (setq treemacs-git-integration t)
-  (setq treemacs--persist-file (locate-user-emacs-file "cache/treemacs-persist"))
-  ;; Follow currently opened file
-  (treemacs-follow-mode)
-  ;; Keep notice of file changes
-  (treemacs-filewatch-mode))
 
 ;; Wgrep
 (require-package 'wgrep)
