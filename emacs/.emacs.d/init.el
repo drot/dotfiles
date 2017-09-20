@@ -181,9 +181,6 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
-;; Use Emacs own tooltip implementation
-(setq x-gtk-use-system-tooltips nil)
-
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
 
@@ -525,18 +522,14 @@
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t))
 
-;; Additional features with Dired-x
-(after 'dired
-  ;; Initialize mode
-  (require 'dired-x)
-  ;; Ignore uninteresting files
-  (setq dired-omit-verbose nil)
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
-  ;; Shorten the Dired Omit mode lighter
-  (after 'dired-x
-    (add-function :after (symbol-function 'dired-omit-startup)
-                  (lambda () (delight 'dired-omit-mode " oT" t))
-                  '((name . dired-omit-mode-delight)))))
+;; Autoload dired-x features
+(autoload 'dired-jump "dired-x"
+  "Jump to Dired buffer corresponding to current buffer." t)
+(autoload 'dired-jump-other-window "dired-x"
+  "Like \\[dired-jump] (dired-jump) but in other window." t)
+;; Set key bindings
+(global-set-key (kbd "C-x C-j") #'dired-jump)
+(global-set-key (kbd "C-x 4 C-j") #'dired-jump-other-window)
 
 ;; Wdired movement and editable parts
 (after 'wdired
@@ -800,17 +793,6 @@
   (setq avy-background t)
   (setq avy-highlight-first t))
 
-;; Bookmark+
-(require-package 'bookmark+)
-;; Configuration
-(after 'bookmark
-  ;; Initialize package
-  (require 'bookmark+)
-  (setq bmkp-bmenu-state-file (locate-user-emacs-file "cache/bmkp-bmenu-state.el"))
-  (setq bmkp-bmenu-commands-file (locate-user-emacs-file "cache/bmkp-bmenu-commands.el"))
-  (setq bmkp-auto-light-when-set 'all-in-buffer)
-  (setq bmkp-auto-light-when-jump 'all-in-buffer))
-
 ;; Dash
 (require-package 'dash)
 ;; Configuration
@@ -831,20 +813,113 @@
 (global-set-key (kbd "C-c d P") #'debbugs-org-patches)
 (global-set-key (kbd "C-c d B") #'debbugs-org-bugs)
 
-;; Dired+
-(require-package 'dired+)
+;; Dired Filter
+(require-package 'dired-filter)
 ;; Configuration
-(after 'dired-x
+(after 'dired
   ;; Initialize mode
-  (require 'dired+)
-  ;; Customize
-  (setq diredp-hide-details-initially-flag nil)
-  (setq diredp-hide-details-propagate-flag nil))
+  (require 'dired-filter)
+  ;; Set key bindings
+  (define-key dired-mode-map (kbd "C-.") dired-filter-mark-map))
+
+;; Dired Rainbow
+(require-package 'dired-rainbow)
+;; Configuration
+(after 'dired-filter
+  ;; Initialize mode
+  (require 'dired-rainbow)
+  ;; Define faces by file type
+  (dired-rainbow-define compressed "#ad7fa8" ("zip" "bz2" "tgz" "txz" "gz" "xz"
+                                              "z" "Z" "jar" "war" "ear" "rar"
+                                              "sar" "xpi" "apk" "xz" "tar"))
+  (dired-rainbow-define document "#fce94f" ("doc" "docx" "odt" "pdb" "pdf" "ps"
+                                            "rtf" "djvu" "epub"))
+  (dired-rainbow-define encrypted "LightBlue" ("gpg" "pgp"))
+  (dired-rainbow-define excel "#3465a4" ("xlsx"))
+  (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+  (dired-rainbow-define html "#4e9a06" ("htm" "html" "xhtml"))
+  (dired-rainbow-define image "#ff4b4b" ("jpg" "png" "jpeg" "gif"))
+  (dired-rainbow-define log "#c17d11" ("log"))
+  (dired-rainbow-define packaged "#e6a8df" ("deb" "rpm"))
+  (dired-rainbow-define sourcefile "#fcaf3e" ("py" "c" "cc" "h" "java" "pl" "rb" "R" "php"))
+  (dired-rainbow-define xml "#b4fa70" ("xml" "xsd" "xsl" "xslt" "wsdl"))
+  ;; Custom file types
+  (defconst dired-audio-files-extensions
+    '("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV")
+    "Dired Audio files extensions.")
+  (dired-rainbow-define audio "#329EE8" dired-audio-files-extensions)
+  (defconst dired-video-files-extensions
+    '("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
+      "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
+      "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
+      "asf" "m2v" "m4v" "mpeg" "MPEG" "tp")
+    "Dired Video files extensions.")
+  (dired-rainbow-define video "#B3CCFF" dired-video-files-extensions)
+  ;; Define faces by file permission
+  (dired-rainbow-define-chmod executable-unix "Green" "-.*x.*"))
+
+;; Dired Subtree
+(require-package 'dired-subtree)
+;; Configuration
+(after 'dired-rainbow
+  ;; Initialize mode
+  (require 'dired-subtree)
+  ;; Set key bindings
+  (define-prefix-command 'dired-subtree-map)
+  (define-key dired-subtree-map (kbd "i") #'dired-subtree-insert)
+  (define-key dired-subtree-map (kbd "/") #'dired-subtree-apply-filter)
+  (define-key dired-subtree-map (kbd "k") #'dired-subtree-remove)
+  (define-key dired-subtree-map (kbd "n") #'dired-subtree-next-sibling)
+  (define-key dired-subtree-map (kbd "p") #'dired-subtree-previous-sibling)
+  (define-key dired-subtree-map (kbd "u") #'dired-subtree-up)
+  (define-key dired-subtree-map (kbd "d") #'dired-subtree-down)
+  (define-key dired-subtree-map (kbd "a") #'dired-subtree-beginning)
+  (define-key dired-subtree-map (kbd "e") #'dired-subtree-end)
+  (define-key dired-subtree-map (kbd "c") #'dired-subtree-cycle)
+  (define-key dired-subtree-map (kbd "m") #'dired-subtree-mark-subtree)
+  (define-key dired-subtree-map (kbd "u") #'dired-subtree-unmark-subtree)
+  (define-key dired-subtree-map (kbd "C-f") #'dired-subtree-only-this-file)
+  (define-key dired-subtree-map (kbd "C-d") #'dired-subtree-only-this-directory)
+  (define-key dired-mode-map (kbd "C-,") dired-subtree-map))
+
+;; Dired Ranger
+(require-package 'dired-ranger)
+;; Configuration
+(after 'dired-subtree
+  ;; Initialize mode
+  (require 'dired-ranger)
+  ;; Set key bindings
+  (define-prefix-command 'dired-ranger-map)
+  (define-key dired-ranger-map (kbd "c") #'dired-ranger-copy)
+  (define-key dired-ranger-map (kbd "p") #'dired-ranger-paste)
+  (define-key dired-ranger-map (kbd "m") #'dired-ranger-move)
+  (define-key dired-mode-map (kbd "r") dired-ranger-map)
+  ;; Bookmarking
+  (define-key dired-mode-map (kbd "'") #'dired-ranger-bookmark)
+  (define-key dired-mode-map (kbd "`") #'dired-ranger-bookmark-visit))
+
+;; Dired Narrow
+(require-package 'dired-narrow)
+;; Configuration
+(after 'dired-ranger
+  ;; Initialize mode
+  (require 'dired-narrow)
+  ;; Set key binding
+  (define-key dired-mode-map (kbd "\\") #'dired-narrow))
+
+;; Dired Collapse
+(require-package 'dired-collapse)
+;; Configuration
+(after 'dired-ranger
+  ;; Initialize mode
+  (require 'dired-collapse)
+  ;; Set key binding
+  (define-key dired-mode-map (kbd ",") #'dired-collapse-mode))
 
 ;; Dired Async
 (require-package 'async)
 ;; Configuration
-(after 'dired+
+(after 'dired-collapse
   ;; Initialize mode
   (require 'dired-async)
   ;; Shorten mode lighter
@@ -1003,8 +1078,9 @@
 
 ;; Info+
 (require-package 'info+)
-;; Initialize package
+;; Configuration
 (after 'info
+  ;; Initialize package
   (require 'info+))
 
 ;; JavaScript mode
