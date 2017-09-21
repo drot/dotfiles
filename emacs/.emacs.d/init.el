@@ -1036,7 +1036,6 @@
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
     (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0))
-
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
 
   ;; Enable notifications
@@ -1593,7 +1592,6 @@
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
-
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
 
   ;; Disable Electric Pair mode when Paredit is active
