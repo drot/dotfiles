@@ -1222,7 +1222,12 @@
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 ;; Configuration
 (after 'nov
-  (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places")))
+  (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
+  ;; Change default font
+  (defun drot|nov-font-setup ()
+    (face-remap-add-relative 'variable-pitch :family "Noto Serif"
+                             :height 1.0))
+  (add-hook 'nov-mode-hook 'drot|nov-font-setup))
 
 ;; Macrostep
 (require-package 'macrostep)
