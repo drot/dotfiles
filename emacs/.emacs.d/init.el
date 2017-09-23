@@ -639,8 +639,8 @@
   (setq eshell-cmpl-ignore-case t)
   ;; Use Pcomplete alternate completion
   (add-hook 'eshell-mode-hook
-            (lambda () (define-key eshell-mode-map (kbd "<tab>")
-                         (lambda () (interactive) (pcomplete-std-complete))))))
+            (lambda () (bind-key "<tab>"
+                                 (lambda () (interactive) (pcomplete-std-complete)) eshell-mode-map))))
 
 ;; Eshell smart display
 (after 'eshell
@@ -834,7 +834,7 @@
   ;; Shorten mode lighter
   (delight 'dired-filter-mode " fR" t)
   ;; Set key bindings
-  (define-key dired-mode-map (kbd "\\") dired-filter-mark-map))
+  (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
 ;; Dired Rainbow
 (require-package 'dired-rainbow)
@@ -1088,7 +1088,7 @@
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
 (bind-key "C-c i e" #'iedit-mode)
-(bind-key "C-i" #'iedit-mode-from-isearch isearch-mode-map)
+(bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
 (bind-key "C-;" #'iedit-execute-last-modification esc-map)
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
 ;; Configuration
