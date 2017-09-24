@@ -1303,14 +1303,8 @@
 ;; SLIME REPL
 (after 'slime
   (require 'slime-repl)
-  ;; Set key bindings
-  (bind-keys :map slime-repl-mode-map
-             ("C-c M-r" . slime-repl-previous-matching-input)
-             ("C-c M-s" . slime-repl-next-matching-input))
-  ;; Disable conflicting key bindings
-  (unbind-key "DEL" slime-repl-mode-map)
-  (unbind-key "M-r" slime-repl-mode-map)
-  (unbind-key "M-s" slime-repl-mode-map))
+  ;; Disable conflicting key binding
+  (unbind-key "DEL" slime-repl-mode-map))
 
 ;; SLIME Company
 (require-package 'slime-company)
@@ -1597,6 +1591,109 @@
 (after 'paredit
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
+  ;; Set key bindings
+  (bind-keys :map paredit-mode-map
+             ("M-S" . paredit-splice-sexp)
+             ("M-R" . paredit-raise-sexp)
+             ("C-c C-M-s" . paredit-mark-containing-sexp))
+  ;; Disable conflicting key bindings
+  (unbind-key "M-r" paredit-mode-map)
+  (unbind-key "M-s" paredit-mode-map)
+
+  ;; Extra Paredit functions
+  (defun paredit-mark-containing-sexp ()
+    (interactive)
+    (paredit-backward-up)
+    (mark-sexp))
+
+  (defun paredit-barf-all-the-way-backward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-backward-down)
+    (paredit-splice-sexp))
+
+  (defun paredit-barf-all-the-way-forward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-forward-down)
+    (paredit-splice-sexp)
+    (if (eolp) (delete-horizontal-space)))
+
+  (defun paredit-slurp-all-the-way-backward ()
+    (interactive)
+    (catch 'done
+      (while (not (bobp))
+        (save-excursion
+          (paredit-backward-up)
+          (if (eq (char-before) ?\()
+              (throw 'done t)))
+        (paredit-backward-slurp-sexp))))
+
+  (defun paredit-slurp-all-the-way-forward ()
+    (interactive)
+    (catch 'done
+      (while (not (eobp))
+        (save-excursion
+          (paredit-forward-up)
+          (if (eq (char-after) ?\))
+              (throw 'done t)))
+        (paredit-forward-slurp-sexp))))
+
+  (defun paredit--is-at-start-of-sexp ()
+    (and (looking-at "(\\|\\[")
+         (not (nth 3 (syntax-ppss)))   ;; Inside string
+         (not (nth 4 (syntax-ppss))))) ;; Inside comment
+
+  (defun paredit-duplicate-closest-sexp ()
+    (interactive)
+    ;; Skips to start of current sexp
+    (while (not (paredit--is-at-start-of-sexp))
+      (paredit-backward))
+    (set-mark-command nil)
+    ;; While we find sexps we move forward on the line
+    (while (and (bounds-of-thing-at-point 'sexp)
+                (<= (point) (car (bounds-of-thing-at-point 'sexp)))
+                (not (= (point) (line-end-position))))
+      (forward-sexp)
+      (while (looking-at " ")
+        (forward-char)))
+    (kill-ring-save (mark) (point))
+    ;; Go to the next line and copy the sexps we encountered
+    (paredit-newline)
+    (yank)
+    (exchange-point-and-mark))
+
+  (nconc paredit-commands
+         '("Extreme Barfage & Slurpage"
+           (("C-M-)")
+            paredit-slurp-all-the-way-forward
+            ("(foo (bar |baz) quux zot)"
+             "(foo (bar |baz quux zot))")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-}")
+            paredit-barf-all-the-way-forward
+            ("(foo (bar |baz quux) zot)"
+             "(foo (bar|) baz quux zot)"))
+           (("C-M-(")
+            paredit-slurp-all-the-way-backward
+            ("(foo bar (baz| quux) zot)"
+             "((foo bar baz| quux) zot)")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-{")
+            paredit-barf-all-the-way-backward
+            ("(foo (bar baz |quux) zot)"
+             "(foo bar baz (|quux) zot)"))
+           (("C-M->")
+            paredit-duplicate-closest-sexp
+            ("(foo | bar)"
+             "(foo bar)(foo bar)"))))
+
+  (paredit-define-keys)
+  (paredit-annotate-mode-with-examples)
+  (paredit-annotate-functions-with-examples)
+
   ;; Enable Paredit in other related modes
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
