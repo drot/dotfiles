@@ -75,21 +75,6 @@
 ;; Use Delight for mode name shortening
 (require-package 'delight)
 
-;; Undo Tree
-(require-package 'undo-tree)
-;; Initialize mode
-(global-undo-tree-mode)
-;; Shorten mode lighter
-(delight 'undo-tree-mode " uT" t)
-;; Configuration
-(setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-visualizer-timestamps t)
-(setq undo-tree-visualizer-relative-timestamps t)
-;; Compress Undo Tree history files by default
-(advice-add 'undo-tree-make-history-save-file-name :filter-return
-            (lambda (return-value) (concat return-value ".gz")))
-
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
 (load-theme 'sanityinc-tomorrow-night t)
@@ -227,6 +212,23 @@
 ;; Do not save duplicates
 (setq history-delete-duplicates t)
 (setq kill-do-not-save-duplicates t)
+
+;; Undo Tree
+(require-package 'undo-tree)
+ ;; Initialize mode
+(add-hook 'after-init-hook #'global-undo-tree-mode)
+;; Configuration
+(after 'undo-tree
+  ;; Shorten mode lighter
+  (delight 'undo-tree-mode " uT" t)
+  ;; Customize
+  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-relative-timestamps t)
+  ;; Compress Undo Tree history files by default
+  (advice-add 'undo-tree-make-history-save-file-name :filter-return
+              (lambda (return-value) (concat return-value ".gz"))))
 
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
@@ -1420,14 +1422,15 @@
                            (company-dabbrev-code company-gtags company-etags company-keywords)
                            company-dabbrev))
   (setq company-minimum-prefix-length 2)
-  (setq company-require-match 'never)
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t)
   (setq company-selection-wrap-around t)
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-other-buffers nil)
-  (setq company-dabbrev-ignore-case t))
+  (setq company-dabbrev-ignore-case t)
+  ;; Insert candidate as soon as it's selected
+  (company-tng-configure-default))
 
 ;; Company Anaconda
 (require-package 'company-anaconda)
@@ -1438,9 +1441,9 @@
 ;; Company Statistics
 (require-package 'company-statistics)
 ;; Initialize mode
-(add-hook 'global-company-mode-hook #'company-statistics-mode)
+(add-hook 'after-init-hook #'company-statistics-mode)
 ;; Configuration
-(after 'company-statistics
+(after 'company
   (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
 
 ;; Diff-Hl
