@@ -215,7 +215,7 @@
 
 ;; Undo Tree
 (require-package 'undo-tree)
- ;; Initialize mode
+;; Initialize mode
 (add-hook 'after-init-hook #'global-undo-tree-mode)
 ;; Configuration
 (after 'undo-tree
@@ -640,9 +640,15 @@
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
   ;; Use Pcomplete alternate completion
-  (add-hook 'eshell-mode-hook
-            (lambda () (bind-key "<tab>"
-                                 (lambda () (interactive) (pcomplete-std-complete)) eshell-mode-map))))
+  (defun drot|eshell-complete ()
+    (interactive)
+    (pcomplete-std-complete))
+  ;; Custom hook to avoid conflicts
+  (defun drot|eshell-mode-hook ()
+    "Use alternate TAB completion and disable Company in Eshell buffers."
+    (bind-key "<tab>" #'drot|eshell-complete eshell-mode-map)
+    (company-mode 0))
+  (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
 (after 'eshell
