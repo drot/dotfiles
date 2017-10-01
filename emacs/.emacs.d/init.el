@@ -91,12 +91,6 @@
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
 
-;; Enable window dividers
-(setq window-divider-default-places t)
-(setq window-divider-default-bottom-width 1)
-(setq window-divider-default-right-width 1)
-(window-divider-mode)
-
 ;; Show column number and buffer size on the mode line
 (column-number-mode)
 (size-indication-mode)
