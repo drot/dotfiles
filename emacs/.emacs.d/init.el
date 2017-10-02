@@ -779,6 +779,9 @@
 (bind-key [remap other-window] #'ace-window)
 ;; Configuration
 (after 'ace-window
+  ;; Shorten mode lighter
+  (delight 'ace-window-mode " aW" t)
+  ;; Customize
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Anaconda mode
