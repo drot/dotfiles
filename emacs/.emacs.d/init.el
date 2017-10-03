@@ -434,11 +434,7 @@
 ;; ElDoc mode configuration
 (after 'eldoc
   ;; Shorten mode lighter
-  (delight 'eldoc-mode " eD" t)
-  ;; Make compatible with Paredit
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round))
+  (delight 'eldoc-mode " eD" t))
 
 ;; Python mode configuration
 (after 'python
@@ -744,6 +740,9 @@
 (bind-key "C-c o t" #'org-todo-list)
 (bind-key "C-c o s" #'org-search-view)
 (bind-key "C-c o l" #'org-store-link)
+;; Autoload missing function
+(autoload 'org-narrow-to-subtree "org"
+  "Narrow buffer to the current subtree.")
 ;; Configuration
 (after 'org
   ;; Set key binding
@@ -1265,11 +1264,13 @@
 
 ;; Markdown mode
 (require-package 'markdown-mode)
+;; Initialize mode
+(add-hook 'markdown-mode-hook #'whitespace-mode)
+(add-hook 'markdown-mode-hook #'tildify-mode)
+(add-hook 'markdown-mode-hook #'visual-line-mode)
 ;; Configuration
 (after 'markdown-mode
-  (add-hook 'markdown-mode-hook #'whitespace-mode)
-  (add-hook 'markdown-mode-hook #'tildify-mode)
-  (add-hook 'markdown-mode-hook #'visual-line-mode))
+  (setq markdown-fontify-code-blocks-natively t))
 
 ;; Move-text
 (require-package 'move-text)
@@ -1583,8 +1584,8 @@
 (after 'swiper
   (setq swiper-include-line-number-in-search t))
 
-;; Paredit
-(require-package 'paredit)
+;; Lispy
+(require-package 'lispy)
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
@@ -1592,132 +1593,42 @@
                 scheme-mode-hook
                 slime-repl-mode-hook
                 geiser-repl-mode-hook))
-  (add-hook hook #'enable-paredit-mode))
+  (add-hook hook #'lispy-mode))
 ;; Configuration
-(after 'paredit
-  ;; Shorten mode lighter
-  (delight 'paredit-mode " pE" t)
+(after 'lispy
+  ;; Use Paredit key bindings
+  (lispy-set-key-theme '(special paredit c-digits))
   ;; Set key bindings
-  (bind-keys :map paredit-mode-map
-             ("M-S" . paredit-splice-sexp)
-             ("M-R" . paredit-raise-sexp)
-             ("C-c C-M-s" . paredit-mark-containing-sexp))
+  (bind-keys :map lispy-mode-map
+             ("M-S" . lispy-splice)
+             ("M-R" . lispy-raise))
   ;; Disable conflicting key bindings
-  (unbind-key "M-r" paredit-mode-map)
-  (unbind-key "M-s" paredit-mode-map)
+  (unbind-key "M-r" lispy-mode-map)
+  (unbind-key "M-s" lispy-mode-map)
 
-  ;; Extra Paredit functions
-  (defun paredit-mark-containing-sexp ()
-    (interactive)
-    (paredit-backward-up)
-    (mark-sexp))
-
-  (defun paredit-barf-all-the-way-backward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-backward-down)
-    (paredit-splice-sexp))
-
-  (defun paredit-barf-all-the-way-forward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-forward-down)
-    (paredit-splice-sexp)
-    (if (eolp) (delete-horizontal-space)))
-
-  (defun paredit-slurp-all-the-way-backward ()
-    (interactive)
-    (catch 'done
-      (while (not (bobp))
-        (save-excursion
-          (paredit-backward-up)
-          (if (eq (char-before) ?\()
-              (throw 'done t)))
-        (paredit-backward-slurp-sexp))))
-
-  (defun paredit-slurp-all-the-way-forward ()
-    (interactive)
-    (catch 'done
-      (while (not (eobp))
-        (save-excursion
-          (paredit-forward-up)
-          (if (eq (char-after) ?\))
-              (throw 'done t)))
-        (paredit-forward-slurp-sexp))))
-
-  (defun paredit--is-at-start-of-sexp ()
-    (and (looking-at "(\\|\\[")
-         (not (nth 3 (syntax-ppss)))   ;; Inside string
-         (not (nth 4 (syntax-ppss))))) ;; Inside comment
-
-  (defun paredit-duplicate-closest-sexp ()
-    (interactive)
-    ;; Skips to start of current sexp
-    (while (not (paredit--is-at-start-of-sexp))
-      (paredit-backward))
-    (set-mark-command nil)
-    ;; While we find sexps we move forward on the line
-    (while (and (bounds-of-thing-at-point 'sexp)
-                (<= (point) (car (bounds-of-thing-at-point 'sexp)))
-                (not (= (point) (line-end-position))))
-      (forward-sexp)
-      (while (looking-at " ")
-        (forward-char)))
-    (kill-ring-save (mark) (point))
-    ;; Go to the next line and copy the sexps we encountered
-    (paredit-newline)
-    (yank)
-    (exchange-point-and-mark))
-
-  (nconc paredit-commands
-         '("Extreme Barfage & Slurpage"
-           (("C-M-)")
-            paredit-slurp-all-the-way-forward
-            ("(foo (bar |baz) quux zot)"
-             "(foo (bar |baz quux zot))")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-}")
-            paredit-barf-all-the-way-forward
-            ("(foo (bar |baz quux) zot)"
-             "(foo (bar|) baz quux zot)"))
-           (("C-M-(")
-            paredit-slurp-all-the-way-backward
-            ("(foo bar (baz| quux) zot)"
-             "((foo bar baz| quux) zot)")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-{")
-            paredit-barf-all-the-way-backward
-            ("(foo (bar baz |quux) zot)"
-             "(foo bar baz (|quux) zot)"))
-           (("C-M->")
-            paredit-duplicate-closest-sexp
-            ("(foo | bar)"
-             "(foo bar)(foo bar)"))))
-
-  (paredit-define-keys)
-  (paredit-annotate-mode-with-examples)
-  (paredit-annotate-functions-with-examples)
-
-  ;; Enable Paredit in other related modes
-  (defvar drot--paredit-minibuffer-setup-commands
+  ;; Enable Lispy in other related modes
+  (defvar drot--lispy-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
       ibuffer-do-eval
       ibuffer-do-view-and-eval)
-    "Interactive commands for which Paredit should be enabled in the minibuffer.")
+    "Interactive commands for which Lispy should be enabled in the minibuffer.")
 
-  (defun drot|paredit-minibuffer-setup ()
-    "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot--paredit-minibuffer-setup-commands)
-        (enable-paredit-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
+  (defun drot|lispy-minibuffer-setup ()
+    "Enable Lispy during lisp-related minibuffer commands."
+    (if (memq this-command drot--lispy-minibuffer-setup-commands)
+        (lispy-mode)))
+  (add-hook 'minibuffer-setup-hook #'drot|lispy-minibuffer-setup)
 
-  ;; Disable Electric Pair mode when Paredit is active
-  (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil))))
+  ;; Enable additional balance safeguards
+  (setq lispy-safe-delete t)
+  (setq lispy-safe-copy t)
+  (setq lispy-safe-paste t)
+  (setq lispy-safe-actions-no-pull-delimiters-into-comments t)
+
+  ;; Prefer single comment
+  (setq lispy-comment-use-single-semicolon t))
 
 ;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
@@ -1802,7 +1713,7 @@
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
-    "C-c o" "organisation"
+    "C-c o" "organization"
     "C-c p t" "hl-todo"
     "C-c p" "project"
     "C-c s" "search-and-symbols"
