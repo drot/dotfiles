@@ -1627,7 +1627,7 @@
   (setq lispy-safe-paste t)
   (setq lispy-safe-actions-no-pull-delimiters-into-comments t)
 
-  ;; Prefer single comment
+  ;; Prefer single semicolons at the right
   (setq lispy-comment-use-single-semicolon t))
 
 ;; Rainbow Delimiters
