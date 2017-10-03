@@ -1264,12 +1264,12 @@
 
 ;; Markdown mode
 (require-package 'markdown-mode)
-;; Initialize mode
-(add-hook 'markdown-mode-hook #'whitespace-mode)
-(add-hook 'markdown-mode-hook #'tildify-mode)
-(add-hook 'markdown-mode-hook #'visual-line-mode)
 ;; Configuration
 (after 'markdown-mode
+  (add-hook 'markdown-mode-hook #'whitespace-mode)
+  (add-hook 'markdown-mode-hook #'tildify-mode)
+  (add-hook 'markdown-mode-hook #'visual-line-mode)
+  ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t))
 
 ;; Move-text
