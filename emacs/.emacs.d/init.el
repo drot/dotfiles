@@ -1505,7 +1505,7 @@
 
 ;; Hl-Todo
 (require-package 'hl-todo)
-;; Initialize -mode
+;; Initialize mode
 (add-hook 'prog-mode-hook #'hl-todo-mode)
 ;; Configuration
 (after 'hl-todo
