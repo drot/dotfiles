@@ -809,6 +809,9 @@
   (setq avy-background t)
   (setq avy-highlight-first t))
 
+;; CIDER
+(require-package 'cider)
+
 ;; Dash
 (require-package 'dash)
 ;; Configuration
@@ -1590,6 +1593,8 @@
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
                 ielm-mode-hook
+                clojure-mode-hook
+                cider-repl-mode-hook
                 scheme-mode-hook
                 slime-repl-mode-hook
                 geiser-repl-mode-hook))
