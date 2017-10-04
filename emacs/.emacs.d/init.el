@@ -117,6 +117,9 @@
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
+;; Disable tooltips
+(tooltip-mode -1)
+
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t)
 (setq read-buffer-completion-ignore-case t)
