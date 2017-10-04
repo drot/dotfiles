@@ -811,6 +811,11 @@
 
 ;; CIDER
 (require-package 'cider)
+;; Configuration
+(after 'cider-repl
+  ;; Enable persistent history
+  (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
+  (setq cider-repl-wrap-history))
 
 ;; Dash
 (require-package 'dash)
