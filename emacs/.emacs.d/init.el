@@ -812,10 +812,22 @@
 ;; CIDER
 (require-package 'cider)
 ;; Configuration
+(after 'cider-common
+  ;; Use the symbol at point as the default value
+  (setq cider-prompt-for-symbol nil))
+;; Mode configuration
+(after 'cider-mode
+  ;; Enable fuzzy completion with Company
+  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+;; REPL configuration
 (after 'cider-repl
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
-  (setq cider-repl-wrap-history))
+  (setq cider-repl-wrap-history t)
+  ;; Enable fuzzy completion with Company
+  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+  ;; Enable SubWord mode
+  (add-hook 'cider-repl-mode-hook #'subword-mode))
 
 ;; Dash
 (require-package 'dash)
@@ -1637,7 +1649,7 @@
   (setq lispy-safe-paste t)
   (setq lispy-safe-actions-no-pull-delimiters-into-comments t)
 
-  ;; Prefer single semicolons at the right
+  ;; Prefer single semicolons on the right
   (setq lispy-comment-use-single-semicolon t))
 
 ;; Rainbow Delimiters
@@ -1645,6 +1657,7 @@
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
+                clojure-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
 
