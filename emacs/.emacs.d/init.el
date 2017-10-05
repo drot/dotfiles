@@ -519,7 +519,7 @@
 
 ;; Dired configuration
 (after 'dired
-  (setq dired-listing-switches "-ahlF")
+  (setq dired-listing-switches "-ahlF --group-directories-first")
   (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t))
@@ -1265,7 +1265,9 @@
   (defun drot|nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
-  (add-hook 'nov-mode-hook 'drot|nov-font-setup))
+  (add-hook 'nov-mode-hook 'drot|nov-font-setup)
+  ;; Text filling
+  (setq nov-text-width 80))
 
 ;; Macrostep
 (require-package 'macrostep)
