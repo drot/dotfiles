@@ -620,7 +620,7 @@
   (setq speedbar-directory-unshown-regexp "^$")
   ;; Don't ignore the following extensions
   (speedbar-add-supported-extension
-   '("PKGBUILD" ".lisp" ".lua" ".css" ".patch"
+   '("PKGBUILD" ".lisp" ".clj" ".lua" ".css" ".patch"
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
@@ -882,7 +882,7 @@
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
   (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
                                                  "rb" "R" "php" "el" "scm" "cpp"
-                                                 "fos" "lisp"))
+                                                 "fos" "lisp" "clj"))
   (dired-rainbow-define video "#B3CCFF" ("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
                                          "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
                                          "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
