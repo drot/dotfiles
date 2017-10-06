@@ -959,10 +959,21 @@
   ;; Set key binding
   (bind-key "," #'dired-collapse-mode dired-mode-map))
 
+;; Dired-du
+(require-package 'dired-du)
+;; Configuration
+(after 'dired-collapse
+  ;; Initialize mode
+  (require 'dired-du)
+  ;; Shorten mode lighter
+  (delight 'dired-du-mode " dU" t)
+  ;; Use human readable output by default
+  (setq dired-du-size-format t))
+
 ;; Dired Async
 (require-package 'async)
 ;; Configuration
-(after 'dired-collapse
+(after 'dired-du
   ;; Initialize mode
   (require 'dired-async)
   ;; Shorten mode lighter
@@ -1449,6 +1460,7 @@
                            (company-dabbrev-code company-gtags company-etags company-keywords)
                            company-dabbrev))
   (setq company-minimum-prefix-length 2)
+  (setq company-require-match 'never)
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t)
   (setq company-selection-wrap-around t)
