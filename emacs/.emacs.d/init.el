@@ -966,7 +966,7 @@
   ;; Initialize mode
   (require 'dired-du)
   ;; Shorten mode lighter
-  (delight 'dired-du-mode " dU" t)
+  (delight 'dired-du-mode " d-U" t)
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
