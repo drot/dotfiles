@@ -17,22 +17,27 @@ theme.icon_theme = "Numix-Square"
 
 theme.wallpaper = themes_path.."themes/tomorrow/background.png"
 
-theme.bg_normal = "#282a2e"
-theme.bg_focus = "#cc6666"
+theme.bg_normal = "#1d1f21"
+theme.bg_focus = "#282a2e"
 theme.bg_urgent = "#f0c674"
 theme.bg_minimize = "#373b41"
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#c5c8c6"
-theme.fg_focus = "#1d1f21"
+theme.fg_focus = "#81a2be"
 theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#969896"
 
+-- Window borders
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(1)
-theme.border_normal = "#1d1f21"
-theme.border_focus = theme.bg_focus
+theme.border_normal = "#282a2e"
+theme.border_focus = "#969896"
 theme.border_marked = "#f0c674"
+
+-- Wibox
+theme.wibar_border_width = dpi(1)
+theme.wibar_border_color = theme.border_normal
 
 -- Generate taglist squares
 local taglist_square_size = dpi(6)
@@ -47,7 +52,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path.."themes/tomorrow/icons/menu/submenu.png"
-theme.menu_height = dpi(21)
+theme.menu_height = dpi(24)
 theme.menu_width = dpi(126)
 
 -- You can add as many variables as
@@ -82,27 +87,25 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."themes/tomorrow/
 theme.titlebar_maximized_button_normal_active = themes_path.."themes/tomorrow/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."themes/tomorrow/icons/titlebar/maximized_focus_active.png"
 
--- Layout
-theme.layout_fairh = themes_path.."themes/tomorrow/icons/layouts/fairhw.png"
-theme.layout_fairv = themes_path.."themes/tomorrow/icons/layouts/fairvw.png"
-theme.layout_floating  = themes_path.."themes/tomorrow/icons/layouts/floatingw.png"
-theme.layout_magnifier = themes_path.."themes/tomorrow/icons/layouts/magnifierw.png"
-theme.layout_max = themes_path.."themes/tomorrow/icons/layouts/maxw.png"
-theme.layout_fullscreen = themes_path.."themes/tomorrow/icons/layouts/fullscreenw.png"
-theme.layout_tilebottom = themes_path.."themes/tomorrow/icons/layouts/tilebottomw.png"
-theme.layout_tileleft   = themes_path.."themes/tomorrow/icons/layouts/tileleftw.png"
-theme.layout_tile = themes_path.."themes/tomorrow/icons/layouts/tilew.png"
-theme.layout_tiletop = themes_path.."themes/tomorrow/icons/layouts/tiletopw.png"
-theme.layout_spiral  = themes_path.."themes/tomorrow/icons/layouts/spiralw.png"
-theme.layout_dwindle = themes_path.."themes/tomorrow/icons/layouts/dwindlew.png"
-theme.layout_cornernw = themes_path.."themes/tomorrow/icons/layouts/cornernww.png"
-theme.layout_cornerne = themes_path.."themes/tomorrow/icons/layouts/cornernew.png"
-theme.layout_cornersw = themes_path.."themes/tomorrow/icons/layouts/cornersww.png"
-theme.layout_cornerse = themes_path.."themes/tomorrow/icons/layouts/cornersew.png"
+-- Layouts
+theme.layout_cornerne = themes_path.."themes/tomorrow/icons/layouts/cornerne.png"
+theme.layout_cornernw = themes_path.."themes/tomorrow/icons/layouts/cornernw.png"
+theme.layout_cornerse = themes_path.."themes/tomorrow/icons/layouts/cornerse.png"
+theme.layout_cornersw = themes_path.."themes/tomorrow/icons/layouts/cornersw.png"
+theme.layout_dwindle = themes_path.."themes/tomorrow/icons/layouts/dwindle.png"
+theme.layout_fairh = themes_path.."themes/tomorrow/icons/layouts/fairh.png"
+theme.layout_fairv = themes_path.."themes/tomorrow/icons/layouts/fairv.png"
+theme.layout_floating  = themes_path.."themes/tomorrow/icons/layouts/floating.png"
+theme.layout_fullscreen = themes_path.."themes/tomorrow/icons/layouts/fullscreen.png"
+theme.layout_magnifier = themes_path.."themes/tomorrow/icons/layouts/magnifier.png"
+theme.layout_max = themes_path.."themes/tomorrow/icons/layouts/max.png"
+theme.layout_spiral  = themes_path.."themes/tomorrow/icons/layouts/spiral.png"
+theme.layout_tilebottom = themes_path.."themes/tomorrow/icons/layouts/tilebottom.png"
+theme.layout_tileleft   = themes_path.."themes/tomorrow/icons/layouts/tileleft.png"
+theme.layout_tile = themes_path.."themes/tomorrow/icons/layouts/tile.png"
+theme.layout_tiletop = themes_path.."themes/tomorrow/icons/layouts/tiletop.png"
 
--- Generate Awesome icon
-theme.awesome_icon = theme_assets.awesome_icon(
-   theme.menu_height, theme.bg_focus, theme.fg_focus
-)
+-- Awesome icon
+theme.awesome_icon = themes_path.."themes/tomorrow/icons/awesome.png"
 
 return theme
