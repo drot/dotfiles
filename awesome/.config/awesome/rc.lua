@@ -141,17 +141,62 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
+-- Create a separator widget
+local separator = wibox.widget.textbox()
+separator:set_markup(" <span foreground='#f0c674'></span> ")
+
 -- Create a CPU usage icon widget
 local cpu_icon = wibox.widget {
    image = beautiful.widget_cpu,
    widget = wibox.widget.imagebox
 }
 
+-- Create CPU usage widgets
+local cpu_text = wibox.widget {
+   widget = wibox.widget.textbox
+}
+
+-- Enable caching
+vicious.cache(vicious.widgets.cpu)
+-- Register widgets
+vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 2)
+-- vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 2)
+
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
    image = beautiful.widget_memory,
    widget = wibox.widget.imagebox
 }
+
+-- Create memory usage widgets
+local memory_text = wibox.widget {
+   widget = wibox.widget.textbox
+}
+
+local memory_bar = wibox.widget {
+   {
+      max_value = 1,
+      value = 0.5,
+      forced_height = 12,
+      margins = {
+         left = 2,
+         right = 2,
+      },
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_width  = 2,
+      border_color  = beautiful.border_normal,
+      widget = wibox.widget.progressbar,
+   },
+   direction = "east",
+   layout = wibox.container.rotate,
+}
+
+-- Enable caching
+vicious.cache(vicious.widgets.mem)
+-- Register widgets
+vicious.register(memory_text, vicious.widgets.mem, "$1%", 4)
+vicious.register(memory_bar, vicious.widgets.mem, "$1", 4)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -164,18 +209,22 @@ local temperature_text = wibox.widget {
    widget = wibox.widget.textbox
 }
 
-local temperature_graph = wibox.widget {
+local temperature_bar = wibox.widget {
    {
       max_value = 1,
       value = 0.5,
-      forced_width = 12,
+      forced_height = 12,
       margins = {
          left = 2,
          right = 2,
       },
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_width  = 2,
+      border_color  = beautiful.border_normal,
       widget = wibox.widget.progressbar,
    },
-   direction = 'east',
+   direction = "east",
    layout = wibox.container.rotate,
 }
 
@@ -183,7 +232,7 @@ local temperature_graph = wibox.widget {
 vicious.cache(vicious.widgets.thermal)
 -- Register widgets
 vicious.register(temperature_text, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
-vicious.register(temperature_graph, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
@@ -294,10 +343,16 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
+            cpu_text,
+            separator,
             memory_icon,
+            memory_text,
+            memory_bar,
+            separator,
             temperature_icon,
             temperature_text,
-            temperature_graph,
+            temperature_bar,
+            separator,
             clock_icon,
             clock_text,
             wibox.widget.systray(),
