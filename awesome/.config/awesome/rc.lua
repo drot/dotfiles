@@ -44,16 +44,16 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "st"
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
+local terminal = "st"
+local editor = os.getenv("EDITOR") or "nano"
+local editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -93,28 +93,28 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myworkmenu = {
+local myworkmenu = {
    { "Terminal", terminal, beautiful.menu_term },
    { "Emacs", "emacsclient -c", beautiful.menu_emacs }
 }
 
-mywebmenu = {
+local mywebmenu = {
    { "Firefox", "firefox", beautiful.menu_browser },
    { "Skype", "skype", beautiful.menu_skype }
 }
 
-myofficemenu = {
+local myofficemenu = {
    { "Writer", "lowriter", beautiful.menu_writer },
    { "GIMP", "gimp", beautiful.menu_gimp },
    { "Zathura", "zathura", beautiful.menu_pdf }
 }
 
-myutilmenu = {
+local myutilmenu = {
    { "Thunar", "thunar", beautiful.menu_fman },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
 }
 
-myawesomemenu = {
+local myawesomemenu = {
    { "Hotkeys", function() return false, hotkeys_popup.show_help end, beautiful.menu_hotkeys },
    { "Manual", terminal .. " -e man awesome", beautiful.menu_manual },
    { "Edit config", editor_cmd .. " " .. awesome.conffile, beautiful.menu_edit },
@@ -122,17 +122,17 @@ myawesomemenu = {
    { "Quit", function() awesome.quit() end, beautiful.menu_quit }
 }
 
-mymainmenu = awful.menu({ items = {
-                             { "Work", myworkmenu, beautiful.menu_work },
-                             { "Web", mywebmenu, beautiful.menu_web },
-                             { "Office", myofficemenu, beautiful.menu_office },
-                             { "Utilities", myutilmenu, beautiful.menu_util },
-                             { "awesome", myawesomemenu, beautiful.awesome_icon }
+local mymainmenu = awful.menu({ items = {
+                                   { "Work", myworkmenu, beautiful.menu_work },
+                                   { "Web", mywebmenu, beautiful.menu_web },
+                                   { "Office", myofficemenu, beautiful.menu_office },
+                                   { "Utilities", myutilmenu, beautiful.menu_util },
+                                   { "awesome", myawesomemenu, beautiful.awesome_icon }
 }
-                       })
+                             })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                           menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -248,6 +248,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             clock_icon,
             clock_text,
+            wibox.widget.systray(),
          },
       }
 end)
@@ -262,7 +263,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
+local globalkeys = gears.table.join(
    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
       {description="show help", group="awesome"}),
    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -362,7 +363,7 @@ globalkeys = gears.table.join(
       {description = "show the menubar", group = "launcher"})
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
    awful.key({ modkey,           }, "f",
       function (c)
          c.fullscreen = not c.fullscreen
@@ -456,7 +457,7 @@ for i = 1, 9 do
    )
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),
    awful.button({ modkey }, 3, awful.mouse.client.resize))
@@ -576,7 +577,7 @@ client.connect_signal("request::titlebars", function(c)
                                layout = wibox.layout.fixed.horizontal()
                             },
                             layout = wibox.layout.align.horizontal
-                                                   }
+                                                                }
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
