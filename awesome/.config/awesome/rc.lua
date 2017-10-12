@@ -148,6 +148,8 @@ local clock_icon = wibox.widget {
 
 -- Create a text clock widget
 local clock_text = wibox.widget.textclock("%d-%m/%H:%M")
+local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
+month_calendar:attach(clock_text, "br")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -554,7 +556,7 @@ client.connect_signal("request::titlebars", function(c)
                             end)
                          )
 
-                         awful.titlebar(c, { size=24 }) : setup {
+                         awful.titlebar(c, { size = 24 }) : setup {
                             { -- Left
                                awful.titlebar.widget.iconwidget(c),
                                buttons = buttons,
