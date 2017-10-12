@@ -13,6 +13,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+-- Vicious widget library
+local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -139,10 +141,53 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
+-- Create a CPU usage icon widget
+local cpu_icon = wibox.widget {
+   image = beautiful.widget_cpu,
+   widget = wibox.widget.imagebox
+}
+
+-- Create a memory usage icon widget
+local memory_icon = wibox.widget {
+   image = beautiful.widget_memory,
+   widget = wibox.widget.imagebox
+}
+
+-- Create a temperature icon widget
+local temperature_icon = wibox.widget {
+   image = beautiful.widget_temperature,
+   widget = wibox.widget.imagebox
+}
+
+-- Create temperature widgets
+local temperature_text = wibox.widget {
+   widget = wibox.widget.textbox
+}
+
+local temperature_graph = wibox.widget {
+   {
+      max_value = 1,
+      value = 0.5,
+      forced_width = 12,
+      margins = {
+         left = 2,
+         right = 2,
+      },
+      widget = wibox.widget.progressbar,
+   },
+   direction = 'east',
+   layout = wibox.container.rotate,
+}
+
+-- Enable caching
+vicious.cache(vicious.widgets.thermal)
+-- Register widgets
+vicious.register(temperature_text, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
+vicious.register(temperature_graph, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
+
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
    image = beautiful.widget_clock,
-   resize = false,
    widget = wibox.widget.imagebox
 }
 
@@ -248,6 +293,11 @@ awful.screen.connect_for_each_screen(function(s)
          s.mytasklist, -- Middle widget
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            cpu_icon,
+            memory_icon,
+            temperature_icon,
+            temperature_text,
+            temperature_graph,
             clock_icon,
             clock_text,
             wibox.widget.systray(),
@@ -579,7 +629,7 @@ client.connect_signal("request::titlebars", function(c)
                                layout = wibox.layout.fixed.horizontal()
                             },
                             layout = wibox.layout.align.horizontal
-                                                                }
+                                                                  }
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
