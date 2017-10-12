@@ -93,16 +93,41 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
+myworkmenu = {
+   { "Terminal", terminal, beautiful.menu_term },
+   { "Emacs", "emacsclient -c", beautiful.menu_emacs }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                             { "open terminal", terminal }
+mywebmenu = {
+   { "Firefox", "firefox", beautiful.menu_browser },
+   { "Skype", "skype", beautiful.menu_skype }
+}
+
+myofficemenu = {
+   { "Writer", "lowriter", beautiful.menu_writer },
+   { "GIMP", "gimp", beautiful.menu_gimp },
+   { "Zathura", "zathura", beautiful.menu_pdf }
+}
+
+myutilmenu = {
+   { "Thunar", "thunar", beautiful.menu_fman },
+   { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
+}
+
+myawesomemenu = {
+   { "Hotkeys", function() return false, hotkeys_popup.show_help end, beautiful.menu_hotkeys },
+   { "Manual", terminal .. " -e man awesome", beautiful.menu_manual },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile, beautiful.menu_edit },
+   { "Restart", awesome.restart, beautiful.menu_restart },
+   { "Quit", function() awesome.quit() end, beautiful.menu_quit }
+}
+
+mymainmenu = awful.menu({ items = {
+                             { "Work", myworkmenu, beautiful.menu_work },
+                             { "Web", mywebmenu, beautiful.menu_web },
+                             { "Office", myofficemenu, beautiful.menu_office },
+                             { "Utilities", myutilmenu, beautiful.menu_util },
+                             { "awesome", myawesomemenu, beautiful.awesome_icon }
 }
                        })
 
@@ -114,8 +139,15 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+-- Create a text clock icon widget
+local clock_icon = wibox.widget {
+   image = beautiful.widget_clock,
+   resize = false,
+   widget = wibox.widget.imagebox
+}
+
+-- Create a text clock widget
+local clock_text = wibox.widget.textclock("%d-%m/%H:%M")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -199,7 +231,7 @@ awful.screen.connect_for_each_screen(function(s)
       s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
       -- Create the wibox
-      s.mywibox = awful.wibar({ position = "top", screen = s })
+      s.mywibox = awful.wibar({ position = "bottom", height = 24, screen = s })
 
       -- Add widgets to the wibox
       s.mywibox:setup {
@@ -214,8 +246,8 @@ awful.screen.connect_for_each_screen(function(s)
          s.mytasklist, -- Middle widget
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            mytextclock,
+            clock_icon,
+            clock_text,
          },
       }
 end)
@@ -521,7 +553,7 @@ client.connect_signal("request::titlebars", function(c)
                             end)
                          )
 
-                         awful.titlebar(c) : setup {
+                         awful.titlebar(c, { size=24 }) : setup {
                             { -- Left
                                awful.titlebar.widget.iconwidget(c),
                                buttons = buttons,
