@@ -1128,13 +1128,6 @@
 (after 'iedit
   (setq iedit-toggle-key-default nil))
 
-;; Info+
-(require-package 'info+)
-;; Configuration
-(after 'info
-  ;; Initialize package
-  (require 'info+))
-
 ;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
