@@ -158,11 +158,26 @@ local cpu_text = wibox.widget {
    widget = wibox.widget.textbox
 }
 
+local cpu_graph = wibox.widget {
+   {
+      scale = true,
+      forced_height = 12,
+      forced_width = 48,
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_color = beautiful.border_normal,
+      widget = wibox.widget.graph,
+   },
+   top = 2,
+   bottom = 2,
+   layout = wibox.container.margin,
+}
+
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
 vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 4)
---vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
+vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -178,7 +193,6 @@ local memory_text = wibox.widget {
 local memory_bar = wibox.widget {
    {
       max_value = 1,
-      value = 0.5,
       forced_height = 12,
       margins = {
          left = 2,
@@ -346,6 +360,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
             cpu_text,
+            cpu_graph,
             separator,
             memory_icon,
             memory_text,
