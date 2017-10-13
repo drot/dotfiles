@@ -177,9 +177,6 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
-;; Keep window point when switching buffers
-(setq switch-to-buffer-preserve-window-point t)
-
 ;; Change recenter initial position
 (setq recenter-positions '(top middle bottom))
 
@@ -1678,8 +1675,6 @@
 
 ;; Rainbow mode
 (require-package 'rainbow-mode)
-;; Initialize mode
-(add-hook 'css-mode-hook #'rainbow-mode)
 ;; Set key binding
 (bind-key "C-c t r" #'rainbow-mode)
 ;; Configuration
@@ -1821,6 +1816,10 @@
 (bind-key "C-c h k" #'find-function-on-key)
 (bind-key "C-c h v" #'find-variable)
 (bind-key "C-c h 4 v" #'find-variable-other-window)
+
+;; Find library
+(bind-key "C-c h 4 l" #'find-library-other-window)
+(bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
