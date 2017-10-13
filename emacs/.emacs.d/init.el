@@ -502,12 +502,14 @@
 (after 'message
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
+  (setq message-send-mail-function #'smtpmail-send-it)
   ;; Save the BBDB database on every exit action
   (message-add-action #'bbdb-save 'exit 'postpone 'kill 'send))
 
 ;; Outgoing mail server
 (after 'smtpmail
   (setq smtpmail-smtp-server "mail.cock.li")
+  (setq smtpmail-smtp-user "drot-smtp")
   (setq smtpmail-smtp-service 465)
   (setq smtpmail-stream-type 'ssl))
 
@@ -681,6 +683,7 @@
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
+                                    (nnimap-user "drot")
                                     (nnimap-server-port 993)
                                     (nnimap-stream ssl)))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
@@ -1352,13 +1355,6 @@
 (after 'smex
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
-;; Asynchronous SMTP mail sending
-(require-package 'async)
-;; Configuration
-(after 'message
-  (require 'smtpmail-async)
-  (setq message-send-mail-function #'async-smtpmail-send-it))
-
 ;; Systemd mode
 (require-package 'systemd)
 
@@ -1420,6 +1416,7 @@
   (bind-key "C-c o b" #'bbdb-create)
   ;; Customize
   (setq bbdb-update-records-p 'create)
+  (setq bbdb-allow-duplicates t)
   (setq bbdb-mua-pop-up nil)
   (setq bbdb-phone-style nil)
   (setq bbdb-complete-mail-allow-cycling t)
