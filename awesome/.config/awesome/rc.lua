@@ -141,6 +141,10 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
+-- Create a separator text widget
+local separator_text = wibox.widget.textbox()
+separator_text:set_markup(" ")
+
 -- Create a separator widget
 local separator = wibox.widget {
    image = beautiful.widget_separator,
@@ -200,7 +204,7 @@ local memory_bar = wibox.widget {
       },
       background_color = beautiful.bg_normal,
       color = beautiful.hotkeys_modifiers_fg,
-      border_width = 2,
+      border_width = 1,
       border_color = beautiful.border_normal,
       widget = wibox.widget.progressbar,
    },
@@ -236,7 +240,7 @@ local temperature_bar = wibox.widget {
       },
       background_color = beautiful.bg_normal,
       color = beautiful.hotkeys_modifiers_fg,
-      border_width  = 2,
+      border_width  = 1,
       border_color  = beautiful.border_normal,
       widget = wibox.widget.progressbar,
    },
@@ -360,14 +364,17 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
             cpu_text,
+            separator_text,
             cpu_graph,
             separator,
             memory_icon,
             memory_text,
+            separator_text,
             memory_bar,
             separator,
             temperature_icon,
             temperature_text,
+            separator_text,
             temperature_bar,
             separator,
             clock_icon,
