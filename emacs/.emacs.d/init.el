@@ -494,6 +494,10 @@
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
+;; Enable Pass integration
+(after 'auth-source
+  (auth-source-pass-enable))
+
 ;; Mail sending configuration
 (after 'message
   (setq message-confirm-send t)
@@ -675,7 +679,7 @@
   (bind-key "M-o" #'ace-link-gnus gnus-summary-mode-map)
   (bind-key "M-o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
-  (setq gnus-select-method '(nnimap "cock"
+  (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
                                     (nnimap-server-port 993)
                                     (nnimap-stream ssl)))
@@ -1005,13 +1009,13 @@
   (interactive)
   (erc-tls :server "irc.rizon.net" :port 6697
            :nick "drot"))
+
+;; ERC highlight nicknames
+(require-package 'erc-hl-nicks)
 ;; Set key binding
 (bind-key "C-c a i" #'drot|erc-init)
 ;; Configuration
 (after 'erc
-  ;; ERC highlight nicknames
-  (require-package 'erc-hl-nicks)
-
   ;; Workaround for Rizon NickServ authentication
   (defun drot|erc-fetch-password (&rest params)
     "Fetch passwords for ERC authentication from an encrypted source."
