@@ -142,8 +142,10 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a separator widget
-local separator = wibox.widget.textbox()
-separator:set_markup(" <span foreground='#f0c674'></span> ")
+local separator = wibox.widget {
+   image = beautiful.widget_separator,
+   widget = wibox.widget.imagebox
+}
 
 -- Create a CPU usage icon widget
 local cpu_icon = wibox.widget {
@@ -159,8 +161,8 @@ local cpu_text = wibox.widget {
 -- Enable caching
 vicious.cache(vicious.widgets.cpu)
 -- Register widgets
-vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 2)
--- vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 2)
+vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 4)
+--vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -184,8 +186,8 @@ local memory_bar = wibox.widget {
       },
       background_color = beautiful.bg_normal,
       color = beautiful.hotkeys_modifiers_fg,
-      border_width  = 2,
-      border_color  = beautiful.border_normal,
+      border_width = 2,
+      border_color = beautiful.border_normal,
       widget = wibox.widget.progressbar,
    },
    direction = "east",
@@ -195,8 +197,8 @@ local memory_bar = wibox.widget {
 -- Enable caching
 vicious.cache(vicious.widgets.mem)
 -- Register widgets
-vicious.register(memory_text, vicious.widgets.mem, "$1%", 4)
-vicious.register(memory_bar, vicious.widgets.mem, "$1", 4)
+vicious.register(memory_text, vicious.widgets.mem, "$1%", 6)
+vicious.register(memory_bar, vicious.widgets.mem, "$1", 6)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {

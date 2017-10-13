@@ -134,6 +134,7 @@ theme.layout_tiletop = themes_path .. "themes/tomorrow/icons/layouts/tiletop.png
 theme.awesome_icon = themes_path .. "themes/tomorrow/icons/awesome.png"
 
 -- Widgets
+theme.widget_separator = themes_path .. "themes/tomorrow/icons/widgets/separator.png"
 theme.widget_cpu = themes_path .. "themes/tomorrow/icons/widgets/cpu.png"
 theme.widget_memory = themes_path .. "themes/tomorrow/icons/widgets/memory.png"
 theme.widget_temperature = themes_path .. "themes/tomorrow/icons/widgets/temperature.png"
