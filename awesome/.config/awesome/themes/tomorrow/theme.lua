@@ -134,10 +134,12 @@ theme.layout_tiletop = themes_path .. "themes/tomorrow/icons/layouts/tiletop.png
 theme.awesome_icon = themes_path .. "themes/tomorrow/icons/awesome.png"
 
 -- Widgets
+theme.widget_text = "#f0c674"
 theme.widget_separator = themes_path .. "themes/tomorrow/icons/widgets/separator.png"
 theme.widget_cpu = themes_path .. "themes/tomorrow/icons/widgets/cpu.png"
 theme.widget_memory = themes_path .. "themes/tomorrow/icons/widgets/memory.png"
 theme.widget_temperature = themes_path .. "themes/tomorrow/icons/widgets/temperature.png"
+theme.widget_volume = themes_path .. "themes/tomorrow/icons/widgets/volume.png"
 theme.widget_clock = themes_path .. "themes/tomorrow/icons/widgets/clock.png"
 
 return theme

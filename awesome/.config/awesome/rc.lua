@@ -13,8 +13,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
--- Vicious widget library
-local vicious = require("vicious")
+-- Awesome WM complements
+local lain = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -141,10 +141,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
--- Create a separator text widget
-local separator_text = wibox.widget.textbox()
-separator_text:set_markup(" ")
-
 -- Create a separator widget
 local separator = wibox.widget {
    image = beautiful.widget_separator,
@@ -157,31 +153,13 @@ local cpu_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create CPU usage widgets
-local cpu_text = wibox.widget {
-   widget = wibox.widget.textbox
+-- Create CPU usage widget
+local cpu_text = lain.widget.cpu {
+   timeout = 4,
+   settings = function()
+      widget:set_markup(lain.util.markup(beautiful.widget_text, "CPU: " .. cpu_now.usage .. "%"))
+   end
 }
-
-local cpu_graph = wibox.widget {
-   {
-      scale = true,
-      forced_height = 12,
-      forced_width = 48,
-      background_color = beautiful.bg_normal,
-      color = beautiful.hotkeys_modifiers_fg,
-      border_color = beautiful.border_normal,
-      widget = wibox.widget.graph,
-   },
-   top = 2,
-   bottom = 2,
-   layout = wibox.container.margin,
-}
-
--- Enable caching
-vicious.cache(vicious.widgets.cpu)
--- Register widgets
-vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 4)
-vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -189,34 +167,13 @@ local memory_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create memory usage widgets
-local memory_text = wibox.widget {
-   widget = wibox.widget.textbox
+-- Create a memory usage widget
+local memory_text = lain.widget.mem {
+   timeout = 10,
+   settings = function()
+      widget:set_markup(lain.util.markup(beautiful.widget_text, "Mem: " .. mem_now.perc .. "%"))
+   end
 }
-
-local memory_bar = wibox.widget {
-   {
-      max_value = 1,
-      forced_height = 12,
-      margins = {
-         left = 2,
-         right = 2,
-      },
-      background_color = beautiful.bg_normal,
-      color = beautiful.hotkeys_modifiers_fg,
-      border_width = 1,
-      border_color = beautiful.border_normal,
-      widget = wibox.widget.progressbar,
-   },
-   direction = "east",
-   layout = wibox.container.rotate,
-}
-
--- Enable caching
-vicious.cache(vicious.widgets.mem)
--- Register widgets
-vicious.register(memory_text, vicious.widgets.mem, "$1%", 6)
-vicious.register(memory_bar, vicious.widgets.mem, "$1", 6)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -224,35 +181,48 @@ local temperature_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create temperature widgets
-local temperature_text = wibox.widget {
-   widget = wibox.widget.textbox
+-- Create a temperature widget
+local temperature_text = lain.widget.temp {
+   timeout = 60,
+   settings = function()
+      widget:set_markup(lain.util.markup(beautiful.widget_text, "Temp: " .. coretemp_now .. "°C"))
+   end
 }
 
-local temperature_bar = wibox.widget {
-   {
-      max_value = 1,
-      value = 0.5,
-      forced_height = 12,
-      margins = {
-         left = 2,
-         right = 2,
-      },
-      background_color = beautiful.bg_normal,
-      color = beautiful.hotkeys_modifiers_fg,
-      border_width  = 1,
-      border_color  = beautiful.border_normal,
-      widget = wibox.widget.progressbar,
-   },
-   direction = "east",
-   layout = wibox.container.rotate,
+-- Create a volume icon widget
+local volume_icon = wibox.widget {
+   image = beautiful.widget_volume,
+   widget = wibox.widget.imagebox
 }
 
--- Enable caching
-vicious.cache(vicious.widgets.thermal)
--- Register widgets
-vicious.register(temperature_text, vicious.widgets.thermal, "$1°", 20, "thermal_zone0")
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
+-- Create a volume widget
+local volume_text = lain.widget.pulse {
+   settings = function()
+      volume_level = "Vol:" .. volume_now.channel[1] .. "%"
+      if volume_now.muted == "yes" then
+         volume_level = "Muted!"
+      end
+      widget:set_markup(lain.util.markup(beautiful.widget_text, volume_level))
+   end
+}
+-- Buttonize widget
+volume_text.widget:buttons(awful.util.table.join(
+                              awful.button({}, 1, function() -- left click
+                                    awful.spawn("pavucontrol")
+                              end),
+                              awful.button({}, 3, function() -- right click
+                                    awful.spawn(string.format("pactl set-sink-mute %d toggle", volume_text.device))
+                                    volume_text.update()
+                              end),
+                              awful.button({}, 4, function() -- scroll up
+                                    awful.spawn(string.format("pactl set-sink-volume %d +5%%", volume_text.device))
+                                    volume_text.update()
+                              end),
+                              awful.button({}, 5, function() -- scroll down
+                                    awful.spawn(string.format("pactl set-sink-volume %d -5%%", volume_text.device))
+                                    volume_text.update()
+                              end)
+))
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
@@ -261,8 +231,9 @@ local clock_icon = wibox.widget {
 }
 
 -- Create a text clock widget
-local clock_text = wibox.widget.textclock("%d-%m/%H:%M")
+local clock_text = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
 local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
+-- Buttonize widget
 month_calendar:attach(clock_text, "br")
 
 -- Create a wibox for each screen and add it
@@ -364,18 +335,15 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
             cpu_text,
-            separator_text,
-            cpu_graph,
             separator,
             memory_icon,
             memory_text,
-            separator_text,
-            memory_bar,
             separator,
             temperature_icon,
             temperature_text,
-            separator_text,
-            temperature_bar,
+            separator,
+            volume_icon,
+            volume_text,
             separator,
             clock_icon,
             clock_text,
