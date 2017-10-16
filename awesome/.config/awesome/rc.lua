@@ -153,13 +153,37 @@ local cpu_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create CPU usage widget
+-- Create a CPU usage text widget
 local cpu_text = lain.widget.cpu {
    timeout = 4,
-   settings = function()
-      widget:set_markup(lain.util.markup(beautiful.widget_text, "CPU: " .. cpu_now.usage .. "%"))
+   settings = function ()
+      widget:set_markup(cpu_now.usage .. "% ")
    end
 }
+
+-- Create a CPU usage graph widget
+local cpu_graph = wibox.widget {
+      forced_height = 12,
+      forced_width = 48,
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_color = beautiful.border_normal,
+      widget = wibox.widget.graph,
+}
+
+-- Set graph value
+local cpu_value = lain.widget.cpu {
+      timeout = 8,
+      settings  = function()
+         cpu_graph:add_value(cpu_now.usage / 100)
+      end
+}
+
+-- Apply margins to widget
+local cpu_widget = wibox.container.margin(cpu_graph, 0, 0, 2, 2)
+
+--local cpubg = wibox.container.background(cpu_bar, beautiful.border_normal, gears.shape.rectangle)
+--local cpu_widget = wibox.container.margin(dason, 1, 1, 2, 2)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -167,13 +191,39 @@ local memory_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a memory usage widget
+-- Create a memory usage text widget
 local memory_text = lain.widget.mem {
-   timeout = 10,
+   timeout = 12,
    settings = function()
-      widget:set_markup(lain.util.markup(beautiful.widget_text, "Mem: " .. mem_now.perc .. "%"))
+      widget:set_markup(mem_now.perc .. "% ")
    end
 }
+
+-- Create a memory usage bar widget
+local memory_bar = wibox.widget {
+      max_value = 1,
+      forced_height = 12,
+      margins = {
+         left = 2,
+         right = 2,
+      },
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_width = 1,
+      border_color = beautiful.border_normal,
+      widget = wibox.widget.progressbar,
+}
+
+-- Set bar value
+local memory_value = lain.widget.mem {
+      timeout = 16,
+      settings  = function()
+         memory_bar:set_value(mem_now.perc / 100)
+      end
+}
+
+-- Rotate widget
+local memory_widget = wibox.container.rotate(memory_bar, "east")
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -183,11 +233,71 @@ local temperature_icon = wibox.widget {
 
 -- Create a temperature widget
 local temperature_text = lain.widget.temp {
-   timeout = 60,
+   timeout = 20,
    settings = function()
-      widget:set_markup(lain.util.markup(beautiful.widget_text, "Temp: " .. coretemp_now .. "°C"))
+      widget:set_markup(coretemp_now .. "°C ")
    end
 }
+
+-- Create a temperature bar widget
+local temperature_bar = wibox.widget {
+      max_value = 1,
+      forced_height = 12,
+      margins = {
+         left = 2,
+         right = 2,
+      },
+      background_color = beautiful.bg_normal,
+      color = beautiful.hotkeys_modifiers_fg,
+      border_width = 1,
+      border_color = beautiful.border_normal,
+      widget = wibox.widget.progressbar,
+}
+
+-- Set bar value
+local temperature_value = lain.widget.temp {
+      timeout = 24,
+      settings  = function()
+         temperature_bar:set_value(coretemp_now / 100)
+      end
+}
+
+-- Rotate widget
+local temperature_widget = wibox.container.rotate(temperature_bar, "east")
+
+-- Create a file system usage icon widget
+local fs_icon = wibox.widget {
+   image = beautiful.widget_fs,
+   widget = wibox.widget.imagebox
+}
+
+-- Create a file system usage widget
+local fsbar = wibox.widget {
+    forced_height    = 1,
+    forced_width     = 48,
+    color            = beautiful.fg_normal,
+    background_color = beautiful.bg_normal,
+    margins          = 1,
+    paddings         = 1,
+    ticks            = true,
+    ticks_size       = 4,
+    widget           = wibox.widget.progressbar,
+}
+dason = lain.widget.fs({
+    partition = "/home",
+    options = "--exclude-type=tmpfs",
+    notification_preset = { fg = beautiful.fg_normal, bg = beautiful.bg_normal },
+    settings  = function()
+        if tonumber(fs_now.used) < 90 then
+            fsbar:set_color(beautiful.widget_text)
+        else
+            fsbar:set_color("#EB8F8F")
+        end
+        fsbar:set_value(fs_now.used / 100)
+    end
+})
+local fsbg = wibox.container.background(fsbar, beautiful.border_normal, gears.shape.rectangle)
+local fswidget = wibox.container.margin(fsbg, 1, 1, 2, 2)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
@@ -198,7 +308,7 @@ local volume_icon = wibox.widget {
 -- Create a volume widget
 local volume_text = lain.widget.pulse {
    settings = function()
-      volume_level = "Vol:" .. volume_now.channel[1] .. "%"
+      volume_level = "Vol: " .. volume_now.channel[1] .. "%"
       if volume_now.muted == "yes" then
          volume_level = "Muted!"
       end
@@ -335,12 +445,17 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
             cpu_text,
+            cpu_widget,
             separator,
             memory_icon,
             memory_text,
+            memory_widget,
             separator,
             temperature_icon,
             temperature_text,
+            temperature_widget,
+            separator,
+            fswidget,
             separator,
             volume_icon,
             volume_text,
