@@ -182,11 +182,8 @@ local cpu_value = lain.widget.cpu {
    end
 }
 
--- Apply margins to widget
+-- Apply margins to CPU usage widget
 local cpu_widget = wibox.container.margin(cpu_graph, 0, 0, 2, 2)
-
---local cpubg = wibox.container.background(cpu_bar, beautiful.border_normal, gears.shape.rectangle)
---local cpu_widget = wibox.container.margin(dason, 1, 1, 2, 2)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -206,10 +203,9 @@ local memory_text = lain.widget.mem {
 local memory_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
-   rounded_edge = true,
    border_width = 1,
    bg = beautiful.border_normal,
-   border_color = beautiful.bg_normal,
+   border_color = beautiful.bg_focus,
    colors = {
       beautiful.widget_value
    },
@@ -289,10 +285,9 @@ local fs_text = lain.widget.fs {
 local fs_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
-   rounded_edge = true,
    border_width = 1,
    bg = beautiful.border_normal,
-   border_color = beautiful.bg_normal,
+   border_color = beautiful.bg_focus,
    colors = {
       beautiful.widget_value
    },
