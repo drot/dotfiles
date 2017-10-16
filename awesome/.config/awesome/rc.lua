@@ -201,7 +201,6 @@ local memory_text = lain.widget.mem {
 
 -- Create a memory usage bar widget
 local memory_bar = wibox.widget {
-   max_value = 1,
    forced_height = 12,
    margins = {
       left = 2,
@@ -241,7 +240,6 @@ local temperature_text = lain.widget.temp {
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
-   max_value = 1,
    forced_height = 12,
    margins = {
       left = 2,
@@ -283,7 +281,6 @@ local fs_text = lain.widget.fs {
 
 -- Create a file system usage bar widget
 local fs_bar = wibox.widget {
-   max_value = 1,
    forced_height = 12,
    margins = {
       left = 2,
@@ -756,6 +753,7 @@ awful.rules.rules = {
         },
         class = {
            "Skype",
+           "Pidgin",
            "mpv"},
 
         name = {
