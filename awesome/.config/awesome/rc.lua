@@ -102,7 +102,7 @@ local myworkmenu = {
 
 local mywebmenu = {
    { "Firefox", "firefox", beautiful.menu_browser },
-   { "Pidgin", "pidgin", beautiful.menu_pidgin }
+   { "Pidgin", "pidgin", beautiful.menu_pidgin },
    { "Skype", "skype", beautiful.menu_skype }
 }
 
@@ -166,8 +166,10 @@ local cpu_text = lain.widget.cpu {
 local cpu_graph = wibox.widget {
    forced_height = 12,
    forced_width = 48,
+   step_width = 2,
+   step_spacing = 1,
    background_color = beautiful.bg_normal,
-   color = beautiful.hotkeys_modifiers_fg,
+   color = beautiful.widget_value,
    border_color = beautiful.border_normal,
    widget = wibox.widget.graph,
 }
@@ -202,16 +204,14 @@ local memory_text = lain.widget.mem {
 
 -- Create a memory usage bar widget
 local memory_bar = wibox.widget {
-   forced_height = 12,
-   margins = {
-      left = 2,
-      right = 2,
+   max_value = 1,
+   value = 0.25,
+   rounded_edge = true,
+   bg = beautiful.border_normal,
+   widget = wibox.container.arcchart,
+   colors = {
+      beautiful.widget_value
    },
-   background_color = beautiful.bg_normal,
-   color = beautiful.hotkeys_modifiers_fg,
-   border_width = 1,
-   border_color = beautiful.border_normal,
-   widget = wibox.widget.progressbar,
 }
 
 -- Set bar value
@@ -222,8 +222,8 @@ local memory_value = lain.widget.mem {
    end
 }
 
--- Rotate memory usage bar widget
-local memory_widget = wibox.container.rotate(memory_bar, "east")
+-- Set memory usage bar margins
+local memory_widget = wibox.container.margin(memory_bar, 0, 0, 2, 2)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -241,13 +241,16 @@ local temperature_text = lain.widget.temp {
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
-   forced_height = 12,
+   forced_height = 8,
    margins = {
       left = 2,
       right = 2,
    },
+   bar_shape = gears.shape.rounded_bar,
+   shape = gears.shape.rounded_bar,
+   paddings = 1,
    background_color = beautiful.bg_normal,
-   color = beautiful.hotkeys_modifiers_fg,
+   color = beautiful.widget_value,
    border_width = 1,
    border_color = beautiful.border_normal,
    widget = wibox.widget.progressbar,
@@ -282,16 +285,14 @@ local fs_text = lain.widget.fs {
 
 -- Create a file system usage bar widget
 local fs_bar = wibox.widget {
-   forced_height = 12,
-   margins = {
-      left = 2,
-      right = 2,
+   max_value = 1,
+   value = 0.25,
+   rounded_edge = true,
+   bg = beautiful.border_normal,
+   widget = wibox.container.arcchart,
+   colors = {
+      beautiful.widget_value
    },
-   background_color = beautiful.bg_normal,
-   color = beautiful.hotkeys_modifiers_fg,
-   border_width = 1,
-   border_color = beautiful.border_normal,
-   widget = wibox.widget.progressbar,
 }
 
 -- Set bar value
@@ -301,17 +302,12 @@ local fs_value = lain.widget.fs {
    options = "--exclude-type=tmpfs",
    notification_preset = { fg = beautiful.fg_normal, bg = beautiful.bg_normal },
    settings  = function()
-      if tonumber(fs_now.used) < 90 then
-         fs_bar:set_color(beautiful.widget_value)
-      else
-         fs_bar:set_color(beautiful.bg_urgent)
-      end
       fs_bar:set_value(fs_now.used / 100)
    end
 }
 
 -- Set file system usage bar widget rotation
-local fs_widget = wibox.container.rotate(fs_bar, "east")
+local fs_widget = wibox.container.margin(fs_bar, 0, 0, 2, 2)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
@@ -353,12 +349,13 @@ volume_text.widget:buttons(awful.util.table.join(
 -- Create volume bar widget
 local volume_bar = wibox.widget {
    forced_height = 12,
+   paddings = 1,
    margins = {
       left = 2,
       right = 2,
    },
    background_color = beautiful.bg_normal,
-   color = beautiful.hotkeys_modifiers_fg,
+   color = beautiful.widget_value,
    border_width = 1,
    border_color = beautiful.border_normal,
    widget = wibox.widget.progressbar,
