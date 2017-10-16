@@ -102,6 +102,7 @@ local myworkmenu = {
 
 local mywebmenu = {
    { "Firefox", "firefox", beautiful.menu_browser },
+   { "Pidgin", "pidgin", beautiful.menu_pidgin }
    { "Skype", "skype", beautiful.menu_skype }
 }
 
