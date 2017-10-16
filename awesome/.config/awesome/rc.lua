@@ -168,9 +168,9 @@ local cpu_graph = wibox.widget {
    forced_width = 48,
    step_width = 2,
    step_spacing = 1,
-   background_color = beautiful.bg_normal,
+   background_color = beautiful.border_normal,
    color = beautiful.widget_value,
-   border_color = beautiful.border_normal,
+   border_color = beautiful.border_focus,
    widget = wibox.widget.graph,
 }
 
@@ -207,11 +207,13 @@ local memory_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
    rounded_edge = true,
+   border_width = 1,
    bg = beautiful.border_normal,
-   widget = wibox.container.arcchart,
+   border_color = beautiful.bg_normal,
    colors = {
       beautiful.widget_value
    },
+   widget = wibox.container.arcchart,
 }
 
 -- Set bar value
@@ -249,10 +251,10 @@ local temperature_bar = wibox.widget {
    bar_shape = gears.shape.rounded_bar,
    shape = gears.shape.rounded_bar,
    paddings = 1,
-   background_color = beautiful.bg_normal,
+   background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_width = 1,
-   border_color = beautiful.border_normal,
+   border_color = beautiful.border_focus,
    widget = wibox.widget.progressbar,
 }
 
@@ -288,11 +290,13 @@ local fs_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
    rounded_edge = true,
+   border_width = 1,
    bg = beautiful.border_normal,
-   widget = wibox.container.arcchart,
+   border_color = beautiful.bg_normal,
    colors = {
       beautiful.widget_value
    },
+   widget = wibox.container.arcchart,
 }
 
 -- Set bar value
@@ -354,10 +358,10 @@ local volume_bar = wibox.widget {
       left = 2,
       right = 2,
    },
-   background_color = beautiful.bg_normal,
+   background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_width = 1,
-   border_color = beautiful.border_normal,
+   border_color = beautiful.border_focus,
    widget = wibox.widget.progressbar,
 }
 
