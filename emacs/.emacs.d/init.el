@@ -502,9 +502,7 @@
 (after 'message
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
-  (setq message-send-mail-function #'smtpmail-send-it)
-  ;; Save the BBDB database on every exit action
-  (message-add-action #'bbdb-save 'exit 'postpone 'kill 'send))
+  (setq message-send-mail-function #'smtpmail-send-it))
 
 ;; Outgoing mail server
 (after 'smtpmail
@@ -982,8 +980,13 @@
   (require 'dired-async)
   ;; Shorten mode lighter
   (delight 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")) t)
-  ;; Initialize mode
-  (dired-async-mode))
+  ;; Set key bindings
+  (bind-keys :map dired-mode-map
+             ("E c" . dired-async-do-copy)
+             ("E r" . dired-async-do-rename)
+             ("E s" . dired-async-do-symlink)
+             ("E h" . dired-async-do-hardlink)
+             ("E m" . dired-async-mode)))
 
 ;; Easy-kill
 (require-package 'easy-kill)
@@ -1402,36 +1405,6 @@
   (setq anzu-replace-threshold 50)
   (setq anzu-replace-to-string-separator " => "))
 
-;; BBDB
-(require-package 'bbdb)
-;; Initialize mode
-(add-hook 'after-init-hook
-          (lambda () (bbdb-initialize 'gnus 'message)))
-(add-hook 'after-init-hook
-          (lambda () (bbdb-mua-auto-update-init 'gnus 'message)))
-;; Configuration
-(after 'bbdb
-  ;; Set key bindings
-  (bind-key "C-c o B" #'bbdb)
-  (bind-key "C-c o b" #'bbdb-create)
-  ;; Customize
-  (setq bbdb-update-records-p 'create)
-  (setq bbdb-allow-duplicates t)
-  (setq bbdb-mua-pop-up nil)
-  (setq bbdb-phone-style nil)
-  (setq bbdb-complete-mail-allow-cycling t)
-  (setq bbdb-ignore-message-alist '(("From" . "noreply")
-                                    ("From" . "no-reply")
-                                    ("From" . "donotreply")
-                                    ("From" . "subscription")
-                                    ("From" . "newsletter")
-                                    ("From" . "gmane.org")
-                                    ("From" . "debbugs.gnu.org")
-                                    ("From" . "mailer-daemon")
-                                    ("From" . "arch-general")))
-  ;; Save the database after exiting summary view
-  (add-hook 'gnus-summary-exit-hook #'bbdb-save))
-
 ;; Company mode
 (require-package 'company)
 ;; Initialize mode
@@ -1443,8 +1416,7 @@
   ;; Set key binding
   (bind-key "C-c i y" #'company-yasnippet)
   ;; Customize
-  (setq company-backends '(company-bbdb
-                           company-nxml
+  (setq company-backends '(company-nxml
                            company-css
                            company-capf
                            company-files
