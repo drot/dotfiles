@@ -386,7 +386,7 @@ local clock_icon = wibox.widget {
 }
 
 -- Create a text clock widget
-local clock_text = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
+local clock_text = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span> ")
 local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
 -- Buttonize widget
 month_calendar:attach(clock_text, "br")
