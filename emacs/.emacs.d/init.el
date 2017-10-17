@@ -559,8 +559,8 @@
   (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
 ;; Enable Pass integration
-(use-package auth-source
-  :defer t
+(use-package auth-source-pass
+  :after auth-source
   :config
   (auth-source-pass-enable))
 
