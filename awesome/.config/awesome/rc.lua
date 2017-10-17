@@ -204,8 +204,8 @@ local memory_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
    border_width = 1,
-   bg = beautiful.border_normal,
-   border_color = beautiful.bg_focus,
+   bg = beautiful.bg_minimize,
+   border_color = beautiful.bg_normal,
    colors = {
       beautiful.widget_value
    },
@@ -286,8 +286,8 @@ local fs_bar = wibox.widget {
    max_value = 1,
    value = 0.25,
    border_width = 1,
-   bg = beautiful.border_normal,
-   border_color = beautiful.bg_focus,
+   bg = beautiful.bg_minimize,
+   border_color = beautiful.bg_normal,
    colors = {
       beautiful.widget_value
    },
