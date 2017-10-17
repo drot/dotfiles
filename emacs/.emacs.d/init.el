@@ -925,10 +925,44 @@
               ("\\" . dired-filter-mark-map))
   :after dired-x)
 
+;; Dired Rainbow
+(use-package dired-rainbow
+  :ensure t
+  :after dired-filter
+  :commands (dired-rainbow-define dired-rainbow-define-chmod)
+  :config
+  ;; Define faces by file type
+  (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV"))
+  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz" "xz"
+                                             "z" "Z" "jar" "war" "ear" "rar"
+                                             "sar" "xpi" "apk" "xz" "tar"))
+  (dired-rainbow-define document "peru" ("doc" "docx" "odt" "pdb" "pdf" "ps"
+                                         "rtf" "djvu" "epub"))
+  (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
+  (dired-rainbow-define excel "turquise" ("xlsx"))
+  (dired-rainbow-define executable "Gold" ("exe" "msi"))
+  (dired-rainbow-define html "Wheat" ("htm" "html" "xhtml"))
+  (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
+  (dired-rainbow-define log "gray" ("log"))
+  (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
+  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
+                                                 "rb" "R" "php" "el" "scm" "cpp"
+                                                 "fos" "lisp" "clj"))
+  (dired-rainbow-define video "#B3CCFF" ("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
+                                         "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
+                                         "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
+                                         "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
+  (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
+
+  ;; Define faces by file permission
+  (dired-rainbow-define-chmod executable-unix "Gold" "-[rw-]+x.*")
+  (dired-rainbow-define-chmod directory-unix "DeepSkyBlue" "d[rw-]+x.*")
+  (dired-rainbow-define-chmod symlink-unix "SpringGreen" "l[rw-]+x.*"))
+
 ;; Dired Subtree
 (use-package dired-subtree
   :ensure t
-  :after dired-filter
+  :after dired-rainbow
   :config
   ;; Set key bindings
   (bind-keys :map dired-mode-map
@@ -1002,13 +1036,6 @@
               ("E h" . dired-async-do-hardlink)
               ("E m" . dired-async-mode))
   :after dired-du)
-
-;; Dired extra font lock rules
-(use-package diredfl
-  :ensure t
-  :after dired-async
-  :config
-  (diredfl-global-mode))
 
 ;; Easy-kill
 (use-package easy-kill
