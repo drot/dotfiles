@@ -60,20 +60,23 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Try to extract docstrings from special forms
+(setq bind-key-describe-special-forms t)
+
 ;; Use Delight for mode name shortening
 (use-package delight
   :ensure t)
-
-;; Disable needless GUI elements
-(dolist (mode '(tool-bar-mode menu-bar-mode))
-  (when (fboundp mode)
-    (funcall mode -1)))
 
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
   (load-theme 'sanityinc-tomorrow-night t))
+
+;; Disable needless GUI elements
+(dolist (mode '(tool-bar-mode menu-bar-mode))
+  (when (fboundp mode)
+    (funcall mode -1)))
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
@@ -127,9 +130,6 @@
 ;; No length limit when printing values
 (setq eval-expression-print-length nil)
 (setq eval-expression-print-level nil)
-
-;; Try to extract docstrings from special forms
-(setq bind-key-describe-special-forms t)
 
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil)
@@ -868,21 +868,6 @@
   (add-hook 'python-mode-hook #'anaconda-mode)
   (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
-;; Avy
-(use-package avy
-  :ensure t
-  :bind (("C-c n c" . avy-goto-char)
-         ("C-c n k" . avy-goto-char-2)
-         ("C-c n J" . avy-goto-word-0)
-         ("C-c n SPC" . avy-pop-mark)
-         ("C-c n l" . avy-goto-line)
-         ("C-c n j" . avy-goto-word-or-subword-1))
-  :config
-  (setq avy-all-windows 'all-frames)
-  (setq avy-background t)
-  (setq avy-highlight-first t)
-  (avy-setup-default))
-
 ;; CIDER
 (use-package cider-common
   :ensure cider
@@ -1458,6 +1443,23 @@
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
   (setq anzu-replace-to-string-separator " => "))
+
+;; Avy
+(use-package avy
+  :ensure t
+  :bind (("C-c n c" . avy-goto-char)
+         ("C-c n k" . avy-goto-char-2)
+         ("C-c n J" . avy-goto-word-0)
+         ("C-c n SPC" . avy-pop-mark)
+         ("C-c n l" . avy-goto-line)
+         ("C-c n j" . avy-goto-word-or-subword-1))
+  :commands avy-setup-default
+  :init
+  (avy-setup-default)
+  :config
+  (setq avy-all-windows 'all-frames)
+  (setq avy-background t)
+  (setq avy-highlight-first t))
 
 ;; Company mode
 (use-package company
