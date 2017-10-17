@@ -558,6 +558,12 @@
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
+;; Enable Pass integration
+(use-package auth-source
+  :defer t
+  :config
+  (auth-source-pass-enable))
+
 ;; Mail sending configuration
 (use-package message
   :defer t
