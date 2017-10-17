@@ -1018,7 +1018,7 @@
               ("E m" . dired-async-mode))
   :after dired-du)
 
-;; Dired fl
+;; Dired extra font lock rules
 (use-package diredfl
   :ensure t
   :after dired-async
