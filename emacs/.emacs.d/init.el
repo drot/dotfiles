@@ -48,41 +48,32 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Pinned packages
-(setq package-pinned-packages '((json-mode . "gnu")
-                                (yasnippet . "gnu")))
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; Helper function for installing packages
-(defun require-package (package)
-  "Ensures that PACKAGE is installed."
-  (unless (or (package-installed-p package)
-              (require package nil 'noerror))
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
+;; Enable Imenu support for use-package
+(setq use-package-enable-imenu-support t)
 
-;; Use a shorter alias for this commonly used macro
-(defalias 'after 'with-eval-after-load)
-
-;; Use bind-key for personal keybindings
-(require-package 'bind-key)
-;; Set key binding
-(bind-key "C-c h b" #'describe-personal-keybindings)
-;; Configuration
-(after 'bind-key
-  (setq bind-key-describe-special-forms t))
+;; Load use-package
+(eval-when-compile
+  (require 'use-package))
 
 ;; Use Delight for mode name shortening
-(require-package 'delight)
-
-;; Color theme
-(require-package 'color-theme-sanityinc-tomorrow)
-(load-theme 'sanityinc-tomorrow-night t)
+(use-package delight
+  :ensure t)
 
 ;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
   (when (fboundp mode)
     (funcall mode -1)))
+
+;; Color theme
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name))
@@ -136,6 +127,9 @@
 ;; No length limit when printing values
 (setq eval-expression-print-length nil)
 (setq eval-expression-print-level nil)
+
+;; Try to extract docstrings from special forms
+(setq bind-key-describe-special-forms t)
 
 ;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil)
@@ -205,14 +199,13 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Undo Tree
-(require-package 'undo-tree)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-undo-tree-mode)
-;; Configuration
-(after 'undo-tree
-  ;; Shorten mode lighter
-  (delight 'undo-tree-mode " uT" t)
-  ;; Customize
+(use-package undo-tree
+  :ensure t
+  :delight (undo-tree-mode " uT")
+  :commands global-undo-tree-mode
+  :init
+  (add-hook 'after-init-hook #'global-undo-tree-mode)
+  :config
   (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-visualizer-timestamps t)
@@ -231,97 +224,121 @@
 (setq backup-by-copying t)
 
 ;; Save minibuffer history
-(setq savehist-file (locate-user-emacs-file "cache/saved-history"))
-(setq savehist-autosave-interval 60)
-(setq savehist-additional-variables '(search-ring regexp-search-ring))
-(savehist-mode)
+(use-package savehist
+  :config
+  (setq savehist-file (locate-user-emacs-file "cache/saved-history"))
+  (setq savehist-autosave-interval 60)
+  (setq savehist-additional-variables '(search-ring regexp-search-ring))
+  (savehist-mode))
 
 ;; Save recent files list
-(setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
-(setq recentf-exclude '("/\\.git/.*\\'"
-                        "/elpa/.*\\'"
-                        "/image-dired/.*\\'"
-                        "/elfeed/.*\\'"
-                        "/cache/.*\\'"
-                        ".*\\.gz\\'"
-                        "TAGS"))
-(setq recentf-max-saved-items 100)
-(setq recentf-max-menu-items 20)
-(setq recentf-auto-cleanup 600)
-(recentf-mode)
+(use-package recentf
+  :config
+  (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
+  (setq recentf-exclude '("/\\.git/.*\\'"
+                          "/elpa/.*\\'"
+                          "/image-dired/.*\\'"
+                          "/elfeed/.*\\'"
+                          "/cache/.*\\'"
+                          ".*\\.gz\\'"
+                          "TAGS"))
+  (setq recentf-max-saved-items 100)
+  (setq recentf-max-menu-items 20)
+  (setq recentf-auto-cleanup 600)
+  (recentf-mode))
 
 ;; Remember point position in files
-(setq save-place-file (locate-user-emacs-file "cache/saved-places"))
-(save-place-mode)
+(use-package saveplace
+  :config
+  (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
+  (save-place-mode))
 
 ;; Highlight current line
-(global-hl-line-mode)
-;; Disable `hl-line-mode' in special buffers
-(dolist (hook '(undo-tree-visualizer-mode-hook
-                erc-mode-hook
-                eshell-mode-hook
-                term-mode-hook
-                ediff-mode-hook
-                comint-mode-hook
-                nov-mode-hook))
-  (add-hook hook
-            (lambda () (setq-local global-hl-line-mode nil))))
+(use-package hl-line
+  :config
+  (global-hl-line-mode)
+  ;; Disable `hl-line-mode' in special buffers
+  (dolist (hook '(undo-tree-visualizer-mode-hook
+                  erc-mode-hook
+                  eshell-mode-hook
+                  term-mode-hook
+                  ediff-mode-hook
+                  comint-mode-hook
+                  nov-mode-hook))
+    (add-hook hook
+              (lambda () (setq-local global-hl-line-mode nil)))))
 
 ;; Highlight matching parentheses
-(setq show-paren-delay 0)
-(setq show-paren-when-point-inside-paren t)
-(setq show-paren-when-point-in-periphery t)
-(show-paren-mode)
+(use-package paren
+  :config
+  (setq show-paren-delay 0)
+  (setq show-paren-when-point-inside-paren t)
+  (setq show-paren-when-point-in-periphery t)
+  (show-paren-mode))
 
 ;; Highlight regexps interactively
-(setq hi-lock-auto-select-face t)
-(global-hi-lock-mode)
+(use-package hi-lock
+  :config
+  (setq hi-lock-auto-select-face t)
+  (global-hi-lock-mode))
 
 ;; Abbrev mode
-(delight 'abbrev-mode " aB" t)
-;; Configuration
-(setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
-(setq save-abbrevs t)
-;; Load abbrevs if they exist
-(if (file-exists-p abbrev-file-name)
-    (quietly-read-abbrev-file))
-(setq-default abbrev-mode t)
+(use-package abbrev
+  :delight (abbrev-mode " aB")
+  :config
+  (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
+  (setq save-abbrevs t)
+  ;; Load abbrevs if they exist
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file))
+  (setq-default abbrev-mode t))
 
 ;; Electric pair mode
-(setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
-(electric-pair-mode)
+(use-package elec-pair
+  :config
+  (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+  (electric-pair-mode))
 
 ;; Prettify certain symbols
-(setq prettify-symbols-unprettify-at-point t)
-(global-prettify-symbols-mode)
+(use-package prog-mode
+  :config
+  (setq prettify-symbols-unprettify-at-point t)
+  (global-prettify-symbols-mode))
 
 ;; Which function mode
-(setq which-func-unknown "n/a")
-(which-function-mode)
+(use-package which-func
+  :config
+  (setq which-func-unknown "n/a")
+  (which-function-mode))
 
 ;; Fast window switching
-(setq windmove-wrap-around t)
-(windmove-default-keybindings)
+(use-package windmove
+  :config
+  (setq windmove-wrap-around t)
+  (windmove-default-keybindings))
 
 ;; Undo and redo the window configuration
-(winner-mode)
-;; Configuration
-(after 'winner
-  ;; Set key bindings
-  (bind-keys :map winner-mode-map
-             ("C-c w u" . winner-undo)
-             ("C-c w r" . winner-redo))
+(use-package winner
+  :bind (:map winner-mode-map
+              ("C-c w u" . winner-undo)
+              ("C-c w r" . winner-redo))
+  :commands winner-mode
+  :init
+  (winner-mode)
+  :config
   ;; Disable conflicting key bindings
   (unbind-key "C-c <left>" winner-mode-map)
   (unbind-key "C-c <right>" winner-mode-map))
 
 ;; Hide Show mode
-(dolist (hook '(c-mode-common-hook
-                emacs-lisp-mode-hook
-                python-mode-hook))
-  (add-hook hook #'hs-minor-mode))
-;; Configuration
-(after 'hideshow
+(use-package hideshow
+  :commands hs-minor-mode
+  :init
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook #'hs-minor-mode))
+  :config
   (defun drot|hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
@@ -334,28 +351,33 @@
   (setq hs-isearch-open t))
 
 ;; Bug Reference mode
-(add-hook 'text-mode-hook #'bug-reference-mode)
-(add-hook 'prog-mode-hook #'bug-reference-prog-mode)
-;; Configuration
-(after 'bug-reference
+(use-package bug-reference
+  :commands (bug-reference-mode bug-reference-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'bug-reference-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  :config
   (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
 
 ;; Goto Address mode
-(add-hook 'text-mode-hook #'goto-address-mode)
-(add-hook 'prog-mode-hook #'goto-address-prog-mode)
+(use-package goto-addr
+  :commands (goto-address-mode goto-address-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode))
 
 ;; Fly Spell mode configuration
-(add-hook 'text-mode-hook #'flyspell-mode)
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-;; Configuration
-(after 'flyspell
-  ;; Shorten mode lighter
-  (delight 'flyspell-mode " fS" t)
-  ;; Set key bindings
-  (bind-key "C-c l b" #'flyspell-buffer)
-  (bind-keys :map flyspell-mode-map
-             ("C-c l c" . flyspell-correct-word-before-point)
-             ("C-c l p" . flyspell-check-previous-highlighted-word))
+(use-package flyspell
+  :delight (flyspell-mode " fS")
+  :bind (("C-c l b" . flyspell-buffer)
+         :map flyspell-mode-map
+         ("C-c l c" . flyspell-correct-word-before-point)
+         ("C-c l p" . flyspell-check-previous-highlighted-word))
+  :commands (flyspell-mode flyspell-prog-mode)
+  :init
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  :config
   ;; Disable conflicting key bindings
   (unbind-key "C-c $" flyspell-mode-map)
   (unbind-key "C-M-i" flyspell-mode-map)
@@ -367,38 +389,52 @@
   (setq flyspell-duplicate-distance 12000))
 
 ;; Isearch configuration
-(delight 'isearch-mode " iS" t)
-(setq isearch-allow-scroll t)
-(setq search-default-mode #'char-fold-to-regexp)
+(use-package "isearch"
+  :delight (isearch-mode " iS")
+  :defer t
+  :config
+  (setq isearch-allow-scroll t)
+  (setq search-default-mode #'char-fold-to-regexp))
 
 ;; Ispell default program
-(after 'ispell
+(use-package ispell
+  :defer t
+  :config
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra")))
 
 ;; Ediff window split configuration
-(after 'ediff-wind
+(use-package ediff-wind
+  :defer t
+  :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function #'split-window-horizontally)
   (setq ediff-grab-mouse nil))
 
 ;; Ediff restore window configuration
-(after 'ediff-util
+(use-package ediff-util
+  :defer t
+  :config
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;; Uniquify buffer names
-(after 'uniquify
+(use-package uniquify
+  :defer t
+  :config
   (setq uniquify-buffer-name-style 'forward)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
 ;; Use Ibuffer for buffer list
-(bind-key [remap list-buffers] #'ibuffer)
-;; Configuration
-(after 'ibuffer
+(use-package ibuffer
+  :defer t
+  :bind ([remap list-buffers] . ibuffer)
+  :config
   (setq ibuffer-default-sorting-mode 'major-mode))
 
 ;; Version control configuration
-(after 'vc-hooks
+(use-package vc-hooks
+  :defer t
+  :config
   (setq vc-ignore-dir-regexp
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
@@ -407,35 +443,51 @@
   (setq vc-make-backup-files t))
 
 ;; Customize interface options
-(after 'cus-edit
+(use-package cus-edit
+  :defer t
+  :config
   (setq custom-buffer-done-kill t)
   (setq custom-buffer-verbose-help nil)
   (setq custom-unlispify-tag-names nil)
   (setq custom-unlispify-menu-entries nil))
 
 ;; Treat all themes as safe
-(after 'custom
+(use-package custom
+  :defer t
+  :config
   (setq custom-safe-themes t))
 
-;; Auto Revert mode lighter
-(after 'autorevert
-  (delight 'auto-revert-mode " aR" t))
+;; Auto Revert mode
+(use-package autorevert
+  :delight (auto-revert-mode " aR")
+  :defer t)
 
 ;; Imenu configuration
-(after 'imenu
+(use-package imenu
+  :defer t
+  :config
   (setq imenu-auto-rescan t))
 
 ;; Ignore case sensitivity with Pcomplete
-(after 'pcomplete
+(use-package pcomplete
+  :defer t
+  :config
   (setq pcomplete-ignore-case t))
 
 ;; ElDoc mode configuration
-(after 'eldoc
-  ;; Shorten mode lighter
-  (delight 'eldoc-mode " eD" t))
+(use-package eldoc
+  :delight (eldoc-mode " eD")
+  :defer t
+  :config
+  ;; Make compatible with Paredit
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round))
 
 ;; Python mode configuration
-(after 'python
+(use-package python
+  :defer t
+  :config
   ;; Use Python 3 as default
   (setq python-shell-interpreter "python3")
   ;; Disable indent offset guessing
@@ -445,10 +497,10 @@
             (lambda () (setq fill-column 79)))
   (add-hook 'python-mode-hook #'subword-mode))
 
-;; CC mode
-(add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
-;; Configuration
-(after 'cc-mode
+;; CC mode configuration
+(use-package cc-mode
+  :mode ("\\.fos\\'" . c++-mode)
+  :config
   (setq c-basic-offset 4)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
@@ -456,37 +508,49 @@
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; Use a default tag file
-(after 'etags
+(use-package etags
+  :defer t
+  :config
   (setq tags-file-name "TAGS"))
 
 ;; Scheme mode configuration
-(after 'scheme
+(use-package scheme
+  :defer t
+  :config
   (setq scheme-program-name "guile"))
 
 ;; CSS mode configuration
-(after 'css-mode
+(use-package css-mode
+  :defer t
+  :config
   (setq css-indent-offset 2))
 
 ;; NXML mode configuration
-(after 'nxml-mode
+(use-package nxml-mode
+  :defer t
+  :config
   (setq nxml-slash-auto-complete-flag t)
   (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
 
 ;; Outline mode
-(bind-key "C-c t o" #'outline-minor-mode)
-;; Configuration
-(after 'outline
-  (delight 'outline-minor-mode " oL" t)
+(use-package outline
+  :delight (outline-minor-mode " oL")
+  :bind ("C-c t o" . outline-minor-mode)
+  :config
   (setq outline-minor-mode-prefix (kbd "C-c O")))
 
 ;; Doc View mode configuration
-(after 'doc-view
+(use-package doc-view
+  :defer t
+  :config
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
 ;; Colorize ANSI escape sequences
-(after 'ansi-color
+(use-package ansi-color
+  :defer t
+  :config
   (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
@@ -494,128 +558,137 @@
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
-;; Enable Pass integration
-(after 'auth-source
-  (auth-source-pass-enable))
-
 ;; Mail sending configuration
-(after 'message
+(use-package message
+  :defer t
+  :config
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
+  ;; Default mail sending function
   (setq message-send-mail-function #'smtpmail-send-it))
 
 ;; Outgoing mail server
-(after 'smtpmail
+(use-package smtpmail
+  :defer t
+  :config
   (setq smtpmail-smtp-server "mail.cock.li")
   (setq smtpmail-smtp-user "drot-smtp")
   (setq smtpmail-smtp-service 465)
   (setq smtpmail-stream-type 'ssl))
 
 ;; Smiley configuration
-(after 'smiley
+(use-package smiley
+  :defer t
+  :config
   (setq smiley-style 'medium))
 
 ;; Prevent GnuTLS warnings
-(after 'gnutls
+(use-package gnutls
+  :defer t
+  :config
   (setq gnutls-min-prime-bits nil))
 
 ;; Dired configuration
-(after 'dired
+(use-package dired
+  :defer t
+  :config
   (setq dired-listing-switches "-ahlF --group-directories-first")
   (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t))
 
-;; Autoload Dired-X features
-(autoload 'dired-jump "dired-x"
-  "Jump to Dired buffer corresponding to current buffer." t)
-(autoload 'dired-jump-other-window "dired-x"
-  "Like \\[dired-jump] (dired-jump) but in other window." t)
-;; Set key bindings
-(bind-key "C-x C-j" #'dired-jump)
-(bind-key "C-x 4 C-j" #'dired-jump-other-window)
-;; Shorten Dired Omit mode lighter
-(after 'dired-x
+;; Additional features with dired-x
+(use-package dired-x
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window))
+  :after dired
+  :config
+  ;; Shorten the Dired Omit mode lighter
   (add-function :after (symbol-function 'dired-omit-startup)
                 (lambda () (delight 'dired-omit-mode " oT" t))
                 '((name . dired-omit-mode-delight))))
 
 ;; Wdired movement and editable parts
-(after 'wdired
+(use-package wdired
+  :defer t
+  :config
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
 ;; TRAMP configuration
-(after 'tramp
+(use-package tramp
+  :defer t
+  :config
   (setq tramp-default-method "ssh")
   (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
 
 ;; Bookmarks
-(after 'bookmark
+(use-package bookmark
+  :defer t
+  :config
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
 
 ;; Find file at point
-(bind-key "C-c f f" #'find-file-at-point)
-;; Configuration
-(after 'ffap
+(use-package ffap
+  :bind ("C-c f f" . find-file-at-point)
+  :config
   (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
-(bind-key "C-c h a" #'apropos)
-;; Configuration
-(after 'apropos
+(use-package apropos
+  :bind ("C-c h a" . apropos)
+  :config
   (setq apropos-do-all t))
 
 ;; Copyright insertion
-(bind-key "C-c i c" #'copyright)
-(bind-key "C-c i C" #'copyright-update)
-;; Configuration
-(after 'copyright
+(use-package copyright
+  :bind (("C-c i c" . copyright)
+         ("C-c i C" . copyright-update))
+  :config
   (setq copyright-year-ranges t)
   (setq copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(bind-key "C-c x w" #'whitespace-cleanup)
-(bind-key "C-c t w" #'whitespace-mode)
-;; Shorten mode lighter
-(after 'whitespace
-  (delight 'whitespace-mode " wS" t))
+(use-package whitespace
+  :delight (whitespace-mode " wS")
+  :bind (("C-c x w" . whitespace-cleanup)
+         ("C-c t w" . whitespace-mode)))
 
 ;; Regexp builder
-(bind-key "C-c s r" #'re-builder)
-;; Configuration
-(after 're-builder
+(use-package re-builder
+  :bind ("C-c s r" . re-builder)
+  :config
   (setq reb-re-syntax 'string))
 
 ;; Proced
-(bind-key "C-c a P" #'proced)
-;; Configuration
-(after 'proced
+(use-package proced
+  :bind ("C-c a P" . proced)
+  :config
   (setq-default proced-sort 'start)
   (setq-default proced-tree-flag t))
 
 ;; GDB
-(bind-key "C-c a D" #'gdb)
-;; Configuration
-(after 'gdb-mi
+(use-package gdb-mi
+  :bind ("C-c a D" . gdb)
+  :config
   (setq gdb-many-windows t))
 
 ;; Open URLs with the specified browser
-(bind-key "C-c n u" #'browse-url)
-(bind-key "C-c n b" #'browse-url-at-point)
-;; Configuration
-(after 'browse-url
+(use-package browse-url
+  :bind (("C-c n u" . browse-url)
+         ("C-c n b" . browse-url-at-point))
+  :config
   (setq browse-url-browser-function #'browse-url-firefox))
 
-;; Speedbar
-(bind-key "C-c p s" #'speedbar)
-;; Configuration
-(after 'speedbar
-  ;; Set key binding
-  (bind-key "a" #'speedbar-toggle-show-all-files speedbar-mode-map)
+;; Speedbar configuration
+(use-package speedbar
+  :bind (("C-c p s" . speedbar)
+         :map speedbar-mode-map
+         ("a" . speedbar-toggle-show-all-files))
+  :config
   ;; Emulate NERDTree behavior
   (setq speedbar-use-images nil)
   (setq speedbar-show-unknown-files t)
@@ -625,10 +698,10 @@
    '("PKGBUILD" ".lisp" ".clj" ".lua" ".css" ".patch"
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
-;; Eshell
-(bind-key "C-c a e" #'eshell)
-;; Configuration
-(after 'eshell
+;; Eshell configuration
+(use-package eshell
+  :bind ("C-c a e" . eshell)
+  :config
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
   ;; Use Pcomplete alternate completion
@@ -643,41 +716,42 @@
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
-(after 'eshell
-  ;; Initialize mode
-  (require 'em-smart)
+(use-package em-smart
+  :after eshell
+  :config
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
-;; Shell mode
-(bind-key "C-c a s" #'shell)
-;; Configuration
-(after 'shell
+;; Shell mode configuration
+(use-package shell
+  :bind ("C-c a s" . shell)
+  :config
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
-(bind-key "C-c a I" #'ielm)
-;; Configuration
-(after 'ielm
+(use-package ielm
+  :bind ("C-c a I" . ielm)
+  :config
   (setq ielm-prompt "EL> "))
 
-;; Compilation
-(bind-key "C-c c C" #'compile)
-(bind-key "C-c c R" #'recompile)
-;; Configuration
-(after 'compile
+;; Compilation configuration
+(use-package compile
+  :bind (("C-c c C" . compile)
+         ("C-c c R" . recompile))
+  :config
   (setq compilation-ask-about-save nil)
   (setq compilation-always-kill t)
   (setq compilation-scroll-output 'first-error)
   (setq compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "C-c a g" #'gnus)
-;; Configuration
-(after 'gnus
-  ;; Set key bindings
-  (bind-key "M-o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "M-o" #'ace-link-gnus gnus-article-mode-map)
+(use-package gnus
+  :bind (("C-c a g" . gnus)
+         :map gnus-summary-mode-map
+         ("M-o" . ace-link-gnus)
+         :map gnus-article-mode-map
+         ("M-o" . ace-link-gnus))
+  :config
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
@@ -720,10 +794,10 @@
   (setq gnus-sum-thread-tree-leaf-with-other "├──>")
   (setq gnus-sum-thread-tree-single-leaf "└──>"))
 
-;; Calendar
-(bind-key "C-c a C" #'calendar)
-;; Configuration
-(after 'calendar
+;; Calendar configuration
+(use-package calendar
+  :bind ("C-c a C" . calendar)
+  :config
   (setq holiday-general-holidays nil)
   (setq holiday-solar-holidays nil)
   (setq holiday-bahai-holidays nil)
@@ -738,19 +812,15 @@
   (setq calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Org-mode configuration
-(bind-key "C-c o a" #'org-agenda)
-(bind-key "C-c o c" #'org-capture)
-(bind-key "C-c o t" #'org-todo-list)
-(bind-key "C-c o s" #'org-search-view)
-(bind-key "C-c o l" #'org-store-link)
-;; Autoload missing function
-(autoload 'org-narrow-to-subtree "org"
-  "Narrow buffer to the current subtree.")
-;; Configuration
-(after 'org
-  ;; Set key binding
-  (bind-key "M-o" #'ace-link-org org-mode-map)
-  ;; Customize
+(use-package org
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o c" . org-capture)
+         ("C-c o t" . org-todo-list)
+         ("C-c o s" . org-search-view)
+         ("C-c o l" . org-store-link)
+         :map org-mode-map
+         ("M-o" . ace-link-org))
+  :config
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
   (setq org-agenda-files '("~/.emacs.d/org"))
@@ -766,9 +836,9 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(bind-key "C-c a T" #'display-time-world)
-;; Configuration
-(after 'time
+(use-package time
+  :bind ("C-c a T" . display-time-world)
+  :config
   (setq display-time-world-list '(("Europe/Riga" "Riga")
                                   ("America/Los_Angeles" "Los Angeles")
                                   ("Canada/Eastern" "Quebec")
@@ -776,54 +846,57 @@
                                   ("UTC" "Universal"))))
 
 ;; Ace-window
-(require-package 'ace-window)
-;; Set key binding
-(bind-key [remap other-window] #'ace-window)
-;; Configuration
-(after 'ace-window
-  ;; Shorten mode lighter
-  (delight 'ace-window-mode " aW" t)
-  ;; Customize
+(use-package ace-window
+  :ensure t
+  :delight (ace-window-mode " aW")
+  :bind ([remap other-window] . ace-window)
+  :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Anaconda mode
-(require-package 'anaconda-mode)
-;; Initialize mode
-(add-hook 'python-mode-hook #'anaconda-mode)
-(add-hook 'python-mode-hook #'anaconda-eldoc-mode)
-;; Shorten mode lighter
-(after 'anaconda-mode
-  (delight 'anaconda-mode " aC" t))
+(use-package anaconda-mode
+  :ensure t
+  :delight (anaconda-mode " aC")
+  :commands (anaconda-mode anaconda-eldoc-mode)
+  :init
+  (add-hook 'python-mode-hook #'anaconda-mode)
+  (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
 ;; Avy
-(require-package 'avy)
-;; Initialize mode
-(avy-setup-default)
-;; Set key bindings
-(bind-key "C-c n c" #'avy-goto-char)
-(bind-key "C-c n k" #'avy-goto-char-2)
-(bind-key "C-c n J" #'avy-goto-word-0)
-(bind-key "C-c n SPC" #'avy-pop-mark)
-(bind-key "C-c n l" #'avy-goto-line)
-(bind-key "C-c n j" #'avy-goto-word-or-subword-1)
-;; Configuration
-(after 'avy
+(use-package avy
+  :ensure t
+  :bind (("C-c n c" . avy-goto-char)
+         ("C-c n k" . avy-goto-char-2)
+         ("C-c n J" . avy-goto-word-0)
+         ("C-c n SPC" . avy-pop-mark)
+         ("C-c n l" . avy-goto-line)
+         ("C-c n j" . avy-goto-word-or-subword-1))
+  :config
   (setq avy-all-windows 'all-frames)
   (setq avy-background t)
-  (setq avy-highlight-first t))
+  (setq avy-highlight-first t)
+  (avy-setup-default))
 
 ;; CIDER
-(require-package 'cider)
-;; Configuration
-(after 'cider-common
+(use-package cider-common
+  :ensure cider
+  :defer t
+  :config
   ;; Use the symbol at point as the default value
   (setq cider-prompt-for-symbol nil))
-;; Mode configuration
-(after 'cider-mode
-  ;; Enable fuzzy completion with Company
+
+;; CIDER mode configuration
+(use-package cider-mode
+  :ensure cider
+  :defer t
+  :config
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
-;; REPL configuration
-(after 'cider-repl
+
+;; CIDER REPL configuration
+(use-package cider-repl
+  :ensure cider
+  :defer t
+  :config
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
   (setq cider-repl-wrap-history t)
@@ -833,75 +906,39 @@
   (add-hook 'cider-repl-mode-hook #'subword-mode))
 
 ;; Dash
-(require-package 'dash)
-;; Configuration
-(after 'dash
+(use-package dash
+  :ensure t
+  :defer t
+  :config
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
 
 ;; Debbugs
-(require-package 'debbugs)
-;; Set key bindings
-(bind-key "C-c d g" #'debbugs-gnu)
-(bind-key "C-c d s" #'debbugs-gnu-search)
-(bind-key "C-c d t" #'debbugs-gnu-usertags)
-(bind-key "C-c d p" #'debbugs-gnu-patches)
-(bind-key "C-c d b" #'debbugs-gnu-bugs)
-(bind-key "C-c d O" #'debbugs-org)
-(bind-key "C-c d S" #'debbugs-org-search)
-(bind-key "C-c d P" #'debbugs-org-patches)
-(bind-key "C-c d B" #'debbugs-org-bugs)
+(use-package debbugs
+  :ensure t
+  :bind (("C-c d g" . debbugs-gnu)
+         ("C-c d s" . debbugs-gnu-search)
+         ("C-c d t" . debbugs-gnu-usertags)
+         ("C-c d p" . debbugs-gnu-patches)
+         ("C-c d b" . debbugs-gnu-bugs)
+         ("C-c d O" . debbugs-org)
+         ("C-c d S" . debbugs-org-search)
+         ("C-c d P" . debbugs-org-patches)
+         ("C-c d B" . debbugs-org-bugs)))
 
 ;; Dired Filter
-(require-package 'dired-filter)
-;; Configuration
-(after 'dired
-  ;; Initialize mode
-  (require 'dired-filter)
-  ;; Shorten mode lighter
-  (delight 'dired-filter-mode " fR" t)
-  ;; Set key bindings
-  (bind-key "\\" dired-filter-mark-map dired-mode-map))
-
-;; Dired Rainbow
-(require-package 'dired-rainbow)
-;; Configuration
-(after 'dired-filter
-  ;; Initialize mode
-  (require 'dired-rainbow)
-  ;; Define faces by file type
-  (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV"))
-  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz" "xz"
-                                             "z" "Z" "jar" "war" "ear" "rar"
-                                             "sar" "xpi" "apk" "xz" "tar"))
-  (dired-rainbow-define document "peru" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                         "rtf" "djvu" "epub"))
-  (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
-  (dired-rainbow-define excel "turquise" ("xlsx"))
-  (dired-rainbow-define executable "Gold" ("exe" "msi"))
-  (dired-rainbow-define html "Wheat" ("htm" "html" "xhtml"))
-  (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
-  (dired-rainbow-define log "gray" ("log"))
-  (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
-                                                 "rb" "R" "php" "el" "scm" "cpp"
-                                                 "fos" "lisp" "clj"))
-  (dired-rainbow-define video "#B3CCFF" ("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
-                                         "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
-                                         "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
-                                         "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
-  (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
-  ;; Define faces by file permission
-  (dired-rainbow-define-chmod executable-unix "Gold" "-[rw-]+x.*")
-  (dired-rainbow-define-chmod directory-unix "DeepSkyBlue" "d[rw-]+x.*")
-  (dired-rainbow-define-chmod symlink-unix "SpringGreen" "l[rw-]+x.*"))
+(use-package dired-filter
+  :ensure t
+  :delight (dired-filter-mode " fR")
+  :bind (:map dired-mode-map
+              ("\\" . dired-filter-mark-map))
+  :after dired-x)
 
 ;; Dired Subtree
-(require-package 'dired-subtree)
-;; Configuration
-(after 'dired-rainbow
-  ;; Initialize mode
-  (require 'dired-subtree)
+(use-package dired-subtree
+  :ensure t
+  :after dired-filter
+  :config
   ;; Set key bindings
   (bind-keys :map dired-mode-map
              :prefix "C-,"
@@ -923,11 +960,13 @@
              ("C-o C-d" . dired-subtree-only-this-directory)))
 
 ;; Dired Ranger
-(require-package 'dired-ranger)
-;; Configuration
-(after 'dired-subtree
-  ;; Initialize mode
-  (require 'dired-ranger)
+(use-package dired-ranger
+  :ensure t
+  :bind (:map dired-mode-map
+              ("'" . dired-ranger-bookmark)
+              ("`" . dired-ranger-bookmark-visit))
+  :after dired-subtree
+  :config
   ;; Set key bindings
   (bind-keys :map dired-mode-map
              :prefix "r"
@@ -935,70 +974,62 @@
              :prefix-docstring "Dired Ranger map."
              ("c" . dired-ranger-copy)
              ("p" . dired-ranger-paste)
-             ("m" . dired-ranger-move))
-  ;; Bookmarking
-  (bind-keys :map dired-mode-map
-             ("'" . dired-ranger-bookmark)
-             ("`" . dired-ranger-bookmark-visit)))
+             ("m" . dired-ranger-move)))
 
 ;; Dired Narrow
-(require-package 'dired-narrow)
-;; Configuration
-(after 'dired-ranger
-  ;; Initialize mode
-  (require 'dired-narrow)
-  ;; Shorten mode lighter
-  (delight 'dired-narrow-mode " d-N" t)
-  ;; Set key binding
-  (bind-key "C-." #'dired-narrow dired-mode-map))
+(use-package dired-narrow
+  :ensure t
+  :delight (dired-narrow-mode " d-N")
+  :bind (:map dired-mode-map
+              ("C-." . dired-narrow))
+  :after dired-ranger)
 
 ;; Dired Collapse
-(require-package 'dired-collapse)
-;; Configuration
-(after 'dired-ranger
-  ;; Initialize mode
-  (require 'dired-collapse)
-  ;; Set key binding
-  (bind-key "," #'dired-collapse-mode dired-mode-map))
+(use-package dired-collapse
+  :ensure t
+  :bind (:map dired-mode-map
+              ("," . dired-collapse-mode))
+  :after dired-narrow)
 
-;; Dired-du
-(require-package 'dired-du)
-;; Configuration
-(after 'dired-collapse
-  ;; Initialize mode
-  (require 'dired-du)
-  ;; Shorten mode lighter
-  (delight 'dired-du-mode " d-U" t)
+;; Dired du
+(use-package dired-du
+  :ensure t
+  :delight (dired-du-mode " d-U")
+  :after dired-collapse
+  :config
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
 ;; Dired Async
-(require-package 'async)
-;; Configuration
-(after 'dired-du
-  ;; Initialize mode
-  (require 'dired-async)
-  ;; Shorten mode lighter
-  (delight 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")) t)
-  ;; Set key bindings
-  (bind-keys :map dired-mode-map
-             ("E c" . dired-async-do-copy)
-             ("E r" . dired-async-do-rename)
-             ("E s" . dired-async-do-symlink)
-             ("E h" . dired-async-do-hardlink)
-             ("E m" . dired-async-mode)))
+(use-package dired-async
+  :ensure async
+  :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
+  :bind (:map dired-mode-map
+              ("E c" . dired-async-do-copy)
+              ("E r" . dired-async-do-rename)
+              ("E s" . dired-async-do-symlink)
+              ("E h" . dired-async-do-hardlink)
+              ("E m" . dired-async-mode))
+  :after dired-du)
+
+;; Dired fl
+(use-package diredfl
+  :ensure t
+  :after dired-async
+  :config
+  (diredfl-global-mode))
 
 ;; Easy-kill
-(require-package 'easy-kill)
-(bind-key [remap kill-ring-save] #'easy-kill)
-(bind-key [remap mark-sexp] #'easy-mark)
+(use-package easy-kill
+  :ensure t
+  :bind (([remap kill-ring-save] . easy-kill)
+         ([remap mark-sexp] . easy-mark)))
 
 ;; Elfeed
-(require-package 'elfeed)
-;; Set key binding
-(bind-key "C-c a f" #'elfeed)
-;; Configuration
-(after 'elfeed
+(use-package elfeed
+  :ensure t
+  :bind ("C-c a f" . elfeed)
+  :config
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
                        ("https://lwn.net/headlines/rss" lwn)
                        ("https://www.reddit.com/r/emacs/.rss" emacs)
@@ -1009,19 +1040,19 @@
   (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
   (setq elfeed-search-filter "@1-week-ago +unread"))
 
-;; ERC
-(defun drot|erc-init ()
-  "Connect to IRC."
-  (interactive)
-  (erc-tls :server "irc.rizon.net" :port 6697
-           :nick "drot"))
+;; ERC configuration
+(use-package erc
+  :ensure erc-hl-nicks
+  :bind ("C-c a i" . drot|erc-init)
+  :commands drot|erc-init
+  :config
+  ;; Use custom function to launch ERC
+  (defun drot|erc-init ()
+    "Connect to IRC."
+    (interactive)
+    (erc-tls :server "irc.rizon.net" :port 6697
+             :nick "drot"))
 
-;; ERC highlight nicknames
-(require-package 'erc-hl-nicks)
-;; Set key binding
-(bind-key "C-c a i" #'drot|erc-init)
-;; Configuration
-(after 'erc
   ;; Workaround for Rizon NickServ authentication
   (defun drot|erc-fetch-password (&rest params)
     "Fetch passwords for ERC authentication from an encrypted source."
@@ -1107,57 +1138,59 @@
   (add-hook 'erc-insert-post-hook 'erc-truncate-buffer))
 
 ;; Expand region
-(require-package 'expand-region)
-;; Set key binding
-(bind-key "C-c x e" #'expand-region)
+(use-package expand-region
+  :ensure t
+  :bind ("C-c x e" . er/expand-region))
 
 ;; Flx
-(require-package 'flx)
+(use-package flx
+  :ensure t
+  :defer t)
 
 ;; Geiser
-(require-package 'geiser)
-;; Set key binding
-(bind-key "C-c t g" #'run-geiser)
-;; Configuration
-(after 'geiser
+(use-package geiser
+  :ensure t
+  :bind ("C-c t g" . run-geiser)
+  :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; IEdit
-(require-package 'iedit)
-;; Autoload missing functions
-(autoload 'iedit-mode-from-isearch "iedit"
-  "Start Iedit mode using last search string as the regexp." t)
-(autoload 'iedit-execute-last-modification "iedit"
-  "Apply last modification in Iedit mode to the current buffer or an active region." t)
-;; Set key bindings
-(bind-key "C-c i e" #'iedit-mode)
-(bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
-(bind-key "C-;" #'iedit-execute-last-modification esc-map)
-(bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
-;; Configuration
-(after 'iedit
+(use-package iedit
+  :ensure t
+  :bind (("C-c i e" . iedit-mode)
+         :map isearch-mode-map
+         ("C-;" . iedit-mode-from-isearch)
+         :map esc-map
+         ("C-;" . iedit-execute-last-modification)
+         :map help-map
+         ("C-;" . iedit-mode-toggle-on-function))
+  :functions iedit-mode-toggle-on-function
+  :config
   (setq iedit-toggle-key-default nil))
 
 ;; JavaScript mode
-(require-package 'js2-mode)
-;; Initialize mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;; Configuration
-(after 'js2-mode
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config
   (setq js2-basic-offset 2)
   (setq js2-highlight-level 3)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; JSON mode
-(require-package 'json-mode)
+(use-package json-mode
+  :ensure t
+  :pin gnu
+  :defer t)
 
 ;; Key Chord
-(require-package 'key-chord)
-;; Initialize mode
-(add-hook 'after-init-hook
-          (lambda () (key-chord-mode 1)))
-;; Configuration
-(after 'key-chord
+(use-package key-chord
+  :ensure t
+  :commands key-chord-mode
+  :init
+  (add-hook 'after-init-hook
+            (lambda () (key-chord-mode 1)))
+  :config
   (key-chord-define-global "3j" #'dired-jump)
   (key-chord-define-global "3l" #'avy-goto-line)
   (key-chord-define-global "3u" #'undo-tree-visualize)
@@ -1168,18 +1201,19 @@
   (key-chord-define-global "8r" #'replace-string))
 
 ;; Lua mode
-(require-package 'lua-mode)
+(use-package lua-mode
+  :ensure t
+  :defer t)
 
 ;; Hydra
-(require-package 'hydra)
-;; Set key bindings
-(bind-key "C-c x m" #'hydra-mark-text/body)
-(bind-key "C-c x M" #'hydra-move-text/body)
-(bind-key "C-c m h" #'hydra-multiple-cursors/body)
-(bind-key "C-c w h" #'hydra-window-resize/body)
-(bind-key "C-c x O" #'hydra-outline/body)
-;; Configuration
-(after 'hydra
+(use-package hydra
+  :ensure t
+  :bind (("C-c x m" . hydra-mark-text/body)
+         ("C-c x M" . hydra-move-text/body)
+         ("C-c m h" . hydra-multiple-cursors/body)
+         ("C-c w h" . hydra-window-resize/body)
+         ("C-c x O" . hydra-outline/body))
+  :config
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock)
 
@@ -1267,11 +1301,11 @@
     ("q" nil "Quit")))
 
 ;; EPUB format support
-(require-package 'nov)
-;; Initialize package
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-;; Configuration
-(after 'nov
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
   (defun drot|nov-font-setup ()
@@ -1282,24 +1316,26 @@
   (setq nov-text-width 80))
 
 ;; Macrostep
-(require-package 'macrostep)
-;; Set key binding
-(bind-key "C-c M-e" #'macrostep-expand emacs-lisp-mode-map)
+(use-package macrostep
+  :ensure t
+  :bind (:map emacs-lisp-mode-map
+              ("C-c M-e" . macrostep-expand)))
 
 ;; Magit
-(require-package 'magit)
-;; Set key bindings
-(bind-key "C-c v v" #'magit-status)
-(bind-key "C-c v d" #'magit-dispatch-popup)
-(bind-key "C-c v c" #'magit-clone)
-(bind-key "C-c v b" #'magit-blame)
-(bind-key "C-c v l" #'magit-log-buffer-file)
-(bind-key "C-c v p" #'magit-pull)
+(use-package magit
+  :ensure t
+  :bind (("C-c v v" . magit-status)
+         ("C-c v d" . magit-dispatch-popup)
+         ("C-c v c" . magit-clone)
+         ("C-c v b" . magit-blame)
+         ("C-c v l" . magit-log-buffer-file)
+         ("C-c v p" . magit-pull)))
 
 ;; Markdown mode
-(require-package 'markdown-mode)
-;; Configuration
-(after 'markdown-mode
+(use-package markdown-mode
+  :ensure t
+  :defer t
+  :config
   (add-hook 'markdown-mode-hook #'whitespace-mode)
   (add-hook 'markdown-mode-hook #'tildify-mode)
   (add-hook 'markdown-mode-hook #'visual-line-mode)
@@ -1307,31 +1343,33 @@
   (setq markdown-fontify-code-blocks-natively t))
 
 ;; Move-text
-(require-package 'move-text)
+(use-package move-text
+  :ensure t
+  :defer t)
 
 ;; Paradox
-(require-package 'paradox)
-;; Set key binding
-(bind-key "C-c a p" #'paradox-list-packages)
-;; Configuration
-(after 'paradox
+(use-package paradox
+  :ensure t
+  :bind ("C-c a p" . paradox-list-packages)
+  :config
   (setq paradox-github-token t)
   (setq paradox-execute-asynchronously t)
   (setq paradox-spinner-type 'rotating-line)
   (setq paradox-display-download-count t))
 
 ;; PKGBUILD mode
-(require-package 'pkgbuild-mode)
+(use-package pkgbuild-mode
+  :ensure t
+  :defer t)
 
 ;; SLIME
-(require-package 'slime)
-;; Set key bindings
-(bind-key "C-c t s" #'slime)
-(bind-key "C-c t C" #'slime-connect)
-;; Configuration
-(after 'slime
-  ;; Set key binding
-  (bind-key "C-c $" #'slime-export-symbol-at-point slime-mode-indirect-map)
+(use-package slime
+  :ensure t
+  :bind (("C-c t s" . slime)
+         ("C-c t C" . slime-connect)
+         :map slime-mode-indirect-map
+         ("C-c $" . slime-export-symbol-at-point))
+  :config
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Use all accessible features and SBCL by default
@@ -1341,81 +1379,89 @@
   (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")))
 
 ;; SLIME REPL
-(after 'slime
-  (require 'slime-repl)
+(use-package slime-repl
+  :ensure slime
+  :defer t
+  :config
   ;; Disable conflicting key binding
   (unbind-key "DEL" slime-repl-mode-map))
 
 ;; SLIME Company
-(require-package 'slime-company)
-;; Configuration
-(after 'slime-company
+(use-package slime-company
+  :ensure t
+  :defer t
+  :config
   (setq slime-company-completion 'fuzzy))
 
 ;; Smex
-(require-package 'smex)
-;; Configuration
-(after 'smex
+(use-package smex
+  :ensure t
+  :defer t
+  :config
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
 ;; Systemd mode
-(require-package 'systemd)
+(use-package systemd
+  :ensure t
+  :defer t)
 
 ;; Wgrep
-(require-package 'wgrep)
+(use-package wgrep
+  :ensure t
+  :defer t)
 
 ;; YAML mode
-(require-package 'yaml-mode)
+(use-package yaml-mode
+  :ensure t
+  :defer t)
 
 ;; Zop-to-char
-(require-package 'zop-to-char)
-;; Set key bindings
-(bind-key [remap zap-to-char] #'zop-to-char)
-(bind-key "M-Z" #'zop-up-to-char)
+(use-package zop-to-char
+  :ensure t
+  :bind (([remap zap-to-char] . zop-to-char)
+         ("M-Z" . zop-up-to-char)))
 
 ;; Ace-link
-(require-package 'ace-link)
-;; Initialize mode
-(add-hook 'after-init-hook #'ace-link-setup-default)
-;; Configuration
-(after 'ace-link
-  ;; Set key binding
-  (bind-key "C-c n a"  #'ace-link-addr))
+(use-package ace-link
+  :ensure t
+  :bind ("C-c n a" . ace-link-addr)
+  :commands ace-link-setup-default
+  :init
+  (add-hook 'after-init-hook #'ace-link-setup-default))
 
 ;; Adaptive Wrap
-(require-package 'adaptive-wrap)
-(add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode)
+(use-package adaptive-wrap
+  :ensure t
+  :commands adaptive-wrap-prefix-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
 
 ;; Anzu
-(require-package 'anzu)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-anzu-mode)
-;; Configuration
-(after 'anzu
-  ;; Set key bindings
-  (bind-key [remap query-replace] #'anzu-query-replace)
-  (bind-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
-  (bind-keys :map isearch-mode-map
-             ([remap isearch-query-replace] . anzu-isearch-query-replace)
-             ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  ;; Shorten mode lighter
-  (delight 'anzu-mode " aZ" t)
-  ;; Customize
+(use-package anzu
+  :ensure t
+  :delight (anzu-mode " aZ")
+  :bind (([remap query-replace] . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp)
+         :map isearch-mode-map
+         ([remap isearch-query-replace] . anzu-isearch-query-replace)
+         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
+  :commands global-anzu-mode
+  :init
+  (add-hook 'after-init-hook #'global-anzu-mode)
+  :config
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
   (setq anzu-replace-to-string-separator " => "))
 
 ;; Company mode
-(require-package 'company)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-company-mode)
-;; Configuration
-(after 'company
-  ;; Shorten mode lighter
-  (delight 'company-mode " cY" t)
-  ;; Set key binding
-  (bind-key "C-c i y" #'company-yasnippet)
-  ;; Customize
+(use-package company
+  :ensure t
+  :delight (company-mode " cY")
+  :bind ("C-c i y" . company-yasnippet)
+  :commands global-company-mode
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
+  :config
   (setq company-backends '(company-nxml
                            company-css
                            company-capf
@@ -1435,27 +1481,30 @@
   (company-tng-configure-default))
 
 ;; Company Anaconda
-(require-package 'company-anaconda)
-;; Initialize mode
-(add-hook 'python-mode-hook
-          (lambda () (add-to-list 'company-backends #'company-anaconda)))
+(use-package company-anaconda
+  :ensure t
+  :commands company-anaconda
+  :init
+  (add-hook 'python-mode-hook
+            (lambda () (add-to-list 'company-backends #'company-anaconda))))
 
 ;; Company Statistics
-(require-package 'company-statistics)
-;; Initialize mode
-(add-hook 'after-init-hook #'company-statistics-mode)
-;; Configuration
-(after 'company
+(use-package company-statistics
+  :ensure t
+  :commands company-statistics-mode
+  :init
+  (add-hook 'after-init-hook #'company-statistics-mode)
+  :config
   (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
 
 ;; Diff-Hl
-(require-package 'diff-hl)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-diff-hl-mode)
-;; Configuration
-(after 'diff-hl
-  ;; Set key binding
-  (bind-key "C-c t d" #'diff-hl-margin-mode)
+(use-package diff-hl
+  :ensure t
+  :bind ("C-c t d" . diff-hl-margin-mode)
+  :commands global-diff-hl-mode
+  :init
+  (add-hook 'after-init-hook #'global-diff-hl-mode)
+  :config
   ;; Update diffs immediately
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
@@ -1463,12 +1512,13 @@
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
 ;; Eyebrowse
-(require-package 'eyebrowse)
-;; Initialize mode
-(setq eyebrowse-keymap-prefix (kbd "C-c e"))
-(add-hook 'after-init-hook #'eyebrowse-mode)
-;; Configuration
-(after 'eyebrowse
+(use-package eyebrowse
+  :ensure t
+  :commands eyebrowse-mode
+  :init
+  (setq eyebrowse-keymap-prefix (kbd "C-c e"))
+  (add-hook 'after-init-hook #'eyebrowse-mode)
+  :config
   (setq eyebrowse-wrap-around t)
   (setq eyebrowse-switch-back-and-forth t)
   (setq eyebrowse-new-workspace t)
@@ -1476,71 +1526,72 @@
   (setq eyebrowse-mode-line-right-delimiter ">"))
 
 ;; FlyCheck
-(require-package 'flycheck)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-flycheck-mode)
-;; Configuration
-(after 'flycheck
+(use-package flycheck
+  :ensure t
+  :commands global-flycheck-mode
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :config
   (setq flycheck-mode-line-prefix "fC"))
 
 ;; FlyCheck GUI popups
-(require-package 'flycheck-pos-tip)
-;; Initialize mode
-(after 'flycheck
+(use-package flycheck-pos-tip
+  :ensure t
+  :after flycheck
+  :config
   (setq flycheck-pos-tip-max-width 80)
   (flycheck-pos-tip-mode))
 
 ;; Form-feed
-(require-package 'form-feed)
-;; Initialize mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                scheme-mode-hook
-                compilation-mode-hook
-                outline-mode-hook
-                help-mode-hook))
-  (add-hook hook #'form-feed-mode))
+(use-package form-feed
+  :ensure t
+  :commands form-feed-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  scheme-mode-hook
+                  compilation-mode-hook
+                  outline-mode-hook
+                  help-mode-hook))
+    (add-hook hook #'form-feed-mode)))
 
 ;; Hl-Todo
-(require-package 'hl-todo)
-;; Initialize mode
-(add-hook 'prog-mode-hook #'hl-todo-mode)
-;; Configuration
-(after 'hl-todo
-  ;; Set key bindings
-  (bind-keys :map hl-todo-mode-map
-             ("C-c p t p" . hl-todo-previous)
-             ("C-c p t n" . hl-todo-next)
-             ("C-c p t o" . hl-todo-occur)))
+(use-package hl-todo
+  :ensure t
+  :bind (:map hl-todo-mode-map
+              ("C-c p t p" . hl-todo-previous)
+              ("C-c p t n" . hl-todo-next)
+              ("C-c p t o" . hl-todo-occur))
+  :commands hl-todo-mode
+  :init
+  (add-hook 'prog-mode-hook #'hl-todo-mode))
 
 ;; Multiple cursors
-(require-package 'multiple-cursors)
-;; Initialize package
-(setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
-;; Set key bindings
-(bind-key "C-c m <SPC>" #'mc/vertical-align-with-space)
-(bind-key "C-c m a" #'mc/vertical-align)
-(bind-key "C-c m e" #'mc/mark-more-like-this-extended)
-(bind-key "C-c m m" #'mc/mark-all-like-this-dwim)
-(bind-key "C-c m l" #'mc/edit-lines)
-(bind-key "C-c m n" #'mc/mark-next-like-this)
-(bind-key "C-c m p" #'mc/mark-previous-like-this)
-(bind-key "C-c m C-a" #'mc/edit-beginnings-of-lines)
-(bind-key "C-c m C-e" #'mc/edit-ends-of-lines)
-(bind-key "C-c m C-s" #'mc/mark-all-in-region)
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
+         ("C-c m a" . mc/vertical-align)
+         ("C-c m e" . mc/mark-more-like-this-extended)
+         ("C-c m m" . mc/mark-all-like-this-dwim)
+         ("C-c m l" . mc/edit-lines)
+         ("C-c m n" . mc/mark-next-like-this)
+         ("C-c m p" . mc/mark-previous-like-this)
+         ("C-c m C-a" . mc/edit-beginnings-of-lines)
+         ("C-c m C-e" . mc/edit-ends-of-lines)
+         ("C-c m C-s" . mc/mark-all-in-region))
+  :commands (activate-cursor-for-undo deactivate-cursor-after-undo)
+  :init
+  (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el")))
 
 ;; Ivy
-(require-package 'ivy)
-(require-package 'ivy-hydra)
-;; Initialize mode
-(add-hook 'after-init-hook #'ivy-mode)
-;; Configuration
-(after 'ivy
-  ;; Shorten mode lighter
-  (delight 'ivy-mode " iY" t)
-  ;; Set key binding
-  (bind-key "C-c n R" #'ivy-resume)
-  ;; Customize
+(use-package ivy
+  :ensure ivy-hydra
+  :delight (ivy-mode " iY")
+  :bind ("C-c n R" . ivy-resume)
+  :commands ivy-mode
+  :init
+  (add-hook 'after-init-hook #'ivy-mode)
+  :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-use-virtual-buffers t)
@@ -1551,149 +1602,241 @@
   (setq ivy-action-wrap t))
 
 ;; Counsel
-(require-package 'counsel)
-;; Initialize mode
-(add-hook 'after-init-hook #'counsel-mode)
-;; Configuration
-(after 'counsel
-  ;; Shorten mode lighter
-  (delight 'counsel-mode " cS" t)
-  ;; Set key bindings
-  (bind-key "C-c f G" #'counsel-git)
-  (bind-key "C-c f j" #'counsel-dired-jump)
-  (bind-key "C-c f r" #'counsel-recentf)
-  (bind-key "C-c s G" #'counsel-git-grep)
-  (bind-key "C-c s i" #'counsel-imenu)
-  (bind-key "C-c s g" #'counsel-grep)
-  (bind-key "C-c n m" #'counsel-mark-ring)
-  (bind-key "C-c h c" #'counsel-command-history)
-  (bind-key "C-c h l" #'counsel-find-library)
-  (bind-key "C-c i 8" #'counsel-unicode-char)
-  ;; Customize
+(use-package counsel
+  :ensure t
+  :delight (counsel-mode " cS")
+  :bind (("C-c f G" . counsel-git)
+         ("C-c f j" . counsel-dired-jump)
+         ("C-c f r" . counsel-recentf)
+         ("C-c s G" . counsel-git-grep)
+         ("C-c s i" . counsel-imenu)
+         ("C-c s g" . counsel-grep)
+         ("C-c n m" . counsel-mark-ring)
+         ("C-c h c" . counsel-command-history)
+         ("C-c h l" . counsel-find-library)
+         ("C-c i 8" . counsel-unicode-char))
+  :commands counsel-mode
+  :init
+  (add-hook 'after-init-hook #'counsel-mode)
+  :config
   (setq counsel-find-file-at-point t))
 
 ;; Swiper
-(require-package 'swiper)
-;; Set key bindings
-(bind-key "C-c s S" #'swiper-all)
-(bind-key "C-c s s" #'swiper)
-(bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
-;; Configure
-(after 'swiper
+(use-package swiper
+  :ensure t
+  :bind (("C-c s S" . swiper-all)
+         ("C-c s s" . swiper)
+         :map isearch-mode-map
+         ("C-c S" . swiper-from-isearch))
+  :config
   (setq swiper-include-line-number-in-search t))
 
-;; Lispy
-(require-package 'lispy)
-;; Initialize mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                ielm-mode-hook
-                clojure-mode-hook
-                cider-repl-mode-hook
-                scheme-mode-hook
-                slime-repl-mode-hook
-                geiser-repl-mode-hook))
-  (add-hook hook #'lispy-mode))
-;; Configuration
-(after 'lispy
-  ;; Use Paredit key bindings
-  (lispy-set-key-theme '(special paredit c-digits))
-  ;; Set key bindings
-  (bind-keys :map lispy-mode-map
-             ("M-S" . lispy-splice)
-             ("M-R" . lispy-raise))
+;; Paredit
+(use-package paredit
+  :ensure t
+  :delight (paredit-mode " pE")
+  :bind (("M-S" . paredit-splice-sexp)
+         ("M-R" . paredit-raise-sexp)
+         ("C-c C-M-s" . paredit-mark-containing-sexp))
+  :commands enable-paredit-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  ielm-mode-hook
+                  clojure-mode-hook
+                  cider-repl-mode-hook
+                  scheme-mode-hook
+                  slime-repl-mode-hook
+                  geiser-repl-mode-hook))
+    (add-hook hook #'enable-paredit-mode))
+  :config
   ;; Disable conflicting key bindings
-  (unbind-key "M-r" lispy-mode-map)
-  (unbind-key "M-s" lispy-mode-map)
+  (unbind-key "M-r" paredit-mode-map)
+  (unbind-key "M-s" paredit-mode-map)
 
-  ;; Enable Lispy in other related modes
-  (defvar drot--lispy-minibuffer-setup-commands
+  ;; Extra Paredit functions
+  (defun paredit-mark-containing-sexp ()
+    (interactive)
+    (paredit-backward-up)
+    (mark-sexp))
+
+  (defun paredit-barf-all-the-way-backward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-backward-down)
+    (paredit-splice-sexp))
+
+  (defun paredit-barf-all-the-way-forward ()
+    (interactive)
+    (paredit-split-sexp)
+    (paredit-forward-down)
+    (paredit-splice-sexp)
+    (if (eolp) (delete-horizontal-space)))
+
+  (defun paredit-slurp-all-the-way-backward ()
+    (interactive)
+    (catch 'done
+      (while (not (bobp))
+        (save-excursion
+          (paredit-backward-up)
+          (if (eq (char-before) ?\()
+              (throw 'done t)))
+        (paredit-backward-slurp-sexp))))
+
+  (defun paredit-slurp-all-the-way-forward ()
+    (interactive)
+    (catch 'done
+      (while (not (eobp))
+        (save-excursion
+          (paredit-forward-up)
+          (if (eq (char-after) ?\))
+              (throw 'done t)))
+        (paredit-forward-slurp-sexp))))
+
+  (defun paredit--is-at-start-of-sexp ()
+    (and (looking-at "(\\|\\[")
+         (not (nth 3 (syntax-ppss)))   ;; Inside string
+         (not (nth 4 (syntax-ppss))))) ;; Inside comment
+
+  (defun paredit-duplicate-closest-sexp ()
+    (interactive)
+    ;; Skips to start of current sexp
+    (while (not (paredit--is-at-start-of-sexp))
+      (paredit-backward))
+    (set-mark-command nil)
+    ;; While we find sexps we move forward on the line
+    (while (and (bounds-of-thing-at-point 'sexp)
+                (<= (point) (car (bounds-of-thing-at-point 'sexp)))
+                (not (= (point) (line-end-position))))
+      (forward-sexp)
+      (while (looking-at " ")
+        (forward-char)))
+    (kill-ring-save (mark) (point))
+    ;; Go to the next line and copy the sexps we encountered
+    (paredit-newline)
+    (yank)
+    (exchange-point-and-mark))
+
+  (nconc paredit-commands
+         '("Extreme Barfage & Slurpage"
+           (("C-M-)")
+            paredit-slurp-all-the-way-forward
+            ("(foo (bar |baz) quux zot)"
+             "(foo (bar |baz quux zot))")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-}")
+            paredit-barf-all-the-way-forward
+            ("(foo (bar |baz quux) zot)"
+             "(foo (bar|) baz quux zot)"))
+           (("C-M-(")
+            paredit-slurp-all-the-way-backward
+            ("(foo bar (baz| quux) zot)"
+             "((foo bar baz| quux) zot)")
+            ("(a b ((c| d)) e f)"
+             "(a b ((c| d)) e f)"))
+           (("C-M-{")
+            paredit-barf-all-the-way-backward
+            ("(foo (bar baz |quux) zot)"
+             "(foo bar baz (|quux) zot)"))
+           (("C-M->")
+            paredit-duplicate-closest-sexp
+            ("(foo | bar)"
+             "(foo bar)(foo bar)"))))
+
+  (paredit-define-keys)
+  (paredit-annotate-mode-with-examples)
+  (paredit-annotate-functions-with-examples)
+
+  ;; Enable Paredit in other related modes
+  (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
       ibuffer-do-eval
       ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
+    "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot|lispy-minibuffer-setup ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot--lispy-minibuffer-setup-commands)
-        (lispy-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot|lispy-minibuffer-setup)
+  (defun drot|paredit-minibuffer-setup ()
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command drot--paredit-minibuffer-setup-commands)
+        (enable-paredit-mode)))
 
-  ;; Enable additional balance safeguards
-  (setq lispy-safe-delete t)
-  (setq lispy-safe-copy t)
-  (setq lispy-safe-paste t)
-  (setq lispy-safe-actions-no-pull-delimiters-into-comments t)
+  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
 
-  ;; Prefer single semicolons on the right
-  (setq lispy-comment-use-single-semicolon t))
+  ;; Disable Electric Pair mode when Paredit is active
+  (add-hook 'paredit-mode-hook
+            (lambda () (setq-local electric-pair-mode nil))))
 
 ;; Rainbow Delimiters
-(require-package 'rainbow-delimiters)
-;; Initialize mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                clojure-mode-hook
-                scheme-mode-hook))
-  (add-hook hook #'rainbow-delimiters-mode))
+(use-package rainbow-delimiters
+  :ensure t
+  :commands rainbow-delimiters-mode
+  :init
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  clojure-mode-hook
+                  scheme-mode-hook))
+    (add-hook hook #'rainbow-delimiters-mode)))
 
 ;; Rainbow mode
-(require-package 'rainbow-mode)
-;; Set key binding
-(bind-key "C-c t r" #'rainbow-mode)
-;; Configuration
-(after 'rainbow-mode
-  (delight 'rainbow-mode " rW" t))
+(use-package rainbow-mode
+  :ensure t
+  :delight (rainbow-mode " rW")
+  :bind ("C-c t r" . rainbow-mode))
 
 ;; Skewer
-(require-package 'skewer-mode)
-;; Initialize mode
-(add-hook 'js2-mode-hook #'skewer-mode)
-;; Set key bindings
-(bind-key "C-c t S" #'run-skewer)
-;; Configuration
-(after 'skewer-mode
-  (delight 'skewer-mode " sK" t))
+(use-package skewer-mode
+  :ensure t
+  :delight (skewer-mode " sK")
+  :bind ("C-c t S" . run-skewer)
+  :commands skewer-mode
+  :init
+  (add-hook 'js2-mode-hook #'skewer-mode))
 
 ;; Skewer CSS
-(add-hook 'css-mode-hook #'skewer-css-mode)
-;; Configuration
-(after 'skewer-css
-  (delight 'skewer-css-mode " sKC" t))
+(use-package skewer-css
+  :ensure skewer-mode
+  :delight (skewer-css-mode " sKC")
+  :commands skewer-css-mode
+  :init
+  (add-hook 'css-mode-hook #'skewer-css-mode))
 
 ;; Skewer HTML
-(add-hook 'html-mode-hook #'skewer-html-mode)
-;; Configuration
-(after 'skewer-html
-  (delight skewer-html-mode " sKH" t))
+(use-package skewer-html
+  :ensure skewer-mode
+  :delight (skewer-html-mode " sKH")
+  :commands skewer-html-mode
+  :init
+  (add-hook 'html-mode-hook #'skewer-html-mode))
 
 ;; Visual Fill Column
-(require-package 'visual-fill-column)
-;; Initialize mode
-(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(use-package visual-fill-column
+  :ensure t
+  :commands visual-fill-column-mode
+  :init
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
 ;; Volatile Highlights
-(require-package 'volatile-highlights)
-;; Initialize mode
-(add-hook 'after-init-hook #'volatile-highlights-mode)
-;; Configuration
-(after 'volatile-highlights
-  (delight 'volatile-highlights-mode " vH" t))
+(use-package volatile-highlights
+  :ensure t
+  :delight (volatile-highlights-mode " vH")
+  :commands volatile-highlights-mode
+  :init
+  (add-hook 'after-init-hook #'volatile-highlights-mode))
 
 ;; Which Key
-(require-package 'which-key)
-;; Initialize mode
-(setq which-key-idle-delay 2.0)
-(setq which-key-idle-secondary-delay 1.0)
-(setq which-key-allow-imprecise-window-fit t)
-(setq which-key-sort-order #'which-key-prefix-then-key-order)
-(add-hook 'after-init-hook #'which-key-mode)
-;; Configuration
-(after 'which-key
-  ;; Set key binding
-  (bind-key "C-c h K" #'which-key-show-top-level)
+(use-package which-key
+  :ensure t
+  :bind ("C-c h K" . which-key-show-top-level)
+  :commands which-key-mode
+  :init
+  (setq which-key-idle-delay 2.0)
+  (setq which-key-idle-secondary-delay 1.0)
+  (setq which-key-allow-imprecise-window-fit t)
+  (setq which-key-sort-order #'which-key-prefix-then-key-order)
+  (add-hook 'after-init-hook #'which-key-mode)
+  :config
   ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flycheck"
@@ -1727,12 +1870,16 @@
     "C-x w" "highlight"))
 
 ;; YASnippet
-(require-package 'yasnippet)
-;; Initialize mode
-(add-hook 'after-init-hook #'yas-global-mode)
-;; Configuration
-(after 'yasnippet
-  (delight 'yas-minor-mode " yS" t))
+(use-package yasnippet
+  :ensure t
+  :delight (yas-minor-mode " yS")
+  :pin gnu
+  :commands yas-global-mode
+  :init
+  (add-hook 'after-init-hook #'yas-global-mode))
+
+;; Display personal bindings
+(bind-key "C-c h b" #'describe-personal-keybindings)
 
 ;; Toggle debug on error
 (bind-key "C-c t D" #'toggle-debug-on-error)
