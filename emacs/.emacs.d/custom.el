@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet which-key volatile-highlights visual-fill-column skewer-mode rainbow-mode rainbow-delimiters paredit counsel ivy-hydra multiple-cursors hl-todo form-feed flycheck-pos-tip flycheck eyebrowse diff-hl company-statistics company-anaconda anzu adaptive-wrap ace-link zop-to-char yaml-mode wgrep systemd smex slime-company slime pkgbuild-mode paradox move-text markdown-mode magit macrostep nov hydra lua-mode key-chord json-mode js2-mode iedit geiser flx expand-region erc-hl-nicks elfeed easy-kill async dired-du dired-collapse dired-narrow dired-ranger dired-subtree dired-rainbow dired-filter debbugs cider anaconda-mode ace-window undo-tree color-theme-sanityinc-tomorrow delight use-package))))
+    (use-package delight color-theme-sanityinc-tomorrow undo-tree ace-window anaconda-mode cider debbugs dired-filter dired-rainbow dired-subtree dired-ranger dired-narrow dired-collapse dired-du async easy-kill elfeed erc-hl-nicks expand-region flx geiser iedit js2-mode json-mode key-chord lua-mode hydra nov macrostep magit markdown-mode move-text paradox pkgbuild-mode slime slime-company smex systemd wgrep yaml-mode zop-to-char ace-link adaptive-wrap anzu company-anaconda company-statistics diff-hl eyebrowse flycheck flycheck-pos-tip form-feed hl-todo multiple-cursors ivy-hydra counsel paredit rainbow-delimiters rainbow-mode skewer-mode visual-fill-column volatile-highlights which-key yasnippet))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
