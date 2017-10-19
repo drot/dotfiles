@@ -43,23 +43,19 @@
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Load changes from the customize interface
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file 'noerror)
-
 ;; Activate packages and add the MELPA package archive
 (package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Pinned packages
-(setq package-pinned-packages '((json-mode . "gnu")
-                                (yasnippet . "gnu")))
+;; Redefine function to stop using Customize to track packages
+(defun package--save-selected-packages (&optional VALUE opt)
+  nil)
 
-;; Install packages if not already installed
-(unless package-archive-contents
-  (package-refresh-contents))
-(package-install-selected-packages)
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;; Enable Imenu support for use-package
 (setq use-package-enable-imenu-support t)
@@ -68,11 +64,26 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Redefine use-package ensure keyword to use a custom function instead
+(defun drot|use-package-ensure-elpa (name ensure state context &optional no-refresh)
+  (let ((package (or (when (eq ensure t) (use-package-as-symbol name))
+                     ensure)))
+    (when package
+      (add-to-list 'package-selected-packages package)))
+  (use-package-ensure-elpa name ensure state context no-refresh))
+
+(setq use-package-ensure-function #'drot|use-package-ensure-elpa)
+
 ;; Try to extract docstrings from special forms
 (setq bind-key-describe-special-forms t)
 
+;; Use Delight for mode name shortening
+(use-package delight
+  :ensure t)
+
 ;; Color theme
 (use-package color-theme-sanityinc-tomorrow
+  :ensure t
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
@@ -203,6 +214,7 @@
 
 ;; Undo Tree
 (use-package undo-tree
+  :ensure t
   :delight (undo-tree-mode " uT")
   :commands global-undo-tree-mode
   :init
@@ -855,6 +867,7 @@
 
 ;; Ace-window
 (use-package ace-window
+  :ensure t
   :delight (ace-window-mode " aW")
   :bind ([remap other-window] . ace-window)
   :config
@@ -862,6 +875,7 @@
 
 ;; Anaconda mode
 (use-package anaconda-mode
+  :ensure t
   :delight (anaconda-mode " aC")
   :commands (anaconda-mode anaconda-eldoc-mode)
   :init
@@ -870,6 +884,7 @@
 
 ;; CIDER
 (use-package cider-common
+  :ensure cider
   :defer t
   :config
   ;; Use the symbol at point as the default value
@@ -877,12 +892,14 @@
 
 ;; CIDER mode configuration
 (use-package cider-mode
+  :ensure cider
   :defer t
   :config
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
 ;; CIDER REPL configuration
 (use-package cider-repl
+  :ensure cider
   :defer t
   :config
   ;; Enable persistent history
@@ -895,6 +912,7 @@
 
 ;; Dash
 (use-package dash
+  :ensure t
   :defer t
   :config
   ;; Enable syntax coloring for Dash functions
@@ -902,6 +920,7 @@
 
 ;; Debbugs
 (use-package debbugs
+  :ensure t
   :bind (("C-c d g" . debbugs-gnu)
          ("C-c d s" . debbugs-gnu-search)
          ("C-c d t" . debbugs-gnu-usertags)
@@ -914,6 +933,7 @@
 
 ;; Dired Filter
 (use-package dired-filter
+  :ensure t
   :delight (dired-filter-mode " fR")
   :bind (:map dired-mode-map
               ("\\" . dired-filter-mark-map))
@@ -921,6 +941,7 @@
 
 ;; Dired Rainbow
 (use-package dired-rainbow
+  :ensure t
   :after dired-filter
   :commands (dired-rainbow-define dired-rainbow-define-chmod)
   :config
@@ -954,6 +975,7 @@
 
 ;; Dired Subtree
 (use-package dired-subtree
+  :ensure t
   :after dired-rainbow
   :config
   ;; Set key bindings
@@ -978,6 +1000,7 @@
 
 ;; Dired Ranger
 (use-package dired-ranger
+  :ensure t
   :bind (:map dired-mode-map
               ("'" . dired-ranger-bookmark)
               ("`" . dired-ranger-bookmark-visit))
@@ -994,6 +1017,7 @@
 
 ;; Dired Narrow
 (use-package dired-narrow
+  :ensure t
   :delight (dired-narrow-mode " d-N")
   :bind (:map dired-mode-map
               ("C-." . dired-narrow))
@@ -1001,12 +1025,14 @@
 
 ;; Dired Collapse
 (use-package dired-collapse
+  :ensure t
   :bind (:map dired-mode-map
               ("," . dired-collapse-mode))
   :after dired-narrow)
 
 ;; Dired du
 (use-package dired-du
+  :ensure t
   :delight (dired-du-mode " d-U")
   :after dired-collapse
   :config
@@ -1015,6 +1041,7 @@
 
 ;; Dired Async
 (use-package dired-async
+  :ensure async
   :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
   :bind (:map dired-mode-map
               ("E c" . dired-async-do-copy)
@@ -1026,11 +1053,13 @@
 
 ;; Easy-kill
 (use-package easy-kill
+  :ensure t
   :bind (([remap kill-ring-save] . easy-kill)
          ([remap mark-sexp] . easy-mark)))
 
 ;; Elfeed
 (use-package elfeed
+  :ensure t
   :bind ("C-c a f" . elfeed)
   :config
   (setq elfeed-feeds '(("https://news.ycombinator.com/rss" hnews)
@@ -1045,6 +1074,7 @@
 
 ;; ERC configuration
 (use-package erc
+  :ensure erc-hl-nicks
   :bind ("C-c a i" . drot|erc-init)
   :commands drot|erc-init
   :config
@@ -1141,20 +1171,24 @@
 
 ;; Expand region
 (use-package expand-region
+  :ensure t
   :bind ("C-c x e" . er/expand-region))
 
 ;; Flx
 (use-package flx
+  :ensure t
   :defer t)
 
 ;; Geiser
 (use-package geiser
+  :ensure t
   :bind ("C-c t g" . run-geiser)
   :config
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; IEdit
 (use-package iedit
+  :ensure t
   :bind (("C-c i e" . iedit-mode)
          :map isearch-mode-map
          ("C-;" . iedit-mode-from-isearch)
@@ -1168,6 +1202,7 @@
 
 ;; JavaScript mode
 (use-package js2-mode
+  :ensure t
   :mode ("\\.js\\'" . js2-mode)
   :config
   (setq js2-basic-offset 2)
@@ -1176,10 +1211,13 @@
 
 ;; JSON mode
 (use-package json-mode
+  :ensure t
+  :pin gnu
   :defer t)
 
 ;; Key Chord
 (use-package key-chord
+  :ensure t
   :commands key-chord-mode
   :init
   (add-hook 'after-init-hook
@@ -1196,10 +1234,12 @@
 
 ;; Lua mode
 (use-package lua-mode
+  :ensure t
   :defer t)
 
 ;; Hydra
 (use-package hydra
+  :ensure t
   :bind (("C-c x m" . hydra-mark-text/body)
          ("C-c x M" . hydra-move-text/body)
          ("C-c m h" . hydra-multiple-cursors/body)
@@ -1294,6 +1334,7 @@
 
 ;; EPUB format support
 (use-package nov
+  :ensure t
   :mode ("\\.epub\\'" . nov-mode)
   :config
   ;; Change default saved places file location
@@ -1308,11 +1349,13 @@
 
 ;; Macrostep
 (use-package macrostep
+  :ensure t
   :bind (:map emacs-lisp-mode-map
               ("C-c M-e" . macrostep-expand)))
 
 ;; Magit
 (use-package magit
+  :ensure t
   :bind (("C-c v v" . magit-status)
          ("C-c v d" . magit-dispatch-popup)
          ("C-c v c" . magit-clone)
@@ -1322,6 +1365,7 @@
 
 ;; Markdown mode
 (use-package markdown-mode
+  :ensure t
   :defer t
   :config
   (add-hook 'markdown-mode-hook #'whitespace-mode)
@@ -1332,10 +1376,12 @@
 
 ;; Move-text
 (use-package move-text
+  :ensure t
   :defer t)
 
 ;; Paradox
 (use-package paradox
+  :ensure t
   :bind ("C-c a p" . paradox-list-packages)
   :config
   (setq paradox-github-token t)
@@ -1345,10 +1391,12 @@
 
 ;; PKGBUILD mode
 (use-package pkgbuild-mode
+  :ensure t
   :defer t)
 
 ;; SLIME
 (use-package slime
+  :ensure t
   :bind (("C-c t s" . slime)
          ("C-c t C" . slime-connect)
          :map slime-mode-indirect-map
@@ -1364,6 +1412,7 @@
 
 ;; SLIME REPL
 (use-package slime-repl
+  :ensure slime
   :defer t
   :config
   ;; Disable conflicting key binding
@@ -1371,35 +1420,42 @@
 
 ;; SLIME Company
 (use-package slime-company
+  :ensure t
   :defer t
   :config
   (setq slime-company-completion 'fuzzy))
 
 ;; Smex
 (use-package smex
+  :ensure t
   :defer t
   :config
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
 ;; Systemd mode
 (use-package systemd
+  :ensure t
   :defer t)
 
 ;; Wgrep
 (use-package wgrep
+  :ensure t
   :defer t)
 
 ;; YAML mode
 (use-package yaml-mode
+  :ensure t
   :defer t)
 
 ;; Zop-to-char
 (use-package zop-to-char
+  :ensure t
   :bind (([remap zap-to-char] . zop-to-char)
          ("M-Z" . zop-up-to-char)))
 
 ;; Ace-link
 (use-package ace-link
+  :ensure t
   :bind ("C-c n a" . ace-link-addr)
   :commands ace-link-setup-default
   :init
@@ -1407,12 +1463,14 @@
 
 ;; Adaptive Wrap
 (use-package adaptive-wrap
+  :ensure t
   :commands adaptive-wrap-prefix-mode
   :init
   (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode))
 
 ;; Anzu
 (use-package anzu
+  :ensure t
   :delight (anzu-mode " aZ")
   :bind (([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
@@ -1429,6 +1487,7 @@
 
 ;; Avy
 (use-package avy
+  :ensure t
   :bind (("C-c n c" . avy-goto-char)
          ("C-c n k" . avy-goto-char-2)
          ("C-c n J" . avy-goto-word-0)
@@ -1445,6 +1504,7 @@
 
 ;; Company mode
 (use-package company
+  :ensure t
   :delight (company-mode " cY")
   :bind ("C-c i y" . company-yasnippet)
   :commands global-company-mode
@@ -1471,6 +1531,7 @@
 
 ;; Company Anaconda
 (use-package company-anaconda
+  :ensure t
   :commands company-anaconda
   :init
   (add-hook 'python-mode-hook
@@ -1478,6 +1539,7 @@
 
 ;; Company Statistics
 (use-package company-statistics
+  :ensure t
   :commands company-statistics-mode
   :init
   (add-hook 'after-init-hook #'company-statistics-mode)
@@ -1486,6 +1548,7 @@
 
 ;; Diff-Hl
 (use-package diff-hl
+  :ensure t
   :bind ("C-c t d" . diff-hl-margin-mode)
   :commands global-diff-hl-mode
   :init
@@ -1499,6 +1562,7 @@
 
 ;; Eyebrowse
 (use-package eyebrowse
+  :ensure t
   :commands eyebrowse-mode
   :init
   (setq eyebrowse-keymap-prefix (kbd "C-c e"))
@@ -1512,6 +1576,7 @@
 
 ;; FlyCheck
 (use-package flycheck
+  :ensure t
   :commands global-flycheck-mode
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -1520,6 +1585,7 @@
 
 ;; FlyCheck GUI popups
 (use-package flycheck-pos-tip
+  :ensure t
   :after flycheck
   :config
   (setq flycheck-pos-tip-max-width 80)
@@ -1527,6 +1593,7 @@
 
 ;; Form-feed
 (use-package form-feed
+  :ensure t
   :commands form-feed-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1539,6 +1606,7 @@
 
 ;; Hl-Todo
 (use-package hl-todo
+  :ensure t
   :bind (:map hl-todo-mode-map
               ("C-c p t p" . hl-todo-previous)
               ("C-c p t n" . hl-todo-next)
@@ -1549,6 +1617,7 @@
 
 ;; Multiple cursors
 (use-package multiple-cursors
+  :ensure t
   :bind (("C-c m <SPC>" . mc/vertical-align-with-space)
          ("C-c m a" . mc/vertical-align)
          ("C-c m e" . mc/mark-more-like-this-extended)
@@ -1565,6 +1634,7 @@
 
 ;; Ivy
 (use-package ivy
+  :ensure ivy-hydra
   :delight (ivy-mode " iY")
   :bind ("C-c n R" . ivy-resume)
   :commands ivy-mode
@@ -1582,6 +1652,7 @@
 
 ;; Counsel
 (use-package counsel
+  :ensure t
   :delight (counsel-mode " cS")
   :bind (("C-c f G" . counsel-git)
          ("C-c f j" . counsel-dired-jump)
@@ -1601,6 +1672,7 @@
 
 ;; Swiper
 (use-package swiper
+  :ensure t
   :bind (("C-c s S" . swiper-all)
          ("C-c s s" . swiper)
          :map isearch-mode-map
@@ -1610,6 +1682,7 @@
 
 ;; Paredit
 (use-package paredit
+  :ensure t
   :delight (paredit-mode " pE")
   :bind (("M-S" . paredit-splice-sexp)
          ("M-R" . paredit-raise-sexp)
@@ -1746,6 +1819,7 @@
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :commands rainbow-delimiters-mode
   :init
   (dolist (hook '(emacs-lisp-mode-hook
@@ -1756,11 +1830,13 @@
 
 ;; Rainbow mode
 (use-package rainbow-mode
+  :ensure t
   :delight (rainbow-mode " rW")
   :bind ("C-c t r" . rainbow-mode))
 
 ;; Skewer
 (use-package skewer-mode
+  :ensure t
   :delight (skewer-mode " sK")
   :bind ("C-c t S" . run-skewer)
   :commands skewer-mode
@@ -1769,6 +1845,7 @@
 
 ;; Skewer CSS
 (use-package skewer-css
+  :ensure skewer-mode
   :delight (skewer-css-mode " sKC")
   :commands skewer-css-mode
   :init
@@ -1776,6 +1853,7 @@
 
 ;; Skewer HTML
 (use-package skewer-html
+  :ensure skewer-mode
   :delight (skewer-html-mode " sKH")
   :commands skewer-html-mode
   :init
@@ -1783,12 +1861,14 @@
 
 ;; Visual Fill Column
 (use-package visual-fill-column
+  :ensure t
   :commands visual-fill-column-mode
   :init
   (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
+  :ensure t
   :delight (volatile-highlights-mode " vH")
   :commands volatile-highlights-mode
   :init
@@ -1796,6 +1876,7 @@
 
 ;; Which Key
 (use-package which-key
+  :ensure t
   :bind ("C-c h K" . which-key-show-top-level)
   :commands which-key-mode
   :init
@@ -1842,7 +1923,9 @@
 
 ;; YASnippet
 (use-package yasnippet
+  :ensure t
   :delight (yas-minor-mode " yS")
+  :pin gnu
   :commands yas-global-mode
   :init
   (add-hook 'after-init-hook #'yas-global-mode))
@@ -1939,5 +2022,9 @@
 
 ;; Change Ispell dictionary
 (bind-key "C-c l d" #'ispell-change-dictionary)
+
+;; Load changes from the customize interface
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror)
 
 ;;; init.el ends here
