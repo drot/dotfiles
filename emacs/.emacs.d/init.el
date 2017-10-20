@@ -50,6 +50,7 @@
 
 ;; Redefine function to stop using Customize to track packages
 (defun package--save-selected-packages (&optional VALUE opt)
+  "Dummy function to avoid Package writing VALUE and OPT of selected packages."
   nil)
 
 ;; Bootstrap use-package
@@ -66,6 +67,7 @@
 
 ;; Redefine use-package ensure keyword to use a custom function instead
 (defun drot|use-package-ensure-elpa (name ensure state context &optional no-refresh)
+  "Custom function to ENSURE that NAME is installed."
   (let ((package (or (when (eq ensure t) (use-package-as-symbol name))
                      ensure)))
     (when package
