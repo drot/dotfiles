@@ -1215,23 +1215,6 @@
   :pin gnu
   :defer t)
 
-;; Key Chord
-(use-package key-chord
-  :ensure t
-  :commands key-chord-mode
-  :init
-  (add-hook 'after-init-hook
-            (lambda () (key-chord-mode 1)))
-  :config
-  (key-chord-define-global "3j" #'dired-jump)
-  (key-chord-define-global "3l" #'avy-goto-line)
-  (key-chord-define-global "3u" #'undo-tree-visualize)
-  (key-chord-define-global "8w" #'avy-goto-word-or-subword-1)
-  (key-chord-define-global "8c" #'avy-goto-char)
-  (key-chord-define-global "8e" #'er/expand-region)
-  (key-chord-define-global "8q" #'query-replace)
-  (key-chord-define-global "8r" #'replace-string))
-
 ;; Lua mode
 (use-package lua-mode
   :ensure t
