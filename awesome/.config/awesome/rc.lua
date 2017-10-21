@@ -299,7 +299,6 @@ local fs_value = lain.widget.fs {
    timeout = 44,
    partition = "/home",
    options = "--exclude-type=tmpfs",
-   notification_preset = { fg = beautiful.fg_normal, bg = beautiful.bg_normal },
    settings  = function()
       fs_bar:set_value(fs_now.used / 100)
    end

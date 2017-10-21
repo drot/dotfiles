@@ -1374,6 +1374,14 @@
   (setq paradox-spinner-type 'rotating-line)
   (setq paradox-display-download-count t))
 
+;; PDF Tools
+(use-package pdf-tools
+  :ensure t
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  ;; Make sure the binary is always compiled
+  (pdf-tools-install :no-query))
+
 ;; PKGBUILD mode
 (use-package pkgbuild-mode
   :ensure t
