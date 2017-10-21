@@ -963,7 +963,7 @@
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
   (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
                                                  "rb" "R" "php" "el" "scm" "cpp"
-                                                 "fos" "lisp" "clj"))
+                                                 "fos" "lisp" "clj" "lua" "lisp"))
   (dired-rainbow-define video "#B3CCFF" ("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
                                          "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
                                          "M2TS" "avi" "AVI" "mov" "MOV" "wmv"

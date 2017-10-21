@@ -184,7 +184,7 @@ local cpu_text = wibox.widget {
 }
 
 -- Adjust CPU usage text background margins
-local cpu_text_widget = wibox.container.margin(cpu_text, 0, 0, 2, 2)
+local cpu_text_widget = wibox.container.margin(cpu_text, 2, 2, 2, 2)
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
@@ -269,7 +269,7 @@ local memory_value = lain.widget.mem {
 }
 
 -- Set memory usage bar margins
-local memory_widget = wibox.container.margin(memory_bar, 0, 0, 2, 2)
+local memory_widget = wibox.container.margin(memory_bar, 2, 2, 2, 2)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -311,8 +311,10 @@ local temperature_text_widget = wibox.container.margin(temperature_text, 2, 2, 2
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
-   forced_height = 8,
+   forced_height = 12,
    margins = {
+      top = 2,
+      bottom = 2,
       left = 2,
       right = 2,
    },
@@ -401,7 +403,7 @@ local fs_value = lain.widget.fs {
 }
 
 -- Set file system usage bar widget margins
-local fs_widget = wibox.container.margin(fs_bar, 0, 0, 2, 2)
+local fs_widget = wibox.container.margin(fs_bar, 2, 2, 2, 2)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
@@ -466,9 +468,11 @@ volume.widget:buttons(awful.util.table.join(
 
 -- Create volume bar widget
 local volume_bar = wibox.widget {
-   forced_height = 12,
+   forced_height = 16,
    paddings = 1,
    margins = {
+      top = 2,
+      bottom = 2,
       left = 2,
       right = 2,
    },
