@@ -304,7 +304,7 @@ local fs_value = lain.widget.fs {
    end
 }
 
--- Set file system usage bar widget rotation
+-- Set file system usage bar widget margins
 local fs_widget = wibox.container.margin(fs_bar, 0, 0, 2, 2)
 
 -- Create a volume icon widget
@@ -382,10 +382,32 @@ local clock_icon = wibox.widget {
 }
 
 -- Create a text clock widget
-local clock_text = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span> ")
-local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
+local clock_text = wibox.widget {
+    {
+        {
+            {
+                widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
+            },
+            left   = 6,
+            right  = 6,
+            widget = wibox.container.margin
+        },
+        shape              = gears.shape.rounded_bar,
+        bg                 = beautiful.bg_focus,
+        shape_border_color = beautiful.bg_focus,
+        shape_border_width = beautiful.border_width,
+        widget             = wibox.container.background
+    },
+    spacing = 2,
+    layout  = wibox.layout.fixed.horizontal
+}
+
 -- Buttonize widget
+local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
 month_calendar:attach(clock_text, "br")
+
+-- Adjust text clock widget margins
+local clock_widget = wibox.container.margin(clock_text, 2, 2, 2, 2)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -503,9 +525,10 @@ awful.screen.connect_for_each_screen(function(s)
             volume_icon,
             volume_text,
             volume_widget,
+            dason,
             separator,
             clock_icon,
-            clock_text,
+            clock_widget,
             wibox.widget.systray(),
          },
       }
