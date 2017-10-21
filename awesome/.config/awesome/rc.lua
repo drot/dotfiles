@@ -155,12 +155,36 @@ local cpu_icon = wibox.widget {
 }
 
 -- Create a CPU usage text widget
-local cpu_text = lain.widget.cpu {
+local cpu = lain.widget.cpu {
    timeout = 4,
    settings = function ()
-      widget:set_markup(cpu_now.usage .. "% ")
+      widget:set_markup(cpu_now.usage .. "%")
    end
 }
+
+-- Create a CPU usage text background
+local cpu_text = wibox.widget {
+   {
+      {
+         {
+            widget = cpu.widget
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
+}
+
+-- Adjust CPU usage text background margins
+local cpu_text_widget = wibox.container.margin(cpu_text, 0, 0, 2, 2)
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
@@ -183,7 +207,7 @@ local cpu_value = lain.widget.cpu {
 }
 
 -- Apply margins to CPU usage widget
-local cpu_widget = wibox.container.margin(cpu_graph, 0, 0, 2, 2)
+local cpu_widget = wibox.container.margin(cpu_graph, 2, 2, 2, 2)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -192,12 +216,36 @@ local memory_icon = wibox.widget {
 }
 
 -- Create a memory usage text widget
-local memory_text = lain.widget.mem {
+local memory = lain.widget.mem {
    timeout = 12,
    settings = function()
-      widget:set_markup(mem_now.perc .. "% ")
+      widget:set_markup(mem_now.perc .. "%")
    end
 }
+
+-- Create a memory usage text background
+local memory_text = wibox.widget {
+   {
+      {
+         {
+            widget = memory.widget
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
+}
+
+-- Adjust memory usage text background margins
+local memory_text_widget = wibox.container.margin(memory_text, 2, 2, 2, 2)
 
 -- Create a memory usage bar widget
 local memory_bar = wibox.widget {
@@ -230,12 +278,36 @@ local temperature_icon = wibox.widget {
 }
 
 -- Create a temperature widget
-local temperature_text = lain.widget.temp {
+local temperature = lain.widget.temp {
    timeout = 20,
    settings = function()
-      widget:set_markup(coretemp_now .. "°C ")
+      widget:set_markup(coretemp_now .. "°C")
    end
 }
+
+-- Create temperature text background
+local temperature_text = wibox.widget {
+   {
+      {
+         {
+            widget = temperature.widget
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
+}
+
+-- Adjust temperature text background margins
+local temperature_text_widget = wibox.container.margin(temperature_text, 2, 2, 2, 2)
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
@@ -272,14 +344,38 @@ local fs_icon = wibox.widget {
 }
 
 -- Create a file system usage text widget
-local fs_text = lain.widget.fs {
+local fs = lain.widget.fs {
    timeout = 40,
    partition = "/home",
    options = "--exclude-type=tmpfs",
    settings  = function()
-      widget:set_markup(fs_now.used .. "% ")
+      widget:set_markup(fs_now.used .. "%")
    end
 }
+
+-- Create a file system usage text background
+local fs_text = wibox.widget {
+   {
+      {
+         {
+            widget = fs.widget
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
+}
+
+-- Adjust file system usage text background margins
+local fs_text_widget = wibox.container.margin(fs_text, 2, 2, 2, 2)
 
 -- Create a file system usage bar widget
 local fs_bar = wibox.widget {
@@ -314,10 +410,10 @@ local volume_icon = wibox.widget {
 }
 
 -- Create a volume text widget
-local volume_text = lain.widget.pulse {
+local volume = lain.widget.pulse {
    timeout = 6,
    settings = function()
-      volume_level = volume_now.channel[1] .. "% "
+      volume_level = volume_now.channel[1] .. "%"
       if volume_now.muted == "yes" then
          volume_level = "Muted!"
       end
@@ -325,23 +421,47 @@ local volume_text = lain.widget.pulse {
    end
 }
 
+-- Create a volume text background
+local volume_text = wibox.widget {
+   {
+      {
+         {
+            widget = volume.widget
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
+}
+
+-- Adjust volume text background margins
+local volume_text_widget = wibox.container.margin(volume_text, 2, 2, 2, 2)
+
 -- Buttonize widget
-volume_text.widget:buttons(awful.util.table.join(
-                              awful.button({}, 1, function() -- left click
-                                    awful.spawn("pavucontrol")
-                              end),
-                              awful.button({}, 3, function() -- right click
-                                    awful.spawn(string.format("pactl set-sink-mute %d toggle", volume_text.device))
-                                    volume_text.update()
-                              end),
-                              awful.button({}, 4, function() -- scroll up
-                                    awful.spawn(string.format("pactl set-sink-volume %d +5%%", volume_text.device))
-                                    volume_text.update()
-                              end),
-                              awful.button({}, 5, function() -- scroll down
-                                    awful.spawn(string.format("pactl set-sink-volume %d -5%%", volume_text.device))
-                                    volume_text.update()
-                              end)
+volume.widget:buttons(awful.util.table.join(
+                         awful.button({}, 1, function() -- left click
+                               awful.spawn("pavucontrol")
+                         end),
+                         awful.button({}, 3, function() -- right click
+                               awful.spawn(string.format("pactl set-sink-mute %d toggle", volume.device))
+                               volume.update()
+                         end),
+                         awful.button({}, 4, function() -- scroll up
+                               awful.spawn(string.format("pactl set-sink-volume %d +5%%", volume.device))
+                               volume.update()
+                         end),
+                         awful.button({}, 5, function() -- scroll down
+                               awful.spawn(string.format("pactl set-sink-volume %d -5%%", volume.device))
+                               volume.update()
+                         end)
 ))
 
 -- Create volume bar widget
@@ -383,23 +503,23 @@ local clock_icon = wibox.widget {
 
 -- Create a text clock widget
 local clock_text = wibox.widget {
-    {
-        {
-            {
-                widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
-            },
-            left   = 6,
-            right  = 6,
-            widget = wibox.container.margin
-        },
-        shape              = gears.shape.rounded_bar,
-        bg                 = beautiful.bg_focus,
-        shape_border_color = beautiful.bg_focus,
-        shape_border_width = beautiful.border_width,
-        widget             = wibox.container.background
-    },
-    spacing = 2,
-    layout  = wibox.layout.fixed.horizontal
+   {
+      {
+         {
+            widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
+         },
+         left   = 6,
+         right  = 6,
+         widget = wibox.container.margin
+      },
+      shape              = gears.shape.rounded_rect,
+      bg                 = beautiful.bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget             = wibox.container.background
+   },
+   spacing = 2,
+   layout  = wibox.layout.fixed.horizontal
 }
 
 -- Buttonize widget
@@ -507,25 +627,24 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
-            cpu_text,
+            cpu_text_widget,
             cpu_widget,
             separator,
             memory_icon,
-            memory_text,
+            memory_text_widget,
             memory_widget,
             separator,
             temperature_icon,
-            temperature_text,
+            temperature_text_widget,
             temperature_widget,
             separator,
             fs_icon,
-            fs_text,
+            fs_text_widget,
             fs_widget,
             separator,
             volume_icon,
-            volume_text,
+            volume_text_widget,
             volume_widget,
-            dason,
             separator,
             clock_icon,
             clock_widget,
