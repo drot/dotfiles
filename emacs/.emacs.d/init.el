@@ -1786,6 +1786,7 @@
             ("(foo | bar)"
              "(foo bar)(foo bar)"))))
 
+  ;; Display extra functions with examples
   (paredit-define-keys)
   (paredit-annotate-mode-with-examples)
   (paredit-annotate-functions-with-examples)
@@ -1803,7 +1804,6 @@
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
-
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
 
   ;; Disable Electric Pair mode when Paredit is active
@@ -1912,7 +1912,7 @@
     "C-x w" "highlight")
   ;; Major mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
-  "C-, C-o" "dired-subtree-only"))
+    "C-, C-o" "dired-subtree-only"))
 
 ;; YASnippet
 (use-package yasnippet
