@@ -350,6 +350,8 @@ local fs = lain.widget.fs {
    timeout = 40,
    partition = "/home",
    options = "--exclude-type=tmpfs",
+   notify = "off",
+   showpopup = "off",
    settings  = function()
       widget:set_markup(fs_now.used .. "%")
    end
