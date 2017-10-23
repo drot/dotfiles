@@ -48,11 +48,6 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Redefine function to stop using Customize to track packages
-(defun package--save-selected-packages (&optional VALUE opt)
-  "Dummy function to avoid Package writing VALUE and OPT of selected packages."
-  nil)
-
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -64,17 +59,6 @@
 ;; Load use-package
 (eval-when-compile
   (require 'use-package))
-
-;; Redefine use-package ensure keyword to use a custom function instead
-(defun drot|use-package-ensure-elpa (name ensure state context &optional no-refresh)
-  "Custom function to ENSURE that NAME is installed."
-  (let ((package (or (when (eq ensure t) (use-package-as-symbol name))
-                     ensure)))
-    (when package
-      (add-to-list 'package-selected-packages package)))
-  (use-package-ensure-elpa name ensure state context no-refresh))
-
-(setq use-package-ensure-function #'drot|use-package-ensure-elpa)
 
 ;; Try to extract docstrings from special forms
 (setq bind-key-describe-special-forms t)
