@@ -45,13 +45,15 @@ theme.hotkeys_description_font = theme.font
 theme.hotkeys_modifiers_fg = "#f0c674"
 
 -- Generate taglist squares
-local taglist_square_size = dpi(6)
+local taglist_square_size = dpi(5)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
    taglist_square_size, theme.fg_normal
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
    taglist_square_size, theme.fg_normal
 )
+
+theme.taglist_bg_focus = theme.bg_normal
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
@@ -136,7 +138,6 @@ theme.awesome_icon = themes_path .. "themes/tomorrow/icons/awesome.png"
 
 -- Widgets
 theme.widget_value = "#f0c674"
-theme.widget_separator = themes_path .. "themes/tomorrow/icons/widgets/separator.png"
 theme.widget_cpu = themes_path .. "themes/tomorrow/icons/widgets/cpu.png"
 theme.widget_memory = themes_path .. "themes/tomorrow/icons/widgets/memory.png"
 theme.widget_temperature = themes_path .. "themes/tomorrow/icons/widgets/temperature.png"
