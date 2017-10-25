@@ -156,29 +156,33 @@ local cpu = lain.widget.cpu {
    end
 }
 
--- Create a CPU usage text background
-local cpu_text = wibox.widget {
+-- Create a CPU usage text widget
+local cpu_text_widget = wibox.widget {
    {
       {
          {
-            widget = cpu.widget
+            {
+               widget = cpu.widget
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Adjust CPU usage text background margins
-local cpu_text_widget = wibox.container.margin(cpu_text, 2, 2, 2, 2)
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
@@ -201,30 +205,34 @@ local cpu_value = lain.widget.cpu {
 }
 
 -- Create a background for the CPU usage widget
-local cpu_background = wibox.widget {
+local cpu_widget = wibox.widget {
    {
       {
          {
-            widget = cpu_graph
+            {
+               widget = cpu_graph
+            },
+            top = 2,
+            bottom = 2,
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         top = 2,
-         bottom = 2,
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_normal,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_normal,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Apply margins to the CPU usage background
-local cpu_widget = wibox.container.margin(cpu_background, 2, 2, 2, 2)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -240,29 +248,33 @@ local memory = lain.widget.mem {
    end
 }
 
--- Create a memory usage text background
-local memory_text = wibox.widget {
+-- Create a memory usage text widget
+local memory_text_widget = wibox.widget {
    {
       {
          {
-            widget = memory.widget
+            {
+               widget = memory.widget
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Adjust memory usage text background margins
-local memory_text_widget = wibox.container.margin(memory_text, 2, 2, 2, 2)
 
 -- Create a memory usage chart widget
 local memory_chart = wibox.widget {
@@ -287,30 +299,34 @@ local memory_value = lain.widget.mem {
 }
 
 -- Create a memory usage chart background
-local memory_background = wibox.widget {
+local memory_widget = wibox.widget {
    {
       {
          {
-            widget = memory_chart
+            {
+               widget = memory_chart
+            },
+            top = 2,
+            bottom = 2,
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         top = 2,
-         bottom = 2,
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_normal,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_normal,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Set memory usage bar background margins
-local memory_widget = wibox.container.margin(memory_background, 2, 2, 2, 2)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -326,29 +342,33 @@ local temperature = lain.widget.temp {
    end
 }
 
--- Create temperature text background
-local temperature_text = wibox.widget {
+-- Create temperature text widget
+local temperature_text_widget = wibox.widget {
    {
       {
          {
-            widget = temperature.widget
+            {
+               widget = temperature.widget
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Adjust temperature text background margins
-local temperature_text_widget = wibox.container.margin(temperature_text, 2, 2, 2, 2)
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
@@ -398,29 +418,33 @@ local fs = lain.widget.fs {
    end
 }
 
--- Create a file system usage text background
-local fs_text = wibox.widget {
+-- Create a file system usage text widget
+local fs_text_widget = wibox.widget {
    {
       {
          {
-            widget = fs.widget
+            {
+               widget = fs.widget
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Adjust file system usage text background margins
-local fs_text_widget = wibox.container.margin(fs_text, 2, 2, 2, 2)
 
 -- Create a file system usage chart widget
 local fs_chart = wibox.widget {
@@ -490,29 +514,33 @@ local volume = lain.widget.pulse {
    end
 }
 
--- Create a volume text background
-local volume_text = wibox.widget {
+-- Create a volume text widget
+local volume_text_widget = wibox.widget {
    {
       {
          {
-            widget = volume.widget
+            {
+               widget = volume.widget
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Adjust volume text background margins
-local volume_text_widget = wibox.container.margin(volume_text, 2, 2, 2, 2)
 
 -- Buttonize widget
 volume.widget:buttons(awful.util.table.join(
@@ -573,32 +601,36 @@ local clock_icon = wibox.widget {
 }
 
 -- Create a text clock widget
-local clock_text = wibox.widget {
+local clock_widget = wibox.widget {
    {
       {
          {
-            widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
+            {
+               widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
+            },
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Buttonize widget
 local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
-month_calendar:attach(clock_text, "br")
-
--- Adjust text clock widget margins
-local clock_widget = wibox.container.margin(clock_text, 2, 2, 2, 2)
+month_calendar:attach(clock_widget, "br")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -680,26 +712,30 @@ awful.screen.connect_for_each_screen(function(s)
          {
             {
                {
-                  widget = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+                  {
+                     widget = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+                  },
+                  top = 2,
+                  bottom = 2,
+                  left = 2,
+                  right = 2,
+                  widget = wibox.container.margin
                },
-               top = 2,
-               bottom = 2,
-               left = 2,
-               right = 2,
-               widget = wibox.container.margin
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_focus,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
             },
-            shape = gears.shape.rectangle,
-            bg = beautiful.bg_focus,
-            shape_border_color = beautiful.bg_minimize,
-            shape_border_width = beautiful.border_width,
-            widget = wibox.container.background
+            spacing = 2,
+            layout = wibox.layout.fixed.horizontal
          },
-         spacing = 2,
-         layout = wibox.layout.fixed.horizontal
+         top = 2,
+         bottom = 2,
+         left = 2,
+         right = 2,
+         widget = wibox.container.margin
       }
-
-      -- Apply margins to the taglist widget
-      s.mytaglist_widget = wibox.container.margin(s.mytaglist, 2, 2, 2, 2)
 
       -- Create a tasklist widget
       s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
@@ -713,7 +749,7 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
-            s.mytaglist_widget,
+            s.mytaglist,
             s.mylayoutbox,
             s.mypromptbox,
          },
