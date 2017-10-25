@@ -506,7 +506,7 @@ local volume_icon = wibox.widget {
 local volume = lain.widget.pulse {
    timeout = 6,
    settings = function()
-      volume_level = volume_now.channel[1] .. "%"
+      local volume_level = volume_now.channel[1] .. "%"
       if volume_now.muted == "yes" then
          volume_level = "Muted!"
       end
