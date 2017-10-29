@@ -1502,9 +1502,7 @@
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-other-buffers nil)
-  (setq company-dabbrev-ignore-case t)
-  ;; Insert candidate as soon as it's selected
-  (company-tng-configure-default))
+  (setq company-dabbrev-ignore-case t))
 
 ;; Company Anaconda
 (use-package company-anaconda
