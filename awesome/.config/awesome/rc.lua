@@ -408,7 +408,7 @@ local fs_icon = wibox.widget {
 
 -- Create a file system usage text widget
 local fs = lain.widget.fs {
-   timeout = 40,
+   timeout = 60,
    partition = "/home",
    options = "--exclude-type=tmpfs",
    notify = "off",
@@ -462,7 +462,7 @@ local fs_chart = wibox.widget {
 
 -- Set chart value
 local fs_value = lain.widget.fs {
-   timeout = 44,
+   timeout = 64,
    partition = "/home",
    options = "--exclude-type=tmpfs",
    settings  = function()
