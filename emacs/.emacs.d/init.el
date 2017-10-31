@@ -861,7 +861,11 @@
   :ensure auctex
   :defer t
   :config
+  ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
+  ;; Automatically save and parse style
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
   ;; Use PDF Tools as default viewer
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-start-server t)
@@ -1565,6 +1569,7 @@
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode)
   :config
+  (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-mode-line-prefix "fC"))
 
 ;; FlyCheck GUI popups
