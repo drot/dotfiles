@@ -198,22 +198,6 @@
 (setq history-delete-duplicates t)
 (setq kill-do-not-save-duplicates t)
 
-;; Undo Tree
-(use-package undo-tree
-  :ensure t
-  :delight (undo-tree-mode " uT")
-  :commands global-undo-tree-mode
-  :init
-  (add-hook 'after-init-hook #'global-undo-tree-mode)
-  :config
-  (setq undo-tree-history-directory-alist `((".*" . ,(locate-user-emacs-file "undo"))))
-  (setq undo-tree-auto-save-history t)
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t)
-  ;; Compress Undo Tree history files by default
-  (advice-add 'undo-tree-make-history-save-file-name :filter-return
-              (lambda (return-value) (concat return-value ".gz"))))
-
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "cache/.saves-"))
@@ -867,6 +851,32 @@
   :init
   (add-hook 'python-mode-hook #'anaconda-mode)
   (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
+
+;; AUCTeX
+(use-package auctex
+  :ensure t
+  :defer t)
+
+;; TeX configuration
+(use-package tex
+  :ensure auctex
+  :defer t
+  :config
+  (setq-default TeX-engine 'luatex)
+  ;; Use PDF Tools as default viewer
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+  (setq TeX-source-correlate-start-server t)
+  ;; Revert PDF automatically
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+
+;; RefTeX
+(use-package reftex
+  :ensure auctex
+  :delight (reftex-mode " rF")
+  :after latex
+  :config
+  (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t))
 
 ;; CIDER
 (use-package cider-common
