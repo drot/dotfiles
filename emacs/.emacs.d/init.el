@@ -242,8 +242,7 @@
   :config
   (global-hl-line-mode)
   ;; Disable `hl-line-mode' in special buffers
-  (dolist (hook '(undo-tree-visualizer-mode-hook
-                  erc-mode-hook
+  (dolist (hook '(erc-mode-hook
                   eshell-mode-hook
                   term-mode-hook
                   ediff-mode-hook
@@ -1613,7 +1612,6 @@
          ("C-c m C-a" . mc/edit-beginnings-of-lines)
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region))
-  :commands (activate-cursor-for-undo deactivate-cursor-after-undo)
   :init
   (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el")))
 
