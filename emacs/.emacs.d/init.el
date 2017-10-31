@@ -1569,7 +1569,6 @@
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode)
   :config
-  (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-mode-line-prefix "fC"))
 
 ;; FlyCheck GUI popups
