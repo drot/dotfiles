@@ -519,9 +519,7 @@
 ;; Outline mode
 (use-package outline
   :delight (outline-minor-mode " oL")
-  :bind ("C-c t o" . outline-minor-mode)
-  :config
-  (setq outline-minor-mode-prefix (kbd "C-c O")))
+  :bind ("C-c t o" . outline-minor-mode))
 
 ;; Doc View mode configuration
 (use-package doc-view
@@ -870,7 +868,9 @@
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-start-server t)
   ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  ;; Enable Outline mode
+  (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
 
 ;; RefTeX
 (use-package reftex
@@ -1877,7 +1877,7 @@
   (which-key-add-key-based-replacements
     "C-c !" "flycheck"
     "C-c &" "yasnippet"
-    "C-c @" "hide-show"
+    "C-c @" "hide-show-and-outline"
     "C-c O" "outline"
     "C-c e" "eyebrowse"
     "C-c a" "applications"
