@@ -648,7 +648,7 @@
 
 ;; Regexp builder
 (use-package re-builder
-  :bind ("C-c s R" . re-builder)
+  :bind ("C-c s b" . re-builder)
   :config
   (setq reb-re-syntax 'string))
 
@@ -1952,8 +1952,9 @@
 ;; Grep
 (bind-key "C-c s f" #'grep)
 
-;; Replace regex
-(bind-key "C-c s r" #'replace-regexp)
+;; Replace string immediately
+(bind-key "C-c s r" #'replace-string)
+(bind-key "C-c s R" #'replace-regexp)
 
 ;; Grep results as a dired buffer
 (bind-key "C-c s d" #'find-grep-dired)
