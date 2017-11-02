@@ -868,9 +868,23 @@
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-start-server t)
   ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  ;; Enable Outline mode
-  (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+
+;; TeX external commands
+(use-package tex-buf
+  :ensure auctex
+  :defer t
+  :config
+  ;; Don't ask to save before processing
+  (setq TeX-save-query nil))
+
+;; TeX fold mode
+(use-package tex-fold
+  :ensure auctex
+  :after latex
+  :config
+  ;; Add folding options
+  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode))
 
 ;; RefTeX
 (use-package reftex
@@ -878,6 +892,7 @@
   :delight (reftex-mode " rF")
   :after latex
   :config
+  ;; Enable by default
   (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
   (setq reftex-plug-into-AUCTeX t))
 
@@ -1904,15 +1919,20 @@
     "C-x n" "narrow"
     "C-x r" "register"
     "C-x w" "highlight")
-  ;; Major mode replacements
+  ;; Dired mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
-    "C-, C-o" "dired-subtree-only"))
+    "C-, C-o" "dired-subtree-only")
+  ;; AUCTeX replacements
+  (which-key-add-major-mode-key-based-replacements 'latex-mode
+    "C-c C-o" "TeX-fold-mode"
+    "C-c C-p" "preview-latex"
+    "C-c C-q" "LaTeX-fill"
+    "C-c C-t" "TeX-toggle"))
 
 ;; YASnippet
 (use-package yasnippet
   :ensure t
   :delight (yas-minor-mode " yS")
-  :pin gnu
   :commands yas-global-mode
   :init
   (add-hook 'after-init-hook #'yas-global-mode))
