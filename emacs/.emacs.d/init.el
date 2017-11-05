@@ -570,7 +570,7 @@
 
 ;; Mail sending configuration
 (use-package message
-  :defer t
+  :bind ("C-c i m" . message-mark-inserted-region)
   :config
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
