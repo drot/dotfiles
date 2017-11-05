@@ -171,6 +171,29 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
+;; Configure `display-buffer' behaviour for some special buffers
+(setq display-buffer-alist
+      `(
+        ;; Put REPLs and error lists into the bottom side window
+        (,(rx bos
+              (or "*Help"               ; Help buffers
+                  "*Warnings*"          ; Emacs warnings
+                  "*Compile-Log*"       ; Emacs byte compiler log
+                  "*compilation"        ; Compilation buffers
+                  "*shell"              ; Shell window
+                  "*Flycheck errors*"   ; Flycheck error list
+                  (and (1+ nonl) " output*") ; AUCTeX command output
+                  ))
+         (display-buffer-reuse-window
+          display-buffer-in-side-window)
+         (side            . bottom)
+         (reusable-frames . visible)
+         (window-height . 0.4))
+        ;; Let `display-buffer' reuse visible frames for all buffers.  This must
+        ;; be the last entry in `display-buffer-alist', because it overrides any
+        ;; later entry with more specific actions.
+        ("." nil (reusable-frames . visible))))
+
 ;; Change recenter initial position
 (setq recenter-positions '(top middle bottom))
 
@@ -1086,6 +1109,11 @@
   (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
   (setq elfeed-search-filter "@1-week-ago +unread"))
 
+;; ERC Rizon authentication workaround
+(use-package erc-rizon
+  :load-path "lisp/"
+  :after erc)
+
 ;; ERC configuration
 (use-package erc
   :ensure erc-hl-nicks
@@ -1099,27 +1127,12 @@
     (erc-tls :server "irc.rizon.net" :port 6697
              :nick "drot"))
 
-  ;; Workaround for Rizon NickServ authentication
-  (defun drot|erc-fetch-password (&rest params)
-    "Fetch passwords for ERC authentication from an encrypted source."
-    (let ((match (car (apply 'auth-source-search params))))
-      (if match
-          (let ((secret (plist-get match :secret)))
-            (if (functionp secret)
-                (funcall secret)
-              secret))
-        (error "Password not found for %S" params))))
-
-  (defun drot|erc-rizon-nickserv-password ()
-    "Fetch NickServ password for the Rizon IRC network."
-    (drot|erc-fetch-password :user "drot" :host "irc.rizon.net"))
-
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-nickserv-identify-mode 'autodetect)
   (setq erc-nickserv-passwords
-        `((Rizon (("drot" . ,(drot|erc-rizon-nickserv-password))))))
+        `((Rizon (("drot" . ,(erc-rizon-nickserv-password))))))
 
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
@@ -1726,7 +1739,7 @@
 
 ;; Paredit extra functions
 (use-package paredit-ext
-  :load-path "~/.emacs.d/lisp"
+  :load-path "lisp/"
   :bind (:map paredit-mode-map
               ("C-c C-M-s" . paredit-mark-containing-sexp))
   :after paredit)
@@ -1860,6 +1873,15 @@
 
 ;; Kill buffer without prompting
 (bind-key "C-c w k" #'kill-this-buffer)
+
+;; Side window management
+(defun drot|quit-bottom-side-windows ()
+  "Quit side windows of the current frame."
+  (interactive)
+  (dolist (window (window-at-side-list))
+    (quit-window nil window)))
+
+(bind-key "C-c w q" #'drot|quit-bottom-side-windows)
 
 ;; Revert buffer
 (bind-key "C-c f g" #'revert-buffer)
