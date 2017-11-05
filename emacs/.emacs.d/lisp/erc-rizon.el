@@ -20,11 +20,10 @@
 
 ;;; Commentary:
 
-;; 
+;; Workaround for Rizon NickServ authentication
 
 ;;; Code:
 
-;; Workaround for Rizon NickServ authentication
 (defun erc-rizon-fetch-password (&rest params)
   "Fetch password with PARAMS for ERC authentication from an encrypted source."
   (let ((match (car (apply 'auth-source-search params))))
