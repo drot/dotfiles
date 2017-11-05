@@ -602,9 +602,17 @@
 (use-package dired
   :defer t
   :config
-  (setq dired-listing-switches "-ahlF --group-directories-first")
+  ;; Default `ls' switches
+  (setq dired-listing-switches "-alhF")
+  ;; If we are on a GNU system or have GNU ls, add some more `ls' switches
+  (when (or (memq system-type '(gnu gnu/linux))
+            (string= (file-name-nondirectory insert-directory-program) "gls"))
+    (setq dired-listing-switches
+          (concat dired-listing-switches " --group-directories-first")))
+  ;; Do certain operations recursively
   (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
+  ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
 ;; Additional features with dired-x
