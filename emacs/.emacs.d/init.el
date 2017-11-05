@@ -186,7 +186,7 @@
                   ))
          (display-buffer-reuse-window
           display-buffer-in-side-window)
-         (side            . bottom)
+         (side . bottom)
          (reusable-frames . visible)
          (window-height . 0.4))
         ;; Let `display-buffer' reuse visible frames for all buffers.  This must
