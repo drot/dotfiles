@@ -880,7 +880,9 @@
   :config
   ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
   (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t))))
+            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+  ;; Enable Flymake checking
+  (add-hook 'LaTeX-mode-hook #'flymake-mode))
 
 ;; TeX configuration
 (use-package tex
