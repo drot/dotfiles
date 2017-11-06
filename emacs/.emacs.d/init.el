@@ -720,7 +720,7 @@
 
 ;; IELM
 (use-package ielm
-  :bind ("C-c a I" . ielm)
+  :bind ("C-c a '" . ielm)
   :config
   (setq ielm-prompt "EL> "))
 
