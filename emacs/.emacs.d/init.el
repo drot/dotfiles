@@ -1513,12 +1513,12 @@
 ;; Avy
 (use-package avy
   :ensure t
-  :bind (("C-c n c" . avy-goto-char)
-         ("C-c n k" . avy-goto-char-2)
-         ("C-c n J" . avy-goto-word-0)
-         ("C-c n SPC" . avy-pop-mark)
-         ("C-c n l" . avy-goto-line)
-         ("C-c n j" . avy-goto-word-or-subword-1))
+  :bind (("C-c j c" . avy-goto-char)
+         ("C-c j k" . avy-goto-char-2)
+         ("C-c j w" . avy-goto-word-0)
+         ("C-c j SPC" . avy-pop-mark)
+         ("C-c j l" . avy-goto-line)
+         ("C-c j j" . avy-goto-word-or-subword-1))
   :commands avy-setup-default
   :init
   (avy-setup-default)
@@ -1641,7 +1641,7 @@
 (use-package ivy
   :ensure ivy-hydra
   :delight (ivy-mode " iY")
-  :bind ("C-c n R" . ivy-resume)
+  :bind ("C-c n i" . ivy-resume)
   :commands ivy-mode
   :init
   (add-hook 'after-init-hook #'ivy-mode)
@@ -1665,7 +1665,7 @@
          ("C-c s G" . counsel-git-grep)
          ("C-c s i" . counsel-imenu)
          ("C-c s g" . counsel-grep)
-         ("C-c n m" . counsel-mark-ring)
+         ("C-c j m" . counsel-mark-ring)
          ("C-c h c" . counsel-command-history)
          ("C-c h l" . counsel-find-library)
          ("C-c i 8" . counsel-unicode-char))
@@ -1818,6 +1818,7 @@
     "C-c h 4" "help-other-window"
     "C-c h" "help-extended"
     "C-c i" "insertion"
+    "C-c j" "jump"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c n" "navigation"
@@ -1899,7 +1900,7 @@
 (bind-key "C-c p r" #'project-find-regexp)
 
 ;; EWW
-(bind-key "C-c a b" #'eww)
+(bind-key "C-c n e" #'eww)
 
 ;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
