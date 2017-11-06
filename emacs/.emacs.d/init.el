@@ -171,28 +171,6 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
-;; Configure `display-buffer' behaviour for some special buffers
-(setq display-buffer-alist
-      `(
-        ;; Put REPLs and error lists into the bottom side window
-        (,(rx bos
-              (or "*Help"               ; Help buffers
-                  "*Warnings*"          ; Emacs warnings
-                  "*Compile-Log*"       ; Emacs byte compiler log
-                  "*compilation"        ; Compilation buffers
-                  "*shell"              ; Shell window
-                  (and (1+ nonl) " output*") ; AUCTeX command output
-                  ))
-         (display-buffer-reuse-window
-          display-buffer-in-side-window)
-         (side . bottom)
-         (reusable-frames . visible)
-         (window-height . 0.4))
-        ;; Let `display-buffer' reuse visible frames for all buffers.  This must
-        ;; be the last entry in `display-buffer-alist', because it overrides any
-        ;; later entry with more specific actions.
-        ("." nil (reusable-frames . visible))))
-
 ;; Change recenter initial position
 (setq recenter-positions '(top middle bottom))
 
