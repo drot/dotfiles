@@ -181,7 +181,6 @@
                   "*Compile-Log*"       ; Emacs byte compiler log
                   "*compilation"        ; Compilation buffers
                   "*shell"              ; Shell window
-                  "*Flycheck errors*"   ; Flycheck error list
                   (and (1+ nonl) " output*") ; AUCTeX command output
                   ))
          (display-buffer-reuse-window
@@ -539,11 +538,6 @@
   (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
 
-;; Outline mode
-(use-package outline
-  :delight (outline-minor-mode " oL")
-  :bind ("C-c t o" . outline-minor-mode))
-
 ;; Doc View mode configuration
 (use-package doc-view
   :defer t
@@ -752,6 +746,17 @@
   :config
   (setq ielm-prompt "EL> "))
 
+;; Flymake
+(use-package flymake
+  :bind (("C-c ! t" . flymake-mode)
+         :map flymake-mode-map
+         ("C-c ! n" . flymake-goto-next-error)
+         ("C-c ! p" . flymake-goto-prev-error)
+         ("C-c ! R" . flymake-reporting-backends)
+         ("C-c ! r" . flymake-running-backends)
+         ("C-c ! d" . flymake-disabled-backends)
+         ("C-c ! l" . flymake-switch-to-log-buffer)))
+
 ;; Compilation configuration
 (use-package compile
   :bind (("C-c c C" . compile)
@@ -829,6 +834,11 @@
   (setq calendar-longitude 17.48)
   (setq calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
+;; Outline mode
+(use-package outline
+  :delight (outline-minor-mode " oL")
+  :bind ("C-c t o" . outline-minor-mode))
+
 ;; Org-mode configuration
 (use-package org
   :bind (("C-c o a" . org-agenda)
@@ -884,6 +894,15 @@
 (use-package auctex
   :ensure t
   :defer t)
+
+;; LaTeX configuration
+(use-package latex
+  :ensure auctex
+  :defer t
+  :config
+  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
+  (add-hook 'LaTeX-mode-hook
+            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t))))
 
 ;; TeX configuration
 (use-package tex
@@ -1598,23 +1617,6 @@
   (setq eyebrowse-mode-line-left-delimiter "<")
   (setq eyebrowse-mode-line-right-delimiter ">"))
 
-;; FlyCheck
-(use-package flycheck
-  :ensure t
-  :commands global-flycheck-mode
-  :init
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  :config
-  (setq flycheck-mode-line-prefix "fC"))
-
-;; FlyCheck GUI popups
-(use-package flycheck-pos-tip
-  :ensure t
-  :after flycheck
-  :config
-  (setq flycheck-pos-tip-max-width 80)
-  (flycheck-pos-tip-mode))
-
 ;; Form-feed
 (use-package form-feed
   :ensure t
@@ -1823,7 +1825,7 @@
   :config
   ;; Global replacements
   (which-key-add-key-based-replacements
-    "C-c !" "flycheck"
+    "C-c !" "flymake"
     "C-c &" "yasnippet"
     "C-c @" "hide-show-and-outline"
     "C-c O" "outline"
