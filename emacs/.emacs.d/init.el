@@ -873,17 +873,6 @@
   :ensure t
   :defer t)
 
-;; LaTeX configuration
-(use-package latex
-  :ensure auctex
-  :defer t
-  :config
-  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
-  (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
-  ;; Enable Flymake syntax checking
-  (add-hook 'LaTeX-mode-hook #'flymake-mode))
-
 ;; TeX configuration
 (use-package tex
   :ensure auctex
@@ -907,6 +896,17 @@
   :config
   ;; Don't ask to save before processing
   (setq TeX-save-query nil))
+
+;; LaTeX configuration
+(use-package latex
+  :ensure auctex
+  :defer t
+  :config
+  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
+  (add-hook 'LaTeX-mode-hook
+            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+  ;; Enable Flymake syntax checking
+  (add-hook 'LaTeX-mode-hook #'flymake-mode))
 
 ;; TeX fold mode
 (use-package tex-fold
@@ -1863,15 +1863,6 @@
 
 ;; Kill buffer without prompting
 (bind-key "C-c w k" #'kill-this-buffer)
-
-;; Side window management
-(defun drot|quit-bottom-side-windows ()
-  "Quit side windows of the current frame."
-  (interactive)
-  (dolist (window (window-at-side-list))
-    (quit-window nil window)))
-
-(bind-key "C-c w q" #'drot|quit-bottom-side-windows)
 
 ;; Revert buffer
 (bind-key "C-c f g" #'revert-buffer)
