@@ -831,8 +831,10 @@
             (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
-  ;; Add folding options
+  ;; Enable folding options
   (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
+  ;; Further folding options with Outline
+  (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
   ;; Add RefTeX support
   (add-hook 'LaTeX-mode-hook #'turn-on-reftex))
 
@@ -1750,7 +1752,7 @@
     "C-, C-o" "dired-subtree-only")
   ;; AUCTeX replacements
   (which-key-add-major-mode-key-based-replacements 'latex-mode
-    "C-c C-o" "TeX-fold-mode"
+    "C-c C-o" "TeX-fold"
     "C-c C-p" "preview-latex"
     "C-c C-q" "LaTeX-fill"
     "C-c C-t" "TeX-toggle"))
