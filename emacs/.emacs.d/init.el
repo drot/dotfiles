@@ -449,6 +449,7 @@
 
 ;; Scheme mode configuration
 (after 'scheme
+  ;; Use Guile as default interpreter
   (setq scheme-program-name "guile"))
 
 ;; CSS mode configuration
@@ -656,15 +657,23 @@
 
 ;; Flymake
 (bind-key "C-c ! t" #'flymake-mode)
-;; Set key bindings
+;; Configuration
 (after 'flymake
+  ;; Define Hydra
+  (defhydra hydra-flymake (:columns 2)
+    "Flymake"
+    ("n" flymake-goto-next-error "Next Error")
+    ("p" flymake-goto-prev-error "Previous Error")
+    ("q" nil "Quit"))
+  ;; Set key bindings
   (bind-keys :map flymake-mode-map
              ("C-c ! n" . flymake-goto-next-error)
              ("C-c ! p" . flymake-goto-prev-error)
              ("C-c ! R" . flymake-reporting-backends)
              ("C-c ! r" . flymake-running-backends)
              ("C-c ! d" . flymake-disabled-backends)
-             ("C-c ! l" . flymake-switch-to-log-buffer)))
+             ("C-c ! l" . flymake-switch-to-log-buffer)
+             ("C-c ! h" . hydra-flymake/body)))
 
 ;; Compilation
 (bind-key "C-c c C" #'compile)
@@ -749,7 +758,29 @@
 ;; Configuration
 (after 'outline
   ;; Shorten mode lighter
-  (delight 'outline-minor-mode " oL" t))
+  (delight 'outline-minor-mode " oL" t)
+  ;; Define Hydra
+  (defhydra hydra-outline (:columns 4)
+    "Outline Mode"
+    ("z" outline-hide-sublevels "Hide Sub-Levels")
+    ("t" outline-hide-body "Hide Body")
+    ("o" outline-hide-other "Hide Other")
+    ("c" outline-hide-entry "Hide Entry")
+    ("l" outline-hide-leaves "Hide Leaves")
+    ("d" outline-hide-subtree "Hide Sub-Tree")
+    ("a" outline-show-all "Show All")
+    ("e" outline-show-entry "Show Entry")
+    ("i" outline-show-children "Show Children")
+    ("k" outline-show-branches "Show Branches")
+    ("s" outline-show-subtree "Show Sub-Tree")
+    ("u" outline-up-heading "Up Heading")
+    ("n" outline-next-visible-heading "Next Visible Heading")
+    ("p" outline-previous-visible-heading "Previous Visible Heading")
+    ("f" outline-forward-same-level "Forward Same Level")
+    ("b" outline-backward-same-level "Backward Same Level")
+    ("q" nil "Quit"))
+  ;; Set key binding
+  (bind-key "C-c O h" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1186,99 +1217,10 @@
 
 ;; Hydra
 (require-package 'hydra)
-;; Set key bindings
-(bind-key "C-c x m" #'hydra-mark-text/body)
-(bind-key "C-c x M" #'hydra-move-text/body)
-(bind-key "C-c m h" #'hydra-multiple-cursors/body)
-(bind-key "C-c w h" #'hydra-window-resize/body)
-(bind-key "C-c x O" #'hydra-outline/body)
 ;; Configuration
 (after 'hydra
   ;; Enable syntax coloring for Hydra definitions
-  (hydra-add-font-lock)
-
-  ;; Hydra for the move-text package
-  (defhydra hydra-move-text (:columns 2)
-    "Move Text"
-    ("p" move-text-up "Move Text Up")
-    ("n" move-text-down "Move Text Down")
-    ("q" nil "Quit"))
-
-  ;; Hydra for various text marking operations
-  (defhydra hydra-mark-text (:exit t :columns 4)
-    "Mark Text"
-    ("e" mark-sexp "S-Expression")
-    ("f" er/mark-defun "Function")
-    ("w" er/mark-word "Word")
-    ("u" er/mark-url "URL")
-    ("E" er/mark-email "Email")
-    ("p" er/mark-text-paragraph "Paragraph")
-    ("s" er/mark-symbol "Symbol")
-    ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
-    ("q" er/mark-inside-quotes "Inside Quotes")
-    ("Q" er/mark-outside-quotes "Outside Quotes")
-    ("(" er/mark-inside-pairs "Inside Pairs")
-    ("[" er/mark-inside-pairs "Inside Pairs")
-    ("{" er/mark-inside-pairs "Inside Pairs")
-    (")" er/mark-outside-pairs "Outside Pairs")
-    ("]" er/mark-outside-pairs "Outside Pairs")
-    ("}" er/mark-outside-pairs "Outside Pairs")
-    ("c" er/mark-comment "Comment")
-    ("." er/expand-region "Expand Region" :exit nil)
-    ("," er/contract-region "Contract Region" :exit nil))
-
-  ;; Hydra for Multiple Cursors
-  (defhydra hydra-multiple-cursors (:columns 3)
-    "Multiple Cursors"
-    ("l" mc/edit-lines "Edit Lines In Region" :exit t)
-    ("b" mc/edit-beginnings-of-lines "Edit Beginnings Of Lines In Region" :Exit t)
-    ("e" mc/edit-ends-of-lines "Edit Ends Of Lines In Region" :exit t)
-    ("a" mc/mark-all-dwim "Mark All Dwim" :exit t)
-    ("S" mc/mark-all-symbols-like-this "Mark All Symbols Likes This" :exit t)
-    ("w" mc/mark-all-words-like-this "Mark All Words Like This" :exit t)
-    ("r" mc/mark-all-in-region "Mark All In Region" :exit t)
-    ("R" mc/mark-all-in-region-regexp "Mark All In Region (regexp)" :exit t)
-    ("d" mc/mark-all-like-this-in-defun "Mark All Like This In Defun" :exit t)
-    ("s" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Like This In Defun" :exit t)
-    ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Like This In Defun" :exit t)
-    ("i" mc/insert-numbers "Insert Numbers" :exit t)
-    ("n" mc/mark-next-like-this "Mark Next Like This")
-    ("N" mc/skip-to-next-like-this "Skip To Next Like This")
-    ("M-n" mc/unmark-next-like-this "Unmark Next Like This")
-    ("p" mc/mark-previous-like-this "Mark Previous Like This")
-    ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
-    ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
-    ("q" nil "Quit" :exit t))
-
-  ;; Hydra for more convenient window resizing
-  (defhydra hydra-window-resize (:columns 2)
-    "Resize Windows"
-    ("n" enlarge-window "Enlarge Window")
-    ("p" shrink-window "Shrink Window")
-    ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
-    ("b" shrink-window-horizontally "Shrink Window Horizontally")
-    ("q" nil "Quit"))
-
-  ;; Hydra for Outline mode
-  (defhydra hydra-outline (:columns 4)
-    "Outline Mode"
-    ("z" outline-hide-sublevels "Hide Sub-Levels")
-    ("t" outline-hide-body "Hide Body")
-    ("o" outline-hide-other "Hide Other")
-    ("c" outline-hide-entry "Hide Entry")
-    ("l" outline-hide-leaves "Hide Leaves")
-    ("d" outline-hide-subtree "Hide Sub-Tree")
-    ("a" outline-show-all "Show All")
-    ("e" outline-show-entry "Show Entry")
-    ("i" outline-show-children "Show Children")
-    ("k" outline-show-branches "Show Branches")
-    ("s" outline-show-subtree "Show Sub-Tree")
-    ("u" outline-up-heading "Up Heading")
-    ("n" outline-next-visible-heading "Next Visible Heading")
-    ("p" outline-previous-visible-heading "Previous Visible Heading")
-    ("f" outline-forward-same-level "Forward Same Level")
-    ("b" outline-backward-same-level "Backward Same Level")
-    ("q" nil "Quit")))
+  (hydra-add-font-lock))
 
 ;; EPUB format support
 (require-package 'nov)
@@ -1323,6 +1265,14 @@
 
 ;; Move-text
 (require-package 'move-text)
+;; Define Hydra
+(defhydra hydra-move-text (:columns 2)
+  "Move Text"
+  ("p" move-text-up "Move Text Up")
+  ("n" move-text-down "Move Text Down")
+  ("q" nil "Quit"))
+;; Set key binding
+(bind-key "C-c x M" #'hydra-move-text/body)
 
 ;; Paradox
 (require-package 'paradox)
@@ -1551,9 +1501,34 @@
 (bind-key "C-c m C-a" #'mc/edit-beginnings-of-lines)
 (bind-key "C-c m C-e" #'mc/edit-ends-of-lines)
 (bind-key "C-c m C-s" #'mc/mark-all-in-region)
+;; Define Hydra
+(defhydra hydra-multiple-cursors (:columns 3)
+  "Multiple Cursors"
+  ("l" mc/edit-lines "Edit Lines In Region" :exit t)
+  ("b" mc/edit-beginnings-of-lines "Edit Beginnings Of Lines In Region" :Exit t)
+  ("e" mc/edit-ends-of-lines "Edit Ends Of Lines In Region" :exit t)
+  ("a" mc/mark-all-dwim "Mark All Dwim" :exit t)
+  ("S" mc/mark-all-symbols-like-this "Mark All Symbols Likes This" :exit t)
+  ("w" mc/mark-all-words-like-this "Mark All Words Like This" :exit t)
+  ("r" mc/mark-all-in-region "Mark All In Region" :exit t)
+  ("R" mc/mark-all-in-region-regexp "Mark All In Region (regexp)" :exit t)
+  ("d" mc/mark-all-like-this-in-defun "Mark All Like This In Defun" :exit t)
+  ("s" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Like This In Defun" :exit t)
+  ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Like This In Defun" :exit t)
+  ("i" mc/insert-numbers "Insert Numbers" :exit t)
+  ("n" mc/mark-next-like-this "Mark Next Like This")
+  ("N" mc/skip-to-next-like-this "Skip To Next Like This")
+  ("M-n" mc/unmark-next-like-this "Unmark Next Like This")
+  ("p" mc/mark-previous-like-this "Mark Previous Like This")
+  ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
+  ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
+  ("q" nil "Quit" :exit t))
+;; Set key binding
+(bind-key "C-c m h" #'hydra-multiple-cursors/body)
 
 ;; Ivy
 (require-package 'ivy)
+;; Ivy Hydra support
 (require-package 'ivy-hydra)
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
@@ -1771,6 +1746,17 @@
 ;; Toggle debug on error
 (bind-key "C-c t D" #'toggle-debug-on-error)
 
+;; Hydra for more convenient window resizing
+(defhydra hydra-window-resize (:columns 2)
+  "Resize Windows"
+  ("n" enlarge-window "Enlarge Window")
+  ("p" shrink-window "Shrink Window")
+  ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
+  ("b" shrink-window-horizontally "Shrink Window Horizontally")
+  ("q" nil "Quit"))
+;; Set key binding
+(bind-key "C-c w h" #'hydra-window-resize/body)
+
 ;; Bury buffer
 (bind-key "C-c w b" #'bury-buffer)
 
@@ -1827,6 +1813,31 @@
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
+
+;; Hydra for various text marking operations
+(defhydra hydra-mark-text (:exit t :columns 4)
+  "Mark Text"
+  ("e" mark-sexp "S-Expression")
+  ("f" er/mark-defun "Function")
+  ("w" er/mark-word "Word")
+  ("u" er/mark-url "URL")
+  ("E" er/mark-email "Email")
+  ("p" er/mark-text-paragraph "Paragraph")
+  ("s" er/mark-symbol "Symbol")
+  ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
+  ("q" er/mark-inside-quotes "Inside Quotes")
+  ("Q" er/mark-outside-quotes "Outside Quotes")
+  ("(" er/mark-inside-pairs "Inside Pairs")
+  ("[" er/mark-inside-pairs "Inside Pairs")
+  ("{" er/mark-inside-pairs "Inside Pairs")
+  (")" er/mark-outside-pairs "Outside Pairs")
+  ("]" er/mark-outside-pairs "Outside Pairs")
+  ("}" er/mark-outside-pairs "Outside Pairs")
+  ("c" er/mark-comment "Comment")
+  ("." er/expand-region "Expand Region" :exit nil)
+  ("," er/contract-region "Contract Region" :exit nil))
+;; Set key binding
+(bind-key "C-c x m" #'hydra-mark-text/body)
 
 ;; Sort lines alphabetically
 (bind-key "C-c x l" #'sort-lines)
