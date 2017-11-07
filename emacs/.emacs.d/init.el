@@ -1131,8 +1131,9 @@
   (defun drot|erc-init ()
     "Connect to IRC."
     (interactive)
-    (erc-tls :server "irc.rizon.net" :port 6697
-             :nick "drot"))
+    (when (y-or-n-p "Connect to IRC? ")
+      (erc-tls :server "irc.rizon.net" :port 6697
+              :nick "drot")))
 
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
