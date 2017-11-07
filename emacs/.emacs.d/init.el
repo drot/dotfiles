@@ -744,8 +744,11 @@
 
 ;; Outline mode
 (bind-key "C-c t o" #'outline-minor-mode)
+;; Set default prefix
+(setq outline-minor-mode-prefix (kbd "C-c O"))
 ;; Configuration
 (after 'outline
+  ;; Shorten mode lighter
   (delight 'outline-minor-mode " oL" t))
 
 ;; Org-mode
@@ -1719,7 +1722,7 @@
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c &" "yasnippet"
-    "C-c @" "hide-show-and-outline"
+    "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c e" "eyebrowse"
     "C-c a" "applications"
