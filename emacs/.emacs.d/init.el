@@ -1535,6 +1535,7 @@
   ;; Set key binding
   (bind-key "C-c n R" #'ivy-resume)
   ;; Customize
+  (setq ivy-do-completion-in-region nil)
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-use-virtual-buffers t)
