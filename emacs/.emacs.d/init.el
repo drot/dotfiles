@@ -520,9 +520,9 @@
   (setq dired-dwim-target t))
 
 ;; Autoload Dired-X features
-(autoload 'dired-jump "dired-x"
+(autoload #'dired-jump "dired-x"
   "Jump to Dired buffer corresponding to current buffer." t)
-(autoload 'dired-jump-other-window "dired-x"
+(autoload #'dired-jump-other-window "dired-x"
   "Like \\[dired-jump] (dired-jump) but in other window." t)
 ;; Set key bindings
 (bind-key "C-x C-j" #'dired-jump)
@@ -1186,9 +1186,9 @@
 ;; IEdit
 (require-package 'iedit)
 ;; Autoload missing functions
-(autoload 'iedit-mode-from-isearch "iedit"
+(autoload #'iedit-mode-from-isearch "iedit"
   "Start Iedit mode using last search string as the regexp." t)
-(autoload 'iedit-execute-last-modification "iedit"
+(autoload #'iedit-execute-last-modification "iedit"
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
 (bind-key "C-c i e" #'iedit-mode)
@@ -1287,6 +1287,9 @@
 
 ;; PDF Tools
 (require-package 'pdf-tools)
+;; Autoload missing function
+(autoload #'pdf-view-mode "pdf-tools"
+  "Major mode in PDF buffers." t)
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
 ;; Configuration
