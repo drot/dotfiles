@@ -627,14 +627,10 @@
 (after 'eshell
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
-  ;; Use Pcomplete alternate completion
-  (defun drot|eshell-complete ()
-    (interactive)
-    (pcomplete-std-complete))
   ;; Custom hook to avoid conflicts
   (defun drot|eshell-mode-hook ()
     "Use alternate TAB completion and disable Company in Eshell buffers."
-    (bind-key [remap eshell-pcomplete] #'drot|eshell-complete eshell-mode-map)
+    (bind-key [remap eshell-pcomplete] #'completion-at-point eshell-mode-map)
     (company-mode 0))
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
