@@ -35,10 +35,10 @@
           (lambda () (setq gc-cons-threshold 400000)))
 
 ;; Set default directory for save files
-(make-directory (locate-user-emacs-file "cache/") t)
+(make-directory (locate-user-emacs-file "cache") t)
 
 ;; Extend `load-path' to include custom user directory
-(add-to-list 'load-path (locate-user-emacs-file "lisp/"))
+(add-to-list 'load-path (locate-user-emacs-file "lisp"))
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
@@ -207,7 +207,7 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache/") t)))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "cache/.saves-"))
 (setq backup-directory-alist `(("." . ,(locate-user-emacs-file "cache"))))
 (setq version-control t)
