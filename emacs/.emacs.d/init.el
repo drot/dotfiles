@@ -1598,7 +1598,7 @@
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
 
-  ;; Enable Paredit in other related modes
+  ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
