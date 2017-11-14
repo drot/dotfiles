@@ -1690,8 +1690,9 @@
 (setq which-key-allow-imprecise-window-fit t)
 (setq which-key-sort-order #'which-key-prefix-then-key-order)
 (add-hook 'after-init-hook #'which-key-mode)
-;; Set key binding
+;; Set key bindings
 (bind-key "C-c h K" #'which-key-show-top-level)
+(bind-key "C-c h M" #'which-key-show-major-mode)
 ;; Configuration
 (after 'which-key
   ;; Global replacements
