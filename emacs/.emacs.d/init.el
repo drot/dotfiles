@@ -482,9 +482,7 @@
 (after 'auth-source
   (auth-source-pass-enable))
 
-;; Mail sending
-(bind-key "C-c i m" #'message-mark-inserted-region)
-;; Configuration
+;; Mail sending configuration
 (after 'message
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
