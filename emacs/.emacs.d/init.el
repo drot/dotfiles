@@ -686,8 +686,8 @@
 ;; Configuration
 (after 'gnus
   ;; Set key bindings
-  (bind-key "M-o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "M-o" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "M-O" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "M-O" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
@@ -787,7 +787,7 @@
 ;; Configuration
 (after 'org
   ;; Set key binding
-  (bind-key "M-o" #'ace-link-org org-mode-map)
+  (bind-key "M-O" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org/"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
