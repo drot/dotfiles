@@ -1449,19 +1449,6 @@
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
-;; Eyebrowse
-(require-package 'eyebrowse)
-;; Initialize mode
-(setq eyebrowse-keymap-prefix (kbd "C-c e"))
-(add-hook 'after-init-hook #'eyebrowse-mode)
-;; Configuration
-(after 'eyebrowse
-  (setq eyebrowse-wrap-around t)
-  (setq eyebrowse-switch-back-and-forth t)
-  (setq eyebrowse-new-workspace t)
-  (setq eyebrowse-mode-line-left-delimiter "<")
-  (setq eyebrowse-mode-line-right-delimiter ">"))
-
 ;; Form-feed
 (require-package 'form-feed)
 ;; Initialize mode
@@ -1484,6 +1471,14 @@
              ("C-c p t p" . hl-todo-previous)
              ("C-c p t n" . hl-todo-next)
              ("C-c p t o" . hl-todo-occur)))
+
+;; Hyperbole
+(require-package 'hyperbole)
+;; Configuration
+(setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
+;; Initialize mode
+(add-hook 'after-init-hook
+          (lambda () (require 'hyperbole)))
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1699,7 +1694,6 @@
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
-    "C-c e" "eyebrowse"
     "C-c a" "applications"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
@@ -1745,17 +1739,6 @@
 
 ;; Toggle debug on error
 (bind-key "C-c t D" #'toggle-debug-on-error)
-
-;; Hydra for more convenient window resizing
-(defhydra hydra-window-resize (:columns 2)
-  "Resize Windows"
-  ("n" enlarge-window "Enlarge Window")
-  ("p" shrink-window "Shrink Window")
-  ("f" enlarge-window-horizontally "Enlarge Window Horizontally")
-  ("b" shrink-window-horizontally "Shrink Window Horizontally")
-  ("q" nil "Quit"))
-;; Set key binding
-(bind-key "C-c w h" #'hydra-window-resize/body)
 
 ;; Bury buffer
 (bind-key "C-c w b" #'bury-buffer)
