@@ -1161,7 +1161,7 @@
 
   ;; Truncate buffer
   (setq erc-truncate-buffer-on-save t)
-  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer))
+  (add-hook 'erc-insert-post-hook #'erc-truncate-buffer))
 
 ;; Expand region
 (require-package 'expand-region)
