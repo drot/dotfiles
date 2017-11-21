@@ -598,7 +598,7 @@
   (setq gdb-many-windows t))
 
 ;; Open URLs with the specified browser
-(bind-key "C-c n u" #'browse-url)
+(bind-key "C-c n U" #'browse-url)
 (bind-key "C-c n b" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
@@ -686,8 +686,8 @@
 ;; Configuration
 (after 'gnus
   ;; Set key bindings
-  (bind-key "M-O" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "M-O" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c n u" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c n u" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
@@ -787,7 +787,7 @@
 ;; Configuration
 (after 'org
   ;; Set key binding
-  (bind-key "M-O" #'ace-link-org org-mode-map)
+  (bind-key "C-c n u" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org/"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -1534,7 +1534,7 @@
   ;; Shorten mode lighter
   (delight 'ivy-mode " iY" t)
   ;; Set key binding
-  (bind-key "C-c n R" #'ivy-resume)
+  (bind-key "C-c n r" #'ivy-resume)
   ;; Customize
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
