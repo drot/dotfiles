@@ -598,8 +598,8 @@
   (setq gdb-many-windows t))
 
 ;; Open URLs with the specified browser
-(bind-key "C-c n U" #'browse-url)
-(bind-key "C-c n b" #'browse-url-at-point)
+(bind-key "C-c n b" #'browse-url)
+(bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
   (setq browse-url-browser-function #'browse-url-firefox))
@@ -1540,7 +1540,7 @@
   ;; Shorten mode lighter
   (delight 'ivy-mode " iY" t)
   ;; Set key binding
-  (bind-key "C-c n r" #'ivy-resume)
+  (bind-key "C-c n i" #'ivy-resume)
   ;; Customize
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
