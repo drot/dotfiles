@@ -686,8 +686,8 @@
 ;; Configuration
 (after 'gnus
   ;; Set key bindings
-  (bind-key "C-c n u" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "C-c n u" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "M-o" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "M-o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
@@ -787,7 +787,7 @@
 ;; Configuration
 (after 'org
   ;; Set key binding
-  (bind-key "C-c n u" #'ace-link-org org-mode-map)
+  (bind-key "M-o" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org/"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -834,7 +834,9 @@
   (delight 'anaconda-mode " aC" t))
 
 ;; AUCTeX
-(require-package 'auctex)
+;;(require-package 'auctex)
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
 
 ;; TeX configuration
 (after 'tex
@@ -1476,9 +1478,13 @@
 (require-package 'hyperbole)
 ;; Configuration
 (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-;; Set key binding
+;; Set key bindings
+(add-hook 'hyperbole-init-hook
+          (lambda () (bind-key "C-c C-\\" #'hkey-operate)))
 (add-hook 'hyperbole-init-hook
           (lambda () (bind-key "C-c ," #'hui-select-thing)))
+(add-hook 'hyperbole-init-hook
+          (lambda () (bind-key "C-c w g" #'hycontrol-windows-grid)))
 ;; Initialize mode
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
