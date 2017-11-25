@@ -686,8 +686,8 @@
 ;; Configuration
 (after 'gnus
   ;; Set key bindings
-  (bind-key "M-o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "M-o" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c n l" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c n l" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method '(nnimap "mail.cock.li"
                                     (nnimap-address "mail.cock.li")
@@ -787,7 +787,7 @@
 ;; Configuration
 (after 'org
   ;; Set key binding
-  (bind-key "M-o" #'ace-link-org org-mode-map)
+  (bind-key "C-c n l" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org/"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -815,14 +815,10 @@
 
 ;; Ace-window
 (require-package 'ace-window)
-;; Set key binding
-(bind-key [remap other-window] #'ace-window)
 ;; Configuration
 (after 'ace-window
   ;; Shorten mode lighter
-  (delight 'ace-window-mode " aW" t)
-  ;; Customize
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+  (delight 'ace-window-mode " aW" t))
 
 ;; Anaconda mode
 (require-package 'anaconda-mode)
@@ -1478,9 +1474,10 @@
 (require-package 'hyperbole)
 ;; Configuration
 (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-;; Set key bindings
+;; Add ace-window support
 (add-hook 'hyperbole-init-hook
-          (lambda () (bind-key "C-c C-\\" #'hkey-operate)))
+          (lambda () (hkey-ace-window-setup (kbd "M-o"))))
+;; Set key bindings
 (add-hook 'hyperbole-init-hook
           (lambda () (bind-key "C-c ," #'hui-select-thing)))
 (add-hook 'hyperbole-init-hook
