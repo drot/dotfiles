@@ -1608,7 +1608,7 @@
   (require 'paredit-ext)
   ;; Set key bindings
   (bind-keys :map paredit-mode-map
-             ("C-c C-M-s" . paredit-mark-containing-sexp)
+             ("C-c C-M-SPC" . paredit-mark-containing-sexp)
              ("M-{" . paredit-wrap-curly)
              ("M-[" . paredit-wrap-square))
 
