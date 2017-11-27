@@ -1622,9 +1622,9 @@
   ;; Set key bindings
   (bind-keys :map paredit-mode-map
              ("C-c C-M-s" . paredit-mark-containing-sexp)
-             ("M-S" . paredit-splice-sexp)
-             ("M-P" . paredit-split-sexp)
-             ("M-R" . paredit-raise-sexp))
+             ("M-D" . paredit-splice-sexp)
+             ("M-S" . paredit-split-sexp)
+             ("C-S-<backspace>" . paredit-raise-sexp))
   ;; Disable conflicting key bindings
   (unbind-key "M-r" paredit-mode-map)
   (unbind-key "M-s" paredit-mode-map))
