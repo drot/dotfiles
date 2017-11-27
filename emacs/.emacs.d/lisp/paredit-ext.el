@@ -33,7 +33,7 @@
   "Extra functions for paredit"
   :group 'paredit)
 
-(defun mark-containing-sexp ()
+(defun paredit-mark-containing-sexp ()
   (interactive)
   (paredit-backward-up)
   (mark-sexp))

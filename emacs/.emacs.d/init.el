@@ -1313,8 +1313,14 @@
 
 ;; SLIME REPL configuration
 (after 'slime-repl
-  ;; Disable conflicting key binding
-  (unbind-key "DEL" slime-repl-mode-map))
+  ;; Set key bindings
+  (bind-keys :map slime-repl-mode-map
+             ("C-c M-r" . slime-repl-previous-matching-input)
+             ("C-c M-s" . slime-repl-next-matching-input))
+  ;; Disable conflicting key bindings
+  (unbind-key "DEL" slime-repl-mode-map)
+  (unbind-key "M-r" slime-repl-mode-map)
+  (unbind-key "M-s" slime-repl-mode-map))
 
 ;; SLIME Company
 (require-package 'slime-company)
@@ -1592,10 +1598,19 @@
                 slime-repl-mode-hook
                 geiser-repl-mode-hook))
   (add-hook hook #'enable-paredit-mode))
+
 ;; Configuration
 (after 'paredit
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
+
+  ;; Paredit extra functions
+  (require 'paredit-ext)
+  ;; Set key bindings
+  (bind-keys :map paredit-mode-map
+             ("C-c C-M-s" . paredit-mark-containing-sexp)
+             ("M-{" . paredit-wrap-curly)
+             ("M-[" . paredit-wrap-square))
 
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
@@ -1615,19 +1630,6 @@
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil))))
-
-;; Paredit extra functions
-(after 'paredit
-  (require 'paredit-ext)
-  ;; Set key bindings
-  (bind-keys :map paredit-mode-map
-             ("C-c C-M-s" . paredit-mark-containing-sexp)
-             ("M-D" . paredit-splice-sexp)
-             ("M-S" . paredit-split-sexp)
-             ("C-S-<backspace>" . paredit-raise-sexp))
-  ;; Disable conflicting key bindings
-  (unbind-key "M-r" paredit-mode-map)
-  (unbind-key "M-s" paredit-mode-map))
 
 ;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
