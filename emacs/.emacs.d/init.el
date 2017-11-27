@@ -1611,8 +1611,9 @@
              ("C-c C-M-SPC" . paredit-mark-containing-sexp)
              ("M-{" . paredit-wrap-curly)
              ("M-[" . paredit-wrap-square))
-  ;; Avoid conflict with the default `search-map'
+  ;; Avoid conflict with the default `search-map' and point position bindings
   (bind-key "M-S" search-map paredit-mode-map)
+  (bind-key "M-R" #'move-to-window-line-top-bottom)
 
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
