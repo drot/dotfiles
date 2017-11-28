@@ -519,7 +519,10 @@
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
-;; Autoload Dired-X features
+;; Additional Dired features with Dired-X
+(after 'dired
+  (require 'dired-x))
+;; Autoload Dired-X jump features
 (autoload #'dired-jump "dired-x"
   "Jump to Dired buffer corresponding to current buffer." t)
 (autoload #'dired-jump-other-window "dired-x"
@@ -1671,7 +1674,7 @@
 (add-hook 'html-mode-hook #'skewer-html-mode)
 ;; Configuration
 (after 'skewer-html
-  (delight skewer-html-mode " sKH" t))
+  (delight 'skewer-html-mode " sKH" t))
 
 ;; Visual Fill Column
 (require-package 'visual-fill-column)
