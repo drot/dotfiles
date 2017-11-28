@@ -1436,12 +1436,12 @@
 (require-package 'hyperbole)
 ;; Configuration
 (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-;; Add ace-window support
-(add-hook 'hyperbole-init-hook
-          (lambda () (hkey-ace-window-setup (kbd "M-o"))))
 ;; Set key bindings
 (add-hook 'hyperbole-init-hook
           (lambda ()
+            ;; Add ace-window support
+            (hkey-ace-window-setup (kbd "M-o"))
+            ;; Remap default bindings
             (bind-key "C-c ," #'hui-select-thing)
             (bind-key "C-c |" #'hycontrol-windows-grid)
             (bind-key "C-c C-\\" #'hkey-operate)))
