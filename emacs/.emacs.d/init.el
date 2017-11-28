@@ -1416,14 +1416,21 @@
 (add-hook 'prog-mode-hook #'hl-todo-mode)
 ;; Configuration
 (after 'hl-todo
+  ;; Define Hydra
+  (defhydra hydra-hl-todo (:columns 2)
+    "Highlight TODO"
+    ("n" hl-todo-next "Next TODO")
+    ("p" hl-todo-previous "Previous TODO")
+    ("q" nil "Quit"))
   ;; Set key bindings
   (bind-keys :map hl-todo-mode-map
              :prefix "C-c T"
              :prefix-map hl-todo-map
              :prefix-docstring "Highlight TODO map."
-             ("p" . hl-todo-previous)
              ("n" . hl-todo-next)
-             ("o" . hl-todo-occur)))
+             ("p" . hl-todo-previous)
+             ("o" . hl-todo-occur)
+             ("h" . hydra-hl-todo/body)))
 
 ;; Hyperbole
 (require-package 'hyperbole)
@@ -1617,7 +1624,6 @@
     "C-c O" "outline"
     "C-c f v" "variables"
     "C-c h 4" "help-other-window"
-    "C-c p t" "hl-todo"
     "C-x C-a" "edebug"
     "C-x a" "abbrev"
     "C-x n" "narrow"
