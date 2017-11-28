@@ -111,8 +111,8 @@
 ;; Always scroll evenly with the mouse
 (setq mouse-wheel-progressive-speed nil)
 
-;; Disable alarm bell
-(setq ring-bell-function #'ignore)
+;; Use visual bell instead
+(setq visible-bell t)
 
 ;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
@@ -187,8 +187,7 @@
 (setq view-read-only t)
 (setq view-inhibit-help-message t)
 
-;; Kill and yank clipboard options
-(setq select-enable-primary t)
+;; Kill and yank clipboard saving
 (setq save-interprogram-paste-before-kill t)
 
 ;; Mouse yank at point instead of click
