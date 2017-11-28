@@ -506,6 +506,8 @@
 
 ;; Dired configuration
 (after 'dired
+  ;; Load Dired Extra library for additional features
+  (require 'dired-x)
   ;; Default `ls' switches
   (setq dired-listing-switches "-alhF")
   ;; If we are on a GNU system or have GNU ls, add some more `ls' switches
@@ -519,18 +521,7 @@
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
-;; Additional Dired features with Dired-X
-(after 'dired
-  (require 'dired-x))
-;; Autoload Dired-X jump features
-(autoload #'dired-jump "dired-x"
-  "Jump to Dired buffer corresponding to current buffer." t)
-(autoload #'dired-jump-other-window "dired-x"
-  "Like \\[dired-jump] (dired-jump) but in other window." t)
-;; Set key bindings
-(bind-key "C-x C-j" #'dired-jump)
-(bind-key "C-x 4 C-j" #'dired-jump-other-window)
-;; Configuration
+;; Dired Extra configuration
 (after 'dired-x
   ;; Shorten Dired Omit mode lighter
   (add-function :after (symbol-function 'dired-omit-startup)
@@ -957,7 +948,6 @@
                                          "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
                                          "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
   (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
-
   ;; Define faces by file permission
   (dired-rainbow-define-chmod executable-unix "Gold" "-[rw-]+x.*")
   (dired-rainbow-define-chmod directory-unix "DeepSkyBlue" "d[rw-]+x.*")
@@ -1094,29 +1084,24 @@
 (after 'erc
   ;; ERC Rizon authentication workaround
   (require 'erc-rizon)
-
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-nickserv-identify-mode 'autodetect)
   (setq erc-nickserv-passwords
         `((Rizon (("drot" . ,(erc-rizon-nickserv-password))))))
-
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
   (setq erc-autojoin-timing 'ident)
   (setq erc-server-reconnect-timeout 30)
-
   ;; Configure text filling
   (setq erc-fill-function #'erc-fill-static)
   (setq erc-fill-column 140)
   (setq erc-fill-static-center 10)
-
   ;; Timestap formatting
   (setq erc-insert-timestamp-function #'erc-insert-timestamp-left)
   (setq erc-timestamp-only-if-changed-flag nil)
   (setq erc-timestamp-format "[%H:%M] ")
-
   ;; Text formatting
   (setq erc-header-line-format "%t: %o")
   (setq erc-interpret-mirc-color t)
@@ -1125,41 +1110,32 @@
   (setq erc-nick-uniquifier "_")
   (setq erc-prompt
         (lambda () (concat (buffer-name) ">")))
-
   ;; Channel tracking options
   (setq erc-track-exclude-server-buffer t)
   (setq erc-track-showcount t)
   (setq erc-track-switch-direction 'importance)
   (setq erc-track-visibility 'selected-visible)
-
   ;; Hide lurker activity
   (setq erc-lurker-threshold-time 3600)
   (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
-
   ;; Open query buffers in the current window
   (setq erc-query-display 'buffer)
-
   ;; Kill all buffers upon ERC quit
   (setq erc-kill-buffer-on-part t)
   (setq erc-kill-queries-on-quit t)
   (setq erc-kill-server-buffer-on-quit t)
-
   ;; Prevent accidental paste
   (setq erc-accidental-paste-threshold-seconds 0.5)
-
   ;; Disable some conflicting modes
   (defun drot|erc-mode-hook ()
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
     (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0))
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
-
   ;; Enable notifications
   (erc-notifications-mode)
-
   ;; Enable spell-checking
   (erc-spelling-mode)
-
   ;; Truncate buffer
   (setq erc-truncate-buffer-on-save t)
   (add-hook 'erc-insert-post-hook #'erc-truncate-buffer))
@@ -1606,7 +1582,6 @@
 (after 'paredit
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
-
   ;; Paredit extra functions
   (require 'paredit-ext)
   ;; Set key bindings
@@ -1617,7 +1592,6 @@
   ;; Avoid conflict with the default `search-map' and point position bindings
   (bind-key "M-S" search-map paredit-mode-map)
   (bind-key "M-R" #'move-to-window-line-top-bottom)
-
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1632,7 +1606,6 @@
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
-
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil))))
