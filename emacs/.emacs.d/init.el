@@ -350,23 +350,26 @@
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra")))
 
-;; Isearch configuration
+;; Isearch
 (delight 'isearch-mode " iS" t)
 (setq isearch-allow-scroll t)
 (setq search-default-mode #'char-fold-to-regexp)
 
 ;; Ediff window split configuration
 (after 'ediff-wind
+  ;; Configuration
   (setq ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function #'split-window-horizontally)
   (setq ediff-grab-mouse nil))
 
 ;; Ediff restore window configuration
 (after 'ediff-util
+  ;; Configuration
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;; Uniquify buffer names
 (after 'uniquify
+  ;; Configuration
   (setq uniquify-buffer-name-style 'forward)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
@@ -376,8 +379,9 @@
 (after 'ibuffer
   (setq ibuffer-default-sorting-mode 'major-mode))
 
-;; Version control configuration
+;; Version control
 (after 'vc-hooks
+  ;; Configuration
   (setq vc-ignore-dir-regexp
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
@@ -387,6 +391,7 @@
 
 ;; Customize interface options
 (after 'cus-edit
+  ;; COnfiguration
   (setq custom-buffer-done-kill t)
   (setq custom-buffer-verbose-help nil)
   (setq custom-unlispify-tag-names nil)
@@ -394,10 +399,12 @@
 
 ;; Treat all themes as safe
 (after 'custom
+  ;; Configuration
   (setq custom-safe-themes t))
 
-;; Auto Revert mode lighter
+;; Auto Revert mode
 (after 'autorevert
+  ;; Shorten mode lighter
   (delight 'auto-revert-mode " aR" t))
 
 ;; Imenu configuration
@@ -441,27 +448,31 @@
           (other . "k&r")))
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
-;; Use a default tag file
+;; Etags
 (after 'etags
+  ;; Configuration
   (setq tags-file-name "TAGS"))
 
-;; Scheme mode configuration
+;; Scheme mode
 (after 'scheme
   ;; Use Guile as default interpreter
   (setq scheme-program-name "guile"))
 
-;; CSS mode configuration
+;; CSS mode
 (after 'css-mode
+  ;; Configuration
   (setq css-indent-offset 2))
 
-;; NXML mode configuration
+;; NXML mode
 (after 'nxml-mode
+  ;; Configuration
   (setq nxml-slash-auto-complete-flag t)
   (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
 
-;; Doc View mode configuration
+;; Doc View mode
 (after 'doc-view
+  ;; Configuration
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
@@ -476,10 +487,12 @@
 
 ;; Enable Pass integration
 (after 'auth-source
+  ;; Initialize mode
   (auth-source-pass-enable))
 
-;; Mail sending configuration
+;; Mail sending
 (after 'message
+  ;; Configuration
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
   ;; Default mail sending function
@@ -487,17 +500,20 @@
 
 ;; Outgoing mail server
 (after 'smtpmail
+  ;; Configuration
   (setq smtpmail-smtp-server "mail.cock.li")
   (setq smtpmail-smtp-user "drot-smtp")
   (setq smtpmail-smtp-service 465)
   (setq smtpmail-stream-type 'ssl))
 
-;; Smiley configuration
+;; Smileys
 (after 'smiley
+  ;; Configuration
   (setq smiley-style 'medium))
 
 ;; Prevent GnuTLS warnings
 (after 'gnutls
+  ;; Configuration
   (setq gnutls-min-prime-bits nil))
 
 ;; Dired configuration
@@ -526,11 +542,13 @@
 
 ;; Wdired movement and editable parts
 (after 'wdired
+  ;; Configuration
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
-;; TRAMP configuration
+;; TRAMP
 (after 'tramp
+  ;; Configuration
   (setq tramp-default-method "ssh")
   (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
   (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
@@ -538,17 +556,18 @@
 
 ;; Bookmarks
 (after 'bookmark
+  ;; Configuration
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
 
 ;; Find file at point
-
-;; Configuration
 (after 'ffap
+  ;; Configuration
   (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
 (after 'apropos
+  ;; Configuration
   (setq apropos-do-all t))
 
 ;; Copyright insertion
@@ -772,6 +791,12 @@
           ("Canada/Eastern" "Quebec")
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
+
+;; Better cycle spacing
+(bind-key [remap just-one-space] #'cycle-spacing)
+
+;; Replace dabbrev-expand with hippie-expand
+(bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Ace-window
 (require-package 'ace-window)
@@ -1508,7 +1533,7 @@
              ("M-[" . paredit-wrap-square))
   ;; Avoid conflict with the default `search-map' and point position bindings
   (bind-key "M-S" search-map paredit-mode-map)
-  (bind-key "M-R" #'move-to-window-line-top-bottom)
+  (bind-key "M-R" #'move-to-window-line-top-bottom paredit-mode-map)
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1913,12 +1938,6 @@
            ("A" . align)
            ("a" . align-current)
            ("r" . align-regexp))
-
-;; Cycle spacing
-(bind-key [remap just-one-space] #'cycle-spacing)
-
-;; Replace dabbrev-expand with hippie-expand
-(bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
