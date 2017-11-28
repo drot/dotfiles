@@ -1649,15 +1649,13 @@
   (delight 'yas-minor-mode " yS" t))
 
 ;; Custom Flymake global map
-(bind-keys :map global-map
-           :prefix "C-c !"
+(bind-keys :prefix "C-c !"
            :prefix-map flymake-map
            :prefix-docstring "Flymake map."
            ("t" . flymake-mode))
 
 ;; Custom Applications global map
-(bind-keys :map global-map
-           :prefix "C-c a"
+(bind-keys :prefix "C-c a"
            :prefix-map applications-map
            :prefix-docstring "Applications map."
            ;; Proced
@@ -1688,8 +1686,7 @@
            ("t" . ansi-term))
 
 ;; Custom Compilation and Comments global map
-(bind-keys :map global-map
-           :prefix "C-c c"
+(bind-keys :prefix "C-c c"
            :prefix-map compile-and-comments-map
            :prefix-docstring "Compile and Comments map."
            ;; Compilation
@@ -1702,8 +1699,7 @@
            ("o" . comment-or-uncomment-region))
 
 ;; Custom Debbugs global map
-(bind-keys :map global-map
-           :prefix "C-c d"
+(bind-keys :prefix "C-c d"
            :prefix-map debbugs-map
            :prefix-docstring "Debbugs map."
            ("g" . debbugs-gnu)
@@ -1717,8 +1713,7 @@
            ("B" . debbugs-org-bugs))
 
 ;; Custom Files global map
-(bind-keys :map global-map
-           :prefix "C-c f"
+(bind-keys :prefix "C-c f"
            :prefix-map files-map
            :prefix-docstring "Files map."
            ;; Find file at point
@@ -1740,8 +1735,7 @@
            ("v p" . add-file-local-variable-prop-line))
 
 ;; Custom Help Extended global map
-(bind-keys :map global-map
-           :prefix "C-c h"
+(bind-keys :prefix "C-c h"
            :prefix-map help-extended-map
            :prefix-docstring "Help Extended map."
            ;; Bind key
@@ -1764,8 +1758,7 @@
            ("4 L" . find-library-other-frame))
 
 ;; Custom Insertion global map
-(bind-keys :map global-map
-           :prefix "C-c i"
+(bind-keys :prefix "C-c i"
            :prefix-map insertion-map
            :prefix-docstring "Insertion map."
            ;; Copyright
@@ -1781,8 +1774,7 @@
            ("a" . auto-insert))
 
 ;; Custom Jump global map
-(bind-keys :map global-map
-           :prefix "C-c j"
+(bind-keys :prefix "C-c j"
            :prefix-map jump-map
            :prefix-docstring "Jump map."
            ;; Avy
@@ -1796,8 +1788,7 @@
            ("m" . counsel-mark-ring))
 
 ;; Custom Navigation global map
-(bind-keys :map global-map
-           :prefix "C-c n"
+(bind-keys :prefix "C-c n"
            :prefix-map navigation-map
            :prefix-docstring "Navigation map."
            ;; Browse URL
@@ -1811,8 +1802,7 @@
            ("e" . eww))
 
 ;; Custom Multiple Cursors global map
-(bind-keys :map global-map
-           :prefix "C-c m"
+(bind-keys :prefix "C-c m"
            :prefix-map multiple-cursors-map
            :prefix-docstring "Multiple Cursors map."
            ("<SPC>" . mc/vertical-align-with-space)
@@ -1828,8 +1818,7 @@
            ("h" . hydra-multiple-cursors/body))
 
 ;; Custom Organization global map
-(bind-keys :map global-map
-           :prefix "C-c o"
+(bind-keys :prefix "C-c o"
            :prefix-map organization-map
            :prefix-docstring "Organization map."
            ;; Org-mode
@@ -1840,8 +1829,7 @@
            ("l" . org-store-link))
 
 ;; Custom Project global map
-(bind-keys :map global-map
-           :prefix "C-c p"
+(bind-keys :prefix "C-c p"
            :prefix-map project-map
            :prefix-docstring "Project map."
            ;; Speedbar
@@ -1851,8 +1839,7 @@
            ("r" . project-find-regexp))
 
 ;; Custom Search and Symbols global map
-(bind-keys :map global-map
-           :prefix "C-c s"
+(bind-keys :prefix "C-c s"
            :prefix-map search-and-symbols-map
            :prefix-docstring "Search and Symbols map."
            ;; Regexp builder
@@ -1873,8 +1860,7 @@
            ("d" . find-grep-dired))
 
 ;; Custom Toggles global map
-(bind-keys :map global-map
-           :prefix "C-c t"
+(bind-keys :prefix "C-c t"
            :prefix-map toggles-map
            :prefix-docstring "Toggles map."
            ;; Whitespace
@@ -1902,8 +1888,7 @@
            ("f" . auto-fill-mode))
 
 ;; Custom Magit global map
-(bind-keys :map global-map
-           :prefix "C-c v"
+(bind-keys :prefix "C-c v"
            :prefix-map magit-map
            :prefix-docstring "Magit map."
            ("v" . magit-status)
@@ -1914,8 +1899,7 @@
            ("p" . magit-pull))
 
 ;; Custom Windows global map
-(bind-keys :map global-map
-           :prefix "C-c w"
+(bind-keys :prefix "C-c w"
            :prefix-map windows-map
            :prefix-docstring "Windows map."
            ;; Bury buffer
@@ -1924,8 +1908,7 @@
            ("k" . kill-this-buffer))
 
 ;; Custom Text global map
-(bind-keys :map global-map
-           :prefix "C-c x"
+(bind-keys :prefix "C-c x"
            :prefix-map text-map
            :prefix-docstring "Text map."
            ;; Whitespace mode
