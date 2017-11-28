@@ -1441,9 +1441,10 @@
           (lambda () (hkey-ace-window-setup (kbd "M-o"))))
 ;; Set key bindings
 (add-hook 'hyperbole-init-hook
-          (lambda () (bind-key "C-c ," #'hui-select-thing)))
-(add-hook 'hyperbole-init-hook
-          (lambda () (bind-key "g" #'hycontrol-windows-grid windows-map)))
+          (lambda ()
+            (bind-key "C-c ," #'hui-select-thing)
+            (bind-key "C-c |" #'hycontrol-windows-grid)
+            (bind-key "C-c C-\\" #'hkey-operate)))
 ;; Initialize mode
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
@@ -1898,14 +1899,22 @@
            ("l" . magit-log-buffer-file)
            ("p" . magit-pull))
 
-;; Custom Windows global map
-(bind-keys :prefix "C-c w"
-           :prefix-map windows-map
-           :prefix-docstring "Windows map."
+;; Custom Buffers global map
+(bind-keys :prefix "C-c b"
+           :prefix-map buffers-map
+           :prefix-docstring "Buffers map."
+           ;; Erase buffer
+           ("X" . erase-buffer)
            ;; Bury buffer
            ("b" . bury-buffer)
+           ;; Eval buffer
+           ("e" . eval-buffer)
+           ;; Insert buffer
+           ("i" . insert-buffer)
            ;; Kill buffer without prompting
-           ("k" . kill-this-buffer))
+           ("k" . kill-this-buffer)
+           ;; Un-bury buffer
+           ("u" . unbury-buffer))
 
 ;; Custom Text global map
 (bind-keys :prefix "C-c x"
