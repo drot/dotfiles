@@ -243,17 +243,15 @@
 
 ;; Highlight current line
 (use-package hl-line
-  :config
+  :init
   (global-hl-line-mode)
-  ;; Disable `hl-line-mode' in special buffers
-  (dolist (hook '(erc-mode-hook
-                  eshell-mode-hook
-                  term-mode-hook
-                  ediff-mode-hook
-                  comint-mode-hook
-                  nov-mode-hook))
-    (add-hook hook
-              (lambda () (setq-local global-hl-line-mode nil)))))
+  :hook ((erc-mode
+          eshell-mode
+          term-mode
+          ediff-mode
+          comint-mode
+          nov-mode) . (lambda () (setq-local global-hl-line-mode nil)))
+  :config)
 
 ;; Highlight matching parentheses
 (use-package paren
@@ -696,15 +694,13 @@
 ;; Eshell smart display
 (use-package em-smart
   :after eshell
-  :config
-  (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
+  :hook (eshell-mode . eshell-smart-initialize))
 
 ;; Shell mode configuration
 (use-package shell
   :bind ("C-c a s" . shell)
-  :config
-  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
-  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
+  :hook ((shell-mode . ansi-color-for-comint-mode-on)
+         (shell-mode . compilation-shell-minor-mode)))
 
 ;; IELM
 (use-package ielm
@@ -848,6 +844,10 @@
          ("C-c o l" . org-store-link)
          :map org-mode-map
          ("M-o" . ace-link-org))
+  :hook ((org-shiftup-final . windmove-up)
+         (org-shiftdown-final . windmove-down)
+         (org-shiftleft-final . windmove-left)
+         (org-shiftright-final . windmove-right))
   :config
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -856,12 +856,7 @@
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-catch-invisible-edits 'error)
-  (setq org-startup-indented t)
-  ;; Avoid Wind Move conflict
-  (add-hook 'org-shiftup-final-hook 'windmove-up)
-  (add-hook 'org-shiftdown-final-hook 'windmove-down)
-  (add-hook 'org-shiftleft-final-hook 'windmove-left)
-  (add-hook 'org-shiftright-final-hook 'windmove-right))
+  (setq org-startup-indented t))
 
 ;; World time
 (use-package time
@@ -890,7 +885,7 @@
 ;; TeX configuration
 (use-package tex
   ;; :ensure auctex
-  :defer t
+  :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :config
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
@@ -899,9 +894,7 @@
   (setq TeX-parse-self t)
   ;; Use PDF Tools as default viewer
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-start-server t)
-  ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (setq TeX-source-correlate-start-server t))
 
 ;; TeX external commands
 (use-package tex-buf
@@ -914,32 +907,24 @@
 ;; LaTeX configuration
 (use-package latex
   ;; :ensure auctex
-  :defer t
-  :config
-  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
-  (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
-  ;; Enable Flymake syntax checking
-  (add-hook 'LaTeX-mode-hook #'flymake-mode)
-  ;; Further folding options with Outline mode
-  (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
+  :hook ((LaTeX-mode . (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+         (LaTeX-mode . flymake-mode)
+         (LaTeX-mode . outline-minor-mode)))
 
 ;; TeX fold mode
 (use-package tex-fold
   ;; :ensure auctex
   :after latex
-  :config
-  ;; Add folding options
-  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode))
+  :hook (LaTeX-mode . TeX-fold-mode))
 
 ;; RefTeX
 (use-package reftex
   ;; :ensure auctex
   :delight (reftex-mode " rF")
   :after latex
+  :hook (LaTeX-mode . turn-on-reftex)
   :config
   ;; Enable by default
-  (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
   (setq reftex-plug-into-AUCTeX t))
 
 ;; CIDER
@@ -953,22 +938,17 @@
 ;; CIDER mode configuration
 (use-package cider-mode
   :ensure cider
-  :defer t
-  :config
-  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+  :hook (cider-mode . cider-company-enable-fuzzy-completion))
 
 ;; CIDER REPL configuration
 (use-package cider-repl
   :ensure cider
-  :defer t
+  :hook ((cider-repl-mode . cider-company-enable-fuzzy-completion)
+         (cider-repl-mode . subword-mode))
   :config
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
-  (setq cider-repl-wrap-history t)
-  ;; Enable fuzzy completion with Company
-  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-  ;; Enable SubWord mode
-  (add-hook 'cider-repl-mode-hook #'subword-mode))
+  (setq cider-repl-wrap-history t))
 
 ;; Dash
 (use-package dash
@@ -1242,10 +1222,10 @@
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
+  :hook (js2-mode . js2-highlight-unused-variables-mode)
   :config
   (setq js2-basic-offset 2)
-  (setq js2-highlight-level 3)
-  (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
+  (setq js2-highlight-level 3))
 
 ;; JSON mode
 (use-package json-mode
@@ -1300,11 +1280,10 @@
 ;; Markdown mode
 (use-package markdown-mode
   :ensure t
-  :defer t
+  :hook  ((markdown-mode . whitespace-mode)
+          (markdown-mode . tildify-mode)
+          (markdown-mode . visual-line-mode))
   :config
-  (add-hook 'markdown-mode-hook #'whitespace-mode)
-  (add-hook 'markdown-mode-hook #'tildify-mode)
-  (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t))
 
@@ -1536,13 +1515,12 @@
 (use-package diff-hl
   :ensure t
   :bind ("C-c t d" . diff-hl-margin-mode)
-  :hook (after-init . global-diff-hl-mode)
+  :hook ((after-init . global-diff-hl-mode)
+         (dired-mode . diff-hl-dired-mode)
+         (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
   ;; Update diffs immediately
-  (diff-hl-flydiff-mode)
-  ;; Add hooks for other packages
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+  (diff-hl-flydiff-mode))
 
 ;; Form-feed
 (use-package form-feed
@@ -1576,16 +1554,14 @@
   :ensure t
   :init
   (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-  :hook (after-init . (lambda () (require 'hyperbole)))
-  :config
-  (add-hook 'hyperbole-init-hook
-            (lambda ()
-              ;; Add ace-window support
-              (hkey-ace-window-setup (kbd "M-o"))
-              ;; Remap default bindings
-              (bind-key "C-c ," #'hui-select-thing)
-              (bind-key "C-c |" #'hycontrol-windows-grid)
-              (bind-key "C-c C-\\" #'hkey-operate))))
+  :hook ((after-init . (lambda () (require 'hyperbole)))
+         (hyperbole-init . (lambda ()
+                             ;; Add ace-window support
+                             (hkey-ace-window-setup (kbd "M-o"))
+                             ;; Remap default bindings
+                             (bind-key "C-c ," #'hui-select-thing)
+                             (bind-key "C-c |" #'hycontrol-windows-grid)
+                             (bind-key "C-c C-\\" #'hkey-operate)))))
 
 ;; Ivy
 (use-package ivy
@@ -1635,19 +1611,16 @@
 (use-package paredit
   :ensure t
   :delight (paredit-mode " pE")
-  :hook ((emacs-lisp-mode
-          lisp-mode
-          ielm-mode
-          clojure-mode
-          cider-repl-mode
-          scheme-mode
-          slime-repl-mode
-          geiser-repl-mode) . enable-paredit-mode)
+  :hook (((emacs-lisp-mode
+           lisp-mode
+           ielm-mode
+           clojure-mode
+           cider-repl-mode
+           scheme-mode
+           slime-repl-mode
+           geiser-repl-mode) . enable-paredit-mode)
+         (paredit-mode . (lambda () (setq-local electric-pair-mode nil))))
   :config
-  ;; Disable conflicting key bindings
-  (unbind-key "M-r" paredit-mode-map)
-  (unbind-key "M-s" paredit-mode-map)
-
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1661,10 +1634,7 @@
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
-  ;; Disable Electric Pair mode when Paredit is active
-  (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil))))
+  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup))
 
 ;; Paredit extra functions
 (use-package paredit-ext
