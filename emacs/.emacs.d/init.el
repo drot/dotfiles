@@ -306,14 +306,13 @@
 (use-package winner
   :bind (:map winner-mode-map
               ("C-c w u" . winner-undo)
-              ("C-c w r" . winner-redo))
+              ("C-c w r" . winner-redo)
+              ;; Disable conflicting key bindings
+              ("C-c <left>")
+              ("C-c <right>"))
   :commands winner-mode
   :init
-  (winner-mode)
-  :config
-  ;; Disable conflicting key bindings
-  (unbind-key "C-c <left>" winner-mode-map)
-  (unbind-key "C-c <right>" winner-mode-map))
+  (winner-mode))
 
 ;; Hide Show mode
 (use-package hideshow
@@ -348,13 +347,13 @@
   :bind (("C-c l b" . flyspell-buffer)
          :map flyspell-mode-map
          ("C-c l c" . flyspell-correct-word-before-point)
-         ("C-c l p" . flyspell-check-previous-highlighted-word))
+         ("C-c l p" . flyspell-check-previous-highlighted-word)
+         ;; Disable conflicting key bindings
+         ("C-c $")
+         ("C-M-i"))
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
   :config
-  ;; Disable conflicting key bindings
-  (unbind-key "C-c $" flyspell-mode-map)
-  (unbind-key "C-M-i" flyspell-mode-map)
   ;; Correct some annoying defaults
   (setq flyspell-use-meta-tab nil)
   (setq flyspell-issue-message-flag nil)
@@ -460,6 +459,7 @@
 
 ;; Python mode configuration
 (use-package python
+  ;; PEP 8 conformance
   :hook ((python-mode . (lambda () (setq fill-column 79)))
          (python-mode . subword-mode))
   :config
@@ -842,6 +842,7 @@
          ("C-c o l" . org-store-link)
          :map org-mode-map
          ("M-o" . ace-link-org))
+  ;; Avoid conflict with Wind Move
   :hook ((org-shiftup-final . windmove-up)
          (org-shiftdown-final . windmove-down)
          (org-shiftleft-final . windmove-left)
@@ -1366,10 +1367,10 @@
   :bind (("C-c t s" . slime)
          ("C-c t C" . slime-connect)
          :map slime-mode-indirect-map
-         ("C-c $" . slime-export-symbol-at-point))
+         ("C-c $" . slime-export-symbol-at-point)
+         ;; Disable conflicting key binding
+         ("C-c x"))
   :config
-  ;; Disable conflicting key binding
-  (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Use all accessible features and SBCL by default
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy slime-company))
@@ -1381,12 +1382,11 @@
   :ensure slime
   :bind (:map slime-repl-mode-map
               ("C-c M-r" . slime-repl-previous-matching-input)
-              ("C-c M-s" . slime-repl-next-matching-input))
-  :config
-  ;; Disable conflicting key bindings
-  (unbind-key "DEL" slime-repl-mode-map)
-  (unbind-key "M-r" slime-repl-mode-map)
-  (unbind-key "M-s" slime-repl-mode-map))
+              ("C-c M-s" . slime-repl-next-matching-input)
+              ;; Disable conflicting key bindings
+              ("DEL")
+              ("M-r")
+              ("M-s")))
 
 ;; SLIME Company
 (use-package slime-company
@@ -1550,16 +1550,13 @@
 ;; Hyperbole
 (use-package hyperbole
   :ensure t
+  :bind (("C-c ," . hui-select-thing)
+         ("C-c |" . hycontrol-windows-grid)
+         ("C-c C-\\" . hkey-operate))
   :init
   (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
   :hook ((after-init . (lambda () (require 'hyperbole)))
-         (hyperbole-init . (lambda ()
-                             ;; Add ace-window support
-                             (hkey-ace-window-setup (kbd "M-o"))
-                             ;; Remap default bindings
-                             (bind-key "C-c ," #'hui-select-thing)
-                             (bind-key "C-c |" #'hycontrol-windows-grid)
-                             (bind-key "C-c C-\\" #'hkey-operate)))))
+         (hyperbole-init . (lambda () (hkey-ace-window-setup (kbd "M-o"))))))
 
 ;; Ivy
 (use-package ivy
