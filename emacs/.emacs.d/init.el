@@ -515,14 +515,12 @@
 
 ;; Colorize ANSI escape sequences
 (use-package ansi-color
-  :defer t
+  :hook (compilation-filter . drot|ansi-color-compilation-buffer)
   :config
   (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
-  ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
+      (ansi-color-apply-on-region compilation-filter-start (point-max)))))
 
 ;; Enable Pass integration
 (use-package auth-source-pass
@@ -681,6 +679,7 @@
 ;; Eshell configuration
 (use-package eshell
   :bind ("C-c a e" . eshell)
+  :hook (eshell-mode . drot|eshell-mode-hook)
   :config
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
@@ -688,8 +687,7 @@
   (defun drot|eshell-mode-hook ()
     "Use alternate TAB completion and disable Company in Eshell buffers."
     (bind-key [remap eshell-pcomplete] #'completion-at-point eshell-mode-map)
-    (company-mode 0))
-  (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
+    (company-mode 0)))
 
 ;; Eshell smart display
 (use-package em-smart
@@ -1121,7 +1119,8 @@
 (use-package erc
   :ensure erc-hl-nicks
   :bind ("C-c a i" . drot|erc-init)
-  :commands drot|erc-init
+  :hook ((erc-mode . drot|erc-mode-hook)
+         (erc-insert-post . erc-truncate-buffer))
   :config
   ;; Use a custom function to launch ERC
   (defun drot|erc-init ()
@@ -1130,6 +1129,12 @@
     (when (y-or-n-p "Connect to IRC? ")
       (erc-tls :server "irc.rizon.net" :port 6697
                :nick "drot")))
+
+  ;; Disable some conflicting modes
+  (defun drot|erc-mode-hook ()
+    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000)
+    (company-mode 0))
 
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
@@ -1173,19 +1178,12 @@
   (setq erc-kill-server-buffer-on-quit t)
   ;; Prevent accidental paste
   (setq erc-accidental-paste-threshold-seconds 0.5)
-  ;; Disable some conflicting modes
-  (defun drot|erc-mode-hook ()
-    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
-    (set (make-local-variable 'scroll-conservatively) 1000)
-    (company-mode 0))
-  (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
   ;; Enable notifications
   (erc-notifications-mode)
   ;; Enable spell-checking
   (erc-spelling-mode)
   ;; Truncate buffer
-  (setq erc-truncate-buffer-on-save t)
-  (add-hook 'erc-insert-post-hook #'erc-truncate-buffer))
+  (setq erc-truncate-buffer-on-save t))
 
 ;; Expand region
 (use-package expand-region
@@ -1250,6 +1248,7 @@
 (use-package nov
   :ensure t
   :mode ("\\.epub\\'" . nov-mode)
+  :hook (nov-mode . drot|nov-font-setup)
   :config
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
@@ -1257,7 +1256,6 @@
   (defun drot|nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
-  (add-hook 'nov-mode-hook 'drot|nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
@@ -1619,7 +1617,8 @@
            scheme-mode
            slime-repl-mode
            geiser-repl-mode) . enable-paredit-mode)
-         (paredit-mode . (lambda () (setq-local electric-pair-mode nil))))
+         (paredit-mode . (lambda () (setq-local electric-pair-mode nil)))
+         (minibuffer-setup . drot|paredit-minibuffer-setup))
   :config
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
@@ -1633,8 +1632,7 @@
   (defun drot|paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
-        (enable-paredit-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup))
+        (enable-paredit-mode))))
 
 ;; Paredit extra functions
 (use-package paredit-ext
