@@ -884,7 +884,6 @@
 ;; TeX configuration
 (use-package tex
   ;; :ensure auctex
-  :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :config
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
@@ -893,7 +892,9 @@
   (setq TeX-parse-self t)
   ;; Use PDF Tools as default viewer
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-start-server t))
+  (setq TeX-source-correlate-start-server t)
+  ;; Revert buffer automatically
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 ;; TeX external commands
 (use-package tex-buf
@@ -1676,6 +1677,15 @@
   :ensure skewer-mode
   :delight (skewer-html-mode " sKH")
   :hook (mhtml-mode . skewer-html-mode))
+
+;; Undohist
+(use-package undohist
+  :load-path "lisp/"
+  :hook (after-init . undohist-initialize)
+  :config
+  (setq undohist-ignored-files
+        '("\\.gpg\\'"
+          "\\COMMIT_EDITMSG\\'")))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
