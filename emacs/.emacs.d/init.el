@@ -884,6 +884,7 @@
 ;; TeX configuration
 (use-package tex
   ;; :ensure auctex
+  :defer t
   :config
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
