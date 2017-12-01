@@ -1684,7 +1684,7 @@
   :hook (after-init . undohist-initialize)
   :config
   (setq undohist-ignored-files
-        '("\\.gpg\\'"
+        '(".*\\.gpg\\'"
           ".*\\.gz\\'"
           "/elpa/.*\\'"
           "/tmp/.*\\'"
