@@ -1685,7 +1685,9 @@
   :config
   (setq undohist-ignored-files
         '("\\.gpg\\'"
-          "\\COMMIT_EDITMSG\\'")))
+          "/tmp"
+          "/EDITMSG"
+          "/elpa")))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
