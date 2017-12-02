@@ -1862,6 +1862,10 @@
 ;; Set key binding
 (bind-key "C-c x m" #'hydra-mark-text/body)
 
+;; Matching lines operation
+(bind-key "C-c s l" #'delete-matching-lines)
+(bind-key "C-c s L" #'delete-non-matching-lines)
+
 ;; Local variable insertion
 (bind-key "C-c f v d" #'add-dir-local-variable)
 (bind-key "C-c f v f" #'add-file-local-variable)
