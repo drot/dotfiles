@@ -1569,6 +1569,7 @@
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
+  (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-virtual-abbreviate 'full)
   (setq ivy-count-format "(%d/%d) ")
