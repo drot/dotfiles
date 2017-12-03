@@ -1113,11 +1113,6 @@
   (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
   (setq elfeed-search-filter "@1-week-ago +unread"))
 
-;; ERC Rizon authentication workaround
-(use-package erc-rizon
-  :load-path "lisp/"
-  :after erc)
-
 ;; ERC configuration
 (use-package erc
   :ensure erc-hl-nicks
@@ -1132,6 +1127,21 @@
     (when (y-or-n-p "Connect to IRC? ")
       (erc-tls :server "irc.rizon.net" :port 6697
                :nick "drot")))
+
+  ;; Rizon authentication workaround
+  (defun erc-rizon-fetch-password (&rest params)
+    "Fetch password with PARAMS for ERC authentication from an encrypted source."
+    (let ((match (car (apply 'auth-source-search params))))
+      (if match
+          (let ((secret (plist-get match :secret)))
+            (if (functionp secret)
+                (funcall secret)
+              secret))
+        (error "Password not found for %S" params))))
+
+  (defun erc-rizon-nickserv-password ()
+    "Fetch NickServ password for the Rizon IRC network."
+    (erc-rizon-fetch-password :user "drot" :host "irc.rizon.net"))
 
   ;; Disable some conflicting modes
   (defun drot|erc-mode-hook ()
@@ -1609,6 +1619,10 @@
 (use-package paredit
   :ensure t
   :delight (paredit-mode " pE")
+  :bind (:map paredit-mode-map
+              ("M-{" . paredit-wrap-curly)
+              ("M-[" . paredit-wrap-square)
+              ("M-R" . move-to-window-line-top-bottom))
   :hook (((emacs-lisp-mode
            lisp-mode
            ielm-mode
@@ -1620,6 +1634,8 @@
          (paredit-mode . (lambda () (setq-local electric-pair-mode nil)))
          (minibuffer-setup . drot|paredit-minibuffer-setup))
   :config
+  ;; Avoid conflict with the default `search-map'
+  (bind-key "M-i" search-map paredit-mode-map)
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1633,19 +1649,6 @@
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode))))
-
-;; Paredit extra functions
-(use-package paredit-ext
-  :load-path "lisp/"
-  :bind (:map paredit-mode-map
-              ("C-c C-M-s" . paredit-mark-containing-sexp)
-              ("M-{" . paredit-wrap-curly)
-              ("M-[" . paredit-wrap-square))
-  :after paredit
-  :config
-  ;; Avoid conflict with the default `search-map' and point position bindings
-  (bind-key "M-i" search-map paredit-mode-map)
-  (bind-key "M-R" #'move-to-window-line-top-bottom paredit-mode-map))
 
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -1679,18 +1682,6 @@
   :ensure skewer-mode
   :delight (skewer-html-mode " sKH")
   :hook (mhtml-mode . skewer-html-mode))
-
-;; Undohist
-(use-package undohist
-  :load-path "lisp/"
-  :hook (after-init . undohist-initialize)
-  :config
-  (setq undohist-ignored-files
-        '(".*\\.gpg\\'"
-          ".*\\.gz\\'"
-          "/elpa/.*\\'"
-          "/tmp/.*\\'"
-          "COMMIT_EDITMSG")))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
@@ -1783,9 +1774,6 @@
 ;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
 (bind-key "C-c f h" #'hexl-find-file)
-
-;; Grep
-(bind-key "C-c s f" #'grep)
 
 ;; Replace string immediately
 (bind-key "C-c s r" #'replace-string)
