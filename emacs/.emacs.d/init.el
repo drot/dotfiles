@@ -48,10 +48,12 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
+;; Bootstrap `use-package' and `delight'
+(unless (and (package-installed-p 'use-package)
+             (package-installed-p 'delight))
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (package-install 'delight))
 
 ;; Enable Imenu support for use-package
 (setq use-package-enable-imenu-support t)
@@ -59,6 +61,8 @@
 ;; Load `use-package'
 (eval-when-compile
   (require 'use-package))
+;; Don't append hook names
+(setq use-package-hook-name-suffix nil)
 
 ;; `bind-key' configuration
 (use-package bind-key
@@ -245,12 +249,12 @@
 (use-package hl-line
   :init
   (global-hl-line-mode)
-  :hook ((erc-mode
-          eshell-mode
-          term-mode
-          ediff-mode
-          comint-mode
-          nov-mode) . (lambda () (setq-local global-hl-line-mode nil)))
+  :hook ((erc-mode-hook
+          eshell-mode-hook
+          term-mode-hook
+          ediff-mode-hook
+          comint-mode-hook
+          nov-mode-hook) . (lambda () (setq-local global-hl-line-mode nil)))
   :config)
 
 ;; Highlight matching parentheses
@@ -316,7 +320,9 @@
 
 ;; Hide Show mode
 (use-package hideshow
-  :hook ((c-mode-common emacs-lisp-mode python-mode) . hs-minor-mode)
+  :hook ((c-mode-common-hook
+          emacs-lisp-mode-hook
+          python-mode-hook) . hs-minor-mode)
   :config
   (defun drot|hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
@@ -331,15 +337,15 @@
 
 ;; Bug Reference mode
 (use-package bug-reference
-  :hook ((text-mode . bug-reference-mode)
-         (prog-mode . bug-reference-prog-mode))
+  :hook ((text-mode-hook . bug-reference-mode)
+         (prog-mode-hook . bug-reference-prog-mode))
   :config
   (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
 
 ;; Goto Address mode
 (use-package goto-addr
-  :hook ((text-mode . goto-address-mode)
-         (prog-mode . goto-address-prog-mode)))
+  :hook ((text-mode-hook . goto-address-mode)
+         (prog-mode-hook . goto-address-prog-mode)))
 
 ;; Fly Spell mode configuration
 (use-package flyspell
@@ -351,8 +357,8 @@
          ;; Disable conflicting key bindings
          ("C-c $")
          ("C-M-i"))
-  :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
+  :hook ((text-mode-hook . flyspell-mode)
+         (prog-mode-hook . flyspell-prog-mode))
   :config
   ;; Correct some annoying defaults
   (setq flyspell-use-meta-tab nil)
@@ -386,9 +392,7 @@
 
 ;; Ediff restore window configuration
 (use-package ediff-util
-  :defer t
-  :config
-  (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
+  :hook (ediff-after-quit-hook-internal . winner-undo))
 
 ;; Uniquify buffer names
 (use-package uniquify
@@ -460,8 +464,8 @@
 ;; Python mode configuration
 (use-package python
   ;; PEP 8 conformance
-  :hook ((python-mode . (lambda () (setq fill-column 79)))
-         (python-mode . subword-mode))
+  :hook ((python-mode-hook . (lambda () (setq fill-column 79)))
+         (python-mode-hook . subword-mode))
   :config
   ;; Use Python 3 as default
   (setq python-shell-interpreter "python3")
@@ -471,7 +475,7 @@
 ;; CC mode configuration
 (use-package cc-mode
   :mode ("\\.fos\\'" . c++-mode)
-  :hook (c-mode-common . auto-fill-mode)
+  :hook (c-mode-common-hook . auto-fill-mode)
   :config
   (setq c-basic-offset 4)
   (setq c-default-style
@@ -515,7 +519,7 @@
 
 ;; Colorize ANSI escape sequences
 (use-package ansi-color
-  :hook (compilation-filter . drot|ansi-color-compilation-buffer)
+  :hook (compilation-filter-hook . drot|ansi-color-compilation-buffer)
   :config
   (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
@@ -679,7 +683,7 @@
 ;; Eshell configuration
 (use-package eshell
   :bind ("C-c a e" . eshell)
-  :hook (eshell-mode . drot|eshell-mode-hook)
+  :hook (eshell-mode-hook . drot|eshell-mode-hook)
   :config
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
@@ -692,13 +696,13 @@
 ;; Eshell smart display
 (use-package em-smart
   :after eshell
-  :hook (eshell-mode . eshell-smart-initialize))
+  :hook (eshell-mode-hook . eshell-smart-initialize))
 
 ;; Shell mode configuration
 (use-package shell
   :bind ("C-c a s" . shell)
-  :hook ((shell-mode . ansi-color-for-comint-mode-on)
-         (shell-mode . compilation-shell-minor-mode)))
+  :hook ((shell-mode-hook . ansi-color-for-comint-mode-on)
+         (shell-mode-hook . compilation-shell-minor-mode)))
 
 ;; IELM
 (use-package ielm
@@ -843,10 +847,10 @@
          :map org-mode-map
          ("M-o" . ace-link-org))
   ;; Avoid conflict with Wind Move
-  :hook ((org-shiftup-final . windmove-up)
-         (org-shiftdown-final . windmove-down)
-         (org-shiftleft-final . windmove-left)
-         (org-shiftright-final . windmove-right))
+  :hook ((org-shiftup-final-hook . windmove-up)
+         (org-shiftdown-final-hook . windmove-down)
+         (org-shiftleft-final-hook . windmove-left)
+         (org-shiftright-final-hook . windmove-right))
   :config
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -884,7 +888,7 @@
 ;; TeX configuration
 (use-package tex
   ;; :ensure auctex
-  :defer t
+  :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :config
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
@@ -893,9 +897,7 @@
   (setq TeX-parse-self t)
   ;; Use PDF Tools as default viewer
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-start-server t)
-  ;; Revert buffer automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (setq TeX-source-correlate-start-server t))
 
 ;; TeX external commands
 (use-package tex-buf
@@ -908,22 +910,22 @@
 ;; LaTeX configuration
 (use-package latex
   ;; :ensure auctex
-  :hook ((LaTeX-mode . (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
-         (LaTeX-mode . flymake-mode)
-         (LaTeX-mode . outline-minor-mode)))
+  :hook ((LaTeX-mode-hook . (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+         (LaTeX-mode-hook . flymake-mode)
+         (LaTeX-mode-hook . outline-minor-mode)))
 
 ;; TeX fold mode
 (use-package tex-fold
   ;; :ensure auctex
   :after latex
-  :hook (LaTeX-mode . TeX-fold-mode))
+  :hook (LaTeX-mode-hook . TeX-fold-mode))
 
 ;; RefTeX
 (use-package reftex
   ;; :ensure auctex
   :delight (reftex-mode " rF")
   :after latex
-  :hook (LaTeX-mode . turn-on-reftex)
+  :hook (LaTeX-mode-hook . turn-on-reftex)
   :config
   ;; Enable by default
   (setq reftex-plug-into-AUCTeX t))
@@ -939,13 +941,13 @@
 ;; CIDER mode configuration
 (use-package cider-mode
   :ensure cider
-  :hook (cider-mode . cider-company-enable-fuzzy-completion))
+  :hook (cider-mode-hook . cider-company-enable-fuzzy-completion))
 
 ;; CIDER REPL configuration
 (use-package cider-repl
   :ensure cider
-  :hook ((cider-repl-mode . cider-company-enable-fuzzy-completion)
-         (cider-repl-mode . subword-mode))
+  :hook ((cider-repl-mode-hook . cider-company-enable-fuzzy-completion)
+         (cider-repl-mode-hook . subword-mode))
   :config
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
@@ -1117,8 +1119,8 @@
 (use-package erc
   :ensure erc-hl-nicks
   :bind ("C-c a i" . drot|erc-init)
-  :hook ((erc-mode . drot|erc-mode-hook)
-         (erc-insert-post . erc-truncate-buffer))
+  :hook ((erc-mode-hook . drot|erc-mode-hook)
+         (erc-insert-post-hook . erc-truncate-buffer))
   :config
   ;; Use a custom function to launch ERC
   (defun drot|erc-init ()
@@ -1233,7 +1235,7 @@
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
-  :hook (js2-mode . js2-highlight-unused-variables-mode)
+  :hook (js2-mode-hook . js2-highlight-unused-variables-mode)
   :config
   (setq js2-basic-offset 2)
   (setq js2-highlight-level 3))
@@ -1261,7 +1263,7 @@
 (use-package nov
   :ensure t
   :mode ("\\.epub\\'" . nov-mode)
-  :hook (nov-mode . drot|nov-font-setup)
+  :hook (nov-mode-hook . drot|nov-font-setup)
   :config
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
@@ -1291,9 +1293,9 @@
 ;; Markdown mode
 (use-package markdown-mode
   :ensure t
-  :hook  ((markdown-mode . whitespace-mode)
-          (markdown-mode . tildify-mode)
-          (markdown-mode . visual-line-mode))
+  :hook  ((markdown-mode-hook . whitespace-mode)
+          (markdown-mode-hook . tildify-mode)
+          (markdown-mode-hook . visual-line-mode))
   :config
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t))
@@ -1439,19 +1441,19 @@
 (use-package ace-link
   :ensure t
   :bind ("C-c n a" . ace-link-addr)
-  :hook (after-init . ace-link-setup-default))
+  :hook (after-init-hook . ace-link-setup-default))
 
 ;; Adaptive Wrap
 (use-package adaptive-wrap
   :ensure t
-  :hook (visual-line-mode . adaptive-wrap-prefix-mode))
+  :hook (visual-line-mode-hook . adaptive-wrap-prefix-mode))
 
 ;; Anaconda mode
 (use-package anaconda-mode
   :ensure t
   :delight (anaconda-mode " aC")
-  :hook ((python-mode . anaconda-mode)
-         (python-mode . anaconda-eldoc-mode)))
+  :hook ((python-mode-hook . anaconda-mode)
+         (python-mode-hook . anaconda-eldoc-mode)))
 
 ;; Anzu
 (use-package anzu
@@ -1462,7 +1464,7 @@
          :map isearch-mode-map
          ([remap isearch-query-replace] . anzu-isearch-query-replace)
          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  :hook (after-init . global-anzu-mode)
+  :hook (after-init-hook . global-anzu-mode)
   :config
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
@@ -1490,7 +1492,7 @@
   :ensure t
   :delight (company-mode " cY")
   :bind ("C-c i y" . company-yasnippet)
-  :hook (after-init . global-company-mode)
+  :hook (after-init-hook . global-company-mode)
   :config
   (setq company-backends
         '(company-nxml
@@ -1512,22 +1514,22 @@
 ;; Company Anaconda
 (use-package company-anaconda
   :ensure t
-  :hook (python-mode . (lambda () (add-to-list 'company-backends #'company-anaconda))))
+  :hook (python-mode-hook . (lambda () (add-to-list 'company-backends #'company-anaconda))))
 
 ;; Company Statistics
 (use-package company-statistics
   :ensure t
-  :hook (after-init . company-statistics-mode)
+  :hook (after-init-hook . company-statistics-mode)
   :config
   (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
 
 ;; Diff-Hl
 (use-package diff-hl
   :ensure t
-  :bind ("C-c t d" . diff-hl-margin-mode)
-  :hook ((after-init . global-diff-hl-mode)
-         (dired-mode . diff-hl-dired-mode)
-         (magit-post-refresh . diff-hl-magit-post-refresh))
+  :bind ("C-c t D" . diff-hl-margin-mode)
+  :hook ((after-init-hook . global-diff-hl-mode)
+         (dired-mode-hook . diff-hl-dired-mode)
+         (magit-post-refresh-hook . diff-hl-magit-post-refresh))
   :config
   ;; Update diffs immediately
   (diff-hl-flydiff-mode))
@@ -1535,12 +1537,12 @@
 ;; Form-feed
 (use-package form-feed
   :ensure t
-  :hook ((emacs-lisp-mode
-          lisp-mode
-          scheme-mode
-          compilation-mode
-          outline-mode
-          help-mode) . form-feed-mode))
+  :hook ((emacs-lisp-mode-hook
+          lisp-mode-hook
+          scheme-mode-hook
+          compilation-mode-hook
+          outline-mode-hook
+          help-mode-hook) . form-feed-mode))
 
 ;; Hl-Todo
 (use-package hl-todo
@@ -1550,7 +1552,7 @@
               ("C-c p t n" . hl-todo-next)
               ("C-c p t o" . hl-todo-occur)
               ("C-c p t h" . hydra-hl-todo/body))
-  :hook (prog-mode . hl-todo-mode)
+  :hook (prog-mode-hook . hl-todo-mode)
   :config
   ;; Define Hydra
   (defhydra hydra-hl-todo (:columns 2)
@@ -1567,15 +1569,15 @@
          ("C-c C-\\" . hkey-operate))
   :init
   (setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-  :hook ((after-init . (lambda () (require 'hyperbole)))
-         (hyperbole-init . (lambda () (hkey-ace-window-setup (kbd "M-o"))))))
+  :hook ((after-init-hook . (lambda () (require 'hyperbole)))
+         (hyperbole-init-hook . (lambda () (hkey-ace-window-setup (kbd "M-o"))))))
 
 ;; Ivy
 (use-package ivy
   :ensure ivy-hydra
   :delight (ivy-mode " iY")
   :bind ("C-c n i" . ivy-resume)
-  :hook (after-init . ivy-mode)
+  :hook (after-init-hook . ivy-mode)
   :config
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
@@ -1601,7 +1603,7 @@
          ("C-c h c" . counsel-command-history)
          ("C-c h l" . counsel-find-library)
          ("C-c i 8" . counsel-unicode-char))
-  :hook (after-init . counsel-mode)
+  :hook (after-init-hook . counsel-mode)
   :config
   (setq counsel-find-file-at-point t))
 
@@ -1623,16 +1625,16 @@
               ("M-{" . paredit-wrap-curly)
               ("M-[" . paredit-wrap-square)
               ("M-R" . move-to-window-line-top-bottom))
-  :hook (((emacs-lisp-mode
-           lisp-mode
-           ielm-mode
-           clojure-mode
-           cider-repl-mode
-           scheme-mode
-           slime-repl-mode
-           geiser-repl-mode) . enable-paredit-mode)
-         (paredit-mode . (lambda () (setq-local electric-pair-mode nil)))
-         (minibuffer-setup . drot|paredit-minibuffer-setup))
+  :hook (((emacs-lisp-mode-hook
+           lisp-mode-hook
+           ielm-mode-hook
+           clojure-mode-hook
+           cider-repl-mode-hook
+           scheme-mode-hook
+           slime-repl-mode-hook
+           geiser-repl-mode-hook) . enable-paredit-mode)
+         (paredit-mode-hook . (lambda () (setq-local electric-pair-mode nil)))
+         (minibuffer-setup-hook . drot|paredit-minibuffer-setup))
   :config
   ;; Avoid conflict with the default `search-map'
   (bind-key "M-i" search-map paredit-mode-map)
@@ -1653,10 +1655,10 @@
 ;; Rainbow Delimiters
 (use-package rainbow-delimiters
   :ensure t
-  :hook ((emacs-lisp-mode
-          lisp-mode
-          clojure-mode
-          scheme-mode) . rainbow-delimiters-mode))
+  :hook ((emacs-lisp-mode-hook
+          lisp-mode-hook
+          clojure-mode-hook
+          scheme-mode-hook) . rainbow-delimiters-mode))
 
 ;; Rainbow mode
 (use-package rainbow-mode
@@ -1669,30 +1671,30 @@
   :ensure t
   :delight (skewer-mode " sK")
   :bind ("C-c t S" . run-skewer)
-  :hook (js2-mode . skewer-mode))
+  :hook (js2-mode-hook . skewer-mode))
 
 ;; Skewer CSS
 (use-package skewer-css
   :ensure skewer-mode
   :delight (skewer-css-mode " sKC")
-  :hook (css-mode . skewer-css-mode))
+  :hook (css-mode-hook . skewer-css-mode))
 
 ;; Skewer HTML
 (use-package skewer-html
   :ensure skewer-mode
   :delight (skewer-html-mode " sKH")
-  :hook (mhtml-mode . skewer-html-mode))
+  :hook (mhtml-mode-hook . skewer-html-mode))
 
 ;; Visual Fill Column
 (use-package visual-fill-column
   :ensure t
-  :hook (visual-line-mode . visual-fill-column-mode))
+  :hook (visual-line-mode-hook . visual-fill-column-mode))
 
 ;; Volatile Highlights
 (use-package volatile-highlights
   :ensure t
   :delight (volatile-highlights-mode " vH")
-  :hook (after-init . volatile-highlights-mode))
+  :hook (after-init-hook . volatile-highlights-mode))
 
 ;; Which Key
 (use-package which-key
@@ -1703,7 +1705,7 @@
   (setq which-key-idle-secondary-delay 1.0)
   (setq which-key-allow-imprecise-window-fit t)
   (setq which-key-sort-order #'which-key-prefix-then-key-order)
-  :hook (after-init . which-key-mode)
+  :hook (after-init-hook . which-key-mode)
   :config
   ;; Global replacements
   (which-key-add-key-based-replacements
@@ -1753,10 +1755,10 @@
 (use-package yasnippet
   :ensure t
   :delight (yas-minor-mode " yS")
-  :hook (after-init . yas-global-mode))
+  :hook (after-init-hook . yas-global-mode))
 
 ;; Toggle debug on error
-(bind-key "C-c t D" #'toggle-debug-on-error)
+(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Ruler mode
 (bind-key "C-c t R" #'ruler-mode)
