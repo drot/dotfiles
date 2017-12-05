@@ -660,8 +660,8 @@
 
 ;; Open URLs with the specified browser
 (use-package browse-url
-  :bind (("C-c n u" . browse-url)
-         ("C-c n b" . browse-url-at-point))
+  :bind (("C-c n b" . browse-url)
+         ("C-c n p" . browse-url-at-point))
   :config
   (setq browse-url-browser-function #'browse-url-firefox))
 
@@ -743,9 +743,9 @@
 (use-package gnus
   :bind (("C-c a g" . gnus)
          :map gnus-summary-mode-map
-         ("M-o" . ace-link-gnus)
+         ("C-c n o" . ace-link-gnus)
          :map gnus-article-mode-map
-         ("M-o" . ace-link-gnus))
+         ("C-c n o" . ace-link-gnus))
   :config
   ;; Configure mail and news server
   (setq gnus-select-method
@@ -845,7 +845,7 @@
          ("C-c o s" . org-search-view)
          ("C-c o l" . org-store-link)
          :map org-mode-map
-         ("M-o" . ace-link-org))
+         ("C-c n o" . ace-link-org))
   ;; Avoid conflict with Wind Move
   :hook ((org-shiftup-final-hook . windmove-up)
          (org-shiftdown-final-hook . windmove-down)
