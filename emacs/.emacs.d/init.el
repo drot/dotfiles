@@ -1036,8 +1036,8 @@
 ;; Dired Subtree
 (use-package dired-subtree
   :ensure t
-  :config
-  ;; Set key bindings
+  :init
+  ;; Set key map
   (bind-keys :map dired-mode-map
              :prefix "C-,"
              :prefix-map dired-subtree-map
@@ -1063,8 +1063,8 @@
   :bind (:map dired-mode-map
               ("'" . dired-ranger-bookmark)
               ("`" . dired-ranger-bookmark-visit))
-  :config
-  ;; Set key bindings
+  :init
+  ;; Set key map
   (bind-keys :map dired-mode-map
              :prefix "r"
              :prefix-map dired-ranger-map
