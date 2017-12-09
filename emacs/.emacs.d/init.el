@@ -367,6 +367,13 @@
   (setq flyspell-consider-dash-as-word-delimiter-flag t)
   (setq flyspell-duplicate-distance 12000))
 
+;; Ispell default program
+(use-package ispell
+  :bind ("C-c l d" . ispell-change-dictionary)
+  :config
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=ultra")))
+
 ;; Isearch configuration
 (use-package isearch
   :delight (isearch-mode " iS")
@@ -374,13 +381,6 @@
   :config
   (setq isearch-allow-scroll t)
   (setq search-default-mode #'char-fold-to-regexp))
-
-;; Ispell default program
-(use-package ispell
-  :defer t
-  :config
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra")))
 
 ;; Ediff window split configuration
 (use-package ediff-wind
@@ -1200,7 +1200,7 @@
 ;; Expand region
 (use-package expand-region
   :ensure t
-  :bind ("C-c x e" . er/expand-region))
+  :bind ("C-=" . er/expand-region))
 
 ;; Flx
 (use-package flx
@@ -1708,14 +1708,12 @@
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c &" "yasnippet"
-    "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c a" "applications"
     "C-c b" "buffers"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
-    "C-c e" "eyebrowse"
     "C-c f v" "variables"
     "C-c f" "files"
     "C-c h 4" "help-other-window"
@@ -1870,9 +1868,6 @@
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
-
-;; Change Ispell dictionary
-(bind-key "C-c l d" #'ispell-change-dictionary)
 
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
