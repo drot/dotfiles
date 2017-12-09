@@ -971,19 +971,40 @@
          ("C-c d P" . debbugs-org-patches)
          ("C-c d B" . debbugs-org-bugs)))
 
+;; Dired Async
+(use-package dired-async
+  :ensure async
+  :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
+  :bind (:map dired-mode-map
+              ("E c" . dired-async-do-copy)
+              ("E r" . dired-async-do-rename)
+              ("E s" . dired-async-do-symlink)
+              ("E h" . dired-async-do-hardlink)
+              ("E m" . dired-async-mode)))
+
+;; Dired du
+(use-package dired-du
+  :ensure t
+  :delight (dired-du-mode " d-U")
+  :bind (:map dired-mode-map
+              ("C-x M-r" . dired-du-mode)
+              ("* N" . dired-du-count-sizes)
+              ("C-x C-h" . dired-du--toggle-human-readable))
+  :config
+  ;; Use human readable output by default
+  (setq dired-du-size-format t))
+
 ;; Dired Filter
 (use-package dired-filter
   :ensure t
   :delight (dired-filter-mode " fR")
   :bind (:map dired-mode-map
-              ("\\" . dired-filter-mark-map))
-  :after dired-x)
+              ("\\" . dired-filter-mark-map)))
 
 ;; Dired Rainbow
 (use-package dired-rainbow
   :ensure t
-  :after dired-filter
-  :commands (dired-rainbow-define dired-rainbow-define-chmod)
+  :functions (dired-rainbow-define dired-rainbow-define-chmod)
   :config
   ;; Define faces by file type
   (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV"))
@@ -1015,7 +1036,6 @@
 ;; Dired Subtree
 (use-package dired-subtree
   :ensure t
-  :after dired-rainbow
   :config
   ;; Set key bindings
   (bind-keys :map dired-mode-map
@@ -1043,7 +1063,6 @@
   :bind (:map dired-mode-map
               ("'" . dired-ranger-bookmark)
               ("`" . dired-ranger-bookmark-visit))
-  :after dired-subtree
   :config
   ;; Set key bindings
   (bind-keys :map dired-mode-map
@@ -1059,36 +1078,13 @@
   :ensure t
   :delight (dired-narrow-mode " d-N")
   :bind (:map dired-mode-map
-              ("C-." . dired-narrow))
-  :after dired-ranger)
+              ("C-." . dired-narrow)))
 
 ;; Dired Collapse
 (use-package dired-collapse
   :ensure t
   :bind (:map dired-mode-map
-              ("," . dired-collapse-mode))
-  :after dired-narrow)
-
-;; Dired du
-(use-package dired-du
-  :ensure t
-  :delight (dired-du-mode " d-U")
-  :after dired-collapse
-  :config
-  ;; Use human readable output by default
-  (setq dired-du-size-format t))
-
-;; Dired Async
-(use-package dired-async
-  :ensure async
-  :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
-  :bind (:map dired-mode-map
-              ("E c" . dired-async-do-copy)
-              ("E r" . dired-async-do-rename)
-              ("E s" . dired-async-do-symlink)
-              ("E h" . dired-async-do-hardlink)
-              ("E m" . dired-async-mode))
-  :after dired-du)
+              ("," . dired-collapse-mode)))
 
 ;; Easy-kill
 (use-package easy-kill
