@@ -879,15 +879,13 @@
   :defer t)
 
 ;; AUCTeX
-;; (use-package auctex
-;;   :ensure t
-;;   :defer t)
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
+(use-package auctex
+  :ensure t
+  :defer t)
 
 ;; TeX configuration
 (use-package tex
-  ;; :ensure auctex
+  :ensure auctex
   :hook (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :config
   ;; Default TeX engine
@@ -901,7 +899,7 @@
 
 ;; TeX external commands
 (use-package tex-buf
-  ;; :ensure auctex
+  :ensure auctex
   :defer t
   :config
   ;; Don't ask to save before processing
@@ -909,20 +907,19 @@
 
 ;; LaTeX configuration
 (use-package latex
-  ;; :ensure auctex
+  :ensure auctex
   :hook ((LaTeX-mode-hook . (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
          (LaTeX-mode-hook . flymake-mode)
          (LaTeX-mode-hook . outline-minor-mode)))
 
 ;; TeX fold mode
 (use-package tex-fold
-  ;; :ensure auctex
+  :ensure auctex
   :after latex
   :hook (LaTeX-mode-hook . TeX-fold-mode))
 
 ;; RefTeX
 (use-package reftex
-  ;; :ensure auctex
   :delight (reftex-mode " rF")
   :after latex
   :hook (LaTeX-mode-hook . turn-on-reftex)
