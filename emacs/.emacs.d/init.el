@@ -653,12 +653,10 @@
 (after 'eshell
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
-  ;; Custom hook to avoid conflicts
-  (defun drot|eshell-mode-hook ()
-    "Use alternate TAB completion and disable Company in Eshell buffers."
-    (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
-    (company-mode 0))
-  (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
+  ;; Use alternate tab completion
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point))))
 
 ;; Eshell smart display
 (after 'eshell
