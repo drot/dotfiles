@@ -207,9 +207,12 @@
 (setq savehist-file (locate-user-emacs-file "cache/saved-history"))
 (setq savehist-autosave-interval 60)
 (setq savehist-additional-variables '(search-ring regexp-search-ring))
+;; Initialize mode
 (savehist-mode)
 
 ;; Save recent files list
+(global-set-key (kbd "C-c f r") #'recentf-open-files)
+;; Configuration
 (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
 (setq recentf-exclude
       '("/\\.git/.*\\'"
@@ -222,10 +225,12 @@
 (setq recentf-max-saved-items 100)
 (setq recentf-max-menu-items 20)
 (setq recentf-auto-cleanup 600)
+;; Initialize mode
 (recentf-mode)
 
 ;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
+;; Initialize mode
 (save-place-mode)
 
 ;; Highlight current line
@@ -244,11 +249,23 @@
 (setq show-paren-delay 0)
 (setq show-paren-when-point-inside-paren t)
 (setq show-paren-when-point-in-periphery t)
+;; Initialize mode
 (show-paren-mode)
 
 ;; Highlight regexps interactively
 (setq hi-lock-auto-select-face t)
+;; Initialize mode
 (global-hi-lock-mode)
+
+;; IDO
+(setq ido-save-directory-list-file (locate-user-emacs-file "cache/ido.last"))
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-use-filename-at-point 'guess)
+(setq ido-use-virtual-buffers t)
+;; Initialize modes
+(ido-mode)
+(ido-everywhere)
 
 ;; Abbrev mode
 (delight 'abbrev-mode " aB" t)
@@ -258,22 +275,27 @@
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
+;; Initialize mode
 (setq-default abbrev-mode t)
 
 ;; Electric pair mode
 (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+;; Initialize mode
 (electric-pair-mode)
 
 ;; Prettify certain symbols
 (setq prettify-symbols-unprettify-at-point t)
+;; Initialize mode
 (global-prettify-symbols-mode)
 
 ;; Which function mode
 (setq which-func-unknown "n/a")
+;; Initialize mode
 (which-function-mode)
 
 ;; Fast window switching
 (setq windmove-wrap-around t)
+;; Initialize mode
 (windmove-default-keybindings)
 
 ;; Undo and redo the window configuration
@@ -401,6 +423,8 @@
   (delight 'auto-revert-mode " aR" t))
 
 ;; Imenu configuration
+(global-set-key (kbd "C-c s i") #'imenu)
+;; Configuration
 (after 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
@@ -1167,9 +1191,6 @@
 ;; Set key binding
 (global-set-key (kbd "C-=") #'er/expand-region)
 
-;; Flx
-(require-package 'flx)
-
 ;; Geiser
 (require-package 'geiser)
 ;; Set key binding
@@ -1533,55 +1554,10 @@
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
 
-;; Ivy
-(require-package 'ivy)
-;; Ivy Hydra support
-(require-package 'ivy-hydra)
+;; IDO everywhere
+(require-package 'ido-completing-read+)
 ;; Initialize mode
-(add-hook 'after-init-hook #'ivy-mode)
-;; Configuration
-(after 'ivy
-  ;; Shorten mode lighter
-  (delight 'ivy-mode " iY" t)
-  ;; Set key binding
-  (global-set-key (kbd "C-c n i") #'ivy-resume)
-  ;; Customize
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-  (setq ivy-initial-inputs-alist nil)
-  (setq ivy-use-selectable-prompt t)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-virtual-abbreviate 'full)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-format-function #'ivy-format-function-arrow)
-  (setq ivy-wrap t)
-  (setq ivy-action-wrap t))
-
-;; Counsel
-(require-package 'counsel)
-;; Configuration
-(after 'ivy
-  ;; Initialize mode
-  (require 'counsel)
-  ;; Set key bindings
-  (global-set-key (kbd "C-c f g") #'counsel-git)
-  (global-set-key (kbd "C-c f j") #'counsel-dired-jump)
-  (global-set-key (kbd "C-c f r") #'counsel-recentf)
-  (global-set-key (kbd "C-c s G") #'counsel-git-grep)
-  (global-set-key (kbd "C-c s i") #'counsel-imenu)
-  (global-set-key (kbd "C-c s g") #'counsel-grep)
-  (global-set-key (kbd "C-c j m") #'counsel-mark-ring)
-  (global-set-key (kbd "C-c h c") #'counsel-command-history)
-  (global-set-key (kbd "C-c h l") #'counsel-find-library)
-  (global-set-key (kbd "C-c i 8") #'counsel-unicode-char)
-  (global-set-key (kbd "M-Y") #'counsel-yank-pop)
-  ;; Remap builtin functions with `counsel' equivalents
-  (global-set-key [remap describe-bindings] #'counsel-descbinds)
-  (global-set-key [remap describe-function] #'counsel-describe-function)
-  (global-set-key [remap describe-variable] #'counsel-describe-variable)
-  (global-set-key [remap find-file] #'counsel-find-file)
-  (global-set-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
-  ;; Customize
-  (setq counsel-find-file-at-point t))
+(add-hook 'after-init-hook #'ido-ubiquitous-mode)
 
 ;; Amx
 (require-package 'amx)
@@ -1593,16 +1569,6 @@
   (global-set-key (kbd "M-X") #'amx-major-mode-commands)
   ;; Customize
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
-;; Swiper
-(require-package 'swiper)
-;; Set key bindings
-(global-set-key (kbd "C-c s S") #'swiper-all)
-(global-set-key (kbd "C-c s s") #'swiper)
-(define-key isearch-mode-map (kbd "C-c S") #'swiper-from-isearch)
-;; Configure
-(after 'swiper
-  (setq swiper-include-line-number-in-search t))
 
 ;; Paredit
 (require-package 'paredit)
@@ -1802,6 +1768,7 @@
 (global-set-key (kbd "C-c h 4 v") #'find-variable-other-window)
 
 ;; Find library
+(global-set-key (kbd "C-c h l") #'find-library)
 (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
 (global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
 
