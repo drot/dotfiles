@@ -1368,12 +1368,6 @@
 (after 'slime-company
   (setq slime-company-completion 'fuzzy))
 
-;; Smex
-(require-package 'smex)
-;; Configuration
-(after 'smex
-  (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
-
 ;; Systemd mode
 (require-package 'systemd)
 
@@ -1564,12 +1558,10 @@
 
 ;; Counsel
 (require-package 'counsel)
-;; Initialize mode
-(add-hook 'after-init-hook #'counsel-mode)
 ;; Configuration
-(after 'counsel
-  ;; Shorten mode lighter
-  (delight 'counsel-mode " cS" t)
+(after 'ivy
+  ;; Initialize mode
+  (require 'counsel)
   ;; Set key bindings
   (global-set-key (kbd "C-c f g") #'counsel-git)
   (global-set-key (kbd "C-c f j") #'counsel-dired-jump)
@@ -1581,8 +1573,26 @@
   (global-set-key (kbd "C-c h c") #'counsel-command-history)
   (global-set-key (kbd "C-c h l") #'counsel-find-library)
   (global-set-key (kbd "C-c i 8") #'counsel-unicode-char)
+  (global-set-key (kbd "M-Y") #'counsel-yank-pop)
+  ;; Remap builtin functions with `counsel' equivalents
+  (global-set-key [remap describe-bindings] #'counsel-descbinds)
+  (global-set-key [remap describe-function] #'counsel-describe-function)
+  (global-set-key [remap describe-variable] #'counsel-describe-variable)
+  (global-set-key [remap find-file] #'counsel-find-file)
+  (global-set-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
   ;; Customize
   (setq counsel-find-file-at-point t))
+
+;; Amx
+(require-package 'amx)
+;; Initialize mode
+(add-hook 'after-init-hook #'amx-mode)
+;; Configuration
+(after 'amx
+  ;; Set key binding
+  (global-set-key (kbd "M-X") #'amx-major-mode-commands)
+  ;; Customize
+  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
 ;; Swiper
 (require-package 'swiper)
