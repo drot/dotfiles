@@ -644,7 +644,7 @@
   (setq speedbar-directory-unshown-regexp "^$")
   ;; Don't ignore the following extensions
   (speedbar-add-supported-extension
-   '("PKGBUILD" ".lisp" ".clj" ".lua" ".css" ".patch"
+   '(".lisp" ".clj" ".lua" ".css" ".patch"
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
@@ -1352,9 +1352,6 @@
 (after 'pdf-tools
   ;; Make sure the binary is always compiled
   (pdf-tools-install :no-query))
-
-;; PKGBUILD mode
-(require-package 'pkgbuild-mode)
 
 ;; SLIME
 (require-package 'slime)
