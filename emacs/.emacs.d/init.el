@@ -211,8 +211,6 @@
 (savehist-mode)
 
 ;; Save recent files list
-(global-set-key (kbd "C-c f r") #'recentf-open-files)
-;; Configuration
 (setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
 (setq recentf-exclude
       '("/\\.git/.*\\'"
@@ -256,16 +254,6 @@
 (setq hi-lock-auto-select-face t)
 ;; Initialize mode
 (global-hi-lock-mode)
-
-;; IDO
-(setq ido-save-directory-list-file (locate-user-emacs-file "cache/ido.last"))
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-use-filename-at-point 'guess)
-(setq ido-use-virtual-buffers t)
-;; Initialize modes
-(ido-mode)
-(ido-everywhere)
 
 ;; Abbrev mode
 (delight 'abbrev-mode " aB" t)
@@ -423,8 +411,6 @@
   (delight 'auto-revert-mode " aR" t))
 
 ;; Imenu configuration
-(global-set-key (kbd "C-c s i") #'imenu)
-;; Configuration
 (after 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
@@ -580,9 +566,8 @@
   (setq bookmark-save-flag 1))
 
 ;; Find file at point
-(global-set-key (kbd "C-c f f") #'find-file-at-point)
-;; Configuration
 (after 'ffap
+  ;; Configuration
   (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
@@ -620,7 +605,7 @@
   (setq-default proced-tree-flag t))
 
 ;; GDB
-(global-set-key (kbd "C-c a D") #'gdb)
+(global-set-key (kbd "C-c a d") #'gdb)
 ;; Configuration
 (after 'gdb-mi
   (setq gdb-many-windows t))
@@ -653,10 +638,12 @@
 (after 'eshell
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
-  ;; Use alternate tab completion
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point))))
+  ;; Custom hook to avoid conflicts
+  (defun drot|eshell-mode-hook ()
+    "Use alternate TAB completion and disable Company in Eshell buffers."
+    (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
+    (company-mode 0))
+  (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
 (after 'eshell
@@ -1189,6 +1176,9 @@
 ;; Set key binding
 (global-set-key (kbd "C-=") #'er/expand-region)
 
+;; Flx
+(require-package 'flx)
+
 ;; Geiser
 (require-package 'geiser)
 ;; Set key binding
@@ -1384,6 +1374,12 @@
 (after 'slime-company
   (setq slime-company-completion 'fuzzy))
 
+;; Smex
+(require-package 'smex)
+;; Configuration
+(after 'smex
+  (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
+
 ;; Systemd mode
 (require-package 'systemd)
 
@@ -1549,21 +1545,60 @@
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
 
-;; IDO everywhere
-(require-package 'ido-completing-read+)
+;; Ivy
+(require-package 'ivy)
+;; Ivy Hydra support
+(require-package 'ivy-hydra)
 ;; Initialize mode
-(add-hook 'after-init-hook #'ido-ubiquitous-mode)
-
-;; Amx
-(require-package 'amx)
-;; Initialize mode
-(add-hook 'after-init-hook #'amx-mode)
+(add-hook 'after-init-hook #'ivy-mode)
 ;; Configuration
-(after 'amx
+(after 'ivy
+  ;; Shorten mode lighter
+  (delight 'ivy-mode " iY" t)
   ;; Set key binding
-  (global-set-key (kbd "M-X") #'amx-major-mode-commands)
+  (global-set-key (kbd "C-c n i") #'ivy-resume)
   ;; Customize
-  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-initial-inputs-alist nil)
+  (setq ivy-use-selectable-prompt t)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-virtual-abbreviate 'full)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-format-function #'ivy-format-function-arrow)
+  (setq ivy-wrap t)
+  (setq ivy-action-wrap t))
+
+;; Counsel
+(require-package 'counsel)
+;; Initialize mode
+(add-hook 'after-init-hook #'counsel-mode)
+;; Configuration
+(after 'counsel
+  ;; Shorten mode lighter
+  (delight 'counsel-mode " cS" t)
+  ;; Set key bindings
+  (global-set-key (kbd "C-c f g") #'counsel-git)
+  (global-set-key (kbd "C-c f j") #'counsel-dired-jump)
+  (global-set-key (kbd "C-c f r") #'counsel-recentf)
+  (global-set-key (kbd "C-c s G") #'counsel-git-grep)
+  (global-set-key (kbd "C-c s i") #'counsel-imenu)
+  (global-set-key (kbd "C-c s g") #'counsel-grep)
+  (global-set-key (kbd "C-c j m") #'counsel-mark-ring)
+  (global-set-key (kbd "C-c h c") #'counsel-command-history)
+  (global-set-key (kbd "C-c h l") #'counsel-find-library)
+  (global-set-key (kbd "C-c i 8") #'counsel-unicode-char)
+  ;; Customize
+  (setq counsel-find-file-at-point t))
+
+;; Swiper
+(require-package 'swiper)
+;; Set key bindings
+(global-set-key (kbd "C-c s S") #'swiper-all)
+(global-set-key (kbd "C-c s s") #'swiper)
+(define-key isearch-mode-map (kbd "C-c S") #'swiper-from-isearch)
+;; Configure
+(after 'swiper
+  (setq swiper-include-line-number-in-search t))
 
 ;; Paredit
 (require-package 'paredit)
@@ -1763,7 +1798,6 @@
 (global-set-key (kbd "C-c h 4 v") #'find-variable-other-window)
 
 ;; Find library
-(global-set-key (kbd "C-c h l") #'find-library)
 (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
 (global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
 
