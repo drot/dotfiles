@@ -1003,7 +1003,6 @@
 (use-package dired-rainbow
   :ensure t
   :after dired
-  :functions (dired-rainbow-define dired-rainbow-define-chmod)
   :config
   ;; Define faces by file type
   (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV"))
