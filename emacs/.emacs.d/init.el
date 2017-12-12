@@ -566,6 +566,8 @@
 (use-package dired
   :defer t
   :config
+  ;; Load Dired Extra library for additional features
+  (require 'dired-x)
   ;; Default `ls' switches
   (setq dired-listing-switches "-alhF")
   ;; If we are on a GNU system or have GNU ls, add some more `ls' switches
@@ -973,8 +975,8 @@
 ;; ;; Dired Async
 (use-package dired-async
   :ensure async
-  :after dired
   :delight '(:eval (when (eq major-mode 'dired-mode) " aS"))
+  :after dired
   :bind (:map dired-mode-map
               ("E c" . dired-async-do-copy)
               ("E r" . dired-async-do-rename)
@@ -1071,8 +1073,8 @@
 ;; Dired Narrow
 (use-package dired-narrow
   :ensure t
-  :after dired
   :delight (dired-narrow-mode " d-N")
+  :after dired
   :bind (:map dired-mode-map
               ("C-." . dired-narrow)))
 
