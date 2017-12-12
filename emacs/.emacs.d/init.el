@@ -1850,7 +1850,7 @@
 (bind-key "C-c f v p" #'add-file-local-variable-prop-line)
 
 ;; Extended buffer operation key bindings
-(bind-key "C-c b X" #'erase-buffer)
+(bind-key "C-c b DEL" #'erase-buffer)
 (bind-key "C-c b b" #'bury-buffer)
 (bind-key "C-c b u" #'unbury-buffer)
 (bind-key "C-c b e" #'eval-buffer)
