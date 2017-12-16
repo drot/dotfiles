@@ -1540,6 +1540,7 @@
             (hkey-ace-window-setup (kbd "M-o"))
             ;; Remap default bindings
             (global-set-key (kbd "C-c ,") #'hui-select-thing)
+            (global-set-key (kbd "C-c R") #'hui:ebut-rename)
             (global-set-key (kbd "C-c |") #'hycontrol-windows-grid)
             (global-set-key (kbd "C-c C-\\") #'hkey-operate)))
 ;; Initialize mode
