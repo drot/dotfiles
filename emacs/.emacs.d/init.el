@@ -642,6 +642,7 @@
   (defun drot|eshell-mode-hook ()
     "Use alternate TAB completion and disable Company in Eshell buffers."
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
+    (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
