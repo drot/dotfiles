@@ -745,7 +745,7 @@
   (setq gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(global-set-key (kbd "C-c a C") #'calendar)
+(global-set-key (kbd "C-c a c") #'calendar)
 ;; Configuration
 (after 'calendar
   (setq holiday-general-holidays nil)
