@@ -1768,9 +1768,6 @@
 (global-set-key (kbd "C-c f e") #'ediff)
 (global-set-key (kbd "C-c f E") #'ediff3)
 
-;; Calculator
-(global-set-key (kbd "C-c a c") #'calc)
-
 ;; ANSI Term
 (global-set-key (kbd "C-c a t") #'ansi-term)
 
