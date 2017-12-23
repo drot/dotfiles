@@ -13,8 +13,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
--- Awesome WM complements
-local lain = require("lain")
+-- Vicious widget library
+local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -148,13 +148,9 @@ local cpu_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a CPU usage text widget
-local cpu = lain.widget.cpu {
-   timeout = 4,
-   settings = function ()
-      widget:set_markup(cpu_now.usage .. "%")
-   end
-}
+-- Set CPU usage text value
+local cpu_text = wibox.widget.textbox()
+vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 4)
 
 -- Create a CPU usage text widget
 local cpu_text_widget = wibox.widget {
@@ -162,7 +158,7 @@ local cpu_text_widget = wibox.widget {
       {
          {
             {
-               widget = cpu.widget
+               widget = cpu_text
             },
             left = 6,
             right = 6,
@@ -196,13 +192,8 @@ local cpu_graph = wibox.widget {
    widget = wibox.widget.graph,
 }
 
--- Set graph value
-local cpu_value = lain.widget.cpu {
-   timeout = 8,
-   settings  = function()
-      cpu_graph:add_value(cpu_now.usage / 100)
-   end
-}
+-- Set CPU usage graph value
+vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 8)
 
 -- Create a background for the CPU usage widget
 local cpu_widget = wibox.widget {
@@ -240,13 +231,9 @@ local memory_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a memory usage text widget
-local memory = lain.widget.mem {
-   timeout = 12,
-   settings = function()
-      widget:set_markup(mem_now.perc .. "%")
-   end
-}
+-- Set memory usage text value
+local memory_text = wibox.widget.textbox()
+vicious.register(memory_text, vicious.widgets.mem, "$1%", 12)
 
 -- Create a memory usage text widget
 local memory_text_widget = wibox.widget {
@@ -254,7 +241,7 @@ local memory_text_widget = wibox.widget {
       {
          {
             {
-               widget = memory.widget
+               widget = memory_text
             },
             left = 6,
             right = 6,
@@ -290,13 +277,8 @@ local memory_chart = wibox.widget {
    widget = wibox.container.arcchart,
 }
 
--- Set chart value
-local memory_value = lain.widget.mem {
-   timeout = 16,
-   settings  = function()
-      memory_chart:set_value(mem_now.perc / 100)
-   end
-}
+-- Set memory usage chart value
+vicious.register(memory_chart, vicious.widgets.mem, "$1", 16)
 
 -- Create a memory usage chart background
 local memory_widget = wibox.widget {
@@ -334,13 +316,9 @@ local temperature_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a temperature widget
-local temperature = lain.widget.temp {
-   timeout = 20,
-   settings = function()
-      widget:set_markup(coretemp_now .. "°C")
-   end
-}
+-- Set temperature text value
+local temperature_text = wibox.widget.textbox()
+vicious.register(temperature_text, vicious.widgets.thermal, "$1°C", 20, "thermal_zone0")
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -348,7 +326,7 @@ local temperature_text_widget = wibox.widget {
       {
          {
             {
-               widget = temperature.widget
+               widget = temperature_text
             },
             left = 6,
             right = 6,
@@ -389,13 +367,8 @@ local temperature_bar = wibox.widget {
    widget = wibox.widget.progressbar,
 }
 
--- Set bar value
-local temperature_value = lain.widget.temp {
-   timeout = 24,
-   settings  = function()
-      temperature_bar:set_value(coretemp_now / 100)
-   end
-}
+-- Set temperature bar value
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 24, "thermal_zone0")
 
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
@@ -406,17 +379,9 @@ local fs_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a file system usage text widget
-local fs = lain.widget.fs {
-   timeout = 60,
-   partition = "/home",
-   options = "--exclude-type=tmpfs",
-   notify = "off",
-   showpopup = "off",
-   settings  = function()
-      widget:set_markup(fs_now.used .. "%")
-   end
-}
+-- Set file system usage text value
+local fs_text = wibox.widget.textbox()
+vicious.register(fs_text, vicious.widgets.fs, "${/home used_p}%", 300)
 
 -- Create a file system usage text widget
 local fs_text_widget = wibox.widget {
@@ -424,7 +389,7 @@ local fs_text_widget = wibox.widget {
       {
          {
             {
-               widget = fs.widget
+               widget = fs_text
             },
             left = 6,
             right = 6,
@@ -460,15 +425,8 @@ local fs_chart = wibox.widget {
    widget = wibox.container.arcchart,
 }
 
--- Set chart value
-local fs_value = lain.widget.fs {
-   timeout = 64,
-   partition = "/home",
-   options = "--exclude-type=tmpfs",
-   settings  = function()
-      fs_chart:set_value(fs_now.used / 100)
-   end
-}
+-- Set file system usage chart value
+vicious.register(fs_chart, vicious.widgets.fs, "${/home used_p}", 302)
 
 -- Create a file system usage chart background
 local fs_background = wibox.widget {
@@ -502,17 +460,9 @@ local volume_icon = wibox.widget {
    widget = wibox.widget.imagebox
 }
 
--- Create a volume text widget
-local volume = lain.widget.pulse {
-   timeout = 6,
-   settings = function()
-      local volume_level = volume_now.channel[1] .. "%"
-      if volume_now.muted == "yes" then
-         volume_level = "Muted!"
-      end
-      widget:set_markup(volume_level)
-   end
-}
+-- Set volume text value
+local volume_text = wibox.widget.textbox()
+vicious.register(volume_text, vicious.contrib.pulse, "$1%", 6)
 
 -- Create a volume text widget
 local volume_text_widget = wibox.widget {
@@ -520,7 +470,7 @@ local volume_text_widget = wibox.widget {
       {
          {
             {
-               widget = volume.widget
+               widget = volume_text
             },
             left = 6,
             right = 6,
@@ -542,25 +492,6 @@ local volume_text_widget = wibox.widget {
    widget = wibox.container.margin
 }
 
--- Buttonize widget
-volume.widget:buttons(awful.util.table.join(
-                         awful.button({}, 1, function() -- left click
-                               awful.spawn("pavucontrol")
-                         end),
-                         awful.button({}, 3, function() -- right click
-                               awful.spawn(string.format("pactl set-sink-mute %d toggle", volume.device))
-                               volume.update()
-                         end),
-                         awful.button({}, 4, function() -- scroll up
-                               awful.spawn(string.format("pactl set-sink-volume %d +5%%", volume.device))
-                               volume.update()
-                         end),
-                         awful.button({}, 5, function() -- scroll down
-                               awful.spawn(string.format("pactl set-sink-volume %d -5%%", volume.device))
-                               volume.update()
-                         end)
-))
-
 -- Create volume bar widget
 local volume_bar = wibox.widget {
    forced_height = 16,
@@ -578,18 +509,8 @@ local volume_bar = wibox.widget {
    widget = wibox.widget.progressbar,
 }
 
--- Set bar value
-local volume_value = lain.widget.pulse {
-   timeout = 10,
-   settings  = function()
-      if tonumber(volume_now.channel[1]) < 40 then
-         volume_bar:set_color(beautiful.widget_value)
-      else
-         volume_bar:set_color(beautiful.bg_urgent)
-      end
-      volume_bar:set_value(volume_now.channel[1] / 100)
-   end
-}
+-- Set volume bar value
+vicious.register(volume_bar, vicious.contrib.pulse, "$1", 10)
 
 -- Set volume bar widget rotation
 local volume_widget = wibox.container.rotate(volume_bar, "east")
@@ -885,7 +806,15 @@ local globalkeys = gears.table.join(
       {description = "lua execute prompt", group = "awesome"}),
    -- Menubar
    awful.key({ modkey }, "p", function() menubar.show() end,
-      {description = "show the menubar", group = "launcher"})
+      {description = "show the menubar", group = "launcher"}),
+
+   -- Volume control
+   awful.key({ }, "XF86AudioRaiseVolume", function () vicious.contrib.pulse.add(5, 1) end,
+      {description = "increase volume", group = "volume"}),
+   awful.key({ }, "XF86AudioLowerVolume", function () vicious.contrib.pulse.add(-5, 1) end,
+      {description = "lower volume", group = "volume"}),
+   awful.key({ }, "XF86AudioMute", function () vicious.contrib.pulse.toggle(1) end,
+      {description = "mute volume", group = "volume"})
 )
 
 local clientkeys = gears.table.join(
