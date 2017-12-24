@@ -149,8 +149,8 @@ local cpu_icon = wibox.widget {
 }
 
 -- Set CPU usage text value
-local cpu_text = wibox.widget.textbox()
-vicious.register(cpu_text, vicious.widgets.cpu, "$1%", 4)
+local cpu_text_value = wibox.widget.textbox()
+vicious.register(cpu_text_value, vicious.widgets.cpu, "$1%", 4)
 
 -- Create a CPU usage text widget
 local cpu_text_widget = wibox.widget {
@@ -158,7 +158,7 @@ local cpu_text_widget = wibox.widget {
       {
          {
             {
-               widget = cpu_text
+               widget = cpu_text_value
             },
             left = 6,
             right = 6,
@@ -232,8 +232,8 @@ local memory_icon = wibox.widget {
 }
 
 -- Set memory usage text value
-local memory_text = wibox.widget.textbox()
-vicious.register(memory_text, vicious.widgets.mem, "$1%", 12)
+local memory_text_value = wibox.widget.textbox()
+vicious.register(memory_text_value, vicious.widgets.mem, "$1%", 12)
 
 -- Create a memory usage text widget
 local memory_text_widget = wibox.widget {
@@ -241,7 +241,7 @@ local memory_text_widget = wibox.widget {
       {
          {
             {
-               widget = memory_text
+               widget = memory_text_value
             },
             left = 6,
             right = 6,
@@ -317,8 +317,8 @@ local temperature_icon = wibox.widget {
 }
 
 -- Set temperature text value
-local temperature_text = wibox.widget.textbox()
-vicious.register(temperature_text, vicious.widgets.thermal, "$1°C", 20, "thermal_zone0")
+local temperature_text_value = wibox.widget.textbox()
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, "thermal_zone0")
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -326,7 +326,7 @@ local temperature_text_widget = wibox.widget {
       {
          {
             {
-               widget = temperature_text
+               widget = temperature_text_value
             },
             left = 6,
             right = 6,
@@ -380,8 +380,8 @@ local fs_icon = wibox.widget {
 }
 
 -- Set file system usage text value
-local fs_text = wibox.widget.textbox()
-vicious.register(fs_text, vicious.widgets.fs, "${/home used_p}%", 300)
+local fs_text_value = wibox.widget.textbox()
+vicious.register(fs_text_value, vicious.widgets.fs, "${/home used_p}%", 300)
 
 -- Create a file system usage text widget
 local fs_text_widget = wibox.widget {
@@ -389,7 +389,7 @@ local fs_text_widget = wibox.widget {
       {
          {
             {
-               widget = fs_text
+               widget = fs_text_value
             },
             left = 6,
             right = 6,
@@ -461,8 +461,8 @@ local volume_icon = wibox.widget {
 }
 
 -- Set volume text value
-local volume_text = wibox.widget.textbox()
-vicious.register(volume_text, vicious.contrib.pulse, "$1%", 6)
+local volume_text_value = wibox.widget.textbox()
+vicious.register(volume_text_value, vicious.contrib.pulse, "$1%", 6)
 
 -- Create a volume text widget
 local volume_text_widget = wibox.widget {
@@ -470,7 +470,7 @@ local volume_text_widget = wibox.widget {
       {
          {
             {
-               widget = volume_text
+               widget = volume_text_value
             },
             left = 6,
             right = 6,
