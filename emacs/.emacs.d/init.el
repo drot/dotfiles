@@ -470,7 +470,6 @@
 (after 'nxml-mode
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t)
-  (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
 
 ;; Doc View mode
