@@ -665,25 +665,6 @@
 (after 'ielm
   (setq ielm-prompt "EL> "))
 
-;; Flymake
-(global-set-key (kbd "C-c ! t") #'flymake-mode)
-;; Configuration
-(after 'flymake
-  ;; Define Hydra
-  (defhydra hydra-flymake (:columns 2)
-    "Flymake"
-    ("n" flymake-goto-next-error "Next Error")
-    ("p" flymake-goto-prev-error "Previous Error")
-    ("q" nil "Quit"))
-  ;; Set key bindings
-  (define-key flymake-mode-map (kbd "C-c ! n") #'flymake-goto-next-error)
-  (define-key flymake-mode-map (kbd "C-c ! p") #'flymake-goto-prev-error)
-  (define-key flymake-mode-map (kbd "C-c ! R") #'flymake-reporting-backends)
-  (define-key flymake-mode-map (kbd "C-c ! r") #'flymake-running-backends)
-  (define-key flymake-mode-map (kbd "C-c ! d") #'flymake-disabled-backends)
-  (define-key flymake-mode-map (kbd "C-c ! l") #'flymake-switch-to-log-buffer)
-  (define-key flymake-mode-map (kbd "C-c ! h") #'hydra-flymake/body))
-
 ;; Compilation
 (global-set-key (kbd "C-c c C") #'compile)
 (global-set-key (kbd "C-c c R") #'recompile)
@@ -868,11 +849,6 @@
 
 ;; LaTeX configuration
 (after 'latex
-  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
-  (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
-  ;; Enable Flymake syntax checking
-  (add-hook 'LaTeX-mode-hook #'flymake-mode)
   ;; Enable folding options
   (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
   ;; Further folding options with Outline
@@ -1499,6 +1475,23 @@
   ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+
+;; FlyCheck
+(require-package 'flycheck)
+;; Initialize mode
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;; Configuration
+(after 'flycheck
+  ;; Shorten mode lighter
+  (setq flycheck-mode-line-prefix "fC"))
+
+;; FlyCheck GUI popups
+(require-package 'flycheck-pos-tip)
+;; Configuration
+(after 'flycheck
+  (setq flycheck-pos-tip-max-width 80)
+  ;; Initialize mode
+  (flycheck-pos-tip-mode))
 
 ;; Form-feed
 (require-package 'form-feed)
