@@ -496,7 +496,7 @@
 (global-set-key (kbd "C-c i m") #'message-mark-inserted-region)
 ;; Configuration
 (after 'message
-  ;; Configuration
+  ;; Customize
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t)
   ;; Default mail sending function
@@ -1488,6 +1488,7 @@
 (require-package 'flycheck-pos-tip)
 ;; Configuration
 (after 'flycheck
+  ;; Customize
   (setq flycheck-pos-tip-max-width 80)
   ;; Initialize mode
   (flycheck-pos-tip-mode))
