@@ -937,6 +937,12 @@ awful.rules.rules = {
      }
    },
 
+   -- Start clients as slave
+   { rule = { },
+     properties = { },
+     callback = awful.client.setslave
+   },
+
    -- Floating clients.
    { rule_any = {
         instance = {
