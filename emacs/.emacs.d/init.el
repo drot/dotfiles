@@ -1127,7 +1127,7 @@
   (setq erc-server-reconnect-timeout 30)
   ;; Configure text filling
   (setq erc-fill-function #'erc-fill-static)
-  (setq erc-fill-column 140)
+  (setq erc-fill-column 150)
   (setq erc-fill-static-center 10)
   ;; Timestap formatting
   (setq erc-insert-timestamp-function #'erc-insert-timestamp-left)
