@@ -351,8 +351,7 @@
 (global-set-key (kbd "C-c l d") #'ispell-change-dictionary)
 ;; Configuration
 (after 'ispell
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra")))
+  (setq ispell-program-name "hunspell"))
 
 ;; Isearch
 (delight 'isearch-mode " iS" t)
