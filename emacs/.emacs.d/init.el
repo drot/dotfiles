@@ -63,6 +63,15 @@
 ;; Use a shorter alias for this commonly used macro
 (defalias 'after 'with-eval-after-load)
 
+;; Use `bind-key' for personal keybindings
+(require-package 'bind-key)
+;; Set key binding
+(bind-key "C-c h b" #'describe-personal-keybindings)
+;; Configuration
+(after 'bind-key
+  ;; Extract special forms
+  (setq bind-key-describe-special-forms t))
+
 ;; Use `delight' for mode name shortening
 (require-package 'delight)
 
@@ -291,11 +300,12 @@
 ;; Configuration
 (after 'winner
   ;; Set key bindings
-  (define-key winner-mode-map (kbd "C-c w u") #'winner-undo)
-  (define-key winner-mode-map (kbd "C-c w r") #'winner-redo)
+  (bind-keys :map winner-mode-map
+             ("C-c w u" . winner-undo)
+             ("C-c w r" . winner-redo))
   ;; Disable conflicting key bindings
-  (define-key winner-mode-map (kbd "C-c <left>") nil)
-  (define-key winner-mode-map (kbd "C-c <right>") nil))
+  (unbind-key "C-c <left>" winner-mode-map)
+  (unbind-key "C-c <right>" winner-mode-map))
 
 ;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
@@ -334,12 +344,13 @@
   ;; Shorten mode lighter
   (delight 'flyspell-mode " fS" t)
   ;; Set key bindings
-  (global-set-key (kbd "C-c l b") #'flyspell-buffer)
-  (define-key flyspell-mode-map (kbd "C-c l c") #'flyspell-correct-word-before-point)
-  (define-key flyspell-mode-map (kbd "C-c l p") #'flyspell-check-previous-highlighted-word)
+  (bind-key "C-c l b" #'flyspell-buffer)
+  (bind-keys :map flyspell-mode-map
+             ("C-c l c" . flyspell-correct-word-before-point)
+             ("C-c l p" . flyspell-check-previous-highlighted-word))
   ;; Disable conflicting key bindings
-  (define-key flyspell-mode-map (kbd "C-c $") nil)
-  (define-key flyspell-mode-map (kbd "C-M-i") nil)
+  (unbind-key "C-c $" flyspell-mode-map)
+  (unbind-key "C-M-i" flyspell-mode-map)
   ;; Correct some annoying defaults
   (setq flyspell-use-meta-tab nil)
   (setq flyspell-issue-message-flag nil)
@@ -348,7 +359,7 @@
   (setq flyspell-duplicate-distance 12000))
 
 ;; Ispell
-(global-set-key (kbd "C-c l d") #'ispell-change-dictionary)
+(bind-key "C-c l d" #'ispell-change-dictionary)
 ;; Configuration
 (after 'ispell
   (setq ispell-program-name "hunspell"))
@@ -376,7 +387,7 @@
   (setq uniquify-ignore-buffers-re "^\\*"))
 
 ;; Use Ibuffer for buffer list
-(global-set-key [remap list-buffers] #'ibuffer)
+(bind-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after 'ibuffer
   (setq ibuffer-default-sorting-mode 'major-mode))
@@ -393,7 +404,7 @@
 
 ;; Customize interface options
 (after 'cus-edit
-  ;; COnfiguration
+  ;; Configuration
   (setq custom-buffer-done-kill t)
   (setq custom-buffer-verbose-help nil)
   (setq custom-unlispify-tag-names nil)
@@ -492,7 +503,7 @@
   (auth-source-pass-enable))
 
 ;; Mail sending
-(global-set-key (kbd "C-c i m") #'message-mark-inserted-region)
+(bind-key "C-c i m" #'message-mark-inserted-region)
 ;; Configuration
 (after 'message
   ;; Customize
@@ -569,58 +580,58 @@
   (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
-(global-set-key (kbd "C-c h a") #'apropos)
+(bind-key "C-c h a" #'apropos)
 ;; Configuration
 (after 'apropos
   (setq apropos-do-all t))
 
 ;; Copyright insertion
-(global-set-key (kbd "C-c i c") #'copyright)
-(global-set-key (kbd "C-c i C") #'copyright-update)
+(bind-key "C-c i c" #'copyright)
+(bind-key "C-c i C" #'copyright-update)
 ;; Configuration
 (after 'copyright
   (setq copyright-year-ranges t)
   (setq copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(global-set-key (kbd "C-c x w") #'whitespace-cleanup)
-(global-set-key (kbd "C-c t w") #'whitespace-mode)
+(bind-key "C-c x w" #'whitespace-cleanup)
+(bind-key "C-c t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after 'whitespace
   (delight 'whitespace-mode " wS" t))
 
 ;; Regexp builder
-(global-set-key (kbd "C-c s b") #'re-builder)
+(bind-key "C-c s b" #'re-builder)
 ;; Configuration
 (after 're-builder
   (setq reb-re-syntax 'string))
 
 ;; Proced
-(global-set-key (kbd "C-c a P") #'proced)
+(bind-key "C-c a P" #'proced)
 ;; Configuration
 (after 'proced
   (setq-default proced-sort 'start)
   (setq-default proced-tree-flag t))
 
 ;; GDB
-(global-set-key (kbd "C-c a d") #'gdb)
+(bind-key "C-c a d" #'gdb)
 ;; Configuration
 (after 'gdb-mi
   (setq gdb-many-windows t))
 
 ;; Open URLs with the specified browser
-(global-set-key (kbd "C-c n b") #'browse-url)
-(global-set-key (kbd "C-c n p") #'browse-url-at-point)
+(bind-key "C-c n b" #'browse-url)
+(bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
   (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Speedbar
-(global-set-key (kbd "C-c p s") #'speedbar)
+(bind-key "C-c p s" #'speedbar)
 ;; Configuration
 (after 'speedbar
   ;; Set key binding
-  (define-key speedbar-mode-map (kbd "a") #'speedbar-toggle-show-all-files)
+  (bind-key "a" #'speedbar-toggle-show-all-files speedbar-mode-map)
   ;; Emulate NERDTree behavior
   (setq speedbar-use-images nil)
   (setq speedbar-show-unknown-files t)
@@ -631,7 +642,7 @@
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
-(global-set-key (kbd "C-c a e") #'eshell)
+(bind-key "C-c a e" #'eshell)
 ;; Configuration
 (after 'eshell
   (setq eshell-hist-ignoredups t)
@@ -651,20 +662,20 @@
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
 ;; Shell mode
-(global-set-key (kbd "C-c a s") #'shell)
+(bind-key "C-c a s" #'shell)
 ;; Configuration
 (after 'shell
   (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
-(global-set-key (kbd "C-c a '") #'ielm)
+(bind-key "C-c a '" #'ielm)
 ;; Configuration
 (after 'ielm
   (setq ielm-prompt "EL> "))
 
 ;; Flymake
-(global-set-key (kbd "C-c ! t") #'flymake-mode)
+(bind-key "C-c ! t" #'flymake-mode)
 ;; Configuration
 (after 'flymake
   ;; Define Hydra
@@ -674,17 +685,18 @@
     ("p" flymake-goto-prev-error "Previous Error")
     ("q" nil "Quit"))
   ;; Set key bindings
-  (define-key flymake-mode-map (kbd "C-c ! n") #'flymake-goto-next-error)
-  (define-key flymake-mode-map (kbd "C-c ! p") #'flymake-goto-prev-error)
-  (define-key flymake-mode-map (kbd "C-c ! R") #'flymake-reporting-backends)
-  (define-key flymake-mode-map (kbd "C-c ! r") #'flymake-running-backends)
-  (define-key flymake-mode-map (kbd "C-c ! d") #'flymake-disabled-backends)
-  (define-key flymake-mode-map (kbd "C-c ! l") #'flymake-switch-to-log-buffer)
-  (define-key flymake-mode-map (kbd "C-c ! h") #'hydra-flymake/body))
+  (bind-keys :map flymake-mode-map
+             ("C-c ! n" . flymake-goto-next-error)
+             ("C-c ! p" . flymake-goto-prev-error)
+             ("C-c ! R" . flymake-reporting-backends)
+             ("C-c ! r" . flymake-running-backends)
+             ("C-c ! d" . flymake-disabled-backends)
+             ("C-c ! l" . flymake-switch-to-log-buffer)
+             ("C-c ! h" . hydra-flymake/body)))
 
 ;; Compilation
-(global-set-key (kbd "C-c c C") #'compile)
-(global-set-key (kbd "C-c c R") #'recompile)
+(bind-key "C-c c C" #'compile)
+(bind-key "C-c c R" #'recompile)
 ;; Configuration
 (after 'compile
   (setq compilation-ask-about-save nil)
@@ -693,12 +705,12 @@
   (setq compilation-context-lines 3))
 
 ;; Gnus
-(global-set-key (kbd "C-c a g") #'gnus)
+(bind-key "C-c a g" #'gnus)
 ;; Configuration
 (after 'gnus
   ;; Set key bindings
-  (define-key gnus-summary-mode-map (kbd "C-c n o") #'ace-link-gnus)
-  (define-key gnus-article-mode-map (kbd "C-c n o") #'ace-link-gnus)
+  (bind-key "C-c n o" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c n o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -743,7 +755,7 @@
   (setq gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(global-set-key (kbd "C-c a c") #'calendar)
+(bind-key "C-c a c" #'calendar)
 ;; Configuration
 (after 'calendar
   (setq holiday-general-holidays nil)
@@ -760,7 +772,7 @@
   (setq calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Outline mode
-(global-set-key (kbd "C-c t o") #'outline-minor-mode)
+(bind-key "C-c t o" #'outline-minor-mode)
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c O"))
 ;; Configuration
@@ -788,18 +800,18 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (define-key outline-minor-mode-map (kbd "C-c O h") #'hydra-outline/body))
+  (bind-key "C-c O h" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
-(global-set-key (kbd "C-c o a") #'org-agenda)
-(global-set-key (kbd "C-c o c") #'org-capture)
-(global-set-key (kbd "C-c o t") #'org-todo-list)
-(global-set-key (kbd "C-c o s") #'org-search-view)
-(global-set-key (kbd "C-c o l") #'org-store-link)
+(bind-key "C-c o a" #'org-agenda)
+(bind-key "C-c o c" #'org-capture)
+(bind-key "C-c o t" #'org-todo-list)
+(bind-key "C-c o s" #'org-search-view)
+(bind-key "C-c o l" #'org-store-link)
 ;; Configuration
 (after 'org
   ;; Set key binding
-  (define-key org-mode-map (kbd "C-c n o") #'ace-link-org)
+  (bind-key "C-c n o" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org/"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -816,7 +828,7 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(global-set-key (kbd "C-c a T") #'display-time-world)
+(bind-key "C-c a T" #'display-time-world)
 ;; Configuration
 (after 'time
   ;; Configuration
@@ -917,15 +929,15 @@
 ;; Debbugs
 (require-package 'debbugs)
 ;; Set key bindings
-(global-set-key (kbd "C-c d g") #'debbugs-gnu)
-(global-set-key (kbd "C-c d s") #'debbugs-gnu-search)
-(global-set-key (kbd "C-c d t") #'debbugs-gnu-usertags)
-(global-set-key (kbd "C-c d p") #'debbugs-gnu-patches)
-(global-set-key (kbd "C-c d b") #'debbugs-gnu-bugs)
-(global-set-key (kbd "C-c d O") #'debbugs-org)
-(global-set-key (kbd "C-c d S") #'debbugs-org-search)
-(global-set-key (kbd "C-c d P") #'debbugs-org-patches)
-(global-set-key (kbd "C-c d B") #'debbugs-org-bugs)
+(bind-key "C-c d g" #'debbugs-gnu)
+(bind-key "C-c d s" #'debbugs-gnu-search)
+(bind-key "C-c d t" #'debbugs-gnu-usertags)
+(bind-key "C-c d p" #'debbugs-gnu-patches)
+(bind-key "C-c d b" #'debbugs-gnu-bugs)
+(bind-key "C-c d O" #'debbugs-org)
+(bind-key "C-c d S" #'debbugs-org-search)
+(bind-key "C-c d P" #'debbugs-org-patches)
+(bind-key "C-c d B" #'debbugs-org-bugs)
 
 ;; Dired Filter
 (require-package 'dired-filter)
@@ -936,7 +948,7 @@
   ;; Shorten mode lighter
   (delight 'dired-filter-mode " fR" t)
   ;; Set key bindings
-  (define-key dired-mode-map (kbd "\\") dired-filter-mark-map))
+  (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
 ;; Dired Rainbow
 (require-package 'dired-rainbow)
@@ -977,25 +989,25 @@
 (after 'dired-rainbow
   ;; Initialize mode
   (require 'dired-subtree)
-  ;; Create key map
-  (defvar dired-subtree-map nil "Dired Subtree map.")
-  (setq dired-subtree-map (make-sparse-keymap))
-  (define-key dired-mode-map (kbd "C-,") dired-subtree-map)
   ;; Set key bindings
-  (define-key dired-subtree-map (kbd "C-i") #'dired-subtree-insert)
-  (define-key dired-subtree-map (kbd "C-/") #'dired-subtree-apply-filter)
-  (define-key dired-subtree-map (kbd "C-k") #'dired-subtree-remove)
-  (define-key dired-subtree-map (kbd "C-n") #'dired-subtree-next-sibling)
-  (define-key dired-subtree-map (kbd "C-p") #'dired-subtree-previous-sibling)
-  (define-key dired-subtree-map (kbd "C-u") #'dired-subtree-up)
-  (define-key dired-subtree-map (kbd "C-d") #'dired-subtree-down)
-  (define-key dired-subtree-map (kbd "C-a") #'dired-subtree-beginning)
-  (define-key dired-subtree-map (kbd "C-e") #'dired-subtree-end)
-  (define-key dired-subtree-map (kbd "C-c") #'dired-subtree-cycle)
-  (define-key dired-subtree-map (kbd "m") #'dired-subtree-mark-subtree)
-  (define-key dired-subtree-map (kbd "u") #'dired-subtree-unmark-subtree)
-  (define-key dired-subtree-map (kbd "C-o C-f") #'dired-subtree-only-this-file)
-  (define-key dired-subtree-map (kbd "C-o C-d") #'dired-subtree-only-this-directory))
+  (bind-keys :map dired-mode-map
+             :prefix "C-,"
+             :prefix-map dired-subtree-map
+             :prefix-docstring "Dired Subtree map."
+             ("C-i" . dired-subtree-insert)
+             ("C-/" . dired-subtree-apply-filter)
+             ("C-k" . dired-subtree-remove)
+             ("C-n" . dired-subtree-next-sibling)
+             ("C-p" . dired-subtree-previous-sibling)
+             ("C-u" . dired-subtree-up)
+             ("C-d" . dired-subtree-down)
+             ("C-a" . dired-subtree-beginning)
+             ("C-e" . dired-subtree-end)
+             ("C-c" . dired-subtree-cycle)
+             ("m" . dired-subtree-mark-subtree)
+             ("u" . dired-subtree-unmark-subtree)
+             ("C-o C-f" . dired-subtree-only-this-file)
+             ("C-o C-d" . dired-subtree-only-this-directory)))
 
 ;; Dired Ranger
 (require-package 'dired-ranger)
@@ -1003,17 +1015,18 @@
 (after 'dired-subtree
   ;; Initialize mode
   (require 'dired-ranger)
-  ;; Create key map
-  (defvar dired-ranger-map nil "Dired Ranger map.")
-  (setq dired-ranger-map (make-sparse-keymap))
-  (define-key dired-mode-map (kbd "r") dired-ranger-map)
   ;; Set key bindings
-  (define-key dired-ranger-map (kbd "c") #'dired-ranger-copy)
-  (define-key dired-ranger-map (kbd "p") #'dired-ranger-paste)
-  (define-key dired-ranger-map (kbd "m") #'dired-ranger-move)
+  (bind-keys :map dired-mode-map
+             :prefix "r"
+             :prefix-map dired-ranger-map
+             :prefix-docstring "Dired Ranger map."
+             ("c" . dired-ranger-copy)
+             ("p" . dired-ranger-paste)
+             ("m" . dired-ranger-move))
   ;; Bookmarking
-  (define-key dired-mode-map (kbd "'") #'dired-ranger-bookmark)
-  (define-key dired-mode-map (kbd "`") #'dired-ranger-bookmark-visit))
+  (bind-keys :map dired-mode-map
+             ("'" . dired-ranger-bookmark)
+             ("`" . dired-ranger-bookmark-visit)))
 
 ;; Dired Narrow
 (require-package 'dired-narrow)
@@ -1024,7 +1037,7 @@
   ;; Shorten mode lighter
   (delight 'dired-narrow-mode " d-N" t)
   ;; Set key binding
-  (define-key dired-mode-map (kbd "C-.") #'dired-narrow))
+  (bind-key "C-." #'dired-narrow dired-mode-map))
 
 ;; Dired Collapse
 (require-package 'dired-collapse)
@@ -1033,7 +1046,7 @@
   ;; Initialize mode
   (require 'dired-collapse)
   ;; Set key binding
-  (define-key dired-mode-map (kbd ",") #'dired-collapse-mode))
+  (bind-key "," #'dired-collapse-mode dired-mode-map))
 
 ;; Dired-du
 (require-package 'dired-du)
@@ -1055,21 +1068,22 @@
   ;; Shorten mode lighter
   (delight 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")) t)
   ;; Set key bindings
-  (define-key dired-mode-map (kbd "E c") #'dired-async-do-copy)
-  (define-key dired-mode-map (kbd "E r") #'dired-async-do-rename)
-  (define-key dired-mode-map (kbd "E s") #'dired-async-do-symlink)
-  (define-key dired-mode-map (kbd "E h") #'dired-async-do-hardlink)
-  (define-key dired-mode-map (kbd "E m") #'dired-async-mode))
+  (bind-keys :map dired-mode-map
+             ("E c" . dired-async-do-copy)
+             ("E r" . dired-async-do-rename)
+             ("E s" . dired-async-do-symlink)
+             ("E h" . dired-async-do-hardlink)
+             ("E m" . dired-async-mode)))
 
 ;; Easy-kill
 (require-package 'easy-kill)
-(global-set-key [remap kill-ring-save] #'easy-kill)
-(global-set-key [remap mark-sexp] #'easy-mark)
+(bind-key [remap kill-ring-save] #'easy-kill)
+(bind-key [remap mark-sexp] #'easy-mark)
 
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
-(global-set-key (kbd "C-c a f") #'elfeed)
+(bind-key "C-c a f" #'elfeed)
 ;; Configuration
 (after 'elfeed
   (setq elfeed-feeds
@@ -1092,7 +1106,7 @@
              :nick "drot")))
 
 ;; Set key binding
-(global-set-key (kbd "C-c a i") #'drot|erc-init)
+(bind-key "C-c a i" #'drot|erc-init)
 
 ;; ERC highlight nicknames
 (require-package 'erc-hl-nicks)
@@ -1173,7 +1187,7 @@
 ;; Expand region
 (require-package 'expand-region)
 ;; Set key binding
-(global-set-key (kbd "C-=") #'er/expand-region)
+(bind-key "C-=" #'er/expand-region)
 
 ;; Flx
 (require-package 'flx)
@@ -1181,7 +1195,7 @@
 ;; Geiser
 (require-package 'geiser)
 ;; Set key binding
-(global-set-key (kbd "C-c t g") #'run-geiser)
+(bind-key "C-c t g" #'run-geiser)
 ;; Configuration
 (after 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
@@ -1194,10 +1208,10 @@
 (autoload #'iedit-execute-last-modification "iedit"
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
-(global-set-key (kbd "C-c i e") #'iedit-mode)
-(define-key isearch-mode-map (kbd "C-;") #'iedit-mode-from-isearch)
-(define-key esc-map (kbd "C-;") #'iedit-execute-last-modification)
-(define-key help-map (kbd "C-;") #'iedit-mode-toggle-on-function)
+(bind-key "C-c i e" #'iedit-mode)
+(bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
+(bind-key "C-;" #'iedit-execute-last-modification esc-map)
+(bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
 ;; Configuration
 (after 'iedit
   (setq iedit-toggle-key-default nil))
@@ -1244,17 +1258,17 @@
 ;; Macrostep
 (require-package 'macrostep)
 ;; Set key binding
-(define-key emacs-lisp-mode-map (kbd "C-c M-e") #'macrostep-expand)
+(bind-key "C-c M-e" #'macrostep-expand emacs-lisp-mode-map)
 
 ;; Magit
 (require-package 'magit)
 ;; Set key bindings
-(global-set-key (kbd "C-c v v") #'magit-status)
-(global-set-key (kbd "C-c v d") #'magit-dispatch-popup)
-(global-set-key (kbd "C-c v c") #'magit-clone)
-(global-set-key (kbd "C-c v b") #'magit-blame)
-(global-set-key (kbd "C-c v l") #'magit-log-buffer-file)
-(global-set-key (kbd "C-c v p") #'magit-pull)
+(bind-key "C-c v v" #'magit-status)
+(bind-key "C-c v d" #'magit-dispatch-popup)
+(bind-key "C-c v c" #'magit-clone)
+(bind-key "C-c v b" #'magit-blame)
+(bind-key "C-c v l" #'magit-log-buffer-file)
+(bind-key "C-c v p" #'magit-pull)
 
 ;; Markdown mode
 (require-package 'markdown-mode)
@@ -1275,23 +1289,23 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(global-set-key (kbd "C-c x M") #'hydra-move-text/body)
+(bind-key "C-c x M" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
 ;; Initialize package
 (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
 ;; Set key bindings
-(global-set-key (kbd "C-c m <SPC>") #'mc/vertical-align-with-space)
-(global-set-key (kbd "C-c m a") #'mc/vertical-align)
-(global-set-key (kbd "C-c m e") #'mc/mark-more-like-this-extended)
-(global-set-key (kbd "C-c m m") #'mc/mark-all-like-this-dwim)
-(global-set-key (kbd "C-c m l") #'mc/edit-lines)
-(global-set-key (kbd "C-c m n") #'mc/mark-next-like-this)
-(global-set-key (kbd "C-c m p") #'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c m C-a") #'mc/edit-beginnings-of-lines)
-(global-set-key (kbd "C-c m C-e") #'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-c m C-s") #'mc/mark-all-in-region)
+(bind-key "C-c m <SPC>" #'mc/vertical-align-with-space)
+(bind-key "C-c m a" #'mc/vertical-align)
+(bind-key "C-c m e" #'mc/mark-more-like-this-extended)
+(bind-key "C-c m m" #'mc/mark-all-like-this-dwim)
+(bind-key "C-c m l" #'mc/edit-lines)
+(bind-key "C-c m n" #'mc/mark-next-like-this)
+(bind-key "C-c m p" #'mc/mark-previous-like-this)
+(bind-key "C-c m C-a" #'mc/edit-beginnings-of-lines)
+(bind-key "C-c m C-e" #'mc/edit-ends-of-lines)
+(bind-key "C-c m C-s" #'mc/mark-all-in-region)
 ;; Define Hydra
 (defhydra hydra-multiple-cursors (:columns 3)
   "Multiple Cursors"
@@ -1315,12 +1329,12 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(global-set-key (kbd "C-c m h") #'hydra-multiple-cursors/body)
+(bind-key "C-c m h" #'hydra-multiple-cursors/body)
 
 ;; Paradox
 (require-package 'paradox)
 ;; Set key binding
-(global-set-key (kbd "C-c a p") #'paradox-list-packages)
+(bind-key "C-c a p" #'paradox-list-packages)
 ;; Configuration
 (after 'paradox
   (setq paradox-github-token t)
@@ -1343,14 +1357,14 @@
 ;; SLIME
 (require-package 'slime)
 ;; Set key bindings
-(global-set-key (kbd "C-c t s") #'slime)
-(global-set-key (kbd "C-c t C") #'slime-connect)
+(bind-key "C-c t s" #'slime)
+(bind-key "C-c t C" #'slime-connect)
 ;; Configuration
 (after 'slime
   ;; Set key binding
-  (define-key slime-mode-indirect-map (kbd "C-c $") #'slime-export-symbol-at-point)
+  (bind-key "C-c $" #'slime-export-symbol-at-point slime-mode-indirect-map)
   ;; Disable conflicting key binding
-  (define-key slime-mode-indirect-map (kbd "C-c x") nil)
+  (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Use all accessible features and SBCL by default
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy slime-company))
@@ -1360,12 +1374,13 @@
 ;; SLIME REPL configuration
 (after 'slime-repl
   ;; Set key bindings
-  (define-key slime-repl-mode-map (kbd "C-c M-r") #'slime-repl-previous-matching-input)
-  (define-key slime-repl-mode-map (kbd "C-c M-s") #'slime-repl-next-matching-input)
+  (bind-keys :map slime-repl-mode-map
+             ("C-c M-r" . slime-repl-previous-matching-input)
+             ("C-c M-s" . slime-repl-next-matching-input))
   ;; Disable conflicting key bindings
-  (define-key slime-repl-mode-map (kbd "DEL") nil)
-  (define-key slime-repl-mode-map (kbd "M-r") nil)
-  (define-key slime-repl-mode-map (kbd "M-s") nil))
+  (unbind-key "DEL" slime-repl-mode-map)
+  (unbind-key "M-r" slime-repl-mode-map)
+  (unbind-key "M-s" slime-repl-mode-map))
 
 ;; SLIME Company
 (require-package 'slime-company)
@@ -1391,8 +1406,8 @@
 ;; Zop-to-char
 (require-package 'zop-to-char)
 ;; Set key bindings
-(global-set-key [remap zap-to-char] #'zop-to-char)
-(global-set-key (kbd "M-Z") #'zop-up-to-char)
+(bind-key [remap zap-to-char] #'zop-to-char)
+(bind-key "M-Z" #'zop-up-to-char)
 
 ;; Ace-link
 (require-package 'ace-link)
@@ -1401,7 +1416,7 @@
 ;; Configuration
 (after 'ace-link
   ;; Set key binding
-  (global-set-key (kbd "C-c n a")  #'ace-link-addr))
+  (bind-key "C-c n a"  #'ace-link-addr))
 
 ;; Adaptive Wrap
 (require-package 'adaptive-wrap)
@@ -1414,10 +1429,11 @@
 ;; Configuration
 (after 'anzu
   ;; Set key bindings
-  (global-set-key [remap query-replace] #'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
-  (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
-  (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+  (bind-key [remap query-replace] #'anzu-query-replace)
+  (bind-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
+  (bind-keys :map isearch-mode-map
+             ([remap isearch-query-replace] . anzu-isearch-query-replace)
+             ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   ;; Shorten mode lighter
   (delight 'anzu-mode " aZ" t)
   ;; Customize
@@ -1430,12 +1446,12 @@
 ;; Initialize mode
 (avy-setup-default)
 ;; Set key bindings
-(global-set-key (kbd "C-c j c") #'avy-goto-char)
-(global-set-key (kbd "C-c j k") #'avy-goto-char-2)
-(global-set-key (kbd "C-c j w") #'avy-goto-word-0)
-(global-set-key (kbd "C-c j SPC") #'avy-pop-mark)
-(global-set-key (kbd "C-c j l") #'avy-goto-line)
-(global-set-key (kbd "C-c j j") #'avy-goto-word-or-subword-1)
+(bind-key "C-c j c" #'avy-goto-char)
+(bind-key "C-c j k" #'avy-goto-char-2)
+(bind-key "C-c j w" #'avy-goto-word-0)
+(bind-key "C-c j SPC" #'avy-pop-mark)
+(bind-key "C-c j l" #'avy-goto-line)
+(bind-key "C-c j j" #'avy-goto-word-or-subword-1)
 ;; Configuration
 (after 'avy
   (setq avy-all-windows 'all-frames)
@@ -1451,7 +1467,7 @@
   ;; Shorten mode lighter
   (delight 'company-mode " cY" t)
   ;; Set key binding
-  (global-set-key (kbd "C-c i y") #'company-yasnippet)
+  (bind-key "C-c i y" #'company-yasnippet)
   ;; Customize
   (setq company-backends
         '(company-nxml
@@ -1491,7 +1507,7 @@
 ;; Configuration
 (after 'diff-hl
   ;; Set key binding
-  (global-set-key (kbd "C-c t D") #'diff-hl-margin-mode)
+  (bind-key "C-c t D" #'diff-hl-margin-mode)
   ;; Update diffs immediately
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
@@ -1522,10 +1538,11 @@
     ("p" hl-todo-previous "Previous TODO")
     ("q" nil "Quit"))
   ;; Set key bindings
-  (define-key hl-todo-mode-map (kbd "C-c p t n") #'hl-todo-next)
-  (define-key hl-todo-mode-map (kbd "C-c p t p") #'hl-todo-previous)
-  (define-key hl-todo-mode-map (kbd "C-c p t o") #'hl-todo-occur)
-  (define-key hl-todo-mode-map (kbd "C-c p t h") #'hydra-hl-todo/body))
+  (bind-keys :map hl-todo-mode-map
+             ("C-c p t n" . hl-todo-next)
+             ("C-c p t p" . hl-todo-previous)
+             ("C-c p t o" . hl-todo-occur)
+             ("C-c p t h" . hydra-hl-todo/body)))
 
 ;; Hyperbole
 (require-package 'hyperbole)
@@ -1537,10 +1554,10 @@
             ;; Add ace-window support
             (hkey-ace-window-setup (kbd "M-o"))
             ;; Remap default bindings
-            (global-set-key (kbd "C-c ,") #'hui-select-thing)
-            (global-set-key (kbd "C-c R") #'hui:ebut-rename)
-            (global-set-key (kbd "C-c |") #'hycontrol-windows-grid)
-            (global-set-key (kbd "C-c C-\\") #'hkey-operate)))
+            (bind-key "C-c ," #'hui-select-thing)
+            (bind-key "C-c R" #'hui:ebut-rename)
+            (bind-key "C-c |" #'hycontrol-windows-grid)
+            (bind-key "C-c C-\\" #'hkey-operate)))
 ;; Initialize mode
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
@@ -1556,7 +1573,7 @@
   ;; Shorten mode lighter
   (delight 'ivy-mode " iY" t)
   ;; Set key binding
-  (global-set-key (kbd "C-c n i") #'ivy-resume)
+  (bind-key "C-c n i" #'ivy-resume)
   ;; Customize
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
@@ -1577,25 +1594,25 @@
   ;; Shorten mode lighter
   (delight 'counsel-mode " cS" t)
   ;; Set key bindings
-  (global-set-key (kbd "C-c f g") #'counsel-git)
-  (global-set-key (kbd "C-c f j") #'counsel-dired-jump)
-  (global-set-key (kbd "C-c f r") #'counsel-recentf)
-  (global-set-key (kbd "C-c s G") #'counsel-git-grep)
-  (global-set-key (kbd "C-c s i") #'counsel-imenu)
-  (global-set-key (kbd "C-c s g") #'counsel-grep)
-  (global-set-key (kbd "C-c j m") #'counsel-mark-ring)
-  (global-set-key (kbd "C-c h c") #'counsel-command-history)
-  (global-set-key (kbd "C-c h l") #'counsel-find-library)
-  (global-set-key (kbd "C-c i 8") #'counsel-unicode-char)
+  (bind-key "C-c f g" #'counsel-git)
+  (bind-key "C-c f j" #'counsel-dired-jump)
+  (bind-key "C-c f r" #'counsel-recentf)
+  (bind-key "C-c s G" #'counsel-git-grep)
+  (bind-key "C-c s i" #'counsel-imenu)
+  (bind-key "C-c s g" #'counsel-grep)
+  (bind-key "C-c j m" #'counsel-mark-ring)
+  (bind-key "C-c h c" #'counsel-command-history)
+  (bind-key "C-c h l" #'counsel-find-library)
+  (bind-key "C-c i 8" #'counsel-unicode-char)
   ;; Customize
   (setq counsel-find-file-at-point t))
 
 ;; Swiper
 (require-package 'swiper)
 ;; Set key bindings
-(global-set-key (kbd "C-c s S") #'swiper-all)
-(global-set-key (kbd "C-c s s") #'swiper)
-(define-key isearch-mode-map (kbd "C-c S") #'swiper-from-isearch)
+(bind-key "C-c s S" #'swiper-all)
+(bind-key "C-c s s" #'swiper)
+(bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configure
 (after 'swiper
   (setq swiper-include-line-number-in-search t))
@@ -1617,8 +1634,9 @@
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
   ;; Set key bindings
-  (define-key paredit-mode-map (kbd "M-{") #'paredit-wrap-curly)
-  (define-key paredit-mode-map (kbd "M-[") #'paredit-wrap-square)
+  (bind-keys :map paredit-mode-map
+             ("M-{" . paredit-wrap-curly)
+             ("M-[" . paredit-wrap-square))
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1649,7 +1667,7 @@
 ;; Rainbow mode
 (require-package 'rainbow-mode)
 ;; Set key binding
-(global-set-key (kbd "C-c t r") #'rainbow-mode)
+(bind-key "C-c t r" #'rainbow-mode)
 ;; Configuration
 (after 'rainbow-mode
   (delight 'rainbow-mode " rW" t))
@@ -1659,7 +1677,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key bindings
-(global-set-key (kbd "C-c t S") #'run-skewer)
+(bind-key "C-c t S" #'run-skewer)
 ;; Configuration
 (after 'skewer-mode
   (delight 'skewer-mode " sK" t))
@@ -1698,8 +1716,8 @@
 (setq which-key-sort-order #'which-key-prefix-then-key-order)
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Set key bindings
-(global-set-key (kbd "C-c h K") #'which-key-show-top-level)
-(global-set-key (kbd "C-c h M") #'which-key-show-major-mode)
+(bind-key "C-c h K" #'which-key-show-top-level)
+(bind-key "C-c h M" #'which-key-show-major-mode)
 ;; Configuration
 (after 'which-key
   ;; Global replacements
@@ -1757,72 +1775,72 @@
   (delight 'yas-minor-mode " yS" t))
 
 ;; Toggle debug on error
-(global-set-key (kbd "C-c t d") #'toggle-debug-on-error)
+(bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Ruler mode
-(global-set-key (kbd "C-c t R") #'ruler-mode)
+(bind-key "C-c t R" #'ruler-mode)
 
 ;; Ediff
-(global-set-key (kbd "C-c f e") #'ediff)
-(global-set-key (kbd "C-c f E") #'ediff3)
+(bind-key "C-c f e" #'ediff)
+(bind-key "C-c f E" #'ediff3)
 
 ;; ANSI Term
-(global-set-key (kbd "C-c a t") #'ansi-term)
+(bind-key "C-c a t" #'ansi-term)
 
 ;; Hexl mode
-(global-set-key (kbd "C-c t h") #'hexl-mode)
-(global-set-key (kbd "C-c f h") #'hexl-find-file)
+(bind-key "C-c t h" #'hexl-mode)
+(bind-key "C-c f h" #'hexl-find-file)
 
 ;; Replace string immediately
-(global-set-key (kbd "C-c s r") #'replace-string)
-(global-set-key (kbd "C-c s R") #'replace-regexp)
+(bind-key "C-c s r" #'replace-string)
+(bind-key "C-c s R" #'replace-regexp)
 
 ;; Grep results as a dired buffer
-(global-set-key (kbd "C-c s d") #'find-grep-dired)
+(bind-key "C-c s d" #'find-grep-dired)
 
 ;; Project
-(global-set-key (kbd "C-c p f") #'project-find-file)
-(global-set-key (kbd "C-c p r") #'project-find-regexp)
+(bind-key "C-c p f" #'project-find-file)
+(bind-key "C-c p r" #'project-find-regexp)
 
 ;; EWW
-(global-set-key (kbd "C-c n e") #'eww)
+(bind-key "C-c n e" #'eww)
 
 ;; Find function and variable definitions
-(global-set-key (kbd "C-c h f") #'find-function)
-(global-set-key (kbd "C-c h 4 f") #'find-function-other-window)
-(global-set-key (kbd "C-c h k") #'find-function-on-key)
-(global-set-key (kbd "C-c h v") #'find-variable)
-(global-set-key (kbd "C-c h 4 v") #'find-variable-other-window)
+(bind-key "C-c h f" #'find-function)
+(bind-key "C-c h 4 f" #'find-function-other-window)
+(bind-key "C-c h k" #'find-function-on-key)
+(bind-key "C-c h v" #'find-variable)
+(bind-key "C-c h 4 v" #'find-variable-other-window)
 
 ;; Find library
-(global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
-(global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
+(bind-key "C-c h 4 l" #'find-library-other-window)
+(bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; Cycle spacing
-(global-set-key [remap just-one-space] #'cycle-spacing)
+(bind-key [remap just-one-space] #'cycle-spacing)
 
 ;; Sort lines alphabetically
-(global-set-key (kbd "C-c x l") #'sort-lines)
+(bind-key "C-c x l" #'sort-lines)
 
 ;; Tildify mode
-(global-set-key (kbd "C-c x t") #'tildify-region)
+(bind-key "C-c x t" #'tildify-region)
 
 ;; Auto Fill mode
-(global-set-key (kbd "C-c t f") #'auto-fill-mode)
+(bind-key "C-c t f" #'auto-fill-mode)
 
 ;; Align
-(global-set-key (kbd "C-c x A") #'align)
-(global-set-key (kbd "C-c x a") #'align-current)
-(global-set-key (kbd "C-c x r") #'align-regexp)
+(bind-key "C-c x A" #'align)
+(bind-key "C-c x a" #'align-current)
+(bind-key "C-c x r" #'align-regexp)
 
 ;; Auto Insert
-(global-set-key (kbd "C-c i a") #'auto-insert)
+(bind-key "C-c i a" #'auto-insert)
 
 ;; Commenting
-(global-set-key (kbd "C-c c d") #'comment-dwim)
-(global-set-key (kbd "C-c c r") #'comment-region)
-(global-set-key (kbd "C-c c u") #'uncomment-region)
-(global-set-key (kbd "C-c c o") #'comment-or-uncomment-region)
+(bind-key "C-c c d" #'comment-dwim)
+(bind-key "C-c c r" #'comment-region)
+(bind-key "C-c c u" #'uncomment-region)
+(bind-key "C-c c o" #'comment-or-uncomment-region)
 
 ;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
@@ -1847,28 +1865,28 @@
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(global-set-key (kbd "C-c x m") #'hydra-mark-text/body)
+(bind-key "C-c x m" #'hydra-mark-text/body)
 
 ;; Matching lines operation
-(global-set-key (kbd "C-c s l") #'delete-matching-lines)
-(global-set-key (kbd "C-c s L") #'delete-non-matching-lines)
+(bind-key "C-c s l" #'delete-matching-lines)
+(bind-key "C-c s L" #'delete-non-matching-lines)
 
 ;; Local variable insertion
-(global-set-key (kbd "C-c f v d") #'add-dir-local-variable)
-(global-set-key (kbd "C-c f v f") #'add-file-local-variable)
-(global-set-key (kbd "C-c f v p") #'add-file-local-variable-prop-line)
+(bind-key "C-c f v d" #'add-dir-local-variable)
+(bind-key "C-c f v f" #'add-file-local-variable)
+(bind-key "C-c f v p" #'add-file-local-variable-prop-line)
 
 ;; Extended buffer operation key bindings
-(global-set-key (kbd "C-c b DEL") #'erase-buffer)
-(global-set-key (kbd "C-c b b") #'bury-buffer)
-(global-set-key (kbd "C-c b u") #'unbury-buffer)
-(global-set-key (kbd "C-c b e") #'eval-buffer)
-(global-set-key (kbd "C-c b k") #'kill-this-buffer)
-(global-set-key (kbd "C-c b g") #'revert-buffer)
-(global-set-key (kbd "C-c b i") #'insert-buffer)
+(bind-key "C-c b DEL" #'erase-buffer)
+(bind-key "C-c b b" #'bury-buffer)
+(bind-key "C-c b u" #'unbury-buffer)
+(bind-key "C-c b e" #'eval-buffer)
+(bind-key "C-c b k" #'kill-this-buffer)
+(bind-key "C-c b g" #'revert-buffer)
+(bind-key "C-c b i" #'insert-buffer)
 
 ;; Replace dabbrev-expand with hippie-expand
-(global-set-key [remap dabbrev-expand] #'hippie-expand)
+(bind-key [remap dabbrev-expand] #'hippie-expand)
 
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
