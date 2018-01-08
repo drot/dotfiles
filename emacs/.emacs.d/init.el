@@ -1113,27 +1113,12 @@
 
 ;; ERC configuration
 (after 'erc
-  ;; Rizon authentication workaround
-  (defun erc-rizon-fetch-password (&rest params)
-    "Fetch password with PARAMS for ERC authentication from an encrypted source."
-    (let ((match (car (apply 'auth-source-search params))))
-      (if match
-          (let ((secret (plist-get match :secret)))
-            (if (functionp secret)
-                (funcall secret)
-              secret))
-        (error "Password not found for %S" params))))
-
-  (defun erc-rizon-nickserv-password ()
-    "Fetch NickServ password for the Rizon IRC network."
-    (erc-rizon-fetch-password :user "drot" :host "irc.rizon.net"))
-
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-nickserv-identify-mode 'autodetect)
   (setq erc-nickserv-passwords
-        `((Rizon (("drot" . ,(erc-rizon-nickserv-password))))))
+        `((Rizon (("drot" . ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))))))
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
   (setq erc-autojoin-timing 'ident)
