@@ -345,6 +345,7 @@
   (delight 'flyspell-mode " fS" t)
   ;; Set key bindings
   (bind-key "C-c l b" #'flyspell-buffer)
+  (bind-key "C-c l r" #'flyspell-region)
   (bind-keys :map flyspell-mode-map
              ("C-c l c" . flyspell-correct-word-before-point)
              ("C-c l p" . flyspell-check-previous-highlighted-word))
