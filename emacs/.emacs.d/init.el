@@ -1591,6 +1591,7 @@
   (bind-key "C-c h l" #'counsel-find-library)
   (bind-key "C-c i 8" #'counsel-unicode-char)
   ;; Customize
+  (setq counsel-preselect-current-file t)
   (setq counsel-find-file-at-point t))
 
 ;; Swiper
