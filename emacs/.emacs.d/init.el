@@ -177,6 +177,12 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
+;; Draw window dividers
+(setq window-divider-default-bottom-width 1)
+(setq window-divider-default-right-width 1)
+(setq window-divider-default-places t)
+(window-divider-mode)
+
 ;; Change recenter initial position
 (setq recenter-positions '(top middle bottom))
 
