@@ -63,14 +63,12 @@ theme.menu_width = dpi(126)
 
 -- Menu icons
 theme.menu_submenu_icon = themes_path .. "themes/tomorrow/icons/menu/submenu.png"
-theme.menu_work = themes_path .. "themes/tomorrow/icons/menu/work.png"
 theme.menu_web = themes_path .. "themes/tomorrow/icons/menu/web.png"
 theme.menu_office = themes_path .. "themes/tomorrow/icons/menu/office.png"
 theme.menu_util = themes_path .. "themes/tomorrow/icons/menu/util.png"
 theme.menu_term = themes_path .. "themes/tomorrow/icons/menu/term.png"
 theme.menu_emacs = themes_path .. "themes/tomorrow/icons/menu/emacs.png"
 theme.menu_browser = themes_path .. "themes/tomorrow/icons/menu/browser.png"
-theme.menu_skype = themes_path .. "themes/tomorrow/icons/menu/skype.png"
 theme.menu_pidgin = themes_path .. "themes/tomorrow/icons/menu/pidgin.png"
 theme.menu_pdf = themes_path .. "themes/tomorrow/icons/menu/pdf.png"
 theme.menu_writer = themes_path .. "themes/tomorrow/icons/menu/writer.png"

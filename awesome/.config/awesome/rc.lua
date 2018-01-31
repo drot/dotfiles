@@ -46,7 +46,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "sakura -c 120 -r 30"
+local terminal = "st -g 120x30"
 local editor = os.getenv("EDITOR") or "nano"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -95,15 +95,9 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-local myworkmenu = {
-   { "Terminal", terminal, beautiful.menu_term },
-   { "Emacs", "emacsclient -c", beautiful.menu_emacs }
-}
-
 local mywebmenu = {
-   { "Firefox", "firefox", beautiful.menu_browser },
+   { "Chromium", "chromium", beautiful.menu_browser },
    { "Pidgin", "pidgin", beautiful.menu_pidgin },
-   { "Skype", "skype", beautiful.menu_skype }
 }
 
 local myofficemenu = {
@@ -126,7 +120,8 @@ local myawesomemenu = {
 }
 
 local mymainmenu = awful.menu({ items = {
-                                   { "Work", myworkmenu, beautiful.menu_work },
+                                   { "Terminal", terminal, beautiful.menu_term },
+                                   { "Emacs", "emacsclient -c", beautiful.menu_emacs },
                                    { "Web", mywebmenu, beautiful.menu_web },
                                    { "Office", myofficemenu, beautiful.menu_office },
                                    { "Utilities", myutilmenu, beautiful.menu_util },
@@ -950,7 +945,6 @@ awful.rules.rules = {
            "pinentry",
         },
         class = {
-           "Skype",
            "Pidgin",
            "mpv"},
 
@@ -969,6 +963,9 @@ awful.rules.rules = {
 
    -- Set Firefox to always map on the tag named "2" on screen 1
    { rule = { class = "Firefox" },
+     properties = { screen = 1, tag = "2" } },
+   -- Apply the same for Chromium
+   { rule = { class = "Chromium" },
      properties = { screen = 1, tag = "2" } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
