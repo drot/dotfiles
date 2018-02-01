@@ -13,7 +13,7 @@ local theme = {}
 
 theme.font = "Iosevka Term 12"
 
-theme.icon_theme = "Numix-Square"
+theme.icon_theme = "Papirus"
 
 theme.wallpaper = themes_path .. "themes/tomorrow/background.png"
 
