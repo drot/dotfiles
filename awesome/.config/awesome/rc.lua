@@ -102,8 +102,11 @@ local mywebmenu = {
 
 local myofficemenu = {
    { "Writer", "lowriter", beautiful.menu_writer },
-   { "GIMP", "gimp", beautiful.menu_gimp },
    { "Zathura", "zathura", beautiful.menu_pdf }
+}
+
+local mygraphicsmenu = {
+   { "GIMP", "gimp", beautiful.menu_gimp },
 }
 
 local myutilmenu = {
@@ -122,9 +125,10 @@ local myawesomemenu = {
 local mymainmenu = awful.menu({ items = {
                                    { "Terminal", terminal, beautiful.menu_term },
                                    { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-                                   { "Web", mywebmenu, beautiful.menu_web },
+                                   { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
                                    { "Office", myofficemenu, beautiful.menu_office },
                                    { "Utilities", myutilmenu, beautiful.menu_util },
+                                   { "Web", mywebmenu, beautiful.menu_web },
                                    { "awesome", myawesomemenu, beautiful.awesome_icon }
 }
                              })
