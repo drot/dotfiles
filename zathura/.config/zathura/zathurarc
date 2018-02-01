@@ -1,7 +1,7 @@
 # -*- mode: Conf -*-
 
 # Default font
-set font "Iosevka Term 12"
+set font "Hack 12"
 
 # Display filename as title
 set window-title-basename "true"
