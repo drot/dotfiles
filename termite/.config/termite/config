@@ -70,7 +70,7 @@ color20 = #b4b7b4
 color21 = #e0e0e0
 
 [hints]
-font = Hack Bold 11
+font = Iosevka Term Bold 12
 foreground = #1d1f21
 background = #81a2be
 active_foreground = #1d1f21

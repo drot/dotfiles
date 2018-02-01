@@ -10,7 +10,7 @@ Xft.rgba: rgb
 Xcursor.theme: Adwaita
 
 ! Emacs
-Emacs.font: Hack-11
+Emacs.font: Iosevka Term-12
 Emacs.background: #222222
 Emacs.menuBar: off
 Emacs.toolBar: off
@@ -40,8 +40,8 @@ URxvt.keysym.M-Delete: matcher:list
 URxvt*matcher.button: 1
 
 ! Font
-URxvt*font: xft:Hack:pixelsize=15,xft:Noto Emoji:size=7
-URxvt*boldFont: xft:Hack:bold:pixelsize=15,xft:Noto Emoji:size=7
+URxvt*font: xft:Iosevka Term:pixelsize=15,xft:Noto Emoji:size=7
+URxvt*boldFont: xft:Iosevka Term:bold:pixelsize=15,xft:Noto Emoji:size=7
 URxvt*letterSpace: -1
 
 ! Colors
@@ -100,7 +100,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Hack:pixelsize=15
+XTerm*faceName: Iosevka Term:pixelsize=15
 
 ! Colors
 XTerm*foreground: #c5c8c6
