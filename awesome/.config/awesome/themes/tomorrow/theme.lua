@@ -11,7 +11,7 @@ local themes_path = gfs.get_configuration_dir()
 
 local theme = {}
 
-theme.font = "Hack 12"
+theme.font = "Hack 11.5"
 
 theme.icon_theme = "Numix-Square"
 
@@ -59,7 +59,7 @@ theme.taglist_bg_focus = theme.bg_normal
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_height = dpi(24)
-theme.menu_width = dpi(126)
+theme.menu_width = dpi(132)
 
 -- Menu icons
 theme.menu_submenu_icon = themes_path .. "themes/tomorrow/icons/menu/submenu.png"
