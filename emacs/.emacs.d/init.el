@@ -497,6 +497,7 @@
 
 ;; Colorize ANSI escape sequences
 (after 'ansi-color
+  ;; Colorization function
   (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
@@ -672,7 +673,6 @@
 (bind-key "C-c a s" #'shell)
 ;; Configuration
 (after 'shell
-  (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
