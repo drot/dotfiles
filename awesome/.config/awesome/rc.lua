@@ -102,7 +102,7 @@ local mywebmenu = {
 
 local myofficemenu = {
    { "Writer", "lowriter", beautiful.menu_writer },
-   { "Zathura", "zathura", beautiful.menu_pdf }
+   { "llpp", "llpp", beautiful.menu_pdf }
 }
 
 local mygraphicsmenu = {
