@@ -254,7 +254,9 @@
                 term-mode-hook
                 ediff-mode-hook
                 comint-mode-hook
-                nov-mode-hook))
+                cider-repl-mode-hook
+                nov-mode-hook
+                slime-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -923,6 +925,8 @@
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
   (setq cider-repl-wrap-history t)
+  ;; Display result prefix
+  (setq cider-repl-result-prefix "; => ")
   ;; Enable fuzzy completion with Company
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   ;; Enable SubWord mode
@@ -1364,6 +1368,10 @@
   (setq slime-contribs '(slime-fancy slime-company))
   (setq slime-protocol-version 'ignore)
   (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")))
+
+;; Shorten SLIME Autodoc mode lighter
+(after 'slime-autodoc
+  (delight 'slime-autodoc-mode " aD" t))
 
 ;; SLIME REPL configuration
 (after 'slime-repl
