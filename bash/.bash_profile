@@ -6,7 +6,7 @@ export PAGER=less
 export LESS=-Ri
 export GREP_COLORS="mt=01;37;41"
 export GIT_PS1_SHOWDIRTYSTATE=yes
-export BROWSER=chromium
+export BROWSER=firefox
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export WINEPREFIX=$HOME/.config/wine/

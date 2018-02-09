@@ -634,7 +634,7 @@
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
-  (setq browse-url-browser-function #'browse-url-chromium))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
