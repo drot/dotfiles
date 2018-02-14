@@ -1281,7 +1281,9 @@
 (after 'markdown-mode
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
-  (setq markdown-fontify-code-blocks-natively t))
+  (setq markdown-fontify-code-blocks-natively t)
+  ;; Conflicts with `which-key'
+  (setq markdown-enable-prefix-prompts nil))
 
 ;; Move-text
 (require-package 'move-text)
@@ -1778,9 +1780,9 @@
     "C-c TAB" "markdown-images"
     "C-c C-a" "markdown-links"
     "C-c C-c" "markdown-commands"
-    "C-c C-s" "markdown-style"
+    "C-c C-s" "markdown-styles"
     "C-c C-t" "markdown-header"
-    "C-c C-x" "markdown-toggle"))
+    "C-c C-x" "markdown-toggles"))
 
 ;; YASnippet
 (require-package 'yasnippet)
