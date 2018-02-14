@@ -545,10 +545,9 @@
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
   ;; Default `ls' switches
-  (setq dired-listing-switches "-alhF")
-  ;; If we are on a GNU system or have GNU ls, add some more `ls' switches
-  (when (or (memq system-type '(gnu gnu/linux))
-            (string= (file-name-nondirectory insert-directory-program) "gls"))
+  (setq dired-listing-switches "-alhFG")
+  ;; If we are on a GNU system add some more `ls' switches
+  (when (eq system-type 'gnu/linux)
     (setq dired-listing-switches
           (concat dired-listing-switches " --group-directories-first")))
   ;; Do certain operations recursively
@@ -1289,7 +1288,9 @@
   ;; Enable `visual-line-mode' in markdown buffers
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
-  (setq markdown-fontify-code-blocks-natively t))
+  (setq markdown-fontify-code-blocks-natively t)
+  ;; Use underscores for italic text
+  (setq markdown-italic-underscore t))
 
 ;; Move-text
 (require-package 'move-text)
