@@ -614,7 +614,7 @@
 (bind-key "C-c t ~" #'tildify-mode)
 ;; Configuration
 (add-hook 'LaTeX-mode-hook
-            (lambda () (setq-local tildify-space-string "~")))
+          (lambda () (setq-local tildify-space-string "~")))
 
 ;; Regexp builder
 (bind-key "C-c s b" #'re-builder)
