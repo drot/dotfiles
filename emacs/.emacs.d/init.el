@@ -1281,6 +1281,12 @@
 (setq markdown-enable-prefix-prompts nil)
 ;; Configuration
 (after 'markdown-mode
+  ;; Default markdown command
+  (setq markdown-command
+        (concat "pandoc"
+                " --from=markdown --to=html"
+                " --standalone --mathjax --highlight-style=pygments"))
+  ;; Enable `visual-line-mode' in markdown buffers
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t))
