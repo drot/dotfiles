@@ -610,6 +610,13 @@
 (after 'whitespace
   (delight 'whitespace-mode " wS" t))
 
+;; Tildify mode
+(bind-key "C-c x t" #'tildify-region)
+(bind-key "C-c t ~" #'tildify-mode)
+;; Configuration
+(add-hook 'LaTeX-mode-hook
+            (lambda () (setq-local tildify-space-string "~")))
+
 ;; Regexp builder
 (bind-key "C-c s b" #'re-builder)
 ;; Configuration
@@ -1272,8 +1279,6 @@
 (require-package 'markdown-mode)
 ;; Configuration
 (after 'markdown-mode
-  (add-hook 'markdown-mode-hook #'whitespace-mode)
-  (add-hook 'markdown-mode-hook #'tildify-mode)
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t))
@@ -1767,7 +1772,15 @@
     "C-c C-o" "TeX-fold-mode"
     "C-c C-p" "preview-latex"
     "C-c C-q" "LaTeX-fill"
-    "C-c C-t" "TeX-toggle"))
+    "C-c C-t" "TeX-toggle")
+  ;; Markdown mode replacements
+  (which-key-add-major-mode-key-based-replacements 'markdown-mode
+    "C-c TAB" "markdown-images"
+    "C-c C-a" "markdown-links"
+    "C-c C-c" "markdown-commands"
+    "C-c C-s" "markdown-style"
+    "C-c C-t" "markdown-header"
+    "C-c C-x" "markdown-toggle"))
 
 ;; YASnippet
 (require-package 'yasnippet)
@@ -1824,9 +1837,6 @@
 
 ;; Sort lines alphabetically
 (bind-key "C-c x l" #'sort-lines)
-
-;; Tildify mode
-(bind-key "C-c x t" #'tildify-region)
 
 ;; Auto Fill mode
 (bind-key "C-c t f" #'auto-fill-mode)
