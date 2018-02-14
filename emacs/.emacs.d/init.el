@@ -1277,13 +1277,13 @@
 
 ;; Markdown mode
 (require-package 'markdown-mode)
+;; Avoid conflict with `which-key'
+(setq markdown-enable-prefix-prompts nil)
 ;; Configuration
 (after 'markdown-mode
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
-  (setq markdown-fontify-code-blocks-natively t)
-  ;; Conflicts with `which-key'
-  (setq markdown-enable-prefix-prompts nil))
+  (setq markdown-fontify-code-blocks-natively t))
 
 ;; Move-text
 (require-package 'move-text)
