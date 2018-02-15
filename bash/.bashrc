@@ -23,18 +23,18 @@ shopt -s cmdhist
 shopt -s histappend
 
 # Colored listings
-if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
+if [[ -r "$HOME/.dircolors" ]] && type -p dircolors >/dev/null; then
     eval "$(dircolors -b "$HOME/.dircolors")"
 fi
 
 # Load aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f "$HOME/.bash_aliases" ]; then
+    . "$HOME/.bash_aliases"
 fi
 
 # Load custom functions
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
+if [ -f "$HOME/.bash_functions" ]; then
+    . "$HOME/.bash_functions"
 fi
 
 # Bash completion
@@ -46,13 +46,13 @@ fi
 GIT="\$(__git_ps1 ' %s')"
 
 # Prompt window title
-TITLE='\[\e]2;\u@\h:\W\a\]'
+TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Prompt colors
-RED='\[\033[1;31m\]'
-GREEN='\[\033[1;32m\]'
-BLUE='\[\033[1;34m\]'
-NIL='\[\033[00m\]'
+RED="\[\033[1;31m\]"
+GREEN="\[\033[1;32m\]"
+BLUE="\[\033[1;34m\]"
+NIL="\[\033[00m\]"
 
 # Prompt format
 case $TERM in
