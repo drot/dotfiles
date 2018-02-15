@@ -1283,8 +1283,8 @@
   ;; Default markdown command
   (setq markdown-command
         (concat "pandoc"
-                " --from=markdown --to=html"
-                " --standalone --mathjax --highlight-style=pygments"))
+                " -f markdown -t html"
+                " -s --mathjax --highlight-style=pygments"))
   ;; Enable `visual-line-mode' in markdown buffers
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
