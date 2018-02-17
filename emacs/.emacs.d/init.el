@@ -1595,7 +1595,7 @@
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-virtual-abbreviate 'full)
+  (setq ivy-virtual-abbreviate 'abbreviate)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-format-function #'ivy-format-function-arrow)
   (setq ivy-wrap t)
