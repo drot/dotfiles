@@ -1343,17 +1343,6 @@
 ;; Set key binding
 (bind-key "C-c m h" #'hydra-multiple-cursors/body)
 
-;; Paradox
-(require-package 'paradox)
-;; Set key binding
-(bind-key "C-c a p" #'paradox-list-packages)
-;; Configuration
-(after 'paradox
-  (setq paradox-github-token t)
-  (setq paradox-execute-asynchronously t)
-  (setq paradox-spinner-type 'rotating-line)
-  (setq paradox-display-download-count t))
-
 ;; PDF Tools
 (require-package 'pdf-tools)
 ;; Autoload missing function
@@ -1773,7 +1762,6 @@
   (which-key-add-major-mode-key-based-replacements 'dired-mode
     "C-, C-o" "dired-subtree-only"
     "C-," "dired-subtree"
-    "E" "emacs-async"
     "\\" "dired-filter"
     "r" "dired-ranger")
   ;; AUCTeX replacements
@@ -1840,6 +1828,9 @@
 ;; Find library
 (bind-key "C-c h 4 l" #'find-library-other-window)
 (bind-key "C-c h 4 L" #'find-library-other-frame)
+
+;; List packages
+(bind-key "C-c a p" #'package-list-packages)
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
