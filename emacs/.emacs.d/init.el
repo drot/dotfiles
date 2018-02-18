@@ -870,6 +870,12 @@
 (after 'anaconda-mode
   (delight 'anaconda-mode " aC" t))
 
+;; Company Anaconda
+(require-package 'company-anaconda)
+;; Initialize mode
+(add-hook 'python-mode-hook
+          (lambda () (add-to-list 'company-backends #'company-anaconda)))
+
 ;; AUCTeX
 (require-package 'auctex)
 
@@ -1355,6 +1361,36 @@
   ;; Make sure the binary is always compiled
   (pdf-tools-install :no-query))
 
+;; Rainbow mode
+(require-package 'rainbow-mode)
+;; Set key binding
+(bind-key "C-c t r" #'rainbow-mode)
+;; Configuration
+(after 'rainbow-mode
+  (delight 'rainbow-mode " rW" t))
+
+;; Skewer
+(require-package 'skewer-mode)
+;; Initialize mode
+(add-hook 'js2-mode-hook #'skewer-mode)
+;; Set key bindings
+(bind-key "C-c t S" #'run-skewer)
+;; Configuration
+(after 'skewer-mode
+  (delight 'skewer-mode " sK" t))
+
+;; Skewer CSS
+(add-hook 'css-mode-hook #'skewer-css-mode)
+;; Configuration
+(after 'skewer-css
+  (delight 'skewer-css-mode " sKC" t))
+
+;; Skewer HTML
+(add-hook 'mhtml-mode-hook #'skewer-html-mode)
+;; Configuration
+(after 'skewer-html
+  (delight 'skewer-html-mode " sKH" t))
+
 ;; SLIME
 (require-package 'slime)
 ;; Set key bindings
@@ -1401,6 +1437,11 @@
 
 ;; Systemd mode
 (require-package 'systemd)
+
+;; Visual Fill Column
+(require-package 'visual-fill-column)
+;; Initialize mode
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
 ;; Wgrep
 (require-package 'wgrep)
@@ -1490,12 +1531,6 @@
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-other-buffers nil)
   (setq company-dabbrev-ignore-case t))
-
-;; Company Anaconda
-(require-package 'company-anaconda)
-;; Initialize mode
-(add-hook 'python-mode-hook
-          (lambda () (add-to-list 'company-backends #'company-anaconda)))
 
 ;; Company Statistics
 (require-package 'company-statistics)
@@ -1669,41 +1704,6 @@
                 clojure-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
-
-;; Rainbow mode
-(require-package 'rainbow-mode)
-;; Set key binding
-(bind-key "C-c t r" #'rainbow-mode)
-;; Configuration
-(after 'rainbow-mode
-  (delight 'rainbow-mode " rW" t))
-
-;; Skewer
-(require-package 'skewer-mode)
-;; Initialize mode
-(add-hook 'js2-mode-hook #'skewer-mode)
-;; Set key bindings
-(bind-key "C-c t S" #'run-skewer)
-;; Configuration
-(after 'skewer-mode
-  (delight 'skewer-mode " sK" t))
-
-;; Skewer CSS
-(add-hook 'css-mode-hook #'skewer-css-mode)
-;; Configuration
-(after 'skewer-css
-  (delight 'skewer-css-mode " sKC" t))
-
-;; Skewer HTML
-(add-hook 'mhtml-mode-hook #'skewer-html-mode)
-;; Configuration
-(after 'skewer-html
-  (delight 'skewer-html-mode " sKH" t))
-
-;; Visual Fill Column
-(require-package 'visual-fill-column)
-;; Initialize mode
-(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
 ;; Volatile Highlights
 (require-package 'volatile-highlights)
