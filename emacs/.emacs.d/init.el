@@ -1127,7 +1127,11 @@
   "Connect to IRC."
   (interactive)
   (when (y-or-n-p "Connect to IRC? ")
+    ;; Rizon
     (erc-tls :server "irc.rizon.net" :port 6697
+             :nick "drot")
+    ;; ForestNet
+    (erc-tls :server "irc.forestnet.org" :port 6697
              :nick "drot")))
 
 ;; Set key binding
