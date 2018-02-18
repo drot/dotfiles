@@ -457,7 +457,9 @@
   ;; PEP8 conformance
   (add-hook 'python-mode-hook
             (lambda () (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode))
+  (add-hook 'python-mode-hook #'subword-mode)
+  ;; Flymake configuration
+  (setq python-flymake-command '("pyflakes3")))
 
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
@@ -1535,7 +1537,9 @@
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-other-buffers nil)
-  (setq company-dabbrev-ignore-case t))
+  (setq company-dabbrev-ignore-case t)
+  ;; Insert candidate as soon as TAB is pressed
+  (company-tng-configure-default))
 
 ;; Company Statistics
 (require-package 'company-statistics)
