@@ -514,6 +514,7 @@
 
 ;; Mail sending
 (bind-key "C-c i m" #'message-mark-inserted-region)
+(bind-key "C-c i f" #'message-mark-insert-file)
 ;; Configuration
 (after 'message
   ;; Customize
