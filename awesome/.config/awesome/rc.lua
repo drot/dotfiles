@@ -141,6 +141,10 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
+
+-- Cache CPU usage widgets
+vicious.cache(vicious.widgets.cpu)
+
 -- Create a CPU usage icon widget
 local cpu_icon = wibox.widget {
    image = beautiful.widget_cpu,
@@ -192,7 +196,7 @@ local cpu_graph = wibox.widget {
 }
 
 -- Set CPU usage graph value
-vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 8)
+vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
 
 -- Create a background for the CPU usage widget
 local cpu_widget = wibox.widget {
@@ -223,6 +227,9 @@ local cpu_widget = wibox.widget {
    right = 2,
    widget = wibox.container.margin
 }
+
+-- Cache memory usage widgets
+vicious.cache(vicious.widgets.mem)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
@@ -277,7 +284,7 @@ local memory_chart = wibox.widget {
 }
 
 -- Set memory usage chart value
-vicious.register(memory_chart, vicious.widgets.mem, "$1", 16)
+vicious.register(memory_chart, vicious.widgets.mem, "$1", 12)
 
 -- Create a memory usage chart background
 local memory_widget = wibox.widget {
@@ -308,6 +315,9 @@ local memory_widget = wibox.widget {
    right = 2,
    widget = wibox.container.margin
 }
+
+-- Cache temperature value widgets
+vicious.cache(vicious.widgets.thermal)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
@@ -367,7 +377,7 @@ local temperature_bar = wibox.widget {
 }
 
 -- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 24, "thermal_zone0")
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
 
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
@@ -377,6 +387,9 @@ local fs_icon = wibox.widget {
    image = beautiful.widget_fs,
    widget = wibox.widget.imagebox
 }
+
+-- Cache file system usage widgets
+vicious.cache(vicious.widgets.fs)
 
 -- Set file system usage text value
 local fs_text_value = wibox.widget.textbox()
@@ -425,7 +438,7 @@ local fs_chart = wibox.widget {
 }
 
 -- Set file system usage chart value
-vicious.register(fs_chart, vicious.widgets.fs, "${/home used_p}", 302)
+vicious.register(fs_chart, vicious.widgets.fs, "${/home used_p}", 300)
 
 -- Create a file system usage chart background
 local fs_background = wibox.widget {
@@ -452,6 +465,9 @@ local fs_background = wibox.widget {
 
 -- Set file system usage chart widget margins
 local fs_widget = wibox.container.margin(fs_background, 2, 2, 2, 2)
+
+-- Cache volume value widgets
+vicious.cache(vicious.contrib.pulse)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
@@ -509,7 +525,7 @@ local volume_bar = wibox.widget {
 }
 
 -- Set volume bar value
-vicious.register(volume_bar, vicious.contrib.pulse, "$1", 10)
+vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
 
 -- Set volume bar widget rotation
 local volume_widget = wibox.container.rotate(volume_bar, "east")
