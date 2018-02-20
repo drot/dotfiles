@@ -171,7 +171,7 @@ client.urgent $base02 $base08 $base07 $base08
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol "  "
+    separator_symbol " >> "
     status_command i3status
     colors {
            background $base01
