@@ -141,6 +141,9 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+;; Sentence ends with single space
+(setq sentence-end-double-space nil)
+
 ;; Increase default fill width
 (setq-default fill-column 80)
 
@@ -572,6 +575,11 @@
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
+;; Image-Dired
+(after 'image-dired
+  ;; Change default external viewer
+  (setq image-dired-external-viewer "pqiv"))
+
 ;; TRAMP
 (after 'tramp
   ;; Configuration
@@ -940,6 +948,8 @@
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
   (setq cider-repl-wrap-history t)
+  ;; Disable help banner
+  (setq cider-repl-display-help-banner nil)
   ;; Display result prefix
   (setq cider-repl-result-prefix "; => ")
   ;; Enable fuzzy completion with Company
@@ -1530,7 +1540,6 @@
           (company-dabbrev-code company-gtags company-etags company-keywords)
           company-dabbrev))
   (setq company-minimum-prefix-length 2)
-  (setq company-require-match 'never)
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t)
   (setq company-selection-wrap-around t)
