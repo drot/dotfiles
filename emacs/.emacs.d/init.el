@@ -1740,8 +1740,9 @@
 (setq which-key-sort-order #'which-key-prefix-then-key-order)
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Set key bindings
-(bind-key "C-c h K" #'which-key-show-top-level)
-(bind-key "C-c h M" #'which-key-show-major-mode)
+(bind-key "C-c h w t" #'which-key-show-top-level)
+(bind-key "C-c h w m" #'which-key-show-major-mode)
+(bind-key "C-c h w k" #'which-key-show-full-keymap)
 ;; Configuration
 (after 'which-key
   ;; Global replacements
@@ -1757,6 +1758,7 @@
     "C-c f v" "variables"
     "C-c f" "files"
     "C-c h 4" "help-other-window"
+    "C-c h w" "which-key"
     "C-c h" "help-extended"
     "C-c i" "insertion"
     "C-c j" "jump"
