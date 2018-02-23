@@ -1,17 +1,17 @@
 # Environment variables
-export EDITOR=emacsclient
+export EDITOR="emacsclient"
 export ALTERNATE_EDITOR=""
-export VISUAL=${EDITOR}
-export PAGER=less
-export LESS=-Ri
+export VISUAL="${EDITOR}"
+export PAGER="less"
+export LESS="-Ri"
 export GREP_COLORS="mt=01;37;41"
-export GIT_PS1_SHOWDIRTYSTATE=yes
-export BROWSER=firefox
+export GIT_PS1_SHOWDIRTYSTATE="yes"
+export BROWSER="firefox"
 export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export WINEPREFIX="$HOME/.config/wine/"
-# export WINEARCH=win32
+# export WINEARCH="win32"
 
 # Set PATH so it includes user directory
 if [ -d "$HOME/.local/bin" ] ; then
@@ -19,4 +19,4 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Initialize Bash
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -r "$HOME/.bashrc" ]] && . "$HOME/.bashrc"

@@ -1,23 +1,23 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
-# Notify of completed background jobs
+# Notify of completed background jobs immediately
 set -o notify
 
-# Bash options
+# Shell behavior options
 shopt -s cdspell
 shopt -s direxpand
 shopt -s dirspell
 shopt -s extglob
 shopt -s no_empty_cmd_completion
 
-# History configuration
-HISTCONTROL=ignoreboth:erasedups
-HISTSIZE=20000
-HISTFILESIZE=${HISTSIZE}
+# History format and size
+HISTCONTROL="ignoreboth:erasedups"
+HISTSIZE="20000"
+HISTFILESIZE="${HISTSIZE}"
 HISTTIMEFORMAT="%F %T "
 
-# Bash history options
+# History options
 shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
@@ -28,12 +28,12 @@ if [[ -r "$HOME/.dircolors" ]] && type -p dircolors >/dev/null; then
 fi
 
 # Load aliases
-if [ -f "$HOME/.bash_aliases" ]; then
+if [[ -r "$HOME/.bash_aliases" ]]; then
     . "$HOME/.bash_aliases"
 fi
 
 # Load custom functions
-if [ -f "$HOME/.bash_functions" ]; then
+if [[ -r "$HOME/.bash_functions" ]]; then
     . "$HOME/.bash_functions"
 fi
 
