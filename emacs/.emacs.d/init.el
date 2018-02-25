@@ -519,9 +519,7 @@
 (after 'message
   ;; Customize
   (setq message-confirm-send t)
-  (setq message-kill-buffer-on-exit t)
-  ;; Default mail sending function
-  (setq message-send-mail-function #'smtpmail-send-it))
+  (setq message-kill-buffer-on-exit t))
 
 ;; Outgoing mail server
 (after 'smtpmail
@@ -1107,6 +1105,15 @@
              ("E s" . dired-async-do-symlink)
              ("E h" . dired-async-do-hardlink)
              ("E m" . dired-async-mode)))
+
+;; Asynchronous SMTP mail sending
+(after 'message
+  ;; Load async library
+  (require 'smtpmail-async)
+    ;; Change default mail sending function
+  (setq message-send-mail-function #'async-smtpmail-send-it)
+  ;; Enable compatibility with the Pass password manager
+  (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
 
 ;; Easy-kill
 (require-package 'easy-kill)
