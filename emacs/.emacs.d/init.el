@@ -249,19 +249,14 @@
 ;; Initialize mode
 (save-place-mode)
 
+;; Line numbers display
+(setq display-line-numbers-type 'relative)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+
 ;; Highlight current line
-(global-hl-line-mode)
-;; Disable `hl-line-mode' in special buffers
-(dolist (hook '(erc-mode-hook
-                eshell-mode-hook
-                term-mode-hook
-                ediff-mode-hook
-                comint-mode-hook
-                cider-repl-mode-hook
-                nov-mode-hook
-                slime-repl-mode-hook))
-  (add-hook hook
-            (lambda () (setq-local global-hl-line-mode nil))))
+(add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'text-mode-hook #'hl-line-mode)
 
 ;; Highlight matching parentheses
 (setq show-paren-delay 0)
