@@ -251,6 +251,7 @@
 
 ;; Line numbers display
 (setq display-line-numbers-type 'relative)
+;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
@@ -644,7 +645,8 @@
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-generic)
+  (setq browse-url-generic-program "qutebrowser"))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
@@ -1535,9 +1537,7 @@
   (bind-key "C-c i y" #'company-yasnippet)
   ;; Customize
   (setq company-backends
-        '(company-nxml
-          company-css
-          company-capf
+        '(company-capf
           company-files
           (company-dabbrev-code company-gtags company-etags company-keywords)
           company-dabbrev))
