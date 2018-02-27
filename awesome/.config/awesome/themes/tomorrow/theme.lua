@@ -44,6 +44,10 @@ theme.hotkeys_font = theme.font
 theme.hotkeys_description_font = theme.font
 theme.hotkeys_modifiers_fg = "#f0c674"
 
+-- Prompt cursor
+theme.prompt_fg_cursor = theme.bg_normal
+theme.prompt_bg_cursor = theme.fg_normal
+
 -- Generate taglist squares
 local taglist_square_size = dpi(5)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
