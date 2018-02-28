@@ -831,6 +831,10 @@ local globalkeys = gears.table.join(
    awful.key({ }, "XF86AudioMute", function () vicious.contrib.pulse.toggle(1) end,
       {description = "mute volume", group = "volume"}),
 
+   -- Clipboard
+   awful.key({ modkey }, "Insert", function () awful.spawn.with_shell("clipmenusel") end,
+      {description = "pick selection", group = "clipboard"}),
+
    -- Screenshot grabbing
    awful.key({ }, "Print", function () awful.spawn.with_shell("maim /tmp/screenshot-$(date +%s).png") end,
       {description = "screenshot desktop", group = "screenshot"}),

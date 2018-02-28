@@ -10,7 +10,7 @@ SELECTED_BACKGROUND="#282a2e"
 SELECTED_FOREGROUND="#f0c674"
 
 # Show clipboard
-clipmenu -b -i -p ">" \
+clipmenu -i -p ">" \
          -fn $FONT \
          -nb $NORMAL_BACKGROUND \
          -nf $NORMAL_FOREGROUND \
