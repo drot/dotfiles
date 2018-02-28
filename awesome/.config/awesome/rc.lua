@@ -829,7 +829,13 @@ local globalkeys = gears.table.join(
    awful.key({ }, "XF86AudioLowerVolume", function () vicious.contrib.pulse.add(-5, 1) end,
       {description = "lower volume", group = "volume"}),
    awful.key({ }, "XF86AudioMute", function () vicious.contrib.pulse.toggle(1) end,
-      {description = "mute volume", group = "volume"})
+      {description = "mute volume", group = "volume"}),
+
+   -- Screenshot grabbing
+   awful.key({ }, "Print", function () awful.spawn.with_shell("maim /tmp/screenshot-$(date +%s).png") end,
+      {description = "screenshot desktop", group = "screenshot"}),
+   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("maim -s /tmp/screenshot-$(date +%s).png") end,
+      {description = "screenshot selection", group = "screenshot"})
 )
 
 local clientkeys = gears.table.join(
