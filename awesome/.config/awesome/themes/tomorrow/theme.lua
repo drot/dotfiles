@@ -57,11 +57,20 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
    taglist_square_size, theme.fg_normal
 )
 
+-- Taglist
 theme.taglist_bg_focus = theme.bg_normal
 
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
+-- Tasklist
+theme.tasklist_sticky = "[*]"
+theme.tasklist_ontop = "[^]"
+theme.tasklist_above = "[↑]"
+theme.tasklist_below = "[↓]"
+theme.tasklist_floating = "[~]"
+theme.tasklist_maximized = "[+]"
+theme.tasklist_maximized_horizontal = "[-]"
+theme.tasklist_maximized_vertical = "[|]"
+
+-- Menu
 theme.menu_height = dpi(24)
 theme.menu_width = dpi(132)
 
@@ -85,11 +94,6 @@ theme.menu_manual = themes_path .. "themes/tomorrow/icons/menu/manual.png"
 theme.menu_edit = themes_path .. "themes/tomorrow/icons/menu/edit.png"
 theme.menu_restart = themes_path .. "themes/tomorrow/icons/menu/restart.png"
 theme.menu_quit = themes_path .. "themes/tomorrow/icons/menu/quit.png"
-
--- You can add as many variables as
--- you wish and access them by using
--- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
 
 -- Titlebar
 theme.titlebar_close_button_normal = themes_path .. "themes/tomorrow/icons/titlebar/close_normal.png"
