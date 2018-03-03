@@ -858,7 +858,7 @@
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
           ("America/Los_Angeles" "Los Angeles")
-          ("Canada/Eastern" "Quebec")
+          ("Canada/Eastern" "Toronto")
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
 
