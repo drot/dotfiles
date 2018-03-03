@@ -836,9 +836,9 @@ local globalkeys = gears.table.join(
       {description = "pick selection", group = "clipboard"}),
 
    -- Screenshot grabbing
-   awful.key({ }, "Print", function () awful.spawn.with_shell("maim /tmp/screenshot-$(date +%s).png") end,
+   awful.key({ }, "Print", function () awful.spawn.with_shell("maim -u /tmp/screenshot-$(date +%s).png") end,
       {description = "screenshot desktop", group = "screenshot"}),
-   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("maim -s /tmp/screenshot-$(date +%s).png") end,
+   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("maim -su /tmp/screenshot-$(date +%s).png") end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
