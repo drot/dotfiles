@@ -647,8 +647,7 @@
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after 'browse-url
-  (setq browse-url-browser-function #'browse-url-generic)
-  (setq browse-url-generic-program "qutebrowser"))
+  (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
