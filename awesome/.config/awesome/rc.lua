@@ -987,13 +987,13 @@ awful.rules.rules = {
    }, properties = { floating = true }},
 
    -- Add titlebars to normal clients and dialogs
-   { rule_any = {type = { "normal", "dialog" }
+   { rule_any = { type = { "normal", "dialog" }
                 }, properties = { titlebars_enabled = true }
    },
 
    -- Set Chromium to always map on the tag named "2" on screen 1
    { rule = { class = "Chromium" },
-     properties = { screen = 1, tag = "2" } },
+     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    -- Apply the same for qutebrowser
    { rule = { class = "qutebrowser" },
      properties = { screen = 1, tag = "2" } },
