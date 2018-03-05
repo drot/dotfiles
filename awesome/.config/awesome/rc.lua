@@ -107,6 +107,7 @@ local myofficemenu = {
 
 local mygraphicsmenu = {
    { "GIMP", "gimp", beautiful.menu_gimp },
+   { "pqiv", "pqiv Pictures", beautiful.menu_pqiv },
 }
 
 local myutilmenu = {
