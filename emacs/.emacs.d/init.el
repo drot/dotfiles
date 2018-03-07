@@ -721,6 +721,9 @@
 (bind-key "C-c c R" #'recompile)
 ;; Configuration
 (after 'compile
+  ;; Shorten mode lighter
+  (delight 'compilation-shell-minor-mode " sC" t)
+  ;; Customize
   (setq compilation-ask-about-save nil)
   (setq compilation-always-kill t)
   (setq compilation-scroll-output 'first-error)
