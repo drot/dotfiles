@@ -61,14 +61,14 @@
     (package-install package)))
 
 ;; Use a shorter alias for this commonly used macro
-(defalias 'after 'with-eval-after-load)
+(defalias 'after-load 'with-eval-after-load)
 
 ;; Use `bind-key' for personal keybindings
 (require-package 'bind-key)
 ;; Set key binding
 (bind-key "C-c h b" #'describe-personal-keybindings)
 ;; Configuration
-(after 'bind-key
+(after-load 'bind-key
   ;; Extract special forms
   (setq bind-key-describe-special-forms t))
 
@@ -307,7 +307,7 @@
 ;; Undo and redo the window configuration
 (winner-mode)
 ;; Configuration
-(after 'winner
+(after-load 'winner
   ;; Set key bindings
   (bind-keys :map winner-mode-map
              ("C-c w u" . winner-undo)
@@ -322,7 +322,7 @@
                 python-mode-hook))
   (add-hook hook #'hs-minor-mode))
 ;; Configuration
-(after 'hideshow
+(after-load 'hideshow
   (defun drot|hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
@@ -338,7 +338,7 @@
 (add-hook 'text-mode-hook #'bug-reference-mode)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 ;; Configuration
-(after 'bug-reference
+(after-load 'bug-reference
   (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
 
 ;; Goto Address mode
@@ -349,7 +349,7 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 ;; Configuration
-(after 'flyspell
+(after-load 'flyspell
   ;; Shorten mode lighter
   (delight 'flyspell-mode " fS" t)
   ;; Set key bindings
@@ -371,7 +371,7 @@
 ;; Ispell
 (bind-key "C-c l d" #'ispell-change-dictionary)
 ;; Configuration
-(after 'ispell
+(after-load 'ispell
   (setq ispell-program-name "hunspell"))
 
 ;; Isearch
@@ -380,18 +380,18 @@
 (setq search-default-mode #'char-fold-to-regexp)
 
 ;; Ediff window split
-(after 'ediff-wind
+(after-load 'ediff-wind
   ;; Configuration
   (setq ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function #'split-window-horizontally)
   (setq ediff-grab-mouse nil))
 
 ;; Ediff restore previous window configuration
-(after 'ediff-util
+(after-load 'ediff-util
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;; Uniquify buffer names
-(after 'uniquify
+(after-load 'uniquify
   ;; Configuration
   (setq uniquify-buffer-name-style 'forward)
   (setq uniquify-ignore-buffers-re "^\\*"))
@@ -399,11 +399,11 @@
 ;; Use Ibuffer for buffer list
 (bind-key [remap list-buffers] #'ibuffer)
 ;; Configuration
-(after 'ibuffer
+(after-load 'ibuffer
   (setq ibuffer-default-sorting-mode 'major-mode))
 
 ;; Version control
-(after 'vc-hooks
+(after-load 'vc-hooks
   ;; Configuration
   (setq vc-ignore-dir-regexp
         (format "\\(%s\\)\\|\\(%s\\)"
@@ -413,7 +413,7 @@
   (setq vc-make-backup-files t))
 
 ;; Customize interface options
-(after 'cus-edit
+(after-load 'cus-edit
   ;; Configuration
   (setq custom-buffer-done-kill t)
   (setq custom-buffer-verbose-help nil)
@@ -421,27 +421,27 @@
   (setq custom-unlispify-menu-entries nil))
 
 ;; Treat all themes as safe
-(after 'custom
+(after-load 'custom
   ;; Configuration
   (setq custom-safe-themes t))
 
 ;; Auto Revert mode
-(after 'autorevert
+(after-load 'autorevert
   ;; Shorten mode lighter
   (delight 'auto-revert-mode " aR" t))
 
 ;; Imenu configuration
-(after 'imenu
+(after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
 
 ;; Pcomplete configuration
-(after 'pcomplete
+(after-load 'pcomplete
   ;;Ignore case sensitivity with Pcomplete
   (setq pcomplete-ignore-case t))
 
 ;; ElDoc mode configuration
-(after 'eldoc
+(after-load 'eldoc
   ;; Shorten mode lighter
   (delight 'eldoc-mode " eD" t)
   ;; Make compatible with Paredit
@@ -450,7 +450,7 @@
    #'paredit-close-round))
 
 ;; Python mode configuration
-(after 'python
+(after-load 'python
   ;; Use Python 3 as default
   (setq python-shell-interpreter "python3")
   ;; Disable indent offset guessing
@@ -465,7 +465,7 @@
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
 ;; Configuration
-(after 'cc-mode
+(after-load 'cc-mode
   (setq c-basic-offset 4)
   (setq c-default-style
         '((java-mode . "java")
@@ -474,34 +474,34 @@
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; Etags
-(after 'etags
+(after-load 'etags
   ;; Configuration
   (setq tags-file-name "TAGS"))
 
 ;; Scheme mode
-(after 'scheme
+(after-load 'scheme
   ;; Use Guile as the default interpreter
   (setq scheme-program-name "guile"))
 
 ;; CSS mode
-(after 'css-mode
+(after-load 'css-mode
   ;; Configuration
   (setq css-indent-offset 2))
 
 ;; NXML mode
-(after 'nxml-mode
+(after-load 'nxml-mode
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t)
   (setq nxml-sexp-element-flag t))
 
 ;; Doc View mode
-(after 'doc-view
+(after-load 'doc-view
   ;; Configuration
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
 ;; Colorize ANSI escape sequences
-(after 'ansi-color
+(after-load 'ansi-color
   ;; Colorization function
   (defun drot|ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
@@ -511,7 +511,7 @@
   (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
 
 ;; Enable Pass integration
-(after 'auth-source
+(after-load 'auth-source
   ;; Initialize mode
   (auth-source-pass-enable))
 
@@ -519,13 +519,13 @@
 (bind-key "C-c i m" #'message-mark-inserted-region)
 (bind-key "C-c i f" #'message-mark-insert-file)
 ;; Configuration
-(after 'message
+(after-load 'message
   ;; Customize
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t))
 
 ;; Outgoing mail server
-(after 'smtpmail
+(after-load 'smtpmail
   ;; Configuration
   (setq smtpmail-smtp-server "mail.cock.li")
   (setq smtpmail-smtp-user "drot-smtp")
@@ -533,17 +533,17 @@
   (setq smtpmail-stream-type 'ssl))
 
 ;; Smileys
-(after 'smiley
+(after-load 'smiley
   ;; Configuration
   (setq smiley-style 'medium))
 
 ;; Prevent GnuTLS warnings
-(after 'gnutls
+(after-load 'gnutls
   ;; Configuration
   (setq gnutls-min-prime-bits nil))
 
 ;; Dired configuration
-(after 'dired
+(after-load 'dired
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
   ;; Default `ls' switches
@@ -559,25 +559,25 @@
   (setq dired-dwim-target t))
 
 ;; Dired Extra configuration
-(after 'dired-x
+(after-load 'dired-x
   ;; Shorten Dired Omit mode lighter
   (add-function :after (symbol-function 'dired-omit-startup)
                 (lambda () (delight 'dired-omit-mode " oT" t))
                 '((name . dired-omit-mode-delight))))
 
 ;; Wdired movement and editable parts
-(after 'wdired
+(after-load 'wdired
   ;; Configuration
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
 ;; Image-Dired
-(after 'image-dired
+(after-load 'image-dired
   ;; Change default external viewer
   (setq image-dired-external-viewer "pqiv"))
 
 ;; TRAMP
-(after 'tramp
+(after-load 'tramp
   ;; Configuration
   (setq tramp-default-method "ssh")
   (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
@@ -585,27 +585,27 @@
   (setq tramp-auto-save-directory temporary-file-directory))
 
 ;; Bookmarks
-(after 'bookmark
+(after-load 'bookmark
   ;; Configuration
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
 
 ;; Find file at point
-(after 'ffap
+(after-load 'ffap
   ;; Configuration
   (setq ffap-machine-p-known 'reject))
 
 ;; Search more extensively with apropos
 (bind-key "C-c h a" #'apropos)
 ;; Configuration
-(after 'apropos
+(after-load 'apropos
   (setq apropos-do-all t))
 
 ;; Copyright insertion
 (bind-key "C-c i c" #'copyright)
 (bind-key "C-c i C" #'copyright-update)
 ;; Configuration
-(after 'copyright
+(after-load 'copyright
   (setq copyright-year-ranges t)
   (setq copyright-names-regexp (regexp-quote user-login-name)))
 
@@ -613,7 +613,7 @@
 (bind-key "C-c x w" #'whitespace-cleanup)
 (bind-key "C-c t w" #'whitespace-mode)
 ;; Shorten mode lighter
-(after 'whitespace
+(after-load 'whitespace
   (delight 'whitespace-mode " wS" t))
 
 ;; Tildify mode
@@ -626,33 +626,33 @@
 ;; Regexp builder
 (bind-key "C-c s b" #'re-builder)
 ;; Configuration
-(after 're-builder
+(after-load 're-builder
   (setq reb-re-syntax 'string))
 
 ;; Proced
 (bind-key "C-c a P" #'proced)
 ;; Configuration
-(after 'proced
+(after-load 'proced
   (setq-default proced-sort 'start)
   (setq-default proced-tree-flag t))
 
 ;; GDB
 (bind-key "C-c a d" #'gdb)
 ;; Configuration
-(after 'gdb-mi
+(after-load 'gdb-mi
   (setq gdb-many-windows t))
 
 ;; Open URLs with the specified browser
 (bind-key "C-c n b" #'browse-url)
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
-(after 'browse-url
+(after-load 'browse-url
   (setq browse-url-browser-function #'browse-url-chromium))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
 ;; Configuration
-(after 'speedbar
+(after-load 'speedbar
   ;; Set key binding
   (bind-key "a" #'speedbar-toggle-show-all-files speedbar-mode-map)
   ;; Emulate NERDTree behavior
@@ -667,7 +667,7 @@
 ;; Eshell
 (bind-key "C-c a e" #'eshell)
 ;; Configuration
-(after 'eshell
+(after-load 'eshell
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
@@ -679,7 +679,7 @@
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
-(after 'eshell
+(after-load 'eshell
   ;; Initialize mode
   (require 'em-smart)
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
@@ -687,19 +687,19 @@
 ;; Shell mode
 (bind-key "C-c a s" #'shell)
 ;; Configuration
-(after 'shell
+(after-load 'shell
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
 (bind-key "C-c a '" #'ielm)
 ;; Configuration
-(after 'ielm
+(after-load 'ielm
   (setq ielm-prompt "EL> "))
 
 ;; Flymake
 (bind-key "C-c ! t" #'flymake-mode)
 ;; Configuration
-(after 'flymake
+(after-load 'flymake
   ;; Define Hydra
   (defhydra hydra-flymake (:columns 2)
     "Flymake"
@@ -720,7 +720,7 @@
 (bind-key "C-c c C" #'compile)
 (bind-key "C-c c R" #'recompile)
 ;; Configuration
-(after 'compile
+(after-load 'compile
   ;; Shorten mode lighter
   (delight 'compilation-shell-minor-mode " sC" t)
   ;; Customize
@@ -732,7 +732,7 @@
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
 ;; Configuration
-(after 'gnus
+(after-load 'gnus
   ;; Set key bindings
   (bind-key "C-c n o" #'ace-link-gnus gnus-summary-mode-map)
   (bind-key "C-c n o" #'ace-link-gnus gnus-article-mode-map)
@@ -782,7 +782,7 @@
 ;; Calendar
 (bind-key "C-c a c" #'calendar)
 ;; Configuration
-(after 'calendar
+(after-load 'calendar
   (setq holiday-general-holidays nil)
   (setq holiday-solar-holidays nil)
   (setq holiday-bahai-holidays nil)
@@ -801,7 +801,7 @@
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c O"))
 ;; Configuration
-(after 'outline
+(after-load 'outline
   ;; Shorten mode lighter
   (delight 'outline-minor-mode " oL" t)
   ;; Define Hydra
@@ -834,7 +834,7 @@
 (bind-key "C-c o s" #'org-search-view)
 (bind-key "C-c o l" #'org-store-link)
 ;; Configuration
-(after 'org
+(after-load 'org
   ;; Set key binding
   (bind-key "C-c n o" #'ace-link-org org-mode-map)
   ;; Customize
@@ -855,7 +855,7 @@
 ;; World time
 (bind-key "C-c a T" #'display-time-world)
 ;; Configuration
-(after 'time
+(after-load 'time
   ;; Configuration
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
@@ -867,7 +867,7 @@
 ;; Ace-window
 (require-package 'ace-window)
 ;; Configuration
-(after 'ace-window
+(after-load 'ace-window
   ;; Shorten mode lighter
   (delight 'ace-window-mode " aW" t))
 
@@ -877,7 +877,7 @@
 (add-hook 'python-mode-hook #'anaconda-mode)
 (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
 ;; Shorten mode lighter
-(after 'anaconda-mode
+(after-load 'anaconda-mode
   (delight 'anaconda-mode " aC" t))
 
 ;; Company Anaconda
@@ -890,7 +890,7 @@
 (require-package 'auctex)
 
 ;; TeX configuration
-(after 'tex
+(after-load 'tex
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
   ;; Automatically save and parse style
@@ -905,12 +905,12 @@
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 ;; TeX external commands
-(after 'tex-buf
+(after-load 'tex-buf
   ;; Don't ask to save before processing
   (setq TeX-save-query nil))
 
 ;; LaTeX configuration
-(after 'latex
+(after-load 'latex
   ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
   (add-hook 'LaTeX-mode-hook
             (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
@@ -924,7 +924,7 @@
   (add-hook 'LaTeX-mode-hook #'turn-on-reftex))
 
 ;; RefTeX
-(after 'reftex
+(after-load 'reftex
   ;; Shorten mode lighter
   (delight 'reftex-mode " rF" t)
   ;; Enable AUCTeX integration
@@ -933,17 +933,17 @@
 ;; CIDER
 (require-package 'cider)
 ;; Configuration
-(after 'cider-common
+(after-load 'cider-common
   ;; Use the symbol at point as the default value
   (setq cider-prompt-for-symbol nil))
 
 ;; CIDER mode configuration
-(after 'cider-mode
+(after-load 'cider-mode
   ;; Enable fuzzy completion with Company
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
 ;; CIDER REPL configuration
-(after 'cider-repl
+(after-load 'cider-repl
   ;; Enable persistent history
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
   (setq cider-repl-wrap-history t)
@@ -956,10 +956,17 @@
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
 
+;; Clojure mode
+(require-package 'clojure-mode)
+;; Configuration
+(after-load 'clojure-mode
+  ;; Enable SubWord mode
+  (add-hook 'clojure-mode-hook #'subword-mode))
+
 ;; Dash
 (require-package 'dash)
 ;; Configuration
-(after 'dash
+(after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
 
@@ -979,7 +986,7 @@
 ;; Dired Filter
 (require-package 'dired-filter)
 ;; Configuration
-(after 'dired-x
+(after-load 'dired-x
   ;; Initialize mode
   (require 'dired-filter)
   ;; Shorten mode lighter
@@ -990,7 +997,7 @@
 ;; Dired Rainbow
 (require-package 'dired-rainbow)
 ;; Configuration
-(after 'dired-filter
+(after-load 'dired-filter
   ;; Initialize mode
   (require 'dired-rainbow)
   ;; Define faces by file type
@@ -1023,7 +1030,7 @@
 ;; Dired Subtree
 (require-package 'dired-subtree)
 ;; Configuration
-(after 'dired-rainbow
+(after-load 'dired-rainbow
   ;; Initialize mode
   (require 'dired-subtree)
   ;; Set key bindings
@@ -1049,7 +1056,7 @@
 ;; Dired Ranger
 (require-package 'dired-ranger)
 ;; Configuration
-(after 'dired-subtree
+(after-load 'dired-subtree
   ;; Initialize mode
   (require 'dired-ranger)
   ;; Set key bindings
@@ -1068,7 +1075,7 @@
 ;; Dired Narrow
 (require-package 'dired-narrow)
 ;; Configuration
-(after 'dired-ranger
+(after-load 'dired-ranger
   ;; Initialize mode
   (require 'dired-narrow)
   ;; Shorten mode lighter
@@ -1079,7 +1086,7 @@
 ;; Dired Collapse
 (require-package 'dired-collapse)
 ;; Configuration
-(after 'dired-narrow
+(after-load 'dired-narrow
   ;; Initialize mode
   (require 'dired-collapse)
   ;; Set key binding
@@ -1088,7 +1095,7 @@
 ;; Dired-du
 (require-package 'dired-du)
 ;; Configuration
-(after 'dired-collapse
+(after-load 'dired-collapse
   ;; Initialize mode
   (require 'dired-du)
   ;; Shorten mode lighter
@@ -1099,7 +1106,7 @@
 ;; Dired Async
 (require-package 'async)
 ;; Configuration
-(after 'dired-du
+(after-load 'dired-du
   ;; Initialize mode
   (require 'dired-async)
   ;; Shorten mode lighter
@@ -1113,10 +1120,10 @@
              ("E m" . dired-async-mode)))
 
 ;; Asynchronous SMTP mail sending
-(after 'message
+(after-load 'message
   ;; Load async library
   (require 'smtpmail-async)
-    ;; Change default mail sending function
+  ;; Change default mail sending function
   (setq message-send-mail-function #'async-smtpmail-send-it)
   ;; Enable compatibility with the Pass password manager
   (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
@@ -1131,7 +1138,7 @@
 ;; Set key binding
 (bind-key "C-c a f" #'elfeed)
 ;; Configuration
-(after 'elfeed
+(after-load 'elfeed
   (setq elfeed-feeds
         '(("https://news.ycombinator.com/rss" hnews)
           ("https://lwn.net/headlines/rss" lwn)
@@ -1162,7 +1169,7 @@
 (require-package 'erc-hl-nicks)
 
 ;; ERC configuration
-(after 'erc
+(after-load 'erc
   ;; Load ERC services mode for Rizon authentication
   (erc-services-mode)
   (setq erc-prompt-for-nickserv-password nil)
@@ -1232,7 +1239,7 @@
 ;; Set key binding
 (bind-key "C-c t g" #'run-geiser)
 ;; Configuration
-(after 'geiser
+(after-load 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; IEdit
@@ -1248,7 +1255,7 @@
 (bind-key "C-;" #'iedit-execute-last-modification esc-map)
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
 ;; Configuration
-(after 'iedit
+(after-load 'iedit
   (setq iedit-toggle-key-default nil))
 
 ;; JavaScript mode
@@ -1256,7 +1263,7 @@
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; Configuration
-(after 'js2-mode
+(after-load 'js2-mode
   (setq js2-basic-offset 2)
   (setq js2-highlight-level 3)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
@@ -1270,7 +1277,7 @@
 ;; Hydra
 (require-package 'hydra)
 ;; Configuration
-(after 'hydra
+(after-load 'hydra
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
@@ -1279,7 +1286,7 @@
 ;; Initialize package
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 ;; Configuration
-(after 'nov
+(after-load 'nov
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
@@ -1310,7 +1317,7 @@
 ;; Avoid conflict with `which-key'
 (setq markdown-enable-prefix-prompts nil)
 ;; Configuration
-(after 'markdown-mode
+(after-load 'markdown-mode
   ;; Default markdown command
   (setq markdown-command
         (concat "pandoc"
@@ -1382,7 +1389,7 @@
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
 ;; Configuration
-(after 'pdf-tools
+(after-load 'pdf-tools
   ;; Make sure the binary is always compiled
   (pdf-tools-install :no-query))
 
@@ -1391,7 +1398,7 @@
 ;; Set key binding
 (bind-key "C-c t r" #'rainbow-mode)
 ;; Configuration
-(after 'rainbow-mode
+(after-load 'rainbow-mode
   (delight 'rainbow-mode " rW" t))
 
 ;; Skewer
@@ -1401,19 +1408,19 @@
 ;; Set key bindings
 (bind-key "C-c t S" #'run-skewer)
 ;; Configuration
-(after 'skewer-mode
+(after-load 'skewer-mode
   (delight 'skewer-mode " sK" t))
 
 ;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
 ;; Configuration
-(after 'skewer-css
+(after-load 'skewer-css
   (delight 'skewer-css-mode " sKC" t))
 
 ;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 ;; Configuration
-(after 'skewer-html
+(after-load 'skewer-html
   (delight 'skewer-html-mode " sKH" t))
 
 ;; SLIME
@@ -1422,7 +1429,7 @@
 (bind-key "C-c t s" #'slime)
 (bind-key "C-c t C" #'slime-connect)
 ;; Configuration
-(after 'slime
+(after-load 'slime
   ;; Set key binding
   (bind-key "C-c $" #'slime-export-symbol-at-point slime-mode-indirect-map)
   ;; Disable conflicting key binding
@@ -1434,11 +1441,11 @@
   (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")))
 
 ;; Shorten SLIME Autodoc mode lighter
-(after 'slime-autodoc
+(after-load 'slime-autodoc
   (delight 'slime-autodoc-mode " aD" t))
 
 ;; SLIME REPL configuration
-(after 'slime-repl
+(after-load 'slime-repl
   ;; Set key bindings
   (bind-keys :map slime-repl-mode-map
              ("C-c M-r" . slime-repl-previous-matching-input)
@@ -1451,13 +1458,13 @@
 ;; SLIME Company
 (require-package 'slime-company)
 ;; Configuration
-(after 'slime-company
+(after-load 'slime-company
   (setq slime-company-completion 'fuzzy))
 
 ;; Smex
 (require-package 'smex)
 ;; Configuration
-(after 'smex
+(after-load 'smex
   (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
 
 ;; Systemd mode
@@ -1485,7 +1492,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Configuration
-(after 'ace-link
+(after-load 'ace-link
   ;; Set key binding
   (bind-key "C-c n a"  #'ace-link-addr))
 
@@ -1498,7 +1505,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-anzu-mode)
 ;; Configuration
-(after 'anzu
+(after-load 'anzu
   ;; Set key bindings
   (bind-key [remap query-replace] #'anzu-query-replace)
   (bind-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
@@ -1524,7 +1531,7 @@
 (bind-key "C-c j l" #'avy-goto-line)
 (bind-key "C-c j j" #'avy-goto-word-or-subword-1)
 ;; Configuration
-(after 'avy
+(after-load 'avy
   (setq avy-all-windows 'all-frames)
   (setq avy-background t)
   (setq avy-highlight-first t))
@@ -1534,7 +1541,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-company-mode)
 ;; Configuration
-(after 'company
+(after-load 'company
   ;; Shorten mode lighter
   (delight 'company-mode " cY" t)
   ;; Set key binding
@@ -1561,7 +1568,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'company-statistics-mode)
 ;; Configuration
-(after 'company
+(after-load 'company
   (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
 
 ;; Diff-Hl
@@ -1569,7 +1576,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-diff-hl-mode)
 ;; Configuration
-(after 'diff-hl
+(after-load 'diff-hl
   ;; Set key binding
   (bind-key "C-c t D" #'diff-hl-margin-mode)
   ;; Update diffs immediately
@@ -1594,7 +1601,7 @@
 ;; Initialize mode
 (add-hook 'prog-mode-hook #'hl-todo-mode)
 ;; Configuration
-(after 'hl-todo
+(after-load 'hl-todo
   ;; Define Hydra
   (defhydra hydra-hl-todo (:columns 2)
     "Highlight TODO"
@@ -1633,7 +1640,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Configuration
-(after 'ivy
+(after-load 'ivy
   ;; Shorten mode lighter
   (delight 'ivy-mode " iY" t)
   ;; Set key binding
@@ -1654,7 +1661,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Configuration
-(after 'counsel
+(after-load 'counsel
   ;; Shorten mode lighter
   (delight 'counsel-mode " cS" t)
   ;; Set key bindings
@@ -1679,7 +1686,7 @@
 (bind-key "C-c s s" #'swiper)
 (bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configure
-(after 'swiper
+(after-load 'swiper
   (setq swiper-include-line-number-in-search t))
 
 ;; Paredit
@@ -1695,7 +1702,7 @@
                 geiser-repl-mode-hook))
   (add-hook hook #'enable-paredit-mode))
 ;; Configuration
-(after 'paredit
+(after-load 'paredit
   ;; Shorten mode lighter
   (delight 'paredit-mode " pE" t)
   ;; Set key bindings
@@ -1734,7 +1741,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'volatile-highlights-mode)
 ;; Configuration
-(after 'volatile-highlights
+(after-load 'volatile-highlights
   (delight 'volatile-highlights-mode " vH" t))
 
 ;; Which Key
@@ -1750,7 +1757,7 @@
 (bind-key "C-c h w m" #'which-key-show-major-mode)
 (bind-key "C-c h w k" #'which-key-show-full-keymap)
 ;; Configuration
-(after 'which-key
+(after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
@@ -1810,7 +1817,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'yas-global-mode)
 ;; Configuration
-(after 'yasnippet
+(after-load 'yasnippet
   (delight 'yas-minor-mode " yS" t))
 
 ;; Toggle debug on error
