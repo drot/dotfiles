@@ -930,6 +930,13 @@
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
+;; Clojure mode
+(require-package 'clojure-mode)
+;; Configuration
+(after-load 'clojure-mode
+  ;; Enable SubWord mode
+  (add-hook 'clojure-mode-hook #'subword-mode))
+
 ;; CIDER
 (require-package 'cider)
 ;; Configuration
@@ -955,13 +962,6 @@
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
-
-;; Clojure mode
-(require-package 'clojure-mode)
-;; Configuration
-(after-load 'clojure-mode
-  ;; Enable SubWord mode
-  (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;; Dash
 (require-package 'dash)
