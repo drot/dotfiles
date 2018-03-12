@@ -278,9 +278,7 @@ local memory_chart = wibox.widget {
    border_width = 1,
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
-   colors = {
-      beautiful.widget_value
-   },
+   colors = { beautiful.widget_value },
    widget = wibox.container.arcchart,
 }
 
@@ -432,9 +430,7 @@ local fs_chart = wibox.widget {
    border_width = 1,
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
-   colors = {
-      beautiful.widget_value
-   },
+   colors = { beautiful.widget_value },
    widget = wibox.container.arcchart,
 }
 
@@ -995,9 +991,9 @@ awful.rules.rules = {
    -- Set Chromium to always map on the tag named "2" on screen 1
    { rule = { class = "Chromium" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   -- Apply the same for qutebrowser
-   { rule = { class = "qutebrowser" },
-     properties = { screen = 1, tag = "2" } },
+   -- Apply the same for Firefox
+   { rule = { class = "Firefox" },
+     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
      properties = { screen = 1, tag = "3" } },
