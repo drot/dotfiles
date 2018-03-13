@@ -130,12 +130,39 @@ local mymainmenu = awful.menu({ items = {
                                    { "Office", myofficemenu, beautiful.menu_office },
                                    { "Utilities", myutilmenu, beautiful.menu_util },
                                    { "Web", mywebmenu, beautiful.menu_web },
-                                   { "awesome", myawesomemenu, beautiful.awesome_icon }
+                                   { "awesome", myawesomemenu, beautiful.awesome_menu_icon }
 }
                              })
 
-local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                           menu = mymainmenu })
+local mylauncher = wibox.widget {
+   {
+      {
+         {
+            {
+               widget = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                                menu = mymainmenu })
+            },
+            top = 2,
+            bottom = 2,
+            left = 4,
+            right = 4,
+            widget = wibox.container.margin
+         },
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_focus,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
+      },
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
+   },
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
+}
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -634,7 +661,7 @@ awful.screen.connect_for_each_screen(function(s)
       s.mypromptbox = awful.widget.prompt()
       -- Create an imagebox widget which will contain an icon indicating which layout we're using.
       -- We need one layoutbox per screen.
-      s.mylayoutbox = awful.widget.layoutbox(s)
+      s.mylayoutbox = wibox.container.margin(awful.widget.layoutbox(s), 2, 2, 4, 4)
       s.mylayoutbox:buttons(gears.table.join(
                                awful.button({ }, 1, function () awful.layout.inc( 1) end),
                                awful.button({ }, 3, function () awful.layout.inc(-1) end),
