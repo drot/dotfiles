@@ -135,33 +135,15 @@ local mymainmenu = awful.menu({ items = {
                              })
 
 local mylauncher = wibox.widget {
-   {
       {
-         {
-            {
-               widget = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                                menu = mymainmenu })
-            },
-            top = 2,
-            bottom = 2,
-            left = 4,
-            right = 4,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
+         widget = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                          menu = mymainmenu })
       },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
-   top = 2,
-   bottom = 2,
-   left = 2,
-   right = 2,
-   widget = wibox.container.margin
+      top = 4,
+      bottom = 4,
+      left = 2,
+      right = 2,
+      widget = wibox.container.margin
 }
 
 -- Menubar configuration
@@ -175,8 +157,15 @@ vicious.cache(vicious.widgets.cpu)
 
 -- Create a CPU usage icon widget
 local cpu_icon = wibox.widget {
-   image = beautiful.widget_cpu,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_cpu,
+      widget = wibox.widget.imagebox
+   },
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Set CPU usage text value
@@ -261,8 +250,15 @@ vicious.cache(vicious.widgets.mem)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
-   image = beautiful.widget_memory,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_memory,
+      widget = wibox.widget.imagebox
+   },
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Set memory usage text value
@@ -347,8 +343,15 @@ vicious.cache(vicious.widgets.thermal)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
-   image = beautiful.widget_temperature,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_temperature,
+      widget = wibox.widget.imagebox
+   },   
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Set temperature text value
@@ -410,8 +413,15 @@ local temperature_widget = wibox.container.rotate(temperature_bar, "east")
 
 -- Create a file system usage icon widget
 local fs_icon = wibox.widget {
-   image = beautiful.widget_fs,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_fs,
+      widget = wibox.widget.imagebox
+   },   
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Cache file system usage widgets
@@ -495,8 +505,15 @@ vicious.cache(vicious.contrib.pulse)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
-   image = beautiful.widget_volume,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_volume,
+      widget = wibox.widget.imagebox
+   },
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Set volume text value
@@ -556,8 +573,15 @@ local volume_widget = wibox.container.rotate(volume_bar, "east")
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
-   image = beautiful.widget_clock,
-   widget = wibox.widget.imagebox
+   {
+      image = beautiful.widget_clock,
+      widget = wibox.widget.imagebox
+   },
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Create a text clock widget
