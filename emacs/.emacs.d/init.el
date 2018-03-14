@@ -1247,8 +1247,6 @@
 
 ;; Geiser
 (require-package 'geiser)
-;; Set key binding
-(bind-key "C-c a r" #'run-geiser)
 ;; Configuration
 (after-load 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
@@ -1417,7 +1415,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key bindings
-(bind-key "C-c a b" #'run-skewer)
+(bind-key "C-c a W" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
   (delight 'skewer-mode " sK" t))
@@ -1846,9 +1844,6 @@
 
 ;; ANSI Term
 (bind-key "C-c a T" #'ansi-term)
-
-;; SQL mode
-(bind-key "C-c a q" #'sql-connect)
 
 ;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
