@@ -34,8 +34,8 @@
 (add-hook 'after-init-hook
           (lambda () (setq gc-cons-threshold 400000)))
 
-;; Create directories for various backups
-(make-directory (locate-user-emacs-file "backup") t)
+;; Create directories for backups and cache files
+(make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
 ;; Disable the site default settings
@@ -214,9 +214,9 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup") t)))
-(setq auto-save-list-file-prefix (locate-user-emacs-file "backup/.saves-"))
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backup"))))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups") t)))
+(setq auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-"))
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups"))))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -1002,7 +1002,7 @@
   (require 'dired-filter)
   ;; Shorten mode lighter
   (delight 'dired-filter-mode " fR" t)
-  ;; Set key bindings
+  ;; Set key binding
   (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
 ;; Dired Rainbow
@@ -1414,7 +1414,7 @@
 (require-package 'skewer-mode)
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
-;; Set key bindings
+;; Set key binding
 (bind-key "C-c a W" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
