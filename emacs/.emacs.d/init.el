@@ -34,7 +34,8 @@
 (add-hook 'after-init-hook
           (lambda () (setq gc-cons-threshold 400000)))
 
-;; Set default directory for save files
+;; Create directories for various backups
+(make-directory (locate-user-emacs-file "backup") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
 ;; Disable the site default settings
@@ -213,9 +214,9 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "cache") t)))
-(setq auto-save-list-file-prefix (locate-user-emacs-file "cache/.saves-"))
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "cache"))))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup") t)))
+(setq auto-save-list-file-prefix (locate-user-emacs-file "backup/.saves-"))
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backup"))))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -257,9 +258,7 @@
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 
 ;; Highlight current line
-(add-hook 'prog-mode-hook #'hl-line-mode)
-(add-hook 'text-mode-hook #'hl-line-mode)
-(add-hook 'conf-mode-hook #'hl-line-mode)
+(global-hl-line-mode)
 
 ;; Highlight matching parentheses
 (setq show-paren-delay 0)
@@ -537,6 +536,11 @@
   ;; Configuration
   (setq smiley-style 'medium))
 
+;; Network Security Manager
+(after-load 'nsm
+  ;; Change default settings file location
+  (setq nsm-settings-file (locate-user-emacs-file "cache/network-security.data")))
+
 ;; Prevent GnuTLS warnings
 (after-load 'gnutls
   ;; Configuration
@@ -642,12 +646,20 @@
 (after-load 'gdb-mi
   (setq gdb-many-windows t))
 
+;; EWW
+(bind-key "C-c a w w" #'eww)
+(bind-key "C-c a w b" #'eww-list-bookmarks)
+;; Configuration
+(after-load 'eww
+  ;; Set bookmarks directory
+  (setq eww-bookmarks-directory (locate-user-emacs-file "cache")))
+
 ;; Open URLs with the specified browser
 (bind-key "C-c n b" #'browse-url)
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after-load 'browse-url
-  (setq browse-url-browser-function #'browse-url-chromium))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
@@ -685,7 +697,7 @@
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
 ;; Shell mode
-(bind-key "C-c a s" #'shell)
+(bind-key "C-c a t" #'shell)
 ;; Configuration
 (after-load 'shell
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
@@ -717,8 +729,7 @@
              ("C-c ! h" . hydra-flymake/body)))
 
 ;; Compilation
-(bind-key "C-c c C" #'compile)
-(bind-key "C-c c R" #'recompile)
+(bind-key "C-c c C" #'recompile)
 ;; Configuration
 (after-load 'compile
   ;; Shorten mode lighter
@@ -838,7 +849,7 @@
   ;; Set key binding
   (bind-key "C-c n o" #'ace-link-org org-mode-map)
   ;; Customize
-  (setq org-directory (locate-user-emacs-file "org/"))
+  (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
   (setq org-agenda-files '("~/.emacs.d/org"))
   (setq org-log-done 'time)
@@ -853,7 +864,7 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(bind-key "C-c a T" #'display-time-world)
+(bind-key "C-c a C" #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Configuration
@@ -1237,7 +1248,7 @@
 ;; Geiser
 (require-package 'geiser)
 ;; Set key binding
-(bind-key "C-c t g" #'run-geiser)
+(bind-key "C-c a r" #'run-geiser)
 ;; Configuration
 (after-load 'geiser
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
@@ -1250,7 +1261,7 @@
 (autoload #'iedit-execute-last-modification "iedit"
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
-(bind-key "C-c i e" #'iedit-mode)
+(bind-key "C-c t i" #'iedit-mode)
 (bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
 (bind-key "C-;" #'iedit-execute-last-modification esc-map)
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
@@ -1406,7 +1417,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key bindings
-(bind-key "C-c t S" #'run-skewer)
+(bind-key "C-c a b" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
   (delight 'skewer-mode " sK" t))
@@ -1426,8 +1437,8 @@
 ;; SLIME
 (require-package 'slime)
 ;; Set key bindings
-(bind-key "C-c t s" #'slime)
-(bind-key "C-c t C" #'slime-connect)
+(bind-key "C-c a s" #'slime)
+(bind-key "C-c a S" #'slime-connect)
 ;; Configuration
 (after-load 'slime
   ;; Set key binding
@@ -1578,7 +1589,7 @@
 ;; Configuration
 (after-load 'diff-hl
   ;; Set key binding
-  (bind-key "C-c t D" #'diff-hl-margin-mode)
+  (bind-key "C-c t v" #'diff-hl-margin-mode)
   ;; Update diffs immediately
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
@@ -1765,6 +1776,7 @@
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
+    "C-c a w" "eww"
     "C-c a" "applications"
     "C-c b" "buffers"
     "C-c c" "compile-and-comments"
@@ -1786,6 +1798,7 @@
     "C-c t" "toggles"
     "C-c v" "version-control"
     "C-c w" "windows"
+    "C-c x a" "align"
     "C-c x" "text"
     "C-x C-a" "edebug"
     "C-x a" "abbrev"
@@ -1829,10 +1842,13 @@
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
-(bind-key "C-c f E" #'ediff3)
+(bind-key "C-c f 3" #'ediff3)
 
 ;; ANSI Term
-(bind-key "C-c a t" #'ansi-term)
+(bind-key "C-c a T" #'ansi-term)
+
+;; SQL mode
+(bind-key "C-c a q" #'sql-connect)
 
 ;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
@@ -1848,9 +1864,6 @@
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
-
-;; EWW
-(bind-key "C-c n e" #'eww)
 
 ;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
@@ -1876,18 +1889,16 @@
 (bind-key "C-c t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "C-c x A" #'align)
-(bind-key "C-c x a" #'align-current)
-(bind-key "C-c x r" #'align-regexp)
+(bind-key "C-c x a a" #'align)
+(bind-key "C-c x a c" #'align-current)
+(bind-key "C-c x a r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
 
 ;; Commenting
 (bind-key "C-c c d" #'comment-dwim)
-(bind-key "C-c c r" #'comment-region)
-(bind-key "C-c c u" #'uncomment-region)
-(bind-key "C-c c o" #'comment-or-uncomment-region)
+(bind-key "C-c c r" #'comment-or-uncomment-region)
 
 ;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
