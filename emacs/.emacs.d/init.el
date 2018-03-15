@@ -32,7 +32,7 @@
 
 ;; Reset garbage collection threshold value to default after startup
 (add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold 400000)))
+          (lambda () (setq gc-cons-threshold 800000)))
 
 ;; Create directories for backups and cache files
 (make-directory (locate-user-emacs-file "backups") t)
@@ -941,13 +941,6 @@
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
-;; Clojure mode
-(require-package 'clojure-mode)
-;; Configuration
-(after-load 'clojure-mode
-  ;; Enable SubWord mode
-  (add-hook 'clojure-mode-hook #'subword-mode))
-
 ;; CIDER
 (require-package 'cider)
 ;; Configuration
@@ -973,6 +966,13 @@
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
+
+;; Clojure mode
+(require-package 'clojure-mode)
+;; Configuration
+(after-load 'clojure-mode
+  ;; Enable SubWord mode
+  (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;; Dash
 (require-package 'dash)
@@ -1624,24 +1624,6 @@
              ("C-c p t o" . hl-todo-occur)
              ("C-c p t h" . hydra-hl-todo/body)))
 
-;; Hyperbole
-(require-package 'hyperbole)
-;; Configuration
-(setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-;; Set key bindings
-(add-hook 'hyperbole-init-hook
-          (lambda ()
-            ;; Add ace-window support
-            (hkey-ace-window-setup (kbd "M-o"))
-            ;; Remap default bindings
-            (bind-key "C-c ," #'hui-select-thing)
-            (bind-key "C-c R" #'hui:ebut-rename)
-            (bind-key "C-c |" #'hycontrol-windows-grid)
-            (bind-key "C-c C-\\" #'hkey-operate)))
-;; Initialize mode
-(add-hook 'after-init-hook
-          (lambda () (require 'hyperbole)))
-
 ;; Ivy
 (require-package 'ivy)
 ;; Ivy Hydra support
@@ -1698,6 +1680,24 @@
 ;; Configure
 (after-load 'swiper
   (setq swiper-include-line-number-in-search t))
+
+;; Hyperbole
+(require-package 'hyperbole)
+;; Configuration
+(setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
+;; Set key bindings
+(add-hook 'hyperbole-init-hook
+          (lambda ()
+            ;; Add ace-window support
+            (hkey-ace-window-setup (kbd "M-o"))
+            ;; Remap default bindings
+            (bind-key "C-c ," #'hui-select-thing)
+            (bind-key "C-c R" #'hui:ebut-rename)
+            (bind-key "C-c |" #'hycontrol-windows-grid)
+            (bind-key "C-c C-\\" #'hkey-operate)))
+;; Initialize mode
+(add-hook 'after-init-hook
+          (lambda () (require 'hyperbole)))
 
 ;; Paredit
 (require-package 'paredit)
