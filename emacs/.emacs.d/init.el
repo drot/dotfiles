@@ -216,7 +216,7 @@
 ;; Configuration for backup files
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups") t)))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-"))
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups"))))
+(setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups"))))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -1352,8 +1352,48 @@
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
-;; Initialize package
+;; Change default `multiple-cursors' lists file location
 (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
+;; Populate default `multiple-cursors' lists
+(unless (file-exists-p mc/list-file)
+  (setq mc/cmds-to-run-for-all
+        '(backward-sexp
+          downcase-region
+          electric-newline-and-maybe-indent
+          end-of-buffer
+          forward-sexp
+          indent-for-tab-command
+          kill-region
+          paredit-backslash
+          paredit-backward
+          paredit-close-round
+          paredit-close-square
+          paredit-comment-dwim
+          paredit-convolute-sexp
+          paredit-doublequote
+          paredit-forward
+          paredit-forward-barf-sexp
+          paredit-forward-delete
+          paredit-forward-down
+          paredit-forward-slurp-sexp
+          paredit-kill
+          paredit-newline
+          paredit-open-round
+          paredit-open-square
+          paredit-reindent-cl-defun
+          paredit-semicolon
+          paredit-splice-sexp-killing-backward
+          paredit-backslash
+          reindent-then-newline-and-indent
+          scroll-other-window
+          slime-autodoc-space
+          slime-space
+          switch-to-buffer
+          upcase-region
+          yank-rectangle))
+  (setq mc/cmds-to-run-once
+        '(down-list
+          mouse-drag-mode-line)))
 ;; Set key bindings
 (bind-key "C-c m <SPC>" #'mc/vertical-align-with-space)
 (bind-key "C-c m a" #'mc/vertical-align)
@@ -1446,8 +1486,7 @@
   ;; Use all accessible features and SBCL by default
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy slime-company))
-  (setq slime-protocol-version 'ignore)
-  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")))
+  (setq slime-protocol-version 'ignore))
 
 ;; Shorten SLIME Autodoc mode lighter
 (after-load 'slime-autodoc
@@ -1462,7 +1501,11 @@
   ;; Disable conflicting key bindings
   (unbind-key "DEL" slime-repl-mode-map)
   (unbind-key "M-r" slime-repl-mode-map)
-  (unbind-key "M-s" slime-repl-mode-map))
+  (unbind-key "M-s" slime-repl-mode-map)
+  ;; Customize
+  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld"))
+  (setq slime-repl-history-remove-duplicates t)
+  (setq slime-repl-history-trim-whitespaces t))
 
 ;; SLIME Company
 (require-package 'slime-company)
@@ -1559,7 +1602,7 @@
   (setq company-backends
         '(company-capf
           company-files
-          (company-dabbrev-code company-gtags company-etags company-keywords)
+          (company-dabbrev-code company-etags company-keywords)
           company-dabbrev))
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
