@@ -47,6 +47,7 @@ PROMPT_DIRTRIM=2
 
 # Git prompt format
 GIT="\$(__git_ps1 ' %s')"
+GIT_PS1_SHOWDIRTYSTATE="yes"
 
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
