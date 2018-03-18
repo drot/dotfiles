@@ -9,6 +9,7 @@ shopt -s cdspell
 shopt -s direxpand
 shopt -s dirspell
 shopt -s extglob
+shopt -s globstar
 shopt -s no_empty_cmd_completion
 
 # History format and size
