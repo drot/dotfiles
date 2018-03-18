@@ -6,6 +6,7 @@ set completion-ignore-case on
 # Colorize Tab completion
 $if Bash
 set colored-stats on
+set colored-completion-prefix on
 $endif
 
 # Use Emacs-style history search keys

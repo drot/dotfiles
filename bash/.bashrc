@@ -42,6 +42,9 @@ if [[ -r /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
+# Trim deep directory paths
+PROMPT_DIRTRIM=2
+
 # Git prompt format
 GIT="\$(__git_ps1 ' %s')"
 
