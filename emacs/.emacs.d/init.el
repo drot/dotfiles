@@ -1680,7 +1680,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Hl-Todo
 (require-package 'hl-todo)
 ;; Initialize mode
-(add-hook 'prog-mode-hook #'hl-todo-mode)
+(add-hook 'after-init-hook #'global-hl-todo-mode)
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
