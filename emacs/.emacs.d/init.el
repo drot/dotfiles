@@ -1911,7 +1911,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c t R" #'ruler-mode)
 
 ;; Variable pitch mode
-(bind-key "C-c t v" #'variable-pitch-mode)
+(bind-key "C-c t V" #'variable-pitch-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
