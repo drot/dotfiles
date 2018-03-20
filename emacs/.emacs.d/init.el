@@ -1327,7 +1327,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (defun drot|nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
-  (add-hook 'nov-mode-hook 'drot|nov-font-setup)
+  (add-hook 'nov-mode-hook #'drot|nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
