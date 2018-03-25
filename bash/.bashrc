@@ -43,8 +43,19 @@ if [[ -r /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
+# VTE workaround
+if [[ $TILIX_ID ]]; then
+    . /etc/profile.d/vte-2.91.sh
+fi
+
+# Prompt colors
+RED="\[\033[1;31m\]"
+GREEN="\[\033[1;32m\]"
+BLUE="\[\033[1;34m\]"
+NIL="\[\033[00m\]"
+
 # Trim deep directory paths
-PROMPT_DIRTRIM=2
+PROMPT_DIRTRIM="2"
 
 # Git prompt format
 GIT="\$(__git_ps1 ' %s')"
@@ -52,12 +63,6 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
-
-# Prompt colors
-RED="\[\033[1;31m\]"
-GREEN="\[\033[1;32m\]"
-BLUE="\[\033[1;34m\]"
-NIL="\[\033[00m\]"
 
 # Prompt format
 case $TERM in

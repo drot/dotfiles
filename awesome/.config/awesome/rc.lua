@@ -46,7 +46,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "lxterminal"
+local terminal = "tilix"
 local editor = os.getenv("EDITOR") or "nano"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -872,11 +872,11 @@ local globalkeys = gears.table.join(
       {description = "show the menubar", group = "launcher"}),
 
    -- Volume control
-   awful.key({ }, "XF86AudioRaiseVolume", function () vicious.contrib.pulse.add(5, 1) end,
+   awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("pactl set-sink-volume 0 +5%") end,
       {description = "increase volume", group = "volume"}),
-   awful.key({ }, "XF86AudioLowerVolume", function () vicious.contrib.pulse.add(-5, 1) end,
+   awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn.with_shell("pactl set-sink-volume 0 -5%") end,
       {description = "lower volume", group = "volume"}),
-   awful.key({ }, "XF86AudioMute", function () vicious.contrib.pulse.toggle(1) end,
+   awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("pactl set-sink-mute 0 toggle") end,
       {description = "mute volume", group = "volume"}),
 
    -- Clipboard
