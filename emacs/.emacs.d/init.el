@@ -540,11 +540,8 @@ Selectively runs either `after-make-console-frame-hooks' or
   (auth-source-pass-enable))
 
 ;; Mail sending
-(bind-key "C-c i m" #'message-mark-inserted-region)
-(bind-key "C-c i f" #'message-mark-insert-file)
-;; Configuration
 (after-load 'message
-  ;; Customize
+  ;; Configuration
   (setq message-confirm-send t)
   (setq message-kill-buffer-on-exit t))
 
