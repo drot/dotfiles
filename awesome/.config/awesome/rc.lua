@@ -1042,8 +1042,10 @@ awful.rules.rules = {
    -- Set Chromium to always map on the tag named "2" on screen 1
    { rule = { class = "Chromium" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   -- Apply the same for Firefox
+   -- Apply the same for Mozilla
    { rule = { class = "Firefox" },
+     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
+   { rule = { class = "Tor Browser" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
