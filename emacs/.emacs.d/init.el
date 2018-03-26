@@ -681,7 +681,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after-load 'browse-url
-  (setq browse-url-browser-function #'browse-url-chromium))
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)

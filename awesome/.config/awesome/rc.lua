@@ -95,9 +95,9 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-local mywebmenu = {
-   { "Chromium", "chromium", beautiful.menu_browser },
-   { "Pidgin", "pidgin", beautiful.menu_pidgin },
+local mygraphicsmenu = {
+   { "GIMP", "gimp", beautiful.menu_gimp },
+   { "pqiv", "pqiv Pictures", beautiful.menu_pqiv }
 }
 
 local myofficemenu = {
@@ -105,14 +105,15 @@ local myofficemenu = {
    { "llpp", "llpp", beautiful.menu_pdf }
 }
 
-local mygraphicsmenu = {
-   { "GIMP", "gimp", beautiful.menu_gimp },
-   { "pqiv", "pqiv Pictures", beautiful.menu_pqiv },
-}
-
 local myutilmenu = {
    { "Thunar", "thunar", beautiful.menu_fman },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
+}
+
+local mywebmenu = {
+   { "Firefox", "firefox", beautiful.menu_browser },
+   { "Pidgin", "pidgin", beautiful.menu_pidgin },
+   { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
 }
 
 local myawesomemenu = {
@@ -1051,13 +1052,13 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { screen = 1, tag = "3" } },
    { rule = { class = "libreoffice" },
-     properties = { screen = 1, tag = "4" } },
+     properties = { screen = 1, tag = "5" } },
    { rule = { class = "Pavucontrol" },
-     properties = { screen = 1, tag = "4" } },
+     properties = { screen = 1, tag = "5" } },
    { rule = { class = "Gimp" },
-     properties = { screen = 1, tag = "4" } },
+     properties = { screen = 1, tag = "5" } },
    { rule = { class = "Thunar" },
-     properties = { screen = 1, tag = "4" } },
+     properties = { screen = 1, tag = "5" } },
 }
 -- }}}
 
