@@ -16,7 +16,7 @@
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
+;; GNU General Public License for more details. #23439
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -524,16 +524,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq doc-view-resolution 300)
   (setq doc-view-continuous t))
 
-;; Colorize ANSI escape sequences
-(after-load 'ansi-color
-  ;; Colorization function
-  (defun drot|ansi-color-compilation-buffer ()
-    "Colorize the compilation mode buffer"
-    (when (eq major-mode 'compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
-  ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer))
-
 ;; Enable Pass integration
 (after-load 'auth-source
   ;; Initialize mode
@@ -710,6 +700,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
     (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
+  ;; Apply the hook
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
@@ -756,6 +747,15 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'compile
   ;; Shorten mode lighter
   (delight 'compilation-shell-minor-mode " sC" t)
+  ;; Colorize ANSI escape sequences
+  (require 'ansi-color)
+  ;; Colorization function
+  (defun drot|ansi-color-compilation-buffer ()
+    "Colorize the compilation mode buffer"
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  ;; Apply colorization
+  (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer)
   ;; Customize
   (setq compilation-ask-about-save nil)
   (setq compilation-always-kill t)
@@ -1250,6 +1250,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
     (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0))
+  ;; Apply the hook
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
   ;; Enable notifications
   (erc-notifications-mode)
@@ -1324,6 +1325,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (defun drot|nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
+  ;; Apply the hook
   (add-hook 'nov-mode-hook #'drot|nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
@@ -1788,6 +1790,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (bind-keys :map paredit-mode-map
              ("M-{" . paredit-wrap-curly)
              ("M-[" . paredit-wrap-square))
+
   ;; Enable Paredit in the minibuffer
   (defvar drot--paredit-minibuffer-setup-commands
     '(eval-expression
@@ -1801,6 +1804,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot--paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
+
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
