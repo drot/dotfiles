@@ -16,7 +16,7 @@
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details. #23439
+;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -707,7 +707,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'eshell
   ;; Initialize mode
   (require 'em-smart)
-  (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
+  (add-hook 'eshell-mode-hook #'eshell-smart-initialize)
+  ;; Jump to end when `counsel-esh-history' is used
+  (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;; Shell mode
 (bind-key "C-c a t" #'shell)
