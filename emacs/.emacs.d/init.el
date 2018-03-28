@@ -60,8 +60,9 @@ Selectively runs either `after-make-console-frame-hooks' or
   "The frame (if any) active during Emacs initialization.")
 
 (add-hook 'after-init-hook
-          (lambda () (when drot|initial-frame
-                  (run-after-make-frame-hooks drot|initial-frame))))
+          (lambda ()
+            (when drot|initial-frame
+              (run-after-make-frame-hooks drot|initial-frame))))
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
@@ -868,6 +869,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c o t" #'org-todo-list)
 (bind-key "C-c o s" #'org-search-view)
 (bind-key "C-c o l" #'org-store-link)
+(bind-key "C-c t t" #'orgtbl-mode)
 ;; Configuration
 (after-load 'org
   ;; Set key binding
@@ -1358,6 +1360,20 @@ Selectively runs either `after-make-console-frame-hooks' or
         (concat "pandoc"
                 " -f markdown -t html"
                 " -s --mathjax --highlight-style=pygments"))
+  ;; Import table creation from `org-mode'
+  (require 'org-table)
+
+  (defun markdown-org-table-align-advice ()
+    "Replace \"+\" sign with \"|\" in tables."
+    (when (member major-mode '(markdown-mode gfm-mode))
+      (save-excursion
+        (save-restriction
+          (narrow-to-region (org-table-begin) (org-table-end))
+          (goto-char (point-min))
+          (while (search-forward "-+-" nil t)
+            (replace-match "-|-"))))))
+
+  (advice-add 'org-table-align :after #'markdown-org-table-align-advice)
   ;; Enable `visual-line-mode' in markdown buffers
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
@@ -1657,8 +1673,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (add-hook 'after-make-console-frame-hooks #'diff-hl-margin-mode)
 ;; Disable `diff-hl-margin-mode' when in a GUI
 (add-hook 'after-make-window-system-frame-hooks
-          (lambda ()
-            (diff-hl-margin-mode 0)))
+          (lambda () (diff-hl-margin-mode 0)))
 ;; Configuration
 (after-load 'diff-hl
   ;; Update diffs immediately
@@ -1766,7 +1781,7 @@ Selectively runs either `after-make-console-frame-hooks' or
             ;; Remap default bindings
             (bind-key "C-c ," #'hui-select-thing)
             (bind-key "C-c R" #'hui:ebut-rename)
-            (bind-key "C-c |" #'hycontrol-windows-grid)
+            (bind-key "C-c W" #'hycontrol-windows-grid)
             (bind-key "C-c C-\\" #'hkey-operate)))
 ;; Initialize mode
 (add-hook 'after-init-hook
