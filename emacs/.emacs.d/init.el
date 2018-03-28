@@ -1362,7 +1362,7 @@ Selectively runs either `after-make-console-frame-hooks' or
                 " -s --mathjax --highlight-style=pygments"))
   ;; Import table creation from `org-mode'
   (require 'org-table)
-
+  ;; Make table format compatible with Markdown
   (defun markdown-org-table-align-advice ()
     "Replace \"+\" sign with \"|\" in tables."
     (when (member major-mode '(markdown-mode gfm-mode))
@@ -1374,8 +1374,9 @@ Selectively runs either `after-make-console-frame-hooks' or
             (replace-match "-|-"))))))
 
   (advice-add 'org-table-align :after #'markdown-org-table-align-advice)
-  ;; Enable `visual-line-mode' in Markdown buffers
+  ;; Enable `visual-line-mode' in Markdown buffers and disable `auto-fill-mode'
   (add-hook 'markdown-mode-hook #'visual-line-mode)
+  (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t)
   ;; Use underscores for italic text
@@ -1564,11 +1565,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Systemd mode
 (require-package 'systemd)
 
-;; Visual Fill Column
-(require-package 'visual-fill-column)
-;; Initialize mode
-(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-
 ;; Wgrep
 (require-package 'wgrep)
 
@@ -1589,10 +1585,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'ace-link
   ;; Set key binding
   (bind-key "C-c n a"  #'ace-link-addr))
-
-;; Adaptive Wrap
-(require-package 'adaptive-wrap)
-(add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode)
 
 ;; Anzu
 (require-package 'anzu)
