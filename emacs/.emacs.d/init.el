@@ -1374,7 +1374,7 @@ Selectively runs either `after-make-console-frame-hooks' or
             (replace-match "-|-"))))))
 
   (advice-add 'org-table-align :after #'markdown-org-table-align-advice)
-  ;; Enable `visual-line-mode' in markdown buffers
+  ;; Enable `visual-line-mode' in Markdown buffers
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   ;; Fontify code blocks
   (setq markdown-fontify-code-blocks-natively t)
@@ -1983,6 +1983,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
+
+;; Table insertion
+(bind-key "C-c i t" #'table-insert)
 
 ;; Commenting
 (bind-key "C-c c d" #'comment-dwim)
