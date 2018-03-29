@@ -476,30 +476,34 @@ local fs_chart = wibox.widget {
 vicious.register(fs_chart, vicious.widgets.fs, "${/home used_p}", 300)
 
 -- Create a file system usage chart background
-local fs_background = wibox.widget {
+local fs_widget = wibox.widget {
    {
       {
          {
-            widget = fs_chart
+            {
+               widget = fs_chart
+            },
+            top = 2,
+            bottom = 2,
+            left = 6,
+            right = 6,
+            widget = wibox.container.margin
          },
-         top = 2,
-         bottom = 2,
-         left = 6,
-         right = 6,
-         widget = wibox.container.margin
+         shape = gears.shape.octogon,
+         bg = beautiful.bg_normal,
+         shape_border_color = beautiful.bg_minimize,
+         shape_border_width = beautiful.border_width,
+         widget = wibox.container.background
       },
-      shape = gears.shape.octogon,
-      bg = beautiful.bg_normal,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
+      spacing = 2,
+      layout = wibox.layout.fixed.horizontal
    },
-   spacing = 2,
-   layout = wibox.layout.fixed.horizontal
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
 }
-
--- Set file system usage chart widget margins
-local fs_widget = wibox.container.margin(fs_background, 2, 2, 2, 2)
 
 -- Cache volume value widgets
 vicious.cache(vicious.contrib.pulse)
