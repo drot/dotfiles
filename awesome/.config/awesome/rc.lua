@@ -142,7 +142,7 @@ local mylauncher = wibox.widget {
       },
       top = 4,
       bottom = 4,
-      left = 2,
+      left = 4,
       right = 2,
       widget = wibox.container.margin
 }
