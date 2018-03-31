@@ -46,7 +46,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "tilix"
+local terminal = "st -g 120x30"
 local editor = os.getenv("EDITOR") or "nano"
 local editor_cmd = terminal .. " -e " .. editor
 

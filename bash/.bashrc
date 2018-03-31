@@ -43,11 +43,6 @@ if [[ -r /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
-# VTE workaround
-if [[ $TILIX_ID ]]; then
-    . /etc/profile.d/vte-2.91.sh
-fi
-
 # Prompt colors
 RED="\[\033[1;31m\]"
 GREEN="\[\033[1;32m\]"
