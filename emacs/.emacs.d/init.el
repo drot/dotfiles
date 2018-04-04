@@ -647,7 +647,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq reb-re-syntax 'string))
 
 ;; Proced
-(bind-key "C-c a P" #'proced)
+(bind-key "C-x p" #'proced)
 ;; Configuration
 (after-load 'proced
   (setq-default proced-sort 'start)
@@ -1267,7 +1267,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Expand region
 (require-package 'expand-region)
 ;; Set key binding
-(bind-key "C-=" #'er/expand-region)
+(bind-key "C-c x r" #'er/expand-region)
 
 ;; Flx
 (require-package 'flx)
@@ -1342,12 +1342,12 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Magit
 (require-package 'magit)
 ;; Set key bindings
-(bind-key "C-c v v" #'magit-status)
-(bind-key "C-c v d" #'magit-dispatch-popup)
-(bind-key "C-c v c" #'magit-clone)
-(bind-key "C-c v b" #'magit-blame)
-(bind-key "C-c v l" #'magit-log-buffer-file)
-(bind-key "C-c v p" #'magit-pull)
+(bind-key "C-x g" #'magit-status)
+(bind-key "C-x M-g" #'magit-dispatch-popup)
+(bind-key "C-c g c" #'magit-clone)
+(bind-key "C-c g b" #'magit-blame)
+(bind-key "C-c g l" #'magit-log-buffer-file)
+(bind-key "C-c g p" #'magit-pull)
 
 ;; Markdown mode
 (require-package 'markdown-mode)
@@ -1519,7 +1519,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (require-package 'slime)
 ;; Set key bindings
 (bind-key "C-c a s" #'slime)
-(bind-key "C-c a S" #'slime-connect)
 ;; Configuration
 (after-load 'slime
   ;; Set key binding
@@ -1771,10 +1770,10 @@ Selectively runs either `after-make-console-frame-hooks' or
             ;; Add ace-window support
             (hkey-ace-window-setup (kbd "M-o"))
             ;; Remap default bindings
-            (bind-key "C-c ," #'hui-select-thing)
-            (bind-key "C-c R" #'hui:ebut-rename)
-            (bind-key "C-c W" #'hycontrol-windows-grid)
-            (bind-key "C-c C-\\" #'hkey-operate)))
+            (bind-key "C-=" #'hui-select-thing)
+            (bind-key "C-x M-r" #'hui:ebut-rename)
+            (bind-key "C-x M-w" #'hycontrol-windows-grid)
+            (bind-key "C-x \\" #'hkey-operate)))
 ;; Initialize mode
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
@@ -1876,7 +1875,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     "C-c p" "project"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
-    "C-c v" "version-control"
+    "C-c g" "git"
     "C-c w" "windows"
     "C-c x a" "align"
     "C-c x" "text"
