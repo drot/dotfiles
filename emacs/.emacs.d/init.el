@@ -950,8 +950,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'latex
   ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
   (add-hook 'LaTeX-mode-hook
-            (lambda ()
-              (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
   ;; Enable folding options
