@@ -950,7 +950,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'latex
   ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
   (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
+            (lambda ()
+              (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
   ;; Enable folding options
@@ -2027,6 +2028,11 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
+
+;; Switch to previous window when dealing with multiple windows
+(bind-key "C-x O" (lambda ()
+                    (interactive)
+                    (other-window -1)))
 
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
