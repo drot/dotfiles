@@ -1342,7 +1342,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Magit
 (require-package 'magit)
 ;; Set key bindings
-(bind-key "C-x g" #'magit-status)
+(bind-key "C-c v v" #'magit-status)
 (bind-key "C-c v d" #'magit-dispatch-popup)
 (bind-key "C-c v c" #'magit-clone)
 (bind-key "C-c v b" #'magit-blame)
