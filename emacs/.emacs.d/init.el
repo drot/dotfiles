@@ -967,6 +967,19 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
+;; Debbugs
+(require-package 'debbugs)
+;; Set key bindings
+(bind-key "C-c d g" #'debbugs-gnu)
+(bind-key "C-c d s" #'debbugs-gnu-search)
+(bind-key "C-c d t" #'debbugs-gnu-usertags)
+(bind-key "C-c d p" #'debbugs-gnu-patches)
+(bind-key "C-c d b" #'debbugs-gnu-bugs)
+(bind-key "C-c d O" #'debbugs-org)
+(bind-key "C-c d S" #'debbugs-org-search)
+(bind-key "C-c d P" #'debbugs-org-patches)
+(bind-key "C-c d B" #'debbugs-org-bugs)
+
 ;; CIDER
 (require-package 'cider)
 ;; Configuration
@@ -1006,19 +1019,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
-
-;; Debbugs
-(require-package 'debbugs)
-;; Set key bindings
-(bind-key "C-c d g" #'debbugs-gnu)
-(bind-key "C-c d s" #'debbugs-gnu-search)
-(bind-key "C-c d t" #'debbugs-gnu-usertags)
-(bind-key "C-c d p" #'debbugs-gnu-patches)
-(bind-key "C-c d b" #'debbugs-gnu-bugs)
-(bind-key "C-c d O" #'debbugs-org)
-(bind-key "C-c d S" #'debbugs-org-search)
-(bind-key "C-c d P" #'debbugs-org-patches)
-(bind-key "C-c d B" #'debbugs-org-bugs)
 
 ;; Dired Filter
 (require-package 'dired-filter)

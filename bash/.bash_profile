@@ -10,7 +10,7 @@ export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export WINEPREFIX="$HOME/.config/wine"
-# export WINEARCH="win32"
+export WINEARCH="win32"
 
 # Set PATH so it includes user directory
 if [ -d "$HOME/.local/bin" ] ; then
