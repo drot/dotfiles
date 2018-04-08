@@ -1267,7 +1267,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Expand region
 (require-package 'expand-region)
 ;; Set key binding
-(bind-key "C-=" #'er/expand-region)
+(bind-key "C-c x r" #'er/expand-region)
 
 ;; Flx
 (require-package 'flx)
@@ -1768,7 +1768,7 @@ Selectively runs either `after-make-console-frame-hooks' or
             ;; Add ace-window support
             (hkey-ace-window-setup (kbd "M-o"))
             ;; Remap default bindings
-            (bind-key "C-," #'hui-select-thing)
+            (bind-key "C-=" #'hui-select-thing)
             (bind-key "C-x M-r" #'hui:ebut-rename)
             (bind-key "C-x M-w" #'hycontrol-windows-grid)
             (bind-key "C-x \\" #'hkey-operate)))
