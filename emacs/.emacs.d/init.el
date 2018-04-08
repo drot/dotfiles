@@ -1557,12 +1557,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'slime-company
   (setq slime-company-completion 'fuzzy))
 
-;; Smex
-(require-package 'smex)
-;; Configuration
-(after-load 'smex
-  (setq smex-save-file (locate-user-emacs-file "cache/smex-items")))
-
 ;; Systemd mode
 (require-package 'systemd)
 
@@ -1729,23 +1723,31 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Counsel
 (require-package 'counsel)
-;; Initialize mode
-(add-hook 'after-init-hook #'counsel-mode)
+;; Override default key bindings
+(bind-key [remap describe-bindings] #'counsel-descbinds)
+(bind-key [remap describe-function] #'counsel-describe-function)
+(bind-key [remap describe-variable] #'counsel-describe-variable)
+(bind-key [remap describe-face] #'counsel-describe-face)
+(bind-key [remap list-faces-display] #'counsel-faces)
+(bind-key [remap find-file] #'counsel-find-file)
+(bind-key [remap yank-pop] #'counsel-yank-pop)
+(bind-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
+(bind-key [remap bookmark-jump] #'counsel-bookmark)
+;; Set the rest of the key bindings
+(bind-key "C-c f g" #'counsel-git)
+(bind-key "C-c f j" #'counsel-dired-jump)
+(bind-key "C-c f r" #'counsel-recentf)
+(bind-key "C-c s G" #'counsel-git-grep)
+(bind-key "C-c s i" #'counsel-imenu)
+(bind-key "C-c s g" #'counsel-grep)
+(bind-key "C-c j m" #'counsel-mark-ring)
+(bind-key "C-c h c" #'counsel-command-history)
+(bind-key "C-c h l" #'counsel-find-library)
+(bind-key "C-c i 8" #'counsel-unicode-char)
 ;; Configuration
 (after-load 'counsel
   ;; Shorten mode lighter
   (delight 'counsel-mode " cS" t)
-  ;; Set key bindings
-  (bind-key "C-c f g" #'counsel-git)
-  (bind-key "C-c f j" #'counsel-dired-jump)
-  (bind-key "C-c f r" #'counsel-recentf)
-  (bind-key "C-c s G" #'counsel-git-grep)
-  (bind-key "C-c s i" #'counsel-imenu)
-  (bind-key "C-c s g" #'counsel-grep)
-  (bind-key "C-c j m" #'counsel-mark-ring)
-  (bind-key "C-c h c" #'counsel-command-history)
-  (bind-key "C-c h l" #'counsel-find-library)
-  (bind-key "C-c i 8" #'counsel-unicode-char)
   ;; Customize
   (setq counsel-preselect-current-file t)
   (setq counsel-find-file-at-point t))
@@ -1759,6 +1761,16 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configure
 (after-load 'swiper
   (setq swiper-include-line-number-in-search t))
+
+;; Amx
+(require-package 'amx)
+;; Initialize mode
+(add-hook 'after-init-hook #'amx-mode)
+;; Set key bindings
+(bind-key "M-X" #'amx-major-mode-commands)
+;; Configuration
+(after-load 'amx
+  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
 ;; Hyperbole
 (require-package 'hyperbole)
@@ -1980,7 +1992,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Commenting
 (bind-key "C-c c d" #'comment-dwim)
-(bind-key "C-c c r" #'comment-or-uncomment-region)
+(bind-key "C-c c r" #'comment-region)
+(bind-key "C-c c u" #'uncomment-region)
 
 ;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
