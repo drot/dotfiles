@@ -1768,6 +1768,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (add-hook 'after-init-hook #'amx-mode)
 ;; Set key bindings
 (bind-key "M-X" #'amx-major-mode-commands)
+(bind-key "C-c h u" #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
