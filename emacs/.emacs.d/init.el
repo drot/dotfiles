@@ -496,6 +496,7 @@ Selectively runs either `after-make-console-frame-hooks' or
         '((java-mode . "java")
           (awk-mode . "awk")
           (other . "k&r")))
+  ;; Enable Auto Fill
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; Etags
@@ -701,7 +702,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
     (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
-  ;; Apply the hook
+  ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
 
 ;; Eshell smart display
@@ -1038,7 +1039,8 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Initialize mode
   (require 'dired-rainbow)
   ;; Define faces by file type
-  (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG" "flac" "FLAC" "wav" "WAV"))
+  (dired-rainbow-define audio "#329EE8" ("mp3" "MP3" "ogg" "OGG"
+                                         "flac" "FLAC" "wav" "WAV"))
   (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz" "xz"
                                              "z" "Z" "jar" "war" "ear" "rar"
                                              "sar" "xpi" "apk" "xz" "tar"))
@@ -1254,7 +1256,7 @@ Selectively runs either `after-make-console-frame-hooks' or
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
     (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0))
-  ;; Apply the hook
+  ;; Apply the custom hook
   (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
   ;; Enable notifications
   (erc-notifications-mode)
@@ -1329,7 +1331,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (defun drot|nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
-  ;; Apply the hook
+  ;; Apply the custom hook
   (add-hook 'nov-mode-hook #'drot|nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
