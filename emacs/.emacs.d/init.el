@@ -1641,9 +1641,9 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t)
   (setq company-selection-wrap-around t)
+  (setq company-require-match 'never)
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-other-buffers nil)
   (setq company-dabbrev-ignore-case t))
 
 ;; Company Statistics
