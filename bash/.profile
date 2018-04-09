@@ -18,4 +18,6 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Initialize Bash
-[[ -r "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
+if [ -n "$BASH" ]; then
+    [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+fi
