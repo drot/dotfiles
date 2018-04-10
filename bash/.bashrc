@@ -23,6 +23,11 @@ shopt -s histverify
 shopt -s cmdhist
 shopt -s histappend
 
+# Bash completion
+if [[ -r /usr/share/bash-completion/bash_completion ]]; then
+    . /usr/share/bash-completion/bash_completion
+fi
+
 # Colored listings
 if [[ -r "$HOME/.dircolors" ]] && type -p dircolors >/dev/null; then
     eval "$(dircolors -b "$HOME/.dircolors")"
@@ -36,11 +41,6 @@ fi
 # Load custom functions
 if [[ -r "$HOME/.bash_functions" ]]; then
     . "$HOME/.bash_functions"
-fi
-
-# Bash completion
-if [[ -r /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
 fi
 
 # Prompt colors
