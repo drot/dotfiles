@@ -565,11 +565,15 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
   ;; Default `ls' switches
-  (setq dired-listing-switches "-alhFG")
+  (setq dired-listing-switches "-alhF")
   ;; If we are on a GNU system add some more `ls' switches
   (when (eq system-type 'gnu/linux)
     (setq dired-listing-switches
-          (concat dired-listing-switches " --group-directories-first")))
+          (concat dired-listing-switches "G --group-directories-first")))
+  ;; Use conservative switches when dealing with remote systems
+  (add-hook 'dired-mode-hook (lambda ()
+                               (when (file-remote-p dired-directory)
+                                 (setq-local dired-actual-switches "-alhF"))))
   ;; Do certain operations recursively
   (setq dired-recursive-deletes 'top)
   (setq dired-recursive-copies 'always)
