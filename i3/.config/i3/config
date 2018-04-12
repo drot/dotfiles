@@ -174,7 +174,7 @@ bindsym Print exec --no-startup-id maim -u /tmp/screenshot-$(date +%s).png
 bindsym --release $mod+Print exec --no-startup-id maim -su /tmp/screenshot-$(date +%s).png
 
 # clipboard selection key
-bindsym $mod+Insert --no-startup-id clipmenusel
+bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
