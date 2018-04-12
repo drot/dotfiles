@@ -9,7 +9,6 @@ general {
 
 order += "cpu_usage"
 order += "cpu_temperature 0"
-order += "load"
 order += "disk /home"
 order += "volume master"
 order += "time"
@@ -22,10 +21,6 @@ cpu_temperature 0 {
                 format = "TEMP: %degrees°C"
                 max_threshold = "60"
                 path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input"
-}
-
-load {
-     format = "LOAD: %1min %5min %15min"
 }
 
 disk "/home" {
