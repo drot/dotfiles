@@ -1,10 +1,10 @@
-# font for window titles and the status bar
-font pango:Iosevka Term Bold 12
-
 # general settings
 workspace_layout tabbed
 workspace_auto_back_and_forth yes
 focus_follows_mouse no
+
+# font for window titles and the status bar
+font pango:Iosevka Term Bold 12
 
 # default modifier and movement keys
 set $mod Mod4
@@ -12,6 +12,18 @@ set $up l
 set $down k
 set $left j
 set $right semicolon
+
+# define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # default colors
 set $base00 #1d1f21
@@ -47,14 +59,14 @@ for_window [class="Pinentry"] floating enable
 for_window [class="Pidgin"] floating enable
 
 # assign applications to certain workspaces
-assign [class="Firefox"] 2
-assign [class="Tor Browser"] 2
-assign [class="Conkeror"] 2
-assign [class="Emacs"] 3
-assign [class="Zathura"] 4
-assign [class="libreoffice"] 4
-assign [class="Gimp"] 4
-assign [class="Pavucontrol"] 4
+assign [class="Firefox"] $ws2
+assign [class="Tor Browser"] $ws2
+assign [class="Conkeror"] $ws2
+assign [class="Emacs"] $ws3
+assign [class="Zathura"] $ws4
+assign [class="libreoffice"] $ws4
+assign [class="Gimp"] $ws4
+assign [class="Pavucontrol"] $ws4
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -127,18 +139,6 @@ bindsym $mod+Shift+minus move scratchpad
 # show the next scratchpad window or hide the focused scratchpad window
 # if there are multiple scratchpad windows, this command cycles through them
 bindsym $mod+minus scratchpad show
-
-# define names for default workspaces for which we configure key bindings later on.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
