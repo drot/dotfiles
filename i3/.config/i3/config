@@ -38,7 +38,7 @@ client.unfocused $base02 $base00 $base03 $base01
 client.urgent $base02 $base08 $base07 $base08
 
 # list of floating applications
-for_window [class="Skype"] floating enable
+for_window [class="Tor Browser"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
