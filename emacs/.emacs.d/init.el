@@ -285,6 +285,17 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Highlight current line
 (global-hl-line-mode)
+;; Disable `hl-line-mode' in special buffers
+(dolist (hook '(erc-mode-hook
+                nov-mode-hook
+                eshell-mode-hook
+                term-mode-hook
+                ediff-mode-hook
+                comint-mode-hook
+                cider-repl-mode-hook
+                slime-repl-mode-hook))
+  (add-hook hook
+            (lambda () (setq-local global-hl-line-mode nil))))
 
 ;; Highlight matching parentheses
 (setq show-paren-delay 0)
@@ -518,6 +529,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'nxml-mode
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t)
+  (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
 
 ;; Doc View mode
