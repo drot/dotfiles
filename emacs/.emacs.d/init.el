@@ -235,6 +235,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Repeat mark popping
 (setq set-mark-command-repeat-pop t)
 
+;; Delete selection by typing
+(delete-selection-mode)
+
 ;; Do not save duplicates
 (setq history-delete-duplicates t)
 (setq kill-do-not-save-duplicates t)
@@ -278,6 +281,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Line numbers display
 (setq display-line-numbers-type 'relative)
+(setq-default display-line-numbers-width 3)
 ;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
@@ -1845,7 +1849,14 @@ Selectively runs either `after-make-console-frame-hooks' or
   (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil))))
+            (lambda () (setq-local electric-pair-mode nil)))
+  ;; Compatibility with `delete-selection-mode'
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-open-round 'delete-selection t)
+  (put 'paredit-open-square 'delete-selection t)
+  (put 'paredit-doublequote 'delete-selection t)
+  (put 'paredit-newline 'delete-selection t))
 
 ;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
