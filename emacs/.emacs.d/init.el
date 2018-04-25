@@ -513,7 +513,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   "{" \n
   > _ \n
   "}" > \n)
-(bind-key "C-c i s c" #'drot/cpp-skeleton)
+(bind-key "C-c i s c" #'drot/cc-skeleton)
 ;; Configuration
 (after-load 'cc-mode
   (setq c-basic-offset 4)
