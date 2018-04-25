@@ -504,6 +504,16 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
+;; Skeleton
+(define-skeleton drot/cc-skeleton
+  "Inserts a CC mode skeleton in the current buffer."
+  "Library: "
+  "#include <" str | "iostream" ">" \n \n
+  "main()" ?\n
+  "{" \n
+  > _ \n
+  "}" > \n)
+(bind-key "C-c i s c" #'drot/cpp-skeleton)
 ;; Configuration
 (after-load 'cc-mode
   (setq c-basic-offset 4)
@@ -946,7 +956,16 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; AUCTeX
 (require-package 'auctex)
-
+;; Skeleton
+(define-skeleton drot/latex-skeleton
+  "Inserts a LaTeX skeleton in the current buffer."
+  nil
+  "\\documentclass[a4paper]{article}" \n \n
+  "\\usepackage[croatian]{babel}" \n \n
+  "\\begin{document}" \n \n
+  _ \n \n
+  "\\end{document}" \n)
+(bind-key "C-c i s l" #'drot/latex-skeleton)
 ;; TeX configuration
 (after-load 'tex
   ;; Default TeX engine
@@ -1273,9 +1292,8 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq erc-accidental-paste-threshold-seconds 0.5)
   ;; Disable some conflicting modes
   (defun drot/erc-mode-hook ()
-    "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
-    (set (make-local-variable 'scroll-conservatively) 1000)
-    (company-mode 0))
+    "Keep prompt at bottom in ERC buffers."
+    (set (make-local-variable 'scroll-conservatively) 1000))
   ;; Apply the custom hook
   (add-hook 'erc-mode-hook #'drot/erc-mode-hook)
   ;; Enable notifications
@@ -1645,8 +1663,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'company
   ;; Shorten mode lighter
   (dim-minor-name 'company-mode " cY")
-  ;; Set key binding
-  (bind-key "C-c i y" #'company-yasnippet)
   ;; Customize
   (setq company-backends
         '(company-capf
@@ -1890,7 +1906,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
-    "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c a w" "eww"
@@ -1900,9 +1915,11 @@ Selectively runs either `after-make-console-frame-hooks' or
     "C-c d" "debbugs"
     "C-c f v" "variables"
     "C-c f" "files"
+    "C-c g" "git"
     "C-c h 4" "help-other-window"
     "C-c h w" "which-key"
     "C-c h" "help-extended"
+    "C-c i s" "skeletons"
     "C-c i" "insertion"
     "C-c j" "jump"
     "C-c l" "language-and-spelling"
@@ -1913,7 +1930,6 @@ Selectively runs either `after-make-console-frame-hooks' or
     "C-c p" "project"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
-    "C-c g" "git"
     "C-c w" "windows"
     "C-c x a" "align"
     "C-c x" "text"
@@ -1942,14 +1958,6 @@ Selectively runs either `after-make-console-frame-hooks' or
     "C-c C-s" "markdown-styles"
     "C-c C-t" "markdown-header"
     "C-c C-x" "markdown-toggles"))
-
-;; YASnippet
-(require-package 'yasnippet)
-;; Initialize mode
-(add-hook 'after-init-hook #'yas-global-mode)
-;; Configuration
-(after-load 'yasnippet
-  (dim-minor-name 'yas-minor-mode " yS"))
 
 ;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
