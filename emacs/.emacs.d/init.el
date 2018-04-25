@@ -1178,6 +1178,9 @@ Selectively runs either `after-make-console-frame-hooks' or
   (require 'dired-du)
   ;; Shorten mode lighter
   (dim-minor-name 'dired-du-mode " d-U")
+  ;; Disable and rebind conflicting key binding
+  (setq dired-du-bind-mode nil)
+  (bind-key "C-x M-u" #'dired-du-mode dired-mode-map)
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
