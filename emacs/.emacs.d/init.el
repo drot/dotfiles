@@ -1703,7 +1703,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Update diffs immediately
   (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
 ;; Form-feed
