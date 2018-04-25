@@ -99,8 +99,8 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Extract special forms
   (setq bind-key-describe-special-forms t))
 
-;; Use `delight' for mode name shortening
-(require-package 'delight)
+;; Use `dim' for mode name shortening
+(require-package 'dim)
 
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
@@ -182,11 +182,11 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(delight 'auto-fill-function " fL" t)
+(dim-minor-name 'auto-fill-function " fL")
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
-(delight 'visual-line-mode " vL" t)
+(dim-minor-name 'visual-line-mode " vL")
 
 ;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent)
@@ -314,7 +314,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (global-hi-lock-mode)
 
 ;; Abbrev mode
-(delight 'abbrev-mode " aB" t)
+(dim-minor-name 'abbrev-mode " aB")
 ;; Configuration
 (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
 (setq save-abbrevs t)
@@ -391,7 +391,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'flyspell
   ;; Shorten mode lighter
-  (delight 'flyspell-mode " fS" t)
+  (dim-minor-name 'flyspell-mode " fS")
   ;; Set key bindings
   (bind-key "C-c l b" #'flyspell-buffer)
   (bind-key "C-c l r" #'flyspell-region)
@@ -415,7 +415,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq ispell-program-name "hunspell"))
 
 ;; Isearch
-(delight 'isearch-mode " iS" t)
+(dim-minor-name 'isearch-mode " iS")
 (setq isearch-allow-scroll t)
 (setq search-default-mode #'char-fold-to-regexp)
 
@@ -468,7 +468,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Auto Revert mode
 (after-load 'autorevert
   ;; Shorten mode lighter
-  (delight 'auto-revert-mode " aR" t))
+  (dim-minor-name 'auto-revert-mode " aR"))
 
 ;; Imenu configuration
 (after-load 'imenu
@@ -483,7 +483,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; ElDoc mode configuration
 (after-load 'eldoc
   ;; Shorten mode lighter
-  (delight 'eldoc-mode " eD" t)
+  (dim-minor-name 'eldoc-mode " eD")
   ;; Make compatible with Paredit
   (eldoc-add-command
    #'paredit-backward-delete
@@ -600,8 +600,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'dired-x
   ;; Shorten Dired Omit mode lighter
   (add-function :after (symbol-function 'dired-omit-startup)
-                (lambda () (delight 'dired-omit-mode " oT" t))
-                '((name . dired-omit-mode-delight))))
+                (lambda () (dim-minor-name 'dired-omit-mode " oT"))
+                '((name . dired-omit-mode-dim))))
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
@@ -652,7 +652,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
-  (delight 'whitespace-mode " wS" t))
+  (dim-minor-name 'whitespace-mode " wS"))
 
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
@@ -770,7 +770,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'compile
   ;; Shorten mode lighter
-  (delight 'compilation-shell-minor-mode " sC" t)
+  (dim-minor-name 'compilation-shell-minor-mode " sC")
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
@@ -860,7 +860,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'outline
   ;; Shorten mode lighter
-  (delight 'outline-minor-mode " oL" t)
+  (dim-minor-name 'outline-minor-mode " oL")
   ;; Define Hydra
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
@@ -927,7 +927,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'ace-window
   ;; Shorten mode lighter
-  (delight 'ace-window-mode " aW" t))
+  (dim-minor-name 'ace-window-mode " aW"))
 
 ;; Anaconda mode
 (require-package 'anaconda-mode)
@@ -936,7 +936,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (add-hook 'python-mode-hook #'anaconda-eldoc-mode)
 ;; Shorten mode lighter
 (after-load 'anaconda-mode
-  (delight 'anaconda-mode " aC" t))
+  (dim-minor-name 'anaconda-mode " aC"))
 
 ;; Company Anaconda
 (require-package 'company-anaconda)
@@ -984,7 +984,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; RefTeX
 (after-load 'reftex
   ;; Shorten mode lighter
-  (delight 'reftex-mode " rF" t)
+  (dim-minor-name 'reftex-mode " rF")
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
@@ -1048,7 +1048,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Initialize mode
   (require 'dired-filter)
   ;; Shorten mode lighter
-  (delight 'dired-filter-mode " fR" t)
+  (dim-minor-name 'dired-filter-mode " fR")
   ;; Set key binding
   (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
@@ -1138,7 +1138,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Initialize mode
   (require 'dired-narrow)
   ;; Shorten mode lighter
-  (delight 'dired-narrow-mode " d-N" t)
+  (dim-minor-name 'dired-narrow-mode " d-N")
   ;; Set key binding
   (bind-key "C-." #'dired-narrow dired-mode-map))
 
@@ -1158,7 +1158,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Initialize mode
   (require 'dired-du)
   ;; Shorten mode lighter
-  (delight 'dired-du-mode " d-U" t)
+  (dim-minor-name 'dired-du-mode " d-U")
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
@@ -1169,7 +1169,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Initialize mode
   (require 'dired-async)
   ;; Shorten mode lighter
-  (delight 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")) t)
+  (dim-minor-name 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")))
   ;; Set key bindings
   (bind-keys :map dired-mode-map
              ("E c" . dired-async-do-copy)
@@ -1513,7 +1513,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c t r" #'rainbow-mode)
 ;; Configuration
 (after-load 'rainbow-mode
-  (delight 'rainbow-mode " rW" t))
+  (dim-minor-name 'rainbow-mode " rW"))
 
 ;; Skewer
 (require-package 'skewer-mode)
@@ -1523,19 +1523,19 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c a W" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
-  (delight 'skewer-mode " sK" t))
+  (dim-minor-name 'skewer-mode " sK"))
 
 ;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
 ;; Configuration
 (after-load 'skewer-css
-  (delight 'skewer-css-mode " sKC" t))
+  (dim-minor-name 'skewer-css-mode " sKC"))
 
 ;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 ;; Configuration
 (after-load 'skewer-html
-  (delight 'skewer-html-mode " sKH" t))
+  (dim-minor-name 'skewer-html-mode " sKH"))
 
 ;; SLIME
 (require-package 'slime)
@@ -1554,7 +1554,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Shorten SLIME Autodoc mode lighter
 (after-load 'slime-autodoc
-  (delight 'slime-autodoc-mode " aD" t))
+  (dim-minor-name 'slime-autodoc-mode " aD"))
 
 ;; SLIME REPL configuration
 (after-load 'slime-repl
@@ -1614,7 +1614,7 @@ Selectively runs either `after-make-console-frame-hooks' or
              ([remap isearch-query-replace] . anzu-isearch-query-replace)
              ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   ;; Shorten mode lighter
-  (delight 'anzu-mode " aZ" t)
+  (dim-minor-name 'anzu-mode " aZ")
   ;; Customize
   (setq anzu-search-threshold 1000)
   (setq anzu-replace-threshold 50)
@@ -1644,7 +1644,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'company
   ;; Shorten mode lighter
-  (delight 'company-mode " cY" t)
+  (dim-minor-name 'company-mode " cY")
   ;; Set key binding
   (bind-key "C-c i y" #'company-yasnippet)
   ;; Customize
@@ -1726,7 +1726,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
-  (delight 'ivy-mode " iY" t)
+  (dim-minor-name 'ivy-mode " iY")
   ;; Set key binding
   (bind-key "C-c n i" #'ivy-resume)
   ;; Customize
@@ -1766,8 +1766,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c i 8" #'counsel-unicode-char)
 ;; Configuration
 (after-load 'counsel
-  ;; Shorten mode lighter
-  (delight 'counsel-mode " cS" t)
   ;; Customize
   (setq counsel-preselect-current-file t)
   (setq counsel-find-file-at-point t))
@@ -1826,7 +1824,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'paredit
   ;; Shorten mode lighter
-  (delight 'paredit-mode " pE" t)
+  (dim-minor-name 'paredit-mode " pE")
   ;; Set key bindings
   (bind-keys :map paredit-mode-map
              ("M-{" . paredit-wrap-curly)
@@ -1873,7 +1871,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (add-hook 'after-init-hook #'volatile-highlights-mode)
 ;; Configuration
 (after-load 'volatile-highlights
-  (delight 'volatile-highlights-mode " vH" t))
+  (dim-minor-name 'volatile-highlights-mode " vH"))
 
 ;; Which Key
 (require-package 'which-key)
@@ -1951,7 +1949,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (add-hook 'after-init-hook #'yas-global-mode)
 ;; Configuration
 (after-load 'yasnippet
-  (delight 'yas-minor-mode " yS" t))
+  (dim-minor-name 'yas-minor-mode " yS"))
 
 ;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
