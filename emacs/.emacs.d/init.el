@@ -56,13 +56,13 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 (add-hook 'after-make-frame-functions #'run-after-make-frame-hooks)
 
-(defconst drot|initial-frame (selected-frame)
+(defconst drot/initial-frame (selected-frame)
   "The frame (if any) active during Emacs initialization.")
 
 (add-hook 'after-init-hook
           (lambda ()
-            (when drot|initial-frame
-              (run-after-make-frame-hooks drot|initial-frame))))
+            (when drot/initial-frame
+              (run-after-make-frame-hooks drot/initial-frame))))
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
@@ -363,7 +363,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (add-hook hook #'hs-minor-mode))
 ;; Configuration
 (after-load 'hideshow
-  (defun drot|hs-display-code-line-counts (ov)
+  (defun drot/hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
@@ -371,7 +371,7 @@ Selectively runs either `after-make-console-frame-hooks' or
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'drot|hs-display-code-line-counts)
+  (setq hs-set-up-overlay #'drot/hs-display-code-line-counts)
   (setq hs-isearch-open t))
 
 ;; Bug Reference mode
@@ -717,13 +717,13 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
-  (defun drot|eshell-mode-hook ()
+  (defun drot/eshell-mode-hook ()
     "Use alternate completions and disable Company in Eshell buffers."
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
     (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot|eshell-mode-hook))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-hook))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -774,12 +774,12 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
-  (defun drot|ansi-color-compilation-buffer ()
+  (defun drot/ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'drot|ansi-color-compilation-buffer)
+  (add-hook 'compilation-filter-hook #'drot/ansi-color-compilation-buffer)
   ;; Customize
   (setq compilation-ask-about-save nil)
   (setq compilation-always-kill t)
@@ -1210,7 +1210,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq elfeed-search-filter "@1-week-ago +unread"))
 
 ;; ERC
-(defun drot|erc-init ()
+(defun drot/erc-init ()
   "Connect to IRC."
   (interactive)
   (when (y-or-n-p "Connect to IRC? ")
@@ -1222,7 +1222,7 @@ Selectively runs either `after-make-console-frame-hooks' or
              :nick "drot")))
 
 ;; Set key binding
-(bind-key "C-c a i" #'drot|erc-init)
+(bind-key "C-c a i" #'drot/erc-init)
 
 ;; ERC highlight nicknames
 (require-package 'erc-hl-nicks)
@@ -1272,12 +1272,12 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Prevent accidental paste
   (setq erc-accidental-paste-threshold-seconds 0.5)
   ;; Disable some conflicting modes
-  (defun drot|erc-mode-hook ()
+  (defun drot/erc-mode-hook ()
     "Keep prompt at bottom and disable Company and YASnippet in ERC buffers."
     (set (make-local-variable 'scroll-conservatively) 1000)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'erc-mode-hook #'drot|erc-mode-hook)
+  (add-hook 'erc-mode-hook #'drot/erc-mode-hook)
   ;; Enable notifications
   (erc-notifications-mode)
   ;; Enable spell-checking
@@ -1348,11 +1348,11 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
-  (defun drot|nov-font-setup ()
+  (defun drot/nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
   ;; Apply the custom hook
-  (add-hook 'nov-mode-hook #'drot|nov-font-setup)
+  (add-hook 'nov-mode-hook #'drot/nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
@@ -1831,7 +1831,7 @@ Selectively runs either `after-make-console-frame-hooks' or
              ("M-[" . paredit-wrap-square))
 
   ;; Enable Paredit in the minibuffer
-  (defvar drot--paredit-minibuffer-setup-commands
+  (defvar drot/paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
@@ -1839,12 +1839,12 @@ Selectively runs either `after-make-console-frame-hooks' or
       ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot|paredit-minibuffer-setup ()
+  (defun drot/paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot--paredit-minibuffer-setup-commands)
+    (if (memq this-command drot/paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot|paredit-minibuffer-setup)
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil)))
