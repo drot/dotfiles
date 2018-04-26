@@ -238,6 +238,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Repeat mark popping
 (setq set-mark-command-repeat-pop t)
 
+;; Rotate the clipboard when rotating the kill ring
+(setq yank-pop-change-selection t)
+
 ;; Delete selection by typing
 (delete-selection-mode)
 
@@ -480,6 +483,10 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Configuration
   (setq custom-safe-themes t))
 
+;; MIME decoding configuration
+(after-load 'mm-decode
+  (setq mm-inline-large-images 'resize))
+
 ;; Auto Revert mode
 (after-load 'autorevert
   ;; Shorten mode lighter
@@ -560,6 +567,10 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq nxml-slash-auto-complete-flag t)
   (setq nxml-auto-insert-xml-declaration-flag t)
   (setq nxml-sexp-element-flag t))
+
+;; Man page reading
+(after-load 'man
+  (setq Man-notify-method 'aggresive))
 
 ;; Doc View mode
 (after-load 'doc-view
@@ -1434,8 +1445,9 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Enable `visual-line-mode' in Markdown buffers and disable `auto-fill-mode'
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
-  ;; Fontify code blocks
+  ;; Additional fontification
   (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-header-scaling t)
   ;; Use underscores for italic text
   (setq markdown-italic-underscore t))
 
