@@ -198,6 +198,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
+;; Don't use GTK tooltips
+(setq x-gtk-use-system-tooltips nil)
+
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
 
@@ -356,6 +359,16 @@ Selectively runs either `after-make-console-frame-hooks' or
   (unbind-key "C-c <left>" winner-mode-map)
   (unbind-key "C-c <right>" winner-mode-map))
 
+;; Find file at point
+(ffap-bindings)
+;; Configuration
+(after-load 'ffap
+  ;; Configuration
+  (setq dired-at-point-require-prefix t)
+  (setq ffap-require-prefix t)
+  (setq ffap-machine-p-known 'reject)
+  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+
 ;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
                 emacs-lisp-mode-hook
@@ -434,13 +447,15 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'uniquify
   ;; Configuration
   (setq uniquify-buffer-name-style 'forward)
+  (setq uniquify-trailing-separator-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
 ;; Use Ibuffer for buffer list
 (bind-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after-load 'ibuffer
-  (setq ibuffer-default-sorting-mode 'major-mode))
+  (setq ibuffer-default-sorting-mode 'major-mode)
+  (setq ibuffer-use-other-window t))
 
 ;; Version control
 (after-load 'vc-hooks
@@ -638,11 +653,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
   (setq bookmark-save-flag 1))
 
-;; Find file at point
-(after-load 'ffap
-  ;; Configuration
-  (setq ffap-machine-p-known 'reject))
-
 ;; Search more extensively with apropos
 (bind-key "C-c h a" #'apropos)
 ;; Configuration
@@ -774,6 +784,10 @@ Selectively runs either `after-make-console-frame-hooks' or
              ("C-c ! d" . flymake-disabled-backends)
              ("C-c ! l" . flymake-switch-to-log-buffer)
              ("C-c ! h" . hydra-flymake/body)))
+
+;; Comint 
+(after-load 'comint
+  (setq comint-input-ignoredups t))
 
 ;; Compilation
 (bind-key "C-c c C" #'recompile)
@@ -1768,7 +1782,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key [remap describe-variable] #'counsel-describe-variable)
 (bind-key [remap describe-face] #'counsel-describe-face)
 (bind-key [remap list-faces-display] #'counsel-faces)
-(bind-key [remap find-file] #'counsel-find-file)
 (bind-key [remap yank-pop] #'counsel-yank-pop)
 (bind-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
 (bind-key [remap bookmark-jump] #'counsel-bookmark)
@@ -1786,8 +1799,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'counsel
   ;; Customize
-  (setq counsel-preselect-current-file t)
-  (setq counsel-find-file-at-point t))
+  (setq counsel-preselect-current-file t))
 
 ;; Swiper
 (require-package 'swiper)
@@ -1797,7 +1809,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configure
 (after-load 'swiper
-  (setq swiper-include-line-number-in-search t))
+  (setq swiper-include-line-number-in-search t)
+  (setq swiper-goto-start-of-match t))
 
 ;; Amx
 (require-package 'amx)
