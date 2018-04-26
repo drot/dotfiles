@@ -285,6 +285,17 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Initialize mode
 (save-place-mode)
 
+;; Find file at point
+(ffap-bindings)
+;; Configuration
+(after-load 'ffap
+  ;; Configuration
+  (setq dired-at-point-require-prefix t)
+  (setq ffap-require-prefix t)
+  (setq ffap-file-finder #'drot/counsel-find-file)
+  (setq ffap-machine-p-known 'reject)
+  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+
 ;; Line numbers display
 (setq display-line-numbers-type 'relative)
 (setq-default display-line-numbers-width 3)
@@ -361,16 +372,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Disable conflicting key bindings
   (unbind-key "C-c <left>" winner-mode-map)
   (unbind-key "C-c <right>" winner-mode-map))
-
-;; Find file at point
-(ffap-bindings)
-;; Configuration
-(after-load 'ffap
-  ;; Configuration
-  (setq dired-at-point-require-prefix t)
-  (setq ffap-require-prefix t)
-  (setq ffap-machine-p-known 'reject)
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
 ;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
@@ -457,6 +458,18 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after-load 'ibuffer
+  ;; Ffap compatibility function
+  (defun drot/ibuffer-ffap ()
+  "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
+  (interactive)
+  (require 'ffap)
+  (let* ((buffer (ibuffer-current-buffer))
+         (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
+         (default-directory (buffer-local-value 'default-directory buffer)))
+    (call-interactively ffap-file-finder)))
+  ;; Rebind `ibuffer-find-file' with the compatibility function
+  (bind-key [remap ibuffer-find-file] #'drot/ibuffer-ffap ibuffer-mode-map)
+  ;; Customize
   (setq ibuffer-default-sorting-mode 'major-mode)
   (setq ibuffer-use-other-window t))
 
@@ -796,7 +809,7 @@ Selectively runs either `after-make-console-frame-hooks' or
              ("C-c ! l" . flymake-switch-to-log-buffer)
              ("C-c ! h" . hydra-flymake/body)))
 
-;; Comint 
+;; Comint mode
 (after-load 'comint
   (setq comint-input-ignoredups t))
 
@@ -1788,6 +1801,16 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Counsel
 (require-package 'counsel)
+;; Ffap compatibility function
+(defun drot/counsel-find-file (&optional file)
+  "Like `counsel-find-file', but return buffer, not name of FILE.
+This likens `counsel-find-file' to `find-file' more and makes it
+suitable for assigning to `ffap-file-finder'."
+  (interactive)
+  (if file
+      (find-file file)
+    (set-buffer (or (find-buffer-visiting (counsel-find-file))
+                    (other-buffer nil t)))))
 ;; Override default key bindings
 (bind-key [remap describe-bindings] #'counsel-descbinds)
 (bind-key [remap describe-function] #'counsel-describe-function)
