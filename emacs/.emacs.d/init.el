@@ -464,31 +464,34 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'ibuffer
   ;; Ffap compatibility function
   (defun drot/ibuffer-ffap ()
-  "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
-  (interactive)
-  (let* ((buffer (ibuffer-current-buffer))
-         (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
-         (default-directory (buffer-local-value 'default-directory buffer)))
-    (call-interactively ffap-file-finder)))
+    "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
+    (interactive)
+    (let* ((buffer (ibuffer-current-buffer))
+           (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
+           (default-directory (buffer-local-value 'default-directory buffer)))
+      (call-interactively ffap-file-finder)))
   ;; Rebind `ibuffer-find-file' with the compatibility function
   (bind-key [remap ibuffer-find-file] #'drot/ibuffer-ffap ibuffer-mode-map)
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
-           ("Core" (or (mode . lisp-interaction-mode)
-                       (mode . messages-buffer-mode)))
-           ("Custom" (mode . Custom-mode))
-           ("Dired" (mode . dired-mode))
-           ("ERC" (mode . erc-mode))
+           ("Code" (and (or (derived-mode . prog-mode)
+                            (derived-mode . conf-mode))
+                        (not (derived-mode . lisp-interaction-mode))))
+           ("Core" (or (derived-mode . lisp-interaction-mode)
+                       (derived-mode . messages-buffer-mode)))
+           ("Custom" (derived-mode . Custom-mode))
+           ("Dired" (derived-mode . dired-mode))
+           ("ERC" (derived-mode . erc-mode))
            ("Git" (derived-mode . magit-mode))
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
                        (derived-mode . gnus-article-mode)))
-           ("Image" (mode . image-mode))
-           ("Mail" (or (mode . message-mode)
-                       (mode . mail-mode)))
-           ("Org" (mode . org-mode))
-           ("PDF" (mode . pdf-view-mode)))))
+           ("Image" (derived-mode . image-mode))
+           ("Mail" (or (derived-mode . message-mode)
+                       (derived-mode . mail-mode)))
+           ("Org" (derived-mode . org-mode))
+           ("PDF" (derived-mode . pdf-view-mode)))))
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
