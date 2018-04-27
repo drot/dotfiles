@@ -341,6 +341,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Initialize mode
 (setq-default abbrev-mode t)
 
+;; Prevent skeleton/abbrev recursion
+(setq skeleton-further-elements '((abbrev-mode nil)))
+
 ;; Electric pair mode
 (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
 ;; Initialize mode
