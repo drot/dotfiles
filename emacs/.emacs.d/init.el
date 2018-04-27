@@ -486,6 +486,7 @@ Selectively runs either `after-make-console-frame-hooks' or
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
                        (derived-mode . gnus-article-mode)))
+           ("Help" (derived-mode . help-mode))
            ("Image" (mode . image-mode))
            ("Log" (or (derived-mode . TeX-output-mode)
                       (mode . compilation-mode)
