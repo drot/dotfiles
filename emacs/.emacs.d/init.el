@@ -123,7 +123,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (size-indication-mode)
 
 ;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p #'y-or-n-p)
+(advice-add #'yes-or-no-p :override #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.01)
@@ -462,15 +462,32 @@ Selectively runs either `after-make-console-frame-hooks' or
   (defun drot/ibuffer-ffap ()
   "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
   (interactive)
-  (require 'ffap)
   (let* ((buffer (ibuffer-current-buffer))
          (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
          (default-directory (buffer-local-value 'default-directory buffer)))
     (call-interactively ffap-file-finder)))
   ;; Rebind `ibuffer-find-file' with the compatibility function
   (bind-key [remap ibuffer-find-file] #'drot/ibuffer-ffap ibuffer-mode-map)
+  ;; Use a default buffer filter
+  (setq ibuffer-saved-filter-groups
+        '(("primary"
+           ("Core" (or (mode . lisp-interaction-mode)
+                       (mode . messages-buffer-mode)))
+           ("Custom" (mode . Custom-mode))
+           ("Dired" (mode . dired-mode))
+           ("ERC" (mode . erc-mode))
+           ("Git" (mode . magit-mode))
+           ("Image" (mode . image-mode))
+           ("Mail" (or (mode . message-mode)
+                       (mode . mail-mode)))
+           ("Org" (mode . org-mode))
+           ("PDF" (mode . pdf-view-mode)))))
+  ;; Load the default buffer filter
+  (add-hook 'ibuffer-mode-hook
+            (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
   ;; Customize
-  (setq ibuffer-default-sorting-mode 'major-mode)
+  (setq ibuffer-show-empty-filter-groups nil)
+  (setq ibuffer-jump-offer-only-visible-buffers t)
   (setq ibuffer-use-other-window t))
 
 ;; Version control
@@ -787,7 +804,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (bind-key "C-c a '" #'ielm)
 ;; Configuration
 (after-load 'ielm
-  (setq ielm-prompt "EL> "))
+  (setq ielm-prompt "(>) "))
 
 ;; Flymake
 (bind-key "C-c ! t" #'flymake-mode)
