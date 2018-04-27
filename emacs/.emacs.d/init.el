@@ -475,23 +475,33 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
-           ("Code" (and (or (derived-mode . prog-mode)
-                            (derived-mode . conf-mode))
-                        (not (derived-mode . lisp-interaction-mode))))
-           ("Core" (or (derived-mode . lisp-interaction-mode)
-                       (derived-mode . messages-buffer-mode)))
+           ("Code" (or (derived-mode . prog-mode)
+                       (derived-mode . conf-mode)))
            ("Custom" (derived-mode . Custom-mode))
-           ("Dired" (derived-mode . dired-mode))
+           ("Dired" (mode . dired-mode))
+           ("Document" (or (derived-mode . latex-mode)
+                           (derived-mode . markdown-mode)))
            ("ERC" (derived-mode . erc-mode))
            ("Git" (derived-mode . magit-mode))
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
                        (derived-mode . gnus-article-mode)))
-           ("Image" (derived-mode . image-mode))
+           ("Image" (mode . image-mode))
+           ("Log" (or (derived-mode . TeX-output-mode)
+                      (mode . compilation-mode)
+                      (derived-mode . ivy-occur-mode)
+                      (derived-mode . geiser-messages-mode)
+                      (derived-mode . messages-buffer-mode)
+                      (mode . tags-table-mode)))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Org" (derived-mode . org-mode))
-           ("PDF" (derived-mode . pdf-view-mode)))))
+           ("PDF" (derived-mode . pdf-view-mode))
+           ("REPL" (or (derived-mode . cider-repl-mode)
+                       (derived-mode . geiser-repl-mode)
+                       (mode . slime-repl-mode)))
+           ("Shell" (or (derived-mode . eshell-mode)
+                        (derived-mode . shell-mode))))))
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
@@ -1480,7 +1490,7 @@ Selectively runs either `after-make-console-frame-hooks' or
           (goto-char (point-min))
           (while (search-forward "-+-" nil t)
             (replace-match "-|-"))))))
-
+  ;; Add advice for table alignment
   (advice-add 'org-table-align :after #'markdown-org-table-align-advice)
   ;; Enable `visual-line-mode' in Markdown buffers and disable `auto-fill-mode'
   (add-hook 'markdown-mode-hook #'visual-line-mode)
