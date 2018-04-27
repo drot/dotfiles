@@ -298,7 +298,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Line numbers display
 (setq display-line-numbers-type 'relative)
-(setq-default display-line-numbers-width 3)
+(setq display-line-numbers-current-absolute nil)
+(setq-default display-line-numbers-width 2)
 ;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
