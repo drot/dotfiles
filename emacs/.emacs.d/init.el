@@ -1597,7 +1597,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; PDF Tools
 (require-package 'pdf-tools)
 ;; Autoload missing function
-(autoload #'pdf-view-mode "pdf-tools"
+(autoload #'pdf-view-mode "pdf-view"
   "Major mode in PDF buffers." t)
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
