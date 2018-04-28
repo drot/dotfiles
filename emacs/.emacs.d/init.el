@@ -1603,7 +1603,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'pdf-tools
   ;; Make sure the binary is always compiled
-  (pdf-tools-install :no-query))
+  (pdf-tools-install :no-query-p))
 
 ;; Rainbow mode
 (require-package 'rainbow-mode)
