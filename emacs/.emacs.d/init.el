@@ -1605,6 +1605,11 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Make sure the binary is always compiled
   (pdf-tools-install t))
 
+;; PDF Tools annotations
+(after-load 'pdf-annot
+  ;; Activate annotations automatically
+  (setq pdf-annot-activate-created-annotations t))
+
 ;; Rainbow mode
 (require-package 'rainbow-mode)
 ;; Set key binding
