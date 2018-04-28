@@ -1599,11 +1599,11 @@ Selectively runs either `after-make-console-frame-hooks' or
 (autoload #'pdf-view-mode "pdf-tools"
   "Major mode in PDF buffers." t)
 ;; Initialize mode
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
 ;; Configuration
 (after-load 'pdf-tools
   ;; Make sure the binary is always compiled
-  (pdf-tools-install :no-query-p))
+  (pdf-tools-install t))
 
 ;; Rainbow mode
 (require-package 'rainbow-mode)
