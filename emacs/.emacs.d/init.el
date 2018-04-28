@@ -409,13 +409,14 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Fly Spell mode configuration
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+;; Set key bindings
+(bind-key "C-c l b" #'flyspell-buffer)
+(bind-key "C-c l r" #'flyspell-region)
 ;; Configuration
 (after-load 'flyspell
   ;; Shorten mode lighter
   (dim-minor-name 'flyspell-mode " fS")
   ;; Set key bindings
-  (bind-key "C-c l b" #'flyspell-buffer)
-  (bind-key "C-c l r" #'flyspell-region)
   (bind-keys :map flyspell-mode-map
              ("C-c l c" . flyspell-correct-word-before-point)
              ("C-c l p" . flyspell-check-previous-highlighted-word))
