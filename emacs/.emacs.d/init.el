@@ -308,7 +308,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Highlight current line
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
-(dolist (hook '(erc-mode-hook
+(dolist (hook '(artist-mode-hook
+                erc-mode-hook
                 nov-mode-hook
                 eshell-mode-hook
                 term-mode-hook
@@ -2053,6 +2054,9 @@ suitable for assigning to `ffap-file-finder'."
     "C-c C-s" "markdown-styles"
     "C-c C-t" "markdown-header"
     "C-c C-x" "markdown-toggles"))
+
+;; Artist mode
+(bind-key "C-c t a" #'artist-mode)
 
 ;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
