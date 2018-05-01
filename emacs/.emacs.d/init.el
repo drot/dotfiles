@@ -309,7 +309,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
 (dolist (hook '(artist-mode-hook
-                erc-mode-hook
+                rcirc-mode-hook
                 nov-mode-hook
                 eshell-mode-hook
                 term-mode-hook
@@ -1309,81 +1309,100 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
   (setq elfeed-search-filter "@1-week-ago +unread"))
 
-;; ERC
-(defun drot/erc-init ()
-  "Connect to IRC."
-  (interactive)
-  (when (y-or-n-p "Connect to IRC? ")
-    ;; Rizon
-    (erc-tls :server "irc.rizon.net" :port 6697
-             :nick "drot")
-    ;; ForestNet
-    (erc-tls :server "irc.forestnet.org" :port 6697
-             :nick "drot")))
+;; rcirc
+(bind-key "C-c a i" #'irc)
+;; Configuration
+(after-load 'rcirc
+  ;; User defaults
+  (setq rcirc-default-user-name "drot")
+  (setq rcirc-reconnect-delay 10)
+  ;; Connect to the specified servers and channels
+  (setq rcirc-server-alist
+        '(("irc.rizon.net" :port 6697 :encryption tls
+           :channels ("#/g/technology" "#rice"))
+          ("irc.forestnet.org" :port 6697 :encryption tls
+           :channels ("#rawhide" "#sq"))))
+  ;; Authentication
+  (setq rcirc-authinfo
+        `(("rizon" nickserv "drot" ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))
+          ("forestnet" nickserv "drot" ,(auth-source-pass-get 'secret "auth-sources/drot@irc.forestnet.org"))))
+  ;; Truncate buffer output
+  (setq rcirc-buffer-maximum-lines 2048)
+  ;; Set fill column value to frame width
+  (setq rcirc-fill-column 'frame-width)
+  ;; Enable logging
+  (setq rcirc-log-flag t)
+  ;; Enable additional modes
+  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
+  (add-hook 'rcirc-mode-hook #'flyspell-mode)
+  ;; Disable company mode in rcirc buffers
+  (add-hook 'rcirc-mode-hook
+            (lambda () (company-mode 0)))
+  ;; Exclude text properties when yanking text in rcirc buffers
+  (add-to-list 'yank-excluded-properties 'rcirc-text)
+  ;; Add some custom commands
+  (defun-rcirc-command chanserv (arg)
+    "Send a private message to the ChanServ service."
+    (rcirc-send-string process (concat "chanserv " arg)))
 
-;; Set key binding
-(bind-key "C-c a i" #'drot/erc-init)
+  (defun-rcirc-command mystery (arg)
+    "Send a private message to the Mystery service."
+    (rcirc-send-string process (concat "mystery " arg)))
 
-;; ERC highlight nicknames
-(require-package 'erc-hl-nicks)
+  (defun-rcirc-command memoserv (arg)
+    "Send a private message to the MemoServ service."
+    (rcirc-send-string process (concat "memoserv " arg)))
 
-;; ERC configuration
-(after-load 'erc
-  ;; Load ERC services mode for Rizon authentication
-  (erc-services-mode)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-nickserv-identify-mode 'autodetect)
-  (setq erc-nickserv-passwords
-        `((Rizon (("drot" . ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))))))
-  ;; Connect to specified servers
-  (setq erc-prompt-for-password nil)
-  (setq erc-autojoin-timing 'ident)
-  (setq erc-server-reconnect-timeout 30)
-  ;; Configure text filling
-  (setq erc-fill-function #'erc-fill-static)
-  (setq erc-fill-column 150)
-  (setq erc-fill-static-center 10)
-  ;; Timestap formatting
-  (setq erc-insert-timestamp-function #'erc-insert-timestamp-left)
-  (setq erc-timestamp-only-if-changed-flag nil)
-  (setq erc-timestamp-format "[%H:%M] ")
-  ;; Text formatting
-  (setq erc-header-line-format "%t: %o")
-  (setq erc-interpret-mirc-color t)
-  (setq erc-button-buttonize-nicks nil)
-  (setq erc-format-nick-function #'erc-format-@nick)
-  (setq erc-nick-uniquifier "_")
-  (setq erc-prompt
-        (lambda () (concat (buffer-name) ">")))
-  ;; Channel tracking options
-  (setq erc-track-exclude-server-buffer t)
-  (setq erc-track-showcount t)
-  (setq erc-track-switch-direction 'importance)
-  (setq erc-track-visibility 'selected-visible)
-  ;; Hide lurker activity
-  (setq erc-lurker-threshold-time 3600)
-  (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
-  ;; Open query buffers in the current window
-  (setq erc-query-display 'buffer)
-  ;; Kill all buffers upon ERC quit
-  (setq erc-kill-buffer-on-part t)
-  (setq erc-kill-queries-on-quit t)
-  (setq erc-kill-server-buffer-on-quit t)
-  ;; Prevent accidental paste
-  (setq erc-accidental-paste-threshold-seconds 0.5)
-  ;; Disable some conflicting modes
-  (defun drot/erc-mode-hook ()
-    "Keep prompt at bottom in ERC buffers."
-    (set (make-local-variable 'scroll-conservatively) 1000))
-  ;; Apply the custom hook
-  (add-hook 'erc-mode-hook #'drot/erc-mode-hook)
-  ;; Enable notifications
-  (erc-notifications-mode)
-  ;; Enable spell-checking
-  (erc-spelling-mode)
-  ;; Truncate buffer
-  (setq erc-truncate-buffer-on-save t)
-  (add-hook 'erc-insert-post-hook #'erc-truncate-buffer))
+  (defun-rcirc-command nickserv (arg)
+    "Send a private message to the NickServ service."
+    (rcirc-send-string process (concat "nickserv " arg))))
+
+;; rcirc color codes support
+(require-package 'rcirc-styles)
+;; Configuration
+(after-load 'rcirc
+  ;; Initialize mode
+  (require 'rcirc-styles)
+  ;; Set key bindings
+  (bind-keys :map rcirc-mode-map
+             ("C-c C-e p" . rcirc-styles-toggle-preview)
+             ("C-c C-e a" . rcirc-styles-insert-attribute)
+             ("C-c C-e c" . rcirc-styles-insert-color))
+  ;; Use custom colors
+  (setq rcirc-styles-color-vector
+        ["#373b41"
+         "#cc6666"
+         "#b5bd68"
+         "#f0c674"
+         "#81a2be"
+         "#b294bb"
+         "#8abeb7"
+         "#c5c8c6"
+         "#969896"
+         "#cc6666"
+         "#b5bd68"
+         "#f0c674"
+         "#81a2be"
+         "#b294bb"
+         "#8abeb7"
+         "#ffffff"]))
+
+;; rcirc colored nicknames
+(require-package 'rcirc-color)
+;; Configuration
+(after-load 'rcirc
+  ;; Initialize mode
+  (require 'rcirc-color)
+  ;; Inherit nick colors from rcirc-styles colors
+  (setq rcirc-colors (append rcirc-styles-color-vector nil)))
+
+;; rcirc notifications
+(require-package 'rcirc-notify)
+;; Configuration
+(after-load 'rcirc
+  ;; Initialize mode
+  (rcirc-notify-add-hooks))
 
 ;; Expand region
 (require-package 'expand-region)
