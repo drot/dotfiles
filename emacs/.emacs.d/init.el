@@ -1885,7 +1885,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap bookmark-jump] #'counsel-bookmark)
 ;; Set the rest of the key bindings
 (bind-key "C-c f g" #'counsel-git)
-(bind-key "C-c f j" #'counsel-dired-jump)
+(bind-key "C-c f d" #'counsel-dired-jump)
 (bind-key "C-c f r" #'counsel-recentf)
 (bind-key "C-c s G" #'counsel-git-grep)
 (bind-key "C-c s i" #'counsel-imenu)
@@ -1894,6 +1894,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h c" #'counsel-command-history)
 (bind-key "C-c h l" #'counsel-find-library)
 (bind-key "C-c i 8" #'counsel-unicode-char)
+(bind-key "C-c f f" #'counsel-file-jump)
+(bind-key [remap org-goto] #'counsel-org-goto)
+(bind-key [remap org-set-tags-command] #'counsel-org-tag)
+(bind-key [remap menu-bar-open] #'counsel-tmm)
 ;; Configuration
 (after-load 'counsel
   ;; Customize
@@ -2126,6 +2130,11 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Sort lines alphabetically
 (bind-key "C-c x l" #'sort-lines)
+
+;; Word capitalization operations
+(bind-key [remap capitalize-word] #'capitalize-dwim)
+(bind-key [remap upcase-word] #'upcase-dwim)
+(bind-key [remap downcase-word] #'downcase-dwim)
 
 ;; Auto Fill mode
 (bind-key "C-c t f" #'auto-fill-mode)
