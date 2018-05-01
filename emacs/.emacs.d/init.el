@@ -874,7 +874,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "C-c a g" #'gnus)
+(bind-key "C-x M" #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
@@ -1087,15 +1087,15 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Debbugs
 (require-package 'debbugs)
 ;; Set key bindings
-(bind-key "C-c d g" #'debbugs-gnu)
-(bind-key "C-c d s" #'debbugs-gnu-search)
-(bind-key "C-c d t" #'debbugs-gnu-usertags)
-(bind-key "C-c d p" #'debbugs-gnu-patches)
-(bind-key "C-c d b" #'debbugs-gnu-bugs)
-(bind-key "C-c d O" #'debbugs-org)
-(bind-key "C-c d S" #'debbugs-org-search)
-(bind-key "C-c d P" #'debbugs-org-patches)
-(bind-key "C-c d B" #'debbugs-org-bugs)
+(bind-key "C-c a b g" #'debbugs-gnu)
+(bind-key "C-c a b s" #'debbugs-gnu-search)
+(bind-key "C-c a b t" #'debbugs-gnu-usertags)
+(bind-key "C-c a b p" #'debbugs-gnu-patches)
+(bind-key "C-c a b b" #'debbugs-gnu-bugs)
+(bind-key "C-c a b O" #'debbugs-org)
+(bind-key "C-c a b S" #'debbugs-org-search)
+(bind-key "C-c a b P" #'debbugs-org-patches)
+(bind-key "C-c a b B" #'debbugs-org-bugs)
 
 ;; CIDER
 (require-package 'cider)
@@ -2026,6 +2026,7 @@ suitable for assigning to `ffap-file-finder'."
     "C-c !" "flymake"
     "C-c @" "hide-show"
     "C-c O" "outline"
+    "C-c a b" "debbugs"
     "C-c a w" "eww"
     "C-c a" "applications"
     "C-c b" "buffers"
