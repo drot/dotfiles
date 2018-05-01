@@ -774,7 +774,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Open URLs with the specified browser
 (bind-key "C-c n b" #'browse-url)
-(bind-key "C-c n p" #'browse-url-at-point)
 ;; Configuration
 (after-load 'browse-url
   (setq browse-url-browser-function #'browse-url-firefox))
@@ -1845,12 +1844,12 @@ Selectively runs either `after-make-console-frame-hooks' or
 (require-package 'ivy-hydra)
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
+;; Set key binding
+(bind-key "C-c r" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
   (dim-minor-name 'ivy-mode " iY")
-  ;; Set key binding
-  (bind-key "C-c n i" #'ivy-resume)
   ;; Customize
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil)
