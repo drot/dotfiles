@@ -1371,7 +1371,7 @@ Selectively runs either `after-make-console-frame-hooks' or
              ("C-c C-e c" . rcirc-styles-insert-color))
   ;; Use custom colors
   (setq rcirc-styles-color-vector
-        ["#373b41"
+        ["#515151"
          "#cc6666"
          "#b5bd68"
          "#f0c674"
