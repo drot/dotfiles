@@ -1329,7 +1329,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 2048)
   ;; Set fill column value to frame width
-  (setq rcirc-fill-column 'frame-width)
+  (setq rcirc-fill-column #'window-text-width)
   ;; Enable logging
   (setq rcirc-log-flag t)
   ;; Enable additional modes
