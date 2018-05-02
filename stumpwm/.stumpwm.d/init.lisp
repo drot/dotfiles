@@ -11,11 +11,13 @@
 
 (in-package :stumpwm)
 
-;; Load swank
+;; Load Swank
 (load (car (directory "~/.emacs.d/elpa/slime-*/swank-loader.lisp")))
 
+;; Initialize Swank
 (swank-loader:init)
 
+;; Command for on-demand starting of the Swank server
 (defcommand swank () ()
   "Creates a Swank server in the StumpWM Lisp process."
   (swank:create-server
@@ -104,24 +106,24 @@
 ;; Volume control functions
 (defcommand voltoggle () ()
   "Toggle volume."
-  (run-shell-command "ponymix -N toggle"))
+  (run-shell-command "pactl set-sink-mute 0 toggle"))
 
 (defcommand volplus () ()
   "Increase volume."
-  (run-shell-command "ponymix -N increase 5"))
+  (run-shell-command "pactl set-sink-volume 0 +5%"))
 
 (defcommand volminus () ()
   "Decrease volume"
-  (run-shell-command "ponymix -N decrease 5"))
+  (run-shell-command "pactl set-sink-volume 0 -5%"))
 
 ;; Run or raise
 (defcommand eclient () ()
   "Run/Raise Emacsclient."
   (run-or-raise "emacsclient -c" '(:class "Emacs")))
 
-(defcommand conkeror () ()
-  "Run/Raise Conkeror."
-  (run-or-raise "conkeror" '(:class "Conkeror")))
+(defcommand firefox () ()
+  "Run/Raise Firefox."
+  (run-or-raise "firefox" '(:class "Firefox")))
 
 (defcommand gimp () ()
   "Run/Raise GIMP."
@@ -149,13 +151,13 @@
 (set-prefix-key (kbd "C-i"))
 
 ;; Swap default key bindings
-(define-key *root-map* (kbd "C-b") "conkeror")
+(define-key *root-map* (kbd "C-b") "firefox")
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "C-e") "eclient")
 
 ;; Volume control key bindings
-(define-key *top-map* (kbd "s-period") "voltoggle")
-(define-key *top-map* (kbd "s-plus") "volplus")
-(define-key *top-map* (kbd "s-minus") "volminus")
+(define-key *top-map* (kbd "XF86AudioMute") "voltoggle")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "volplus")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "volminus")
 
 ;;; init.lisp ends here
