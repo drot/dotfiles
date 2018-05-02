@@ -1845,7 +1845,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "C-c r" #'ivy-resume)
+(bind-key "C-c M-r" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
