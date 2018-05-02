@@ -2023,7 +2023,6 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
-    "C-c !" "flymake"
     "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c a b" "debbugs"
@@ -2053,10 +2052,12 @@ suitable for assigning to `ffap-file-finder'."
     "C-c x a" "align"
     "C-c x" "text"
     "C-x C-a" "edebug"
+    "C-x O" "previous-other-window"
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
-    "C-x w" "highlight")
+    "C-x w" "highlight"
+    "C-c !" "flymake")
   ;; Dired mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
     "C-, C-o" "dired-subtree-only"
