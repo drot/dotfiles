@@ -752,7 +752,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq reb-re-syntax 'string))
 
 ;; Proced
-(bind-key "C-x p" #'proced)
+(bind-key "C-c a p" #'proced)
 ;; Configuration
 (after-load 'proced
   (setq-default proced-sort 'start)
@@ -874,7 +874,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "C-x M" #'gnus)
+(bind-key "C-c a g" #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
@@ -2125,7 +2125,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; List packages
-(bind-key "C-c a p" #'package-list-packages)
+(bind-key "C-x p" #'package-list-packages)
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
