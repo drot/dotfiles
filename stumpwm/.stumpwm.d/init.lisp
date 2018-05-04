@@ -34,14 +34,14 @@
                         "net"))
 
 ;; Change default color map
-(setf *colors* '("#5f5f5f"              ; 0 black
-                 "#dca3a3"              ; 1 red
-                 "#9fc59f"              ; 2 green
-                 "#f0dfaf"              ; 3 yellow
-                 "#8cd0d3"              ; 4 blue
-                 "#dc8cc3"              ; 5 magenta
-                 "#93e0e3"              ; 6 cyan
-                 "#dcdccc"))            ; 7 white
+(setf *colors* '("#1d1f21"              ; 0 black
+                 "#cc6666"              ; 1 red
+                 "#b5bd68"              ; 2 green
+                 "#f0c674"              ; 3 yellow
+                 "#81a2be"              ; 4 blue
+                 "#b294bb"              ; 5 magenta
+                 "#8abeb7"              ; 6 cyan
+                 "#c5c8c6"))            ; 7 white
 (update-color-map (current-screen))
 
 ;; Font
@@ -51,22 +51,22 @@
 (setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
 
 ;; Window colors
-(set-win-bg-color "#5f5f5f")
-(set-focus-color "#9fc59f")
-(set-unfocus-color "#1e2320")
-(set-float-focus-color "#9fc59f")
-(set-float-unfocus-color "#1e2320")
+(set-win-bg-color "#373b41")
+(set-focus-color "#282a2e")
+(set-unfocus-color "#1d1f21")
+(set-float-focus-color "#282a2e")
+(set-float-unfocus-color "#1d1f21")
 
 ;; Message and input prompt colors
-(set-border-color "#5f5f5f")
-(set-fg-color "#dcdccc")
-(set-bg-color "#1e2320")
+(set-border-color "#373b41")
+(set-fg-color "#c5c8c6")
+(set-bg-color "#1d1f21")
 
 ;; Grabbed pointer style
 (setf *grab-pointer-character* 40)
 (setf *grab-pointer-character-mask* 41)
-(setf *grab-pointer-foreground* (hex-to-xlib-color "#1e2320"))
-(setf *grab-pointer-background* (hex-to-xlib-color "#f0dfaf"))
+(setf *grab-pointer-foreground* (hex-to-xlib-color "#1d1f21"))
+(setf *grab-pointer-background* (hex-to-xlib-color "#f0c674"))
 
 ;; Message and input prompt style
 (setf *input-window-gravity* :center)
@@ -74,18 +74,18 @@
 (setf *input-history-ignore-duplicates* 1)
 
 ;; Mode line colors
-(setf *mode-line-foreground-color* "#dcdccc")
-(setf *mode-line-background-color* "#3f3f3f")
-(setf *mode-line-border-color* "#5f5f5f")
+(setf *mode-line-foreground-color* "#c5c8c6")
+(setf *mode-line-background-color* "#1d1f21")
+(setf *mode-line-border-color* "#373b41")
 
 ;; Group and window format
 (setf *group-format* "%n%s(%t)")
 (setf *window-format* "%m%n%s(%50t) ")
 
 ;; Mode line format
-(setf *time-modeline-string* "^6*%d-%m^n ^3*%H:%M^n")
+(setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 (setf *screen-mode-line-format* '("(^7*%n^n) ^06%u^n ^30%W^n ^>"
-                                  " (^2*%c^n)(^4*%M^n)(^7*%l^n)(%d)"))
+                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d)"))
 
 ;; Show the mode line for current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
