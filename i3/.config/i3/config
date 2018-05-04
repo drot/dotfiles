@@ -72,7 +72,7 @@ assign [class="Pavucontrol"] $ws4
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st -g 120x30
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill

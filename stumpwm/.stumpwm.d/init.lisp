@@ -91,6 +91,9 @@
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
 
+;; Disable mouse focus
+(setf *mouse-focus-policy* :ignore)
+
 ;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
 (run-commands "gnewbg www"
@@ -101,7 +104,7 @@
 ;; Default terminal
 (defcommand terminal () ()
   "Start a terminal session."
-  (run-shell-command "termite"))
+  (run-shell-command "kitty"))
 
 ;; Volume control functions
 (defcommand voltoggle () ()
