@@ -1664,6 +1664,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 (require-package 'slime)
 ;; Set key bindings
 (bind-key "C-c a s" #'slime)
+(bind-key "C-c a S" #'slime-connect)
 ;; Configuration
 (after-load 'slime
   ;; Set key binding
