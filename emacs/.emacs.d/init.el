@@ -773,7 +773,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache")))
 
 ;; Open URLs with the specified browser
-(bind-key "C-c n b" #'browse-url)
+(bind-key "C-c u b" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
   (setq browse-url-browser-function #'browse-url-firefox))
@@ -878,8 +878,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
-  (bind-key "C-c n o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "C-c n o" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c u l" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c u l" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -981,7 +981,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'org
   ;; Set key binding
-  (bind-key "C-c n o" #'ace-link-org org-mode-map)
+  (bind-key "C-c u l" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
@@ -1723,7 +1723,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'ace-link
   ;; Set key binding
-  (bind-key "C-c n a"  #'ace-link-addr))
+  (bind-key "C-c u a"  #'ace-link-addr))
 
 ;; Anzu
 (require-package 'anzu)
@@ -2028,6 +2028,7 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
+    "C-c !" "flymake"
     "C-c @" "hide-show"
     "C-c O" "outline"
     "C-c a b" "debbugs"
@@ -2047,12 +2048,12 @@ suitable for assigning to `ffap-file-finder'."
     "C-c j" "jump"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
-    "C-c n" "navigation"
     "C-c o" "organization"
     "C-c p t" "hl-todo"
     "C-c p" "project"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
+    "C-c u" "url"
     "C-c w" "windows"
     "C-c x a" "align"
     "C-c x" "text"
@@ -2061,8 +2062,7 @@ suitable for assigning to `ffap-file-finder'."
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
-    "C-x w" "highlight"
-    "C-c !" "flymake")
+    "C-x w" "highlight")
   ;; Dired mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
     "C-, C-o" "dired-subtree-only"
