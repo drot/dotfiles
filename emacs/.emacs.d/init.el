@@ -2016,6 +2016,10 @@ suitable for assigning to `ffap-file-finder'."
 (setq which-key-allow-imprecise-window-fit t)
 (setq which-key-sort-order #'which-key-prefix-then-key-order)
 (add-hook 'after-init-hook #'which-key-mode)
+;; Rebind paging command
+(setq which-key-use-C-h-commands nil)
+(setq which-key-paging-prefixes '("C-x"))
+(setq which-key-paging-key "<f5>")
 ;; Set key bindings
 (bind-key "C-c h w t" #'which-key-show-top-level)
 (bind-key "C-c h w m" #'which-key-show-major-mode)
