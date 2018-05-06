@@ -2018,7 +2018,7 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Rebind paging command
 (setq which-key-use-C-h-commands nil)
-(setq which-key-paging-prefixes '("C-x"))
+(setq which-key-paging-prefixes '("C-x" "C-c"))
 (setq which-key-paging-key "<f5>")
 ;; Set key bindings
 (bind-key "C-c h w t" #'which-key-show-top-level)
