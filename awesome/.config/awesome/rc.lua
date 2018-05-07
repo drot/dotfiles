@@ -46,9 +46,9 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "st -g 120x30"
+local terminal = "kitty"
 local editor = os.getenv("EDITOR") or "nano"
-local editor_cmd = terminal .. " -e " .. editor
+local editor_cmd = terminal .. " " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -357,7 +357,7 @@ local temperature_icon = wibox.widget {
 
 -- Set temperature text value
 local temperature_text_value = wibox.widget.textbox()
-vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, "thermal_zone0")
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon1", "core" })
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -407,7 +407,7 @@ local temperature_bar = wibox.widget {
 }
 
 -- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, "thermal_zone0")
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon1", "core" })
 
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
@@ -430,7 +430,7 @@ vicious.cache(vicious.widgets.fs)
 
 -- Set file system usage text value
 local fs_text_value = wibox.widget.textbox()
-vicious.register(fs_text_value, vicious.widgets.fs, "${/home used_p}%", 300)
+vicious.register(fs_text_value, vicious.widgets.fs, "${/ used_p}%", 300)
 
 -- Create a file system usage text widget
 local fs_text_widget = wibox.widget {
@@ -473,7 +473,7 @@ local fs_chart = wibox.widget {
 }
 
 -- Set file system usage chart value
-vicious.register(fs_chart, vicious.widgets.fs, "${/home used_p}", 300)
+vicious.register(fs_chart, vicious.widgets.fs, "${/ used_p}", 300)
 
 -- Create a file system usage chart background
 local fs_widget = wibox.widget {
