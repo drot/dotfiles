@@ -93,6 +93,18 @@ local function client_menu_toggle_fn()
 end
 -- }}}
 
+-- {{{ Notification configuration
+naughty.config.presets.low.bg = beautiful.bg_normal
+naughty.config.presets.low.fg = beautiful.fg_normal
+naughty.config.presets.low.border_color = beautiful.border_color
+naughty.config.presets.normal.bg = beautiful.bg_focus
+naughty.config.presets.normal.fg = beautiful.fg_focus
+naughty.config.presets.normal.border_color = beautiful.border_focus
+naughty.config.presets.critical.bg = beautiful.bg_urgent
+naughty.config.presets.critical.fg = beautiful.bg_normal
+naughty.config.presets.critical.border_color = beautiful.bg_normal
+-- }}}
+
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
@@ -347,7 +359,7 @@ local temperature_icon = wibox.widget {
    {
       image = beautiful.widget_temperature,
       widget = wibox.widget.imagebox
-   },   
+   },
    top = 4,
    bottom = 4,
    left = 2,
@@ -417,7 +429,7 @@ local fs_icon = wibox.widget {
    {
       image = beautiful.widget_fs,
       widget = wibox.widget.imagebox
-   },   
+   },
    top = 4,
    bottom = 4,
    left = 2,
