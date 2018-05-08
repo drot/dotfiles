@@ -545,6 +545,11 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Shorten mode lighter
   (dim-minor-name 'auto-revert-mode " aR"))
 
+;; ElDoc mode
+(after-load 'eldoc
+  ;; Shorten mode lighter
+  (dim-minor-name 'eldoc-mode " eD"))
+
 ;; Imenu configuration
 (after-load 'imenu
   ;; Always rescan buffers
@@ -554,15 +559,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'pcomplete
   ;;Ignore case sensitivity with Pcomplete
   (setq pcomplete-ignore-case t))
-
-;; ElDoc mode configuration
-(after-load 'eldoc
-  ;; Shorten mode lighter
-  (dim-minor-name 'eldoc-mode " eD")
-  ;; Make compatible with Paredit
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round))
 
 ;; Python mode configuration
 (after-load 'python
@@ -1985,6 +1981,11 @@ suitable for assigning to `ffap-file-finder'."
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil)))
+
+  ;; Compatibility with `eldoc-mode'
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round)
   ;; Compatibility with `delete-selection-mode'
   (put 'paredit-forward-delete 'delete-selection 'supersede)
   (put 'paredit-backward-delete 'delete-selection 'supersede)
