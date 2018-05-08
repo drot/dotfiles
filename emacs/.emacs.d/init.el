@@ -588,6 +588,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   "{" \n
   > _ \n
   "}" > \n)
+;; Bind skeleton
 (bind-key "C-c i s c" #'drot/cc-skeleton)
 ;; Configuration
 (after-load 'cc-mode
@@ -1042,6 +1043,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   "\\begin{document}" \n \n
   _ \n \n
   "\\end{document}" \n)
+;; Bind skeleton
 (bind-key "C-c i s l" #'drot/latex-skeleton)
 ;; TeX configuration
 (after-load 'tex
@@ -2158,7 +2160,6 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c i t" #'table-insert)
 
 ;; Commenting
-(bind-key "C-c c d" #'comment-dwim)
 (bind-key "C-c c r" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
 
