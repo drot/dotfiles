@@ -14,15 +14,21 @@ man() {
 
 # Paste to 0x0.st
 0x0() {
+    local opts
+    local URL="https://0x0.st"
+    # Parameter pick
     if [ "$1" = "-f" ]; then
-        curl -F "file=@$2" https://0x0.st
+        opts="-F file=@$2 $URL"
     elif [ "$1" = "-u" ]; then
-        curl -F "url=$2" https://0x0.st
+        opts="-F url=$2 $URL"
     elif [ "$1" = "-s" ]; then
-        curl -F "shorten=$2" https://0x0.st
+        opts="-F shorten=$2 $URL"
     else
         echo "'-f' for file upload, '-u' for URL upload, '-s' for URL shortening."
+        return
     fi
+    # Execute upload
+    curl $opts | xclip
 }
 
 # Paste to ix.io
