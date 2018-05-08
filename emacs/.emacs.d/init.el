@@ -558,7 +558,11 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; ElDoc mode configuration
 (after-load 'eldoc
   ;; Shorten mode lighter
-  (dim-minor-name 'eldoc-mode " eD"))
+  (dim-minor-name 'eldoc-mode " eD")
+  ;; Make compatible with Paredit
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round))
 
 ;; Python mode configuration
 (after-load 'python
@@ -1543,23 +1547,26 @@ Selectively runs either `after-make-console-frame-hooks' or
           forward-sexp
           indent-for-tab-command
           kill-region
-          lispy-backward
-          lispy-parens
-          lispy-right-nostring
-          lispy-close-square
-          lispy-comment
-          lispy-convolute-sexp
-          lispy-doublequote
-          lispy-forward
-          lispy-forward-barf-sexp
-          lispy-forward-delete
-          lispy-forward-down
-          lispy-forward-slurp-sexp
-          lispy-kill
-          lispy-newline-and-indent
-          lispy-open-curly
-          lispy-open-square
-          lispy-splice-sexp-killing-backward
+          paredit-backslash
+          paredit-backward
+          paredit-close-round
+          paredit-close-square
+          paredit-comment-dwim
+          paredit-convolute-sexp
+          paredit-doublequote
+          paredit-forward
+          paredit-forward-barf-sexp
+          paredit-forward-delete
+          paredit-forward-down
+          paredit-forward-slurp-sexp
+          paredit-kill
+          paredit-newline
+          paredit-open-round
+          paredit-open-square
+          paredit-reindent-cl-defun
+          paredit-semicolon
+          paredit-splice-sexp-killing-backward
+          paredit-backslash
           reindent-then-newline-and-indent
           scroll-other-window
           slime-autodoc-space
@@ -1937,8 +1944,8 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
 
-;; Lispy
-(require-package 'lispy)
+;; Paredit
+(require-package 'paredit)
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
@@ -1948,34 +1955,41 @@ suitable for assigning to `ffap-file-finder'."
                 scheme-mode-hook
                 slime-repl-mode-hook
                 geiser-repl-mode-hook))
-  (add-hook hook #'lispy-mode))
+  (add-hook hook #'enable-paredit-mode))
 ;; Configuration
-(after-load 'lispy
-  ;; Use Paredit key bindings
-  (lispy-set-key-theme '(special paredit c-digits))
+(after-load 'paredit
+  ;; Shorten mode lighter
+  (dim-minor-name 'paredit-mode " pE")
+  ;; Set key bindings
+  (bind-keys :map paredit-mode-map
+             ("M-{" . paredit-wrap-curly)
+             ("M-[" . paredit-wrap-square))
 
-  ;; Enable Lispy in other related modes
-  (defvar drot/lispy-minibuffer-setup-commands
+  ;; Enable Paredit in the minibuffer
+  (defvar drot/paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
       ibuffer-do-eval
       ibuffer-do-view-and-eval)
-    "Interactive commands for which Lispy should be enabled in the minibuffer.")
+    "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot/lispy-minibuffer-setup ()
-    "Enable Lispy during lisp-related minibuffer commands."
-    (if (memq this-command drot/lispy-minibuffer-setup-commands)
-        (lispy-mode)))
-  (add-hook 'minibuffer-setup-hook #'drot/lispy-minibuffer-setup)
+  (defun drot/paredit-minibuffer-setup ()
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command drot/paredit-minibuffer-setup-commands)
+        (enable-paredit-mode)))
 
-  ;; Enable additional balance safeguards
-  (setq lispy-safe-delete t)
-  (setq lispy-safe-copy t)
-  (setq lispy-safe-paste t)
-  (setq lispy-safe-actions-no-pull-delimiters-into-comments t)
-  ;; Prefer single comment
-  (setq lispy-comment-use-single-semicolon t))
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
+  ;; Disable Electric Pair mode when Paredit is active
+  (add-hook 'paredit-mode-hook
+            (lambda () (setq-local electric-pair-mode nil)))
+  ;; Compatibility with `delete-selection-mode'
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-open-round 'delete-selection t)
+  (put 'paredit-open-square 'delete-selection t)
+  (put 'paredit-doublequote 'delete-selection t)
+  (put 'paredit-newline 'delete-selection t))
 
 ;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
@@ -2144,6 +2158,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c i t" #'table-insert)
 
 ;; Commenting
+(bind-key "C-c c d" #'comment-dwim)
 (bind-key "C-c c r" #'comment-region)
 (bind-key "C-c c u" #'uncomment-region)
 
