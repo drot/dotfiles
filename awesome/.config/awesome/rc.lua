@@ -1064,6 +1064,9 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
+   -- Wine
+   { rule = { class = "Wine" },
+     properties = { titlebars_enabled = false } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
      properties = { screen = 1, tag = "3" } },
