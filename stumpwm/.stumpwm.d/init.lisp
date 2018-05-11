@@ -5,7 +5,8 @@
 
 ;;; Commentary:
 
-;; Zenburn themed, mostly default key bindings.
+;; Tomorrow Night themed, mostly default key bindings.
+;; Stumptray module requires XEmbed to be installed via Quicklisp.
 
 ;;; Code:
 
@@ -31,7 +32,8 @@
 ;; Load contrib modules
 (mapcar #'load-module '("cpu"
                         "mem"
-                        "net"))
+                        "net"
+                        "stumptray"))
 
 ;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
@@ -45,7 +47,7 @@
 (update-color-map (current-screen))
 
 ;; Font
-(set-font "-*-terminus-bold-*-*-*-18-*-*-*-*-*-*-*")
+;; (set-font "-*-terminus-bold-*-*-*-18-*-*-*-*-*-*-*")
 
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
@@ -85,11 +87,14 @@
 ;; Mode line format
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 (setf *screen-mode-line-format* '("(^7*%n^n) ^06%u^n ^30%W^n ^>"
-                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d)"))
+                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d)%T"))
 
-;; Show the mode line for current screen
+;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
+
+;; Toggle tray space
+(stumptray:stumptray)
 
 ;; Disable mouse focus
 (setf *mouse-focus-policy* :ignore)
