@@ -5,8 +5,10 @@
 
 ;;; Commentary:
 
-;; Tomorrow Night themed, mostly default key bindings.
-;; Stumptray module requires XEmbed to be installed via Quicklisp.
+;; Tomorrow Night themed, mostly default key bindings. `stumptray' module requires
+;; `clx-xembed' to be installed via Quicklisp. `ttf-fonts' module requires
+;; `clx-truetype' to be installed via Quicklisp and running `xft:cache-fonts'
+;; for initial font cache population.
 
 ;;; Code:
 
@@ -22,7 +24,7 @@
 (defcommand swank () ()
   "Creates a Swank server in the StumpWM Lisp process."
   (swank:create-server
-   :port 4666
+   :port 4005
    :style swank:*communication-style*
    :dont-close t)
   (echo-string (current-screen) "Starting Swank..."))
@@ -30,10 +32,11 @@
 (define-key *root-map* (kbd "C-s") "swank")
 
 ;; Load contrib modules
-(mapcar #'load-module '("cpu"
-                        "mem"
-                        "net"
-                        "stumptray"))
+(load-module "cpu")
+(load-module "mem")
+(load-module "net")
+(load-module "stumptray")
+(load-module "ttf-fonts")
 
 ;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
@@ -47,7 +50,10 @@
 (update-color-map (current-screen))
 
 ;; Font
-;; (set-font "-*-terminus-bold-*-*-*-18-*-*-*-*-*-*-*")
+(set-font (make-instance 'xft:font
+                         :family "Iosevka Term"
+                         :subfamily "Regular"
+                         :size 12))
 
 ;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
@@ -87,7 +93,7 @@
 ;; Mode line format
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 (setf *screen-mode-line-format* '("(^7*%n^n) ^06%u^n ^30%W^n ^>"
-                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d)%T"))
+                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d) %T"))
 
 ;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
