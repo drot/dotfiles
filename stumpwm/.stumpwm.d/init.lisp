@@ -166,6 +166,17 @@
 ;; Change default prefix key
 (set-prefix-key (kbd "C-i"))
 
+;; Display prefix key in use
+(defun key-seq-msg (key key-seq cmd)
+  "Show a message with current incomplete key sequence."
+  (declare (ignore key))
+  (or (eq *top-map* *resize-map*)
+      (stringp cmd)
+      (let ((*message-window-gravity* :bottom-left))
+        (message "~A" (print-key-seq (reverse key-seq))))))
+
+(add-hook *key-press-hook* 'key-seq-msg)
+
 ;; Swap default key bindings
 (define-key *root-map* (kbd "C-b") "firefox")
 (define-key *root-map* (kbd "c") "terminal")
