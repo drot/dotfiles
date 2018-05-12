@@ -70,16 +70,19 @@
 (set-fg-color "#c5c8c6")
 (set-bg-color "#1d1f21")
 
+;; Message and input prompt style
+(setf *input-window-gravity* :center)
+(setf *message-window-gravity* :bottom-right)
+(setf *input-history-ignore-duplicates* 1)
+
 ;; Grabbed pointer style
 (setf *grab-pointer-character* 40)
 (setf *grab-pointer-character-mask* 41)
 (setf *grab-pointer-foreground* (hex-to-xlib-color "#1d1f21"))
 (setf *grab-pointer-background* (hex-to-xlib-color "#f0c674"))
 
-;; Message and input prompt style
-(setf *input-window-gravity* :center)
-(setf *message-window-gravity* :bottom-right)
-(setf *input-history-ignore-duplicates* 1)
+;; Disable mouse focus
+(setf *mouse-focus-policy* :sloppy)
 
 ;; Mode line colors
 (setf *mode-line-foreground-color* "#c5c8c6")
@@ -90,10 +93,12 @@
 (setf *group-format* "%n%s(%t)")
 (setf *window-format* "%m%n%s(%50t) ")
 
-;; Mode line format
+;; Mode line time format
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
-(setf *screen-mode-line-format* '("(^7*%n^n) ^06%u^n ^30%W^n ^>"
-                                  " (^2*%c^n)(^4*%M^n)(^3*%l^n)(%d) %T"))
+
+;; Mode line format
+(setf *screen-mode-line-format* '("<^7*%n^n> ^06%u^n ^30%W^n ^>"
+                                  " ^2*%c^n >> ^4*%M^n >> ^3*%l^n >> %d %T"))
 
 ;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
@@ -101,9 +106,6 @@
 
 ;; Toggle tray space
 (stumptray:stumptray)
-
-;; Disable mouse focus
-(setf *mouse-focus-policy* :ignore)
 
 ;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
