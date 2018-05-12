@@ -753,7 +753,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq reb-re-syntax 'string))
 
 ;; Proced
-(bind-key "C-c a p" #'proced)
+(bind-key "C-x p" #'proced)
 ;; Configuration
 (after-load 'proced
   (setq-default proced-sort 'start)
@@ -2133,7 +2133,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; List packages
-(bind-key "C-x p" #'package-list-packages)
+(bind-key "C-c a p" #'package-list-packages)
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
