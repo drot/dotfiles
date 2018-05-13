@@ -215,10 +215,10 @@ local cpu_text_widget = wibox.widget {
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
-   max_value = 100,
    forced_height = 6,
    forced_width = 48,
    stack = true,
+   max_value = 100,
    stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
    border_color = beautiful.border_focus,
@@ -226,7 +226,6 @@ local cpu_graph = wibox.widget {
 }
 
 -- Set CPU usage graph value
--- vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
 vicious.register(cpu_graph, vicious.widgets.cpu,
                  function (widget, args)
                     cpu_graph:add_value(args[2], 1) -- Core 1, color 1
