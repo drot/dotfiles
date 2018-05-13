@@ -138,7 +138,7 @@ local myawesomemenu = {
 
 local mymainmenu = awful.menu({ items = {
                                    { "Terminal", terminal, beautiful.menu_term },
-                                   { "Emacs", "emacsclient -c", beautiful.menu_emacs },
+                                   { "Emacs", "emacs", beautiful.menu_emacs },
                                    { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
                                    { "Office", myofficemenu, beautiful.menu_office },
                                    { "Utilities", myutilmenu, beautiful.menu_util },
@@ -221,7 +221,6 @@ local cpu_graph = wibox.widget {
    stack = true,
    stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
-   color = beautiful.widget_value,
    border_color = beautiful.border_focus,
    widget = wibox.widget.graph,
 }
