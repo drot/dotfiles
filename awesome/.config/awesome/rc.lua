@@ -148,15 +148,15 @@ local mymainmenu = awful.menu({ items = {
                              })
 
 local mylauncher = wibox.widget {
-      {
-         widget = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                          menu = mymainmenu })
-      },
-      top = 4,
-      bottom = 4,
-      left = 4,
-      right = 2,
-      widget = wibox.container.margin
+   {
+      widget = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                       menu = mymainmenu })
+   },
+   top = 4,
+   bottom = 4,
+   left = 4,
+   right = 2,
+   widget = wibox.container.margin
 }
 
 -- Menubar configuration
@@ -215,10 +215,11 @@ local cpu_text_widget = wibox.widget {
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
+   max_value = 100,
    forced_height = 6,
    forced_width = 48,
-   step_width = 2,
-   step_spacing = 1,
+   stack = true,
+   stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_color = beautiful.border_focus,
@@ -226,7 +227,14 @@ local cpu_graph = wibox.widget {
 }
 
 -- Set CPU usage graph value
-vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
+-- vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 4)
+vicious.register(cpu_graph, vicious.widgets.cpu,
+                 function (widget, args)
+                    cpu_graph:add_value(args[2], 1) -- Core 1, color 1
+                    cpu_graph:add_value(args[3], 2) -- Core 2, color 2
+                    cpu_graph:add_value(args[4], 3) -- Core 3, color 3
+                    cpu_graph:add_value(args[5], 4) -- Core 4, color 4
+                 end, 4)
 
 -- Create a background for the CPU usage widget
 local cpu_widget = wibox.widget {
@@ -1023,7 +1031,7 @@ awful.rules.rules = {
                     keys = clientkeys,
                     buttons = clientbuttons,
                     screen = awful.screen.preferred,
-                    placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                    placement = awful.placement.centered+awful.placement.no_overlap+awful.placement.no_offscreen
      }
    },
 
