@@ -1052,8 +1052,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Automatically save and parse style
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
-  ;; Insert macros with a backslash
-  (setq TeX-electric-escape t)
   ;; Use PDF Tools as default viewer
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-start-server t)
