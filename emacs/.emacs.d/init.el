@@ -1987,9 +1987,6 @@ suitable for assigning to `ffap-file-finder'."
   ;; Compatibility with `delete-selection-mode'
   (put 'paredit-forward-delete 'delete-selection 'supersede)
   (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-open-round 'delete-selection t)
-  (put 'paredit-open-square 'delete-selection t)
-  (put 'paredit-doublequote 'delete-selection t)
   (put 'paredit-newline 'delete-selection t))
 
 ;; Rainbow Delimiters
