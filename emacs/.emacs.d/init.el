@@ -132,11 +132,17 @@ Selectively runs either `after-make-console-frame-hooks' or
 (setq-default indicate-buffer-boundaries 'left)
 (setq-default indicate-empty-lines t)
 
-;; Move point all the way when scrolling to buffer boundaries
+;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
+
+;; Preserve point position when scrolling
+(setq scroll-preserve-screen-position t)
 
 ;; Always scroll evenly with the mouse
 (setq mouse-wheel-progressive-speed nil)
+
+;; Enable faster scrolling
+(setq fast-but-imprecise-scrolling t)
 
 ;; Use visual bell instead
 (setq visible-bell t)
@@ -203,9 +209,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
-
-;; Enable faster scrolling
-(setq fast-but-imprecise-scrolling t)
 
 ;; Resize windows proportionally
 (setq window-combination-resize t)
