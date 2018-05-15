@@ -1563,8 +1563,11 @@ Selectively runs either `after-make-console-frame-hooks' or
           paredit-newline
           paredit-open-round
           paredit-open-square
+          paredit-wrap-round
+          paredit-wrap-square
           paredit-reindent-cl-defun
           paredit-semicolon
+          paredit-splice-sexp
           paredit-splice-sexp-killing-backward
           paredit-backslash
           reindent-then-newline-and-indent
