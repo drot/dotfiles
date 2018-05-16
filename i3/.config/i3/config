@@ -6,24 +6,14 @@ focus_follows_mouse no
 # font for window titles and the status bar
 font pango:Iosevka Term Bold 12
 
-# default modifier and movement keys
+# default modifier key
 set $mod Mod4
+
+# default movement keys
 set $up l
 set $down k
 set $left j
 set $right semicolon
-
-# define names for default workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
 # default colors
 set $base00 #1d1f21
@@ -48,25 +38,6 @@ client.focused $base03 $base02 $base0D $base01
 client.focused_inactive $base03 $base01 $base03 $base01
 client.unfocused $base02 $base00 $base03 $base01
 client.urgent $base02 $base08 $base07 $base08
-
-# list of floating applications
-for_window [class="Tor Browser"] floating enable
-for_window [class="mpv"] floating enable
-for_window [class="MPlayer"] floating enable
-for_window [class="Wine"] floating enable
-for_window [class="Thunar"] floating enable
-for_window [class="Pinentry"] floating enable
-for_window [class="Pidgin"] floating enable
-
-# assign applications to certain workspaces
-assign [class="Firefox"] $ws2
-assign [class="Tor Browser"] $ws2
-assign [class="Conkeror"] $ws2
-assign [class="Emacs"] $ws3
-assign [class="Zathura"] $ws4
-assign [class="libreoffice"] $ws4
-assign [class="Gimp"] $ws4
-assign [class="Pavucontrol"] $ws4
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -137,8 +108,19 @@ bindsym $mod+u [urgent="latest"] focus
 bindsym $mod+Shift+minus move scratchpad
 
 # show the next scratchpad window or hide the focused scratchpad window
-# if there are multiple scratchpad windows, this command cycles through them
 bindsym $mod+minus scratchpad show
+
+# define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -200,6 +182,25 @@ mode "RESIZE" {
 }
 
 bindsym $mod+r mode "RESIZE"
+
+# list of floating applications
+for_window [class="Tor Browser"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="MPlayer"] floating enable
+for_window [class="Wine"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="Pinentry"] floating enable
+for_window [class="Pidgin"] floating enable
+
+# assign applications to certain workspaces
+assign [class="Firefox"] $ws2
+assign [class="Tor Browser"] $ws2
+assign [class="Conkeror"] $ws2
+assign [class="Emacs"] $ws3
+assign [class="Zathura"] $ws4
+assign [class="libreoffice"] $ws4
+assign [class="Gimp"] $ws4
+assign [class="Pavucontrol"] $ws4
 
 # start i3bar to display a workspace bar
 bar {
