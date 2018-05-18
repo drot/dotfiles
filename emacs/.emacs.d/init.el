@@ -1451,6 +1451,10 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Lua mode
 (require-package 'lua-mode)
+;; Configuration
+(after-load 'lua-mode
+  ;; Lua 5.3 as the default interpreter
+  (setq lua-default-application "lua5.3"))
 
 ;; Hydra
 (require-package 'hydra)
