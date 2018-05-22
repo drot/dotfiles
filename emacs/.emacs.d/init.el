@@ -1950,7 +1950,7 @@ suitable for assigning to `ffap-file-finder'."
             (bind-key "C-c ," #'hui-select-thing)
             (bind-key "C-x M-r" #'hui:ebut-rename)
             (bind-key "C-x M-w" #'hycontrol-windows-grid)
-            (bind-key "C-x \\" #'hkey-operate)))
+            (bind-key "C-x M-o" #'hkey-operate)))
 ;; Initialize mode
 (add-hook 'after-init-hook
           (lambda () (require 'hyperbole)))
