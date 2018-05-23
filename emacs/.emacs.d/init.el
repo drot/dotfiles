@@ -539,6 +539,15 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Image mode
 (after-load 'image-mode
+  ;; Show image dimension function
+  (defun drot-show-image-dimensions-in-mode-line ()
+    (let* ((image-dimensions (image-size (image-get-display-property) :pixels))
+           (width (car image-dimensions))
+           (height (cdr image-dimensions)))
+      (setq mode-line-buffer-identification
+            (format " (%dx%d)" width height))))
+  ;; Apply the custom hook
+  (add-hook 'image-mode-hook #'drot-show-image-dimensions-in-mode-line)
   ;; Loop animated images forever
   (setq image-animate-loop t))
 
