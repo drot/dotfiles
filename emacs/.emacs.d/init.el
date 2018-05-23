@@ -40,10 +40,10 @@
 
 ;; Detect `window-system' properly with daemon usage
 (defvar after-make-console-frame-hooks '()
-  "Hooks to run after creating a new TTY frame")
+  "Hooks to run after creating a new TTY frame.")
 
 (defvar after-make-window-system-frame-hooks '()
-  "Hooks to run after creating a new window-system frame")
+  "Hooks to run after creating a new GUI frame.")
 
 (defun run-after-make-frame-hooks (frame)
   "Run configured hooks in response to the newly-created FRAME.
@@ -56,13 +56,13 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 (add-hook 'after-make-frame-functions #'run-after-make-frame-hooks)
 
-(defconst drot:initial-frame (selected-frame)
+(defconst drot-initial-frame (selected-frame)
   "The frame (if any) active during Emacs initialization.")
 
 (add-hook 'after-init-hook
           (lambda ()
-            (when drot:initial-frame
-              (run-after-make-frame-hooks drot:initial-frame))))
+            (when drot-initial-frame
+              (run-after-make-frame-hooks drot-initial-frame))))
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
@@ -134,9 +134,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 
 ;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
-
-;; Preserve point position when scrolling
-(setq scroll-preserve-screen-position t)
 
 ;; Always scroll evenly with the mouse
 (setq mouse-wheel-progressive-speed nil)
@@ -219,9 +216,6 @@ Selectively runs either `after-make-console-frame-hooks' or
 (setq window-divider-default-places t)
 (window-divider-mode)
 
-;; Change recenter initial position
-(setq recenter-positions '(top middle bottom))
-
 ;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 
@@ -295,7 +289,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Configuration
   (setq dired-at-point-require-prefix t)
   (setq ffap-require-prefix t)
-  (setq ffap-file-finder #'drot:counsel-find-file)
+  (setq ffap-file-finder #'drot-counsel-find-file)
   (setq ffap-machine-p-known 'reject)
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
@@ -388,7 +382,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (add-hook hook #'hs-minor-mode))
 ;; Configuration
 (after-load 'hideshow
-  (defun drot:hs-display-code-line-counts (ov)
+  (defun drot-hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
@@ -396,7 +390,7 @@ Selectively runs either `after-make-console-frame-hooks' or
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'drot:hs-display-code-line-counts)
+  (setq hs-set-up-overlay #'drot-hs-display-code-line-counts)
   (setq hs-isearch-open t))
 
 ;; Bug Reference mode
@@ -468,7 +462,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'ibuffer
   ;; Ffap compatibility function
-  (defun drot:ibuffer-ffap ()
+  (defun drot-ibuffer-ffap ()
     "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
     (interactive)
     (let* ((buffer (ibuffer-current-buffer))
@@ -476,7 +470,7 @@ Selectively runs either `after-make-console-frame-hooks' or
            (default-directory (buffer-local-value 'default-directory buffer)))
       (call-interactively ffap-file-finder)))
   ;; Rebind `ibuffer-find-file' with the compatibility function
-  (bind-key [remap ibuffer-find-file] #'drot:ibuffer-ffap ibuffer-mode-map)
+  (bind-key [remap ibuffer-find-file] #'drot-ibuffer-ffap ibuffer-mode-map)
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
@@ -543,6 +537,11 @@ Selectively runs either `after-make-console-frame-hooks' or
 (after-load 'mm-decode
   (setq mm-inline-large-images 'resize))
 
+;; Image mode
+(after-load 'image-mode
+  ;; Loop animated images forever
+  (setq image-animate-loop t))
+
 ;; Auto Revert mode
 (after-load 'autorevert
   ;; Shorten mode lighter
@@ -583,7 +582,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
 ;; Skeleton
-(define-skeleton drot:cc-skeleton
+(define-skeleton drot-cc-skeleton
   "Inserts a CC mode skeleton in the current buffer."
   "Library: "
   "#include <" str | "iostream" ">" \n \n
@@ -592,7 +591,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   > _ \n
   "}" > \n)
 ;; Bind skeleton
-(bind-key "C-c i s c" #'drot:cc-skeleton)
+(bind-key "C-c i s c" #'drot-cc-skeleton)
 ;; Configuration
 (after-load 'cc-mode
   (setq c-basic-offset 4)
@@ -804,13 +803,13 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq eshell-hist-ignoredups t)
   (setq eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
-  (defun drot:eshell-mode-hook ()
+  (defun drot-eshell-mode-hook ()
     "Use alternate completions and disable Company in Eshell buffers."
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
     (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot:eshell-mode-hook))
+  (add-hook 'eshell-mode-hook #'drot-eshell-mode-hook))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -865,12 +864,12 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
-  (defun drot:ansi-color-compilation-buffer ()
+  (defun drot-ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'drot:ansi-color-compilation-buffer)
+  (add-hook 'compilation-filter-hook #'drot-ansi-color-compilation-buffer)
   ;; Customize
   (setq compilation-ask-about-save nil)
   (setq compilation-always-kill t)
@@ -1038,7 +1037,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; AUCTeX
 (require-package 'auctex)
 ;; Skeleton
-(define-skeleton drot:latex-skeleton
+(define-skeleton drot-latex-skeleton
   "Inserts a LaTeX skeleton in the current buffer."
   nil
   "\\documentclass[a4paper]{article}" \n \n
@@ -1047,7 +1046,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   _ \n \n
   "\\end{document}" \n)
 ;; Bind skeleton
-(bind-key "C-c i s l" #'drot:latex-skeleton)
+(bind-key "C-c i s l" #'drot-latex-skeleton)
 ;; TeX configuration
 (after-load 'tex
   ;; Default TeX engine
@@ -1472,11 +1471,11 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
-  (defun drot:nov-font-setup ()
+  (defun drot-nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
                              :height 1.0))
   ;; Apply the custom hook
-  (add-hook 'nov-mode-hook #'drot:nov-font-setup)
+  (add-hook 'nov-mode-hook #'drot-nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
@@ -1877,7 +1876,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Counsel
 (require-package 'counsel)
 ;; Ffap compatibility function
-(defun drot:counsel-find-file (&optional file)
+(defun drot-counsel-find-file (&optional file)
   "Like `counsel-find-file', but return buffer, not name of FILE.
 This likens `counsel-find-file' to `find-file' more and makes it
 suitable for assigning to `ffap-file-finder'."
@@ -1977,7 +1976,7 @@ suitable for assigning to `ffap-file-finder'."
              ("M-[" . paredit-wrap-square))
 
   ;; Enable Paredit in the minibuffer
-  (defvar drot:paredit-minibuffer-setup-commands
+  (defvar drot-paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
@@ -1985,12 +1984,12 @@ suitable for assigning to `ffap-file-finder'."
       ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot:paredit-minibuffer-setup ()
+  (defun drot-paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot:paredit-minibuffer-setup-commands)
+    (if (memq this-command drot-paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot:paredit-minibuffer-setup)
+  (add-hook 'minibuffer-setup-hook #'drot-paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil)))
