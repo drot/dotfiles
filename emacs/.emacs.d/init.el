@@ -246,9 +246,9 @@ Selectively runs either `after-make-console-frame-hooks' or
 (setq kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups") t)))
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-"))
-(setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups"))))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
 (setq version-control t)
 (setq kept-new-versions 6)
 (setq delete-old-versions t)
@@ -720,7 +720,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Configuration
   (setq tramp-default-method "ssh")
   (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
-  (setq tramp-backup-directory-alist `((".*" . ,temporary-file-directory)))
+  (setq tramp-backup-directory-alist `(("." . ,temporary-file-directory)))
   (setq tramp-auto-save-directory temporary-file-directory))
 
 ;; Bookmarks
