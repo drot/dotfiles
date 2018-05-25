@@ -782,7 +782,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'eww
   ;; Set bookmarks directory
-  (setq eww-bookmarks-directory (locate-user-emacs-file "cache")))
+  (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
 ;; Open URLs with the specified browser
 (bind-key "C-c u b" #'browse-url)
