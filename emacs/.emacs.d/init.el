@@ -890,8 +890,8 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
-  (bind-key "C-c u l" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "C-c u l" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c u o" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c u o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -993,7 +993,7 @@ Selectively runs either `after-make-console-frame-hooks' or
 ;; Configuration
 (after-load 'org
   ;; Set key binding
-  (bind-key "C-c u l" #'ace-link-org org-mode-map)
+  (bind-key "C-c u o" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org"))
   (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
