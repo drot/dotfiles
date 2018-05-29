@@ -376,7 +376,7 @@ local temperature_icon = wibox.widget {
 
 -- Set temperature text value
 local temperature_text_value = wibox.widget.textbox()
-vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon1", "core" })
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon2", "core" })
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -426,7 +426,7 @@ local temperature_bar = wibox.widget {
 }
 
 -- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon1", "core" })
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon2", "core" })
 
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
