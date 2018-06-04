@@ -113,13 +113,14 @@ local mygraphicsmenu = {
 }
 
 local myofficemenu = {
-   { "Writer", "lowriter", beautiful.menu_writer },
-   { "llpp", "llpp", beautiful.menu_pdf }
+   { "llpp", "llpp", beautiful.menu_pdf },
+   { "Writer", "lowriter", beautiful.menu_writer }
 }
 
 local myutilmenu = {
-   { "Thunar", "thunar", beautiful.menu_fman },
-   { "Pavucontrol", "pavucontrol", beautiful.menu_pavu }
+   { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
+   { "ssr", "simplescreenrecorder", beautiful.menu_ssr },
+   { "Thunar", "thunar", beautiful.menu_fman }
 }
 
 local mywebmenu = {
@@ -376,7 +377,7 @@ local temperature_icon = wibox.widget {
 
 -- Set temperature text value
 local temperature_text_value = wibox.widget.textbox()
-vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon1", "core" })
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon0", "core" })
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -426,7 +427,7 @@ local temperature_bar = wibox.widget {
 }
 
 -- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon1", "core" })
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
 
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
