@@ -140,6 +140,7 @@ local myawesomemenu = {
 local mymainmenu = awful.menu({ items = {
                                    { "Terminal", terminal, beautiful.menu_term },
                                    { "Emacs", "emacs", beautiful.menu_emacs },
+                                   { "qutebrowser", "qutebrowser", beautiful.menu_qutebrowser },
                                    { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
                                    { "Office", myofficemenu, beautiful.menu_office },
                                    { "Utilities", myutilmenu, beautiful.menu_util },
@@ -1065,8 +1066,8 @@ awful.rules.rules = {
                 }, properties = { titlebars_enabled = true }
    },
 
-   -- Set Chromium to always map on the tag named "2" on screen 1
-   { rule = { class = "Chromium" },
+   -- Set qutebrowser to always map on the tag named "2" on screen 1
+   { rule = { class = "qutebrowser" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    -- Apply the same for Mozilla
    { rule = { class = "Firefox" },
