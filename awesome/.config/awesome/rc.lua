@@ -124,7 +124,7 @@ local myutilmenu = {
 }
 
 local mywebmenu = {
-   { "Firefox", "firefox", beautiful.menu_browser },
+   { "Firefox", "firefox", beautiful.menu_firefox },
    { "Pidgin", "pidgin", beautiful.menu_pidgin },
    { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
 }
