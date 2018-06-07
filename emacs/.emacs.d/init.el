@@ -38,32 +38,6 @@
 (make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
-;; Detect `window-system' properly with daemon usage
-(defvar after-make-console-frame-hooks '()
-  "Hooks to run after creating a new TTY frame.")
-
-(defvar after-make-window-system-frame-hooks '()
-  "Hooks to run after creating a new GUI frame.")
-
-(defun run-after-make-frame-hooks (frame)
-  "Run configured hooks in response to the newly-created FRAME.
-Selectively runs either `after-make-console-frame-hooks' or
-`after-make-window-system-frame-hooks'"
-  (with-selected-frame frame
-    (run-hooks (if window-system
-                   'after-make-window-system-frame-hooks
-                 'after-make-console-frame-hooks))))
-
-(add-hook 'after-make-frame-functions #'run-after-make-frame-hooks)
-
-(defconst drot-initial-frame (selected-frame)
-  "The frame (if any) active during Emacs initialization.")
-
-(add-hook 'after-init-hook
-          (lambda ()
-            (when drot-initial-frame
-              (run-after-make-frame-hooks drot-initial-frame))))
-
 ;; Disable the site default settings
 (setq inhibit-default-init t)
 
@@ -1001,6 +975,7 @@ Selectively runs either `after-make-console-frame-hooks' or
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
+  (setq org-goto-interface 'outline-path-completion)
   (setq org-catch-invisible-edits 'error)
   (setq org-startup-indented t)
   ;; Avoid Wind Move conflict
@@ -1813,15 +1788,10 @@ Selectively runs either `after-make-console-frame-hooks' or
 (require-package 'diff-hl)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-diff-hl-mode)
-;; Enable `diff-hl-margin-mode' when in a terminal
-(add-hook 'after-make-console-frame-hooks #'diff-hl-margin-mode)
-;; Disable `diff-hl-margin-mode' when in a GUI
-(add-hook 'after-make-window-system-frame-hooks
-          (lambda () (diff-hl-margin-mode 0)))
+;; Update diffs immediately
+(add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Configuration
 (after-load 'diff-hl
-  ;; Update diffs immediately
-  (diff-hl-flydiff-mode)
   ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
@@ -1919,7 +1889,10 @@ suitable for assigning to `ffap-file-finder'."
 ;; Configuration
 (after-load 'counsel
   ;; Customize
-  (setq counsel-preselect-current-file t))
+  (setq counsel-preselect-current-file t)
+  (setq counsel-org-goto-face-style 'verbatim)
+  (setq counsel-org-headline-display-tags t)
+  (setq counsel-org-headline-display-todo t))
 
 ;; Swiper
 (require-package 'swiper)
