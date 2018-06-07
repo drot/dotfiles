@@ -184,6 +184,9 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
+;; Move point to window split
+(setq split-window-keep-point nil)
+
 ;; Draw window dividers
 (setq window-divider-default-bottom-width 1)
 (setq window-divider-default-right-width 1)
