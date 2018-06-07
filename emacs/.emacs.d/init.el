@@ -1028,21 +1028,6 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Shorten mode lighter
   (dim-minor-name 'ace-window-mode " aW"))
 
-;; Anaconda mode
-(require-package 'anaconda-mode)
-;; Initialize mode
-(add-hook 'python-mode-hook #'anaconda-mode)
-(add-hook 'python-mode-hook #'anaconda-eldoc-mode)
-;; Shorten mode lighter
-(after-load 'anaconda-mode
-  (dim-minor-name 'anaconda-mode " aC"))
-
-;; Company Anaconda
-(require-package 'company-anaconda)
-;; Initialize mode
-(add-hook 'python-mode-hook
-          (lambda () (add-to-list 'company-backends #'company-anaconda)))
-
 ;; AUCTeX
 (require-package 'auctex)
 ;; Skeleton
@@ -1297,8 +1282,21 @@ Selectively runs either `after-make-console-frame-hooks' or
   ;; Enable compatibility with the Pass password manager
   (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
 
+;; Eglot
+(require-package 'eglot)
+;; Set key bindings
+(bind-key "C-c e t" #'eglot)
+(bind-key "C-c e c" #'eglot-reconnect)
+(bind-key "C-c e s" #'eglot-shutdown)
+(bind-key "C-c e r" #'eglot-rename)
+(bind-key "C-c e a" #'eglot-code-actions)
+(bind-key "C-c e h" #'eglot-help-at-point)
+(bind-key "C-c e b" #'eglot-events-buffer)
+(bind-key "C-c e e" #'eglot-stderr-buffer)
+
 ;; Easy-kill
 (require-package 'easy-kill)
+;; Set key bindings
 (bind-key [remap kill-ring-save] #'easy-kill)
 (bind-key [remap mark-sexp] #'easy-mark)
 
@@ -2045,8 +2043,8 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
-    "C-c !" "flymake"
     "C-c @" "hide-show"
+    "C-c !" "flymake"
     "C-c O" "outline"
     "C-c a b" "debbugs"
     "C-c a w" "eww"
@@ -2054,6 +2052,7 @@ suitable for assigning to `ffap-file-finder'."
     "C-c b" "buffers"
     "C-c c" "compile-and-comments"
     "C-c d" "debbugs"
+    "C-c e" "eglot"
     "C-c f v" "variables"
     "C-c f" "files"
     "C-c g" "git"
