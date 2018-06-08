@@ -1793,6 +1793,8 @@
 (add-hook 'after-init-hook #'global-diff-hl-mode)
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
+;; Set key binding
+(bind-key "C-c g h" #'diff-hl-margin-mode)
 ;; Configuration
 (after-load 'diff-hl
   ;; Add hooks for other packages
