@@ -223,7 +223,7 @@ local cpu_graph = wibox.widget {
    max_value = 100,
    stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
-   border_color = beautiful.border_focus,
+   border_color = beautiful.bg_minimize,
    widget = wibox.widget.graph,
 }
 
@@ -423,7 +423,7 @@ local temperature_bar = wibox.widget {
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_width = 1,
-   border_color = beautiful.border_focus,
+   border_color = beautiful.bg_minimize,
    widget = wibox.widget.progressbar,
 }
 
@@ -587,7 +587,7 @@ local volume_bar = wibox.widget {
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_width = 1,
-   border_color = beautiful.border_focus,
+   border_color = beautiful.bg_minimize,
    widget = wibox.widget.progressbar,
 }
 
