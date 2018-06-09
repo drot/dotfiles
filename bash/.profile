@@ -10,6 +10,9 @@ export NAME="Davor Rotim"
 export EMAIL="drot@firemail.cc"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+# Qt5 default style
+export QT_STYLE_OVERRIDE="adwaita"
+
 # Wine specific variables
 export WINEPREFIX="$HOME/.config/wine"
 export WINEARCH="win32"
