@@ -86,8 +86,8 @@
     (funcall mode -1)))
 
 ;; Don't show the startup welcome messages
-(setq inhibit-startup-echo-area-message (user-login-name))
-(setq inhibit-startup-screen t)
+(setq inhibit-startup-echo-area-message (user-login-name)
+      inhibit-startup-screen t)
 
 ;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
@@ -103,8 +103,8 @@
 (setq echo-keystrokes 0.01)
 
 ;; Indicate buffer boundaries and empty lines
-(setq-default indicate-buffer-boundaries 'left)
-(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'left
+              indicate-empty-lines t)
 
 ;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
@@ -122,8 +122,8 @@
 (setq use-dialog-box nil)
 
 ;; Ignore case on completion
-(setq read-file-name-completion-ignore-case t)
-(setq read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
@@ -138,12 +138,12 @@
 (setq disabled-command-function nil)
 
 ;; No length limit when printing values
-(setq eval-expression-print-length nil)
-(setq eval-expression-print-level nil)
+(setq eval-expression-print-length nil
+      eval-expression-print-level nil)
 
 ;; Use spaces instead of tabs and set default tab width
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil
+              tab-width 4)
 
 ;; Sentence ends with single space
 (setq sentence-end-double-space nil)
@@ -166,8 +166,8 @@
 (dim-minor-name 'visual-line-mode " vL")
 
 ;; Use Gnus as the default mail program
-(setq mail-user-agent 'gnus-user-agent)
-(setq read-mail-command #'gnus)
+(setq mail-user-agent 'gnus-user-agent
+      read-mail-command #'gnus)
 
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
@@ -188,17 +188,17 @@
 (setq split-window-keep-point nil)
 
 ;; Draw window dividers
-(setq window-divider-default-bottom-width 1)
-(setq window-divider-default-right-width 1)
-(setq window-divider-default-places t)
+(setq window-divider-default-bottom-width 1
+      window-divider-default-right-width 1
+      window-divider-default-places t)
 (window-divider-mode)
 
 ;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 
 ;; Display read-only buffers in view mode
-(setq view-read-only t)
-(setq view-inhibit-help-message t)
+(setq view-read-only t
+      view-inhibit-help-message t)
 
 ;; Kill and yank clipboard saving
 (setq save-interprogram-paste-before-kill t)
@@ -219,27 +219,31 @@
 (delete-selection-mode)
 
 ;; Do not save duplicates
-(setq history-delete-duplicates t)
-(setq kill-do-not-save-duplicates t)
+(setq history-delete-duplicates t
+      kill-do-not-save-duplicates t)
 
 ;; Configuration for backup files
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups/"))))
-(setq auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-"))
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
-(setq version-control t)
-(setq kept-new-versions 6)
-(setq delete-old-versions t)
-(setq backup-by-copying t)
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups/")))
+      auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-")
+      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t))
+      version-control t
+      kept-new-versions 6
+      delete-old-versions t
+      backup-by-copying t)
 
 ;; Save minibuffer history
-(setq savehist-file (locate-user-emacs-file "cache/saved-history"))
-(setq savehist-autosave-interval 60)
-(setq savehist-additional-variables '(search-ring regexp-search-ring))
+(setq savehist-file (locate-user-emacs-file "cache/saved-history")
+      savehist-autosave-interval 60
+      savehist-additional-variables '(search-ring regexp-search-ring))
 ;; Initialize mode
 (savehist-mode)
 
 ;; Save recent files list
-(setq recentf-save-file (locate-user-emacs-file "cache/recent-files"))
+(setq recentf-save-file (locate-user-emacs-file "cache/recent-files")
+      recentf-max-saved-items 100
+      recentf-max-menu-items 20
+      recentf-auto-cleanup 600)
+;; Exclude certain files
 (setq recentf-exclude
       '("/\\.git/.*\\'"
         "/elpa/.*\\'"
@@ -248,9 +252,6 @@
         "/cache/.*\\'"
         ".*\\.gz\\'"
         "TAGS"))
-(setq recentf-max-saved-items 100)
-(setq recentf-max-menu-items 20)
-(setq recentf-auto-cleanup 600)
 ;; Initialize mode
 (recentf-mode)
 
@@ -264,15 +265,15 @@
 ;; Configuration
 (after-load 'ffap
   ;; Configuration
-  (setq dired-at-point-require-prefix t)
-  (setq ffap-require-prefix t)
-  (setq ffap-file-finder #'drot-counsel-find-file)
-  (setq ffap-machine-p-known 'reject)
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+  (setq dired-at-point-require-prefix t
+        ffap-require-prefix t
+        ffap-file-finder #'drot-counsel-find-file
+        ffap-machine-p-known 'reject
+        ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
 ;; Line numbers display
-(setq display-line-numbers-type 'relative)
-(setq display-line-numbers-current-absolute nil)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-current-absolute nil)
 (setq-default display-line-numbers-width 2)
 ;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -295,9 +296,9 @@
             (lambda () (setq-local global-hl-line-mode nil))))
 
 ;; Highlight matching parentheses
-(setq show-paren-delay 0)
-(setq show-paren-when-point-inside-paren t)
-(setq show-paren-when-point-in-periphery t)
+(setq show-paren-delay 0
+      show-paren-when-point-inside-paren t
+      show-paren-when-point-in-periphery t)
 ;; Initialize mode
 (show-paren-mode)
 
@@ -309,8 +310,8 @@
 ;; Abbrev mode
 (dim-minor-name 'abbrev-mode " aB")
 ;; Configuration
-(setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory))
-(setq save-abbrevs t)
+(setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
+      save-abbrevs t)
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
@@ -367,8 +368,8 @@
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'drot-hs-display-code-line-counts)
-  (setq hs-isearch-open t))
+  (setq hs-set-up-overlay #'drot-hs-display-code-line-counts
+        hs-isearch-open t))
 
 ;; Bug Reference mode
 (add-hook 'text-mode-hook #'bug-reference-mode)
@@ -399,11 +400,11 @@
   (unbind-key "C-c $" flyspell-mode-map)
   (unbind-key "C-M-i" flyspell-mode-map)
   ;; Correct some annoying defaults
-  (setq flyspell-use-meta-tab nil)
-  (setq flyspell-issue-message-flag nil)
-  (setq flyspell-issue-welcome-flag nil)
-  (setq flyspell-consider-dash-as-word-delimiter-flag t)
-  (setq flyspell-duplicate-distance 12000))
+  (setq flyspell-use-meta-tab nil
+        flyspell-issue-message-flag nil
+        flyspell-issue-welcome-flag nil
+        flyspell-consider-dash-as-word-delimiter-flag t
+        flyspell-duplicate-distance 12000))
 
 ;; Ispell
 (bind-key "C-c l d" #'ispell-change-dictionary)
@@ -413,15 +414,15 @@
 
 ;; Isearch
 (dim-minor-name 'isearch-mode " iS")
-(setq isearch-allow-scroll t)
-(setq search-default-mode #'char-fold-to-regexp)
+(setq isearch-allow-scroll t
+      search-default-mode #'char-fold-to-regexp)
 
 ;; Ediff window split
 (after-load 'ediff-wind
   ;; Configuration
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain)
-  (setq ediff-split-window-function #'split-window-horizontally)
-  (setq ediff-grab-mouse nil))
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain
+        ediff-split-window-function #'split-window-horizontally
+        ediff-grab-mouse nil))
 
 ;; Ediff restore previous window configuration
 (after-load 'ediff-util
@@ -430,9 +431,9 @@
 ;; Uniquify buffer names
 (after-load 'uniquify
   ;; Configuration
-  (setq uniquify-buffer-name-style 'forward)
-  (setq uniquify-trailing-separator-p t)
-  (setq uniquify-ignore-buffers-re "^\\*"))
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-trailing-separator-p t
+        uniquify-ignore-buffers-re "^\\*"))
 
 ;; Use Ibuffer for buffer list
 (bind-key [remap list-buffers] #'ibuffer)
@@ -483,27 +484,28 @@
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
   ;; Customize
-  (setq ibuffer-show-empty-filter-groups nil)
-  (setq ibuffer-jump-offer-only-visible-buffers t)
-  (setq ibuffer-use-other-window t))
+  (setq ibuffer-show-empty-filter-groups nil
+        ibuffer-jump-offer-only-visible-buffers t
+        ibuffer-use-other-window t))
 
 ;; Version control
 (after-load 'vc-hooks
-  ;; Configuration
+  ;; TRAMP speedup
   (setq vc-ignore-dir-regexp
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
                 tramp-file-name-regexp))
-  (setq vc-follow-symlinks t)
-  (setq vc-make-backup-files t))
+  ;; Configuration
+  (setq vc-follow-symlinks t
+        vc-make-backup-files t))
 
 ;; Customize interface options
 (after-load 'cus-edit
   ;; Configuration
-  (setq custom-buffer-done-kill t)
-  (setq custom-buffer-verbose-help nil)
-  (setq custom-unlispify-tag-names nil)
-  (setq custom-unlispify-menu-entries nil))
+  (setq custom-buffer-done-kill t
+        custom-buffer-verbose-help nil
+        custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
 
 ;; Treat all themes as safe
 (after-load 'custom
@@ -580,7 +582,9 @@
 (bind-key "C-c i s c" #'drot-cc-skeleton)
 ;; Configuration
 (after-load 'cc-mode
+  ;; Default indentation
   (setq c-basic-offset 4)
+  ;; Indentation of supported modes
   (setq c-default-style
         '((java-mode . "java")
           (awk-mode . "awk")
@@ -606,9 +610,9 @@
 ;; NXML mode
 (after-load 'nxml-mode
   ;; Configuration
-  (setq nxml-slash-auto-complete-flag t)
-  (setq nxml-auto-insert-xml-declaration-flag t)
-  (setq nxml-sexp-element-flag t))
+  (setq nxml-slash-auto-complete-flag t
+        nxml-auto-insert-xml-declaration-flag t
+        nxml-sexp-element-flag t))
 
 ;; Man page reading
 (after-load 'man
@@ -617,8 +621,8 @@
 ;; Doc View mode
 (after-load 'doc-view
   ;; Configuration
-  (setq doc-view-resolution 300)
-  (setq doc-view-continuous t))
+  (setq doc-view-resolution 300
+        doc-view-continuous t))
 
 ;; Enable Pass integration
 (after-load 'auth-source
@@ -628,16 +632,16 @@
 ;; Mail sending
 (after-load 'message
   ;; Configuration
-  (setq message-confirm-send t)
-  (setq message-kill-buffer-on-exit t))
+  (setq message-confirm-send t
+        message-kill-buffer-on-exit t))
 
 ;; Outgoing mail server
 (after-load 'smtpmail
   ;; Configuration
-  (setq smtpmail-smtp-server "mail.cock.li")
-  (setq smtpmail-smtp-user "drot-smtp")
-  (setq smtpmail-smtp-service 465)
-  (setq smtpmail-stream-type 'ssl))
+  (setq smtpmail-smtp-server "mail.cock.li"
+        smtpmail-smtp-user "drot-smtp"
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'ssl))
 
 ;; Smileys
 (after-load 'smiley
@@ -669,8 +673,8 @@
                                (when (file-remote-p dired-directory)
                                  (setq-local dired-actual-switches "-alhF"))))
   ;; Do certain operations recursively
-  (setq dired-recursive-deletes 'top)
-  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'top
+        dired-recursive-copies 'always)
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
@@ -684,8 +688,8 @@
 ;; Wdired movement and editable parts
 (after-load 'wdired
   ;; Configuration
-  (setq wdired-allow-to-change-permissions t)
-  (setq wdired-use-dired-vertical-movement 'sometimes))
+  (setq wdired-allow-to-change-permissions t
+        wdired-use-dired-vertical-movement 'sometimes))
 
 ;; Image-Dired
 (after-load 'image-dired
@@ -695,16 +699,16 @@
 ;; TRAMP
 (after-load 'tramp
   ;; Configuration
-  (setq tramp-default-method "ssh")
-  (setq tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
-  (setq tramp-backup-directory-alist `(("." . ,temporary-file-directory)))
-  (setq tramp-auto-save-directory temporary-file-directory))
+  (setq tramp-default-method "ssh"
+        tramp-persistency-file-name (locate-user-emacs-file "cache/tramp")
+        tramp-backup-directory-alist `(("." . ,temporary-file-directory))
+        tramp-auto-save-directory temporary-file-directory))
 
 ;; Bookmarks
 (after-load 'bookmark
   ;; Configuration
-  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark"))
-  (setq bookmark-save-flag 1))
+  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark")
+        bookmark-save-flag 1))
 
 ;; Search more extensively with apropos
 (bind-key "C-c h a" #'apropos)
@@ -717,8 +721,8 @@
 (bind-key "C-c i C" #'copyright-update)
 ;; Configuration
 (after-load 'copyright
-  (setq copyright-year-ranges t)
-  (setq copyright-names-regexp (regexp-quote user-login-name)))
+  (setq copyright-year-ranges t
+        copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
 (bind-key "C-c x w" #'whitespace-cleanup)
@@ -744,8 +748,9 @@
 (bind-key "C-x p" #'proced)
 ;; Configuration
 (after-load 'proced
-  (setq-default proced-sort 'start)
-  (setq-default proced-tree-flag t))
+  ;; Use tree view
+  (setq-default proced-sort 'start
+                proced-tree-flag t))
 
 ;; GDB
 (bind-key "C-c a d" #'gdb)
@@ -765,7 +770,8 @@
 (bind-key "C-c u b" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-generic
+        browse-url-generic-program "qutebrowser"))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
@@ -774,9 +780,9 @@
   ;; Set key binding
   (bind-key "a" #'speedbar-toggle-show-all-files speedbar-mode-map)
   ;; Emulate NERDTree behavior
-  (setq speedbar-use-images nil)
-  (setq speedbar-show-unknown-files t)
-  (setq speedbar-directory-unshown-regexp "^$")
+  (setq speedbar-use-images nil
+        speedbar-show-unknown-files t
+        speedbar-directory-unshown-regexp "^$")
   ;; Don't ignore the following extensions
   (speedbar-add-supported-extension
    '(".lisp" ".clj" ".lua" ".css" ".patch"
@@ -786,8 +792,9 @@
 (bind-key "C-c a e" #'eshell)
 ;; Configuration
 (after-load 'eshell
-  (setq eshell-hist-ignoredups t)
-  (setq eshell-cmpl-ignore-case t)
+  ;; Ignore duplicates and case
+  (setq eshell-hist-ignoredups t
+        eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
   (defun drot-eshell-mode-hook ()
     "Use alternate completions and disable Company in Eshell buffers."
@@ -857,10 +864,10 @@
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot-ansi-color-compilation-buffer)
   ;; Customize
-  (setq compilation-ask-about-save nil)
-  (setq compilation-always-kill t)
-  (setq compilation-scroll-output 'first-error)
-  (setq compilation-context-lines 3))
+  (setq compilation-ask-about-save nil
+        compilation-always-kill t
+        compilation-scroll-output 'first-error
+        compilation-context-lines 3))
 
 ;; Gnus
 (bind-key "C-c a g" #'gnus)
@@ -878,10 +885,10 @@
                  (nnimap-stream ssl)))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
   ;; Article fetching options
-  (setq gnus-article-browse-delete-temp t)
-  (setq gnus-treat-strip-trailing-blank-lines 'last)
-  (setq gnus-mime-display-multipart-related-as-mixed t)
-  (setq gnus-auto-select-first nil)
+  (setq gnus-article-browse-delete-temp t
+        gnus-treat-strip-trailing-blank-lines 'last
+        gnus-mime-display-multipart-related-as-mixed t
+        gnus-auto-select-first nil)
   ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Configure visible headers
@@ -898,36 +905,36 @@
           ((header "to" "address@gmail.com")
            (address "address@gmail.com"))))
   ;; Display of the summary buffer
-  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n")
-  (setq gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M")))
-  (setq gnus-group-line-format "%M%S%p%P%5y:%B %G\n")
-  (setq gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references)
-  (setq gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
-  (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
+  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n"
+        gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M"))
+        gnus-group-line-format "%M%S%p%P%5y:%B %G\n"
+        gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references
+        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
   ;; Display of message threading
-  (setq gnus-sum-thread-tree-root "")
-  (setq gnus-sum-thread-tree-false-root "")
-  (setq gnus-sum-thread-tree-indent "    ")
-  (setq gnus-sum-thread-tree-vertical "│   ")
-  (setq gnus-sum-thread-tree-leaf-with-other "├──>")
-  (setq gnus-sum-thread-tree-single-leaf "└──>"))
+  (setq gnus-sum-thread-tree-root ""
+        gnus-sum-thread-tree-false-root ""
+        gnus-sum-thread-tree-indent "    "
+        gnus-sum-thread-tree-vertical "│   "
+        gnus-sum-thread-tree-leaf-with-other "├──>"
+        gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
 (bind-key "C-c a c" #'calendar)
 ;; Configuration
 (after-load 'calendar
-  (setq holiday-general-holidays nil)
-  (setq holiday-solar-holidays nil)
-  (setq holiday-bahai-holidays nil)
-  (setq holiday-oriental-holidays nil)
-  (setq holiday-islamic-holidays nil)
-  (setq holiday-hebrew-holidays nil)
-  (setq calendar-week-start-day 1)
-  (setq calendar-mark-holidays-flag t)
-  (setq calendar-date-style 'european)
-  (setq calendar-latitude 43.2)
-  (setq calendar-longitude 17.48)
-  (setq calendar-location-name "Mostar, Bosnia and Herzegovina"))
+  (setq holiday-general-holidays nil
+        holiday-solar-holidays nil
+        holiday-bahai-holidays nil
+        holiday-oriental-holidays nil
+        holiday-islamic-holidays nil
+        holiday-hebrew-holidays nil
+        calendar-week-start-day 1
+        calendar-mark-holidays-flag t
+        calendar-date-style 'european
+        calendar-latitude 43.2
+        calendar-longitude 17.48
+        calendar-location-name "Mostar, Bosnia and Herzegovina"))
 
 ;; Outline mode
 (bind-key "C-c t o" #'outline-minor-mode)
@@ -972,15 +979,15 @@
   ;; Set key binding
   (bind-key "C-c u o" #'ace-link-org org-mode-map)
   ;; Customize
-  (setq org-directory (locate-user-emacs-file "org"))
-  (setq org-default-notes-file (locate-user-emacs-file "org/notes.org"))
-  (setq org-agenda-files '("~/.emacs.d/org"))
-  (setq org-log-done 'time)
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
-  (setq org-goto-interface 'outline-path-completion)
-  (setq org-catch-invisible-edits 'error)
-  (setq org-startup-indented t)
+  (setq org-directory (locate-user-emacs-file "org")
+        org-default-notes-file (locate-user-emacs-file "org/notes.org")
+        org-agenda-files '("~/.emacs.d/org")
+        org-log-done 'time
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-goto-interface 'outline-path-completion
+        org-catch-invisible-edits 'error
+        org-startup-indented t)
   ;; Avoid Wind Move conflict
   (add-hook 'org-shiftup-final-hook 'windmove-up)
   (add-hook 'org-shiftdown-final-hook 'windmove-down)
@@ -1024,11 +1031,11 @@
   ;; Default TeX engine
   (setq-default TeX-engine 'luatex)
   ;; Automatically save and parse style
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
+  (setq TeX-auto-save t
+        TeX-parse-self t)
   ;; Use PDF Tools as default viewer
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-start-server t)
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t)
   ;; Revert PDF automatically
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
@@ -1085,9 +1092,9 @@
 
 ;; CIDER REPL configuration
 (after-load 'cider-repl
-  ;; Enable persistent history
-  (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history"))
-  (setq cider-repl-wrap-history t)
+  ;; Enable persistent history and cycle through it
+  (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history")
+        cider-repl-wrap-history t)
   ;; Disable help banner
   (setq cider-repl-display-help-banner nil)
   ;; Display result prefix
@@ -1284,6 +1291,7 @@
 (bind-key "C-c a f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
+  ;; Default feeds
   (setq elfeed-feeds
         '(("https://news.ycombinator.com/rss" hnews)
           ("https://lwn.net/headlines/rss" lwn)
@@ -1291,17 +1299,18 @@
           ("https://www.reddit.com/r/linux/.rss" linux)
           ("https://www.reddit.com/r/linux/.rss" programming)
           ("http://bljesak.info/rss" bljesak)))
-  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
-  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left))
-  (setq elfeed-search-filter "@1-week-ago +unread"))
+  ;; Customize
+  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)
+        elfeed-search-date-format '("%d-%m-%Y" 10 :left)
+        elfeed-search-filter "@1-week-ago +unread"))
 
 ;; rcirc
 (bind-key "C-c a i" #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
-  (setq rcirc-default-user-name "drot")
-  (setq rcirc-reconnect-delay 10)
+  (setq rcirc-default-user-name "drot"
+        rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
         '(("irc.rizon.net" :port 6697 :encryption tls
@@ -1426,8 +1435,8 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; Configuration
 (after-load 'js2-mode
-  (setq js2-basic-offset 2)
-  (setq js2-highlight-level 3)
+  (setq js2-basic-offset 2
+        js2-highlight-level 3)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; JSON mode
@@ -1508,8 +1517,8 @@
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
   ;; Additional fontification
-  (setq markdown-fontify-code-blocks-natively t)
-  (setq markdown-header-scaling t)
+  (setq markdown-fontify-code-blocks-natively t
+        markdown-header-scaling t)
   ;; Use underscores for italic text
   (setq markdown-italic-underscore t))
 
@@ -1530,6 +1539,7 @@
 (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
 ;; Populate default `multiple-cursors' lists
 (unless (file-exists-p mc/list-file)
+  ;; Commands to run always
   (setq mc/cmds-to-run-for-all
         '(backward-sexp
           downcase-region
@@ -1568,6 +1578,7 @@
           switch-to-buffer
           upcase-region
           yank-rectangle))
+  ;; Commands to run only once
   (setq mc/cmds-to-run-once
         '(down-list
           mouse-drag-mode-line)))
@@ -1666,9 +1677,9 @@
   ;; Disable conflicting key binding
   (unbind-key "C-c x" slime-mode-indirect-map)
   ;; Use all accessible features and SBCL by default
-  (setq inferior-lisp-program "sbcl")
-  (setq slime-contribs '(slime-fancy slime-company))
-  (setq slime-protocol-version 'ignore))
+  (setq inferior-lisp-program "sbcl"
+        slime-contribs '(slime-fancy slime-company)
+        slime-protocol-version 'ignore))
 
 ;; Shorten SLIME Autodoc mode lighter
 (after-load 'slime-autodoc
@@ -1685,14 +1696,15 @@
   (unbind-key "M-r" slime-repl-mode-map)
   (unbind-key "M-s" slime-repl-mode-map)
   ;; Customize
-  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld"))
-  (setq slime-repl-history-remove-duplicates t)
-  (setq slime-repl-history-trim-whitespaces t))
+  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")
+        slime-repl-history-remove-duplicates t
+        slime-repl-history-trim-whitespaces t))
 
 ;; SLIME Company
 (require-package 'slime-company)
 ;; Configuration
 (after-load 'slime-company
+  ;; Use fuzzy completion
   (setq slime-company-completion 'fuzzy))
 
 ;; Systemd mode
@@ -1734,10 +1746,10 @@
   ;; Shorten mode lighter
   (dim-minor-name 'anzu-mode " aZ")
   ;; Customize
-  (setq anzu-search-threshold 1000)
-  (setq anzu-replace-threshold 50)
-  (setq anzu-deactivate-region t)
-  (setq anzu-replace-to-string-separator " => "))
+  (setq anzu-search-threshold 1000
+        anzu-replace-threshold 50
+        anzu-deactivate-region t
+        anzu-replace-to-string-separator " => "))
 
 ;; Avy
 (require-package 'avy)
@@ -1752,9 +1764,9 @@
 (bind-key "C-c j j" #'avy-goto-word-or-subword-1)
 ;; Configuration
 (after-load 'avy
-  (setq avy-all-windows 'all-frames)
-  (setq avy-background t)
-  (setq avy-highlight-first t))
+  (setq avy-all-windows 'all-frames
+        avy-background t
+        avy-highlight-first t))
 
 ;; Company mode
 (require-package 'company)
@@ -1880,9 +1892,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f g" #'counsel-git)
 (bind-key "C-c f d" #'counsel-dired-jump)
 (bind-key "C-c f r" #'counsel-recentf)
-(bind-key "C-c s G" #'counsel-git-grep)
+(bind-key "C-c s v" #'counsel-git-grep)
 (bind-key "C-c s i" #'counsel-imenu)
-(bind-key "C-c s g" #'counsel-grep)
+(bind-key "C-c s G" #'counsel-grep)
+(bind-key "C-c s g" #'counsel-rg)
 (bind-key "C-c j m" #'counsel-mark-ring)
 (bind-key "C-c h c" #'counsel-command-history)
 (bind-key "C-c h l" #'counsel-find-library)
