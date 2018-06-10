@@ -1776,20 +1776,21 @@
 (after-load 'company
   ;; Shorten mode lighter
   (dim-minor-name 'company-mode " cY")
-  ;; Customize
+  ;; Specify backends explicitly
   (setq company-backends
         '(company-capf
           company-files
           (company-dabbrev-code company-etags company-keywords)
           company-dabbrev))
-  (setq company-minimum-prefix-length 2)
-  (setq company-tooltip-align-annotations t)
-  (setq company-tooltip-flip-when-above t)
-  (setq company-selection-wrap-around t)
-  (setq company-require-match 'never)
-  (setq company-show-numbers t)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-ignore-case t))
+  ;; Customize
+  (setq company-minimum-prefix-length 2
+        company-tooltip-align-annotations t
+        company-tooltip-flip-when-above t
+        company-selection-wrap-around t
+        company-require-match 'never
+        company-show-numbers t
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case t))
 
 ;; Company Statistics
 (require-package 'company-statistics)
@@ -1856,16 +1857,16 @@
   ;; Shorten mode lighter
   (dim-minor-name 'ivy-mode " iY")
   ;; Customize
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-  (setq ivy-initial-inputs-alist nil)
-  (setq ivy-dynamic-exhibit-delay-ms 150)
-  (setq ivy-use-selectable-prompt t)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-virtual-abbreviate 'abbreviate)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-format-function #'ivy-format-function-arrow)
-  (setq ivy-wrap t)
-  (setq ivy-action-wrap t))
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ivy-initial-inputs-alist nil
+        ivy-dynamic-exhibit-delay-ms 150
+        ivy-use-selectable-prompt t
+        ivy-use-virtual-buffers t
+        ivy-virtual-abbreviate 'abbreviate
+        ivy-count-format "(%d/%d) "
+        ivy-format-function #'ivy-format-function-arrow
+        ivy-wrap t
+        ivy-action-wrap t))
 
 ;; Counsel
 (require-package 'counsel)
@@ -1907,10 +1908,10 @@ suitable for assigning to `ffap-file-finder'."
 ;; Configuration
 (after-load 'counsel
   ;; Customize
-  (setq counsel-preselect-current-file t)
-  (setq counsel-org-goto-face-style 'verbatim)
-  (setq counsel-org-headline-display-tags t)
-  (setq counsel-org-headline-display-todo t))
+  (setq counsel-preselect-current-file t
+        counsel-org-goto-face-style 'verbatim
+        counsel-org-headline-display-tags t
+        counsel-org-headline-display-todo t))
 
 ;; Swiper
 (require-package 'swiper)
@@ -1918,10 +1919,11 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c s S" #'swiper-all)
 (bind-key "C-c s s" #'swiper)
 (bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
-;; Configure
+;; Configuration
 (after-load 'swiper
-  (setq swiper-include-line-number-in-search t)
-  (setq swiper-goto-start-of-match t))
+  ;; Customize
+  (setq swiper-include-line-number-in-search t
+        swiper-goto-start-of-match t))
 
 ;; Amx
 (require-package 'amx)
@@ -2017,15 +2019,15 @@ suitable for assigning to `ffap-file-finder'."
 ;; Which Key
 (require-package 'which-key)
 ;; Initialize mode
-(setq which-key-idle-delay 2.0)
-(setq which-key-idle-secondary-delay 1.0)
-(setq which-key-allow-imprecise-window-fit t)
-(setq which-key-sort-order #'which-key-prefix-then-key-order)
+(setq which-key-idle-delay 2.0
+      which-key-idle-secondary-delay 1.0
+      which-key-allow-imprecise-window-fit t
+      which-key-sort-order #'which-key-prefix-then-key-order)
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Rebind paging command
-(setq which-key-use-C-h-commands nil)
-(setq which-key-paging-prefixes '("C-x" "C-c"))
-(setq which-key-paging-key "<f5>")
+(setq which-key-use-C-h-commands nil
+      which-key-paging-prefixes '("C-x" "C-c")
+      which-key-paging-key "<f5>")
 ;; Set key bindings
 (bind-key "C-c h w t" #'which-key-show-top-level)
 (bind-key "C-c h w m" #'which-key-show-major-mode)
