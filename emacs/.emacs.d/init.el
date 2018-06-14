@@ -545,6 +545,10 @@
   ;;Ignore case sensitivity with Pcomplete
   (setq pcomplete-ignore-case t))
 
+;; Search more extensively with apropos
+(after-load 'apropos
+  (setq apropos-do-all t))
+
 ;; ElDoc mode configuration
 (after-load 'eldoc
   ;; Shorten mode lighter
@@ -709,12 +713,6 @@
   ;; Configuration
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark")
         bookmark-save-flag 1))
-
-;; Search more extensively with apropos
-(bind-key "C-c h a" #'apropos)
-;; Configuration
-(after-load 'apropos
-  (setq apropos-do-all t))
 
 ;; Copyright insertion
 (bind-key "C-c i c" #'copyright)
@@ -1884,6 +1882,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap describe-bindings] #'counsel-descbinds)
 (bind-key [remap describe-function] #'counsel-describe-function)
 (bind-key [remap describe-variable] #'counsel-describe-variable)
+(bind-key [remap apropos-command] #'counsel-apropos)
 (bind-key [remap describe-face] #'counsel-describe-face)
 (bind-key [remap list-faces-display] #'counsel-faces)
 (bind-key [remap yank-pop] #'counsel-yank-pop)
