@@ -1277,6 +1277,10 @@
 (bind-key "C-c e h" #'eglot-help-at-point)
 (bind-key "C-c e b" #'eglot-events-buffer)
 (bind-key "C-c e e" #'eglot-stderr-buffer)
+;; Configuration
+(after-load 'eglot
+  ;; Add the Lua language server
+  (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
 ;; Easy-kill
 (require-package 'easy-kill)

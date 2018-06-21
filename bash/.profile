@@ -20,9 +20,14 @@ export WINEDEBUG="-all"
 # Disable Mono and Gecko install prompt; prevent .desktop creation
 export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml=d"
 
-# Check for Rust if available
+# Check for Cargo packages if available
 if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# Check for LuaRocks packages if available
+if [ -d "$HOME/.luarocks/bin" ] ; then
+    export PATH="$HOME/.luarocks/bin:$PATH"
 fi
 
 # Set PATH so it includes user directory
