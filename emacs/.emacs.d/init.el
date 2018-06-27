@@ -1680,6 +1680,9 @@
   ;; Change history file location
   (setq sly-mrepl-history-file-name (locate-user-emacs-file "cache/sly-mrepl-history")))
 
+;; SLY macrostep
+(require-package 'sly-macrostep)
+
 ;; Systemd mode
 (require-package 'systemd)
 
