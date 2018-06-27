@@ -290,8 +290,7 @@
                 term-mode-hook
                 ediff-mode-hook
                 comint-mode-hook
-                cider-repl-mode-hook
-                slime-repl-mode-hook))
+                cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -478,7 +477,7 @@
            ("PDF" (derived-mode . pdf-view-mode))
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
-                       (mode . slime-repl-mode)))
+                       (derived-mode . sly-mrepl-mode)))
            ("Shell" (or (derived-mode . eshell-mode)
                         (derived-mode . shell-mode))))))
   ;; Load the default buffer filter
@@ -1576,8 +1575,6 @@
           paredit-backslash
           reindent-then-newline-and-indent
           scroll-other-window
-          slime-autodoc-space
-          slime-space
           switch-to-buffer
           upcase-region
           yank-rectangle))
@@ -1668,47 +1665,20 @@
 (after-load 'skewer-html
   (dim-minor-name 'skewer-html-mode " sKH"))
 
-;; SLIME
-(require-package 'slime)
+;; SLY
+(require-package 'sly)
 ;; Set key bindings
-(bind-key "C-c a s" #'slime)
-(bind-key "C-c a S" #'slime-connect)
+(bind-key "C-c a s" #'sly)
+(bind-key "C-c a S" #'sly-connect)
 ;; Configuration
-(after-load 'slime
-  ;; Set key binding
-  (bind-key "C-c $" #'slime-export-symbol-at-point slime-mode-indirect-map)
-  ;; Disable conflicting key binding
-  (unbind-key "C-c x" slime-mode-indirect-map)
-  ;; Use all accessible features and SBCL by default
-  (setq inferior-lisp-program "sbcl"
-        slime-contribs '(slime-fancy slime-company)
-        slime-protocol-version 'ignore))
+(after-load 'sly
+  ;; Use SBCL by default
+  (setq inferior-lisp-program "sbcl"))
 
-;; Shorten SLIME Autodoc mode lighter
-(after-load 'slime-autodoc
-  (dim-minor-name 'slime-autodoc-mode " aD"))
-
-;; SLIME REPL configuration
-(after-load 'slime-repl
-  ;; Set key bindings
-  (bind-keys :map slime-repl-mode-map
-             ("C-c M-r" . slime-repl-previous-matching-input)
-             ("C-c M-s" . slime-repl-next-matching-input))
-  ;; Disable conflicting key bindings
-  (unbind-key "DEL" slime-repl-mode-map)
-  (unbind-key "M-r" slime-repl-mode-map)
-  (unbind-key "M-s" slime-repl-mode-map)
-  ;; Customize
-  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")
-        slime-repl-history-remove-duplicates t
-        slime-repl-history-trim-whitespaces t))
-
-;; SLIME Company
-(require-package 'slime-company)
-;; Configuration
-(after-load 'slime-company
-  ;; Use fuzzy completion
-  (setq slime-company-completion 'fuzzy))
+;; SLY REPL
+(after-load 'sly-mrepl
+  ;; Change history file location
+  (setq sly-mrepl-history-file-name (locate-user-emacs-file "cache/sly-mrepl-history")))
 
 ;; Systemd mode
 (require-package 'systemd)
@@ -1967,7 +1937,7 @@ suitable for assigning to `ffap-file-finder'."
                 clojure-mode-hook
                 cider-repl-mode-hook
                 scheme-mode-hook
-                slime-repl-mode-hook
+                sly-mrepl-mode-hook
                 geiser-repl-mode-hook))
   (add-hook hook #'enable-paredit-mode))
 ;; Configuration

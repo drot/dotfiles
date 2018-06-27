@@ -14,22 +14,21 @@
 
 (in-package :stumpwm)
 
-;; Load Swank
-(load (car (directory "~/.emacs.d/elpa/slime-*/swank-loader.lisp")))
+;; Load Slynk
+(load (car (directory "~/.emacs.d/elpa/sly-*/slynk/slynk-loader.lisp")))
 
-;; Initialize Swank
-(swank-loader:init)
+;; Initialize Slynk
+(slynk-loader:init)
 
 ;; Command for on-demand starting of the Swank server
-(defcommand swank () ()
-  "Creates a Swank server in the StumpWM Lisp process."
-  (swank:create-server
+(defcommand slynk () ()
+  "Creates a Slynk server in the StumpWM Lisp process."
+  (slynk:create-server
    :port 4005
-   :style swank:*communication-style*
    :dont-close t)
-  (echo-string (current-screen) "Starting Swank..."))
+  (echo-string (current-screen) "Starting Slynk..."))
 
-(define-key *root-map* (kbd "C-s") "swank")
+(define-key *root-map* (kbd "C-s") "slynk")
 
 ;; Load contrib modules
 (load-module "cpu")
