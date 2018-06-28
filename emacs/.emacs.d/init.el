@@ -1412,8 +1412,9 @@
 ;; Geiser
 (require-package 'geiser)
 ;; Configuration
-(after-load 'geiser
-  (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
+(after-load 'geiser-repl
+  ;; Change history file location
+ (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; IEdit
 (require-package 'iedit)
