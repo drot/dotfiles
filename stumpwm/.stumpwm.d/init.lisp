@@ -6,7 +6,7 @@
 ;;; Commentary:
 
 ;; Tomorrow Night themed, mostly default key bindings. `stumptray' module requires
-;; `clx-xembed' to be installed via Quicklisp. `ttf-fonts' module requires
+;; `xembed' to be installed via Quicklisp. `ttf-fonts' module requires
 ;; `clx-truetype' to be installed via Quicklisp and running `xft:cache-fonts'
 ;; for initial font cache population.
 
@@ -15,10 +15,8 @@
 (in-package :stumpwm)
 
 ;; Load Slynk
-(load (car (directory "~/.emacs.d/elpa/sly-*/slynk/slynk-loader.lisp")))
-
-;; Initialize Slynk
-(slynk-loader:init)
+(push (car (directory "~/.emacs.d/elpa/sly-2*/slynk/")) asdf:*central-registry*)
+(asdf:operate 'asdf:load-op 'slynk)
 
 ;; Command for on-demand starting of the Swank server
 (defcommand slynk () ()
