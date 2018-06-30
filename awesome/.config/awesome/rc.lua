@@ -1066,6 +1066,10 @@ awful.rules.rules = {
                 }, properties = { titlebars_enabled = true }
    },
 
+   -- Start llpp maximized
+   { rule = { class = "llpp" },
+     properties = { maximized_vertical = true, maximized_horizontal = true } },
+
    -- Set qutebrowser to always map on the tag named "2" on screen 1
    { rule = { class = "qutebrowser" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },

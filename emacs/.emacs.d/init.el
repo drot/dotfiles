@@ -567,9 +567,7 @@
   ;; PEP8 conformance
   (add-hook 'python-mode-hook
             (lambda () (setq fill-column 79)))
-  (add-hook 'python-mode-hook #'subword-mode)
-  ;; Flymake configuration
-  (setq python-flymake-command '("pyflakes3")))
+  (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
