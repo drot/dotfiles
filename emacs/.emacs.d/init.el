@@ -463,13 +463,14 @@
                        (derived-mode . apropos-mode)))
            ("Image" (mode . image-mode))
            ("Log" (or (derived-mode . TeX-output-mode)
-                      (name . "\*Flymake log\*")
-                      (name . "\*sly-inferior-lisp for sbcl\*")
-                      (name . "\*sly-events for sbcl\*")
                       (derived-mode . ivy-occur-mode)
                       (derived-mode . geiser-messages-mode)
                       (derived-mode . messages-buffer-mode)
-                      (mode . tags-table-mode)))
+                      (mode . tags-table-mode)
+                      (name . "\*compilation\*")
+                      (name . "\*Flymake log\*")
+                      (name . "\*sly-inferior-lisp for sbcl\*")
+                      (name . "\*sly-events for sbcl\*")))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Org" (derived-mode . org-mode))
@@ -846,7 +847,7 @@
   (setq comint-input-ignoredups t))
 
 ;; Compilation
-(bind-key "C-c c C" #'recompile)
+(bind-key "C-c c c" #'recompile)
 ;; Configuration
 (after-load 'compile
   ;; Shorten mode lighter
