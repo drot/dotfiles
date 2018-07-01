@@ -175,9 +175,6 @@
 ;; Draw block cursor as wide as the glyph under it
 (setq x-stretch-cursor t)
 
-;; Don't use GTK tooltips
-(setq x-gtk-use-system-tooltips nil)
-
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
 
@@ -466,7 +463,9 @@
                        (derived-mode . apropos-mode)))
            ("Image" (mode . image-mode))
            ("Log" (or (derived-mode . TeX-output-mode)
-                      (mode . compilation-mode)
+                      (name . "\*Flymake log\*")
+                      (name . "\*sly-inferior-lisp for sbcl\*")
+                      (name . "\*sly-events for sbcl\*")
                       (derived-mode . ivy-occur-mode)
                       (derived-mode . geiser-messages-mode)
                       (derived-mode . messages-buffer-mode)
@@ -477,7 +476,8 @@
            ("PDF" (derived-mode . pdf-view-mode))
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
-                       (derived-mode . sly-mrepl-mode)))
+                       (derived-mode . sly-mrepl-mode)
+                       (name . "\*Python\*")))
            ("Shell" (or (derived-mode . eshell-mode)
                         (derived-mode . shell-mode))))))
   ;; Load the default buffer filter
@@ -571,17 +571,6 @@
 
 ;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
-;; Skeleton
-(define-skeleton drot-cc-skeleton
-  "Inserts a CC mode skeleton in the current buffer."
-  "Library: "
-  "#include <" str | "iostream" ">" \n \n
-  "main()" ?\n
-  "{" \n
-  > _ \n
-  "}" > \n)
-;; Bind skeleton
-(bind-key "C-c i s c" #'drot-cc-skeleton)
 ;; Configuration
 (after-load 'cc-mode
   ;; Default indentation
@@ -592,7 +581,19 @@
           (awk-mode . "awk")
           (other . "k&r")))
   ;; Enable Auto Fill
-  (add-hook 'c-mode-common-hook #'auto-fill-mode))
+  (add-hook 'c-mode-common-hook #'auto-fill-mode)
+  ;; Skeleton
+  (define-skeleton drot-cc-skeleton
+    "Inserts a CC mode skeleton in the current buffer."
+    "Library: "
+    "#include <" str | "iostream" ">" \n \n
+    "main()" ?\n
+    "{" \n
+    > _ \n
+    "}" > \n)
+  ;; Bind skeleton
+  (bind-key "C-c i s" #'drot-cc-skeleton c-mode-map)
+  (bind-key "C-c i s" #'drot-cc-skeleton c++-mode-map))
 
 ;; Etags
 (after-load 'etags
@@ -1011,17 +1012,6 @@
 
 ;; AUCTeX
 (require-package 'auctex)
-;; Skeleton
-(define-skeleton drot-latex-skeleton
-  "Inserts a LaTeX skeleton in the current buffer."
-  nil
-  "\\documentclass[a4paper]{article}" \n \n
-  "\\usepackage[croatian]{babel}" \n \n
-  "\\begin{document}" \n \n
-  _ \n \n
-  "\\end{document}" \n)
-;; Bind skeleton
-(bind-key "C-c i s l" #'drot-latex-skeleton)
 ;; TeX configuration
 (after-load 'tex
   ;; Default TeX engine
@@ -1033,8 +1023,18 @@
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
         TeX-source-correlate-start-server t)
   ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
-
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  ;; Skeleton
+  (define-skeleton drot-latex-skeleton
+    "Inserts a LaTeX skeleton in the current buffer."
+    nil
+    "\\documentclass[a4paper]{article}" \n \n
+    "\\usepackage[croatian]{babel}" \n \n
+    "\\begin{document}" \n \n
+    _ \n \n
+    "\\end{document}" \n)
+  ;; Bind skeleton
+  (bind-key "C-c i s" #'drot-latex-skeleton TeX-mode-map))
 ;; TeX external commands
 (after-load 'tex-buf
   ;; Don't ask to save before processing
@@ -1138,7 +1138,7 @@
                                              "z" "Z" "jar" "war" "ear" "rar"
                                              "sar" "xpi" "apk" "xz" "tar"))
   (dired-rainbow-define document "peru" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                         "rtf" "djvu" "epub"))
+                                         "rtf" "djvu" "epub" "md" "tex"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
   (dired-rainbow-define excel "turquise" ("xlsx"))
   (dired-rainbow-define executable "Gold" ("exe" "msi"))
@@ -1521,7 +1521,16 @@
   (setq markdown-fontify-code-blocks-natively t
         markdown-header-scaling t)
   ;; Use underscores for italic text
-  (setq markdown-italic-underscore t))
+  (setq markdown-italic-underscore t)
+  ;; Skeleton
+  (define-skeleton drot-markdown-code-skeleton
+    "Inserts a Markdown code skeleton in the current buffer."
+    nil
+    "```" \n
+    _ \n
+    "```" \n)
+  ;; Bind skeleton
+  (bind-key "C-c i s" #'drot-markdown-code-skeleton markdown-mode-map))
 
 ;; Move-text
 (require-package 'move-text)
@@ -2028,7 +2037,6 @@ suitable for assigning to `ffap-file-finder'."
     "C-c h 4" "help-other-window"
     "C-c h w" "which-key"
     "C-c h" "help-extended"
-    "C-c i s" "skeletons"
     "C-c i" "insertion"
     "C-c j" "jump"
     "C-c l" "language-and-spelling"
