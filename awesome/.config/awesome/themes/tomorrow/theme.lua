@@ -61,6 +61,10 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.taglist_bg_focus = theme.bg_normal
 
 -- Tasklist
+theme.tasklist_spacing = 1
+theme.tasklist_bg_normal = "#222427"
+theme.tasklist_font_minimized = "Iosevka Term Italic 12"
+theme.tasklist_shape_border_color_urgent = theme.bg_urgent
 theme.tasklist_sticky = "[*]"
 theme.tasklist_ontop = "[^]"
 theme.tasklist_above = "[↑]"
