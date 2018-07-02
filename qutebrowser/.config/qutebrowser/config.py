@@ -48,22 +48,6 @@ c.tabs.background = True
 #   - last-used: Select the previously selected tab.
 c.tabs.select_on_remove = 'prev'
 
-# Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
-# for a blank page.
-# Type: FuzzyUrl
-c.url.default_page = 'https://searx.me/'
-
-# Search engines which can be used via the address bar. Maps a search
-# engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
-# placeholder. The placeholder will be replaced by the search term, use
-# `{{` and `}}` for literal `{`/`}` signs. The search engine named
-# `DEFAULT` is used when `url.auto_search` is turned on and something
-# else than a URL was entered to be opened. Other search engines can be
-# used by prepending the search engine name to the search term, e.g.
-# `:open google qutebrowser`.
-# Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://searx.me/?q={}'}
-
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
 c.url.start_pages = 'about:blank'
