@@ -1406,9 +1406,6 @@
 ;; Set key binding
 (bind-key "C-=" #'er/expand-region)
 
-;; Flx
-(require-package 'flx)
-
 ;; Geiser
 (require-package 'geiser)
 ;; Configuration
@@ -1778,14 +1775,6 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;; Company Statistics
-(require-package 'company-statistics)
-;; Initialize mode
-(add-hook 'after-init-hook #'company-statistics-mode)
-;; Configuration
-(after-load 'company
-  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
-
 ;; Diff-Hl
 (require-package 'diff-hl)
 ;; Initialize mode
@@ -1843,9 +1832,7 @@
   ;; Shorten mode lighter
   (dim-minor-name 'ivy-mode " iY")
   ;; Customize
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-        ivy-initial-inputs-alist nil
-        ivy-dynamic-exhibit-delay-ms 150
+  (setq ivy-dynamic-exhibit-delay-ms 150
         ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
@@ -1922,6 +1909,22 @@ suitable for assigning to `ffap-file-finder'."
 ;; Configuration
 (after-load 'amx
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
+
+;; Ivy Prescient
+(require-package 'ivy-prescient)
+;; Initialize mode
+(ivy-prescient-mode)
+
+;; Company Prescient
+(require-package 'company-prescient)
+(company-prescient-mode)
+
+;; Prescient configuration
+(after-load 'prescient
+  ;; Change save file location
+  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el")))
+;; Enable persistent history
+(prescient-persist-mode)
 
 ;; Hyperbole
 (require-package 'hyperbole)
