@@ -1917,6 +1917,7 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Company Prescient
 (require-package 'company-prescient)
+;; Initialize mode
 (company-prescient-mode)
 
 ;; Prescient configuration
