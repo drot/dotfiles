@@ -1005,13 +1005,6 @@
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
 
-;; Ace-window
-(require-package 'ace-window)
-;; Configuration
-(after-load 'ace-window
-  ;; Shorten mode lighter
-  (dim-minor-name 'ace-window-mode " aW"))
-
 ;; AUCTeX
 (require-package 'auctex)
 ;; TeX configuration
@@ -1234,9 +1227,6 @@
   (require 'dired-du)
   ;; Shorten mode lighter
   (dim-minor-name 'dired-du-mode " d-U")
-  ;; Disable and rebind conflicting key binding
-  (setq dired-du-bind-mode nil)
-  (bind-key "C-x M-u" #'dired-du-mode dired-mode-map)
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
@@ -1411,7 +1401,7 @@
 ;; Configuration
 (after-load 'geiser-repl
   ;; Change history file location
- (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
+  (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; IEdit
 (require-package 'iedit)
@@ -1734,10 +1724,25 @@
         anzu-deactivate-region t
         anzu-replace-to-string-separator " => "))
 
+;; Ace-window
+(require-package 'ace-window)
+;; Initialize mode
+(add-hook 'after-init-hook #'ace-window-display-mode)
+;; Set key binding
+(bind-key "M-o" #'ace-window)
+;; Configuration
+(after-load 'ace-window
+  ;; Shorten mode lighter
+  (dim-minor-name 'ace-window-mode " aW")
+  ;; Use keys on the home row
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  ;; Show even with 2 windows
+  (setq aw-dispatch-always t))
+
 ;; Avy
 (require-package 'avy)
 ;; Initialize mode
-(avy-setup-default)
+(add-hook 'after-init-hook #'avy-setup-default)
 ;; Set key bindings
 (bind-key "C-c j c" #'avy-goto-char)
 (bind-key "C-c j k" #'avy-goto-char-2)
@@ -1788,6 +1793,22 @@
   ;; Add hooks for other packages
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+
+;; Eyebrowse
+(require-package 'eyebrowse)
+;; Change default prefix
+(setq eyebrowse-keymap-prefix (kbd "C-c w"))
+;; Initialize mode
+(add-hook 'after-init-hook #'eyebrowse-mode)
+(after-load 'eyebrowse
+  ;; Switch to last position automatically
+  (setq eyebrowse-wrap-around t)
+  (setq eyebrowse-switch-back-and-forth t)
+  ;; Start from scratch
+  (setq eyebrowse-new-workspace t)
+  ;; Differentiate from `which-function-mode'
+  (setq eyebrowse-mode-line-left-delimiter "<")
+  (setq eyebrowse-mode-line-right-delimiter ">"))
 
 ;; Form-feed
 (require-package 'form-feed)
@@ -1926,24 +1947,6 @@ suitable for assigning to `ffap-file-finder'."
   (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el")))
 ;; Enable persistent history
 (prescient-persist-mode)
-
-;; Hyperbole
-(require-package 'hyperbole)
-;; Configuration
-(setq hbmap:dir-user (locate-user-emacs-file "hyperbole/"))
-;; Set key bindings
-(add-hook 'hyperbole-init-hook
-          (lambda ()
-            ;; Add ace-window support
-            (hkey-ace-window-setup (kbd "M-o"))
-            ;; Remap default bindings
-            (bind-key "C-c ," #'hui-select-thing)
-            (bind-key "C-x M-r" #'hui:ebut-rename)
-            (bind-key "C-x M-w" #'hycontrol-windows-grid)
-            (bind-key "C-x M-o" #'hkey-operate)))
-;; Initialize mode
-(add-hook 'after-init-hook
-          (lambda () (require 'hyperbole)))
 
 ;; Paredit
 (require-package 'paredit)
