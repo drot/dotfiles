@@ -35,6 +35,9 @@ theme.border_normal = "#282a2e"
 theme.border_focus = "#969896"
 theme.border_marked = theme.bg_urgent
 
+-- Titlebar
+theme.titlebar_bg = "#222427"
+
 -- Wibox
 theme.wibar_border_width = dpi(1)
 theme.wibar_border_color = theme.border_normal
@@ -62,7 +65,7 @@ theme.taglist_bg_focus = theme.bg_normal
 
 -- Tasklist
 theme.tasklist_spacing = 1
-theme.tasklist_bg_normal = "#222427"
+theme.tasklist_bg_normal = theme.titlebar_bg
 theme.tasklist_font_minimized = "Iosevka Term Italic 12"
 theme.tasklist_shape_border_color_urgent = theme.bg_urgent
 theme.tasklist_sticky = "[*]"
