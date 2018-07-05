@@ -15,8 +15,7 @@ theme.font = "Iosevka Term 12"
 
 theme.icon_theme = "Papirus"
 
-theme.wallpaper = themes_path .. "themes/tomorrow/background.png"
-
+-- Main colors
 theme.bg_normal = "#1d1f21"
 theme.bg_focus = "#282a2e"
 theme.bg_urgent = "#cc6666"
@@ -27,6 +26,9 @@ theme.fg_normal = "#c5c8c6"
 theme.fg_focus = "#81a2be"
 theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#969896"
+
+-- Wallpaper
+theme.wallpaper = theme_assets.wallpaper(theme.bg_normal, theme.bg_focus, theme.bg_minimize)
 
 -- Window borders
 theme.useless_gap = dpi(0)
