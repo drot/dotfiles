@@ -1013,6 +1013,19 @@
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
 
+;; Ace-window
+(require-package 'ace-window)
+;; Set key binding
+(bind-key "M-o" #'ace-window)
+;; Configuration
+(after-load 'ace-window
+  ;; Shorten mode lighter
+  (dim-minor-name 'ace-window-mode " aW")
+  ;; Use keys on the home row
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  ;; Show even with 2 windows
+  (setq aw-dispatch-always t))
+
 ;; AUCTeX
 (require-package 'auctex)
 ;; TeX configuration
@@ -1731,21 +1744,6 @@
         anzu-replace-threshold 50
         anzu-deactivate-region t
         anzu-replace-to-string-separator " => "))
-
-;; Ace-window
-(require-package 'ace-window)
-;; Initialize mode
-(add-hook 'after-init-hook #'ace-window-display-mode)
-;; Set key binding
-(bind-key "M-o" #'ace-window)
-;; Configuration
-(after-load 'ace-window
-  ;; Shorten mode lighter
-  (dim-minor-name 'ace-window-mode " aW")
-  ;; Use keys on the home row
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  ;; Show even with 2 windows
-  (setq aw-dispatch-always t))
 
 ;; Avy
 (require-package 'avy)
