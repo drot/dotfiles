@@ -683,7 +683,15 @@
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
-;; Dired Extra configuration
+;; Dired Extra
+(autoload #'dired-jump "dired-x"
+  "Jump to Dired buffer corresponding to current buffer." t)
+(autoload #'dired-jump-other-window "dired-x"
+  "Like \\[dired-jump] (dired-jump) but in other window." t)
+;; Set key bindings     
+(bind-key "C-x C-j" #'dired-jump)
+(bind-key "C-x 4 C-j" #'dired-jump-other-window)
+;; Configuration
 (after-load 'dired-x
   ;; Shorten Dired Omit mode lighter
   (add-function :after (symbol-function 'dired-omit-startup)
