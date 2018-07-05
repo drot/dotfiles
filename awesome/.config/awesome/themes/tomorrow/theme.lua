@@ -153,7 +153,7 @@ theme.layout_tile = themes_path .. "themes/tomorrow/icons/layouts/tile.png"
 theme.layout_tiletop = themes_path .. "themes/tomorrow/icons/layouts/tiletop.png"
 
 -- Awesome icon
-theme.awesome_icon = themes_path .. "themes/tomorrow/icons/awesome.png"
+theme.awesome_icon = theme_assets.awesome_icon(16, theme.fg_focus, theme.bg_normal)
 
 -- Widgets
 theme.widget_value = "#f0c674"
