@@ -616,7 +616,6 @@
 (after-load 'nxml-mode
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t
-        nxml-auto-insert-xml-declaration-flag t
         nxml-sexp-element-flag t))
 
 ;; Man page reading
