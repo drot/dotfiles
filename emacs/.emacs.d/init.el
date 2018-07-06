@@ -614,6 +614,8 @@
 
 ;; NXML mode
 (after-load 'nxml-mode
+  ;; Insert XML declaration automatically
+  (bind-key "C-c i s" #'nxml-insert-xml-declaration nxml-mode-map)
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t
         nxml-sexp-element-flag t))
