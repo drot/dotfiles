@@ -689,7 +689,7 @@
   "Jump to Dired buffer corresponding to current buffer." t)
 (autoload #'dired-jump-other-window "dired-x"
   "Like \\[dired-jump] (dired-jump) but in other window." t)
-;; Set key bindings     
+;; Set key bindings
 (bind-key "C-x C-j" #'dired-jump)
 (bind-key "C-x 4 C-j" #'dired-jump-other-window)
 ;; Configuration
@@ -1479,7 +1479,7 @@
   ;; Change default font
   (defun drot-nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Noto Serif"
-                             :height 1.0))
+                             :height 1.2))
   ;; Apply the custom hook
   (add-hook 'nov-mode-hook #'drot-nov-font-setup)
   ;; Text filling
@@ -1864,6 +1864,8 @@
         ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
+        ;; Don't use extra shortcuts
+        ivy-extra-directories nil
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t
