@@ -1425,7 +1425,7 @@
   ;; Change history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
-;; IEdit
+;; Iedit
 (require-package 'iedit)
 ;; Autoload missing functions
 (autoload #'iedit-mode-from-isearch "iedit"
@@ -1439,6 +1439,7 @@
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
 ;; Configuration
 (after-load 'iedit
+  ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
 ;; JavaScript mode
