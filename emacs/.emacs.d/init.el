@@ -1230,7 +1230,9 @@
   ;; Shorten mode lighter
   (dim-minor-name 'dired-narrow-mode " d-N")
   ;; Set key binding
-  (bind-key "C-." #'dired-narrow dired-mode-map))
+  (bind-key "C-." #'dired-narrow dired-mode-map)
+  ;; Exit on single match
+  (setq dired-narrow-exit-when-one-left t))
 
 ;; Dired Collapse
 (require-package 'dired-collapse)
