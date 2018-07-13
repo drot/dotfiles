@@ -1943,22 +1943,24 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'amx
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
+;; Prescient
+(require-package 'prescient)
+;; Configuration
+(after-load 'prescient
+  ;; Change save file location
+  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Enable persistent history
+  (prescient-persist-mode))
+
 ;; Ivy Prescient
 (require-package 'ivy-prescient)
 ;; Initialize mode
-(ivy-prescient-mode)
+(add-hook 'after-init-hook #'ivy-prescient-mode)
 
 ;; Company Prescient
 (require-package 'company-prescient)
 ;; Initialize mode
-(company-prescient-mode)
-
-;; Prescient configuration
-(after-load 'prescient
-  ;; Change save file location
-  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el")))
-;; Enable persistent history
-(prescient-persist-mode)
+(add-hook 'after-init-hook #'company-prescient-mode)
 
 ;; Paredit
 (require-package 'paredit)
