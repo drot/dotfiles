@@ -2026,11 +2026,12 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Which Key
 (require-package 'which-key)
-;; Initialize mode
+;; Configuration
 (setq which-key-idle-delay 2.0
       which-key-idle-secondary-delay 1.0
       which-key-allow-imprecise-window-fit t
       which-key-sort-order #'which-key-prefix-then-key-order)
+;; Initialize mode
 (add-hook 'after-init-hook #'which-key-mode)
 ;; Rebind paging command
 (setq which-key-use-C-h-commands nil
@@ -2040,7 +2041,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h w t" #'which-key-show-top-level)
 (bind-key "C-c h w m" #'which-key-show-major-mode)
 (bind-key "C-c h w k" #'which-key-show-full-keymap)
-;; Configuration
+;; Key description configuration
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
