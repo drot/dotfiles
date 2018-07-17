@@ -3,6 +3,9 @@ $include /etc/inputrc
 # Case-insensitive completion
 set completion-ignore-case on
 
+# Add trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
 # Bracketed paste mode
 set enable-bracketed-paste on
 
