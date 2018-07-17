@@ -27,9 +27,6 @@ shopt -s histappend # append to the history file
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
-# Save history with each command execution
-PROMPT_COMMAND="history -a"
-
 # Bash completion
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
@@ -55,6 +52,9 @@ RED="\[\033[1;31m\]"
 GREEN="\[\033[1;32m\]"
 BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
+
+# Save history after each command execution
+PROMPT_COMMAND="history -a"
 
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
