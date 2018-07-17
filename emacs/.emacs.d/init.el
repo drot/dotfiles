@@ -1867,8 +1867,6 @@
         ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
-        ;; Don't use extra shortcuts
-        ivy-extra-directories nil
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
         ivy-wrap t
