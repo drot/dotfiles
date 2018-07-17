@@ -3,6 +3,9 @@ $include /etc/inputrc
 # Case-insensitive completion
 set completion-ignore-case on
 
+# Bracketed paste mode
+set enable-bracketed-paste on
+
 # Colorize Tab completion
 $if Bash
 set colored-stats on
