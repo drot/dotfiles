@@ -27,6 +27,9 @@ shopt -s histappend # append to the history file
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
+# Save history with each command execution
+PROMPT_COMMAND="history -a"
+
 # Bash completion
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion

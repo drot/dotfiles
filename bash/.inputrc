@@ -9,9 +9,10 @@ set mark-symlinked-directories on
 # Bracketed paste mode
 set enable-bracketed-paste on
 
-# Colorize Tab completion
+# Enhance Tab completion
 $if Bash
 set colored-stats on
+set visible-stats on
 set colored-completion-prefix on
 $endif
 
