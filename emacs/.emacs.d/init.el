@@ -725,7 +725,7 @@
         copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(bind-key "C-c W" #'whitespace-cleanup)
+(bind-key "C-c x" #'whitespace-cleanup)
 (bind-key "<f5> t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
@@ -875,8 +875,8 @@
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
-  (bind-key "C-c M-o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "C-c M-o" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c j" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c j" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -980,7 +980,7 @@
 ;; Configuration
 (after-load 'org
   ;; Set key binding
-  (bind-key "C-c M-o" #'ace-link-org org-mode-map)
+  (bind-key "C-c j" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org")
         org-default-notes-file (locate-user-emacs-file "org/notes.org")
@@ -1725,7 +1725,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Set key binding
-(bind-key "C-c M-o"  #'ace-link-addr)
+(bind-key "C-c j"  #'ace-link-addr)
 
 ;; Anzu
 (require-package 'anzu)
@@ -1752,12 +1752,11 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
 ;; Set key bindings
-(bind-key "C-c j" #'avy-goto-char)
-(bind-key "<f5> j k" #'avy-goto-char-2)
-(bind-key "<f5> j w" #'avy-goto-word-0)
-(bind-key "<f5> j SPC" #'avy-pop-mark)
-(bind-key "<f5> j l" #'avy-goto-line)
-(bind-key "<f5> j j" #'avy-goto-word-or-subword-1)
+(bind-key "C-:" #'avy-goto-char)
+(bind-key "C-'" #'avy-goto-char-2)
+(bind-key "M-g f" #'avy-goto-line)
+(bind-key "M-g w" #'avy-goto-word-1)
+(bind-key "M-g e" #'avy-goto-word-0)
 ;; Configuration
 (after-load 'avy
   ;; Work across all frames
@@ -1885,17 +1884,29 @@ suitable for assigning to `ffap-file-finder'."
       (find-file file)
     (set-buffer (or (find-buffer-visiting (counsel-find-file))
                     (other-buffer nil t)))))
-;; Override default key bindings
-(bind-key [remap describe-bindings] #'counsel-descbinds)
-(bind-key [remap describe-function] #'counsel-describe-function)
-(bind-key [remap describe-variable] #'counsel-describe-variable)
-(bind-key [remap apropos-command] #'counsel-apropos)
-(bind-key [remap describe-face] #'counsel-describe-face)
-(bind-key [remap list-faces-display] #'counsel-faces)
-(bind-key [remap yank-pop] #'counsel-yank-pop)
-(bind-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
-(bind-key [remap bookmark-jump] #'counsel-bookmark)
-;; Set the rest of the key bindings
+;; Override default key map
+(defvar counsel-mode-map
+  (let ((map (make-sparse-keymap)))
+    (dolist (binding
+             '((describe-bindings . counsel-descbinds)
+               (describe-function . counsel-describe-function)
+               (describe-variable . counsel-describe-variable)
+               (describe-face . counsel-describe-face)
+               (list-faces-display . counsel-faces)
+               (find-library . counsel-find-library)
+               (load-library . counsel-load-library)
+               (load-theme . counsel-load-theme)
+               (yank-pop . counsel-yank-pop)
+               (info-lookup-symbol . counsel-info-lookup-symbol)
+               (pop-to-mark-command . counsel-mark-ring)
+               (bookmark-jump . counsel-bookmark)))
+      (define-key map (vector 'remap (car binding)) (cdr binding)))
+    map)
+  "Modified map for `counsel-mode'.
+Remaps built-in functions to counsel replacements.")
+;; Initialize mode
+(add-hook 'after-init-hook #'counsel-mode)
+;; Set key bindings
 (bind-key "C-c i" #'counsel-imenu)
 (bind-key "C-c k" #'counsel-rg)
 (bind-key "<f5> f g" #'counsel-git)
@@ -1903,7 +1914,6 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> f r" #'counsel-recentf)
 (bind-key "<f5> s v" #'counsel-git-grep)
 (bind-key "<f5> s g" #'counsel-grep)
-(bind-key "<f5> j m" #'counsel-mark-ring)
 (bind-key "<f5> h c" #'counsel-command-history)
 (bind-key "<f5> h l" #'counsel-find-library)
 (bind-key "<f5> i 8" #'counsel-unicode-char)
@@ -1913,6 +1923,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap menu-bar-open] #'counsel-tmm)
 ;; Configuration
 (after-load 'counsel
+  ;; Shorten mode lighter
+  (dim-minor-name 'counsel-mode " cS")
   ;; Customize
   (setq counsel-preselect-current-file t
         ;; Change `counsel-org' defaults
@@ -1925,9 +1937,6 @@ suitable for assigning to `ffap-file-finder'."
 ;; Set key bindings
 (bind-key "C-c S" #'swiper)
 (bind-key "<f5> s s" #'swiper-all)
-;; Switch from `isearch'
-(autoload #'swiper-from-isearch "swiper"
-  "Invoke `swiper' from isearch." t)
 (bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
@@ -2060,7 +2069,6 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> h w" "which-key"
     "<f5> h" "help-extended"
     "<f5> i" "insertion"
-    "<f5> j" "jump"
     "<f5> l" "language-and-spelling"
     "<f5> m" "multiple-cursors"
     "<f5> o" "organization"
