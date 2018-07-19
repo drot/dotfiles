@@ -1431,7 +1431,7 @@
 (autoload #'iedit-execute-last-modification "iedit"
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
 ;; Set key bindings
-(bind-key "<f5> t i" #'iedit-mode)
+(bind-key "C-c I" #'iedit-mode)
 (bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
 (bind-key "C-;" #'iedit-execute-last-modification esc-map)
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
@@ -1793,7 +1793,7 @@
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Set key binding
-(bind-key "<f5> g h" #'diff-hl-margin-mode)
+(bind-key "<f5> t v" #'diff-hl-margin-mode)
 ;; Configuration
 (after-load 'diff-hl
   ;; Add hooks for other packages
