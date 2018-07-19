@@ -919,16 +919,14 @@
 (bind-key "<f5> a c" #'calendar)
 ;; Configuration
 (after-load 'calendar
+  ;; Calendar defaults
   (setq calendar-week-start-day 1
         calendar-mark-holidays-flag t
         calendar-date-style 'european
         calendar-latitude 43.2
         calendar-longitude 17.48
-        calendar-location-name "Mostar, Bosnia and Herzegovina"))
-
-;; Holidays
-(after-load 'holidays
-  ;; Configuration
+        calendar-location-name "Mostar, Bosnia and Herzegovina")
+  ;; Holiday defaults
   (setq holiday-general-holidays nil
         holiday-solar-holidays nil
         holiday-bahai-holidays nil
