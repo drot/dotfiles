@@ -721,7 +721,7 @@
         copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(bind-key "<f5> x w" #'whitespace-cleanup)
+(bind-key "C-c w" #'whitespace-cleanup)
 (bind-key "<f5> t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
@@ -756,14 +756,14 @@
 
 ;; EWW
 (bind-key "<f5> u w" #'eww)
-(bind-key "<f5> u B" #'eww-list-bookmarks)
+(bind-key "<f5> u b" #'eww-list-bookmarks)
 ;; Configuration
 (after-load 'eww
   ;; Set bookmarks directory
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
 ;; Open URLs with the specified browser
-(bind-key "<f5> u b" #'browse-url)
+(bind-key "<f5> u u" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
   (setq browse-url-browser-function #'browse-url-generic
@@ -821,7 +821,7 @@
   (setq ielm-prompt "(>) "))
 
 ;; Flymake
-(bind-key "<f5> ! t" #'flymake-mode)
+(bind-key "C-c !" #'flymake-mode)
 ;; Configuration
 (after-load 'flymake
   ;; Define Hydra
@@ -845,7 +845,7 @@
   (setq comint-input-ignoredups t))
 
 ;; Compilation
-(bind-key "<f5> c c" #'recompile)
+(bind-key "C-c C" #'recompile)
 ;; Configuration
 (after-load 'compile
   ;; Shorten mode lighter
@@ -966,11 +966,11 @@
   (bind-key "C-c o h" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
-(bind-key "<f5> o a" #'org-agenda)
+(bind-key "C-c a" #'org-agenda)
+(bind-key "C-c l" #'org-store-link)
 (bind-key "<f5> o c" #'org-capture)
 (bind-key "<f5> o t" #'org-todo-list)
 (bind-key "<f5> o s" #'org-search-view)
-(bind-key "<f5> o l" #'org-store-link)
 (bind-key "<f5> t t" #'orgtbl-mode)
 ;; Configuration
 (after-load 'org
@@ -1271,17 +1271,19 @@
 
 ;; Eglot
 (require-package 'eglot)
-;; Set key bindings
-(bind-key "<f5> e t" #'eglot)
-(bind-key "<f5> e c" #'eglot-reconnect)
-(bind-key "<f5> e s" #'eglot-shutdown)
-(bind-key "<f5> e r" #'eglot-rename)
-(bind-key "<f5> e a" #'eglot-code-actions)
-(bind-key "<f5> e h" #'eglot-help-at-point)
-(bind-key "<f5> e b" #'eglot-events-buffer)
-(bind-key "<f5> e e" #'eglot-stderr-buffer)
+;; Set key binding
+(bind-key "C-c e" #'eglot)
 ;; Configuration
 (after-load 'eglot
+  ;; Set key bindings
+  (bind-keys :map eglot-mode-map
+             ("<f5> e c" . eglot-reconnect)
+             ("<f5> e s" . eglot-shutdown)
+             ("<f5> e r" . eglot-rename)
+             ("<f5> e a" . eglot-code-actions)
+             ("<f5> e h" . eglot-help-at-point)
+             ("<f5> e b" . eglot-events-buffer)
+             ("<f5> e e" . eglot-stderr-buffer))
   ;; Add the Lua language server
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
@@ -1595,11 +1597,11 @@
         '(down-list
           mouse-drag-mode-line)))
 ;; Set key bindings
+(bind-key "C-c m" #'mc/edit-lines)
 (bind-key "<f5> m <SPC>" #'mc/vertical-align-with-space)
 (bind-key "<f5> m a" #'mc/vertical-align)
 (bind-key "<f5> m e" #'mc/mark-more-like-this-extended)
 (bind-key "<f5> m m" #'mc/mark-all-like-this-dwim)
-(bind-key "<f5> m l" #'mc/edit-lines)
 (bind-key "<f5> m n" #'mc/mark-next-like-this)
 (bind-key "<f5> m p" #'mc/mark-previous-like-this)
 (bind-key "<f5> m C-a" #'mc/edit-beginnings-of-lines)
@@ -1742,7 +1744,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
 ;; Set key bindings
-(bind-key "<f5> j c" #'avy-goto-char)
+(bind-key "C-c j" #'avy-goto-char)
 (bind-key "<f5> j k" #'avy-goto-char-2)
 (bind-key "<f5> j w" #'avy-goto-word-0)
 (bind-key "<f5> j SPC" #'avy-pop-mark)
@@ -1750,8 +1752,10 @@
 (bind-key "<f5> j j" #'avy-goto-word-or-subword-1)
 ;; Configuration
 (after-load 'avy
-  (setq avy-all-windows 'all-frames
-        avy-background t
+  ;; Work across all frames
+  (setq avy-all-windows 'all-frames)
+  ;; Dim background during selection
+  (setq avy-background t
         avy-highlight-first t))
 
 ;; Company mode
@@ -1883,13 +1887,13 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap info-lookup-symbol] #'counsel-info-lookup-symbol)
 (bind-key [remap bookmark-jump] #'counsel-bookmark)
 ;; Set the rest of the key bindings
+(bind-key "C-c i" #'counsel-imenu)
+(bind-key "C-c k" #'counsel-rg)
 (bind-key "<f5> f g" #'counsel-git)
-(bind-key "<f5> f d" #'counsel-dired-jump)
+(bind-key "<f5> f j" #'counsel-dired-jump)
 (bind-key "<f5> f r" #'counsel-recentf)
 (bind-key "<f5> s v" #'counsel-git-grep)
-(bind-key "<f5> s i" #'counsel-imenu)
-(bind-key "<f5> s G" #'counsel-grep)
-(bind-key "<f5> s g" #'counsel-rg)
+(bind-key "<f5> s g" #'counsel-grep)
 (bind-key "<f5> j m" #'counsel-mark-ring)
 (bind-key "<f5> h c" #'counsel-command-history)
 (bind-key "<f5> h l" #'counsel-find-library)
@@ -1910,9 +1914,12 @@ suitable for assigning to `ffap-file-finder'."
 ;; Swiper
 (require-package 'swiper)
 ;; Set key bindings
-(bind-key "<f5> s S" #'swiper-all)
-(bind-key "<f5> s s" #'swiper)
-(bind-key "<f5> S" #'swiper-from-isearch isearch-mode-map)
+(bind-key "C-c S" #'swiper)
+(bind-key "<f5> s s" #'swiper-all)
+;; Switch from `isearch'
+(autoload #'swiper-from-isearch "swiper"
+  "Invoke `swiper' from isearch." t)
+(bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
   ;; Customize
@@ -2036,10 +2043,8 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> !" "flymake"
     "<f5> a" "applications"
     "<f5> b" "buffers"
-    "<f5> c" "compile-and-comments"
     "<f5> d" "debbugs"
     "<f5> e" "eglot"
-    "<f5> f v" "variables"
     "<f5> f" "files"
     "<f5> g" "git"
     "<f5> h 4" "help-other-window"
@@ -2055,6 +2060,7 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> s" "search-and-symbols"
     "<f5> t" "toggles"
     "<f5> u" "url"
+    "<f5> v" "local-variables"
     "<f5> w" "eyebrowse"
     "<f5> x a" "align"
     "<f5> x" "text"
@@ -2100,8 +2106,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> t V" #'variable-pitch-mode)
 
 ;; Ediff
-(bind-key "<f5> f e" #'ediff)
-(bind-key "<f5> f 3" #'ediff3)
+(bind-key "C-c d" #'ediff)
+(bind-key "<f5> f d" #'ediff3)
 
 ;; ANSI Term
 (bind-key "<f5> a T" #'ansi-term)
@@ -2111,11 +2117,11 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> f h" #'hexl-find-file)
 
 ;; String replacement operations
-(bind-key "<f5> s r" #'replace-string)
-(bind-key "<f5> s R" #'replace-regexp)
+(bind-key "C-c r" #'replace-string)
+(bind-key "C-c R" #'replace-regexp)
 
 ;; Grep results as a dired buffer
-(bind-key "<f5> s d" #'find-grep-dired)
+(bind-key "C-c f" #'find-grep-dired)
 
 ;; Project
 (bind-key "<f5> p f" #'project-find-file)
@@ -2139,7 +2145,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap just-one-space] #'cycle-spacing)
 
 ;; Sort lines alphabetically
-(bind-key "<f5> x l" #'sort-lines)
+(bind-key "C-c s" #'sort-lines)
 
 ;; Word capitalization operations
 (bind-key [remap capitalize-word] #'capitalize-dwim)
@@ -2161,11 +2167,11 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> i t" #'table-insert)
 
 ;; Commenting
-(bind-key "<f5> c r" #'comment-region)
-(bind-key "<f5> c u" #'uncomment-region)
+(bind-key "C-c c" #'comment-region)
+(bind-key "C-c u" #'uncomment-region)
 
 ;; Check parens
-(bind-key "<f5> c p" #'check-parens)
+(bind-key "C-c p" #'check-parens)
 
 ;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
@@ -2197,17 +2203,17 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> s L" #'delete-non-matching-lines)
 
 ;; Local variable insertion
-(bind-key "<f5> f v d" #'add-dir-local-variable)
-(bind-key "<f5> f v f" #'add-file-local-variable)
-(bind-key "<f5> f v p" #'add-file-local-variable-prop-line)
+(bind-key "<f5> v d" #'add-dir-local-variable)
+(bind-key "<f5> v f" #'add-file-local-variable)
+(bind-key "<f5> v p" #'add-file-local-variable-prop-line)
 
 ;; Extended buffer operation key bindings
+(bind-key "C-c g" #'revert-buffer)
 (bind-key "<f5> b DEL" #'erase-buffer)
 (bind-key "<f5> b b" #'bury-buffer)
 (bind-key "<f5> b u" #'unbury-buffer)
 (bind-key "<f5> b e" #'eval-buffer)
 (bind-key "<f5> b k" #'kill-this-buffer)
-(bind-key "<f5> b g" #'revert-buffer)
 (bind-key "<f5> b i" #'insert-buffer)
 
 ;; Replace dabbrev-expand with hippie-expand
