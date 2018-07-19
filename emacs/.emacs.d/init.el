@@ -843,7 +843,7 @@
              ("<f5> ! r" . flymake-running-backends)
              ("<f5> ! d" . flymake-disabled-backends)
              ("<f5> ! l" . flymake-switch-to-log-buffer)
-             ("<f5> ! h" . hydra-flymake/body)))
+             ("C-c h f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -968,7 +968,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "C-c o h" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c h o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c a" #'org-agenda)
@@ -1552,7 +1552,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "<f5> x M" #'hydra-move-text/body)
+(bind-key "C-c h M" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1638,7 +1638,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "<f5> m h" #'hydra-multiple-cursors/body)
+(bind-key "C-c h m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1848,7 +1848,7 @@
              ("<f5> p t n" . hl-todo-next)
              ("<f5> p t p" . hl-todo-previous)
              ("<f5> p t o" . hl-todo-occur)
-             ("<f5> p t h" . hydra-hl-todo/body)))
+             ("C-c h t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -2073,6 +2073,7 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> x a" "align"
     "<f5> x" "text"
     "C-c @" "hide-show"
+    "C-c h" "hydras"
     "C-c o" "outline"
     "C-c w" "eyebrowse"
     "C-x C-a" "edebug"
@@ -2205,7 +2206,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "<f5> x m" #'hydra-mark-text/body)
+(bind-key "C-c h x" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "<f5> s l" #'delete-matching-lines)
