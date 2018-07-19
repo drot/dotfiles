@@ -1599,6 +1599,9 @@
   ;; Commands to run only once
   (setq mc/cmds-to-run-once
         '(down-list
+          hydra-multiple-cursors/mc/edit-beginnings-of-lines
+          hydra-multiple-cursors/mc/edit-ends-of-lines-and-exit
+          hydra-multiple-cursors/mc/edit-lines-and-exit
           mouse-drag-mode-line)))
 ;; Set key bindings
 (bind-key "C-c m" #'mc/edit-lines)
