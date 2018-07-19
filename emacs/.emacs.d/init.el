@@ -725,7 +725,7 @@
         copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(bind-key "C-c w" #'whitespace-cleanup)
+(bind-key "C-c W" #'whitespace-cleanup)
 (bind-key "<f5> t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
@@ -739,9 +739,10 @@
           (lambda () (setq-local tildify-space-string "~")))
 
 ;; Regexp builder
-(bind-key "<f5> s b" #'re-builder)
+(bind-key "C-c b" #'re-builder)
 ;; Configuration
 (after-load 're-builder
+  ;; Default regex syntax
   (setq reb-re-syntax 'string))
 
 ;; Proced
@@ -1806,7 +1807,7 @@
 ;; Eyebrowse
 (require-package 'eyebrowse)
 ;; Change default prefix
-(setq eyebrowse-keymap-prefix (kbd "<f5> w"))
+(setq eyebrowse-keymap-prefix (kbd "C-c w"))
 ;; Initialize mode
 (add-hook 'after-init-hook #'eyebrowse-mode)
 (after-load 'eyebrowse
@@ -1868,6 +1869,7 @@
         ivy-virtual-abbreviate 'abbreviate
         ivy-count-format "(%d/%d) "
         ivy-format-function #'ivy-format-function-arrow
+        ;; Wrap by default
         ivy-wrap t
         ivy-action-wrap t))
 
@@ -2068,11 +2070,11 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> t" "toggles"
     "<f5> u" "url"
     "<f5> v" "local-variables"
-    "<f5> w" "eyebrowse"
     "<f5> x a" "align"
     "<f5> x" "text"
     "C-c @" "hide-show"
     "C-c o" "outline"
+    "C-c w" "eyebrowse"
     "C-x C-a" "edebug"
     "C-x O" "previous-other-window"
     "C-x a" "abbrev"
@@ -2104,7 +2106,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> t a" #'artist-mode)
 
 ;; Toggle debug on error
-(bind-key "<f5> t d" #'toggle-debug-on-error)
+(bind-key "C-c B" #'toggle-debug-on-error)
 
 ;; Ruler mode
 (bind-key "<f5> t R" #'ruler-mode)
