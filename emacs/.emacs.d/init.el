@@ -2106,7 +2106,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> t a" #'artist-mode)
 
 ;; Toggle debug on error
-(bind-key "C-c B" #'toggle-debug-on-error)
+(bind-key "C-c D" #'toggle-debug-on-error)
 
 ;; Ruler mode
 (bind-key "<f5> t R" #'ruler-mode)
