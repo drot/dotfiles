@@ -1885,25 +1885,23 @@ suitable for assigning to `ffap-file-finder'."
     (set-buffer (or (find-buffer-visiting (counsel-find-file))
                     (other-buffer nil t)))))
 ;; Override default key map
-(defvar counsel-mode-map
-  (let ((map (make-sparse-keymap)))
-    (dolist (binding
-             '((describe-bindings . counsel-descbinds)
-               (describe-function . counsel-describe-function)
-               (describe-variable . counsel-describe-variable)
-               (describe-face . counsel-describe-face)
-               (list-faces-display . counsel-faces)
-               (find-library . counsel-find-library)
-               (load-library . counsel-load-library)
-               (load-theme . counsel-load-theme)
-               (yank-pop . counsel-yank-pop)
-               (info-lookup-symbol . counsel-info-lookup-symbol)
-               (pop-to-mark-command . counsel-mark-ring)
-               (bookmark-jump . counsel-bookmark)))
-      (define-key map (vector 'remap (car binding)) (cdr binding)))
-    map)
-  "Modified map for `counsel-mode'.
-Remaps built-in functions to counsel replacements.")
+(setq counsel-mode-map
+      (let ((map (make-sparse-keymap)))
+        (dolist (binding
+                 '((describe-bindings . counsel-descbinds)
+                   (describe-function . counsel-describe-function)
+                   (describe-variable . counsel-describe-variable)
+                   (describe-face . counsel-describe-face)
+                   (list-faces-display . counsel-faces)
+                   (find-library . counsel-find-library)
+                   (load-library . counsel-load-library)
+                   (load-theme . counsel-load-theme)
+                   (yank-pop . counsel-yank-pop)
+                   (info-lookup-symbol . counsel-info-lookup-symbol)
+                   (pop-to-mark-command . counsel-mark-ring)
+                   (bookmark-jump . counsel-bookmark)))
+          (define-key map (vector 'remap (car binding)) (cdr binding)))
+        map))
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
