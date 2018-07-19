@@ -490,7 +490,7 @@
         vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "<f5> c" #'customize-group)
+(bind-key "<f5> a k" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -875,8 +875,8 @@
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
-  (bind-key "<f5> M-o" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "<f5> M-o" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c M-o" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c M-o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -980,7 +980,7 @@
 ;; Configuration
 (after-load 'org
   ;; Set key binding
-  (bind-key "<f5> M-o" #'ace-link-org org-mode-map)
+  (bind-key "C-c M-o" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org")
         org-default-notes-file (locate-user-emacs-file "org/notes.org")
@@ -1725,7 +1725,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Set key binding
-(bind-key "<f5> M-o"  #'ace-link-addr)
+(bind-key "C-c M-o"  #'ace-link-addr)
 
 ;; Anzu
 (require-package 'anzu)
@@ -1857,7 +1857,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "<f5> r" #'ivy-resume)
+(bind-key "C-c y" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
