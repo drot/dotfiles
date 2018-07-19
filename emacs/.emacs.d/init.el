@@ -489,12 +489,15 @@
   (setq vc-follow-symlinks t
         vc-make-backup-files t))
 
-;; Customize interface options
+;; Customize interface
+(bind-key "<f5> c" #'customize-group)
+;; Configuration
 (after-load 'cus-edit
-  ;; Configuration
+  ;; Kill buffer when done and shorten help
   (setq custom-buffer-done-kill t
-        custom-buffer-verbose-help nil
-        custom-unlispify-tag-names nil
+        custom-buffer-verbose-help nil)
+  ;; Display entries as words
+  (setq custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
 
 ;; Treat all themes as safe
@@ -1850,7 +1853,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "<f5> M-r" #'ivy-resume)
+(bind-key "<f5> r" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
