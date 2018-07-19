@@ -504,6 +504,7 @@
 
 ;; MIME decoding configuration
 (after-load 'mm-decode
+  ;; Fit images to buffer
   (setq mm-inline-large-images 'resize))
 
 ;; Image mode
