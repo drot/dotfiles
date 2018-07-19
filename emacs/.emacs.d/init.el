@@ -785,7 +785,7 @@
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
-(bind-key "<f5> a e" #'eshell)
+(bind-key "<f8>" #'eshell)
 ;; Configuration
 (after-load 'eshell
   ;; Ignore duplicates and case
@@ -866,7 +866,7 @@
         compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "<f5> a g" #'gnus)
+(bind-key "<f6>" #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
@@ -919,18 +919,22 @@
 (bind-key "<f5> a c" #'calendar)
 ;; Configuration
 (after-load 'calendar
-  (setq holiday-general-holidays nil
-        holiday-solar-holidays nil
-        holiday-bahai-holidays nil
-        holiday-oriental-holidays nil
-        holiday-islamic-holidays nil
-        holiday-hebrew-holidays nil
-        calendar-week-start-day 1
+  (setq calendar-week-start-day 1
         calendar-mark-holidays-flag t
         calendar-date-style 'european
         calendar-latitude 43.2
         calendar-longitude 17.48
         calendar-location-name "Mostar, Bosnia and Herzegovina"))
+
+;; Holidays
+(after-load 'holidays
+  ;; Configuration
+  (setq holiday-general-holidays nil
+        holiday-solar-holidays nil
+        holiday-bahai-holidays nil
+        holiday-oriental-holidays nil
+        holiday-islamic-holidays nil
+        holiday-hebrew-holidays nil))
 
 ;; Outline mode
 (bind-key "<f5> t o" #'outline-minor-mode)
@@ -994,7 +998,7 @@
 (bind-key "<f5> a C" #'display-time-world)
 ;; Configuration
 (after-load 'time
-  ;; Configuration
+  ;; Time zones we are interested in
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
           ("America/Los_Angeles" "Los Angeles")
@@ -1309,7 +1313,7 @@
         elfeed-search-filter "@1-week-ago +unread"))
 
 ;; rcirc
-(bind-key "<f5> a i" #'irc)
+(bind-key "<f7>" #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
@@ -1900,6 +1904,7 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'counsel
   ;; Customize
   (setq counsel-preselect-current-file t
+        ;; Change `counsel-org' defaults
         counsel-org-goto-face-style 'verbatim
         counsel-org-headline-display-tags t
         counsel-org-headline-display-todo t))
@@ -1914,6 +1919,7 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'swiper
   ;; Customize
   (setq swiper-include-line-number-in-search t
+        ;; Always go to the beginning of a match
         swiper-goto-start-of-match t))
 
 ;; Amx
@@ -2129,7 +2135,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> h 4 L" #'find-library-other-frame)
 
 ;; List packages
-(bind-key "<f5> a p" #'package-list-packages)
+(bind-key "<f9>" #'package-list-packages)
 
 ;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
@@ -2159,6 +2165,9 @@ suitable for assigning to `ffap-file-finder'."
 ;; Commenting
 (bind-key "<f5> c r" #'comment-region)
 (bind-key "<f5> c u" #'uncomment-region)
+
+;; Check parens
+(bind-key "<f5> c p" #'check-parens)
 
 ;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
