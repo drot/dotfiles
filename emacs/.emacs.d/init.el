@@ -248,6 +248,7 @@
         "/elfeed/.*\\'"
         "/cache/.*\\'"
         ".*\\.gz\\'"
+        "newsrc"
         "TAGS"))
 ;; Initialize mode
 (recentf-mode)
