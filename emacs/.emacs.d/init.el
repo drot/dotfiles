@@ -1905,7 +1905,7 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
 (bind-key "C-c i" #'counsel-imenu)
-(bind-key "C-c x" #'counsel-rg)
+(bind-key "C-c z" #'counsel-rg)
 (bind-key "<f5> f g" #'counsel-git)
 (bind-key "<f5> f j" #'counsel-dired-jump)
 (bind-key "<f5> f r" #'counsel-recentf)
@@ -2170,9 +2170,9 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "<f5> x a" #'align)
+(bind-key "C-c A" #'align-regexp)
+(bind-key "C-c x" #'align)
 (bind-key "<f5> x c" #'align-current)
-(bind-key "<f5> x r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "<f5> i a" #'auto-insert)
@@ -2213,8 +2213,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h x" #'hydra-mark-text/body)
 
 ;; Matching lines operation
-(bind-key "<f5> s l" #'delete-matching-lines)
-(bind-key "<f5> s L" #'delete-non-matching-lines)
+(bind-key "<f5> x l" #'delete-matching-lines)
+(bind-key "<f5> x L" #'delete-non-matching-lines)
 
 ;; Local variable insertion
 (bind-key "<f5> v d" #'add-dir-local-variable)
