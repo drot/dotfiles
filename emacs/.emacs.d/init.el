@@ -1904,8 +1904,8 @@ suitable for assigning to `ffap-file-finder'."
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
+(bind-key "C-c G" #'counsel-rg)
 (bind-key "C-c i" #'counsel-imenu)
-(bind-key "C-c z" #'counsel-rg)
 (bind-key "<f5> f g" #'counsel-git)
 (bind-key "<f5> f j" #'counsel-dired-jump)
 (bind-key "<f5> f r" #'counsel-recentf)
