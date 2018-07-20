@@ -1293,12 +1293,6 @@
   ;; Add the Lua language server
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
-;; Easy-kill
-(require-package 'easy-kill)
-;; Set key bindings
-(bind-key [remap kill-ring-save] #'easy-kill)
-(bind-key [remap mark-sexp] #'easy-mark)
-
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
