@@ -1722,7 +1722,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Set key binding
-(bind-key "C-c M-o"  #'ace-link-addr)
+(bind-key "C-c L"  #'ace-link-addr)
 
 ;; Anzu
 (require-package 'anzu)
