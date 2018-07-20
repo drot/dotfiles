@@ -2075,7 +2075,6 @@ suitable for assigning to `ffap-file-finder'."
     "<f5> t" "toggles"
     "<f5> u" "url"
     "<f5> v" "local-variables"
-    "<f5> x a" "align"
     "<f5> x" "text"
     "C-c @" "hide-show"
     "C-c h" "hydras"
@@ -2171,9 +2170,9 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "<f5> t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "<f5> x a a" #'align)
-(bind-key "<f5> x a c" #'align-current)
-(bind-key "<f5> x a r" #'align-regexp)
+(bind-key "<f5> x a" #'align)
+(bind-key "<f5> x c" #'align-current)
+(bind-key "<f5> x r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "<f5> i a" #'auto-insert)
