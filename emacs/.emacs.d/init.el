@@ -709,6 +709,7 @@
   ;; Configuration
   (setq tramp-default-method "ssh"
         tramp-persistency-file-name (locate-user-emacs-file "cache/tramp")
+        ;; Use temp directory for save files
         tramp-backup-directory-alist `(("." . ,temporary-file-directory))
         tramp-auto-save-directory temporary-file-directory))
 
@@ -850,6 +851,7 @@
 
 ;; Comint mode
 (after-load 'comint
+  ;; Ignore duplicate commands
   (setq comint-input-ignoredups t))
 
 ;; Compilation
