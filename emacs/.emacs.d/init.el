@@ -434,6 +434,7 @@
       (call-interactively ffap-file-finder)))
   ;; Rebind `ibuffer-find-file' with the compatibility function
   (bind-key [remap ibuffer-find-file] #'drot-ibuffer-ffap ibuffer-mode-map)
+
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
@@ -1869,6 +1870,7 @@
 
 ;; Counsel
 (require-package 'counsel)
+
 ;; Ffap compatibility function
 (defun drot-counsel-find-file (&optional file)
   "Like `counsel-find-file', but return buffer, not name of FILE.
@@ -1879,6 +1881,7 @@ suitable for assigning to `ffap-file-finder'."
       (find-file file)
     (set-buffer (or (find-buffer-visiting (counsel-find-file))
                     (other-buffer nil t)))))
+
 ;; Override default key map
 (setq counsel-mode-map
       (let ((map (make-sparse-keymap)))
@@ -1897,6 +1900,7 @@ suitable for assigning to `ffap-file-finder'."
                    (bookmark-jump . counsel-bookmark)))
           (define-key map (vector 'remap (car binding)) (cdr binding)))
         map))
+
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
