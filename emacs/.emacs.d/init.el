@@ -726,7 +726,7 @@
         copyright-names-regexp (regexp-quote user-login-name)))
 
 ;; Whitespace mode
-(bind-key "C-c x" #'whitespace-cleanup)
+(bind-key "C-c k" #'whitespace-cleanup)
 (bind-key "<f5> t w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
@@ -1901,7 +1901,7 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
 (bind-key "C-c i" #'counsel-imenu)
-(bind-key "C-c k" #'counsel-rg)
+(bind-key "C-c x" #'counsel-rg)
 (bind-key "<f5> f g" #'counsel-git)
 (bind-key "<f5> f j" #'counsel-dired-jump)
 (bind-key "<f5> f r" #'counsel-recentf)
