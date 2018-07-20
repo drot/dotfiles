@@ -374,14 +374,14 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 ;; Set key bindings
-(bind-key "<f5> l b" #'flyspell-buffer)
-(bind-key "<f5> l r" #'flyspell-region)
+(bind-key "<f5> C-b" #'flyspell-buffer)
+(bind-key "<f5> F" #'flyspell-region)
 ;; Configuration
 (after-load 'flyspell
   ;; Shorten mode lighter
   (dim-minor-name 'flyspell-mode " fS")
   ;; Set key bindings
-  (bind-key "<f5> l p" #'flyspell-check-previous-highlighted-word flyspell-mode-map)
+  (bind-key "<f5> C-p" #'flyspell-check-previous-highlighted-word flyspell-mode-map)
   ;; Disable conflicting key binding
   (unbind-key "C-M-i" flyspell-mode-map)
   ;; Correct some annoying defaults
@@ -392,7 +392,7 @@
         flyspell-duplicate-distance 12000))
 
 ;; Ispell
-(bind-key "<f5> l d" #'ispell-change-dictionary)
+(bind-key "<f5> C-d" #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
   (setq ispell-program-name "hunspell"))
@@ -492,7 +492,7 @@
         vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "<f5> a k" #'customize-group)
+(bind-key "<f5> k" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -588,8 +588,8 @@
     > _ \n
     "}" > \n)
   ;; Bind skeleton
-  (bind-key "<f5> i s" #'drot-cc-skeleton c-mode-map)
-  (bind-key "<f5> i s" #'drot-cc-skeleton c++-mode-map))
+  (bind-key "<f5> C-s" #'drot-cc-skeleton c-mode-map)
+  (bind-key "<f5> C-s" #'drot-cc-skeleton c++-mode-map))
 
 ;; Etags
 (after-load 'etags
@@ -609,7 +609,7 @@
 ;; NXML mode
 (after-load 'nxml-mode
   ;; Insert XML declaration automatically
-  (bind-key "<f5> i s" #'nxml-insert-xml-declaration nxml-mode-map)
+  (bind-key "<f5> C-s" #'nxml-insert-xml-declaration nxml-mode-map)
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t
         nxml-sexp-element-flag t))
@@ -719,8 +719,8 @@
         bookmark-save-flag 1))
 
 ;; Copyright insertion
-(bind-key "<f5> i c" #'copyright)
-(bind-key "<f5> i C" #'copyright-update)
+(bind-key "<f5> C" #'copyright)
+(bind-key "<f5> C-c" #'copyright-update)
 ;; Configuration
 (after-load 'copyright
   (setq copyright-year-ranges t
@@ -728,14 +728,14 @@
 
 ;; Whitespace mode
 (bind-key "C-c k" #'whitespace-cleanup)
-(bind-key "<f5> t w" #'whitespace-mode)
+(bind-key "<f5> M-w" #'whitespace-mode)
 ;; Shorten mode lighter
 (after-load 'whitespace
   (dim-minor-name 'whitespace-mode " wS"))
 
 ;; Tildify mode
-(bind-key "<f5> x t" #'tildify-region)
-(bind-key "<f5> t ~" #'tildify-mode)
+(bind-key "<f5> C-t" #'tildify-region)
+(bind-key "<f5> M-t" #'tildify-mode)
 ;; Configuration
 (add-hook 'LaTeX-mode-hook
           (lambda () (setq-local tildify-space-string "~")))
@@ -756,28 +756,29 @@
                 proced-tree-flag t))
 
 ;; GDB
-(bind-key "<f5> a d" #'gdb)
+(bind-key "<f5> D" #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
   (setq gdb-many-windows t))
 
 ;; EWW
-(bind-key "<f5> u w" #'eww)
-(bind-key "<f5> u b" #'eww-list-bookmarks)
+(bind-key "<f5> w" #'eww)
+(bind-key "<f5> B" #'eww-list-bookmarks)
 ;; Configuration
 (after-load 'eww
   ;; Set bookmarks directory
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
 ;; Open URLs with the specified browser
-(bind-key "<f5> u u" #'browse-url)
+(bind-key "<f5> u" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
+  ;; Need to use the `browse-url-generic' function
   (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "qutebrowser"))
 
 ;; Speedbar
-(bind-key "<f5> p s" #'speedbar)
+(bind-key "<f5> +" #'speedbar)
 ;; Configuration
 (after-load 'speedbar
   ;; Set key binding
@@ -816,13 +817,13 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;; Shell mode
-(bind-key "<f5> a t" #'shell)
+(bind-key "<f5> s" #'shell)
 ;; Configuration
 (after-load 'shell
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
-(bind-key "<f5> a '" #'ielm)
+(bind-key "<f5> '" #'ielm)
 ;; Configuration
 (after-load 'ielm
   (setq ielm-prompt "(>) "))
@@ -877,8 +878,8 @@
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
-  (bind-key "C-c j" #'ace-link-gnus gnus-summary-mode-map)
-  (bind-key "C-c j" #'ace-link-gnus gnus-article-mode-map)
+  (bind-key "C-c M-o" #'ace-link-gnus gnus-summary-mode-map)
+  (bind-key "C-c M-o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -923,7 +924,7 @@
         gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(bind-key "<f5> a c" #'calendar)
+(bind-key "<f5> c" #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -942,7 +943,7 @@
         holiday-hebrew-holidays nil))
 
 ;; Outline mode
-(bind-key "<f5> t o" #'outline-minor-mode)
+(bind-key "<f5> M-o" #'outline-minor-mode)
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c o"))
 ;; Configuration
@@ -982,7 +983,7 @@
 ;; Configuration
 (after-load 'org
   ;; Set key binding
-  (bind-key "C-c j" #'ace-link-org org-mode-map)
+  (bind-key "C-c M-o" #'ace-link-org org-mode-map)
   ;; Customize
   (setq org-directory (locate-user-emacs-file "org")
         org-default-notes-file (locate-user-emacs-file "org/notes.org")
@@ -1000,7 +1001,7 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(bind-key "<f5> a C" #'display-time-world)
+(bind-key "<f5> T" #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Time zones we are interested in
@@ -1048,7 +1049,7 @@
     _ \n \n
     "\\end{document}" \n)
   ;; Bind skeleton
-  (bind-key "<f5> i s" #'drot-latex-skeleton TeX-mode-map))
+  (bind-key "<f5> C-s" #'drot-latex-skeleton TeX-mode-map))
 ;; TeX external commands
 (after-load 'tex-buf
   ;; Don't ask to save before processing
@@ -1297,7 +1298,7 @@
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
-(bind-key "<f5> a f" #'elfeed)
+(bind-key "<f5> f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -1537,7 +1538,7 @@
     _ \n
     "```" \n)
   ;; Bind skeleton
-  (bind-key "<f5> i s" #'drot-markdown-code-skeleton markdown-mode-map))
+  (bind-key "<f5> C-s" #'drot-markdown-code-skeleton markdown-mode-map))
 
 ;; Move-text
 (require-package 'move-text)
@@ -1656,7 +1657,7 @@
 ;; Rainbow mode
 (require-package 'rainbow-mode)
 ;; Set key binding
-(bind-key "<f5> t r" #'rainbow-mode)
+(bind-key "<f5> M-r" #'rainbow-mode)
 ;; Configuration
 (after-load 'rainbow-mode
   (dim-minor-name 'rainbow-mode " rW"))
@@ -1666,7 +1667,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key binding
-(bind-key "<f5> a w" #'run-skewer)
+(bind-key "<f5> W" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
   (dim-minor-name 'skewer-mode " sK"))
@@ -1686,8 +1687,8 @@
 ;; SLY
 (require-package 'sly)
 ;; Set key bindings
-(bind-key "<f5> a s" #'sly)
-(bind-key "<f5> a S" #'sly-connect)
+(bind-key "<f5> M-s" #'sly)
+(bind-key "<f5> C-e" #'sly-connect)
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
@@ -1721,7 +1722,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Set key binding
-(bind-key "C-c j"  #'ace-link-addr)
+(bind-key "C-c M-o"  #'ace-link-addr)
 
 ;; Anzu
 (require-package 'anzu)
@@ -1792,7 +1793,7 @@
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Set key binding
-(bind-key "<f5> t v" #'diff-hl-margin-mode)
+(bind-key "<f5> M-d" #'diff-hl-margin-mode)
 ;; Configuration
 (after-load 'diff-hl
   ;; Add hooks for other packages
@@ -1840,9 +1841,9 @@
     ("q" nil "Quit"))
   ;; Set key bindings
   (bind-keys :map hl-todo-mode-map
-             ("<f5> p t n" . hl-todo-next)
-             ("<f5> p t p" . hl-todo-previous)
-             ("<f5> p t o" . hl-todo-occur)
+             ("<f5> t n" . hl-todo-next)
+             ("<f5> t p" . hl-todo-previous)
+             ("<f5> t o" . hl-todo-occur)
              ("C-c h t" . hydra-hl-todo/body)))
 
 ;; Ivy
@@ -1852,7 +1853,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "C-c y" #'ivy-resume)
+(bind-key "C-c j" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
@@ -1906,15 +1907,15 @@ suitable for assigning to `ffap-file-finder'."
 ;; Set key bindings
 (bind-key "C-c G" #'counsel-rg)
 (bind-key "C-c i" #'counsel-imenu)
-(bind-key "<f5> f g" #'counsel-git)
-(bind-key "<f5> f j" #'counsel-dired-jump)
-(bind-key "<f5> f r" #'counsel-recentf)
-(bind-key "<f5> s v" #'counsel-git-grep)
-(bind-key "<f5> s g" #'counsel-grep)
+(bind-key "<f5> g g" #'counsel-git)
+(bind-key "<f5> C-j" #'counsel-dired-jump)
+(bind-key "<f5> r" #'counsel-recentf)
+(bind-key "<f5> g r" #'counsel-git-grep)
+(bind-key "<f5> G" #'counsel-grep)
 (bind-key "<f5> h c" #'counsel-command-history)
 (bind-key "<f5> h l" #'counsel-find-library)
-(bind-key "<f5> i 8" #'counsel-unicode-char)
-(bind-key "<f5> f f" #'counsel-file-jump)
+(bind-key "<f5> 8" #'counsel-unicode-char)
+(bind-key "<f5> j" #'counsel-file-jump)
 (bind-key [remap org-goto] #'counsel-org-goto)
 (bind-key [remap org-set-tags-command] #'counsel-org-tag)
 (bind-key [remap menu-bar-open] #'counsel-tmm)
@@ -1933,7 +1934,7 @@ suitable for assigning to `ffap-file-finder'."
 (require-package 'swiper)
 ;; Set key bindings
 (bind-key "C-c S" #'swiper)
-(bind-key "<f5> s s" #'swiper-all)
+(bind-key "<f5> C-a" #'swiper-all)
 (bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
@@ -2056,26 +2057,18 @@ suitable for assigning to `ffap-file-finder'."
   ;; Global replacements
   (which-key-add-key-based-replacements
     "<f5> !" "flymake"
-    "<f5> a" "applications"
     "<f5> b" "buffers"
     "<f5> d" "debbugs"
     "<f5> e" "eglot"
-    "<f5> f" "files"
     "<f5> g" "git"
     "<f5> h 4" "help-other-window"
     "<f5> h w" "which-key"
     "<f5> h" "help-extended"
-    "<f5> i" "insertion"
-    "<f5> l" "language-and-spelling"
     "<f5> m" "multiple-cursors"
-    "<f5> o" "organization"
-    "<f5> p t" "hl-todo"
-    "<f5> p" "project"
+    "<f5> o" "org-mode"
     "<f5> s" "search-and-symbols"
-    "<f5> t" "toggles"
-    "<f5> u" "url"
+    "<f5> t" "todo"
     "<f5> v" "local-variables"
-    "<f5> x" "text"
     "C-c @" "hide-show"
     "C-c h" "hydras"
     "C-c o" "outline"
@@ -2121,14 +2114,14 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Ediff
 (bind-key "C-c d" #'ediff)
-(bind-key "<f5> f d" #'ediff3)
+(bind-key "<f5> e" #'ediff3)
 
 ;; ANSI Term
-(bind-key "<f5> a T" #'ansi-term)
+(bind-key "<f5> ~" #'ansi-term)
 
 ;; Hexl mode
-(bind-key "<f5> t h" #'hexl-mode)
-(bind-key "<f5> f h" #'hexl-find-file)
+(bind-key "<f5> M-h" #'hexl-mode)
+(bind-key "<f5> H" #'hexl-find-file)
 
 ;; String replacement operations
 (bind-key "C-c r" #'replace-string)
@@ -2138,8 +2131,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f" #'find-grep-dired)
 
 ;; Project
-(bind-key "<f5> p f" #'project-find-file)
-(bind-key "<f5> p r" #'project-find-regexp)
+(bind-key "<f5> C-f" #'project-find-file)
+(bind-key "<f5> P" #'project-find-regexp)
 
 ;; Find function and variable definitions
 (bind-key "<f5> h f" #'find-function)
@@ -2167,7 +2160,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap downcase-word] #'downcase-dwim)
 
 ;; Auto Fill mode
-(bind-key "<f5> t f" #'auto-fill-mode)
+(bind-key "<f5> M-f" #'auto-fill-mode)
 
 ;; Align
 (bind-key "C-c A" #'align-regexp)
@@ -2175,10 +2168,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c x" #'align)
 
 ;; Auto Insert
-(bind-key "<f5> i a" #'auto-insert)
+(bind-key "<f5> a" #'auto-insert)
 
 ;; Table insertion
-(bind-key "<f5> i t" #'table-insert)
+(bind-key "<f5> i" #'table-insert)
 
 ;; Commenting
 (bind-key "C-c c" #'comment-region)
@@ -2213,8 +2206,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h x" #'hydra-mark-text/body)
 
 ;; Matching lines operation
-(bind-key "<f5> x l" #'delete-matching-lines)
-(bind-key "<f5> x L" #'delete-non-matching-lines)
+(bind-key "<f5> l" #'delete-matching-lines)
+(bind-key "<f5> L" #'delete-non-matching-lines)
 
 ;; Local variable insertion
 (bind-key "<f5> v d" #'add-dir-local-variable)
