@@ -1651,7 +1651,11 @@
 ;; Configuration
 (after-load 'pdf-tools
   ;; Make sure the binary is always compiled
-  (pdf-tools-install t))
+  (pdf-tools-install t)
+  ;; Enable SyncTeX support
+  (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
+  ;; Enable link following
+  (add-hook 'pdf-view-mode-hook #'pdf-links-minor-mode))
 
 ;; PDF Tools annotations
 (after-load 'pdf-annot
