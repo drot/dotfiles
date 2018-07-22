@@ -1069,7 +1069,9 @@
   ;; Further folding options with Outline
   (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
   ;; Add RefTeX support
-  (add-hook 'LaTeX-mode-hook #'turn-on-reftex))
+  (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
+  ;; Add SyncTeX support
+  (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode))
 
 ;; RefTeX
 (after-load 'reftex
@@ -2049,7 +2051,7 @@ suitable for assigning to `ffap-file-finder'."
 ;; Rebind paging command
 (setq which-key-use-C-h-commands nil
       which-key-paging-prefixes '("C-x" "C-c" "<f5>")
-      which-key-paging-key "<f6>")
+      which-key-paging-key "<f5>")
 ;; Set key bindings
 (bind-key "<f5> h w t" #'which-key-show-top-level)
 (bind-key "<f5> h w m" #'which-key-show-major-mode)
