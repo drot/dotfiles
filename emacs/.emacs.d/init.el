@@ -380,10 +380,10 @@
 (after-load 'flyspell
   ;; Shorten mode lighter
   (dim-minor-name 'flyspell-mode " fS")
-  ;; Set key bindings
-  (bind-key "C-c l p" #'flyspell-check-previous-highlighted-word flyspell-mode-map)
   ;; Disable conflicting key binding
   (unbind-key "C-M-i" flyspell-mode-map)
+  ;; Set key binding
+  (bind-key "C-c `" #'flyspell-check-previous-highlighted-word flyspell-mode-map)
   ;; Correct some annoying defaults
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
@@ -1803,7 +1803,7 @@
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Set key binding
-(bind-key "C-c g h" #'diff-hl-margin-mode)
+(bind-key "C-c t v" #'diff-hl-margin-mode)
 ;; Configuration
 (after-load 'diff-hl
   ;; Add hooks for other packages
