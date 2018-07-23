@@ -1915,7 +1915,7 @@ suitable for assigning to `ffap-file-finder'."
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
-(bind-key "C-c s C-s" #'counsel-rg)
+(bind-key "C-c s g" #'counsel-rg)
 (bind-key "C-c s i" #'counsel-imenu)
 (bind-key "C-c f g" #'counsel-git)
 (bind-key "C-c f d" #'counsel-dired-jump)
@@ -2073,7 +2073,7 @@ suitable for assigning to `ffap-file-finder'."
     "C-c a w" "eww"
     "C-c a" "applications"
     "C-c b" "buffers"
-    "C-c c" "compile-and-comments"
+    "C-c c" "compile-and-check"
     "C-c e" "eglot"
     "C-c f" "files"
     "C-c g" "git"
@@ -2192,10 +2192,6 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Table insertion
 (bind-key "C-c i t" #'table-insert)
-
-;; Commenting
-(bind-key "C-c c r" #'comment-region)
-(bind-key "C-c c u" #'uncomment-region)
 
 ;; Check parens
 (bind-key "C-c c p" #'check-parens)
