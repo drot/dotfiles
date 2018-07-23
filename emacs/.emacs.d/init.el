@@ -1302,7 +1302,7 @@
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
-(bind-key "<f6>" #'elfeed)
+(bind-key "C-c a f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -1863,7 +1863,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "C-c M-r" #'ivy-resume)
+(bind-key "<f6>" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
