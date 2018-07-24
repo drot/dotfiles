@@ -845,7 +845,7 @@
              ("C-c ! r" . flymake-running-backends)
              ("C-c ! d" . flymake-disabled-backends)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("C-c ! h" . hydra-flymake/body)))
+             ("C-c ` f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -945,7 +945,7 @@
 ;; Outline mode
 (bind-key "C-c t o" #'outline-minor-mode)
 ;; Set default prefix
-(setq outline-minor-mode-prefix (kbd "C-c O"))
+(setq outline-minor-mode-prefix (kbd "C-c o"))
 ;; Configuration
 (after-load 'outline
   ;; Shorten mode lighter
@@ -971,7 +971,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "C-c O h" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c ` o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1551,7 +1551,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "C-c x M" #'hydra-move-text/body)
+(bind-key "C-c ` x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1637,7 +1637,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "C-c m h" #'hydra-multiple-cursors/body)
+(bind-key "C-c ` m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1852,7 +1852,7 @@
              ("C-c p t n" . hl-todo-next)
              ("C-c p t p" . hl-todo-previous)
              ("C-c p t o" . hl-todo-occur)
-             ("C-c p t h" . hydra-hl-todo/body)))
+             ("C-c ` t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -2066,7 +2066,7 @@ suitable for assigning to `ffap-file-finder'."
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c @" "hide-show"
-    "C-c O" "outline"
+    "C-c `" "hydras"
     "C-c a b" "debbugs"
     "C-c a w" "eww"
     "C-c a" "applications"
@@ -2081,7 +2081,7 @@ suitable for assigning to `ffap-file-finder'."
     "C-c i" "insertion"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
-    "C-c o" "org-mode"
+    "C-c o" "org-and-outline"
     "C-c p t" "hl-todo"
     "C-c p" "project"
     "C-c s" "search-and-symbols"
@@ -2220,7 +2220,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "C-c x m" #'hydra-mark-text/body)
+(bind-key "C-c ` SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
