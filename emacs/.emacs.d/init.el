@@ -2116,7 +2116,10 @@ suitable for assigning to `ffap-file-finder'."
     "C-c C-c" "markdown-commands"
     "C-c C-s" "markdown-styles"
     "C-c C-t" "markdown-header"
-    "C-c C-x" "markdown-toggles"))
+    "C-c C-x" "markdown-toggles")
+  ;; Org mode replacements
+  (which-key-add-major-mode-key-based-replacements 'org-mode
+    "C-c \"" "org-plot"))
 
 ;; Artist mode
 (bind-key "C-c t a" #'artist-mode)
