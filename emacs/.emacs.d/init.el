@@ -1666,6 +1666,7 @@
 (bind-key "C-c t r" #'rainbow-mode)
 ;; Configuration
 (after-load 'rainbow-mode
+  ;; Shorten mode lighter
   (dim-minor-name 'rainbow-mode " rW"))
 
 ;; Skewer
@@ -1676,18 +1677,21 @@
 (bind-key "C-c a W" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
+  ;; Shorten mode lighter
   (dim-minor-name 'skewer-mode " sK"))
 
 ;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
 ;; Configuration
 (after-load 'skewer-css
+  ;; Shorten mode lighter
   (dim-minor-name 'skewer-css-mode " sKC"))
 
 ;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 ;; Configuration
 (after-load 'skewer-html
+  ;; Shorten mode lighter
   (dim-minor-name 'skewer-html-mode " sKH"))
 
 ;; SLY
@@ -1816,13 +1820,13 @@
 (add-hook 'after-init-hook #'eyebrowse-mode)
 (after-load 'eyebrowse
   ;; Switch to last position automatically
-  (setq eyebrowse-wrap-around t)
-  (setq eyebrowse-switch-back-and-forth t)
+  (setq eyebrowse-wrap-around t
+        eyebrowse-switch-back-and-forth t)
   ;; Start from scratch
   (setq eyebrowse-new-workspace t)
   ;; Differentiate from `which-function-mode'
-  (setq eyebrowse-mode-line-left-delimiter "<")
-  (setq eyebrowse-mode-line-right-delimiter ">"))
+  (setq eyebrowse-mode-line-left-delimiter "<"
+        eyebrowse-mode-line-right-delimiter ">"))
 
 ;; Form-feed
 (require-package 'form-feed)
@@ -1872,9 +1876,9 @@
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
         ivy-count-format "(%d/%d) "
-        ivy-format-function #'ivy-format-function-arrow
-        ;; Wrap by default
-        ivy-wrap t
+        ivy-format-function #'ivy-format-function-arrow)
+  ;; Wrap by default
+  (setq ivy-wrap t
         ivy-action-wrap t))
 
 ;; Counsel
@@ -2119,7 +2123,11 @@ suitable for assigning to `ffap-file-finder'."
     "C-c C-x" "markdown-toggles")
   ;; Org mode replacements
   (which-key-add-major-mode-key-based-replacements 'org-mode
-    "C-c \"" "org-plot"))
+    "C-c \"" "org-plot")
+  ;; Gnus summary mode replacements
+  (which-key-add-major-mode-key-based-replacements 'gnus-summary-mode
+    "C-c C-s" "gnus-summary"
+    "C-c C-v" "gnus-decode"))
 
 ;; Artist mode
 (bind-key "C-c t a" #'artist-mode)
