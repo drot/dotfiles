@@ -97,7 +97,7 @@
 (size-indication-mode)
 
 ;; Answer y or n instead of yes or no at prompts
-(advice-add #'yes-or-no-p :override #'y-or-n-p)
+(advice-add 'yes-or-no-p :override #'y-or-n-p)
 
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.01)
@@ -1523,7 +1523,7 @@
           (while (search-forward "-+-" nil t)
             (replace-match "-|-"))))))
   ;; Add advice for table alignment
-  (advice-add #'org-table-align :after #'markdown-org-table-align-advice)
+  (advice-add 'org-table-align :after #'markdown-org-table-align-advice)
   ;; Enable `visual-line-mode' in Markdown buffers and disable `auto-fill-mode'
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
