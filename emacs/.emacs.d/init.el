@@ -2001,8 +2001,11 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'paredit
   ;; Shorten mode lighter
   (dim-minor-name 'paredit-mode " pE")
+  ;; Disable conflicting key binding
+  (unbind-key "M-s" paredit-mode-map)
   ;; Set key bindings
   (bind-keys :map paredit-mode-map
+             ("M-s M-s" . paredit-splice-sexp)
              ("M-{" . paredit-wrap-curly)
              ("M-[" . paredit-wrap-square))
 
