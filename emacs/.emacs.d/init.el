@@ -364,7 +364,7 @@
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 ;; Configuration
 (after-load 'bug-reference
-  (setq bug-reference-url-format "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=%s"))
+  (setq bug-reference-url-format "https://debbugs.gnu.org/%s"))
 
 ;; Goto Address mode
 (add-hook 'text-mode-hook #'goto-address-mode)
