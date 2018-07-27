@@ -548,9 +548,7 @@
   ;; Shorten mode lighter
   (dim-minor-name 'eldoc-mode " eD")
   ;; Make compatible with Paredit
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round))
+  (eldoc-add-command #'paredit-backward-delete #'paredit-close-round))
 
 ;; Python mode configuration
 (after-load 'python
