@@ -1086,7 +1086,7 @@ awful.rules.rules = {
      properties = { titlebars_enabled = false } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
-     properties = { screen = 1, tag = "3" } },
+     properties = { screen = 1, tag = "3", maximized_vertical = true, maximized_horizontal = true } },
    { rule = { class = "libreoffice" },
      properties = { screen = 1, tag = "5" } },
    { rule = { class = "Pavucontrol" },
