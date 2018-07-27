@@ -55,7 +55,7 @@ c.url.start_pages = 'about:blank'
 # Default monospace fonts. Whenever "monospace" is used in a font
 # setting, it's replaced with the fonts listed here.
 # Type: Font
-c.fonts.monospace = '"Iosevka Term"'
+c.fonts.monospace = '"Iosevka Term SS05"'
 
 # Font used in the completion widget.
 # Type: Font

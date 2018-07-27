@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Font
-FONT="IosevkaTerm-12"
+FONT="IosevkaTermSS05-12"
 
 # Colors
 NORMAL_BACKGROUND="#282a2e"

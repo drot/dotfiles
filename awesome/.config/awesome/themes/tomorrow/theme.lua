@@ -11,7 +11,7 @@ local themes_path = gfs.get_configuration_dir()
 
 local theme = {}
 
-theme.font = "Iosevka Term 12"
+theme.font = "Iosevka Term SS05 12"
 
 theme.icon_theme = "Papirus"
 

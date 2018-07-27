@@ -4,7 +4,7 @@ workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
 # font for window titles and the status bar
-font pango:Iosevka Term Bold 12
+font pango:Iosevka Term SS05 Bold 12
 
 # default modifier key
 set $mod Mod4
