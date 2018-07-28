@@ -2103,7 +2103,8 @@ suitable for assigning to `ffap-file-finder'."
     "C-x a" "abbrev"
     "C-x n" "narrow"
     "C-x r" "register"
-    "C-x w" "highlight")
+    "C-x w" "highlight"
+    "M-s h" "highlight")
   ;; Dired mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
     "C-, C-o" "dired-subtree-only"
