@@ -1530,8 +1530,6 @@
   ;; Additional fontification
   (setq markdown-fontify-code-blocks-natively t
         markdown-header-scaling t)
-  ;; Use underscores for italic text
-  (setq markdown-italic-underscore t)
   ;; Skeleton
   (define-skeleton drot-markdown-code-skeleton
     "Inserts a Markdown code skeleton in the current buffer."
