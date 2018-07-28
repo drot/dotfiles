@@ -362,8 +362,10 @@
 ;; Bug Reference mode
 (add-hook 'text-mode-hook #'bug-reference-mode)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+(add-hook 'gnus-article-mode-hook #'bug-reference-mode)
 ;; Configuration
 (after-load 'bug-reference
+  ;; GNU bug tracker
   (setq bug-reference-url-format "https://debbugs.gnu.org/%s"))
 
 ;; Goto Address mode
