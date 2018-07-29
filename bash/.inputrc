@@ -1,19 +1,14 @@
+# Readline options -*- mode: sh; -*-
 $include /etc/inputrc
 
-# Case-insensitive completion
-set completion-ignore-case on
-
-# Add trailing slash when autocompleting symlinks to directories
-set mark-symlinked-directories on
-
-# Bracketed paste mode
-set enable-bracketed-paste on
-
-# Enhance Tab completion
+# Bash specific options
 $if Bash
-set colored-stats on
-set visible-stats on
-set colored-completion-prefix on
+set completion-ignore-case on # case-insensitive completion
+set colored-stats on # use colors for completion display
+set visible-stats on # mark distinctive options
+set colored-completion-prefix on # colorize completion prefix
+set mark-symlinked-directories on #  add trailing slashes to symlinks
+set enable-bracketed-paste on # bracketed paste mode
 $endif
 
 # Use Emacs-style history search keys
