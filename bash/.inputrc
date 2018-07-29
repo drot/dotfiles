@@ -5,7 +5,7 @@ $include /etc/inputrc
 $if Bash
 set completion-ignore-case on # case-insensitive completion
 set colored-stats on # use colors for completion display
-set visible-stats on # mark distinctive options
+set visible-stats on # append file type when listing completions
 set colored-completion-prefix on # colorize completion prefix
 set mark-symlinked-directories on #  add trailing slashes to symlinks
 set enable-bracketed-paste on # bracketed paste mode
