@@ -71,11 +71,11 @@ theme.taglist_bg_focus = theme.bg_normal
 theme.tasklist_spacing = 1
 theme.tasklist_shape = gshape.octogon
 theme.tasklist_shape_border_width = dpi(1)
+theme.tasklist_font_minimized = "Iosevka Term SS05 Italic 12"
 theme.tasklist_shape_border_color = theme.bg_minimize
 theme.tasklist_shape_border_color_minimized = theme.fg_minimize
 theme.tasklist_bg_normal = theme.bg_focus
 theme.tasklist_bg_focus = theme.titlebar_bg
-theme.tasklist_font_minimized = "Iosevka Term SS05 Italic 12"
 theme.tasklist_shape_border_color_urgent = theme.bg_urgent
 theme.tasklist_sticky = "[*]"
 theme.tasklist_ontop = "[^]"
@@ -83,8 +83,8 @@ theme.tasklist_above = "[↑]"
 theme.tasklist_below = "[↓]"
 theme.tasklist_floating = "[~]"
 theme.tasklist_maximized = "[+]"
-theme.tasklist_maximized_horizontal = "[-]"
-theme.tasklist_maximized_vertical = "[|]"
+theme.tasklist_maximized_horizontal = "[↔]"
+theme.tasklist_maximized_vertical = "[↕]"
 
 -- Menu
 theme.menu_height = dpi(24)
