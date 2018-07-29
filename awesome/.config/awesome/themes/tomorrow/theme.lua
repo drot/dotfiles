@@ -9,6 +9,8 @@ local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_configuration_dir()
 
+local gshape = require("gears.shape")
+
 local theme = {}
 
 theme.font = "Iosevka Term SS05 12"
@@ -67,7 +69,12 @@ theme.taglist_bg_focus = theme.bg_normal
 
 -- Tasklist
 theme.tasklist_spacing = 1
-theme.tasklist_bg_normal = theme.titlebar_bg
+theme.tasklist_shape = gshape.octogon
+theme.tasklist_shape_border_width = dpi(1)
+theme.tasklist_shape_border_color = theme.bg_minimize
+theme.tasklist_shape_border_color_minimized = theme.fg_minimize
+theme.tasklist_bg_normal = theme.bg_focus
+theme.tasklist_bg_focus = theme.titlebar_bg
 theme.tasklist_font_minimized = "Iosevka Term SS05 Italic 12"
 theme.tasklist_shape_border_color_urgent = theme.bg_urgent
 theme.tasklist_sticky = "[*]"
