@@ -77,14 +77,14 @@ theme.tasklist_shape_border_color_minimized = theme.fg_minimize
 theme.tasklist_bg_normal = theme.bg_focus
 theme.tasklist_bg_focus = theme.titlebar_bg
 theme.tasklist_shape_border_color_urgent = theme.bg_urgent
-theme.tasklist_sticky = "* "
-theme.tasklist_ontop = "^ "
-theme.tasklist_above = "↑ "
-theme.tasklist_below = "↓ "
-theme.tasklist_floating = "~ "
-theme.tasklist_maximized = "+ "
-theme.tasklist_maximized_horizontal = "↔ "
-theme.tasklist_maximized_vertical = "↕ "
+theme.tasklist_sticky = "[*]"
+theme.tasklist_ontop = "[^]"
+theme.tasklist_above = "[↑]"
+theme.tasklist_below = "[↓]"
+theme.tasklist_floating = "[~]"
+theme.tasklist_maximized = "[+]"
+theme.tasklist_maximized_horizontal = "[↔]"
+theme.tasklist_maximized_vertical = "[↕]"
 
 -- Menu
 theme.menu_height = dpi(24)
