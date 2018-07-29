@@ -492,7 +492,7 @@
         vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "C-c a k" #'customize-group)
+(bind-key "C-c a C" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
