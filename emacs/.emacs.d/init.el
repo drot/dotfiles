@@ -1448,6 +1448,7 @@
 (after-load 'js2-mode
   (setq js2-basic-offset 2
         js2-highlight-level 3)
+  ;; Highlight unused variables
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;; JSON mode
@@ -1934,9 +1935,9 @@ suitable for assigning to `ffap-file-finder'."
   ;; Shorten mode lighter
   (dim-minor-name 'counsel-mode " cS")
   ;; Customize
-  (setq counsel-preselect-current-file t
-        ;; Change `counsel-org' defaults
-        counsel-org-goto-face-style 'verbatim
+  (setq counsel-preselect-current-file t)
+  ;; Change `counsel-org' defaults
+  (setq counsel-org-goto-face-style 'verbatim
         counsel-org-headline-display-tags t
         counsel-org-headline-display-todo t))
 
@@ -1949,9 +1950,9 @@ suitable for assigning to `ffap-file-finder'."
 ;; Configuration
 (after-load 'swiper
   ;; Customize
-  (setq swiper-include-line-number-in-search t
-        ;; Always go to the beginning of a match
-        swiper-goto-start-of-match t))
+  (setq swiper-include-line-number-in-search t)
+  ;; Always go to the beginning of a match
+  (setq swiper-goto-start-of-match t))
 
 ;; Amx
 (require-package 'amx)
@@ -1962,6 +1963,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c h u" #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
+  ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
 ;; Prescient
@@ -2046,6 +2048,7 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'volatile-highlights-mode)
 ;; Configuration
 (after-load 'volatile-highlights
+  ;; Shorten mode lighter
   (dim-minor-name 'volatile-highlights-mode " vH"))
 
 ;; Which Key
