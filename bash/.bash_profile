@@ -21,21 +21,21 @@ export WINEDEBUG="-all"
 export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml=d"
 
 # Check for Cargo packages if available
-if [[ -d "$HOME/.cargo/bin" ]]; then
+if [[ -d $HOME/.cargo/bin ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Check for LuaRocks packages if available
-if [[ -d "$HOME/.luarocks/bin" ]]; then
+if [[ -d $HOME/.luarocks/bin ]]; then
     export PATH="$HOME/.luarocks/bin:$PATH"
 fi
 
 # Set PATH so it includes user directory
-if [[ -d "$HOME/.local/bin" ]]; then
+if [[ -d $HOME/.local/bin ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Initialize Bash
-if [[ -r "$HOME/.bashrc" ]]; then
-    . "$HOME/.bashrc"
+if [[ -r $HOME/.bashrc ]]; then
+    source $HOME/.bashrc
 fi

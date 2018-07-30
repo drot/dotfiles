@@ -28,22 +28,22 @@ shopt -s cmdhist # save multi-line commands as one command
 
 # Bash completion
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
 fi
 
 # Colored listings
-if [[ -r "$HOME/.dircolors" ]] && type -p dircolors >/dev/null; then
+if [[ -r $HOME/.dircolors ]] && type -p dircolors >/dev/null; then
     eval "$(dircolors -b "$HOME/.dircolors")"
 fi
 
 # Load aliases
-if [[ -r "$HOME/.bash_aliases" ]]; then
-    . "$HOME/.bash_aliases"
+if [[ -r $HOME/.bash_aliases ]]; then
+    source $HOME/.bash_aliases
 fi
 
 # Load custom functions
-if [[ -r "$HOME/.bash_functions" ]]; then
-    . "$HOME/.bash_functions"
+if [[ -r $HOME/.bash_functions ]]; then
+    source $HOME/.bash_functions
 fi
 
 # Prompt colors

@@ -1,6 +1,6 @@
 # Add completions from user installs -*- mode: sh; -*-
-if [[ -d "$HOME/.local/etc/bash_completion.d" ]]; then
+if [[ -d $HOME/.local/etc/bash_completion.d ]]; then
     for compfile in ~/.local/etc/bash_completion.d/*; do
-        . "$compfile"
+        source $compfile
     done
 fi
