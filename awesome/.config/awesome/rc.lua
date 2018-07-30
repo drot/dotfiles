@@ -1071,7 +1071,7 @@ awful.rules.rules = {
 
    -- Start llpp maximized
    { rule = { class = "llpp" },
-     properties = { maximized_vertical = true, maximized_horizontal = true } },
+     properties = { maximized = true } },
 
    -- Set qutebrowser to always map on the tag named "2" on screen 1
    { rule = { class = "qutebrowser" },
@@ -1086,7 +1086,7 @@ awful.rules.rules = {
      properties = { titlebars_enabled = false } },
    -- Map the rest of the applications
    { rule = { class = "Emacs" },
-     properties = { screen = 1, tag = "3", maximized_vertical = true, maximized_horizontal = true } },
+     properties = { screen = 1, tag = "3", maximized = true } },
    { rule = { class = "libreoffice" },
      properties = { screen = 1, tag = "5" } },
    { rule = { class = "Pavucontrol" },
