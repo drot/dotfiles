@@ -18,5 +18,5 @@ set enable-bracketed-paste on
 $endif
 
 # Use Emacs-style history search keys
-"\ep":history-search-backward
-"\en":history-search-forward
+"\ep": history-search-backward
+"\en": history-search-forward
