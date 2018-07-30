@@ -3,12 +3,18 @@ $include /etc/inputrc
 
 # Bash specific options
 $if Bash
-set completion-ignore-case on # case-insensitive completion
-set colored-stats on # use colors for completion display
-set visible-stats on # append file type when listing completions
-set colored-completion-prefix on # colorize completion prefix
-set mark-symlinked-directories on #  add trailing slashes to symlinks
-set enable-bracketed-paste on # bracketed paste mode
+# case-insensitive completion
+set completion-ignore-case on
+# use colors for completion display
+set colored-stats on
+# append file type when listing completions
+set visible-stats on
+# colorize completion prefix
+set colored-completion-prefix on
+# add trailing slashes to symlinks
+set mark-symlinked-directories on
+# bracketed paste mode
+set enable-bracketed-paste on
 $endif
 
 # Use Emacs-style history search keys
