@@ -67,7 +67,7 @@
 ;; Use `bind-key' for personal keybindings
 (require-package 'bind-key)
 ;; Set key binding
-(bind-key "C-c H b" #'describe-personal-keybindings)
+(bind-key "C-c h b" #'describe-personal-keybindings)
 ;; Configuration
 (after-load 'bind-key
   ;; Extract special forms
@@ -845,7 +845,7 @@
              ("C-c ! r" . flymake-running-backends)
              ("C-c ! d" . flymake-disabled-backends)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("C-c h f" . hydra-flymake/body)))
+             ("C-c k f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -971,7 +971,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "C-c h o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c k o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1550,7 +1550,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "C-c h x" #'hydra-move-text/body)
+(bind-key "C-c k x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1636,7 +1636,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "C-c h m" #'hydra-multiple-cursors/body)
+(bind-key "C-c k m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1855,7 +1855,7 @@
              ("C-c p t n" . hl-todo-next)
              ("C-c p t p" . hl-todo-previous)
              ("C-c p t o" . hl-todo-occur)
-             ("C-c h t" . hydra-hl-todo/body)))
+             ("C-c k t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -1923,8 +1923,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f r" #'counsel-recentf)
 (bind-key "C-c s v" #'counsel-git-grep)
 (bind-key "C-c s G" #'counsel-grep)
-(bind-key "C-c H c" #'counsel-command-history)
-(bind-key "C-c H l" #'counsel-find-library)
+(bind-key "C-c h c" #'counsel-command-history)
+(bind-key "C-c h l" #'counsel-find-library)
 (bind-key "C-c i 8" #'counsel-unicode-char)
 (bind-key "C-c f j" #'counsel-file-jump)
 (bind-key [remap org-goto] #'counsel-org-goto)
@@ -1960,7 +1960,7 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'amx-mode)
 ;; Set key bindings
 (bind-key "M-X" #'amx-major-mode-commands)
-(bind-key "C-c H u" #'amx-show-unbound-commands)
+(bind-key "C-c h u" #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
   ;; Change save file location
@@ -2065,16 +2065,16 @@ suitable for assigning to `ffap-file-finder'."
       which-key-paging-prefixes '("C-x" "C-c")
       which-key-paging-key "<f5>")
 ;; Set key bindings
-(bind-key "C-c H w t" #'which-key-show-top-level)
-(bind-key "C-c H w m" #'which-key-show-major-mode)
-(bind-key "C-c H w k" #'which-key-show-full-keymap)
+(bind-key "C-c h w t" #'which-key-show-top-level)
+(bind-key "C-c h w m" #'which-key-show-major-mode)
+(bind-key "C-c h w k" #'which-key-show-full-keymap)
 ;; Key description configuration
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c @" "hide-show"
-    "C-c h" "hydras"
+    "C-c k" "hydras"
     "C-c a b" "debbugs"
     "C-c a w" "eww"
     "C-c a" "applications"
@@ -2083,9 +2083,9 @@ suitable for assigning to `ffap-file-finder'."
     "C-c e" "eglot"
     "C-c f" "files"
     "C-c g" "git"
-    "C-c H 4" "help-other-window"
-    "C-c H w" "which-key"
-    "C-c H" "help-extended"
+    "C-c h 4" "help-other-window"
+    "C-c h w" "which-key"
+    "C-c h" "help-extended"
     "C-c i" "insertion"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
@@ -2169,15 +2169,15 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c p r" #'project-find-regexp)
 
 ;; Find function and variable definitions
-(bind-key "C-c H f" #'find-function)
-(bind-key "C-c H 4 f" #'find-function-other-window)
-(bind-key "C-c H k" #'find-function-on-key)
-(bind-key "C-c H v" #'find-variable)
-(bind-key "C-c H 4 v" #'find-variable-other-window)
+(bind-key "C-c h f" #'find-function)
+(bind-key "C-c h 4 f" #'find-function-other-window)
+(bind-key "C-c h k" #'find-function-on-key)
+(bind-key "C-c h v" #'find-variable)
+(bind-key "C-c h 4 v" #'find-variable-other-window)
 
 ;; Find library
-(bind-key "C-c H 4 l" #'find-library-other-window)
-(bind-key "C-c H 4 L" #'find-library-other-frame)
+(bind-key "C-c h 4 l" #'find-library-other-window)
+(bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; List packages
 (bind-key "<f9>" #'package-list-packages)
@@ -2233,7 +2233,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "C-c h SPC" #'hydra-mark-text/body)
+(bind-key "C-c k SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
