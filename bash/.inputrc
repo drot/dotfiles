@@ -15,6 +15,8 @@ set colored-completion-prefix on
 set mark-symlinked-directories on
 # bracketed paste mode
 set enable-bracketed-paste on
+# show paren matches
+set blink-matching-paren on
 $endif
 
 # Use Emacs-style history search keys
