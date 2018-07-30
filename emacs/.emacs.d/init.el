@@ -159,10 +159,12 @@
 
 ;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
+;; Shorten mode lighter
 (dim-minor-name 'auto-fill-function " fL")
 
 ;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil vertical-bar))
+;; Shorten mode lighter
 (dim-minor-name 'visual-line-mode " vL")
 
 ;; Use Gnus as the default mail program
@@ -395,12 +397,14 @@
 (bind-key "C-c l d" #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
+  ;; Default spellchecker
   (setq ispell-program-name "hunspell"))
 
 ;; Isearch
-(dim-minor-name 'isearch-mode " iS")
 (setq isearch-allow-scroll t
       search-default-mode #'char-fold-to-regexp)
+;; Shorten mode lighter
+(dim-minor-name 'isearch-mode " iS")
 
 ;; Ediff window split
 (after-load 'ediff-wind
@@ -728,8 +732,9 @@
 ;; Whitespace mode
 (bind-key "C-c x w" #'whitespace-cleanup)
 (bind-key "C-c t w" #'whitespace-mode)
-;; Shorten mode lighter
+;; Configuration
 (after-load 'whitespace
+  ;; Shorten mode lighter
   (dim-minor-name 'whitespace-mode " wS"))
 
 ;; Tildify mode
