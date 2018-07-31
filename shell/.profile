@@ -31,7 +31,7 @@ if [ -d "$HOME/.luarocks/bin" ]; then
 fi
 
 # Set PATH so it includes user directory
-if [ "-d $HOME/.local/bin" ]; then
+if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
