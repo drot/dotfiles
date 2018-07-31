@@ -497,7 +497,7 @@
         vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "C-c a C" #'customize-group)
+(bind-key "C-c z C" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -757,7 +757,7 @@
                 proced-tree-flag t))
 
 ;; GDB
-(bind-key "C-c a d" #'gdb)
+(bind-key "C-c z d" #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
   (setq gdb-many-windows t))
@@ -818,13 +818,13 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;; Shell mode
-(bind-key "C-c a ~" #'shell)
+(bind-key "C-c z ~" #'shell)
 ;; Configuration
 (after-load 'shell
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
 
 ;; IELM
-(bind-key "C-c a `" #'ielm)
+(bind-key "C-c r i" #'ielm)
 ;; Configuration
 (after-load 'ielm
   (setq ielm-prompt "(>) "))
@@ -926,7 +926,7 @@
         gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(bind-key "C-c a c" #'calendar)
+(bind-key "C-c z c" #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -1003,7 +1003,7 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(bind-key "C-c a T" #'display-time-world)
+(bind-key "C-c z T" #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Time zones we are interested in
@@ -1083,15 +1083,15 @@
 ;; Debbugs
 (require-package 'debbugs)
 ;; Set key bindings
-(bind-key "C-c a b g" #'debbugs-gnu)
-(bind-key "C-c a b s" #'debbugs-gnu-search)
-(bind-key "C-c a b t" #'debbugs-gnu-usertags)
-(bind-key "C-c a b p" #'debbugs-gnu-patches)
-(bind-key "C-c a b b" #'debbugs-gnu-bugs)
-(bind-key "C-c a b O" #'debbugs-org)
-(bind-key "C-c a b S" #'debbugs-org-search)
-(bind-key "C-c a b P" #'debbugs-org-patches)
-(bind-key "C-c a b B" #'debbugs-org-bugs)
+(bind-key "C-c d g" #'debbugs-gnu)
+(bind-key "C-c d s" #'debbugs-gnu-search)
+(bind-key "C-c d t" #'debbugs-gnu-usertags)
+(bind-key "C-c d p" #'debbugs-gnu-patches)
+(bind-key "C-c d b" #'debbugs-gnu-bugs)
+(bind-key "C-c d O" #'debbugs-org)
+(bind-key "C-c d S" #'debbugs-org-search)
+(bind-key "C-c d P" #'debbugs-org-patches)
+(bind-key "C-c d B" #'debbugs-org-bugs)
 
 ;; CIDER
 (require-package 'cider)
@@ -1302,7 +1302,7 @@
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
-(bind-key "C-c a f" #'elfeed)
+(bind-key "C-c z f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -1675,7 +1675,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key binding
-(bind-key "C-c a W" #'run-skewer)
+(bind-key "C-c r w" #'run-skewer)
 ;; Configuration
 (after-load 'skewer-mode
   ;; Shorten mode lighter
@@ -1698,8 +1698,8 @@
 ;; SLY
 (require-package 'sly)
 ;; Set key bindings
-(bind-key "C-c a s" #'sly)
-(bind-key "C-c a S" #'sly-connect)
+(bind-key "C-c r s" #'sly)
+(bind-key "C-c r c" #'sly-connect)
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
@@ -2076,12 +2076,10 @@ suitable for assigning to `ffap-file-finder'."
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c @" "hide-show"
-    "C-c k" "hydras"
-    "C-c a b" "debbugs"
-    "C-c a w" "eww"
-    "C-c a" "applications"
+    "C-c a" "align"
     "C-c b" "buffers"
     "C-c c" "compile-and-check"
+    "C-c d" "debbugs"
     "C-c e" "eglot"
     "C-c f" "files"
     "C-c g" "git"
@@ -2089,18 +2087,20 @@ suitable for assigning to `ffap-file-finder'."
     "C-c h w" "which-key"
     "C-c h" "help-extended"
     "C-c i" "insertion"
+    "C-c k" "hydras"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c o" "org-and-outline"
     "C-c p t" "hl-todo"
     "C-c p" "project"
+    "C-c r" "repl"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
     "C-c u" "url"
     "C-c v" "local-variables"
     "C-c w" "eyebrowse"
-    "C-c x a" "align"
     "C-c x" "text"
+    "C-c z" "execute"
     "C-x C-a" "edebug"
     "C-x O" "previous-other-window"
     "C-x a" "abbrev"
@@ -2153,7 +2153,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f 3" #'ediff3)
 
 ;; ANSI Term
-(bind-key "C-c a t" #'ansi-term)
+(bind-key "C-c z t" #'ansi-term)
 
 ;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
@@ -2199,9 +2199,9 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "C-c x a a" #'align)
-(bind-key "C-c x a c" #'align-current)
-(bind-key "C-c x a r" #'align-regexp)
+(bind-key "C-c a a" #'align)
+(bind-key "C-c a c" #'align-current)
+(bind-key "C-c a r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
