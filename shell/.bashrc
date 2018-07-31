@@ -28,7 +28,7 @@ shopt -s cmdhist # save multi-line commands as one command
 
 # Bash completion
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
+    . /usr/share/bash-completion/bash_completion
 fi
 
 # Colored listings
@@ -38,12 +38,12 @@ fi
 
 # Load aliases
 if [[ -r $HOME/.bash_aliases ]]; then
-    source $HOME/.bash_aliases
+    . $HOME/.bash_aliases
 fi
 
 # Load custom functions
 if [[ -r $HOME/.bash_functions ]]; then
-    source $HOME/.bash_functions
+    . $HOME/.bash_functions
 fi
 
 # Prompt colors

@@ -1,0 +1,7 @@
+# Source environment settings
+if [ -r "$HOME/.profile" ]; then
+    . "$HOME/.profile";
+fi
+
+# Disable DPMS
+xset s off -dpms
