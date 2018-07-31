@@ -1230,7 +1230,7 @@
   ;; Initialize mode
   (require 'dired-narrow)
   ;; Shorten mode lighter
-  (dim-minor-name 'dired-narrow-mode " d-N")
+  (dim-minor-name 'dired-narrow-mode " dN")
   ;; Set key binding
   (bind-key "C-." #'dired-narrow dired-mode-map)
   ;; Exit on single match
@@ -1252,7 +1252,7 @@
   ;; Initialize mode
   (require 'dired-du)
   ;; Shorten mode lighter
-  (dim-minor-name 'dired-du-mode " d-U")
+  (dim-minor-name 'dired-du-mode " dU")
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
