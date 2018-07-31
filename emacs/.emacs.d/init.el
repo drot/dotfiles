@@ -1675,7 +1675,8 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key binding
-(bind-key "C-c r w" #'run-skewer)
+(bind-key "C-c z w" #'run-skewer)
+(bind-key "C-c r w" #'skewer-repl)
 ;; Configuration
 (after-load 'skewer-mode
   ;; Shorten mode lighter
