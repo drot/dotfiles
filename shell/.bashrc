@@ -38,12 +38,12 @@ fi
 
 # Load aliases
 if [[ -r $HOME/.bash_aliases ]]; then
-    . $HOME/.bash_aliases
+    . "$HOME/.bash_aliases"
 fi
 
 # Load custom functions
 if [[ -r $HOME/.bash_functions ]]; then
-    . $HOME/.bash_functions
+    . "$HOME/.bash_functions"
 fi
 
 # Prompt colors
