@@ -274,6 +274,7 @@
 ;; Line numbers display
 (setq display-line-numbers-type 'relative
       display-line-numbers-current-absolute nil)
+;; Maximum width reserved for line numbers
 (setq-default display-line-numbers-width 2)
 ;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -448,7 +449,7 @@
            ("Dired" (mode . dired-mode))
            ("Document" (or (derived-mode . latex-mode)
                            (derived-mode . markdown-mode)))
-           ("ERC" (derived-mode . erc-mode))
+           ("IRC" (mode . rcirc-mode))
            ("Git" (derived-mode . magit-mode))
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
@@ -616,10 +617,6 @@
   (setq nxml-slash-auto-complete-flag t
         nxml-sexp-element-flag t))
 
-;; Man page reading
-(after-load 'man
-  (setq Man-notify-method 'aggresive))
-
 ;; Doc View mode
 (after-load 'doc-view
   ;; Configuration
@@ -710,9 +707,9 @@
 (after-load 'tramp
   ;; Configuration
   (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (locate-user-emacs-file "cache/tramp")
-        ;; Use temp directory for save files
-        tramp-backup-directory-alist `(("." . ,temporary-file-directory))
+        tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
+  ;; Use temp directory for save files
+  (setq tramp-backup-directory-alist `(("." . ,temporary-file-directory))
         tramp-auto-save-directory temporary-file-directory))
 
 ;; Bookmarks
