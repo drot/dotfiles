@@ -1159,11 +1159,12 @@
   (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf" "ps"
                                            "rtf" "djvu" "epub" "md" "tex"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
-  (dired-rainbow-define excel "turquise" ("xlsx"))
-  (dired-rainbow-define executable "Gold" ("exe" "msi"))
+  (dired-rainbow-define excel "turquoise" ("xlsx"))
+  (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
   (dired-rainbow-define html "Wheat" ("htm" "html" "xhtml"))
   (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
   (dired-rainbow-define log "gray" ("log"))
+  (dired-rainbow-define config (:foreground "cadet blue" :italic t) ("conf" "ini" "yml"))
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
   (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
                                                  "rb" "R" "php" "el" "scm" "cpp"
@@ -1174,9 +1175,9 @@
                                             "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
   (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
   ;; Define faces by file permission
-  (dired-rainbow-define-chmod executable-unix "gold" "-[rw-]+x.*")
-  (dired-rainbow-define-chmod directory-unix "DeepSkyBlue" "d[rw-]+x.*")
-  (dired-rainbow-define-chmod symlink-unix "violet" "l[rw-]+x.*"))
+  (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-[rw-]+x.*")
+  (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d[rw-]+x.*")
+  (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l[rw-]+x.*"))
 
 ;; Dired Subtree
 (require-package 'dired-subtree)
@@ -1975,6 +1976,8 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'prescient
   ;; Change save file location
   (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
   ;; Enable persistent history
   (prescient-persist-mode))
 
