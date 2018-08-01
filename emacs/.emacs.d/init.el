@@ -497,7 +497,7 @@
         vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "C-c z C" #'customize-group)
+(bind-key "C-c a C" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -757,7 +757,7 @@
                 proced-tree-flag t))
 
 ;; GDB
-(bind-key "C-c z d" #'gdb)
+(bind-key "C-c a d" #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
   (setq gdb-many-windows t))
@@ -818,7 +818,7 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;; Shell mode
-(bind-key "C-c z ~" #'shell)
+(bind-key "C-c a ~" #'shell)
 ;; Configuration
 (after-load 'shell
   (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
@@ -926,7 +926,7 @@
         gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(bind-key "C-c z c" #'calendar)
+(bind-key "C-c a c" #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -1003,7 +1003,7 @@
   (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; World time
-(bind-key "C-c z T" #'display-time-world)
+(bind-key "C-c a T" #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Time zones we are interested in
@@ -1303,7 +1303,7 @@
 ;; Elfeed
 (require-package 'elfeed)
 ;; Set key binding
-(bind-key "C-c z f" #'elfeed)
+(bind-key "C-c a f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -1676,7 +1676,7 @@
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set key binding
-(bind-key "C-c z w" #'run-skewer)
+(bind-key "C-c a w" #'run-skewer)
 (bind-key "C-c r w" #'skewer-repl)
 ;; Configuration
 (after-load 'skewer-mode
@@ -2080,7 +2080,7 @@ suitable for assigning to `ffap-file-finder'."
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
     "C-c @" "hide-show"
-    "C-c a" "align"
+    "C-c a" "applications"
     "C-c b" "buffers"
     "C-c c" "compile-and-check"
     "C-c d" "debbugs"
@@ -2103,8 +2103,8 @@ suitable for assigning to `ffap-file-finder'."
     "C-c u" "url"
     "C-c v" "local-variables"
     "C-c w" "eyebrowse"
+    "C-c x a" "align"
     "C-c x" "text"
-    "C-c z" "execute"
     "C-x C-a" "edebug"
     "C-x O" "previous-other-window"
     "C-x a" "abbrev"
@@ -2157,7 +2157,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f 3" #'ediff3)
 
 ;; ANSI Term
-(bind-key "C-c z t" #'ansi-term)
+(bind-key "C-c a t" #'ansi-term)
 
 ;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
@@ -2203,9 +2203,9 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c t f" #'auto-fill-mode)
 
 ;; Align
-(bind-key "C-c a a" #'align)
-(bind-key "C-c a c" #'align-current)
-(bind-key "C-c a r" #'align-regexp)
+(bind-key "C-c x a a" #'align)
+(bind-key "C-c x a c" #'align-current)
+(bind-key "C-c x a r" #'align-regexp)
 
 ;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
