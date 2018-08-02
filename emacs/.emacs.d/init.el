@@ -416,6 +416,7 @@
 
 ;; Ediff restore previous window configuration
 (after-load 'ediff-util
+  ;; Clever hack using `window-undo'
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;; Uniquify buffer names
@@ -821,7 +822,13 @@
 (bind-key "C-c a ~" #'shell)
 ;; Configuration
 (after-load 'shell
-  (add-hook 'shell-mode-hook #'compilation-shell-minor-mode))
+  ;; Custom hook to avoid conflicts
+  (defun drot-shell-mode-hook ()
+    "Disable Company and enable clickable file paths."
+    (compilation-shell-minor-mode)
+    (company-mode 0))
+  ;; Apply the custom hook
+  (add-hook 'shell-mode-hook #'drot-shell-mode-hook))
 
 ;; IELM
 (bind-key "C-c r i" #'ielm)
