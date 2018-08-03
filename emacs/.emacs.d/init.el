@@ -183,9 +183,6 @@
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
-;; Move point to window split
-(setq split-window-keep-point nil)
-
 ;; Draw window dividers
 (setq window-divider-default-bottom-width 1
       window-divider-default-right-width 1
@@ -1164,7 +1161,7 @@
                                              "z" "Z" "jar" "war" "ear" "rar"
                                              "sar" "xpi" "apk" "xz" "tar"))
   (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                           "rtf" "djvu" "epub" "md" "tex"))
+                                           "rtf" "djvu" "epub" "md" "tex" "org"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
   (dired-rainbow-define excel "turquoise" ("xlsx"))
   (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
