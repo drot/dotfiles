@@ -475,6 +475,7 @@
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
                        (derived-mode . sly-mrepl-mode)
+                       (derived-mode . skewer-repl-mode)
                        (name . "\*Python\*")))
            ("Shell" (or (derived-mode . eshell-mode)
                         (derived-mode . shell-mode)))
