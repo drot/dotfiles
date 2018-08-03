@@ -1774,7 +1774,7 @@
         '(unspecified "#1d1f21" "#969896" "#cc6666" "#cc6666"
                       "#b5bd68" "#b5bd68" "#f0c674" "#f0c674"
                       "#81a2be" "#81a2be" "#b294bb" "#b294bb"
-                      "#8abeb7" "#8abeb7" "#c5c8c6" "#ffffff")))                       
+                      "#8abeb7" "#8abeb7" "#c5c8c6" "#ffffff")))
 ;; Wgrep
 (require-package 'wgrep)
 
