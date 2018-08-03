@@ -288,7 +288,8 @@
                 term-mode-hook
                 ediff-mode-hook
                 comint-mode-hook
-                cider-repl-mode-hook))
+                cider-repl-mode-hook
+                weechat-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -653,7 +654,9 @@
 ;; Prevent GnuTLS warnings
 (after-load 'gnutls
   ;; Configuration
-  (setq gnutls-min-prime-bits nil))
+  (setq gnutls-min-prime-bits nil)
+  ;; Add WeeChat relay certificate
+  (add-to-list 'gnutls-trustfiles (expand-file-name "~/.emacs.d/relay.crt")))
 
 ;; Dired configuration
 (after-load 'dired
@@ -758,6 +761,7 @@
 (bind-key "C-c a d" #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
+  ;; Multiple window layout
   (setq gdb-many-windows t))
 
 ;; EWW
@@ -1324,7 +1328,7 @@
         elfeed-search-filter "@1-week-ago +unread"))
 
 ;; rcirc
-(bind-key "<f7>" #'irc)
+(bind-key "C-c a i" #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
@@ -1721,6 +1725,51 @@
 
 ;; Systemd mode
 (require-package 'systemd)
+
+;; WeeChat
+(require-package 'weechat)
+;; Set key binding
+(bind-key "<f7>" #'weechat-connect)
+;; Configuration
+(after-load 'weechat
+  ;; Disable conflicting key bind
+  (unbind-key "C-c C-g" weechat-mode-map)
+  ;; Set key bindings
+  (bind-key "C-c C-l" #'weechat-get-more-lines weechat-mode-map)
+  (bind-key "C-c C-d" #'weechat-disconnect weechat-mode-map)
+  ;; Which modules to load
+  (setq weechat-modules '(weechat-button
+                          weechat-complete
+                          weechat-tracking
+                          weechat-spelling
+                          weechat-notifications))
+
+  ;; Authentication function
+  (defun drot-weechat-password-auth (host port)
+    (auth-source-pass-get 'secret "auth-sources/da1.hashbang.sh"))
+
+  ;; Connection defaults
+  (setq weechat-host-default "da1.hashbang.sh"
+        weechat-port-default 55956
+        weechat-mode-default 'ssl
+        weechat-password-callback #'drot-weechat-password-auth)
+  ;; Which channels to monitor
+  (setq weechat-auto-monitor-buffers '("forestnet.#rawhide"
+                                       "freenode.#emacs")))
+
+;; WeeChat tracking
+(after-load 'weechat-tracking
+  ;; Track messages and highlights
+  (setq weechat-tracking-types '(:highlight :message)))
+
+;; WeeChat color handling
+(after-load 'weechat-color
+  ;; Tomorrow Night palette
+  (setq weechat-color-list
+        '(unspecified "#1d1f21" "#cc6666" "#b5bd68" "#f0c674"
+                      "#81a2be" "#b294bb" "#8abeb7" "#c5c8c6"
+                      "#969896" "#cc6666" "#b5bd68" "#f0c674"
+                      "#81a2be" "#b294bb" "#8abeb7" "#ffffff")))
 
 ;; Wgrep
 (require-package 'wgrep)
