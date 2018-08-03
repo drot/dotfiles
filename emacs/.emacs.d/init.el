@@ -123,7 +123,8 @@
 
 ;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t)
 
 ;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
