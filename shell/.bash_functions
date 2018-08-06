@@ -17,11 +17,11 @@ man() {
     local opts
     local URL="https://0x0.st"
     # Parameter pick
-    if [ "$1" = "-f" ]; then
+    if [[ $1 = "-f" ]]; then
         opts="-F file=@$2 $URL"
-    elif [ "$1" = "-u" ]; then
+    elif [[ $1 = "-u" ]]; then
         opts="-F url=$2 $URL"
-    elif [ "$1" = "-s" ]; then
+    elif [[ $1 = "-s" ]]; then
         opts="-F shorten=$2 $URL"
     else
         echo "'-f' for file upload, '-u' for URL upload, '-s' for URL shortening."
