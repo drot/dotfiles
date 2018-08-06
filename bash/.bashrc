@@ -67,10 +67,6 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Prompt format
 case $TERM in
-    xterm*|rxvt*|st*|screen*|tmux*)
-        PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
-        ;;
-    *)
-        PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
-        ;;
+    xterm*|screen*|tmux*) PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
+    *) PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
 esac
