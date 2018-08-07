@@ -1015,10 +1015,10 @@
         org-catch-invisible-edits 'error
         org-startup-indented t)
   ;; Avoid Wind Move conflict
-  (add-hook 'org-shiftup-final-hook 'windmove-up)
-  (add-hook 'org-shiftdown-final-hook 'windmove-down)
-  (add-hook 'org-shiftleft-final-hook 'windmove-left)
-  (add-hook 'org-shiftright-final-hook 'windmove-right))
+  (add-hook 'org-shiftup-final-hook #'windmove-up)
+  (add-hook 'org-shiftdown-final-hook #'windmove-down)
+  (add-hook 'org-shiftleft-final-hook #'windmove-left)
+  (add-hook 'org-shiftright-final-hook #'windmove-right))
 
 ;; World time
 (bind-key "C-c a T" #'display-time-world)
