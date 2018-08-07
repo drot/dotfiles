@@ -82,7 +82,7 @@ theme.tasklist_ontop = "[†]"
 theme.tasklist_above = "[↑]"
 theme.tasklist_below = "[↓]"
 theme.tasklist_floating = "[≈]"
-theme.tasklist_maximized = "[□]"
+theme.tasklist_maximized = "[×]"
 theme.tasklist_maximized_horizontal = "[↔]"
 theme.tasklist_maximized_vertical = "[↕]"
 
