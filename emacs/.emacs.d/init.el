@@ -589,7 +589,7 @@
   (define-skeleton drot-cc-skeleton
     "Inserts a CC mode skeleton in the current buffer."
     "Library: "
-    "#include <" str | "iostream" ">" \n \n
+    "#include <" str | "iostream" ">" \n\n
     "main()" ?\n
     "{" \n
     > _ \n
@@ -1063,10 +1063,10 @@
   (define-skeleton drot-latex-skeleton
     "Inserts a LaTeX skeleton in the current buffer."
     nil
-    "\\documentclass[a4paper]{article}" \n \n
-    "\\usepackage[croatian]{babel}" \n \n
-    "\\begin{document}" \n \n
-    _ \n \n
+    "\\documentclass[a4paper]{article}" \n\n
+    "\\usepackage[croatian]{babel}" \n\n
+    "\\begin{document}" \n\n
+    _ \n\n
     "\\end{document}" \n)
   ;; Bind skeleton
   (bind-key "C-c i s" #'drot-latex-skeleton TeX-mode-map))
