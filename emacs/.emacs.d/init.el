@@ -895,7 +895,7 @@
         compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "<f6>" #'gnus)
+(bind-key "<f5>" #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
@@ -1931,7 +1931,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
-(bind-key "<f5>" #'ivy-resume)
+(bind-key "<f6>" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Shorten mode lighter
