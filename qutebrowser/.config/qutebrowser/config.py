@@ -108,3 +108,7 @@ c.fonts.tabs = '12pt monospace'
 # Font family for standard fonts.
 # Type: FontFamily
 c.fonts.web.family.standard = None
+
+# Bindings for normal mode
+config.bind(',m', 'spawn mpv {url}')
+config.bind(',v', 'hint links spawn mpv {url}')
