@@ -807,7 +807,7 @@
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
-(bind-key "<f8>" #'eshell)
+(bind-key "<f7>" #'eshell)
 ;; Configuration
 (after-load 'eshell
   ;; Ignore duplicates and case
@@ -1740,7 +1740,7 @@
 ;; WeeChat
 (require-package 'weechat)
 ;; Set key binding
-(bind-key "<f7>" #'weechat-connect)
+(bind-key "<f8>" #'weechat-connect)
 ;; Configuration
 (after-load 'weechat
   ;; Disable conflicting key bind
