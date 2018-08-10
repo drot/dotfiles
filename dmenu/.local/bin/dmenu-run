@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # Font
-FONT="IosevkaTermSS05-12:style=Bold"
+font="IosevkaTermSS05-12:style=Bold"
 
 # Colors
-NORMAL_BACKGROUND="#1d1f21"
-NORMAL_FOREGROUND="#969896"
-SELECTED_BACKGROUND="#81a2be"
-SELECTED_FOREGROUND="#1d1f21"
+normal_background="#1d1f21"
+normal_foreground="#969896"
+selected_background="#81a2be"
+selected_foreground="#1d1f21"
 
 # Run dmenu:
 dmenu_run -i -p ">" \
-          -nb $NORMAL_BACKGROUND \
-          -nf $NORMAL_FOREGROUND \
-          -sb $SELECTED_BACKGROUND \
-          -sf $SELECTED_FOREGROUND \
-          -fn $FONT
+          -nb $"normal_background" \
+          -nf $"normal_foreground" \
+          -sb $"selected_background" \
+          -sf $"selected_foreground" \
+          -fn $"font"

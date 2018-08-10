@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # Font
-FONT="IosevkaTermSS05-12"
+font="IosevkaTermSS05-12"
 
 # Colors
-NORMAL_BACKGROUND="#282a2e"
-NORMAL_FOREGROUND="#969896"
-SELECTED_BACKGROUND="#1d1f21"
-SELECTED_FOREGROUND="#f0c674"
+normal_background="#282a2e"
+normal_foreground="#969896"
+selected_background="#1d1f21"
+selected_foreground="#f0c674"
 
 # Show clipboard
 clipmenu -i -p ">" \
-         -fn $FONT \
-         -nb $NORMAL_BACKGROUND \
-         -nf $NORMAL_FOREGROUND \
-         -sb $SELECTED_BACKGROUND \
-         -sf $SELECTED_FOREGROUND
+         -fn "$font" \
+         -nb "$normal_background" \
+         -nf "$normal_foreground" \
+         -sb "$selected_background" \
+         -sf "$selected_foreground"
