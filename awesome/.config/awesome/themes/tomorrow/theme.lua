@@ -89,6 +89,7 @@ theme.tasklist_maximized_vertical = "[↕]"
 -- Menu
 theme.menu_height = dpi(24)
 theme.menu_width = dpi(132)
+theme.menu_border_width = dpi(2)
 
 -- Menu icons
 theme.awesome_menu_icon = themes_path .. "themes/tomorrow/icons/menu/awesomemenu.png"
