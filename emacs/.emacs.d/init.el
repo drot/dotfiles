@@ -1176,7 +1176,7 @@
                                              "z" "Z" "jar" "war" "ear" "rar"
                                              "sar" "xpi" "apk" "xz" "tar"))
   (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                           "rtf" "djvu" "epub" "md" "tex" "org"))
+                                           "rtf" "djvu" "epub" "md" "tex" "org" "txt"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
   (dired-rainbow-define excel "turquoise" ("xlsx"))
   (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
