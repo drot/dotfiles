@@ -86,6 +86,9 @@ theme.tasklist_maximized = "[×]"
 theme.tasklist_maximized_horizontal = "[↔]"
 theme.tasklist_maximized_vertical = "[↕]"
 
+-- Tooltip
+theme.tooltip_border_color = theme.border_focus
+
 -- Menu
 theme.menu_height = dpi(24)
 theme.menu_width = dpi(132)
