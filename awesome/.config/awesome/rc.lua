@@ -911,7 +911,7 @@ local globalkeys = gears.table.join(
 
    -- Clipboard
    awful.key({ modkey }, "Insert", function () awful.spawn.with_shell("clipmenusel") end,
-      {description = "pick selection", group = "clipboard"}),
+      {description = "clipboard menu", group = "clipboard"}),
 
    -- Screenshot grabbing
    awful.key({ }, "Print", function () awful.spawn.with_shell("maim -u /tmp/screenshot-$(date +%s).png") end,
