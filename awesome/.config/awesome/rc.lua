@@ -153,15 +153,13 @@ local mymainmenu = awful.menu(
 )
 
 local mylauncher = wibox.widget {
-   {
-      widget = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                       menu = mymainmenu })
-   },
    top = 4,
    bottom = 4,
    left = 4,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { widget = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                      menu = mymainmenu }) }
 }
 
 -- Menubar configuration
@@ -175,15 +173,13 @@ vicious.cache(vicious.widgets.cpu)
 
 -- Create a CPU usage icon widget
 local cpu_icon = wibox.widget {
-   {
-      image = beautiful.widget_cpu,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_cpu,
+     widget = wibox.widget.imagebox }
 }
 
 -- Set CPU usage text value
@@ -192,30 +188,22 @@ vicious.register(cpu_text_value, vicious.widgets.cpu, "$1%", 4)
 
 -- Create a CPU usage text widget
 local cpu_text_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = cpu_text_value
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = cpu_text_value } } } }
 }
 
 -- Create a CPU usage graph widget
@@ -227,7 +215,7 @@ local cpu_graph = wibox.widget {
    stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
    border_color = beautiful.bg_minimize,
-   widget = wibox.widget.graph,
+   widget = wibox.widget.graph
 }
 
 -- Set CPU usage graph value
@@ -242,32 +230,24 @@ vicious.register(cpu_cores_graph, vicious.widgets.cpu,
 
 -- Create a background for the CPU usage widget
 local cpu_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = cpu_graph
-            },
-            top = 2,
-            bottom = 2,
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_normal,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_normal,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { top = 2,
+         bottom = 2,
+         left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = cpu_graph } } } }
 }
 
 -- Cache memory usage widgets
@@ -275,15 +255,13 @@ vicious.cache(vicious.widgets.mem)
 
 -- Create a memory usage icon widget
 local memory_icon = wibox.widget {
-   {
-      image = beautiful.widget_memory,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_memory,
+     widget = wibox.widget.imagebox }
 }
 
 -- Set memory usage text value
@@ -292,30 +270,22 @@ vicious.register(memory_text_value, vicious.widgets.mem, "$1%", 12)
 
 -- Create a memory usage text widget
 local memory_text_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = memory_text_value
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = memory_text_value } } } }
 }
 
 -- Create a memory usage chart widget
@@ -327,7 +297,7 @@ local memory_chart = wibox.widget {
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
    colors = { beautiful.widget_value },
-   widget = wibox.container.arcchart,
+   widget = wibox.container.arcchart
 }
 
 -- Set memory usage chart value
@@ -335,32 +305,24 @@ vicious.register(memory_chart, vicious.widgets.mem, "$1", 12)
 
 -- Create a memory usage chart background
 local memory_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = memory_chart
-            },
-            top = 2,
-            bottom = 2,
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_normal,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_normal,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { top = 2,
+         bottom = 2,
+         left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = memory_chart } } } }
 }
 
 -- Cache temperature value widgets
@@ -368,15 +330,13 @@ vicious.cache(vicious.widgets.thermal)
 
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
-   {
-      image = beautiful.widget_temperature,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_temperature,
+     widget = wibox.widget.imagebox }
 }
 
 -- Set temperature text value
@@ -385,41 +345,31 @@ vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, {
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = temperature_text_value
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = temperature_text_value } } } }
 }
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
    forced_height = 12,
-   margins = {
-      top = 2,
-      bottom = 2,
-      left = 2,
-      right = 2,
-   },
+   margins = { top = 2,
+               bottom = 2,
+               left = 2,
+               right = 2 },
    bar_shape = gears.shape.rounded_bar,
    shape = gears.shape.rounded_bar,
    paddings = 1,
@@ -427,7 +377,7 @@ local temperature_bar = wibox.widget {
    color = beautiful.widget_value,
    border_width = 1,
    border_color = beautiful.bg_minimize,
-   widget = wibox.widget.progressbar,
+   widget = wibox.widget.progressbar
 }
 
 -- Set temperature bar value
@@ -438,15 +388,13 @@ local temperature_widget = wibox.container.rotate(temperature_bar, "east")
 
 -- Create a file system usage icon widget
 local fs_icon = wibox.widget {
-   {
-      image = beautiful.widget_fs,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_fs,
+     widget = wibox.widget.imagebox }
 }
 
 -- Cache file system usage widgets
@@ -458,30 +406,22 @@ vicious.register(fs_text_value, vicious.widgets.fs, "${/ used_p}%", 300)
 
 -- Create a file system usage text widget
 local fs_text_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = fs_text_value
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = fs_text_value } } } }
 }
 
 -- Create a file system usage chart widget
@@ -493,7 +433,7 @@ local fs_chart = wibox.widget {
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
    colors = { beautiful.widget_value },
-   widget = wibox.container.arcchart,
+   widget = wibox.container.arcchart
 }
 
 -- Set file system usage chart value
@@ -501,32 +441,24 @@ vicious.register(fs_chart, vicious.widgets.fs, "${/ used_p}", 300)
 
 -- Create a file system usage chart background
 local fs_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = fs_chart
-            },
-            top = 2,
-            bottom = 2,
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_normal,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_normal,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { top = 2,
+         bottom = 2,
+         left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = fs_chart } } } }
 }
 
 -- Cache volume value widgets
@@ -534,15 +466,13 @@ vicious.cache(vicious.contrib.pulse)
 
 -- Create a volume icon widget
 local volume_icon = wibox.widget {
-   {
-      image = beautiful.widget_volume,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_volume,
+     widget = wibox.widget.imagebox }
 }
 
 -- Set volume text value
@@ -551,47 +481,37 @@ vicious.register(volume_text_value, vicious.contrib.pulse, "$1%", 6)
 
 -- Create a volume text widget
 local volume_text_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = volume_text_value
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = volume_text_value } } } }
 }
 
 -- Create volume bar widget
 local volume_bar = wibox.widget {
    forced_height = 16,
    paddings = 1,
-   margins = {
-      top = 2,
-      bottom = 2,
-      left = 2,
-      right = 2,
-   },
+   margins = { top = 2,
+               bottom = 2,
+               left = 2,
+               right = 2 },
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
    border_width = 1,
    border_color = beautiful.bg_minimize,
-   widget = wibox.widget.progressbar,
+   widget = wibox.widget.progressbar
 }
 
 -- Set volume bar value
@@ -602,43 +522,33 @@ local volume_widget = wibox.container.rotate(volume_bar, "east")
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
-   {
-      image = beautiful.widget_clock,
-      widget = wibox.widget.imagebox
-   },
    top = 4,
    bottom = 4,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { image = beautiful.widget_clock,
+     widget = wibox.widget.imagebox }
 }
 
 -- Create a text clock widget
 local clock_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>")
-            },
-            left = 6,
-            right = 6,
-            widget = wibox.container.margin
-         },
-         shape = gears.shape.octogon,
-         bg = beautiful.bg_focus,
-         shape_border_color = beautiful.bg_minimize,
-         shape_border_width = beautiful.border_width,
-         widget = wibox.container.background
-      },
-      spacing = 2,
-      layout = wibox.layout.fixed.horizontal
-   },
    top = 2,
    bottom = 2,
    left = 2,
    right = 2,
-   widget = wibox.container.margin
+   widget = wibox.container.margin,
+   { spacing = 2,
+     layout = wibox.layout.fixed.horizontal,
+     { shape = gears.shape.octogon,
+       bg = beautiful.bg_focus,
+       shape_border_color = beautiful.bg_minimize,
+       shape_border_width = beautiful.border_width,
+       widget = wibox.container.background,
+       { left = 6,
+         right = 6,
+         widget = wibox.container.margin,
+         { widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>") } } } }
 }
 
 -- Buttonize widget
@@ -722,32 +632,24 @@ awful.screen.connect_for_each_screen(function(s)
                                awful.button({ }, 5, function () awful.layout.inc(-1) end)))
       -- Create a taglist widget
       s.mytaglist = wibox.widget {
-         {
-            {
-               {
-                  {
-                     widget = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
-                  },
-                  top = 2,
-                  bottom = 2,
-                  left = 4,
-                  right = 4,
-                  widget = wibox.container.margin
-               },
-               shape = gears.shape.octogon,
-               bg = beautiful.bg_focus,
-               shape_border_color = beautiful.bg_minimize,
-               shape_border_width = beautiful.border_width,
-               widget = wibox.container.background
-            },
-            spacing = 2,
-            layout = wibox.layout.fixed.horizontal
-         },
          top = 2,
          bottom = 2,
          left = 2,
          right = 2,
-         widget = wibox.container.margin
+         widget = wibox.container.margin,
+         { spacing = 2,
+           layout = wibox.layout.fixed.horizontal,
+           { shape = gears.shape.octogon,
+             bg = beautiful.bg_focus,
+             shape_border_color = beautiful.bg_minimize,
+             shape_border_width = beautiful.border_width,
+             widget = wibox.container.background,
+             { top = 2,
+               bottom = 2,
+               left = 4,
+               right = 4,
+               widget = wibox.container.margin,
+               { widget = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons) } } } }
       }
 
       -- Create a tasklist widget
