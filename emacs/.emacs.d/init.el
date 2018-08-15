@@ -2014,9 +2014,9 @@ suitable for assigning to `ffap-file-finder'."
 ;; Swiper
 (require-package 'swiper)
 ;; Set key bindings
-(bind-key "C-c s S" #'swiper-all)
-(bind-key "C-c s s" #'swiper)
-(bind-key "C-c S" #'swiper-from-isearch isearch-mode-map)
+(bind-key "C-c s s" #'swiper-all)
+(bind-key "M-s s" #'swiper)
+(bind-key "M-s s" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
   ;; Customize
