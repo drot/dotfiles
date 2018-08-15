@@ -96,7 +96,7 @@ theme.menu_border_width = dpi(2)
 theme.menu_border_color = theme.border_focus
 
 -- Menu icons
-theme.awesome_menu_icon = themes_path .. "themes/tomorrow/icons/menu/awesomemenu.png"
+theme.awesome_menu_icon = themes_path .. "themes/tomorrow/icons/menu/awesome.png"
 theme.menu_submenu_icon = themes_path .. "themes/tomorrow/icons/menu/submenu.png"
 theme.menu_web = themes_path .. "themes/tomorrow/icons/menu/web.png"
 theme.menu_office = themes_path .. "themes/tomorrow/icons/menu/office.png"
