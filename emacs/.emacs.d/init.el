@@ -1132,7 +1132,7 @@
   ;; Disable help banner
   (setq cider-repl-display-help-banner nil)
   ;; Display result prefix
-  (setq cider-repl-result-prefix "; => ")
+  (setq cider-repl-result-prefix ";; => ")
   ;; Enable fuzzy completion with Company
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   ;; Enable SubWord mode
