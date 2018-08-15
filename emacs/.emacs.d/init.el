@@ -1836,6 +1836,8 @@
 (after-load 'avy
   ;; Work across all frames
   (setq avy-all-windows 'all-frames)
+  ;; Follow indentation with the overlay
+  (setq avy-indent-line-overlay t)
   ;; Dim background during selection
   (setq avy-background t
         avy-highlight-first t))
