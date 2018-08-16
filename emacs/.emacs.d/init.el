@@ -322,8 +322,6 @@
 (setq skeleton-further-elements '((abbrev-mode nil)))
 
 ;; Electric pair mode
-(setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
-;; Initialize mode
 (electric-pair-mode)
 
 ;; Prettify certain symbols
