@@ -188,6 +188,7 @@
 (setq window-divider-default-bottom-width 1
       window-divider-default-right-width 1
       window-divider-default-places t)
+;; Initialize mode
 (window-divider-mode)
 
 ;; Prompt for buffer switch in strongly dedicated windows
@@ -733,6 +734,7 @@
 (bind-key "C-c i C" #'copyright-update)
 ;; Configuration
 (after-load 'copyright
+  ;; Change default format
   (setq copyright-year-ranges t
         copyright-names-regexp (regexp-quote user-login-name)))
 
