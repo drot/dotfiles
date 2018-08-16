@@ -25,7 +25,7 @@ man() {
         opts="-F shorten=$2 $URL"
     else
         echo "'-f' for file upload, '-u' for URL upload, '-s' for URL shortening."
-        return
+        return 1
     fi
     # Execute upload and send to clipboard
     curl $opts | xclip
