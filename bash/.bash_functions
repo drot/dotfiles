@@ -28,7 +28,7 @@ man() {
         return 1
     fi
     # Execute upload and send to clipboard
-    curl $curl_opts | xsel -b
+    curl -# $curl_opts | tr -d '\n' | xsel
 }
 
 # Find process
