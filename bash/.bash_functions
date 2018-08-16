@@ -18,17 +18,17 @@ man() {
     local url="https://0x0.st"
     # Parameter pick
     if [[ $1 = "-f" ]]; then
-        curl_opts="-F file=@$2 $url"
+        curl_opts="file=@$2 $url"
     elif [[ $1 = "-u" ]]; then
-        curl_opts="-F url=$2 $url"
+        curl_opts="url=$2 $url"
     elif [[ $1 = "-s" ]]; then
-        curl_opts="-F shorten=$2 $url"
+        curl_opts="shorten=$2 $url"
     else
         echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
         return 1
     fi
     # Execute upload and send to clipboard
-    curl -# $curl_opts | tr -d '\n' | xsel
+    curl -# -F $curl_opts | tr -d '\n' | xsel
 }
 
 # Find process
