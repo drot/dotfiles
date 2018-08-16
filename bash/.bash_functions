@@ -14,21 +14,21 @@ man() {
 
 # Paste to 0x0.st
 0x0() {
-    local opts
-    local URL="https://0x0.st"
+    local curl_opts
+    local url="https://0x0.st"
     # Parameter pick
     if [[ $1 = "-f" ]]; then
-        opts="-F file=@$2 $URL"
+        curl_opts="-F file=@$2 $url"
     elif [[ $1 = "-u" ]]; then
-        opts="-F url=$2 $URL"
+        curl_opts="-F url=$2 $url"
     elif [[ $1 = "-s" ]]; then
-        opts="-F shorten=$2 $URL"
+        curl_opts="-F shorten=$2 $url"
     else
-        echo "'-f' for file upload, '-u' for URL upload, '-s' for URL shortening."
+        echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
         return 1
     fi
     # Execute upload and send to clipboard
-    curl $opts | xclip
+    curl $curl_opts | xsel -b
 }
 
 # Find process
