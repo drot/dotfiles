@@ -2260,6 +2260,9 @@ suitable for assigning to `ffap-file-finder'."
 ;; Sort lines alphabetically
 (bind-key "C-c x l" #'sort-lines)
 
+;; Sort fields with regular expressions
+(bind-key "C-c x f" #'sort-regexp-fields)
+
 ;; Word capitalization operations
 (bind-key [remap capitalize-word] #'capitalize-dwim)
 (bind-key [remap upcase-word] #'upcase-dwim)
