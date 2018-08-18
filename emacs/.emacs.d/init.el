@@ -309,8 +309,6 @@
 (global-hi-lock-mode)
 
 ;; Abbrev mode
-(dim-minor-name 'abbrev-mode " aB")
-;; Configuration
 (setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
       save-abbrevs t)
 ;; Load abbrevs if they exist
@@ -318,6 +316,8 @@
     (quietly-read-abbrev-file))
 ;; Initialize mode
 (setq-default abbrev-mode t)
+;; Shorten mode lighter
+(dim-minor-name 'abbrev-mode " aB" 'abbrev)
 
 ;; Prevent skeleton/abbrev recursion
 (setq skeleton-further-elements '((abbrev-mode nil)))
@@ -380,10 +380,10 @@
 ;; Set key bindings
 (bind-key "C-c l b" #'flyspell-buffer)
 (bind-key "C-c l r" #'flyspell-region)
+;; Shorten mode lighter
+(dim-minor-name 'flyspell-mode " fS" 'flyspell)
 ;; Configuration
 (after-load 'flyspell
-  ;; Shorten mode lighter
-  (dim-minor-name 'flyspell-mode " fS")
   ;; Disable conflicting key binding
   (unbind-key "C-M-i" flyspell-mode-map)
   ;; Correct some annoying defaults
@@ -404,7 +404,7 @@
 (setq isearch-allow-scroll t
       search-default-mode #'char-fold-to-regexp)
 ;; Shorten mode lighter
-(dim-minor-name 'isearch-mode " iS")
+(dim-minor-name 'isearch-mode " iS" 'isearch)
 
 ;; Ediff window split
 (after-load 'ediff-wind
@@ -536,9 +536,7 @@
   (setq image-animate-loop t))
 
 ;; Auto Revert mode
-(after-load 'autorevert
-  ;; Shorten mode lighter
-  (dim-minor-name 'auto-revert-mode " aR"))
+(dim-minor-name 'auto-revert-mode " aR" 'autorevert)
 
 ;; Imenu configuration
 (after-load 'imenu
@@ -554,10 +552,10 @@
 (after-load 'apropos
   (setq apropos-do-all t))
 
-;; ElDoc mode configuration
+;; ElDoc mode
+(dim-minor-name 'eldoc-mode " eD" 'eldoc)
+;; Configuration
 (after-load 'eldoc
-  ;; Shorten mode lighter
-  (dim-minor-name 'eldoc-mode " eD")
   ;; Make compatible with Paredit
   (eldoc-add-command #'paredit-backward-delete #'paredit-close-round))
 
@@ -741,10 +739,8 @@
 ;; Whitespace mode
 (bind-key "C-c x w" #'whitespace-cleanup)
 (bind-key "C-c t w" #'whitespace-mode)
-;; Configuration
-(after-load 'whitespace
-  ;; Shorten mode lighter
-  (dim-minor-name 'whitespace-mode " wS"))
+;; Shorten mode lighter
+(dim-minor-name 'whitespace-mode " wS" 'whitespace)
 
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
@@ -875,10 +871,10 @@
 
 ;; Compilation
 (bind-key "C-c c c" #'recompile)
+;; Shorten mode lighter
+(dim-minor-name 'compilation-shell-minor-mode " sC" 'compile)
 ;; Configuration
 (after-load 'compile
-  ;; Shorten mode lighter
-  (dim-minor-name 'compilation-shell-minor-mode " sC")
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
@@ -967,10 +963,10 @@
 (bind-key "C-c t o" #'outline-minor-mode)
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c o"))
+;; Shorten mode lighter
+(dim-minor-name 'outline-minor-mode " oL" 'outline)
 ;; Configuration
 (after-load 'outline
-  ;; Shorten mode lighter
-  (dim-minor-name 'outline-minor-mode " oL")
   ;; Define Hydra
   (defhydra hydra-outline (:columns 4)
     "Outline Mode"
@@ -1037,10 +1033,10 @@
 (require-package 'ace-window)
 ;; Set key binding
 (bind-key "M-o" #'ace-window)
+;; Shorten mode lighter
+(dim-minor-name 'ace-window-mode " aW" 'ace-window)
 ;; Configuration
 (after-load 'ace-window
-  ;; Shorten mode lighter
-  (dim-minor-name 'ace-window-mode " aW")
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   ;; Show even with 2 windows
@@ -1093,9 +1089,9 @@
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode))
 
 ;; RefTeX
+(dim-minor-name 'reftex-mode " rF" 'reftex)
+;; Configuration
 (after-load 'reftex
-  ;; Shorten mode lighter
-  (dim-minor-name 'reftex-mode " rF")
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
@@ -1154,12 +1150,12 @@
 
 ;; Dired Filter
 (require-package 'dired-filter)
+;; Shorten mode lighter
+(dim-minor-name 'dired-filter-mode " fR" 'dired-filter)
 ;; Configuration
 (after-load 'dired-x
   ;; Initialize mode
   (require 'dired-filter)
-  ;; Shorten mode lighter
-  (dim-minor-name 'dired-filter-mode " fR")
   ;; Set key binding
   (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
@@ -1245,12 +1241,12 @@
 
 ;; Dired Narrow
 (require-package 'dired-narrow)
+;; Shorten mode lighter
+(dim-minor-name 'dired-narrow-mode " dN" 'dired-narrow)
 ;; Configuration
 (after-load 'dired-ranger
   ;; Initialize mode
   (require 'dired-narrow)
-  ;; Shorten mode lighter
-  (dim-minor-name 'dired-narrow-mode " dN")
   ;; Set key binding
   (bind-key "C-." #'dired-narrow dired-mode-map)
   ;; Exit on single match
@@ -1267,23 +1263,24 @@
 
 ;; Dired-du
 (require-package 'dired-du)
+;; Shorten mode lighter
+(dim-minor-name 'dired-du-mode " dU" 'dired-du)
 ;; Configuration
 (after-load 'dired-collapse
   ;; Initialize mode
   (require 'dired-du)
-  ;; Shorten mode lighter
-  (dim-minor-name 'dired-du-mode " dU")
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
 ;; Dired Async
 (require-package 'async)
+;; Shorten mode lighter
+(dim-minor-name 'dired-async-mode
+                '(:eval (when (eq major-mode 'dired-mode) " aS")) 'dired-async)
 ;; Configuration
 (after-load 'dired-du
   ;; Initialize mode
   (require 'dired-async)
-  ;; Shorten mode lighter
-  (dim-minor-name 'dired-async-mode '(:eval (when (eq major-mode 'dired-mode) " aS")))
   ;; Set key bindings
   (bind-keys :map dired-mode-map
              ("E c" . dired-async-do-copy)
@@ -1685,10 +1682,8 @@
 (require-package 'rainbow-mode)
 ;; Set key binding
 (bind-key "C-c t r" #'rainbow-mode)
-;; Configuration
-(after-load 'rainbow-mode
-  ;; Shorten mode lighter
-  (dim-minor-name 'rainbow-mode " rW"))
+;; Shorten mode lighter
+(dim-minor-name 'rainbow-mode " rW" 'rainbow-mode)
 
 ;; Skewer
 (require-package 'skewer-mode)
@@ -1697,24 +1692,18 @@
 ;; Set key binding
 (bind-key "C-c a w" #'run-skewer)
 (bind-key "C-c r w" #'skewer-repl)
-;; Configuration
-(after-load 'skewer-mode
-  ;; Shorten mode lighter
-  (dim-minor-name 'skewer-mode " sK"))
+;; Shorten mode lighter
+(dim-minor-name 'skewer-mode " sK" 'skewer-mode)
 
 ;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
-;; Configuration
-(after-load 'skewer-css
-  ;; Shorten mode lighter
-  (dim-minor-name 'skewer-css-mode " sKC"))
+;; Shorten mode lighter
+(dim-minor-name 'skewer-css-mode " sKC" 'skewer-css)
 
 ;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
-;; Configuration
-(after-load 'skewer-html
-  ;; Shorten mode lighter
-  (dim-minor-name 'skewer-html-mode " sKH"))
+;; Shorten mode lighter
+(dim-minor-name 'skewer-html-mode " sKH" 'skewer-html)
 
 ;; SLY
 (require-package 'sly)
@@ -1806,6 +1795,8 @@
 (require-package 'anzu)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-anzu-mode)
+;; Shorten mode lighter
+(dim-minor-name 'anzu-mode " aZ" 'anzu)
 ;; Configuration
 (after-load 'anzu
   ;; Set key bindings
@@ -1814,8 +1805,6 @@
   (bind-keys :map isearch-mode-map
              ([remap isearch-query-replace] . anzu-isearch-query-replace)
              ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  ;; Shorten mode lighter
-  (dim-minor-name 'anzu-mode " aZ")
   ;; Customize
   (setq anzu-search-threshold 1000
         anzu-replace-threshold 50
@@ -1846,10 +1835,10 @@
 (require-package 'company)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-company-mode)
+;; Shorten mode lighter
+(dim-minor-name 'company-mode " cY" 'company)
 ;; Configuration
 (after-load 'company
-  ;; Shorten mode lighter
-  (dim-minor-name 'company-mode " cY")
   ;; Specify backends explicitly
   (setq company-backends
         '(company-capf
@@ -1934,10 +1923,10 @@
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set key binding
 (bind-key "<f6>" #'ivy-resume)
+;; Shorten mode lighter
+(dim-minor-name 'ivy-mode " iY" 'ivy)
 ;; Configuration
 (after-load 'ivy
-  ;; Shorten mode lighter
-  (dim-minor-name 'ivy-mode " iY")
   ;; Customize
   (setq ivy-dynamic-exhibit-delay-ms 150
         ivy-use-selectable-prompt t
@@ -2000,10 +1989,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key [remap org-goto] #'counsel-org-goto)
 (bind-key [remap org-set-tags-command] #'counsel-org-tag)
 (bind-key [remap menu-bar-open] #'counsel-tmm)
+;; Shorten mode lighter
+(dim-minor-name 'counsel-mode " cS" 'counsel)
 ;; Configuration
 (after-load 'counsel
-  ;; Shorten mode lighter
-  (dim-minor-name 'counsel-mode " cS")
   ;; Customize
   (setq counsel-preselect-current-file t)
   ;; Change `counsel-org' defaults
@@ -2069,10 +2058,10 @@ suitable for assigning to `ffap-file-finder'."
                 sly-mrepl-mode-hook
                 geiser-repl-mode-hook))
   (add-hook hook #'enable-paredit-mode))
+;; Shorten mode lighter
+(dim-minor-name 'paredit-mode " pE" 'paredit)
 ;; Configuration
 (after-load 'paredit
-  ;; Shorten mode lighter
-  (dim-minor-name 'paredit-mode " pE")
   ;; Disable conflicting key binding
   (unbind-key "M-s" paredit-mode-map)
   ;; Set key bindings
@@ -2118,10 +2107,8 @@ suitable for assigning to `ffap-file-finder'."
 (require-package 'volatile-highlights)
 ;; Initialize mode
 (add-hook 'after-init-hook #'volatile-highlights-mode)
-;; Configuration
-(after-load 'volatile-highlights
-  ;; Shorten mode lighter
-  (dim-minor-name 'volatile-highlights-mode " vH"))
+;; Shorten mode lighter
+(dim-minor-name 'volatile-highlights-mode " vH" 'volatile-highlights)
 
 ;; Which Key
 (require-package 'which-key)
