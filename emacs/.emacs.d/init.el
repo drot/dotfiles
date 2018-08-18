@@ -849,7 +849,7 @@
 ;; Configuration
 (after-load 'flymake
   ;; Define Hydra
-  (defhydra hydra-flymake (:columns 2)
+  (defhydra hydra-flymake ()
     "Flymake"
     ("n" flymake-goto-next-error "Next Error")
     ("p" flymake-goto-prev-error "Previous Error")
@@ -1565,7 +1565,7 @@
 ;; Move-text
 (require-package 'move-text)
 ;; Define Hydra
-(defhydra hydra-move-text (:columns 2)
+(defhydra hydra-move-text ()
   "Move Text"
   ("p" move-text-up "Move Text Up")
   ("n" move-text-down "Move Text Down")
@@ -1905,7 +1905,7 @@
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
-  (defhydra hydra-hl-todo (:columns 2)
+  (defhydra hydra-hl-todo ()
     "Highlight TODO"
     ("n" hl-todo-next "Next TODO")
     ("p" hl-todo-previous "Previous TODO")
