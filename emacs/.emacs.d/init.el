@@ -853,6 +853,7 @@
     "Flymake"
     ("n" flymake-goto-next-error "Next Error")
     ("p" flymake-goto-prev-error "Previous Error")
+    ("d" flymake-show-diagnostics-buffer "List All Errors" :exit t)
     ("q" nil "Quit"))
   ;; Set key bindings
   (bind-keys :map flymake-mode-map
@@ -860,7 +861,8 @@
              ("C-c ! p" . flymake-goto-prev-error)
              ("C-c ! R" . flymake-reporting-backends)
              ("C-c ! r" . flymake-running-backends)
-             ("C-c ! d" . flymake-disabled-backends)
+             ("C-c ! D" . flymake-disabled-backends)
+             ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
              ("C-c k f" . hydra-flymake/body)))
 
