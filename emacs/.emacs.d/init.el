@@ -398,7 +398,9 @@
 ;; Configuration
 (after-load 'ispell
   ;; Default spellchecker
-  (setq ispell-program-name (executable-find "hunspell")))
+  (setq ispell-program-name (executable-find "hunspell"))
+  ;; Default dictionary
+  (setq ispell-dictionary "en_US"))
 
 ;; Isearch
 (setq isearch-allow-scroll t
