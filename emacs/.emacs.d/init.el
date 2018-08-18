@@ -1006,9 +1006,9 @@
   ;; Set key binding
   (bind-key "C-c M-o" #'ace-link-org org-mode-map)
   ;; Customize
-  (setq org-directory (locate-user-emacs-file "org")
-        org-default-notes-file (locate-user-emacs-file "org/notes.org")
-        org-agenda-files '("~/.emacs.d/org")
+  (setq org-directory "~/Documents/org"
+        org-default-notes-file "~/Documents/org/notes.org"
+        org-agenda-files '("~/Documents/org")
         org-log-done 'time
         org-src-fontify-natively t
         org-src-tab-acts-natively t
