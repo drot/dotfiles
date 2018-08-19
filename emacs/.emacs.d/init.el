@@ -1032,6 +1032,11 @@
   (add-hook 'org-shiftleft-final-hook #'windmove-left)
   (add-hook 'org-shiftright-final-hook #'windmove-right))
 
+;; Org time clocking
+(after-load 'org-clock
+  ;; Change default persist file location
+  (setq org-clock-persist-file (locate-user-emacs-file "cache/org-clock-save.el")))
+
 ;; World time
 (bind-key "C-c a T" #'display-time-world)
 ;; Configuration
@@ -1454,7 +1459,7 @@
 (require-package 'geiser)
 ;; Configuration
 (after-load 'geiser-repl
-  ;; Change history file location
+  ;; Change default history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
 ;; Iedit
