@@ -1019,6 +1019,8 @@
   ;; Org-mode behavior
   (setq org-log-done 'time
         org-goto-interface 'outline-path-completion
+        org-highlight-latex-and-related '(entities latex script)
+        org-special-ctrl-a/e t
         org-use-speed-commands t
         org-M-RET-may-split-line nil
         org-catch-invisible-edits 'error
