@@ -164,7 +164,7 @@
 (dim-minor-name 'auto-fill-function " fL")
 
 ;; Visual Line mode configuration
-(setq visual-line-fringe-indicators '(nil vertical-bar))
+(setq visual-line-fringe-indicators '(nil right-triangle))
 ;; Shorten mode lighter
 (dim-minor-name 'visual-line-mode " vL")
 
