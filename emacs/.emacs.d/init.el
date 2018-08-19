@@ -1020,6 +1020,7 @@
   (setq org-log-done 'time
         org-goto-interface 'outline-path-completion
         org-use-speed-commands t
+        org-M-RET-may-split-line nil
         org-catch-invisible-edits 'error
         org-startup-indented t)
   ;; Source code behavior
