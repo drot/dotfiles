@@ -1469,6 +1469,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; Configuration
 (after-load 'js2-mode
+  ;; Syntax defaults
   (setq js2-basic-offset 2
         js2-highlight-level 3)
   ;; Highlight unused variables
