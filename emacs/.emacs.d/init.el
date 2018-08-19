@@ -550,8 +550,9 @@
   ;;Ignore case sensitivity with Pcomplete
   (setq pcomplete-ignore-case t))
 
-;; Search more extensively with apropos
+;; Apropos configuration
 (after-load 'apropos
+  ;; Search more extensively
   (setq apropos-do-all t))
 
 ;; ElDoc mode
