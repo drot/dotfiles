@@ -1023,7 +1023,7 @@
         org-special-ctrl-a/e t
         org-use-speed-commands t
         org-M-RET-may-split-line nil
-        org-catch-invisible-edits 'error
+        org-catch-invisible-edits 'smart
         org-startup-indented t)
   ;; Source code behavior
   (setq org-src-fontify-natively t
