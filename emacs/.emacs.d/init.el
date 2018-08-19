@@ -1010,16 +1010,19 @@
 (after-load 'org
   ;; Set key binding
   (bind-key "C-c M-o" #'ace-link-org org-mode-map)
-  ;; Customize
+  ;; Default directory and file location
   (setq org-directory "~/Documents/org"
         org-default-notes-file "~/Documents/org/notes.org"
-        org-agenda-files '("~/Documents/org")
-        org-log-done 'time
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t
+        org-agenda-files '("~/Documents/org"))
+  ;; Org-mode behavior
+  (setq org-log-done 'time
         org-goto-interface 'outline-path-completion
+        org-use-speed-commands t
         org-catch-invisible-edits 'error
         org-startup-indented t)
+  ;; Source code behavior
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t)
   ;; Avoid Wind Move conflict
   (add-hook 'org-shiftup-final-hook #'windmove-up)
   (add-hook 'org-shiftdown-final-hook #'windmove-down)
