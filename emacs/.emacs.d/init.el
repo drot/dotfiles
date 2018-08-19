@@ -397,14 +397,18 @@
 (bind-key "C-c l d" #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
-  ;; Default spellchecker
-  (setq ispell-program-name (executable-find "hunspell"))
+  ;; Issue warning if missing program
+  (unless ispell-program-name
+    (warn "No spell checker available."))
+  ;; Extra switches
+  (setq ispell-extra-args '("--sug-mode=ultra"))
   ;; Default dictionary
-  (setq ispell-dictionary "en_US"))
+  (setq ispell-dictionary "english"))
 
 ;; Isearch
-(setq isearch-allow-scroll t
-      search-default-mode #'char-fold-to-regexp)
+(setq isearch-allow-scroll t)
+;; Match similar chars
+(setq search-default-mode #'char-fold-to-regexp)
 ;; Shorten mode lighter
 (dim-minor-name 'isearch-mode " iS" 'isearch)
 
