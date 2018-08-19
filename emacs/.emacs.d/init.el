@@ -350,6 +350,7 @@
   (add-hook hook #'hs-minor-mode))
 ;; Configuration
 (after-load 'hideshow
+  ;; Custom overlay function
   (defun drot-hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
@@ -357,6 +358,7 @@
                    (format "... / %d"
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
+
   ;; Unfold when search is active and apply custom overlay
   (setq hs-set-up-overlay #'drot-hs-display-code-line-counts
         hs-isearch-open t))
