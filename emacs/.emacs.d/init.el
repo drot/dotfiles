@@ -591,19 +591,7 @@
           (awk-mode . "awk")
           (other . "k&r")))
   ;; Enable Auto Fill
-  (add-hook 'c-mode-common-hook #'auto-fill-mode)
-  ;; Skeleton
-  (define-skeleton drot-cc-skeleton
-    "Inserts a CC mode skeleton in the current buffer."
-    "Library: "
-    "#include <" str | "iostream" ">" \n\n
-    "main()" ?\n
-    "{" \n
-    > _ \n
-    "}" > \n)
-  ;; Bind skeleton
-  (bind-key "C-c i s" #'drot-cc-skeleton c-mode-map)
-  (bind-key "C-c i s" #'drot-cc-skeleton c++-mode-map))
+  (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;; Etags
 (after-load 'etags
@@ -1077,18 +1065,8 @@
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
         TeX-source-correlate-start-server t)
   ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  ;; Skeleton
-  (define-skeleton drot-latex-skeleton
-    "Inserts a LaTeX skeleton in the current buffer."
-    nil
-    "\\documentclass[a4paper]{article}" \n\n
-    "\\usepackage[croatian]{babel}" \n\n
-    "\\begin{document}" \n\n
-    _ \n\n
-    "\\end{document}" \n)
-  ;; Bind skeleton
-  (bind-key "C-c i s" #'drot-latex-skeleton TeX-mode-map))
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+
 ;; TeX external commands
 (after-load 'tex-buf
   ;; Don't ask to save before processing
@@ -1572,16 +1550,7 @@
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
   ;; Additional fontification
   (setq markdown-fontify-code-blocks-natively t
-        markdown-header-scaling t)
-  ;; Skeleton
-  (define-skeleton drot-markdown-code-skeleton
-    "Inserts a Markdown code skeleton in the current buffer."
-    nil
-    "```" \n
-    _ \n
-    "```" \n)
-  ;; Bind skeleton
-  (bind-key "C-c i s" #'drot-markdown-code-skeleton markdown-mode-map))
+        markdown-header-scaling t))
 
 ;; Move-text
 (require-package 'move-text)
@@ -1860,6 +1829,8 @@
 (add-hook 'after-init-hook #'global-company-mode)
 ;; Shorten mode lighter
 (dim-minor-name 'company-mode " cY" 'company)
+;; Set key binding
+(bind-key "C-c i y" #'company-yasnippet)
 ;; Configuration
 (after-load 'company
   ;; Specify backends explicitly
@@ -2215,6 +2186,13 @@ suitable for assigning to `ffap-file-finder'."
   (which-key-add-major-mode-key-based-replacements 'gnus-summary-mode
     "C-c C-s" "gnus-summary"
     "C-c C-v" "gnus-decode"))
+
+;; YASnippet
+(require-package 'yasnippet)
+;; Initialize mode
+(add-hook 'after-init-hook #'yas-global-mode)
+;; Shorten mode lighter
+(dim-minor-name 'yas-minor-mode " yS" 'yasnippet)
 
 ;; Artist mode
 (bind-key "C-c t a" #'artist-mode)

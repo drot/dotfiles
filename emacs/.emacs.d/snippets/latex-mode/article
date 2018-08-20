@@ -1,0 +1,16 @@
+# name: Article class template
+# key: article
+# --
+\documentclass[a4paper]{article}
+
+\usepackage[croatian]{babel}
+
+\begin{document}
+
+$0
+
+\end{document}
+
+% Local Variables:
+% ispell-local-dictionary: "croatian"
+% End:
