@@ -1,0 +1,4 @@
+# name: Insert image
+# key: img
+# --
+![${1:Alt Text}](${2:URL}) $0
