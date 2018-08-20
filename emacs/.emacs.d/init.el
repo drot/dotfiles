@@ -2126,6 +2126,7 @@ suitable for assigning to `ffap-file-finder'."
   ;; Global replacements
   (which-key-add-key-based-replacements
     "C-c !" "flymake"
+    "C-c &" "yasnippet"
     "C-c @" "hide-show"
     "C-c a" "applications"
     "C-c b" "buffers"
