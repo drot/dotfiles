@@ -846,7 +846,7 @@
 ;; Configuration
 (after-load 'flymake
   ;; Define Hydra
-  (defhydra hydra-flymake ()
+  (defhydra hydra-flymake (:pre (flyspell-mode 0) :post (flyspell-mode))
     "Flymake"
     ("n" flymake-goto-next-error "Next Error")
     ("p" flymake-goto-prev-error "Previous Error")
