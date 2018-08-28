@@ -862,7 +862,7 @@
              ("C-c ! D" . flymake-disabled-backends)
              ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("C-c k f" . hydra-flymake/body)))
+             ("C-c q f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -988,7 +988,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "C-c k o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c q o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1559,7 +1559,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "C-c k x" #'hydra-move-text/body)
+(bind-key "C-c q x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1645,7 +1645,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "C-c k m" #'hydra-multiple-cursors/body)
+(bind-key "C-c q m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1905,7 +1905,7 @@
              ("C-c p t n" . hl-todo-next)
              ("C-c p t p" . hl-todo-previous)
              ("C-c p t o" . hl-todo-occur)
-             ("C-c k t" . hydra-hl-todo/body)))
+             ("C-c q t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -2137,12 +2137,12 @@ suitable for assigning to `ffap-file-finder'."
     "C-c h w" "which-key"
     "C-c h" "help-extended"
     "C-c i" "insertion"
-    "C-c k" "hydras"
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c o" "org-and-outline"
     "C-c p t" "hl-todo"
     "C-c p" "project"
+    "C-c q" "hydras"
     "C-c r" "repl"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
@@ -2295,7 +2295,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "C-c k SPC" #'hydra-mark-text/body)
+(bind-key "C-c q SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
