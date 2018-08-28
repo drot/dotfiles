@@ -839,6 +839,7 @@
 (bind-key "C-c r i" #'ielm)
 ;; Configuration
 (after-load 'ielm
+  ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
 ;; Flymake
@@ -1074,9 +1075,6 @@
 
 ;; LaTeX configuration
 (after-load 'latex
-  ;; Enable Flymake `tex-chktex' backend with AUCTeX LaTeX mode
-  (add-hook 'LaTeX-mode-hook
-            (lambda () (add-hook 'flymake-diagnostic-functions #'tex-chktex nil t)))
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
   ;; Enable folding options
