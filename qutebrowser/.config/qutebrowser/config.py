@@ -36,6 +36,10 @@ c.completion.height = '25%'
 # Type: ShellCommand
 c.editor.command = ['emacsclient', '-c', '{file}']
 
+# CSS border value for hints.
+# Type: String
+c.hints.border = '1px solid #1d1f21'
+
 # Open new tabs (middleclick/ctrl+click) in the background.
 # Type: Bool
 c.tabs.background = True
@@ -75,15 +79,15 @@ c.colors.completion.category.bg = '#1d1f21'
 
 # Top border color of the completion widget category headers.
 # Type: QssColor
-c.colors.completion.category.border.top = '#1d1f21'
+c.colors.completion.category.border.top = '#969896'
 
 # Bottom border color of the completion widget category headers.
 # Type: QssColor
-c.colors.completion.category.border.bottom = '#1d1f21'
+c.colors.completion.category.border.bottom = '#969896'
 
 # Foreground color of the selected completion item.
 # Type: QtColor
-c.colors.completion.item.selected.fg = '#282a2e'
+c.colors.completion.item.selected.fg = '#1d1f21'
 
 # Background color of the selected completion item.
 # Type: QssColor
@@ -91,15 +95,15 @@ c.colors.completion.item.selected.bg = '#f0c674'
 
 # Top border color of the completion widget category headers.
 # Type: QssColor
-c.colors.completion.item.selected.border.top = '#f0c674'
+c.colors.completion.item.selected.border.top = '#1d1f21'
 
 # Bottom border color of the selected completion item.
 # Type: QssColor
-c.colors.completion.item.selected.border.bottom = '#f0c674'
+c.colors.completion.item.selected.border.bottom = '#1d1f21'
 
 # Foreground color of the matched text in the completion.
 # Type: QssColor
-c.colors.completion.match.fg = '#b5bd68'
+c.colors.completion.match.fg = 'white'
 
 # Color of the scrollbar handle in the completion view.
 # Type: QssColor
