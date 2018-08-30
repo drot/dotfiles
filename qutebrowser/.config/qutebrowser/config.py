@@ -59,7 +59,7 @@ c.url.start_pages = 'about:blank'
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.
 # Type: List of QtColor, or QtColor
-c.colors.completion.fg = '#c5c8c6'
+c.colors.completion.fg = '#969896'
 
 # Background color of the completion widget for odd rows.
 # Type: QssColor
