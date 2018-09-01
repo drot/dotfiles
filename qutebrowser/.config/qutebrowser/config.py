@@ -135,7 +135,7 @@ c.colors.downloads.stop.bg = '#81a2be'
 
 # Foreground color for downloads with errors.
 # Type: QtColor
-c.colors.downloads.error.fg = '#1d1f21'
+c.colors.downloads.error.fg = 'white'
 
 # Background color for downloads with errors.
 # Type: QtColor
@@ -168,7 +168,7 @@ c.colors.keyhint.bg = '#1d1f21'
 
 # Foreground color of an error message.
 # Type: QssColor
-c.colors.messages.error.fg = '#1d1f21'
+c.colors.messages.error.fg = 'white'
 
 # Background color of an error message.
 # Type: QssColor
