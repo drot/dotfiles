@@ -1496,8 +1496,8 @@
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
   (defun drot-nov-font-setup ()
-    (face-remap-add-relative 'variable-pitch :family "Noto Serif"
-                             :height 1.2))
+    "Apply custom variable pitch font for `nov.el'."
+    (face-remap-add-relative 'variable-pitch :family "Noto Serif" :height 1.2))
   ;; Apply the custom hook
   (add-hook 'nov-mode-hook #'drot-nov-font-setup)
   ;; Text filling
