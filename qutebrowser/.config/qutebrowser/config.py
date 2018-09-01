@@ -338,7 +338,7 @@ c.colors.tabs.odd.bg = '#4d4d4c'
 
 # Foreground color of unselected even tabs.
 # Type: QtColor
-c.colors.tabs.even.fg = '#1d1f21'
+c.colors.tabs.even.fg = '#e0e0e0'
 
 # Background color of unselected even tabs.
 # Type: QtColor
