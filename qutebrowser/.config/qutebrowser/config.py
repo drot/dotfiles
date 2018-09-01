@@ -228,11 +228,11 @@ c.colors.statusbar.normal.bg = '#1d1f21'
 
 # Foreground color of the statusbar in insert mode.
 # Type: QssColor
-c.colors.statusbar.insert.fg = '#1d1f21'
+c.colors.statusbar.insert.fg = '#c5c8c6'
 
 # Background color of the statusbar in insert mode.
 # Type: QssColor
-c.colors.statusbar.insert.bg = '#81a2be'
+c.colors.statusbar.insert.bg = '#373b41'
 
 # Foreground color of the statusbar in passthrough mode.
 # Type: QssColor
