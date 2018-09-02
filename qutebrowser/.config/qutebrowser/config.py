@@ -216,7 +216,7 @@ c.colors.prompts.bg = '#1d1f21'
 
 # Background color for the selected item in filename prompts.
 # Type: QssColor
-c.colors.prompts.selected.bg = '#f0c674'
+c.colors.prompts.selected.bg = '#373b41'
 
 # Foreground color of the statusbar.
 # Type: QssColor

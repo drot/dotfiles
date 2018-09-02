@@ -11,7 +11,7 @@ export EMAIL="drot@firemail.cc"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Qt5 default style
-export QT_STYLE_OVERRIDE="adwaita"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Wine specific variables
 export WINEPREFIX="$HOME/.config/wine"
