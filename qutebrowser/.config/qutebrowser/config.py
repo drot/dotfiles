@@ -184,11 +184,11 @@ c.colors.messages.warning.fg = '#1d1f21'
 
 # Background color of a warning message.
 # Type: QssColor
-c.colors.messages.warning.bg = '#b294bb'
+c.colors.messages.warning.bg = '#f0c674'
 
 # Border color of a warning message.
 # Type: QssColor
-c.colors.messages.warning.border = '#b294bb'
+c.colors.messages.warning.border = '#f0c674'
 
 # Foreground color of an info message.
 # Type: QssColor
@@ -196,7 +196,7 @@ c.colors.messages.info.fg = '#c5c8c6'
 
 # Background color of an info message.
 # Type: QssColor
-c.colors.messages.info.bg = '#1d1f21'
+c.colors.messages.info.bg = '#373b41'
 
 # Border color of an info message.
 # Type: QssColor
