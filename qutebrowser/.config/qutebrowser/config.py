@@ -220,7 +220,7 @@ c.colors.prompts.selected.bg = '#373b41'
 
 # Foreground color of the statusbar.
 # Type: QssColor
-c.colors.statusbar.normal.fg = '#b5bd68'
+c.colors.statusbar.normal.fg = '#c5c8c6'
 
 # Background color of the statusbar.
 # Type: QssColor
@@ -284,7 +284,7 @@ c.colors.statusbar.caret.selection.bg = '#81a2be'
 
 # Background color of the progress bar.
 # Type: QssColor
-c.colors.statusbar.progress.bg = '#81a2be'
+c.colors.statusbar.progress.bg = '#f0c674'
 
 # Default foreground color of the URL in the statusbar.
 # Type: QssColor
@@ -296,7 +296,7 @@ c.colors.statusbar.url.error.fg = '#cc6666'
 
 # Foreground color of the URL in the statusbar for hovered links.
 # Type: QssColor
-c.colors.statusbar.url.hover.fg = '#c5c8c6'
+c.colors.statusbar.url.hover.fg = '#81a2be'
 
 # Foreground color of the URL in the statusbar on successful load
 # (http).
