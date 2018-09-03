@@ -2180,6 +2180,8 @@ suitable for assigning to `ffap-file-finder'."
     "C-c C-x" "markdown-toggles")
   ;; Org mode replacements
   (which-key-add-major-mode-key-based-replacements 'org-mode
+    "C-c C-v" "org-babel"
+    "C-c C-x" "org-toggles"
     "C-c \"" "org-plot")
   ;; Gnus summary mode replacements
   (which-key-add-major-mode-key-based-replacements 'gnus-summary-mode
