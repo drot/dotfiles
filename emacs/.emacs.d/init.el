@@ -1013,7 +1013,6 @@
                       org-gnus
                       org-info
                       org-id
-                      org-man
                       org-mhe))
   ;; Record time when a task is done
   (setq org-log-done 'time)
