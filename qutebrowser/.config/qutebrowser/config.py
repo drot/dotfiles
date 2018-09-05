@@ -123,7 +123,7 @@ c.colors.downloads.start.fg = '#1d1f21'
 
 # Color gradient start for download backgrounds.
 # Type: QtColor
-c.colors.downloads.start.bg = '#8abeb7'
+c.colors.downloads.start.bg = '#81a2be'
 
 # Color gradient end for download text.
 # Type: QtColor
@@ -131,7 +131,7 @@ c.colors.downloads.stop.fg = '#1d1f21'
 
 # Color gradient stop for download backgrounds.
 # Type: QtColor
-c.colors.downloads.stop.bg = '#81a2be'
+c.colors.downloads.stop.bg = '#b5bd68'
 
 # Foreground color for downloads with errors.
 # Type: QtColor
