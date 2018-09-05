@@ -1815,12 +1815,15 @@
           company-dabbrev))
   ;; Change default behavior
   (setq company-minimum-prefix-length 2
-        company-tooltip-align-annotations t
-        company-tooltip-flip-when-above t
         company-selection-wrap-around t
-        company-require-match 'never
-        company-show-numbers t
-        company-dabbrev-downcase nil
+        company-require-match 'never)
+  ;; Show numbers on candidates
+  (setq company-show-numbers t)
+  ;; Tooltip behavior
+  (setq company-tooltip-align-annotations t
+        company-tooltip-flip-when-above t)
+  ;; Dabbrev completion behavior
+  (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
 ;; Diff-Hl
