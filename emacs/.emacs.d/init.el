@@ -1005,16 +1005,34 @@
   (setq org-directory "~/Documents/org"
         org-default-notes-file "~/Documents/org/notes.org"
         org-agenda-files '("~/Documents/org"))
-  ;; Org-mode behavior
-  (setq org-log-done 'time
-        org-goto-interface 'outline-path-completion
-        org-highlight-latex-and-related '(entities latex script)
-        org-special-ctrl-a/e t
-        org-use-speed-commands t
+  ;; Default modules to load
+  (setq org-modules '(org-bibtex
+                      org-bookmark
+                      org-docview
+                      org-eshell
+                      org-eww
+                      org-gnus
+                      org-info
+                      org-id
+                      org-man
+                      org-mhe))
+  ;; Record time when a task is done
+  (setq org-log-done 'time)
+  ;; Indent headings by default
+  (setq org-startup-indented t)
+  ;; Smart avoidance for collapsed heading edits
+  (setq org-catch-invisible-edits 'smart)
+  ;; Change fontification for done headings
+  (setq org-fontify-done-headline t)
+  ;; Make movement behavior special and use speed keys
+  (setq org-special-ctrl-a/e t
         org-M-RET-may-split-line nil
-        org-catch-invisible-edits 'smart
-        org-startup-indented t)
-  ;; Source code behavior
+        org-use-speed-commands t)
+  ;; Default `org-goto' interface
+  (setq org-goto-interface 'outline-path-completion)
+  ;; LaTeX syntax highlight
+  (setq org-highlight-latex-and-related '(entities latex script))
+  ;; Native source code behavior
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t)
   ;; Avoid Wind Move conflict
@@ -1878,9 +1896,9 @@
 ;; Shorten mode lighter
 (dim-minor-name 'ivy-mode " iY" 'ivy)
 ;; Configuration
-(after-load 'ivy  
+(after-load 'ivy
   ;; Optimize completion
-  setq ivy-dynamic-exhibit-delay-ms 150
+  (setq ivy-dynamic-exhibit-delay-ms 150)
   ;; Change default behavior
   (setq ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t
