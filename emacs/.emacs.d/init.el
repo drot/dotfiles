@@ -658,10 +658,8 @@
 
 ;; Prevent GnuTLS warnings
 (after-load 'gnutls
-  ;; Configuration
-  (setq gnutls-min-prime-bits nil)
-  ;; Add WeeChat relay certificate
-  (add-to-list 'gnutls-trustfiles (expand-file-name "~/.emacs.d/relay.crt")))
+  ;; Don't use default values
+  (setq gnutls-min-prime-bits nil))
 
 ;; Dired configuration
 (after-load 'dired
@@ -1668,6 +1666,9 @@
   ;; Activate annotations automatically
   (setq pdf-annot-activate-created-annotations t))
 
+;; Polymode
+(require-package 'polymode)
+
 ;; Rainbow mode
 (require-package 'rainbow-mode)
 ;; Set key binding
@@ -1716,50 +1717,6 @@
 ;; Systemd mode
 (require-package 'systemd)
 
-;; WeeChat
-(require-package 'weechat)
-;; Set key binding
-(bind-key "<f8>" #'weechat-connect)
-;; Configuration
-(after-load 'weechat
-  ;; Disable conflicting key bind
-  (unbind-key "C-c C-g" weechat-mode-map)
-  ;; Set key bindings
-  (bind-key "C-c C-l" #'weechat-get-more-lines weechat-mode-map)
-  (bind-key "C-c C-d" #'weechat-disconnect weechat-mode-map)
-  ;; Which modules to load
-  (setq weechat-modules '(weechat-button
-                          weechat-complete
-                          weechat-tracking
-                          weechat-spelling
-                          weechat-notifications))
-
-  ;; Authentication function
-  (defun drot-weechat-password-auth (host port)
-    (auth-source-pass-get 'secret "auth-sources/da1.hashbang.sh"))
-
-  ;; Connection defaults
-  (setq weechat-host-default "da1.hashbang.sh"
-        weechat-port-default 55956
-        weechat-mode-default 'ssl
-        weechat-password-callback #'drot-weechat-password-auth)
-  ;; Which channels to monitor
-  (setq weechat-auto-monitor-buffers '("forestnet.#rawhide"
-                                       "freenode.#emacs")))
-
-;; WeeChat tracking
-(after-load 'weechat-tracking
-  ;; Track messages and highlights
-  (setq weechat-tracking-types '(:highlight :message)))
-
-;; WeeChat color handling
-(after-load 'weechat-color
-  ;; Tomorrow Night palette
-  (setq weechat-color-list
-        '(unspecified "#1d1f21" "#969896" "#cc6666" "#cc6666"
-                      "#b5bd68" "#b5bd68" "#f0c674" "#f0c674"
-                      "#81a2be" "#81a2be" "#b294bb" "#b294bb"
-                      "#8abeb7" "#8abeb7" "#c5c8c6" "#ffffff")))
 ;; Wgrep
 (require-package 'wgrep)
 
