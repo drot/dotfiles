@@ -1007,7 +1007,6 @@
         org-agenda-files '("~/Documents/org"))
   ;; Default modules to load
   (setq org-modules '(org-bibtex
-                      org-bookmark
                       org-docview
                       org-eshell
                       org-eww
