@@ -264,10 +264,11 @@
 (ffap-bindings)
 ;; Configuration
 (after-load 'ffap
-  ;; Configuration
-  (setq dired-at-point-require-prefix t
-        ffap-require-prefix t
-        ffap-file-finder #'drot-counsel-find-file
+  ;; Require prefix
+  (setq ffap-require-prefix t
+        dired-at-point-require-prefix t)
+  ;; Default find file function and optimization
+  (setq ffap-file-finder #'drot-counsel-find-file
         ffap-machine-p-known 'reject
         ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
@@ -492,7 +493,7 @@
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
-  ;; Customize
+  ;; Change default behavior
   (setq ibuffer-show-empty-filter-groups nil
         ibuffer-jump-offer-only-visible-buffers t
         ibuffer-use-other-window t))
@@ -504,9 +505,10 @@
         (format "\\(%s\\)\\|\\(%s\\)"
                 vc-ignore-dir-regexp
                 tramp-file-name-regexp))
-  ;; Configuration
-  (setq vc-follow-symlinks t
-        vc-make-backup-files t))
+  ;; Don't ask to follow symlinks
+  (setq vc-follow-symlinks t)
+  ;; Make backups even under version control
+  (setq vc-make-backup-files t))
 
 ;; Customize interface
 (bind-key "C-c a C" #'customize-group)
@@ -519,9 +521,9 @@
   (setq custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
 
-;; Treat all themes as safe
+;; Custom theme configuration
 (after-load 'custom
-  ;; Configuration
+  ;; Treat themes as safe
   (setq custom-safe-themes t))
 
 ;; MIME decoding configuration
@@ -595,7 +597,7 @@
 
 ;; Etags
 (after-load 'etags
-  ;; Configuration
+  ;; Default filename
   (setq tags-file-name "TAGS"))
 
 ;; Sh mode
@@ -610,7 +612,7 @@
 
 ;; CSS mode
 (after-load 'css-mode
-  ;; Configuration
+  ;; Indent level
   (setq css-indent-offset 2))
 
 ;; NXML mode
@@ -623,7 +625,7 @@
 
 ;; Doc View mode
 (after-load 'doc-view
-  ;; Configuration
+  ;; Better document browsing
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
@@ -648,7 +650,7 @@
 
 ;; Smileys
 (after-load 'smiley
-  ;; Configuration
+  ;; Resize smileys
   (setq smiley-style 'medium))
 
 ;; Network Security Manager
@@ -740,7 +742,7 @@
 ;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
 (bind-key "C-c t ~" #'tildify-mode)
-;; Configuration
+;; Initialize in LaTeX buffers
 (add-hook 'LaTeX-mode-hook
           (lambda () (setq-local tildify-space-string "~")))
 
@@ -882,7 +884,7 @@
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot-ansi-color-compilation-buffer)
-  ;; Customize
+  ;; Change default behavior
   (setq compilation-ask-about-save nil
         compilation-always-kill t
         compilation-scroll-output 'first-error
@@ -1326,7 +1328,7 @@
           ("https://www.reddit.com/r/linux/.rss" linux)
           ("https://www.reddit.com/r/linux/.rss" programming)
           ("http://bljesak.info/rss" bljesak)))
-  ;; Customize
+  ;; Change default database location and search defaults
   (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)
         elfeed-search-filter "@1-week-ago +unread"))
@@ -1752,10 +1754,11 @@
   (bind-keys :map isearch-mode-map
              ([remap isearch-query-replace] . anzu-isearch-query-replace)
              ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  ;; Customize
+  ;; Optimize behavior
   (setq anzu-search-threshold 1000
-        anzu-replace-threshold 50
-        anzu-deactivate-region t
+        anzu-replace-threshold 50)
+  ;; Deactivate region and separator string
+  (setq anzu-deactivate-region t
         anzu-replace-to-string-separator " => "))
 
 ;; Avy
@@ -1794,7 +1797,7 @@
           company-files
           (company-dabbrev-code company-etags company-keywords)
           company-dabbrev))
-  ;; Customize
+  ;; Change default behavior
   (setq company-minimum-prefix-length 2
         company-tooltip-align-annotations t
         company-tooltip-flip-when-above t
@@ -1875,10 +1878,11 @@
 ;; Shorten mode lighter
 (dim-minor-name 'ivy-mode " iY" 'ivy)
 ;; Configuration
-(after-load 'ivy
-  ;; Customize
-  (setq ivy-dynamic-exhibit-delay-ms 150
-        ivy-use-selectable-prompt t
+(after-load 'ivy  
+  ;; Optimize completion
+  setq ivy-dynamic-exhibit-delay-ms 150
+  ;; Change default behavior
+  (setq ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
         ivy-count-format "(%d/%d) "
@@ -1942,7 +1946,7 @@ suitable for assigning to `ffap-file-finder'."
 (dim-minor-name 'counsel-mode " cS" 'counsel)
 ;; Configuration
 (after-load 'counsel
-  ;; Customize
+  ;; Preselect files
   (setq counsel-preselect-current-file t)
   ;; Change `counsel-org' defaults
   (setq counsel-org-goto-face-style 'verbatim
@@ -1957,7 +1961,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "M-s s" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
-  ;; Customize
+  ;; Include line numbers
   (setq swiper-include-line-number-in-search t)
   ;; Always go to the beginning of a match
   (setq swiper-goto-start-of-match t))
