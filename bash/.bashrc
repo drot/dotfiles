@@ -22,7 +22,6 @@ HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 HISTTIMEFORMAT="%F %T "
 
 # History options
-shopt -s histappend # append to the history file
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
