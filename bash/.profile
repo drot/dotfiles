@@ -13,6 +13,10 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Qt5 default style
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+# TeXdoc specific
+export PDFVIEWER_texdoc="llpp"
+export DVIVIEWER_texdoc="${PDFVIEWER_texdoc}"
+
 # Wine specific variables
 export WINEPREFIX="$HOME/.config/wine"
 export WINEARCH="win32"
