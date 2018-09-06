@@ -52,7 +52,7 @@ BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
 
 # Save history after each command execution
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
