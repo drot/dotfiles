@@ -1736,6 +1736,8 @@
 
 ;; YAML mode
 (require-package 'yaml-mode)
+;; Enable SubWord mode
+(add-hook 'yaml-mode-hook #'subword-mode)
 
 ;; Zop-to-char
 (require-package 'zop-to-char)
