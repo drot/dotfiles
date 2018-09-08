@@ -507,7 +507,7 @@
   (setq vc-make-backup-files t))
 
 ;; Customize interface
-(bind-key "C-c a C" #'customize-group)
+(bind-key "C-c a c" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -937,7 +937,7 @@
         gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(bind-key "C-c a c" #'calendar)
+(bind-key "C-c a C" #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -1346,7 +1346,7 @@
         elfeed-search-filter "@1-week-ago +unread"))
 
 ;; rcirc
-(bind-key "C-c a i" #'irc)
+(bind-key "<f8>" #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
