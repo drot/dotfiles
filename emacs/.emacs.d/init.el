@@ -213,9 +213,6 @@
 ;; Rotate the clipboard when rotating the kill ring
 (setq yank-pop-change-selection t)
 
-;; Delete selection by typing
-(delete-selection-mode)
-
 ;; Do not save duplicates
 (setq history-delete-duplicates t
       kill-do-not-save-duplicates t)
@@ -359,7 +356,6 @@
                    (format "... / %d"
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
-
   ;; Unfold when search is active and apply custom overlay
   (setq hs-set-up-overlay #'drot-hs-display-code-line-counts
         hs-isearch-open t))
@@ -2059,12 +2055,7 @@ suitable for assigning to `ffap-file-finder'."
   (add-hook 'minibuffer-setup-hook #'drot-paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil)))
-
-  ;; Compatibility with `delete-selection-mode'
-  (put 'paredit-forward-delete 'delete-selection 'supersede)
-  (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-newline 'delete-selection t))
+            (lambda () (setq-local electric-pair-mode nil))))
 
 ;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
