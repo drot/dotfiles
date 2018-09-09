@@ -539,7 +539,9 @@
   ;; Apply the custom hook
   (add-hook 'image-mode-hook #'drot-show-image-dimensions-in-mode-line)
   ;; Loop animated images forever
-  (setq image-animate-loop t))
+  (setq image-animate-loop t)
+  ;; Loop animated image automatically
+  (add-hook 'image-mode-hook #'image-toggle-animation))
 
 ;; Auto Revert mode
 (dim-minor-name 'auto-revert-mode " aR" 'autorevert)
@@ -703,7 +705,8 @@
 ;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
-  (setq image-dired-external-viewer "pqiv"))
+  (when (executable-find "sxiv")
+    (setq image-dired-external-viewer "pqiv")))
 
 ;; TRAMP
 (after-load 'tramp
