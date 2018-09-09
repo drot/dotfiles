@@ -575,6 +575,7 @@
   ;; PEP8 conformance
   (add-hook 'python-mode-hook
             (lambda () (setq fill-column 79)))
+  ;; Enable SubWord mode
   (add-hook 'python-mode-hook #'subword-mode))
 
 ;; CC mode
@@ -613,8 +614,6 @@
 
 ;; NXML mode
 (after-load 'nxml-mode
-  ;; Insert XML declaration automatically
-  (bind-key "C-c i s" #'nxml-insert-xml-declaration nxml-mode-map)
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t
         nxml-sexp-element-flag t))
@@ -696,9 +695,10 @@
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
-  ;; Configuration
-  (setq wdired-allow-to-change-permissions t
-        wdired-use-dired-vertical-movement 'sometimes))
+  ;; Allow changing of permissions too
+  (setq wdired-allow-to-change-permissions t)
+  ;; Make movement work the same as in regular Dired buffers
+  (setq wdired-use-dired-vertical-movement 'sometimes))
 
 ;; Image-Dired
 (after-load 'image-dired
