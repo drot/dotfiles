@@ -809,7 +809,7 @@
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;; Eshell
-(bind-key "<f7>" #'eshell)
+(bind-key "C-c a e" #'eshell)
 ;; Configuration
 (after-load 'eshell
   ;; Ignore duplicates and case
@@ -833,7 +833,7 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;; Shell mode
-(bind-key "C-c a ~" #'shell)
+(bind-key "C-c a s" #'shell)
 ;; Configuration
 (after-load 'shell
   ;; Custom hook to avoid conflicts
@@ -871,7 +871,7 @@
              ("C-c ! D" . flymake-disabled-backends)
              ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("C-c q f" . hydra-flymake/body)))
+             ("<f7> f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -997,7 +997,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "C-c q o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "<f7> o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1584,7 +1584,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "C-c q x" #'hydra-move-text/body)
+(bind-key "<f7> x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1670,7 +1670,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "C-c q m" #'hydra-multiple-cursors/body)
+(bind-key "<f7> m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1893,7 +1893,7 @@
   ;; Set key bindings
   (bind-keys :map hl-todo-mode-map
              ("M-s t" . hl-todo-occur)
-             ("C-c q t" . hydra-hl-todo/body)))
+             ("<f7> t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -2107,6 +2107,7 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'which-key
   ;; Global replacements
   (which-key-add-key-based-replacements
+    "<f7>" "hydras"
     "C-c !" "flymake"
     "C-c &" "yasnippet"
     "C-c @" "hide-show"
@@ -2125,7 +2126,6 @@ suitable for assigning to `ffap-file-finder'."
     "C-c m" "multiple-cursors"
     "C-c o" "org-and-outline"
     "C-c p" "project"
-    "C-c q" "hydras"
     "C-c r" "repl"
     "C-c s" "search-and-symbols"
     "C-c t" "toggles"
@@ -2280,7 +2280,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "C-c q SPC" #'hydra-mark-text/body)
+(bind-key "<f7> SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
