@@ -783,6 +783,11 @@
   (setq browse-url-browser-function #'browse-url-generic
         browse-url-generic-program "qutebrowser"))
 
+;; SHR
+(after-load 'shr
+  ;; Use specified browser instead of searching for it
+  (setq shr-external-browser browse-url-browser-function))
+
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
 ;; Configuration
