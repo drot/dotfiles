@@ -2141,6 +2141,8 @@ suitable for assigning to `ffap-file-finder'."
     "C-x r" "register"
     "C-x w" "highlight"
     "M-s h" "highlight")
+  ;; Description replacement for Hydras
+  (push '((nil . "/body") . (nil . "|=")) which-key-replacement-alist)
   ;; Dired mode replacements
   (which-key-add-major-mode-key-based-replacements 'dired-mode
     "C-, C-o" "dired-subtree-only"
