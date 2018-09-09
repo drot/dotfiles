@@ -1892,8 +1892,6 @@
     ("q" nil "Quit"))
   ;; Set key bindings
   (bind-keys :map hl-todo-mode-map
-             ("C-c p t n" . hl-todo-next)
-             ("C-c p t p" . hl-todo-previous)
              ("M-s t" . hl-todo-occur)
              ("C-c q t" . hydra-hl-todo/body)))
 
@@ -2126,7 +2124,6 @@ suitable for assigning to `ffap-file-finder'."
     "C-c l" "language-and-spelling"
     "C-c m" "multiple-cursors"
     "C-c o" "org-and-outline"
-    "C-c p t" "hl-todo"
     "C-c p" "project"
     "C-c q" "hydras"
     "C-c r" "repl"
