@@ -626,6 +626,11 @@
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
+;; Woman
+(after-load 'woman
+  ;; Use global fill column
+  (setq woman-fill-column fill-column))
+
 ;; Enable Pass integration
 (after-load 'auth-source
   ;; Initialize mode
