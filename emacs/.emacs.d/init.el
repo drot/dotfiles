@@ -1881,7 +1881,7 @@
   (bind-keys :map hl-todo-mode-map
              ("C-c p t n" . hl-todo-next)
              ("C-c p t p" . hl-todo-previous)
-             ("C-c p t o" . hl-todo-occur)
+             ("M-s t" . hl-todo-occur)
              ("C-c q t" . hydra-hl-todo/body)))
 
 ;; Ivy
