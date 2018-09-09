@@ -307,7 +307,7 @@
 (global-hi-lock-mode)
 
 ;; Abbrev mode
-(setq abbrev-file-name (expand-file-name "abbrevs" user-emacs-directory)
+(setq abbrev-file-name (locate-user-emacs-file "abbrevs")
       save-abbrevs t)
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
@@ -792,6 +792,12 @@
 (after-load 'shr
   ;; Use specified browser instead of searching for it
   (setq shr-external-browser browse-url-browser-function))
+
+;; URL history
+(after-load 'url-history
+  ;; Save visited URLs
+  (setq url-history-track t
+        url-history-file (locate-user-emacs-file "url/history")))
 
 ;; Speedbar
 (bind-key "C-c p s" #'speedbar)
@@ -1354,7 +1360,7 @@
           ("https://www.reddit.com/r/linux/.rss" programming)
           ("http://bljesak.info/rss" bljesak)))
   ;; Change default database location and search defaults
-  (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)
+  (setq elfeed-db-directory (locate-user-emacs-file "elfeed")
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)
         elfeed-search-filter "@1-week-ago +unread"))
 
