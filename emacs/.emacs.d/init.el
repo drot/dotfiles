@@ -2177,7 +2177,10 @@ suitable for assigning to `ffap-file-finder'."
   ;; Gnus summary mode replacements
   (which-key-add-major-mode-key-based-replacements 'gnus-summary-mode
     "C-c C-s" "gnus-summary"
-    "C-c C-v" "gnus-decode"))
+    "C-c C-v" "gnus-decode")
+  ;; SQL interactive mode replacements
+  (which-key-add-major-mode-key-based-replacements 'sql-interactive-mode
+    "C-c C-l" "sql-list"))
 
 ;; YASnippet
 (require-package 'yasnippet)
