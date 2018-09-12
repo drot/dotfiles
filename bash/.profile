@@ -29,11 +29,6 @@ if [ -d "$HOME/.cargo/bin" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-# Check for LuaRocks packages if available
-if [ -d "$HOME/.luarocks/bin" ]; then
-    export PATH="$HOME/.luarocks/bin:$PATH"
-fi
-
 # Set PATH so it includes user directory
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
