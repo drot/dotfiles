@@ -284,7 +284,7 @@ c.colors.statusbar.caret.selection.bg = '#81a2be'
 
 # Background color of the progress bar.
 # Type: QssColor
-c.colors.statusbar.progress.bg = '#f0c674'
+c.colors.statusbar.progress.bg = '#81a2be'
 
 # Default foreground color of the URL in the statusbar.
 # Type: QssColor
