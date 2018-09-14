@@ -1551,8 +1551,6 @@
 
 ;; Markdown mode
 (require-package 'markdown-mode)
-;; Avoid conflict with `which-key'
-(setq markdown-enable-prefix-prompts nil)
 ;; Configuration
 (after-load 'markdown-mode
   ;; Default markdown command
@@ -1800,7 +1798,7 @@
 (add-hook 'after-init-hook #'avy-setup-default)
 ;; Set key bindings
 (bind-key "C-:" #'avy-goto-char)
-(bind-key "C-'" #'avy-goto-char-2)
+(bind-key "C-'" #'avy-goto-char-timer)
 (bind-key "M-g f" #'avy-goto-line)
 (bind-key "M-g w" #'avy-goto-word-1)
 (bind-key "M-g e" #'avy-goto-word-0)
@@ -2091,96 +2089,6 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'volatile-highlights-mode)
 ;; Shorten mode lighter
 (dim-minor-name 'volatile-highlights-mode " vH" 'volatile-highlights)
-
-;; Which Key
-(require-package 'which-key)
-;; Configuration
-(setq which-key-idle-delay 2.0
-      which-key-idle-secondary-delay 1.0
-      which-key-allow-imprecise-window-fit t
-      which-key-sort-order #'which-key-prefix-then-key-order)
-;; Initialize mode
-(add-hook 'after-init-hook #'which-key-mode)
-;; Rebind paging command
-(setq which-key-use-C-h-commands nil
-      which-key-paging-prefixes '("C-x" "C-c")
-      which-key-paging-key "<f5>")
-;; Set key bindings
-(bind-key "C-c h w t" #'which-key-show-top-level)
-(bind-key "C-c h w m" #'which-key-show-major-mode)
-(bind-key "C-c h w k" #'which-key-show-full-keymap)
-;; Key description configuration
-(after-load 'which-key
-  ;; Global replacements
-  (which-key-add-key-based-replacements
-    "<f7>" "hydras"
-    "C-c !" "flymake"
-    "C-c &" "yasnippet"
-    "C-c @" "hide-show"
-    "C-c a" "applications"
-    "C-c b" "buffers"
-    "C-c c" "compile-and-check"
-    "C-c d" "debbugs"
-    "C-c e" "eglot"
-    "C-c f" "files"
-    "C-c g" "git"
-    "C-c h 4" "help-other-window"
-    "C-c h w" "which-key"
-    "C-c h" "help-extended"
-    "C-c i" "insertion"
-    "C-c l" "language-and-spelling"
-    "C-c m" "multiple-cursors"
-    "C-c o" "org-and-outline"
-    "C-c p" "project"
-    "C-c r" "repl"
-    "C-c s" "search-and-symbols"
-    "C-c t" "toggles"
-    "C-c u" "url"
-    "C-c v" "local-variables"
-    "C-c w" "eyebrowse"
-    "C-c x a" "align"
-    "C-c x" "text"
-    "C-x C-a" "edebug"
-    "C-x O" "previous-other-window"
-    "C-x a" "abbrev"
-    "C-x n" "narrow"
-    "C-x r" "register"
-    "C-x w" "highlight"
-    "M-s h" "highlight")
-  ;; Description replacement for Hydras
-  (push '((nil . "/body") . (nil . "|=")) which-key-replacement-alist)
-  ;; Dired mode replacements
-  (which-key-add-major-mode-key-based-replacements 'dired-mode
-    "C-, C-o" "dired-subtree-only"
-    "C-," "dired-subtree"
-    "\\" "dired-filter"
-    "r" "dired-ranger")
-  ;; AUCTeX replacements
-  (which-key-add-major-mode-key-based-replacements 'latex-mode
-    "C-c C-o" "TeX-fold-mode"
-    "C-c C-p" "preview-latex"
-    "C-c C-q" "LaTeX-fill"
-    "C-c C-t" "TeX-toggle")
-  ;; Markdown mode replacements
-  (which-key-add-major-mode-key-based-replacements 'markdown-mode
-    "C-c TAB" "markdown-images"
-    "C-c C-a" "markdown-links"
-    "C-c C-c" "markdown-commands"
-    "C-c C-s" "markdown-styles"
-    "C-c C-t" "markdown-header"
-    "C-c C-x" "markdown-toggles")
-  ;; Org mode replacements
-  (which-key-add-major-mode-key-based-replacements 'org-mode
-    "C-c C-v" "org-babel"
-    "C-c C-x" "org-toggles"
-    "C-c \"" "org-plot")
-  ;; Gnus summary mode replacements
-  (which-key-add-major-mode-key-based-replacements 'gnus-summary-mode
-    "C-c C-s" "gnus-summary"
-    "C-c C-v" "gnus-decode")
-  ;; SQL interactive mode replacements
-  (which-key-add-major-mode-key-based-replacements 'sql-interactive-mode
-    "C-c C-l" "sql-list"))
 
 ;; YASnippet
 (require-package 'yasnippet)
