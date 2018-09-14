@@ -2222,11 +2222,6 @@ suitable for assigning to `ffap-file-finder'."
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
 
-;; Switch to previous window when dealing with multiple windows
-(bind-key "C-x O" (lambda ()
-                    (interactive)
-                    (other-window -1)))
-
 ;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
