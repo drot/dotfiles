@@ -761,9 +761,10 @@
 (bind-key "C-x p" #'proced)
 ;; Configuration
 (after-load 'proced
+  ;; Sort by start time
+  (setq-default proced-sort 'start)
   ;; Use tree view
-  (setq-default proced-sort 'start
-                proced-tree-flag t))
+  (setq-default proced-tree-flag t))
 
 ;; GDB
 (bind-key "C-c a d" #'gdb)
