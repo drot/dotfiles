@@ -1874,6 +1874,8 @@
 
 ;; Form-feed
 (require-package 'form-feed)
+;; Same line width as `fill-column' width
+(setq form-feed-line-width fill-column)
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
