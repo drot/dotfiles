@@ -1877,6 +1877,12 @@
                 outline-mode-hook
                 help-mode-hook))
   (add-hook hook #'form-feed-mode))
+;; Configuration
+(after-load 'form-feed
+  ;; Make `form-feed-line-line' color equal to comment color
+  (set-face-attribute 'form-feed-line nil
+                      :inherit font-lock-comment-face
+                      :strike-through t))
 
 ;; Hl-Todo
 (require-package 'hl-todo)
