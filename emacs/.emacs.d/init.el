@@ -175,9 +175,6 @@
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
-;; Draw block cursor as wide as the glyph under it
-(setq x-stretch-cursor t)
-
 ;; Highlight region even in non-selected windows
 (setq highlight-nonselected-windows t)
 
@@ -1880,9 +1877,7 @@
 ;; Configuration
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
-  (set-face-attribute 'form-feed-line nil
-                      :inherit font-lock-comment-face
-                      :strike-through t))
+  (set-face-attribute 'form-feed-line nil :strike-through "#969896"))
 
 ;; Hl-Todo
 (require-package 'hl-todo)
