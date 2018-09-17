@@ -1508,6 +1508,21 @@
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
+;; lv-window
+(after-load 'lv
+  ;; Disable line number display in Hydra windows
+  (defun drot-lv-window (orig-fun &rest args)
+    "Disable line numbers in LV window."
+    (let ((turn-off-line-numbers (not (or (window-live-p lv-wnd)
+                                          (get-buffer " *LV*")))))
+      (prog1
+          (apply orig-fun args)
+        (when turn-off-line-numbers
+          (with-current-buffer " *LV*"
+            (setq-local display-line-numbers nil))))))
+  ;; Advise the `lv-window' function
+  (advice-add 'lv-window :around #'drot-lv-window))
+
 ;; EPUB format support
 (require-package 'nov)
 ;; Initialize package
