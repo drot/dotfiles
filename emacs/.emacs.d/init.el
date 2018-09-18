@@ -1827,12 +1827,6 @@
 (bind-key "C-c i y" #'company-yasnippet)
 ;; Configuration
 (after-load 'company
-  ;; Specify backends explicitly
-  (setq company-backends
-        '(company-capf
-          company-files
-          (company-dabbrev-code company-etags company-keywords)
-          company-dabbrev))
   ;; Change default behavior
   (setq company-minimum-prefix-length 2
         company-selection-wrap-around t
