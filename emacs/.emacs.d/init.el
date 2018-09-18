@@ -1515,8 +1515,7 @@
     "Disable line numbers in LV window."
     (let ((turn-off-line-numbers (not (or (window-live-p lv-wnd)
                                           (get-buffer " *LV*")))))
-      (prog1
-          (apply orig-fun args)
+      (prog1 (apply orig-fun args)
         (when turn-off-line-numbers
           (with-current-buffer " *LV*"
             (setq-local display-line-numbers nil))))))
