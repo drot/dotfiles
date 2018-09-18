@@ -1508,7 +1508,7 @@
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
-;; lv-window
+;; Hydra display with lv-window
 (after-load 'lv
   ;; Disable line number display in Hydra windows
   (defun drot-lv-window (orig-fun &rest args)
