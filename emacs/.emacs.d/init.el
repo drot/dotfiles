@@ -1036,6 +1036,8 @@
   (setq org-goto-interface 'outline-path-completion)
   ;; LaTeX syntax highlight
   (setq org-highlight-latex-and-related '(entities latex script))
+  ;; LaTeX preview scale
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t)
