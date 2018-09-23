@@ -77,6 +77,10 @@
 (require-package 'minions)
 ;; Initialize mode
 (minions-mode)
+;; Configuration
+(after-load 'minions
+  ;; Change mode lighter
+  (setq minions-mode-line-lighter "+M"))
 
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
