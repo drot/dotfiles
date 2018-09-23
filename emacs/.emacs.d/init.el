@@ -80,7 +80,9 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter
-  (setq minions-mode-line-lighter "+M"))
+  (setq minions-mode-line-lighter "+M")
+  ;; Don't hide the following minor modes
+  (setq minions-direct '(cider-mode flymake-mode overwrite-mode)))
 
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
