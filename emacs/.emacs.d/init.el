@@ -430,6 +430,7 @@
            (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
            (default-directory (buffer-local-value 'default-directory buffer)))
       (call-interactively ffap-file-finder)))
+
   ;; Rebind `ibuffer-find-file' with the compatibility function
   (bind-key [remap ibuffer-find-file] #'drot-ibuffer-ffap ibuffer-mode-map)
 
