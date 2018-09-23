@@ -28,21 +28,36 @@
 ;;; Code:
 
 ;; Delay garbage collection during startup
+(defun drot/reset-gc-cons-threshold ()
+  "Reset garbage collection threshold."
+  (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))))
+
+;; Use the highest number possible
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Reset garbage collection threshold value to default after startup
-(add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold 800000)))
+(add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
 
-;; Create directories for backups and cache files
-(make-directory (locate-user-emacs-file "backups") t)
-(make-directory (locate-user-emacs-file "cache") t)
+;; Temporarily disable the file name handler
+(setq default-file-name-handler-alist file-name-handler-alist
+      file-name-handler-alist nil)
+
+(defun drot/reset-file-name-handler-alist ()
+  "Reset file name handler to default value."
+  (setq file-name-handler-alist default-file-name-handler-alist))
+
+;; Reset the file name handler to default value after initialization
+(add-hook 'after-init-hook #'drot/reset-file-name-handler-alist)
+
+;; Prefer newest version of a file
+(setq load-prefer-newer t)
 
 ;; Disable the site default settings
 (setq inhibit-default-init t)
 
-;; Prefer newest version of a file
-(setq load-prefer-newer t)
+;; Create directories for backups and cache files
+(make-directory (locate-user-emacs-file "backups") t)
+(make-directory (locate-user-emacs-file "cache") t)
 
 ;; Activate packages and add the MELPA package archive
 (package-initialize)
@@ -262,7 +277,7 @@
   (setq ffap-require-prefix t
         dired-at-point-require-prefix t)
   ;; Default find file function and optimization
-  (setq ffap-file-finder #'drot-counsel-find-file
+  (setq ffap-file-finder #'drot/counsel-find-file
         ffap-machine-p-known 'reject
         ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
@@ -344,7 +359,7 @@
 ;; Configuration
 (after-load 'hideshow
   ;; Custom overlay function
-  (defun drot-hs-display-code-line-counts (ov)
+  (defun drot/hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
@@ -352,7 +367,7 @@
                            (count-lines (overlay-start ov)
                                         (overlay-end ov))))))
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'drot-hs-display-code-line-counts
+  (setq hs-set-up-overlay #'drot/hs-display-code-line-counts
         hs-isearch-open t))
 
 ;; Bug Reference mode
@@ -426,7 +441,7 @@
 ;; Configuration
 (after-load 'ibuffer
   ;; Ffap compatibility function
-  (defun drot-ibuffer-ffap ()
+  (defun drot/ibuffer-ffap ()
     "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
     (interactive)
     (let* ((buffer (ibuffer-current-buffer))
@@ -435,7 +450,7 @@
       (call-interactively ffap-file-finder)))
 
   ;; Rebind `ibuffer-find-file' with the compatibility function
-  (bind-key [remap ibuffer-find-file] #'drot-ibuffer-ffap ibuffer-mode-map)
+  (bind-key [remap ibuffer-find-file] #'drot/ibuffer-ffap ibuffer-mode-map)
 
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
@@ -522,14 +537,14 @@
 ;; Image mode
 (after-load 'image-mode
   ;; Show image dimension function
-  (defun drot-show-image-dimensions-in-mode-line ()
+  (defun drot/show-image-dimensions-in-mode-line ()
     (let* ((image-dimensions (image-size (image-get-display-property) :pixels))
            (width (car image-dimensions))
            (height (cdr image-dimensions)))
       (setq mode-line-buffer-identification
             (format " (%dx%d)" width height))))
   ;; Apply the custom hook
-  (add-hook 'image-mode-hook #'drot-show-image-dimensions-in-mode-line)
+  (add-hook 'image-mode-hook #'drot/show-image-dimensions-in-mode-line)
   ;; Loop animated images forever
   (setq image-animate-loop t)
   ;; Loop animated image automatically
@@ -636,7 +651,7 @@
 (after-load 'smtpmail
   ;; Configuration
   (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-user "drot-smtp"
+        smtpmail-smtp-user "drot/smtp"
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
@@ -805,13 +820,13 @@
   (setq eshell-hist-ignoredups t
         eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
-  (defun drot-eshell-mode-hook ()
+  (defun drot/eshell-mode-hook ()
     "Use alternate completions and disable Company in Eshell buffers."
     (define-key eshell-mode-map [remap eshell-pcomplete] #'completion-at-point)
     (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot-eshell-mode-hook))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-hook))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -826,12 +841,12 @@
 ;; Configuration
 (after-load 'shell
   ;; Custom hook to avoid conflicts
-  (defun drot-shell-mode-hook ()
+  (defun drot/shell-mode-hook ()
     "Disable Company and enable clickable file paths."
     (compilation-shell-minor-mode)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'shell-mode-hook #'drot-shell-mode-hook))
+  (add-hook 'shell-mode-hook #'drot/shell-mode-hook))
 
 ;; IELM
 (bind-key "C-c r i" #'ielm)
@@ -874,12 +889,12 @@
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
-  (defun drot-ansi-color-compilation-buffer ()
+  (defun drot/ansi-color-compilation-buffer ()
     "Colorize the compilation mode buffer"
     (when (eq major-mode 'compilation-mode)
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'drot-ansi-color-compilation-buffer)
+  (add-hook 'compilation-filter-hook #'drot/ansi-color-compilation-buffer)
   ;; Change default behavior
   (setq compilation-ask-about-save nil
         compilation-always-kill t
@@ -1497,11 +1512,11 @@
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
-  (defun drot-nov-font-setup ()
+  (defun drot/nov-font-setup ()
     "Apply custom variable pitch font for `nov.el'."
     (face-remap-add-relative 'variable-pitch :family "Noto Serif" :height 1.2))
   ;; Apply the custom hook
-  (add-hook 'nov-mode-hook #'drot-nov-font-setup)
+  (add-hook 'nov-mode-hook #'drot/nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
@@ -1884,7 +1899,7 @@
 (require-package 'counsel)
 
 ;; Ffap compatibility function
-(defun drot-counsel-find-file (&optional file)
+(defun drot/counsel-find-file (&optional file)
   "Like `counsel-find-file', but return buffer, not name of FILE.
 This likens `counsel-find-file' to `find-file' more and makes it
 suitable for assigning to `ffap-file-finder'."
@@ -2009,7 +2024,7 @@ suitable for assigning to `ffap-file-finder'."
              ("M-[" . paredit-wrap-square))
 
   ;; Enable Paredit in the minibuffer
-  (defvar drot-paredit-minibuffer-setup-commands
+  (defvar drot/paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
@@ -2017,12 +2032,12 @@ suitable for assigning to `ffap-file-finder'."
       ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot-paredit-minibuffer-setup ()
+  (defun drot/paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot-paredit-minibuffer-setup-commands)
+    (if (memq this-command drot/paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'drot-paredit-minibuffer-setup)
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil))))
