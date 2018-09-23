@@ -1038,6 +1038,8 @@
   (setq org-highlight-latex-and-related '(entities latex script))
   ;; LaTeX preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  ;; Store LaTeX preview images in a single directory
+  (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t)
