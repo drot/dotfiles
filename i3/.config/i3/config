@@ -185,6 +185,7 @@ bindsym $mod+r mode "RESIZE"
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
+for_window [class="qutebrowser"] border pixel 1
 for_window [class="mpv"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
@@ -195,7 +196,7 @@ for_window [class="Pidgin"] floating enable
 # assign applications to certain workspaces
 assign [class="Firefox"] $ws2
 assign [class="Tor Browser"] $ws2
-assign [class="Conkeror"] $ws2
+assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
 assign [class="Zathura"] $ws4
 assign [class="libreoffice"] $ws4

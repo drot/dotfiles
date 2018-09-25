@@ -38,17 +38,6 @@
 ;; Reset garbage collection threshold value to default after startup
 (add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
 
-;; Temporarily disable the file name handler
-(setq default-file-name-handler-alist file-name-handler-alist
-      file-name-handler-alist nil)
-
-(defun drot/reset-file-name-handler-alist ()
-  "Reset file name handler to default value."
-  (setq file-name-handler-alist default-file-name-handler-alist))
-
-;; Reset the file name handler to default value after initialization
-(add-hook 'after-init-hook #'drot/reset-file-name-handler-alist)
-
 ;; Prefer newest version of a file
 (setq load-prefer-newer t)
 

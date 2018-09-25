@@ -64,8 +64,13 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
+# Check if we are on a SSH connection
+if [[ -n "$SSH_CLIENT" ]]; then
+    SSH_CON="+R "
+fi
+
 # Prompt format
 case $TERM in
-    xterm*|screen*|tmux*) PS1="${TITLE}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
-    *) PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
+    xterm*|screen*|tmux*) PS1="${TITLE}${RED}${SSH_CON}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
+    *) PS1="${RED}${SSH_CON}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
 esac
