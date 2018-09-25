@@ -86,9 +86,11 @@
   ;; Change mode lighter
   (setq minions-mode-line-lighter "+M")
   ;; Don't hide the following minor modes
-  (setq minions-direct '(auto-revert-mode
+  (setq minions-direct '(ace-window-mode
+                         auto-revert-mode
                          cider-mode
                          flymake-mode
+                         isearch-mode
                          overwrite-mode)))
 
 ;; Color theme
