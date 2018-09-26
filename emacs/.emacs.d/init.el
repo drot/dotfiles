@@ -1655,19 +1655,13 @@
 
 ;; PDF Tools
 (require-package 'pdf-tools)
-;; Autoload missing function
-(autoload #'pdf-view-mode "pdf-view"
-  "Major mode in PDF buffers." t)
 ;; Initialize mode
-(add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
+(add-hook 'doc-view-mode-hook
+          (lambda () (pdf-tools-install t)))
 ;; Enable SyncTeX support
 (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
 ;; Enable link following
 (add-hook 'pdf-view-mode-hook #'pdf-links-minor-mode)
-;; Configuration
-(after-load 'pdf-tools
-  ;; Make sure the binary is always compiled
-  (pdf-tools-install t))
 
 ;; PDF Tools annotations
 (after-load 'pdf-annot
