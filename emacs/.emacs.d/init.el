@@ -1350,14 +1350,20 @@
         rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
-        '(("irc.rizon.net" :port 6697 :encryption tls
+        '(("irc.rizon.net"
+           :port 6697
+           :encryption tls
            :channels ("#/g/technology" "#rice"))
-          ("irc.forestnet.org" :port 6697 :encryption tls
+          ("irc.forestnet.org"
+           :port 6697
+           :encryption tls
            :channels ("#rawhide" "#sq"))))
   ;; Authentication
   (setq rcirc-authinfo
-        `(("rizon" nickserv "drot" ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))
-          ("forestnet" nickserv "drot" ,(auth-source-pass-get 'secret "auth-sources/drot@irc.forestnet.org"))))
+        `(("rizon" nickserv "drot"
+           ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))
+          ("forestnet" nickserv "drot"
+           ,(auth-source-pass-get 'secret "auth-sources/drot@irc.forestnet.org"))))
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 2048)
   ;; Set fill column value to frame width
@@ -1839,7 +1845,8 @@
 ;; Configuration
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
-  (set-face-attribute 'form-feed-line nil :strike-through "#969896"))
+  (face-spec-set 'form-feed-line
+  '((t (:strike-through "#969896")))))
 
 ;; Hl-Todo
 (require-package 'hl-todo)
