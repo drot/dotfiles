@@ -311,7 +311,7 @@
 
 ;; Abbrev mode
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs")
-      save-abbrevs t)
+      save-abbrevs 'silently)
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
