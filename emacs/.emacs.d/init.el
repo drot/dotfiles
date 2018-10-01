@@ -267,10 +267,12 @@
   ;; Require prefix
   (setq ffap-require-prefix t
         dired-at-point-require-prefix t)
-  ;; Default find file function and optimization
-  (setq ffap-file-finder #'drot/counsel-find-file
-        ffap-machine-p-known 'reject
-        ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+  ;; Change default find file function
+  (setq ffap-file-finder #'drot/counsel-find-file)
+  ;; Disable pinging to avoid slowdowns
+  (setq ffap-machine-p-known 'reject)
+  ;; Default RFC path
+  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
 ;; Line numbers display
 (setq display-line-numbers-type 'relative
@@ -310,8 +312,9 @@
 (global-hi-lock-mode)
 
 ;; Abbrev mode
-(setq abbrev-file-name (locate-user-emacs-file "abbrevs")
-      save-abbrevs 'silently)
+(setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
+;; Don't ask for save confirmation
+(setq save-abbrevs 'silently)
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
@@ -410,10 +413,11 @@
 
 ;; Ediff window split
 (after-load 'ediff-wind
-  ;; Configuration
+  ;; Two windows, side by side
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
-        ediff-split-window-function #'split-window-horizontally
-        ediff-grab-mouse nil))
+        ediff-split-window-function #'split-window-horizontally)
+  ;; Don't touch the mouse
+  (setq ediff-grab-mouse nil))
 
 ;; Ediff restore previous window configuration
 (after-load 'ediff-util
