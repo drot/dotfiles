@@ -1713,7 +1713,9 @@
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
-  (setq inferior-lisp-program "sbcl"))
+  (setq inferior-lisp-program "sbcl")
+  ;; Don't prompt on protocol mismatch
+  (setq sly-ignore-protocol-mismatches t))
 
 ;; SLY REPL
 (after-load 'sly-mrepl
