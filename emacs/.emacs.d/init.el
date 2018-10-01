@@ -454,6 +454,12 @@
                            (derived-mode . markdown-mode)))
            ("IRC" (or (mode . rcirc-mode)
                       (mode . weechat-mode)))
+           ("Ediff" (or (mode . ediff-mode)
+                        (mode . ediff-meta-mode)
+                        (name . "\*ediff-errors\*")
+                        (name . "\*ediff-diff\*")
+                        (name . "\*ediff-fine-diff\*")
+                        (name . "\*ediff-custom-diff\*")))
            ("Git" (derived-mode . magit-mode))
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
@@ -1846,7 +1852,7 @@
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
   (face-spec-set 'form-feed-line
-  '((t (:strike-through "#969896")))))
+                 '((t (:strike-through "#969896")))))
 
 ;; Hl-Todo
 (require-package 'hl-todo)
