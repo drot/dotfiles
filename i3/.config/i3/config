@@ -4,7 +4,7 @@ workspace_auto_back_and_forth yes
 focus_follows_mouse no
 
 # font for window titles and the status bar
-font pango:Iosevka Term SS05 Bold 12
+font pango:Iosevka Term SS05, FontAwesome 12
 
 # default modifier key
 set $mod Mod4
@@ -13,7 +13,7 @@ set $mod Mod4
 set $up l
 set $down k
 set $left j
-set $right semicolon
+set $right ccaron
 
 # default colors
 set $base00 #1d1f21
@@ -34,9 +34,9 @@ set $base0E #b294bb
 set $base0F #a3685a
 
 # window colors - border background text indicator
-client.focused $base03 $base02 $base0D $base01
-client.focused_inactive $base03 $base01 $base03 $base01
-client.unfocused $base02 $base00 $base03 $base01
+client.focused $base03 $base02 $base0D $base0D
+client.focused_inactive $base03 $base01 $base03 $base03
+client.unfocused $base02 $base01 $base03 $base03
 client.urgent $base02 $base08 $base07 $base08
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -185,8 +185,10 @@ bindsym $mod+r mode "RESIZE"
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
-for_window [class="qutebrowser"] border pixel 1
+for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
+for_window [class="SimpleScreenRecorder"] floating enable
+for_window [class="Vncviewer"] floating enable
 for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Thunar"] floating enable
@@ -207,15 +209,16 @@ assign [class="Pavucontrol"] $ws4
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol " >> "
+    separator_symbol " » "
     status_command i3status
     colors {
-           background $base01
-           statusline $base05
-           separator $base03
-           focused_workspace $base00 $base0D $base00
-           active_workspace $base03 $base02 $base07
-           inactive_workspace $base03 $base02 $base03
-           urgent_workspace $base00 $base08 $base07
-           }
+        background $base01
+        statusline $base05
+        separator $base03
+        # workspace colors - border background text
+        focused_workspace $base03 $base01 $base0D
+        active_workspace $base03 $base02 $base07
+        inactive_workspace $base02 $base00 $base03
+        urgent_workspace $base00 $base08 $base07
+    }
 }
