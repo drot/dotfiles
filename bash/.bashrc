@@ -46,8 +46,8 @@ if [[ -r $HOME/.bash_functions ]]; then
 fi
 
 # Prompt colors
-RED="\[\033[1;31m\]"
-GREEN="\[\033[1;32m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[0;32m\]"
 BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
 
@@ -66,7 +66,7 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Check if we are on a SSH connection
 if [[ -n "$SSH_CLIENT" ]]; then
-    SSH_CONN="\[\033[0;31m\]@ "
+    SSH_CONN="${RED}@ "
 fi
 
 # Prompt format
