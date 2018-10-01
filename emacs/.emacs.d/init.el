@@ -569,7 +569,6 @@
   (setq apropos-do-all t))
 
 ;; ElDoc mode
-;; Configuration
 (after-load 'eldoc
   ;; Make compatible with Paredit
   (eldoc-add-command #'paredit-backward-delete #'paredit-close-round))
