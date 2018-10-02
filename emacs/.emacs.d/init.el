@@ -1855,7 +1855,7 @@
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
   (face-spec-set 'form-feed-line
-                 '((t (:strike-through "#969896")))))
+                 '((t (:strike-through t :inherit font-lock-comment-face)))))
 
 ;; Hl-Todo
 (require-package 'hl-todo)
