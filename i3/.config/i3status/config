@@ -1,10 +1,10 @@
 general {
-        output_format = "i3bar"
-        colors = true
-        interval = 3
-        color_good = "#b5bd68"
-        color_degraded = "#f0c674"
-        color_bad = "#cc6666"
+    output_format = "i3bar"
+    colors = true
+    interval = 3
+    color_good = "#b5bd68"
+    color_degraded = "#f0c674"
+    color_bad = "#cc6666"
 }
 
 order += "cpu_usage"
@@ -14,25 +14,25 @@ order += "volume master"
 order += "time"
 
 cpu_usage {
-          format = "CPU: %usage"
+    format = " %usage"
 }
 
 cpu_temperature 0 {
-                format = "TEMP: %degrees°C"
-                max_threshold = "60"
-                path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
+    format = " %degrees°C"
+    max_threshold = "60"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
 }
 
 disk "/" {
-     format = "DISK: %percentage_used"
+    format = " %percentage_used"
 }
 
 volume master {
-       format = "VOL: %volume"
-       format_muted = "VOL: muted (%volume)"
-       device = "pulse"
+    format = " %volume"
+    format_muted = " (%volume)"
+    device = "pulse"
 }
 
 time {
-     format = "%d-%m/%H:%M"
+    format = " %d-%m  %H:%M"
 }
