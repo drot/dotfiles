@@ -33,5 +33,5 @@ man() {
 
 # Find process
 pids() {
-    pgrep -l "$1"
+    pgrep -a "$1"
 }
