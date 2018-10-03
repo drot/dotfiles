@@ -91,7 +91,8 @@
                          cider-mode
                          flymake-mode
                          isearch-mode
-                         overwrite-mode)))
+                         overwrite-mode
+                         poly-markdown-mode)))
 
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
@@ -391,8 +392,9 @@
   (setq flyspell-use-meta-tab nil
         flyspell-issue-message-flag nil
         flyspell-issue-welcome-flag nil
-        flyspell-consider-dash-as-word-delimiter-flag t
-        flyspell-duplicate-distance 12000))
+        flyspell-consider-dash-as-word-delimiter-flag t)
+  ;; Don't slowdown looking for duplicates
+  (setq flyspell-duplicate-distance 12000))
 
 ;; Ispell
 (bind-key "C-c l d" #'ispell-change-dictionary)
@@ -497,10 +499,11 @@
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
-  ;; Change default behavior
+  ;; Don't show empty filter groups and jump only to visible buffers
   (setq ibuffer-show-empty-filter-groups nil
-        ibuffer-jump-offer-only-visible-buffers t
-        ibuffer-use-other-window t))
+        ibuffer-jump-offer-only-visible-buffers t)
+  ;; Split window instead for buffer display
+  (setq ibuffer-use-other-window t))
 
 ;; Version control
 (after-load 'vc-hooks
@@ -571,7 +574,9 @@
 ;; ElDoc mode
 (after-load 'eldoc
   ;; Make compatible with Paredit
-  (eldoc-add-command #'paredit-backward-delete #'paredit-close-round))
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round))
 
 ;; Python mode configuration
 (after-load 'python
@@ -681,9 +686,10 @@
     (setq dired-listing-switches
           (concat dired-listing-switches "G --group-directories-first")))
   ;; Use conservative switches when dealing with remote systems
-  (add-hook 'dired-mode-hook (lambda ()
-                               (when (file-remote-p dired-directory)
-                                 (setq-local dired-actual-switches "-alhF"))))
+  (add-hook 'dired-mode-hook
+            (lambda ()
+              (when (file-remote-p dired-directory)
+                (setq-local dired-actual-switches "-alhF"))))
   ;; Do certain operations recursively
   (setq dired-recursive-deletes 'top
         dired-recursive-copies 'always)
@@ -778,13 +784,12 @@
   ;; Set bookmarks directory
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
-;; Open URLs with the specified browser
+;; Browse URL
 (bind-key "C-c u b" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
-  ;; Need to use the `browse-url-generic' function
-  (setq browse-url-browser-function #'browse-url-generic
-        browse-url-generic-program "qutebrowser"))
+  ;;  Open URLs with the specified browser
+  (setq browse-url-browser-function #'browse-url-firefox))
 
 ;; SHR
 (after-load 'shr
@@ -1569,7 +1574,9 @@
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
   ;; Additional fontification
   (setq markdown-fontify-code-blocks-natively t
-        markdown-header-scaling t))
+        markdown-header-scaling t)
+  ;; Don't insert spaces after a code fence
+  (setq markdown-spaces-after-code-fence 0))
 
 ;; Move-text
 (require-package 'move-text)
@@ -1683,8 +1690,10 @@
   ;; Activate annotations automatically
   (setq pdf-annot-activate-created-annotations t))
 
-;; Polymode
-(require-package 'polymode)
+;; Polymode Markdown
+(require-package 'poly-markdown)
+;; Initialize mode
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;; Rainbow mode
 (require-package 'rainbow-mode)
@@ -1722,6 +1731,11 @@
 
 ;; SLY macrostep
 (require-package 'sly-macrostep)
+
+;; SQL indentation
+(require-package 'sql-indent)
+;; Initialize mode
+(add-hook 'sql-mode-hook #'sqlind-minor-mode)
 
 ;; Systemd mode
 (require-package 'systemd)
