@@ -30,8 +30,3 @@ man() {
     # Execute upload and send to clipboard
     curl -# -F "$curl_opts" "$url" | tr -d '\n' | xsel
 }
-
-# Find process
-pids() {
-    pgrep -a "$1"
-}
