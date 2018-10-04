@@ -170,6 +170,7 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
+for_window [class="Firefox"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
