@@ -1,9 +1,0 @@
-{ "sheets" : [
-    "content-buffer-input.css",
-    "new-tabs.css",
-    "minibuffer.css",
-    "mode-line.css",
-    "hints-url-panel.css",
-    "eye-guide.css"
-]
-}
