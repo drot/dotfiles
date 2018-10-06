@@ -101,7 +101,7 @@ naughty.config.presets.normal.bg = beautiful.bg_focus
 naughty.config.presets.normal.fg = beautiful.fg_focus
 naughty.config.presets.normal.border_color = beautiful.border_focus
 naughty.config.presets.critical.bg = beautiful.bg_urgent
-naughty.config.presets.critical.fg = beautiful.bg_normal
+naughty.config.presets.critical.fg = beautiful.fg_urgent
 naughty.config.presets.critical.border_color = beautiful.bg_normal
 -- }}}
 
