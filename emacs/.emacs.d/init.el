@@ -880,7 +880,7 @@
              ("C-c ! D" . flymake-disabled-backends)
              ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("<f7> f" . hydra-flymake/body)))
+             ("<f5> f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -907,7 +907,7 @@
         compilation-context-lines 3))
 
 ;; Gnus
-(bind-key "<f5>" #'gnus)
+(bind-key "<f8>" #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set key bindings
@@ -1002,7 +1002,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set key binding
-  (bind-key "<f7> o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "<f5> o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1356,7 +1356,7 @@
         elfeed-search-filter "@1-week-ago +unread"))
 
 ;; rcirc
-(bind-key "<f8>" #'irc)
+(bind-key "<f7>" #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
@@ -1587,7 +1587,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set key binding
-(bind-key "<f7> x" #'hydra-move-text/body)
+(bind-key "<f5> x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1673,7 +1673,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set key binding
-(bind-key "<f7> m" #'hydra-multiple-cursors/body)
+(bind-key "<f5> m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1886,7 +1886,7 @@
   ;; Set key bindings
   (bind-keys :map hl-todo-mode-map
              ("M-s t" . hl-todo-occur)
-             ("<f7> t" . hydra-hl-todo/body)))
+             ("<f5> t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -2178,7 +2178,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set key binding
-(bind-key "<f7> SPC" #'hydra-mark-text/body)
+(bind-key "<f5> SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
