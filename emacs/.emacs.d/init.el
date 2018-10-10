@@ -1678,8 +1678,7 @@
 ;; PDF Tools
 (require-package 'pdf-tools)
 ;; Initialize mode
-(add-hook 'doc-view-mode-hook
-          (lambda () (pdf-tools-install t)))
+(pdf-loader-install)
 ;; Enable SyncTeX support
 (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
 ;; Enable link following
