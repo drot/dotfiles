@@ -779,7 +779,7 @@
 
 ;; EWW
 (bind-key "C-c u w" #'eww)
-(bind-key "C-c u B" #'eww-list-bookmarks)
+(bind-key "C-c u C-b" #'eww-list-bookmarks)
 ;; Configuration
 (after-load 'eww
   ;; Set bookmarks directory
@@ -958,7 +958,7 @@
         gnus-sum-thread-tree-single-leaf "└──>"))
 
 ;; Calendar
-(bind-key "C-c a C" #'calendar)
+(bind-key "C-c a C-c" #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -1064,7 +1064,7 @@
   (setq org-clock-persist-file (locate-user-emacs-file "cache/org-clock-save.el")))
 
 ;; World time
-(bind-key "C-c a T" #'display-time-world)
+(bind-key "C-c a C-t" #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Time zones we are interested in
@@ -1133,10 +1133,10 @@
 (bind-key "C-c d t" #'debbugs-gnu-usertags)
 (bind-key "C-c d p" #'debbugs-gnu-patches)
 (bind-key "C-c d b" #'debbugs-gnu-bugs)
-(bind-key "C-c d O" #'debbugs-org)
-(bind-key "C-c d S" #'debbugs-org-search)
-(bind-key "C-c d P" #'debbugs-org-patches)
-(bind-key "C-c d B" #'debbugs-org-bugs)
+(bind-key "C-c d C-o" #'debbugs-org)
+(bind-key "C-c d C-s" #'debbugs-org-search)
+(bind-key "C-c d C-p" #'debbugs-org-patches)
+(bind-key "C-c d C-b" #'debbugs-org-bugs)
 
 ;; CIDER
 (require-package 'cider)
@@ -1952,13 +1952,13 @@ suitable for assigning to `ffap-file-finder'."
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
-(bind-key "C-c s g" #'counsel-rg)
+(bind-key "C-c s C-s" #'counsel-rg)
 (bind-key "C-c s i" #'counsel-imenu)
 (bind-key "C-c f g" #'counsel-git)
 (bind-key "C-c f d" #'counsel-dired-jump)
 (bind-key "C-c f r" #'counsel-recentf)
 (bind-key "C-c s v" #'counsel-git-grep)
-(bind-key "C-c s G" #'counsel-grep)
+(bind-key "C-c s g" #'counsel-grep)
 (bind-key "C-c h c" #'counsel-command-history)
 (bind-key "C-c h l" #'counsel-find-library)
 (bind-key "C-c i 8" #'counsel-unicode-char)
@@ -2088,10 +2088,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
 ;; Ruler mode
-(bind-key "C-c t R" #'ruler-mode)
+(bind-key "C-c t C-r" #'ruler-mode)
 
 ;; Variable pitch mode
-(bind-key "C-c t V" #'variable-pitch-mode)
+(bind-key "C-c t C-v" #'variable-pitch-mode)
 
 ;; Ediff
 (bind-key "C-c f e" #'ediff)
@@ -2106,7 +2106,7 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Replace string immediately
 (bind-key "C-c s r" #'replace-string)
-(bind-key "C-c s R" #'replace-regexp)
+(bind-key "C-c s C-r" #'replace-regexp)
 
 ;; Grep results as a dired buffer
 (bind-key "C-c s d" #'find-grep-dired)
@@ -2187,7 +2187,7 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
-(bind-key "C-c s L" #'delete-non-matching-lines)
+(bind-key "C-c s C-l" #'delete-non-matching-lines)
 
 ;; Local variable insertion
 (bind-key "C-c v d" #'add-dir-local-variable)
