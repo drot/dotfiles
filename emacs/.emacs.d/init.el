@@ -1486,6 +1486,11 @@
   ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
+;; ix.io paste support
+(require-package 'ix)
+;; Set key binding
+(bind-key "C-c x p" #'ix)
+
 ;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
