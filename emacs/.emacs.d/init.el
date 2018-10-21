@@ -92,7 +92,8 @@
                          flymake-mode
                          isearch-mode
                          overwrite-mode
-                         poly-markdown-mode)))
+                         poly-markdown-mode
+                         sqlind-minor-mode)))
 
 ;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
