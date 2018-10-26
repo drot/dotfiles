@@ -720,6 +720,9 @@
   (when (executable-find "sxiv")
     (setq image-dired-external-viewer "pqiv")))
 
+;; Gnus Dired
+(add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
+
 ;; TRAMP
 (after-load 'tramp
   ;; Configuration
