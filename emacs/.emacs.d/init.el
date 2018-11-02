@@ -190,9 +190,6 @@
 ;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
-;; Highlight region even in non-selected windows
-(setq highlight-nonselected-windows t)
-
 ;; Resize windows proportionally
 (setq window-combination-resize t)
 
