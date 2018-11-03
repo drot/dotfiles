@@ -553,9 +553,9 @@
   ;; Loop animated image automatically
   (add-hook 'image-mode-hook #'image-toggle-animation))
 
-;; Auto Revert mode
-
-;; Imenu configuration
+;; Imenu
+(bind-key "C-c s i" #'imenu)
+;; Configuration
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
@@ -1954,7 +1954,6 @@ suitable for assigning to `ffap-file-finder'."
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set key bindings
 (bind-key "C-c s C-s" #'counsel-rg)
-(bind-key "C-c s i" #'counsel-imenu)
 (bind-key "C-c f g" #'counsel-git)
 (bind-key "C-c f d" #'counsel-dired-jump)
 (bind-key "C-c f r" #'counsel-recentf)
