@@ -10,7 +10,7 @@ selected_background="#81a2be"
 selected_foreground="#1d1f21"
 
 # Run dmenu:
-dmenu_run -i -p ">" \
+dmenu_run -i -p ">_" \
           -nb "$normal_background" \
           -nf "$normal_foreground" \
           -sb "$selected_background" \
