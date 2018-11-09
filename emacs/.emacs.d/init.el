@@ -70,7 +70,7 @@
 
 ;; Use `bind-key' for personal keybindings
 (require-package 'bind-key)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c h b" #'describe-personal-keybindings)
 ;; Configuration
 (after-load 'bind-key
@@ -379,7 +379,7 @@
 ;; Fly Spell mode configuration
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c l b" #'flyspell-buffer)
 (bind-key "C-c l r" #'flyspell-region)
 ;; Configuration
@@ -700,7 +700,7 @@
   "Jump to Dired buffer corresponding to current buffer." t)
 (autoload #'dired-jump-other-window "dired-x"
   "Like \\[dired-jump] (dired-jump) but in other window." t)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-x C-j" #'dired-jump)
 (bind-key "C-x 4 C-j" #'dired-jump-other-window)
 
@@ -808,7 +808,7 @@
 (bind-key "C-c p s" #'speedbar)
 ;; Configuration
 (after-load 'speedbar
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "a" #'speedbar-toggle-show-all-files speedbar-mode-map)
   ;; Emulate NERDTree behavior
   (setq speedbar-use-images nil
@@ -873,7 +873,7 @@
     ("p" flymake-goto-prev-error "Previous Error")
     ("d" flymake-show-diagnostics-buffer "List All Errors" :exit t)
     ("q" nil "Quit"))
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map flymake-mode-map
              ("C-c ! n" . flymake-goto-next-error)
              ("C-c ! p" . flymake-goto-prev-error)
@@ -912,7 +912,7 @@
 (bind-key "<f8>" #'gnus)
 ;; Configuration
 (after-load 'gnus
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-key "C-c M-o" #'ace-link-gnus gnus-summary-mode-map)
   (bind-key "C-c M-o" #'ace-link-gnus gnus-article-mode-map)
   ;; Configure mail and news server
@@ -1003,7 +1003,7 @@
     ("f" outline-forward-same-level "Forward Same Level")
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "<f5> o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
@@ -1015,7 +1015,7 @@
 (bind-key "C-c t t" #'orgtbl-mode)
 ;; Configuration
 (after-load 'org
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "C-c M-o" #'ace-link-org org-mode-map)
   ;; Default directory and file location
   (setq org-directory "~/Documents/org"
@@ -1078,7 +1078,7 @@
 
 ;; Ace-window
 (require-package 'ace-window)
-;; Set key binding
+;; Set global key binding
 (bind-key "M-o" #'ace-window)
 ;; Configuration
 (after-load 'ace-window
@@ -1128,7 +1128,7 @@
 
 ;; Debbugs
 (require-package 'debbugs)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c d g" #'debbugs-gnu)
 (bind-key "C-c d s" #'debbugs-gnu-search)
 (bind-key "C-c d t" #'debbugs-gnu-usertags)
@@ -1185,7 +1185,7 @@
 (after-load 'dired-x
   ;; Initialize mode
   (require 'dired-filter)
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
 ;; Dired Rainbow
@@ -1229,7 +1229,7 @@
 (after-load 'dired-rainbow
   ;; Initialize mode
   (require 'dired-subtree)
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map dired-mode-map
              :prefix "C-,"
              :prefix-map dired-subtree-map
@@ -1255,7 +1255,7 @@
 (after-load 'dired-subtree
   ;; Initialize mode
   (require 'dired-ranger)
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map dired-mode-map
              :prefix "r"
              :prefix-map dired-ranger-map
@@ -1274,7 +1274,7 @@
 (after-load 'dired-ranger
   ;; Initialize mode
   (require 'dired-narrow)
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "C-." #'dired-narrow dired-mode-map)
   ;; Exit on single match
   (setq dired-narrow-exit-when-one-left t))
@@ -1285,7 +1285,7 @@
 (after-load 'dired-narrow
   ;; Initialize mode
   (require 'dired-collapse)
-  ;; Set key binding
+  ;; Set local key binding
   (bind-key "," #'dired-collapse-mode dired-mode-map))
 
 ;; Dired-du
@@ -1303,7 +1303,7 @@
 (after-load 'dired-du
   ;; Initialize mode
   (require 'dired-async)
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map dired-mode-map
              ("E c" . dired-async-do-copy)
              ("E r" . dired-async-do-rename)
@@ -1322,11 +1322,11 @@
 
 ;; Eglot
 (require-package 'eglot)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c e t" #'eglot)
 ;; Configuration
 (after-load 'eglot
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map eglot-mode-map
              ("C-c e c" . eglot-reconnect)
              ("C-c e s" . eglot-shutdown)
@@ -1338,9 +1338,15 @@
   ;; Add the Lua language server
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
+;; Easy-kill
+(require-package 'easy-kill)
+;; Set global key bindings
+(bind-key [remap kill-ring-save] #'easy-kill)
+(bind-key [remap mark-sexp] #'easy-mark)
+
 ;; Elfeed
 (require-package 'elfeed)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c a f" #'elfeed)
 ;; Configuration
 (after-load 'elfeed
@@ -1418,7 +1424,7 @@
 (after-load 'rcirc
   ;; Initialize mode
   (require 'rcirc-styles)
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map rcirc-mode-map
              ("C-c C-e p" . rcirc-styles-toggle-preview)
              ("C-c C-e a" . rcirc-styles-insert-attribute)
@@ -1460,7 +1466,7 @@
 
 ;; Expand region
 (require-package 'expand-region)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-=" #'er/expand-region)
 
 ;; Geiser
@@ -1477,8 +1483,9 @@
   "Start Iedit mode using last search string as the regexp." t)
 (autoload #'iedit-execute-last-modification "iedit"
   "Apply last modification in Iedit mode to the current buffer or an active region." t)
-;; Set key bindings
+;; Set global key binding
 (bind-key "C-c i e" #'iedit-mode)
+;; Set local key bindings
 (bind-key "C-;" #'iedit-mode-from-isearch isearch-mode-map)
 (bind-key "C-;" #'iedit-execute-last-modification esc-map)
 (bind-key "C-;" #'iedit-mode-toggle-on-function help-map)
@@ -1489,7 +1496,7 @@
 
 ;; ix.io paste support
 (require-package 'ix)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c x p" #'ix)
 
 ;; JavaScript mode
@@ -1540,12 +1547,12 @@
 
 ;; Macrostep
 (require-package 'macrostep)
-;; Set key binding
+;; Set local key binding
 (bind-key "C-c M-e" #'macrostep-expand emacs-lisp-mode-map)
 
 ;; Magit
 (require-package 'magit)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-x g" #'magit-status)
 (bind-key "C-x M-g" #'magit-dispatch-popup)
 (bind-key "C-c g c" #'magit-clone)
@@ -1593,7 +1600,7 @@
   ("p" move-text-up "Move Text Up")
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
-;; Set key binding
+;; Set global key binding
 (bind-key "<f5> x" #'hydra-move-text/body)
 
 ;; Multiple cursors
@@ -1646,7 +1653,7 @@
           hydra-multiple-cursors/mc/edit-ends-of-lines-and-exit
           hydra-multiple-cursors/mc/edit-lines-and-exit
           mouse-drag-mode-line)))
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c m <SPC>" #'mc/vertical-align-with-space)
 (bind-key "C-c m a" #'mc/vertical-align)
 (bind-key "C-c m e" #'mc/mark-more-like-this-extended)
@@ -1679,7 +1686,7 @@
   ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
-;; Set key binding
+;; Set global key binding
 (bind-key "<f5> m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
@@ -1703,14 +1710,14 @@
 
 ;; Rainbow mode
 (require-package 'rainbow-mode)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c t r" #'rainbow-mode)
 
 ;; Skewer
 (require-package 'skewer-mode)
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c a w" #'run-skewer)
 (bind-key "C-c r w" #'skewer-repl)
 
@@ -1722,7 +1729,7 @@
 
 ;; SLY
 (require-package 'sly)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c r s" #'sly)
 (bind-key "C-c r c" #'sly-connect)
 ;; Configuration
@@ -1756,7 +1763,7 @@
 
 ;; Zop-to-char
 (require-package 'zop-to-char)
-;; Set key bindings
+;; Set global key bindings
 (bind-key [remap zap-to-char] #'zop-to-char)
 (bind-key "M-Z" #'zop-up-to-char)
 
@@ -1766,7 +1773,7 @@
 (add-hook 'after-init-hook #'ace-link-setup-default)
 ;; Configuration
 (after-load 'ace-link
-  ;; Set key binding
+  ;; Set global key binding
   (bind-key "C-c u a"  #'ace-link-addr))
 
 ;; Anzu
@@ -1775,7 +1782,7 @@
 (add-hook 'after-init-hook #'global-anzu-mode)
 ;; Configuration
 (after-load 'anzu
-  ;; Set key bindings
+  ;; Set global key bindings
   (bind-key [remap query-replace] #'anzu-query-replace)
   (bind-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
   (bind-keys :map isearch-mode-map
@@ -1792,7 +1799,7 @@
 (require-package 'avy)
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-:" #'avy-goto-char)
 (bind-key "C-'" #'avy-goto-char-timer)
 (bind-key "M-g f" #'avy-goto-line)
@@ -1812,7 +1819,7 @@
 (require-package 'company)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-company-mode)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c i y" #'company-yasnippet)
 ;; Configuration
 (after-load 'company
@@ -1835,7 +1842,7 @@
 (add-hook 'after-init-hook #'global-diff-hl-mode)
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
-;; Set key binding
+;; Set global key binding
 (bind-key "C-c t v" #'diff-hl-margin-mode)
 ;; Configuration
 (after-load 'diff-hl
@@ -1889,7 +1896,7 @@
     ("n" hl-todo-next "Next TODO")
     ("p" hl-todo-previous "Previous TODO")
     ("q" nil "Quit"))
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map hl-todo-mode-map
              ("M-s t" . hl-todo-occur)
              ("<f5> t" . hydra-hl-todo/body)))
@@ -1900,7 +1907,7 @@
 (require-package 'ivy-hydra)
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
-;; Set key binding
+;; Set global key binding
 (bind-key "<f6>" #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
@@ -1952,7 +1959,7 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c s C-s" #'counsel-rg)
 (bind-key "C-c f g" #'counsel-git)
 (bind-key "C-c f d" #'counsel-dired-jump)
@@ -1977,9 +1984,10 @@ suitable for assigning to `ffap-file-finder'."
 
 ;; Swiper
 (require-package 'swiper)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "C-c s s" #'swiper-all)
 (bind-key "M-s s" #'swiper)
+;; Set local key binding
 (bind-key "M-s s" #'swiper-from-isearch isearch-mode-map)
 ;; Configuration
 (after-load 'swiper
@@ -1992,7 +2000,7 @@ suitable for assigning to `ffap-file-finder'."
 (require-package 'amx)
 ;; Initialize mode
 (add-hook 'after-init-hook #'amx-mode)
-;; Set key bindings
+;; Set global key bindings
 (bind-key "M-X" #'amx-major-mode-commands)
 (bind-key "C-c h u" #'amx-show-unbound-commands)
 ;; Configuration
@@ -2037,7 +2045,7 @@ suitable for assigning to `ffap-file-finder'."
 (after-load 'paredit
   ;; Disable conflicting key binding
   (unbind-key "M-s" paredit-mode-map)
-  ;; Set key bindings
+  ;; Set local key bindings
   (bind-keys :map paredit-mode-map
              ("M-s M-s" . paredit-splice-sexp)
              ("M-{" . paredit-wrap-curly)
@@ -2182,7 +2190,7 @@ suitable for assigning to `ffap-file-finder'."
   ("c" er/mark-comment "Comment")
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
-;; Set key binding
+;; Set global key binding
 (bind-key "<f5> SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
