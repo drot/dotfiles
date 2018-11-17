@@ -714,7 +714,7 @@
 ;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
-  (when (executable-find "sxiv")
+  (when (executable-find "pqiv")
     (setq image-dired-external-viewer "pqiv")))
 
 ;; Gnus Dired
