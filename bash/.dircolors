@@ -271,6 +271,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # compiled apps for interpreted languages
 .pyc 38;5;240
 
+# orchestration
+.tf 38;5;168
+.tfstate 38;5;168
+
 ## html
 .css 38;5;125;1
 .less 38;5;125;1
@@ -589,7 +593,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sig 38;5;192;3
 .p7s 38;5;192;3
 .rsa 38;5;192;3
-.rsa.pub 38;5;192;3
+*id_rsa 38;5;192;3
+*rsa.pub 38;5;192;3
+*authorized_keys 38;5;192;3
 
 ## emulators
 .32x 38;5;213
