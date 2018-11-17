@@ -1497,7 +1497,7 @@
 ;; ix.io paste support
 (require-package 'ix)
 ;; Set global key binding
-(bind-key "C-c x p" #'ix)
+(bind-key "C-c x y" #'ix)
 
 ;; JavaScript mode
 (require-package 'js2-mode)
