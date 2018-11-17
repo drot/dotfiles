@@ -80,6 +80,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 ## documents
 *README 38;5;220;1
 *README.rst 38;5;220;1
+*README.md 38;5;220;1
 *LICENSE 38;5;220;1
 *COPYING 38;5;220;1
 *INSTALL 38;5;220;1
@@ -190,6 +191,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .ahk 38;5;41
 # python
 .py 38;5;41
+.ipynb 38;5;41
+# ruby
+.rb 38;5;41
+.gemspec 38;5;41
 # perl
 .pl 38;5;208
 .PL 38;5;160
@@ -305,6 +310,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *Makefile 38;5;155
 *MANIFEST 38;5;243
 *pm_to_blib 38;5;240
+# ruby rake
+.rake 38;5;155
 # automake
 .am 38;5;242
 .in 38;5;242
@@ -498,7 +505,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # backups
 .BUP 38;5;241
 .bak 38;5;241
+# object files
 .o 38;5;241
+# core dumps
+*core 38;5;241
+# static Rust library
 .rlib 38;5;241
 # temporary files
 .swp 38;5;244
@@ -509,11 +520,13 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pid 38;5;248
 .state 38;5;248
 *lockfile 38;5;248
+*lock 38;5;248
 # error logs
 .err 38;5;160;1
 .error 38;5;160;1
 .stderr 38;5;160;1
 # state dumps
+.aria2 38;5;241
 .dump 38;5;241
 .stackdump 38;5;241
 .zcompdump 38;5;241
@@ -556,6 +569,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .properties 38;5;116
 .sfv 38;5;116
 .srt 38;5;116
+.sub 38;5;116
 .theme 38;5;116
 .torrent 38;5;116
 .urlview 38;5;116
@@ -573,6 +587,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .asc 38;5;192;3
 .enc 38;5;192;3
 .sig 38;5;192;3
+.p7s 38;5;192;3
+.rsa 38;5;192;3
+.rsa.pub 38;5;192;3
 
 ## emulators
 .32x 38;5;213
@@ -637,7 +654,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pi 38;5;7
 .plt 38;5;7
 .pm 38;5;7
-.rb 38;5;7
 .rdf 38;5;7
 .rst 38;5;7
 .ru 38;5;7
