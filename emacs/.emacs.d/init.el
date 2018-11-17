@@ -737,7 +737,7 @@
 
 ;; Copyright insertion
 (bind-key "C-c i c" #'copyright)
-(bind-key "C-c i C" #'copyright-update)
+(bind-key "C-c i C-c" #'copyright-update)
 ;; Configuration
 (after-load 'copyright
   ;; Change default format
