@@ -29,7 +29,6 @@ man() {
     fi
     # Upload command
     local upload="curl -# -F $curl_opts $url"
-    
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
         $upload
