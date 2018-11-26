@@ -113,14 +113,15 @@ local mygraphicsmenu = {
 }
 
 local myofficemenu = {
-   { "llpp", "llpp", beautiful.menu_pdf },
-   { "Writer", "lowriter", beautiful.menu_writer }
+   { "Writer", "lowriter", beautiful.menu_writer },
+   { "Zathura", "zathura", beautiful.menu_pdf }
 }
 
 local myutilmenu = {
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
-   { "ssr", "simplescreenrecorder", beautiful.menu_ssr },
-   { "Thunar", "thunar", beautiful.menu_fman }
+   { "SSR", "simplescreenrecorder", beautiful.menu_ssr },
+   { "Thunar", "thunar", beautiful.menu_fman },
+   { "Virt Manager", "virt-manager", beautiful.menu_virt }
 }
 
 local mywebmenu = {
