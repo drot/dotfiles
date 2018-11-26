@@ -142,7 +142,7 @@ local mymainmenu = awful.menu(
    {
       items = {
          { "Terminal", terminal, beautiful.menu_term },
-         { "Emacs", "emacs", beautiful.menu_emacs },
+         { "Emacs", "emacsclient -c", beautiful.menu_emacs },
          { "qutebrowser", "qutebrowser", beautiful.menu_qutebrowser },
          { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
          { "Office", myofficemenu, beautiful.menu_office },
