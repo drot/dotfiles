@@ -188,8 +188,8 @@ assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
 assign [class="Zathura"] $ws4
 assign [class="libreoffice"] $ws4
-assign [class="Gimp"] $ws4
-assign [class="Pavucontrol"] $ws4
+assign [class="Gimp"] $ws5
+assign [class="Pavucontrol"] $ws6
 
 # start i3bar to display a workspace bar
 bar {
