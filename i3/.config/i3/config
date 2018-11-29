@@ -186,8 +186,8 @@ assign [class="Firefox"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
-assign [class="Zathura"] $ws4
-assign [class="libreoffice"] $ws4
+assign [class="Zathura"] $ws5
+assign [class="libreoffice"] $ws5
 assign [class="Gimp"] $ws5
 assign [class="Pavucontrol"] $ws6
 
