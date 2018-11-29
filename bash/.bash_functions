@@ -27,13 +27,11 @@ man() {
         echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
         return 1
     fi
-    # Upload command
-    local upload="curl -# -F $curl_opts $url"
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
-        $upload
+        curl -# -F "$curl_opts" "$url"
     else
-        $upload | tr -d '\n' | xsel
+        curl -# -F "$curl_opts" "$url" | tr -d '\n' | xsel
     fi
 }
 
