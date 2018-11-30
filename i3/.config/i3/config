@@ -163,7 +163,7 @@ bindsym XF86TouchpadToggle exec ~/.scripts/touchpad_toggle
 
 # screenshot keys
 bindsym Print exec --no-startup-id maim -u /tmp/screenshot-$(date +%s).png
-bindsym --release $mod+Print exec --no-startup-id maim -su /tmp/screenshot-$(date +%s).png
+bindsym --release $mod+Print exec maim -su -f png | curl -s -F'file=@-' https://0x0.st | xsel
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
