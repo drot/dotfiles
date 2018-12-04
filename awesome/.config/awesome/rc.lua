@@ -118,9 +118,9 @@ local myofficemenu = {
 }
 
 local myutilmenu = {
+   { "PCManFM", "pcmanfm", beautiful.menu_fman },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
    { "SSR", "simplescreenrecorder", beautiful.menu_ssr },
-   { "Thunar", "thunar", beautiful.menu_fman },
    { "Virt Manager", "virt-manager", beautiful.menu_virt }
 }
 
@@ -976,7 +976,7 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "5" } },
    { rule = { class = "Gimp" },
      properties = { screen = 1, tag = "5" } },
-   { rule = { class = "Thunar" },
+   { rule = { class = "Pcmanfm" },
      properties = { screen = 1, tag = "5" } },
 }
 -- }}}
