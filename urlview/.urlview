@@ -1,8 +1,5 @@
-# regular expression to use to match URLs
-# REGEXP (((http|https|ftp|gopher)|mailto):(//)?[^ <>"\t]*|(www|ftp)[0-9]?\.[-a-z0-9.]+)[^ .,;\t\n\r<">\):]?[^, <>"\t]*[^ .,;\t\n\r<">\):]
-
 # command to invoke for selected URL
-COMMAND /etc/urlview/url_handler.sh
+COMMAND /home/drot/.scripts/linkhandler
 
 # set to yes to enable menu wrapping
 WRAP Yes
