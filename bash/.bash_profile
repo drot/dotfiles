@@ -14,7 +14,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # TeXdoc specific
-export PDFVIEWER_texdoc="llpp"
+export PDFVIEWER_texdoc="zathura"
 export DVIVIEWER_texdoc="${PDFVIEWER_texdoc}"
 
 # Wine specific variables
