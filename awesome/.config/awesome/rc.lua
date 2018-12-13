@@ -46,7 +46,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "kitty"
+local terminal = "alacritty"
 local editor = os.getenv("EDITOR") or "nano"
 local editor_cmd = terminal .. " " .. editor
 
@@ -108,8 +108,8 @@ naughty.config.presets.critical.border_color = beautiful.bg_normal
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
-   { "GIMP", "gimp", beautiful.menu_gimp },
-   { "pqiv", "pqiv Pictures", beautiful.menu_pqiv }
+   { "feh", "feh Pictures", beautiful.menu_feh },
+   { "GIMP", "gimp", beautiful.menu_gimp }
 }
 
 local myofficemenu = {
