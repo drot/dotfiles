@@ -47,8 +47,8 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/them
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "st"
-local editor = os.getenv("EDITOR") or "nano"
-local editor_cmd = terminal .. " " .. editor
+local editor = os.getenv("EDITOR")
+local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
