@@ -715,8 +715,8 @@
 ;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
-  (when (executable-find "pqiv")
-    (setq image-dired-external-viewer "pqiv")))
+  (when (executable-find "feh")
+    (setq image-dired-external-viewer "feh")))
 
 ;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
