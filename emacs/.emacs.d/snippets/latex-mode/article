@@ -1,9 +1,14 @@
-# name: Article class template
+# name: Article class template for Croatian
 # key: article
 # --
 \documentclass[a4paper]{article}
 
+% Word-like page format and language selection
+\usepackage[left=3.5cm, right=2.5cm, top=3.5cm, bottom=2.5cm]{geometry}
 \usepackage[croatian]{babel}
+
+% Correct spacing for my language
+\frenchspacing{}
 
 \begin{document}
 
