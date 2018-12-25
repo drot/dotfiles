@@ -1477,6 +1477,16 @@
   ;; Change default history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
+;; Helpful
+(require-package 'helpful)
+;; Set key bindings
+(bind-key [remap describe-function] #'helpful-callable)
+(bind-key [remap describe-variable] #'helpful-variable)
+(bind-key [remap describe-key] #'helpful-key)
+(bind-key "C-c h p" #'helpful-at-point)
+(bind-key "C-c h f" #'helpful-function)
+(bind-key "C-c h c" #'helpful-command)
+
 ;; Iedit
 (require-package 'iedit)
 ;; Autoload missing functions
@@ -1924,8 +1934,6 @@ suitable for assigning to `ffap-file-finder'."
       (let ((map (make-sparse-keymap)))
         (dolist (binding
                  '((describe-bindings . counsel-descbinds)
-                   (describe-function . counsel-describe-function)
-                   (describe-variable . counsel-describe-variable)
                    (apropos-command . counsel-apropos)
                    (describe-face . counsel-describe-face)
                    (list-faces-display . counsel-faces)
@@ -1948,7 +1956,7 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f r" #'counsel-recentf)
 (bind-key "C-c s v" #'counsel-git-grep)
 (bind-key "C-c s g" #'counsel-grep)
-(bind-key "C-c h c" #'counsel-command-history)
+(bind-key "C-c h C-c" #'counsel-command-history)
 (bind-key "C-c h l" #'counsel-find-library)
 (bind-key "C-c i 8" #'counsel-unicode-char)
 (bind-key "C-c f j" #'counsel-file-jump)
@@ -2104,17 +2112,6 @@ suitable for assigning to `ffap-file-finder'."
 ;; Project
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
-
-;; Find function and variable definitions
-(bind-key "C-c h f" #'find-function)
-(bind-key "C-c h 4 f" #'find-function-other-window)
-(bind-key "C-c h k" #'find-function-on-key)
-(bind-key "C-c h v" #'find-variable)
-(bind-key "C-c h 4 v" #'find-variable-other-window)
-
-;; Find library
-(bind-key "C-c h 4 l" #'find-library-other-window)
-(bind-key "C-c h 4 L" #'find-library-other-frame)
 
 ;; List packages
 (bind-key "<f9>" #'package-list-packages)
