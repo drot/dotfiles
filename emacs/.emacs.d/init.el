@@ -1777,25 +1777,6 @@
   ;; Set global key binding
   (bind-key "C-c u a"  #'ace-link-addr))
 
-;; Anzu
-(require-package 'anzu)
-;; Initialize mode
-(add-hook 'after-init-hook #'global-anzu-mode)
-;; Configuration
-(after-load 'anzu
-  ;; Set global key bindings
-  (bind-key [remap query-replace] #'anzu-query-replace)
-  (bind-key [remap query-replace-regexp] #'anzu-query-replace-regexp)
-  (bind-keys :map isearch-mode-map
-             ([remap isearch-query-replace] . anzu-isearch-query-replace)
-             ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  ;; Optimize behavior
-  (setq anzu-search-threshold 1000
-        anzu-replace-threshold 50)
-  ;; Deactivate region and separator string
-  (setq anzu-deactivate-region t
-        anzu-replace-to-string-separator " => "))
-
 ;; Avy
 (require-package 'avy)
 ;; Initialize mode
