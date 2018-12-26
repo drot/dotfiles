@@ -1479,9 +1479,10 @@
 
 ;; Helpful
 (require-package 'helpful)
+;; Override Counsel
+(advice-add 'counsel-describe-function :override #'helpful-callable)
+(advice-add 'counsel-describe-variable :override #'helpful-variable)
 ;; Set key bindings
-(bind-key [remap describe-function] #'helpful-callable)
-(bind-key [remap describe-variable] #'helpful-variable)
 (bind-key [remap describe-key] #'helpful-key)
 (bind-key "C-c h p" #'helpful-at-point)
 (bind-key "C-c h f" #'helpful-function)
@@ -1929,24 +1930,6 @@ suitable for assigning to `ffap-file-finder'."
     (set-buffer (or (find-buffer-visiting (counsel-find-file))
                     (other-buffer nil t)))))
 
-;; Override default key map
-(setq counsel-mode-map
-      (let ((map (make-sparse-keymap)))
-        (dolist (binding
-                 '((describe-bindings . counsel-descbinds)
-                   (apropos-command . counsel-apropos)
-                   (describe-face . counsel-describe-face)
-                   (list-faces-display . counsel-faces)
-                   (find-library . counsel-find-library)
-                   (load-library . counsel-load-library)
-                   (load-theme . counsel-load-theme)
-                   (yank-pop . counsel-yank-pop)
-                   (info-lookup-symbol . counsel-info-lookup-symbol)
-                   (pop-to-mark-command . counsel-mark-ring)
-                   (bookmark-jump . counsel-bookmark)))
-          (define-key map (vector 'remap (car binding)) (cdr binding)))
-        map))
-
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set global key bindings
@@ -1990,6 +1973,8 @@ suitable for assigning to `ffap-file-finder'."
 (require-package 'amx)
 ;; Initialize mode
 (add-hook 'after-init-hook #'amx-mode)
+;; Override Counsel mode
+(advice-add 'counsel-M-x :override #'amx)
 ;; Set global key bindings
 (bind-key "M-X" #'amx-major-mode-commands)
 (bind-key "C-c h u" #'amx-show-unbound-commands)
