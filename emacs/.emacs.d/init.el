@@ -945,7 +945,7 @@
           ((header "to" "address@gmail.com")
            (address "address@gmail.com"))))
   ;; Display of the summary buffer
-  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B (%c) %s%)\n"
+  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-23,23f  %B (%c) %s%)\n"
         gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M"))
         gnus-group-line-format "%M%S%p%P%5y:%B %G\n"
         gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references
