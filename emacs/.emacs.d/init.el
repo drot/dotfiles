@@ -554,9 +554,7 @@
   ;; Loop animated image automatically
   (add-hook 'image-mode-hook #'image-toggle-animation))
 
-;; Imenu
-(bind-key "C-c s i" #'imenu)
-;; Configuration
+;; Imenu configuration
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
@@ -883,7 +881,7 @@
              ("C-c ! D" . flymake-disabled-backends)
              ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("<f5> f" . hydra-flymake/body)))
+             ("C-c k f" . hydra-flymake/body)))
 
 ;; Comint mode
 (after-load 'comint
@@ -1005,7 +1003,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set local key binding
-  (bind-key "<f5> o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c k o" #'hydra-outline/body outline-minor-mode-map))
 
 ;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1477,17 +1475,6 @@
   ;; Change default history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
-;; Helpful
-(require-package 'helpful)
-;; Override Counsel
-(advice-add 'counsel-describe-function :override #'helpful-callable)
-(advice-add 'counsel-describe-variable :override #'helpful-variable)
-;; Set key bindings
-(bind-key [remap describe-key] #'helpful-key)
-(bind-key "C-c h p" #'helpful-at-point)
-(bind-key "C-c h f" #'helpful-function)
-(bind-key "C-c h c" #'helpful-command)
-
 ;; Iedit
 (require-package 'iedit)
 ;; Autoload missing functions
@@ -1613,7 +1600,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set global key binding
-(bind-key "<f5> x" #'hydra-move-text/body)
+(bind-key "C-c k x" #'hydra-move-text/body)
 
 ;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1699,7 +1686,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set global key binding
-(bind-key "<f5> m" #'hydra-multiple-cursors/body)
+(bind-key "C-c k m" #'hydra-multiple-cursors/body)
 
 ;; PDF Tools
 (require-package 'pdf-tools)
@@ -1892,7 +1879,7 @@
   ;; Set local key bindings
   (bind-keys :map hl-todo-mode-map
              ("M-s t" . hl-todo-occur)
-             ("<f5> t" . hydra-hl-todo/body)))
+             ("C-c k t" . hydra-hl-todo/body)))
 
 ;; Ivy
 (require-package 'ivy)
@@ -1939,7 +1926,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c f r" #'counsel-recentf)
 (bind-key "C-c s v" #'counsel-git-grep)
 (bind-key "C-c s g" #'counsel-grep)
-(bind-key "C-c h C-c" #'counsel-command-history)
+(bind-key "C-c s i" #'counsel-imenu)
+(bind-key "C-c h c" #'counsel-command-history)
 (bind-key "C-c h l" #'counsel-find-library)
 (bind-key "C-c i 8" #'counsel-unicode-char)
 (bind-key "C-c f j" #'counsel-file-jump)
@@ -2098,6 +2086,17 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
 
+;; Find function and variable definitions
+(bind-key "C-c h f" #'find-function)
+(bind-key "C-c h 4 f" #'find-function-other-window)
+(bind-key "C-c h k" #'find-function-on-key)
+(bind-key "C-c h v" #'find-variable)
+(bind-key "C-c h 4 v" #'find-variable-other-window)
+
+;; Find library
+(bind-key "C-c h 4 l" #'find-library-other-window)
+(bind-key "C-c h 4 L" #'find-library-other-frame)
+
 ;; List packages
 (bind-key "<f9>" #'package-list-packages)
 
@@ -2155,7 +2154,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set global key binding
-(bind-key "<f5> SPC" #'hydra-mark-text/body)
+(bind-key "C-c k SPC" #'hydra-mark-text/body)
 
 ;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
@@ -2172,8 +2171,8 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c b u" #'unbury-buffer)
 (bind-key "C-c b e" #'eval-buffer)
 (bind-key "C-c b k" #'kill-this-buffer)
-(bind-key "C-c b g" #'revert-buffer)
 (bind-key "C-c b i" #'insert-buffer)
+(bind-key "<f5>" #'revert-buffer)
 
 ;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
