@@ -31,7 +31,7 @@ man() {
     if [[ -z $DISPLAY ]]; then
         curl -# -F "$curl_opts" "$url"
     else
-        curl -# -F "$curl_opts" "$url" | tr -d '\n' | xsel
+        curl -# -F "$curl_opts" "$url" | tr -d '\n' | tr -d '\n' | xsel -b
     fi
 }
 
