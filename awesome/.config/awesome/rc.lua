@@ -125,7 +125,6 @@ local myutilmenu = {
 }
 
 local mywebmenu = {
-   { "Firefox", "firefox", beautiful.menu_firefox },
    { "Pidgin", "pidgin", beautiful.menu_pidgin },
    { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
 }
@@ -143,7 +142,7 @@ local mymainmenu = awful.menu(
       items = {
          { "Terminal", terminal, beautiful.menu_term },
          { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-         { "qutebrowser", "qutebrowser", beautiful.menu_qutebrowser },
+         { "Firefox", "firefox", beautiful.menu_firefox },
          { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
          { "Office", myofficemenu, beautiful.menu_office },
          { "Utilities", myutilmenu, beautiful.menu_util },
