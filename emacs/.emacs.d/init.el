@@ -84,7 +84,7 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter
-  (setq minions-mode-line-lighter "+M")
+  (setq minions-mode-line-lighter "[+]")
   ;; Don't hide the following minor modes
   (setq minions-direct '(ace-window-mode
                          auto-revert-mode
