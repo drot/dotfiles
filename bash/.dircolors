@@ -198,7 +198,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .gemspec 38;5;41
 # perl
 .pl 38;5;208
-.PL 38;5;160
+.PL 38;5;124
 .t 38;5;114
 # sql
 .msql 38;5;222
@@ -275,6 +275,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # orchestration
 .tf 38;5;168
 .tfstate 38;5;168
+.tfvars 38;5;168
 
 ## html
 .css 38;5;125;1
@@ -476,15 +477,15 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .part 38;5;239
 
 ## partition images
-.dmg 38;5;124
-.iso 38;5;124
-.bin 38;5;124
-.nrg 38;5;124
-.qcow 38;5;124
-.sparseimage 38;5;124
-.toast 38;5;124
-.vcd 38;5;124
-.vmdk 38;5;124
+.dmg 38;5;160
+.iso 38;5;160
+.bin 38;5;160
+.nrg 38;5;160
+.qcow 38;5;160
+.sparseimage 38;5;160
+.toast 38;5;160
+.vcd 38;5;160
+.vmdk 38;5;160
 
 ## databases
 .accdb 38;5;60
@@ -527,9 +528,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *lockfile 38;5;248
 *lock 38;5;248
 # error logs
-.err 38;5;160;1
-.error 38;5;160;1
-.stderr 38;5;160;1
+.err 38;5;124;1
+.error 38;5;124;1
+.stderr 38;5;124;1
 # state dumps
 .aria2 38;5;241
 .dump 38;5;241
