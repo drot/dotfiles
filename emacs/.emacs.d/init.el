@@ -1,6 +1,6 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2018 drot
+;; Copyright (C) 2009-2019 drot
 
 ;; Author: drot
 ;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.emacs.d
@@ -27,36 +27,36 @@
 
 ;;; Code:
 
-;; Delay garbage collection during startup
+;;; Delay garbage collection during startup
 (defun drot/reset-gc-cons-threshold ()
   "Reset garbage collection threshold."
   (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))))
 
-;; Use the highest number possible
+;;; Use the highest number possible
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Reset garbage collection threshold value to default after startup
+;;; Reset garbage collection threshold value to default after startup
 (add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
 
-;; Prefer newest version of a file
+;;; Prefer newest version of a file
 (setq load-prefer-newer t)
 
-;; Disable the site default settings
+;;; Disable the site default settings
 (setq inhibit-default-init t)
 
-;; Create directories for backups and cache files
+;;; Create directories for backups and cache files
 (make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
-;; Activate packages and add the MELPA package archive
+;;; Activate packages and add the MELPA package archive
 (package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-;; Pinned packages
+;;; Pinned packages
 (setq package-pinned-packages '((json-mode . "gnu")))
 
-;; Helper function for installing packages
+;;; Helper function for installing packages
 (defun require-package (package)
   "Ensures that PACKAGE is installed."
   (unless (or (package-installed-p package)
@@ -65,10 +65,10 @@
       (package-refresh-contents))
     (package-install package)))
 
-;; Use a shorter alias for this commonly used macro
+;;; Use a shorter alias for this commonly used macro
 (defalias 'after-load 'with-eval-after-load)
 
-;; Use `bind-key' for personal keybindings
+;;; Use `bind-key' for personal keybindings
 (require-package 'bind-key)
 ;; Set global key binding
 (bind-key "C-c h b" #'describe-personal-keybindings)
@@ -77,7 +77,7 @@
   ;; Extract special forms
   (setq bind-key-describe-special-forms t))
 
-;; Group minor mode lighters with Minions
+;;; Group minor mode lighters with Minions
 (require-package 'minions)
 ;; Initialize mode
 (minions-mode)
@@ -95,131 +95,131 @@
                          poly-markdown-mode
                          sqlind-minor-mode)))
 
-;; Color theme
+;;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
 (load-theme 'sanityinc-tomorrow-night t)
 
-;; Disable needless GUI elements
+;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
   (when (fboundp mode)
     (funcall mode -1)))
 
-;; Don't show the startup welcome messages
+;;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
       inhibit-startup-screen t)
 
-;; Disable scratch buffer info text
+;;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
 
-;; Show column number and buffer size on the mode line
+;;; Show column number and buffer size on the mode line
 (column-number-mode)
 (size-indication-mode)
 
-;; Answer y or n instead of yes or no at prompts
+;;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
 
-;; Show unfinished keystrokes early
+;;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.01)
 
-;; Indicate buffer boundaries and empty lines
+;;; Indicate buffer boundaries and empty lines
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
-;; Move point all the way to buffer boundary before signaling an error
+;;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
 
-;; Always scroll evenly with the mouse
+;;; Always scroll evenly with the mouse
 (setq mouse-wheel-progressive-speed nil)
 
-;; Enable faster scrolling
+;;; Enable faster scrolling
 (setq fast-but-imprecise-scrolling t)
 
-;; Use visual bell instead
+;;; Use visual bell instead
 (setq visible-bell t)
 
-;; Don't use dialogs for minibuffer input
+;;; Don't use dialogs for minibuffer input
 (setq use-dialog-box nil)
 
-;; Ignore case on completion
+;;; Ignore case on completion
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;; Cycle completion on smaller number of candidates
+;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
-;; Enable recursive minibuffers
+;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
-;; Indicate minibuffer recursion depth
+;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode)
 
-;; Enable all disabled commands
+;;; Enable all disabled commands
 (setq disabled-command-function nil)
 
-;; No length limit when printing values
+;;; No length limit when printing values
 (setq eval-expression-print-length nil
       eval-expression-print-level nil)
 
-;; Use spaces instead of tabs and set default tab width
+;;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
 
-;; Sentence ends with single space
+;;; Sentence ends with single space
 (setq sentence-end-double-space nil)
 
-;; Increase default fill width
+;;; Increase default fill width
 (setq-default fill-column 80)
 
-;; Require a final new line
+;;; Require a final new line
 (setq require-final-newline t)
 
-;; Set Text mode as the default major mode
+;;; Set Text mode as the default major mode
 (setq-default major-mode #'text-mode)
 
-;; Enable Auto Fill mode for Text mode
+;;; Enable Auto Fill mode for Text mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
-;; Visual Line mode configuration
+;;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil right-triangle))
 
-;; Use Gnus as the default mail program
+;;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent
       read-mail-command #'gnus)
 
-;; Put underline below the font bottom line
+;;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
-;; Resize windows proportionally
+;;; Resize windows proportionally
 (setq window-combination-resize t)
 
-;; Prompt for buffer switch in strongly dedicated windows
+;;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 
-;; Display read-only buffers in view mode
+;;; Display read-only buffers in view mode
 (setq view-read-only t
       view-inhibit-help-message t)
 
-;; Kill and yank clipboard saving
+;;; Kill and yank clipboard saving
 (setq save-interprogram-paste-before-kill t)
 
-;; Mouse yank at point instead of click
+;;; Mouse yank at point instead of click
 (setq mouse-yank-at-point t)
 
-;; Increase maximum size of the mark ring
+;;; Increase maximum size of the mark ring
 (setq mark-ring-max 30)
 
-;; Repeat mark popping
+;;; Repeat mark popping
 (setq set-mark-command-repeat-pop t)
 
-;; Rotate the clipboard when rotating the kill ring
+;;; Rotate the clipboard when rotating the kill ring
 (setq yank-pop-change-selection t)
 
-;; Do not save duplicates
+;;; Do not save duplicates
 (setq history-delete-duplicates t
       kill-do-not-save-duplicates t)
 
-;; Configuration for backup files
+;;; Configuration for backup files
 (setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups/")))
       auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-")
       auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t))
@@ -228,14 +228,14 @@
       delete-old-versions t
       backup-by-copying t)
 
-;; Save minibuffer history
+;;; Save minibuffer history
 (setq savehist-file (locate-user-emacs-file "cache/saved-history")
       savehist-autosave-interval 60
       savehist-additional-variables '(search-ring regexp-search-ring))
 ;; Initialize mode
 (savehist-mode)
 
-;; Save recent files list
+;;; Save recent files list
 (setq recentf-save-file (locate-user-emacs-file "cache/recent-files")
       recentf-max-saved-items 100
       recentf-max-menu-items 20
@@ -254,12 +254,12 @@
 ;; Initialize mode
 (recentf-mode)
 
-;; Remember point position in files
+;;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
 ;; Initialize mode
 (save-place-mode)
 
-;; Find file at point
+;;; Find file at point
 (ffap-bindings)
 ;; Configuration
 (after-load 'ffap
@@ -273,7 +273,7 @@
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
-;; Line numbers display
+;;; Line numbers display
 (setq display-line-numbers-type 'relative
       display-line-numbers-current-absolute nil)
 ;; Maximum width reserved for line numbers
@@ -283,7 +283,7 @@
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 
-;; Highlight current line
+;;; Highlight current line
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
 (dolist (hook '(artist-mode-hook
@@ -298,19 +298,19 @@
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
-;; Highlight matching parentheses
+;;; Highlight matching parentheses
 (setq show-paren-delay 0
       show-paren-when-point-inside-paren t
       show-paren-when-point-in-periphery t)
 ;; Initialize mode
 (show-paren-mode)
 
-;; Highlight regexps interactively
+;;; Highlight regexps interactively
 (setq hi-lock-auto-select-face t)
 ;; Initialize mode
 (global-hi-lock-mode)
 
-;; Abbrev mode
+;;; Abbrev mode
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
 ;; Don't ask for save confirmation
 (setq save-abbrevs 'silently)
@@ -323,28 +323,28 @@
 ;; Prevent skeleton/abbrev recursion
 (setq skeleton-further-elements '((abbrev-mode nil)))
 
-;; Electric pair mode
+;;; Electric pair mode
 (electric-pair-mode)
 
-;; Prettify certain symbols
+;;; Prettify certain symbols
 (setq prettify-symbols-unprettify-at-point t)
 ;; Initialize mode
 (global-prettify-symbols-mode)
 
-;; Which function mode
+;;; Which function mode
 (setq which-func-unknown "n/a")
 ;; Initialize mode
 (which-function-mode)
 
-;; Fast window switching
+;;; Fast window switching
 (setq windmove-wrap-around t)
 ;; Initialize mode
 (windmove-default-keybindings)
 
-;; Undo and redo the window configuration
+;;; Undo and redo the window configuration
 (winner-mode)
 
-;; Hide Show mode
+;;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
                 emacs-lisp-mode-hook
                 python-mode-hook))
@@ -363,7 +363,7 @@
   (setq hs-set-up-overlay #'drot/hs-display-code-line-counts
         hs-isearch-open t))
 
-;; Bug Reference mode
+;;; Bug Reference mode
 (add-hook 'text-mode-hook #'bug-reference-mode)
 (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
 (add-hook 'gnus-article-mode-hook #'bug-reference-mode)
@@ -372,11 +372,11 @@
   ;; GNU bug tracker
   (setq bug-reference-url-format "https://debbugs.gnu.org/%s"))
 
-;; Goto Address mode
+;;; Goto Address mode
 (add-hook 'text-mode-hook #'goto-address-mode)
 (add-hook 'prog-mode-hook #'goto-address-prog-mode)
 
-;; Fly Spell mode configuration
+;;; Fly Spell mode configuration
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 ;; Set global key bindings
@@ -394,7 +394,7 @@
   ;; Don't slowdown looking for duplicates
   (setq flyspell-duplicate-distance 12000))
 
-;; Ispell
+;;; Ispell
 (bind-key "C-c l d" #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
@@ -406,12 +406,12 @@
   ;; Default dictionary
   (setq ispell-dictionary "english"))
 
-;; Isearch
+;;; Isearch
 (setq isearch-allow-scroll t)
 ;; Match similar chars
 (setq search-default-mode #'char-fold-to-regexp)
 
-;; Ediff window split
+;;; Ediff window split
 (after-load 'ediff-wind
   ;; Two windows, side by side
   (setq ediff-window-setup-function #'ediff-setup-windows-plain
@@ -419,19 +419,19 @@
   ;; Don't touch the mouse
   (setq ediff-grab-mouse nil))
 
-;; Ediff restore previous window configuration
+;;; Ediff restore previous window configuration
 (after-load 'ediff-util
   ;; Clever hack using `window-undo'
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
-;; Uniquify buffer names
+;;; Uniquify buffer names
 (after-load 'uniquify
   ;; Configuration
   (setq uniquify-buffer-name-style 'forward
         uniquify-trailing-separator-p t
         uniquify-ignore-buffers-re "^\\*"))
 
-;; Use Ibuffer for buffer list
+;;; Use Ibuffer for buffer list
 (bind-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after-load 'ibuffer
@@ -505,7 +505,7 @@
   ;; Split window instead for buffer display
   (setq ibuffer-use-other-window t))
 
-;; Version control
+;;; Version control
 (after-load 'vc-hooks
   ;; TRAMP speedup
   (setq vc-ignore-dir-regexp
@@ -517,7 +517,7 @@
   ;; Make backups even under version control
   (setq vc-make-backup-files t))
 
-;; Customize interface
+;;; Customize interface
 (bind-key "C-c a c" #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
@@ -528,17 +528,17 @@
   (setq custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
 
-;; Custom theme configuration
+;;; Custom theme configuration
 (after-load 'custom
   ;; Treat themes as safe
   (setq custom-safe-themes t))
 
-;; MIME decoding configuration
+;;; MIME decoding configuration
 (after-load 'mm-decode
   ;; Fit images to buffer
   (setq mm-inline-large-images 'resize))
 
-;; Image mode
+;;; Image mode
 (after-load 'image-mode
   ;; Show image dimension function
   (defun drot/show-image-dimensions-in-mode-line ()
@@ -554,29 +554,29 @@
   ;; Loop animated image automatically
   (add-hook 'image-mode-hook #'image-toggle-animation))
 
-;; Imenu configuration
+;;; Imenu configuration
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
 
-;; Pcomplete configuration
+;;; Pcomplete configuration
 (after-load 'pcomplete
   ;;Ignore case sensitivity with Pcomplete
   (setq pcomplete-ignore-case t))
 
-;; Apropos configuration
+;;; Apropos configuration
 (after-load 'apropos
   ;; Search more extensively
   (setq apropos-do-all t))
 
-;; ElDoc mode
+;;; ElDoc mode
 (after-load 'eldoc
   ;; Make compatible with Paredit
   (eldoc-add-command
    #'paredit-backward-delete
    #'paredit-close-round))
 
-;; Python mode configuration
+;;; Python mode configuration
 (after-load 'python
   ;; Use Python 3 as default
   (setq python-shell-interpreter "python3")
@@ -588,7 +588,7 @@
   ;; Enable SubWord mode
   (add-hook 'python-mode-hook #'subword-mode))
 
-;; CC mode
+;;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
 ;; Configuration
 (after-load 'cc-mode
@@ -602,55 +602,55 @@
   ;; Enable Auto Fill
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
-;; Etags
+;;; Etags
 (after-load 'etags
   ;; Default filename
   (setq tags-file-name "TAGS"))
 
-;; Sh mode
+;;; Sh mode
 (after-load 'sh-script
   ;; Remove annoying heredoc insertion
   (remove-hook 'sh-mode-hook #'sh-electric-here-document-mode))
 
-;; Scheme mode
+;;; Scheme mode
 (after-load 'scheme
   ;; Use Guile as the default interpreter
   (setq scheme-program-name "guile"))
 
-;; CSS mode
+;;; CSS mode
 (after-load 'css-mode
   ;; Indent level
   (setq css-indent-offset 2))
 
-;; NXML mode
+;;; NXML mode
 (after-load 'nxml-mode
   ;; Configuration
   (setq nxml-slash-auto-complete-flag t
         nxml-sexp-element-flag t))
 
-;; Doc View mode
+;;; Doc View mode
 (after-load 'doc-view
   ;; Better document browsing
   (setq doc-view-resolution 300
         doc-view-continuous t))
 
-;; Woman
+;;; Woman
 (after-load 'woman
   ;; Use global fill column
   (setq woman-fill-column fill-column))
 
-;; Enable Pass integration
+;;; Enable Pass integration
 (after-load 'auth-source
   ;; Initialize mode
   (auth-source-pass-enable))
 
-;; Mail sending
+;;; Mail sending
 (after-load 'message
   ;; Configuration
   (setq message-confirm-send t
         message-kill-buffer-on-exit t))
 
-;; Outgoing mail server
+;;; Outgoing mail server
 (after-load 'smtpmail
   ;; Configuration
   (setq smtpmail-smtp-server "mail.cock.li"
@@ -658,22 +658,22 @@
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
-;; Smileys
+;;; Smileys
 (after-load 'smiley
   ;; Resize smileys
   (setq smiley-style 'medium))
 
-;; Network Security Manager
+;;; Network Security Manager
 (after-load 'nsm
   ;; Change default settings file location
   (setq nsm-settings-file (locate-user-emacs-file "cache/network-security.data")))
 
-;; Prevent GnuTLS warnings
+;;; Prevent GnuTLS warnings
 (after-load 'gnutls
   ;; Don't use default values
   (setq gnutls-min-prime-bits nil))
 
-;; Dired configuration
+;;; Dired configuration
 (after-load 'dired
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
@@ -694,7 +694,7 @@
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
-;; Dired Extra
+;;; Dired Extra
 (autoload #'dired-jump "dired-x"
   "Jump to Dired buffer corresponding to current buffer." t)
 (autoload #'dired-jump-other-window "dired-x"
@@ -703,23 +703,23 @@
 (bind-key "C-x C-j" #'dired-jump)
 (bind-key "C-x 4 C-j" #'dired-jump-other-window)
 
-;; Wdired movement and editable parts
+;;; Wdired movement and editable parts
 (after-load 'wdired
   ;; Allow changing of permissions too
   (setq wdired-allow-to-change-permissions t)
   ;; Make movement work the same as in regular Dired buffers
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
-;; Image-Dired
+;;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
   (when (executable-find "feh")
     (setq image-dired-external-viewer "feh")))
 
-;; Gnus Dired
+;;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
 
-;; TRAMP
+;;; TRAMP
 (after-load 'tramp
   ;; Configuration
   (setq tramp-default-method "ssh"
@@ -728,13 +728,13 @@
   (setq tramp-backup-directory-alist `(("." . ,temporary-file-directory))
         tramp-auto-save-directory temporary-file-directory))
 
-;; Bookmarks
+;;; Bookmarks
 (after-load 'bookmark
   ;; Configuration
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark")
         bookmark-save-flag 1))
 
-;; Copyright insertion
+;;; Copyright insertion
 (bind-key "C-c i c" #'copyright)
 (bind-key "C-c i C-c" #'copyright-update)
 ;; Configuration
@@ -743,25 +743,25 @@
   (setq copyright-year-ranges t
         copyright-names-regexp (regexp-quote user-login-name)))
 
-;; Whitespace mode
+;;; Whitespace mode
 (bind-key "C-c x w" #'whitespace-cleanup)
 (bind-key "C-c t w" #'whitespace-mode)
 
-;; Tildify mode
+;;; Tildify mode
 (bind-key "C-c x t" #'tildify-region)
 (bind-key "C-c t ~" #'tildify-mode)
 ;; Initialize in LaTeX buffers
 (add-hook 'LaTeX-mode-hook
           (lambda () (setq-local tildify-space-string "~")))
 
-;; Regexp builder
+;;; Regexp builder
 (bind-key "C-c s b" #'re-builder)
 ;; Configuration
 (after-load 're-builder
   ;; Default regex syntax
   (setq reb-re-syntax 'string))
 
-;; Proced
+;;; Proced
 (bind-key "C-x p" #'proced)
 ;; Configuration
 (after-load 'proced
@@ -770,14 +770,14 @@
   ;; Use tree view
   (setq-default proced-tree-flag t))
 
-;; GDB
+;;; GDB
 (bind-key "C-c a d" #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
   ;; Multiple window layout
   (setq gdb-many-windows t))
 
-;; EWW
+;;; EWW
 (bind-key "C-c u w" #'eww)
 (bind-key "C-c u C-b" #'eww-list-bookmarks)
 ;; Configuration
@@ -785,14 +785,14 @@
   ;; Set bookmarks directory
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
-;; Browse URL
+;;; Browse URL
 (bind-key "C-c u b" #'browse-url)
 ;; Configuration
 (after-load 'browse-url
   ;;  Open URLs with the specified browser
   (setq browse-url-browser-function #'browse-url-firefox))
 
-;; SHR
+;;; SHR
 (after-load 'shr
   ;; Use specified browser instead of searching for it
   (setq shr-external-browser browse-url-browser-function))
@@ -803,7 +803,7 @@
   (setq url-history-track t
         url-history-file (locate-user-emacs-file "url/history")))
 
-;; Speedbar
+;;; Speedbar
 (bind-key "C-c p s" #'speedbar)
 ;; Configuration
 (after-load 'speedbar
@@ -818,7 +818,7 @@
    '(".lisp" ".clj" ".lua" ".css" ".patch"
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
-;; Eshell
+;;; Eshell
 (bind-key "C-c a e" #'eshell)
 ;; Configuration
 (after-load 'eshell
@@ -834,7 +834,7 @@
   ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'drot/eshell-mode-hook))
 
-;; Eshell smart display
+;;; Eshell smart display
 (after-load 'eshell
   ;; Initialize mode
   (require 'em-smart)
@@ -842,7 +842,7 @@
   ;; Jump to end when `counsel-esh-history' is used
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
-;; Shell mode
+;;; Shell mode
 (bind-key "C-c a s" #'shell)
 ;; Configuration
 (after-load 'shell
@@ -854,14 +854,14 @@
   ;; Apply the custom hook
   (add-hook 'shell-mode-hook #'drot/shell-mode-hook))
 
-;; IELM
+;;; IELM
 (bind-key "C-c r i" #'ielm)
 ;; Configuration
 (after-load 'ielm
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
-;; Flymake
+;;; Flymake
 (bind-key "C-c ! t" #'flymake-mode)
 ;; Configuration
 (after-load 'flymake
@@ -883,12 +883,12 @@
              ("C-c ! l" . flymake-switch-to-log-buffer)
              ("C-c k f" . hydra-flymake/body)))
 
-;; Comint mode
+;;; Comint mode
 (after-load 'comint
   ;; Ignore duplicate commands
   (setq comint-input-ignoredups t))
 
-;; Compilation
+;;; Compilation
 (bind-key "C-c c c" #'recompile)
 ;; Configuration
 (after-load 'compile
@@ -907,7 +907,7 @@
         compilation-scroll-output 'first-error
         compilation-context-lines 3))
 
-;; Gnus
+;;; Gnus
 (bind-key "<f8>" #'gnus)
 ;; Configuration
 (after-load 'gnus
@@ -957,7 +957,7 @@
         gnus-sum-thread-tree-leaf-with-other "├──>"
         gnus-sum-thread-tree-single-leaf "└──>"))
 
-;; Calendar
+;;; Calendar
 (bind-key "C-c a C-c" #'calendar)
 ;; Configuration
 (after-load 'calendar
@@ -976,7 +976,7 @@
         holiday-islamic-holidays nil
         holiday-hebrew-holidays nil))
 
-;; Outline mode
+;;; Outline mode
 (bind-key "C-c t o" #'outline-minor-mode)
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c o"))
@@ -1005,7 +1005,7 @@
   ;; Set local key binding
   (bind-key "C-c k o" #'hydra-outline/body outline-minor-mode-map))
 
-;; Org-mode
+;;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
 (bind-key "C-c o c" #'org-capture)
 (bind-key "C-c o t" #'org-todo-list)
@@ -1058,12 +1058,12 @@
   (add-hook 'org-shiftleft-final-hook #'windmove-left)
   (add-hook 'org-shiftright-final-hook #'windmove-right))
 
-;; Org time clocking
+;;; Org time clocking
 (after-load 'org-clock
   ;; Change default persist file location
   (setq org-clock-persist-file (locate-user-emacs-file "cache/org-clock-save.el")))
 
-;; World time
+;;; World time
 (bind-key "C-c a C-t" #'display-time-world)
 ;; Configuration
 (after-load 'time
@@ -1075,7 +1075,7 @@
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
 
-;; Ace-window
+;;; Ace-window
 (require-package 'ace-window)
 ;; Set global key binding
 (bind-key "M-o" #'ace-window)
@@ -1086,7 +1086,7 @@
   ;; Show even with 2 windows
   (setq aw-dispatch-always t))
 
-;; AUCTeX
+;;; AUCTeX
 (require-package 'auctex)
 ;; TeX configuration
 (after-load 'tex
@@ -1101,12 +1101,12 @@
   ;; Revert PDF automatically
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
-;; TeX external commands
+;;; TeX external commands
 (after-load 'tex-buf
   ;; Don't ask to save before processing
   (setq TeX-save-query nil))
 
-;; LaTeX configuration
+;;; LaTeX configuration
 (after-load 'latex
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
@@ -1119,13 +1119,12 @@
   ;; Add SyncTeX support
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode))
 
-;; RefTeX
-;; Configuration
+;;; RefTeX configuration
 (after-load 'reftex
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
-;; Debbugs
+;;; Debbugs browser
 (require-package 'debbugs)
 ;; Set global key bindings
 (bind-key "C-c d g" #'debbugs-gnu)
@@ -1138,19 +1137,19 @@
 (bind-key "C-c d C-p" #'debbugs-org-patches)
 (bind-key "C-c d C-b" #'debbugs-org-bugs)
 
-;; CIDER
+;;; CIDER
 (require-package 'cider)
 ;; Configuration
 (after-load 'cider-common
   ;; Use the symbol at point as the default value
   (setq cider-prompt-for-symbol nil))
 
-;; CIDER mode configuration
+;;; CIDER mode configuration
 (after-load 'cider-mode
   ;; Enable fuzzy completion with Company
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
-;; CIDER REPL configuration
+;;; CIDER REPL configuration
 (after-load 'cider-repl
   ;; Enable persistent history and cycle through it
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history")
@@ -1164,21 +1163,21 @@
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
 
-;; Clojure mode
+;;; Clojure mode
 (require-package 'clojure-mode)
 ;; Configuration
 (after-load 'clojure-mode
   ;; Enable SubWord mode
   (add-hook 'clojure-mode-hook #'subword-mode))
 
-;; Dash
+;;; Dash
 (require-package 'dash)
 ;; Configuration
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
 
-;; Dired Filter
+;;; Dired Filter
 (require-package 'dired-filter)
 ;; Configuration
 (after-load 'dired-x
@@ -1187,7 +1186,7 @@
   ;; Set local key binding
   (bind-key "\\" dired-filter-mark-map dired-mode-map))
 
-;; Dired Rainbow
+;;; Dired Rainbow
 (require-package 'dired-rainbow)
 ;; Configuration
 (after-load 'dired-filter
@@ -1222,7 +1221,7 @@
   (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d[rw-]+x.*")
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l[rw-]+x.*"))
 
-;; Dired Subtree
+;;; Dired Subtree
 (require-package 'dired-subtree)
 ;; Configuration
 (after-load 'dired-rainbow
@@ -1248,7 +1247,7 @@
              ("C-o C-f" . dired-subtree-only-this-file)
              ("C-o C-d" . dired-subtree-only-this-directory)))
 
-;; Dired Ranger
+;;; Dired Ranger
 (require-package 'dired-ranger)
 ;; Configuration
 (after-load 'dired-subtree
@@ -1267,7 +1266,7 @@
              ("'" . dired-ranger-bookmark)
              ("`" . dired-ranger-bookmark-visit)))
 
-;; Dired Narrow
+;;; Dired Narrow
 (require-package 'dired-narrow)
 ;; Configuration
 (after-load 'dired-ranger
@@ -1278,7 +1277,7 @@
   ;; Exit on single match
   (setq dired-narrow-exit-when-one-left t))
 
-;; Dired Collapse
+;;; Dired Collapse
 (require-package 'dired-collapse)
 ;; Configuration
 (after-load 'dired-narrow
@@ -1287,7 +1286,7 @@
   ;; Set local key binding
   (bind-key "," #'dired-collapse-mode dired-mode-map))
 
-;; Dired-du
+;;; Dired-du
 (require-package 'dired-du)
 ;; Configuration
 (after-load 'dired-collapse
@@ -1296,7 +1295,7 @@
   ;; Use human readable output by default
   (setq dired-du-size-format t))
 
-;; Dired Async
+;;; Dired Async
 (require-package 'async)
 ;; Configuration
 (after-load 'dired-du
@@ -1310,7 +1309,7 @@
              ("E h" . dired-async-do-hardlink)
              ("E m" . dired-async-mode)))
 
-;; Asynchronous SMTP mail sending
+;;; Asynchronous SMTP mail sending
 (after-load 'message
   ;; Load async library
   (require 'smtpmail-async)
@@ -1319,7 +1318,7 @@
   ;; Enable compatibility with the Pass password manager
   (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
 
-;; Eglot
+;;; Eglot
 (require-package 'eglot)
 ;; Set global key binding
 (bind-key "C-c e t" #'eglot)
@@ -1337,13 +1336,13 @@
   ;; Add the Lua language server
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
-;; Easy-kill
+;;; Easy-kill
 (require-package 'easy-kill)
 ;; Set global key bindings
 (bind-key [remap kill-ring-save] #'easy-kill)
 (bind-key [remap mark-sexp] #'easy-mark)
 
-;; Elfeed
+;;; Elfeed
 (require-package 'elfeed)
 ;; Set global key binding
 (bind-key "C-c a f" #'elfeed)
@@ -1362,7 +1361,7 @@
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)
         elfeed-search-filter "@1-week-ago +unread"))
 
-;; rcirc
+;;; rcirc
 (bind-key "<f7>" #'irc)
 ;; Configuration
 (after-load 'rcirc
@@ -1417,7 +1416,7 @@
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
 
-;; rcirc color codes support
+;;; rcirc color codes support
 (require-package 'rcirc-styles)
 ;; Configuration
 (after-load 'rcirc
@@ -1447,7 +1446,7 @@
          "#8abeb7"
          "#ffffff"]))
 
-;; rcirc colored nicknames
+;;; rcirc colored nicknames
 (require-package 'rcirc-color)
 ;; Configuration
 (after-load 'rcirc
@@ -1456,26 +1455,26 @@
   ;; Inherit nick colors from rcirc-styles colors
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
-;; rcirc notifications
+;;; rcirc notifications
 (require-package 'rcirc-notify)
 ;; Configuration
 (after-load 'rcirc
   ;; Initialize mode
   (rcirc-notify-add-hooks))
 
-;; Expand region
+;;; Expand region
 (require-package 'expand-region)
 ;; Set global key binding
 (bind-key "C-=" #'er/expand-region)
 
-;; Geiser
+;;; Geiser
 (require-package 'geiser)
 ;; Configuration
 (after-load 'geiser-repl
   ;; Change default history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
 
-;; Iedit
+;;; Iedit
 (require-package 'iedit)
 ;; Autoload missing functions
 (autoload #'iedit-mode-from-isearch "iedit"
@@ -1493,12 +1492,12 @@
   ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
-;; ix.io paste support
+;;; ix.io paste support
 (require-package 'ix)
 ;; Set global key binding
 (bind-key "C-c x y" #'ix)
 
-;; JavaScript mode
+;;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -1510,24 +1509,24 @@
   ;; Highlight unused variables
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
-;; JSON mode
+;;; JSON mode
 (require-package 'json-mode)
 
-;; Lua mode
+;;; Lua mode
 (require-package 'lua-mode)
 ;; Configuration
 (after-load 'lua-mode
   ;; Lua 5.3 as the default interpreter
   (setq lua-default-application "lua5.3"))
 
-;; Hydra
+;;; Hydra
 (require-package 'hydra)
 ;; Configuration
 (after-load 'hydra
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
-;; EPUB format support
+;;; EPUB format support
 (require-package 'nov)
 ;; Initialize package
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
@@ -1544,14 +1543,14 @@
   ;; Text filling
   (setq nov-text-width 80))
 
-;; Macrostep
+;;; Macrostep
 (require-package 'macrostep)
 ;; Set local key binding
 (bind-key "C-c M-e" #'macrostep-expand emacs-lisp-mode-map)
 
-;; Magit
+;;; Magit
 (require-package 'magit)
-;; Set global key bindings
+;;; Set global key bindings
 (bind-key "C-x g" #'magit-status)
 (bind-key "C-x M-g" #'magit-dispatch-popup)
 (bind-key "C-c g c" #'magit-clone)
@@ -1559,7 +1558,7 @@
 (bind-key "C-c g l" #'magit-log-buffer-file)
 (bind-key "C-c g p" #'magit-pull)
 
-;; Markdown mode
+;;; Markdown mode
 (require-package 'markdown-mode)
 ;; Configuration
 (after-load 'markdown-mode
@@ -1591,7 +1590,7 @@
   ;; Don't insert spaces after a code fence
   (setq markdown-spaces-after-code-fence 0))
 
-;; Move-text
+;;; Move-text
 (require-package 'move-text)
 ;; Define Hydra
 (defhydra hydra-move-text ()
@@ -1602,7 +1601,7 @@
 ;; Set global key binding
 (bind-key "C-c k x" #'hydra-move-text/body)
 
-;; Multiple cursors
+;;; Multiple cursors
 (require-package 'multiple-cursors)
 ;; Change default `multiple-cursors' lists file location
 (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
@@ -1688,7 +1687,7 @@
 ;; Set global key binding
 (bind-key "C-c k m" #'hydra-multiple-cursors/body)
 
-;; PDF Tools
+;;; PDF Tools
 (require-package 'pdf-tools)
 ;; Initialize mode
 (pdf-loader-install)
@@ -1697,22 +1696,22 @@
 ;; Enable link following
 (add-hook 'pdf-view-mode-hook #'pdf-links-minor-mode)
 
-;; PDF Tools annotations
+;;; PDF Tools annotations
 (after-load 'pdf-annot
   ;; Activate annotations automatically
   (setq pdf-annot-activate-created-annotations t))
 
-;; Polymode Markdown
+;;; Polymode Markdown
 (require-package 'poly-markdown)
 ;; Initialize mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
-;; Rainbow mode
+;;; Rainbow mode
 (require-package 'rainbow-mode)
 ;; Set global key binding
 (bind-key "C-c t r" #'rainbow-mode)
 
-;; Skewer
+;;; Skewer
 (require-package 'skewer-mode)
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
@@ -1720,13 +1719,13 @@
 (bind-key "C-c a w" #'run-skewer)
 (bind-key "C-c r w" #'skewer-repl)
 
-;; Skewer CSS
+;;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
 
-;; Skewer HTML
+;;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
-;; SLY
+;;; SLY
 (require-package 'sly)
 ;; Set global key bindings
 (bind-key "C-c r s" #'sly)
@@ -1736,37 +1735,37 @@
   ;; Use SBCL by default
   (setq inferior-lisp-program "sbcl"))
 
-;; SLY REPL
+;;; SLY REPL
 (after-load 'sly-mrepl
   ;; Change history file location
   (setq sly-mrepl-history-file-name (locate-user-emacs-file "cache/sly-mrepl-history")))
 
-;; SLY macrostep
+;;; SLY macrostep
 (require-package 'sly-macrostep)
 
-;; SQL indentation
+;;; SQL indentation
 (require-package 'sql-indent)
 ;; Initialize mode
 (add-hook 'sql-mode-hook #'sqlind-minor-mode)
 
-;; Systemd mode
+;;; Systemd mode
 (require-package 'systemd)
 
-;; Wgrep
+;;; Wgrep
 (require-package 'wgrep)
 
-;; YAML mode
+;;; YAML mode
 (require-package 'yaml-mode)
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
 
-;; Zop-to-char
+;;; Zop-to-char
 (require-package 'zop-to-char)
 ;; Set global key bindings
 (bind-key [remap zap-to-char] #'zop-to-char)
 (bind-key "M-Z" #'zop-up-to-char)
 
-;; Ace-link
+;;; Ace-link
 (require-package 'ace-link)
 ;; Initialize mode
 (add-hook 'after-init-hook #'ace-link-setup-default)
@@ -1775,7 +1774,7 @@
   ;; Set global key binding
   (bind-key "C-c u a"  #'ace-link-addr))
 
-;; Avy
+;;; Avy
 (require-package 'avy)
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
@@ -1795,7 +1794,7 @@
   (setq avy-background t
         avy-highlight-first t))
 
-;; Company mode
+;;; Company mode
 (require-package 'company)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-company-mode)
@@ -1816,7 +1815,7 @@
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;; Diff-Hl
+;;; Diff-Hl
 (require-package 'diff-hl)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-diff-hl-mode)
@@ -1830,7 +1829,7 @@
   (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 
-;; Eyebrowse
+;;; Eyebrowse
 (require-package 'eyebrowse)
 ;; Change default prefix
 (setq eyebrowse-keymap-prefix (kbd "C-c w"))
@@ -1846,7 +1845,7 @@
   (setq eyebrowse-mode-line-left-delimiter "<"
         eyebrowse-mode-line-right-delimiter ">"))
 
-;; Form-feed
+;;; Form-feed
 (require-package 'form-feed)
 ;; Same line width as `fill-column' width
 (setq form-feed-line-width fill-column)
@@ -1864,7 +1863,7 @@
   (face-spec-set 'form-feed-line
                  '((t (:strike-through t :inherit font-lock-comment-face)))))
 
-;; Hl-Todo
+;;; Hl-Todo
 (require-package 'hl-todo)
 ;; Initialize mode
 (add-hook 'after-init-hook #'global-hl-todo-mode)
@@ -1881,7 +1880,7 @@
              ("M-s t" . hl-todo-occur)
              ("C-c k t" . hydra-hl-todo/body)))
 
-;; Ivy
+;;; Ivy
 (require-package 'ivy)
 ;; Ivy Hydra support
 (require-package 'ivy-hydra)
@@ -1903,7 +1902,7 @@
   (setq ivy-wrap t
         ivy-action-wrap t))
 
-;; Counsel
+;;; Counsel
 (require-package 'counsel)
 
 ;; Ffap compatibility function
@@ -1943,7 +1942,7 @@ suitable for assigning to `ffap-file-finder'."
         counsel-org-headline-display-tags t
         counsel-org-headline-display-todo t))
 
-;; Swiper
+;;; Swiper
 (require-package 'swiper)
 ;; Set global key bindings
 (bind-key "C-c s s" #'swiper-all)
@@ -1957,7 +1956,7 @@ suitable for assigning to `ffap-file-finder'."
   ;; Always go to the beginning of a match
   (setq swiper-goto-start-of-match t))
 
-;; Amx
+;;; Amx
 (require-package 'amx)
 ;; Initialize mode
 (add-hook 'after-init-hook #'amx-mode)
@@ -1971,7 +1970,7 @@ suitable for assigning to `ffap-file-finder'."
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
-;; Prescient
+;;; Prescient
 (require-package 'prescient)
 ;; Configuration
 (after-load 'prescient
@@ -1982,17 +1981,17 @@ suitable for assigning to `ffap-file-finder'."
   ;; Enable persistent history
   (prescient-persist-mode))
 
-;; Ivy Prescient
+;;; Ivy Prescient
 (require-package 'ivy-prescient)
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-prescient-mode)
 
-;; Company Prescient
+;;; Company Prescient
 (require-package 'company-prescient)
 ;; Initialize mode
 (add-hook 'after-init-hook #'company-prescient-mode)
 
-;; Paredit
+;;; Paredit
 (require-package 'paredit)
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
@@ -2033,7 +2032,7 @@ suitable for assigning to `ffap-file-finder'."
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil))))
 
-;; Rainbow Delimiters
+;;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
 ;; Initialize mode
 (dolist (hook '(emacs-lisp-mode-hook
@@ -2042,96 +2041,96 @@ suitable for assigning to `ffap-file-finder'."
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
 
-;; Volatile Highlights
+;;; Volatile Highlights
 (require-package 'volatile-highlights)
 ;; Initialize mode
 (add-hook 'after-init-hook #'volatile-highlights-mode)
 
-;; YASnippet
+;;; YASnippet
 (require-package 'yasnippet)
 ;; Initialize mode
 (add-hook 'after-init-hook #'yas-global-mode)
 
-;; Artist mode
+;;; Artist mode
 (bind-key "C-c t a" #'artist-mode)
 
-;; Toggle debug on error
+;;; Toggle debug on error
 (bind-key "C-c t d" #'toggle-debug-on-error)
 
-;; Ruler mode
+;;; Ruler mode
 (bind-key "C-c t C-r" #'ruler-mode)
 
-;; Variable pitch mode
+;;; Variable pitch mode
 (bind-key "C-c t C-v" #'variable-pitch-mode)
 
-;; Ediff
+;;; Ediff
 (bind-key "C-c f e" #'ediff)
 (bind-key "C-c f 3" #'ediff3)
 
-;; ANSI Term
+;;; ANSI Term
 (bind-key "C-c a t" #'ansi-term)
 
-;; Hexl mode
+;;; Hexl mode
 (bind-key "C-c t h" #'hexl-mode)
 (bind-key "C-c f h" #'hexl-find-file)
 
-;; Replace string immediately
+;;; Replace string immediately
 (bind-key "C-c s r" #'replace-string)
 (bind-key "C-c s C-r" #'replace-regexp)
 
-;; Grep results as a dired buffer
+;;; Grep results as a dired buffer
 (bind-key "C-c s d" #'find-grep-dired)
 
-;; Project
+;;; Project
 (bind-key "C-c p f" #'project-find-file)
 (bind-key "C-c p r" #'project-find-regexp)
 
-;; Find function and variable definitions
+;;; Find function and variable definitions
 (bind-key "C-c h f" #'find-function)
 (bind-key "C-c h 4 f" #'find-function-other-window)
 (bind-key "C-c h k" #'find-function-on-key)
 (bind-key "C-c h v" #'find-variable)
 (bind-key "C-c h 4 v" #'find-variable-other-window)
 
-;; Find library
+;;; Find library
 (bind-key "C-c h 4 l" #'find-library-other-window)
 (bind-key "C-c h 4 L" #'find-library-other-frame)
 
-;; List packages
+;;; List packages
 (bind-key "<f9>" #'package-list-packages)
 
-;; Cycle spacing
+;;; Cycle spacing
 (bind-key [remap just-one-space] #'cycle-spacing)
 
-;; Sort lines alphabetically
+;;; Sort lines alphabetically
 (bind-key "C-c x l" #'sort-lines)
 
-;; Sort fields with regular expressions
+;;; Sort fields with regular expressions
 (bind-key "C-c x f" #'sort-regexp-fields)
 
-;; Word capitalization operations
+;;; Word capitalization operations
 (bind-key [remap capitalize-word] #'capitalize-dwim)
 (bind-key [remap upcase-word] #'upcase-dwim)
 (bind-key [remap downcase-word] #'downcase-dwim)
 
-;; Auto Fill mode
+;;; Auto Fill mode
 (bind-key "C-c t f" #'auto-fill-mode)
 
-;; Align
+;;; Align
 (bind-key "C-c x a a" #'align)
 (bind-key "C-c x a c" #'align-current)
 (bind-key "C-c x a r" #'align-regexp)
 
-;; Auto Insert
+;;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
 
-;; Table insertion
+;;; Table insertion
 (bind-key "C-c i t" #'table-insert)
 
-;; Check parens
+;;; Check parens
 (bind-key "C-c c p" #'check-parens)
 
-;; Hydra for various text marking operations
+;;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :columns 4)
   "Mark Text"
   ("e" mark-sexp "S-Expression")
@@ -2156,16 +2155,16 @@ suitable for assigning to `ffap-file-finder'."
 ;; Set global key binding
 (bind-key "C-c k SPC" #'hydra-mark-text/body)
 
-;; Matching lines operation
+;;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
 (bind-key "C-c s C-l" #'delete-non-matching-lines)
 
-;; Local variable insertion
+;;; Local variable insertion
 (bind-key "C-c v d" #'add-dir-local-variable)
 (bind-key "C-c v f" #'add-file-local-variable)
 (bind-key "C-c v p" #'add-file-local-variable-prop-line)
 
-;; Extended buffer operation key bindings
+;;; Extended buffer operation key bindings
 (bind-key "C-c b DEL" #'erase-buffer)
 (bind-key "C-c b b" #'bury-buffer)
 (bind-key "C-c b u" #'unbury-buffer)
@@ -2174,10 +2173,10 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c b i" #'insert-buffer)
 (bind-key "<f5>" #'revert-buffer)
 
-;; Replace dabbrev-expand with hippie-expand
+;;; Replace dabbrev-expand with hippie-expand
 (bind-key [remap dabbrev-expand] #'hippie-expand)
 
-;; Load changes from the customize interface
+;;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
 
