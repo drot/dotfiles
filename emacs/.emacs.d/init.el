@@ -639,6 +639,11 @@
   ;; Use global fill column
   (setq woman-fill-column fill-column))
 
+;;; Interact with GnuPG directly
+(after-load 'epa
+  ;; Configuration
+  (setq epa-pinentry-mode 'loopback))
+
 ;;; Enable Pass integration
 (after-load 'auth-source
   ;; Initialize mode
