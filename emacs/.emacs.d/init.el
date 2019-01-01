@@ -977,6 +977,8 @@
         holiday-hebrew-holidays nil))
 
 ;;; Outline mode
+(add-hook 'prog-mode-hook #'outline-minor-mode)
+;; Set key binding
 (bind-key "C-c t o" #'outline-minor-mode)
 ;; Set default prefix
 (setq outline-minor-mode-prefix (kbd "C-c o"))
