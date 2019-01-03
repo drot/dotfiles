@@ -2124,9 +2124,9 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c t f" #'auto-fill-mode)
 
 ;;; Align
-(bind-key "C-c x a a" #'align)
-(bind-key "C-c x a c" #'align-current)
-(bind-key "C-c x a r" #'align-regexp)
+(bind-key "C-c x a" #'align)
+(bind-key "C-c x c" #'align-current)
+(bind-key "C-c x r" #'align-regexp)
 
 ;;; Auto Insert
 (bind-key "C-c i a" #'auto-insert)
