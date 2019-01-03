@@ -886,7 +886,7 @@
              ("C-c ! D" . flymake-disabled-backends)
              ("C-c ! d" . flymake-show-diagnostics-buffer)
              ("C-c ! l" . flymake-switch-to-log-buffer)
-             ("C-c k f" . hydra-flymake/body)))
+             ("C-c ! h" . hydra-flymake/body)))
 
 ;;; Comint mode
 (after-load 'comint
@@ -1010,7 +1010,7 @@
     ("b" outline-backward-same-level "Backward Same Level")
     ("q" nil "Quit"))
   ;; Set local key binding
-  (bind-key "C-c k o" #'hydra-outline/body outline-minor-mode-map))
+  (bind-key "C-c o h" #'hydra-outline/body outline-minor-mode-map))
 
 ;;; Org-mode
 (bind-key "C-c o a" #'org-agenda)
@@ -1606,7 +1606,7 @@
   ("n" move-text-down "Move Text Down")
   ("q" nil "Quit"))
 ;; Set global key binding
-(bind-key "C-c k x" #'hydra-move-text/body)
+(bind-key "C-c x h" #'hydra-move-text/body)
 
 ;;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1692,7 +1692,7 @@
   ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
   ("q" nil "Quit" :exit t))
 ;; Set global key binding
-(bind-key "C-c k m" #'hydra-multiple-cursors/body)
+(bind-key "C-c m h" #'hydra-multiple-cursors/body)
 
 ;;; PDF Tools
 (require-package 'pdf-tools)
@@ -1885,7 +1885,7 @@
   ;; Set local key bindings
   (bind-keys :map hl-todo-mode-map
              ("M-s t" . hl-todo-occur)
-             ("C-c k t" . hydra-hl-todo/body)))
+             ("C-c p h" . hydra-hl-todo/body)))
 
 ;;; Ivy
 (require-package 'ivy)
@@ -2160,7 +2160,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set global key binding
-(bind-key "C-c k SPC" #'hydra-mark-text/body)
+(bind-key "C-c x SPC" #'hydra-mark-text/body)
 
 ;;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
