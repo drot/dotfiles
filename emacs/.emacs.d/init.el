@@ -2160,7 +2160,7 @@ suitable for assigning to `ffap-file-finder'."
   ("." er/expand-region "Expand Region" :exit nil)
   ("," er/contract-region "Contract Region" :exit nil))
 ;; Set global key binding
-(bind-key "C-c x SPC" #'hydra-mark-text/body)
+(bind-key "C-c x C-SPC" #'hydra-mark-text/body)
 
 ;;; Matching lines operation
 (bind-key "C-c s l" #'delete-matching-lines)
