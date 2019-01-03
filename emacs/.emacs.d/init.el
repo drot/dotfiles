@@ -871,12 +871,21 @@
 ;; Configuration
 (after-load 'flymake
   ;; Define Hydra
-  (defhydra hydra-flymake (:pre (flyspell-mode 0) :post (flyspell-mode))
-    "Flymake"
-    ("n" flymake-goto-next-error "Next Error")
-    ("p" flymake-goto-prev-error "Previous Error")
-    ("d" flymake-show-diagnostics-buffer "List All Errors" :exit t)
-    ("q" nil "Quit"))
+  (defhydra hydra-flymake (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
+    "
+^Errors^            ^List errors^
+^^^^^^-----------------------------
+_n_: next           _d_: show
+_p_: previous
+
+"
+    ;; Errors
+    ("n" flymake-goto-next-error)
+    ("p" flymake-goto-prev-error)
+    ;; List errors
+    ("d" flymake-show-diagnostics-buffer :exit t)
+    ;; Quit
+    ("q" nil "quit"))
   ;; Set local key bindings
   (bind-keys :map flymake-mode-map
              ("C-c ! n" . flymake-goto-next-error)
@@ -1021,7 +1030,8 @@ _d_: subtree
     ("p" outline-previous-visible-heading)  ; Previous
     ("f" outline-forward-same-level)        ; Forward - same level
     ("b" outline-backward-same-level)       ; Backward - same level
-    ("z" nil "leave"))
+    ;; Quit
+    ("z" nil "quit"))
   ;; Set local key binding
   (bind-key "C-c o h" #'hydra-outline/body outline-minor-mode-map))
 
