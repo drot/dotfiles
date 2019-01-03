@@ -873,10 +873,10 @@
   ;; Define Hydra
   (defhydra hydra-flymake (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
     "
-^Errors^            ^List errors^
+^Errors^            ^List Errors^
 ^^^^^^-----------------------------
-_n_: next           _d_: show
-_p_: previous
+_n_: Next           _d_: Show
+_p_: Previous
 
 "
     ;; Errors
@@ -885,7 +885,7 @@ _p_: previous
     ;; List errors
     ("d" flymake-show-diagnostics-buffer :exit t)
     ;; Quit
-    ("q" nil "quit"))
+    ("q" nil "Quit"))
   ;; Set local key bindings
   (bind-keys :map flymake-mode-map
              ("C-c ! n" . flymake-goto-next-error)
@@ -1003,12 +1003,12 @@ _p_: previous
     "
 ^Hide^             ^Show^           ^Move
 ^^^^^^------------------------------------------------------
-_q_: sublevels     _a_: all         _u_: up
-_t_: body          _e_: entry       _n_: next visible
-_o_: other         _i_: children    _p_: previous visible
-_c_: entry         _k_: branches    _f_: forward same level
-_l_: leaves        _s_: subtree     _b_: backward same level
-_d_: subtree
+_q_: Sublevels     _a_: All         _u_: Up
+_t_: Body          _e_: Entry       _n_: Next Visible
+_o_: Other         _i_: Children    _p_: Previous Visible
+_c_: Entry         _k_: Branches    _f_: Forward Same Level
+_l_: Leaves        _s_: Subtree     _b_: Backward Same Level
+_d_: Subtree
 
 "
     ;; Hide
@@ -1031,7 +1031,7 @@ _d_: subtree
     ("f" outline-forward-same-level)        ; Forward - same level
     ("b" outline-backward-same-level)       ; Backward - same level
     ;; Quit
-    ("z" nil "quit"))
+    ("z" nil "Quit"))
   ;; Set local key binding
   (bind-key "C-c o h" #'hydra-outline/body outline-minor-mode-map))
 
@@ -1623,7 +1623,7 @@ _d_: subtree
 ;;; Move-text
 (require-package 'move-text)
 ;; Define Hydra
-(defhydra hydra-move-text ()
+(defhydra hydra-move-text (:color pink)
   "Move Text"
   ("p" move-text-up "Move Text Up")
   ("n" move-text-down "Move Text Down")
@@ -1900,7 +1900,7 @@ _d_: subtree
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
-  (defhydra hydra-hl-todo ()
+  (defhydra hydra-hl-todo (:color pink)
     "Highlight TODO"
     ("n" hl-todo-next "Next TODO")
     ("p" hl-todo-previous "Previous TODO")
@@ -2161,27 +2161,44 @@ suitable for assigning to `ffap-file-finder'."
 (bind-key "C-c c p" #'check-parens)
 
 ;;; Hydra for various text marking operations
-(defhydra hydra-mark-text (:exit t :columns 4)
-  "Mark Text"
-  ("e" mark-sexp "S-Expression")
-  ("f" er/mark-defun "Function")
-  ("w" er/mark-word "Word")
-  ("u" er/mark-url "URL")
-  ("E" er/mark-email "Email")
-  ("p" er/mark-text-paragraph "Paragraph")
-  ("s" er/mark-symbol "Symbol")
-  ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
-  ("q" er/mark-inside-quotes "Inside Quotes")
-  ("Q" er/mark-outside-quotes "Outside Quotes")
-  ("(" er/mark-inside-pairs "Inside Pairs")
-  ("[" er/mark-inside-pairs "Inside Pairs")
-  ("{" er/mark-inside-pairs "Inside Pairs")
-  (")" er/mark-outside-pairs "Outside Pairs")
-  ("]" er/mark-outside-pairs "Outside Pairs")
-  ("}" er/mark-outside-pairs "Outside Pairs")
-  ("c" er/mark-comment "Comment")
-  ("." er/expand-region "Expand Region" :exit nil)
-  ("," er/contract-region "Contract Region" :exit nil))
+(defhydra hydra-mark-text (:exit t :color pink :hint nil)
+  "
+^Lisp^                   ^Text^           ^Quotes^               ^Pairs^            ^Region^
+^^^^^^------------------------------------------------------------------------------------------------
+_e_: S-Expression        _w_: Word        _q_: Inside Quotes    _(_: Inside Pairs   _._: Expand Region
+_f_: Function            _p_: Paragraph   _Q_: Outside Quotes   _[_: Inside Pairs   _,_: Contract Region
+_s_: Symbol              _c_: Comment     ^ ^                   _{_: Inside Pairs
+_S_: Prefixed Symbol     _u_: URL         ^ ^                   _)_: Inside Pairs
+^ ^                      _E_: Email       ^ ^                   _]_: Inside Pairs
+^ ^                      ^ ^              ^ ^                   _}_: Inside Pairs
+
+"
+  ;; Lisp
+  ("e" mark-sexp)
+  ("f" er/mark-defun)
+  ("s" er/mark-symbol)
+  ("S" er/mark-symbol-with-prefix)
+  ;; Text
+  ("w" er/mark-word)
+  ("p" er/mark-text-paragraph)
+  ("c" er/mark-comment)
+  ("u" er/mark-url)
+  ("E" er/mark-email)
+  ;; Quotes
+  ("q" er/mark-inside-quotes)
+  ("Q" er/mark-outside-quotes)
+  ;; Pairs
+  ("(" er/mark-inside-pairs)
+  ("[" er/mark-inside-pairs)
+  ("{" er/mark-inside-pairs)
+  (")" er/mark-outside-pairs)
+  ("]" er/mark-outside-pairs)
+  ("}" er/mark-outside-pairs)
+  ;; Region
+  ("." er/expand-region :exit nil)
+  ("," er/contract-region :exit nil)
+  ;; Quit
+  ("q" nil "Quit"))
 ;; Set global key binding
 (bind-key "C-c x C-SPC" #'hydra-mark-text/body)
 
