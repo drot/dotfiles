@@ -1614,7 +1614,7 @@ _d_: Subtree
   ("n" move-text-down "Move Down")
   ("q" nil "Quit"))
 ;; Set global key binding
-(global-set-key (kbd "C-c x h") #'hydra-move-text/body)
+(global-set-key (kbd "C-c x m") #'hydra-move-text/body)
 
 ;;; Multiple cursors
 (require-package 'multiple-cursors)
