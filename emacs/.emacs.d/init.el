@@ -864,9 +864,9 @@
   ;; Define Hydra
   (defhydra hydra-flymake (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
     "
-^Errors^            ^List Errors^
-^^^^^^-----------------------------
-_n_: Next           _d_: Show
+^Errors^       ^List Errors^
+^^^^^^------------------------
+_n_: Next      _d_: Show
 _p_: Previous
 
 "
@@ -990,13 +990,13 @@ _p_: Previous
   ;; Define Hydra
   (defhydra hydra-outline (:color pink :hint nil)
     "
-^Hide^             ^Show^           ^Move
-^^^^^^------------------------------------------------------
-_q_: Sublevels     _a_: All         _u_: Up
-_t_: Body          _e_: Entry       _n_: Next Visible
-_o_: Other         _i_: Children    _p_: Previous Visible
-_c_: Entry         _k_: Branches    _f_: Forward Same Level
-_l_: Leaves        _s_: Subtree     _b_: Backward Same Level
+^Hide^          ^Show^         ^Move
+^^^^^^-------------------------------------------------
+_q_: Sublevels  _a_: All       _u_: Up
+_t_: Body       _e_: Entry     _n_: Next Visible
+_o_: Other      _i_: Children  _p_: Previous Visible
+_c_: Entry      _k_: Branches  _f_: Forward Same Level
+_l_: Leaves     _s_: Subtree   _b_: Backward Same Level
 _d_: Subtree
 
 "
@@ -1610,8 +1610,8 @@ _d_: Subtree
 ;; Define Hydra
 (defhydra hydra-move-text (:color pink)
   "Move Text"
-  ("p" move-text-up "Move Text Up")
-  ("n" move-text-down "Move Text Down")
+  ("p" move-text-up "Move Up")
+  ("n" move-text-down "Move Down")
   ("q" nil "Quit"))
 ;; Set global key binding
 (global-set-key (kbd "C-c x h") #'hydra-move-text/body)
@@ -1680,13 +1680,13 @@ _d_: Subtree
 ;; Define Hydra
 (defhydra hydra-multiple-cursors (:color pink :hint nil)
   "
-^Lines^                   ^Mark Like This^        ^Up^           ^Down^         ^Other^
-^^^^^^-----------------------------------------------------------------------------------------------------
-_l_: Edit Lines           _a_: All Dwim           _n_: Next      _p_: Previous  _i_: Insert Numbers
-_b_: Beginnings of Lines  _s_: All Symbols        _N_: Skip      _P_: Skip      _R_: Mark All Region Regexp
-_e_: Ends of Lines        _w_: All Words          _M-n_: Unmark  _M-p_: Unmark  _f_: Mark All Region Defun
-^ ^                       _r_: All Region         ^ ^            ^ ^            _S_: Mark All Symbols Defun
-^ ^                       ^ ^                     ^ ^            ^ ^            _W_: Mark All Words Defun
+^Lines^                   ^Mark Like This^  ^Up^           ^Down^         ^Other^
+^^^^^^-----------------------------------------------------------------------------------------------
+_l_: Edit Lines           _a_: All Dwim     _n_: Next      _p_: Previous  _i_: Insert Numbers
+_b_: Beginnings of Lines  _s_: All Symbols  _N_: Skip      _P_: Skip      _R_: Mark All Region Regexp
+_e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: Mark All Region Defun
+^ ^                       _r_: All Region   ^ ^            ^ ^            _S_: Mark All Symbols Defun
+^ ^                       ^ ^               ^ ^            ^ ^            _W_: Mark All Words Defun
 
 "
   ("l" mc/edit-lines :exit t)
@@ -2153,14 +2153,14 @@ suitable for assigning to `ffap-file-finder'."
 ;;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :color pink :hint nil)
   "
-^Lisp^                   ^Text^           ^Quotes^               ^Pairs^            ^Region^
-^^^^^^------------------------------------------------------------------------------------------------
-_e_: S-Expression        _w_: Word        _q_: Inside Quotes    _(_: Inside Pairs   _._: Expand Region
-_f_: Function            _p_: Paragraph   _Q_: Outside Quotes   _[_: Inside Pairs   _,_: Contract Region
-_s_: Symbol              _c_: Comment     ^ ^                   _{_: Inside Pairs
-_S_: Prefixed Symbol     _u_: URL         ^ ^                   _)_: Inside Pairs
-^ ^                      _E_: Email       ^ ^                   _]_: Inside Pairs
-^ ^                      ^ ^              ^ ^                   _}_: Inside Pairs
+^Lisp^                ^Text^          ^Quotes^              ^Pairs^           ^Region^
+^^^^^^------------------------------------------------------------------------------------------
+_e_: S-Expression     _w_: Word       _q_: Inside Quotes   _(_: Inside Pairs  _._: Expand Region
+_f_: Function         _p_: Paragraph  _Q_: Outside Quotes  _[_: Inside Pairs  _,_: Contract Region
+_s_: Symbol           _c_: Comment    ^ ^                  _{_: Inside Pairs
+_S_: Prefixed Symbol  _u_: URL        ^ ^                  _)_: Inside Pairs
+^ ^                   _E_: Email      ^ ^                  _]_: Inside Pairs
+^ ^                   ^ ^             ^ ^                  _}_: Inside Pairs
 
 "
   ;; Lisp
