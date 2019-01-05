@@ -1678,27 +1678,36 @@ _d_: Subtree
 (global-set-key (kbd "C-c m C-e") #'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-c m C-s") #'mc/mark-all-in-region)
 ;; Define Hydra
-(defhydra hydra-multiple-cursors (:columns 3)
-  "Multiple Cursors"
-  ("l" mc/edit-lines "Edit Lines In Region" :exit t)
-  ("b" mc/edit-beginnings-of-lines "Edit Beginnings Of Lines In Region" :Exit t)
-  ("e" mc/edit-ends-of-lines "Edit Ends Of Lines In Region" :exit t)
-  ("a" mc/mark-all-dwim "Mark All Dwim" :exit t)
-  ("S" mc/mark-all-symbols-like-this "Mark All Symbols Likes This" :exit t)
-  ("w" mc/mark-all-words-like-this "Mark All Words Like This" :exit t)
-  ("r" mc/mark-all-in-region "Mark All In Region" :exit t)
-  ("R" mc/mark-all-in-region-regexp "Mark All In Region (regexp)" :exit t)
-  ("d" mc/mark-all-like-this-in-defun "Mark All Like This In Defun" :exit t)
-  ("s" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Like This In Defun" :exit t)
-  ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Like This In Defun" :exit t)
-  ("i" mc/insert-numbers "Insert Numbers" :exit t)
-  ("n" mc/mark-next-like-this "Mark Next Like This")
-  ("N" mc/skip-to-next-like-this "Skip To Next Like This")
-  ("M-n" mc/unmark-next-like-this "Unmark Next Like This")
-  ("p" mc/mark-previous-like-this "Mark Previous Like This")
-  ("P" mc/skip-to-previous-like-this "Skip To Previous Like This")
-  ("M-p" mc/unmark-previous-like-this "Unmark Previous Like This")
-  ("q" nil "Quit" :exit t))
+(defhydra hydra-multiple-cursors (:color pink :hint nil)
+  "
+^Lines^                   ^Mark Like This^        ^Up^           ^Down^         ^Other^
+^^^^^^-----------------------------------------------------------------------------------------------------
+_l_: Edit Lines           _a_: All Dwim           _n_: Next      _p_: Previous  _i_: Insert Numbers
+_b_: Beginnings of Lines  _s_: All Symbols        _N_: Skip      _P_: Skip      _R_: Mark All Region Regexp
+_e_: Ends of Lines        _w_: All Words          _M-n_: Unmark  _M-p_: Unmark  _f_: Mark All Region Defun
+^ ^                       _r_: All Region         ^ ^            ^ ^            _S_: Mark All Symbols Defun
+^ ^                       ^ ^                     ^ ^            ^ ^            _W_: Mark All Words Defun
+
+"
+  ("l" mc/edit-lines :exit t)
+  ("b" mc/edit-beginnings-of-lines :exit t)
+  ("e" mc/edit-ends-of-lines :exit t)
+  ("a" mc/mark-all-dwim :exit t)
+  ("s" mc/mark-all-symbols-like-this :exit t)
+  ("w" mc/mark-all-words-like-this :exit t)
+  ("r" mc/mark-all-in-region :exit t)
+  ("n" mc/mark-next-like-this)
+  ("N" mc/skip-to-next-like-this)
+  ("M-n" mc/unmark-next-like-this)
+  ("p" mc/mark-previous-like-this)
+  ("P" mc/skip-to-previous-like-this)
+  ("M-p" mc/unmark-previous-like-this)
+  ("i" mc/insert-numbers :exit t)
+  ("R" mc/mark-all-in-region-regexp :exit t)
+  ("f" mc/mark-all-like-this-in-defun :exit t)
+  ("S" mc/mark-all-symbols-like-this-in-defun :exit t)
+  ("W" mc/mark-all-words-like-this-in-defun :exit t)
+  ("q" nil "Quit"))
 ;; Set global key binding
 (global-set-key (kbd "C-c m h") #'hydra-multiple-cursors/body)
 
