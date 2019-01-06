@@ -102,7 +102,7 @@ c.colors.completion.item.selected.border.top = '#1d1f21'
 c.colors.completion.item.selected.border.bottom = '#1d1f21'
 
 # Foreground color of the matched text in the completion.
-# Type: QssColor
+# Type: QtColor
 c.colors.completion.match.fg = 'white'
 
 # Color of the scrollbar handle in the completion view.
@@ -414,5 +414,5 @@ c.fonts.statusbar = '12pt monospace'
 c.fonts.tabs = '12pt monospace'
 
 # Bindings for normal mode
-config.bind(',m', 'spawn mpv {url}')
-config.bind(';M', 'hint links spawn mpv {hint-url}')
+config.bind(',m', 'spawn umpv {url}')
+config.bind(';M', 'hint links spawn umpv {hint-url}')
