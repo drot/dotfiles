@@ -971,13 +971,15 @@ awful.rules.rules = {
    { rule = { class = "Emacs" },
      properties = { screen = 1, tag = "3", maximized = true } },
    { rule = { class = "libreoffice" },
-     properties = { screen = 1, tag = "5" } },
+     properties = { screen = 1, tag = "4" } },
    { rule = { class = "Pavucontrol" },
-     properties = { screen = 1, tag = "5" } },
+     properties = { screen = 1, tag = "4" } },
    { rule = { class = "Gimp" },
-     properties = { screen = 1, tag = "5" } },
+     properties = { screen = 1, tag = "4" } },
    { rule = { class = "Pcmanfm" },
-     properties = { screen = 1, tag = "5" } },
+     properties = { screen = 1, tag = "4" } },
+   { rule = { class = "Ripcord" },
+     properties = { screen = 1, tag = "4" } },
 }
 -- }}}
 
