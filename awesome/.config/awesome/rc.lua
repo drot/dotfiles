@@ -126,6 +126,7 @@ local myutilmenu = {
 
 local mywebmenu = {
    { "Pidgin", "pidgin", beautiful.menu_pidgin },
+   { "Ripcord", "ripcord", beautiful.menu_ripcord },
    { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
 }
 
