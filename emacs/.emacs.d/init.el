@@ -1826,8 +1826,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (after-load 'company
   ;; Change default behavior
   (setq company-minimum-prefix-length 2
-        company-selection-wrap-around t
-        company-require-match 'never)
+        company-selection-wrap-around t)
   ;; Show numbers on candidates
   (setq company-show-numbers t)
   ;; Tooltip behavior
@@ -1835,7 +1834,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
         company-tooltip-flip-when-above t)
   ;; Dabbrev completion behavior
   (setq company-dabbrev-downcase nil
-        company-dabbrev-ignore-case t))
+        company-dabbrev-ignore-case t)
+  ;; Insert completions immediately
+  (company-tng-configure-default))
 
 ;;; Diff-Hl
 (require-package 'diff-hl)
