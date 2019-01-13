@@ -10,7 +10,7 @@ selected_background="#1d1f21"
 selected_foreground="#f0c674"
 
 # Show clipboard
-clipmenu -i -p ">" \
+clipmenu -i -p "Paste:" \
          -fn "$font" \
          -nb "$normal_background" \
          -nf "$normal_foreground" \
