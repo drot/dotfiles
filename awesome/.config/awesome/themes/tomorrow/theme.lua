@@ -124,6 +124,7 @@ theme.tag_web = themes_path .. "themes/tomorrow/icons/tags/web.png"
 theme.tag_editor = themes_path .. "themes/tomorrow/icons/tags/editor.png"
 theme.tag_office = themes_path .. "themes/tomorrow/icons/tags/office.png"
 theme.tag_utils = themes_path .. "themes/tomorrow/icons/tags/utils.png"
+theme.tag_graphics = themes_path .. "themes/tomorrow/icons/tags/graphics.png"
 theme.tag_misc = themes_path .. "themes/tomorrow/icons/tags/misc.png"
 
 -- Titlebar

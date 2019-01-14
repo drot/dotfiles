@@ -139,10 +139,18 @@ tyrannical.tags = {
       exclusive = true,
       icon = beautiful.tag_utils,
       layout = awful.layout.suit.float,
-      class = { "Pavucontrol", "Gimp", "Pcmanfm", "virt-manager" }
+      class = { "Pavucontrol", "Pcmanfm", "virt-manager" }
    },
    {
       name = "6",
+      init = false,
+      exclusive = true,
+      icon = beautiful.tag_graphics,
+      layout = awful.layout.suit.float,
+      class = { "Gimp" }
+   },
+   {
+      name = "7",
       init = false,
       exclusive = false,
       icon = beautiful.tag_misc,
