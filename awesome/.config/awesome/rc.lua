@@ -108,7 +108,7 @@ tyrannical.tags = {
    },
    {
       name = "2",
-      init = false,
+      init = true,
       exclusive = true,
       icon = beautiful.tag_web,
       screen = 1,
@@ -117,7 +117,7 @@ tyrannical.tags = {
    },
    {
       name = "3",
-      init = false,
+      init = true,
       exclusive = true,
       icon = beautiful.tag_editor,
       screen = 1,
@@ -126,7 +126,7 @@ tyrannical.tags = {
    },
    {
       name = "4",
-      init = false,
+      init = true,
       exclusive = true,
       icon = beautiful.tag_office,
       screen = 1,
