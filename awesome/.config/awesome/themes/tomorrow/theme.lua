@@ -118,6 +118,14 @@ theme.menu_edit = themes_path .. "themes/tomorrow/icons/menu/edit.png"
 theme.menu_restart = themes_path .. "themes/tomorrow/icons/menu/restart.png"
 theme.menu_quit = themes_path .. "themes/tomorrow/icons/menu/quit.png"
 
+-- Taglist
+theme.tag_term = themes_path .. "themes/tomorrow/icons/tags/term.png"
+theme.tag_web = themes_path .. "themes/tomorrow/icons/tags/web.png"
+theme.tag_editor = themes_path .. "themes/tomorrow/icons/tags/editor.png"
+theme.tag_office = themes_path .. "themes/tomorrow/icons/tags/office.png"
+theme.tag_utils = themes_path .. "themes/tomorrow/icons/tags/utils.png"
+theme.tag_misc = themes_path .. "themes/tomorrow/icons/tags/misc.png"
+
 -- Titlebar
 theme.titlebar_close_button_normal = themes_path .. "themes/tomorrow/icons/titlebar/close_normal.png"
 theme.titlebar_close_button_focus = themes_path .. "themes/tomorrow/icons/titlebar/close_focus.png"

@@ -101,30 +101,34 @@ tyrannical.tags = {
       name = "1",
       init = true,
       exclusive = true,
+      icon = beautiful.tag_term,
       screen = 1,
       layout = awful.layout.suit.tile,
       class = { "xterm", "st-256color" }
    },
    {
       name = "2",
-      init = true,
+      init = false,
       exclusive = true,
+      icon = beautiful.tag_web,
       screen = 1,
       layout = awful.layout.suit.float,
       class = { "Firefox", "Tor Browser" }
    },
    {
       name = "3",
-      init = true,
+      init = false,
       exclusive = true,
+      icon = beautiful.tag_editor,
       screen = 1,
       layout = awful.layout.suit.float,
       class  = { "Emacs" }
    },
    {
       name = "4",
-      init = true,
+      init = false,
       exclusive = true,
+      icon = beautiful.tag_office,
       screen = 1,
       layout = awful.layout.suit.float,
       class = { "zathura", "libreoffice" }
@@ -133,6 +137,7 @@ tyrannical.tags = {
       name = "5",
       init = false,
       exclusive = true,
+      icon = beautiful.tag_utils,
       layout = awful.layout.suit.float,
       class = { "Pavucontrol", "Gimp", "Pcmanfm", "virt-manager" }
    },
@@ -140,6 +145,7 @@ tyrannical.tags = {
       name = "6",
       init = false,
       exclusive = false,
+      icon = beautiful.tag_misc,
       layout = awful.layout.suit.float,
       class = { "Ripcord" }
    },
