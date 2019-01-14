@@ -134,7 +134,7 @@ tyrannical.tags = {
       init = false,
       exclusive = true,
       layout = awful.layout.suit.float,
-      class = { "Pavucontrol", "Gimp", "Pcmanfm" }
+      class = { "Pavucontrol", "Gimp", "Pcmanfm", "virt-manager" }
    },
    {
       name = "6",
