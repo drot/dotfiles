@@ -127,10 +127,17 @@ tyrannical.tags = {
       exclusive = true,
       screen = 1,
       layout = awful.layout.suit.float,
-      class = { "zathura", "libreoffice", "Pavucontrol", "Gimp", "Pcmanfm" }
+      class = { "zathura", "libreoffice" }
    },
    {
       name = "5",
+      init = false,
+      exclusive = true,
+      layout = awful.layout.suit.float,
+      class = { "Pavucontrol", "Gimp", "Pcmanfm" }
+   },
+   {
+      name = "6",
       init = false,
       exclusive = false,
       layout = awful.layout.suit.float,
