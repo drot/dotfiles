@@ -2,6 +2,8 @@
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
+-- Tyrannical tagging system
+local tyrannical = require("tyrannical")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -91,6 +93,76 @@ local function client_menu_toggle_fn()
       end
    end
 end
+-- }}}
+
+-- {{{ Tyrannical setup
+tyrannical.tags = {
+   {
+      name = "1",
+      init = true,
+      exclusive = true,
+      screen = 1,
+      layout = awful.layout.suit.tile,
+      class = { "xterm", "st-256color" }
+   },
+   {
+      name = "2",
+      init = true,
+      exclusive = true,
+      screen = 1,
+      layout = awful.layout.suit.float,
+      class = { "Firefox", "Tor Browser" }
+   },
+   {
+      name = "3",
+      init = true,
+      exclusive = true,
+      screen = 1,
+      layout = awful.layout.suit.float,
+      class  = { "Emacs" }
+   },
+   {
+      name = "4",
+      init = true,
+      exclusive = true,
+      screen = 1,
+      layout = awful.layout.suit.float,
+      class = { "zathura", "libreoffice", "Pavucontrol", "Gimp", "Pcmanfm" }
+   },
+   {
+      name = "5",
+      init = false,
+      exclusive = false,
+      layout = awful.layout.suit.float,
+      class = { "Ripcord" }
+   },
+}
+
+-- Ignore the tag "exclusive" property for the following clients (matched by classes)
+tyrannical.properties.intrusive = {
+   "st-256color", "mpv", "pinentry", "feh", "Pidgin"
+}
+
+-- Ignore the tiled layout for the matching clients
+tyrannical.properties.floating = {
+   "mpv", "pinentry", "feh", "Pidgin"
+}
+
+-- Make the matching clients (by classes) on top of the default layout
+tyrannical.properties.ontop = {
+   "Xephyr"
+}
+
+-- Make matching clients maximized
+tyrannical.properties.maximized = {
+   emacs = true,
+   zathura = true,
+}
+
+-- Block popups
+tyrannical.settings.block_children_focus_stealing = true
+-- Force popups/dialogs to have the same tags as the parent client
+tyrannical.settings.group_children = true
 -- }}}
 
 -- {{{ Notification configuration
@@ -600,9 +672,6 @@ awful.screen.connect_for_each_screen(function(s)
       -- Wallpaper
       set_wallpaper(s)
 
-      -- Each screen has its own tag table.
-      awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
-
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt()
       -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -951,35 +1020,11 @@ awful.rules.rules = {
    { rule_any = { type = { "normal", "dialog" }
                 }, properties = { titlebars_enabled = true }
    },
-
-   -- Start llpp maximized
-   { rule = { class = "llpp" },
-     properties = { maximized = true } },
-
-   -- Set qutebrowser to always map on the tag named "2" on screen 1
-   { rule = { class = "qutebrowser" },
-     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   -- Apply the same for Mozilla
+   -- Disable titlebars on browsers
    { rule = { class = "Firefox" },
-     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   { rule = { class = "Tor Browser" },
-     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   -- Wine
-   { rule = { class = "Wine" },
      properties = { titlebars_enabled = false } },
-   -- Map the rest of the applications
-   { rule = { class = "Emacs" },
-     properties = { screen = 1, tag = "3", maximized = true } },
-   { rule = { class = "libreoffice" },
-     properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Pavucontrol" },
-     properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Gimp" },
-     properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Pcmanfm" },
-     properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Ripcord" },
-     properties = { screen = 1, tag = "4" } },
+   { rule = { class = "Tor Browser" },
+     properties = { titlebars_enabled = false } },
 }
 -- }}}
 
