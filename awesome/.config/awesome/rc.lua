@@ -1027,8 +1027,8 @@ awful.rules.rules = {
         },
         class = {
            "Pidgin",
-           "mpv"},
-
+           "mpv"
+        },
         name = {
            "Event Tester", -- xev
         },
