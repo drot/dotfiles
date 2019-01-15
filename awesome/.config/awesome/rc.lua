@@ -123,7 +123,7 @@ tyrannical.tags = {
    },
    {
       icon = beautiful.tag_office,
-      init = false,
+      init = true,
       exclusive = true,
       screen = 1,
       layout = awful.layout.suit.float,
@@ -147,6 +147,7 @@ tyrannical.tags = {
       icon = beautiful.tag_misc,
       init = false,
       exclusive = false,
+      fallback = true,
       layout = awful.layout.suit.float,
       class = { "Ripcord" }
    },
