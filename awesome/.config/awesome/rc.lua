@@ -123,7 +123,7 @@ tyrannical.tags = {
    },
    {
       icon = beautiful.tag_office,
-      init = true,
+      init = false,
       exclusive = true,
       screen = 1,
       layout = awful.layout.suit.float,
