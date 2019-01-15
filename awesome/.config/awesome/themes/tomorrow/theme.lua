@@ -65,7 +65,7 @@ theme.taglist_bg_focus = theme.bg_normal
 
 -- Tasklist
 theme.tasklist_spacing = 1
-theme.tasklist_shape = gshape.octogon
+theme.tasklist_shape = gshape.rectangle
 theme.tasklist_shape_border_width = dpi(1)
 theme.tasklist_font_minimized = "Iosevka Term SS05 Italic 12"
 theme.tasklist_shape_border_color = theme.bg_minimize
