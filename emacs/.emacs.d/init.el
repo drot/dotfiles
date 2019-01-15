@@ -478,6 +478,7 @@
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Org" (derived-mode . org-mode))
+           ("Packages" (derived-mode . package-menu-mode))
            ("PDF" (derived-mode . pdf-view-mode))
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
