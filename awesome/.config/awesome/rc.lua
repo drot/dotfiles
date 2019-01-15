@@ -98,62 +98,55 @@ end
 -- {{{ Tyrannical setup
 tyrannical.tags = {
    {
-      name = "1",
+      icon = beautiful.tag_term,
       init = true,
       exclusive = true,
-      icon = beautiful.tag_term,
       screen = 1,
       layout = awful.layout.suit.tile,
       class = { "xterm", "st-256color" }
    },
    {
-      name = "2",
+      icon = beautiful.tag_web,
       init = true,
       exclusive = true,
-      icon = beautiful.tag_web,
       screen = 1,
       layout = awful.layout.suit.float,
       class = { "Firefox", "Tor Browser" }
    },
    {
-      name = "3",
+      icon = beautiful.tag_editor,
       init = true,
       exclusive = true,
-      icon = beautiful.tag_editor,
       screen = 1,
       layout = awful.layout.suit.float,
       class  = { "Emacs" }
    },
    {
-      name = "4",
+      icon = beautiful.tag_office,
       init = true,
       exclusive = true,
-      icon = beautiful.tag_office,
       screen = 1,
       layout = awful.layout.suit.float,
       class = { "zathura", "libreoffice" }
    },
    {
-      name = "5",
+      icon = beautiful.tag_utils,
       init = false,
       exclusive = true,
-      icon = beautiful.tag_utils,
       layout = awful.layout.suit.float,
       class = { "Pavucontrol", "Pcmanfm", "virt-manager" }
    },
    {
-      name = "6",
+      icon = beautiful.tag_graphics,
       init = false,
       exclusive = true,
-      icon = beautiful.tag_graphics,
       layout = awful.layout.suit.float,
       class = { "Gimp" }
    },
    {
-      name = "7",
+      icon = beautiful.tag_misc,
       init = false,
       exclusive = false,
-      icon = beautiful.tag_misc,
       layout = awful.layout.suit.float,
       class = { "Ripcord" }
    },
