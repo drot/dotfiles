@@ -155,12 +155,12 @@ tyrannical.tags = {
 
 -- Ignore the tag "exclusive" property for the following clients (matched by classes)
 tyrannical.properties.intrusive = {
-   "st-256color", "mpv", "pinentry", "feh", "Pidgin"
+   "st-256color", "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder"
 }
 
 -- Ignore the tiled layout for the matching clients
 tyrannical.properties.floating = {
-   "mpv", "pinentry", "feh", "Pidgin"
+   "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder"
 }
 
 -- Make the matching clients (by classes) on top of the default layout
