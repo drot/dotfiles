@@ -160,7 +160,7 @@ tyrannical.properties.intrusive = {
 
 -- Ignore the tiled layout for the matching clients
 tyrannical.properties.floating = {
-   "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder", "virt-manager"
+   "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder", "virt-manager", "Wine"
 }
 
 -- Make the matching clients (by classes) on top of the default layout
