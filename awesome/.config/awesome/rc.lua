@@ -144,6 +144,13 @@ tyrannical.tags = {
       class = { "Gimp" }
    },
    {
+      icon = beautiful.tag_games,
+      init = false,
+      exclusive = true,
+      layout = awful.layout.suit.float,
+      class = { "Wine" }
+   },
+   {
       icon = beautiful.tag_misc,
       init = false,
       exclusive = false,
@@ -160,7 +167,8 @@ tyrannical.properties.intrusive = {
 
 -- Ignore the tiled layout for the matching clients
 tyrannical.properties.floating = {
-   "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder", "virt-manager", "Wine"
+   "mpv", "pinentry", "feh", "Pidgin",
+   "simplescreenrecorder", "virt-manager", "Wine", "Gimp"
 }
 
 -- Make the matching clients (by classes) on top of the default layout
