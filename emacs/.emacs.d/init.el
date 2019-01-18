@@ -546,6 +546,13 @@
   ;; Loop animated image automatically
   (add-hook 'image-mode-hook #'image-toggle-animation))
 
+;;; Change default print command
+(setq lpr-command "lp")
+;; Configuration
+(after-load 'lpr
+  ;; Don't add extra switches
+  (setq lpr-add-switches nil))
+
 ;;; Imenu configuration
 (after-load 'imenu
   ;; Always rescan buffers
@@ -1725,6 +1732,12 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (after-load 'pdf-annot
   ;; Activate annotations automatically
   (setq pdf-annot-activate-created-annotations t))
+
+;;; PDF Tools printing
+(after-load 'pdf-misc
+  ;; Use lp when possible
+  (when (executable-find "lp")
+    (setq pdf-misc-print-programm "/usr/bin/lp")))
 
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
