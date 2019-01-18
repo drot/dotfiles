@@ -1901,7 +1901,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
     ("q" nil "Quit"))
   ;; Set local key bindings
   (define-key hl-todo-mode-map (kbd "M-s t") #'hl-todo-occur)
-  (define-key hl-todo-mode-map (kbd "C-c p h") #'hydra-hl-todo/body)
+  (define-key hl-todo-mode-map (kbd "C-c p t") #'hydra-hl-todo/body)
   (define-key hl-todo-mode-map (kbd "C-c p i") #'hl-todo-insert-keyword))
 
 ;;; Ivy
