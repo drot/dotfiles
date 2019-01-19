@@ -78,7 +78,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # right mouse button and modifier toggles floating
-bindsym $mod+button3 floating toggle
+bindsym --whole-window $mod+button3 floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
