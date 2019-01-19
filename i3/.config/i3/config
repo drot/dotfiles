@@ -179,11 +179,10 @@ for_window [class="Tor Browser"] floating enable
 for_window [class="Firefox"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
+for_window [class="feh"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="Vncviewer"] floating enable
-for_window [class="MPlayer"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="Thunar"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Pidgin"] floating enable
@@ -193,8 +192,9 @@ assign [class="Firefox"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
-assign [class="libreoffice"] $ws5
+assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
+assign [class="Pcmanfm"] $ws6
 assign [class="Pavucontrol"] $ws6
 
 # start i3bar to display a workspace bar
