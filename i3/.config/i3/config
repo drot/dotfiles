@@ -30,8 +30,8 @@ bindsym $mod+Return exec st
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# middle mouse button over a titlebar kills the window
-bindsym --release button2 kill
+# middle mouse button and modifer over a window kills the window
+bindsym --whole-window $mod+button2 kill
 
 # start dmenu
 bindsym $mod+p exec --no-startup-id dmenu-run
@@ -77,8 +77,8 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# right mouse button over a titlebar toggles floating
-bindsym button3 floating toggle
+# right mouse button and modifier toggles floating
+bindsym $mod+button3 floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
