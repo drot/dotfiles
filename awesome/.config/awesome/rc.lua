@@ -110,7 +110,6 @@ tyrannical.tags = {
       init = true,
       exclusive = true,
       screen = 1,
-      layout = awful.layout.suit.float,
       class = { "Firefox", "Tor Browser" }
    },
    {
@@ -118,7 +117,6 @@ tyrannical.tags = {
       init = true,
       exclusive = true,
       screen = 1,
-      layout = awful.layout.suit.float,
       class  = { "Emacs" }
    },
    {
@@ -126,28 +124,24 @@ tyrannical.tags = {
       init = true,
       exclusive = true,
       screen = 1,
-      layout = awful.layout.suit.float,
       class = { "zathura", "libreoffice" }
    },
    {
       icon = beautiful.tag_utils,
       init = false,
       exclusive = true,
-      layout = awful.layout.suit.float,
       class = { "Pavucontrol", "Pcmanfm", "virt-manager" }
    },
    {
       icon = beautiful.tag_graphics,
       init = false,
       exclusive = true,
-      layout = awful.layout.suit.float,
       class = { "Gimp" }
    },
    {
       icon = beautiful.tag_games,
       init = false,
       exclusive = true,
-      layout = awful.layout.suit.float,
       class = { "Wine" }
    },
    {
@@ -155,7 +149,6 @@ tyrannical.tags = {
       init = false,
       exclusive = false,
       fallback = true,
-      layout = awful.layout.suit.float,
       class = { "Ripcord" }
    },
 }
@@ -182,6 +175,8 @@ tyrannical.properties.maximized = {
    zathura = true,
 }
 
+-- Default tag layout
+tyrannical.settings.default_layout = awful.layout.suit.float
 -- Block popups
 tyrannical.settings.block_children_focus_stealing = true
 -- Force popups/dialogs to have the same tags as the parent client
