@@ -1814,12 +1814,19 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (require-package 'avy)
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
+;; Define Hydra
+(defhydra hydra-avy-cycle (:color pink)
+  "Cycle avy candidates"
+  ("n" avy-next "Next")
+  ("p" avy-prev "Previous")
+  ("q" nil "Quit"))
 ;; Set global key bindings
 (global-set-key (kbd "C-:") #'avy-goto-char)
 (global-set-key (kbd "C-'") #'avy-goto-char-timer)
 (global-set-key (kbd "M-g f") #'avy-goto-line)
 (global-set-key (kbd "M-g w") #'avy-goto-word-1)
 (global-set-key (kbd "M-g e") #'avy-goto-word-0)
+(global-set-key (kbd "C-M-'") 'hydra-avy-cycle/body)
 ;; Configuration
 (after-load 'avy
   ;; Work across all frames
