@@ -24,16 +24,16 @@ export WINEDEBUG="-all"
 export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml=d"
 
 # Check for Cargo packages if available
-if [ -d "$HOME/.cargo/bin" ]; then
+if [[ -d $HOME/.cargo/bin ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Set PATH so it includes user directory
-if [ -d "$HOME/.local/bin" ]; then
+if [[ -d $HOME/.local/bin ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Initialize Bash if available
-if [ -n "$BASH" ]; then
-    [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+if [[ -n $BASH ]]; then
+    [[ -r $HOME/.bashrc ]] && . "$HOME/.bashrc"
 fi
