@@ -1108,9 +1108,7 @@ _d_: Subtree
 ;; Configuration
 (after-load 'ace-window
   ;; Use keys on the home row
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  ;; Show even with 2 windows
-  (setq aw-dispatch-always t))
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;;; AUCTeX
 (require-package 'auctex)
