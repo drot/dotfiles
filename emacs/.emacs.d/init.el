@@ -311,9 +311,6 @@
 ;; Initialize mode
 (setq-default abbrev-mode t)
 
-;; Prevent skeleton/abbrev recursion
-(setq skeleton-further-elements '((abbrev-mode nil)))
-
 ;;; Electric pair mode
 (electric-pair-mode)
 
@@ -1090,10 +1087,12 @@ _d_: Subtree
   ;; Change default persist file location
   (setq org-clock-persist-file (locate-user-emacs-file "cache/org-clock-save.el")))
 
-;;; World time
+;;; Time display
 (global-set-key (kbd "C-c a C-t") #'display-time-world)
 ;; Configuration
 (after-load 'time
+  ;; Use 24hr format
+  (setq display-time-24hr-format t)
   ;; Time zones we are interested in
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
@@ -2005,7 +2004,7 @@ suitable for assigning to `ffap-file-finder'."
 ;; Initialize mode
 (add-hook 'after-init-hook #'amx-mode)
 ;; Override Counsel mode
-(advice-add 'counsel-M-x :override #'amx)
+(global-set-key (kbd "M-x") #'amx)
 ;; Set global key bindings
 (global-set-key (kbd "M-X") #'amx-major-mode-commands)
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
