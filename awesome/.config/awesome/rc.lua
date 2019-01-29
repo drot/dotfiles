@@ -1,3 +1,7 @@
+-- If LuaRocks is installed, make sure that packages installed through it are
+-- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+pcall(require, "luarocks.loader")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -11,7 +15,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup").widget
+local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -626,7 +630,7 @@ local clock_widget = wibox.widget {
 
 -- Buttonize widget
 local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
-month_calendar:attach(clock_widget, "br")
+month_calendar:attach(clock_widget, "br", { on_hover = false})
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -651,19 +655,16 @@ local tasklist_buttons = gears.table.join(
          if c == client.focus then
             c.minimized = true
          else
-            -- Without this, the following
-            -- :isvisible() makes no sense
-            c.minimized = false
-            if not c:isvisible() and c.first_tag then
-               c.first_tag:view_only()
-            end
-            -- This will also un-minimize
-            -- the client, if needed
-            client.focus = c
-            c:raise()
+            c:emit_signal(
+               "request::activate",
+               "tasklist",
+               {raise = true}
+            )
          end
    end),
-   awful.button({ }, 3, client_menu_toggle_fn()),
+   awful.button({ }, 3, function()
+         awful.menu.client_list({ theme = { width = 250 } })
+   end),
    awful.button({ }, 4, function ()
          awful.client.focus.byidx(1)
    end),
@@ -985,9 +986,18 @@ for i = 1, 9 do
 end
 
 local clientbuttons = gears.table.join(
-   awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-   awful.button({ modkey }, 1, awful.mouse.client.move),
-   awful.button({ modkey }, 3, awful.mouse.client.resize))
+   awful.button({ }, 1, function (c)
+         c:emit_signal("request::activate", "mouse_click", {raise = true})
+   end),
+   awful.button({ modkey }, 1, function (c)
+         c:emit_signal("request::activate", "mouse_click", {raise = true})
+         awful.mouse.client.move(c)
+   end),
+   awful.button({ modkey }, 3, function (c)
+         c:emit_signal("request::activate", "mouse_click", {raise = true})
+         awful.mouse.client.resize(c)
+   end)
+)
 
 -- Set keys
 root.keys(globalkeys)
@@ -1066,13 +1076,11 @@ client.connect_signal("request::titlebars", function(c)
                          -- buttons for the titlebar
                          local buttons = gears.table.join(
                             awful.button({ }, 1, function()
-                                  client.focus = c
-                                  c:raise()
+                                  c:emit_signal("request::activate", "titlebar", {raise = true})
                                   awful.mouse.client.move(c)
                             end),
                             awful.button({ }, 3, function()
-                                  client.focus = c
-                                  c:raise()
+                                  c:emit_signal("request::activate", "titlebar", {raise = true})
                                   awful.mouse.client.resize(c)
                             end)
                          )
