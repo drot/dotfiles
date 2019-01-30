@@ -1011,7 +1011,7 @@ awful.rules.rules = {
    -- GIMP
    { rule = { class = "Gimp" },
      properties = { screen = 1, switchtotag = true,
-                    -- Add seventh tag
+                    -- Add sixth tag
                     new_tag = {
                        name = nil,
                        volatile = true,
@@ -1037,7 +1037,7 @@ awful.rules.rules = {
    -- Wine
    { rule = { class = "Wine" },
      properties = { screen = 1, titlebars_enabled = false, switchtotag = true,
-                    -- Add sixth tag
+                    -- Add eighth tag
                     new_tag = {
                        name = nil,
                        volatile = true,
