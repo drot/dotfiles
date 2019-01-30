@@ -602,7 +602,7 @@ awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
 
       -- Add first tag
-      awful.tag.add(nil, {
+      awful.tag.add("", {
                        icon = beautiful.tag_term,
                        layout = awful.layout.suit.tile,
                        screen = s,
@@ -610,21 +610,21 @@ awful.screen.connect_for_each_screen(function(s)
       })
 
       -- Add second tag
-      awful.tag.add(nil, {
+      awful.tag.add("", {
                        icon = beautiful.tag_web,
                        layout = awful.layout.suit.floating,
                        screen = s,
       })
 
       -- Add third tag
-      awful.tag.add(nil, {
+      awful.tag.add("", {
                        icon = beautiful.tag_editor,
                        layout = awful.layout.suit.floating,
                        screen = s,
       })
 
       -- Add fourth tag
-      awful.tag.add(nil, {
+      awful.tag.add("", {
                        icon = beautiful.tag_office,
                        layout = awful.layout.suit.floating,
                        screen = s,
@@ -1000,7 +1000,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
-                       name = nil,
+                       name = "",
                        volatile = true,
                        icon = beautiful.tag_utils,
                        layout = awful.layout.suit.floating,
@@ -1013,7 +1013,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add sixth tag
                     new_tag = {
-                       name = nil,
+                       name = "",
                        volatile = true,
                        icon = beautiful.tag_graphics,
                        layout = awful.layout.suit.floating,
@@ -1026,7 +1026,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
-                       name = nil,
+                       name = "",
                        volatile = true,
                        icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
@@ -1039,7 +1039,7 @@ awful.rules.rules = {
      properties = { screen = 1, titlebars_enabled = false, switchtotag = true,
                     -- Add eighth tag
                     new_tag = {
-                       name = nil,
+                       name = "",
                        volatile = true,
                        icon = beautiful.tag_games,
                        layout = awful.layout.suit.floating,
