@@ -996,7 +996,7 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "4" } },
    -- Utility programs
    { rule_any = { class = { "Pavucontrol", "Pcmanfm" } },
-     properties = { screen = 1,
+     properties = { screen = 1, switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
                        name = "5",
@@ -1009,7 +1009,7 @@ awful.rules.rules = {
    },
    -- GIMP
    { rule = { class = "Gimp" },
-     properties = { screen = 1,
+     properties = { screen = 1, switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
                        name = "7",
@@ -1022,7 +1022,7 @@ awful.rules.rules = {
    },
    -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { screen = 1,
+     properties = { screen = 1, switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
                        name = "7",
@@ -1035,7 +1035,7 @@ awful.rules.rules = {
    },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { screen = 1, titlebars_enabled = false,
+     properties = { screen = 1, titlebars_enabled = false, switchtotag = true,
                     -- Add sixth tag
                     new_tag = {
                        name = "8",
