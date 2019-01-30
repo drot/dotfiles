@@ -958,7 +958,7 @@ awful.rules.rules = {
                     screen = awful.screen.preferred,
                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
-    },
+   },
 
    -- Floating clients.
    { rule_any = {
