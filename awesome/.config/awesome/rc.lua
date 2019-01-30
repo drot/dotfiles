@@ -603,10 +603,10 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Add first tag
       awful.tag.add("1", {
-                       icon               = beautiful.tag_term,
-                       layout             = awful.layout.suit.tile,
-                       screen             = s,
-                       selected           = true,
+                       icon = beautiful.tag_term,
+                       layout = awful.layout.suit.tile,
+                       screen = s,
+                       selected = true,
       })
 
       -- Add second tag
@@ -626,20 +626,6 @@ awful.screen.connect_for_each_screen(function(s)
       -- Add fourth tag
       awful.tag.add("4", {
                        icon = beautiful.tag_office,
-                       layout = awful.layout.suit.floating,
-                       screen = s,
-      })
-
-      -- Add fifth tag
-      awful.tag.add("5", {
-                       icon = beautiful.tag_utils,
-                       layout = awful.layout.suit.floating,
-                       screen = s,
-      })
-
-      -- Add sixth tag
-      awful.tag.add("6", {
-                       icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
                        screen = s,
       })
@@ -1002,24 +988,64 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
      properties = { screen = 1, tag = "2", titlebars_enabled = false } },
-   -- Wine
-   { rule = { class = "Wine" },
-     properties = { titlebars_enabled = false } },
-   -- Map the rest of the applications
+   -- Emacs
    { rule = { class = "Emacs" },
      properties = { screen = 1, tag = "3", maximized = true } },
-   { rule = { class = "libreoffice" },
+   -- Office programs
+   { rule_any = { class = { "Zathura", "libreoffice" } },
      properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Zathura" },
-     properties = { screen = 1, tag = "4" } },
-   { rule = { class = "Pavucontrol" },
-     properties = { screen = 1, tag = "5" } },
+   -- Utility programs
+   { rule_any = { class = { "Pavucontrol", "Pcmanfm" } },
+     properties = { screen = 1,
+                    -- Add fifth tag
+                    new_tag = {
+                       name = "5",
+                       volatile = true,
+                       icon = beautiful.tag_utils,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+                    }
+     }
+   },
+   -- GIMP
    { rule = { class = "Gimp" },
-     properties = { screen = 1, tag = "5" } },
-   { rule = { class = "Pcmanfm" },
-     properties = { screen = 1, tag = "5" } },
+     properties = { screen = 1,
+                    -- Add seventh tag
+                    new_tag = {
+                       name = "7",
+                       volatile = true,
+                       icon = beautiful.tag_graphics,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+                    }
+     }
+   },
+   -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { screen = 1, tag = "6" } },
+     properties = { screen = 1,
+                    -- Add seventh tag
+                    new_tag = {
+                       name = "7",
+                       volatile = true,
+                       icon = beautiful.tag_misc,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+                    }
+     }
+   },
+   -- Wine
+   { rule = { class = "Wine" },
+     properties = { screen = 1, titlebars_enabled = false,
+                    -- Add sixth tag
+                    new_tag = {
+                       name = "8",
+                       volatile = true,
+                       icon = beautiful.tag_games,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+                    }
+     }
+   },
 }
 -- }}}
 
