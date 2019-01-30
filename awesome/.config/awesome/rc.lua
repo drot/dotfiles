@@ -968,7 +968,8 @@ awful.rules.rules = {
         },
         class = {
            "Pidgin",
-           "mpv"
+           "mpv",
+           "SimpleScreenRecorder"
         },
         name = {
            "Event Tester", -- xev
@@ -995,7 +996,7 @@ awful.rules.rules = {
    { rule_any = { class = { "Zathura", "libreoffice" } },
      properties = { screen = 1, tag = "4" } },
    -- Utility programs
-   { rule_any = { class = { "Pavucontrol", "Pcmanfm" } },
+   { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
      properties = { screen = 1, switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
