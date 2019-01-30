@@ -6,8 +6,6 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Tyrannical tagging system
-local tyrannical = require("tyrannical")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -97,94 +95,6 @@ local function client_menu_toggle_fn()
       end
    end
 end
--- }}}
-
--- {{{ Tyrannical setup
-tyrannical.tags = {
-   {
-      icon = beautiful.tag_term,
-      init = true,
-      exclusive = true,
-      screen = 1,
-      layout = awful.layout.suit.tile,
-      class = { "xterm", "st-256color" }
-   },
-   {
-      icon = beautiful.tag_web,
-      init = true,
-      exclusive = true,
-      screen = 1,
-      class = { "Firefox", "Tor Browser" }
-   },
-   {
-      icon = beautiful.tag_editor,
-      init = true,
-      exclusive = true,
-      screen = 1,
-      class  = { "Emacs" }
-   },
-   {
-      icon = beautiful.tag_office,
-      init = true,
-      exclusive = true,
-      screen = 1,
-      class = { "zathura", "libreoffice" }
-   },
-   {
-      icon = beautiful.tag_utils,
-      init = false,
-      exclusive = true,
-      class = { "Pavucontrol", "Pcmanfm", "virt-manager" }
-   },
-   {
-      icon = beautiful.tag_graphics,
-      init = false,
-      exclusive = true,
-      class = { "Gimp" }
-   },
-   {
-      icon = beautiful.tag_games,
-      init = false,
-      exclusive = true,
-      class = { "Wine" }
-   },
-   {
-      icon = beautiful.tag_misc,
-      init = false,
-      exclusive = false,
-      fallback = true,
-      class = { "Ripcord" }
-   },
-}
-
--- Ignore the tag "exclusive" property for the following clients (matched by classes)
-tyrannical.properties.intrusive = {
-   "st-256color", "mpv", "pinentry", "feh", "Pidgin", "simplescreenrecorder"
-}
-
--- Ignore the tiled layout for the matching clients
-tyrannical.properties.floating = {
-   "mpv", "pinentry", "feh", "Pidgin",
-   "simplescreenrecorder", "virt-manager", "Wine", "Gimp"
-}
-
--- Make the matching clients (by classes) on top of the default layout
-tyrannical.properties.ontop = {
-   "Xephyr"
-}
-
--- Make matching clients maximized
-tyrannical.properties.maximized = {
-   emacs = true,
-   zathura = true,
-}
-
--- Default tag layout
-tyrannical.settings.default_layout = awful.layout.suit.float
--- Block popups
-tyrannical.settings.block_children_focus_stealing = true
--- Force popups/dialogs to have the same tags as the parent client
-tyrannical.settings.group_children = true
 -- }}}
 
 -- {{{ Notification configuration
@@ -691,6 +601,49 @@ awful.screen.connect_for_each_screen(function(s)
       -- Wallpaper
       set_wallpaper(s)
 
+      -- Add first tag
+      awful.tag.add("1", {
+                       icon               = beautiful.tag_term,
+                       layout             = awful.layout.suit.tile,
+                       screen             = s,
+                       selected           = true,
+      })
+
+      -- Add second tag
+      awful.tag.add("2", {
+                       icon = beautiful.tag_web,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+      })
+
+      -- Add third tag
+      awful.tag.add("3", {
+                       icon = beautiful.tag_editor,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+      })
+
+      -- Add fourth tag
+      awful.tag.add("4", {
+                       icon = beautiful.tag_office,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+      })
+
+      -- Add fifth tag
+      awful.tag.add("5", {
+                       icon = beautiful.tag_utils,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+      })
+
+      -- Add sixth tag
+      awful.tag.add("6", {
+                       icon = beautiful.tag_misc,
+                       layout = awful.layout.suit.floating,
+                       screen = s,
+      })
+
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt()
       -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -723,7 +676,8 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Create a tasklist widget
       s.mytasklist = wibox.container.margin(
-         awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons), 2, 2, 2, 2)
+         awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons), 2, 2, 2, 2
+      )
 
       -- Create the wibox
       s.mywibox = awful.wibar({ position = "bottom", height = 24, screen = s })
@@ -1018,13 +972,7 @@ awful.rules.rules = {
                     screen = awful.screen.preferred,
                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
-   },
-
-   -- Start clients as slave
-   { rule = { },
-     properties = { },
-     callback = awful.client.setslave
-   },
+    },
 
    -- Floating clients.
    { rule_any = {
@@ -1048,11 +996,30 @@ awful.rules.rules = {
    { rule_any = { type = { "normal", "dialog" }
                 }, properties = { titlebars_enabled = true }
    },
-   -- Disable titlebars on browsers
+
+   -- Set Firefox to always map on the tag named "2" on screen 1
    { rule = { class = "Firefox" },
-     properties = { titlebars_enabled = false } },
+     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
+     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
+   -- Wine
+   { rule = { class = "Wine" },
      properties = { titlebars_enabled = false } },
+   -- Map the rest of the applications
+   { rule = { class = "Emacs" },
+     properties = { screen = 1, tag = "3", maximized = true } },
+   { rule = { class = "libreoffice" },
+     properties = { screen = 1, tag = "4" } },
+   { rule = { class = "Zathura" },
+     properties = { screen = 1, tag = "4" } },
+   { rule = { class = "Pavucontrol" },
+     properties = { screen = 1, tag = "5" } },
+   { rule = { class = "Gimp" },
+     properties = { screen = 1, tag = "5" } },
+   { rule = { class = "Pcmanfm" },
+     properties = { screen = 1, tag = "5" } },
+   { rule = { class = "Ripcord" },
+     properties = { screen = 1, tag = "6" } },
 }
 -- }}}
 
