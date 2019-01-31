@@ -602,7 +602,7 @@ awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
 
       -- Add first tag
-      awful.tag.add("", {
+      awful.tag.add("1", {
                        icon = beautiful.tag_term,
                        layout = awful.layout.suit.tile,
                        screen = s,
@@ -610,21 +610,21 @@ awful.screen.connect_for_each_screen(function(s)
       })
 
       -- Add second tag
-      awful.tag.add("", {
+      awful.tag.add("2", {
                        icon = beautiful.tag_web,
                        layout = awful.layout.suit.floating,
                        screen = s,
       })
 
       -- Add third tag
-      awful.tag.add("", {
+      awful.tag.add("3", {
                        icon = beautiful.tag_editor,
                        layout = awful.layout.suit.floating,
                        screen = s,
       })
 
       -- Add fourth tag
-      awful.tag.add("", {
+      awful.tag.add("4", {
                        icon = beautiful.tag_office,
                        layout = awful.layout.suit.floating,
                        screen = s,
