@@ -535,12 +535,18 @@ local clock_widget = wibox.widget {
      { left = 6,
        right = 6,
        widget = wibox.container.margin,
-       { widget = wibox.widget.textclock("<span foreground='#f0c674'>%d-%m/%H:%M</span>") } } }
+       { widget = wibox.widget.textclock("<span foreground='#f0c674'>%H:%M</span>") } } }
 }
 
 -- Buttonize widget
 local month_calendar = awful.widget.calendar_popup.month({ font = beautiful.font })
 month_calendar:attach(clock_widget, "br", { on_hover = false})
+-- Add popup on mouse over
+local clock_tooltip = awful.tooltip { }
+clock_tooltip:add_to_object(clock_widget)
+clock_widget:connect_signal('mouse::enter', function()
+                               clock_tooltip.text = os.date('Today is %A %B %d %Y\nThe time is %T')
+end)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -997,7 +1003,7 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "4" } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
-     properties = { screen = 1, switchtotag = true,
+     properties = { screen = 1, tag = "5", switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
                        name = "5",
@@ -1010,7 +1016,7 @@ awful.rules.rules = {
    },
    -- GIMP
    { rule = { class = "Gimp" },
-     properties = { screen = 1, switchtotag = true,
+     properties = { screen = 1, tag = "6", switchtotag = true,
                     -- Add sixth tag
                     new_tag = {
                        name = "6",
@@ -1023,7 +1029,7 @@ awful.rules.rules = {
    },
    -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { screen = 1, switchtotag = true,
+     properties = { screen = 1, tag = "7", switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
                        name = "7",
@@ -1036,7 +1042,7 @@ awful.rules.rules = {
    },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { screen = 1, titlebars_enabled = false, switchtotag = true,
+     properties = { screen = 1, tag = "8", titlebars_enabled = false, switchtotag = true,
                     -- Add eighth tag
                     new_tag = {
                        name = "8",
