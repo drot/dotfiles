@@ -992,15 +992,15 @@ awful.rules.rules = {
 
    -- Set Firefox to always map on the tag named "2" on screen 1
    { rule = { class = "Firefox" },
-     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
+     properties = { tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
-     properties = { screen = 1, tag = "2", titlebars_enabled = false } },
+     properties = { tag = "2", titlebars_enabled = false } },
    -- Emacs
    { rule = { class = "Emacs" },
-     properties = { screen = 1, tag = "3", maximized = true } },
+     properties = { tag = "3", maximized = true } },
    -- Office programs
    { rule_any = { class = { "Zathura", "libreoffice" } },
-     properties = { screen = 1, tag = "4" } },
+     properties = { tag = "4" } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
      properties = { tag = "U", switchtotag = true,
