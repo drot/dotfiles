@@ -1003,10 +1003,10 @@ awful.rules.rules = {
      properties = { screen = 1, tag = "4" } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
-     properties = { screen = 1, tag = "5", switchtotag = true,
+     properties = { tag = "U", switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
-                       name = "5",
+                       name = "U",
                        volatile = true,
                        icon = beautiful.tag_utils,
                        layout = awful.layout.suit.floating,
@@ -1016,10 +1016,10 @@ awful.rules.rules = {
    },
    -- GIMP
    { rule = { class = "Gimp" },
-     properties = { screen = 1, tag = "6", switchtotag = true,
+     properties = { tag = "G", switchtotag = true,
                     -- Add sixth tag
                     new_tag = {
-                       name = "6",
+                       name = "G",
                        volatile = true,
                        icon = beautiful.tag_graphics,
                        layout = awful.layout.suit.floating,
@@ -1029,10 +1029,10 @@ awful.rules.rules = {
    },
    -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { screen = 1, tag = "7", switchtotag = true,
+     properties = { tag = "R", switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
-                       name = "7",
+                       name = "R",
                        volatile = true,
                        icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
@@ -1042,10 +1042,10 @@ awful.rules.rules = {
    },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { screen = 1, tag = "8", titlebars_enabled = false, switchtotag = true,
+     properties = { tag = "W", titlebars_enabled = false, switchtotag = true,
                     -- Add eighth tag
                     new_tag = {
-                       name = "8",
+                       name = "W",
                        volatile = true,
                        icon = beautiful.tag_games,
                        layout = awful.layout.suit.floating,
