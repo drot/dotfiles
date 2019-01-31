@@ -647,6 +647,8 @@
 
 ;;; Mail sending
 (after-load 'message
+  ;; Set main directory
+  (setq message-directory "~/.mail/")
   ;; Configuration
   (setq message-confirm-send t
         message-kill-buffer-on-exit t))
@@ -658,6 +660,11 @@
         smtpmail-smtp-user "drot/smtp"
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
+
+;;; Mail folder access for Gnus
+(after-load 'nnfolder
+  ;; Set main directory
+  (setq nnfolder-directory "~/.mail/archive"))
 
 ;;; Smileys
 (after-load 'smiley
@@ -922,6 +929,8 @@ _p_: Previous
   ;; Set local key bindings
   (define-key gnus-summary-mode-map (kbd "C-c M-o") #'ace-link-gnus)
   (define-key gnus-article-mode-map (kbd "C-c M-o") #'ace-link-gnus)
+  ;; Main Gnus directory
+  (setq gnus-directory "~/.news/")
   ;; Configure mail and news server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
@@ -929,7 +938,7 @@ _p_: Previous
                  (nnimap-user "drot")
                  (nnimap-server-port 993)
                  (nnimap-stream ssl)))
-  (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
+  (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
@@ -1091,8 +1100,13 @@ _d_: Subtree
 (global-set-key (kbd "C-c a C-t") #'display-time-world)
 ;; Configuration
 (after-load 'time
-  ;; Use 24hr format
-  (setq display-time-24hr-format t)
+  ;; Use custom mode line format
+  (setq display-time-string-forms
+        '((propertize
+           (format-time-string "%H:%M" now)
+           'face '(:inherit font-lock-keyword-face :weight bold)
+           'help-echo (format-time-string "%a, %e %b, %Y" now))
+          load " "))
   ;; Time zones we are interested in
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
