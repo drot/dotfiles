@@ -1000,7 +1000,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add fifth tag
                     new_tag = {
-                       name = "",
+                       name = "5",
                        volatile = true,
                        icon = beautiful.tag_utils,
                        layout = awful.layout.suit.floating,
@@ -1013,7 +1013,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add sixth tag
                     new_tag = {
-                       name = "",
+                       name = "6",
                        volatile = true,
                        icon = beautiful.tag_graphics,
                        layout = awful.layout.suit.floating,
@@ -1026,7 +1026,7 @@ awful.rules.rules = {
      properties = { screen = 1, switchtotag = true,
                     -- Add seventh tag
                     new_tag = {
-                       name = "",
+                       name = "7",
                        volatile = true,
                        icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
@@ -1039,7 +1039,7 @@ awful.rules.rules = {
      properties = { screen = 1, titlebars_enabled = false, switchtotag = true,
                     -- Add eighth tag
                     new_tag = {
-                       name = "",
+                       name = "8",
                        volatile = true,
                        icon = beautiful.tag_games,
                        layout = awful.layout.suit.floating,
