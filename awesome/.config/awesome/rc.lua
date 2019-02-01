@@ -680,28 +680,60 @@ awful.screen.connect_for_each_screen(function(s)
                        icon = beautiful.tag_term,
                        layout = awful.layout.suit.tile,
                        screen = s,
-                       selected = true,
+                       selected = true
       })
 
       -- Add second tag
       awful.tag.add("2", {
                        icon = beautiful.tag_web,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
       })
 
       -- Add third tag
       awful.tag.add("3", {
                        icon = beautiful.tag_editor,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
       })
 
       -- Add fourth tag
       awful.tag.add("4", {
                        icon = beautiful.tag_office,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
+      })
+
+      -- Add fifth tag
+      awful.tag.add("5", {
+                       volatile = true,
+                       icon = beautiful.tag_utils,
+                       layout = awful.layout.suit.floating,
+                       screen = s
+      })
+
+      -- Add sixth tag
+      awful.tag.add("6", {
+                       volatile = true,
+                       icon = beautiful.tag_graphics,
+                       layout = awful.layout.suit.floating,
+                       screen = s
+      })
+
+      -- Add seventh tag
+      awful.tag.add("7", {
+                       volatile = true,
+                       icon = beautiful.tag_misc,
+                       layout = awful.layout.suit.floating,
+                       screen = s
+      })
+
+      -- Add eighth tag
+      awful.tag.add("8", {
+                       volatile = true,
+                       icon = beautiful.tag_games,
+                       layout = awful.layout.suit.floating,
+                       screen = s
       })
 
       -- Create a promptbox for each screen
@@ -719,7 +751,7 @@ awful.screen.connect_for_each_screen(function(s)
          {
             {
                {
-                  widget = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)                  
+                  widget = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)                  
                },
                top = 2,
                bottom = 2,
@@ -1077,56 +1109,16 @@ awful.rules.rules = {
      properties = { tag = "4" } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
-     properties = { switch_to_tags = true,
-                    -- Add fifth tag
-                    new_tag = {
-                       name = "U",
-                       volatile = true,
-                       icon = beautiful.tag_utils,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-                    }
-     }
-   },
+     properties = { tag = "5" } },
    -- GIMP
    { rule = { class = "Gimp" },
-     properties = { switch_to_tags = true,
-                    -- Add sixth tag
-                    new_tag = {
-                       name = "G",
-                       volatile = true,
-                       icon = beautiful.tag_graphics,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-                    }
-     }
-   },
+     properties = { tag = "6" } },
    -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { switch_to_tags = true,
-                    -- Add seventh tag
-                    new_tag = {
-                       name = "R",
-                       volatile = true,
-                       icon = beautiful.tag_misc,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-                    }
-     }
-   },
+     properties = { tag = "7" } },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { titlebars_enabled = false, switch_to_tags = true,
-                    -- Add eighth tag
-                    new_tag = {
-                       name = "W",
-                       volatile = true,
-                       icon = beautiful.tag_games,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-                    }
-     }
-   }
+     properties = { tag = "8" } }
 }
 -- }}}
 
