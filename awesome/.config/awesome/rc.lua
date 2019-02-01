@@ -1084,7 +1084,7 @@ awful.rules.rules = {
                        volatile = true,
                        icon = beautiful.tag_utils,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
                     }
      }
    },
@@ -1097,7 +1097,7 @@ awful.rules.rules = {
                        volatile = true,
                        icon = beautiful.tag_graphics,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
                     }
      }
    },
@@ -1110,7 +1110,7 @@ awful.rules.rules = {
                        volatile = true,
                        icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
                     }
      }
    },
@@ -1123,10 +1123,10 @@ awful.rules.rules = {
                        volatile = true,
                        icon = beautiful.tag_games,
                        layout = awful.layout.suit.floating,
-                       screen = s,
+                       screen = s
                     }
      }
-   },
+   }
 }
 -- }}}
 
