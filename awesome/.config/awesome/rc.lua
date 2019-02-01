@@ -413,11 +413,11 @@ local temperature_bar = wibox.widget {
    widget = wibox.widget.progressbar
 }
 
--- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
-
 -- Rotate temperature bar widget
 local temperature_widget = wibox.container.rotate(temperature_bar, "east")
+
+-- Set temperature bar value
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
 
 -- Create a file system usage icon widget
 local fs_icon = wibox.widget {
@@ -563,11 +563,11 @@ local volume_bar = wibox.widget {
    widget = wibox.widget.progressbar
 }
 
--- Set volume bar value
-vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
-
 -- Set volume bar widget rotation
 local volume_widget = wibox.container.rotate(volume_bar, "east")
+
+-- Set volume bar value
+vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
