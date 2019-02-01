@@ -706,7 +706,6 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Add fifth tag
       awful.tag.add("5", {
-                       volatile = true,
                        icon = beautiful.tag_utils,
                        layout = awful.layout.suit.floating,
                        screen = s
@@ -714,7 +713,6 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Add sixth tag
       awful.tag.add("6", {
-                       volatile = true,
                        icon = beautiful.tag_graphics,
                        layout = awful.layout.suit.floating,
                        screen = s
@@ -722,7 +720,6 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Add seventh tag
       awful.tag.add("7", {
-                       volatile = true,
                        icon = beautiful.tag_misc,
                        layout = awful.layout.suit.floating,
                        screen = s
@@ -730,7 +727,6 @@ awful.screen.connect_for_each_screen(function(s)
 
       -- Add eighth tag
       awful.tag.add("8", {
-                       volatile = true,
                        icon = beautiful.tag_games,
                        layout = awful.layout.suit.floating,
                        screen = s
