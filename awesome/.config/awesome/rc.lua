@@ -916,9 +916,14 @@ local globalkeys = gears.table.join(
          }
       end,
       {description = "lua execute prompt", group = "awesome"}),
+
    -- Menubar
    awful.key({ modkey }, "p", function() menubar.show() end,
       {description = "show the menubar", group = "launcher"}),
+
+   -- Lock screen
+   awful.key({ modkey }, "F12", function () awful.spawn("slock") end,
+      {description = "lock the screen", group = "screen"}),
 
    -- Volume control
    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("pactl set-sink-volume 0 +5%") end,
