@@ -1107,19 +1107,19 @@ awful.rules.rules = {
      properties = { tag = "3", maximized = true } },
    -- Office programs
    { rule_any = { class = { "Zathura", "libreoffice" } },
-     properties = { tag = "4" } },
+     properties = { tag = "4", switch_to_tags = true } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
-     properties = { tag = "5" } },
+     properties = { tag = "5", switch_to_tags = true } },
    -- GIMP
    { rule = { class = "Gimp" },
-     properties = { tag = "6" } },
+     properties = { tag = "6", switch_to_tags = true } },
    -- Ripcord
    { rule = { class = "Ripcord" },
-     properties = { tag = "7" } },
+     properties = { tag = "7", switch_to_tags = true } },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { tag = "8" } }
+     properties = { tag = "8", switch_to_tags = true } }
 }
 -- }}}
 
