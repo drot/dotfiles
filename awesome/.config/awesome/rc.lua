@@ -206,7 +206,7 @@ local cpu_text_widget = wibox.widget {
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
@@ -298,7 +298,7 @@ local memory_text_widget = wibox.widget {
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
@@ -384,7 +384,7 @@ local temperature_text_widget = wibox.widget {
 
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
@@ -451,7 +451,7 @@ local fs_text_widget = wibox.widget {
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
@@ -536,7 +536,7 @@ local volume_text_widget = wibox.widget {
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
@@ -594,7 +594,7 @@ local clock_widget = wibox.widget {
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
-      bg = beautiful.bg_focus,
+      bg = beautiful.titlebar_bg_focus,
       shape_border_color = beautiful.bg_minimize,
       shape_border_width = beautiful.border_width,
       widget = wibox.container.background
