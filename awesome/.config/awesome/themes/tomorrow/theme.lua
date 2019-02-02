@@ -61,7 +61,15 @@ theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
 
 -- Taglist
+theme.taglist_shape = gshape.rectangle
+theme.taglist_shape_empty = theme.taglist_shape
+theme.taglist_shape_border_width = dpi(1)
+theme.taglist_spacing = dpi(3)
+theme.taglist_bg_occupied = theme.titlebar_bg
 theme.taglist_bg_focus = theme.bg_normal
+theme.taglist_shape_border_color = theme.bg_minimize
+theme.taglist_shape_border_color_focus = theme.border_focus
+theme.taglist_shape_border_color_urgent = theme.fg_urgent
 
 -- Tasklist
 theme.tasklist_spacing = 1

@@ -490,7 +490,7 @@ local fs_widget = wibox.widget {
          left = 6,
          right = 6,
          widget = wibox.container.margin
-      },       
+      },
       shape = gears.shape.rectangle,
       bg = beautiful.bg_normal,
       shape_border_color = beautiful.bg_minimize,
@@ -587,7 +587,7 @@ local clock_widget = wibox.widget {
    {
       {
          {
-            widget = wibox.widget.textclock("<span foreground='#f0c674'>%H:%M</span>")            
+            widget = wibox.widget.textclock("<span foreground='#f0c674'>%H:%M</span>")
          },
          left = 6,
          right = 6,
@@ -747,7 +747,7 @@ awful.screen.connect_for_each_screen(function(s)
          {
             {
                {
-                  widget = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)                  
+                  widget = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)
                },
                top = 2,
                bottom = 2,
