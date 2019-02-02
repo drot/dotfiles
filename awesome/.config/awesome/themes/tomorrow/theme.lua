@@ -40,8 +40,8 @@ theme.border_focus = "#969896"
 theme.border_marked = theme.bg_urgent
 
 -- Titlebar
-theme.titlebar_bg_normal = theme.bg_normal
-theme.titlebar_bg_focus = theme.bg_focus
+theme.titlebar_bg_normal = theme.bg_focus
+theme.titlebar_bg_focus = "#111213"
 
 -- Wibox
 theme.wibar_border_width = dpi(1)
