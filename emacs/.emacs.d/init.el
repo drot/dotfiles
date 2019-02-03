@@ -1106,7 +1106,7 @@ _d_: Subtree
         '((propertize
            (format-time-string "%H:%M" now)
            'face '(:inherit font-lock-keyword-face :weight bold)
-           'help-echo (format-time-string "%a, %e %b, %Y" now))
+           'help-echo (format-time-string "%a, %d-%m-%Y" now))
           load " "))
   ;; Time zones we are interested in
   (setq display-time-world-list
