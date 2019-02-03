@@ -1111,7 +1111,7 @@ awful.rules.rules = {
      properties = { tag = "4", switch_to_tags = true } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
-     properties = { tag = "5", switch_to_tags = true } },
+     properties = { tag = "5", switch_to_tags = true, floating = true } },
    -- GIMP
    { rule = { class = "Gimp" },
      properties = { tag = "6", switch_to_tags = true } },
@@ -1120,7 +1120,7 @@ awful.rules.rules = {
      properties = { tag = "7", switch_to_tags = true } },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { tag = "8", switch_to_tags = true } }
+     properties = { tag = "8", switch_to_tags = true, floating = true } }
 }
 -- }}}
 
