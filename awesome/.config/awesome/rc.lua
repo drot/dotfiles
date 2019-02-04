@@ -245,7 +245,7 @@ local cpu_widget = wibox.widget {
                widget = cpu_graph
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 4
+            spacing = 3
          },
          top = 2,
          bottom = 2,
@@ -330,7 +330,7 @@ local memory_widget = wibox.widget {
                widget = memory_chart
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 4
+            spacing = 3
          },
          top = 2,
          bottom = 2,
@@ -418,7 +418,7 @@ local temperature_widget = wibox.widget {
                direction = "east"
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 4
+            spacing = 3
          },
          top = 2,
          bottom = 2,
@@ -503,7 +503,7 @@ local fs_widget = wibox.widget {
                widget = fs_chart
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 4,
+            spacing = 3,
          },
          top = 2,
          bottom = 2,
@@ -591,7 +591,7 @@ local volume_widget = wibox.widget {
                direction = "east"
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 4
+            spacing = 3
          },
          top = 2,
          bottom = 2,
