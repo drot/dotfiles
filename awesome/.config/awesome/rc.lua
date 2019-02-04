@@ -227,18 +227,30 @@ local cpu_widget = wibox.widget {
       {
          {
             {
-               widget = cpu_text_widget
+               {
+                  {
+                     widget = cpu_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
             },
             {
                widget = cpu_graph
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 6
+            spacing = 4
          },
          top = 2,
          bottom = 2,
-         left = 6,
-         right = 6,
+         left = 4,
+         right = 4,
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
@@ -300,18 +312,30 @@ local memory_widget = wibox.widget {
       {
          {
             {
-               widget = memory_text_widget
+               {
+                  {
+                     widget = memory_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
             },
             {
                widget = memory_chart
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 6
+            spacing = 4
          },
          top = 2,
          bottom = 2,
-         left = 6,
-         right = 6,
+         left = 4,
+         right = 4,
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
@@ -441,18 +465,30 @@ local fs_widget = wibox.widget {
       {
          {
             {
-               widget = fs_text_widget
+               {
+                  {
+                     widget = fs_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
             },
             {
                widget = fs_chart
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 6,
+            spacing = 4,
          },
          top = 2,
          bottom = 2,
-         left = 6,
-         right = 6,
+         left = 4,
+         right = 4,
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
