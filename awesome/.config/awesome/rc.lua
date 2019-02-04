@@ -221,7 +221,7 @@ vicious.register(cpu_cores_graph, vicious.widgets.cpu,
                     cpu_graph:add_value(args[5], 4) -- Core 4, color 4
                  end, 4)
 
--- Create a background for the CPU usage widget
+-- Create the CPU usage widget
 local cpu_widget = wibox.widget {
    {
       {
@@ -306,7 +306,7 @@ local memory_chart = wibox.widget {
 -- Set memory usage chart value
 vicious.register(memory_chart, vicious.widgets.mem, "$1", 12)
 
--- Create a memory usage chart background
+-- Create the memory usage widget
 local memory_widget = wibox.widget {
    {
       {
@@ -373,15 +373,58 @@ vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, {
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
+   widget = temperature_text_value
+}
+
+-- Create a temperature bar widget
+local temperature_bar = wibox.widget {
+   forced_height = 8,
+   paddings = 1,
+   background_color = beautiful.border_normal,
+   color = beautiful.widget_value,
+   border_width = 1,
+   border_color = beautiful.bg_minimize,
+   widget = wibox.widget.progressbar
+}
+
+-- Set temperature bar value
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
+
+-- Create the temperature widget
+local temperature_widget = wibox.widget {
    {
       {
          {
-            widget = temperature_text_value
+            {
+               {
+                  {
+                     widget = temperature_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
+            },
+            {
+               {
+                  widget = temperature_bar
+               },
+               widget = wibox.container.rotate,
+               direction = "east"
+            },
+            layout = wibox.layout.fixed.horizontal,
+            spacing = 4
          },
-         left = 6,
-         right = 6,
+         top = 2,
+         bottom = 2,
+         left = 4,
+         right = 4,
          widget = wibox.container.margin
-
       },
       shape = gears.shape.rectangle,
       bg = beautiful.titlebar_bg_focus,
@@ -395,29 +438,6 @@ local temperature_text_widget = wibox.widget {
    right = 2,
    widget = wibox.container.margin
 }
-
--- Create a temperature bar widget
-local temperature_bar = wibox.widget {
-   forced_height = 12,
-   margins = { top = 2,
-               bottom = 2,
-               left = 2,
-               right = 2 },
-   bar_shape = gears.shape.rounded_bar,
-   shape = gears.shape.rounded_bar,
-   paddings = 1,
-   background_color = beautiful.border_normal,
-   color = beautiful.widget_value,
-   border_width = 1,
-   border_color = beautiful.bg_minimize,
-   widget = wibox.widget.progressbar
-}
-
--- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
-
--- Rotate temperature bar widget
-local temperature_widget = wibox.container.rotate(temperature_bar, "east")
 
 -- Create a file system usage icon widget
 local fs_icon = wibox.widget {
@@ -459,7 +479,7 @@ local fs_chart = wibox.widget {
 -- Set file system usage chart value
 vicious.register(fs_chart, vicious.widgets.fs, "${/ used_p}", 300)
 
--- Create a file system usage chart background
+-- Create the file system usage widget
 local fs_widget = wibox.widget {
    {
       {
@@ -526,13 +546,57 @@ vicious.register(volume_text_value, vicious.contrib.pulse, "$1%", 6)
 
 -- Create a volume text widget
 local volume_text_widget = wibox.widget {
+   widget = volume_text_value
+}
+
+-- Create volume bar widget
+local volume_bar = wibox.widget {
+   forced_height = 8,
+   paddings = 1,
+   background_color = beautiful.border_normal,
+   color = beautiful.widget_value,
+   border_width = 1,
+   border_color = beautiful.bg_minimize,
+   widget = wibox.widget.progressbar
+}
+
+-- Set volume bar value
+vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
+
+-- Create volume widget
+local volume_widget = wibox.widget {
    {
       {
          {
-            widget = volume_text_value
+            {
+               {
+                  {
+                     widget = volume_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
+            },
+            {
+               {
+                  widget = volume_bar
+               },
+               widget = wibox.container.rotate,
+               direction = "east"
+            },
+            layout = wibox.layout.fixed.horizontal,
+            spacing = 4
          },
-         left = 6,
-         right = 6,
+         top = 2,
+         bottom = 2,
+         left = 4,
+         right = 4,
          widget = wibox.container.margin
       },
       shape = gears.shape.rectangle,
@@ -547,27 +611,6 @@ local volume_text_widget = wibox.widget {
    right = 2,
    widget = wibox.container.margin
 }
-
--- Create volume bar widget
-local volume_bar = wibox.widget {
-   forced_height = 16,
-   paddings = 1,
-   margins = { top = 2,
-               bottom = 2,
-               left = 2,
-               right = 2 },
-   background_color = beautiful.border_normal,
-   color = beautiful.widget_value,
-   border_width = 1,
-   border_color = beautiful.bg_minimize,
-   widget = wibox.widget.progressbar
-}
-
--- Set volume bar value
-vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
-
--- Set volume bar widget rotation
-local volume_widget = wibox.container.rotate(volume_bar, "east")
 
 -- Create a text clock icon widget
 local clock_icon = wibox.widget {
@@ -795,12 +838,10 @@ awful.screen.connect_for_each_screen(function(s)
             memory_icon,
             memory_widget,
             temperature_icon,
-            temperature_text_widget,
             temperature_widget,
             fs_icon,
             fs_widget,
             volume_icon,
-            volume_text_widget,
             volume_widget,
             clock_icon,
             clock_widget,
