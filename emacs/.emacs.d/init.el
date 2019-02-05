@@ -75,7 +75,7 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter
-  (setq minions-mode-line-lighter "[+]")
+  (setq minions-mode-line-lighter "#")
   ;; Don't hide the following minor modes
   (setq minions-direct '(ace-window-mode
                          artist-mode
@@ -1103,11 +1103,13 @@ _d_: Subtree
 (after-load 'time
   ;; Use custom mode line format
   (setq display-time-string-forms
-        '((propertize
+        '("["
+          (propertize
            (format-time-string "%H:%M" now)
            'face '(:inherit font-lock-keyword-face :weight bold)
            'help-echo (format-time-string "%A, %d-%m-%Y" now))
-          load " "))
+          load
+          "] "))
   ;; Time zones we are interested in
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
