@@ -117,6 +117,12 @@
 (setq-default indicate-buffer-boundaries 'left
               indicate-empty-lines t)
 
+;;; Show window dividers
+(setq window-divider-default-bottom-width 1
+      window-divider-default-right-width 1
+      window-divider-default-places t)
+(window-divider-mode)
+
 ;;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
 
@@ -325,10 +331,12 @@
 ;; Initialize mode
 (which-function-mode)
 
-;;; Fast window switching
-(setq windmove-wrap-around t)
-;; Initialize mode
+;;; Wind Move fast window switching
 (windmove-default-keybindings)
+;; Configuration
+(after-load 'windmove
+  ;; Cycle windows
+  (setq windmove-wrap-around t))
 
 ;;; Undo and redo the window configuration
 (winner-mode)
@@ -1862,6 +1870,8 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   ;; Change default behavior
   (setq company-minimum-prefix-length 2
         company-selection-wrap-around t)
+  ;; Allow non-matching input
+  (setq company-require-match nil)
   ;; Show numbers on candidates
   (setq company-show-numbers t)
   ;; Tooltip behavior
@@ -1869,9 +1879,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
         company-tooltip-flip-when-above t)
   ;; Dabbrev completion behavior
   (setq company-dabbrev-downcase nil
-        company-dabbrev-ignore-case t)
-  ;; Insert completions immediately
-  (company-tng-configure-default))
+        company-dabbrev-ignore-case t))
 
 ;;; Diff-Hl
 (require-package 'diff-hl)
