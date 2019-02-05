@@ -503,7 +503,7 @@ local fs_widget = wibox.widget {
                widget = fs_chart
             },
             layout = wibox.layout.fixed.horizontal,
-            spacing = 3,
+            spacing = 3
          },
          top = 2,
          bottom = 2,
