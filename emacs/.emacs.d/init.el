@@ -121,6 +121,7 @@
 (setq window-divider-default-bottom-width 1
       window-divider-default-right-width 1
       window-divider-default-places t)
+;; Initialize mode
 (window-divider-mode)
 
 ;;; Move point all the way to buffer boundary before signaling an error
