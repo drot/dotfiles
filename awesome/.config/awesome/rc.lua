@@ -244,8 +244,8 @@ local cpu_widget = wibox.widget {
             {
                widget = cpu_graph
             },
-            layout = wibox.layout.fixed.horizontal,
-            spacing = 3
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
          },
          top = 2,
          bottom = 2,
@@ -329,8 +329,8 @@ local memory_widget = wibox.widget {
             {
                widget = memory_chart
             },
-            layout = wibox.layout.fixed.horizontal,
-            spacing = 3
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
          },
          top = 2,
          bottom = 2,
@@ -414,11 +414,11 @@ local temperature_widget = wibox.widget {
                {
                   widget = temperature_bar
                },
-               widget = wibox.container.rotate,
-               direction = "east"
+               direction = "east",
+               widget = wibox.container.rotate
             },
-            layout = wibox.layout.fixed.horizontal,
-            spacing = 3
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
          },
          top = 2,
          bottom = 2,
@@ -502,8 +502,8 @@ local fs_widget = wibox.widget {
             {
                widget = fs_chart
             },
-            layout = wibox.layout.fixed.horizontal,
-            spacing = 3
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
          },
          top = 2,
          bottom = 2,
@@ -587,11 +587,11 @@ local volume_widget = wibox.widget {
                {
                   widget = volume_bar
                },
-               widget = wibox.container.rotate,
-               direction = "east"
+               direction = "east",
+               widget = wibox.container.rotate
             },
-            layout = wibox.layout.fixed.horizontal,
-            spacing = 3
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
          },
          top = 2,
          bottom = 2,
