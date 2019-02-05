@@ -1122,7 +1122,8 @@ awful.rules.rules = {
         class = {
            "Pidgin",
            "mpv",
-           "SimpleScreenRecorder"
+           "SimpleScreenRecorder",
+           "feh"
         },
         name = {
            "Event Tester", -- xev
