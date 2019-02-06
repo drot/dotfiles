@@ -1693,6 +1693,7 @@ _d_: Subtree
   ;; Commands to run only once
   (setq mc/cmds-to-run-once
         '(down-list
+          swiper-mc
           hydra-multiple-cursors/mc/edit-beginnings-of-lines
           hydra-multiple-cursors/mc/edit-ends-of-lines-and-exit
           hydra-multiple-cursors/mc/edit-lines-and-exit
