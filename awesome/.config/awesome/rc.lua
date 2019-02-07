@@ -960,11 +960,20 @@ local globalkeys = gears.table.join(
       {description = "lock the screen", group = "screen"}),
 
    -- Volume control
-   awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("pactl set-sink-volume 0 +5%") end,
+   awful.key({ }, "XF86AudioRaiseVolume",
+      function ()
+         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +5%",
+                                           function () vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "increase volume", group = "volume"}),
-   awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn.with_shell("pactl set-sink-volume 0 -5%") end,
+   awful.key({ }, "XF86AudioLowerVolume",
+      function ()
+         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -5%",
+                                           function() vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "lower volume", group = "volume"}),
-   awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("pactl set-sink-mute 0 toggle") end,
+   awful.key({ }, "XF86AudioMute",
+      function ()
+         awful.spawn.easy_async_with_shell("pactl set-sink-mute 0 toggle",
+                                           function () vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "mute volume", group = "volume"}),
 
    -- Clipboard
