@@ -713,62 +713,27 @@ awful.screen.connect_for_each_screen(function(s)
       -- Wallpaper
       set_wallpaper(s)
 
+      -- Common tag properties
+      local tags = { 1, 2, 3, 4, 5, 6, 7, 8 }
+      local icons = { beautiful.tag_term, beautiful.tag_web, beautiful.tag_editor, beautiful.tag_office,
+                      beautiful.tag_utils, beautiful.tag_graphics, beautiful.tag_misc, beautiful.tag_games }
+
       -- Add first tag
-      awful.tag.add("1", {
-                       icon = beautiful.tag_term,
-                       layout = awful.layout.suit.tile,
-                       screen = s,
-                       selected = true
+      awful.tag.add(tags[1], {
+            icon = icons[1],
+            layout = awful.layout.suit.tile,
+            screen = s,
+            selected = true
       })
 
-      -- Add second tag
-      awful.tag.add("2", {
-                       icon = beautiful.tag_web,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add third tag
-      awful.tag.add("3", {
-                       icon = beautiful.tag_editor,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add fourth tag
-      awful.tag.add("4", {
-                       icon = beautiful.tag_office,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add fifth tag
-      awful.tag.add("5", {
-                       icon = beautiful.tag_utils,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add sixth tag
-      awful.tag.add("6", {
-                       icon = beautiful.tag_graphics,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add seventh tag
-      awful.tag.add("7", {
-                       icon = beautiful.tag_misc,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
-
-      -- Add eighth tag
-      awful.tag.add("8", {
-                       icon = beautiful.tag_games,
-                       layout = awful.layout.suit.floating,
-                       screen = s
-      })
+      -- Add the rest of the tags
+      for i = 2, 8 do
+         awful.tag.add(tags[i], {
+               icon = icons[i],
+               layout = awful.layout.suit.floating,
+               screen = s,
+         })
+      end
 
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt()
