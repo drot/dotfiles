@@ -718,21 +718,22 @@ awful.screen.connect_for_each_screen(function(s)
       local icons = { beautiful.tag_term, beautiful.tag_web, beautiful.tag_editor, beautiful.tag_office,
                       beautiful.tag_utils, beautiful.tag_graphics, beautiful.tag_misc, beautiful.tag_games }
 
-      -- Add first tag
-      awful.tag.add(tags[1], {
-            icon = icons[1],
-            layout = awful.layout.suit.tile,
-            screen = s,
-            selected = true
-      })
-
-      -- Add the rest of the tags
-      for i = 2, 8 do
-         awful.tag.add(tags[i], {
-               icon = icons[i],
-               layout = awful.layout.suit.floating,
-               screen = s,
-         })
+      -- Each screen has its own tag table.
+      for i = 1, 8 do
+         if i == 1 then
+            awful.tag.add(tags[i], {
+                             icon = icons[i],
+                             layout = awful.layout.suit.tile,
+                             screen = s,
+                             selected = true
+            })
+         else
+            awful.tag.add(tags[i], {
+                             icon = icons[i],
+                             layout = awful.layout.suit.floating,
+                             screen = s,
+            })
+         end
       end
 
       -- Create a promptbox for each screen
