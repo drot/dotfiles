@@ -27,44 +27,6 @@
 
 ;;; Code:
 
-;;; Delay garbage collection during startup
-(defun drot/reset-gc-cons-threshold ()
-  "Reset garbage collection threshold."
-  (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))))
-
-;;; Use the highest number possible
-(setq gc-cons-threshold most-positive-fixnum)
-
-;;; Reset garbage collection threshold value to default after startup
-(add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
-
-;;; Prefer newest version of a file
-(setq load-prefer-newer t)
-
-;;; Disable the site default settings
-(setq inhibit-default-init t)
-
-;;; Create directories for backups and cache files
-(make-directory (locate-user-emacs-file "backups") t)
-(make-directory (locate-user-emacs-file "cache") t)
-
-;;; Activate packages and add the MELPA package archive
-(package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-
-;;; Pinned packages
-(setq package-pinned-packages '((json-mode . "gnu")))
-
-;;; Helper function for installing packages
-(defun require-package (package)
-  "Ensures that PACKAGE is installed."
-  (unless (or (package-installed-p package)
-              (require package nil 'noerror))
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
-
 ;;; Use a shorter alias for this commonly used macro
 (defalias 'after-load 'with-eval-after-load)
 
@@ -86,6 +48,13 @@
                          overwrite-mode
                          poly-markdown-mode
                          sqlind-minor-mode)))
+
+;;; Hydra
+(require-package 'hydra)
+;; Configuration
+(after-load 'hydra
+  ;; Enable syntax coloring for Hydra definitions
+  (hydra-add-font-lock))
 
 ;;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
@@ -332,8 +301,12 @@
 ;; Initialize mode
 (which-function-mode)
 
-;;; Wind Move fast window switching
+;;; Wind Move
 (windmove-default-keybindings)
+;; Key bindings to pick next window display position
+(windmove-display-default-keybindings)
+;; Key bindings to delete windows
+(windmove-delete-default-keybindings)
 ;; Configuration
 (after-load 'windmove
   ;; Cycle windows
@@ -1565,13 +1538,6 @@ _d_: Subtree
   ;; Lua 5.3 as the default interpreter
   (setq lua-default-application "lua5.3"))
 
-;;; Hydra
-(require-package 'hydra)
-;; Configuration
-(after-load 'hydra
-  ;; Enable syntax coloring for Hydra definitions
-  (hydra-add-font-lock))
-
 ;;; EPUB format support
 (require-package 'nov)
 ;; Initialize package
@@ -1807,8 +1773,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; SQL indentation
 (require-package 'sql-indent)
-;; Initialize mode
-(add-hook 'sql-mode-hook #'sqlind-minor-mode)
 
 ;;; Systemd mode
 (require-package 'systemd)
@@ -2151,6 +2115,8 @@ suitable for assigning to `ffap-file-finder'."
 ;;; Project
 (global-set-key (kbd "C-c p f") #'project-find-file)
 (global-set-key (kbd "C-c p r") #'project-find-regexp)
+(global-set-key (kbd "C-c p s") #'project-search)
+(global-set-key (kbd "C-c p q") #'project-query-replace)
 
 ;;; Find function and variable definitions
 (global-set-key (kbd "C-c h f") #'find-function)
