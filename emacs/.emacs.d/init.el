@@ -304,9 +304,9 @@
 
 ;;; Wind Move
 (windmove-default-keybindings)
-;; Key bindings to pick next window display position
+;; Set key bindings to pick next window display position
 (windmove-display-default-keybindings)
-;; Key bindings to delete windows
+;; Set key bindings to delete windows
 (windmove-delete-default-keybindings)
 ;; Configuration
 (after-load 'windmove
