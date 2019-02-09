@@ -3,6 +3,8 @@ $include /etc/inputrc
 
 # Bash specific options
 $if Bash
+# disable beep
+set bell-style visible
 # case-insensitive completion
 set completion-ignore-case on
 # use colors for completion display
