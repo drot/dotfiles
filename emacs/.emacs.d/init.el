@@ -39,15 +39,16 @@
   ;; Change mode lighter
   (setq minions-mode-line-lighter "#")
   ;; Don't hide the following minor modes
-  (setq minions-direct '(ace-window-mode
-                         artist-mode
-                         auto-revert-mode
-                         cider-mode
-                         flymake-mode
-                         isearch-mode
-                         overwrite-mode
-                         poly-markdown-mode
-                         sqlind-minor-mode)))
+  (setq minions-direct
+        '(ace-window-mode
+          artist-mode
+          auto-revert-mode
+          cider-mode
+          flymake-mode
+          isearch-mode
+          overwrite-mode
+          poly-markdown-mode
+          sqlind-minor-mode)))
 
 ;;; Hydra
 (require-package 'hydra)
