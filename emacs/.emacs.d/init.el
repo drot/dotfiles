@@ -54,7 +54,8 @@
           isearch-mode
           overwrite-mode
           poly-markdown-mode
-          sqlind-minor-mode)))
+          sqlind-minor-mode
+          subword-mode)))
 
 ;;; Hydra
 (require-package 'hydra)
