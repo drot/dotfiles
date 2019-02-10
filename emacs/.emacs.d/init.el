@@ -31,41 +31,6 @@
 (make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
-;;; Use a shorter alias for this commonly used macro
-(defalias 'after-load 'with-eval-after-load)
-
-;;; Group minor mode lighters with Minions
-(require-package 'minions)
-;; Initialize mode
-(minions-mode)
-;; Configuration
-(after-load 'minions
-  ;; Change mode lighter
-  (setq minions-mode-line-lighter "#")
-  ;; Don't hide the following minor modes
-  (setq minions-direct
-        '(ace-window-mode
-          artist-mode
-          auto-fill-function
-          auto-revert-mode
-          cider-mode
-          flymake-mode
-          geiser-autodoc-mode
-          geiser-mode
-          isearch-mode
-          overwrite-mode
-          poly-markdown-mode
-          sqlind-minor-mode
-          subword-mode
-          visual-line-mode)))
-
-;;; Hydra
-(require-package 'hydra)
-;; Configuration
-(after-load 'hydra
-  ;; Enable syntax coloring for Hydra definitions
-  (hydra-add-font-lock))
-
 ;;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
 ;; Load theme explicitly
@@ -89,6 +54,9 @@
 
 ;;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
+
+;;; Use a shorter alias for this commonly used macro
+(defalias 'after-load 'with-eval-after-load)
 
 ;;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.01)
@@ -867,6 +835,13 @@
 (after-load 'ielm
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
+
+;;; Hydra
+(require-package 'hydra)
+;; Configuration
+(after-load 'hydra
+  ;; Enable syntax coloring for Hydra definitions
+  (hydra-add-font-lock))
 
 ;;; Flymake
 (global-set-key (kbd "C-c ! t") #'flymake-mode)
@@ -2038,6 +2013,31 @@ suitable for assigning to `ffap-file-finder'."
 (require-package 'company-prescient)
 ;; Initialize mode
 (add-hook 'after-init-hook #'company-prescient-mode)
+
+;;; Group minor mode lighters with Minions
+(require-package 'minions)
+;; Initialize mode
+(minions-mode)
+;; Configuration
+(after-load 'minions
+  ;; Change mode lighter
+  (setq minions-mode-line-lighter "#")
+  ;; Don't hide the following minor modes
+  (setq minions-direct
+        '(ace-window-mode
+          artist-mode
+          auto-fill-function
+          auto-revert-mode
+          cider-mode
+          flymake-mode
+          geiser-autodoc-mode
+          geiser-mode
+          isearch-mode
+          overwrite-mode
+          poly-markdown-mode
+          sqlind-minor-mode
+          subword-mode
+          visual-line-mode)))
 
 ;;; Paredit
 (require-package 'paredit)
