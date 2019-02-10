@@ -55,7 +55,8 @@
           overwrite-mode
           poly-markdown-mode
           sqlind-minor-mode
-          subword-mode)))
+          subword-mode
+          visual-line-mode)))
 
 ;;; Hydra
 (require-package 'hydra)
