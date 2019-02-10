@@ -651,7 +651,7 @@
 (after-load 'smtpmail
   ;; Configuration
   (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-user "drot-smtp"
+        smtpmail-smtp-user "drot"
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
