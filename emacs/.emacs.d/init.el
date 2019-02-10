@@ -31,15 +31,15 @@
 (make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
-;;; Color theme
-(require-package 'color-theme-sanityinc-tomorrow)
-;; Load theme explicitly
-(load-theme 'sanityinc-tomorrow-night t)
-
 ;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
   (when (fboundp mode)
     (funcall mode -1)))
+
+;;; Color theme
+(require-package 'color-theme-sanityinc-tomorrow)
+;; Load theme explicitly
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-echo-area-message (user-login-name)
