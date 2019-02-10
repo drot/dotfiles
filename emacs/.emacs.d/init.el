@@ -27,6 +27,10 @@
 
 ;;; Code:
 
+;;; Create directories for backups and cache files
+(make-directory (locate-user-emacs-file "backups") t)
+(make-directory (locate-user-emacs-file "cache") t)
+
 ;;; Use a shorter alias for this commonly used macro
 (defalias 'after-load 'with-eval-after-load)
 
@@ -59,6 +63,7 @@
 
 ;;; Color theme
 (require-package 'color-theme-sanityinc-tomorrow)
+;; Load theme explicitly
 (load-theme 'sanityinc-tomorrow-night t)
 
 ;;; Disable needless GUI elements
@@ -217,6 +222,7 @@
         "/backups/.*\\'"
         "/elfeed/.*\\'"
         "/cache/.*\\'"
+        "/dev/shm/.*\\'"
         ".*\\.gz\\'"
         "newsrc"
         "TAGS"))

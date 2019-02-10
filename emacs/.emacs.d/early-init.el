@@ -55,7 +55,8 @@
 (setq package-pinned-packages '((json-mode . "gnu")))
 
 ;; Speed up package startup
-(setq package-quickstart t)
+(setq package-quickstart-file (locate-user-emacs-file "elpa/package-quickstart.el")
+      package-quickstart t)
 
 ;; Helper function for installing packages
 (defun require-package (package)
@@ -65,9 +66,5 @@
     (unless (assoc package package-archive-contents)
       (package-refresh-contents))
     (package-install package)))
-
-;;; Create directories for backups and cache files
-(make-directory (locate-user-emacs-file "backups") t)
-(make-directory (locate-user-emacs-file "cache") t)
 
 ;;; early-init.el ends here
