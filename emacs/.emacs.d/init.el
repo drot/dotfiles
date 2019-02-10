@@ -707,6 +707,11 @@
   ;; Make movement work the same as in regular Dired buffers
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
+;;; Dired auxiliary features
+(after-load 'dired-aux
+  ;; Ask to create directories if they don't exist
+  (setq dired-create-destination-dirs 'ask))
+
 ;;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
