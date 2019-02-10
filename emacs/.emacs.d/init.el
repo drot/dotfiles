@@ -49,6 +49,8 @@
           auto-revert-mode
           cider-mode
           flymake-mode
+          geiser-autodoc-mode
+          geiser-mode
           isearch-mode
           overwrite-mode
           poly-markdown-mode
