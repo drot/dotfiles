@@ -605,8 +605,7 @@
 ;;; NXML mode
 (after-load 'nxml-mode
   ;; Configuration
-  (setq nxml-slash-auto-complete-flag t
-        nxml-sexp-element-flag t))
+  (setq nxml-slash-auto-complete-flag t))
 
 ;;; Doc View mode
 (after-load 'doc-view
