@@ -46,6 +46,7 @@
   (setq minions-direct
         '(ace-window-mode
           artist-mode
+          auto-fill-function
           auto-revert-mode
           cider-mode
           flymake-mode
@@ -54,7 +55,9 @@
           isearch-mode
           overwrite-mode
           poly-markdown-mode
-          sqlind-minor-mode)))
+          sqlind-minor-mode
+          subword-mode
+          visual-line-mode)))
 
 ;;; Hydra
 (require-package 'hydra)
