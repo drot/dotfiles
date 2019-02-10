@@ -55,8 +55,7 @@
 (setq package-pinned-packages '((json-mode . "gnu")))
 
 ;; Speed up package startup
-(setq package-quickstart-file (locate-user-emacs-file "elpa/package-quickstart.el")
-      package-quickstart t)
+(setq package-quickstart t)
 
 ;; Helper function for installing packages
 (defun require-package (package)
