@@ -46,6 +46,7 @@
   (setq minions-direct
         '(ace-window-mode
           artist-mode
+          auto-fill-mode
           auto-revert-mode
           cider-mode
           flymake-mode
