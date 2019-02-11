@@ -607,6 +607,9 @@
   ;; Initialize mode
   (auth-source-pass-enable))
 
+(setq auth-source-debug t)
+(setq auth-source-do-cache nil)
+
 ;;; Mail sending
 (after-load 'message
   ;; Set main directory
@@ -916,8 +919,7 @@ _p_: Previous
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
-        gnus-mime-display-multipart-related-as-mixed t
-        gnus-auto-select-first nil)
+        gnus-mime-display-multipart-related-as-mixed t)
   ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Configure visible headers
