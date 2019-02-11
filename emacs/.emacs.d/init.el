@@ -607,9 +607,6 @@
   ;; Initialize mode
   (auth-source-pass-enable))
 
-(setq auth-source-debug t)
-(setq auth-source-do-cache nil)
-
 ;;; Mail sending
 (after-load 'message
   ;; Set main directory
