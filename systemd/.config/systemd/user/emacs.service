@@ -3,7 +3,7 @@ Description=Emacs text editor
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
-Type=notify
+Type=simple
 ExecStart=/home/drot/.local/bin/emacs --fg-daemon
 ExecStop=/home/drot/.local/bin/emacsclient --eval "(kill-emacs)"
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
