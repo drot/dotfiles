@@ -1702,7 +1702,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; PDF Tools
 (require-package 'pdf-tools)
 ;; Initialize mode
-(pdf-loader-install)
+(pdf-loader-install t)
 ;; Enable SyncTeX support
 (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
 ;; Enable link following
