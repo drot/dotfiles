@@ -27,43 +27,9 @@
 
 ;;; Code:
 
-;;; Delay garbage collection during startup
-(defun drot/reset-gc-cons-threshold ()
-  "Reset garbage collection threshold."
-  (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))))
-
-;;; Use the highest number possible
-(setq gc-cons-threshold most-positive-fixnum)
-
-;;; Reset garbage collection threshold value to default after startup
-(add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
-
-;;; Prefer newest version of a file
-(setq load-prefer-newer t)
-
-;;; Disable the site default settings
-(setq inhibit-default-init t)
-
 ;;; Create directories for backups and cache files
 (make-directory (locate-user-emacs-file "backups") t)
 (make-directory (locate-user-emacs-file "cache") t)
-
-;;; Activate packages and add the MELPA package archive
-(package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-
-;;; Pinned packages
-(setq package-pinned-packages '((json-mode . "gnu")))
-
-;;; Helper function for installing packages
-(defun require-package (package)
-  "Ensures that PACKAGE is installed."
-  (unless (or (package-installed-p package)
-              (require package nil 'noerror))
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
 
 ;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
@@ -315,8 +281,12 @@
 ;; Initialize mode
 (which-function-mode)
 
-;;; Wind Move fast window switching
+;;; Wind Move
 (windmove-default-keybindings)
+;; Set key bindings to pick next window display position
+(windmove-display-default-keybindings)
+;; Set key bindings to delete windows
+(windmove-delete-default-keybindings)
 ;; Configuration
 (after-load 'windmove
   ;; Cycle windows
@@ -614,8 +584,7 @@
 ;;; NXML mode
 (after-load 'nxml-mode
   ;; Configuration
-  (setq nxml-slash-auto-complete-flag t
-        nxml-sexp-element-flag t))
+  (setq nxml-slash-auto-complete-flag t))
 
 ;;; Doc View mode
 (after-load 'doc-view
@@ -705,6 +674,11 @@
   (setq wdired-allow-to-change-permissions t)
   ;; Make movement work the same as in regular Dired buffers
   (setq wdired-use-dired-vertical-movement 'sometimes))
+
+;;; Dired auxiliary features
+(after-load 'dired-aux
+  ;; Ask to create directories if they don't exist
+  (setq dired-create-destination-dirs 'ask))
 
 ;;; Image-Dired
 (after-load 'image-dired
@@ -1789,8 +1763,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; SQL indentation
 (require-package 'sql-indent)
-;; Initialize mode
-(add-hook 'sql-mode-hook #'sqlind-minor-mode)
 
 ;;; Systemd mode
 (require-package 'systemd)
@@ -2158,6 +2130,8 @@ suitable for assigning to `ffap-file-finder'."
 ;;; Project
 (global-set-key (kbd "C-c p f") #'project-find-file)
 (global-set-key (kbd "C-c p r") #'project-find-regexp)
+(global-set-key (kbd "C-c p s") #'project-search)
+(global-set-key (kbd "C-c p q") #'project-query-replace)
 
 ;;; Find function and variable definitions
 (global-set-key (kbd "C-c h f") #'find-function)

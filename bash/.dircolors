@@ -1,4 +1,4 @@
-## supported terminals
+## supported terminals  -*- mode: conf-space; -*-
 TERM ansi
 TERM color-xterm
 TERM con132x25
@@ -212,6 +212,16 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .R 38;5;49
 # GrADS script
 .gs 38;5;81
+# Clojure
+.clj 38;5;41
+.cljs 38;5;41
+.cljc 38;5;41
+# Clojure gorilla REPL worksheet
+.cljw 38;5;41
+# Scala
+.scala 38;5;41
+# Dart
+.dart 38;5;51
 # assembly language
 .asm 38;5;81
 # LISP
@@ -254,6 +264,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .f 38;5;81
 .for 38;5;81
 .ftn 38;5;81
+# Nim
+.nim 38;5;81
 # pascal
 .s 38;5;110
 .S 38;5;110
@@ -263,6 +275,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .swift 38;5;219
 # ?
 .sx 38;5;81
+# Vala
+.vala 38;5;81
+.vapi 38;5;81
 # haskell
 .hi 38;5;110
 .hs 38;5;81
@@ -337,6 +352,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tif 38;5;97
 .TIFF 38;5;97
 .cdr 38;5;97
+.flif 38;5;97
 .gif 38;5;97
 .ico 38;5;97
 .jpeg 38;5;97
@@ -347,6 +363,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .psd 38;5;97
 .xbm 38;5;97
 .xpm 38;5;97
+.webp 38;5;97
 # vector
 .ai 38;5;99
 .eps 38;5;99
@@ -585,12 +602,12 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .bfe 38;5;192;3
 .enc 38;5;192;3
 .gpg 38;5;192;3
+.key 38;5;192;3
 .signature 38;5;192;3
 .sig 38;5;192;3
 .p12 38;5;192;3
 .pem 38;5;192;3
 .pgp 38;5;192;3
-.asc 38;5;192;3
 .enc 38;5;192;3
 .sig 38;5;192;3
 .p7s 38;5;192;3
@@ -637,8 +654,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .mm 38;5;7
 # perldoc
 .pod 38;5;7
-# GIMP brush
+# GIMP files
 .gbr 38;5;7
+.scm 38;5;7
+.xcf 38;5;7
 # printer spool file
 .spl 38;5;7
 # RStudio project file
