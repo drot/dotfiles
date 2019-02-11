@@ -623,11 +623,6 @@
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
-;;; Mail folder access for Gnus
-(after-load 'nnfolder
-  ;; Set main directory
-  (setq nnfolder-directory "~/.mail/archive"))
-
 ;;; Smileys
 (after-load 'smiley
   ;; Resize smileys
@@ -946,6 +941,11 @@ _p_: Previous
         gnus-sum-thread-tree-vertical "│   "
         gnus-sum-thread-tree-leaf-with-other "├──>"
         gnus-sum-thread-tree-single-leaf "└──>"))
+
+;;; Mail folder access for Gnus
+(after-load 'nnfolder
+  ;; Set main directory
+  (setq nnfolder-directory "~/.mail/archive"))
 
 ;;; Calendar
 (global-set-key (kbd "C-c a C-c") #'calendar)
