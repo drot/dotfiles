@@ -857,13 +857,6 @@
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
-;;; Hydra
-(require-package 'hydra)
-;; Configuration
-(after-load 'hydra
-  ;; Enable syntax coloring for Hydra definitions
-  (hydra-add-font-lock))
-
 ;;; Flymake
 (global-set-key (kbd "C-c ! t") #'flymake-mode)
 ;; Configuration
@@ -1508,6 +1501,13 @@ _d_: Subtree
 (after-load 'geiser-repl
   ;; Change default history file location
   (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
+
+;;; Hydra
+(require-package 'hydra)
+;; Configuration
+(after-load 'hydra
+  ;; Enable syntax coloring for Hydra definitions
+  (hydra-add-font-lock))
 
 ;;; Iedit
 (require-package 'iedit)
