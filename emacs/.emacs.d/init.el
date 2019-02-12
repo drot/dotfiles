@@ -1911,7 +1911,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Configuration
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
-  (set-face-attribute 'form-feed-line nil :strike-through t :inherit font-lock-comment-face))
+  (set-face-attribute 'form-feed-line nil
+                      :strike-through t
+                      :inherit font-lock-comment-face))
 
 ;;; Hl-Todo
 (require-package 'hl-todo)
