@@ -160,12 +160,13 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # volume keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
+bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
+bindsym XF86AudioMicMute exec --no-startup-id ~/.scripts/audio_toggle mic
 
 # toggle touchpad
-bindsym XF86TouchpadToggle exec ~/.scripts/touchpad_toggle
+bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/touchpad_toggle
 
 # screenshot keys
 bindsym Print exec --no-startup-id maim -u /tmp/screenshot-$(date +%s).png
@@ -186,6 +187,11 @@ for_window [class="Wine"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Pidgin"] floating enable
+for_window [class="Pavucontrol"] floating enable
+# Ripcord specific
+for_window [title="Ripcord Accounts"] floating enable
+for_window [title="Preferences"] floating enable
+for_window [title="Emoji"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Firefox"] $ws2
@@ -196,6 +202,7 @@ assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
 assign [class="Pcmanfm"] $ws6
 assign [class="Pavucontrol"] $ws6
+assign [class="Ripcord"] $ws7
 
 # start i3bar to display a workspace bar
 bar {
