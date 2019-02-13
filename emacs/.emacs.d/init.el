@@ -1113,7 +1113,7 @@ _d_: Subtree
 ;;; Ace-window
 (require-package 'ace-window)
 ;; Set global key binding
-(global-set-key (kbd "M-o") #'ace-window)
+(global-set-key (kbd "C-c j") #'ace-window)
 ;; Configuration
 (after-load 'ace-window
   ;; Use keys on the home row
