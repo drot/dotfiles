@@ -931,6 +931,8 @@ _p_: Previous
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
         gnus-mime-display-multipart-related-as-mixed t)
+  ;; Don't auto select first article
+  (setq gnus-auto-select-first nil)
   ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Configure visible headers
@@ -1874,11 +1876,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t v") #'diff-hl-margin-mode)
-;; Configuration
-(after-load 'diff-hl
-  ;; Add hooks for other packages
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+;; Add hooks for other packages
+(add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
+(add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 
 ;;; Eyebrowse
 (require-package 'eyebrowse)
