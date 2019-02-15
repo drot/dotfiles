@@ -1116,9 +1116,9 @@ awful.rules.rules = {
    -- Emacs
    { rule = { class = "Emacs" },
      properties = { tag = "3", maximized = true } },
-   -- Office programs
-   { rule_any = { class = { "Zathura", "libreoffice" } },
-     properties = { tag = "4", switch_to_tags = true } },
+   -- Zathura
+   { rule = { class = "Zathura" },
+     properties = { tag = "4", maximized = true, switch_to_tags = true } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
      properties = { tag = "5", switch_to_tags = true, floating = true } },
