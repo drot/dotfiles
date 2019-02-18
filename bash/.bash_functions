@@ -64,7 +64,8 @@ ix() {
 # Record desktop
 record() {
     if [[ $1 == *.mp4 ]]; then
-        ffmpeg -y -f x11grab -s 1600x900 -i :0.0 -f pulse -i 0 /tmp/"$1"
+        ffmpeg -y -f x11grab -s $(xdpyinfo | awk '/dimensions:/{print $2}') \
+               -i :0.0 -f pulse -i 0 /tmp/"$1"
     else
         echo "Specify an .mp4 output file please."
         return 1
