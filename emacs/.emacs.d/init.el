@@ -1530,11 +1530,6 @@ _d_: Subtree
   ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
-;;; ix.io paste support
-(require-package 'ix)
-;; Set global key binding
-(global-set-key (kbd "C-c x y") #'ix)
-
 ;;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
@@ -1797,6 +1792,16 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; Systemd mode
 (require-package 'systemd)
+
+;;; Web pasting support
+(require-package 'webpaste)
+;; Set global key bindings
+(global-set-key (kbd "C-c x y") #'webpaste-paste-region)
+(global-set-key (kbd "C-c b y") #'webpaste-paste-buffer)
+;; Configuration
+(after-load 'webpaste
+  ;; Change priority for pastebin services
+  (setq webpaste-provider-priority '("ptpb.pw" "ix.io" "dpaste.de")))
 
 ;;; Wgrep
 (require-package 'wgrep)
