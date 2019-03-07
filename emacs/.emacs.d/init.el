@@ -1793,6 +1793,11 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; Systemd mode
 (require-package 'systemd)
 
+;;; Undo propose
+(require-package 'undo-propose)
+;; Set global key binding
+(global-set-key (kbd "C-c b u") #'undo-propose)
+
 ;;; Web pasting support
 (require-package 'webpaste)
 ;; Set global key bindings
@@ -2264,8 +2269,8 @@ _S_: Prefixed Symbol  _u_: URL        ^ ^                  _)_: Inside Pairs
 
 ;;; Extended buffer operation key bindings
 (global-set-key (kbd "C-c b DEL") #'erase-buffer)
-(global-set-key (kbd "C-c b b") #'bury-buffer)
-(global-set-key (kbd "C-c b u") #'unbury-buffer)
+(global-set-key (kbd "C-z") #'bury-buffer)
+(global-set-key (kbd "C-S-z") #'unbury-buffer)
 (global-set-key (kbd "C-c b e") #'eval-buffer)
 (global-set-key (kbd "C-c b k") #'kill-this-buffer)
 (global-set-key (kbd "C-c b i") #'insert-buffer)
