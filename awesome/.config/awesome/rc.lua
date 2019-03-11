@@ -1130,7 +1130,7 @@ awful.rules.rules = {
      properties = { tag = "7", switch_to_tags = true } },
    -- Wine
    { rule = { class = "Wine" },
-     properties = { tag = "8", switch_to_tags = true, floating = true } }
+     properties = { tag = "8", switch_to_tags = true, floating = true, titlebars_enabled = false } }
 }
 -- }}}
 

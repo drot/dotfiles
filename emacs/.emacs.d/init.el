@@ -1806,7 +1806,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Configuration
 (after-load 'webpaste
   ;; Change priority for pastebin services
-  (setq webpaste-provider-priority '("ptpb.pw" "ix.io" "dpaste.de")))
+  (setq webpaste-provider-priority '("ix.io" "dpaste.de")))
 
 ;;; Wgrep
 (require-package 'wgrep)
