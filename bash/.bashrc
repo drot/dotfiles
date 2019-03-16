@@ -25,6 +25,11 @@ HISTTIMEFORMAT="%F %T "
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
+# Bash completion
+if [[ -r /etc/profile.d/bash_completion.sh ]]; then
+    . /etc/profile.d/bash_completion.sh
+fi
+
 # Colored listings
 if [[ -r $HOME/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b "$HOME/.dircolors")
@@ -52,13 +57,9 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
 
-# Git prompt support
-if [[ -r /usr/share/git/git-prompt.sh ]]; then
-    . /usr/share/git/git-prompt.sh
-    # Prompt format
-    GIT="\$(__git_ps1 ' %s')"
-    GIT_PS1_SHOWDIRTYSTATE="yes"
-fi
+# Git prompt format
+GIT="\$(__git_ps1 ' %s')"
+GIT_PS1_SHOWDIRTYSTATE="yes"
 
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
