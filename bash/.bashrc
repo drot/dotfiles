@@ -25,11 +25,6 @@ HISTTIMEFORMAT="%F %T "
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
-# Bash completion
-if [[ -r /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
-fi
-
 # Colored listings
 if [[ -r $HOME/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b "$HOME/.dircolors")
