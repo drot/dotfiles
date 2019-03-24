@@ -71,3 +71,8 @@ record() {
         return 1
     fi
 }
+
+# Find common files quickly with fzf
+finder() {
+    find ~/.scripts ~/.config -type f -not \( -path "*/\.git/*" -or -path "*/\GIMP/*" \) | fzf | xargs -r $EDITOR
+}
