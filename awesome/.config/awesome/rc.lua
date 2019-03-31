@@ -794,7 +794,6 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
-            --cpu_text_widget,
             cpu_widget,
             memory_icon,
             memory_widget,
