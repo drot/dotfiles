@@ -74,7 +74,7 @@ record() {
 
 # Find common files quickly with fzf
 finder() {
-    find ~/.scripts ~/.config -type f -not \
+    find -L ~/.scripts ~/.config -type f -not \
          \( -path "*/\.git/*" -o -path "*/\wine/*" -o -path "*/\libreoffice/*" -o -path "*/\GIMP/*" \) \
         | fzf | xargs -r $EDITOR
 }
