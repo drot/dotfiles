@@ -323,6 +323,11 @@
   (setq windmove-wrap-around t))
 
 ;;; Undo and redo the window configuration
+(setq winner-dont-bind-my-keys t)
+;; Set key bindings
+(global-set-key (kbd "<C-s-left>") #'winner-undo)
+(global-set-key (kbd "<C-s-right>") #'winner-redo)
+;; Initialize mode
 (winner-mode)
 
 ;;; Hide Show mode
@@ -1086,12 +1091,7 @@ _d_: Subtree
   (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t)
-  ;; Avoid Wind Move conflict
-  (add-hook 'org-shiftup-final-hook #'windmove-up)
-  (add-hook 'org-shiftdown-final-hook #'windmove-down)
-  (add-hook 'org-shiftleft-final-hook #'windmove-left)
-  (add-hook 'org-shiftright-final-hook #'windmove-right))
+        org-src-tab-acts-natively t))
 
 ;;; Org time clocking
 (after-load 'org-clock
