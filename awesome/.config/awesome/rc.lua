@@ -364,7 +364,7 @@ local temperature_icon = wibox.widget {
 
 -- Set temperature text value
 local temperature_text_value = wibox.widget.textbox()
-vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon0", "core" })
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon1", "core" })
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -651,7 +651,7 @@ month_calendar:attach(clock_widget, "br", { on_hover = false})
 local clock_tooltip = awful.tooltip { }
 clock_tooltip:add_to_object(clock_widget)
 clock_widget:connect_signal('mouse::enter', function()
-                               clock_tooltip.text = os.date('Today is %A, %B %d %Y\nThe time is %T')
+                               clock_tooltip.text = os.date('Today is %A, %B %d %Y')
 end)
 
 -- Create a wibox for each screen and add it
