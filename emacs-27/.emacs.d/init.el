@@ -608,7 +608,7 @@
 ;;; Interact with GnuPG directly
 (after-load 'epa
   ;; Configuration
-  (setq epa-pinentry-mode 'loopback))
+  (setq epg-pinentry-mode 'loopback))
 
 ;;; Enable Pass integration
 (after-load 'auth-source
