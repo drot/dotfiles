@@ -281,7 +281,7 @@
 ;; Initialize mode
 (which-function-mode)
 
-;;; Wind Move
+;;; Wind Move fast window switching
 (windmove-default-keybindings)
 ;; Set key bindings to pick next window display position
 (windmove-display-default-keybindings)
@@ -293,6 +293,11 @@
   (setq windmove-wrap-around t))
 
 ;;; Undo and redo the window configuration
+(setq winner-dont-bind-my-keys t)
+;; Set key bindings
+(global-set-key (kbd "<C-s-left>") #'winner-undo)
+(global-set-key (kbd "<C-s-right>") #'winner-redo)
+;; Initialize mode
 (winner-mode)
 
 ;;; Hide Show mode
@@ -912,6 +917,8 @@ _p_: Previous
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
         gnus-mime-display-multipart-related-as-mixed t)
+  ;; Don't auto select first article
+  (setq gnus-auto-select-first nil)
   ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Configure visible headers
@@ -1027,14 +1034,15 @@ _d_: Subtree
         org-default-notes-file "~/Documents/org/notes.org"
         org-agenda-files '("~/Documents/org"))
   ;; Default modules to load
-  (setq org-modules '(org-bibtex
-                      org-docview
-                      org-eshell
-                      org-eww
-                      org-gnus
-                      org-info
-                      org-id
-                      org-mhe))
+  (setq org-modules
+        '(org-bibtex
+          org-docview
+          org-eshell
+          org-eww
+          org-gnus
+          org-info
+          org-id
+          org-mhe))
   ;; Record time when a task is done
   (setq org-log-done 'time)
   ;; Indent headings by default
@@ -1057,12 +1065,7 @@ _d_: Subtree
   (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t)
-  ;; Avoid Wind Move conflict
-  (add-hook 'org-shiftup-final-hook #'windmove-up)
-  (add-hook 'org-shiftdown-final-hook #'windmove-down)
-  (add-hook 'org-shiftleft-final-hook #'windmove-left)
-  (add-hook 'org-shiftright-final-hook #'windmove-right))
+        org-src-tab-acts-natively t))
 
 ;;; Org time clocking
 (after-load 'org-clock
@@ -1501,11 +1504,6 @@ _d_: Subtree
   ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
-;;; ix.io paste support
-(require-package 'ix)
-;; Set global key binding
-(global-set-key (kbd "C-c x y") #'ix)
-
 ;;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
@@ -1767,6 +1765,21 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; Systemd mode
 (require-package 'systemd)
 
+;;; Undo propose
+(require-package 'undo-propose)
+;; Set global key binding
+(global-set-key (kbd "C-c b u") #'undo-propose)
+
+;;; Web pasting support
+(require-package 'webpaste)
+;; Set global key bindings
+(global-set-key (kbd "C-c x y") #'webpaste-paste-region)
+(global-set-key (kbd "C-c b y") #'webpaste-paste-buffer)
+;; Configuration
+(after-load 'webpaste
+  ;; Change priority for pastebin services
+  (setq webpaste-provider-priority '("ix.io" "dpaste.de")))
+
 ;;; Wgrep
 (require-package 'wgrep)
 
@@ -1845,11 +1858,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t v") #'diff-hl-margin-mode)
-;; Configuration
-(after-load 'diff-hl
-  ;; Add hooks for other packages
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+;; Add hooks for other packages
+(add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
+(add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 
 ;;; Eyebrowse
 (require-package 'eyebrowse)
@@ -1882,8 +1893,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Configuration
 (after-load 'form-feed
   ;; Make `form-feed-line-line' color equal to comment color
-  (face-spec-set 'form-feed-line
-                 '((t (:strike-through t :inherit font-lock-comment-face)))))
+  (set-face-attribute 'form-feed-line nil
+                      :strike-through t
+                      :inherit font-lock-comment-face))
 
 ;;; Hl-Todo
 (require-package 'hl-todo)
@@ -2013,7 +2025,7 @@ suitable for assigning to `ffap-file-finder'."
 ;; Initialize mode
 (add-hook 'after-init-hook #'company-prescient-mode)
 
-;;; Group minor mode lighters with Minions
+;;; Minions
 (require-package 'minions)
 ;; Initialize mode
 (minions-mode)
@@ -2231,8 +2243,8 @@ _S_: Prefixed Symbol  _u_: URL        ^ ^                  _)_: Inside Pairs
 
 ;;; Extended buffer operation key bindings
 (global-set-key (kbd "C-c b DEL") #'erase-buffer)
-(global-set-key (kbd "C-c b b") #'bury-buffer)
-(global-set-key (kbd "C-c b u") #'unbury-buffer)
+(global-set-key (kbd "C-z") #'bury-buffer)
+(global-set-key (kbd "C-S-z") #'unbury-buffer)
 (global-set-key (kbd "C-c b e") #'eval-buffer)
 (global-set-key (kbd "C-c b k") #'kill-this-buffer)
 (global-set-key (kbd "C-c b i") #'insert-buffer)

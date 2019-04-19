@@ -54,9 +54,6 @@
 ;; Pinned packages
 (setq package-pinned-packages '((json-mode . "gnu")))
 
-;; Speed up package startup
-(setq package-quickstart t)
-
 ;; Helper function for installing packages
 (defun require-package (package)
   "Ensures that PACKAGE is installed."
