@@ -366,6 +366,9 @@
 (setq isearch-allow-scroll t)
 ;; Match similar chars
 (setq search-default-mode #'char-fold-to-regexp)
+;; Display number of matches
+(setq isearch-lazy-count t
+      lazy-count-prefix-format "(%s/%s) ")
 
 ;;; Ediff window split
 (after-load 'ediff-wind
