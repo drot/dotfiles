@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Setting up early initialization options.
+;; Setup of early initialization options.
 
 ;;; Code:
 
