@@ -27,6 +27,16 @@ Emacs.toolBar: off
 Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
+! XMessage
+Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
+Xmessage*background: red
+Xmessage*foreground: yellow
+Xmessage*form.*.shapeStyle: rectangle
+Xmessage*Scrollbar.width: 1
+Xmessage*Scrollbar.borderWidth: 0
+Xmessage*Buttons: OK
+Xmessage*defaultButton: OK
+
 ! URXVT
 ! General
 URxvt*urgentOnBell: true
@@ -66,27 +76,20 @@ URxvt*colorUL: #81a2be
 
 ! Black Dark/Light
 URxvt*color0: #1d1f21
-URxvt*color8: #969896
-! Red Dark/Light
 URxvt*color1: #cc6666
-URxvt*color9: #cc6666
-! Green Dark/Light
 URxvt*color2: #b5bd68
-URxvt*color10: #b5bd68
-! Yellow Dark/Light
 URxvt*color3: #f0c674
-URxvt*color11: #f0c674
-! Blue Dark/Light
 URxvt*color4: #81a2be
-URxvt*color12: #81a2be
-! Magenta Dark/Light
 URxvt*color5: #b294bb
-URxvt*color13: #b294bb
-! Cyan Dark/Light
 URxvt*color6: #8abeb7
-URxvt*color14: #8abeb7
-! White Dark/Light
 URxvt*color7: #c5c8c6
+URxvt*color8: #969896
+URxvt*color9: #cc6666
+URxvt*color10: #b5bd68
+URxvt*color11: #f0c674
+URxvt*color12: #81a2be
+URxvt*color13: #b294bb
+URxvt*color14: #8abeb7
 URxvt*color15: #ffffff
 
 ! XTerm
@@ -122,37 +125,19 @@ XTerm*colorIT: #b5bd68
 XTerm*colorBD: #c5c8c6
 XTerm*colorUL: #81a2be
 
-! Black Dark/Light
 XTerm*color0: #1d1f21
-XTerm*color8: #969896
-! Red Dark/Light
 XTerm*color1: #cc6666
-XTerm*color9: #cc6666
-! Green Dark/Light
 XTerm*color2: #b5bd68
-XTerm*color10: #b5bd68
-! Yellow Dark/Light
 XTerm*color3: #f0c674
-XTerm*color11: #f0c674
-! Blue Dark/Light
 XTerm*color4: #81a2be
-XTerm*color12: #81a2be
-! Magenta Dark/Light
 XTerm*color5: #b294bb
-XTerm*color13: #b294bb
-! Cyan Dark/Light
 XTerm*color6: #8abeb7
-XTerm*color14: #8abeb7
-! White Dark/Light
 XTerm*color7: #c5c8c6
+XTerm*color8: #969896
+XTerm*color9: #cc6666
+XTerm*color10: #b5bd68
+XTerm*color11: #f0c674
+XTerm*color12: #81a2be
+XTerm*color13: #b294bb
+XTerm*color14: #8abeb7
 XTerm*color15: #ffffff
-
-! XMessage
-Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
-Xmessage*background: red
-Xmessage*foreground: yellow
-Xmessage*form.*.shapeStyle: rectangle
-Xmessage*Scrollbar.width: 1
-Xmessage*Scrollbar.borderWidth: 0
-Xmessage*Buttons: OK
-Xmessage*defaultButton: OK
