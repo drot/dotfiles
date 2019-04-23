@@ -38,7 +38,6 @@ Xmessage*Buttons: OK
 Xmessage*defaultButton: OK
 
 ! URXVT
-! General
 URxvt*urgentOnBell: true
 URxvt*saveLines: 65535
 
@@ -64,17 +63,17 @@ URxvt*font: xft:Iosevka Term SS05:pixelsize=16,xft:Noto Emoji:size=12
 URxvt*boldFont: xft:Iosevka Term SS05:bold:pixelsize=16,xft:Noto Emoji:size=12
 URxvt*letterSpace: -1
 
-! Colors
+! Main colors
 URxvt*foreground: #c5c8c6
 URxvt*background: #1d1f21
 URxvt*cursorColor: #c5c8c6
 
-! Stylized
+! Stylized colors
 URxvt*colorIT: #b5bd68
 URxvt*colorBD: #c5c8c6
 URxvt*colorUL: #81a2be
 
-! Black Dark/Light
+! Colors
 URxvt*color0: #1d1f21
 URxvt*color1: #cc6666
 URxvt*color2: #b5bd68
@@ -93,7 +92,6 @@ URxvt*color14: #8abeb7
 URxvt*color15: #ffffff
 
 ! XTerm
-! General
 XTerm*locale: true
 XTerm*termName: xterm-256color
 XTerm*bellIsUrgent: true
@@ -115,16 +113,17 @@ XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 ! Font
 XTerm*faceName: Iosevka Term SS05:pixelsize=16
 
-! Colors
+! Main colors
 XTerm*foreground: #c5c8c6
 XTerm*background: #1d1f21
 XTerm*cursorColor: #c5c8c6
 
-! Stylized
+! Stylized colors
 XTerm*colorIT: #b5bd68
 XTerm*colorBD: #c5c8c6
 XTerm*colorUL: #81a2be
 
+! Colors
 XTerm*color0: #1d1f21
 XTerm*color1: #cc6666
 XTerm*color2: #b5bd68
