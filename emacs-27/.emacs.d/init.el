@@ -410,7 +410,8 @@
   (setq ibuffer-saved-filter-groups
         '(("primary"
            ("Code" (and (or (derived-mode . prog-mode)
-                            (derived-mode . conf-mode))
+                            (derived-mode . conf-mode)
+                            (derived-mode . sgml-mode))
                         (not (name . "scratch"))))
            ("Custom" (derived-mode . Custom-mode))
            ("Dired" (mode . dired-mode))
