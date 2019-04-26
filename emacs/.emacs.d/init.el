@@ -1105,12 +1105,35 @@ _d_: Subtree
 (after-load 'time
   ;; Use custom mode line format
   (setq display-time-string-forms
-        '("["
+        '(" ["
           (propertize
            (format-time-string "%H:%M" now)
            'face '(:inherit font-lock-keyword-face :weight bold)
            'help-echo (format-time-string "%A, %d-%m-%Y" now))
           load
+          ;; Keep default mail notification format
+          (if mail
+              (concat
+               " "
+               (propertize
+                display-time-mail-string
+                'display `(when (and display-time-use-mail-icon
+                                     (display-graphic-p))
+                            ,@display-time-mail-icon
+                            ,@(if (and display-time-mail-face
+                                       (memq (plist-get (cdr display-time-mail-icon)
+                                                        :type)
+                                             '(pbm xbm)))
+                                  (let ((bg (face-attribute display-time-mail-face
+                                                            :background)))
+                                    (if (stringp bg)
+                                        (list :background bg)))))
+                'face display-time-mail-face
+                'help-echo "You have new mail; mouse-2: Read mail"
+                'mouse-face 'mode-line-highlight
+                'local-map (make-mode-line-mouse-map 'mouse-2
+                                                     read-mail-command)))
+            "")
           "] "))
   ;; Time zones we are interested in
   (setq display-time-world-list
