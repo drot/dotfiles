@@ -436,6 +436,8 @@
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
+           ("Calculator" (or (mode . calc-mode)
+                             (mode . calc-trail-mode)))
            ("Code" (and (or (derived-mode . prog-mode)
                             (derived-mode . conf-mode)
                             (derived-mode . sgml-mode))
