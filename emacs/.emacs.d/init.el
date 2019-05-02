@@ -485,7 +485,8 @@
                        (name . "*Python*")))
            ("Shell" (or (derived-mode . eshell-mode)
                         (derived-mode . shell-mode)))
-           ("Terminal" (derived-mode . term-mode)))))
+           ("Terminal" (derived-mode . term-mode))
+           ("TRAMP" (name . "*tramp")))))
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
