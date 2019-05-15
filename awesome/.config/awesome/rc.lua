@@ -1127,6 +1127,9 @@ awful.rules.rules = {
    -- Ripcord
    { rule = { class = "Ripcord" },
      properties = { tag = "7", switch_to_tags = true } },
+   -- Chatterino
+   { rule = { class = "chatterino" },
+     properties = { tag = "7", switch_to_tags = true, floating = true } },
    -- Wine
    { rule = { class = "Wine" },
      properties = { tag = "8", switch_to_tags = true, floating = true, titlebars_enabled = false } }
