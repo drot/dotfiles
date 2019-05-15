@@ -117,6 +117,7 @@ local mygraphicsmenu = {
 }
 
 local myofficemenu = {
+   { "Libreoffice", "libreoffice", beautiful.menu_libreoffice },
    { "Writer", "lowriter", beautiful.menu_writer },
    { "Zathura", "zathura", beautiful.menu_pdf }
 }
