@@ -231,6 +231,11 @@
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 
+;; Display fill column indicator
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+(add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
+(add-hook 'conf-mode-hook #'display-fill-column-indicator-mode)
+
 ;;; Highlight current line
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
@@ -643,7 +648,8 @@
 ;;; Network Security Manager
 (after-load 'nsm
   ;; Change default settings file location
-  (setq nsm-settings-file (locate-user-emacs-file "cache/network-security.data")))
+  (setq nsm-settings-file
+        (locate-user-emacs-file "cache/network-security.data")))
 
 ;;; Prevent GnuTLS warnings
 (after-load 'gnutls
@@ -854,7 +860,8 @@
 ;; Configuration
 (after-load 'flymake
   ;; Define Hydra
-  (defhydra hydra-flymake (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
+  (defhydra hydra-flymake
+    (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
     "
 ^Errors^       ^List Errors^
 ^^^^^^------------------------
@@ -1076,7 +1083,8 @@ _d_: Subtree
 ;;; Org time clocking
 (after-load 'org-clock
   ;; Change default persist file location
-  (setq org-clock-persist-file (locate-user-emacs-file "cache/org-clock-save.el")))
+  (setq org-clock-persist-file
+        (locate-user-emacs-file "cache/org-clock-save.el")))
 
 ;;; Time display
 (global-set-key (kbd "C-c a C-t") #'display-time-world)
@@ -1513,7 +1521,8 @@ _d_: Subtree
 ;; Configuration
 (after-load 'geiser-repl
   ;; Change default history file location
-  (setq geiser-repl-history-filename (locate-user-emacs-file "cache/geiser-history")))
+  (setq geiser-repl-history-filename
+        (locate-user-emacs-file "cache/geiser-history")))
 
 ;;; Iedit
 (require-package 'iedit)
@@ -1783,7 +1792,8 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; SLY REPL
 (after-load 'sly-mrepl
   ;; Change history file location
-  (setq sly-mrepl-history-file-name (locate-user-emacs-file "cache/sly-mrepl-history")))
+  (setq sly-mrepl-history-file-name
+        (locate-user-emacs-file "cache/sly-mrepl-history")))
 
 ;;; SLY macrostep
 (require-package 'sly-macrostep)
