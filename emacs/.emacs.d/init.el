@@ -1078,7 +1078,12 @@ _d_: Subtree
   (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t))
+        org-src-tab-acts-natively t)
+  ;; Make Wind Move work in Org mode
+  (add-hook 'org-shiftup-final-hook #'windmove-up)
+  (add-hook 'org-shiftleft-final-hook #'windmove-left)
+  (add-hook 'org-shiftdown-final-hook #'windmove-down)
+  (add-hook 'org-shiftright-final-hook #'windmove-right))
 
 ;;; Org time clocking
 (after-load 'org-clock
