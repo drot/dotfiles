@@ -1262,9 +1262,9 @@ _d_: Subtree
                                             "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
   (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
   ;; Define faces by file permission
-  (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-[rw-]+x.*")
-  (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d[rw-]+x.*")
-  (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l[rw-]+x.*"))
+  (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-.*x.*")
+  (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d.*")
+  (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
 
 ;;; Dired Subtree
 (require-package 'dired-subtree)
