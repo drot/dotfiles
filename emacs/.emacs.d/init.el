@@ -2159,9 +2159,6 @@ suitable for assigning to `ffap-file-finder'."
 ;;; Toggle debug on error
 (global-set-key (kbd "C-c t d") #'toggle-debug-on-error)
 
-;;; Ruler mode
-(global-set-key (kbd "C-c t C-r") #'ruler-mode)
-
 ;;; Variable pitch mode
 (global-set-key (kbd "C-c t C-v") #'variable-pitch-mode)
 
