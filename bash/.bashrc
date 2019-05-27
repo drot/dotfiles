@@ -1,8 +1,8 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
-# Disable flow control
-stty -ixon
+# Remap stop key for flow control 
+stty stop ^P
 
 # Notify of completed background jobs immediately
 set -o notify
