@@ -1,6 +1,9 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
+# Disable flow control
+stty -ixon
+
 # Notify of completed background jobs immediately
 set -o notify
 
