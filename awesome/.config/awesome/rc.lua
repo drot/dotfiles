@@ -112,7 +112,7 @@ naughty.config.presets.critical.border_color = beautiful.bg_normal
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
-   { "feh", "feh -t ~/Pictures/*", beautiful.menu_feh },
+   { "feh", "feh -tr " .. os.getenv("HOME") .. "/Pictures", beautiful.menu_feh },
    { "GIMP", "gimp", beautiful.menu_gimp }
 }
 
