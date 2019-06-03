@@ -53,7 +53,7 @@
 (size-indication-mode)
 
 ;;; Answer y or n instead of yes or no at prompts
-(fset 'yes-or-no-p #'y-or-n-p)
+(advice-add #'yes-or-no-p :override #'y-or-n-p)
 
 ;;; Use a shorter alias for this commonly used macro
 (defalias 'after-load 'with-eval-after-load)
@@ -1970,12 +1970,12 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (after-load 'ivy
   ;; Optimize completion
   (setq ivy-dynamic-exhibit-delay-ms 150)
-  ;; Change default behavior
+  ;; Prompt format
   (setq ivy-use-selectable-prompt t
-        ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate
-        ivy-count-format "(%d/%d) "
-        ivy-format-function #'ivy-format-function-arrow)
+        ivy-count-format "(%d/%d) ")
+  ;; Virtual buffer usage
+  (setq ivy-use-virtual-buffers t
+        ivy-virtual-abbreviate 'abbreviate)
   ;; Wrap by default
   (setq ivy-wrap t
         ivy-action-wrap t))
