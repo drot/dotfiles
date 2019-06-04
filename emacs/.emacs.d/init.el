@@ -1973,6 +1973,8 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   ;; Prompt format
   (setq ivy-use-selectable-prompt t
         ivy-count-format "(%d/%d) ")
+  ;; Use arrow display
+  (setq ivy-format-functions-alist '((t . ivy-format-function-arrow)))
   ;; Virtual buffer usage
   (setq ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate)
