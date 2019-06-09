@@ -1126,9 +1126,6 @@ awful.rules.rules = {
    -- GIMP
    { rule = { class = "Gimp" },
      properties = { tag = "6", switch_to_tags = true } },
-   -- Ripcord
-   { rule = { class = "Ripcord" },
-     properties = { tag = "7", switch_to_tags = true } },
    -- Chatterino
    { rule = { class = "chatterino" },
      properties = { tag = "7", switch_to_tags = true, floating = true } },
