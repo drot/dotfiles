@@ -98,15 +98,23 @@ end
 -- }}}
 
 -- {{{ Notification configuration
-naughty.config.presets.low.bg = beautiful.bg_normal
-naughty.config.presets.low.fg = beautiful.fg_normal
-naughty.config.presets.low.border_color = beautiful.border_color
-naughty.config.presets.normal.bg = beautiful.bg_focus
-naughty.config.presets.normal.fg = beautiful.fg_focus
-naughty.config.presets.normal.border_color = beautiful.border_focus
-naughty.config.presets.critical.bg = beautiful.bg_urgent
-naughty.config.presets.critical.fg = beautiful.fg_urgent
-naughty.config.presets.critical.border_color = beautiful.bg_normal
+naughty.config.presets.low = {
+   bg = beautiful.bg_normal,
+   fg = beautiful.fg_normal,
+   border_color = beautiful.border_color
+}
+
+naughty.config.presets.normal = {
+   bg = beautiful.bg_focus,
+   fg = beautiful.fg_focus,
+   border_color = beautiful.border_focus
+}
+
+naughty.config.presets.critical = {
+   bg = beautiful.bg_urgent,
+   fg = beautiful.fg_urgent,
+   border_color = beautiful.bg_normal
+}
 -- }}}
 
 -- {{{ Menu
@@ -131,6 +139,7 @@ local myutilmenu = {
 
 local mywebmenu = {
    { "Chatterino", "chatterino", beautiful.menu_chatterino },
+   { "Discord", "discord --disable-smooth-scrolling", beautiful.menu_discord },
    { "Pidgin", "pidgin", beautiful.menu_pidgin },
    { "Ripcord", "ripcord", beautiful.menu_ripcord },
    { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
@@ -950,7 +959,11 @@ local globalkeys = gears.table.join(
    -- Screenshot grabbing
    awful.key({ }, "Print", function () awful.spawn.with_shell("maim -u /tmp/screenshot-$(date +%s).png") end,
       {description = "screenshot desktop", group = "screenshot"}),
-   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("maim -su -f png | curl -s -F'file=@-' https://0x0.st | tr -d '\n' | xsel -b") end,
+   awful.key({ modkey }, "Print",
+      function () awful.spawn.easy_async_with_shell("maim -su -f png | curl -s -F'file=@-' https://0x0.st | tr -d '\n' | xsel -b",
+                                                    function () naughty.notify({ preset = naughty.config.presets.normal,
+                                                                                 title = "Screenshot!",
+                                                                                 text = "Region screenshot taken." }) end) end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
