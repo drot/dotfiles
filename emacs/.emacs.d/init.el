@@ -53,7 +53,7 @@
 (size-indication-mode)
 
 ;;; Answer y or n instead of yes or no at prompts
-(advice-add #'yes-or-no-p :override #'y-or-n-p)
+(fset 'yes-or-no-p #'y-or-n-p)
 
 ;;; Use a shorter alias for this commonly used macro
 (defalias 'after-load 'with-eval-after-load)
