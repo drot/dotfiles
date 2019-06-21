@@ -511,6 +511,7 @@
 (after-load 'image-mode
   ;; Show image dimension function
   (defun drot/image-dimensions-minor-mode ()
+    "Display image dimensions in the mode line."
     (let* ((image-dimensions (image-size (image-get-display-property) :pixels))
            (width (car image-dimensions))
            (height (cdr image-dimensions)))
