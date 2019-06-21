@@ -42,8 +42,8 @@
 (load-theme 'sanityinc-tomorrow-night t)
 
 ;;; Don't show the startup welcome messages
-(setq inhibit-startup-echo-area-message (user-login-name)
-      inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
+(fset 'display-startup-echo-area-message #'ignore)
 
 ;;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
