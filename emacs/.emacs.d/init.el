@@ -1183,19 +1183,6 @@ _d_: Subtree
   ;; Enable AUCTeX integration
   (setq reftex-plug-into-AUCTeX t))
 
-;;; Debbugs browser
-(require-package 'debbugs)
-;; Set global key bindings
-(global-set-key (kbd "C-c d g") #'debbugs-gnu)
-(global-set-key (kbd "C-c d s") #'debbugs-gnu-search)
-(global-set-key (kbd "C-c d t") #'debbugs-gnu-usertags)
-(global-set-key (kbd "C-c d p") #'debbugs-gnu-patches)
-(global-set-key (kbd "C-c d b") #'debbugs-gnu-bugs)
-(global-set-key (kbd "C-c d C-o") #'debbugs-org)
-(global-set-key (kbd "C-c d C-s") #'debbugs-org-search)
-(global-set-key (kbd "C-c d C-p") #'debbugs-org-patches)
-(global-set-key (kbd "C-c d C-b") #'debbugs-org-bugs)
-
 ;;; CIDER
 (require-package 'cider)
 ;; Configuration
@@ -1235,6 +1222,19 @@ _d_: Subtree
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
+
+;;; Debbugs browser
+(require-package 'debbugs)
+;; Set global key bindings
+(global-set-key (kbd "C-c d g") #'debbugs-gnu)
+(global-set-key (kbd "C-c d s") #'debbugs-gnu-search)
+(global-set-key (kbd "C-c d t") #'debbugs-gnu-usertags)
+(global-set-key (kbd "C-c d p") #'debbugs-gnu-patches)
+(global-set-key (kbd "C-c d b") #'debbugs-gnu-bugs)
+(global-set-key (kbd "C-c d C-o") #'debbugs-org)
+(global-set-key (kbd "C-c d C-s") #'debbugs-org-search)
+(global-set-key (kbd "C-c d C-p") #'debbugs-org-patches)
+(global-set-key (kbd "C-c d C-b") #'debbugs-org-bugs)
 
 ;;; Dired Filter
 (require-package 'dired-filter)
