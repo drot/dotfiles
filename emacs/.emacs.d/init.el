@@ -2009,7 +2009,7 @@ suitable for assigning to `ffap-file-finder'."
 (global-set-key (kbd "C-c s i") #'counsel-imenu)
 (global-set-key (kbd "C-c h c") #'counsel-command-history)
 (global-set-key (kbd "C-c h l") #'counsel-find-library)
-(global-set-key (kbd "C-c i 8") #'counsel-unicode-char)
+(global-set-key (kbd "C-c i u") #'counsel-unicode-char)
 (global-set-key (kbd "C-c f j") #'counsel-file-jump)
 (global-set-key [remap org-goto] #'counsel-org-goto)
 (global-set-key [remap org-set-tags-command] #'counsel-org-tag)
