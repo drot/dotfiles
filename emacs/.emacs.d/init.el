@@ -817,7 +817,9 @@
   ;; Custom hook to avoid conflicts
   (defun drot/eshell-mode-hook ()
     "Integrate with Counsel and disable Company in Eshell buffers."
-    (define-key eshell-mode-map [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
+    (define-key eshell-mode-map
+      [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
+    ;; Disable Company since we use `completion-at-point'
     (company-mode 0))
   ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'drot/eshell-mode-hook))
