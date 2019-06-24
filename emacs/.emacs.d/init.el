@@ -786,7 +786,7 @@
   ;; Use specified browser instead of searching for it
   (setq shr-external-browser browse-url-browser-function))
 
-;; URL history
+;;; URL history
 (after-load 'url-history
   ;; Save visited URLs
   (setq url-history-track t
