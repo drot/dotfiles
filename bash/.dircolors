@@ -109,10 +109,12 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # key-value, non-relational data
 .bib 38;5;178
 .json 38;5;178
+.jsonl 38;5;178
 .msg 38;5;178
 .pgn 38;5;178
 .rss 38;5;178
 .xml 38;5;178
+.toml 38;5;178
 .yaml 38;5;178
 .yml 38;5;178
 .RData 38;5;178
@@ -163,6 +165,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *conf 1
 *config 1
 *rc 1
+*authorized_keys 1
+*known_hosts 1
 .ini 1
 .plist 1
 # vim
@@ -282,6 +286,13 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .hi 38;5;110
 .hs 38;5;81
 .lhs 38;5;81
+# agda
+.agda 38;5;81
+.lagda 38;5;81
+.lagda.tex 38;5;81
+.lagda.rst 38;5;81
+.lagda.md 38;5;81
+.agdai 38;5;110
 
 ## binaries
 # compiled apps for interpreted languages
@@ -331,6 +342,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *Makefile 38;5;155
 *MANIFEST 38;5;243
 *pm_to_blib 38;5;240
+# functional configuration
+.nix 38;5;155
+.dhall 38;5;178
 # ruby rake
 .rake 38;5;155
 # automake
@@ -348,6 +362,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 
 ## graphics
 .bmp 38;5;97
+.dicom 38;5;97
 .tiff 38;5;97
 .tif 38;5;97
 .TIFF 38;5;97
@@ -612,9 +627,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sig 38;5;192;3
 .p7s 38;5;192;3
 .rsa 38;5;192;3
+*id_dsa 38;5;192;3
 *id_rsa 38;5;192;3
-*rsa.pub 38;5;192;3
-*authorized_keys 38;5;192;3
+*id_ecdsa 38;5;192;3
+*id_ed25519 38;5;192;3
 
 ## emulators
 .32x 38;5;213
