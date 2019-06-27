@@ -103,7 +103,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .mkd 38;5;184
 .nfo 38;5;184
 .org 38;5;184
-.pod 38;5;184
 .tex 38;5;184
 .textile 38;5;184
 # key-value, non-relational data
@@ -130,8 +129,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .docm 38;5;111;4
 .doc 38;5;111
 .docx 38;5;111
-.eps 38;5;111
-.ps 38;5;111
 .odb 38;5;111
 .odt 38;5;111
 .rtf 38;5;111
@@ -230,7 +227,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .asm 38;5;81
 # LISP
 .cl 38;5;81
-.clj 38;5;81
 .el 38;5;81
 .lisp 38;5;81
 .scm 38;5;81
@@ -320,7 +316,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .java 38;5;074;1
 .js 38;5;074;1
 .mjs 38;5;074;1
-.jsm 38;5;074;1
 .jsm 38;5;074;1
 .jsp 38;5;074;1
 
@@ -444,7 +439,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cda 38;5;136;1
 .flac 38;5;136;1
 .alac 38;5;136;1
-.midi 38;5;136;1
 .pcm 38;5;136;1
 .wav 38;5;136;1
 .wv 38;5;136;1
@@ -500,7 +494,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .vdf 38;5;215
 .vpk 38;5;215
 .bsp 38;5;215
-.dmg 38;5;215
 
 ## segments from 0 to three digits after first extension letter
 .r[0-9]{0,2} 38;5;239
@@ -624,8 +617,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .p12 38;5;192;3
 .pem 38;5;192;3
 .pgp 38;5;192;3
-.enc 38;5;192;3
-.sig 38;5;192;3
 .p7s 38;5;192;3
 .rsa 38;5;192;3
 *id_dsa 38;5;192;3
@@ -673,7 +664,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pod 38;5;7
 # GIMP files
 .gbr 38;5;7
-.scm 38;5;7
 .xcf 38;5;7
 # printer spool file
 .spl 38;5;7
@@ -704,7 +694,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sch 38;5;7
 .sty 38;5;7
 .sug 38;5;7
-.t 38;5;7
 .tdy 38;5;7
 .tfm 38;5;7
 .tfnt 38;5;7
