@@ -464,6 +464,7 @@
            ("Shell" (or (derived-mode . eshell-mode)
                         (derived-mode . shell-mode)))
            ("Terminal" (derived-mode . term-mode))
+           ("Text" (mode . text-mode))
            ("TRAMP" (name . "*tramp")))))
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
