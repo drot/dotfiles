@@ -383,7 +383,7 @@
   ;; Don't touch the mouse
   (setq ediff-grab-mouse nil))
 
-;;; Ediff restore previous window configuration
+;; Ediff restore previous window configuration
 (after-load 'ediff-util
   ;; Clever hack using `window-undo'
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
@@ -679,7 +679,7 @@
   ;; Imitate orthodox file managers with two buffers open
   (setq dired-dwim-target t))
 
-;;; Dired Extra
+;; Dired Extra
 (autoload #'dired-jump "dired-x"
   "Jump to Dired buffer corresponding to current buffer." t)
 (autoload #'dired-jump-other-window "dired-x"
@@ -688,25 +688,25 @@
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 (global-set-key (kbd "C-x 4 C-j") #'dired-jump-other-window)
 
-;;; Wdired movement and editable parts
+;; Wdired movement and editable parts
 (after-load 'wdired
   ;; Allow changing of permissions too
   (setq wdired-allow-to-change-permissions t)
   ;; Make movement work the same as in regular Dired buffers
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
-;;; Dired auxiliary features
+;; Dired auxiliary features
 (after-load 'dired-aux
   ;; Ask to create directories if they don't exist
   (setq dired-create-destination-dirs 'ask))
 
-;;; Image-Dired
+;; Image-Dired
 (after-load 'image-dired
   ;; Change default external viewer
   (when (executable-find "feh")
     (setq image-dired-external-viewer "feh")))
 
-;;; Gnus Dired
+;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
 
 ;;; TRAMP
@@ -825,7 +825,7 @@
   ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'drot/eshell-mode-hook))
 
-;;; Eshell smart display
+;; Eshell smart display
 (after-load 'eshell
   ;; Initialize mode
   (require 'em-smart)
@@ -1089,7 +1089,7 @@ _d_: Subtree
   (add-hook 'org-shiftdown-final-hook #'windmove-down)
   (add-hook 'org-shiftright-final-hook #'windmove-right))
 
-;;; Org time clocking
+;; Org time clocking
 (after-load 'org-clock
   ;; Change default persist file location
   (setq org-clock-persist-file
@@ -1163,12 +1163,12 @@ _d_: Subtree
   ;; Revert PDF automatically
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
-;;; TeX external commands
+;; TeX external commands
 (after-load 'tex-buf
   ;; Don't ask to save before processing
   (setq TeX-save-query nil))
 
-;;; LaTeX configuration
+;; LaTeX configuration
 (after-load 'latex
   ;; Enable Flymake syntax checking
   (add-hook 'LaTeX-mode-hook #'flymake-mode)
@@ -1193,12 +1193,12 @@ _d_: Subtree
   ;; Use the symbol at point as the default value
   (setq cider-prompt-for-symbol nil))
 
-;;; CIDER mode configuration
+;; CIDER mode configuration
 (after-load 'cider-mode
   ;; Enable fuzzy completion with Company
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
-;;; CIDER REPL configuration
+;; CIDER REPL configuration
 (after-load 'cider-repl
   ;; Enable persistent history and cycle through it
   (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history")
@@ -1475,7 +1475,7 @@ _d_: Subtree
     "Send a private message to the NickServ service."
     (rcirc-send-string process (concat "nickserv " arg))))
 
-;;; rcirc color codes support
+;; rcirc color codes support
 (require-package 'rcirc-styles)
 ;; Configuration
 (after-load 'rcirc
@@ -1504,7 +1504,7 @@ _d_: Subtree
          "#8abeb7"
          "#ffffff"]))
 
-;;; rcirc colored nicknames
+;; rcirc colored nicknames
 (require-package 'rcirc-color)
 ;; Configuration
 (after-load 'rcirc
@@ -1513,7 +1513,7 @@ _d_: Subtree
   ;; Inherit nick colors from rcirc-styles colors
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
-;;; rcirc notifications
+;; rcirc notifications
 (require-package 'rcirc-notify)
 ;; Configuration
 (after-load 'rcirc
@@ -1597,7 +1597,7 @@ _d_: Subtree
 
 ;;; Magit
 (require-package 'magit)
-;;; Set global key bindings
+;; Set global key bindings
 (global-set-key (kbd "C-x g") #'magit-status)
 (global-set-key (kbd "C-x M-g") #'magit-dispatch-popup)
 (global-set-key (kbd "C-c g c") #'magit-clone)
@@ -1753,12 +1753,12 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Enable link following
 (add-hook 'pdf-view-mode-hook #'pdf-links-minor-mode)
 
-;;; PDF Tools annotations
+;; PDF Tools annotations
 (after-load 'pdf-annot
   ;; Activate annotations automatically
   (setq pdf-annot-activate-created-annotations t))
 
-;;; PDF Tools printing
+;; PDF Tools printing
 (after-load 'pdf-misc
   ;; Use lp when possible
   (when (executable-find "lp")
@@ -1782,10 +1782,10 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c a w") #'run-skewer)
 (global-set-key (kbd "C-c r w") #'skewer-repl)
 
-;;; Skewer CSS
+;; Skewer CSS
 (add-hook 'css-mode-hook #'skewer-css-mode)
 
-;;; Skewer HTML
+;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
 ;;; SLY
@@ -1798,7 +1798,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   ;; Use SBCL by default
   (setq inferior-lisp-program "sbcl"))
 
-;;; SLY REPL
+;; SLY REPL
 (after-load 'sly-mrepl
   ;; Change history file location
   (setq sly-mrepl-history-file-name
