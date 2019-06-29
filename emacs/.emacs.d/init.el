@@ -247,7 +247,7 @@
                 ediff-mode-hook
                 comint-mode-hook
                 cider-repl-mode-hook
-                weechat-mode-hook))
+                slime-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -448,8 +448,6 @@
                       (mode . compilation-mode)
                       (mode . tags-table-mode)
                       (name . "*Flymake log*")
-                      (name . "*sly-inferior-lisp for sbcl*")
-                      (name . "*sly-events for sbcl*")
                       (name . "*Warnings*")))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
@@ -458,7 +456,7 @@
            ("PDF" (derived-mode . pdf-view-mode))
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
-                       (derived-mode . sly-mrepl-mode)
+                       (mode . slime-repl-mode)
                        (derived-mode . skewer-repl-mode)
                        (name . "*Python*")))
            ("Shell" (or (derived-mode . eshell-mode)
@@ -1688,6 +1686,8 @@ _d_: Subtree
           paredit-backslash
           reindent-then-newline-and-indent
           scroll-other-window
+          slime-autodoc-space
+          slime-space
           switch-to-buffer
           upcase-region
           yank-rectangle))
@@ -1788,24 +1788,41 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Skewer HTML
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
-;;; SLY
-(require-package 'sly)
+;;; SLIME
+(require-package 'slime)
 ;; Set global key bindings
-(global-set-key (kbd "C-c r s") #'sly)
-(global-set-key (kbd "C-c r c") #'sly-connect)
+(global-set-key (kbd "C-c r s") #'slime)
+(global-set-key (kbd "C-c r c") #'slime-connect)
 ;; Configuration
-(after-load 'sly
-  ;; Use SBCL by default
-  (setq inferior-lisp-program "sbcl"))
+(after-load 'slime
+  ;; Disable conflicting key binding
+  (define-key slime-mode-indirect-map (kbd "C-c x") nil)
+  ;; Set local key binding
+  (define-key slime-mode-indirect-map (kbd "C-c $") #'slime-export-symbol-at-point)
+  ;; Use SBCL by default and all accessible features
+  (setq inferior-lisp-program "sbcl"
+        slime-contribs '(slime-fancy slime-company)))
 
-;; SLY REPL
-(after-load 'sly-mrepl
-  ;; Change history file location
-  (setq sly-mrepl-history-file-name
-        (locate-user-emacs-file "cache/sly-mrepl-history")))
+;; SLIME REPL configuration
+(after-load 'slime-repl
+  ;; Disable conflicting key bindings
+  (define-key slime-repl-mode-map (kbd "DEL") nil)
+  (define-key slime-repl-mode-map (kbd "M-r") nil)
+  (define-key slime-repl-mode-map (kbd "M-s") nil)
+  ;; Set local key bindings
+  (define-key slime-repl-mode-map (kbd "C-c M-r") #'slime-repl-previous-matching-input)
+  (define-key slime-repl-mode-map (kbd "C-c M-s") #'slime-repl-next-matching-input)
+  ;; Customize
+  (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")
+        slime-repl-history-remove-duplicates t
+        slime-repl-history-trim-whitespaces t))
 
-;;; SLY macrostep
-(require-package 'sly-macrostep)
+;;; SLIME Company
+(require-package 'slime-company)
+;; Configuration
+(after-load 'slime-company
+  ;; Use fuzzy completion
+  (setq slime-company-completion 'fuzzy))
 
 ;;; SQL indentation
 (require-package 'sql-indent)
@@ -2096,6 +2113,7 @@ suitable for assigning to `ffap-file-finder'."
           isearch-mode
           overwrite-mode
           poly-markdown-mode
+          slime-autodoc-mode
           sqlind-minor-mode
           subword-mode
           visual-line-mode)))
@@ -2109,7 +2127,7 @@ suitable for assigning to `ffap-file-finder'."
                 clojure-mode-hook
                 cider-repl-mode-hook
                 scheme-mode-hook
-                sly-mrepl-mode-hook
+                slime-repl-mode-hook
                 geiser-repl-mode-hook))
   (add-hook hook #'enable-paredit-mode))
 ;; Configuration
