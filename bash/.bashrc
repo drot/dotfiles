@@ -26,6 +26,7 @@ HISTTIMEFORMAT="%F %T "
 # History options
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
+shopt -s histappend # append to history instead of erasing
 
 # Bash completion
 if [[ -r /etc/profile.d/bash_completion.sh ]]; then
@@ -54,7 +55,7 @@ BLUE="\[\033[1;34m\]"
 NIL="\[\033[00m\]"
 
 # Save history after each command execution
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
