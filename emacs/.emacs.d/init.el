@@ -448,6 +448,8 @@
                       (mode . compilation-mode)
                       (mode . tags-table-mode)
                       (name . "*Flymake log*")
+                      (name . "*slime-events*")
+                      (name . "*inferior-lisp*")
                       (name . "*Warnings*")))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
