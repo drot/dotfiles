@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 
-import runpy
+from runpy import run_path
 
-runpy.run_path('/home/drot/build/kitty', run_name='__main__')
+run_path('/home/drot/.build/kitty', run_name='__main__')
