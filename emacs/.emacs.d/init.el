@@ -1814,7 +1814,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   ;; Set local key bindings
   (define-key slime-repl-mode-map (kbd "C-c M-r") #'slime-repl-previous-matching-input)
   (define-key slime-repl-mode-map (kbd "C-c M-s") #'slime-repl-next-matching-input)
-  ;; Customize
+  ;; History configuration
   (setq slime-repl-history-file (locate-user-emacs-file "cache/slime-history.eld")
         slime-repl-history-remove-duplicates t
         slime-repl-history-trim-whitespaces t))
