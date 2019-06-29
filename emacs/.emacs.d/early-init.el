@@ -47,6 +47,9 @@
 ;;; Package configuration
 (require 'package)
 
+;; Enable package quickstart
+(setq package-quickstart t)
+
 ;; Add the MELPA package archive
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
