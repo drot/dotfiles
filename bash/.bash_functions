@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Man page colorization
-man() {
+man () {
     LESS_TERMCAP_mb=$'\e[01;31m' \
     LESS_TERMCAP_md=$'\e[01;32m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -13,7 +13,7 @@ man() {
 }
 
 # Paste to 0x0.st
-0x0() {
+0x0 () {
     local curl_opts
     local url="https://0x0.st"
     # Parameter pick
@@ -36,7 +36,7 @@ man() {
 }
 
 # Paste to ix.io
-ix() {
+ix () {
     local opts
     local OPTIND
     [ -f "$HOME/.netrc" ] && opts='-n'
@@ -62,7 +62,7 @@ ix() {
 }
 
 # Record desktop
-record() {
+record () {
     if [[ $1 == *.mp4 ]]; then
         ffmpeg -y -f x11grab -s $(xdpyinfo | awk '/dimensions:/{print $2}') \
                -i :0.0 -f pulse -i 0 /tmp/"$1"
@@ -73,7 +73,7 @@ record() {
 }
 
 # Find common files quickly with fzf
-finder() {
+finder () {
     find -L ~/.scripts ~/.config -type f -not \
          \( -path "*/\.git/*" -o -path "*/\wine/*" -o -path "*/\libreoffice/*" -o -path "*/\GIMP/*" \) \
         | fzf | xargs -r $EDITOR
