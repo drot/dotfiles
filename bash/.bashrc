@@ -1,7 +1,7 @@
 # Check for interactive
 [[ $- != *i* ]] && return
 
-# Remap stop key for flow control 
+# Remap stop key for flow control
 stty stop ^P
 
 # Notify of completed background jobs immediately
