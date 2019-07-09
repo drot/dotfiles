@@ -1106,6 +1106,7 @@ _d_: Subtree
            (format-time-string "%H:%M" now)
            'face '(:inherit font-lock-keyword-face :weight bold)
            'help-echo (format-time-string "%A, %d-%m-%Y" now))
+          ;; Load average
           load
           ;; Keep default mail notification format
           (if mail
