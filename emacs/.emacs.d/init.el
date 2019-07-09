@@ -28,7 +28,7 @@
 ;;; Code:
 
 ;;; Create directories for backups and cache files
-(make-directory (locate-user-emacs-file "backups") t)
+(make-directory (locate-user-emacs-file "backup") t)
 (make-directory (locate-user-emacs-file "cache") t)
 
 ;;; Disable needless GUI elements
@@ -167,9 +167,9 @@
       kill-do-not-save-duplicates t)
 
 ;;; Configuration for backup files
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backups/")))
-      auto-save-list-file-prefix (locate-user-emacs-file "backups/.saves-")
-      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t))
+(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/")))
+      auto-save-list-file-prefix (locate-user-emacs-file "backup/auto-save/.saves-")
+      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/auto-save/") t))
       version-control t
       kept-new-versions 6
       delete-old-versions t
@@ -192,7 +192,7 @@
       '("/\\.git/.*\\'"
         "/elpa/.*\\'"
         "/image-dired/.*\\'"
-        "/backups/.*\\'"
+        "/backup/.*\\'"
         "/elfeed/.*\\'"
         "/cache/.*\\'"
         "/dev/shm/.*\\'"
