@@ -168,12 +168,14 @@
 
 ;;; Configuration for backup files
 (setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/")))
-      auto-save-list-file-prefix (locate-user-emacs-file "backup/auto-save/.saves-")
-      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/auto-save/") t))
       version-control t
       kept-new-versions 6
       delete-old-versions t
       backup-by-copying t)
+
+;;; Auto save file configuration
+(setq auto-save-list-file-prefix (locate-user-emacs-file "backup/auto-save/.saves-")
+      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/auto-save/") t)))
 
 ;;; Save minibuffer history
 (setq savehist-file (locate-user-emacs-file "cache/saved-history")
@@ -206,20 +208,6 @@
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
 ;; Initialize mode
 (save-place-mode)
-
-;;; Find file at point
-(ffap-bindings)
-;; Configuration
-(after-load 'ffap
-  ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
-  ;; Change default find file function
-  (setq ffap-file-finder #'drot/counsel-find-file)
-  ;; Disable pinging to avoid slowdowns
-  (setq ffap-machine-p-known 'reject)
-  ;; Default RFC path
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
 ;;; Line numbers display
 (setq display-line-numbers-type 'relative
@@ -399,18 +387,6 @@
 (global-set-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after-load 'ibuffer
-  ;; Ffap compatibility function
-  (defun drot/ibuffer-ffap ()
-    "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
-    (interactive)
-    (let* ((buffer (ibuffer-current-buffer))
-           (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
-           (default-directory (buffer-local-value 'default-directory buffer)))
-      (call-interactively ffap-file-finder)))
-
-  ;; Rebind `ibuffer-find-file' with the compatibility function
-  (define-key ibuffer-mode-map [remap ibuffer-find-file] #'drot/ibuffer-ffap)
-
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
@@ -687,6 +663,11 @@
 ;; Set global key bindings
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 (global-set-key (kbd "C-x 4 C-j") #'dired-jump-other-window)
+;; Dired Extra Omit configuration
+(after-load 'dired-x
+  ;; Omit dotfiles as well
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..+$")))
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
@@ -995,7 +976,7 @@ _p_: Previous
 ;; Set key binding
 (global-set-key (kbd "C-c t o") #'outline-minor-mode)
 ;; Set default prefix
-(setq outline-minor-mode-prefix (kbd "C-c o"))
+(setq outline-minor-mode-prefix (kbd "C-c C-o"))
 ;; Configuration
 (after-load 'outline
   ;; Define Hydra
@@ -1258,11 +1239,13 @@ _d_: Subtree
   ;; Define faces by file type
   (dired-rainbow-define audio "DeepPink" ("mp3" "MP3" "ogg" "OGG"
                                           "flac" "FLAC" "wav" "WAV"))
-  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz" "xz"
-                                             "z" "Z" "jar" "war" "ear" "rar"
-                                             "sar" "xpi" "apk" "xz" "tar"))
-  (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf" "ps"
-                                           "rtf" "djvu" "epub" "md" "tex" "org" "txt"))
+  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz"
+                                             "xz" "z" "Z" "jar" "war"
+                                             "ear" "rar" "sar" "xpi"
+                                             "apk" "xz" "tar"))
+  (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf"
+                                           "ps" "rtf" "djvu" "epub" "md"
+                                           "tex" "org" "txt"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
   (dired-rainbow-define excel "turquoise" ("xlsx"))
   (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
@@ -1271,13 +1254,15 @@ _d_: Subtree
   (dired-rainbow-define log "gray" ("log"))
   (dired-rainbow-define config (:foreground "cadet blue" :italic t) ("conf" "ini" "yml"))
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java" "pl"
-                                                 "rb" "R" "php" "el" "scm" "cpp"
-                                                 "fos" "lisp" "clj" "lua" "lisp" "sh"))
-  (dired-rainbow-define video "firebrick2" ("vob" "VOB" "mkv" "MKV" "mpe" "mpg"
-                                            "MPG" "mp4" "MP4" "ts" "TS" "m2ts"
-                                            "M2TS" "avi" "AVI" "mov" "MOV" "wmv"
-                                            "asf" "m2v" "m4v" "mpeg" "MPEG" "tp"))
+  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java"
+                                                 "pl" "rb" "R" "php" "el"
+                                                 "scm" "cpp" "fos" "lisp" "clj"
+                                                 "lua" "lisp" "sh"))
+  (dired-rainbow-define video "firebrick2" ("vob" "VOB" "mkv" "MKV" "mpe"
+                                            "mpg" "MPG" "mp4" "MP4" "ts"
+                                            "TS" "m2ts" "M2TS" "avi" "AVI"
+                                            "mov" "MOV" "wmv" "asf" "m2v"
+                                            "m4v" "mpeg" "MPEG" "tp"))
   (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
   ;; Define faces by file permission
   (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-.*x.*")
@@ -2008,18 +1993,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; Counsel
 (require-package 'counsel)
-
-;; Ffap compatibility function
-(defun drot/counsel-find-file (&optional file)
-  "Like `counsel-find-file', but return buffer, not name of FILE.
-This likens `counsel-find-file' to `find-file' more and makes it
-suitable for assigning to `ffap-file-finder'."
-  (interactive)
-  (if file
-      (find-file file)
-    (set-buffer (or (find-buffer-visiting (counsel-find-file))
-                    (other-buffer nil t)))))
-
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set global key bindings
