@@ -208,8 +208,6 @@
 (save-place-mode)
 
 ;;; Find file at point
-(ffap-bindings)
-;; Configuration
 (after-load 'ffap
   ;; Require prefix
   (setq ffap-require-prefix t
@@ -220,6 +218,8 @@
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+;; Initialize mode
+(ffap-bindings)
 
 ;;; Line numbers display
 (setq display-line-numbers-type 'relative
