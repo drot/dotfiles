@@ -207,20 +207,6 @@
 ;; Initialize mode
 (save-place-mode)
 
-;;; Find file at point
-(after-load 'ffap
-  ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
-  ;; Change default find file function
-  (setq ffap-file-finder #'drot/counsel-find-file)
-  ;; Disable pinging to avoid slowdowns
-  (setq ffap-machine-p-known 'reject)
-  ;; Default RFC path
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Initialize mode
-(ffap-bindings)
-
 ;;; Line numbers display
 (setq display-line-numbers-type 'relative
       display-line-numbers-current-absolute nil)
@@ -399,18 +385,6 @@
 (global-set-key [remap list-buffers] #'ibuffer)
 ;; Configuration
 (after-load 'ibuffer
-  ;; Ffap compatibility function
-  (defun drot/ibuffer-ffap ()
-    "Like `ibuffer-find-file', but backed by `ffap-file-finder'."
-    (interactive)
-    (let* ((buffer (ibuffer-current-buffer))
-           (buffer (if (buffer-live-p buffer) buffer (current-buffer)))
-           (default-directory (buffer-local-value 'default-directory buffer)))
-      (call-interactively ffap-file-finder)))
-
-  ;; Rebind `ibuffer-find-file' with the compatibility function
-  (define-key ibuffer-mode-map [remap ibuffer-find-file] #'drot/ibuffer-ffap)
-
   ;; Use a default buffer filter
   (setq ibuffer-saved-filter-groups
         '(("primary"
@@ -660,8 +634,6 @@
 
 ;;; Dired configuration
 (after-load 'dired
-  ;; Bind `dired-x-find-file'
-  (setq dired-x-hands-off-my-keys nil)
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
   ;; Default `ls' switches
@@ -2015,17 +1987,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; Counsel
 (require-package 'counsel)
-
-;; Ffap compatibility function
-(defun drot/counsel-find-file (&optional file)
-  "Like `counsel-find-file', but return buffer, not name of FILE.
-This likens `counsel-find-file' to `find-file' more and makes it
-suitable for assigning to `ffap-file-finder'."
-  (interactive)
-  (if file
-      (find-file file)
-    (set-buffer (or (find-buffer-visiting (counsel-find-file))
-                    (other-buffer nil t)))))
 
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
