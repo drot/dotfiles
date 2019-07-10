@@ -660,6 +660,8 @@
 
 ;;; Dired configuration
 (after-load 'dired
+  ;; Bind `dired-x-find-file'
+  (setq dired-x-hands-off-my-keys nil)
   ;; Load Dired Extra library for additional features
   (require 'dired-x)
   ;; Default `ls' switches
@@ -687,6 +689,11 @@
 ;; Set global key bindings
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 (global-set-key (kbd "C-x 4 C-j") #'dired-jump-other-window)
+;; Dired Extra Omit configuration
+(after-load 'dired-x
+  ;; Omit dotfiles as well
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..+$")))
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
