@@ -423,6 +423,7 @@
                       (derived-mode . geiser-messages-mode)
                       (mode . compilation-mode)
                       (mode . tags-table-mode)
+                      (name . "*nrepl-server")
                       (name . "*Flymake log*")
                       (name . "*slime-events*")
                       (name . "*inferior-lisp*")
@@ -1196,10 +1197,17 @@ _d_: Subtree
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
 
+;; CIDER ElDoc configuration
+(after-load 'cider-eldoc
+  ;; Display context dependent info
+  (setq cider-eldoc-display-context-dependent-info t))
+
 ;;; Clojure mode
 (require-package 'clojure-mode)
 ;; Configuration
 (after-load 'clojure-mode
+  ;; Enable CIDER mode
+  (add-hook 'clojure-mode-hook #'cider-mode)
   ;; Enable SubWord mode
   (add-hook 'clojure-mode-hook #'subword-mode))
 
