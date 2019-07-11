@@ -903,14 +903,16 @@ _p_: Previous
   (define-key gnus-article-mode-map (kbd "C-c M-o") #'ace-link-gnus)
   ;; Main Gnus directory
   (setq gnus-directory "~/.news/")
-  ;; Configure mail and news server
+  ;; Configure mail server
   (setq gnus-select-method
         '(nnimap "mail.cock.li"
                  (nnimap-address "mail.cock.li")
                  (nnimap-user "drot")
                  (nnimap-server-port 993)
                  (nnimap-stream ssl)))
-  (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
+  ;; Configure news server
+  (add-to-list 'gnus-secondary-select-methods
+               '(nntp "news.gmane.org"))
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
