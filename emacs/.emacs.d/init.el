@@ -264,7 +264,17 @@
 ;;; Electric pair mode
 (electric-pair-mode)
 
-;;; Prettify certain symbols
+;;; Prettify-Symbols mode
+(defun +emacs-lisp-prettify-symbols-setup ()
+  "Prettify `emacs-lisp-mode' specific symbols."
+  (dolist (symbol '(("defun"    . ?ƒ)
+                    ("defmacro" . ?μ)
+                    ("defvar"   . ?ν)
+                    ("defconst" . "ν_")))
+    (cl-pushnew symbol prettify-symbols-alist :test #'equal)))
+;; Apply the custom hook
+(add-hook 'emacs-lisp-mode-hook #'+emacs-lisp-prettify-symbols-setup)
+;; Show actual symbol on point
 (setq prettify-symbols-unprettify-at-point t)
 ;; Initialize mode
 (global-prettify-symbols-mode)
