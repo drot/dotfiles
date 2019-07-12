@@ -1207,7 +1207,7 @@ _d_: Subtree
 ;; Configuration
 (after-load 'clojure-mode
   ;; Enable CIDER mode
-  (add-hook 'clojure-mode-hook #'cider-mode)
+  ;;(add-hook 'clojure-mode-hook #'cider-mode)
   ;; Enable SubWord mode
   (add-hook 'clojure-mode-hook #'subword-mode))
 
@@ -2063,6 +2063,8 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (after-load 'prescient
   ;; Change save file location
   (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
   ;; Use fuzzy matching by default
   (setq prescient-filter-method 'fuzzy)
   ;; Enable persistent history
