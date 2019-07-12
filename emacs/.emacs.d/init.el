@@ -306,7 +306,7 @@
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
                    (propertize
-                    (format "... / %d"
+                    (format " ... / %d"
                             (count-lines (overlay-start ov)
                                          (overlay-end ov)))
                     'face 'font-lock-comment-face))))
