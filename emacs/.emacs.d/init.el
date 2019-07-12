@@ -305,9 +305,13 @@
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
-                   (format "... / %d"
-                           (count-lines (overlay-start ov)
-                                        (overlay-end ov))))))
+                   (propertize
+                    (format "... / %d"
+                            (count-lines (overlay-start ov)
+                                         (overlay-end ov)))
+                    'face 'font-lock-comment-face))))
+  ;; Use nesting
+  (setq hs-allow-nesting t)
   ;; Unfold when search is active and apply custom overlay
   (setq hs-set-up-overlay #'+hs-display-code-line-counts
         hs-isearch-open t))
@@ -884,9 +888,9 @@ _p_: Previous
   (require 'ansi-color)
   ;; Colorization function
   (defun +ansi-color-compilation-buffer ()
-    "Colorize the compilation mode buffer"
-    (when (eq major-mode 'compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  "Colorize from `compilation-filter-start' to `point'."
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region compilation-filter-start (point))))
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'+ansi-color-compilation-buffer)
   ;; Change default behavior
