@@ -1832,6 +1832,11 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; Systemd mode
 (require-package 'systemd)
 
+;;; Undo propose
+(require-package 'undo-propose)
+;; Set global key binding
+(global-set-key (kbd "C-c b u") #'undo-propose)
+
 ;;; Web pasting support
 (require-package 'webpaste)
 ;; Set global key bindings
