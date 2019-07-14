@@ -1990,6 +1990,16 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   (define-key hl-todo-mode-map (kbd "C-c p t") #'hydra-hl-todo/body)
   (define-key hl-todo-mode-map (kbd "C-c p i") #'hl-todo-insert-keyword))
 
+;;; Amx
+(require-package 'amx)
+;; Set global key bindings
+(global-set-key (kbd "M-X") #'amx-major-mode-commands)
+(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
+;; Configuration
+(after-load 'amx
+  ;; Change save file location
+  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
+
 ;;; Ivy
 (require-package 'ivy)
 ;; Ivy Hydra support
@@ -2055,20 +2065,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   (setq swiper-include-line-number-in-search t)
   ;; Always go to the beginning of a match
   (setq swiper-goto-start-of-match t))
-
-;;; Amx
-(require-package 'amx)
-;; Initialize mode
-(add-hook 'after-init-hook #'amx-mode)
-;; Override Counsel mode
-(global-set-key (kbd "M-x") #'amx)
-;; Set global key bindings
-(global-set-key (kbd "M-X") #'amx-major-mode-commands)
-(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
-;; Configuration
-(after-load 'amx
-  ;; Change save file location
-  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
 ;;; Prescient
 (require-package 'prescient)
