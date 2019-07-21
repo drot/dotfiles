@@ -1992,6 +1992,8 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 
 ;;; Amx
 (require-package 'amx)
+;; Initialize mode
+(add-hook 'after-init-hook #'amx-mode)
 ;; Set global key bindings
 (global-set-key (kbd "M-X") #'amx-major-mode-commands)
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
