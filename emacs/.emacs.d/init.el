@@ -1427,7 +1427,11 @@ _d_: Subtree
   ;; Change default database location and search defaults
   (setq elfeed-db-directory (locate-user-emacs-file "elfeed")
         elfeed-search-date-format '("%d-%m-%Y" 10 :left)
-        elfeed-search-filter "@1-week-ago +unread"))
+        elfeed-search-filter "@1-week-ago +unread")
+  ;; Entries older than 2 weeks are marked as read
+  (add-hook 'elfeed-new-entry-hook
+            (elfeed-make-tagger :before "2 weeks ago"
+                                :remove 'unread)))
 
 ;;; rcirc
 (global-set-key (kbd "<f7>") #'irc)
