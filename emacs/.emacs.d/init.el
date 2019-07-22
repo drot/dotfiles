@@ -956,12 +956,13 @@ _p_: Previous
         gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
         gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
   ;; Display of message threading
-  (setq gnus-sum-thread-tree-root ""
-        gnus-sum-thread-tree-false-root ""
-        gnus-sum-thread-tree-indent "    "
-        gnus-sum-thread-tree-vertical "│   "
-        gnus-sum-thread-tree-leaf-with-other "├──>"
-        gnus-sum-thread-tree-single-leaf "└──>"))
+  (setq gnus-sum-thread-tree-indent " "
+        gnus-sum-thread-tree-root "■ "
+        gnus-sum-thread-tree-false-root "□ "
+        gnus-sum-thread-tree-single-indent "▣ "
+        gnus-sum-thread-tree-leaf-with-other "├─▶ "
+        gnus-sum-thread-tree-vertical "│"
+        gnus-sum-thread-tree-single-leaf "└─▶ "))
 
 ;;; Mail folder access for Gnus
 (after-load 'nnfolder
