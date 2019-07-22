@@ -387,7 +387,7 @@
 
 ;; Ediff restore previous window configuration
 (after-load 'ediff-util
-  ;; Clever hack using `window-undo'
+  ;; Clever hack using `winner-undo'
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;;; Uniquify buffer names
