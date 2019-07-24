@@ -897,9 +897,9 @@ _p_: Previous
   (require 'ansi-color)
   ;; Colorization function
   (defun drot/ansi-color-compilation-buffer ()
-  "Colorize from `compilation-filter-start' to `point'."
-  (let ((inhibit-read-only t))
-    (ansi-color-apply-on-region compilation-filter-start (point))))
+    "Colorize from `compilation-filter-start' to `point'."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region compilation-filter-start (point))))
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot/ansi-color-compilation-buffer)
   ;; Change default behavior
@@ -1815,9 +1815,10 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   (define-key slime-mode-indirect-map (kbd "C-c x") nil)
   ;; Set local key binding
   (define-key slime-mode-indirect-map (kbd "C-c $") #'slime-export-symbol-at-point)
-  ;; Use SBCL by default and all accessible features
-  (setq inferior-lisp-program "sbcl"
-        slime-contribs '(slime-fancy slime-company)))
+  ;; Use SBCL by default
+  (setq inferior-lisp-program "sbcl")
+  ;; Load contrib modules
+  (setq slime-contribs '(slime-fancy slime-company)))
 
 ;; SLIME REPL configuration
 (after-load 'slime-repl
