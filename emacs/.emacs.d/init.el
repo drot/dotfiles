@@ -265,7 +265,7 @@
 (electric-pair-mode)
 
 ;;; Prettify-Symbols mode
-(defun +emacs-lisp-prettify-symbols-setup ()
+(defun drot/emacs-lisp-prettify-symbols-setup ()
   "Prettify `emacs-lisp-mode' specific symbols."
   (dolist (symbol '(("defun"    . ?ƒ)
                     ("defmacro" . ?μ)
@@ -273,7 +273,7 @@
                     ("defconst" . "ν_")))
     (cl-pushnew symbol prettify-symbols-alist :test #'equal)))
 ;; Apply the custom hook
-(add-hook 'emacs-lisp-mode-hook #'+emacs-lisp-prettify-symbols-setup)
+(add-hook 'emacs-lisp-mode-hook #'drot/emacs-lisp-prettify-symbols-setup)
 ;; Show actual symbol on point
 (setq prettify-symbols-unprettify-at-point t)
 ;; Initialize mode
@@ -311,7 +311,7 @@
 ;; Configuration
 (after-load 'hideshow
   ;; Custom overlay function
-  (defun +hs-display-code-line-counts (ov)
+  (defun drot/hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
     (when (eq 'code (overlay-get ov 'hs))
       (overlay-put ov 'display
@@ -323,7 +323,7 @@
   ;; Use nesting
   (setq hs-allow-nesting t)
   ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'+hs-display-code-line-counts
+  (setq hs-set-up-overlay #'drot/hs-display-code-line-counts
         hs-isearch-open t))
 
 ;;; Bug Reference mode
@@ -501,7 +501,7 @@
 ;;; Image mode
 (after-load 'image-mode
   ;; Show image dimension function
-  (defun +image-dimensions-minor-mode ()
+  (defun drot/image-dimensions-minor-mode ()
     "Display image dimensions in the mode line."
     (let* ((image-dimensions (image-size (image-get-display-property) :pixels))
            (width (car image-dimensions))
@@ -509,7 +509,7 @@
       (setq mode-line-buffer-identification
             (format " (%dx%d)" width height))))
   ;; Apply the custom hook
-  (add-hook 'image-mode-hook #'+image-dimensions-minor-mode)
+  (add-hook 'image-mode-hook #'drot/image-dimensions-minor-mode)
   ;; Loop animated images forever
   (setq image-animate-loop t)
   ;; Loop animated image automatically
@@ -811,14 +811,14 @@
   (setq eshell-hist-ignoredups t
         eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
-  (defun +eshell-mode-setup ()
+  (defun drot/eshell-mode-setup ()
     "Integrate with Counsel and disable Company in Eshell buffers."
     (define-key eshell-mode-map
       [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     ;; Disable Company since we use `completion-at-point'
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'+eshell-mode-setup))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -833,12 +833,12 @@
 ;; Configuration
 (after-load 'shell
   ;; Custom hook to avoid conflicts
-  (defun +shell-mode-setup ()
+  (defun drot/shell-mode-setup ()
     "Disable Company and enable clickable file paths."
     (compilation-shell-minor-mode)
     (company-mode 0))
   ;; Apply the custom hook
-  (add-hook 'shell-mode-hook #'+shell-mode-setup))
+  (add-hook 'shell-mode-hook #'drot/shell-mode-setup))
 
 ;;; IELM
 (global-set-key (kbd "C-c r i") #'ielm)
@@ -896,12 +896,12 @@ _p_: Previous
   ;; Colorize ANSI escape sequences
   (require 'ansi-color)
   ;; Colorization function
-  (defun +ansi-color-compilation-buffer ()
+  (defun drot/ansi-color-compilation-buffer ()
   "Colorize from `compilation-filter-start' to `point'."
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region compilation-filter-start (point))))
   ;; Apply colorization
-  (add-hook 'compilation-filter-hook #'+ansi-color-compilation-buffer)
+  (add-hook 'compilation-filter-hook #'drot/ansi-color-compilation-buffer)
   ;; Change default behavior
   (setq compilation-ask-about-save nil
         compilation-always-kill t
@@ -1596,11 +1596,11 @@ _d_: Subtree
   ;; Change default saved places file location
   (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
-  (defun +nov-font-setup ()
+  (defun drot/nov-font-setup ()
     "Apply custom variable pitch font for `nov.el'."
     (face-remap-add-relative 'variable-pitch :family "Noto Serif" :height 1.2))
   ;; Apply the custom hook
-  (add-hook 'nov-mode-hook #'+nov-font-setup)
+  (add-hook 'nov-mode-hook #'drot/nov-font-setup)
   ;; Text filling
   (setq nov-text-width 80))
 
@@ -1631,7 +1631,7 @@ _d_: Subtree
   ;; Import table creation from `org-mode'
   (require 'org-table)
   ;; Make table format compatible with Markdown
-  (defun +markdown-org-table-align-advice ()
+  (defun drot/markdown-org-table-align-advice ()
     "Replace \"+\" sign with \"|\" in tables."
     (when (member major-mode '(markdown-mode gfm-mode))
       (save-excursion
@@ -1641,7 +1641,7 @@ _d_: Subtree
           (while (search-forward "-+-" nil t)
             (replace-match "-|-"))))))
   ;; Add advice for table alignment
-  (advice-add 'org-table-align :after #'+markdown-org-table-align-advice)
+  (advice-add 'org-table-align :after #'drot/markdown-org-table-align-advice)
   ;; Enable `visual-line-mode' in Markdown buffers and disable `auto-fill-mode'
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   (add-hook 'markdown-mode-hook #'turn-off-auto-fill)
@@ -2144,7 +2144,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
   (define-key paredit-mode-map (kbd "M-[") #'paredit-wrap-square)
 
   ;; Enable Paredit in the minibuffer
-  (defvar +paredit-minibuffer-setup-commands
+  (defvar drot/paredit-minibuffer-setup-commands
     '(eval-expression
       pp-eval-expression
       eval-expression-with-eldoc
@@ -2152,12 +2152,12 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
       ibuffer-do-view-and-eval)
     "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun +paredit-minibuffer-setup ()
+  (defun drot/paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command +paredit-minibuffer-setup-commands)
+    (if (memq this-command drot/paredit-minibuffer-setup-commands)
         (enable-paredit-mode)))
 
-  (add-hook 'minibuffer-setup-hook #'+paredit-minibuffer-setup)
+  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
   (add-hook 'paredit-mode-hook
             (lambda () (setq-local electric-pair-mode nil))))
