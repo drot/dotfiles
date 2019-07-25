@@ -438,9 +438,9 @@ local temperature_widget = wibox.widget {
 }
 
 -- Create a file system usage icon widget
-local fs_icon = wibox.widget {
+local disk_icon = wibox.widget {
    {
-      image = beautiful.widget_fs,
+      image = beautiful.widget_disk,
       widget = wibox.widget.imagebox
    },
    top = 4,
@@ -454,16 +454,16 @@ local fs_icon = wibox.widget {
 vicious.cache(vicious.widgets.fs)
 
 -- Set file system usage text value
-local fs_text_value = wibox.widget.textbox()
-vicious.register(fs_text_value, vicious.widgets.fs, "${/ used_p}%", 300)
+local disk_text_value = wibox.widget.textbox()
+vicious.register(disk_text_value, vicious.widgets.fs, "${/ used_p}%", 300)
 
 -- Create a file system usage text widget
-local fs_text_widget = wibox.widget {
-   widget = fs_text_value
+local disk_text_widget = wibox.widget {
+   widget = disk_text_value
 }
 
 -- Create a file system usage chart widget
-local fs_chart = wibox.widget {
+local disk_chart = wibox.widget {
    max_value = 1,
    value = 0.25,
    thickness = 4,
@@ -475,17 +475,17 @@ local fs_chart = wibox.widget {
 }
 
 -- Set file system usage chart value
-vicious.register(fs_chart, vicious.widgets.fs, "${/ used_p}", 300)
+vicious.register(disk_chart, vicious.widgets.fs, "${/ used_p}", 300)
 
 -- Create the file system usage widget
-local fs_widget = wibox.widget {
+local disk_widget = wibox.widget {
    {
       {
          {
             {
                {
                   {
-                     widget = fs_text_widget
+                     widget = disk_text_widget
                   },
                   left = 4,
                   right = 4,
@@ -498,7 +498,7 @@ local fs_widget = wibox.widget {
                widget = wibox.container.background
             },
             {
-               widget = fs_chart
+               widget = disk_chart
             },
             spacing = 3,
             layout = wibox.layout.fixed.horizontal
@@ -802,8 +802,8 @@ awful.screen.connect_for_each_screen(function(s)
             memory_widget,
             temperature_icon,
             temperature_widget,
-            fs_icon,
-            fs_widget,
+            disk_icon,
+            disk_widget,
             volume_icon,
             volume_widget,
             clock_icon,

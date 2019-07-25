@@ -204,7 +204,7 @@ theme.widget_value = "#f0c674"
 theme.widget_cpu = themes_path .. "themes/tomorrow/icons/widgets/cpu.png"
 theme.widget_memory = themes_path .. "themes/tomorrow/icons/widgets/memory.png"
 theme.widget_temperature = themes_path .. "themes/tomorrow/icons/widgets/temperature.png"
-theme.widget_fs = themes_path .. "themes/tomorrow/icons/widgets/fs.png"
+theme.widget_disk = themes_path .. "themes/tomorrow/icons/widgets/disk.png"
 theme.widget_volume = themes_path .. "themes/tomorrow/icons/widgets/volume.png"
 theme.widget_clock = themes_path .. "themes/tomorrow/icons/widgets/clock.png"
 
