@@ -264,91 +264,6 @@ local cpu_widget = wibox.widget {
    widget = wibox.container.margin
 }
 
--- Cache memory usage widgets
-vicious.cache(vicious.widgets.mem)
-
--- Create a memory usage icon widget
-local memory_icon = wibox.widget {
-   {
-      image = beautiful.widget_memory,
-      widget = wibox.widget.imagebox
-   },
-   top = 4,
-   bottom = 4,
-   left = 2,
-   right = 2,
-   widget = wibox.container.margin
-}
-
--- Set memory usage text value
-local memory_text_value = wibox.widget.textbox()
-vicious.register(memory_text_value, vicious.widgets.mem, "$1%", 12)
-
--- Create a memory usage text widget
-local memory_text_widget = wibox.widget {
-   widget = memory_text_value
-}
-
--- Create a memory usage chart widget
-local memory_chart = wibox.widget {
-   max_value = 1,
-   value = 0.25,
-   thickness = 4,
-   border_width = 1,
-   bg = beautiful.bg_minimize,
-   border_color = beautiful.bg_normal,
-   colors = { beautiful.widget_value },
-   widget = wibox.container.arcchart
-}
-
--- Set memory usage chart value
-vicious.register(memory_chart, vicious.widgets.mem, "$1", 12)
-
--- Create the memory usage widget
-local memory_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               {
-                  {
-                     widget = memory_text_widget
-                  },
-                  left = 4,
-                  right = 4,
-                  widget = wibox.container.margin
-               },
-               shape = gears.shape.rectangle,
-               bg = beautiful.bg_normal,
-               shape_border_color = beautiful.bg_minimize,
-               shape_border_width = beautiful.border_width,
-               widget = wibox.container.background
-            },
-            {
-               widget = memory_chart
-            },
-            spacing = 3,
-            layout = wibox.layout.fixed.horizontal
-         },
-         top = 2,
-         bottom = 2,
-         left = 4,
-         right = 4,
-         widget = wibox.container.margin
-      },
-      shape = gears.shape.rectangle,
-      bg = beautiful.titlebar_bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
-   },
-   top = 2,
-   bottom = 2,
-   left = 2,
-   right = 2,
-   widget = wibox.container.margin
-}
-
 -- Cache temperature value widgets
 vicious.cache(vicious.widgets.thermal)
 
@@ -414,6 +329,91 @@ local temperature_widget = wibox.widget {
                },
                direction = "east",
                widget = wibox.container.rotate
+            },
+            spacing = 3,
+            layout = wibox.layout.fixed.horizontal
+         },
+         top = 2,
+         bottom = 2,
+         left = 4,
+         right = 4,
+         widget = wibox.container.margin
+      },
+      shape = gears.shape.rectangle,
+      bg = beautiful.titlebar_bg_focus,
+      shape_border_color = beautiful.bg_minimize,
+      shape_border_width = beautiful.border_width,
+      widget = wibox.container.background
+   },
+   top = 2,
+   bottom = 2,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
+}
+
+-- Cache memory usage widgets
+vicious.cache(vicious.widgets.mem)
+
+-- Create a memory usage icon widget
+local memory_icon = wibox.widget {
+   {
+      image = beautiful.widget_memory,
+      widget = wibox.widget.imagebox
+   },
+   top = 4,
+   bottom = 4,
+   left = 2,
+   right = 2,
+   widget = wibox.container.margin
+}
+
+-- Set memory usage text value
+local memory_text_value = wibox.widget.textbox()
+vicious.register(memory_text_value, vicious.widgets.mem, "$1%", 12)
+
+-- Create a memory usage text widget
+local memory_text_widget = wibox.widget {
+   widget = memory_text_value
+}
+
+-- Create a memory usage chart widget
+local memory_chart = wibox.widget {
+   max_value = 1,
+   value = 0.25,
+   thickness = 4,
+   border_width = 1,
+   bg = beautiful.bg_minimize,
+   border_color = beautiful.bg_normal,
+   colors = { beautiful.widget_value },
+   widget = wibox.container.arcchart
+}
+
+-- Set memory usage chart value
+vicious.register(memory_chart, vicious.widgets.mem, "$1", 12)
+
+-- Create the memory usage widget
+local memory_widget = wibox.widget {
+   {
+      {
+         {
+            {
+               {
+                  {
+                     widget = memory_text_widget
+                  },
+                  left = 4,
+                  right = 4,
+                  widget = wibox.container.margin
+               },
+               shape = gears.shape.rectangle,
+               bg = beautiful.bg_normal,
+               shape_border_color = beautiful.bg_minimize,
+               shape_border_width = beautiful.border_width,
+               widget = wibox.container.background
+            },
+            {
+               widget = memory_chart
             },
             spacing = 3,
             layout = wibox.layout.fixed.horizontal
@@ -798,10 +798,10 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             cpu_icon,
             cpu_widget,
-            memory_icon,
-            memory_widget,
             temperature_icon,
             temperature_widget,
+            memory_icon,
+            memory_widget,
             disk_icon,
             disk_widget,
             volume_icon,
