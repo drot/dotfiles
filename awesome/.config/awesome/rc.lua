@@ -123,9 +123,9 @@ local myofficemenu = {
 }
 
 local myutilmenu = {
-   { "PCManFM", "pcmanfm", beautiful.menu_fman },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
    { "SSR", "simplescreenrecorder", beautiful.menu_ssr },
+   { "Thunar", "thunar", beautiful.menu_fman },
    { "Virt Manager", "virt-manager", beautiful.menu_virt }
 }
 
@@ -1126,7 +1126,7 @@ awful.rules.rules = {
    { rule = { class = "Zathura" },
      properties = { tag = "4", maximized = true, switch_to_tags = true } },
    -- Utility programs
-   { rule_any = { class = { "Virt-manager", "Pavucontrol", "Pcmanfm" } },
+   { rule_any = { class = { "Virt-manager", "Pavucontrol", "Thunar" } },
      properties = { tag = "5", switch_to_tags = true, floating = true } },
    -- GIMP
    { rule = { class = "Gimp" },
