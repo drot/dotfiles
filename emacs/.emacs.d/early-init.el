@@ -44,6 +44,14 @@
 ;;; Disable the site default settings
 (setq inhibit-default-init t)
 
+;;; Disable scroll bars and fringes in minibuffer area
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (set-window-scroll-bars
+             (minibuffer-window frame) 0 nil 0 nil t)
+            (set-window-fringes
+             (minibuffer-window frame) 0 0 nil t)))
+
 ;;; Package configuration
 (require 'package)
 
