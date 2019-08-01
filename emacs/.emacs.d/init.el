@@ -1938,11 +1938,20 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (add-hook 'after-init-hook #'global-diff-hl-mode)
 ;; Update diffs immediately
 (add-hook 'after-init-hook #'diff-hl-flydiff-mode)
-;; Set global key binding
-(global-set-key (kbd "C-c t v") #'diff-hl-margin-mode)
 ;; Add hooks for other packages
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+;; Use `diff-hl-margin-mode' when appropriate
+(defun drot/diff-hl-setup (&optional frame)
+  "Check if we are using a graphical frame and enable `diff-hl-margin-mode' when
+ appropriate."
+  (with-selected-frame (or frame (selected-frame))
+    (if (display-graphic-p)
+        (diff-hl-margin-mode -1)
+      (diff-hl-margin-mode))))
+;; Apply the custom hooks
+(add-hook 'after-init-hook #'drot/diff-hl-setup)
+(add-hook 'after-make-frame-functions 'drot/diff-hl-setup)
 
 ;;; Eyebrowse
 (require-package 'eyebrowse)
