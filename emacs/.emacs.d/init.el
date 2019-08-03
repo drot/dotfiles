@@ -938,6 +938,8 @@ _p_: Previous
   ;; Configure visible headers
   (setq gnus-visible-headers
         "^From:\\|^Reply-To\\|^Organization:\\|^To:\\|^Cc:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Gnus")
+  ;; Display gravatars
+  (setq gnus-treat-from-gravatar 'head)
   ;; Show the article headers in this order
   (setq gnus-sorted-header-list
         '("^From:" "^Reply-To" "^Organization:" "^To:" "^Cc:" "^Newsgroups:"
@@ -2040,7 +2042,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c s C-s") #'counsel-rg)
 (global-set-key (kbd "C-c f g") #'counsel-git)
 (global-set-key (kbd "C-c f d") #'counsel-dired-jump)
-(global-set-key (kbd "C-c f r") #'counsel-recentf)
+(global-set-key (kbd "C-c f r") #'counsel-buffer-or-recentf)
 (global-set-key (kbd "C-c s v") #'counsel-git-grep)
 (global-set-key (kbd "C-c s g") #'counsel-grep)
 (global-set-key (kbd "C-c s i") #'counsel-imenu)
