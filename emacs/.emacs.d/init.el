@@ -756,8 +756,6 @@
   (setq-default proced-tree-flag t))
 
 ;;; GDB
-(global-set-key (kbd "C-c r d") #'gdb)
-;; Configuration
 (after-load 'gdb-mi
   ;; Multiple window layout
   (setq gdb-many-windows t))
@@ -829,8 +827,6 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;;; Shell mode
-(global-set-key (kbd "<C-f6>") #'shell)
-;; Configuration
 (after-load 'shell
   ;; Custom hook to avoid conflicts
   (defun drot/shell-mode-setup ()
@@ -1797,7 +1793,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Initialize mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set global key binding
-(global-set-key (kbd "C-c a w") #'run-skewer)
 (global-set-key (kbd "C-c r w") #'skewer-repl)
 
 ;; Skewer CSS
@@ -2197,9 +2192,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c f e") #'ediff)
 (global-set-key (kbd "C-c f 3") #'ediff3)
 
-;;; ANSI Term
-(global-set-key (kbd "C-c a t") #'ansi-term)
-
 ;;; Hexl mode
 (global-set-key (kbd "C-c t h") #'hexl-mode)
 (global-set-key (kbd "C-c f h") #'hexl-find-file)
@@ -2260,7 +2252,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c i t") #'table-insert)
 
 ;;; Check parens
-(global-set-key (kbd "C-c c p") #'check-parens)
+;;(global-set-key (kbd "<f2> h") #'check-parens)
 
 ;;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :color pink :hint nil)
