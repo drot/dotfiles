@@ -2185,9 +2185,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; Toggle debug on error
 (global-set-key (kbd "C-c t d") #'toggle-debug-on-error)
 
-;;; Variable pitch mode
-(global-set-key (kbd "C-c t C-v") #'variable-pitch-mode)
-
 ;;; Ediff
 (global-set-key (kbd "C-c f e") #'ediff)
 (global-set-key (kbd "C-c f 3") #'ediff3)
