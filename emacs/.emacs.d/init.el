@@ -2251,9 +2251,6 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;;; Table insertion
 (global-set-key (kbd "C-c i t") #'table-insert)
 
-;;; Check parens
-;;(global-set-key (kbd "<f2> h") #'check-parens)
-
 ;;; Hydra for various text marking operations
 (defhydra hydra-mark-text (:exit t :color pink :hint nil)
   "
