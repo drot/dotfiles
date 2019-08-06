@@ -478,7 +478,7 @@
   (setq vc-make-backup-files t))
 
 ;;; Customize interface
-(global-set-key (kbd "C-c a c") #'customize-group)
+(global-set-key (kbd "<C-f9>") #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
@@ -756,7 +756,7 @@
   (setq-default proced-tree-flag t))
 
 ;;; GDB
-(global-set-key (kbd "C-c a d") #'gdb)
+(global-set-key (kbd "C-c r d") #'gdb)
 ;; Configuration
 (after-load 'gdb-mi
   ;; Multiple window layout
@@ -804,7 +804,7 @@
      ".conf" ".diff" ".sh" ".org" ".md" ".deb")))
 
 ;;; Eshell
-(global-set-key (kbd "C-c a e") #'eshell)
+(global-set-key (kbd "<f6>") #'eshell)
 ;; Configuration
 (after-load 'eshell
   ;; Ignore duplicates and case
@@ -829,7 +829,7 @@
   (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
 
 ;;; Shell mode
-(global-set-key (kbd "C-c a s") #'shell)
+(global-set-key (kbd "<C-f6>") #'shell)
 ;; Configuration
 (after-load 'shell
   ;; Custom hook to avoid conflicts
@@ -890,7 +890,7 @@ _p_: Previous
   (setq comint-input-ignoredups t))
 
 ;;; Compilation
-(global-set-key (kbd "C-c c c") #'recompile)
+(global-set-key (kbd "<C-f5>") #'recompile)
 ;; Configuration
 (after-load 'compile
   ;; Colorize ANSI escape sequences
@@ -972,7 +972,7 @@ _p_: Previous
   (setq nnfolder-directory "~/.mail/archive"))
 
 ;;; Calendar
-(global-set-key (kbd "C-c a C-c") #'calendar)
+(global-set-key (kbd "<f12>") #'calendar)
 ;; Configuration
 (after-load 'calendar
   ;; Calendar defaults
@@ -1096,7 +1096,7 @@ _d_: Subtree
         (locate-user-emacs-file "cache/org-clock-save.el")))
 
 ;;; Time display
-(global-set-key (kbd "C-c a C-t") #'display-time-world)
+(global-set-key (kbd "<C-f12>") #'display-time-world)
 ;; Configuration
 (after-load 'time
   ;; Use custom mode line format
@@ -1416,7 +1416,7 @@ _d_: Subtree
 ;;; Elfeed
 (require-package 'elfeed)
 ;; Set global key binding
-(global-set-key (kbd "C-c a f") #'elfeed)
+(global-set-key (kbd "<C-f8>") #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -2017,7 +2017,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 ;; Initialize mode
 (add-hook 'after-init-hook #'ivy-mode)
 ;; Set global key binding
-(global-set-key (kbd "<f6>") #'ivy-resume)
+(global-set-key (kbd "<C-f4>") #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
   ;; Optimize completion
