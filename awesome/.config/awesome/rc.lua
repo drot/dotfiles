@@ -654,7 +654,7 @@ month_calendar:attach(clock_widget, "br", { on_hover = false})
 local clock_tooltip = awful.tooltip { }
 clock_tooltip:add_to_object(clock_widget)
 clock_widget:connect_signal('mouse::enter', function()
-                               clock_tooltip.text = os.date('%A, %B %d %Y')
+                               clock_tooltip.text = os.date('%A, %B %d, %Y')
 end)
 
 -- Create a wibox for each screen and add it
