@@ -228,14 +228,15 @@
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
 (dolist (hook '(artist-mode-hook
-                rcirc-mode-hook
-                nov-mode-hook
-                eshell-mode-hook
-                term-mode-hook
-                ediff-mode-hook
-                comint-mode-hook
                 cider-repl-mode-hook
-                slime-repl-mode-hook))
+                ediff-mode-hook
+                eshell-mode-hook
+                nov-mode-hook
+                rcirc-mode-hook
+                slime-repl-mode-hook
+                term-mode-hook
+                vterm-mode-hook
+                comint-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -1848,6 +1849,18 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (require-package 'undo-propose)
 ;; Set global key binding
 (global-set-key (kbd "C-c b u") #'undo-propose)
+
+;;; VTerm
+(when (file-directory-p "~/.build/emacs-libvterm")
+  (add-to-list 'load-path "~/.build/emacs-libvterm"))
+;; Function to load the VTerm module
+(defun drot/vterm-init ()
+  "Load and initialize VTerm."
+  (interactive)
+  (require 'vterm)
+  (vterm))
+;; Set global key binding
+(global-set-key (kbd "<C-f6>") #'drot/vterm-init)
 
 ;;; Web pasting support
 (require-package 'webpaste)
