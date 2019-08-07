@@ -99,7 +99,6 @@ XTerm*saveLines: 65535
 XTerm*borderWidth: 0
 
 ! Release Meta binding
-XTerm*fullscreen: never
 XTerm*metaSendsEscape: true
 XTerm*eightBitInput: false
 

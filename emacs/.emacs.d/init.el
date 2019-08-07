@@ -1852,16 +1852,9 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c b u") #'undo-propose)
 
 ;;; VTerm
-(when (file-directory-p "~/.build/emacs-libvterm")
-  (add-to-list 'load-path "~/.build/emacs-libvterm"))
-;; Function to load the VTerm module
-(defun drot/vterm-init ()
-  "Load and initialize VTerm."
-  (interactive)
-  (require 'vterm)
-  (vterm))
+(require-package 'vterm)
 ;; Set global key binding
-(global-set-key (kbd "<C-f6>") #'drot/vterm-init)
+(global-set-key (kbd "<C-f6>") #'vterm)
 
 ;;; Web pasting support
 (require-package 'webpaste)
