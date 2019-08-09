@@ -269,16 +269,6 @@
 (setq prettify-symbols-unprettify-at-point t)
 ;; Initialize mode
 (global-prettify-symbols-mode)
-;; Add replacements for `org-mode' task symbols
-(defun drot/org-prettify-task-symbols-setup ()
-  "Prettify `org-mode' task list symbols."
-  (dolist (symbol '(("TODO"     . ?⚑)
-                    ("DOING"    . ?⚐)
-                    ("CANCELED" . ?✘)
-                    ("DONE"     . ?✔)))
-    (cl-pushnew symbol prettify-symbols-alist :test #'equal)))
-;; Apply the custom hook
-(add-hook 'org-mode-hook #'drot/org-prettify-task-symbols-setup)
 
 ;;; Which function mode
 (setq which-func-unknown "n/a")
@@ -1058,6 +1048,16 @@ _d_: Subtree
           org-info
           org-id
           org-mhe))
+  ;; Add replacements for task symbols
+  (defun drot/org-prettify-task-symbols-setup ()
+    "Prettify `org-mode' task list symbols."
+    (dolist (symbol '(("TODO"     . ?⚑)
+                      ("DOING"    . ?⚐)
+                      ("CANCELED" . ?✘)
+                      ("DONE"     . ?✔)))
+      (cl-pushnew symbol prettify-symbols-alist :test #'equal)))
+  ;; Apply the custom hook
+  (add-hook 'org-mode-hook #'drot/org-prettify-task-symbols-setup)
   ;; Record time when a task is done
   (setq org-log-done 'time)
   ;; Indent headings by default
