@@ -35,6 +35,10 @@ c.editor.command = ['emacsclient', '-c', '{file}']
 # Type: String
 c.hints.border = '1px solid #1d1f21'
 
+# Padding (in pixels) for the statusbar.
+# Type: Padding
+c.statusbar.padding = {'bottom': 6, 'left': 2, 'right': 2, 'top': 1}
+
 # Open new tabs (middleclick/ctrl+click) in the background.
 # Type: Bool
 c.tabs.background = True
