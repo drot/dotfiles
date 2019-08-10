@@ -93,7 +93,7 @@ c.colors.completion.item.selected.fg = '#1d1f21'
 # Type: QssColor
 c.colors.completion.item.selected.bg = '#f0c674'
 
-# Top border color of the completion widget category headers.
+# Top border color of the selected completion item.
 # Type: QssColor
 c.colors.completion.item.selected.border.top = '#1d1f21'
 
@@ -151,7 +151,7 @@ c.colors.hints.fg = '#1d1f21'
 c.colors.hints.bg = '#f0c674'
 
 # Font color for the matched part of hints.
-# Type: QssColor
+# Type: QtColor
 c.colors.hints.match.fg = 'white'
 
 # Text color for the keyhint widget.
@@ -313,7 +313,7 @@ c.colors.statusbar.url.success.https.fg = '#f0c674'
 c.colors.statusbar.url.warn.fg = '#b294bb'
 
 # Background color of the tab bar.
-# Type: QtColor
+# Type: QssColor
 c.colors.tabs.bar.bg = '#1d1f21'
 
 # Color gradient start for the tab indicator.
@@ -359,6 +359,30 @@ c.colors.tabs.selected.even.fg = '#81a2be'
 # Background color of selected even tabs.
 # Type: QtColor
 c.colors.tabs.selected.even.bg = '#282a2e'
+
+# Background color of pinned unselected odd tabs.
+# Type: QtColor
+c.colors.tabs.pinned.odd.bg = '#b5bd68'
+
+# Background color of pinned unselected even tabs.
+# Type: QtColor
+c.colors.tabs.pinned.even.bg = '#de935f'
+
+# Foreground color of pinned selected odd tabs.
+# Type: QtColor
+c.colors.tabs.pinned.selected.odd.fg = '#969896'
+
+# Background color of pinned selected odd tabs.
+# Type: QtColor
+c.colors.tabs.pinned.selected.odd.bg = '#1d1f21'
+
+# Foreground color of pinned selected even tabs.
+# Type: QtColor
+c.colors.tabs.pinned.selected.even.fg = '#969896'
+
+# Background color of pinned selected even tabs.
+# Type: QtColor
+c.colors.tabs.pinned.selected.even.bg = '#1d1f21'
 
 # Default monospace fonts. Whenever "monospace" is used in a font
 # setting, it's replaced with the fonts listed here.
