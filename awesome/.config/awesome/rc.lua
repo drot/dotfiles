@@ -1119,6 +1119,8 @@ awful.rules.rules = {
      properties = { tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
      properties = { tag = "2", titlebars_enabled = false } },
+   { rule = { class = "qutebrowser" },
+     properties = { tag = "2", titlebars_enabled = false } },
    -- Emacs
    { rule = { class = "Emacs" },
      properties = { tag = "3", maximized = true } },
