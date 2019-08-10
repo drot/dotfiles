@@ -177,14 +177,14 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
-for_window [class="Firefox"] border pixel 2
+for_window [class="firefox"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="Pcmanfm"] floating enable
+for_window [class="Thunar"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Pidgin"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -194,13 +194,13 @@ for_window [title="Preferences"] floating enable
 for_window [title="Emoji"] floating enable
 
 # assign applications to certain workspaces
-assign [class="Firefox"] $ws2
+assign [class="firefox"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
 assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
-assign [class="Pcmanfm"] $ws6
+assign [class="Thunar"] $ws6
 assign [class="Pavucontrol"] $ws6
 assign [class="Ripcord"] $ws7
 

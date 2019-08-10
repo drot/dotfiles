@@ -9,6 +9,7 @@ general {
 
 order += "cpu_usage"
 order += "cpu_temperature 0"
+order += "memory"
 order += "disk /"
 order += "volume master"
 order += "time"
@@ -19,8 +20,15 @@ cpu_usage {
 
 cpu_temperature 0 {
     format = " %degrees°C"
-    max_threshold = "60"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp2_input"
+    max_threshold = 60
+    format_above_threshold = " %degrees°C"
+    path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+memory {
+    format = " %percentage_used"
+    threshold_degraded = 40%
+    threshold_critical = 20%
 }
 
 disk "/" {
@@ -34,5 +42,5 @@ volume master {
 }
 
 time {
-    format = " %d-%m  %H:%M"
+    format = " %d-%m  %H:%M "
 }
