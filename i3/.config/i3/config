@@ -169,8 +169,8 @@ bindsym XF86AudioMicMute exec --no-startup-id ~/.scripts/audio_toggle mic
 bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/touchpad_toggle
 
 # screenshot keys
-bindsym Print exec --no-startup-id maim -u /tmp/screenshot-$(date +%s).png
-bindsym --release $mod+Print exec --no-startup-id maim -su -f png | curl -s -F'file=@-' https://0x0.st | tr -d '\n' | xsel -b
+bindsym Print exec --no-startup-id ~/.scripts/screenshot full
+bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
