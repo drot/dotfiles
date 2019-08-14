@@ -848,19 +848,12 @@
 (after-load 'flymake
   ;; Define Hydra
   (defhydra hydra-flymake
-    (:color pink :hint nil :pre (flyspell-mode 0) :post (flyspell-mode))
-    "
-^Errors^       ^List Errors^
-^^^^^^------------------------
-_n_: Next      _d_: Show
-_p_: Previous
-
-"
+    (:color pink :pre (flyspell-mode 0) :post (flyspell-mode))
     ;; Errors
-    ("n" flymake-goto-next-error)
-    ("p" flymake-goto-prev-error)
+    ("n" flymake-goto-next-error "Next" :column "Errors")
+    ("p" flymake-goto-prev-error "Previous")
     ;; List errors
-    ("d" flymake-show-diagnostics-buffer :exit t)
+    ("d" flymake-show-diagnostics-buffer "Show" :column "List Errors" :exit t)
     ;; Quit
     ("q" nil "Quit"))
   ;; Set local key bindings
@@ -988,36 +981,25 @@ _p_: Previous
 (after-load 'outline
   ;; Define Hydra
   (defhydra hydra-outline (:color pink :hint nil)
-    "
-^Hide^          ^Show^         ^Move
-^^^^^^-------------------------------------------------
-_q_: Sublevels  _a_: All       _u_: Up
-_t_: Body       _e_: Entry     _n_: Next Visible
-_o_: Other      _i_: Children  _p_: Previous Visible
-_c_: Entry      _k_: Branches  _f_: Forward Same Level
-_l_: Leaves     _s_: Subtree   _b_: Backward Same Level
-_d_: Subtree
-
-"
     ;; Hide
-    ("q" hide-sublevels)    ; Hide everything but the top-level headings
-    ("t" hide-body)         ; Hide everything but headings (all body lines)
-    ("o" hide-other)        ; Hide other branches
-    ("c" hide-entry)        ; Hide this entry's body
-    ("l" hide-leaves)       ; Hide body lines in this entry and sub-entries
-    ("d" hide-subtree)      ; Hide everything in this entry and sub-entries
+    ("q" hide-sublevels "Sublevels" :column "Hide") ; Hide everything but the top-level headings
+    ("t" hide-body "Body") ; Hide everything but headings (all body lines)
+    ("o" hide-other "Other") ; Hide other branches
+    ("c" hide-entry "Entry") ; Hide this entry's body
+    ("l" hide-leaves "Leaves") ; Hide body lines in this entry and sub-entries
+    ("d" hide-subtree "Subtree") ; Hide everything in this entry and sub-entries
     ;; Show
-    ("a" show-all)          ; Show (expand) everything
-    ("e" show-entry)        ; Show this heading's body
-    ("i" show-children)     ; Show this heading's immediate child sub-headings
-    ("k" show-branches)     ; Show all sub-headings under this heading
-    ("s" show-subtree)      ; Show (expand) everything in this heading & below
+    ("a" show-all "All" :column "Show") ; Show (expand) everything
+    ("e" show-entry "Entry") ; Show this heading's body
+    ("i" show-children "Children") ; Show this heading's immediate child sub-headings
+    ("k" show-branches "Branches") ; Show all sub-headings under this heading
+    ("s" show-subtree "Subtree") ; Show (expand) everything in this heading & below
     ;; Move
-    ("u" outline-up-heading)                ; Up
-    ("n" outline-next-visible-heading)      ; Next
-    ("p" outline-previous-visible-heading)  ; Previous
-    ("f" outline-forward-same-level)        ; Forward - same level
-    ("b" outline-backward-same-level)       ; Backward - same level
+    ("u" outline-up-heading "Up" :column "Move") ; Up
+    ("n" outline-next-visible-heading "Next Visible") ; Next
+    ("p" outline-previous-visible-heading "Previous Visible") ; Previous
+    ("f" outline-forward-same-level "Forward Same Level") ; Forward - same level
+    ("b" outline-backward-same-level "Backward Same Level") ; Backward - same level
     ;; Quit
     ("z" nil "Quit"))
   ;; Set local key binding
@@ -1655,8 +1637,7 @@ _d_: Subtree
 (require-package 'move-text)
 ;; Define Hydra
 (defhydra hydra-move-text (:color pink)
-  "Move Text"
-  ("p" move-text-up "Move Up")
+  ("p" move-text-up "Move Up" :column "Move Text")
   ("n" move-text-down "Move Down")
   ("q" nil "Quit"))
 ;; Set global key binding
@@ -1727,35 +1708,30 @@ _d_: Subtree
 (global-set-key (kbd "C-c m C-e") #'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-c m C-s") #'mc/mark-all-in-region)
 ;; Define Hydra
-(defhydra hydra-multiple-cursors (:color pink :hint nil)
-  "
-^Lines^                   ^Mark Like This^  ^Up^           ^Down^         ^Other^
-^^^^^^-----------------------------------------------------------------------------------------------
-_l_: Edit Lines           _a_: All Dwim     _n_: Next      _p_: Previous  _i_: Insert Numbers
-_b_: Beginnings of Lines  _s_: All Symbols  _N_: Skip      _P_: Skip      _R_: Mark All Region Regexp
-_e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: Mark All Region Defun
-^ ^                       _r_: All Region   ^ ^            ^ ^            _S_: Mark All Symbols Defun
-^ ^                       ^ ^               ^ ^            ^ ^            _W_: Mark All Words Defun
-
-"
-  ("l" mc/edit-lines :exit t)
-  ("b" mc/edit-beginnings-of-lines :exit t)
-  ("e" mc/edit-ends-of-lines :exit t)
-  ("a" mc/mark-all-dwim :exit t)
-  ("s" mc/mark-all-symbols-like-this :exit t)
-  ("w" mc/mark-all-words-like-this :exit t)
-  ("r" mc/mark-all-in-region :exit t)
-  ("n" mc/mark-next-like-this)
-  ("N" mc/skip-to-next-like-this)
-  ("M-n" mc/unmark-next-like-this)
-  ("p" mc/mark-previous-like-this)
-  ("P" mc/skip-to-previous-like-this)
-  ("M-p" mc/unmark-previous-like-this)
-  ("i" mc/insert-numbers :exit t)
-  ("R" mc/mark-all-in-region-regexp :exit t)
-  ("f" mc/mark-all-like-this-in-defun :exit t)
-  ("S" mc/mark-all-symbols-like-this-in-defun :exit t)
-  ("W" mc/mark-all-words-like-this-in-defun :exit t)
+(defhydra hydra-multiple-cursors (:color pink)
+  ;; Lines
+  ("l" mc/edit-lines "Edit Lines" :column "Lines" :exit t)
+  ("b" mc/edit-beginnings-of-lines "Beginnings of Lines" :exit t)
+  ("e" mc/edit-ends-of-lines "Ends of Lines" :exit t)
+  ;; Mark Like This
+  ("a" mc/mark-all-dwim "All DWIM" :column "Mark Like This" :exit t)
+  ("s" mc/mark-all-symbols-like-this "All Symbols" :exit t)
+  ("w" mc/mark-all-words-like-this "All Words" :exit t)
+  ("r" mc/mark-all-in-region "All Region" :exit t)
+  ;; Up
+  ("n" mc/mark-next-like-this "Next" :column "Up")
+  ("N" mc/skip-to-next-like-this "Skip")
+  ("M-n" mc/unmark-next-like-this "Unmark")
+  ;; Down
+  ("p" mc/mark-previous-like-this "Previous" :column "Down")
+  ("P" mc/skip-to-previous-like-this "Skip")
+  ("M-p" mc/unmark-previous-like-this "Unmark")
+  ;; Other
+  ("i" mc/insert-numbers "Insert Numbers" :column "Other" :exit t)
+  ("R" mc/mark-all-in-region-regexp "Mark All Region Regexp" :exit t)
+  ("f" mc/mark-all-like-this-in-defun "Mark All Region Defun" :exit t)
+  ("S" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Defun" :exit t)
+  ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Defun" :exit t)
   ("q" nil "Quit"))
 ;; Set global key binding
 (global-set-key (kbd "C-c m h") #'hydra-multiple-cursors/body)
@@ -1893,8 +1869,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (add-hook 'after-init-hook #'avy-setup-default)
 ;; Define Hydra
 (defhydra hydra-avy-cycle (:color pink)
-  "Cycle avy candidates"
-  ("n" avy-next "Next")
+  ("n" avy-next "Next" :column "Cycle avy Candidates")
   ("p" avy-prev "Previous")
   ("q" nil "Quit"))
 ;; Set global key bindings
@@ -1991,8 +1966,7 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (after-load 'hl-todo
   ;; Define Hydra
   (defhydra hydra-hl-todo (:color pink)
-    "Highlight TODO"
-    ("n" hl-todo-next "Next TODO")
+    ("n" hl-todo-next "Next TODO" :column "Highlight TODO")
     ("p" hl-todo-previous "Previous TODO")
     ("q" nil "Quit"))
   ;; Set local key bindings
@@ -2256,42 +2230,31 @@ _e_: Ends of Lines        _w_: All Words    _M-n_: Unmark  _M-p_: Unmark  _f_: M
 (global-set-key (kbd "C-c i t") #'table-insert)
 
 ;;; Hydra for various text marking operations
-(defhydra hydra-mark-text (:exit t :color pink :hint nil)
-  "
-^Lisp^                ^Text^          ^Quotes^              ^Pairs^           ^Region^
-^^^^^^------------------------------------------------------------------------------------------
-_e_: S-Expression     _w_: Word       _q_: Inside Quotes   _(_: Inside Pairs  _._: Expand Region
-_f_: Function         _p_: Paragraph  _Q_: Outside Quotes  _[_: Inside Pairs  _,_: Contract Region
-_s_: Symbol           _c_: Comment    ^ ^                  _{_: Inside Pairs
-_S_: Prefixed Symbol  _u_: URL        ^ ^                  _)_: Inside Pairs
-^ ^                   _E_: Email      ^ ^                  _]_: Inside Pairs
-^ ^                   ^ ^             ^ ^                  _}_: Inside Pairs
-
-"
+(defhydra hydra-mark-text (:exit t :color pink)
   ;; Lisp
-  ("e" mark-sexp)
-  ("f" er/mark-defun)
-  ("s" er/mark-symbol)
-  ("S" er/mark-symbol-with-prefix)
+  ("e" mark-sexp "S-Expression" :column "Lisp")
+  ("f" er/mark-defun "Function")
+  ("s" er/mark-symbol "Symbol")
+  ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
   ;; Text
-  ("w" er/mark-word)
-  ("p" er/mark-text-paragraph)
-  ("c" er/mark-comment)
-  ("u" er/mark-url)
-  ("E" er/mark-email)
+  ("w" er/mark-word "Word" :column "Text")
+  ("p" er/mark-text-paragraph "Paragraph")
+  ("c" er/mark-comment "Comment")
+  ("u" er/mark-url "URL")
+  ("E" er/mark-email "Email")
   ;; Quotes
-  ("q" er/mark-inside-quotes)
-  ("Q" er/mark-outside-quotes)
+  ("q" er/mark-inside-quotes "Inside Quotes" :column "Quotes")
+  ("Q" er/mark-outside-quotes "Outside Quotes")
   ;; Pairs
-  ("(" er/mark-inside-pairs)
-  ("[" er/mark-inside-pairs)
-  ("{" er/mark-inside-pairs)
-  (")" er/mark-outside-pairs)
-  ("]" er/mark-outside-pairs)
-  ("}" er/mark-outside-pairs)
+  ("(" er/mark-inside-pairs "Inside Pairs" :column "Pairs")
+  ("[" er/mark-inside-pairs "Inside Pairs")
+  ("{" er/mark-inside-pairs "Inside Pairs")
+  (")" er/mark-outside-pairs "Inside Pairs")
+  ("]" er/mark-outside-pairs "Inside Pairs")
+  ("}" er/mark-outside-pairs "Inside Pairs")
   ;; Region
-  ("." er/expand-region :exit nil)
-  ("," er/contract-region :exit nil)
+  ("." er/expand-region "Expand Region" :column "Region" :exit nil)
+  ("," er/contract-region "Contract Region" :exit nil)
   ;; Quit
   ("q" nil "Quit"))
 ;; Set global key binding
