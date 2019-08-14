@@ -848,7 +848,7 @@
 (after-load 'flymake
   ;; Define Hydra
   (defhydra hydra-flymake
-    (:color pink :pre (flyspell-mode 0) :post (flyspell-mode))
+    (:pre (flyspell-mode 0) :post (flyspell-mode))
     ;; Errors
     ("n" flymake-goto-next-error "Next" :column "Errors")
     ("p" flymake-goto-prev-error "Previous")
@@ -980,7 +980,7 @@
 ;; Configuration
 (after-load 'outline
   ;; Define Hydra
-  (defhydra hydra-outline (:color pink :hint nil)
+  (defhydra hydra-outline ()
     ;; Hide
     ("q" hide-sublevels "Sublevels" :column "Hide") ; Hide everything but the top-level headings
     ("t" hide-body "Body") ; Hide everything but headings (all body lines)
@@ -1636,7 +1636,7 @@
 ;;; Move-text
 (require-package 'move-text)
 ;; Define Hydra
-(defhydra hydra-move-text (:color pink)
+(defhydra hydra-move-text ()
   ("p" move-text-up "Move Up" :column "Move Text")
   ("n" move-text-down "Move Down")
   ("q" nil "Quit"))
@@ -1708,7 +1708,7 @@
 (global-set-key (kbd "C-c m C-e") #'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-c m C-s") #'mc/mark-all-in-region)
 ;; Define Hydra
-(defhydra hydra-multiple-cursors (:color pink)
+(defhydra hydra-multiple-cursors ()
   ;; Lines
   ("l" mc/edit-lines "Edit Lines" :column "Lines" :exit t)
   ("b" mc/edit-beginnings-of-lines "Beginnings of Lines" :exit t)
@@ -1868,7 +1868,7 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'avy-setup-default)
 ;; Define Hydra
-(defhydra hydra-avy-cycle (:color pink)
+(defhydra hydra-avy-cycle ()
   ("n" avy-next "Next" :column "Cycle avy Candidates")
   ("p" avy-prev "Previous")
   ("q" nil "Quit"))
@@ -1965,7 +1965,7 @@
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
-  (defhydra hydra-hl-todo (:color pink)
+  (defhydra hydra-hl-todo ()
     ("n" hl-todo-next "Next TODO" :column "Highlight TODO")
     ("p" hl-todo-previous "Previous TODO")
     ("q" nil "Quit"))
@@ -2230,7 +2230,7 @@
 (global-set-key (kbd "C-c i t") #'table-insert)
 
 ;;; Hydra for various text marking operations
-(defhydra hydra-mark-text (:exit t :color pink)
+(defhydra hydra-mark-text (:exit t)
   ;; Lisp
   ("e" mark-sexp "S-Expression" :column "Lisp")
   ("f" er/mark-defun "Function")
