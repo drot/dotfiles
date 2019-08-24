@@ -1115,7 +1115,7 @@ awful.rules.rules = {
    },
 
    -- Set browsers to always map on the tag named "2" on screen 1
-   { rule = { class = "firefox" },
+   { rule = { class = "Firefox" },
      properties = { tag = "2", titlebars_enabled = false } },
    { rule = { class = "Tor Browser" },
      properties = { tag = "2", titlebars_enabled = false } },

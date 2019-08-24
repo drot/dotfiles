@@ -1676,7 +1676,7 @@
           paredit-open-square
           paredit-wrap-round
           paredit-wrap-square
-          paredit-reindent-cl-defun
+          paredit-reindent-defun
           paredit-semicolon
           paredit-splice-sexp
           paredit-splice-sexp-killing-backward
