@@ -2027,6 +2027,7 @@
 (global-set-key (kbd "C-c i u") #'counsel-unicode-char)
 (global-set-key (kbd "C-c f j") #'counsel-file-jump)
 (global-set-key (kbd "C-c o j") #'counsel-outline)
+(global-set-key (kbd "C-c v s") #'counsel-set-variable)
 (global-set-key [remap org-goto] #'counsel-org-goto)
 (global-set-key [remap org-set-tags-command] #'counsel-org-tag)
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
