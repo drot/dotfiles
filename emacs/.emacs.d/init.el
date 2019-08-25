@@ -2026,6 +2026,7 @@
 (global-set-key (kbd "C-c h l") #'counsel-find-library)
 (global-set-key (kbd "C-c i u") #'counsel-unicode-char)
 (global-set-key (kbd "C-c f j") #'counsel-file-jump)
+(global-set-key (kbd "C-c o j") #'counsel-outline)
 (global-set-key [remap org-goto] #'counsel-org-goto)
 (global-set-key [remap org-set-tags-command] #'counsel-org-tag)
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
@@ -2271,7 +2272,7 @@
 (global-set-key (kbd "C-c t h") #'hexl-mode)
 (global-set-key (kbd "C-c f h") #'hexl-find-file)
 
-;;; Replace string immediately
+;;; Replace strings
 (global-set-key (kbd "C-c s r") #'replace-string)
 (global-set-key (kbd "C-c s C-r") #'replace-regexp)
 
