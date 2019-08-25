@@ -140,7 +140,7 @@ local mywebmenu = {
 local myawesomemenu = {
    { "Hotkeys", function() return false, hotkeys_popup.show_help end, beautiful.menu_hotkeys },
    { "Manual", terminal .. " -e man awesome", beautiful.menu_manual },
-   { "Edit config", editor_cmd .. " " .. awesome.conffile, beautiful.menu_edit },
+   { "Edit Config", editor_cmd .. " " .. awesome.conffile, beautiful.menu_edit },
    { "Restart", awesome.restart, beautiful.menu_restart },
    { "Quit", function() awesome.quit() end, beautiful.menu_quit }
 }
