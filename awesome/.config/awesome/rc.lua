@@ -932,19 +932,25 @@ local globalkeys = gears.table.join(
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +5%",
                                            function ()
-                                              vicious.force({ volume_text_value, volume_bar }) end) end,
+                                              vicious.force({ volume_text_value, volume_bar })
+         end)
+      end,
       {description = "increase volume", group = "volume"}),
    awful.key({ }, "XF86AudioLowerVolume",
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -5%",
                                            function()
-                                              vicious.force({ volume_text_value, volume_bar }) end) end,
+                                              vicious.force({ volume_text_value, volume_bar })
+         end)
+      end,
       {description = "lower volume", group = "volume"}),
    awful.key({ }, "XF86AudioMute",
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-mute 0 toggle",
                                            function ()
-                                              vicious.force({ volume_text_value, volume_bar }) end) end,
+                                              vicious.force({ volume_text_value, volume_bar })
+         end)
+      end,
       {description = "mute volume", group = "volume"}),
 
    -- Clipboard
@@ -959,7 +965,9 @@ local globalkeys = gears.table.join(
                                               naughty.notify({ preset = naughty.config.presets.normal,
                                                                title = "Screenshot!",
                                                                icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
-                                                               text = "Screenshot taken." }) end) end,
+                                                               text = "Screenshot taken." })
+         end)
+      end,
       {description = "screenshot desktop", group = "screenshot"}),
 
    awful.key({ modkey }, "Print",
@@ -969,7 +977,9 @@ local globalkeys = gears.table.join(
                                               naughty.notify({ preset = naughty.config.presets.normal,
                                                                title = "Screenshot!",
                                                                icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
-                                                               text = "Region screenshot taken." }) end) end,
+                                                               text = "Region screenshot taken." })
+         end)
+      end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
