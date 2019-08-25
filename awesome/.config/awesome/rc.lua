@@ -849,9 +849,9 @@ local globalkeys = gears.table.join(
       {description = "show main menu", group = "awesome"}),
 
    -- Layout manipulation
-   awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+   awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1) end,
       {description = "swap with next client by index", group = "client"}),
-   awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+   awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1) end,
       {description = "swap with previous client by index", group = "client"}),
    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
       {description = "focus the next screen", group = "screen"}),
@@ -876,21 +876,21 @@ local globalkeys = gears.table.join(
    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
       {description = "quit awesome", group = "awesome"}),
 
-   awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+   awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05) end,
       {description = "increase master width factor", group = "layout"}),
-   awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+   awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05) end,
       {description = "decrease master width factor", group = "layout"}),
    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
       {description = "increase the number of master clients", group = "layout"}),
    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
       {description = "decrease the number of master clients", group = "layout"}),
-   awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+   awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true) end,
       {description = "increase the number of columns", group = "layout"}),
-   awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+   awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true) end,
       {description = "decrease the number of columns", group = "layout"}),
-   awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+   awful.key({ modkey,           }, "space", function () awful.layout.inc( 1) end,
       {description = "select next", group = "layout"}),
-   awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+   awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end,
       {description = "select previous", group = "layout"}),
 
    awful.key({ modkey, "Control" }, "n",
@@ -931,17 +931,20 @@ local globalkeys = gears.table.join(
    awful.key({ }, "XF86AudioRaiseVolume",
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +5%",
-                                           function () vicious.force({ volume_text_value, volume_bar }) end) end,
+                                           function ()
+                                              vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "increase volume", group = "volume"}),
    awful.key({ }, "XF86AudioLowerVolume",
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -5%",
-                                           function() vicious.force({ volume_text_value, volume_bar }) end) end,
+                                           function()
+                                              vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "lower volume", group = "volume"}),
    awful.key({ }, "XF86AudioMute",
       function ()
          awful.spawn.easy_async_with_shell("pactl set-sink-mute 0 toggle",
-                                           function () vicious.force({ volume_text_value, volume_bar }) end) end,
+                                           function ()
+                                              vicious.force({ volume_text_value, volume_bar }) end) end,
       {description = "mute volume", group = "volume"}),
 
    -- Clipboard
@@ -952,17 +955,21 @@ local globalkeys = gears.table.join(
    awful.key({ }, "Print",
       function ()
          awful.spawn.easy_async_with_shell("maim -u /tmp/screenshot-$(date +%s).png",
-                                           function () naughty.notify({ preset = naughty.config.presets.normal,
-                                                                        title = "Screenshot!",
-                                                                        text = "Screenshot taken." }) end) end,
+                                           function ()
+                                              naughty.notify({ preset = naughty.config.presets.normal,
+                                                               title = "Screenshot!",
+                                                               icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
+                                                               text = "Screenshot taken." }) end) end,
       {description = "screenshot desktop", group = "screenshot"}),
 
    awful.key({ modkey }, "Print",
       function ()
          awful.spawn.easy_async_with_shell("maim -su -f png | curl -s -F'file=@-' https://0x0.st | tr -d '\n' | xsel -b",
-                                           function () naughty.notify({ preset = naughty.config.presets.normal,
-                                                                        title = "Screenshot!",
-                                                                        text = "Region screenshot taken." }) end) end,
+                                           function ()
+                                              naughty.notify({ preset = naughty.config.presets.normal,
+                                                               title = "Screenshot!",
+                                                               icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
+                                                               text = "Region screenshot taken." }) end) end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
@@ -973,15 +980,15 @@ local clientkeys = gears.table.join(
          c:raise()
       end,
       {description = "toggle fullscreen", group = "client"}),
-   awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+   awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill() end,
       {description = "close", group = "client"}),
-   awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+   awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
       {description = "toggle floating", group = "client"}),
    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
       {description = "move to master", group = "client"}),
-   awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+   awful.key({ modkey,           }, "o",      function (c) c:move_to_screen() end,
       {description = "move to screen", group = "client"}),
-   awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+   awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop end,
       {description = "toggle keep on top", group = "client"}),
    awful.key({ modkey,           }, "n",
       function (c)
