@@ -857,13 +857,14 @@
     ;; Quit
     ("q" nil "Quit"))
   ;; Set local key bindings
-  (define-key flymake-mode-map (kbd "C-c ! n") #'flymake-goto-next-error)
-  (define-key flymake-mode-map (kbd "C-c ! p") #'flymake-goto-prev-error)
-  (define-key flymake-mode-map (kbd "C-c ! C-r") #'flymake-reporting-backends)
-  (define-key flymake-mode-map (kbd "C-c ! r") #'flymake-running-backends)
-  (define-key flymake-mode-map (kbd "C-c ! d") #'flymake-show-diagnostics-buffer)
-  (define-key flymake-mode-map (kbd "C-c ! l") #'flymake-switch-to-log-buffer)
-  (define-key flymake-mode-map (kbd "C-c ! h") #'hydra-flymake/body))
+  (dolist (bind '(("C-c ! n" . flymake-goto-next-error)
+                  ("C-c ! p" . flymake-goto-prev-error)
+                  ("C-c ! C-r" . flymake-reporting-backends)
+                  ("C-c ! r" . flymake-running-backends)
+                  ("C-c ! d" . flymake-show-diagnostics-buffer)
+                  ("C-c ! l" . flymake-switch-to-log-buffer)
+                  ("C-c ! h" . hydra-flymake/body)))
+    (define-key flymake-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Comint mode
 (after-load 'comint
@@ -1006,12 +1007,13 @@
   (define-key outline-minor-mode-map (kbd "C-c o h") #'hydra-outline/body))
 
 ;;; Org-mode
-(global-set-key (kbd "C-c o a") #'org-agenda)
-(global-set-key (kbd "C-c o c") #'org-capture)
-(global-set-key (kbd "C-c o t") #'org-todo-list)
-(global-set-key (kbd "C-c o s") #'org-search-view)
-(global-set-key (kbd "C-c o l") #'org-store-link)
-(global-set-key (kbd "C-c t t") #'orgtbl-mode)
+(dolist (bind '(("C-c o a" . org-agenda)
+                ("C-c o c" . org-capture)
+                ("C-c o t" . org-todo-list)
+                ("C-c o s" . org-search-view)
+                ("C-c o l" . org-store-link)
+                ("C-c t t" . orgtbl-mode)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'org
   ;; Set local key binding
@@ -1123,9 +1125,10 @@
 ;;; 0x0 paste support
 (require-package '0x0)
 ;; Set global key bindings
-(global-set-key (kbd "C-c b y") #'0x0-upload)
-(global-set-key (kbd "C-c f u") #'0x0-upload-file)
-(global-set-key (kbd "C-c x y") #'0x0-upload-string)
+(dolist (bind '(("C-c b y" . 0x0-upload)
+                ("C-c f u" . 0x0-upload-file)
+                ("C-c x y" . 0x0-upload-string)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Ace-window
 (require-package 'ace-window)
@@ -1224,15 +1227,16 @@
 ;;; Debbugs browser
 (require-package 'debbugs)
 ;; Set global key bindings
-(global-set-key (kbd "C-c d g") #'debbugs-gnu)
-(global-set-key (kbd "C-c d s") #'debbugs-gnu-search)
-(global-set-key (kbd "C-c d t") #'debbugs-gnu-usertags)
-(global-set-key (kbd "C-c d p") #'debbugs-gnu-patches)
-(global-set-key (kbd "C-c d b") #'debbugs-gnu-bugs)
-(global-set-key (kbd "C-c d C-o") #'debbugs-org)
-(global-set-key (kbd "C-c d C-s") #'debbugs-org-search)
-(global-set-key (kbd "C-c d C-p") #'debbugs-org-patches)
-(global-set-key (kbd "C-c d C-b") #'debbugs-org-bugs)
+(dolist (bind '(("C-c d g" . debbugs-gnu)
+                ("C-c d s" . debbugs-gnu-search)
+                ("C-c d t" . debbugs-gnu-usertags)
+                ("C-c d p" . debbugs-gnu-patches)
+                ("C-c d b" . debbugs-gnu-bugs)
+                ("C-c d C-o" . debbugs-org)
+                ("C-c d C-s" . debbugs-org-search)
+                ("C-c d C-p" . debbugs-org-patches)
+                ("C-c d C-b" . debbugs-org-bugs)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Dired Filter
 (require-package 'dired-filter)
@@ -1293,20 +1297,21 @@
   (setq dired-subtree-map (make-sparse-keymap))
   (define-key dired-mode-map (kbd "C-,") dired-subtree-map)
   ;; Set local key bindings
-  (define-key dired-subtree-map (kbd "C-i") #'dired-subtree-insert)
-  (define-key dired-subtree-map (kbd "C-/") #'dired-subtree-apply-filter)
-  (define-key dired-subtree-map (kbd "C-k") #'dired-subtree-remove)
-  (define-key dired-subtree-map (kbd "C-n") #'dired-subtree-next-sibling)
-  (define-key dired-subtree-map (kbd "C-p") #'dired-subtree-previous-sibling)
-  (define-key dired-subtree-map (kbd "C-u") #'dired-subtree-up)
-  (define-key dired-subtree-map (kbd "C-d") #'dired-subtree-down)
-  (define-key dired-subtree-map (kbd "C-a") #'dired-subtree-beginning)
-  (define-key dired-subtree-map (kbd "C-e") #'dired-subtree-end)
-  (define-key dired-subtree-map (kbd "C-c") #'dired-subtree-cycle)
-  (define-key dired-subtree-map (kbd "m") #'dired-subtree-mark-subtree)
-  (define-key dired-subtree-map (kbd "u") #'dired-subtree-unmark-subtree)
-  (define-key dired-subtree-map (kbd "C-o C-f") #'dired-subtree-only-this-file)
-  (define-key dired-subtree-map (kbd "C-o C-d") #'dired-subtree-only-this-directory))
+  (dolist (bind '(("C-i" . dired-subtree-insert)
+                  ("C-/" . dired-subtree-apply-filter)
+                  ("C-k" . dired-subtree-remove)
+                  ("C-n" . dired-subtree-next-sibling)
+                  ("C-p" . dired-subtree-previous-sibling)
+                  ("C-u" . dired-subtree-up)
+                  ("C-d" . dired-subtree-down)
+                  ("C-a" . dired-subtree-beginning)
+                  ("C-e" . dired-subtree-end)
+                  ("C-c" . dired-subtree-cycle)
+                  ("m" . dired-subtree-mark-subtree)
+                  ("u" . dired-subtree-unmark-subtree)
+                  ("C-o C-f" . dired-subtree-only-this-file)
+                  ("C-o C-d" . dired-subtree-only-this-directory)))
+    (define-key dired-subtree-map (kbd (car bind)) (cdr bind))))
 
 ;;; Dired Ranger
 (require-package 'dired-ranger)
@@ -1319,9 +1324,10 @@
   (setq dired-ranger-map (make-sparse-keymap))
   (define-key dired-mode-map (kbd "r") dired-ranger-map)
   ;; Set local key bindings
-  (define-key dired-ranger-map (kbd "c") #'dired-ranger-copy)
-  (define-key dired-ranger-map (kbd "p") #'dired-ranger-paste)
-  (define-key dired-ranger-map (kbd "m") #'dired-ranger-move)
+  (dolist (bind '(("c" . dired-ranger-copy)
+                  ("p" . dired-ranger-paste)
+                  ("m" . dired-ranger-move)))
+    (define-key dired-ranger-map (kbd (car bind)) (cdr bind)))
   ;; Bookmarking
   (define-key dired-mode-map (kbd "'") #'dired-ranger-bookmark)
   (define-key dired-mode-map (kbd "`") #'dired-ranger-bookmark-visit))
@@ -1362,11 +1368,12 @@
   ;; Initialize mode
   (require 'dired-async)
   ;; Set local key bindings
-  (define-key dired-mode-map (kbd "E c") #'dired-async-do-copy)
-  (define-key dired-mode-map (kbd "E r") #'dired-async-do-rename)
-  (define-key dired-mode-map (kbd "E s") #'dired-async-do-symlink)
-  (define-key dired-mode-map (kbd "E h") #'dired-async-do-hardlink)
-  (define-key dired-mode-map (kbd "E m") #'dired-async-mode))
+  (dolist (bind '(("E c" . dired-async-do-copy)
+                  ("E r" . dired-async-do-rename)
+                  ("E s" . dired-async-do-symlink)
+                  ("E h" . dired-async-do-hardlink)
+                  ("E m" . dired-async-mode)))
+    (define-key dired-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Asynchronous SMTP mail sending
 (after-load 'message
@@ -1384,13 +1391,14 @@
 ;; Configuration
 (after-load 'eglot
   ;; Set local key bindings
-  (define-key eglot-mode-map (kbd "C-c e c") #'eglot-reconnect)
-  (define-key eglot-mode-map (kbd "C-c e s") #'eglot-shutdown)
-  (define-key eglot-mode-map (kbd "C-c e r") #'eglot-rename)
-  (define-key eglot-mode-map (kbd "C-c e a") #'eglot-code-actions)
-  (define-key eglot-mode-map (kbd "C-c e h") #'eglot-help-at-point)
-  (define-key eglot-mode-map (kbd "C-c e b") #'eglot-events-buffer)
-  (define-key eglot-mode-map (kbd "C-c e e") #'eglot-stderr-buffer)
+  (dolist (bind '(("C-c e c" . eglot-reconnect)
+                  ("C-c e s" . eglot-shutdown)
+                  ("C-c e r" . eglot-rename)
+                  ("C-c e a" . eglot-code-actions)
+                  ("C-c e h" . eglot-help-at-point)
+                  ("C-c e b" . eglot-events-buffer)
+                  (C-c e e . eglot-stderr-buffer)))
+    (define-key eglot-mode-map (kbd (car bind)) (cdr bind)))
   ;; Add the Lua language server
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
@@ -1485,9 +1493,10 @@
   ;; Initialize mode
   (require 'rcirc-styles)
   ;; Set local key bindings
-  (define-key rcirc-mode-map (kbd "C-c C-e p") #'rcirc-styles-toggle-preview)
-  (define-key rcirc-mode-map (kbd "C-c C-e a") #'rcirc-styles-insert-attribute)
-  (define-key rcirc-mode-map (kbd "C-c C-e c") #'rcirc-styles-insert-color)
+  (dolist (bind '(("C-c C-e p" . rcirc-styles-toggle-preview)
+                  ("C-c C-e a" . rcirc-styles-insert-attribute)
+                  ("C-c C-e c" . rcirc-styles-insert-color)))
+    (define-key rcirc-mode-map (kbd (car bind)) (cdr bind)))
   ;; Use custom colors
   (setq rcirc-styles-color-vector
         ["#515151"
@@ -1601,12 +1610,13 @@
 ;;; Magit
 (require-package 'magit)
 ;; Set global key bindings
-(global-set-key (kbd "C-x g") #'magit-status)
-(global-set-key (kbd "C-x M-g") #'magit-dispatch-popup)
-(global-set-key (kbd "C-c g c") #'magit-clone)
-(global-set-key (kbd "C-c g b") #'magit-blame)
-(global-set-key (kbd "C-c g l") #'magit-log-buffer-file)
-(global-set-key (kbd "C-c g p") #'magit-pull)
+(dolist (bind '(("C-x g" . magit-status)
+                ("C-x M-g" . magit-dispatch-popup)
+                ("C-c g c" . magit-clone)
+                ("C-c g b" . magit-blame)
+                ("C-c g l" . magit-log-buffer-file)
+                ("C-c g p" . magit-pull)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Markdown mode
 (require-package 'markdown-mode)
@@ -1704,16 +1714,17 @@
           mouse-drag-mode-line
           swiper-mc)))
 ;; Set global key bindings
-(global-set-key (kbd "C-c m <SPC>") #'mc/vertical-align-with-space)
-(global-set-key (kbd "C-c m a") #'mc/vertical-align)
-(global-set-key (kbd "C-c m e") #'mc/mark-more-like-this-extended)
-(global-set-key (kbd "C-c m m") #'mc/mark-all-like-this-dwim)
-(global-set-key (kbd "C-c m l") #'mc/edit-lines)
-(global-set-key (kbd "C-c m n") #'mc/mark-next-like-this)
-(global-set-key (kbd "C-c m p") #'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c m C-a") #'mc/edit-beginnings-of-lines)
-(global-set-key (kbd "C-c m C-e") #'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-c m C-s") #'mc/mark-all-in-region)
+(dolist (bind '(("C-c m <SPC>" . mc/vertical-align-with-space)
+                ("C-c m a" . mc/vertical-align)
+                ("C-c m e" . mc/mark-more-like-this-extended)
+                ("C-c m m" . mc/mark-all-like-this-dwim)
+                ("C-c m l" . mc/edit-lines)
+                ("C-c m n" . mc/mark-next-like-this)
+                ("C-c m p" . mc/mark-previous-like-this)
+                ("C-c m C-a" . mc/edit-beginnings-of-lines)
+                ("C-c m C-e" . mc/edit-ends-of-lines)
+                ("C-c m C-s" . mc/mark-all-in-region)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Define Hydra
 (defhydra hydra-multiple-cursors ()
   ;; Lines
@@ -1805,9 +1816,10 @@
 ;; SLIME REPL configuration
 (after-load 'slime-repl
   ;; Disable conflicting key bindings
-  (define-key slime-repl-mode-map (kbd "DEL") nil)
-  (define-key slime-repl-mode-map (kbd "M-r") nil)
-  (define-key slime-repl-mode-map (kbd "M-s") nil)
+  (dolist (bind '(("DEL" . nil)
+                  ("M-r" . nil)
+                  ("M-s" . nil)))
+    (define-key slime-repl-mode-map (kbd (car bind)) (cdr bind)))
   ;; Set local key bindings
   (define-key slime-repl-mode-map (kbd "C-c M-r") #'slime-repl-previous-matching-input)
   (define-key slime-repl-mode-map (kbd "C-c M-s") #'slime-repl-next-matching-input)
@@ -1870,12 +1882,13 @@
   ("p" avy-prev "Previous")
   ("q" nil "Quit"))
 ;; Set global key bindings
-(global-set-key (kbd "C-:") #'avy-goto-char)
-(global-set-key (kbd "C-'") #'avy-goto-char-timer)
-(global-set-key (kbd "M-g f") #'avy-goto-line)
-(global-set-key (kbd "M-g w") #'avy-goto-word-1)
-(global-set-key (kbd "M-g e") #'avy-goto-word-0)
-(global-set-key (kbd "C-M-'") 'hydra-avy-cycle/body)
+(dolist (bind '(("C-:" . avy-goto-char)
+                ("C-'" . avy-goto-char-timer)
+                ("M-g f" . avy-goto-line)
+                ("M-g w" . avy-goto-word-1)
+                ("M-g e" . avy-goto-word-0)
+                ("C-M-'" . hydra-avy-cycle/body)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'avy
   ;; Work across all frames
@@ -1967,9 +1980,10 @@
     ("p" hl-todo-previous "Previous TODO")
     ("q" nil "Quit"))
   ;; Set local key bindings
-  (define-key hl-todo-mode-map (kbd "M-s t") #'hl-todo-occur)
-  (define-key hl-todo-mode-map (kbd "C-c p t") #'hydra-hl-todo/body)
-  (define-key hl-todo-mode-map (kbd "C-c p i") #'hl-todo-insert-keyword))
+  (dolist (bind '(("M-s t" . hl-todo-occur)
+                  ("C-c p t" . hydra-hl-todo/body)
+                  ("C-c p i" . hl-todo-insert-keyword)))
+    (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Amx
 (require-package 'amx)
@@ -2012,19 +2026,21 @@
 ;; Initialize mode
 (add-hook 'after-init-hook #'counsel-mode)
 ;; Set global key bindings
-(global-set-key (kbd "C-c s C-s") #'counsel-rg)
-(global-set-key (kbd "C-c f g") #'counsel-git)
-(global-set-key (kbd "C-c f d") #'counsel-dired-jump)
-(global-set-key (kbd "C-c f r") #'counsel-buffer-or-recentf)
-(global-set-key (kbd "C-c s v") #'counsel-git-grep)
-(global-set-key (kbd "C-c s g") #'counsel-grep)
-(global-set-key (kbd "C-c s i") #'counsel-imenu)
-(global-set-key (kbd "C-c h c") #'counsel-command-history)
-(global-set-key (kbd "C-c h l") #'counsel-find-library)
-(global-set-key (kbd "C-c i u") #'counsel-unicode-char)
-(global-set-key (kbd "C-c f j") #'counsel-file-jump)
-(global-set-key (kbd "C-c o j") #'counsel-outline)
-(global-set-key (kbd "C-c v s") #'counsel-set-variable)
+(dolist (bind '(("C-c s C-s" . counsel-rg)
+                ("C-c f g" . counsel-git)
+                ("C-c f d" . counsel-dired-jump)
+                ("C-c f r" . counsel-buffer-or-recentf)
+                ("C-c s v" . counsel-git-grep)
+                ("C-c s g" . counsel-grep)
+                ("C-c s i" . counsel-imenu)
+                ("C-c h c" . counsel-command-history)
+                ("C-c h l" . counsel-find-library)
+                ("C-c i u" . counsel-unicode-char)
+                ("C-c f j" . counsel-file-jump)
+                ("C-c o j" . counsel-outline)
+                ("C-c v s" . counsel-set-variable)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
+;; Remap the rest
 (global-set-key [remap org-goto] #'counsel-org-goto)
 (global-set-key [remap org-set-tags-command] #'counsel-org-tag)
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
@@ -2213,10 +2229,11 @@
   ;; Disable conflicting key binding
   (define-key paredit-mode-map (kbd "M-s") nil)
   ;; Set local key bindings
-  (define-key paredit-mode-map (kbd "M-s M-s") #'paredit-splice-sexp)
-  (define-key paredit-mode-map (kbd "M-{") #'paredit-wrap-curly)
-  (define-key paredit-mode-map (kbd "M-[") #'paredit-wrap-square)
-  (define-key paredit-mode-map (kbd "C-c C-M-s") #'paredit-mark-containing-sexp)
+  (dolist (bind '(("M-s M-s" . paredit-splice-sexp)
+                  ("M-{" . paredit-wrap-curly)
+                  ("M-[" . paredit-wrap-square)
+                  ("C-c C-M-s" . paredit-mark-containing-sexp)))
+    (define-key paredit-mode-map (kbd (car bind)) (cdr bind)))
 
   ;; Enable Paredit in the minibuffer
   (defvar drot/paredit-minibuffer-setup-commands
@@ -2278,17 +2295,19 @@
 (global-set-key (kbd "C-c s d") #'find-grep-dired)
 
 ;;; Project
-(global-set-key (kbd "C-c p f") #'project-find-file)
-(global-set-key (kbd "C-c p r") #'project-find-regexp)
-(global-set-key (kbd "C-c p s") #'project-search)
-(global-set-key (kbd "C-c p q") #'project-query-replace)
+(dolist (bind '(("C-c p f" . project-find-file)
+                ("C-c p r" . project-find-regexp)
+                ("C-c p s" . project-search)
+                ("C-c p q" . project-query-replace)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find function and variable definitions
-(global-set-key (kbd "C-c h f") #'find-function)
-(global-set-key (kbd "C-c h 4 f") #'find-function-other-window)
-(global-set-key (kbd "C-c h k") #'find-function-on-key)
-(global-set-key (kbd "C-c h v") #'find-variable)
-(global-set-key (kbd "C-c h 4 v") #'find-variable-other-window)
+(dolist (bind '(("C-c h f" . find-function)
+                ("C-c h 4 f" . find-function-other-window)
+                ("C-c h k" . find-function-on-key)
+                ("C-c h v" . find-variable)
+                ("C-c h 4 v" . find-variable-other-window)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find library
 (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
@@ -2315,9 +2334,10 @@
 (global-set-key (kbd "C-c t f") #'auto-fill-mode)
 
 ;;; Align
-(global-set-key (kbd "C-c x a") #'align)
-(global-set-key (kbd "C-c x c") #'align-current)
-(global-set-key (kbd "C-c x r") #'align-regexp)
+(dolist (bind '(("C-c x a" . align)
+                ("C-c x c" . align-current)
+                ("C-c x r" . align-regexp)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Auto Insert
 (global-set-key (kbd "C-c i a") #'auto-insert)
@@ -2361,18 +2381,20 @@
 (global-set-key (kbd "C-c s C-l") #'delete-non-matching-lines)
 
 ;;; Local variable insertion
-(global-set-key (kbd "C-c v d") #'add-dir-local-variable)
-(global-set-key (kbd "C-c v f") #'add-file-local-variable)
-(global-set-key (kbd "C-c v p") #'add-file-local-variable-prop-line)
+(dolist (bind '(("C-c v d" . add-dir-local-variable)
+                ("C-c v f" . add-file-local-variable)
+                ("C-c v p" . add-file-local-variable-prop-line)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Extended buffer operation key bindings
-(global-set-key (kbd "C-c b DEL") #'erase-buffer)
-(global-set-key (kbd "C-z") #'bury-buffer)
-(global-set-key (kbd "C-S-z") #'unbury-buffer)
-(global-set-key (kbd "C-c b e") #'eval-buffer)
-(global-set-key (kbd "C-c b k") #'kill-this-buffer)
-(global-set-key (kbd "C-c b i") #'insert-buffer)
-(global-set-key (kbd "<f5>") #'revert-buffer)
+(dolist (bind '(("C-c b DEL" . erase-buffer)
+                ("C-z" . bury-buffer)
+                ("C-S-z" . unbury-buffer)
+                ("C-c b e" . eval-buffer)
+                ("C-c b k" . kill-this-buffer)
+                ("C-c b i" . insert-buffer)
+                ("<f5>" . revert-buffer)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Replace dabbrev-expand with hippie-expand
 (global-set-key [remap dabbrev-expand] #'hippie-expand)
