@@ -1120,6 +1120,13 @@
           ("Asia/Saigon" "Saigon")
           ("UTC" "Universal"))))
 
+;;; 0x0 paste support
+(require-package '0x0)
+;; Set global key bindings
+(global-set-key (kbd "C-c b y") #'0x0-upload)
+(global-set-key (kbd "C-c f u") #'0x0-upload-file)
+(global-set-key (kbd "C-c x y") #'0x0-upload-string)
+
 ;;; Ace-window
 (require-package 'ace-window)
 ;; Set global key binding
@@ -1831,16 +1838,6 @@
 (require-package 'vterm)
 ;; Set global key binding
 (global-set-key (kbd "<C-f6>") #'vterm)
-
-;;; Web pasting support
-(require-package 'webpaste)
-;; Set global key bindings
-(global-set-key (kbd "C-c x y") #'webpaste-paste-region)
-(global-set-key (kbd "C-c b y") #'webpaste-paste-buffer)
-;; Configuration
-(after-load 'webpaste
-  ;; Change priority for pastebin services
-  (setq webpaste-provider-priority '("ix.io" "dpaste.de")))
 
 ;;; Wgrep
 (require-package 'wgrep)
