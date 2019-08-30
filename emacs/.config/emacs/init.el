@@ -108,6 +108,9 @@
 (setq eval-expression-print-length nil
       eval-expression-print-level nil)
 
+;; Select the help window always
+(setq help-window-select t)
+
 ;;; Use spaces instead of tabs and set default tab width
 (setq-default indent-tabs-mode nil
               tab-width 4)
