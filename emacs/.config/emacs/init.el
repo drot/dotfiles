@@ -962,12 +962,13 @@
 (after-load 'calendar
   ;; Calendar defaults
   (setq calendar-week-start-day 1
-        calendar-mark-holidays-flag t
         calendar-date-style 'european
         calendar-latitude 43.33
-        calendar-longitude 17.81
-        calendar-location-name "Mostar, Bosnia and Herzegovina")
+        calendar-longitude 17.81)
   ;; Holiday defaults
+  (setq calendar-mark-holidays-flag t
+        calendar-christian-all-holidays-flag t)
+  ;; Disable other holidays
   (setq holiday-general-holidays nil
         holiday-solar-holidays nil
         holiday-bahai-holidays nil
