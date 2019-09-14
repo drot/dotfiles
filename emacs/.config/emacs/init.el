@@ -925,6 +925,8 @@
         "^From:\\|^Reply-To\\|^Organization:\\|^To:\\|^Cc:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Gnus")
   ;; Display gravatars
   (setq gnus-treat-from-gravatar 'head)
+  ;; Use notifications
+  (add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)
   ;; Show the article headers in this order
   (setq gnus-sorted-header-list
         '("^From:" "^Reply-To" "^Organization:" "^To:" "^Cc:" "^Newsgroups:"
