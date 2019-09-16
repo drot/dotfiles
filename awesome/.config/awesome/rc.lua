@@ -930,7 +930,7 @@ local globalkeys = gears.table.join(
    -- Volume control
    awful.key({ }, "XF86AudioRaiseVolume",
       function ()
-         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +5%",
+         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle up",
                                            function ()
                                               vicious.force({ volume_text_value, volume_bar })
          end)
@@ -938,7 +938,7 @@ local globalkeys = gears.table.join(
       {description = "increase volume", group = "volume"}),
    awful.key({ }, "XF86AudioLowerVolume",
       function ()
-         awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -5%",
+         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle down",
                                            function()
                                               vicious.force({ volume_text_value, volume_bar })
          end)
@@ -946,7 +946,7 @@ local globalkeys = gears.table.join(
       {description = "lower volume", group = "volume"}),
    awful.key({ }, "XF86AudioMute",
       function ()
-         awful.spawn.easy_async_with_shell("pactl set-sink-mute 0 toggle",
+         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle mute",
                                            function ()
                                               vicious.force({ volume_text_value, volume_bar })
          end)
@@ -960,7 +960,7 @@ local globalkeys = gears.table.join(
    -- Screenshot grabbing
    awful.key({ }, "Print",
       function ()
-         awful.spawn.easy_async_with_shell("maim -u /tmp/screenshot-$(date +%s).png",
+         awful.spawn.easy_async_with_shell("~/.scripts/screenshot",
                                            function ()
                                               naughty.notify({ preset = naughty.config.presets.normal,
                                                                title = "Screenshot!",
@@ -972,7 +972,7 @@ local globalkeys = gears.table.join(
 
    awful.key({ modkey }, "Print",
       function ()
-         awful.spawn.easy_async_with_shell("maim -su -f png | curl -s -F'file=@-' https://0x0.st | tr -d '\n' | xsel -b",
+         awful.spawn.easy_async_with_shell("~/.scripts/screenshot region",
                                            function ()
                                               naughty.notify({ preset = naughty.config.presets.normal,
                                                                title = "Screenshot!",
