@@ -958,28 +958,10 @@ local globalkeys = gears.table.join(
       {description = "clipboard menu", group = "clipboard"}),
 
    -- Screenshot grabbing
-   awful.key({ }, "Print",
-      function ()
-         awful.spawn.easy_async_with_shell("~/.scripts/screenshot",
-                                           function ()
-                                              naughty.notify({ preset = naughty.config.presets.normal,
-                                                               title = "Screenshot!",
-                                                               icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
-                                                               text = "Screenshot taken." })
-         end)
-      end,
+   awful.key({ }, "Print", function () awful.spawn.with_shell("~/.scripts/screenshot") end,
       {description = "screenshot desktop", group = "screenshot"}),
 
-   awful.key({ modkey }, "Print",
-      function ()
-         awful.spawn.easy_async_with_shell("~/.scripts/screenshot region",
-                                           function ()
-                                              naughty.notify({ preset = naughty.config.presets.normal,
-                                                               title = "Screenshot!",
-                                                               icon = "/usr/share/icons/Papirus/48x48/devices/camera-photo.svg",
-                                                               text = "Region screenshot taken." })
-         end)
-      end,
+   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("~/.scripts/screenshot region") end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
