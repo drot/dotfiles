@@ -2102,10 +2102,9 @@
 (minions-mode)
 ;; Configuration
 (after-load 'minions
-  ;; Change mode lighter
-  (setq minions-mode-line-lighter "#")
-  ;; Change mode lighter color
-  (setq minions-mode-line-face 'font-lock-function-name-face)
+  ;; Change mode lighter and color
+  (setq minions-mode-line-lighter "#"
+        minions-mode-line-face 'font-lock-function-name-face)
   ;; Don't hide the following minor modes
   (setq minions-direct
         '(ace-window-mode
