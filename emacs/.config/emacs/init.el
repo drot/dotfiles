@@ -1913,7 +1913,13 @@
 (global-set-key (kbd "C-c i y") #'company-yasnippet)
 ;; Configuration
 (after-load 'company
-  ;; Change default behavior
+  ;; Change default backends
+  (setq company-backends
+        '(company-capf
+          company-files
+          (company-dabbrev-code company-etags company-keywords)
+          company-dabbrev))
+  ;; More eager completion and cycle candidates
   (setq company-minimum-prefix-length 2
         company-selection-wrap-around t)
   ;; Allow non-matching input
