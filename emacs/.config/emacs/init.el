@@ -1945,22 +1945,6 @@
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 
-;;; Eyebrowse
-(require-package 'eyebrowse)
-;; Change default prefix
-(setq eyebrowse-keymap-prefix (kbd "C-c w"))
-;; Initialize mode
-(add-hook 'after-init-hook #'eyebrowse-mode)
-(after-load 'eyebrowse
-  ;; Switch to last position automatically
-  (setq eyebrowse-wrap-around t
-        eyebrowse-switch-back-and-forth t)
-  ;; Start from scratch
-  (setq eyebrowse-new-workspace t)
-  ;; Differentiate from `which-function-mode'
-  (setq eyebrowse-mode-line-left-delimiter "<"
-        eyebrowse-mode-line-right-delimiter ">"))
-
 ;;; Form-feed
 (require-package 'form-feed)
 ;; Same line width as `fill-column' width
