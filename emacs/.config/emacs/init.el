@@ -391,6 +391,11 @@
         uniquify-trailing-separator-p t
         uniquify-ignore-buffers-re "^\\*"))
 
+;;; Tab bar
+(after-load 'tab-bar
+  ;; Don't show on single tab
+  (setq tab-bar-show 1))
+
 ;;; Use Ibuffer for buffer list
 (global-set-key [remap list-buffers] #'ibuffer)
 ;; Configuration
