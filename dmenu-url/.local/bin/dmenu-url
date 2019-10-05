@@ -10,7 +10,7 @@ selected_background="#1d1f21"
 selected_foreground="#f0c674"
 
 # Show clipboard
-dmenu -i -l 10 -w $WINDOWID -p "Follow URL:" \
+dmenu -i -l 10 -w $WINDOWID -p "URL:" \
       -fn "$font" \
       -nb "$normal_background" \
       -nf "$normal_foreground" \

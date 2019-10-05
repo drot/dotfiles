@@ -20,8 +20,8 @@ export DVIVIEWER_texdoc="${PDFVIEWER_texdoc}"
 export WINEPREFIX="$HOME/.config/wine"
 export WINEARCH="win32"
 export WINEDEBUG="-all"
-# Disable Mono and Gecko install prompt; prevent .desktop creation
-export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml=d"
+# Disable Gecko install prompt; prevent .desktop creation
+export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 
 # Check for Cargo packages if available
 if [ -d "$HOME/.cargo/bin" ]; then
