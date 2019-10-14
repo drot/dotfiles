@@ -1441,6 +1441,9 @@
             (elfeed-make-tagger :before "2 weeks ago"
                                 :remove 'unread)))
 
+;;; Flx fuzzy matching
+(require-package 'flx)
+
 ;;; rcirc
 (global-set-key (kbd "<f7>") #'irc)
 ;; Configuration
@@ -2005,9 +2008,6 @@
 (after-load 'amx
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
-;; Flx fuzzy matching
-(require-package 'flx)
 
 ;;; Ivy
 (require-package 'ivy)
