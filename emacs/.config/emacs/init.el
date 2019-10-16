@@ -574,11 +574,6 @@
   ;; Default filename
   (setq tags-file-name "TAGS"))
 
-;;; Sh mode
-(after-load 'sh-script
-  ;; Remove annoying heredoc insertion
-  (remove-hook 'sh-mode-hook #'sh-electric-here-document-mode))
-
 ;;; Scheme mode
 (after-load 'scheme
   ;; Use Guile as the default interpreter
