@@ -1436,9 +1436,6 @@
             (elfeed-make-tagger :before "2 weeks ago"
                                 :remove 'unread)))
 
-;;; Flx fuzzy matching
-(require-package 'flx)
-
 ;;; rcirc
 (global-set-key (kbd "<f7>") #'irc)
 ;; Configuration
@@ -1935,15 +1932,6 @@
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company statistics
-(require-package 'company-statistics)
-;; Initialize mode
-(add-hook 'global-company-mode-hook #'company-statistics-mode)
-;; Configuration
-(after-load 'company-statistics
-  ;; Change save file location
-  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
-
 ;;; Diff-Hl
 (require-package 'diff-hl)
 ;; Initialize mode
@@ -2014,8 +2002,6 @@
 (global-set-key (kbd "<C-f4>") #'ivy-resume)
 ;; Configuration
 (after-load 'ivy
-  ;; Use fuzzy completion
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   ;; Optimize completion
   (setq ivy-dynamic-exhibit-delay-ms 150)
   ;; Prompt format
@@ -2055,8 +2041,6 @@
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
 ;; Configuration
 (after-load 'counsel
-  ;; Reset initial `ivy' input
-  (setq ivy-initial-inputs-alist nil)
   ;; Preselect files
   (setq counsel-preselect-current-file t)
   ;; Change `counsel-org' defaults
@@ -2077,6 +2061,29 @@
   (setq swiper-include-line-number-in-search t)
   ;; Always go to the beginning of a match
   (setq swiper-goto-start-of-match t))
+
+;;; Prescient
+(require-package 'prescient)
+;; Configuration
+(after-load 'prescient
+  ;; Change save file location
+  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
+  ;; Enable persistent history
+  (prescient-persist-mode))
+
+;;; Ivy Prescient
+(require-package 'ivy-prescient)
+;; Initialize mode
+(add-hook 'after-init-hook #'ivy-prescient-mode)
+
+;;; Company Prescient
+(require-package 'company-prescient)
+;; Initialize mode
+(add-hook 'after-init-hook #'company-prescient-mode)
 
 ;;; Minions
 (require-package 'minions)
