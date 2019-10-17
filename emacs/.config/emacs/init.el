@@ -2041,6 +2041,8 @@
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
 ;; Configuration
 (after-load 'counsel
+  ;; Don't set initial input
+  (setq ivy-initial-inputs-alist nil)
   ;; Preselect files
   (setq counsel-preselect-current-file t)
   ;; Change `counsel-org' defaults
