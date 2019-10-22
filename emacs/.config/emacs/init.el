@@ -1456,9 +1456,9 @@
   ;; Authentication
   (setq rcirc-authinfo
         `(("rizon" nickserv "drot"
-           ,(auth-source-pass-get 'secret "auth-sources/drot@irc.rizon.net"))
+           ,(auth-source-pass-get 'secret "IRC/drot@irc.rizon.net"))
           ("forestnet" nickserv "drot"
-           ,(auth-source-pass-get 'secret "auth-sources/drot@irc.forestnet.org"))))
+           ,(auth-source-pass-get 'secret "IRC/drot@irc.forestnet.org"))))
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 2048)
   ;; Set fill column value to frame width
