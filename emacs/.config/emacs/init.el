@@ -2041,8 +2041,6 @@
 (global-set-key [remap menu-bar-open] #'counsel-tmm)
 ;; Configuration
 (after-load 'counsel
-  ;; Don't set initial input
-  (setq ivy-initial-inputs-alist nil)
   ;; Preselect files
   (setq counsel-preselect-current-file t)
   ;; Change `counsel-org' defaults
@@ -2079,8 +2077,10 @@
 
 ;;; Ivy Prescient
 (require-package 'ivy-prescient)
-;; Initialize mode
-(add-hook 'after-init-hook #'ivy-prescient-mode)
+;; Configuration
+(after-load 'counsel
+  ;; Initialize mode
+  (ivy-prescient-mode))
 
 ;;; Company Prescient
 (require-package 'company-prescient)
