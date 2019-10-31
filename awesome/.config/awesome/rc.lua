@@ -540,7 +540,8 @@ local volume_icon = wibox.widget {
 
 -- Set volume text value
 local volume_text_value = wibox.widget.textbox()
-vicious.register(volume_text_value, vicious.contrib.pulse, "$1%", 6)
+local sink = "alsa_output.pci-0000_00_1b.0.analog-stereo"
+vicious.register(volume_text_value, vicious.contrib.pulse, "$1%", 6, sink)
 
 -- Create a volume text widget
 local volume_text_widget = wibox.widget {
@@ -559,7 +560,7 @@ local volume_bar = wibox.widget {
 }
 
 -- Set volume bar value
-vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6)
+vicious.register(volume_bar, vicious.contrib.pulse, "$1", 6, sink)
 
 -- Create volume widget
 local volume_widget = wibox.widget {
