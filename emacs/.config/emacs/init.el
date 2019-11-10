@@ -844,6 +844,13 @@
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
+;;; lv - other echo area
+(require-package 'lv)
+;; Configuration
+(after-load 'lv
+  ;; Center commands
+  (setq lv-use-padding t))
+
 ;;; Flymake
 (global-set-key (kbd "C-c ! t") #'flymake-mode)
 ;; Configuration
