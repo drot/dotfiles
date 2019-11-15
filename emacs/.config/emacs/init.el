@@ -858,7 +858,7 @@
   ;; Define Hydra
   (defhydra hydra-flymake
     (:pre (flyspell-mode 0) :post (flyspell-mode))
-    ;; Errors
+    ;; Go to errors
     ("n" flymake-goto-next-error "Next" :column "Errors")
     ("p" flymake-goto-prev-error "Previous")
     ;; List errors
