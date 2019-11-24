@@ -97,7 +97,7 @@ theme.tooltip_border_width = dpi(1)
 
 -- Menu
 theme.menu_height = dpi(24)
-theme.menu_width = dpi(132)
+theme.menu_width = dpi(136)
 theme.menu_border_width = dpi(1)
 theme.menu_border_color = theme.border_focus
 
