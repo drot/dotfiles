@@ -51,7 +51,7 @@
 
 ;;; Font
 (set-font (make-instance 'xft:font
-                         :family "Iosevka Term SS05"
+                         :family "Cascadia Mono"
                          :subfamily "Regular"
                          :size 12))
 

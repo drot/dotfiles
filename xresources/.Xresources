@@ -11,7 +11,7 @@ Xcursor.theme: Adwaita
 
 ! Emacs
 Emacs.font: fontset-startup
-Emacs.Fontset-0: -CYEL-Iosevka Term SS05-normal-normal-normal-*-16-*-*-*-m-0-fontset-startup,\
+Emacs.Fontset-0: -SAJA-Cascadia Mono-normal-normal-normal-*-16-*-*-*-m-0-fontset-startup,\
     arabic:-GOOG-Noto Sans Arabic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     burmese:-GOOG-Noto Sans Myanmar-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     ethiopic:-GOOG-Noto Sans Ethiopic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
@@ -59,8 +59,8 @@ URxvt.keysym.M-Delete: matcher:list
 URxvt*matcher.button: 1
 
 ! Font
-URxvt*font: xft:Iosevka Term SS05:pixelsize=16,xft:Noto Emoji:size=12
-URxvt*boldFont: xft:Iosevka Term SS05:bold:pixelsize=16,xft:Noto Emoji:size=12
+URxvt*font: xft:Cascadia Mono:pixelsize=16,xft:Noto Emoji:size=12
+URxvt*boldFont: xft:Cascadia Mono:bold:pixelsize=16,xft:Noto Emoji:size=12
 URxvt*letterSpace: -1
 
 ! Main colors
@@ -110,7 +110,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Iosevka Term SS05:pixelsize=16
+XTerm*faceName: Cascadia Mono:pixelsize=16
 
 ! Main colors
 XTerm*foreground: #c5c8c6

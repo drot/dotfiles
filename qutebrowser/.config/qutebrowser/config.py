@@ -386,7 +386,7 @@ c.colors.tabs.pinned.selected.even.bg = '#1d1f21'
 # Default monospace fonts. Whenever "monospace" is used in a font
 # setting, it's replaced with the fonts listed here.
 # Type: Font
-c.fonts.monospace = '"Iosevka Term SS05"'
+c.fonts.monospace = '"Cascadia Mono"'
 
 # Font used in the completion widget.
 # Type: Font

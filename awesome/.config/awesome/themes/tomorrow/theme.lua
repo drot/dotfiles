@@ -13,7 +13,7 @@ local gshape = require("gears.shape")
 
 local theme = {}
 
-theme.font = "Iosevka Term SS05 12"
+theme.font = "Cascadia Mono 12"
 
 theme.icon_theme = "Papirus"
 
