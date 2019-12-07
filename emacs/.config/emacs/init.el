@@ -2101,7 +2101,7 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter and color
-  (setq minions-mode-line-lighter "λ"
+  (setq minions-mode-line-lighter "≡"
         minions-mode-line-face 'shadow)
   ;; Don't hide the following minor modes
   (setq minions-direct
