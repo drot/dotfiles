@@ -1871,12 +1871,6 @@
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
 
-;;; Zop-to-char
-(require-package 'zop-to-char)
-;; Set global key bindings
-(global-set-key [remap zap-to-char] #'zop-to-char)
-(global-set-key (kbd "M-Z") #'zop-up-to-char)
-
 ;;; Ace-link
 (require-package 'ace-link)
 ;; Initialize mode
