@@ -15,7 +15,7 @@
 (in-package :stumpwm)
 
 ;;; Load Slynk
-(push (car (directory "~/.emacs.d/elpa/sly-2*/slynk/")) asdf:*central-registry*)
+(push (car (directory "~/.config/emacs/elpa/sly-2*/slynk/")) asdf:*central-registry*)
 (asdf:operate 'asdf:load-op 'slynk)
 
 ;;; Command for on-demand starting of the Swank server
