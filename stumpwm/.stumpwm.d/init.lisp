@@ -138,7 +138,7 @@
 (clear-window-placement-rules)
 
 (define-frame-preference "www"
-    (0 t t :class "Conkeror"))
+    (0 t t :class "Firefox"))
 
 (define-frame-preference "emacs"
     (0 t t :class "Emacs"))
