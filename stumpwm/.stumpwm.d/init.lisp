@@ -6,9 +6,7 @@
 ;;; Commentary:
 
 ;; Tomorrow Night themed, mostly default key bindings. `stumptray' module requires
-;; `xembed' to be installed via Quicklisp. `ttf-fonts' module requires
-;; `clx-truetype' to be installed via Quicklisp and running `xft:cache-fonts'
-;; for initial font cache population.
+;; `xembed' to be installed via Quicklisp.
 
 ;;; Code:
 
@@ -33,7 +31,6 @@
 (load-module "mem")
 (load-module "net")
 (load-module "stumptray")
-(load-module "ttf-fonts")
 
 ;;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
@@ -45,12 +42,6 @@
                  "#8abeb7"              ; 6 cyan
                  "#c5c8c6"))            ; 7 white
 (update-color-map (current-screen))
-
-;;; Font
-(set-font (make-instance 'xft:font
-                         :family "Cascadia Mono"
-                         :subfamily "Regular"
-                         :size 12))
 
 ;;; Startup message
 (setf *startup-message* "^4*StumpWM^n ^7*has^n ^3*initialized^n^6*.^n")
@@ -94,8 +85,9 @@
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 
 ;;; Mode line format
-(setf *screen-mode-line-format* '("<^7*%n^n> ^06%u^n ^30%W^n ^>"
-                                  " ^2*%c^n >> ^4*%M^n >> ^3*%l^n >> %d %T"))
+(setf stumpwm:*screen-mode-line-format*
+      '("<^7*%n^n> ^06%u^n ^30%W^n ^>"
+        " ^2*%c^n >> ^4*%M^n >> ^3*%l^n >> %d %T"))
 
 ;;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
