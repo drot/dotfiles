@@ -156,13 +156,17 @@
 (set-prefix-key (kbd "C-i"))
 
 ;;; Display prefix key in use
-(defun key-seq-msg (key key-seq cmd)
+(defun key-seq-msg (_key key-seq cmd)
   "Show a message with current incomplete key sequence."
-  (declare (ignore key))
-  (or (eq *top-map* *resize-map*)
-      (stringp cmd)
-      (let ((*message-window-gravity* :bottom-left))
-        (message "~A" (print-key-seq (reverse key-seq))))))
+  (declare (ignore _key))
+  (unless (or (stringp cmd)
+              (eq *top-map* *resize-map*))
+    (let* ((oriented-key-seq (reverse key-seq))
+           (maps (get-kmaps-at-key-seq (dereference-kmaps (top-maps))
+                                       oriented-key-seq)))
+      (when maps
+        (let ((*message-window-gravity* :bottom-left))
+          (message "~A" (print-key-seq oriented-key-seq)))))))
 
 (add-hook *key-press-hook* 'key-seq-msg)
 
