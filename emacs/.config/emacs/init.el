@@ -1068,6 +1068,8 @@
         org-use-speed-commands t)
   ;; Default `org-goto' interface
   (setq org-goto-interface 'outline-path-completion)
+  ;; Default LaTeX compiler
+  (setq org-latex-compiler "lualatex")
   ;; LaTeX syntax highlight
   (setq org-highlight-latex-and-related '(entities latex script))
   ;; LaTeX preview scale
