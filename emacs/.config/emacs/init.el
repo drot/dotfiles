@@ -1,6 +1,6 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2019 drot
+;; Copyright (C) 2009-2020 drot
 
 ;; Author: drot
 ;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.emacs.d
