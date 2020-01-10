@@ -228,14 +228,15 @@
 (global-hl-line-mode)
 ;; Disable `hl-line-mode' in special buffers
 (dolist (hook '(artist-mode-hook
-                cider-repl-mode-hook
+                comint-mode-hook
                 ediff-mode-hook
                 eshell-mode-hook
                 nov-mode-hook
                 rcirc-mode-hook
                 term-mode-hook
+                undo-tree-visualizer-mode-hook
                 vterm-mode-hook
-                comint-mode-hook))
+                cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 
@@ -2246,7 +2247,7 @@
   ;; Enable undo history saving
   (setq undo-tree-history-directory-alist `(("." . ,(locate-user-emacs-file "undo/"))))
   (setq undo-tree-auto-save-history t)
-  ;; More detailed visualizer
+  ;; More detailed visualizers
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-relative-timestamps t))
 
