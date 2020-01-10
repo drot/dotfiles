@@ -1834,11 +1834,6 @@
 ;;; Systemd mode
 (require-package 'systemd)
 
-;;; Undo propose
-(require-package 'undo-propose)
-;; Set global key binding
-(global-set-key (kbd "C-c b u") #'undo-propose)
-
 ;;; VTerm
 (require-package 'vterm)
 ;; Set global key binding
@@ -2241,6 +2236,19 @@
                 clojure-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
+
+;;; Undo Tree
+(require-package 'undo-tree)
+;; Initialize mode
+(add-hook 'after-init-hook #'global-undo-tree-mode)
+;; Configuration
+(after-load 'undo-tree
+  ;; Enable undo history saving
+  (setq undo-tree-history-directory-alist `(("." . ,(locate-user-emacs-file "undo/"))))
+  (setq undo-tree-auto-save-history t)
+  ;; More detailed visualizer
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-relative-timestamps t))
 
 ;;; Volatile Highlights
 (require-package 'volatile-highlights)
