@@ -1851,14 +1851,14 @@
 ;;; Ace-link
 (require-package 'ace-link)
 ;; Initialize mode
-(add-hook 'after-init-hook #'ace-link-setup-default)
+(ace-link-setup-default)
 ;; Set global key binding
 (global-set-key (kbd "C-c u a") #'ace-link-addr)
 
 ;;; Avy
 (require-package 'avy)
 ;; Initialize mode
-(add-hook 'after-init-hook #'avy-setup-default)
+(avy-setup-default)
 ;; Define Hydra
 (defhydra hydra-avy-cycle ()
   ("n" avy-next "Next" :column "Cycle avy Candidates")
@@ -1885,7 +1885,7 @@
 ;;; Company mode
 (require-package 'company)
 ;; Initialize mode
-(add-hook 'after-init-hook #'global-company-mode)
+(global-company-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c i y") #'company-yasnippet)
 ;; Configuration
@@ -1913,9 +1913,9 @@
 ;;; Diff-Hl
 (require-package 'diff-hl)
 ;; Initialize mode
-(add-hook 'after-init-hook #'global-diff-hl-mode)
+(global-diff-hl-mode)
 ;; Update diffs immediately
-(add-hook 'after-init-hook #'diff-hl-flydiff-mode)
+(diff-hl-flydiff-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t v") #'diff-hl-margin-mode)
 ;; Add hooks for `dired' and `magit'
@@ -1944,7 +1944,7 @@
 ;;; Hl-Todo
 (require-package 'hl-todo)
 ;; Initialize mode
-(add-hook 'after-init-hook #'global-hl-todo-mode)
+(global-hl-todo-mode)
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
@@ -1961,7 +1961,7 @@
 ;;; Amx
 (require-package 'amx)
 ;; Initialize mode
-(add-hook 'after-init-hook #'amx-mode)
+(amx-mode)
 ;; Set global key bindings
 (global-set-key (kbd "M-X") #'amx-major-mode-commands)
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
@@ -1975,7 +1975,7 @@
 ;; Ivy Hydra support
 (require-package 'ivy-hydra)
 ;; Initialize mode
-(add-hook 'after-init-hook #'ivy-mode)
+(ivy-mode)
 ;; Set global key binding
 (global-set-key (kbd "<C-f4>") #'ivy-resume)
 ;; Configuration
@@ -1997,7 +1997,7 @@
 ;;; Counsel
 (require-package 'counsel)
 ;; Initialize mode
-(add-hook 'after-init-hook #'counsel-mode)
+(counsel-mode)
 ;; Set global key bindings
 (dolist (bind '(("C-c s C-s" . counsel-rg)
                 ("C-c f g" . counsel-git)
@@ -2063,7 +2063,7 @@
 ;;; Company Prescient
 (require-package 'company-prescient)
 ;; Initialize mode
-(add-hook 'after-init-hook #'company-prescient-mode)
+(company-prescient-mode)
 
 ;;; Minions
 (require-package 'minions)
@@ -2241,7 +2241,7 @@
 ;;; Undo Tree
 (require-package 'undo-tree)
 ;; Initialize mode
-(add-hook 'after-init-hook #'global-undo-tree-mode)
+(global-undo-tree-mode)
 ;; Configuration
 (after-load 'undo-tree
   ;; Enable undo history saving
@@ -2254,12 +2254,12 @@
 ;;; Volatile Highlights
 (require-package 'volatile-highlights)
 ;; Initialize mode
-(add-hook 'after-init-hook #'volatile-highlights-mode)
+(volatile-highlights-mode)
 
 ;;; YASnippet
 (require-package 'yasnippet)
 ;; Initialize mode
-(add-hook 'after-init-hook #'yas-global-mode)
+(yas-global-mode)
 
 ;;; Artist mode
 (global-set-key (kbd "C-c t a") #'artist-mode)
