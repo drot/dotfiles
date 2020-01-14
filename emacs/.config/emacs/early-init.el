@@ -29,14 +29,26 @@
 
 ;;; Delay garbage collection during startup
 (defun drot/reset-gc-cons-threshold ()
-  "Reset garbage collection threshold."
+  "Resets the garbage collection threshold to its default value."
   (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))))
 
-;; Use the highest number possible
+;; Increase threshold to maximum possible value
 (setq gc-cons-threshold most-positive-fixnum)
-
-;; Reset garbage collection threshold value to default after startup
+;; Reset threshold after initialization
 (add-hook 'after-init-hook #'drot/reset-gc-cons-threshold)
+
+;;; Temporarily disable the file name handler
+(setq default-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+(defun drot/reset-file-name-handler-alist ()
+  "Resets the file name handler to its default value."
+  (setq file-name-handler-alist
+	    (append default-file-name-handler-alist
+		        file-name-handler-alist))
+  (cl-delete-duplicates file-name-handler-alist :test 'equal))
+
+(add-hook 'after-init-hook #'drot/reset-file-name-handler-alist)
 
 ;;; Prefer newest version of a file
 (setq load-prefer-newer t)
