@@ -918,7 +918,7 @@
                  (nnimap-stream ssl)))
   ;; Configure news server
   (add-to-list 'gnus-secondary-select-methods
-               '(nntp "news.gmane.org"))
+               '(nntp "news.gmane.io"))
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
@@ -2249,7 +2249,9 @@
   (setq undo-tree-auto-save-history t)
   ;; More detailed visualizers
   (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t))
+  (setq undo-tree-visualizer-relative-timestamps t)
+  ;; Exclude some modes
+  (add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode))
 
 ;;; Volatile Highlights
 (require-package 'volatile-highlights)
