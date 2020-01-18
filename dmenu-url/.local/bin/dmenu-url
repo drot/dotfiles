@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Font
-font="CascadiaMono-12"
+font="IosevkaTermSS05-12"
 
 # Colors
 normal_background="#282a2e"

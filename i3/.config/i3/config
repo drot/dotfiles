@@ -10,7 +10,7 @@ client.unfocused #373b41 #282a2e #969896 #969896
 client.urgent #373b41 #cc6666 #ffffff #cc6666
 
 # font for window titles and the status bar
-font pango:Cascadia Mono, FontAwesome 12
+font pango:Iosevka Term SS05, FontAwesome 12
 
 # default modifier key
 set $mod Mod4

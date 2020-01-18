@@ -2247,7 +2247,7 @@
   ;; Enable undo history saving
   (setq undo-tree-history-directory-alist `(("." . ,(locate-user-emacs-file "undo/"))))
   (setq undo-tree-auto-save-history t)
-  ;; More detailed visualizers
+  ;; More detailed visualizer
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-relative-timestamps t)
   ;; Exclude some modes
