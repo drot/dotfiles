@@ -1399,6 +1399,9 @@
   ;; Enable compatibility with the Pass password manager
   (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
 
+;;; Dockerfile mode
+(require-package 'dockerfile-mode)
+
 ;;; Eglot
 (require-package 'eglot)
 ;; Set global key binding
