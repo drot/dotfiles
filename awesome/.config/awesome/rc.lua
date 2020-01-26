@@ -267,6 +267,18 @@ local cpu_widget = wibox.widget {
 -- Cache temperature value widgets
 vicious.cache(vicious.widgets.thermal)
 
+-- Temperature path test
+local hwmon_path = "/sys/devices/platform/coretemp.0/hwmon/"
+
+temperature_path = function ()
+   if gears.filesystem.is_dir(hwmon_path .. "hwmon0") then
+      path = "coretemp.0/hwmon/hwmon0"
+   else
+      path = "coretemp.0/hwmon/hwmon1"
+   end
+   return path
+end
+
 -- Create a temperature icon widget
 local temperature_icon = wibox.widget {
    {
@@ -282,7 +294,8 @@ local temperature_icon = wibox.widget {
 
 -- Set temperature text value
 local temperature_text_value = wibox.widget.textbox()
-vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { "coretemp.0/hwmon/hwmon0", "core" })
+
+vicious.register(temperature_text_value, vicious.widgets.thermal, "$1°C", 20, { temperature_path(), "core" })
 
 -- Create temperature text widget
 local temperature_text_widget = wibox.widget {
@@ -301,7 +314,7 @@ local temperature_bar = wibox.widget {
 }
 
 -- Set temperature bar value
-vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { "coretemp.0/hwmon/hwmon0", "core" })
+vicious.register(temperature_bar, vicious.widgets.thermal, "$1", 20, { temperature_path(), "core" })
 
 -- Create the temperature widget
 local temperature_widget = wibox.widget {
