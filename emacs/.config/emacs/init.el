@@ -1790,6 +1790,12 @@
   (when (executable-find "lp")
     (setq pdf-misc-print-programm "/usr/bin/lp")))
 
+;; Display PDF files to the right always
+(add-to-list 'display-buffer-alist
+             '(("\\.pdf\\(<[^>]+>\\)?$"
+                (display-buffer-in-direction)
+                (direction . rightmost))))
+
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
 ;; Initialize mode
