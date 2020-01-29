@@ -239,6 +239,10 @@
                 cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
+;; Configuration
+(after-load 'hl-line
+  ;; Don't display line highlight in inactive windows
+  (setq hl-line-sticky-flag nil))
 
 ;;; Highlight matching parentheses
 (setq show-paren-delay 0
@@ -264,6 +268,12 @@
 
 ;;; Electric pair mode
 (electric-pair-mode)
+;; Configuration
+(after-load 'electric
+  ;; Use more conservative pairing
+  (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+  ;; Watch out for context
+  (setq electric-quote-context-sensitive t))
 
 ;;; Prettify-Symbols mode
 (setq prettify-symbols-unprettify-at-point t)
@@ -1916,7 +1926,8 @@
   (setq company-tooltip-align-annotations t
         company-tooltip-flip-when-above t)
   ;; Dabbrev completion behavior
-  (setq company-dabbrev-downcase nil
+  (setq company-dabbrev-code-everywhere t
+        company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
 ;;; Diff-Hl
