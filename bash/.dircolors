@@ -147,6 +147,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pptsm 38;5;166;4
 # spreadsheet
 .csv 38;5;78
+.tsv 38;5;78
 # Open document spreadsheet
 .ods 38;5;112
 .xla 38;5;76
@@ -231,6 +232,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cl 38;5;81
 .el 38;5;81
 .lisp 38;5;81
+.rkt 38;5;81
 .scm 38;5;81
 # lua
 .lua 38;5;81
@@ -476,11 +478,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tgz 38;5;40
 .xz 38;5;40
 .z 38;5;40
-.Z 38;5;40
 .zip 38;5;40
 .zipx 38;5;40
 .zoo 38;5;40
 .zpaq 38;5;40
+.zst 38;5;40
 .zz 38;5;40
 
 ## packaged applications
@@ -543,8 +545,12 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .o 38;5;241
 # core dumps
 *core 38;5;241
+# Mini DuMP crash report
+.mdump 38;5;241
 # static Rust library
 .rlib 38;5;241
+# dynamic linked library
+.dll 38;5;241
 # temporary files
 .swp 38;5;244
 .swo 38;5;244
@@ -607,6 +613,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .theme 38;5;116
 .torrent 38;5;116
 .urlview 38;5;116
+.lnk 38;5;39
 
 ## encrypted data
 .asc 38;5;192;3
