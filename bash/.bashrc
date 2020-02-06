@@ -60,7 +60,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_DIRTRIM="2"
 
 # Git prompt format
-GIT="\$(declare -f __git_ps1 &>/dev/null && __git_ps1 ' %s')"
+GIT="\$(declare -F __git_ps1 &>/dev/null && __git_ps1 ' %s')"
 GIT_PS1_SHOWDIRTYSTATE="yes"
 
 # Prompt window title
