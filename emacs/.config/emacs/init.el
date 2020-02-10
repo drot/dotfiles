@@ -2028,7 +2028,7 @@
                 ("C-c s i" . counsel-imenu)
                 ("C-c h c" . counsel-command-history)
                 ("C-c h l" . counsel-find-library)
-                ("C-c i u" . counsel-unicode-char)
+                ("C-x 8 k" . counsel-unicode-char)
                 ("C-c f j" . counsel-file-jump)
                 ("C-c o j" . counsel-outline)
                 ("C-c v s" . counsel-set-variable)))
