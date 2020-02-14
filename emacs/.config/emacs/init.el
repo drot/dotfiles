@@ -937,31 +937,43 @@
   (setq gnus-auto-select-first nil)
   ;; Group by topics
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
+  ;; Ignore certain newsgroups
+  (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
   ;; Configure visible headers
   (setq gnus-visible-headers
         "^From:\\|^Reply-To\\|^Organization:\\|^To:\\|^Cc:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Gnus")
-  ;; Display gravatars
-  (setq gnus-treat-from-gravatar 'head)
-  ;; Use notifications
-  (add-hook 'gnus-after-getting-new-news-hook #'gnus-notifications)
   ;; Show the article headers in this order
   (setq gnus-sorted-header-list
         '("^From:" "^Reply-To" "^Organization:" "^To:" "^Cc:" "^Newsgroups:"
           "^Subject:" "^Date:" "^Gnus"))
+  ;; Specify article age format
+  (setq gnus-user-date-format-alist
+        '(((gnus-seconds-today) . "Today at %R")
+          ((+ 86400 (gnus-seconds-today)) . "Yesterday, %R")
+          (t . "%Y-%m-%d %R")))
+  ;; Display gravatars
+  (setq gnus-treat-from-gravatar 'head)
+  ;; Use notifications
+  (add-hook 'gnus-after-getting-new-news-hook #'gnus-notifications)
   ;; Set return email address based on incoming email address
   (setq gnus-posting-styles
         '(((header "to" "address@outlook.com")
            (address "address@outlook.com"))
           ((header "to" "address@gmail.com")
            (address "address@gmail.com"))))
-  ;; Display of the summary buffer
-  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-23,23f  %B (%c) %s%)\n"
-        gnus-user-date-format-alist '((t . "%d-%m-%Y %H:%M"))
-        gnus-group-line-format "%M%S%p%P%5y:%B %G\n"
-        gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references
-        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-        gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]")
-  ;; Display of message threading
+  ;; Group format
+  (setq gnus-group-line-format "%M%S%p%P%5y:%B %G\n")
+  ;; Summary buffer format
+  (setq gnus-summary-line-format "%U%R%z %-16,16&user-date;  %4L:%-30,30f  %B%S\n")
+  ;; Summary buffer sorting
+  (setq gnus-summary-thread-gathering-function #'gnus-gather-threads-by-subject
+        ;; Sort threads
+        gnus-thread-sort-functions
+        '((not gnus-thread-sort-by-number)
+          (not gnus-thread-sort-by-date))
+        ;; Sort subthreads
+        gnus-subthread-sort-functions #'gnus-thread-sort-by-date)
+  ;; Message threading format
   (setq gnus-sum-thread-tree-indent " "
         gnus-sum-thread-tree-root "■ "
         gnus-sum-thread-tree-false-root "□ "
