@@ -92,14 +92,55 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; Set default completion styles to use
+(setq completion-styles '(partial-completion substring initials flex))
+
+;;; Set completion overrides for specific categories
+(setq completion-category-overrides
+      '((file (styles initials basic))
+        (buffer (styles initials basic))
+        (info-menu (styles basic))))
+
+;;; Don't reject spaces when using flex completion
+(setq completion-flex-nospace nil)
+
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
+
+;;; Display completions vertically
+(setq completions-format 'vertical)
 
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode)
+
+;;; Modify prompt to remove default indication if needed
+(minibuffer-electric-default-mode)
+
+;;; Dim ignored filenames in the minibuffer
+(file-name-shadow-mode)
+
+;;; Enable FIDO mode for IDO-like Icomplete
+(fido-mode)
+;; Configuration
+(after-load 'icomplete
+  ;; Always use single line display
+  (setq icomplete-prospects-height 1)
+  ;; Complete in other places as well
+  (setq icomplete-in-buffer t))
+
+;; Add `recentf-mode' support
+(defun drot/icomplete-recentf ()
+  "Open `recent-list' item in a new buffer.
+The user's $HOME directory is abbreviated as a tilde."
+    (interactive)
+    (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+      (find-file
+       (completing-read "Open Recentf entry: " files nil t))))
+
+(global-set-key (kbd "C-c f r") #'drot/icomplete-recentf)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -440,7 +481,6 @@
                        (derived-mode . Info-mode)))
            ("Image" (mode . image-mode))
            ("Log" (or (derived-mode . TeX-output-mode)
-                      (derived-mode . ivy-occur-mode)
                       (derived-mode . geiser-messages-mode)
                       (mode . tags-table-mode)
                       (name . "*nrepl-server")
@@ -814,9 +854,7 @@
         eshell-cmpl-ignore-case t)
   ;; Custom hook to avoid conflicts
   (defun drot/eshell-mode-setup ()
-    "Integrate with Counsel and disable Company in Eshell buffers."
-    (define-key eshell-mode-map
-      [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
+    "Personal setup hook to run in Eshell buffers."
     ;; Disable Company since we use `completion-at-point'
     (company-mode 0))
   ;; Apply the custom hook
@@ -826,9 +864,7 @@
 (after-load 'eshell
   ;; Initialize mode
   (require 'em-smart)
-  (add-hook 'eshell-mode-hook #'eshell-smart-initialize)
-  ;; Jump to end when `counsel-esh-history' is used
-  (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
+  (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
 ;;; Shell mode
 (after-load 'shell
@@ -847,34 +883,22 @@
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
-;;; Hydra
-(require-package 'hydra)
-;; Configuration
-(after-load 'hydra
-  ;; Enable syntax coloring for Hydra definitions
-  (hydra-add-font-lock))
-
-;;; lv - other echo area
-(require-package 'lv)
-;; Configuration
-(after-load 'lv
-  ;; Center commands
-  (setq lv-use-padding t))
+;;; Transient
+(require-package 'transient)
+;; Initialize mode
+(require 'transient)
 
 ;;; Flymake
 (global-set-key (kbd "C-c ! t") #'flymake-mode)
 ;; Configuration
 (after-load 'flymake
-  ;; Define Hydra
-  (defhydra hydra-flymake
-    (:pre (flyspell-mode 0) :post (flyspell-mode))
-    ;; Go to errors
-    ("n" flymake-goto-next-error "Next" :column "Errors")
-    ("p" flymake-goto-prev-error "Previous")
-    ;; List errors
-    ("d" flymake-show-diagnostics-buffer "Show" :column "List Errors" :exit t)
-    ;; Quit
-    ("q" nil "Quit"))
+  ;; Define Transient command
+  (define-transient-command drot/flymake-transient ()
+    :transient-suffix 'transient--do-stay
+    :transient-non-suffix 'transient--do-warn
+    ["Errors"
+     ("n" "Next Error" flymake-goto-next-error)
+     ("p" "Previous Error" flymake-goto-prev-error)])
   ;; Set local key bindings
   (dolist (bind '(("C-c ! n" . flymake-goto-next-error)
                   ("C-c ! p" . flymake-goto-prev-error)
@@ -882,7 +906,7 @@
                   ("C-c ! r" . flymake-running-backends)
                   ("C-c ! d" . flymake-show-diagnostics-buffer)
                   ("C-c ! l" . flymake-switch-to-log-buffer)
-                  ("C-c ! h" . hydra-flymake/body)))
+                  ("C-c ! h" . drot/flymake-transient)))
     (define-key flymake-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Comint mode
@@ -1014,31 +1038,31 @@
 (setq outline-minor-mode-prefix (kbd "C-c C-o"))
 ;; Configuration
 (after-load 'outline
-  ;; Define Hydra
-  (defhydra hydra-outline ()
-    ;; Hide
-    ("q" hide-sublevels "Sublevels" :column "Hide") ; Hide everything but the top-level headings
-    ("t" hide-body "Body") ; Hide everything but headings (all body lines)
-    ("o" hide-other "Other") ; Hide other branches
-    ("c" hide-entry "Entry") ; Hide this entry's body
-    ("l" hide-leaves "Leaves") ; Hide body lines in this entry and sub-entries
-    ("d" hide-subtree "Subtree") ; Hide everything in this entry and sub-entries
-    ;; Show
-    ("a" show-all "All" :column "Show") ; Show (expand) everything
-    ("e" show-entry "Entry") ; Show this heading's body
-    ("i" show-children "Children") ; Show this heading's immediate child sub-headings
-    ("k" show-branches "Branches") ; Show all sub-headings under this heading
-    ("s" show-subtree "Subtree") ; Show (expand) everything in this heading & below
-    ;; Move
-    ("u" outline-up-heading "Up" :column "Move") ; Up
-    ("n" outline-next-visible-heading "Next Visible") ; Next
-    ("p" outline-previous-visible-heading "Previous Visible") ; Previous
-    ("f" outline-forward-same-level "Forward Same Level") ; Forward - same level
-    ("b" outline-backward-same-level "Backward Same Level") ; Backward - same level
-    ;; Quit
-    ("z" nil "Quit"))
+  ;; Define Transient command
+  (define-transient-command drot/outline-transient ()
+    :transient-suffix 'transient--do-stay
+    :transient-non-suffix 'transient--do-warn
+    ["Hide"
+     ("q" "Sublevels" hide-sublevels)
+     ("t" "Body" hide-body)
+     ("o" "Other" hide-other)
+     ("c" "Entry" hide-entry)
+     ("l" "Leaves" hide-leaves)
+     ("d" "Subtree" hide-subtree)]
+    ["Show"
+     ("a" "All" show-all)
+     ("e" "Entry" show-entry)
+     ("i" "Children" show-children)
+     ("k" "Branches" show-branches)
+     ("s" "Subtree" show-subtree)]
+    ["Move"
+     ("u" "Up" outline-up-heading)
+     ("n" "Next Visible" outline-next-visible-heading)
+     ("p" "Previous Visible" outline-previous-visible-heading)
+     ("f" "Forward Same Level" outline-forward-same-level)
+     ("b" "Backward Same Level" outline-backward-same-level)])
   ;; Set local key binding
-  (define-key outline-minor-mode-map (kbd "C-c o h") #'hydra-outline/body))
+  (define-key outline-minor-mode-map (kbd "C-c o h") #'drot/outline-transient))
 
 ;;; Org-mode
 (dolist (bind '(("C-c o a" . org-agenda)
@@ -1567,6 +1591,11 @@
 
 ;;; Expand region
 (require-package 'expand-region)
+;; Autoload missing functions
+(autoload #'er/mark-defun "er-basic-expansions"
+  "Mark defun around or in front of point." t)
+(autoload #'er/mark-text-paragraph "text-mode-expansions"
+  "Marks one paragraph." t)
 ;; Set global key binding
 (global-set-key (kbd "C-=") #'er/expand-region)
 
@@ -1685,13 +1714,15 @@
 
 ;;; Move-text
 (require-package 'move-text)
-;; Define Hydra
-(defhydra hydra-move-text ()
-  ("p" move-text-up "Move Up" :column "Move Text")
-  ("n" move-text-down "Move Down")
-  ("q" nil "Quit"))
+;; Define Transient command
+(define-transient-command drot/move-text-transient ()
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Move Text"
+   ("p" "Move Up" move-text-up)
+   ("n" "Move Down" move-text-down)])
 ;; Set global key binding
-(global-set-key (kbd "C-c x m") #'hydra-move-text/body)
+(global-set-key (kbd "C-c x m") #'drot/move-text-transient)
 
 ;;; Multiple cursors
 (require-package 'multiple-cursors)
@@ -1739,11 +1770,7 @@
   ;; Commands to run only once
   (setq mc/cmds-to-run-once
         '(down-list
-          hydra-multiple-cursors/mc/edit-beginnings-of-lines
-          hydra-multiple-cursors/mc/edit-ends-of-lines-and-exit
-          hydra-multiple-cursors/mc/edit-lines-and-exit
-          mouse-drag-mode-line
-          swiper-mc)))
+          mouse-drag-mode-line)))
 ;; Set global key bindings
 (dolist (bind '(("C-c m <SPC>" . mc/vertical-align-with-space)
                 ("C-c m a" . mc/vertical-align)
@@ -1756,34 +1783,35 @@
                 ("C-c m C-e" . mc/edit-ends-of-lines)
                 ("C-c m C-s" . mc/mark-all-in-region)))
   (global-set-key (kbd (car bind)) (cdr bind)))
-;; Define Hydra
-(defhydra hydra-multiple-cursors ()
-  ;; Lines
-  ("l" mc/edit-lines "Edit Lines" :column "Lines" :exit t)
-  ("b" mc/edit-beginnings-of-lines "Beginnings of Lines" :exit t)
-  ("e" mc/edit-ends-of-lines "Ends of Lines" :exit t)
-  ;; Mark Like This
-  ("a" mc/mark-all-dwim "All DWIM" :column "Mark Like This" :exit t)
-  ("s" mc/mark-all-symbols-like-this "All Symbols" :exit t)
-  ("w" mc/mark-all-words-like-this "All Words" :exit t)
-  ("r" mc/mark-all-in-region "All Region" :exit t)
-  ;; Up
-  ("n" mc/mark-next-like-this "Next" :column "Up")
-  ("N" mc/skip-to-next-like-this "Skip")
-  ("M-n" mc/unmark-next-like-this "Unmark")
-  ;; Down
-  ("p" mc/mark-previous-like-this "Previous" :column "Down")
-  ("P" mc/skip-to-previous-like-this "Skip")
-  ("M-p" mc/unmark-previous-like-this "Unmark")
-  ;; Other
-  ("i" mc/insert-numbers "Insert Numbers" :column "Other" :exit t)
-  ("R" mc/mark-all-in-region-regexp "Mark All Region Regexp" :exit t)
-  ("f" mc/mark-all-like-this-in-defun "Mark All Region Defun" :exit t)
-  ("S" mc/mark-all-symbols-like-this-in-defun "Mark All Symbols Defun" :exit t)
-  ("W" mc/mark-all-words-like-this-in-defun "Mark All Words Defun" :exit t)
-  ("q" nil "Quit"))
+;; Define Transient command
+(define-transient-command drot/multiple-cursors-transient ()
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Lines"
+   ("l" "Edit Lines" mc/edit-lines)
+   ("b" "Beginnings of Lines" mc/edit-beginnings-of-lines)
+   ("e" "Ends of Lines" mc/edit-ends-of-lines)]
+  ["Mark Like This"
+   ("a" "All DWIM" mc/mark-all-dwim)
+   ("s" "All Symbols" mc/mark-all-symbols-like-this)
+   ("w" "All Words" mc/mark-all-words-like-this)
+   ("r" "All Region" mc/mark-all-in-region)]
+  ["Up"
+   ("n" "Next" mc/mark-next-like-this)
+   ("N" "Skip" mc/skip-to-next-like-this)
+   ("M-n" "Unmark" mc/unmark-next-like-this)]
+  ["Down"
+   ("p" "Previous" mc/mark-previous-like-this)
+   ("P" "Skip" mc/skip-to-previous-like-this)
+   ("M-p" "Unmark" mc/unmark-previous-like-this)]
+  ["Other"
+   ("i" "Insert Numbers" mc/insert-numbers)
+   ("R" "Mark All Region Regexp" mc/mark-all-in-region-regexp)
+   ("f" "Mark All Region Defun" mc/mark-all-like-this-in-defun)
+   ("S" "Mark All Symbols Defun" mc/mark-all-symbols-like-this-in-defun)
+   ("W" "Mark All Words Defun" mc/mark-all-words-like-this-in-defun)])
 ;; Set global key binding
-(global-set-key (kbd "C-c m h") #'hydra-multiple-cursors/body)
+(global-set-key (kbd "C-c m h") #'drot/multiple-cursors-transient)
 
 ;;; PDF Tools
 (require-package 'pdf-tools)
@@ -1883,18 +1911,20 @@
 (require-package 'avy)
 ;; Initialize mode
 (avy-setup-default)
-;; Define Hydra
-(defhydra hydra-avy-cycle ()
-  ("n" avy-next "Next" :column "Cycle avy Candidates")
-  ("p" avy-prev "Previous")
-  ("q" nil "Quit"))
+;; Define Transient command
+(define-transient-command drot/avy-transient ()
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Cycle avy Candidates"
+   ("n" "Next" avy-next)
+   ("p" "Previous" avy-prev)])
 ;; Set global key bindings
 (dolist (bind '(("C-:" . avy-goto-char)
                 ("C-'" . avy-goto-char-timer)
                 ("M-g f" . avy-goto-line)
                 ("M-g w" . avy-goto-word-1)
                 ("M-g e" . avy-goto-word-0)
-                ("C-M-'" . hydra-avy-cycle/body)))
+                ("C-M-'" . drot/avy-transient)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'avy
@@ -1935,6 +1965,15 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
+;;; Company Statistics
+(require-package 'company-statistics)
+;; Initialize mode
+(add-hook 'global-company-mode-hook #'company-statistics-mode)
+;; Configuration
+(after-load 'company-statistics
+  ;; Change save file location
+  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
+
 ;;; Diff-Hl
 (require-package 'diff-hl)
 ;; Initialize mode
@@ -1972,123 +2011,18 @@
 (global-hl-todo-mode)
 ;; Configuration
 (after-load 'hl-todo
-  ;; Define Hydra
-  (defhydra hydra-hl-todo ()
-    ("n" hl-todo-next "Next TODO" :column "Highlight TODO")
-    ("p" hl-todo-previous "Previous TODO")
-    ("q" nil "Quit"))
+  ;; Define Transient command
+  (define-transient-command drot/hl-todo-transient ()
+    :transient-suffix 'transient--do-stay
+    :transient-non-suffix 'transient--do-warn
+    ["Highlight TODO"
+     ("n" "Next" hl-todo-next)
+     ("p" "Previous" hl-todo-previous)])
   ;; Set local key bindings
   (dolist (bind '(("M-s t" . hl-todo-occur)
-                  ("C-c p t" . hydra-hl-todo/body)
+                  ("C-c p t" . drot/hl-todo-transient)
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
-
-;;; Amx
-(require-package 'amx)
-;; Initialize mode
-(amx-mode)
-;; Set global key bindings
-(global-set-key (kbd "M-X") #'amx-major-mode-commands)
-(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
-;; Configuration
-(after-load 'amx
-  ;; Change save file location
-  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
-;;; Ivy
-(require-package 'ivy)
-;; Ivy Hydra support
-(require-package 'ivy-hydra)
-;; Initialize mode
-(ivy-mode)
-;; Set global key binding
-(global-set-key (kbd "<C-f4>") #'ivy-resume)
-;; Configuration
-(after-load 'ivy
-  ;; Optimize completion
-  (setq ivy-dynamic-exhibit-delay-ms 150)
-  ;; Prompt format
-  (setq ivy-use-selectable-prompt t
-        ivy-count-format "(%d/%d) ")
-  ;; Use arrow display
-  (setq ivy-format-functions-alist '((t . ivy-format-function-arrow)))
-  ;; Virtual buffer usage
-  (setq ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate)
-  ;; Wrap by default
-  (setq ivy-wrap t
-        ivy-action-wrap t))
-
-;;; Counsel
-(require-package 'counsel)
-;; Initialize mode
-(counsel-mode)
-;; Set global key bindings
-(dolist (bind '(("C-c s C-s" . counsel-rg)
-                ("C-c f g" . counsel-git)
-                ("C-c f d" . counsel-dired-jump)
-                ("C-c f r" . counsel-buffer-or-recentf)
-                ("C-c s v" . counsel-git-grep)
-                ("C-c s g" . counsel-grep)
-                ("C-c s i" . counsel-imenu)
-                ("C-c h c" . counsel-command-history)
-                ("C-c h l" . counsel-find-library)
-                ("C-x 8 k" . counsel-unicode-char)
-                ("C-c f j" . counsel-file-jump)
-                ("C-c o j" . counsel-outline)
-                ("C-c v s" . counsel-set-variable)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
-;; Remap the rest
-(global-set-key [remap org-goto] #'counsel-org-goto)
-(global-set-key [remap org-set-tags-command] #'counsel-org-tag)
-(global-set-key [remap menu-bar-open] #'counsel-tmm)
-;; Configuration
-(after-load 'counsel
-  ;; Preselect files
-  (setq counsel-preselect-current-file t)
-  ;; Change `counsel-org' defaults
-  (setq counsel-org-goto-face-style 'verbatim
-        counsel-org-headline-display-tags t
-        counsel-org-headline-display-todo t))
-
-;;; Swiper
-(require-package 'swiper)
-;; Set global key bindings
-(global-set-key (kbd "C-c s s") #'swiper-all)
-(global-set-key (kbd "M-s s") #'swiper)
-;; Set local key binding
-(define-key isearch-mode-map (kbd "M-s s") #'swiper-from-isearch)
-;; Configuration
-(after-load 'swiper
-  ;; Include line numbers
-  (setq swiper-include-line-number-in-search t)
-  ;; Always go to the beginning of a match
-  (setq swiper-goto-start-of-match t))
-
-;;; Prescient
-(require-package 'prescient)
-;; Configuration
-(after-load 'prescient
-  ;; Change save file location
-  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
-  ;; Aggressively save history
-  (setq prescient-aggressive-file-save t)
-  ;; Use fuzzy matching by default
-  (setq prescient-filter-method 'fuzzy)
-  ;; Enable persistent history
-  (prescient-persist-mode))
-
-;;; Ivy Prescient
-(require-package 'ivy-prescient)
-;; Configuration
-(after-load 'counsel
-  ;; Initialize mode
-  (ivy-prescient-mode))
-
-;;; Company Prescient
-(require-package 'company-prescient)
-;; Initialize mode
-(company-prescient-mode)
 
 ;;; Minions
 (require-package 'minions)
@@ -2345,36 +2279,36 @@
 ;;; Table insertion
 (global-set-key (kbd "C-c i t") #'table-insert)
 
-;;; Hydra for various text marking operations
-(defhydra hydra-mark-text (:exit t)
-  ;; Lisp
-  ("e" mark-sexp "S-Expression" :column "Lisp")
-  ("f" er/mark-defun "Function")
-  ("s" er/mark-symbol "Symbol")
-  ("S" er/mark-symbol-with-prefix "Prefixed Symbol")
-  ;; Text
-  ("w" er/mark-word "Word" :column "Text")
-  ("p" er/mark-text-paragraph "Paragraph")
-  ("c" er/mark-comment "Comment")
-  ("u" er/mark-url "URL")
-  ("E" er/mark-email "Email")
-  ;; Quotes
-  ("q" er/mark-inside-quotes "Inside Quotes" :column "Quotes")
-  ("Q" er/mark-outside-quotes "Outside Quotes")
-  ;; Pairs
-  ("(" er/mark-inside-pairs "Inside Pairs" :column "Pairs")
-  ("[" er/mark-inside-pairs "Inside Pairs")
-  ("{" er/mark-inside-pairs "Inside Pairs")
-  (")" er/mark-outside-pairs "Inside Pairs")
-  ("]" er/mark-outside-pairs "Inside Pairs")
-  ("}" er/mark-outside-pairs "Inside Pairs")
-  ;; Region
-  ("." er/expand-region "Expand Region" :column "Region" :exit nil)
-  ("," er/contract-region "Contract Region" :exit nil)
-  ;; Quit
-  ("q" nil "Quit"))
+;;; Define Transient for text marking operations
+(define-transient-command drot/mark-text-transient ()
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Lisp"
+   ("e" "S-Expression" mark-sexp)
+   ("f" "Function" er/mark-defun)
+   ("s" "Symbol" er/mark-symbol)
+   ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
+  ["Text"
+   ("w" "Word" er/mark-word)
+   ("p" "Paragraph" er/mark-text-paragraph)
+   ("c" "Comment" er/mark-comment)
+   ("u" "URL" er/mark-url)
+   ("E" "Email" er/mark-email)]
+  ["Quotes"
+   ("q" "Inside Quotes" er/mark-inside-quotes)
+   ("Q" "Outside Quotes" er/mark-outside-quotes)]
+  ["Pairs"
+   ("(" "Inside Pairs" er/mark-inside-pairs)
+   ("[" "Inside Pairs" er/mark-inside-pairs)
+   ("{" "Inside Pairs" er/mark-inside-pairs)
+   (")" "Inside Pairs" er/mark-outside-pairs)
+   ("]" "Inside Pairs" er/mark-outside-pairs)
+   ("}" "Inside Pairs" er/mark-outside-pairs)]
+  ["Region"
+   ("." "Expand Region" er/expand-region)
+   ("," "Contract Region" er/contract-region)])
 ;; Set global key binding
-(global-set-key (kbd "C-c x C-SPC") #'hydra-mark-text/body)
+(global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 
 ;;; Matching lines operation
 (global-set-key (kbd "C-c s l") #'delete-matching-lines)
