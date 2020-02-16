@@ -1043,18 +1043,18 @@ The user's $HOME directory is abbreviated as a tilde."
     :transient-suffix 'transient--do-stay
     :transient-non-suffix 'transient--do-warn
     ["Hide"
-     ("q" "Sublevels" hide-sublevels)
-     ("t" "Body" hide-body)
-     ("o" "Other" hide-other)
-     ("c" "Entry" hide-entry)
-     ("l" "Leaves" hide-leaves)
-     ("d" "Subtree" hide-subtree)]
+     ("q" "Sublevels" outline-hide-sublevels)
+     ("t" "Body" outline-hide-body)
+     ("o" "Other" outline-hide-other)
+     ("c" "Entry" outline-hide-entry)
+     ("l" "Leaves" outline-hide-leaves)
+     ("d" "Subtree" outline-hide-subtree)]
     ["Show"
-     ("a" "All" show-all)
-     ("e" "Entry" show-entry)
-     ("i" "Children" show-children)
-     ("k" "Branches" show-branches)
-     ("s" "Subtree" show-subtree)]
+     ("a" "All" outline-show-all)
+     ("e" "Entry" outline-show-entry)
+     ("i" "Children" outline-show-children)
+     ("k" "Branches" outline-show-branches)
+     ("s" "Subtree" outline-show-subtree)]
     ["Move"
      ("u" "Up" outline-up-heading)
      ("n" "Next Visible" outline-next-visible-heading)
