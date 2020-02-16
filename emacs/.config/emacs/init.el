@@ -883,11 +883,6 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
-;;; Transient
-(require-package 'transient)
-;; Initialize mode
-(require 'transient)
-
 ;;; Flymake
 (global-set-key (kbd "C-c ! t") #'flymake-mode)
 ;; Configuration
@@ -1679,6 +1674,11 @@ The user's $HOME directory is abbreviated as a tilde."
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+
+;;; Transient
+(require-package 'transient)
+;; Initialize mode
+(require 'transient)
 
 ;;; Markdown mode
 (require-package 'markdown-mode)
