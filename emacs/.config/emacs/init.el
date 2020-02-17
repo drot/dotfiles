@@ -891,6 +891,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (after-load 'flymake
   ;; Define Transient command
   (define-transient-command drot/flymake-transient ()
+    "Transient for Flymake commands."
     :transient-suffix 'transient--do-stay
     :transient-non-suffix 'transient--do-warn
     ["Errors"
@@ -1037,6 +1038,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (after-load 'outline
   ;; Define Transient command
   (define-transient-command drot/outline-transient ()
+    "Transient for Outline commands."
     :transient-suffix 'transient--do-stay
     :transient-non-suffix 'transient--do-warn
     ["Display"
@@ -1719,6 +1721,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'move-text)
 ;; Define Transient command
 (define-transient-command drot/move-text-transient ()
+  "Transient for Move-text commands."
   :transient-suffix 'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Move Text"
@@ -1788,6 +1791,7 @@ The user's $HOME directory is abbreviated as a tilde."
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Define Transient command
 (define-transient-command drot/multiple-cursors-transient ()
+  "Transient for Multiple Cursors commands."
   :transient-suffix 'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Lines"
@@ -2285,6 +2289,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Define Transient for text marking operations
 (define-transient-command drot/mark-text-transient ()
+  "Transient for text marking commands."
   :transient-suffix 'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Lisp"
