@@ -135,10 +135,10 @@
 (defun drot/icomplete-recentf ()
   "Open `recent-list' item in a new buffer.
 The user's $HOME directory is abbreviated as a tilde."
-    (interactive)
-    (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-      (find-file
-       (completing-read "Open Recentf entry: " files nil t))))
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file
+     (completing-read "Open Recentf entry: " files nil t))))
 
 (global-set-key (kbd "C-c f r") #'drot/icomplete-recentf)
 
@@ -417,6 +417,8 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Display number of matches
 (setq isearch-lazy-count t
       lazy-count-prefix-format "(%s/%s) ")
+;; Allow search string extension with motion commands
+(setq isearch-yank-on-move 'shift)
 
 ;;; Ediff window split
 (after-load 'ediff-wind
@@ -1037,19 +1039,20 @@ The user's $HOME directory is abbreviated as a tilde."
   (define-transient-command drot/outline-transient ()
     :transient-suffix 'transient--do-stay
     :transient-non-suffix 'transient--do-warn
-    ["Hide"
-     ("q" "Sublevels" outline-hide-sublevels)
-     ("t" "Body" outline-hide-body)
-     ("o" "Other" outline-hide-other)
-     ("c" "Entry" outline-hide-entry)
-     ("l" "Leaves" outline-hide-leaves)
-     ("d" "Subtree" outline-hide-subtree)]
-    ["Show"
-     ("a" "All" outline-show-all)
-     ("e" "Entry" outline-show-entry)
-     ("i" "Children" outline-show-children)
-     ("k" "Branches" outline-show-branches)
-     ("s" "Subtree" outline-show-subtree)]
+    ["Display"
+     ["Hide"
+      ("q" "Sublevels" outline-hide-sublevels)
+      ("t" "Body" outline-hide-body)
+      ("o" "Other" outline-hide-other)
+      ("c" "Entry" outline-hide-entry)
+      ("l" "Leaves" outline-hide-leaves)
+      ("d" "Subtree" outline-hide-subtree)]
+     ["Show"
+      ("a" "All" outline-show-all)
+      ("e" "Entry" outline-show-entry)
+      ("i" "Children" outline-show-children)
+      ("k" "Branches" outline-show-branches)
+      ("s" "Subtree" outline-show-subtree)]]
     ["Move"
      ("u" "Up" outline-up-heading)
      ("n" "Next Visible" outline-next-visible-heading)
@@ -1796,14 +1799,15 @@ The user's $HOME directory is abbreviated as a tilde."
    ("s" "All Symbols" mc/mark-all-symbols-like-this)
    ("w" "All Words" mc/mark-all-words-like-this)
    ("r" "All Region" mc/mark-all-in-region)]
-  ["Up"
-   ("n" "Next" mc/mark-next-like-this)
-   ("N" "Skip" mc/skip-to-next-like-this)
-   ("M-n" "Unmark" mc/unmark-next-like-this)]
-  ["Down"
-   ("p" "Previous" mc/mark-previous-like-this)
-   ("P" "Skip" mc/skip-to-previous-like-this)
-   ("M-p" "Unmark" mc/unmark-previous-like-this)]
+  ["Motion"
+   ["Up"
+    ("n" "Next" mc/mark-next-like-this)
+    ("N" "Skip" mc/skip-to-next-like-this)
+    ("M-n" "Unmark" mc/unmark-next-like-this)]
+   ["Down"
+    ("p" "Previous" mc/mark-previous-like-this)
+    ("P" "Skip" mc/skip-to-previous-like-this)
+    ("M-p" "Unmark" mc/unmark-previous-like-this)]]
   ["Other"
    ("i" "Insert Numbers" mc/insert-numbers)
    ("R" "Mark All Region Regexp" mc/mark-all-in-region-regexp)
@@ -2288,25 +2292,27 @@ The user's $HOME directory is abbreviated as a tilde."
    ("f" "Function" er/mark-defun)
    ("s" "Symbol" er/mark-symbol)
    ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
-  ["Text"
-   ("w" "Word" er/mark-word)
-   ("p" "Paragraph" er/mark-text-paragraph)
-   ("c" "Comment" er/mark-comment)
-   ("u" "URL" er/mark-url)
-   ("E" "Email" er/mark-email)]
-  ["Quotes"
-   ("q" "Inside Quotes" er/mark-inside-quotes)
-   ("Q" "Outside Quotes" er/mark-outside-quotes)]
+  ["Objects"
+   ["Text"
+    ("w" "Word" er/mark-word)
+    ("p" "Paragraph" er/mark-text-paragraph)
+    ("c" "Comment" er/mark-comment)
+    ("u" "URL" er/mark-url)
+    ("E" "Email" er/mark-email)]
+   ["Region"
+    ("." "Expand Region" er/expand-region)
+    ("," "Contract Region" er/contract-region)]]
   ["Pairs"
-   ("(" "Inside Pairs" er/mark-inside-pairs)
-   ("[" "Inside Pairs" er/mark-inside-pairs)
-   ("{" "Inside Pairs" er/mark-inside-pairs)
-   (")" "Inside Pairs" er/mark-outside-pairs)
-   ("]" "Inside Pairs" er/mark-outside-pairs)
-   ("}" "Inside Pairs" er/mark-outside-pairs)]
-  ["Region"
-   ("." "Expand Region" er/expand-region)
-   ("," "Contract Region" er/contract-region)])
+   ["Quotes"
+    ("q" "Inside Quotes" er/mark-inside-quotes)
+    ("Q" "Outside Quotes" er/mark-outside-quotes)]
+   ["Parentheses"
+    ("(" "Opening Pair" er/mark-inside-pairs)
+    ("[" "Opening Pair" er/mark-inside-pairs)
+    ("{" "Opening Pair" er/mark-inside-pairs)
+    (")" "Closing Pair" er/mark-outside-pairs)
+    ("]" "Closing Pair" er/mark-outside-pairs)
+    ("}" "Closing Pair" er/mark-outside-pairs)]])
 ;; Set global key binding
 (global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 
