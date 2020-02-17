@@ -985,7 +985,7 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Group format
   (setq gnus-group-line-format "%M%S%p%P%5y:%B %G\n")
   ;; Summary buffer format
-  (setq gnus-summary-line-format "%U%R%z %-16,16&user-date;  [%4L] %-20,20f  %B%S\n")
+  (setq gnus-summary-line-format "%U%R%z %-16,16&user-date;  {%L}  %-20,20f  %B%S\n")
   ;; Summary buffer sorting
   (setq gnus-summary-thread-gathering-function #'gnus-gather-threads-by-subject
         ;; Sort threads
