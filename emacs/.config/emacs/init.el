@@ -1675,7 +1675,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Transient
 (require-package 'transient)
-;; Initialize mode
+;; Initialize library
 (require 'transient)
 
 ;;; Markdown mode
