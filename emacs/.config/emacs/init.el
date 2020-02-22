@@ -1083,16 +1083,6 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq org-directory "~/Documents/org"
         org-default-notes-file "~/Documents/org/notes.org"
         org-agenda-files '("~/Documents/org"))
-  ;; Default modules to load
-  (setq org-modules
-        '(org-bibtex
-          org-docview
-          org-eshell
-          org-eww
-          org-gnus
-          org-info
-          org-id
-          org-mhe))
   ;; Add replacements for task symbols
   (defun drot/org-prettify-task-symbols-setup ()
     "Prettify `org-mode' task list symbols."
