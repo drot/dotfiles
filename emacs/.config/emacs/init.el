@@ -1044,7 +1044,7 @@ The user's $HOME directory is abbreviated as a tilde."
     "Transient for Outline commands."
     :transient-suffix 'transient--do-stay
     :transient-non-suffix 'transient--do-warn
-    ["Display"
+    ["Outline Control"
      ["Hide"
       ("q" "Sublevels" outline-hide-sublevels)
       ("t" "Body" outline-hide-body)
@@ -1057,13 +1057,13 @@ The user's $HOME directory is abbreviated as a tilde."
       ("e" "Entry" outline-show-entry)
       ("i" "Children" outline-show-children)
       ("k" "Branches" outline-show-branches)
-      ("s" "Subtree" outline-show-subtree)]]
-    ["Move"
-     ("u" "Up" outline-up-heading)
-     ("n" "Next Visible" outline-next-visible-heading)
-     ("p" "Previous Visible" outline-previous-visible-heading)
-     ("f" "Forward Same Level" outline-forward-same-level)
-     ("b" "Backward Same Level" outline-backward-same-level)])
+      ("s" "Subtree" outline-show-subtree)]
+     ["Move"
+      ("u" "Up" outline-up-heading)
+      ("n" "Next Visible" outline-next-visible-heading)
+      ("p" "Previous Visible" outline-previous-visible-heading)
+      ("f" "Forward Same Level" outline-forward-same-level)
+      ("b" "Backward Same Level" outline-backward-same-level)]])
   ;; Set local key binding
   (define-key outline-minor-mode-map (kbd "C-c o h") #'drot/outline-transient))
 
@@ -1787,16 +1787,16 @@ The user's $HOME directory is abbreviated as a tilde."
   "Transient for Multiple Cursors commands."
   :transient-suffix 'transient--do-stay
   :transient-non-suffix 'transient--do-warn
-  ["Lines"
-   ("l" "Edit Lines" mc/edit-lines)
-   ("b" "Beginnings of Lines" mc/edit-beginnings-of-lines)
-   ("e" "Ends of Lines" mc/edit-ends-of-lines)]
-  ["Mark Like This"
-   ("a" "All DWIM" mc/mark-all-dwim)
-   ("s" "All Symbols" mc/mark-all-symbols-like-this)
-   ("w" "All Words" mc/mark-all-words-like-this)
-   ("r" "All Region" mc/mark-all-in-region)]
-  ["Motion"
+  ["Multiple Cursors"
+   ["Lines"
+    ("l" "Edit Lines" mc/edit-lines)
+    ("b" "Beginnings of Lines" mc/edit-beginnings-of-lines)
+    ("e" "Ends of Lines" mc/edit-ends-of-lines)]
+   ["Mark Like This"
+    ("a" "All DWIM" mc/mark-all-dwim)
+    ("s" "All Symbols" mc/mark-all-symbols-like-this)
+    ("w" "All Words" mc/mark-all-words-like-this)
+    ("r" "All Region" mc/mark-all-in-region)]
    ["Up"
     ("n" "Next" mc/mark-next-like-this)
     ("N" "Skip" mc/skip-to-next-like-this)
@@ -1804,13 +1804,13 @@ The user's $HOME directory is abbreviated as a tilde."
    ["Down"
     ("p" "Previous" mc/mark-previous-like-this)
     ("P" "Skip" mc/skip-to-previous-like-this)
-    ("M-p" "Unmark" mc/unmark-previous-like-this)]]
-  ["Other"
-   ("i" "Insert Numbers" mc/insert-numbers)
-   ("R" "Mark All Region Regexp" mc/mark-all-in-region-regexp)
-   ("f" "Mark All Region Defun" mc/mark-all-like-this-in-defun)
-   ("S" "Mark All Symbols Defun" mc/mark-all-symbols-like-this-in-defun)
-   ("W" "Mark All Words Defun" mc/mark-all-words-like-this-in-defun)])
+    ("M-p" "Unmark" mc/unmark-previous-like-this)]
+   ["Other"
+    ("i" "Insert Numbers" mc/insert-numbers)
+    ("R" "Mark All Region Regexp" mc/mark-all-in-region-regexp)
+    ("f" "Mark All Region Defun" mc/mark-all-like-this-in-defun)
+    ("S" "Mark All Symbols Defun" mc/mark-all-symbols-like-this-in-defun)
+    ("W" "Mark All Words Defun" mc/mark-all-words-like-this-in-defun)]])
 ;; Set global key binding
 (global-set-key (kbd "C-c m h") #'drot/multiple-cursors-transient)
 
@@ -2285,12 +2285,12 @@ The user's $HOME directory is abbreviated as a tilde."
   "Transient for text marking commands."
   :transient-suffix 'transient--do-stay
   :transient-non-suffix 'transient--do-warn
-  ["Lisp"
-   ("e" "S-Expression" mark-sexp)
-   ("f" "Function" er/mark-defun)
-   ("s" "Symbol" er/mark-symbol)
-   ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
-  ["Objects"
+  ["Expand Region"
+   ["Lisp"
+    ("e" "S-Expression" mark-sexp)
+    ("f" "Function" er/mark-defun)
+    ("s" "Symbol" er/mark-symbol)
+    ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
    ["Text"
     ("w" "Word" er/mark-word)
     ("p" "Paragraph" er/mark-text-paragraph)
@@ -2299,8 +2299,7 @@ The user's $HOME directory is abbreviated as a tilde."
     ("E" "Email" er/mark-email)]
    ["Region"
     ("." "Expand Region" er/expand-region)
-    ("," "Contract Region" er/contract-region)]]
-  ["Pairs"
+    ("," "Contract Region" er/contract-region)]
    ["Quotes"
     ("q" "Inside Quotes" er/mark-inside-quotes)
     ("Q" "Outside Quotes" er/mark-outside-quotes)]
