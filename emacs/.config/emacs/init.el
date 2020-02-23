@@ -1626,7 +1626,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;;; JavaScript mode
 (require-package 'js2-mode)
 ;; Initialize mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js-mode-hook #'js2-minor-mode)
 ;; Configuration
 (after-load 'js2-mode
   ;; Syntax defaults
