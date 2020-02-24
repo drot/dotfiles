@@ -2045,6 +2045,7 @@ The user's $HOME directory is abbreviated as a tilde."
           geiser-autodoc-mode
           geiser-mode
           isearch-mode
+          js2-minor-mode
           overwrite-mode
           poly-markdown-mode
           sqlind-minor-mode
