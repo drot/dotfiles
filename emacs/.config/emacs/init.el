@@ -129,10 +129,7 @@
   ;; Always use single line display
   (setq icomplete-prospects-height 1)
   ;; Complete in other places as well
-  (setq icomplete-in-buffer t)
-  ;; Add some `icomplete' bindings to `fido-mode'
-  (define-key icomplete-fido-mode-map (kbd "M-t") #'icomplete-force-complete)
-  (define-key icomplete-fido-mode-map (kbd "C-j") 'icomplete-force-complete-and-exit))
+  (setq icomplete-in-buffer t))
 
 ;; Add `recentf-mode' support
 (defun drot/icomplete-recentf ()
