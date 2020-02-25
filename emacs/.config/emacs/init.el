@@ -1880,11 +1880,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
-  (setq inferior-lisp-program "sbcl")
-  ;; Disable conflicting key binding
-  (define-key sly-mode-map (kbd "C-c x") nil)
-  ;; Set local key binding
-  (define-key sly-mode-map (kbd "C-c X") #'sly-export-symbol-at-point))
+  (setq inferior-lisp-program "sbcl"))
 
 ;; SLY REPL
 (after-load 'sly-mrepl
