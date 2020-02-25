@@ -27,70 +27,6 @@ Emacs.toolBar: off
 Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
-! XMessage
-Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
-Xmessage*background: red
-Xmessage*foreground: yellow
-Xmessage*form.*.shapeStyle: rectangle
-Xmessage*Scrollbar.width: 1
-Xmessage*Scrollbar.borderWidth: 0
-Xmessage*Buttons: OK
-Xmessage*defaultButton: OK
-
-! URXVT
-URxvt*urgentOnBell: true
-URxvt*saveLines: 65535
-
-! Release Ctrl/Shift bindings
-URxvt*iso14755: false
-URxvt*iso14755_52: false
-
-! Scrolling
-URxvt*scrollBar: false
-URxvt*scrollTtyOutput: false
-URxvt*scrollWithBuffer: true
-URxvt*scrollTtyKeypress: true
-
-! URL selection
-URxvt*perl-ext-common: default,matcher
-URxvt*url-select.launcher: firefox
-URxvt.keysym.C-Delete: matcher:last
-URxvt.keysym.M-Delete: matcher:list
-URxvt*matcher.button: 1
-
-! Font
-URxvt*font: xft:Iosevka Term SS05:pixelsize=16,xft:Noto Emoji:size=12
-URxvt*boldFont: xft:Iosevka Term SS05:bold:pixelsize=16,xft:Noto Emoji:size=12
-URxvt*letterSpace: -1
-
-! Main colors
-URxvt*foreground: #c5c8c6
-URxvt*background: #1d1f21
-URxvt*cursorColor: #c5c8c6
-
-! Stylized colors
-URxvt*colorIT: #b5bd68
-URxvt*colorBD: #c5c8c6
-URxvt*colorUL: #81a2be
-
-! Colors
-URxvt*color0: #1d1f21
-URxvt*color1: #cc6666
-URxvt*color2: #b5bd68
-URxvt*color3: #f0c674
-URxvt*color4: #81a2be
-URxvt*color5: #b294bb
-URxvt*color6: #8abeb7
-URxvt*color7: #c5c8c6
-URxvt*color8: #969896
-URxvt*color9: #cc6666
-URxvt*color10: #b5bd68
-URxvt*color11: #f0c674
-URxvt*color12: #81a2be
-URxvt*color13: #b294bb
-URxvt*color14: #8abeb7
-URxvt*color15: #ffffff
-
 ! XTerm
 XTerm*locale: true
 XTerm*termName: xterm-256color
@@ -139,3 +75,13 @@ XTerm*color12: #81a2be
 XTerm*color13: #b294bb
 XTerm*color14: #8abeb7
 XTerm*color15: #ffffff
+
+! XMessage
+Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
+Xmessage*background: red
+Xmessage*foreground: yellow
+Xmessage*form.*.shapeStyle: rectangle
+Xmessage*Scrollbar.width: 1
+Xmessage*Scrollbar.borderWidth: 0
+Xmessage*Buttons: OK
+Xmessage*defaultButton: OK
