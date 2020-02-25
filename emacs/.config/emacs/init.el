@@ -1880,7 +1880,19 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
-  (setq inferior-lisp-program "sbcl"))
+  (setq inferior-lisp-program "sbcl")
+  ;; Disable conflicting key bindings
+  (defun drot/sly-sanitize-bindings ()
+    "Removes SLY's conflicting keybindings."
+    (cond ((boundp 'sly-mode-map)
+           (define-key sly-mode-map (kbd "C-c i") nil)
+           (define-key sly-mode-map (kbd "C-c x") nil))
+          ('t (message "SLY keybindings not sanitized!"))))
+  ;; Apply the custom hook
+  (add-hook 'sly-mode-hook #'drot/sly-sanitize-bindings)
+  ;; Set local key bindings
+  (define-key sly-mode-map (kbd "C-c C-s i") #'sly-import-symbol-at-point)
+  (define-key sly-mode-map (kbd "C-c C-s x") #'sly-export-symbol-at-point))
 
 ;; SLY REPL
 (after-load 'sly-mrepl
