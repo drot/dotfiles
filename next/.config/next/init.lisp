@@ -35,6 +35,7 @@ SLY."
             new-url))
         url)))
 
+;; Enable mode for all buffers
 (defclass my-buffer (buffer)
   ((default-modes :initform
                   (cons 'my-mode (get-default 'buffer 'default-modes)))
@@ -46,16 +47,15 @@ SLY."
 
 ;; Set search engines
 (defclass my-remote-interface (remote-interface)
-  ((search-engines
-    :initform
-    '(("ddg"
-       "https://duckduckgo.com/?q=~a"
-       "https://duckduckgo.com/")
-      ("yt"
-       "https://www.youtube.com/results?search_query=~a"
-       "https://www.youtube.com/")
-      ("wiki"
-       "https://en.wikipedia.org/w/index.php?search=~a"
-       "https://en.wikipedia.org/")))))
+  ((search-engines :initform
+                   '(("ddg"
+                      "https://duckduckgo.com/?q=~a"
+                      "https://duckduckgo.com/")
+                     ("yt"
+                      "https://www.youtube.com/results?search_query=~a"
+                      "https://www.youtube.com/")
+                     ("wiki"
+                      "https://en.wikipedia.org/w/index.php?search=~a"
+                      "https://en.wikipedia.org/")))))
 
 (setf *remote-interface-class* 'my-remote-interface)
