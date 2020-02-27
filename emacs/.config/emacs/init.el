@@ -110,6 +110,9 @@
 ;;; Display completions vertically
 (setq completions-format 'vertical)
 
+;;; Don't show help for completions
+(setq completion-show-help nil)
+
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
@@ -180,6 +183,9 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Resize windows proportionally
 (setq window-combination-resize t)
+
+;;; Resize minibuffer to fit text
+(setq resize-mini-windows t)
 
 ;;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
@@ -1845,9 +1851,9 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;; Display PDF files to the right always
 (add-to-list 'display-buffer-alist
-             '(("\\.pdf\\(<[^>]+>\\)?$"
-                (display-buffer-in-direction)
-                (direction . rightmost))))
+             '("\\.pdf\\(<[^>]+>\\)?$"
+               (display-buffer-in-direction)
+               (direction . rightmost)))
 
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
