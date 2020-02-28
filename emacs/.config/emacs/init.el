@@ -92,15 +92,6 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; Set default completion styles to use
-(setq completion-styles '(partial-completion substring initials flex))
-
-;;; Set completion overrides for specific categories
-(setq completion-category-overrides
-      '((file (styles initials basic))
-        (buffer (styles initials basic))
-        (info-menu (styles basic))))
-
 ;;; Don't reject spaces when using flex completion
 (setq completion-flex-nospace nil)
 
@@ -112,6 +103,15 @@
 
 ;;; Don't show help for completions
 (setq completion-show-help nil)
+
+;;; Display completions in a smaller bottom window
+(add-to-list 'display-buffer-alist
+             '("\\*Completions\\*"
+               (display-buffer-in-side-window)
+               (window-height . 0.16)
+               (side . bottom)
+               (slot . 0)
+               (window-parameters . ((no-other-window . t)))))
 
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
@@ -1286,7 +1286,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Configuration
 (after-load 'clojure-mode
   ;; Enable CIDER mode
-  ;;(add-hook 'clojure-mode-hook #'cider-mode)
+  (add-hook 'clojure-mode-hook #'cider-mode)
   ;; Enable SubWord mode
   (add-hook 'clojure-mode-hook #'subword-mode))
 
@@ -1993,14 +1993,23 @@ The user's $HOME directory is abbreviated as a tilde."
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company Statistics
-(require-package 'company-statistics)
-;; Initialize mode
-(company-statistics-mode)
+;;; Prescient
+(require-package 'prescient)
 ;; Configuration
-(after-load 'company-statistics
+(after-load 'prescient
   ;; Change save file location
-  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
+  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
+  ;; Enable persistent history
+  (prescient-persist-mode))
+
+;;; Company Prescient
+(require-package 'company-prescient)
+;; Initialize mode
+(company-prescient-mode)
 
 ;;; Diff-Hl
 (require-package 'diff-hl)
