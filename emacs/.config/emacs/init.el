@@ -1996,7 +1996,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;;; Company Statistics
 (require-package 'company-statistics)
 ;; Initialize mode
-(add-hook 'global-company-mode-hook #'company-statistics-mode)
+(company-statistics-mode)
 ;; Configuration
 (after-load 'company-statistics
   ;; Change save file location
