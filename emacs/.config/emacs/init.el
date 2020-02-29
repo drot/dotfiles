@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009-2020 drot
 
 ;; Author: drot
-;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.emacs.d
+;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.config/emacs
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
@@ -837,7 +837,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Configuration
 (after-load 'browse-url
   ;;  Open URLs with the specified browser
-  (setq browse-url-browser-function #'browse-url-firefox))
+  (setq browse-url-browser-function #'browse-url-xdg-open))
 
 ;;; SHR
 (after-load 'shr
