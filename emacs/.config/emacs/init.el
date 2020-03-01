@@ -92,6 +92,15 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; List of completions to use
+(setq completion-styles '(partial-completion substring initials flex))
+
+;; Override choice of completions per category
+(setq completion-category-overrides
+      '((file (styles initials basic))
+        (buffer (styles initials basic))
+        (info-menu (styles basic))))
+
 ;;; Don't reject spaces when using flex completion
 (setq completion-flex-nospace nil)
 
