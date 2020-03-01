@@ -1897,8 +1897,8 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Apply the custom hook
   (add-hook 'sly-mode-hook #'drot/sly-sanitize-bindings)
   ;; Set local key bindings
-  (define-key sly-mode-map (kbd "C-c C-s i") #'sly-import-symbol-at-point)
-  (define-key sly-mode-map (kbd "C-c C-s x") #'sly-export-symbol-at-point))
+  (define-key sly-mode-map (kbd "C-c M-s i") #'sly-import-symbol-at-point)
+  (define-key sly-mode-map (kbd "C-c M-s x") #'sly-export-symbol-at-point))
 
 ;; SLY REPL
 (after-load 'sly-mrepl
