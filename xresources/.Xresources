@@ -11,7 +11,7 @@ Xcursor.theme: Adwaita
 
 ! Emacs
 Emacs.font: fontset-startup
-Emacs.Fontset-0: -CYEL-Iosevka Term SS05-normal-normal-normal-*-16-*-*-*-m-0-fontset-startup,\
+Emacs.Fontset-0: -BE5N-Iosevka Term SS05-normal-normal-normal-*-16-*-*-*-m-0-fontset-startup,\
     arabic:-GOOG-Noto Sans Arabic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     burmese:-GOOG-Noto Sans Myanmar-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     ethiopic:-GOOG-Noto Sans Ethiopic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
