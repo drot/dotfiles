@@ -69,7 +69,7 @@
 (setq window-divider-default-bottom-width 1
       window-divider-default-right-width 1
       window-divider-default-places t)
-;; Initialize mode
+;; Enable mode
 (window-divider-mode)
 
 ;;; Move point all the way to buffer boundary before signaling an error
@@ -236,7 +236,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (setq savehist-file (locate-user-emacs-file "cache/saved-history")
       savehist-autosave-interval 60
       savehist-additional-variables '(search-ring regexp-search-ring))
-;; Initialize mode
+;; Enable mode
 (savehist-mode)
 
 ;;; Save recent files list
@@ -256,12 +256,12 @@ The user's $HOME directory is abbreviated as a tilde."
         ".*\\.gz\\'"
         "newsrc"
         "TAGS"))
-;; Initialize mode
+;; Enable mode
 (recentf-mode)
 
 ;;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
-;; Initialize mode
+;; Enable mode
 (save-place-mode)
 
 ;;; Find file at point
@@ -273,7 +273,7 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Initialize mode
+;; Enable mode
 (ffap-bindings)
 
 ;;; Line numbers display
@@ -314,12 +314,12 @@ The user's $HOME directory is abbreviated as a tilde."
 (setq show-paren-delay 0
       show-paren-when-point-inside-paren t
       show-paren-when-point-in-periphery t)
-;; Initialize mode
+;; Enable mode
 (show-paren-mode)
 
 ;;; Highlight regexps interactively
 (setq hi-lock-auto-select-face t)
-;; Initialize mode
+;; Enable mode
 (global-hi-lock-mode)
 
 ;;; Abbrev mode
@@ -329,7 +329,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
     (quietly-read-abbrev-file))
-;; Initialize mode
+;; Enable mode
 (setq-default abbrev-mode t)
 
 ;;; Electric pair mode
@@ -343,12 +343,12 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Prettify-Symbols mode
 (setq prettify-symbols-unprettify-at-point t)
-;; Initialize mode
+;; Enable mode
 (global-prettify-symbols-mode)
 
 ;;; Which function mode
 (setq which-func-unknown "n/a")
-;; Initialize mode
+;; Enable mode
 (which-function-mode)
 
 ;;; Wind Move fast window switching
@@ -363,11 +363,6 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq windmove-wrap-around t))
 
 ;;; Undo and redo the window configuration
-(setq winner-dont-bind-my-keys t)
-;; Set key bindings
-(global-set-key (kbd "<C-S-left>") #'winner-undo)
-(global-set-key (kbd "<C-S-right>") #'winner-redo)
-;; Initialize mode
 (winner-mode)
 
 ;;; Hide Show mode
@@ -685,7 +680,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Enable Pass integration
 (after-load 'auth-source
-  ;; Initialize mode
+  ;; Enable mode
   (auth-source-pass-enable))
 
 ;;; Mail sending
@@ -886,7 +881,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;; Eshell smart display
 (after-load 'eshell
-  ;; Initialize mode
+  ;; Enable mode
   (require 'em-smart)
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
@@ -1323,7 +1318,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-filter)
 ;; Configuration
 (after-load 'dired-x
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-filter)
   ;; Set local key binding
   (define-key dired-mode-map (kbd "\\") dired-filter-mark-map))
@@ -1332,7 +1327,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-rainbow)
 ;; Configuration
 (after-load 'dired-filter
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-rainbow)
   ;; Define faces by file type
   (dired-rainbow-define audio "DeepPink" ("mp3" "MP3" "ogg" "OGG"
@@ -1371,7 +1366,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-subtree)
 ;; Configuration
 (after-load 'dired-rainbow
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-subtree)
   ;; Create local key map
   (defvar dired-subtree-map nil "Dired Subtree map.")
@@ -1398,7 +1393,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-ranger)
 ;; Configuration
 (after-load 'dired-subtree
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-ranger)
   ;; Create local keymap
   (defvar dired-ranger-map nil "Dired Ranger map.")
@@ -1417,7 +1412,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-narrow)
 ;; Configuration
 (after-load 'dired-ranger
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-narrow)
   ;; Set local key binding
   (define-key dired-mode-map (kbd "C-.") #'dired-narrow)
@@ -1428,7 +1423,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-collapse)
 ;; Configuration
 (after-load 'dired-narrow
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-collapse)
   ;; Set local key binding
   (define-key dired-mode-map (kbd ",") #'dired-collapse-mode))
@@ -1437,7 +1432,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'dired-du)
 ;; Configuration
 (after-load 'dired-collapse
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-du)
   ;; Use human readable output by default
   (setq dired-du-size-format t))
@@ -1446,7 +1441,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'async)
 ;; Configuration
 (after-load 'dired-du
-  ;; Initialize mode
+  ;; Enable mode
   (require 'dired-async)
   ;; Set local key bindings
   (dolist (bind '(("E c" . dired-async-do-copy)
@@ -1568,7 +1563,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'rcirc-styles)
 ;; Configuration
 (after-load 'rcirc
-  ;; Initialize mode
+  ;; Enable mode
   (require 'rcirc-styles)
   ;; Set local key bindings
   (dolist (bind '(("C-c C-e p" . rcirc-styles-toggle-preview)
@@ -1598,7 +1593,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'rcirc-color)
 ;; Configuration
 (after-load 'rcirc
-  ;; Initialize mode
+  ;; Enable mode
   (require 'rcirc-color)
   ;; Inherit nick colors from rcirc-styles colors
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
@@ -1607,7 +1602,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'rcirc-notify)
 ;; Configuration
 (after-load 'rcirc
-  ;; Initialize mode
+  ;; Enable mode
   (rcirc-notify-add-hooks))
 
 ;;; Expand region
@@ -1679,7 +1674,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; JavaScript mode
 (require-package 'js2-mode)
-;; Initialize mode
+;; Enable mode
 (add-hook 'js-mode-hook #'js2-minor-mode)
 ;; Configuration
 (after-load 'js2-mode
@@ -1870,7 +1865,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; PDF Tools
 (require-package 'pdf-tools)
-;; Initialize mode
+;; Enable mode
 (pdf-loader-install t)
 ;; Enable SyncTeX support
 (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
@@ -1896,7 +1891,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
-;; Initialize mode
+;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;;; Rainbow mode
@@ -1906,7 +1901,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Skewer
 (require-package 'skewer-mode)
-;; Initialize mode
+;; Enable mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c r w") #'skewer-repl)
@@ -1969,14 +1964,14 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Ace-link
 (require-package 'ace-link)
-;; Initialize mode
+;; Enable mode
 (ace-link-setup-default)
 ;; Set global key binding
 (global-set-key (kbd "C-c u a") #'ace-link-addr)
 
 ;;; Avy
 (require-package 'avy)
-;; Initialize mode
+;; Enable mode
 (avy-setup-default)
 ;; Define Transient command
 (define-transient-command drot/avy-transient ()
@@ -2005,7 +2000,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Company mode
 (require-package 'company)
-;; Initialize mode
+;; Enable mode
 (global-company-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c i y") #'company-yasnippet)
@@ -2047,12 +2042,12 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Company Prescient
 (require-package 'company-prescient)
-;; Initialize mode
+;; Enable mode
 (company-prescient-mode)
 
 ;;; Diff-Hl
 (require-package 'diff-hl)
-;; Initialize mode
+;; Enable mode
 (global-diff-hl-mode)
 ;; Update diffs immediately
 (diff-hl-flydiff-mode)
@@ -2066,7 +2061,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (require-package 'form-feed)
 ;; Same line width as `fill-column' width
 (setq form-feed-line-width fill-column)
-;; Initialize mode
+;; Enable mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
                 scheme-mode-hook
@@ -2083,7 +2078,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Hl-Todo
 (require-package 'hl-todo)
-;; Initialize mode
+;; Enable mode
 (global-hl-todo-mode)
 ;; Configuration
 (after-load 'hl-todo
@@ -2102,7 +2097,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Minions
 (require-package 'minions)
-;; Initialize mode
+;; Enable mode
 (minions-mode)
 ;; Configuration
 (after-load 'minions
@@ -2129,7 +2124,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Paredit
 (require-package 'paredit)
-;; Initialize mode
+;; Enable mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
                 ielm-mode-hook
@@ -2267,7 +2262,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Rainbow Delimiters
 (require-package 'rainbow-delimiters)
-;; Initialize mode
+;; Enable mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
                 clojure-mode-hook
@@ -2276,12 +2271,12 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Volatile Highlights
 (require-package 'volatile-highlights)
-;; Initialize mode
+;; Enable mode
 (volatile-highlights-mode)
 
 ;;; YASnippet
 (require-package 'yasnippet)
-;; Initialize mode
+;; Enable mode
 (yas-global-mode)
 
 ;;; Artist mode
