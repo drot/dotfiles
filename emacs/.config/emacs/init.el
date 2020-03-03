@@ -1611,37 +1611,42 @@ The user's $HOME directory is abbreviated as a tilde."
   (rcirc-notify-add-hooks))
 
 ;;; Expand region
-(after-load 'expand-region
-  ;; Define Transient for text marking operations.
-  (define-transient-command drot/mark-text-transient ()
-    "Transient for text marking commands."
-    :transient-suffix 'transient--do-stay
-    :transient-non-suffix 'transient--do-warn
-    ["Expand Region"
-     ["Lisp"
-      ("e" "S-Expression" mark-sexp)
-      ("f" "Function" er/mark-defun)
-      ("s" "Symbol" er/mark-symbol)
-      ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
-     ["Text"
-      ("w" "Word" er/mark-word)
-      ("p" "Paragraph" er/mark-text-paragraph)
-      ("c" "Comment" er/mark-comment)
-      ("u" "URL" er/mark-url)
-      ("E" "Email" er/mark-email)]
-     ["Region"
-      ("." "Expand Region" er/expand-region)
-      ("," "Contract Region" er/contract-region)]
-     ["Quotes"
-      ("q" "Inside Quotes" er/mark-inside-quotes)
-      ("Q" "Outside Quotes" er/mark-outside-quotes)]
-     ["Parentheses"
-      ("(" "Opening Pair" er/mark-inside-pairs)
-      ("[" "Opening Pair" er/mark-inside-pairs)
-      ("{" "Opening Pair" er/mark-inside-pairs)
-      (")" "Closing Pair" er/mark-outside-pairs)
-      ("]" "Closing Pair" er/mark-outside-pairs)
-      ("}" "Closing Pair" er/mark-outside-pairs)]]))
+(require-package 'expand-region)
+;; Autoload missing functions
+(autoload #'er/mark-defun "er-basic-expansions"
+  "Mark defun around or in front of point." t)
+(autoload #'er/mark-text-paragraph "text-mode-expansions"
+  "Marks one paragraph." t)
+;; Define Transient for text marking operations.
+(define-transient-command drot/mark-text-transient ()
+  "Transient for text marking commands."
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Expand Region"
+   ["Lisp"
+    ("e" "S-Expression" mark-sexp)
+    ("f" "Function" er/mark-defun)
+    ("s" "Symbol" er/mark-symbol)
+    ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
+   ["Text"
+    ("w" "Word" er/mark-word)
+    ("p" "Paragraph" er/mark-text-paragraph)
+    ("c" "Comment" er/mark-comment)
+    ("u" "URL" er/mark-url)
+    ("E" "Email" er/mark-email)]
+   ["Region"
+    ("." "Expand Region" er/expand-region)
+    ("," "Contract Region" er/contract-region)]
+   ["Quotes"
+    ("q" "Inside Quotes" er/mark-inside-quotes)
+    ("Q" "Outside Quotes" er/mark-outside-quotes)]
+   ["Parentheses"
+    ("(" "Opening Pair" er/mark-inside-pairs)
+    ("[" "Opening Pair" er/mark-inside-pairs)
+    ("{" "Opening Pair" er/mark-inside-pairs)
+    (")" "Closing Pair" er/mark-outside-pairs)
+    ("]" "Closing Pair" er/mark-outside-pairs)
+    ("}" "Closing Pair" er/mark-outside-pairs)]])
 ;; Set global key bindings
 (global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 (global-set-key (kbd "C-=") #'er/expand-region)
