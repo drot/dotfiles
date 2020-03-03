@@ -369,8 +369,8 @@ The user's $HOME directory is abbreviated as a tilde."
 ;;; Undo and redo the window configuration
 (setq winner-dont-bind-my-keys t)
 ;; Set key bindings
-(global-set-key (kbd "<C-s-left>") #'winner-undo)
-(global-set-key (kbd "<C-s-right>") #'winner-redo)
+(global-set-key (kbd "<C-S-left>") #'winner-undo)
+(global-set-key (kbd "<C-S-right>") #'winner-redo)
 ;; Initialize mode
 (winner-mode)
 
