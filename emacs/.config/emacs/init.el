@@ -183,10 +183,6 @@ The user's $HOME directory is abbreviated as a tilde."
 ;;; Visual Line mode configuration
 (setq visual-line-fringe-indicators '(nil right-triangle))
 
-;;; Use Gnus as the default mail program
-(setq mail-user-agent 'gnus-user-agent
-      read-mail-command #'gnus)
-
 ;;; Put underline below the font bottom line
 (setq x-underline-at-descent-line t)
 
@@ -804,10 +800,6 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq copyright-year-ranges t
         copyright-names-regexp (regexp-quote user-login-name)))
 
-;;; Whitespace mode
-(global-set-key (kbd "C-c x w") #'whitespace-cleanup)
-(global-set-key (kbd "C-c t w") #'whitespace-mode)
-
 ;;; Tildify mode
 (global-set-key (kbd "C-c x t") #'tildify-region)
 (global-set-key (kbd "C-c t ~") #'tildify-mode)
@@ -1042,6 +1034,10 @@ The user's $HOME directory is abbreviated as a tilde."
 (after-load 'nnfolder
   ;; Set main directory
   (setq nnfolder-directory "~/.mail/archive"))
+
+;;; Use Gnus as the default mail program
+(setq mail-user-agent 'gnus-user-agent
+      read-mail-command #'gnus)
 
 ;;; Calendar
 (global-set-key (kbd "<f12>") #'calendar)
@@ -1615,13 +1611,39 @@ The user's $HOME directory is abbreviated as a tilde."
   (rcirc-notify-add-hooks))
 
 ;;; Expand region
-(require-package 'expand-region)
-;; Autoload missing functions
-(autoload #'er/mark-defun "er-basic-expansions"
-  "Mark defun around or in front of point." t)
-(autoload #'er/mark-text-paragraph "text-mode-expansions"
-  "Marks one paragraph." t)
-;; Set global key binding
+(after-load 'expand-region
+  ;; Define Transient for text marking operations.
+  (define-transient-command drot/mark-text-transient ()
+    "Transient for text marking commands."
+    :transient-suffix 'transient--do-stay
+    :transient-non-suffix 'transient--do-warn
+    ["Expand Region"
+     ["Lisp"
+      ("e" "S-Expression" mark-sexp)
+      ("f" "Function" er/mark-defun)
+      ("s" "Symbol" er/mark-symbol)
+      ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
+     ["Text"
+      ("w" "Word" er/mark-word)
+      ("p" "Paragraph" er/mark-text-paragraph)
+      ("c" "Comment" er/mark-comment)
+      ("u" "URL" er/mark-url)
+      ("E" "Email" er/mark-email)]
+     ["Region"
+      ("." "Expand Region" er/expand-region)
+      ("," "Contract Region" er/contract-region)]
+     ["Quotes"
+      ("q" "Inside Quotes" er/mark-inside-quotes)
+      ("Q" "Outside Quotes" er/mark-outside-quotes)]
+     ["Parentheses"
+      ("(" "Opening Pair" er/mark-inside-pairs)
+      ("[" "Opening Pair" er/mark-inside-pairs)
+      ("{" "Opening Pair" er/mark-inside-pairs)
+      (")" "Closing Pair" er/mark-outside-pairs)
+      ("]" "Closing Pair" er/mark-outside-pairs)
+      ("}" "Closing Pair" er/mark-outside-pairs)]]))
+;; Set global key bindings
+(global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 (global-set-key (kbd "C-=") #'er/expand-region)
 
 ;;; Geiser
@@ -2049,7 +2071,7 @@ The user's $HOME directory is abbreviated as a tilde."
   (add-hook hook #'form-feed-mode))
 ;; Configuration
 (after-load 'form-feed
-  ;; Make `form-feed-line-line' color equal to comment color
+  ;; Make `form-feed-line' color equal to comment color
   (set-face-attribute 'form-feed-line nil
                       :strike-through t
                       :inherit font-lock-comment-face))
@@ -2314,6 +2336,10 @@ The user's $HOME directory is abbreviated as a tilde."
 (global-set-key [remap upcase-word] #'upcase-dwim)
 (global-set-key [remap downcase-word] #'downcase-dwim)
 
+;;; Whitespace mode
+(global-set-key (kbd "C-c x w") #'whitespace-cleanup)
+(global-set-key (kbd "C-c t w") #'whitespace-mode)
+
 ;;; Auto Fill mode
 (global-set-key (kbd "C-c t f") #'auto-fill-mode)
 
@@ -2328,39 +2354,6 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Table insertion
 (global-set-key (kbd "C-c i t") #'table-insert)
-
-;;; Define Transient for text marking operations
-(define-transient-command drot/mark-text-transient ()
-  "Transient for text marking commands."
-  :transient-suffix 'transient--do-stay
-  :transient-non-suffix 'transient--do-warn
-  ["Expand Region"
-   ["Lisp"
-    ("e" "S-Expression" mark-sexp)
-    ("f" "Function" er/mark-defun)
-    ("s" "Symbol" er/mark-symbol)
-    ("S" "Prefixed Symbol" er/mark-symbol-with-prefix)]
-   ["Text"
-    ("w" "Word" er/mark-word)
-    ("p" "Paragraph" er/mark-text-paragraph)
-    ("c" "Comment" er/mark-comment)
-    ("u" "URL" er/mark-url)
-    ("E" "Email" er/mark-email)]
-   ["Region"
-    ("." "Expand Region" er/expand-region)
-    ("," "Contract Region" er/contract-region)]
-   ["Quotes"
-    ("q" "Inside Quotes" er/mark-inside-quotes)
-    ("Q" "Outside Quotes" er/mark-outside-quotes)]
-   ["Parentheses"
-    ("(" "Opening Pair" er/mark-inside-pairs)
-    ("[" "Opening Pair" er/mark-inside-pairs)
-    ("{" "Opening Pair" er/mark-inside-pairs)
-    (")" "Closing Pair" er/mark-outside-pairs)
-    ("]" "Closing Pair" er/mark-outside-pairs)
-    ("}" "Closing Pair" er/mark-outside-pairs)]])
-;; Set global key binding
-(global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 
 ;;; Matching lines operation
 (global-set-key (kbd "C-c s l") #'delete-matching-lines)
