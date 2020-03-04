@@ -363,6 +363,11 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq windmove-wrap-around t))
 
 ;;; Undo and redo the window configuration
+(setq winner-dont-bind-my-keys t)
+;; Set key bindings
+(global-set-key (kbd "<C-s-left>") #'winner-undo)
+(global-set-key (kbd "<C-s-right>") #'winner-redo)
+;; Initialize mode
 (winner-mode)
 
 ;;; Hide Show mode
