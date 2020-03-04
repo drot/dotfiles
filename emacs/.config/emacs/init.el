@@ -1643,6 +1643,9 @@ The user's $HOME directory is abbreviated as a tilde."
   (setq geiser-repl-history-filename
         (locate-user-emacs-file "cache/geiser-history")))
 
+;;; htmlize
+(require-package 'htmlize)
+
 ;;; Iedit
 (require-package 'iedit)
 ;; Autoload missing functions
