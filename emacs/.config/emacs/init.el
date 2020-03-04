@@ -549,27 +549,6 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Make backups even under version control
   (setq vc-make-backup-files t))
 
-;;; Customize interface
-(global-set-key (kbd "<C-f9>") #'customize-group)
-;; Configuration
-(after-load 'cus-edit
-  ;; Kill buffer when done and shorten help
-  (setq custom-buffer-done-kill t
-        custom-buffer-verbose-help nil)
-  ;; Display entries as words
-  (setq custom-unlispify-tag-names nil
-        custom-unlispify-menu-entries nil))
-
-;;; Custom theme configuration
-(after-load 'custom
-  ;; Treat themes as safe
-  (setq custom-safe-themes t))
-
-;;; MIME decoding configuration
-(after-load 'mm-decode
-  ;; Fit images to buffer
-  (setq mm-inline-large-images 'resize))
-
 ;;; Image mode
 (after-load 'image-mode
   ;; Show image dimension function
@@ -603,7 +582,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
-  ;;Ignore case sensitivity with Pcomplete
+  ;; Ignore case sensitivity
   (setq pcomplete-ignore-case t))
 
 ;;; Apropos configuration
@@ -661,7 +640,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; NXML mode
 (after-load 'nxml-mode
-  ;; Configuration
+  ;; Auto complete closing tags
   (setq nxml-slash-auto-complete-flag t))
 
 ;;; Doc View mode
@@ -677,34 +656,13 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Interact with GnuPG directly
 (after-load 'epa
-  ;; Configuration
+  ;; Prompt in minibuffer
   (setq epg-pinentry-mode 'loopback))
 
 ;;; Enable Pass integration
 (after-load 'auth-source
   ;; Enable mode
   (auth-source-pass-enable))
-
-;;; Mail sending
-(after-load 'message
-  ;; Set main directory
-  (setq message-directory "~/.mail/")
-  ;; Configuration
-  (setq message-confirm-send t
-        message-kill-buffer-on-exit t))
-
-;;; Outgoing mail server
-(after-load 'smtpmail
-  ;; Configuration
-  (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-user "drot"
-        smtpmail-smtp-service 465
-        smtpmail-stream-type 'ssl))
-
-;;; Smileys
-(after-load 'smiley
-  ;; Resize smileys
-  (setq smiley-style 'medium))
 
 ;;; Network Security Manager
 (after-load 'nsm
@@ -775,7 +733,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; TRAMP
 (after-load 'tramp
-  ;; Configuration
+  ;; Change default method and cache file location
   (setq tramp-default-method "ssh"
         tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
   ;; Use temp directory for save files
@@ -784,7 +742,7 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Bookmarks
 (after-load 'bookmark
-  ;; Configuration
+  ;; Change default file location and enable mode
   (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark")
         bookmark-save-flag 1))
 
@@ -873,13 +831,9 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Ignore duplicates and case
   (setq eshell-hist-ignoredups t
         eshell-cmpl-ignore-case t)
-  ;; Custom hook to avoid conflicts
-  (defun drot/eshell-mode-setup ()
-    "Personal setup hook to run in Eshell buffers."
-    ;; Disable Company since we use `completion-at-point'
-    (company-mode 0))
-  ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
+  ;; Disable Company since we use `completion-at-point'
+  (add-hook 'eshell-mode-hook
+            (lambda () (company-mode 0))))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -954,6 +908,43 @@ The user's $HOME directory is abbreviated as a tilde."
         compilation-always-kill t
         compilation-scroll-output 'first-error
         compilation-context-lines 3))
+
+;;; Mail sending
+(after-load 'message
+  ;; Set main directory
+  (setq message-directory "~/.mail/")
+  ;; Confirm sending and kill buffer on message send success
+  (setq message-confirm-send t
+        message-kill-buffer-on-exit t))
+
+;;; Asynchronous SMTP mail sending
+(require-package 'async)
+;; Configuration
+(after-load 'message
+  ;; Load async library
+  (require 'smtpmail-async)
+  ;; Change default mail sending function
+  (setq message-send-mail-function #'async-smtpmail-send-it)
+  ;; Enable compatibility with the Pass password manager
+  (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
+
+;;; Outgoing mail server
+(after-load 'smtpmail
+  ;; Set mail server and user
+  (setq smtpmail-smtp-server "mail.cock.li"
+        smtpmail-smtp-user "drot"
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'ssl))
+
+;;; Smileys
+(after-load 'smiley
+  ;; Resize smileys
+  (setq smiley-style 'medium))
+
+;;; MIME decoding configuration
+(after-load 'mm-decode
+  ;; Fit images to buffer
+  (setq mm-inline-large-images 'resize))
 
 ;;; Gnus
 (global-set-key (kbd "<f8>") #'gnus)
@@ -1452,15 +1443,6 @@ The user's $HOME directory is abbreviated as a tilde."
                   ("E h" . dired-async-do-hardlink)
                   ("E m" . dired-async-mode)))
     (define-key dired-mode-map (kbd (car bind)) (cdr bind))))
-
-;;; Asynchronous SMTP mail sending
-(after-load 'message
-  ;; Load async library
-  (require 'smtpmail-async)
-  ;; Change default mail sending function
-  (setq message-send-mail-function #'async-smtpmail-send-it)
-  ;; Enable compatibility with the Pass password manager
-  (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
 
 ;;; Dockerfile mode
 (require-package 'dockerfile-mode)
@@ -2379,6 +2361,22 @@ The user's $HOME directory is abbreviated as a tilde."
 
 ;;; Replace dabbrev-expand with hippie-expand
 (global-set-key [remap dabbrev-expand] #'hippie-expand)
+
+;;; Customize interface
+(global-set-key (kbd "<C-f9>") #'customize-group)
+;; Configuration
+(after-load 'cus-edit
+  ;; Kill buffer when done and shorten help
+  (setq custom-buffer-done-kill t
+        custom-buffer-verbose-help nil)
+  ;; Display entries as words
+  (setq custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
+
+;;; Custom theme configuration
+(after-load 'custom
+  ;; Treat themes as safe
+  (setq custom-safe-themes t))
 
 ;;; Load changes from the customize interface
 (setq custom-file (locate-user-emacs-file "custom.el"))
