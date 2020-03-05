@@ -583,7 +583,7 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
 ;; Set global key binding
-(global-set-key (kbd "C-c s i") #'imenu)
+(global-set-key (kbd "M-s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
