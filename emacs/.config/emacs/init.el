@@ -2015,6 +2015,8 @@
                       :inherit font-lock-comment-face))
 
 ;;; Helm
+(require-package 'helm)
+;; Prepare autoloads
 (require 'helm-config)
 ;; Set global key bindings
 (global-set-key [remap execute-extended-command] #'helm-M-x)
