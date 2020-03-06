@@ -92,17 +92,8 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; List of completions to use
-(setq completion-styles '(partial-completion substring initials flex))
-
-;; Override choice of completions per category
-(setq completion-category-overrides
-      '((file (styles initials basic))
-        (buffer (styles initials basic))
-        (info-menu (styles basic))))
-
-;;; Don't reject spaces when using flex completion
-(setq completion-flex-nospace nil)
+;;; Use `flex' completion by default
+(setq completion-styles '(flex))
 
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
@@ -113,46 +104,11 @@
 ;;; Don't show help for completions
 (setq completion-show-help nil)
 
-;;; Display completions in a smaller bottom window
-(add-to-list 'display-buffer-alist
-             '("\\*Completions\\*"
-               (display-buffer-in-side-window)
-               (window-height . 0.16)
-               (side . bottom)
-               (slot . 0)
-               (window-parameters . ((no-other-window . t)))))
-
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode)
-
-;;; Modify prompt to remove default indication if needed
-(minibuffer-electric-default-mode)
-
-;;; Dim ignored filenames in the minibuffer
-(file-name-shadow-mode)
-
-;;; Enable FIDO mode for IDO-like Icomplete
-(fido-mode)
-;; Configuration
-(after-load 'icomplete
-  ;; Always use single line display
-  (setq icomplete-prospects-height 1)
-  ;; Complete in other places as well
-  (setq icomplete-in-buffer t))
-
-;; Add `recentf-mode' support
-(defun drot/icomplete-recentf ()
-  "Open `recent-list' item in a new buffer.
-The user's $HOME directory is abbreviated as a tilde."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file
-     (completing-read "Open Recentf entry: " files nil t))))
-
-(global-set-key (kbd "C-c f r") #'drot/icomplete-recentf)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -263,18 +219,6 @@ The user's $HOME directory is abbreviated as a tilde."
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
 ;; Enable mode
 (save-place-mode)
-
-;;; Find file at point
-(after-load 'ffap
-  ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
-  ;; Disable pinging to avoid slowdowns
-  (setq ffap-machine-p-known 'reject)
-  ;; Default RFC path
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Enable mode
-(ffap-bindings)
 
 ;;; Line numbers display
 (setq display-line-numbers-type 'relative
@@ -748,7 +692,7 @@ The user's $HOME directory is abbreviated as a tilde."
 ;;; Bookmarks
 (after-load 'bookmark
   ;; Change default file location and enable mode
-  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmark")
+  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmarks")
         bookmark-save-flag 1))
 
 ;;; Copyright insertion
@@ -836,15 +780,23 @@ The user's $HOME directory is abbreviated as a tilde."
   ;; Ignore duplicates and case
   (setq eshell-hist-ignoredups t
         eshell-cmpl-ignore-case t)
-  ;; Disable Company since we use `completion-at-point'
-  (add-hook 'eshell-mode-hook
-            (lambda () (company-mode 0))))
+  (defun drot/eshell-mode-setup ()
+    "Disable Company since we use `completion-at-point'."
+    (company-mode 0))
+  ;; Apply the custom hook
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
 
 ;; Eshell smart display
 (after-load 'eshell
   ;; Enable mode
   (require 'em-smart)
   (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
+
+;; Enable integration with helm
+(after-load 'em-hist
+  (define-key eshell-hist-mode-map [remap eshell-previous-matching-input] #'helm-eshell-history)
+  (define-key eshell-hist-mode-map (kbd "M-s") nil) ; Useless when we have `helm-eshell-history'
+  (define-key eshell-hist-mode-map (kbd "M-s f") #'helm-eshell-prompts-all))
 
 ;;; Shell mode
 (after-load 'shell
@@ -1441,13 +1393,7 @@ The user's $HOME directory is abbreviated as a tilde."
 (after-load 'dired-du
   ;; Enable mode
   (require 'dired-async)
-  ;; Set local key bindings
-  (dolist (bind '(("E c" . dired-async-do-copy)
-                  ("E r" . dired-async-do-rename)
-                  ("E s" . dired-async-do-symlink)
-                  ("E h" . dired-async-do-hardlink)
-                  ("E m" . dired-async-mode)))
-    (define-key dired-mode-map (kbd (car bind)) (cdr bind))))
+  (dired-async-mode))
 
 ;;; Dockerfile mode
 (require-package 'dockerfile-mode)
@@ -2068,6 +2014,50 @@ The user's $HOME directory is abbreviated as a tilde."
                       :strike-through t
                       :inherit font-lock-comment-face))
 
+;;; Helm
+(require 'helm-config)
+;; Set global key bindings
+(global-set-key [remap execute-extended-command] #'helm-M-x)
+(global-set-key [remap find-file] #'helm-find-files)
+(global-set-key [remap switch-to-buffer] #'helm-mini)
+;; Configuration
+(after-load 'helm
+  ;; Rebind TAB to run persistent action
+  (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+  ;; make TAB work in terminal
+  (define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
+  ;; List actions using C-z
+  (define-key helm-map (kbd "C-z")  #'helm-select-action)
+  ;; Prefer using curl
+  (when (executable-find "curl")
+    (setq helm-net-prefer-curl t))
+  ;; Move to end or beginning of source when reaching top or bottom of source
+  (setq helm-move-to-line-cycle-in-source t
+        ;; Search for library in `require' and `declare-function' sexp
+        helm-ff-search-library-in-sexp t
+        ;; Scroll 8 lines other window using M-<next>/M-<prior>
+        helm-scroll-amount 8
+        ;; Use `recentf' for file history
+        helm-ff-file-name-history-use-recentf t
+        ;; Offer completion for target directory
+        helm-dwim-target 'completion
+        ;; Disable the header line
+        helm-display-header-line nil)
+  ;; Add bookmark selection and creation to `helm-mini'
+  (setq helm-mini-default-sources
+        '(helm-source-buffers-list
+          helm-source-recentf
+          helm-source-bookmarks
+          helm-source-buffer-not-found
+          helm-source-bookmark-set)))
+;; Enable mode
+(helm-mode)
+
+;;; Helm Descbinds
+(require-package 'helm-descbinds)
+;; Enable mode
+(helm-descbinds-mode)
+
 ;;; Hl-Todo
 (require-package 'hl-todo)
 ;; Enable mode
@@ -2308,6 +2298,7 @@ The user's $HOME directory is abbreviated as a tilde."
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find library
+(global-set-key (kbd "C-c h l") #'find-library)
 (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
 (global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
 
