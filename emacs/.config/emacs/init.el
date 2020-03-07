@@ -2023,6 +2023,7 @@
 (global-set-key [remap execute-extended-command] #'helm-M-x)
 (global-set-key [remap find-file] #'helm-find-files)
 (global-set-key [remap switch-to-buffer] #'helm-mini)
+(global-set-key [remap dabbrev-expand] #'helm-dabbrev)
 ;; Configuration
 (after-load 'helm
   ;; Rebind TAB to run persistent action
@@ -2038,14 +2039,16 @@
   (setq helm-move-to-line-cycle-in-source t
         ;; Search for library in `require' and `declare-function' sexp
         helm-ff-search-library-in-sexp t
-        ;; Scroll 8 lines other window using M-<next>/M-<prior>
-        helm-scroll-amount 8
+        ;; Search all available buffers with `helm-dabbrev'
+        helm-dabbrev-related-buffer-fn nil
         ;; Use `recentf' for file history
         helm-ff-file-name-history-use-recentf t
         ;; Offer completion for target directory
         helm-dwim-target 'completion
         ;; Disable the header line
-        helm-display-header-line nil)
+        helm-display-header-line nil
+        ;; Don't use full window for display
+        helm-turn-on-show-completion nil)
   ;; Add bookmark selection and creation to `helm-mini'
   (setq helm-mini-default-sources
         '(helm-source-buffers-list
@@ -2360,9 +2363,6 @@
                 ("C-c b i" . insert-buffer)
                 ("<f5>" . revert-buffer)))
   (global-set-key (kbd (car bind)) (cdr bind)))
-
-;;; Replace dabbrev-expand with hippie-expand
-(global-set-key [remap dabbrev-expand] #'hippie-expand)
 
 ;;; Customize interface
 (global-set-key (kbd "<C-f9>") #'customize-group)
