@@ -208,6 +208,7 @@
         "/backup/.*\\'"
         "/elfeed/.*\\'"
         "/cache/.*\\'"
+        "/url/.*\\'"
         "/dev/shm/.*\\'"
         ".*\\.gz\\'"
         "newsrc"
