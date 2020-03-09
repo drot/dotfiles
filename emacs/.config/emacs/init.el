@@ -390,6 +390,8 @@
       lazy-count-prefix-format "(%s/%s) ")
 ;; Allow search string extension with motion commands
 (setq isearch-yank-on-move 'shift)
+;; Add local key binding for `isearch-occur'
+(define-key isearch-mode-map (kbd "C-o") #'isearch-occur)
 
 ;;; Ediff window split
 (after-load 'ediff-wind
@@ -2028,7 +2030,7 @@
 (after-load 'helm
   ;; Rebind TAB to run persistent action
   (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
-  ;; make TAB work in terminal
+  ;; Make TAB work in terminal
   (define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
   ;; List actions using C-z
   (define-key helm-map (kbd "C-z")  #'helm-select-action)
