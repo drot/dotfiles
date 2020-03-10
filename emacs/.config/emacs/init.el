@@ -2359,7 +2359,7 @@
 ;;; Extended buffer operation key bindings
 (dolist (bind '(("C-c b DEL" . erase-buffer)
                 ("C-z" . bury-buffer)
-                ("C-c b u" . unbury-buffer)
+                ("C-S-z" . unbury-buffer)
                 ("C-c b e" . eval-buffer)
                 ("C-c b k" . kill-this-buffer)
                 ("C-c b i" . insert-buffer)
