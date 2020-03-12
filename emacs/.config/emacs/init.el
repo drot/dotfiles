@@ -373,9 +373,8 @@
 (global-set-key (kbd "C-c l d") #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
-  ;; Issue warning if missing program
-  (unless ispell-program-name
-    (warn "No spell checker available."))
+  ;; Ensure spell checking program is available
+  (setq ispell-program-name (executable-find "aspell"))
   ;; Extra switches
   (setq ispell-extra-args '("--sug-mode=ultra"))
   ;; Default dictionary
@@ -542,13 +541,6 @@
   ;; Search more extensively
   (setq apropos-do-all t))
 
-;;; ElDoc mode
-(after-load 'eldoc
-  ;; Make compatible with Paredit
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round))
-
 ;;; Python mode configuration
 (after-load 'python
   ;; Use Python 3 as default
@@ -664,8 +656,9 @@
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
-  ;; Allow changing of permissions too
-  (setq wdired-allow-to-change-permissions t)
+  ;; Allow changing of permissions and symbolic links too
+  (setq wdired-allow-to-change-permissions t
+        wdired-allow-to-redirect-links t)
   ;; Make movement work the same as in regular Dired buffers
   (setq wdired-use-dired-vertical-movement 'sometimes))
 
@@ -1059,6 +1052,8 @@
   (setq org-directory "~/Documents/org"
         org-default-notes-file "~/Documents/org/notes.org"
         org-agenda-files '("~/Documents/org"))
+  ;; Display agenda in current window
+  (setq org-agenda-window-setup 'current-window)
   ;; Add replacements for task symbols
   (defun drot/org-prettify-task-symbols-setup ()
     "Prettify `org-mode' task list symbols."
@@ -1071,16 +1066,15 @@
   (add-hook 'org-mode-hook #'drot/org-prettify-task-symbols-setup)
   ;; Record time when a task is done
   (setq org-log-done 'time)
-  ;; Indent headings by default
-  (setq org-startup-indented t)
   ;; Smart avoidance for collapsed heading edits
   (setq org-catch-invisible-edits 'smart)
   ;; Change fontification for done headings
   (setq org-fontify-done-headline t)
-  ;; Make movement behavior special and use speed keys
+  ;; Movement options
   (setq org-special-ctrl-a/e t
-        org-M-RET-may-split-line nil
-        org-use-speed-commands t)
+        org-special-ctrl-k t
+        org-use-speed-commands t
+        org-yank-adjusted-subtrees t)
   ;; Default `org-goto' interface
   (setq org-goto-interface 'outline-path-completion)
   ;; Default LaTeX compiler
@@ -1093,7 +1087,8 @@
   (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
   ;; Native source code behavior
   (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t)
+        org-src-tab-acts-natively t
+        org-src-window-setup 'current-window)
   ;; Make Wind Move work in Org mode
   (add-hook 'org-shiftup-final-hook #'windmove-up)
   (add-hook 'org-shiftleft-final-hook #'windmove-left)
@@ -1104,7 +1099,9 @@
 (after-load 'org-clock
   ;; Change default persist file location
   (setq org-clock-persist-file
-        (locate-user-emacs-file "cache/org-clock-save.el")))
+        (locate-user-emacs-file "cache/org-clock-save.el"))
+  ;; Start from the last closed clock
+  (setq org-clock-continuously t))
 
 ;;; Time display
 (global-set-key (kbd "<C-f12>") #'display-time-world)
@@ -1824,6 +1821,11 @@
   (when (executable-find "lp")
     (setq pdf-misc-print-programm "/usr/bin/lp")))
 
+;; PDF Tools Midnight mode colors
+(after-load 'pdf-view
+  ;; Tomorrow Night palette
+  (setq pdf-view-midnight-colors '("#c5c8c6" . "#1d1f21")))
+
 ;; Display PDF files to the right always
 (add-to-list 'display-buffer-alist
              '("\\.pdf\\(<[^>]+>\\)?$"
@@ -1861,7 +1863,7 @@
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
-  (setq inferior-lisp-program "sbcl")
+  (setq inferior-lisp-program (executable-find "sbcl"))
   ;; Disable conflicting key bindings
   (defun drot/sly-sanitize-bindings ()
     "Removes SLY's conflicting keybindings."
@@ -2026,6 +2028,7 @@
 (global-set-key [remap find-file] #'helm-find-files)
 (global-set-key [remap switch-to-buffer] #'helm-mini)
 (global-set-key [remap dabbrev-expand] #'helm-dabbrev)
+(global-set-key [remap yank-pop] #'helm-show-kill-ring)
 ;; Configuration
 (after-load 'helm
   ;; Rebind TAB to run persistent action
@@ -2126,6 +2129,11 @@
   (add-hook hook #'enable-paredit-mode))
 ;; Configuration
 (after-load 'paredit
+  ;; Enable integration with ElDoc
+  (eldoc-add-command
+   #'paredit-backward-delete
+   #'paredit-close-round)
+
   ;; Define extra commands
   (defun paredit-mark-containing-sexp ()
     (interactive)
