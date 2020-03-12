@@ -186,7 +186,7 @@ for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Thunar"] floating enable
 for_window [class="Pinentry"] floating enable
-for_window [class="Pidgin"] floating enable
+for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
 # Ripcord specific
 for_window [title="Ripcord Accounts"] floating enable
@@ -208,7 +208,6 @@ assign [class="Ripcord"] $ws7
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol " » "
     status_command i3status
     colors {
         background #282a2e
