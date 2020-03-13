@@ -225,7 +225,7 @@
 (setq display-line-numbers-type 'relative
       display-line-numbers-current-absolute nil)
 ;; Maximum width reserved for line numbers
-(setq-default display-line-numbers-width 2)
+(setq display-line-numbers-width-start t)
 ;; Display line numbers only in relevant modes
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
