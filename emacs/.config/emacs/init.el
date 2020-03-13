@@ -1052,8 +1052,6 @@
   (setq org-directory "~/Documents/org"
         org-default-notes-file "~/Documents/org/notes.org"
         org-agenda-files '("~/Documents/org"))
-  ;; Display agenda in current window
-  (setq org-agenda-window-setup 'current-window)
   ;; Add replacements for task symbols
   (defun drot/org-prettify-task-symbols-setup ()
     "Prettify `org-mode' task list symbols."
@@ -1064,6 +1062,13 @@
       (cl-pushnew symbol prettify-symbols-alist :test #'equal)))
   ;; Apply the custom hook
   (add-hook 'org-mode-hook #'drot/org-prettify-task-symbols-setup)
+  ;; Make Wind Move work in Org mode
+  (add-hook 'org-shiftup-final-hook #'windmove-up)
+  (add-hook 'org-shiftleft-final-hook #'windmove-left)
+  (add-hook 'org-shiftdown-final-hook #'windmove-down)
+  (add-hook 'org-shiftright-final-hook #'windmove-right)
+  ;; Display agenda in current window
+  (setq org-agenda-window-setup 'current-window)
   ;; Record time when a task is done
   (setq org-log-done 'time)
   ;; Smart avoidance for collapsed heading edits
@@ -1075,6 +1080,10 @@
         org-special-ctrl-k t
         org-use-speed-commands t
         org-yank-adjusted-subtrees t)
+  ;; Native source code behavior
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-src-window-setup 'current-window)
   ;; Default `org-goto' interface
   (setq org-goto-interface 'outline-path-completion)
   ;; Default LaTeX compiler
@@ -1083,17 +1092,8 @@
   (setq org-highlight-latex-and-related '(entities latex script))
   ;; LaTeX preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-  ;; Store LaTeX preview images in a single directory
-  (setq org-preview-latex-image-directory (locate-user-emacs-file "ltximg/"))
-  ;; Native source code behavior
-  (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t
-        org-src-window-setup 'current-window)
-  ;; Make Wind Move work in Org mode
-  (add-hook 'org-shiftup-final-hook #'windmove-up)
-  (add-hook 'org-shiftleft-final-hook #'windmove-left)
-  (add-hook 'org-shiftdown-final-hook #'windmove-down)
-  (add-hook 'org-shiftright-final-hook #'windmove-right))
+  ;; Store LaTeX preview images in /tmp
+  (setq org-preview-latex-image-directory (concat temporary-file-directory "ltximg/")))
 
 ;; Org time clocking
 (after-load 'org-clock
