@@ -13,7 +13,7 @@ local gshape = require("gears.shape")
 
 local theme = {}
 
-theme.font = "Iosevka Term SS05 12"
+theme.font = "Iosevka Fixed SS05 12"
 
 theme.icon_theme = "Papirus"
 
@@ -76,7 +76,7 @@ theme.taglist_shape_border_color_urgent = theme.fg_urgent
 theme.tasklist_spacing = 1
 theme.tasklist_shape = gshape.rectangle
 theme.tasklist_shape_border_width = dpi(1)
-theme.tasklist_font_minimized = "Iosevka Term SS05 Italic 12"
+theme.tasklist_font_minimized = "Iosevka Fixed SS05 Italic 12"
 theme.tasklist_shape_border_color = theme.bg_minimize
 theme.tasklist_shape_border_color_minimized = theme.fg_minimize
 theme.tasklist_bg_normal = theme.bg_focus
