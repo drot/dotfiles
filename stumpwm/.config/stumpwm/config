@@ -13,8 +13,8 @@
 (in-package :stumpwm)
 
 ;;; Make sure required libraries are installed
-(ql:quickload slynk)
-(ql:quickload xembed)
+(ql:quickload "slynk")
+(ql:quickload "xembed")
 
 ;;; Load contrib modules
 (load-module "cpu")
@@ -174,7 +174,7 @@
 (defcommand slynk () ()
   "Creates a Slynk server in the StumpWM Lisp process."
   (slynk:create-server
-   :port 4005
+   :port 4006
    :dont-close t)
   (echo-string (current-screen) "Starting Slynk..."))
 
