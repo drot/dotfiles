@@ -1,4 +1,4 @@
-;;; init.lisp --- StumpWM user configuration
+;;; config --- StumpWM user configuration -*- mode: lisp; -*-
 
 ;; Author: drot
 ;; Created 30-01-2011
@@ -12,19 +12,9 @@
 
 (in-package :stumpwm)
 
-;;; Load Slynk
-(push (car (directory "~/.config/emacs/elpa/sly-2*/slynk/")) asdf:*central-registry*)
-(asdf:operate 'asdf:load-op 'slynk)
-
-;;; Command for on-demand starting of the Swank server
-(defcommand slynk () ()
-  "Creates a Slynk server in the StumpWM Lisp process."
-  (slynk:create-server
-   :port 4005
-   :dont-close t)
-  (echo-string (current-screen) "Starting Slynk..."))
-
-(define-key *root-map* (kbd "C-s") "slynk")
+;;; Make sure required libraries are installed
+(ql:quickload slynk)
+(ql:quickload xembed)
 
 ;;; Load contrib modules
 (load-module "cpu")
@@ -111,15 +101,15 @@
 ;;; Volume control functions
 (defcommand voltoggle () ()
   "Toggle volume."
-  (run-shell-command "pactl set-sink-mute 0 toggle"))
+  (run-shell-command "~/.scripts/audio_toggle mute"))
 
 (defcommand volplus () ()
   "Increase volume."
-  (run-shell-command "pactl set-sink-volume 0 +5%"))
+  (run-shell-command "~/.scripts/audio_toggle up"))
 
 (defcommand volminus () ()
   "Decrease volume"
-  (run-shell-command "pactl set-sink-volume 0 -5%"))
+  (run-shell-command "~/.scripts/audio_toggle down"))
 
 ;;; Run or raise
 (defcommand eclient () ()
@@ -180,4 +170,14 @@
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "volplus")
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "volminus")
 
-;;; init.lisp ends here
+;;; Command for on-demand starting of the Swank server
+(defcommand slynk () ()
+  "Creates a Slynk server in the StumpWM Lisp process."
+  (slynk:create-server
+   :port 4005
+   :dont-close t)
+  (echo-string (current-screen) "Starting Slynk..."))
+
+(define-key *root-map* (kbd "C-s") "slynk")
+
+;;; config ends here
