@@ -145,9 +145,6 @@
 ;;; Resize windows proportionally
 (setq window-combination-resize t)
 
-;;; Resize minibuffer to fit text
-(setq resize-mini-windows t)
-
 ;;; Prompt for buffer switch in strongly dedicated windows
 (setq switch-to-buffer-in-dedicated-window 'prompt)
 

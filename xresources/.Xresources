@@ -46,7 +46,7 @@ XTerm*ScrollKey: true
 XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Iosevka Term SS05:pixelsize=16
+XTerm*faceName: Iosevka Fixed SS05:pixelsize=16
 
 ! Main colors
 XTerm*foreground: #c5c8c6
