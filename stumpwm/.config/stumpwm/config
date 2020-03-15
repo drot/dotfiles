@@ -144,7 +144,17 @@
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "volplus")
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "volminus")
 
-;; Remap Firefox keys
+;;; Command for on-demand starting of the Swank server
+(defcommand slynk () ()
+  "Creates a Slynk server in the StumpWM Lisp process."
+  (slynk:create-server
+   :port 4006
+   :dont-close t)
+  (echo-string (current-screen) "Starting Slynk..."))
+
+(define-key *root-map* (kbd "C-s") "slynk")
+
+;;; Remap Firefox keys
 (define-remapped-keys
     '(("Firefox"
        ("C-n"   . "Down")
@@ -161,15 +171,5 @@
        ("C-M-b" . "M-Left")
        ("C-M-f" . "M-Right")
        ("C-k"   . ("C-S-End" "C-x")))))
-
-;;; Command for on-demand starting of the Swank server
-(defcommand slynk () ()
-  "Creates a Slynk server in the StumpWM Lisp process."
-  (slynk:create-server
-   :port 4006
-   :dont-close t)
-  (echo-string (current-screen) "Starting Slynk..."))
-
-(define-key *root-map* (kbd "C-s") "slynk")
 
 ;;; config ends here
