@@ -5,22 +5,14 @@
 
 ;;; Commentary:
 
-;; Tomorrow Night themed, mostly default key bindings. `stumptray' module requires
-;; `xembed' to be installed via Quicklisp.
+;; Tomorrow Night themed, mostly default key bindings.
 
 ;;; Code:
 
 (in-package :stumpwm)
 
-;;; Make sure required libraries are installed
+;;; Make sure `slynk' is installed
 (ql:quickload "slynk")
-(ql:quickload "xembed")
-
-;;; Load contrib modules
-(load-module "cpu")
-(load-module "mem")
-(load-module "net")
-(load-module "stumptray")
 
 ;;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
@@ -76,15 +68,12 @@
 
 ;;; Mode line format
 (setf stumpwm:*screen-mode-line-format*
-      '("<^7*%n^n> ^06%u^n ^30%W^n ^>"
-        " ^2*%c^n >> ^4*%M^n >> ^3*%l^n >> %d %T"))
+      (list "<^7*%n^n> ^06%u^n ^30%W^n ^>"
+            '(:eval (stumpwm:run-shell-command "/home/drot/.scripts/statusbar" t))))
 
 ;;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
-
-;;; Toggle tray space
-(stumptray:stumptray)
 
 ;;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
