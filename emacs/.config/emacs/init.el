@@ -152,9 +152,6 @@
 (setq view-read-only t
       view-inhibit-help-message t)
 
-;;; Auto select help buffers
-(setq help-window-select t)
-
 ;;; Kill and yank clipboard saving
 (setq save-interprogram-paste-before-kill t)
 
