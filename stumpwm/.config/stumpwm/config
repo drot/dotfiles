@@ -157,19 +157,19 @@
 ;;; Remap Firefox keys
 (define-remapped-keys
     '(("Firefox"
-       ("C-n"   . "Down")
-       ("C-p"   . "Up")
-       ("C-f"   . "Right")
-       ("C-b"   . "Left")
-       ("C-v"   . "Next")
-       ("M-v"   . "Prior")
-       ("M-w"   . "C-c")
-       ("C-w"   . "C-x")
-       ("C-y"   . "C-v")
-       ("M-<"   . "Home")
-       ("M->"   . "End")
+       ("C-n" . "Down")
+       ("C-p" . "Up")
+       ("C-f" . "Right")
+       ("C-b" . "Left")
+       ("C-v" . "Next")
+       ("M-v" . "Prior")
+       ("M-w" . "C-c")
+       ("C-w" . "C-x")
+       ("C-y" . "C-v")
+       ("M-<" . "Home")
+       ("M->" . "End")
        ("C-M-b" . "M-Left")
        ("C-M-f" . "M-Right")
-       ("C-k"   . ("C-S-End" "C-x")))))
+       ("C-k" . ("C-S-End" "C-x")))))
 
 ;;; config ends here
