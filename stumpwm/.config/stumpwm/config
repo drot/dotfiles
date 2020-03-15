@@ -67,13 +67,13 @@
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 
 ;;; Mode line format
-(setf stumpwm:*screen-mode-line-format*
+(setf *screen-mode-line-format*
       (list "<^7*%n^n> ^06%u^n ^30%W^n ^>"
             '(:eval (run-shell-command "/home/drot/.scripts/statusbar" t))))
 
 ;;; Show the mode line for the current screen
-(stumpwm:toggle-mode-line (stumpwm:current-screen)
-                          (stumpwm:current-head))
+(toggle-mode-line (current-screen)
+                  (current-head))
 
 ;;; First group name and other group creation
 (setf (group-name (car (screen-groups (current-screen)))) "term")
