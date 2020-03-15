@@ -69,7 +69,7 @@
 ;;; Mode line format
 (setf stumpwm:*screen-mode-line-format*
       (list "<^7*%n^n> ^06%u^n ^30%W^n ^>"
-            '(:eval (stumpwm:run-shell-command "/home/drot/.scripts/statusbar" t))))
+            '(:eval (run-shell-command "/home/drot/.scripts/statusbar" t))))
 
 ;;; Show the mode line for the current screen
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
@@ -133,21 +133,6 @@
 
 ;;; Change default prefix key
 (set-prefix-key (kbd "C-i"))
-
-;;; Display prefix key in use
-(defun key-seq-msg (_key key-seq cmd)
-  "Show a message with current incomplete key sequence."
-  (declare (ignore _key))
-  (unless (or (stringp cmd)
-              (eq *top-map* *resize-map*))
-    (let* ((oriented-key-seq (reverse key-seq))
-           (maps (get-kmaps-at-key-seq (dereference-kmaps (top-maps))
-                                       oriented-key-seq)))
-      (when maps
-        (let ((*message-window-gravity* :bottom-left))
-          (message "~A" (print-key-seq oriented-key-seq)))))))
-
-(add-hook *key-press-hook* 'key-seq-msg)
 
 ;;; Swap default key bindings
 (define-key *root-map* (kbd "C-b") "firefox")
