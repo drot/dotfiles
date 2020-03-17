@@ -14,6 +14,9 @@
 ;;; Make sure `slynk' is installed
 (ql:quickload "slynk")
 
+;;; Debug instead of abort
+(setf *top-level-error-action* :break)
+
 ;;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
                  "#cc6666"              ; 1 red
@@ -137,6 +140,7 @@
 ;;; Swap default key bindings
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
+(define-key *root-map* (kbd "") "firefox")
 
 ;;; Volume control key bindings
 (define-key *top-map* (kbd "XF86AudioMute") "voltoggle")
@@ -151,7 +155,7 @@
    :dont-close t)
   (echo-string (current-screen) "Starting Slynk..."))
 
-(define-key *root-map* (kbd "C-s") "slynk")
+(define-key *help-map* (kbd "s") "slynk")
 
 ;;; Remap Firefox keys
 (define-remapped-keys
