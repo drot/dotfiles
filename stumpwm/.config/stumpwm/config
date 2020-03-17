@@ -138,9 +138,9 @@
 (set-prefix-key (kbd "C-i"))
 
 ;;; Swap default key bindings
+(define-key *root-map* (kbd "b") "firefox")
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "e") "eclient")
-(define-key *root-map* (kbd "") "firefox")
 
 ;;; Volume control key bindings
 (define-key *top-map* (kbd "XF86AudioMute") "voltoggle")
