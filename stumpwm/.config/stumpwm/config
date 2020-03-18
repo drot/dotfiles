@@ -71,8 +71,8 @@
 
 ;;; Mode line format
 (setf *screen-mode-line-format*
-      (list "<^7*%n^n> ^06%u^n ^30%W^n ^>"
-            '(:eval (run-shell-command "/home/drot/.scripts/statusbar" t))))
+      (list "^7*<^3*%n^7*>^n ^06%u^n ^30%W^n ^>"
+            '(:eval (run-shell-command "~/.scripts/statusbar" t))))
 
 ;;; Show the mode line for the current screen
 (toggle-mode-line (current-screen)
