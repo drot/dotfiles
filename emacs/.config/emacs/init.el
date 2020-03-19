@@ -185,7 +185,10 @@
 ;;; Save minibuffer history
 (setq savehist-file (locate-user-emacs-file "cache/saved-history")
       savehist-autosave-interval 60
-      savehist-additional-variables '(search-ring regexp-search-ring))
+      savehist-additional-variables
+      '(extended-command-history
+        regexp-search-ring
+        search-ring ))
 ;; Enable mode
 (savehist-mode)
 
