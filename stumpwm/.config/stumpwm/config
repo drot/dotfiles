@@ -64,14 +64,15 @@
 
 ;;; Group and window format
 (setf *group-format* "%n%s(%t)")
-(setf *window-format* "%m%n%s(%50t) ")
+(setf *window-format* "%m%n%s(%50t)")
+(setf *hidden-window-color* "^06*")
 
 ;;; Mode line time format
 (setf *time-modeline-string* "^5*%e-%m^n ^3*%R^n")
 
 ;;; Mode line format
 (setf *screen-mode-line-format*
-      (list "^7*<^3*%n^7*>^n ^06%u^n ^30%W^n ^>"
+      (list "^7*<^3*%n^7*>^n ^04%u^n ^30%v^n ^>"
             '(:eval (run-shell-command "~/.scripts/statusbar" t))))
 
 ;;; Show the mode line for the current screen
