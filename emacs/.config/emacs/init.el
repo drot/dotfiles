@@ -485,6 +485,13 @@
   ;; Split window instead for buffer display
   (setq ibuffer-use-other-window t))
 
+;;; Find file at point
+(after-load 'ffap
+  ;; Disable pinging to avoid slowdowns
+  (setq ffap-machine-p-known 'reject)
+  ;; Default RFC path
+  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+
 ;;; Version control
 (after-load 'vc-hooks
   ;; TRAMP speedup
