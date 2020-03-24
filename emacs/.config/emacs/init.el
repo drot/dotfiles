@@ -427,6 +427,7 @@
                              (mode . calc-trail-mode)))
            ("Code" (and (or (derived-mode . prog-mode)
                             (derived-mode . conf-mode)
+                            (derived-mode . yaml-mode)
                             (derived-mode . sgml-mode))
                         (not (name . "*scratch*"))))
            ("Compilation" (derived-mode . compilation-mode))
