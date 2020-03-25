@@ -448,6 +448,7 @@
            ("Gnus" (or (derived-mode . gnus-group-mode)
                        (mode . gnus-summary-mode)
                        (derived-mode . gnus-article-mode)))
+           ("Helm" (derived-mode . helm-major-mode))
            ("Help" (or (derived-mode . help-mode)
                        (derived-mode . apropos-mode)
                        (derived-mode . Info-mode)))
