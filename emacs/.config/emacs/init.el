@@ -2120,6 +2120,7 @@
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
+          rcirc-omit-mode
           visual-line-mode)))
 
 ;;; Paredit
