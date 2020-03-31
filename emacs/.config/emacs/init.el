@@ -1458,16 +1458,16 @@
            :port 6697
            :encryption tls
            :channels ("#/g/technology" "#rice"))
-          ("irc.forestnet.org"
+          ("chat.freenode.net"
            :port 6697
            :encryption tls
-           :channels ("#rawhide" "#sq"))))
+           :channels ("#archlinux" "#emacs"))))
   ;; Authentication
   (setq rcirc-authinfo
         `(("rizon" nickserv "drot"
            ,(auth-source-pass-get 'secret "IRC/drot@irc.rizon.net"))
-          ("forestnet" nickserv "drot"
-           ,(auth-source-pass-get 'secret "IRC/drot@irc.forestnet.org"))))
+          ("freenode" nickserv "drot"
+           ,(auth-source-pass-get 'secret "IRC/drot@chat.freenode.net"))))
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 2048)
   ;; Set fill column value to frame width
