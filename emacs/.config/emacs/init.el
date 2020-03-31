@@ -1473,7 +1473,8 @@
   ;; Set fill column value to frame width
   (setq rcirc-fill-column #'window-text-width)
   ;; Enable logging
-  (setq rcirc-log-flag t)
+  (setq rcirc-log-flag t
+        rcirc-log-directory (locate-user-emacs-file "rcirc-log"))
   ;; Enable additional modes
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
