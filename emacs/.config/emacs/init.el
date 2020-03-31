@@ -1479,7 +1479,7 @@
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
-  ;; Disable company mode in rcirc buffers
+  ;; Disable `company-mode' in rcirc buffers
   (add-hook 'rcirc-mode-hook
             (lambda () (company-mode 0)))
   ;; Exclude text properties when yanking text in rcirc buffers
