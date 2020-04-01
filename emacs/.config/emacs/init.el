@@ -1401,6 +1401,12 @@
   (require 'dired-async)
   (dired-async-mode))
 
+;;; Dired rsync
+(require-package 'dired-rsync)
+;; Configuration
+(after-load 'dired-async
+  (define-key dired-mode-map (kbd "C-c C-r") #'dired-rsync))
+
 ;;; Dockerfile mode
 (require-package 'dockerfile-mode)
 
