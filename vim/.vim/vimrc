@@ -19,6 +19,11 @@ set termguicolors
 filetype plugin indent on
 syntax on
 
+if !empty($DISPLAY)
+	" Use the Xorg's primary buffer as default register
+	set clipboard=unnamed
+endif
+
 " Hit `%` on `if` to jump to `else`, built-in functionality
 runtime macros/matchit.vim
 
@@ -40,11 +45,15 @@ set ruler
 " Highlight current line
 set cursorline
 
-" Great command-line completion, use `<Tab>` to move around and `<CR>` to validate
+" Enable completion menu
 set wildmenu
 
 " Show line numbers
 set number
+
+" Ignore case in searches unless we specify it
+set ignorecase
+set smartcase
 
 " Show status line
 set laststatus=2
@@ -65,4 +74,4 @@ set autoread
 set scrolloff=1
 
 " Highlight specified column
-set colorcolumn=81
+set colorcolumn=80
