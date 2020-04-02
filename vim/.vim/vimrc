@@ -1,0 +1,68 @@
+" Keep everything under one directory
+set undodir=$HOME/.vim/undo
+set directory=$HOME/.vim/swap
+set backupdir=$HOME/.vim/backup
+set viminfofile=$HOME/.vim/viminfo
+
+" Make sure specified directories exist
+call mkdir(&backupdir, "p")
+call mkdir(&directory, "p")
+call mkdir(&undodir, "p")
+
+" Colorscheme
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+colorscheme base16-tomorrow-night 
+set termguicolors
+
+" Enable file type support and syntax highlight 
+filetype plugin indent on
+syntax on
+
+" Hit `%` on `if` to jump to `else`, built-in functionality
+runtime macros/matchit.vim
+
+" Minimal automatic indenting for any filetype
+set autoindent
+
+" Proper backspace behavior
+set backspace=indent,eol,start
+
+" Possibility to have more than one unsaved buffers
+set hidden
+
+" Incremental search, hit `<CR>` to stop
+set incsearch
+
+" Shows the current line number at the bottom-right of the screen.
+set ruler
+
+" Highlight current line
+set cursorline
+
+" Great command-line completion, use `<Tab>` to move around and `<CR>` to validate
+set wildmenu
+
+" Show line numbers
+set number
+
+" Show status line
+set laststatus=2
+
+" Default list mode characters
+set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
+
+" Enable undo history saving
+set undofile
+
+" Enable backup file creation
+set backup
+
+" Automatically update file on external changes
+set autoread
+
+" Scrolling offset
+set scrolloff=1
+
+" Highlight specified column
+set colorcolumn=81
