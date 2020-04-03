@@ -28,6 +28,11 @@ set autoindent
 " Proper backspace behavior
 set backspace=indent,eol,start
 
+" Proper Tab insertion
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
 " Possibility to have more than one unsaved buffers
 set hidden
 
@@ -65,19 +70,19 @@ set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
 
 " Use the Xorg's primary buffer as default register
 if !empty($DISPLAY)
-	set clipboard=unnamed
+    set clipboard=unnamed
 endif
 
-" Colorscheme
+" Colorscheme setup
 if &t_Co >= 256 && (&term =~# '^st' || &term =~# '^tmux')
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	set termguicolors
-	colorscheme base16-tomorrow-night 
+    " Set override sequences
+    let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+    let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+    " Enable truecolor support
+    set termguicolors
+    " Set colorscheme
+    colorscheme base16-tomorrow-night 
 endif
 
 " Hit `%` on `if` to jump to `else`, built-in functionality
 runtime macros/matchit.vim
-
-
-
