@@ -57,7 +57,7 @@ set relativenumber
 " Scrolling offset
 set scrolloff=1
 
-" Wrap with @
+" Display the last line as much as possible
 set display+=lastline
 
 " Incremental search, hit `<CR>` to stop
