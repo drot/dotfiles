@@ -56,9 +56,16 @@ set relativenumber
 
 " Scrolling offset
 set scrolloff=1
+set sidescrolloff=5
 
 " Display the last line as much as possible
 set display+=lastline
+
+" Default list mode characters
+set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
+
+" Delete comment character when joining commented lines
+set formatoptions+=j
 
 " Incremental search, hit `<CR>` to stop
 set incsearch
@@ -73,9 +80,6 @@ set wildignorecase
 
 " Don't scan included files for completion
 set complete-=i
-
-" Default list mode characters
-set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
 
 " Use the Xorg's primary buffer as default register
 if !empty($DISPLAY)
