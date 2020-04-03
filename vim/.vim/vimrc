@@ -45,6 +45,9 @@ set cursorline
 " Highlight specified column
 set colorcolumn=80
 
+" Show partial commands
+set showcmd
+
 " Show status line
 set laststatus=2
 
@@ -53,6 +56,9 @@ set relativenumber
 
 " Scrolling offset
 set scrolloff=1
+
+" Wrap with @
+set display+=lastline
 
 " Incremental search, hit `<CR>` to stop
 set incsearch
@@ -64,6 +70,9 @@ set smartcase
 " Enable completion menu and ignore case
 set wildmenu
 set wildignorecase
+
+" Don't scan included files for completion
+set complete-=i
 
 " Default list mode characters
 set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
