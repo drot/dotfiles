@@ -78,9 +78,6 @@ set smartcase
 set wildmenu
 set wildignorecase
 
-" Don't scan included files for completion
-set complete-=i
-
 " Use the Xorg's primary buffer as default register
 if !empty($DISPLAY)
     set clipboard=unnamed
