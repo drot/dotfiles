@@ -69,10 +69,12 @@ if !empty($DISPLAY)
 endif
 
 " Colorscheme
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
-colorscheme base16-tomorrow-night 
+if &t_Co >= 256 && (&term =~# '^st' || &term =~# '^tmux')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set termguicolors
+	colorscheme base16-tomorrow-night 
+endif
 
 " Hit `%` on `if` to jump to `else`, built-in functionality
 runtime macros/matchit.vim
