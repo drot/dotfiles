@@ -9,23 +9,18 @@ call mkdir(&backupdir, "p")
 call mkdir(&directory, "p")
 call mkdir(&undodir, "p")
 
-" Colorscheme
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-colorscheme base16-tomorrow-night 
-set termguicolors
+" Enable backup file creation
+set backup
+
+" Automatically update file on external changes
+set autoread
+
+" Enable undo history saving
+set undofile
 
 " Enable file type support and syntax highlight 
 filetype plugin indent on
 syntax on
-
-if !empty($DISPLAY)
-	" Use the Xorg's primary buffer as default register
-	set clipboard=unnamed
-endif
-
-" Hit `%` on `if` to jump to `else`, built-in functionality
-runtime macros/matchit.vim
 
 " Minimal automatic indenting for any filetype
 set autoindent
@@ -36,42 +31,51 @@ set backspace=indent,eol,start
 " Possibility to have more than one unsaved buffers
 set hidden
 
-" Incremental search, hit `<CR>` to stop
-set incsearch
-
 " Shows the current line number at the bottom-right of the screen.
 set ruler
 
 " Highlight current line
 set cursorline
 
-" Enable completion menu
-set wildmenu
+" Highlight specified column
+set colorcolumn=80
 
-" Show line numbers
-set number
+" Show status line
+set laststatus=2
+
+" Show relative line numbers
+set relativenumber
+
+" Scrolling offset
+set scrolloff=1
+
+" Incremental search, hit `<CR>` to stop
+set incsearch
 
 " Ignore case in searches unless we specify it
 set ignorecase
 set smartcase
 
-" Show status line
-set laststatus=2
+" Enable completion menu and ignore case
+set wildmenu
+set wildignorecase
 
 " Default list mode characters
 set listchars=eol:§,tab:¤›,extends:»,precedes:«,nbsp:‡
 
-" Enable undo history saving
-set undofile
+" Use the Xorg's primary buffer as default register
+if !empty($DISPLAY)
+	set clipboard=unnamed
+endif
 
-" Enable backup file creation
-set backup
+" Colorscheme
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+colorscheme base16-tomorrow-night 
+set termguicolors
 
-" Automatically update file on external changes
-set autoread
+" Hit `%` on `if` to jump to `else`, built-in functionality
+runtime macros/matchit.vim
 
-" Scrolling offset
-set scrolloff=1
 
-" Highlight specified column
-set colorcolumn=80
+
