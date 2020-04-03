@@ -78,6 +78,12 @@ set smartcase
 set wildmenu
 set wildignorecase
 
+" Don't redraw screen while executing commands that have not been typed 
+set lazyredraw
+
+" Send more characters to the screen for redrawing 
+set ttyfast
+
 " Use the Xorg's primary buffer as default register
 if !empty($DISPLAY)
     set clipboard=unnamed
