@@ -1843,7 +1843,8 @@
 (add-to-list 'display-buffer-alist
              '("\\.pdf\\(<[^>]+>\\)?$"
                (display-buffer-in-side-window)
-               (side . right)))
+               (side . right)
+               (window-width . 0.5)))
 
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
