@@ -2066,7 +2066,9 @@
         ;; Disable the header line
         helm-display-header-line nil
         ;; Don't use full window for display
-        helm-turn-on-show-completion nil)
+        helm-turn-on-show-completion nil
+        ;; Always display at bottom
+        helm-default-display-buffer-functions '(display-buffer-at-bottom))
   ;; Add bookmark selection and creation to `helm-mini'
   (setq helm-mini-default-sources
         '(helm-source-buffers-list
