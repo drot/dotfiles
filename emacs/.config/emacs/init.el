@@ -1842,8 +1842,8 @@
 ;; Display PDF files to the right always
 (add-to-list 'display-buffer-alist
              '("\\.pdf\\(<[^>]+>\\)?$"
-               (display-buffer-in-direction)
-               (direction . rightmost)))
+               (display-buffer-in-side-window)
+               (side . right)))
 
 ;;; Polymode Markdown
 (require-package 'poly-markdown)
