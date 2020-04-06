@@ -1019,18 +1019,18 @@
   ;; Define Hydra
   (defhydra hydra-outline ()
     ;; Hide
-    ("q" hide-sublevels "Sublevels" :column "Hide") ; Hide everything but the top-level headings
-    ("t" hide-body "Body") ; Hide everything but headings (all body lines)
-    ("o" hide-other "Other") ; Hide other branches
-    ("c" hide-entry "Entry") ; Hide this entry's body
-    ("l" hide-leaves "Leaves") ; Hide body lines in this entry and sub-entries
-    ("d" hide-subtree "Subtree") ; Hide everything in this entry and sub-entries
+    ("q" outline-hide-sublevels "Sublevels" :column "Hide") ; Hide everything but the top-level headings
+    ("t" outline-hide-body "Body") ; Hide everything but headings (all body lines)
+    ("o" outline-hide-other "Other") ; Hide other branches
+    ("c" outline-hide-entry "Entry") ; Hide this entry's body
+    ("l" outline-hide-leaves "Leaves") ; Hide body lines in this entry and sub-entries
+    ("d" outline-hide-subtree "Subtree") ; Hide everything in this entry and sub-entries
     ;; Show
-    ("a" show-all "All" :column "Show") ; Show (expand) everything
-    ("e" show-entry "Entry") ; Show this heading's body
-    ("i" show-children "Children") ; Show this heading's immediate child sub-headings
-    ("k" show-branches "Branches") ; Show all sub-headings under this heading
-    ("s" show-subtree "Subtree") ; Show (expand) everything in this heading & below
+    ("a" outline-show-all "All" :column "Show") ; Show (expand) everything
+    ("e" outline-show-entry "Entry") ; Show this heading's body
+    ("i" outline-show-children "Children") ; Show this heading's immediate child sub-headings
+    ("k" outline-show-branches "Branches") ; Show all sub-headings under this heading
+    ("s" outline-show-subtree "Subtree") ; Show (expand) everything in this heading & below
     ;; Move
     ("u" outline-up-heading "Up" :column "Move") ; Up
     ("n" outline-next-visible-heading "Next Visible") ; Next
