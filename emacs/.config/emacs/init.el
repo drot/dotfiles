@@ -2372,9 +2372,6 @@
 (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
 (global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
 
-;;; List packages
-(global-set-key (kbd "<f9>") #'package-list-packages)
-
 ;;; Cycle spacing
 (global-set-key [remap just-one-space] #'cycle-spacing)
 
