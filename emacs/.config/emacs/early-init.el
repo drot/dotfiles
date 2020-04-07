@@ -44,8 +44,8 @@
 (defun drot/reset-file-name-handler-alist ()
   "Resets the file name handler to its default value."
   (setq file-name-handler-alist
-	    (append default-file-name-handler-alist
-		        file-name-handler-alist))
+        (append default-file-name-handler-alist
+                file-name-handler-alist))
   (cl-delete-duplicates file-name-handler-alist :test 'equal))
 
 (add-hook 'after-init-hook #'drot/reset-file-name-handler-alist)
@@ -65,25 +65,17 @@
              (minibuffer-window frame) 0 0 nil t)))
 
 ;;; Package configuration
-(require 'package)
-
-;; Enable package quickstart
-(setq package-quickstart t)
-
-;; Add the MELPA package archive
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-
-;; Pinned packages
-(setq package-pinned-packages '((json-mode . "gnu")))
-
-;; Helper function for installing packages
-(defun require-package (package)
-  "Ensures that PACKAGE is installed."
-  (unless (or (package-installed-p package)
-              (require package nil 'noerror))
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;;; early-init.el ends here

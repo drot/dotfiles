@@ -37,7 +37,7 @@
     (funcall mode -1)))
 
 ;;; Color theme
-(require-package 'color-theme-sanityinc-tomorrow)
+(straight-use-package 'color-theme-sanityinc-tomorrow)
 ;; Load theme explicitly
 (load-theme 'sanityinc-tomorrow-night t)
 
@@ -602,6 +602,8 @@
   (setq epg-pinentry-mode 'loopback))
 
 ;;; Enable Pass integration
+(straight-use-package 'auth-source-pass)
+;; Configuration
 (after-load 'auth-source
   ;; Enable mode
   (auth-source-pass-enable))
@@ -809,14 +811,14 @@
   (setq ielm-prompt "(>) "))
 
 ;;; Hydra
-(require-package 'hydra)
+(straight-use-package 'hydra)
 ;; Configuration
 (after-load 'hydra
   ;; Enable syntax coloring for Hydra definitions
   (hydra-add-font-lock))
 
 ;;; lv - other echo area
-(require-package 'lv)
+(straight-use-package 'lv)
 ;; Configuration
 (after-load 'lv
   ;; Center commands
@@ -879,7 +881,7 @@
         message-kill-buffer-on-exit t))
 
 ;;; Asynchronous SMTP mail sending
-(require-package 'async)
+(straight-use-package 'async)
 ;; Configuration
 (after-load 'message
   ;; Load async library
@@ -1155,7 +1157,7 @@
           ("UTC" "Universal"))))
 
 ;;; 0x0 paste support
-(require-package '0x0)
+(straight-use-package '0x0)
 ;; Set global key bindings
 (dolist (bind '(("C-c b y" . 0x0-upload)
                 ("C-c f u" . 0x0-upload-file)
@@ -1163,7 +1165,7 @@
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Ace-window
-(require-package 'ace-window)
+(straight-use-package 'ace-window)
 ;; Set global key binding
 (global-set-key (kbd "M-o") #'ace-window)
 ;; Configuration
@@ -1172,7 +1174,7 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;;; AUCTeX
-(require-package 'auctex)
+(straight-use-package 'auctex)
 ;; TeX configuration
 (after-load 'tex
   ;; Default TeX engine
@@ -1210,7 +1212,7 @@
   (setq reftex-plug-into-AUCTeX t))
 
 ;;; CIDER
-(require-package 'cider)
+(straight-use-package 'cider)
 ;; Configuration
 (after-load 'cider-common
   ;; Use the symbol at point as the default value
@@ -1241,7 +1243,7 @@
   (setq cider-eldoc-display-context-dependent-info t))
 
 ;;; Clojure mode
-(require-package 'clojure-mode)
+(straight-use-package 'clojure-mode)
 ;; Configuration
 (after-load 'clojure-mode
   ;; Enable CIDER mode
@@ -1250,14 +1252,14 @@
   (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;;; Dash
-(require-package 'dash)
+(straight-use-package 'dash)
 ;; Configuration
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (dash-enable-font-lock))
 
 ;;; Debbugs browser
-(require-package 'debbugs)
+(straight-use-package 'debbugs)
 ;; Set global key bindings
 (dolist (bind '(("C-c d g" . debbugs-gnu)
                 ("C-c d s" . debbugs-gnu-search)
@@ -1271,7 +1273,7 @@
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Dired Filter
-(require-package 'dired-filter)
+(straight-use-package 'dired-filter)
 ;; Configuration
 (after-load 'dired-x
   ;; Enable mode
@@ -1280,7 +1282,7 @@
   (define-key dired-mode-map (kbd "\\") dired-filter-mark-map))
 
 ;;; Dired Rainbow
-(require-package 'dired-rainbow)
+(straight-use-package 'dired-rainbow)
 ;; Configuration
 (after-load 'dired-filter
   ;; Enable mode
@@ -1319,7 +1321,7 @@
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
 
 ;;; Dired Subtree
-(require-package 'dired-subtree)
+(straight-use-package 'dired-subtree)
 ;; Configuration
 (after-load 'dired-rainbow
   ;; Enable mode
@@ -1346,7 +1348,7 @@
     (define-key dired-subtree-map (kbd (car bind)) (cdr bind))))
 
 ;;; Dired Ranger
-(require-package 'dired-ranger)
+(straight-use-package 'dired-ranger)
 ;; Configuration
 (after-load 'dired-subtree
   ;; Enable mode
@@ -1365,7 +1367,7 @@
   (define-key dired-mode-map (kbd "`") #'dired-ranger-bookmark-visit))
 
 ;;; Dired Narrow
-(require-package 'dired-narrow)
+(straight-use-package 'dired-narrow)
 ;; Configuration
 (after-load 'dired-ranger
   ;; Enable mode
@@ -1376,7 +1378,7 @@
   (setq dired-narrow-exit-when-one-left t))
 
 ;;; Dired Collapse
-(require-package 'dired-collapse)
+(straight-use-package 'dired-collapse)
 ;; Configuration
 (after-load 'dired-narrow
   ;; Enable mode
@@ -1385,7 +1387,7 @@
   (define-key dired-mode-map (kbd ",") #'dired-collapse-mode))
 
 ;;; Dired-du
-(require-package 'dired-du)
+(straight-use-package 'dired-du)
 ;; Configuration
 (after-load 'dired-collapse
   ;; Enable mode
@@ -1394,7 +1396,7 @@
   (setq dired-du-size-format t))
 
 ;;; Dired Async
-(require-package 'async)
+(straight-use-package 'async)
 ;; Configuration
 (after-load 'dired-du
   ;; Enable mode
@@ -1408,16 +1410,16 @@
     (define-key dired-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Dired rsync
-(require-package 'dired-rsync)
+(straight-use-package 'dired-rsync)
 ;; Configuration
 (after-load 'dired-async
   (define-key dired-mode-map (kbd "C-c C-r") #'dired-rsync))
 
 ;;; Dockerfile mode
-(require-package 'dockerfile-mode)
+(straight-use-package 'dockerfile-mode)
 
 ;;; Eglot
-(require-package 'eglot)
+(straight-use-package 'eglot)
 ;; Set global key binding
 (global-set-key (kbd "C-c e t") #'eglot)
 ;; Configuration
@@ -1435,7 +1437,7 @@
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
 
 ;;; Elfeed
-(require-package 'elfeed)
+(straight-use-package 'elfeed)
 ;; Set global key binding
 (global-set-key (kbd "<C-f8>") #'elfeed)
 ;; Configuration
@@ -1514,7 +1516,7 @@
     (rcirc-send-string process (concat "nickserv " arg))))
 
 ;; rcirc color codes support
-(require-package 'rcirc-styles)
+(straight-use-package 'rcirc-styles)
 ;; Configuration
 (after-load 'rcirc
   ;; Enable mode
@@ -1544,7 +1546,7 @@
          "#ffffff"]))
 
 ;; rcirc colored nicknames
-(require-package 'rcirc-color)
+(straight-use-package 'rcirc-color)
 ;; Configuration
 (after-load 'rcirc
   ;; Enable mode
@@ -1553,14 +1555,14 @@
   (setq rcirc-colors (append rcirc-styles-color-vector nil)))
 
 ;; rcirc notifications
-(require-package 'rcirc-notify)
+(straight-use-package 'rcirc-notify)
 ;; Configuration
 (after-load 'rcirc
   ;; Enable mode
   (rcirc-notify-add-hooks))
 
 ;;; Expand region
-(require-package 'expand-region)
+(straight-use-package 'expand-region)
 ;;; Define Hydra
 (defhydra hydra-mark-text (:exit t)
   ;; Lisp
@@ -1594,7 +1596,7 @@
 (global-set-key (kbd "C-=") #'er/expand-region)
 
 ;;; Geiser
-(require-package 'geiser)
+(straight-use-package 'geiser)
 ;; Configuration
 (after-load 'geiser-repl
   ;; Change default history file location
@@ -1602,10 +1604,10 @@
         (locate-user-emacs-file "cache/geiser-history")))
 
 ;;; htmlize
-(require-package 'htmlize)
+(straight-use-package 'htmlize)
 
 ;;; Iedit
-(require-package 'iedit)
+(straight-use-package 'iedit)
 ;; Autoload missing functions
 (autoload #'iedit-mode-from-isearch "iedit"
   "Start Iedit mode using last search string as the regexp." t)
@@ -1623,7 +1625,7 @@
   (setq iedit-toggle-key-default nil))
 
 ;;; JavaScript mode
-(require-package 'js2-mode)
+(straight-use-package 'js2-mode)
 ;; Enable mode
 (add-hook 'js-mode-hook #'js2-minor-mode)
 ;; Configuration
@@ -1635,17 +1637,22 @@
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;;; JSON mode
-(require-package 'json-mode)
+(straight-override-recipe
+ '(json-mode :type git
+             :host github
+             :repo "emacs-straight/json-mode"))
+;; Install package from GNU ELPA instead
+(straight-use-package 'json-mode)
 
 ;;; Lua mode
-(require-package 'lua-mode)
+(straight-use-package 'lua-mode)
 ;; Configuration
 (after-load 'lua-mode
   ;; Lua 5.3 as the default interpreter
   (setq lua-default-application "lua5.3"))
 
 ;;; EPUB format support
-(require-package 'nov)
+(straight-use-package 'nov)
 ;; Initialize package
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 ;; Configuration
@@ -1662,12 +1669,12 @@
   (setq nov-text-width 80))
 
 ;;; Macrostep
-(require-package 'macrostep)
+(straight-use-package 'macrostep)
 ;; Set local key binding
 (define-key emacs-lisp-mode-map (kbd "C-c M-e") #'macrostep-expand)
 
 ;;; Magit
-(require-package 'magit)
+(straight-use-package 'magit)
 ;; Set global key bindings
 (dolist (bind '(("C-x g" . magit-status)
                 ("C-x M-g" . magit-dispatch-popup)
@@ -1678,7 +1685,7 @@
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Markdown mode
-(require-package 'markdown-mode)
+(straight-use-package 'markdown-mode)
 ;; Configuration
 (after-load 'markdown-mode
   ;; Default markdown command
@@ -1710,7 +1717,7 @@
   (setq markdown-spaces-after-code-fence 0))
 
 ;;; Move-text
-(require-package 'move-text)
+(straight-use-package 'move-text)
 ;; Define Hydra
 (defhydra hydra-move-text ()
   ("p" move-text-up "Move Up" :column "Move Text")
@@ -1720,7 +1727,7 @@
 (global-set-key (kbd "C-c x m") #'hydra-move-text/body)
 
 ;;; Multiple cursors
-(require-package 'multiple-cursors)
+(straight-use-package 'multiple-cursors)
 ;; Change default `multiple-cursors' lists file location
 (setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
 ;; Populate default `multiple-cursors' lists
@@ -1812,7 +1819,7 @@
 (global-set-key (kbd "C-c m h") #'hydra-multiple-cursors/body)
 
 ;;; PDF Tools
-(require-package 'pdf-tools)
+(straight-use-package 'pdf-tools)
 ;; Enable mode
 (pdf-loader-install t)
 ;; Enable SyncTeX support
@@ -1844,17 +1851,17 @@
                (window-width . 0.5)))
 
 ;;; Polymode Markdown
-(require-package 'poly-markdown)
+(straight-use-package 'poly-markdown)
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;;; Rainbow mode
-(require-package 'rainbow-mode)
+(straight-use-package 'rainbow-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t r") #'rainbow-mode)
 
 ;;; Skewer
-(require-package 'skewer-mode)
+(straight-use-package 'skewer-mode)
 ;; Enable mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set global key binding
@@ -1867,7 +1874,7 @@
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
 ;;; SLY
-(require-package 'sly)
+(straight-use-package 'sly)
 ;; Set global key bindings
 (global-set-key (kbd "C-c r s") #'sly)
 (global-set-key (kbd "C-c r c") #'sly-connect)
@@ -1895,36 +1902,36 @@
         (locate-user-emacs-file "cache/sly-mrepl-history")))
 
 ;;; SLY macrostep
-(require-package 'sly-macrostep)
+(straight-use-package 'sly-macrostep)
 
 ;;; SQL indentation
-(require-package 'sql-indent)
+(straight-use-package 'sql-indent)
 
 ;;; Systemd mode
-(require-package 'systemd)
+(straight-use-package 'systemd)
 
 ;;; VTerm
-(require-package 'vterm)
+(straight-use-package 'vterm)
 ;; Set global key binding
 (global-set-key (kbd "<C-f6>") #'vterm)
 
 ;;; Wgrep
-(require-package 'wgrep)
+(straight-use-package 'wgrep)
 
 ;;; YAML mode
-(require-package 'yaml-mode)
+(straight-use-package 'yaml-mode)
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
 
 ;;; Ace-link
-(require-package 'ace-link)
+(straight-use-package 'ace-link)
 ;; Enable mode
 (ace-link-setup-default)
 ;; Set global key binding
 (global-set-key (kbd "C-c u a") #'ace-link-addr)
 
 ;;; Avy
-(require-package 'avy)
+(straight-use-package 'avy)
 ;; Enable mode
 (avy-setup-default)
 ;; Define Hydra
@@ -1951,7 +1958,7 @@
         avy-highlight-first t))
 
 ;;; Company mode
-(require-package 'company)
+(straight-use-package 'company)
 ;; Enable mode
 (global-company-mode)
 ;; Set global key binding
@@ -1980,7 +1987,7 @@
         company-dabbrev-ignore-case t))
 
 ;;; Diff-Hl
-(require-package 'diff-hl)
+(straight-use-package 'diff-hl)
 ;; Enable mode
 (global-diff-hl-mode)
 ;; Update diffs immediately
@@ -1992,7 +1999,7 @@
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 
 ;;; Form-feed
-(require-package 'form-feed)
+(straight-use-package 'form-feed)
 ;; Same line width as `fill-column' width
 (setq form-feed-line-width fill-column)
 ;; Enable mode
@@ -2011,7 +2018,7 @@
                       :inherit font-lock-comment-face))
 
 ;;; Hl-Todo
-(require-package 'hl-todo)
+(straight-use-package 'hl-todo)
 ;; Enable mode
 (global-hl-todo-mode)
 ;; Configuration
@@ -2028,7 +2035,7 @@
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Amx
-(require-package 'amx)
+(straight-use-package 'amx)
 ;; Initialize mode
 (amx-mode)
 ;; Set global key bindings
@@ -2040,9 +2047,9 @@
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
 ;;; Ivy
-(require-package 'ivy)
+(straight-use-package 'ivy)
 ;; Ivy Hydra support
-(require-package 'ivy-hydra)
+(straight-use-package 'ivy-hydra)
 ;; Initialize mode
 (ivy-mode)
 ;; Set global key binding
@@ -2064,7 +2071,7 @@
         ivy-action-wrap t))
 
 ;;; Counsel
-(require-package 'counsel)
+(straight-use-package 'counsel)
 ;; Initialize mode
 (counsel-mode)
 ;; Set global key bindings
@@ -2096,7 +2103,7 @@
         counsel-org-headline-display-todo t))
 
 ;;; Swiper
-(require-package 'swiper)
+(straight-use-package 'swiper)
 ;; Set global key bindings
 (global-set-key (kbd "C-c s s") #'swiper-all)
 (global-set-key (kbd "M-s s") #'swiper)
@@ -2110,7 +2117,7 @@
   (setq swiper-goto-start-of-match t))
 
 ;;; Prescient
-(require-package 'prescient)
+(straight-use-package 'prescient)
 ;; Configuration
 (after-load 'prescient
   ;; Change save file location
@@ -2123,19 +2130,19 @@
   (prescient-persist-mode))
 
 ;;; Ivy Prescient
-(require-package 'ivy-prescient)
+(straight-use-package 'ivy-prescient)
 ;; Configuration
 (after-load 'counsel
   ;; Initialize mode
   (ivy-prescient-mode))
 
 ;;; Company Prescient
-(require-package 'company-prescient)
+(straight-use-package 'company-prescient)
 ;; Initialize mode
 (company-prescient-mode)
 
 ;;; Minions
-(require-package 'minions)
+(straight-use-package 'minions)
 ;; Enable mode
 (minions-mode)
 ;; Configuration
@@ -2163,7 +2170,7 @@
           visual-line-mode)))
 
 ;;; Paredit
-(require-package 'paredit)
+(straight-use-package 'paredit)
 ;; Enable mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
@@ -2306,7 +2313,7 @@
             (lambda () (setq-local electric-pair-mode nil))))
 
 ;;; Rainbow Delimiters
-(require-package 'rainbow-delimiters)
+(straight-use-package 'rainbow-delimiters)
 ;; Enable mode
 (dolist (hook '(emacs-lisp-mode-hook
                 lisp-mode-hook
@@ -2315,12 +2322,12 @@
   (add-hook hook #'rainbow-delimiters-mode))
 
 ;;; Volatile Highlights
-(require-package 'volatile-highlights)
+(straight-use-package 'volatile-highlights)
 ;; Enable mode
 (volatile-highlights-mode)
 
 ;;; YASnippet
-(require-package 'yasnippet)
+(straight-use-package 'yasnippet)
 ;; Enable mode
 (yas-global-mode)
 
