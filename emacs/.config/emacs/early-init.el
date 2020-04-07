@@ -64,7 +64,10 @@
             (set-window-fringes
              (minibuffer-window frame) 0 0 nil t)))
 
-;;; Package configuration
+;;; `straight.el' configuration
+(setq straight-process-buffer " *straight-process*")
+
+;; Bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
