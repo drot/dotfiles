@@ -67,6 +67,9 @@
 ;;; `straight.el' configuration
 (setq straight-process-buffer " *straight-process*")
 
+;; Don't check for modifications before the packages are loaded
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
 ;; Bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file
