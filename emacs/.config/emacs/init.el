@@ -2426,7 +2426,7 @@
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Customize interface
-(global-set-key (kbd "<C-f9>") #'customize-group)
+(global-set-key (kbd "<f11>") #'customize-group)
 ;; Configuration
 (after-load 'cus-edit
   ;; Kill buffer when done and shorten help
