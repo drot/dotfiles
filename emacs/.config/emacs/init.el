@@ -1913,7 +1913,7 @@
 ;;; VTerm
 (straight-use-package 'vterm)
 ;; Set global key binding
-(global-set-key (kbd "<C-f6>") #'vterm)
+(global-set-key (kbd "<f9>") #'vterm)
 
 ;;; Wgrep
 (straight-use-package 'wgrep)
