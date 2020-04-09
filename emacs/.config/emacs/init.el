@@ -365,11 +365,9 @@
 ;; Configuration
 (after-load 'ispell
   ;; Ensure spell checking program is available
-  (setq ispell-program-name (executable-find "aspell"))
-  ;; Extra switches
-  (setq ispell-extra-args '("--sug-mode=ultra"))
+  (setq ispell-program-name (executable-find "enchant-2"))
   ;; Default dictionary
-  (setq ispell-dictionary "english"))
+  (setq ispell-dictionary "en_US"))
 
 ;;; Isearch
 (setq isearch-allow-scroll t)
