@@ -199,6 +199,7 @@
         "/backup/.*\\'"
         "/elfeed/.*\\'"
         "/cache/.*\\'"
+        "/straight/.*\\'"
         "/url/.*\\'"
         "/dev/shm/.*\\'"
         ".*\\.gz\\'"
