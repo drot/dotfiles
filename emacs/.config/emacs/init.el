@@ -470,7 +470,9 @@
            ("Terminal" (or (derived-mode . term-mode)
                            (derived-mode . vterm-mode)))
            ("Text" (mode . text-mode))
-           ("TRAMP" (name . "*tramp")))))
+           ("TRAMP" (name . "*tramp"))
+           ("Web" (or (derived-mode . eww-mode)
+                      (derived-mode . elpher-mode))))))
   ;; Load the default buffer filter
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "primary")))
