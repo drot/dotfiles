@@ -65,6 +65,9 @@
              (minibuffer-window frame) 0 0 nil t)))
 
 ;;; `straight.el' configuration
+(setq straight-repository-branch "develop")
+
+;; Hide process buffer
 (setq straight-process-buffer " *straight-process*")
 
 ;; Don't check for modifications before the packages are loaded

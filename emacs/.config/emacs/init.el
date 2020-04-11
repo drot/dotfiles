@@ -1457,6 +1457,9 @@
             (elfeed-make-tagger :before "2 weeks ago"
                                 :remove 'unread)))
 
+;;; Elpher Gopher browser
+(straight-use-package 'elpher)
+
 ;;; rcirc
 (global-set-key (kbd "<f7>") #'irc)
 ;; Configuration
