@@ -908,7 +908,7 @@
   (setq mm-inline-large-images 'resize))
 
 ;;; Gnus
-(global-set-key (kbd "<f8>") #'gnus)
+(global-set-key (kbd "<f9>") #'gnus)
 ;; Configuration
 (after-load 'gnus
   ;; Set local key bindings
@@ -1459,9 +1459,11 @@
 
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
+;; Set key binding
+(global-set-key (kbd "C-c u e") #'elpher)
 
 ;;; rcirc
-(global-set-key (kbd "<f7>") #'irc)
+(global-set-key (kbd "<f8>") #'irc)
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
@@ -1914,7 +1916,7 @@
 ;;; VTerm
 (straight-use-package 'vterm)
 ;; Set global key binding
-(global-set-key (kbd "<f9>") #'vterm)
+(global-set-key (kbd "<f7>") #'vterm)
 
 ;;; Wgrep
 (straight-use-package 'wgrep)
