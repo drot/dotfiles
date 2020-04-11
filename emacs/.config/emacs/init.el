@@ -1640,12 +1640,8 @@
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;;; JSON mode
-(straight-override-recipe
- '(json-mode :type git
-             :host github
-             :repo "emacs-straight/json-mode"))
-;; Install package from GNU ELPA instead
-(straight-use-package 'json-mode)
+(straight-use-package
+ '(json-mode :type git :host github :repo "emacs-straight/json-mode"))
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
