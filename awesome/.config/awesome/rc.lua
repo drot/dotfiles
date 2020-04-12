@@ -119,7 +119,7 @@ local mygraphicsmenu = {
 local myofficemenu = {
    { "LibreOffice", "libreoffice", beautiful.menu_libreoffice },
    { "Writer", "lowriter", beautiful.menu_writer },
-   { "Zathura", "zathura", beautiful.menu_pdf }
+   { "llpp", "llpp", beautiful.menu_pdf }
 }
 
 local myutilmenu = {
@@ -1144,8 +1144,8 @@ awful.rules.rules = {
    -- Emacs
    { rule = { class = "Emacs" },
      properties = { tag = "3", maximized = true } },
-   -- Zathura
-   { rule = { class = "Zathura" },
+   -- llpp
+   { rule = { class = "llpp" },
      properties = { tag = "4", maximized = true, switch_to_tags = true } },
    -- Utility programs
    { rule_any = { class = { "Virt-manager", "Pavucontrol", "Thunar" } },
