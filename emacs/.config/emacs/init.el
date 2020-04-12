@@ -455,6 +455,7 @@
                       (name . "*sly-events for sbcl*")
                       (name . "*inferior-lisp*")
                       (name . "*Warnings*")))
+           ("LSP" (name . "*lsp-log*"))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Org" (derived-mode . org-mode))
