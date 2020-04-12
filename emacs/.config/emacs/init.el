@@ -347,8 +347,8 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 ;; Set global key bindings
-(global-set-key (kbd "C-c l b") #'flyspell-buffer)
-(global-set-key (kbd "C-c l r") #'flyspell-region)
+(global-set-key (kbd "C-c c b") #'flyspell-buffer)
+(global-set-key (kbd "C-c c r") #'flyspell-region)
 ;; Configuration
 (after-load 'flyspell
   ;; Disable conflicting key binding
@@ -362,7 +362,7 @@
   (setq flyspell-duplicate-distance 12000))
 
 ;;; Ispell
-(global-set-key (kbd "C-c l d") #'ispell-change-dictionary)
+(global-set-key (kbd "C-c c d") #'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
   ;; Ensure spell checking program is available
@@ -1419,24 +1419,6 @@
 ;;; Dockerfile mode
 (straight-use-package 'dockerfile-mode)
 
-;;; Eglot
-(straight-use-package 'eglot)
-;; Set global key binding
-(global-set-key (kbd "C-c e t") #'eglot)
-;; Configuration
-(after-load 'eglot
-  ;; Set local key bindings
-  (dolist (bind '(("C-c e c" . eglot-reconnect)
-                  ("C-c e s" . eglot-shutdown)
-                  ("C-c e r" . eglot-rename)
-                  ("C-c e a" . eglot-code-actions)
-                  ("C-c e h" . eglot-help-at-point)
-                  ("C-c e b" . eglot-events-buffer)
-                  (C-c e e . eglot-stderr-buffer)))
-    (define-key eglot-mode-map (kbd (car bind)) (cdr bind)))
-  ;; Add the Lua language server
-  (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
-
 ;;; Elfeed
 (straight-use-package 'elfeed)
 ;; Set global key binding
@@ -1645,6 +1627,13 @@
 ;;; JSON mode
 (straight-use-package
  '(json-mode :type git :host github :repo "emacs-straight/json-mode"))
+
+;;; LSP mode
+(straight-use-package 'lsp-mode)
+;; Change default prefix
+(setq lsp-keymap-prefix "C-c l")
+;; Set global key binding
+(global-set-key (kbd "C-c t l") #'lsp)
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
