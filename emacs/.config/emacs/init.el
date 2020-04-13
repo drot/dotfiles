@@ -731,15 +731,15 @@
   (setq gdb-many-windows t))
 
 ;;; EWW
-(global-set-key (kbd "C-c u w") #'eww)
-(global-set-key (kbd "C-c u C-b") #'eww-list-bookmarks)
+(global-set-key (kbd "C-c w w") #'eww)
+(global-set-key (kbd "C-c w C-b") #'eww-list-bookmarks)
 ;; Configuration
 (after-load 'eww
   ;; Set bookmarks directory
   (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
 ;;; Browse URL
-(global-set-key (kbd "C-c u b") #'browse-url)
+(global-set-key (kbd "C-c w b") #'browse-url)
 ;; Configuration
 (after-load 'browse-url
   ;;  Open URLs with the specified browser
@@ -1446,7 +1446,7 @@
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
 ;; Set key binding
-(global-set-key (kbd "C-c u e") #'elpher)
+(global-set-key (kbd "C-c w e") #'elpher)
 
 ;;; rcirc
 (global-set-key (kbd "<f8>") #'irc)
@@ -1920,7 +1920,7 @@
 ;; Enable mode
 (ace-link-setup-default)
 ;; Set global key binding
-(global-set-key (kbd "C-c u a") #'ace-link-addr)
+(global-set-key (kbd "C-c w a") #'ace-link-addr)
 
 ;;; Avy
 (straight-use-package 'avy)
