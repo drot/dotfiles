@@ -897,7 +897,7 @@
 (after-load 'smtpmail
   ;; Set mail server and user
   (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-user "drot"
+        smtpmail-smtp-user user-login-name
         smtpmail-smtp-service 465
         smtpmail-stream-type 'ssl))
 
@@ -922,9 +922,9 @@
   (setq gnus-directory "~/.news/")
   ;; Configure mail server
   (setq gnus-select-method
-        '(nnimap "mail.cock.li"
+        `(nnimap "mail.cock.li"
                  (nnimap-address "mail.cock.li")
-                 (nnimap-user "drot")
+                 (nnimap-user ,user-login-name)
                  (nnimap-server-port 993)
                  (nnimap-stream ssl)))
   ;; Configure news server
@@ -1453,7 +1453,7 @@
 ;; Configuration
 (after-load 'rcirc
   ;; User defaults
-  (setq rcirc-default-user-name "drot"
+  (setq rcirc-default-user-name user-login-name
         rcirc-reconnect-delay 10)
   ;; Connect to the specified servers and channels
   (setq rcirc-server-alist
