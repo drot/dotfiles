@@ -6,3 +6,10 @@ leave-tmpdir-backups
 
 # Display column number in the modeline
 column-number-mode
+
+# Auto indentation
+auto-indent-mode
+
+# Use C mode where appropriate
+auto-execute *.c c-mode
+
