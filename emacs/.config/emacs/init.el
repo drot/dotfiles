@@ -1900,7 +1900,8 @@
 (straight-use-package 'sql-indent)
 
 ;;; Systemd mode
-(straight-use-package 'systemd)
+(straight-use-package
+ '(systemd :type git :host github :repo "drot/systemd-mode"))
 
 ;;; VTerm
 (straight-use-package 'vterm)
