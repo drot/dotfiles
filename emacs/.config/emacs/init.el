@@ -683,7 +683,7 @@
   ;; Change default method and cache file location
   (setq tramp-default-method "ssh"
         tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
-  ;; Use same backup directory for files handled by TRAMP
+  ;; Keep backup files in home directory and auto-save files in /tmp/
   (setq tramp-backup-directory-alist `(("." . "~/.tramp/"))
         tramp-auto-save-directory temporary-file-directory))
 
