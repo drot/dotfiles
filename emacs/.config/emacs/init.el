@@ -683,9 +683,9 @@
   ;; Change default method and cache file location
   (setq tramp-default-method "ssh"
         tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
-  ;; Use temp directory for save files
-  (setq tramp-backup-directory-alist `(("." . ,temporary-file-directory))
-        tramp-auto-save-directory temporary-file-directory))
+  ;; Use same backup directory for files handled by TRAMP
+  (setq tramp-backup-directory-alist `(("." . "~/.tramp/"))
+        tramp-auto-save-directory (locate-user-emacs-file "backup/auto-save/")))
 
 ;;; Bookmarks
 (after-load 'bookmark
