@@ -38,9 +38,8 @@
 
 ;;; Color theme
 (straight-use-package 'color-theme-sanityinc-tomorrow)
-(straight-use-package 'modus-vivendi-theme)
 ;; Load theme explicitly
-(load-theme 'modus-vivendi t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
