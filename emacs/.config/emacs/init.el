@@ -38,8 +38,9 @@
 
 ;;; Color theme
 (straight-use-package 'color-theme-sanityinc-tomorrow)
+(straight-use-package 'modus-vivendi-theme)
 ;; Load theme explicitly
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'modus-vivendi t)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
@@ -1635,6 +1636,10 @@
 (setq lsp-keymap-prefix "C-c l")
 ;; Set global key binding
 (global-set-key (kbd "C-c t l") #'lsp)
+;; Configuration
+(after-load 'lsp-mode
+  ;; Change session file location
+  (setq lsp-session-file (locate-user-emacs-file "cache/lsp-session")))
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
