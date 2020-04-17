@@ -170,12 +170,12 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night Bright)
+# Colors (Campbell)
 colors:
   # Default colors
   primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+    background: '#0c0c0c'
+    foreground: '#cccccc'
 
     # Bright and dim foreground colors
     #
@@ -212,25 +212,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+    black:      '#0c0c0c'
+    red:        '#c50f1f'
+    green:      '#13a10e'
+    yellow:     '#c19c00'
+    blue:       '#0037da'
+    magenta:    '#881798'
+    cyan:       '#3a96dd'
+    white:      '#cccccc'
 
   # Bright colors
   bright:
-    black:   '#969896'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#ffffff'
+    black:      '#767676'
+    red:        '#e74856'
+    green:      '#16c60c'
+    yellow:     '#f9f1a5'
+    blue:       '#3b78ff'
+    magenta:    '#b4009e'
+    cyan:       '#61d6d6'
+    white:      '#f2f2f2'
 
   # Dim colors
   #
