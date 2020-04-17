@@ -685,7 +685,7 @@
         tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
   ;; Use same backup directory for files handled by TRAMP
   (setq tramp-backup-directory-alist `(("." . "~/.tramp/"))
-        tramp-auto-save-directory (locate-user-emacs-file "backup/auto-save/")))
+        tramp-auto-save-directory temporary-file-directory))
 
 ;;; Bookmarks
 (after-load 'bookmark
