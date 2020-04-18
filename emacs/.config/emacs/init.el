@@ -176,8 +176,11 @@
       backup-by-copying t)
 
 ;;; Auto save file configuration
-(setq auto-save-list-file-prefix (locate-user-emacs-file "backup/auto-save/.saves-")
-      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/auto-save/") t)))
+(setq auto-save-list-file-prefix
+      (locate-user-emacs-file "backup/auto-save/.saves-"))
+;; Keep in backup directory as well
+(setq auto-save-file-name-transforms
+      `((".*" ,(locate-user-emacs-file "backup/auto-save/") t)))
 
 ;;; Save minibuffer history
 (setq savehist-file (locate-user-emacs-file "cache/saved-history")
