@@ -426,6 +426,7 @@
            ("Compilation" (derived-mode . compilation-mode))
            ("Custom" (derived-mode . Custom-mode))
            ("Dired" (mode . dired-mode))
+           ("Diff" (derived-mode . diff-mode))
            ("Document" (or (derived-mode . latex-mode)
                            (derived-mode . markdown-mode)))
            ("IRC" (mode . rcirc-mode))
