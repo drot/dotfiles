@@ -50,7 +50,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "st"
+local terminal = "alacritty"
 local editor = os.getenv("EDITOR")
 local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
@@ -126,7 +126,8 @@ local myutilmenu = {
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
    { "SSR", "simplescreenrecorder", beautiful.menu_ssr },
    { "Thunar", "thunar", beautiful.menu_fman },
-   { "Virt Manager", "virt-manager", beautiful.menu_virt }
+   { "Virt Manager", "virt-manager", beautiful.menu_virt },
+   { "Wireshark", "wireshark", beautiful.menu_wshark }
 }
 
 local mywebmenu = {
@@ -1148,7 +1149,7 @@ awful.rules.rules = {
    { rule = { class = "llpp" },
      properties = { tag = "4", maximized = true, switch_to_tags = true } },
    -- Utility programs
-   { rule_any = { class = { "Virt-manager", "Pavucontrol", "Thunar" } },
+   { rule_any = { class = { "Virt-manager", "Pavucontrol", "Thunar", "Wireshark" } },
      properties = { tag = "5", switch_to_tags = true, floating = true } },
    -- GIMP
    { rule = { class = "Gimp" },
