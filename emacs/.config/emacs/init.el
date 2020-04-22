@@ -1427,7 +1427,7 @@
 ;;; Elfeed
 (straight-use-package 'elfeed)
 ;; Set global key binding
-(global-set-key (kbd "<C-f8>") #'elfeed)
+(global-set-key (kbd "<C-f9>") #'elfeed)
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -2189,101 +2189,16 @@
    #'paredit-backward-delete
    #'paredit-close-round)
 
-  ;; Define extra commands
-  (defun paredit-mark-containing-sexp ()
-    (interactive)
-    (paredit-backward-up)
-    (mark-sexp))
+  ;; Extra functions for ParEdit via `paredit-ext'
+  (straight-use-package
+   '(paredit-ext :type git
+                 :files ("lisp/paredit-ext.el")
+                 :repo "https://github.com/jwiegley/dot-emacs.git"
+                 :nonrecursive t
+                 :depth 1))
 
-  (defun paredit-barf-all-the-way-backward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-backward-down)
-    (paredit-splice-sexp))
-
-  (defun paredit-barf-all-the-way-forward ()
-    (interactive)
-    (paredit-split-sexp)
-    (paredit-forward-down)
-    (paredit-splice-sexp)
-    (if (eolp) (delete-horizontal-space)))
-
-  (defun paredit-slurp-all-the-way-backward ()
-    (interactive)
-    (catch 'done
-      (while (not (bobp))
-        (save-excursion
-          (paredit-backward-up)
-          (if (eq (char-before) ?\()
-              (throw 'done t)))
-        (paredit-backward-slurp-sexp))))
-
-  (defun paredit-slurp-all-the-way-forward ()
-    (interactive)
-    (catch 'done
-      (while (not (eobp))
-        (save-excursion
-          (paredit-forward-up)
-          (if (eq (char-after) ?\))
-              (throw 'done t)))
-        (paredit-forward-slurp-sexp))))
-
-  (defun paredit--is-at-start-of-sexp ()
-    (and (looking-at "(\\|\\[")
-         (not (nth 3 (syntax-ppss))) ;; Inside string
-         (not (nth 4 (syntax-ppss))))) ;; Inside comment
-
-  (defun paredit-duplicate-closest-sexp ()
-    (interactive)
-    ;; Skips to start of current sexp
-    (while (not (paredit--is-at-start-of-sexp))
-      (paredit-backward))
-    (set-mark-command nil)
-    ;; While we find sexps we move forward on the line
-    (while (and (bounds-of-thing-at-point 'sexp)
-                (<= (point) (car (bounds-of-thing-at-point 'sexp)))
-                (not (= (point) (line-end-position))))
-      (forward-sexp)
-      (while (looking-at " ")
-        (forward-char)))
-    (kill-ring-save (mark) (point))
-    ;; Go to the next line and copy the sexprs we encountered
-    (paredit-newline)
-    (yank)
-    (exchange-point-and-mark))
-
-  ;; Add command descriptions
-  (nconc paredit-commands
-         '("Extreme Barfage & Slurpage"
-           (("C-M-)")
-            paredit-slurp-all-the-way-forward
-            ("(foo (bar |baz) quux zot)"
-             "(foo (bar |baz quux zot))")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-}")
-            paredit-barf-all-the-way-forward
-            ("(foo (bar |baz quux) zot)"
-             "(foo (bar|) baz quux zot)"))
-           (("C-M-(")
-            paredit-slurp-all-the-way-backward
-            ("(foo bar (baz| quux) zot)"
-             "((foo bar baz| quux) zot)")
-            ("(a b ((c| d)) e f)"
-             "(a b ((c| d)) e f)"))
-           (("C-M-{")
-            paredit-barf-all-the-way-backward
-            ("(foo (bar baz |quux) zot)"
-             "(foo bar baz (|quux) zot)"))
-           (("C-M->")
-            paredit-duplicate-closest-sexp
-            ("(foo | bar)"
-             "(foo bar)(foo bar)"))))
-
-  ;; Initialize extra key bindings
-  (paredit-define-keys)
-  (paredit-annotate-mode-with-examples)
-  (paredit-annotate-functions-with-examples)
+  ;; Load library
+  (require 'paredit-ext)
 
   ;; Disable conflicting key binding
   (define-key paredit-mode-map (kbd "M-s") nil)
@@ -2291,7 +2206,7 @@
   (dolist (bind '(("M-s M-s" . paredit-splice-sexp)
                   ("M-{" . paredit-wrap-curly)
                   ("M-[" . paredit-wrap-square)
-                  ("C-c C-M-s" . paredit-mark-containing-sexp)))
+                  ("C-c C-M-s" . mark-containing-sexp)))
     (define-key paredit-mode-map (kbd (car bind)) (cdr bind)))
 
   ;; Enable Paredit in the minibuffer
