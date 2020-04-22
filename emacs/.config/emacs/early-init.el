@@ -73,6 +73,9 @@
 ;; Don't check for modifications before the packages are loaded
 (setq straight-check-for-modifications '(check-on-save find-when-checking))
 
+;; Use shallow clones
+(setq straight-vc-git-default-clone-depth 1)
+
 ;; Bootstrap
 (defvar bootstrap-version)
 (let ((bootstrap-file
