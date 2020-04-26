@@ -50,7 +50,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "st"
+local terminal = "alacritty"
 local editor = os.getenv("EDITOR")
 local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
@@ -1105,7 +1105,7 @@ awful.rules.rules = {
                     keys = clientkeys,
                     buttons = clientbuttons,
                     screen = awful.screen.preferred,
-                    placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                    placement = awful.placement.no_offscreen
      },
      callback = awful.client.setslave
    },
