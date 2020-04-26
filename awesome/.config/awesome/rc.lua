@@ -134,7 +134,6 @@ local mywebmenu = {
    { "Chatterino", "chatterino", beautiful.menu_chatterino },
    { "Discord", "discord --disable-smooth-scrolling", beautiful.menu_discord },
    { "Gajim", "gajim", beautiful.menu_gajim },
-   { "Ripcord", "ripcord", beautiful.menu_ripcord },
    { "Tor Browser", "torbrowser-launcher", beautiful.menu_torbrowser }
 }
 
