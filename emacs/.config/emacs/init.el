@@ -36,10 +36,20 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
-;;; Color theme
+;;; Color theme one
 (straight-use-package 'color-theme-sanityinc-tomorrow)
-;; Load theme explicitly
-(load-theme 'sanityinc-tomorrow-night t)
+;;; Color theme two
+(straight-use-package 'modus-vivendi-theme)
+;; Configuration
+(setq modus-vivendi-theme-visible-fringes t
+      modus-vivendi-theme-3d-modeline t
+      modus-vivendi-theme-bold-constructs t
+      modus-vivendi-theme-slanted-constructs t
+      modus-vivendi-theme-distinct-org-blocks t
+      modus-vivendi-theme-section-headings t
+      modus-vivendi-theme-rainbow-headings t)
+;; Load theme
+(load-theme 'modus-vivendi t)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
@@ -1838,7 +1848,7 @@
 (after-load 'pdf-misc
   ;; Use lp when possible
   (when (executable-find "lp")
-    (setq pdf-misc-print-programm "/usr/bin/lp")))
+    (setq pdf-misc-print-program "/usr/bin/lp")))
 
 ;; PDF Tools Midnight mode colors
 (after-load 'pdf-view
