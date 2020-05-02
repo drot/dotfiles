@@ -1122,7 +1122,7 @@
 (after-load 'time
   ;; Use custom mode line format
   (setq display-time-string-forms
-        '(" ["
+        '(" {"
           (propertize
            (format-time-string "%H:%M" now)
            'face '(:inherit font-lock-keyword-face :weight bold)
@@ -1152,7 +1152,11 @@
                 'local-map (make-mode-line-mouse-map 'mouse-2
                                                      read-mail-command)))
             "")
-          "] "))
+          "} "))
+  ;; Change default mail monitoring directory
+  (setq display-time-mail-directory "~/.mail/Inbox/new")
+  ;; Use icon for mail notifications
+  (setq display-time-use-mail-icon t)
   ;; Time zones we are interested in
   (setq display-time-world-list
         '(("Europe/Riga" "Riga")
