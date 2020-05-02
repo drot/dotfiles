@@ -896,24 +896,21 @@
   (setq message-confirm-send t
         message-kill-buffer-on-exit t))
 
-;;; Asynchronous SMTP mail sending
-(straight-use-package 'async)
+;; Send mail configuration
+(after-load 'sendmail
+  ;; Use `msmtp' if possible
+  (when (executable-find "msmtp")
+    (setq sendmail-program "/usr/bin/msmtp"))
+  ;; Change default send mail function
+  (setq send-mail-function #'message-send-mail-with-sendmail)
+  ;; Make compatible with `msmtp'
+  (setq mail-specify-envelope-from t
+        mail-envelope-from 'header))
+
 ;; Configuration
 (after-load 'message
-  ;; Load async library
-  (require 'smtpmail-async)
-  ;; Change default mail sending function
-  (setq message-send-mail-function #'async-smtpmail-send-it)
-  ;; Enable compatibility with the Pass password manager
-  (add-hook 'async-smtpmail-before-send-hook #'auth-source-pass-enable))
-
-;;; Outgoing mail server
-(after-load 'smtpmail
-  ;; Set mail server and user
-  (setq smtpmail-smtp-server "mail.cock.li"
-        smtpmail-smtp-user user-login-name
-        smtpmail-smtp-service 465
-        smtpmail-stream-type 'ssl))
+  ;; Make compatible with `msmtp'
+  (setq message-sendmail-envelope-from 'header))
 
 ;;; Smileys
 (after-load 'smiley
@@ -936,11 +933,8 @@
   (setq gnus-directory "~/.news/")
   ;; Configure mail server
   (setq gnus-select-method
-        `(nnimap "mail.cock.li"
-                 (nnimap-address "mail.cock.li")
-                 (nnimap-user ,user-login-name)
-                 (nnimap-server-port 993)
-                 (nnimap-stream ssl)))
+        '(nnmaildir "firemail"
+                    (directory "~/.mail/")))
   ;; Configure news server
   (add-to-list 'gnus-secondary-select-methods
                '(nntp "news.gmane.io"))
@@ -998,11 +992,6 @@
         gnus-sum-thread-tree-single-leaf "└─▶ ")
   ;; Ensure graceful exit
   (add-hook 'kill-emacs-hook #'gnus-group-exit))
-
-;;; Mail folder access for Gnus
-(after-load 'nnfolder
-  ;; Set main directory
-  (setq nnfolder-directory "~/.mail/archive"))
 
 ;;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent
@@ -1440,6 +1429,8 @@
 (straight-use-package 'elfeed)
 ;; Set global key binding
 (global-set-key (kbd "<C-f9>") #'elfeed)
+;; Change default database location
+(setq elfeed-db-directory (locate-user-emacs-file "elfeed"))
 ;; Configuration
 (after-load 'elfeed
   ;; Default feeds
@@ -1450,9 +1441,8 @@
           ("https://www.reddit.com/r/linux/.rss" linux)
           ("https://www.reddit.com/r/linux/.rss" programming)
           ("http://bljesak.info/rss" bljesak)))
-  ;; Change default database location and search defaults
-  (setq elfeed-db-directory (locate-user-emacs-file "elfeed")
-        elfeed-search-date-format '("%d-%m-%Y" 10 :left)
+  ;; Change search defaults
+  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)
         elfeed-search-filter "@1-week-ago +unread")
   ;; Entries older than 2 weeks are marked as read
   (add-hook 'elfeed-new-entry-hook
