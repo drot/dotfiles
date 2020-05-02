@@ -123,8 +123,8 @@ local myofficemenu = {
 }
 
 local myutilmenu = {
+   { "OBS", "obs", beautiful.menu_obs },
    { "Pavucontrol", "pavucontrol", beautiful.menu_pavu },
-   { "SSR", "simplescreenrecorder", beautiful.menu_ssr },
    { "Thunar", "thunar", beautiful.menu_fman },
    { "Virt Manager", "virt-manager", beautiful.menu_virt },
    { "Wireshark", "wireshark", beautiful.menu_wshark }
@@ -1118,7 +1118,7 @@ awful.rules.rules = {
         class = {
            "Gajim",
            "mpv",
-           "SimpleScreenRecorder",
+           "obs",
            "feh"
         },
         name = {
