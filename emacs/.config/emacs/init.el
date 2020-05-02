@@ -989,9 +989,7 @@
         gnus-sum-thread-tree-single-indent "▣ "
         gnus-sum-thread-tree-leaf-with-other "├─▶ "
         gnus-sum-thread-tree-vertical "│"
-        gnus-sum-thread-tree-single-leaf "└─▶ ")
-  ;; Ensure graceful exit
-  (add-hook 'kill-emacs-hook #'gnus-group-exit))
+        gnus-sum-thread-tree-single-leaf "└─▶ "))
 
 ;;; Use Gnus as the default mail program
 (setq mail-user-agent 'gnus-user-agent
