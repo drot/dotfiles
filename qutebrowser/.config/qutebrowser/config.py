@@ -466,3 +466,7 @@ c.fonts.default_family = 'Iosevka Fixed SS05'
 # "px" suffix.
 # Type: String
 c.fonts.default_size = '12pt'
+
+# Bindings for normal mode
+config.bind(',m', 'spawn mpv {url}')
+config.bind(';M', 'hint links spawn umpv {hint-url}')
