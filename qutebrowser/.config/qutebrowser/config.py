@@ -166,7 +166,7 @@ c.colors.completion.item.selected.border.bottom = '#1d1f21'
 
 # Foreground color of the matched text in the selected completion item.
 # Type: QtColor
-c.colors.completion.item.selected.match.fg = '#ff4444'
+c.colors.completion.item.selected.match.fg = 'white'
 
 # Foreground color of the matched text in the completion.
 # Type: QtColor
@@ -424,7 +424,7 @@ c.colors.tabs.selected.even.bg = '#282a2e'
 
 # Foreground color of pinned unselected odd tabs.
 # Type: QtColor
-c.colors.tabs.pinned.odd.fg = 'white'
+c.colors.tabs.pinned.odd.fg = '#1d1f21'
 
 # Background color of pinned unselected odd tabs.
 # Type: QtColor
@@ -432,11 +432,11 @@ c.colors.tabs.pinned.odd.bg = '#b5bd68'
 
 # Foreground color of pinned unselected even tabs.
 # Type: QtColor
-c.colors.tabs.pinned.even.fg = '#81a2be'
+c.colors.tabs.pinned.even.fg = '#1d1f21'
 
 # Background color of pinned unselected even tabs.
 # Type: QtColor
-c.colors.tabs.pinned.even.bg = '#de935f'
+c.colors.tabs.pinned.even.bg = '#f0c674'
 
 # Foreground color of pinned selected odd tabs.
 # Type: QtColor
