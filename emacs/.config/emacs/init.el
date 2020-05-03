@@ -1854,6 +1854,9 @@
                (side . right)
                (window-width . 0.5)))
 
+;;; PKGBUILD mode
+(straight-use-package 'pkgbuild-mode)
+
 ;;; Polymode Markdown
 (straight-use-package 'poly-markdown)
 ;; Enable mode
