@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Pick action
+if [[ $1 = "open" ]]; then
+    prompt="Open URL"
+elif [[ $1 = "copy" ]]; then
+    prompt="Copy URL"
+else
+    echo "Invalid argument."
+    exit 1
+fi
+
+# Prompt based on action
+rofi -dmenu -i -l 10 -w $WINDOWID -p "$prompt"
