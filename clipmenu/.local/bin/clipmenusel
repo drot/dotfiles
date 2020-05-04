@@ -1,18 +1,3 @@
 #!/usr/bin/env bash
 
-# Font
-font="IosevkaFixedSS05-12"
-
-# Colors
-normal_background="#282a2e"
-normal_foreground="#969896"
-selected_background="#1d1f21"
-selected_foreground="#f0c674"
-
-# Show clipboard
-clipmenu -i -p "Paste:" \
-         -fn "$font" \
-         -nb "$normal_background" \
-         -nf "$normal_foreground" \
-         -sb "$selected_background" \
-         -sf "$selected_foreground"
+CM_LAUNCHER=rofi clipmenu -p "Paste"
