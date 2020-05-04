@@ -11,4 +11,4 @@ else
 fi
 
 # Prompt based on action
-rofi -dmenu -i -l 10 -w $WINDOWID -p "$prompt"
+rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$prompt"
