@@ -20,18 +20,6 @@ require("awful.hotkeys_popup.keys")
 -- Vicious widget library
 local vicious = require("vicious")
 
--- {{{ Notification configuration
-naughty.config.presets.low.bg = beautiful.bg_normal
-naughty.config.presets.low.fg = beautiful.fg_normal
-naughty.config.presets.low.border_color = beautiful.border_color
-naughty.config.presets.normal.bg = beautiful.bg_focus
-naughty.config.presets.normal.fg = beautiful.fg_focus
-naughty.config.presets.normal.border_color = beautiful.border_focus
-naughty.config.presets.critical.bg = beautiful.bg_urgent
-naughty.config.presets.critical.fg = beautiful.fg_urgent
-naughty.config.presets.critical.border_color = beautiful.bg_normal
--- }}}
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -60,6 +48,15 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/tomorrow/theme.lua")
+
+-- {{{ Notification configuration
+naughty.config.presets.normal.bg = beautiful.bg_focus
+naughty.config.presets.normal.fg = beautiful.fg_focus
+naughty.config.presets.normal.border_color = beautiful.border_focus
+naughty.config.presets.critical.bg = beautiful.bg_urgent
+naughty.config.presets.critical.fg = beautiful.fg_urgent
+naughty.config.presets.critical.border_color = beautiful.bg_normal
+-- }}}
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "st"
