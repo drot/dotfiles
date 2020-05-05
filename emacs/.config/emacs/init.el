@@ -475,6 +475,7 @@
            ("Org" (derived-mode . org-mode))
            ("Packages" (derived-mode . package-menu-mode))
            ("PDF" (derived-mode . pdf-view-mode))
+           ("Proced" (derived-mode . proced-mode))
            ("REPL" (or (derived-mode . cider-repl-mode)
                        (derived-mode . geiser-repl-mode)
                        (derived-mode . sly-mrepl-mode)
@@ -1305,19 +1306,19 @@
                                              "apk" "xz" "tar"))
   (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf"
                                            "ps" "rtf" "djvu" "epub" "md"
-                                           "tex" "org" "txt"))
+                                           "tex" "org" "txt" "xlsx"))
   (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
-  (dired-rainbow-define excel "turquoise" ("xlsx"))
   (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
-  (dired-rainbow-define html "Wheat" ("htm" "html" "xhtml"))
+  (dired-rainbow-define html "wheat" ("htm" "html" "xhtml"))
   (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
-  (dired-rainbow-define log "gray" ("log"))
+  (dired-rainbow-define log "dark slate gray" ("log"))
   (dired-rainbow-define config (:foreground "cadet blue" :italic t) ("conf" "ini" "yml"))
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "SandyBrown" ("py" "c" "cc" "h" "java"
+  (dired-rainbow-define sourcefile "orchid" ("py" "c" "cc" "h" "java"
                                                  "pl" "rb" "R" "php" "el"
                                                  "scm" "cpp" "fos" "lisp" "clj"
                                                  "lua" "lisp" "sh"))
+  (dired-rainbow-define patch (:background "red4") ("diff" "patch"))
   (dired-rainbow-define video "firebrick2" ("vob" "VOB" "mkv" "MKV" "mpe"
                                             "mpg" "MPG" "mp4" "MP4" "ts"
                                             "TS" "m2ts" "M2TS" "avi" "AVI"
