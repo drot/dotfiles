@@ -208,4 +208,7 @@ theme.widget_disk = themes_path .. "themes/tomorrow/icons/widgets/disk.png"
 theme.widget_volume = themes_path .. "themes/tomorrow/icons/widgets/volume.png"
 theme.widget_clock = themes_path .. "themes/tomorrow/icons/widgets/clock.png"
 
+-- Notifications size
+theme.notification_icon_size = 64
+
 return theme
