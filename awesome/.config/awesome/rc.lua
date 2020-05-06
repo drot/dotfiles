@@ -621,7 +621,7 @@ local volume_widget = wibox.widget {
    widget = wibox.container.margin
 }
 
--- Create a text clock icon widget
+-- Create a clock icon widget
 local clock_icon = wibox.widget {
    {
       image = beautiful.widget_clock,
