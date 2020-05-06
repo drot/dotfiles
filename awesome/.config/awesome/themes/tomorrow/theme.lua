@@ -206,6 +206,7 @@ theme.widget_memory = themes_path .. "themes/tomorrow/icons/widgets/memory.png"
 theme.widget_temperature = themes_path .. "themes/tomorrow/icons/widgets/temperature.png"
 theme.widget_disk = themes_path .. "themes/tomorrow/icons/widgets/disk.png"
 theme.widget_volume = themes_path .. "themes/tomorrow/icons/widgets/volume.png"
+theme.widget_mail = themes_path .. "themes/tomorrow/icons/widgets/mail.png"
 theme.widget_clock = themes_path .. "themes/tomorrow/icons/widgets/clock.png"
 
 -- Notifications size
