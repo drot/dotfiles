@@ -118,6 +118,7 @@ theme.menu_torbrowser = themes_path .. "themes/tomorrow/icons/menu/torbrowser.pn
 theme.menu_pdf = themes_path .. "themes/tomorrow/icons/menu/pdf.png"
 theme.menu_libreoffice = themes_path .. "themes/tomorrow/icons/menu/libreoffice.png"
 theme.menu_writer = themes_path .. "themes/tomorrow/icons/menu/writer.png"
+theme.menu_draw = themes_path .. "themes/tomorrow/icons/menu/draw.png"
 theme.menu_gimp = themes_path .. "themes/tomorrow/icons/menu/gimp.png"
 theme.menu_feh = themes_path .. "themes/tomorrow/icons/menu/feh.png"
 theme.menu_fman = themes_path .. "themes/tomorrow/icons/menu/fman.png"

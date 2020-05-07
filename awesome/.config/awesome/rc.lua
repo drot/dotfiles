@@ -109,13 +109,14 @@ end
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
+   { "LO Draw", "lodraw", beautiful.menu_draw },
    { "feh viewer", "feh -tr " .. os.getenv("HOME") .. "/Pictures", beautiful.menu_feh },
    { "GIMP", "gimp", beautiful.menu_gimp }
 }
 
 local myofficemenu = {
    { "LibreOffice", "libreoffice", beautiful.menu_libreoffice },
-   { "Writer", "lowriter", beautiful.menu_writer },
+   { "LO Writer", "lowriter", beautiful.menu_writer },
    { "llpp", "llpp", beautiful.menu_pdf }
 }
 
