@@ -1456,6 +1456,10 @@
 (straight-use-package 'elpher)
 ;; Set key binding
 (global-set-key (kbd "C-c w e") #'elpher)
+;; Configuration
+(after-load 'elpher
+  ;; Colorize escape sequences by default
+  (setq elpher-filter-ansi-from-text t))
 
 ;;; rcirc
 (global-set-key (kbd "<f8>") #'irc)
