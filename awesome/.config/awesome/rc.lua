@@ -1246,12 +1246,26 @@ client.connect_signal("request::titlebars", function(c)
                                layout  = wibox.layout.fixed.horizontal
                             },
                             { -- Middle
-                               { -- Title
-                                  align  = "center",
-                                  widget = awful.titlebar.widget.titlewidget(c)
+                               {
+                                  {
+                                     { -- Title
+                                        align  = "center",
+                                        widget = awful.titlebar.widget.titlewidget(c)
+                                     },
+                                     buttons = buttons,
+                                     layout  = wibox.layout.flex.horizontal
+                                  },
+                                  shape = gears.shape.rectangle,
+                                  bg = beautiful.titlebar_bg_focus,
+                                  shape_border_color = beautiful.bg_minimize,
+                                  shape_border_width = beautiful.border_width,
+                                  widget = wibox.container.background
                                },
-                               buttons = buttons,
-                               layout  = wibox.layout.flex.horizontal
+                               top = 2,
+                               bottom = 2,
+                               left = 2,
+                               right = 2,
+                               widget = wibox.container.margin 
                             },
                             { -- Right
                                awful.titlebar.widget.floatingbutton (c),
