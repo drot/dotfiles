@@ -109,9 +109,9 @@ end
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
-   { "LO Draw", "lodraw", beautiful.menu_draw },
    { "feh viewer", "feh -tr " .. os.getenv("HOME") .. "/Pictures", beautiful.menu_feh },
-   { "GIMP", "gimp", beautiful.menu_gimp }
+   { "GIMP", "gimp", beautiful.menu_gimp },
+   { "LO Draw", "lodraw", beautiful.menu_draw }
 }
 
 local myofficemenu = {
@@ -475,7 +475,7 @@ local disk_widget = wibox.widget {
       {
          {
             {
-               widget = disk_icon_widget 
+               widget = disk_icon_widget
             },
             {
                {
@@ -556,7 +556,7 @@ local volume_widget = wibox.widget {
       {
          {
             {
-               widget = volume_icon_widget 
+               widget = volume_icon_widget
             },
             {
                {
@@ -623,7 +623,7 @@ local mail_widget = wibox.widget {
       {
          {
             {
-               widget = mail_icon_widget 
+               widget = mail_icon_widget
             },
             {
                {
@@ -674,7 +674,7 @@ local clock_widget = wibox.widget {
       {
          {
             {
-               widget = clock_icon_widget 
+               widget = clock_icon_widget
             },
             {
                {
@@ -1256,7 +1256,6 @@ client.connect_signal("request::titlebars", function(c)
                                      layout  = wibox.layout.flex.horizontal
                                   },
                                   shape = gears.shape.rectangle,
-                                  bg = beautiful.titlebar_bg_focus,
                                   shape_border_color = beautiful.bg_minimize,
                                   shape_border_width = beautiful.border_width,
                                   widget = wibox.container.background
@@ -1265,7 +1264,7 @@ client.connect_signal("request::titlebars", function(c)
                                bottom = 2,
                                left = 2,
                                right = 2,
-                               widget = wibox.container.margin 
+                               widget = wibox.container.margin
                             },
                             { -- Right
                                awful.titlebar.widget.floatingbutton (c),
