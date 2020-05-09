@@ -20,6 +20,7 @@ Emacs.Fontset-0: -BE5N-Iosevka Fixed SS05-normal-normal-normal-*-16-*-*-*-m-0-fo
     han:-GOOG-Noto Sans CJK TC-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     hebrew:-GOOG-Noto Sans Hebrew-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     kana:-GOOG-Noto Sans CJK JP-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
+    symbol:-GOOG-Noto Color Emoji-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1,\
     thai:-GOOG-Noto Sans Thai-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1
 Emacs.background: #222222
 Emacs.menuBar: off
