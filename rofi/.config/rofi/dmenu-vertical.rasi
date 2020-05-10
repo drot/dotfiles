@@ -1,0 +1,44 @@
+/* -*- mode: css; -*-
+ * vertical dmenu ROFI Color theme
+ */
+
+* {
+  background-color: #1d1f21;
+  text-color: #c5c8c6;
+}
+
+#window {
+  anchor: north;
+  location: north;
+  width: 100%;
+  children: [ vertbox ];
+}
+
+#vertbox {
+  orientation: vertical;
+  spacing: 2px;
+  children: [ prompt, entry, listview ];
+}
+
+#prompt {
+  background-color: #969896;
+  text-color: #1d1f21;
+}
+
+#entry {
+  expand: false;
+}
+
+#listview {
+  layout: vertical;
+  lines: 10;
+}
+
+#element {
+  padding: 2px 2px;
+}
+
+#element selected {
+  background-color: #f0c674;
+  text-color: #1d1f21;
+}

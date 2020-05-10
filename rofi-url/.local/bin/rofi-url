@@ -3,10 +3,10 @@
 # Pick action
 case $1 in
     open)
-        prompt="Open URL"
+        prompt="Open URL:"
         ;;
     copy)
-        prompt="Copy URL"
+        prompt="Copy URL:"
         ;;
     *)
         echo "Invalid argument."
