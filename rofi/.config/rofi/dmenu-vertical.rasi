@@ -8,13 +8,16 @@
 }
 
 #window {
-  anchor: north;
-  location: north;
+  anchor: south;
+  location: south;
   width: 100%;
   children: [ vertbox ];
 }
 
 #vertbox {
+  background-color: #373b41;
+  border: 2px;
+  border-color: #969896;
   orientation: vertical;
   spacing: 2px;
   children: [ prompt, entry, listview ];
@@ -31,6 +34,7 @@
 
 #listview {
   layout: vertical;
+  fixed-height: false;
   lines: 10;
 }
 
