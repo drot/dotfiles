@@ -8,8 +8,8 @@
 }
 
 #window {
-  anchor: south;
-  location: south;
+  anchor: north;
+  location: north;
   width: 100%;
   children: [ vertbox ];
 }
