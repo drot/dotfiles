@@ -95,6 +95,11 @@ theme.tasklist_maximized_vertical = "[↕]"
 theme.tooltip_border_color = theme.border_focus
 theme.tooltip_border_width = dpi(1)
 
+-- Snap area
+theme.snap_bg = theme.hotkeys_modifiers_fg
+theme.snap_border_width = dpi(2)
+theme.snap_shape = gshape.rectangle
+
 -- Menu
 theme.menu_height = dpi(24)
 theme.menu_width = dpi(136)
