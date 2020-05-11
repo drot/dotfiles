@@ -16,6 +16,7 @@ man () {
 0x0 () {
     local curl_opts
     local url="https://0x0.st"
+
     # Parameter pick
     case $1 in
         -f)
@@ -31,54 +32,11 @@ man () {
             echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
             return 1
     esac
+
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
         curl -# -F "$curl_opts" "$url"
     else
         curl -# -F "$curl_opts" "$url" | tr -d '\n' | xsel -b
     fi
-}
-
-# Paste to ix.io
-ix () {
-    local opts
-    local OPTIND
-    [ -f "$HOME/.netrc" ] && opts='-n'
-    while getopts ":hd:i:n:" x; do
-        case $x in
-            h) echo "ix [-d ID] [-i ID] [-n N] [opts]"; return;;
-            d) $echo curl $opts -X DELETE ix.io/$OPTARG; return;;
-            i) opts="$opts -X PUT"; local id="$OPTARG";;
-            n) opts="$opts -F read:1=$OPTARG";;
-        esac
-    done
-    shift $(($OPTIND - 1))
-    [ -t 0 ] && {
-        local filename="$1"
-        shift
-        [ "$filename" ] && {
-            curl $opts -F f:1=@"$filename" $* ix.io/$id
-            return
-        }
-        echo "^C to cancel, ^D to send."
-    }
-    curl $opts -F f:1='<-' $* ix.io/$id
-}
-
-# Record desktop
-record () {
-    if [[ $1 == *.mp4 ]]; then
-        ffmpeg -y -f x11grab -s $(xdpyinfo | awk '/dimensions:/{print $2}') \
-               -i :0.0 -f pulse -i 0 /tmp/"$1"
-    else
-        echo "Specify an .mp4 output file please."
-        return 1
-    fi
-}
-
-# Find common files quickly with fzf
-finder () {
-    find -L ~/.scripts ~/.config -type f -not \
-         \( -path "*/\.git/*" -o -path "*/\wine/*" -o -path "*/\libreoffice/*" -o -path "*/\GIMP/*" \) \
-        | fzf | xargs -r $EDITOR
 }
