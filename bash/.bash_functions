@@ -17,16 +17,20 @@ man () {
     local curl_opts
     local url="https://0x0.st"
     # Parameter pick
-    if [[ $1 = "-f" ]]; then
-        curl_opts="file=@$2"
-    elif [[ $1 = "-u" ]]; then
-        curl_opts="url=$2"
-    elif [[ $1 = "-s" ]]; then
-        curl_opts="shorten=$2"
-    else
-        echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
-        return 1
-    fi
+    case $1 in
+        -f)
+            curl_opts="file=@$2"
+            ;;
+        -u)
+            curl_opts="url=$2"
+            ;;
+        -s)
+            curl_opts="shorten=$2"
+            ;;
+        *)
+            echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
+            return 1
+    esac
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
         curl -# -F "$curl_opts" "$url"
