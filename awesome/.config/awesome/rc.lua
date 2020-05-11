@@ -1181,12 +1181,11 @@ awful.rules.rules = {
                 }, properties = { titlebars_enabled = true }
    },
 
+   -- Terminal emulators
+   { rule_any = { class = { "st-256color", "xterm" } },
+     properties = { titlebars_enabled = false } },
    -- Set browsers to always map on the tag named "2" on screen 1
-   { rule = { class = "Firefox" },
-     properties = { tag = "2", titlebars_enabled = false } },
-   { rule = { class = "Tor Browser" },
-     properties = { tag = "2", titlebars_enabled = false } },
-   { rule = { class = "qutebrowser" },
+   { rule_any = { class = { "Firefox", "Tor Browser", "qutebrowser" } },
      properties = { tag = "2", titlebars_enabled = false } },
    -- Emacs
    { rule = { class = "Emacs" },
