@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-link_handler="xurls | tac | rofi -dmenu -i -l 10 -w $WINDOWID"
+link_handler() {
+    xurls | tac | rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$1" | "${@:2}";
+};
 
-# Pick action
 case $1 in
     open)
-        prompt="Open URL:"
-        eval "$link_handler" -p "$prompt" | xargs -r xdg-open
+        link_handler "Open URL:" xargs -r xdg-open
         ;;
     copy)
-        prompt="Copy URL:"
-        eval "$link_handler" -p "$prompt" | xclip -selection clipboard
+        link_handler "Copy URL:" xclip -selection clipboard
         ;;
     *)
-        echo "Invalid argument."
+        printf >&2 'Bad option "%s"\n' "$1";
         exit 1
         ;;
 esac
