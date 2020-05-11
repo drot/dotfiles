@@ -20,18 +20,20 @@ man () {
     # Parameter pick
     case $1 in
         -f)
-            curl_opts="file=@$2"
+            : "file=@$2"
             ;;
         -u)
-            curl_opts="url=$2"
+            : "url=$2"
             ;;
         -s)
-            curl_opts="shorten=$2"
+            : "shorten=$2"
             ;;
         *)
             echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
             return 1
     esac
+
+    curl_opts="$_"
 
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
