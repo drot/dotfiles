@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
+link_handler="xurls | tac | rofi -dmenu -i -l 10 -w $WINDOWID"
+
 # Pick action
 case $1 in
     open)
         prompt="Open URL:"
+        eval "$link_handler" -p "$prompt" | xargs -r xdg-open
         ;;
     copy)
         prompt="Copy URL:"
+        eval "$link_handler" -p "$prompt" | xclip -selection clipboard
         ;;
     *)
         echo "Invalid argument."
         exit 1
         ;;
 esac
-
-# Prompt based on action
-rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$prompt"
