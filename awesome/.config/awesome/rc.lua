@@ -1282,7 +1282,7 @@ end)
 -- Focus urgent clients automatically
 client.connect_signal("property::urgent", function(c)
                          c.minimized = false
-                         c.border_color = beautiful.border_marked 
+                         c.border_color = beautiful.border_marked
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
