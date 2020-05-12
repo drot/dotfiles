@@ -17,7 +17,6 @@ man () {
     local curl_opts
     local url="https://0x0.st"
 
-    # Parameter pick
     case $1 in
         -f)
             : "file=@$2"
