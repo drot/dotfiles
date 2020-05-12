@@ -19,20 +19,18 @@ man () {
 
     case $1 in
         -f)
-            : "file=@$2"
+            curl_opts="file=@$2"
             ;;
         -u)
-            : "url=$2"
+            curl_opts="url=$2"
             ;;
         -s)
-            : "shorten=$2"
+            curl_opts="shorten=$2"
             ;;
         *)
             echo "'-f' for file upload, '-u' for url upload, '-s' for URL shortening."
             return 1
     esac
-
-    curl_opts="$_"
 
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
