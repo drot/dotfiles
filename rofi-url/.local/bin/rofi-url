@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 link_handler() {
-    xurls | tac | rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$1" | "${@:2}";
-};
+    xurls | tac | rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$1" | "${@:2}"
+}
 
 case $1 in
     open)
@@ -12,7 +12,7 @@ case $1 in
         link_handler "Copy URL:" xclip -selection clipboard
         ;;
     *)
-        printf >&2 'Bad option "%s"\n' "$1";
+        printf >&2 'Bad option "%s"\n' "$1"
         exit 1
         ;;
 esac
