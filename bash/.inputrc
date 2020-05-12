@@ -13,6 +13,8 @@ set colored-stats on
 set visible-stats on
 # colorize completion prefix
 set colored-completion-prefix on
+# skip to beginning of already completed text
+set skip-completed-text on
 # add trailing slashes to symlinks
 set mark-symlinked-directories on
 # bracketed paste mode
