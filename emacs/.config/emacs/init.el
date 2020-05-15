@@ -997,6 +997,22 @@
 (setq mail-user-agent 'gnus-user-agent
       read-mail-command #'gnus)
 
+;;; Newsticker
+(global-set-key (kbd "<C-f9>") #'newsticker-treeview)
+;; Configuration
+(after-load 'newst-backend
+  ;; Purge default sources
+  (setq newsticker-url-list-defaults nil)
+  ;; Add my feeds
+  (setq newsticker-url-list '(("Bljesak.info" "http://bljesak.info/rss")
+                              ("Hacker News" "https://news.ycombinator.com/rss")
+                              ("LWN" "https://lwn.net/headlines/rss")
+                              ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
+                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
+                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss"))))
+;; Enable Imenu for Plainview
+(add-hook 'newsticker-mode-hook #'imenu-add-menubar-index)
+
 ;;; Calendar
 (global-set-key (kbd "<f12>") #'calendar)
 ;; Configuration
@@ -1428,30 +1444,6 @@
 
 ;;; Dockerfile mode
 (straight-use-package 'dockerfile-mode)
-
-;;; Elfeed
-(straight-use-package 'elfeed)
-;; Set global key binding
-(global-set-key (kbd "<C-f9>") #'elfeed)
-;; Change default database location
-(setq elfeed-db-directory (locate-user-emacs-file "elfeed"))
-;; Configuration
-(after-load 'elfeed
-  ;; Default feeds
-  (setq elfeed-feeds
-        '(("https://news.ycombinator.com/rss" hnews)
-          ("https://lwn.net/headlines/rss" lwn)
-          ("https://www.reddit.com/r/emacs/.rss" emacs)
-          ("https://www.reddit.com/r/linux/.rss" linux)
-          ("https://www.reddit.com/r/linux/.rss" programming)
-          ("http://bljesak.info/rss" bljesak)))
-  ;; Change search defaults
-  (setq elfeed-search-date-format '("%d-%m-%Y" 10 :left)
-        elfeed-search-filter "@1-week-ago +unread")
-  ;; Entries older than 2 weeks are marked as read
-  (add-hook 'elfeed-new-entry-hook
-            (elfeed-make-tagger :before "2 weeks ago"
-                                :remove 'unread)))
 
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
