@@ -1851,9 +1851,10 @@
 ;; Display PDF files to the right always
 (add-to-list 'display-buffer-alist
              '("\\.pdf\\(<[^>]+>\\)?$"
-               (display-buffer-in-side-window)
+               (display-buffer-reuse-window display-buffer-in-side-window)
                (side . right)
-               (window-width . 0.5)))
+               (window-width . 0.5)
+               (reusable-frames . nil)))
 
 ;;; PKGBUILD mode
 (straight-use-package 'pkgbuild-mode)
@@ -2256,6 +2257,13 @@
         undo-tree-auto-save-history t)
   ;; Exclude some modes
   (add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode))
+;; Display visualizer on the right
+(add-to-list 'display-buffer-alist
+             '("*undo-tree"
+               (display-buffer-reuse-window display-buffer-in-side-window)
+               (side . right)
+               (window-width . 0.15)
+               (reusable-frames . nil)))
 
 ;;; Volatile Highlights
 (straight-use-package 'volatile-highlights)
