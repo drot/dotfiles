@@ -473,6 +473,7 @@
            ("LSP" (name . "*lsp-log*"))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
+           ("Newsticker" (derived-mode . newsticker-treeview-mode))
            ("Org" (derived-mode . org-mode))
            ("Packages" (derived-mode . package-menu-mode))
            ("PDF" (derived-mode . pdf-view-mode))
