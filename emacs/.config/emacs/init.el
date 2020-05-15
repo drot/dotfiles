@@ -210,7 +210,7 @@
         "/elpa/.*\\'"
         "/image-dired/.*\\'"
         "/backup/.*\\'"
-        "/elfeed/.*\\'"
+        "/newsticker/.*\\'"
         "/cache/.*\\'"
         "/straight/.*\\'"
         "/url/.*\\'"
@@ -1009,7 +1009,9 @@
                               ("LWN" "https://lwn.net/headlines/rss")
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
                               ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
-                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss"))))
+                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
+  ;; Retrieve feeds only once
+  (setq newsticker-retrieval-interval 0))
 ;; Enable Imenu for Plainview
 (add-hook 'newsticker-mode-hook #'imenu-add-menubar-index)
 
@@ -1332,9 +1334,9 @@
   (dired-rainbow-define config (:foreground "cadet blue" :italic t) ("conf" "ini" "yml"))
   (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
   (dired-rainbow-define sourcefile "orchid" ("py" "c" "cc" "h" "java"
-                                                 "pl" "rb" "R" "php" "el"
-                                                 "scm" "cpp" "fos" "lisp" "clj"
-                                                 "lua" "lisp" "sh"))
+                                             "pl" "rb" "R" "php" "el"
+                                             "scm" "cpp" "fos" "lisp" "clj"
+                                             "lua" "lisp" "sh"))
   (dired-rainbow-define patch (:background "red4") ("diff" "patch"))
   (dired-rainbow-define video "firebrick2" ("vob" "VOB" "mkv" "MKV" "mpe"
                                             "mpg" "MPG" "mp4" "MP4" "ts"
