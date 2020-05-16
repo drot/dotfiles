@@ -73,7 +73,7 @@ fi
 
 # Prompt format
 case $TERM in
-    alacritty|xterm*|st*|screen*|tmux*)
+    xterm*|st*|screen*|tmux*)
         PS1="${TITLE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
     *)
         PS1="${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}" ;;
