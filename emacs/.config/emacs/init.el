@@ -1006,6 +1006,7 @@
   (setq newsticker-url-list-defaults nil)
   ;; Add my feeds
   (setq newsticker-url-list '(("Bljesak.info" "http://bljesak.info/rss")
+                              ("Klix.ba" "https://www.klix.ba/rss/naslovnica")
                               ("Hacker News" "https://news.ycombinator.com/rss")
                               ("LWN" "https://lwn.net/headlines/rss")
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
