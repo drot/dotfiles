@@ -1012,7 +1012,7 @@
                               ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
                               ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
                               ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
-  ;; Retrieve feeds only once
+  ;; Retrieve feeds manually
   (setq newsticker-retrieval-interval 0))
 ;; Enable Imenu for Plainview mode
 (add-hook 'newsticker-mode-hook #'imenu-add-menubar-index)
