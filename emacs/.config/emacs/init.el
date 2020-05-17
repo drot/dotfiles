@@ -1005,13 +1005,14 @@
   ;; Purge default sources
   (setq newsticker-url-list-defaults nil)
   ;; Add my feeds
-  (setq newsticker-url-list '(("Bljesak.info" "http://bljesak.info/rss")
-                              ("Klix.ba" "https://www.klix.ba/rss/naslovnica")
-                              ("Hacker News" "https://news.ycombinator.com/rss")
-                              ("LWN" "https://lwn.net/headlines/rss")
-                              ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
-                              ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
-                              ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
+  (setq newsticker-url-list
+        '(("Bljesak.info" "http://bljesak.info/rss")
+          ("Klix.ba" "https://www.klix.ba/rss/naslovnica")
+          ("Hacker News" "https://news.ycombinator.com/rss")
+          ("LWN" "https://lwn.net/headlines/rss")
+          ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
+          ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
+          ("Reddit Programming" "https://www.reddit.com/r/programming/.rss")))
   ;; Retrieve feeds manually
   (setq newsticker-retrieval-interval 0))
 ;; Enable Imenu for Plainview mode
