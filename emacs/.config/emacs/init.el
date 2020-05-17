@@ -1456,7 +1456,9 @@
 ;; Configuration
 (after-load 'elpher
   ;; Colorize escape sequences by default
-  (setq elpher-filter-ansi-from-text t))
+  (setq elpher-filter-ansi-from-text t)
+  ;; Change default bookmarks file location
+  (setq elpher-bookmarks-file (locate-user-emacs-file "cache/elpher-bookmarks")))
 
 ;;; rcirc
 (global-set-key (kbd "<f8>") #'irc)
