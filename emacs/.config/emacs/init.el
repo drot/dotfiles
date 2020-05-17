@@ -59,8 +59,8 @@
 (setq initial-scratch-message nil)
 
 ;;; Show column number and buffer size on the mode line
-(column-number-mode)
-(size-indication-mode)
+(column-number-mode +1)
+(size-indication-mode +1)
 
 ;;; Answer y or n instead of yes or no at prompts
 (fset 'yes-or-no-p #'y-or-n-p)
@@ -80,7 +80,7 @@
       window-divider-default-right-width 1
       window-divider-default-places t)
 ;; Enable mode
-(window-divider-mode)
+(window-divider-mode +1)
 
 ;;; Move point all the way to buffer boundary before signaling an error
 (setq scroll-error-top-bottom t)
@@ -115,7 +115,7 @@
 (setq enable-recursive-minibuffers t)
 
 ;;; Indicate minibuffer recursion depth
-(minibuffer-depth-indicate-mode)
+(minibuffer-depth-indicate-mode +1)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -197,7 +197,7 @@
       savehist-autosave-interval 60
       savehist-additional-variables '(search-ring regexp-search-ring))
 ;; Initialize mode
-(savehist-mode)
+(savehist-mode +1)
 
 ;;; Save recent files list
 (setq recentf-save-file (locate-user-emacs-file "cache/recent-files")
@@ -219,12 +219,12 @@
         "newsrc"
         "TAGS"))
 ;; Enable mode
-(recentf-mode)
+(recentf-mode +1)
 
 ;;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
 ;; Enable mode
-(save-place-mode)
+(save-place-mode +1)
 
 ;;; Line numbers display
 (setq display-line-numbers-type 'relative
@@ -242,7 +242,7 @@
 (add-hook 'conf-mode-hook #'display-fill-column-indicator-mode)
 
 ;;; Highlight current line
-(global-hl-line-mode)
+(global-hl-line-mode +1)
 ;; Disable `hl-line-mode' in special buffers
 (dolist (hook '(artist-mode-hook
                 comint-mode-hook
@@ -266,12 +266,12 @@
       show-paren-when-point-inside-paren t
       show-paren-when-point-in-periphery t)
 ;; Enable mode
-(show-paren-mode)
+(show-paren-mode +1)
 
 ;;; Highlight regexps interactively
 (setq hi-lock-auto-select-face t)
 ;; Enable mode
-(global-hi-lock-mode)
+(global-hi-lock-mode +1)
 
 ;;; Abbrev mode
 (setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
@@ -284,7 +284,7 @@
 (setq-default abbrev-mode t)
 
 ;;; Electric pair mode
-(electric-pair-mode)
+(electric-pair-mode +1)
 ;; Configuration
 (after-load 'electric
   ;; Use more conservative pairing
@@ -295,12 +295,12 @@
 ;;; Prettify-Symbols mode
 (setq prettify-symbols-unprettify-at-point t)
 ;; Enable mode
-(global-prettify-symbols-mode)
+(global-prettify-symbols-mode +1)
 
 ;;; Which function mode
 (setq which-func-unknown "n/a")
 ;; Enable mode
-(which-function-mode)
+(which-function-mode +1)
 
 ;;; Wind Move fast window switching
 (windmove-default-keybindings)
@@ -319,7 +319,7 @@
 (global-set-key (kbd "<C-s-left>") #'winner-undo)
 (global-set-key (kbd "<C-s-right>") #'winner-redo)
 ;; Initialize mode
-(winner-mode)
+(winner-mode +1)
 
 ;;; Hide Show mode
 (dolist (hook '(c-mode-common-hook
@@ -800,7 +800,7 @@
     (define-key eshell-hist-mode-map
       [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     ;; Disable Company since we use `completion-at-point'
-    (company-mode 0))
+    (company-mode -1))
   ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
 
@@ -818,7 +818,7 @@
   (defun drot/shell-mode-setup ()
     "Disable Company and enable clickable file paths."
     (compilation-shell-minor-mode)
-    (company-mode 0))
+    (company-mode -1))
   ;; Apply the custom hook
   (add-hook 'shell-mode-hook #'drot/shell-mode-setup))
 
@@ -849,7 +849,7 @@
 (after-load 'flymake
   ;; Define Hydra
   (defhydra hydra-flymake
-    (:pre (flyspell-mode 0) :post (flyspell-mode))
+    (:pre (flyspell-mode -1) :post (flyspell-mode +1))
     ;; Go to errors
     ("n" flymake-goto-next-error "Next" :column "Errors")
     ("p" flymake-goto-prev-error "Previous")
@@ -1496,7 +1496,7 @@
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
   ;; Disable `company-mode' in rcirc buffers
   (add-hook 'rcirc-mode-hook
-            (lambda () (company-mode 0)))
+            (lambda () (company-mode -1)))
   ;; Exclude text properties when yanking text in rcirc buffers
   (add-to-list 'yank-excluded-properties 'rcirc-text)
   ;; Add some custom commands
@@ -1973,7 +1973,7 @@
 ;;; Company mode
 (straight-use-package 'company)
 ;; Enable mode
-(global-company-mode)
+(global-company-mode +1)
 ;; Set global key binding
 (global-set-key (kbd "C-c i y") #'company-yasnippet)
 ;; Configuration
@@ -2002,9 +2002,9 @@
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
-(global-diff-hl-mode)
+(global-diff-hl-mode +1)
 ;; Update diffs immediately
-(diff-hl-flydiff-mode)
+(diff-hl-flydiff-mode +1)
 ;; Set global key binding
 (global-set-key (kbd "C-c t v") #'diff-hl-margin-mode)
 ;; Add hooks for `dired' and `magit'
@@ -2033,7 +2033,7 @@
 ;;; Hl-Todo
 (straight-use-package 'hl-todo)
 ;; Enable mode
-(global-hl-todo-mode)
+(global-hl-todo-mode +1)
 ;; Configuration
 (after-load 'hl-todo
   ;; Define Hydra
@@ -2050,7 +2050,7 @@
 ;;; Amx
 (straight-use-package 'amx)
 ;; Initialize mode
-(amx-mode)
+(amx-mode +1)
 ;; Set global key bindings
 (global-set-key (kbd "M-X") #'amx-major-mode-commands)
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
@@ -2064,7 +2064,7 @@
 ;; Ivy Hydra support
 (straight-use-package 'ivy-hydra)
 ;; Initialize mode
-(ivy-mode)
+(ivy-mode +1)
 ;; Set global key binding
 (global-set-key (kbd "<C-f4>") #'ivy-resume)
 ;; Configuration
@@ -2086,7 +2086,7 @@
 ;;; Counsel
 (straight-use-package 'counsel)
 ;; Initialize mode
-(counsel-mode)
+(counsel-mode +1)
 ;; Set global key bindings
 (dolist (bind '(("C-c s C-s" . counsel-rg)
                 ("C-c f g" . counsel-git)
@@ -2140,24 +2140,24 @@
   ;; Use fuzzy matching by default
   (setq prescient-filter-method 'fuzzy)
   ;; Enable persistent history
-  (prescient-persist-mode))
+  (prescient-persist-mode +1))
 
 ;;; Ivy Prescient
 (straight-use-package 'ivy-prescient)
 ;; Configuration
 (after-load 'counsel
   ;; Initialize mode
-  (ivy-prescient-mode))
+  (ivy-prescient-mode +1))
 
 ;;; Company Prescient
 (straight-use-package 'company-prescient)
 ;; Initialize mode
-(company-prescient-mode)
+(company-prescient-mode +1)
 
 ;;; Minions
 (straight-use-package 'minions)
 ;; Enable mode
-(minions-mode)
+(minions-mode +1)
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter and color
@@ -2233,7 +2233,7 @@
   (defun drot/paredit-minibuffer-setup ()
     "Enable Paredit during lisp-related minibuffer commands."
     (if (memq this-command drot/paredit-minibuffer-setup-commands)
-        (enable-paredit-mode)))
+        (paredit-mode +1)))
 
   (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
   ;; Disable Electric Pair mode when Paredit is active
@@ -2252,7 +2252,7 @@
 ;;; Undo Tree
 (straight-use-package 'undo-tree)
 ;; Initialize mode
-(global-undo-tree-mode)
+(global-undo-tree-mode +1)
 ;; Configuration
 (after-load 'undo-tree
   ;; Enable undo history saving
@@ -2271,12 +2271,12 @@
 ;;; Volatile Highlights
 (straight-use-package 'volatile-highlights)
 ;; Enable mode
-(volatile-highlights-mode)
+(volatile-highlights-mode +1)
 
 ;;; YASnippet
 (straight-use-package 'yasnippet)
 ;; Enable mode
-(yas-global-mode)
+(yas-global-mode +1)
 
 ;;; Artist mode
 (global-set-key (kbd "C-c t a") #'artist-mode)
