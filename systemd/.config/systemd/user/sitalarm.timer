@@ -1,0 +1,9 @@
+[Unit]
+Description=Track sitting time
+
+[Timer]
+OnActiveSec=45m
+OnUnitActiveSec=45m
+
+[Install]
+WantedBy=timers.target
