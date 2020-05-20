@@ -251,6 +251,7 @@
                 nov-mode-hook
                 rcirc-mode-hook
                 term-mode-hook
+                undo-tree-visualizer-mode-hook
                 vterm-mode-hook
                 cider-repl-mode-hook))
   (add-hook hook
@@ -2249,6 +2250,25 @@
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
 
+;;; Undo Tree
+(straight-use-package 'undo-tree)
+;; Initialize mode
+(global-undo-tree-mode +1)
+;; Configuration
+(after-load 'undo-tree
+  ;; Enable undo history saving
+  (setq undo-tree-history-directory-alist `(("." . ,(locate-user-emacs-file "undo/")))
+        undo-tree-auto-save-history t)
+  ;; Exclude some modes
+  (add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode))
+;; Display visualizer on the right
+(add-to-list 'display-buffer-alist
+             '("*undo-tree"
+               (display-buffer-reuse-window display-buffer-in-side-window)
+               (side . right)
+               (window-width . 0.15)
+               (reusable-frames . nil)))
+
 ;;; Volatile Highlights
 (straight-use-package 'volatile-highlights)
 ;; Enable mode
@@ -2320,10 +2340,6 @@
 
 ;;; Auto Fill mode
 (global-set-key (kbd "C-c t f") #'auto-fill-mode)
-
-;;; Rebind undo specific operations
-(global-set-key (kbd "C-/") #'undo-only)
-(global-set-key (kbd "C-_") #'undo-redo)
 
 ;;; Align
 (dolist (bind '(("C-c x a" . align)
