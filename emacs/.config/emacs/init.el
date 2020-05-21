@@ -2321,10 +2321,6 @@
 ;;; Auto Fill mode
 (global-set-key (kbd "C-c t f") #'auto-fill-mode)
 
-;;; Rebind undo specific operations
-(global-set-key (kbd "C-/") #'undo-only)
-(global-set-key (kbd "C-_") #'undo-redo)
-
 ;;; Align
 (dolist (bind '(("C-c x a" . align)
                 ("C-c x c" . align-current)
