@@ -247,6 +247,7 @@
 (dolist (hook '(artist-mode-hook
                 comint-mode-hook
                 ediff-mode-hook
+                elpher-mode-hook
                 eshell-mode-hook
                 nov-mode-hook
                 rcirc-mode-hook
