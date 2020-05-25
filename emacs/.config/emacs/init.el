@@ -797,7 +797,7 @@
         eshell-cmpl-ignore-case t)
   (defun drot/eshell-mode-setup ()
     "Integrate with Counsel and disable Company in Eshell buffers."
-    (define-key eshell-hist-mode-map
+    (define-key eshell-mode-map
       [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
     ;; Disable Company since we use `completion-at-point'
     (company-mode -1))
