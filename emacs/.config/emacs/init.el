@@ -2354,6 +2354,15 @@
                 ("<f5>" . revert-buffer)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 
+
+;;; Zap up to char
+(defun zap-back-to-char (char)
+  "Like `zap-up-to-char' but goes backwards."
+  (interactive "c")
+  (zap-up-to-char -1 char))
+;; Set global key binding
+(global-set-key (kbd "M-Z") #'zap-back-to-char)
+
 ;;; Customize interface
 (global-set-key (kbd "<f11>") #'customize-group)
 ;; Configuration
