@@ -2356,12 +2356,12 @@
 
 
 ;;; Zap up to char
-(defun zap-back-to-char (char)
+(defun drot/zap-back-to-char (char)
   "Like `zap-up-to-char' but goes backwards."
   (interactive "c")
   (zap-up-to-char -1 char))
 ;; Set global key binding
-(global-set-key (kbd "M-Z") #'zap-back-to-char)
+(global-set-key (kbd "M-Z") #'drot/zap-back-to-char)
 
 ;;; Customize interface
 (global-set-key (kbd "<f11>") #'customize-group)
