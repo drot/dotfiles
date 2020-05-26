@@ -2354,7 +2354,6 @@
                 ("<f5>" . revert-buffer)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 
-
 ;;; Zap up to char
 (defun drot/zap-back-to-char (char)
   "Like `zap-up-to-char' but goes backwards."
