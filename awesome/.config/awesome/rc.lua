@@ -1192,7 +1192,7 @@ awful.rules.rules = {
    { rule_any = { class = { "st-256color", "xterm" } },
      properties = { titlebars_enabled = false } },
    -- Set browsers to always map on the tag named "2" on screen 1
-   { rule_any = { class = { "Firefox", "Tor Browser", "qutebrowser" } },
+   { rule_any = { class = { "firefox", "Tor Browser", "qutebrowser" } },
      properties = { tag = "2", titlebars_enabled = false } },
    -- Emacs
    { rule = { class = "Emacs" },
