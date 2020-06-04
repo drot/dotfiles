@@ -59,7 +59,7 @@ naughty.config.presets.critical.border_color = beautiful.fg_urgent
 -- }}}
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "st"
+local terminal = "alacritty"
 local editor = os.getenv("EDITOR")
 local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
