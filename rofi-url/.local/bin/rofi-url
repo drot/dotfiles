@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 link_handler() {
-    xurls | tac | rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$1" | "${@:2}"
+    local regex='(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]'
+    grep -Po "$regex" | tac | rofi -dmenu -i -l 10 -w "$WINDOWID" -p "$1" | "${@:2}"
 }
 
 case $1 in
