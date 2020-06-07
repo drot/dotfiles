@@ -2062,6 +2062,14 @@
 (selectrum-mode +1)
 ;; Set key binding to repeat last command
 (global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+;; Add `recentf' support
+(defun drot/selectrum-recentf-open ()
+  "Use `completing-read' to open a recent file."
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file (completing-read "Find recent file: " files nil t))))
+;; Set key binding
+(global-set-key (kbd "C-x C-r") #'drot/selectrum-recentf-open)
 
 ;;; Amx
 (straight-use-package 'amx)
