@@ -463,7 +463,6 @@
                        (derived-mode . Info-mode)))
            ("Image" (mode . image-mode))
            ("Log" (or (derived-mode . TeX-output-mode)
-                      (derived-mode . ivy-occur-mode)
                       (derived-mode . geiser-messages-mode)
                       (mode . tags-table-mode)
                       (name . "*nrepl-server")
@@ -504,10 +503,15 @@
 
 ;;; Find file at point
 (after-load 'ffap
+  ;; Require prefix
+  (setq ffap-require-prefix t
+        dired-at-point-require-prefix t)
   ;; Disable pinging to avoid slowdowns
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+;; Initialize mode
+(ffap-bindings)
 
 ;;; Version control
 (after-load 'vc-hooks
@@ -798,9 +802,7 @@
   (setq eshell-hist-ignoredups t
         eshell-cmpl-ignore-case t)
   (defun drot/eshell-mode-setup ()
-    "Integrate with Counsel and disable Company in Eshell buffers."
-    (define-key eshell-mode-map
-      [remap eshell-previous-matching-input-from-input] #'counsel-esh-history)
+    "Custom hook to run for my Eshell buffers."
     ;; Disable Company since we use `completion-at-point'
     (company-mode -1))
   ;; Apply the custom hook
@@ -808,18 +810,18 @@
 
 ;; Eshell smart display
 (after-load 'eshell
-  ;; Enable mode
+  ;; Load library
   (require 'em-smart)
-  (add-hook 'eshell-mode-hook #'eshell-smart-initialize)
-  ;; Jump to end when `counsel-esh-history' is used
-  (add-to-list 'eshell-smart-display-navigate-list #'counsel-esh-history))
+  ;; Initialize mode
+  (add-hook 'eshell-mode-hook #'eshell-smart-initialize))
 
 ;;; Shell mode
 (after-load 'shell
   ;; Custom hook to avoid conflicts
   (defun drot/shell-mode-setup ()
-    "Disable Company and enable clickable file paths."
-    (compilation-shell-minor-mode)
+    "Custom hook to run for my Shell buffers."
+    ;; Enable clickable file paths and disable Company
+    (compilation-shell-minor-mode +1)
     (company-mode -1))
   ;; Apply the custom hook
   (add-hook 'shell-mode-hook #'drot/shell-mode-setup))
@@ -2050,6 +2052,13 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
+;;; Selectrum minibuffer completion
+(straight-use-package 'selectrum)
+;; Initialize mode
+(selectrum-mode +1)
+;; Set key binding to repeat last command
+(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+
 ;;; Amx
 (straight-use-package 'amx)
 ;; Initialize mode
@@ -2059,78 +2068,10 @@
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
+  ;; Change default backend to use `selectrum'
+  (setq amx-backend 'selectrum)
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
-;;; Ivy
-(straight-use-package 'ivy)
-;; Ivy Hydra support
-(straight-use-package 'ivy-hydra)
-;; Initialize mode
-(ivy-mode +1)
-;; Set global key binding
-(global-set-key (kbd "<C-f4>") #'ivy-resume)
-;; Configuration
-(after-load 'ivy
-  ;; Optimize completion
-  (setq ivy-dynamic-exhibit-delay-ms 150)
-  ;; Prompt format
-  (setq ivy-use-selectable-prompt t
-        ivy-count-format "(%d/%d) ")
-  ;; Use arrow display
-  (setq ivy-format-functions-alist '((t . ivy-format-function-arrow)))
-  ;; Virtual buffer usage
-  (setq ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate)
-  ;; Wrap by default
-  (setq ivy-wrap t
-        ivy-action-wrap t))
-
-;;; Counsel
-(straight-use-package 'counsel)
-;; Initialize mode
-(counsel-mode +1)
-;; Set global key bindings
-(dolist (bind '(("C-c s C-s" . counsel-rg)
-                ("C-c f g" . counsel-git)
-                ("C-c f d" . counsel-dired-jump)
-                ("C-c f r" . counsel-buffer-or-recentf)
-                ("C-c s v" . counsel-git-grep)
-                ("C-c s g" . counsel-grep)
-                ("C-c s i" . counsel-imenu)
-                ("C-c h c" . counsel-command-history)
-                ("C-c h l" . counsel-find-library)
-                ("C-x 8 k" . counsel-unicode-char)
-                ("C-c f j" . counsel-file-jump)
-                ("C-c o j" . counsel-outline)
-                ("C-c v s" . counsel-set-variable)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
-;; Remap the rest
-(global-set-key [remap org-goto] #'counsel-org-goto)
-(global-set-key [remap org-set-tags-command] #'counsel-org-tag)
-(global-set-key [remap menu-bar-open] #'counsel-tmm)
-;; Configuration
-(after-load 'counsel
-  ;; Preselect files
-  (setq counsel-preselect-current-file t)
-  ;; Change `counsel-org' defaults
-  (setq counsel-org-goto-face-style 'verbatim
-        counsel-org-headline-display-tags t
-        counsel-org-headline-display-todo t))
-
-;;; Swiper
-(straight-use-package 'swiper)
-;; Set global key bindings
-(global-set-key (kbd "C-c s s") #'swiper-all)
-(global-set-key (kbd "M-s s") #'swiper)
-;; Set local key binding
-(define-key isearch-mode-map (kbd "M-s s") #'swiper-from-isearch)
-;; Configuration
-(after-load 'swiper
-  ;; Include line numbers
-  (setq swiper-include-line-number-in-search t)
-  ;; Always go to the beginning of a match
-  (setq swiper-goto-start-of-match t))
 
 ;;; Prescient
 (straight-use-package 'prescient)
@@ -2145,12 +2086,10 @@
   ;; Enable persistent history
   (prescient-persist-mode +1))
 
-;;; Ivy Prescient
-(straight-use-package 'ivy-prescient)
-;; Configuration
-(after-load 'counsel
-  ;; Initialize mode
-  (ivy-prescient-mode +1))
+;;; Selectrum Prescient
+(straight-use-package 'selectrum-prescient)
+;; Initialize mode
+(selectrum-prescient-mode +1)
 
 ;;; Company Prescient
 (straight-use-package 'company-prescient)
