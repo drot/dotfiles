@@ -2107,6 +2107,8 @@
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
+  ;; Use `completing-read' by default
+  (setq amx-backend 'standard)
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
