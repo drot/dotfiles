@@ -1738,7 +1738,7 @@
    ("p" "Move Up" move-text-up)
    ("n" "Move Down" move-text-down)])
 ;; Set global key binding
-(global-set-key (kbd "C-c x m") #'hydra-move-text/body)
+(global-set-key (kbd "C-c x m") #'drot/move-text-transient)
 
 ;;; Multiple cursors
 (straight-use-package 'multiple-cursors)
