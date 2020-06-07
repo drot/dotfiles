@@ -111,11 +111,44 @@
 ;;; Don't show help for completions
 (setq completion-show-help nil)
 
+;;; Orderless completion style matching
+(straight-use-package 'orderless)
+;; Use only `orderless' by default
+(setq completion-styles '(orderless))
+
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode +1)
+
+;;; Icomplete
+(icomplete-mode +1)
+;; Configuration
+(after-load 'icomplete
+  ;; Reduce the completion delay
+  (setq icomplete-delay-completions-threshold 100
+        icomplete-compute-delay 0.2)
+  ;; Complete in other places as well
+  (setq icomplete-in-buffer t)
+  ;; Automatically delete superfluous parts of file names
+  (setq icomplete-tidy-shadowed-file-names t)
+  ;; Use single line display
+  (setq icomplete-prospects-height 1))
+
+;;; Icomplete vertical display
+(straight-use-package 'icomplete-vertical)
+;; Initialize mode
+(icomplete-vertical-mode +1)
+;; Configuration
+(after-load 'icomplete-vertical
+  ;; Set local key bindings
+  (dolist (bind '(("<down>" . icomplete-forward-completions)
+                  ("C-n" . icomplete-forward-completions)
+                  ("<up>" . icomplete-backward-completions)
+                  ("C-p" . icomplete-backward-completions)
+                  ("C-v" . icomplete-vertical-toggle)))
+    (define-key icomplete-minibuffer-map (kbd (car bind)) (cdr bind))))
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -220,6 +253,15 @@
         "TAGS"))
 ;; Enable mode
 (recentf-mode +1)
+
+;; Add support for minibuffer completion
+(defun drot/recentf-open ()
+  "Use `completing-read' to open a recent file."
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file (completing-read "Find recent file: " files nil t))))
+;; Set key binding
+(global-set-key (kbd "C-x C-r") #'drot/recentf-open)
 
 ;;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
@@ -2056,21 +2098,6 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; Selectrum minibuffer completion
-(straight-use-package 'selectrum)
-;; Initialize mode
-(selectrum-mode +1)
-;; Set key binding to repeat last command
-(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
-;; Add `recentf' support
-(defun drot/selectrum-recentf-open ()
-  "Use `completing-read' to open a recent file."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file (completing-read "Find recent file: " files nil t))))
-;; Set key binding
-(global-set-key (kbd "C-x C-r") #'drot/selectrum-recentf-open)
-
 ;;; Amx
 (straight-use-package 'amx)
 ;; Initialize mode
@@ -2080,8 +2107,6 @@
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
 ;; Configuration
 (after-load 'amx
-  ;; Change default backend to use `selectrum'
-  (setq amx-backend 'selectrum)
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
 
@@ -2097,11 +2122,6 @@
   (setq prescient-filter-method 'fuzzy)
   ;; Enable persistent history
   (prescient-persist-mode +1))
-
-;;; Selectrum Prescient
-(straight-use-package 'selectrum-prescient)
-;; Initialize mode
-(selectrum-prescient-mode +1)
 
 ;;; Company Prescient
 (straight-use-package 'company-prescient)
