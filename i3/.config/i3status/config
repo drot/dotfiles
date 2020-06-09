@@ -15,20 +15,20 @@ order += "volume master"
 order += "time"
 
 cpu_usage {
-    format = " %usage"
+    format = " %usage"
     separator_block_width = 30
 }
 
 cpu_temperature 0 {
     format = " %degrees°C"
     max_threshold = 60
-    format_above_threshold = " %degrees°C"
+    format_above_threshold = " %degrees°C"
     path = "/sys/class/thermal/thermal_zone0/temp"
     separator_block_width = 30
 }
 
 memory {
-    format = " %percentage_used"
+    format = " %percentage_used"
     threshold_degraded = 40%
     threshold_critical = 20%
     separator_block_width = 30
@@ -41,7 +41,7 @@ disk "/" {
 
 volume master {
     format = " %volume"
-    format_muted = " (%volume)"
+    format_muted = " (%volume)"
     device = "pulse"
     separator_block_width = 30
 }
