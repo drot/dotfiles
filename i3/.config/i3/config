@@ -163,10 +163,6 @@ bindsym $mod+r mode "RESIZE"
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
 bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
-bindsym XF86AudioMicMute exec --no-startup-id ~/.scripts/audio_toggle mic
-
-# toggle touchpad
-bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/touchpad_toggle
 
 # screenshot keys
 bindsym Print exec --no-startup-id ~/.scripts/screenshot full
