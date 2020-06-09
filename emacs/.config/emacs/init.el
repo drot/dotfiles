@@ -102,6 +102,21 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; Orderless completion style matching
+(straight-use-package 'orderless)
+;; Configuration
+(setq orderless-matching-styles
+          '(orderless-flex
+            orderless-strict-leading-initialism
+            orderless-regexp
+            orderless-prefixes
+            orderless-literal))
+
+;;; Tweak default completion styles
+(setq completion-styles '(orderless partial-completion))
+;; Don't use defaults for specific completion categories
+(setq completion-category-defaults nil)
+
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -110,11 +125,6 @@
 
 ;;; Don't show help for completions
 (setq completion-show-help nil)
-
-;;; Orderless completion style matching
-(straight-use-package 'orderless)
-;; Use only `orderless' by default
-(setq completion-styles '(orderless))
 
 ;;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
