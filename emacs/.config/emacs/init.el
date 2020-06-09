@@ -2058,6 +2058,15 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
+;;; Company Statistics
+(straight-use-package 'company-statistics)
+;; Initialize mode
+(company-statistics-mode +1)
+;; Configuration
+(after-load 'company-statistics
+  ;; Change save file location
+  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
+
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -2121,24 +2130,6 @@
   (setq amx-backend 'standard)
   ;; Change save file location
   (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
-;;; Prescient
-(straight-use-package 'prescient)
-;; Configuration
-(after-load 'prescient
-  ;; Change save file location
-  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
-  ;; Aggressively save history
-  (setq prescient-aggressive-file-save t)
-  ;; Use fuzzy matching by default
-  (setq prescient-filter-method 'fuzzy)
-  ;; Enable persistent history
-  (prescient-persist-mode +1))
-
-;;; Company Prescient
-(straight-use-package 'company-prescient)
-;; Initialize mode
-(company-prescient-mode +1)
 
 ;;; Minions
 (straight-use-package 'minions)
