@@ -168,6 +168,9 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 # disable title click
 bindsym button1 nop
 
+# lock screen
+bindsym $mod+Pause exec i3lock
+
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
 for_window [class="firefox"] border pixel 2
