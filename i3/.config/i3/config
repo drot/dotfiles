@@ -30,10 +30,7 @@ bindsym $mod+Return exec st
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# middle mouse button and modifer over a window kills the window
-bindsym --whole-window $mod+button2 kill
-
-# start dmenu
+# start launcher
 bindsym $mod+p exec --no-startup-id rofi -modi "run#window#ssh" -show run
 
 # change focus
@@ -76,9 +73,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# right mouse button and modifier toggles floating
-bindsym --whole-window $mod+button3 floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -170,6 +164,9 @@ bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
+
+# disable title click
+bindsym button1 nop
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
