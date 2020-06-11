@@ -2117,20 +2117,6 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; Amx
-(straight-use-package 'amx)
-;; Initialize mode
-(amx-mode +1)
-;; Set global key bindings
-(global-set-key (kbd "M-X") #'amx-major-mode-commands)
-(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
-;; Configuration
-(after-load 'amx
-  ;; Use `completing-read' by default
-  (setq amx-backend 'standard)
-  ;; Change save file location
-  (setq amx-save-file (locate-user-emacs-file "cache/amx-items")))
-
 ;;; Minions
 (straight-use-package 'minions)
 ;; Enable mode

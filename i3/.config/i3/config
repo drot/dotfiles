@@ -184,6 +184,7 @@ for_window [class="Thunar"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="chatterino"] floating enable
 # Ripcord specific
 for_window [title="Ripcord Accounts"] floating enable
 for_window [title="Preferences"] floating enable
