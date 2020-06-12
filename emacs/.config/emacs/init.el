@@ -112,11 +112,6 @@
             orderless-prefixes
             orderless-literal))
 
-;;; Tweak default completion styles
-(setq completion-styles '(orderless partial-completion))
-;; Don't use defaults for specific completion categories
-(setq completion-category-defaults nil)
-
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -146,19 +141,13 @@
   ;; Use single line display
   (setq icomplete-prospects-height 1))
 
-;;; Icomplete vertical display
-(straight-use-package 'icomplete-vertical)
-;; Initialize mode
-(icomplete-vertical-mode +1)
-;; Configuration
-(after-load 'icomplete-vertical
-  ;; Set local key bindings
-  (dolist (bind '(("<down>" . icomplete-forward-completions)
-                  ("C-n" . icomplete-forward-completions)
-                  ("<up>" . icomplete-backward-completions)
-                  ("C-p" . icomplete-backward-completions)
-                  ("C-v" . icomplete-vertical-toggle)))
-    (define-key icomplete-minibuffer-map (kbd (car bind)) (cdr bind))))
+;; Use `orderless' completion
+(add-hook 'icomplete-minibuffer-setup-hook
+          (lambda ()
+            (setq-local completion-styles '(orderless partial-completion))))
+
+;; FIDO mode for making Icomplete behave like IDO
+(fido-mode +1)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
