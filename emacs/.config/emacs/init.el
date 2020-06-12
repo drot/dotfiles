@@ -141,8 +141,7 @@
 
 ;; Use `orderless' completion
 (add-hook 'icomplete-minibuffer-setup-hook
-          (lambda ()
-            (setq-local completion-styles '(orderless partial-completion))))
+          (lambda () (setq-local completion-styles '(orderless partial-completion))))
 
 ;; FIDO mode for making Icomplete behave like IDO
 (fido-mode +1)
