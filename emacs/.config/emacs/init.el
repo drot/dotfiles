@@ -106,11 +106,11 @@
 (straight-use-package 'orderless)
 ;; Configuration
 (setq orderless-matching-styles
-          '(orderless-flex
-            orderless-strict-leading-initialism
-            orderless-regexp
-            orderless-prefixes
-            orderless-literal))
+      '(orderless-flex
+        orderless-strict-leading-initialism
+        orderless-regexp
+        orderless-prefixes
+        orderless-literal))
 
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
