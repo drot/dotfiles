@@ -136,8 +136,6 @@
         icomplete-compute-delay 0.2)
   ;; Complete in other places as well
   (setq icomplete-in-buffer t)
-  ;; Automatically delete superfluous parts of file names
-  (setq icomplete-tidy-shadowed-file-names t)
   ;; Use single line display
   (setq icomplete-prospects-height 1))
 
