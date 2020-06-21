@@ -15,7 +15,7 @@ order += "volume master"
 order += "time"
 
 cpu_usage {
-    format = " %usage"
+    format = " %usage"
     separator_block_width = 30
 }
 
