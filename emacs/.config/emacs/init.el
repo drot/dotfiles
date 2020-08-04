@@ -36,9 +36,7 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
-;;; Color theme one
-(straight-use-package 'color-theme-sanityinc-tomorrow)
-;;; Color theme two
+;;; Color theme
 (straight-use-package 'modus-vivendi-theme)
 ;; Configuration
 (setq modus-vivendi-theme-visible-fringes t
@@ -103,16 +101,6 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; Orderless completion style matching
-(straight-use-package 'orderless)
-;; Configuration
-(setq orderless-matching-styles
-      '(orderless-flex
-        orderless-strict-leading-initialism
-        orderless-regexp
-        orderless-prefixes
-        orderless-literal))
-
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -127,25 +115,6 @@
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode +1)
-
-;;; Icomplete
-(icomplete-mode +1)
-;; Configuration
-(after-load 'icomplete
-  ;; Reduce the completion delay
-  (setq icomplete-delay-completions-threshold 100
-        icomplete-compute-delay 0.2)
-  ;; Complete in other places as well
-  (setq icomplete-in-buffer t)
-  ;; Use single line display
-  (setq icomplete-prospects-height 1))
-
-;; Use `orderless' completion
-(add-hook 'icomplete-minibuffer-setup-hook
-          (lambda () (setq-local completion-styles '(orderless partial-completion))))
-
-;; FIDO mode for making Icomplete behave like IDO
-(fido-mode +1)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -250,15 +219,6 @@
         "TAGS"))
 ;; Enable mode
 (recentf-mode +1)
-
-;; Add support for minibuffer completion
-(defun drot/recentf-open ()
-  "Use `completing-read' to open a recent file."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file (completing-read "Find recent file: " files nil t))))
-;; Set key binding
-(global-set-key (kbd "C-x C-r") #'drot/recentf-open)
 
 ;;; Remember point position in files
 (setq save-place-file (locate-user-emacs-file "cache/saved-places"))
@@ -1565,21 +1525,21 @@
     (define-key rcirc-mode-map (kbd (car bind)) (cdr bind)))
   ;; Use custom colors
   (setq rcirc-styles-color-vector
-        ["#515151"
-         "#cc6666"
-         "#b5bd68"
-         "#f0c674"
-         "#81a2be"
-         "#b294bb"
-         "#8abeb7"
-         "#c5c8c6"
-         "#969896"
-         "#cc6666"
-         "#b5bd68"
-         "#f0c674"
-         "#81a2be"
-         "#b294bb"
-         "#8abeb7"
+        ["#392a48"
+         "#ff8059"
+         "#44bc44"
+         "#eecc00"
+         "#33beff"
+         "#feacd0"
+         "#00d3d0"
+         "#e0e6f0"
+         "#203448"
+         "#fb6859"
+         "#00fc50"
+         "#ffdd00"
+         "#00a2ff"
+         "#ff8bd4"
+         "#30ffc0"
          "#ffffff"]))
 
 ;; rcirc colored nicknames
@@ -2046,15 +2006,6 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company Statistics
-(straight-use-package 'company-statistics)
-;; Initialize mode
-(company-statistics-mode +1)
-;; Configuration
-(after-load 'company-statistics
-  ;; Change save file location
-  (setq company-statistics-file (locate-user-emacs-file "cache/company-statistics-cache.el")))
-
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -2104,6 +2055,62 @@
                   ("C-c p t" . drot/hl-todo-transient)
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
+
+;;; Selectrum minibuffer completion
+(straight-use-package 'selectrum)
+;; Initialize mode
+(selectrum-mode +1)
+;; Set key binding to repeat last command
+(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+;; Add `recentf' support
+(defun drot/selectrum-recentf-open ()
+  "Use `completing-read' to open a recent file."
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file (completing-read "Find recent file: " files nil t))))
+;; Set key binding
+(global-set-key (kbd "C-x C-r") #'drot/selectrum-recentf-open)
+;; Configuration
+(after-load 'selectrum
+  ;; Show line count
+  (setq selectrum-show-indices t)
+  ;; Show total and current matches
+  (setq selectrum-count-style 'current/matches))
+
+;;; Amx
+(straight-use-package 'amx)
+;; Change default backend to use `selectrum'
+(setq amx-backend 'selectrum)
+;; Change save file location
+(setq amx-save-file (locate-user-emacs-file "cache/amx-items"))
+;; Initialize mode
+(amx-mode +1)
+;; Set global key bindings
+(global-set-key (kbd "M-X") #'amx-major-mode-commands)
+(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
+
+;;; Prescient
+(straight-use-package 'prescient)
+;; Configuration
+(after-load 'prescient
+  ;; Change save file location
+  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
+  ;; Enable persistent history
+  (prescient-persist-mode +1))
+
+;;; Selectrum Prescient
+(straight-use-package 'selectrum-prescient)
+;; Initialize mode
+(selectrum-prescient-mode +1)
+
+;;; Company Prescient
+(straight-use-package 'company-prescient)
+;; Initialize mode
+(company-prescient-mode +1)
 
 ;;; Minions
 (straight-use-package 'minions)
