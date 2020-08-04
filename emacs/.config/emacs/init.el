@@ -631,7 +631,9 @@
 ;; Configuration
 (after-load 'auth-source
   ;; Enable mode
-  (auth-source-pass-enable))
+  (auth-source-pass-enable)
+  ;; Don't ask to save authentication info
+  (setq auth-source-save-behavior nil))
 
 ;;; Network Security Manager
 (after-load 'nsm
