@@ -46,6 +46,7 @@
       modus-vivendi-theme-slanted-constructs t
       modus-vivendi-theme-distinct-org-blocks t
       modus-vivendi-theme-section-headings t
+      modus-vivendi-theme-visible-fringes 'subtle
       modus-vivendi-theme-rainbow-headings t)
 ;; Load theme
 (load-theme 'modus-vivendi t)
