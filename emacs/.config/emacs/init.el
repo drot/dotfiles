@@ -906,7 +906,7 @@
   (setq mail-specify-envelope-from t
         mail-envelope-from 'header))
 
-;; Configuration
+;; Mail composing configuration
 (after-load 'message
   ;; Make compatible with `msmtp'
   (setq message-sendmail-envelope-from 'header))
