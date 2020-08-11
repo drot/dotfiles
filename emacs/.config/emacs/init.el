@@ -1943,6 +1943,8 @@
 (straight-use-package 'yaml-mode)
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
+;; Enable with Salt state files by default
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;;; Ace-link
 (straight-use-package 'ace-link)
