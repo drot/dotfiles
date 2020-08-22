@@ -704,6 +704,11 @@
 ;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
 
+;; Dired Find
+(after-load 'dired-find
+  ;; Faster search
+  (setq find-ls-option '("-exec ls -ld {} \\+" . "-ld")))
+
 ;;; TRAMP
 (after-load 'tramp
   ;; Change default method and cache file location
