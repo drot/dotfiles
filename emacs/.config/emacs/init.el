@@ -27,9 +27,10 @@
 
 ;;; Code:
 
-;;; Create directories for backups and cache files
-(make-directory (locate-user-emacs-file "backup") t)
-(make-directory (locate-user-emacs-file "cache") t)
+;;; Keep main Emacs directory clean from various cache and save files
+(straight-use-package 'no-littering)
+;; Initialize mode
+(require 'no-littering)
 
 ;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
@@ -179,29 +180,23 @@
       kill-do-not-save-duplicates t)
 
 ;;; Configuration for backup files
-(setq backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/")))
-      version-control t
+(setq version-control t
       kept-new-versions 6
       delete-old-versions t
       backup-by-copying t)
 
 ;;; Auto save file configuration
-(setq auto-save-list-file-prefix
-      (locate-user-emacs-file "backup/auto-save/.saves-"))
-;; Keep in backup directory as well
 (setq auto-save-file-name-transforms
-      `((".*" ,(locate-user-emacs-file "backup/auto-save/") t)))
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;;; Save minibuffer history
-(setq savehist-file (locate-user-emacs-file "cache/saved-history")
-      savehist-autosave-interval 60
+(setq savehist-autosave-interval 60
       savehist-additional-variables '(search-ring regexp-search-ring))
 ;; Initialize mode
 (savehist-mode +1)
 
 ;;; Save recent files list
-(setq recentf-save-file (locate-user-emacs-file "cache/recent-files")
-      recentf-max-saved-items 100
+(setq recentf-max-saved-items 100
       recentf-max-menu-items 20
       recentf-auto-cleanup 600)
 ;; Exclude certain files
@@ -222,8 +217,6 @@
 (recentf-mode +1)
 
 ;;; Remember point position in files
-(setq save-place-file (locate-user-emacs-file "cache/saved-places"))
-;; Enable mode
 (save-place-mode +1)
 
 ;;; Line numbers display
@@ -274,8 +267,6 @@
 (global-hi-lock-mode +1)
 
 ;;; Abbrev mode
-(setq abbrev-file-name (locate-user-emacs-file "abbrevs"))
-;; Don't ask for save confirmation
 (setq save-abbrevs 'silently)
 ;; Load abbrevs if they exist
 (if (file-exists-p abbrev-file-name)
@@ -636,12 +627,6 @@
   ;; Don't ask to save authentication info
   (setq auth-source-save-behavior nil))
 
-;;; Network Security Manager
-(after-load 'nsm
-  ;; Change default settings file location
-  (setq nsm-settings-file
-        (locate-user-emacs-file "cache/network-security.data")))
-
 ;;; Prevent GnuTLS warnings
 (after-load 'gnutls
   ;; Don't use default values
@@ -711,18 +696,13 @@
 
 ;;; TRAMP
 (after-load 'tramp
-  ;; Change default method and cache file location
-  (setq tramp-default-method "ssh"
-        tramp-persistency-file-name (locate-user-emacs-file "cache/tramp"))
-  ;; Keep backup files in home directory and auto-save files in /tmp/
-  (setq tramp-backup-directory-alist `(("." . "~/.tramp/"))
-        tramp-auto-save-directory temporary-file-directory))
+  ;; Change default method
+  (setq tramp-default-method "ssh"))
 
 ;;; Bookmarks
 (after-load 'bookmark
-  ;; Change default file location and enable mode
-  (setq bookmark-default-file (locate-user-emacs-file "cache/bookmarks")
-        bookmark-save-flag 1))
+  ;; Enable mode
+  (setq bookmark-save-flag 1))
 
 ;;; Copyright insertion
 (global-set-key (kbd "C-c i c") #'copyright)
@@ -764,10 +744,6 @@
 ;;; EWW
 (global-set-key (kbd "C-c w w") #'eww)
 (global-set-key (kbd "C-c w C-b") #'eww-list-bookmarks)
-;; Configuration
-(after-load 'eww
-  ;; Set bookmarks directory
-  (setq eww-bookmarks-directory (locate-user-emacs-file "cache/")))
 
 ;;; Browse URL
 (global-set-key (kbd "C-c w b") #'browse-url)
@@ -780,12 +756,6 @@
 (after-load 'shr
   ;; Use specified browser instead of searching for it
   (setq shr-external-browser browse-url-browser-function))
-
-;;; URL history
-(after-load 'url-history
-  ;; Save visited URLs
-  (setq url-history-track t
-        url-history-file (locate-user-emacs-file "url/history")))
 
 ;;; Speedbar
 (global-set-key (kbd "C-c p s") #'speedbar)
@@ -1136,9 +1106,6 @@
 
 ;; Org time clocking
 (after-load 'org-clock
-  ;; Change default persist file location
-  (setq org-clock-persist-file
-        (locate-user-emacs-file "cache/org-clock-save.el"))
   ;; Start from the last closed clock
   (setq org-clock-continuously t))
 
@@ -1260,9 +1227,8 @@
 
 ;; CIDER REPL configuration
 (after-load 'cider-repl
-  ;; Enable persistent history and cycle through it
-  (setq cider-repl-history-file (locate-user-emacs-file "cache/cider-history")
-        cider-repl-wrap-history t)
+  ;; Cycle through history
+  (setq cider-repl-wrap-history t)
   ;; Disable help banner
   (setq cider-repl-display-help-banner nil)
   ;; Display result prefix
@@ -1460,9 +1426,7 @@
 ;; Configuration
 (after-load 'elpher
   ;; Colorize escape sequences by default
-  (setq elpher-filter-ansi-from-text t)
-  ;; Change default bookmarks file location
-  (setq elpher-bookmarks-file (locate-user-emacs-file "cache/elpher-bookmarks")))
+  (setq elpher-filter-ansi-from-text t))
 
 ;;; rcirc
 (global-set-key (kbd "<f8>") #'irc)
@@ -1492,8 +1456,7 @@
   ;; Set fill column value to frame width
   (setq rcirc-fill-column #'window-text-width)
   ;; Enable logging
-  (setq rcirc-log-flag t
-        rcirc-log-directory (locate-user-emacs-file "rcirc-log"))
+  (setq rcirc-log-flag t)
   ;; Enable additional modes
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
@@ -1609,11 +1572,6 @@
 
 ;;; Geiser
 (straight-use-package 'geiser)
-;; Configuration
-(after-load 'geiser-repl
-  ;; Change default history file location
-  (setq geiser-repl-history-filename
-        (locate-user-emacs-file "cache/geiser-history")))
 
 ;;; htmlize
 (straight-use-package 'htmlize)
@@ -1658,10 +1616,6 @@
 (setq lsp-keymap-prefix "C-c l")
 ;; Set global key binding
 (global-set-key (kbd "C-c t l") #'lsp)
-;; Configuration
-(after-load 'lsp-mode
-  ;; Change session file location
-  (setq lsp-session-file (locate-user-emacs-file "cache/lsp-session")))
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
@@ -1676,8 +1630,6 @@
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 ;; Configuration
 (after-load 'nov
-  ;; Change default saved places file location
-  (setq nov-save-place-file (locate-user-emacs-file "cache/nov-places"))
   ;; Change default font
   (defun drot/nov-font-setup ()
     "Apply custom variable pitch font for `nov.el'."
@@ -1750,8 +1702,6 @@
 
 ;;; Multiple cursors
 (straight-use-package 'multiple-cursors)
-;; Change default `multiple-cursors' lists file location
-(setq mc/list-file (locate-user-emacs-file "cache/mc-lists.el"))
 ;; Populate default `multiple-cursors' lists
 (unless (file-exists-p mc/list-file)
   ;; Commands to run always
@@ -1924,7 +1874,7 @@
 (after-load 'sly-mrepl
   ;; Change history file location
   (setq sly-mrepl-history-file-name
-        (locate-user-emacs-file "cache/sly-mrepl-history")))
+        (no-littering-expand-var-file-name "sly-mrepl-history")))
 
 ;;; SLY macrostep
 (straight-use-package 'sly-macrostep)
@@ -2134,8 +2084,6 @@
 (straight-use-package 'amx)
 ;; Change default backend to use `selectrum'
 (setq amx-backend 'selectrum)
-;; Change save file location
-(setq amx-save-file (locate-user-emacs-file "cache/amx-items"))
 ;; Initialize mode
 (amx-mode +1)
 ;; Set global key bindings
@@ -2146,8 +2094,6 @@
 (straight-use-package 'prescient)
 ;; Configuration
 (after-load 'prescient
-  ;; Change save file location
-  (setq prescient-save-file (locate-user-emacs-file "cache/prescient-save.el"))
   ;; Aggressively save history
   (setq prescient-aggressive-file-save t)
   ;; Use fuzzy matching by default
@@ -2389,7 +2335,7 @@
   (setq custom-safe-themes t))
 
 ;;; Load changes from the customize interface
-(setq custom-file (locate-user-emacs-file "custom.el"))
+(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 (load custom-file 'noerror)
 
 ;;; init.el ends here
