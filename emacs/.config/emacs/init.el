@@ -31,6 +31,10 @@
 (straight-use-package 'no-littering)
 ;; Initialize mode
 (require 'no-littering)
+;; Exclude `no-littering' directories from recent files list
+(after-load 'recentf
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 ;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
