@@ -31,10 +31,6 @@
 (straight-use-package 'no-littering)
 ;; Initialize mode
 (require 'no-littering)
-;; Exclude `no-littering' directories from recent files list
-(after-load 'recentf
-  (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 ;;; Disable needless GUI elements
 (dolist (mode '(tool-bar-mode menu-bar-mode))
@@ -219,6 +215,9 @@
         "TAGS"))
 ;; Enable mode
 (recentf-mode +1)
+;; Exclude `no-littering' directories from recent files list
+(add-to-list 'recentf-exclude no-littering-var-directory)
+(add-to-list 'recentf-exclude no-littering-etc-directory)
 
 ;;; Remember point position in files
 (save-place-mode +1)
