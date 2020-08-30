@@ -564,8 +564,6 @@
 
 ;;; Python mode configuration
 (after-load 'python
-  ;; Use Python 3 as default
-  (setq python-shell-interpreter "python3")
   ;; Disable indent offset guessing
   (setq python-indent-guess-indent-offset nil)
   ;; PEP8 conformance
@@ -1625,10 +1623,6 @@
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
-;; Configuration
-(after-load 'lua-mode
-  ;; Lua 5.3 as the default interpreter
-  (setq lua-default-application "lua5.3"))
 
 ;;; EPUB format support
 (straight-use-package 'nov)
