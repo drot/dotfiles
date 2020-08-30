@@ -33,7 +33,9 @@
 (require 'no-littering)
 
 ;;; Disable needless GUI elements
-(dolist (mode '(tool-bar-mode menu-bar-mode))
+(dolist (mode '(tool-bar-mode
+                menu-bar-mode
+                scroll-bar-mode))
   (when (fboundp mode)
     (funcall mode -1)))
 
