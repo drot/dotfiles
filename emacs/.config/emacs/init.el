@@ -50,7 +50,8 @@
       modus-vivendi-theme-diffs 'desaturated
       modus-vivendi-theme-org-blocks 'greyscale
       modus-vivendi-theme-rainbow-headings t
-      modus-vivendi-theme-section-headings t)
+      modus-vivendi-theme-section-headings t
+      modus-vivendi-theme-scale-headings t)
 ;; Load theme
 (load-theme 'modus-vivendi t)
 
