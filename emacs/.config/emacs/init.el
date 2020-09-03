@@ -1998,6 +1998,11 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
+;;; Company Statistics
+(straight-use-package 'company-statistics)
+;; Initialize mode
+(company-statistics-mode +1)
+
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -2050,34 +2055,13 @@
 
 ;;; Amx
 (straight-use-package 'amx)
-;; Change default backend to use `selectrum'
+;; Change default backend
 (setq amx-backend 'standard)
 ;; Initialize mode
 (amx-mode +1)
 ;; Set global key bindings
 (global-set-key (kbd "M-X") #'amx-major-mode-commands)
 (global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
-
-;;; Prescient
-(straight-use-package 'prescient)
-;; Configuration
-(after-load 'prescient
-  ;; Aggressively save history
-  (setq prescient-aggressive-file-save t)
-  ;; Use fuzzy matching by default
-  (setq prescient-filter-method 'fuzzy)
-  ;; Enable persistent history
-  (prescient-persist-mode +1))
-
-;;; Selectrum Prescient
-(straight-use-package 'selectrum-prescient)
-;; Initialize mode
-(selectrum-prescient-mode +1)
-
-;;; Company Prescient
-(straight-use-package 'company-prescient)
-;; Initialize mode
-(company-prescient-mode +1)
 
 ;;; Minions
 (straight-use-package 'minions)
