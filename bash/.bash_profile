@@ -30,17 +30,11 @@ export WINEDEBUG="-all"
 # Disable Gecko install prompt; prevent .desktop creation
 export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 
-# Check for Cargo packages if available
-if [ -d "$HOME/.cargo/bin" ]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
+# Check for Cargo binaries if available
+[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # Set PATH so it includes user directory
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
-# Initialize Bash if available
-if [ -n "$BASH" ]; then
-    [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
-fi
+# Initialize Bash
+[ -r ~/.bashrc ] && source ~/.bashrc
