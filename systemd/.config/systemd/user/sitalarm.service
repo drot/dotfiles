@@ -1,8 +1,0 @@
-[Unit]
-Description=Track sitting time
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /home/drot/.scripts/alert
-Environment="XDG_RUNTIME_DIR=/run/user/1000"
-Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"

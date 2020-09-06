@@ -1,0 +1,28 @@
+# name: Article class template for Croatian
+# key: article
+# --
+\documentclass[a4paper]{article}
+
+% Word-like page format and language selection
+\usepackage[left=3.5cm, right=2.5cm, top=3.5cm, bottom=2.5cm]{geometry}
+\usepackage[croatian]{babel}
+
+% Font selection
+\usepackage{fontspec}
+\setromanfont{Tinos}
+\setsansfont{Arimo}
+
+% Correct spacing for my language
+\frenchspacing{}
+
+% Beginning
+\begin{document}
+
+$0
+
+% Ending
+\end{document}
+
+% Local Variables:
+% ispell-local-dictionary: "croatian"
+% End:

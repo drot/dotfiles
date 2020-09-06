@@ -1,3 +1,2 @@
-player=mpv --cache=no
+player=mpv
 default-stream=720p
-hls-live-edge=1

@@ -5,4 +5,5 @@ if [ -r "$HOME/.bash_profile" ]; then
     . "$HOME/.bash_profile";
 fi
 
-picom --experimental-backends &
+# Set wallpaper
+display -window root ~/Pictures/cuttlefish.jpg

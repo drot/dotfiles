@@ -1,0 +1,5 @@
+[user]
+	name = Davor Rotim
+	email = rotim.davor@gmail.com
+[url "https://aur.archlinux.org/"]
+	insteadOf = aur:

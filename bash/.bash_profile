@@ -24,9 +24,9 @@ export DVIVIEWER_texdoc="${PDFVIEWER_texdoc}"
 
 # TeX Live installation
 if [[ -d $HOME/.local/texlive ]]; then
-    export PATH="$HOME/.local/texlive/2020/bin/x86_64-linux:$PATH"
-    export MANPATH="$HOME/.local/texlive/2020/texmf-dist/doc/man:$MANPATH"
-    export INFOPATH="$HOME/.local/texlive/2020/texmf-dist/doc/info:$INFOPATH"
+    export PATH="$HOME/.local/texlive/2019/bin/x86_64-linux:$PATH"
+    export MANPATH="$HOME/.local/texlive/2019/texmf-dist/doc/man:$MANPATH"
+    export INFOPATH="$HOME/.local/texlive/2019/texmf-dist/doc/info:$INFOPATH"
 fi
 
 # Check for Cargo binaries if available

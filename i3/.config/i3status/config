@@ -11,6 +11,8 @@ order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "memory"
 order += "disk /"
+order += "wireless _first_"
+order += "battery 0"
 order += "volume master"
 order += "time"
 
@@ -23,7 +25,7 @@ cpu_temperature 0 {
     format = " %degrees°C"
     max_threshold = 60
     format_above_threshold = " %degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp2_input"
+    path = "/sys/class/thermal/thermal_zone0/temp"
     separator_block_width = 30
 }
 
@@ -36,6 +38,24 @@ memory {
 
 disk "/" {
     format = " %percentage_used"
+    separator_block_width = 30
+}
+
+wireless _first_ {
+    format_up = "%quality"
+    format_down = " "
+    separator_block_width = 30
+}
+
+battery 0 {
+    format = " %status %percentage"
+    integer_battery_capacity = true
+    low_threshold = 20
+    threshold_type="percentage"
+    status_chr = ""
+    status_bat = ""
+    status_unk = ""
+    status_full = ""
     separator_block_width = 30
 }
 

@@ -4,7 +4,7 @@ configuration {
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
-	font: "Iosevka Fixed SS05 12";
+	font: "JetBrains Mono 13";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
@@ -12,7 +12,7 @@ configuration {
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 /*	show-icons: false;*/
-/*	terminal: "rofi-sensible-terminal";*/
+/*	terminal: "st";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/

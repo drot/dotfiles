@@ -10,7 +10,7 @@ client.unfocused #373b41 #282a2e #969896 #969896
 client.urgent #373b41 #cc6666 #ffffff #cc6666
 
 # font for window titles and the status bar
-font pango:Iosevka Fixed SS05, FontAwesome 12
+font pango:JetBrains Mono, FontAwesome 13
 
 # default modifier key
 set $mod Mod4
@@ -157,6 +157,10 @@ bindsym $mod+r mode "RESIZE"
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
 bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
+bindsym XF86AudioMicMute exec --no-startup-id ~/.scripts/audio_toggle mic
+
+# toggle touchpad
+bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/touchpad_toggle
 
 # screenshot keys
 bindsym Print exec --no-startup-id ~/.scripts/screenshot full
@@ -183,8 +187,6 @@ for_window [class="Thunar"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="chatterino"] floating enable
-for_window [class="Qemu-system-x86_64"] floating enable
 # Ripcord specific
 for_window [title="Ripcord Accounts"] floating enable
 for_window [title="Preferences"] floating enable

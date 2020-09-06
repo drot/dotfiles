@@ -1,0 +1,16 @@
+# Default values
+defaults
+auth on
+tls on
+logfile ~/.config/msmtp/msmtp.log
+
+# cock.li
+account firemail
+host mail.cock.li
+port 587
+from drot@firemail.cc
+user drot@firemail.cc
+passwordeval "gpg2 --decrypt --no-tty --quiet --no-verbose --for-your-eyes-only --pinentry-mode cancel ~/.password-store/Email/drot@mail.cock.li.gpg"
+
+# Default account
+account default : firemail

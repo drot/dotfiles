@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# trim all mounted file systems which support it
+/usr/bin/fstrim --all || true

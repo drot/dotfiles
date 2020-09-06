@@ -1,0 +1,23 @@
+# cock.li
+IMAPAccount firemail
+Host mail.cock.li
+Port 993
+User drot@firemail.cc
+PassCmd "pass Email/drot@mail.cock.li"
+SSLType IMAPS
+
+IMAPStore firemail-remote
+Account firemail
+
+MaildirStore firemail-local
+Path ~/.mail/
+Inbox ~/.mail/Inbox
+Subfolders Verbatim
+
+Channel firemail
+Master :firemail-remote:
+Slave :firemail-local:
+CopyArrivalDate yes
+Patterns *
+Create Both
+SyncState *

@@ -6,77 +6,14 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
-# User agent to send.  The following placeholders are defined:  *
-# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
-# The underlying WebKit version (set to a fixed value   with
-# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
-# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
-# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
-# QtWebEngine. * `{upstream_browser_version}`: The corresponding
-# Safari/Chrome version. * `{qutebrowser_version}`: The currently
-# running qutebrowser version.  The default value is equal to the
-# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
-# read from JavaScript is always the global value.
-# Type: FormatString
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
-
-# User agent to send.  The following placeholders are defined:  *
-# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
-# The underlying WebKit version (set to a fixed value   with
-# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
-# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
-# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
-# QtWebEngine. * `{upstream_browser_version}`: The corresponding
-# Safari/Chrome version. * `{qutebrowser_version}`: The currently
-# running qutebrowser version.  The default value is equal to the
-# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
-# read from JavaScript is always the global value.
-# Type: FormatString
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://accounts.google.com/*')
-
-# User agent to send.  The following placeholders are defined:  *
-# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
-# The underlying WebKit version (set to a fixed value   with
-# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
-# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
-# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
-# QtWebEngine. * `{upstream_browser_version}`: The corresponding
-# Safari/Chrome version. * `{qutebrowser_version}`: The currently
-# running qutebrowser version.  The default value is equal to the
-# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
-# read from JavaScript is always the global value.
-# Type: FormatString
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
-
-# User agent to send.  The following placeholders are defined:  *
-# `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
-# The underlying WebKit version (set to a fixed value   with
-# QtWebEngine). * `{qt_key}`: "Qt" for QtWebKit, "QtWebEngine" for
-# QtWebEngine. * `{qt_version}`: The underlying Qt version. *
-# `{upstream_browser_key}`: "Version" for QtWebKit, "Chrome" for
-# QtWebEngine. * `{upstream_browser_version}`: The corresponding
-# Safari/Chrome version. * `{qutebrowser_version}`: The currently
-# running qutebrowser version.  The default value is equal to the
-# unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
-# read from JavaScript is always the global value.
-# Type: FormatString
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
-
-# Load images automatically in web pages.
-# Type: Bool
-config.set('content.images', True, 'chrome-devtools://*')
-
-# Load images automatically in web pages.
-# Type: Bool
-config.set('content.images', True, 'devtools://*')
+# Aliases for commands. The keys of the given dictionary are the
+# aliases, while the values are the commands they map to.
+# Type: Dict
+c.aliases = {'w': 'session-save', 'q': 'quit', 'wq': 'quit --save'}
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome-devtools://*')
-
-# Enable JavaScript.
-# Type: Bool
-config.set('content.javascript.enabled', True, 'devtools://*')
+config.set('content.javascript.enabled', True, 'file://*')
 
 # Enable JavaScript.
 # Type: Bool
@@ -91,13 +28,13 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 c.completion.height = '25%'
 
 # Editor (and arguments) to use for the `open-editor` command. The
-# following placeholders are defined:  * `{file}`: Filename of the file
+# following placeholders are defined: * `{file}`: Filename of the file
 # to be edited. * `{line}`: Line in which the caret is found in the
 # text. * `{column}`: Column in which the caret is found in the text. *
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['emacsclient', '-c', '{file}']
+c.editor.command = ['emacsclient', '{file}']
 
 # CSS border value for hints.
 # Type: String
@@ -156,17 +93,13 @@ c.colors.completion.item.selected.fg = '#1d1f21'
 # Type: QssColor
 c.colors.completion.item.selected.bg = '#f0c674'
 
-# Top border color of the selected completion item.
+# Top border color of the completion widget category headers.
 # Type: QssColor
 c.colors.completion.item.selected.border.top = '#1d1f21'
 
 # Bottom border color of the selected completion item.
 # Type: QssColor
 c.colors.completion.item.selected.border.bottom = '#1d1f21'
-
-# Foreground color of the matched text in the selected completion item.
-# Type: QtColor
-c.colors.completion.item.selected.match.fg = 'white'
 
 # Foreground color of the matched text in the completion.
 # Type: QtColor
@@ -218,7 +151,7 @@ c.colors.hints.fg = '#1d1f21'
 c.colors.hints.bg = '#f0c674'
 
 # Font color for the matched part of hints.
-# Type: QtColor
+# Type: QssColor
 c.colors.hints.match.fg = 'white'
 
 # Text color for the keyhint widget.
@@ -243,7 +176,7 @@ c.colors.messages.error.bg = '#cc6666'
 
 # Border color of an error message.
 # Type: QssColor
-c.colors.messages.error.border = '#1d1f21'
+c.colors.messages.error.border = '#cc6666'
 
 # Foreground color of a warning message.
 # Type: QssColor
@@ -255,7 +188,7 @@ c.colors.messages.warning.bg = '#f0c674'
 
 # Border color of a warning message.
 # Type: QssColor
-c.colors.messages.warning.border = '#1d1f21'
+c.colors.messages.warning.border = '#f0c674'
 
 # Foreground color of an info message.
 # Type: QssColor
@@ -366,6 +299,11 @@ c.colors.statusbar.url.error.fg = '#cc6666'
 c.colors.statusbar.url.hover.fg = '#c5c8c6'
 
 # Foreground color of the URL in the statusbar on successful load
+# (http).
+# Type: QssColor
+c.colors.statusbar.url.success.http.fg = 'white'
+
+# Foreground color of the URL in the statusbar on successful load
 # (https).
 # Type: QssColor
 c.colors.statusbar.url.success.https.fg = '#f0c674'
@@ -375,7 +313,7 @@ c.colors.statusbar.url.success.https.fg = '#f0c674'
 c.colors.statusbar.url.warn.fg = '#b294bb'
 
 # Background color of the tab bar.
-# Type: QssColor
+# Type: QtColor
 c.colors.tabs.bar.bg = '#1d1f21'
 
 # Color gradient start for the tab indicator.
@@ -422,51 +360,59 @@ c.colors.tabs.selected.even.fg = '#81a2be'
 # Type: QtColor
 c.colors.tabs.selected.even.bg = '#282a2e'
 
-# Foreground color of pinned unselected odd tabs.
-# Type: QtColor
-c.colors.tabs.pinned.odd.fg = '#1d1f21'
+# Default monospace fonts. Whenever "monospace" is used in a font
+# setting, it's replaced with the fonts listed here.
+# Type: Font
+c.fonts.monospace = '"JetBrains Mono"'
 
-# Background color of pinned unselected odd tabs.
-# Type: QtColor
-c.colors.tabs.pinned.odd.bg = '#b5bd68'
+# Font used in the completion widget.
+# Type: Font
+c.fonts.completion.entry = '13pt monospace'
 
-# Foreground color of pinned unselected even tabs.
-# Type: QtColor
-c.colors.tabs.pinned.even.fg = '#1d1f21'
+# Font used in the completion categories.
+# Type: Font
+c.fonts.completion.category = 'bold 13pt monospace'
 
-# Background color of pinned unselected even tabs.
-# Type: QtColor
-c.colors.tabs.pinned.even.bg = '#f0c674'
+# Font used for the debugging console.
+# Type: QtFont
+c.fonts.debug_console = '13pt monospace'
 
-# Foreground color of pinned selected odd tabs.
-# Type: QtColor
-c.colors.tabs.pinned.selected.odd.fg = '#969896'
+# Font used for the downloadbar.
+# Type: Font
+c.fonts.downloads = '13pt monospace'
 
-# Background color of pinned selected odd tabs.
-# Type: QtColor
-c.colors.tabs.pinned.selected.odd.bg = '#1d1f21'
+# Font used for the hints.
+# Type: Font
+c.fonts.hints = 'bold 13pt monospace'
 
-# Foreground color of pinned selected even tabs.
-# Type: QtColor
-c.colors.tabs.pinned.selected.even.fg = '#969896'
+# Font used in the keyhint widget.
+# Type: Font
+c.fonts.keyhint = '13pt monospace'
 
-# Background color of pinned selected even tabs.
-# Type: QtColor
-c.colors.tabs.pinned.selected.even.bg = '#1d1f21'
+# Font used for error messages.
+# Type: Font
+c.fonts.messages.error = '13pt monospace'
 
-# Default font families to use. Whenever "default_family" is used in a
-# font setting, it's replaced with the fonts listed here. If set to an
-# empty value, a system-specific monospace default is used.
-# Type: List of Font, or Font
-c.fonts.default_family = 'Iosevka Fixed SS05'
+# Font used for info messages.
+# Type: Font
+c.fonts.messages.info = '13pt monospace'
 
-# Default font size to use. Whenever "default_size" is used in a font
-# setting, it's replaced with the size listed here. Valid values are
-# either a float value with a "pt" suffix, or an integer value with a
-# "px" suffix.
-# Type: String
-c.fonts.default_size = '12pt'
+# Font used for warning messages.
+# Type: Font
+c.fonts.messages.warning = '13pt monospace'
+
+# Font used for prompts.
+# Type: Font
+c.fonts.prompts = '13pt sans-serif'
+
+# Font used in the statusbar.
+# Type: Font
+c.fonts.statusbar = '13pt monospace'
+
+# Font used in the tab bar.
+# Type: QtFont
+c.fonts.tabs = '13pt monospace'
 
 # Bindings for normal mode
-config.bind(',m', 'spawn mpv {url}')
+config.bind(',m', 'spawn umpv {url}')
 config.bind(';M', 'hint links spawn umpv {hint-url}')
