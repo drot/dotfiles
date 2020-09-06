@@ -64,6 +64,9 @@
             (set-window-fringes
              (minibuffer-window frame) 0 0 nil t)))
 
+;;; Do not interfere with window management
+(setq frame-inhibit-implied-resize t)
+
 ;;; `straight.el' configuration
 (setq straight-repository-branch "develop")
 
