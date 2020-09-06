@@ -29,13 +29,6 @@ if [[ -d $HOME/.local/texlive ]]; then
     export INFOPATH="$HOME/.local/texlive/2020/texmf-dist/doc/info:$INFOPATH"
 fi
 
-# Wine specific variables
-export WINEPREFIX="$HOME/.config/wine"
-export WINEARCH="win32"
-export WINEDEBUG="-all"
-# Disable Gecko install prompt; prevent .desktop creation
-export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
-
 # Check for Cargo binaries if available
 [ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
