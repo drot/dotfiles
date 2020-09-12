@@ -28,15 +28,15 @@ shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
 # Colored listings
-if [ -r ~/.dircolors ] && type -p dircolors >/dev/null; then
+if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
     eval $(dircolors -b ~/.dircolors)
 fi
 
 # Load aliases
-[ -r ~/.bash_aliases ] && source ~/.bash_aliases
+[[ -r ~/.bash_aliases ]] && source ~/.bash_aliases
 
 # Load custom functions
-[ -r ~/.bash_functions ] && source ~/.bash_functions
+[[ -r ~/.bash_functions ]] && source ~/.bash_functions
 
 # Prompt colors
 RED="\[\033[0;31m\]"
@@ -51,7 +51,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_DIRTRIM="2"
 
 # Git prompt support
-[ -r /usr/share/git/git-prompt.sh ] && source /usr/share/git/git-prompt.sh
+[[ -r /usr/share/git/git-prompt.sh ]] && source /usr/share/git/git-prompt.sh
 
 # Git prompt format
 GIT="\$(declare -F __git_ps1 &>/dev/null && __git_ps1 ' %s')"
@@ -61,7 +61,7 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Check if we are on a SSH connection
-[ -n "$SSH_CLIENT" ] && SSH_CONN="${RED}@ "
+[[ -n "$SSH_CLIENT" ]] && SSH_CONN="${RED}@ "
 
 # Prompt format
 case $TERM in

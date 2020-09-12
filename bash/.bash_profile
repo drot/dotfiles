@@ -30,10 +30,10 @@ if [[ -d $HOME/.local/texlive ]]; then
 fi
 
 # Check for Cargo binaries if available
-[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # Set PATH so it includes user directory
-[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
 
 # Initialize Bash
-[ -r ~/.bashrc ] && source ~/.bashrc
+[[ -r ~/.bashrc ]] && source ~/.bashrc
