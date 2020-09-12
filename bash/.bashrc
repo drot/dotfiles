@@ -61,7 +61,7 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Check if we are on a SSH connection
-[[ -n "$SSH_CLIENT" ]] && SSH_CONN="${RED}@ "
+[[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
 # Prompt format
 case $TERM in
