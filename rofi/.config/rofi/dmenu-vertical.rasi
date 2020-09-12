@@ -7,14 +7,14 @@
   text-color: #c5c8c6;
 }
 
-#window {
+window {
   anchor: north;
   location: north;
   width: 100%;
   children: [ vertbox ];
 }
 
-#vertbox {
+vertbox {
   background-color: #373b41;
   border: 2px;
   border-color: #969896;
@@ -23,26 +23,26 @@
   children: [ prompt, entry, listview ];
 }
 
-#prompt {
+prompt {
   background-color: #969896;
   text-color: #1d1f21;
 }
 
-#entry {
+entry {
   expand: false;
 }
 
-#listview {
+listview {
   layout: vertical;
   fixed-height: false;
   lines: 10;
 }
 
-#element {
+element {
   padding: 2px 2px;
 }
 
-#element selected {
+element selected {
   background-color: #f0c674;
   text-color: #1d1f21;
 }
