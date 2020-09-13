@@ -11,16 +11,15 @@ window {
   anchor: north;
   location: north;
   width: 100%;
-  children: [ vertbox ];
 }
 
-vertbox {
+mainbox {
   background-color: #373b41;
   border: 2px;
   border-color: #969896;
   orientation: vertical;
   spacing: 2px;
-  children: [ prompt, entry, listview ];
+  children: [inputbar, message, mode-switcher, listview];
 }
 
 prompt {
@@ -32,10 +31,22 @@ entry {
   expand: false;
 }
 
+mode-switcher {
+  background-color: #373b41;
+}
+
 listview {
   layout: vertical;
+  scrollbar: true;
   fixed-height: false;
   lines: 10;
+
+}
+
+scrollbar {
+  background-color: #373b41;
+  handle-color: #969896;
+  handle-width: 10px;
 }
 
 element {
