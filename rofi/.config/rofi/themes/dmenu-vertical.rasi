@@ -32,7 +32,15 @@ entry {
 }
 
 mode-switcher {
+  background-color: #969896;
+}
+
+button {
   background-color: #373b41;
+}
+
+button.selected {
+  text-color: #f0c674;
 }
 
 listview {
