@@ -43,16 +43,16 @@ set ruler
 set cursorline
 
 " Highlight specified column
-set colorcolumn=80
+set colorcolumn=81
 
 " Show partial commands
 set showcmd
 
-" Don't show current mode
-set noshowmode
-
 " Show status line
 set laststatus=2
+
+" Status line format
+set statusline=%n\ %F\ %M%=%y%w%r%h\ %{&fenc}\ %l,%c\ %p%%\ %L
 
 " Show relative line numbers
 set relativenumber
@@ -99,12 +99,12 @@ if &t_Co >= 256 && (&term =~# '^st' || &term =~# '^tmux')
     let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
     " Enable truecolor support
     set termguicolors
+    " Dark background by default
+    set background=dark
+    " Make colors more intense
+    let g:gruvbox_contrast_dark = 'hard'
     " Set colorscheme
-    colorscheme landscape
-    " Set `lightline` theme
-    let g:lightline = {
-                \   'colorscheme': 'landscape'
-                \ }
+    colorscheme gruvbox
 endif
 
 " Hit `%` on `if` to jump to `else`, built-in functionality
