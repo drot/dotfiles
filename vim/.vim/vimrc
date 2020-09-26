@@ -36,9 +36,6 @@ set expandtab
 " Possibility to have more than one unsaved buffers
 set hidden
 
-" Show current line number at the bottom-right of the screen
-set ruler
-
 " Highlight current line
 set cursorline
 
