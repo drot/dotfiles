@@ -18,7 +18,7 @@ set autoread
 " Enable undo history saving
 set undofile
 
-" Enable file type support and syntax highlight 
+" Enable file type support and syntax highlight
 filetype plugin indent on
 syntax on
 
@@ -81,10 +81,10 @@ set smartcase
 set wildmenu
 set wildignorecase
 
-" Don't redraw screen while executing commands that have not been typed 
+" Don't redraw screen while executing commands that have not been typed
 set lazyredraw
 
-" Send more characters to the screen for redrawing 
+" Send more characters to the screen for redrawing
 set ttyfast
 
 " Use the Xorg's primary buffer as default register
