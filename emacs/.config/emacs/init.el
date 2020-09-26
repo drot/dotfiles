@@ -108,6 +108,16 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; Orderless completion style matching
+(straight-use-package 'orderless)
+;; Configuration
+(setq orderless-matching-styles
+      '(orderless-flex
+        orderless-strict-leading-initialism
+        orderless-regexp
+        orderless-prefixes
+        orderless-literal))
+
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -240,6 +250,14 @@
 ;; Exclude `no-littering' directories from recent files list
 (add-to-list 'recentf-exclude no-littering-var-directory)
 (add-to-list 'recentf-exclude no-littering-etc-directory)
+;; Add `icomplete' support
+(defun drot/icomplete-recentf-open ()
+  "Use `completing-read' to open a recent file."
+  (interactive)
+  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
+    (find-file (completing-read "Open Recent: " files nil t))))
+;; Set key binding
+(global-set-key (kbd "C-x C-r") #'drot/icomplete-recentf-open)
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -272,7 +290,8 @@
                 rcirc-mode-hook
                 term-mode-hook
                 vterm-mode-hook
-                cider-repl-mode-hook))
+                cider-repl-mode-hook
+                undo-tree-visualizer-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 ;; Configuration
@@ -2179,6 +2198,7 @@
 
 ;;; Project
 (dolist (bind '(("C-c p f" . project-find-file)
+                ("C-c p d" . project-dired)
                 ("C-c p r" . project-find-regexp)
                 ("C-c p s" . project-search)
                 ("C-c p q" . project-query-replace)))
@@ -2268,6 +2288,10 @@
   ;; Display entries as words
   (setq custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
+
+;; Change default undo logic
+(global-set-key (kbd "C-/") #'undo-only) 
+(global-set-key (kbd "C-_") #'undo-redo)
 
 ;;; Custom theme configuration
 (after-load 'custom
