@@ -108,4 +108,4 @@ if &t_Co >= 256 && (&term =~# '^st' || &term =~# '^tmux')
 endif
 
 " Hit `%` on `if` to jump to `else`, built-in functionality
-runtime macros/matchit.vim
+packadd! matchit
