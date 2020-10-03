@@ -290,8 +290,7 @@
                 rcirc-mode-hook
                 term-mode-hook
                 vterm-mode-hook
-                cider-repl-mode-hook
-                undo-tree-visualizer-mode-hook))
+                cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
 ;; Configuration
@@ -2288,10 +2287,6 @@
   ;; Display entries as words
   (setq custom-unlispify-tag-names nil
         custom-unlispify-menu-entries nil))
-
-;; Change default undo logic
-(global-set-key (kbd "C-/") #'undo-only) 
-(global-set-key (kbd "C-_") #'undo-redo)
 
 ;;; Custom theme configuration
 (after-load 'custom
