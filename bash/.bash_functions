@@ -8,7 +8,7 @@ man () {
     LESS_TERMCAP_se=$'\e[0m' \
     LESS_TERMCAP_so=$'\e[01;37;41m' \
     LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[03;04;34m' \
+    LESS_TERMCAP_us=$'\e[0;34m' \
     command man "$@"
 }
 

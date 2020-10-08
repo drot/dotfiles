@@ -39,6 +39,9 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
+(add-to-list 'default-frame-alist
+             '(font . "JetBrains Mono NL-13"))
+
 ;;; Color theme
 (straight-use-package 'modus-vivendi-theme)
 ;; Configuration
@@ -589,6 +592,8 @@
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
+;; Set key binding
+(global-set-key (kbd "C-c s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
@@ -659,15 +664,6 @@
 (after-load 'epa
   ;; Prompt in minibuffer
   (setq epg-pinentry-mode 'loopback))
-
-;;; Enable Pass integration
-(straight-use-package 'auth-source-pass)
-;; Configuration
-(after-load 'auth-source
-  ;; Enable mode
-  (auth-source-pass-enable)
-  ;; Don't ask to save authentication info
-  (setq auth-source-save-behavior nil))
 
 ;;; Prevent GnuTLS warnings
 (after-load 'gnutls
@@ -1217,83 +1213,6 @@
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-;;; AUCTeX
-(straight-use-package 'auctex)
-;; TeX configuration
-(after-load 'tex
-  ;; Default TeX engine
-  (setq-default TeX-engine 'luatex)
-  ;; Automatically save and parse style
-  (setq TeX-auto-save t
-        TeX-parse-self t)
-  ;; Use PDF Tools as default viewer
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-        TeX-source-correlate-start-server t)
-  ;; Revert PDF automatically
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
-
-;; TeX external commands
-(after-load 'tex-buf
-  ;; Don't ask to save before processing
-  (setq TeX-save-query nil))
-
-;; LaTeX configuration
-(after-load 'latex
-  ;; Enable Flymake syntax checking
-  (add-hook 'LaTeX-mode-hook #'flymake-mode)
-  ;; Enable folding options
-  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
-  ;; Further folding options with Outline
-  (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
-  ;; Add RefTeX support
-  (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
-  ;; Add SyncTeX support
-  (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode))
-
-;;; RefTeX configuration
-(after-load 'reftex
-  ;; Enable AUCTeX integration
-  (setq reftex-plug-into-AUCTeX t))
-
-;;; CIDER
-(straight-use-package 'cider)
-;; Configuration
-(after-load 'cider-common
-  ;; Use the symbol at point as the default value
-  (setq cider-prompt-for-symbol nil))
-
-;; CIDER mode configuration
-(after-load 'cider-mode
-  ;; Enable fuzzy completion with Company
-  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
-
-;; CIDER REPL configuration
-(after-load 'cider-repl
-  ;; Cycle through history
-  (setq cider-repl-wrap-history t)
-  ;; Disable help banner
-  (setq cider-repl-display-help-banner nil)
-  ;; Display result prefix
-  (setq cider-repl-result-prefix ";; => ")
-  ;; Enable fuzzy completion with Company
-  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-  ;; Enable SubWord mode
-  (add-hook 'cider-repl-mode-hook #'subword-mode))
-
-;; CIDER ElDoc configuration
-(after-load 'cider-eldoc
-  ;; Display context dependent info
-  (setq cider-eldoc-display-context-dependent-info t))
-
-;;; Clojure mode
-(straight-use-package 'clojure-mode)
-;; Configuration
-(after-load 'clojure-mode
-  ;; Enable CIDER mode
-  (add-hook 'clojure-mode-hook #'cider-mode)
-  ;; Enable SubWord mode
-  (add-hook 'clojure-mode-hook #'subword-mode))
-
 ;;; Dash
 (straight-use-package 'dash)
 ;; Configuration
@@ -1362,6 +1281,13 @@
   (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-.*x.*")
   (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d.*")
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
+
+;;; Extra miscellaneous colorization
+(straight-use-package 'diredfl)
+;; Configuration
+(after-load 'dired-rainbow
+  ;; Enable mode
+  (diredfl-global-mode +1))
 
 ;;; Dired Subtree
 (straight-use-package 'dired-subtree)
@@ -1470,107 +1396,6 @@
   ;; Colorize escape sequences by default
   (setq elpher-filter-ansi-from-text t))
 
-;;; rcirc
-(global-set-key (kbd "<f8>") #'irc)
-;; Configuration
-(after-load 'rcirc
-  ;; User defaults
-  (setq rcirc-default-user-name user-login-name
-        rcirc-reconnect-delay 10)
-  ;; Connect to the specified servers and channels
-  (setq rcirc-server-alist
-        '(("irc.rizon.net"
-           :port 6697
-           :encryption tls
-           :channels ("#/g/technology" "#rice"))
-          ("chat.freenode.net"
-           :port 6697
-           :encryption tls
-           :channels ("#archlinux" "#emacs"))))
-  ;; Authentication
-  (setq rcirc-authinfo
-        `(("rizon" nickserv "drot"
-           ,(auth-source-pass-get 'secret "IRC/drot@irc.rizon.net"))
-          ("freenode" nickserv "drot"
-           ,(auth-source-pass-get 'secret "IRC/drot@chat.freenode.net"))))
-  ;; Truncate buffer output
-  (setq rcirc-buffer-maximum-lines 2048)
-  ;; Set fill column value to frame width
-  (setq rcirc-fill-column #'window-text-width)
-  ;; Enable logging
-  (setq rcirc-log-flag t)
-  ;; Enable additional modes
-  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
-  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
-  (add-hook 'rcirc-mode-hook #'flyspell-mode)
-  ;; Disable `company-mode' in rcirc buffers
-  (add-hook 'rcirc-mode-hook
-            (lambda () (company-mode -1)))
-  ;; Exclude text properties when yanking text in rcirc buffers
-  (add-to-list 'yank-excluded-properties 'rcirc-text)
-  ;; Add some custom commands
-  (defun-rcirc-command chanserv (arg)
-    "Send a private message to the ChanServ service."
-    (rcirc-send-string process (concat "chanserv " arg)))
-
-  (defun-rcirc-command mystery (arg)
-    "Send a private message to the Mystery service."
-    (rcirc-send-string process (concat "mystery " arg)))
-
-  (defun-rcirc-command memoserv (arg)
-    "Send a private message to the MemoServ service."
-    (rcirc-send-string process (concat "memoserv " arg)))
-
-  (defun-rcirc-command nickserv (arg)
-    "Send a private message to the NickServ service."
-    (rcirc-send-string process (concat "nickserv " arg))))
-
-;; rcirc color codes support
-(straight-use-package 'rcirc-styles)
-;; Configuration
-(after-load 'rcirc
-  ;; Enable mode
-  (require 'rcirc-styles)
-  ;; Set local key bindings
-  (dolist (bind '(("C-c C-e p" . rcirc-styles-toggle-preview)
-                  ("C-c C-e a" . rcirc-styles-insert-attribute)
-                  ("C-c C-e c" . rcirc-styles-insert-color)))
-    (define-key rcirc-mode-map (kbd (car bind)) (cdr bind)))
-  ;; Use custom colors
-  (setq rcirc-styles-color-vector
-        ["#392a48"
-         "#ff8059"
-         "#44bc44"
-         "#eecc00"
-         "#33beff"
-         "#feacd0"
-         "#00d3d0"
-         "#e0e6f0"
-         "#203448"
-         "#fb6859"
-         "#00fc50"
-         "#ffdd00"
-         "#00a2ff"
-         "#ff8bd4"
-         "#30ffc0"
-         "#ffffff"]))
-
-;; rcirc colored nicknames
-(straight-use-package 'rcirc-color)
-;; Configuration
-(after-load 'rcirc
-  ;; Enable mode
-  (require 'rcirc-color)
-  ;; Inherit nick colors from rcirc-styles colors
-  (setq rcirc-colors (append rcirc-styles-color-vector nil)))
-
-;; rcirc notifications
-(straight-use-package 'rcirc-notify)
-;; Configuration
-(after-load 'rcirc
-  ;; Enable mode
-  (rcirc-notify-add-hooks))
-
 ;;; Expand region
 (straight-use-package 'expand-region)
 ;; Autoload missing functions
@@ -1658,9 +1483,6 @@
 (setq lsp-keymap-prefix "C-c l")
 ;; Set global key binding
 (global-set-key (kbd "C-c t l") #'lsp)
-
-;;; Lua mode
-(straight-use-package 'lua-mode)
 
 ;;; EPUB format support
 (straight-use-package 'nov)
@@ -1860,13 +1682,19 @@
                (window-width . 0.5)
                (reusable-frames . nil)))
 
-;;; PKGBUILD mode
-(straight-use-package 'pkgbuild-mode)
-
 ;;; Polymode Markdown
 (straight-use-package 'poly-markdown)
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+
+;;; Polymode Ansible
+(straight-use-package 'poly-ansible)
+;; Enable support for Salt state files
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . poly-ansible-mode))
+
+;; Jinja support
+(straight-use-package 'jinja2-mode)
+(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
 
 ;;; Rainbow mode
 (straight-use-package 'rainbow-mode)
@@ -1936,8 +1764,6 @@
 (straight-use-package 'yaml-mode)
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
-;; Enable with Salt state files by default
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;;; Ace-link
 (straight-use-package 'ace-link)
@@ -2091,6 +1917,7 @@
           isearch-mode
           js2-minor-mode
           overwrite-mode
+          poly-ansible-mode
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
@@ -2197,7 +2024,6 @@
 
 ;;; Project
 (dolist (bind '(("C-c p f" . project-find-file)
-                ("C-c p d" . project-dired)
                 ("C-c p r" . project-find-regexp)
                 ("C-c p s" . project-search)
                 ("C-c p q" . project-query-replace)))
