@@ -59,8 +59,8 @@ naughty.config.presets.critical.border_color = beautiful.fg_urgent
 -- }}}
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "st"
-local editor = os.getenv("EDITOR")
+local terminal = "terminator"
+local editor = "emacs"
 local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
 -- Default modkey.
@@ -109,7 +109,7 @@ end
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mygraphicsmenu = {
-   { "feh viewer", "feh -tr " .. os.getenv("HOME") .. "/Pictures", beautiful.menu_feh },
+   { "eog", "Image Viewer", beautiful.menu_feh },
    { "GIMP", "gimp", beautiful.menu_gimp },
    { "LO Draw", "lodraw", beautiful.menu_draw }
 }
@@ -147,8 +147,8 @@ local mymainmenu = awful.menu(
    {
       items = {
          { "Terminal", terminal, beautiful.menu_term },
-         { "Emacs", "emacsclient -c", beautiful.menu_emacs },
-         { "Firefox", "firefox", beautiful.menu_firefox },
+         { "Emacs", "emacs", beautiful.menu_emacs },
+         { "Chrome", "google-chrome", beautiful.menu_firefox },
          { "Graphics", mygraphicsmenu, beautiful.menu_graphics },
          { "Office", myofficemenu, beautiful.menu_office },
          { "Utilities", myutilmenu, beautiful.menu_util },
@@ -268,7 +268,7 @@ temperature_path = function ()
    if gears.filesystem.is_dir(hwmon_path .. "hwmon0") then
       path = "coretemp.0/hwmon/hwmon0"
    else
-      path = "coretemp.0/hwmon/hwmon1"
+      path = "coretemp.0/hwmon/hwmon4"
    end
    return path
 end
@@ -602,66 +602,6 @@ local volume_widget = wibox.widget {
    widget = wibox.container.margin
 }
 
--- Create a mail icon widget
-local mail_icon_widget = wibox.widget {
-   image = beautiful.widget_mail,
-   widget = wibox.widget.imagebox
-}
-
--- Set mail text value
-local mail_text_value = wibox.widget.textbox()
-vicious.register(mail_text_value, vicious.widgets.mdir, "$1", 300, { os.getenv("HOME") .. "/.mail/Inbox" })
-
--- Create a mail text widget
-local mail_text_widget = wibox.widget {
-   widget = mail_text_value
-}
-
--- Create a mail widget
-local mail_widget = wibox.widget {
-   {
-      {
-         {
-            {
-               widget = mail_icon_widget
-            },
-            {
-               {
-                  {
-                     widget = mail_text_widget
-                  },
-                  left = 4,
-                  right = 4,
-                  widget = wibox.container.margin
-               },
-               shape = gears.shape.rectangle,
-               bg = beautiful.bg_normal,
-               shape_border_color = beautiful.bg_minimize,
-               shape_border_width = beautiful.border_width,
-               widget = wibox.container.background
-            },
-            spacing = 3,
-            layout = wibox.layout.fixed.horizontal
-         },
-         top = 2,
-         bottom = 2,
-         left = 4,
-         right = 4,
-         widget = wibox.container.margin
-      },
-      shape = gears.shape.rectangle,
-      bg = beautiful.titlebar_bg_focus,
-      shape_border_color = beautiful.bg_minimize,
-      shape_border_width = beautiful.border_width,
-      widget = wibox.container.background
-   },
-   top = 2,
-   bottom = 2,
-   left = 2,
-   right = 2,
-   widget = wibox.container.margin
-}
-
 -- Create a clock icon widget
 local clock_icon_widget = wibox.widget {
    image = beautiful.widget_clock,
@@ -874,7 +814,6 @@ awful.screen.connect_for_each_screen(function(s)
             memory_widget,
             disk_widget,
             volume_widget,
-            mail_widget,
             clock_widget,
             wibox.widget.systray(),
          },
