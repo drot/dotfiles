@@ -935,40 +935,32 @@ local globalkeys = gears.table.join(
       {description = "lock the screen", group = "screen"}),
 
    -- Volume control
-   awful.key({ }, "XF86AudioRaiseVolume",
+   awful.key({ "Shift" }, "XF86AudioRaiseVolume",
       function ()
-         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle up",
+         awful.spawn.easy_async_with_shell("~/scripts/audio_toggle up",
                                            function ()
                                               vicious.force({ volume_text_value, volume_bar })
          end)
       end,
       {description = "increase volume", group = "volume"}),
-   awful.key({ }, "XF86AudioLowerVolume",
+   awful.key({ "Shift" }, "XF86AudioLowerVolume",
       function ()
-         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle down",
+         awful.spawn.easy_async_with_shell("~/scripts/audio_toggle down",
                                            function()
                                               vicious.force({ volume_text_value, volume_bar })
          end)
       end,
       {description = "lower volume", group = "volume"}),
-   awful.key({ }, "XF86AudioMute",
-      function ()
-         awful.spawn.easy_async_with_shell("~/.scripts/audio_toggle mute",
-                                           function ()
-                                              vicious.force({ volume_text_value, volume_bar })
-         end)
-      end,
-      {description = "mute volume", group = "volume"}),
 
    -- Clipboard
    awful.key({ modkey }, "Insert", function () awful.spawn.with_shell("clipmenusel") end,
       {description = "clipboard menu", group = "clipboard"}),
 
    -- Screenshot grabbing
-   awful.key({ }, "Print", function () awful.spawn.with_shell("~/.scripts/screenshot") end,
+   awful.key({ }, "Print", function () awful.spawn.with_shell("~/scripts/screenshot") end,
       {description = "screenshot desktop", group = "screenshot"}),
 
-   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("~/.scripts/screenshot region") end,
+   awful.key({ modkey }, "Print", function () awful.spawn.with_shell("~/scripts/screenshot region") end,
       {description = "screenshot selection", group = "screenshot"})
 )
 
