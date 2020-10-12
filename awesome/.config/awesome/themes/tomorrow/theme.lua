@@ -15,7 +15,7 @@ local theme = {}
 
 theme.font = "JetBrains Mono NL 13"
 
-theme.icon_theme = "Papirus"
+theme.icon_theme = "Adwaita"
 
 -- Main colors
 theme.bg_normal = "#1d1f21"

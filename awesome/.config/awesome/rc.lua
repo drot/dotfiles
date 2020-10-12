@@ -931,7 +931,7 @@ local globalkeys = gears.table.join(
       {description = "show the menubar", group = "launcher"}),
 
    -- Lock screen
-   awful.key({ modkey }, "F12", function () awful.spawn("slock") end,
+   awful.key({ modkey }, "Menu", function () awful.spawn("slock") end,
       {description = "lock the screen", group = "screen"}),
 
    -- Volume control
@@ -1128,7 +1128,7 @@ awful.rules.rules = {
    },
 
    -- Terminal emulators
-   { rule_any = { class = { "st-256color", "xterm" } },
+   { rule_any = { class = { "st-256color", "xterm", "Terminator" } },
      properties = { titlebars_enabled = false } },
    -- Set browsers to always map on the tag named "2" on screen 1
    { rule_any = { class = { "Google-chrome", "Tor Browser", "qutebrowser" } },
@@ -1146,8 +1146,8 @@ awful.rules.rules = {
    { rule = { class = "Gimp" },
      properties = { tag = "6", switch_to_tags = true } },
    -- Chatterino
-   { rule = { class = "chatterino" },
-     properties = { tag = "7", switch_to_tags = true, floating = true } },
+   { rule = { class = "Slack" },
+     properties = { tag = "7", switch_to_tags = true, titlebars_enabled = false } },
    -- Wine
    { rule = { class = "Wine" },
      properties = { tag = "8", switch_to_tags = true, floating = true,
