@@ -1484,6 +1484,9 @@
 ;; Set global key binding
 (global-set-key (kbd "C-c t l") #'lsp)
 
+;;; Lua mode
+(straight-use-package 'lua-mode)
+
 ;;; EPUB format support
 (straight-use-package 'nov)
 ;; Initialize package
@@ -1916,6 +1919,8 @@
           geiser-mode
           isearch-mode
           js2-minor-mode
+          lsp-mode
+          orgtbl-mode
           overwrite-mode
           poly-ansible-mode
           poly-markdown-mode
@@ -2025,8 +2030,7 @@
 ;;; Project
 (dolist (bind '(("C-c p f" . project-find-file)
                 ("C-c p r" . project-find-regexp)
-                ("C-c p s" . project-search)
-                ("C-c p q" . project-query-replace)))
+                ("C-c p s" . project-search)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find function and variable definitions
