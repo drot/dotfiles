@@ -1438,6 +1438,13 @@
 (global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 (global-set-key (kbd "C-=") #'er/expand-region)
 
+;;; Flymake ShellCheck support
+(straight-use-package 'flymake-shellcheck)
+;; Enable mode
+(when (executable-find "shellcheck")
+  (add-hook 'sh-mode-hook #'flymake-shellcheck-load)
+  (add-hook 'sh-mode-hook #'flymake-mode))
+
 ;;; Geiser
 (straight-use-package 'geiser)
 
