@@ -1,5 +1,7 @@
-autoload -U colors && colors
-zmodload zsh/complist
+# Shell behavior options
+setopt autocd extendedglob nomatch completealiases
+setopt correct
+setopt no_correctall
 
 # History size
 export HISTFILE="$ZDOTDIR/.zhistory"
@@ -18,14 +20,13 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# Shell behavior options
-setopt autocd extendedglob nomatch completealiases
-setopt correct
-setopt no_correctall
-
 # Completions
-autoload -Uz compinit
+autoload -Uz compinit colors
 compinit
+colors
+
+# Enable menu for completions
+zmodload zsh/complist
 
 zstyle ':completion:*' completer _complete _correct _approximate
 zstyle ':completion:*' expand prefix suffix
