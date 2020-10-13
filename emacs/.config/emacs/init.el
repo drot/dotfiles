@@ -1448,6 +1448,21 @@
 ;;; Geiser
 (straight-use-package 'geiser)
 
+;;; Go mode
+(straight-use-package 'go-mode)
+;; Configuration
+(defun drot/lsp-mode-setup ()
+  "Custom hook to run for Go buffers."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+  ;; Customize `compile' command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet")))
+(add-hook 'go-mode-hook #'drot/lsp-mode-setup)
+;; Enable LSP
+(add-hook 'go-mode-hook #'lsp-deferred)
+
 ;;; htmlize
 (straight-use-package 'htmlize)
 
