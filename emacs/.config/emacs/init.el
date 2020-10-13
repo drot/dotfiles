@@ -1442,8 +1442,7 @@
 (straight-use-package 'flymake-shellcheck)
 ;; Enable mode
 (when (executable-find "shellcheck")
-  (add-hook 'sh-mode-hook #'flymake-shellcheck-load)
-  (add-hook 'sh-mode-hook #'flymake-mode))
+  (add-hook 'sh-mode-hook #'flymake-shellcheck-load))
 
 ;;; Geiser
 (straight-use-package 'geiser)
