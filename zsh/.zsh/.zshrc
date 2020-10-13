@@ -25,9 +25,10 @@ autoload -Uz compinit colors
 compinit
 colors
 
-# Enable menu for completions
+# Load completion extensions
 zmodload zsh/complist
 
+# Completion options
 zstyle ':completion:*' completer _complete _correct _approximate
 zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' completer _expand_alias _complete _approximate
@@ -41,7 +42,7 @@ if [[ -f ~/.dircolors ]]; then
     eval $(dircolors -b ~/.dircolors)
 fi
 
-# prompts
+# Prompt
 LPROMPT () {
     PS1="┌─[%{$fg[cyan]%}%m%{$fg_bold[blue]%} %~%{$fg_no_bold[yellow]%}%(0?.. %?)%{$reset_color%}]
 └─╼ "
