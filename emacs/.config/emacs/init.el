@@ -1510,6 +1510,14 @@
 ;;; Lua mode
 (straight-use-package 'lua-mode)
 
+;;; Enhanced Ruby mode
+(straight-use-package 'enh-ruby-mode)
+(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+;; Add interpreter support
+(straight-use-package 'inf-ruby)
+(add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+
 ;;; EPUB format support
 (straight-use-package 'nov)
 ;; Initialize package
