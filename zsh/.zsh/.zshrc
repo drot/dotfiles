@@ -2,7 +2,7 @@ autoload -U colors && colors
 zmodload zsh/complist
 
 # History size
-export HISTFILE="$ZDOTDIR/histfile"
+export HISTFILE="$ZDOTDIR/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=$((HISTSIZE/2))
 # History options
