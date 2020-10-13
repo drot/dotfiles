@@ -18,6 +18,7 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+# Shell behavior options
 setopt autocd extendedglob nomatch completealiases
 setopt correct
 setopt no_correctall
