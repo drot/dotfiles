@@ -66,9 +66,9 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 # Prompt format
 case $TERM in
     xterm*|st*|screen*|tmux*)
-        PS1="${TITLE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${GREEN}(${RESET}\$?${GREEN})${RESET} ${TITLE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)
-        PS1="${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
+        PS1="${GREEN}(${RESET}\$?${GREEN})${RESET} ${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac
