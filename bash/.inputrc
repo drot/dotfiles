@@ -3,26 +3,34 @@ $include /etc/inputrc
 
 # Bash specific options
 $if Bash
-# disable beep
+# Disable beep
 set bell-style visible
-# case-insensitive completion
+# Case-insensitive completion
 set completion-ignore-case on
-# use colors for completion display
+# Use colors for completion display
 set colored-stats on
-# append file type when listing completions
+# Append file type when listing completions
 set visible-stats on
-# colorize completion prefix
+# Colorize completion prefix
 set colored-completion-prefix on
-# skip to beginning of already completed text
+# Display the common prefix in menu-complete
+set menu-complete-display-prefix on
+# Show all completions if there are none available directly
+set show-all-if-ambiguous on
+# Skip to beginning of already completed text
 set skip-completed-text on
-# add trailing slashes to symlinks
+# Add trailing slashes to symlinks
 set mark-symlinked-directories on
-# bracketed paste mode
+# Bracketed paste mode
 set enable-bracketed-paste on
-# show paren matches
+# Show paren matches
 set blink-matching-paren on
 $endif
 
 # Use Emacs-style history search keys
 "\ep": history-search-backward
 "\en": history-search-forward
+
+# Use completion menu and allow cycling
+"\t": menu-complete
+"\e[Z": menu-complete-backward
