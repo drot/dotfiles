@@ -60,15 +60,18 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
+# Show exit code of last command
+EX_CODE="${GREEN}(${RESET}\$?${GREEN})${RESET} "
+
 # Check if we are on a SSH connection
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
 # Prompt format
 case $TERM in
     xterm*|st*|screen*|tmux*)
-        PS1="${GREEN}(${RESET}\$?${GREEN})${RESET} ${TITLE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${TITLE}${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)
-        PS1="${GREEN}(${RESET}\$?${GREEN})${RESET} ${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac

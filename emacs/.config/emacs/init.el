@@ -524,7 +524,8 @@
                         (derived-mode . shell-mode)))
            ("Terminal" (or (derived-mode . term-mode)
                            (derived-mode . vterm-mode)))
-           ("Text" (mode . text-mode))
+           ("Text" (or (mode . text-mode)
+                       (derived-mode . reb-mode)))
            ("TRAMP" (name . "*tramp"))
            ("Web" (or (derived-mode . eww-mode)
                       (derived-mode . elpher-mode))))))
@@ -589,6 +590,8 @@
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
+;; Set key binding
+(global-set-key (kbd "C-c s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
@@ -1363,6 +1366,13 @@
   (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d.*")
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
 
+;;; Extra miscellaneous colorization
+(straight-use-package 'diredfl)
+;; Configuration
+(after-load 'dired-rainbow
+  ;; Enable mode
+  (diredfl-global-mode +1))
+
 ;;; Dired Subtree
 (straight-use-package 'dired-subtree)
 ;; Configuration
@@ -1611,6 +1621,12 @@
 ;; Set global key bindings
 (global-set-key (kbd "C-c x C-SPC") #'drot/mark-text-transient)
 (global-set-key (kbd "C-=") #'er/expand-region)
+
+;;; Flymake ShellCheck support
+(straight-use-package 'flymake-shellcheck)
+;; Enable mode
+(when (executable-find "shellcheck")
+  (add-hook 'sh-mode-hook #'flymake-shellcheck-load))
 
 ;;; Geiser
 (straight-use-package 'geiser)
@@ -1868,6 +1884,15 @@
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
+;;; Polymode Ansible
+(straight-use-package 'poly-ansible)
+;; Enable support for Salt state files
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . poly-ansible-mode))
+
+;; Jinja support
+(straight-use-package 'jinja2-mode)
+(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
+
 ;;; Rainbow mode
 (straight-use-package 'rainbow-mode)
 ;; Set global key binding
@@ -1936,8 +1961,6 @@
 (straight-use-package 'yaml-mode)
 ;; Enable SubWord mode
 (add-hook 'yaml-mode-hook #'subword-mode)
-;; Enable with Salt state files by default
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;;; Ace-link
 (straight-use-package 'ace-link)
@@ -2090,7 +2113,10 @@
           geiser-mode
           isearch-mode
           js2-minor-mode
+          lsp-mode
+          orgtbl-mode
           overwrite-mode
+          poly-ansible-mode
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
@@ -2197,10 +2223,8 @@
 
 ;;; Project
 (dolist (bind '(("C-c p f" . project-find-file)
-                ("C-c p d" . project-dired)
                 ("C-c p r" . project-find-regexp)
-                ("C-c p s" . project-search)
-                ("C-c p q" . project-query-replace)))
+                ("C-c p s" . project-search)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find function and variable definitions
