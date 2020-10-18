@@ -31,7 +31,7 @@ bindsym $mod+Return exec st
 bindsym $mod+Shift+q kill
 
 # start launcher
-bindsym $mod+p exec --no-startup-id rofi -modi "run#window#ssh" -show run
+bindsym $mod+p exec --no-startup-id dmenu-run
 
 # change focus
 bindsym $mod+$left focus left
