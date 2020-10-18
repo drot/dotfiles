@@ -60,18 +60,27 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
-# Show exit code of last command
-EXIT_CODE="${GREEN}(${RESET}\$?${GREEN})${RESET} "
-
 # Check if we are on a SSH connection
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
-# Prompt format
-case $TERM in
-    xterm*|st*|screen*|tmux*)
-        PS1="${TITLE}${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
-        ;;
-    *)
-        PS1="${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
-        ;;
-esac
+# Make dynamic prompt based on exit command value
+build_prompt() {
+    # Show exit code of last command
+    if [[ $? == 0 ]]; then
+        local EXIT_CODE=""
+    else
+        local EXIT_CODE="${GREEN}(${RED}\$?${GREEN})${RESET} "
+    fi
+    # Prompt format
+    case $TERM in
+        xterm*|st*|screen*|tmux*)
+            PS1="${TITLE}${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+            ;;
+        *)
+            PS1="${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+            ;;
+    esac
+}
+
+# Make sure to run the function each time
+PROMPT_COMMAND="build_prompt; $PROMPT_COMMAND"

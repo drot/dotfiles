@@ -43,9 +43,11 @@ if [[ -f ~/.dircolors ]]; then
 fi
 
 # Prompt
-LPROMPT () {
-    PS1="┌─[%{$fg[cyan]%}%m%{$fg_bold[blue]%} %~%{$fg_no_bold[yellow]%}%(0?.. %?)%{$reset_color%}]
-└─╼ "
-}
-LPROMPT
-PROMPT_EOL_MARK=" •"
+# LPROMPT () {
+#     PS1="┌─[%{$fg[cyan]%}%m%{$fg_bold[blue]%} %~%{$fg_no_bold[yellow]%}%(0?.. %?)%{$reset_color%}]
+# └─╼ "
+# }
+# LPROMPT
+# PROMPT_EOL_MARK=" •"
+EX_CODE="%(?..%{$fg[green]%}[%{$reset_color%}%?%{$fg[green]%}]%{$reset_color%} )"
+PS1="${EX_CODE}%{$fg[blue]%}%(4~|%-1~/.../%3~|%4~)%{$fg[yellow]%} > %{$reset_color%}"
