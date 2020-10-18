@@ -4,7 +4,7 @@ configuration {
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
-	font: "Iosevka Fixed SS05 12";
+	font: "JetBrains Mono 13";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
