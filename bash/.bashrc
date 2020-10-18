@@ -64,21 +64,14 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
 # Make dynamic prompt based on exit command value
-build_prompt() {
-    # Show exit code on failure
-    if [[ $? != 0 ]]; then
-        local ERROR_CODE="${GREEN}(${RED}\$?${GREEN})${RESET} "
-    fi
-    # Prompt format
-    case $TERM in
-        xterm*|st*|screen*|tmux*)
-            PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
-            ;;
-        *)
-            PS1="${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
-            ;;
-    esac
-}
+ERROR_CODE="\$(code=\${?##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
 
-# Make sure to run the prompt function on every return
-PROMPT_COMMAND="build_prompt; $PROMPT_COMMAND"
+# Prompt format
+case $TERM in
+    xterm*|st*|screen*|tmux*)
+        PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+        ;;
+    *)
+        PS1="${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+        ;;
+esac
