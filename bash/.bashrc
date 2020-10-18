@@ -82,5 +82,5 @@ build_prompt() {
     esac
 }
 
-# Make sure to run the function each time
+# Make sure to run the prompt function on every return
 PROMPT_COMMAND="build_prompt; $PROMPT_COMMAND"
