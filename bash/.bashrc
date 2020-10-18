@@ -39,10 +39,10 @@ fi
 [[ -r ~/.bash_functions ]] && source ~/.bash_functions
 
 # Prompt colors
-RED="\[\033[0;31m\]"
-GREEN="\[\033[0;32m\]"
-BLUE="\[\033[1;34m\]"
-NIL="\[\033[00m\]"
+RED="\[$(tput setaf 1)\]"
+GREEN="\[$(tput setaf 2)\]"
+BLUE="\[$(tput setaf 4)\]"
+RESET="\[$(tput sgr0)\]"
 
 # Save history after each command execution
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
@@ -60,15 +60,18 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
+# Show exit code of last command
+EX_CODE="${GREEN}(${RESET}\$?${GREEN})${RESET} "
+
 # Check if we are on a SSH connection
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
 # Prompt format
 case $TERM in
     xterm*|st*|screen*|tmux*)
-        PS1="${TITLE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
+        PS1="${TITLE}${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)
-        PS1="${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${NIL}"
+        PS1="${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac
