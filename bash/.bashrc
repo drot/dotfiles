@@ -65,19 +65,17 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Make dynamic prompt based on exit command value
 build_prompt() {
-    # Show exit code of last command
-    if [[ $? == 0 ]]; then
-        local EXIT_CODE=""
-    else
-        local EXIT_CODE="${GREEN}(${RED}\$?${GREEN})${RESET} "
+    # Show exit code on failure
+    if [[ $? != 0 ]]; then
+        local ERROR_CODE="${GREEN}(${RED}\$?${GREEN})${RESET} "
     fi
     # Prompt format
     case $TERM in
         xterm*|st*|screen*|tmux*)
-            PS1="${TITLE}${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+            PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
             ;;
         *)
-            PS1="${EXIT_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
+            PS1="${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} λ ${RESET}"
             ;;
     esac
 }
