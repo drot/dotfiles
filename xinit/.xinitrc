@@ -22,7 +22,7 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-# Execute scripts if present
+# Start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
         [ -x "$f" ] && . "$f"
@@ -30,11 +30,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
+# Start clipmenu
+systemctl --user start clipmenud
+
 # Set wallpaper
 ~/.fehbg &
 
-# Set default cursor
-xsetroot -cursor_name left_ptr &
-
-# Launch i3
+# Start window manager
 exec i3

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Font
-font="JetBrainsMono-13"
+font="JetBrainsMonoNL-13"
 
 # Colors
 normal_background="#1d1f21"
