@@ -14,5 +14,5 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Initialize Bash if available
+# Initialize Bash
 [[ -r ~/.bashrc ]] && source ~/.bashrc
