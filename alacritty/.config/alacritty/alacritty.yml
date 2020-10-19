@@ -96,7 +96,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Iosevka Fixed SS05
+    family: JetBrains Mono NL
 
     # The `style` can be specified to pick a specific face.
     style: Regular
