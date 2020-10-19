@@ -51,7 +51,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_DIRTRIM="2"
 
 # Git prompt support
-[[ -r /usr/share/git/git-prompt.sh ]] && source /usr/share/git/git-prompt.sh
+[[ -r /usr/share/git-core/contrib/completion/git-prompt.sh ]] && source /usr/share/git-core/contrib/completion/git-prompt.sh
 
 # Git prompt format
 GIT="\$(declare -F __git_ps1 &>/dev/null && __git_ps1 ' %s')"
@@ -60,18 +60,18 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
-# Show exit code of last command
-EX_CODE="${GREEN}(${RESET}\$?${GREEN})${RESET} "
-
 # Check if we are on a SSH connection
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
+
+# Make dynamic prompt based on exit command value
+ERROR_CODE="\$(code=\${?##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
 
 # Prompt format
 case $TERM in
     xterm*|st*|screen*|tmux*)
-        PS1="${TITLE}${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)
-        PS1="${EX_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac
