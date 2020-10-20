@@ -61,11 +61,11 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 # Prompt window title
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
-# Check if we are on a SSH connection
-[[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
-
 # Make dynamic prompt based on exit command value
 ERROR_CODE="\$(code=\${?##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
+
+# Check if we are on a SSH connection
+[[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
 
 # Prompt format
 case $TERM in
