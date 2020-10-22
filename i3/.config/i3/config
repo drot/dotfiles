@@ -154,14 +154,14 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # volume keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
-bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/audio_toggle up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/audio_toggle down
+bindsym XF86AudioMute exec --no-startup-id ~/scripts/audio_toggle mute
 
 # screenshot keys
-bindsym Print exec --no-startup-id ~/.scripts/screenshot full
-bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
-bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot upload
+bindsym Print exec --no-startup-id ~/scripts/screenshot full
+bindsym --release $mod+Print exec --no-startup-id ~/scripts/screenshot region
+bindsym --release $mod+Shift+Print exec --no-startup-id ~/scripts/screenshot upload
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
