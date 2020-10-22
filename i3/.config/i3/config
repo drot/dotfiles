@@ -10,7 +10,7 @@ client.unfocused #373b41 #282a2e #969896 #969896
 client.urgent #373b41 #cc6666 #ffffff #cc6666
 
 # font for window titles and the status bar
-font pango:Iosevka Fixed SS05, FontAwesome 12
+font pango:JetBrains Mono NL, FontAwesome 13
 
 # default modifier key
 set $mod Mod4
@@ -161,6 +161,7 @@ bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
 # screenshot keys
 bindsym Print exec --no-startup-id ~/.scripts/screenshot full
 bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
+bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot upload
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
