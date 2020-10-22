@@ -195,8 +195,8 @@ local cpu_text_widget = wibox.widget {
 
 -- Create a CPU usage graph widget
 local cpu_graph = wibox.widget {
-   forced_height = 6,
-   forced_width = 48,
+   forced_height = 10,
+   forced_width = 64,
    stack = true,
    stack_colors = { "#cc6666", "#f0c674", "#81a2be", "#c5c8c6" },
    background_color = beautiful.border_normal,
@@ -291,7 +291,7 @@ local temperature_text_widget = wibox.widget {
 
 -- Create a temperature bar widget
 local temperature_bar = wibox.widget {
-   forced_height = 8,
+   forced_height = 10,
    paddings = 1,
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
@@ -377,7 +377,7 @@ local memory_text_widget = wibox.widget {
 local memory_chart = wibox.widget {
    max_value = 1,
    value = 0.25,
-   thickness = 4,
+   thickness = 6,
    border_width = 1,
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
@@ -458,7 +458,7 @@ local disk_text_widget = wibox.widget {
 local disk_chart = wibox.widget {
    max_value = 1,
    value = 0.25,
-   thickness = 4,
+   thickness = 6,
    border_width = 1,
    bg = beautiful.bg_minimize,
    border_color = beautiful.bg_normal,
@@ -538,7 +538,7 @@ local volume_text_widget = wibox.widget {
 
 -- Create volume bar widget
 local volume_bar = wibox.widget {
-   forced_height = 8,
+   forced_height = 10,
    paddings = 1,
    background_color = beautiful.border_normal,
    color = beautiful.widget_value,
@@ -794,7 +794,7 @@ awful.screen.connect_for_each_screen(function(s)
       }
 
       -- Create the wibox
-      s.mywibox = awful.wibar({ position = "bottom", height = 24, screen = s })
+      s.mywibox = awful.wibar({ position = "bottom", height = 32, screen = s })
 
       -- Add widgets to the wibox
       s.mywibox:setup {
@@ -1176,7 +1176,7 @@ client.connect_signal("request::titlebars", function(c)
                             end)
                          )
 
-                         awful.titlebar(c, { size = 24 }) : setup {
+                         awful.titlebar(c, { size = 32 }) : setup {
                             { -- Left
                                awful.titlebar.widget.iconwidget(c),
                                buttons = buttons,
