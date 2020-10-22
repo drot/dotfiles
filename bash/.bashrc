@@ -69,7 +69,7 @@ ERROR_CODE="\$(code=\${?##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${R
 
 # Prompt format
 case $TERM in
-    xterm*|st*|screen*|tmux*)
+    xterm*|alacritty|st*|screen*|tmux*)
         PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)

@@ -59,7 +59,7 @@ naughty.config.presets.critical.border_color = beautiful.fg_urgent
 -- }}}
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "terminator"
+local terminal = "alacritty"
 local editor = "emacs"
 local editor_cmd = terminal .. " -e " .. editor .. " -t"
 
@@ -1120,7 +1120,7 @@ awful.rules.rules = {
    },
 
    -- Terminal emulators
-   { rule_any = { class = { "st-256color", "xterm", "Terminator" } },
+   { rule_any = { class = { "st-256color", "xterm", "Alacritty" } },
      properties = { titlebars_enabled = false } },
    -- Set browsers to always map on the tag named "2" on screen 1
    { rule_any = { class = { "Google-chrome", "Tor Browser", "qutebrowser" } },
