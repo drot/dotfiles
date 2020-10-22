@@ -170,7 +170,7 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 bindsym button1 nop
 
 # lock screen
-bindsym $mod+Pause exec i3lock
+bindsym $mod+Pause exec i3lock -c 000000
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
