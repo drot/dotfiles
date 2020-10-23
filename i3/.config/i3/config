@@ -166,11 +166,14 @@ bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot up
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
-# disable title click
-bindsym button1 nop
-
 # lock screen
-bindsym $mod+Pause exec i3lock
+bindsym $mod+Pause exec i3lock -c 000000
+
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -f 'xft:$font' -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -f 'xft:$font' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
@@ -186,10 +189,6 @@ for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="chatterino"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
-# Ripcord specific
-for_window [title="Ripcord Accounts"] floating enable
-for_window [title="Preferences"] floating enable
-for_window [title="Emoji"] floating enable
 
 # assign applications to certain workspaces
 assign [class="firefox"] $ws2
