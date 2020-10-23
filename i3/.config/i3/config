@@ -183,9 +183,10 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 
 # assign applications to certain workspaces
-assign [class="Google-chrome"] $ws2
-assign [class="firefox"] $ws2
-assign [class="Emacs"] $ws3
+assign [class="Slack"] $ws1
+assign [class="Google-chrome"] $ws3
+assign [class="firefox"] $ws3
+assign [class="Emacs"] $ws2
 assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
 assign [class="Pavucontrol"] $ws6
