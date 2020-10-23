@@ -175,6 +175,12 @@ bindsym button1 nop
 # lock screen
 bindsym $mod+Pause exec i3lock -c 000000
 
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
