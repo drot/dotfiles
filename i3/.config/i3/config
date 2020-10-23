@@ -128,6 +128,9 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# move workspace
+bindsym $mod+x move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace
@@ -184,9 +187,9 @@ for_window [class="Qemu-system-x86_64"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
-assign [class="Google-chrome"] $ws3
-assign [class="firefox"] $ws3
-assign [class="Emacs"] $ws2
+assign [class="Google-chrome"] $ws2
+assign [class="firefox"] $ws2
+assign [class="Emacs"] $ws3
 assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
 assign [class="Pavucontrol"] $ws6
