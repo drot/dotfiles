@@ -176,10 +176,10 @@ bindsym button1 nop
 bindsym $mod+Pause exec i3lock -c 000000
 
 # read 1 character and mark the current window with this character
-bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+m exec i3-input -f 'xft:$font' -F 'mark %s' -l 1 -P 'Mark: '
 
 # read 1 character and go to the window with the character
-bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+g exec i3-input -f 'xft:$font' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2
@@ -188,6 +188,7 @@ for_window [class="firefox"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
+for_window [class="Org.gnome.Nautilus"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 
