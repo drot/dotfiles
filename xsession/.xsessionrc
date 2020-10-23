@@ -1,8 +1,0 @@
-# -*- mode: sh; -*-
-
-# Source environment settings
-if [ -r "$HOME/.bash_profile" ]; then
-    . "$HOME/.bash_profile";
-fi
-
-picom --experimental-backends &
