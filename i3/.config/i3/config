@@ -195,6 +195,7 @@ assign [class="Pavucontrol"] $ws6
 bar {
     bindsym button4 nop
     bindsym button5 nop
+    tray_output primary
     status_command i3status
     colors {
         background #282a2e
