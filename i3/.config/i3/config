@@ -177,8 +177,6 @@ bindsym $mod+g exec i3-input -f 'xft:JetBrains Mono NL 13' -F '[con_mark="%s"] f
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
-for_window [class="firefox"] border pixel 2
-for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Vncviewer"] floating enable
@@ -189,6 +187,13 @@ for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="chatterino"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
+
+# float special dialogs
+for_window [window_role="Organizer"] floating enable
+
+# applications without borders
+for_window [class="firefox"] border pixel 2
+for_window [class="qutebrowser"] border pixel 2
 
 # assign applications to certain workspaces
 assign [class="firefox"] $ws2
