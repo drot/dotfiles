@@ -194,6 +194,7 @@ for_window [window_role="page-info"] floating enable
 
 # applications without borders
 for_window [class="firefox"] border pixel 2
+for_window [class="Slack"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 
 # assign applications to certain workspaces
@@ -201,6 +202,7 @@ assign [class="firefox"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
+assign [class="Slack"] $ws4
 assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
 assign [class="Thunar"] $ws6
