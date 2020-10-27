@@ -1517,6 +1517,13 @@
 (straight-use-package 'inf-ruby)
 (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
 
+;;; Rubocop
+(straight-use-package 'rubocop)
+;; Change default prefix
+(setq rubocop-keymap-prefix (kbd "C-c C-c"))
+;; Enable mode
+(add-hook 'enh-ruby-mode-hook #'rubocop-mode)
+
 ;;; EPUB format support
 (straight-use-package 'nov)
 ;; Initialize package
