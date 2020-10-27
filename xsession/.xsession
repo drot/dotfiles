@@ -6,5 +6,8 @@ xrandr --output eDP-1 --primary --mode 1920x1080 --pos 974x1200 --rotate normal 
 # Start compositing
 picom --experimental-backends &
 
+# Set wallpaper
+~/.fehbg &
+
 # Start WM
 i3
