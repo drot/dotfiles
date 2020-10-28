@@ -174,7 +174,7 @@ bindsym --release $mod+Shift+Print exec --no-startup-id ~/scripts/screenshot upl
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+Pause exec i3lock -t -i ~/Pictures/y-so-serious.png
+bindsym $mod+Pause exec --no-startup-id ~/scripts/lock-screen
 
 # read 1 character and mark the current window with this character
 bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '

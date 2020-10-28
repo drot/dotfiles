@@ -39,9 +39,6 @@
   (when (fboundp mode)
     (funcall mode -1)))
 
-(add-to-list 'default-frame-alist
-             '(font . "JetBrains Mono NL-13"))
-
 ;;; Color theme
 (straight-use-package 'modus-vivendi-theme)
 ;; Configuration
