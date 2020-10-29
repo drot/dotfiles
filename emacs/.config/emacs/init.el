@@ -1773,12 +1773,6 @@
   (define-key sly-mode-map (kbd "C-c M-s i") #'sly-import-symbol-at-point)
   (define-key sly-mode-map (kbd "C-c M-s x") #'sly-export-symbol-at-point))
 
-;; SLY REPL
-(after-load 'sly-mrepl
-  ;; Change history file location
-  (setq sly-mrepl-history-file-name
-        (no-littering-expand-var-file-name "sly-mrepl-history")))
-
 ;;; SLY macrostep
 (straight-use-package 'sly-macrostep)
 
