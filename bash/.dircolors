@@ -110,6 +110,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .bib 38;5;178
 .json 38;5;178
 .jsonl 38;5;178
+.ndjson 38;5;178
+.jsonnet 38;5;178
+.libsonnet 38;5;142
 .msg 38;5;178
 .pgn 38;5;178
 .rss 38;5;178
@@ -119,6 +122,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .yml 38;5;178
 .RData 38;5;178
 .rdata 38;5;178
+.xsd 38;5;178
+.dtd 38;5;178
+.sgml 38;5;178
+.rng 38;5;178
+.rnc 38;5;178
 # binary
 .cbr 38;5;141
 .cbz 38;5;141
@@ -191,6 +199,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sh 38;5;172
 .zsh 38;5;172
 .vim 38;5;172
+.kak 38;5;172
 
 ## interpreted
 .ahk 38;5;41
@@ -279,6 +288,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .swift 38;5;219
 # ?
 .sx 38;5;81
+# V
+.v 38;5;81
 # Vala
 .vala 38;5;81
 .vapi 38;5;81
@@ -293,6 +304,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .lagda.rst 38;5;81
 .lagda.md 38;5;81
 .agdai 38;5;110
+# Zig
+.zig 38;5;81
 
 ## binaries
 # compiled apps for interpreted languages
@@ -476,6 +489,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sz 38;5;40
 .tar 38;5;40
 .tgz 38;5;40
+.warc 38;5;40
+.WARC 38;5;40
 .xz 38;5;40
 .z 38;5;40
 .zip 38;5;40
