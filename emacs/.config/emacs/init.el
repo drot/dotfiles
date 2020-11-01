@@ -1631,6 +1631,21 @@
 ;;; Geiser
 (straight-use-package 'geiser)
 
+;;; Go mode
+(straight-use-package 'go-mode)
+;; Configuration
+(defun drot/lsp-mode-setup ()
+  "Custom hook to run for Go buffers."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+  ;; Customize `compile' command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet")))
+(add-hook 'go-mode-hook #'drot/lsp-mode-setup)
+;; Enable LSP
+(add-hook 'go-mode-hook #'lsp-deferred)
+
 ;;; htmlize
 (straight-use-package 'htmlize)
 
@@ -1677,6 +1692,21 @@
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
+
+;;; Enhanced Ruby mode
+(straight-use-package 'enh-ruby-mode)
+(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+;; Add interpreter support
+(straight-use-package 'inf-ruby)
+(add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+
+;;; Rubocop
+(straight-use-package 'rubocop)
+;; Change default prefix
+(setq rubocop-keymap-prefix (kbd "C-c C-c"))
+;; Enable mode
+(add-hook 'enh-ruby-mode-hook #'rubocop-mode)
 
 ;;; EPUB format support
 (straight-use-package 'nov)
@@ -1932,12 +1962,6 @@
   ;; Set local key bindings
   (define-key sly-mode-map (kbd "C-c M-s i") #'sly-import-symbol-at-point)
   (define-key sly-mode-map (kbd "C-c M-s x") #'sly-export-symbol-at-point))
-
-;; SLY REPL
-(after-load 'sly-mrepl
-  ;; Change history file location
-  (setq sly-mrepl-history-file-name
-        (no-littering-expand-var-file-name "sly-mrepl-history")))
 
 ;;; SLY macrostep
 (straight-use-package 'sly-macrostep)
