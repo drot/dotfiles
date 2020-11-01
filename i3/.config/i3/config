@@ -165,20 +165,22 @@ bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/touchpad_toggle
 # screenshot keys
 bindsym Print exec --no-startup-id ~/.scripts/screenshot full
 bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
+bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot upload
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
-# disable title click
-bindsym button1 nop
-
 # lock screen
-bindsym $mod+Pause exec i3lock
+bindsym $mod+Pause exec i3lock -c 000000
+
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -f 'xft:JetBrains Mono NL 13' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
-for_window [class="firefox"] border pixel 2
-for_window [class="qutebrowser"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="Vncviewer"] floating enable
@@ -187,16 +189,24 @@ for_window [class="Thunar"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Gajim"] floating enable
 for_window [class="Pavucontrol"] floating enable
-# Ripcord specific
-for_window [title="Ripcord Accounts"] floating enable
-for_window [title="Preferences"] floating enable
-for_window [title="Emoji"] floating enable
+for_window [class="chatterino"] floating enable
+for_window [class="Qemu-system-x86_64"] floating enable
+
+# float special dialogs
+for_window [window_role="Organizer"] floating enable
+for_window [window_role="page-info"] floating enable
+
+# applications without borders
+for_window [class="firefox"] border pixel 2
+for_window [class="Slack"] border pixel 2
+for_window [class="qutebrowser"] border pixel 2
 
 # assign applications to certain workspaces
 assign [class="firefox"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
+assign [class="Slack"] $ws4
 assign [class="libreoffice"] $ws4
 assign [class="Gimp"] $ws5
 assign [class="Thunar"] $ws6
@@ -213,7 +223,7 @@ bar {
         statusline #c5c8c6
         separator #969896
         # workspace colors - border background text
-        focused_workspace #969896 #282a2e #81a2be
+        focused_workspace #969896 #282a2e #f0c674
         active_workspace #969896 #373b41 #ffffff
         inactive_workspace #373b41 #1d1f21 #969896
         urgent_workspace #1d1f21 #cc6666 #ffffff
