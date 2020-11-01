@@ -10,9 +10,7 @@ export GROFF_NO_SGR=yes
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # Set PATH so it includes user directory
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+[[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
 
 # Initialize Bash
 [[ -r ~/.bashrc ]] && source ~/.bashrc
