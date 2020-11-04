@@ -25,7 +25,7 @@ set $right ccaron
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -105,8 +105,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assing workspaces to specific screens
-workspace $ws2 output DP-1
-workspace $ws3 output HDMI-1
+workspace $ws2 output DP-1-1
+workspace $ws3 output HDMI-1-1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
