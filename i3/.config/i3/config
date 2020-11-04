@@ -186,6 +186,7 @@ bindsym $mod+g exec i3-input -f 'xft:JetBrains Mono NL 13' -F '[con_mark="%s"] f
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
 for_window [class="firefox"] border pixel 2
+for_window [class="Terminator"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
