@@ -941,13 +941,9 @@
   (define-key gnus-article-mode-map (kbd "C-c M-o") #'ace-link-gnus)
   ;; Main Gnus directory
   (setq gnus-directory "~/.news/")
-  ;; Configure mail server
-  (setq gnus-select-method
-        '(nnmaildir "firemail"
-                    (directory "~/.mail/")))
   ;; Configure news server
-  (add-to-list 'gnus-secondary-select-methods
-               '(nntp "news.gmane.io"))
+  (setq gnus-select-method
+        '(nntp "news.gmane.io"))
   ;; Article fetching options
   (setq gnus-article-browse-delete-temp t
         gnus-treat-strip-trailing-blank-lines 'last
