@@ -1,7 +1,6 @@
 # general settings
 workspace_layout tabbed
 workspace_auto_back_and_forth yes
-focus_follows_mouse no
 
 # window colors - border background text indicator
 client.focused #969896 #373b41 #81a2be #81a2be
