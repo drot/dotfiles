@@ -1580,19 +1580,6 @@
   ;; Don't insert spaces after a code fence
   (setq markdown-spaces-after-code-fence 0))
 
-;;; Move-text
-(straight-use-package 'move-text)
-;; Define Transient command
-(transient-define-prefix drot/move-text-transient ()
-  "Transient for Move-text commands."
-  :transient-suffix 'transient--do-stay
-  :transient-non-suffix 'transient--do-warn
-  ["Move Text"
-   ("p" "Move Up" move-text-up)
-   ("n" "Move Down" move-text-down)])
-;; Set global key binding
-(global-set-key (kbd "C-c x m") #'drot/move-text-transient)
-
 ;;; Multiple cursors
 (straight-use-package 'multiple-cursors)
 ;; Populate default `multiple-cursors' lists
