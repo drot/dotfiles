@@ -28,60 +28,51 @@ Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
 ! XTerm
-XTerm*locale: true
-XTerm*termName: xterm-256color
-XTerm*bellIsUrgent: true
-XTerm*saveLines: 65535
-XTerm*borderWidth: 0
+XTerm.vt100.locale: true
+XTerm.vt100.termName: xterm-256color
+XTerm.vt100.bellIsUrgent: true
+XTerm.vt100.saveLines: 65535
+XTerm.vt100.borderWidth: 0
 
 ! Release Meta binding
-XTerm*metaSendsEscape: true
-XTerm*eightBitInput: false
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.eightBitInput: false
 
 ! Scrolling
-XTerm*ScrollBar: false
-XTerm*ScrollKey: true
+XTerm.vt100.ScrollBar: false
+XTerm.vt100.ScrollKey: true
 
 ! Dabbrev expand
-XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
+XTerm.vt100.VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: JetBrains Mono NL:pixelsize=17
+XTerm.vt100.faceName: JetBrains Mono NL
+XTerm.vt100.faceSize: 13
 
 ! Main colors
-XTerm*foreground: #c5c8c6
-XTerm*background: #1d1f21
-XTerm*cursorColor: #c5c8c6
+XTerm.vt100.foreground: #c5c8c6
+XTerm.vt100.background: #1d1f21
+XTerm.vt100.cursorColor: #c5c8c6
 
 ! Stylized colors
-XTerm*colorIT: #b5bd68
-XTerm*colorBD: #c5c8c6
-XTerm*colorUL: #81a2be
+XTerm.vt100.colorIT: #b5bd68
+XTerm.vt100.colorBD: #c5c8c6
+XTerm.vt100.colorUL: #81a2be
 
 ! Colors
-XTerm*color0: #1d1f21
-XTerm*color1: #cc6666
-XTerm*color2: #b5bd68
-XTerm*color3: #f0c674
-XTerm*color4: #81a2be
-XTerm*color5: #b294bb
-XTerm*color6: #8abeb7
-XTerm*color7: #c5c8c6
-XTerm*color8: #969896
-XTerm*color9: #cc6666
-XTerm*color10: #b5bd68
-XTerm*color11: #f0c674
-XTerm*color12: #81a2be
-XTerm*color13: #b294bb
-XTerm*color14: #8abeb7
-XTerm*color15: #ffffff
-
-! XMessage
-Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
-Xmessage*background: red
-Xmessage*foreground: yellow
-Xmessage*form.*.shapeStyle: rectangle
-Xmessage*Scrollbar.width: 1
-Xmessage*Scrollbar.borderWidth: 0
-Xmessage*Buttons: OK
-Xmessage*defaultButton: OK
+XTerm.vt100.color0: #1d1f21
+XTerm.vt100.color1: #cc6666
+XTerm.vt100.color2: #b5bd68
+XTerm.vt100.color3: #f0c674
+XTerm.vt100.color4: #81a2be
+XTerm.vt100.color5: #b294bb
+XTerm.vt100.color6: #8abeb7
+XTerm.vt100.color7: #c5c8c6
+XTerm.vt100.color8: #969896
+XTerm.vt100.color9: #cc6666
+XTerm.vt100.color10: #b5bd68
+XTerm.vt100.color11: #f0c674
+XTerm.vt100.color12: #81a2be
+XTerm.vt100.color13: #b294bb
+XTerm.vt100.color14: #8abeb7
+XTerm.vt100.color15: #ffffff
