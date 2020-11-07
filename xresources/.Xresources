@@ -28,7 +28,7 @@ Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
 ! XTerm
-XTerm.vt100.locale: true
+XTerm.vt100.Locale: true
 XTerm.vt100.termName: xterm-256color
 XTerm.vt100.bellIsUrgent: true
 XTerm.vt100.saveLines: 65535
@@ -50,8 +50,8 @@ XTerm.vt100.faceName: JetBrains Mono NL
 XTerm.vt100.faceSize: 13
 
 ! Main colors
-XTerm.vt100.foreground: #c5c8c6
-XTerm.vt100.background: #1d1f21
+XTerm.vt100.Foreground: #c5c8c6
+XTerm.vt100.Background: #1d1f21
 XTerm.vt100.cursorColor: #c5c8c6
 
 ! Stylized colors
