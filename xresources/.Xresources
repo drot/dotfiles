@@ -28,11 +28,10 @@ Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
 ! XTerm
+XTerm.termName: xterm-256color
 XTerm.vt100.Locale: true
-XTerm.vt100.termName: xterm-256color
 XTerm.vt100.bellIsUrgent: true
 XTerm.vt100.saveLines: 65535
-XTerm.vt100.borderWidth: 0
 
 ! Release Meta binding
 XTerm.vt100.metaSendsEscape: true
@@ -50,29 +49,29 @@ XTerm.vt100.faceName: JetBrains Mono NL
 XTerm.vt100.faceSize: 13
 
 ! Main colors
-XTerm.vt100.Foreground: #c5c8c6
-XTerm.vt100.Background: #1d1f21
-XTerm.vt100.cursorColor: #c5c8c6
+XTerm.vt100.Foreground: #cccccc
+XTerm.vt100.Background: #0c0c0c
+XTerm.vt100.cursorColor: #cccccc
 
 ! Stylized colors
-XTerm.vt100.colorIT: #b5bd68
-XTerm.vt100.colorBD: #c5c8c6
-XTerm.vt100.colorUL: #81a2be
+XTerm.vt100.colorIT: #13a10e
+XTerm.vt100.colorBD: #cccccc
+XTerm.vt100.colorUL: #0037da
 
 ! Colors
-XTerm.vt100.color0: #1d1f21
-XTerm.vt100.color1: #cc6666
-XTerm.vt100.color2: #b5bd68
-XTerm.vt100.color3: #f0c674
-XTerm.vt100.color4: #81a2be
-XTerm.vt100.color5: #b294bb
-XTerm.vt100.color6: #8abeb7
-XTerm.vt100.color7: #c5c8c6
-XTerm.vt100.color8: #969896
-XTerm.vt100.color9: #cc6666
-XTerm.vt100.color10: #b5bd68
-XTerm.vt100.color11: #f0c674
-XTerm.vt100.color12: #81a2be
-XTerm.vt100.color13: #b294bb
-XTerm.vt100.color14: #8abeb7
-XTerm.vt100.color15: #ffffff
+XTerm.vt100.color0: #0c0c0c
+XTerm.vt100.color1: #c50f1f
+XTerm.vt100.color2: #13a10e
+XTerm.vt100.color3: #c19c00
+XTerm.vt100.color4: #0037da
+XTerm.vt100.color5: #881798
+XTerm.vt100.color6: #3a96dd
+XTerm.vt100.color7: #cccccc
+XTerm.vt100.color8: #767676
+XTerm.vt100.color9: #e74856
+XTerm.vt100.color10: #16c60c
+XTerm.vt100.color11: #f9f1a5
+XTerm.vt100.color12: #3b78ff
+XTerm.vt100.color13: #b4009e
+XTerm.vt100.color14: #61d6d6
+XTerm.vt100.color15: #f2f2f2
