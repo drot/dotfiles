@@ -43,7 +43,7 @@ XTerm.vt100.ScrollBar: false
 XTerm.vt100.ScrollKey: true
 
 ! Dabbrev expand
-XTerm.vt100.VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
+XTerm.vt100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
 XTerm.vt100.faceName: JetBrains Mono NL
