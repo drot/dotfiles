@@ -1,0 +1,21 @@
+[global_config]
+  title_use_system_font = False
+  title_font = JetBrains Mono NL 13
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#0c0c0c"
+    cursor_color = "#aaaaaa"
+    font = JetBrains Mono NL 13
+    foreground_color = "#cccccc"
+    palette = "#0c0c0c:#c50f1f:#13a10e:#c19c00:#0037da:#881798:#3a96dd:#cccccc:#767676:#e74856:#16c60c:#f9f1a5:#3b78ff:#b4009e:#61d6d6:#f2f2f2"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
