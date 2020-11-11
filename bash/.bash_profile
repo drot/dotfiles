@@ -1,4 +1,7 @@
 # Environment variables
+export EDITOR="emacs"
+export ALTERNATE_EDITOR=""
+export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="-Ri"
 export GREP_COLORS="mt=01;37;41"
