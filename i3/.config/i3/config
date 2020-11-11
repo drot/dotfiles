@@ -236,6 +236,3 @@ bar {
         urgent_workspace #1d1f21 #cc6666 #ffffff
     }
 }
-
-exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/drotim/workspace-3.json'"
-exec emacs
