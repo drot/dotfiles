@@ -104,8 +104,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assing workspaces to specific screens
-workspace $ws2 output DP-1-1
-workspace $ws3 output HDMI-1-1
+workspace $ws2 output HDMI-1-1
+workspace $ws3 output DP-1-1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -208,6 +208,7 @@ for_window [class="Org.gnome.Nautilus"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
+for_window [title="Terminator Preferences"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
