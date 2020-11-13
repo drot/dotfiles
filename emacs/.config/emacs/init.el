@@ -1207,6 +1207,114 @@
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+;; Circe
+(straight-use-package 'circe)
+;; Use custom entry function
+(defun irc ()
+  "Connect to all my IRC servers after enabling contrib modules."
+  (interactive)
+  (circe-lagmon-mode)
+  (enable-circe-color-nicks)
+  (enable-lui-autopaste)
+  (enable-lui-track)
+  (require 'circe-chanop)
+  (circe "Rizon"))
+;; Set global key binding
+(global-set-key (kbd "<f8>") #'irc)
+;; Configuration
+(after-load 'circe
+  ;; Default credentials
+  (setq circe-default-nick "drot"
+        circe-default-user "drot"
+        circe-default-realname "drot"
+        circe-default-part-message "Part."
+        circe-default-quit-message "Quit.")
+
+    ;; Securely fetch passwords
+  (defun drot/circe-fetch-password (&rest params)
+    "Fetch password from an encrypted source."
+    (let ((match (car (apply 'auth-source-search params))))
+      (if match
+          (let ((secret (plist-get match :secret)))
+            (if (functionp secret)
+                (funcall secret)
+              secret))
+        (error "Password not found for %S" params))))
+
+  (defun drot/circe-nickserv-password (server)
+    "Fetch password for the specified server."
+    (drot/circe-fetch-password :login "drot" :machine "irc.rizon.net"))
+
+  ;; Add server entry
+  (setq circe-network-options
+        '(("Rizon"
+           :host "irc.rizon.net"
+           :port 6697
+           :tls t
+           :sasl-username "drot"
+           :sasl-password drot/circe-nickserv-password)))
+
+  (setq circe-nickserv-ghost-style 'after-auth)
+
+  (defun drot/face-at-point-p (face)
+    (let ((face-or-faces (get-text-property (point) 'face)))
+      (cond
+       ((consp face-or-faces)
+        (memq face face-or-faces))
+       ((symbolp face-or-faces)
+        (eq face face-or-faces)))))
+
+  (defun drot/circe-inhibit-nick-highlight-function ()
+    (or (eq major-mode 'circe-server-mode)
+        (drot/face-at-point-p 'circe-server-face)
+        (drot/face-at-point-p 'circe-drot/message-face)))
+
+  (setq circe-inhibit-nick-highlight-function
+        #'drot/circe-inhibit-nick-highlight-function)
+
+  (setq circe-track-faces-priorities '(circe-highlight-nick-face))
+
+  ;; Add extra formatting types
+  (setq lui-formatting-list '(("\\(?:^\\|[[:space:]]\\)\\(\\*[^*[:space:]]+?\\*\\)\\(?:$\\|[[:space:]]\\)" 1 lui-strong-face)
+                              ("\\(?:^\\|[[:space:]]\\)\\(_[^_[:space:]]+?_\\)\\(?:$\\|[[:space:]]\\)" 1 underline))
+        circe-highlight-nick-in-server-messages-p nil
+        circe-highlight-nick-type 'all)
+
+  ;; Cycle nick completion
+  (setq circe-use-cycle-completion t)
+
+  ;; Hide irrelevant messages from lurkers
+  (setq circe-reduce-lurker-spam t)
+
+  ;; Move track bar when switching away from buffer
+  (setq lui-track-behavior 'before-switch-to-buffer)
+
+  ;; Default format for various text
+  (setq circe-format-self-say "<{nick}> {body}"
+        circe-format-server-topic "*** Topic Change by {userhost}: {topic-diff}"
+        circe-server-buffer-name "{network}"
+        circe-prompt-string (propertize ">>> " 'face 'circe-prompt-face))
+
+  ;; Colorize nicks in messages too
+  (setq circe-color-nicks-everywhere t)
+
+  ;; Custom fill for Circe buffers
+  (setq lui-time-stamp-position 'right-margin
+        lui-fill-type nil)
+
+  (defun drot/lui-no-fill-setup ()
+    "Adjust text fill in Circe buffers."
+    (setq fringes-outside-margins t
+          right-margin-width 10
+          fill-column 80
+          wrap-prefix "    ")
+    (visual-line-mode)
+    (setf (cdr (assoc 'continuation fringe-indicator-alist)) nil)
+    (make-local-variable 'overflow-newline-into-fringe)
+    (setq overflow-newline-into-fringe nil))
+  ;; Apply the custom hook
+  (add-hook 'circe-chat-mode-hook #'drot/lui-no-fill-setup))
+
 ;;; Dash
 (straight-use-package 'dash)
 ;; Configuration
