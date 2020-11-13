@@ -1241,18 +1241,14 @@
               secret))
         (error "Password not found for %S" params))))
 
-  (defun drot/circe-nickserv-password (server)
-    "Fetch password for the specified server."
-    (drot/circe-fetch-password :login "drot" :machine "irc.rizon.net"))
-
   ;; Add server entry
   (setq circe-network-options
-        '(("Rizon"
+        `(("Rizon"
            :host "irc.rizon.net"
            :port 6697
            :tls t
            :sasl-username "drot"
-           :sasl-password drot/circe-nickserv-password)))
+           :sasl-password ,(drot/circe-fetch-password :login "drot" :machine "irc.rizon.net"))))
 
   (setq circe-nickserv-ghost-style 'after-auth)
 
