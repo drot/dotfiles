@@ -1230,7 +1230,7 @@
         circe-default-part-message "Part."
         circe-default-quit-message "Quit.")
 
-    ;; Securely fetch passwords
+  ;; Securely fetch passwords
   (defun drot/circe-fetch-password (&rest params)
     "Fetch password from an encrypted source."
     (let ((match (car (apply 'auth-source-search params))))
@@ -1250,8 +1250,7 @@
            :sasl-username "drot"
            :sasl-password ,(drot/circe-fetch-password :login "drot" :machine "irc.rizon.net"))))
 
-  (setq circe-nickserv-ghost-style 'after-auth)
-
+  ;; Custom highlight rules
   (defun drot/face-at-point-p (face)
     (let ((face-or-faces (get-text-property (point) 'face)))
       (cond
