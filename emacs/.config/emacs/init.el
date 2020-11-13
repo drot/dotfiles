@@ -1268,31 +1268,24 @@
         #'drot/circe-inhibit-nick-highlight-function)
 
   (setq circe-track-faces-priorities '(circe-highlight-nick-face))
-
   ;; Add extra formatting types
   (setq lui-formatting-list '(("\\(?:^\\|[[:space:]]\\)\\(\\*[^*[:space:]]+?\\*\\)\\(?:$\\|[[:space:]]\\)" 1 lui-strong-face)
                               ("\\(?:^\\|[[:space:]]\\)\\(_[^_[:space:]]+?_\\)\\(?:$\\|[[:space:]]\\)" 1 underline))
         circe-highlight-nick-in-server-messages-p nil
         circe-highlight-nick-type 'all)
-
   ;; Cycle nick completion
   (setq circe-use-cycle-completion t)
-
   ;; Hide irrelevant messages from lurkers
   (setq circe-reduce-lurker-spam t)
-
   ;; Move track bar when switching away from buffer
   (setq lui-track-behavior 'before-switch-to-buffer)
-
   ;; Default format for various text
   (setq circe-format-self-say "<{nick}> {body}"
         circe-format-server-topic "*** Topic Change by {userhost}: {topic-diff}"
         circe-server-buffer-name "{network}"
         circe-prompt-string (propertize ">>> " 'face 'circe-prompt-face))
-
   ;; Colorize nicks in messages too
   (setq circe-color-nicks-everywhere t)
-
   ;; Custom fill for Circe buffers
   (setq lui-time-stamp-position 'right-margin
         lui-fill-type nil)
