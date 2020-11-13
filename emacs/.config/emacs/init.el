@@ -1207,7 +1207,7 @@
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-;; Circe
+;;; Circe
 (straight-use-package 'circe)
 ;; Use custom entry function
 (defun irc ()
