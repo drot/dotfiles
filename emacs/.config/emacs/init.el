@@ -1492,11 +1492,7 @@
         '(("irc.rizon.net"
            :port 6697
            :encryption tls
-           :channels ("#/g/technology" "#rice"))
-          ("chat.freenode.net"
-           :port 6697
-           :encryption tls
-           :channels ("#archlinux" "#emacs"))))
+           :channels ("#/g/technology" "#rice"))))
   ;; Authentication
   (setq rcirc-authinfo
         `(("rizon" nickserv "drot"
