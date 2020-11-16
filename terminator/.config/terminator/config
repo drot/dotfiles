@@ -11,6 +11,7 @@
 [profiles]
   [[default]]
     background_color = "#0c0c0c"
+    background_darkness = 0.8
     cursor_color = "#aaaaaa"
     font = JetBrains Mono NL 13
     foreground_color = "#cccccc"
