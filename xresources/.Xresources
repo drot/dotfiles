@@ -29,60 +29,53 @@ Emacs.verticalScrollBars: off
 Emacs.cursorBlink: off
 
 ! XTerm
-XTerm*locale: true
-XTerm*termName: xterm-256color
-XTerm*bellIsUrgent: true
-XTerm*saveLines: 65535
-XTerm*borderWidth: 0
+XTerm.termName: xterm-256color
+XTerm.vt100.Locale: true
+XTerm.vt100.bellIsUrgent: true
+XTerm.vt100.saveLines: 65535
 
 ! Release Meta binding
-XTerm*metaSendsEscape: true
-XTerm*eightBitInput: false
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.eightBitInput: false
 
 ! Scrolling
-XTerm*ScrollBar: false
-XTerm*ScrollKey: true
+XTerm.vt100.ScrollBar: false
+XTerm.vt100.ScrollKey: true
 
-! Dabbrev expand
-XTerm*VT100.Translations: #override \n\ Meta <KeyPress> /:dabbrev-expand()
+! URL selection
+XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+XTerm.vt100.Translations: #override \n\
+   Meta <KeyPress> o: exec-formatted("firefox '%t'", PRIMARY) select-start() select-end() \n\
+   Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm*faceName: Iosevka Fixed SS05:pixelsize=16
+XTerm.vt100.faceName: JetBrains Mono NL
+XTerm.vt100.faceSize: 13
 
 ! Main colors
-XTerm*foreground: #c5c8c6
-XTerm*background: #1d1f21
-XTerm*cursorColor: #c5c8c6
+XTerm.vt100.Foreground: #cccccc
+XTerm.vt100.Background: #0c0c0c
+XTerm.vt100.cursorColor: #cccccc
 
 ! Stylized colors
-XTerm*colorIT: #b5bd68
-XTerm*colorBD: #c5c8c6
-XTerm*colorUL: #81a2be
+XTerm.vt100.colorIT: #13a10e
+XTerm.vt100.colorBD: #cccccc
+XTerm.vt100.colorUL: #0037da
 
 ! Colors
-XTerm*color0: #1d1f21
-XTerm*color1: #cc6666
-XTerm*color2: #b5bd68
-XTerm*color3: #f0c674
-XTerm*color4: #81a2be
-XTerm*color5: #b294bb
-XTerm*color6: #8abeb7
-XTerm*color7: #c5c8c6
-XTerm*color8: #969896
-XTerm*color9: #cc6666
-XTerm*color10: #b5bd68
-XTerm*color11: #f0c674
-XTerm*color12: #81a2be
-XTerm*color13: #b294bb
-XTerm*color14: #8abeb7
-XTerm*color15: #ffffff
-
-! XMessage
-Xmessage*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso10646-*
-Xmessage*background: red
-Xmessage*foreground: yellow
-Xmessage*form.*.shapeStyle: rectangle
-Xmessage*Scrollbar.width: 1
-Xmessage*Scrollbar.borderWidth: 0
-Xmessage*Buttons: OK
-Xmessage*defaultButton: OK
+XTerm.vt100.color0: #0c0c0c
+XTerm.vt100.color1: #c50f1f
+XTerm.vt100.color2: #13a10e
+XTerm.vt100.color3: #c19c00
+XTerm.vt100.color4: #0037da
+XTerm.vt100.color5: #881798
+XTerm.vt100.color6: #3a96dd
+XTerm.vt100.color7: #cccccc
+XTerm.vt100.color8: #767676
+XTerm.vt100.color9: #e74856
+XTerm.vt100.color10: #16c60c
+XTerm.vt100.color11: #f9f1a5
+XTerm.vt100.color12: #3b78ff
+XTerm.vt100.color13: #b4009e
+XTerm.vt100.color14: #61d6d6
+XTerm.vt100.color15: #f2f2f2
