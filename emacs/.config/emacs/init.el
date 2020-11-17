@@ -1492,17 +1492,11 @@
         '(("irc.rizon.net"
            :port 6697
            :encryption tls
-           :channels ("#/g/technology" "#rice"))
-          ("chat.freenode.net"
-           :port 6697
-           :encryption tls
-           :channels ("#archlinux" "#emacs"))))
+           :channels ("#/g/technology" "#rice"))))
   ;; Authentication
   (setq rcirc-authinfo
         `(("rizon" nickserv "drot"
-           ,(auth-source-pass-get 'secret "IRC/drot@irc.rizon.net"))
-          ("freenode" nickserv "drot"
-           ,(auth-source-pass-get 'secret "IRC/drot@chat.freenode.net"))))
+           ,(auth-source-pass-get 'secret "IRC/drot@irc.rizon.net"))))
   ;; Truncate buffer output
   (setq rcirc-buffer-maximum-lines 2048)
   ;; Set fill column value to frame width
@@ -2123,7 +2117,7 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter and color
-  (setq minions-mode-line-lighter "#"
+  (setq minions-mode-line-lighter "M+"
         minions-mode-line-face 'shadow)
   ;; Don't hide the following minor modes
   (setq minions-direct
