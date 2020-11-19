@@ -503,15 +503,10 @@
 
 ;;; Find file at point
 (after-load 'ffap
-  ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
   ;; Disable pinging to avoid slowdowns
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Initialize mode
-(ffap-bindings)
 
 ;;; Version control
 (after-load 'vc-hooks
@@ -1965,8 +1960,8 @@
   ;; Set maximum window height
   (setq ido-max-window-height 1)
   ;; Guess file name context
-  ;; (setq ido-use-filename-at-point 'guess
-  ;;       ido-use-url-at-point t)
+  (setq ido-use-filename-at-point 'guess
+        ido-use-url-at-point t)
   ;; Don't ask to create new buffers
   (setq ido-create-new-buffer 'always)
   ;; Enable virtual buffers
