@@ -215,6 +215,7 @@ assign [class="Slack"] $ws1
 assign [class="Google-chrome"] $ws2
 assign [class="firefox"] $ws2
 assign [class="Emacs"] $ws3
+assign [class="Code"] $ws3
 assign [class="libreoffice"] $ws5
 assign [class="Gimp"] $ws5
 assign [class="Evince"] $ws5
