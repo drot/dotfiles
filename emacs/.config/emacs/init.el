@@ -108,16 +108,6 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; Orderless completion style matching
-(straight-use-package 'orderless)
-;; Configuration
-(setq orderless-matching-styles
-      '(orderless-flex
-        orderless-strict-leading-initialism
-        orderless-regexp
-        orderless-prefixes
-        orderless-literal))
-
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -132,25 +122,6 @@
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode +1)
-
-;;; Icomplete
-(icomplete-mode +1)
-;; Configuration
-(after-load 'icomplete
-  ;; Reduce the completion delay
-  (setq icomplete-delay-completions-threshold 100
-        icomplete-compute-delay 0.2)
-  ;; Complete in other places as well
-  (setq icomplete-in-buffer t)
-  ;; Use single line display
-  (setq icomplete-prospects-height 1))
-
-;; Use `orderless' completion
-(add-hook 'icomplete-minibuffer-setup-hook
-          (lambda () (setq-local completion-styles '(orderless partial-completion))))
-
-;; FIDO mode for making Icomplete behave like IDO
-(fido-mode +1)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -250,14 +221,6 @@
 ;; Exclude `no-littering' directories from recent files list
 (add-to-list 'recentf-exclude no-littering-var-directory)
 (add-to-list 'recentf-exclude no-littering-etc-directory)
-;; Add `icomplete' support
-(defun drot/icomplete-recentf-open ()
-  "Use `completing-read' to open a recent file."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file (completing-read "Open Recent: " files nil t))))
-;; Set key binding
-(global-set-key (kbd "C-x C-r") #'drot/icomplete-recentf-open)
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -1995,10 +1958,36 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
+;;; Ido mode
+(after-load 'ido
+  ;; Enable fuzzy matching
+  (setq ido-enable-flex-matching t)
+  ;; Set maximum window height
+  (setq ido-max-window-height 1)
+  ;; Guess file name context
+  ;; (setq ido-use-filename-at-point 'guess
+  ;;       ido-use-url-at-point t)
+  ;; Don't ask to create new buffers
+  (setq ido-create-new-buffer 'always)
+  ;; Enable virtual buffers
+  (setq ido-use-virtual-buffers t))
+;; Enable mode
+(ido-mode +1)
+;; Really enable mode
+(ido-everywhere +1)
+
+;; Ido everywhere
+(straight-use-package 'ido-completing-read+)
+;; Enable mode
+(ido-ubiquitous-mode +1)
+
+;; Ido for other commands
+(straight-use-package 'crm-custom)
+;; Enable mode
+(crm-custom-mode +1)
+
 ;;; Amx
 (straight-use-package 'amx)
-;; Change default backend
-(setq amx-backend 'standard)
 ;; Initialize mode
 (amx-mode +1)
 ;; Set global key bindings
