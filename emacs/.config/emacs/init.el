@@ -111,9 +111,6 @@
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
-;;; Display completions vertically
-(setq completions-format 'vertical)
-
 ;;; Don't show help for completions
 (setq completion-show-help nil)
 
