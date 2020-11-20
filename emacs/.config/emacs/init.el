@@ -1971,6 +1971,12 @@
 ;; Really enable mode
 (ido-everywhere +1)
 
+;; Custom window rule for listing available Ido completions
+(add-to-list 'display-buffer-alist
+             '("\\*Ido Completions\\*"
+               (display-buffer-below-selected display-buffer-at-bottom)
+               (inhibit-same-window . t)))
+
 ;; Ido everywhere
 (straight-use-package 'ido-completing-read+)
 ;; Enable mode
