@@ -1972,7 +1972,8 @@
 (add-to-list 'display-buffer-alist
              '("\\*Ido Completions\\*"
                (display-buffer-below-selected display-buffer-at-bottom)
-               (inhibit-same-window . t)))
+               (inhibit-same-window . t)
+               (window-height . 10)))
 
 ;; Ido everywhere
 (straight-use-package 'ido-completing-read+)
