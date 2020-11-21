@@ -1972,7 +1972,9 @@
   ;; Don't ask to create new buffers
   (setq ido-create-new-buffer 'always)
   ;; Enable virtual buffers
-  (setq ido-use-virtual-buffers t))
+  (setq ido-use-virtual-buffers t)
+  ;; Don't use faces
+  (setq ido-use-faces nil))
 ;; Enable mode
 (ido-mode +1)
 ;; Really enable mode
@@ -1984,15 +1986,20 @@
                (display-buffer-reuse-window display-buffer-at-bottom)
                (window-height . 10)))
 
-;; Ido everywhere
+;;; Ido everywhere
 (straight-use-package 'ido-completing-read+)
 ;; Enable mode
 (ido-ubiquitous-mode +1)
 
-;; Ido for other commands
+;;; Ido for other commands
 (straight-use-package 'crm-custom)
 ;; Enable mode
 (crm-custom-mode +1)
+
+;;; Ido fuzzy matching via Flx
+(straight-use-package 'flx-ido)
+;; Enable mode
+(flx-ido-mode 1)
 
 ;;; Amx
 (straight-use-package 'amx)
@@ -2009,7 +2016,7 @@
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter and color
-  (setq minions-mode-line-lighter "#"
+  (setq minions-mode-line-lighter "M+"
         minions-mode-line-face 'shadow)
   ;; Don't hide the following minor modes
   (setq minions-direct
