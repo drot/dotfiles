@@ -2096,7 +2096,7 @@
 ;; Enable mode
 (ido-ubiquitous-mode +1)
 
-;; Ido for other commands
+;;; Ido for other commands
 (straight-use-package 'crm-custom)
 ;; Enable mode
 (crm-custom-mode +1)
