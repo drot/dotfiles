@@ -1254,7 +1254,7 @@
   ;; Custom fill for Circe buffers
   (setq lui-time-stamp-position 'right-margin
         lui-fill-type nil)
-
+  ;; Text fill setup
   (defun drot/lui-no-fill-setup ()
     "Adjust text fill in Circe buffers."
     (setq fringes-outside-margins t
