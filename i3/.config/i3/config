@@ -201,6 +201,7 @@ for_window [class="qutebrowser"] border pixel 2
 
 # assign applications to certain workspaces
 assign [class="firefox"] $ws2
+assign [class="Chromium"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
