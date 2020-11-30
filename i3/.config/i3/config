@@ -179,6 +179,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/audio_toggle up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/audio_toggle down
 bindsym XF86AudioMute exec --no-startup-id ~/scripts/audio_toggle mute
 
+# player keys
+bindsym XF86AudioPrev exec --no-startup-id ~/scripts/player-control previous
+bindsym XF86AudioNext exec --no-startup-id ~/scripts/player-control next
+bindsym XF86AudioPlay exec --no-startup-id ~/scripts/player-control
+
 # screenshot keys
 bindsym Print exec --no-startup-id ~/scripts/screenshot full
 bindsym --release $mod+Print exec --no-startup-id ~/scripts/screenshot region
