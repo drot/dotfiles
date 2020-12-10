@@ -8,6 +8,7 @@
   title_use_system_font = False
   title_font = JetBrains Mono NL 13
 [keybindings]
+  full_screen = None
 [profiles]
   [[default]]
     background_color = "#0c0c0c"
