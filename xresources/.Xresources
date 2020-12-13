@@ -46,7 +46,7 @@ XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43
 
 ! Enable additional key translations for URL following and abbrev expansion
 XTerm.vt100.Translations: #override \n\
-   Meta <KeyPress> o: exec-formatted("firefox '%t'", PRIMARY) select-start() select-end() \n\
+   Meta <KeyPress> o: exec-formatted("chromium '%t'", PRIMARY) select-start() select-end() \n\
    Shift Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
