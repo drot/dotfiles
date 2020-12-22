@@ -37,6 +37,9 @@ XTerm.vt100.saveLines: 65535
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.eightBitInput: false
 
+! Disable full screen key binding
+XTerm.Fullscreen: never
+
 ! Scrolling
 XTerm.vt100.ScrollBar: false
 XTerm.vt100.ScrollKey: true
