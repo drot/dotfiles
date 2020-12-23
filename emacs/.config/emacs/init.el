@@ -675,17 +675,7 @@
 (after-load 'image-dired
   ;; Change default external viewer
   (when (executable-find "feh")
-    (setq image-dired-external-viewer "feh"))
-  ;; Use GraphicsMagick by default
-  (when (executable-find "gm")
-    ;; Override commands
-    (setq image-dired-cmd-create-thumbnail-program "gm"
-          image-dired-cmd-create-temp-image-program "gm"
-          image-dired-cmd-rotate-thumbnail-program "gm")
-    ;; Override options
-    (setq image-dired-cmd-create-thumbnail-options '("convert" "-size" "%wx%h" "%f[0]" "-resize" "%wx%h>" "-strip" "jpeg:%t")
-          image-dired-cmd-create-temp-image-options '("convert" "-size" "%wx%h" "%f[0]" "-resize" "%wx%h>" "-strip" "jpeg:%t")
-          image-dired-cmd-rotate-thumbnail-options '("mogrify" "-rotate" "%d" "%t"))))
+    (setq image-dired-external-viewer "feh")))
 
 ;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
