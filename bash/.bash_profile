@@ -9,6 +9,9 @@ export NAME="Davor Rotim"
 export EMAIL="rotim.davor@nsoft.com"
 export GROFF_NO_SGR=yes
 
+# Qt5 default style
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 # Check for Cargo binaries if available
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 

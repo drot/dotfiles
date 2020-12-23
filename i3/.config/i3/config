@@ -104,8 +104,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assing workspaces to specific screens
-workspace $ws2 output HDMI-1-1
-workspace $ws3 output DP-1-1
+workspace $ws2 output DP-1-1
+workspace $ws3 output HDMI-1-1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

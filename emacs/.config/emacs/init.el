@@ -40,7 +40,7 @@
     (funcall mode -1)))
 
 ;;; Color theme
-(straight-use-package 'modus-vivendi-theme)
+(straight-use-package 'modus-themes)
 ;; Configuration
 (setq modus-vivendi-theme-slanted-constructs t
       modus-vivendi-theme-bold-constructs t
