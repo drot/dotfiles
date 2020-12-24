@@ -40,7 +40,7 @@
     (funcall mode -1)))
 
 ;;; Color theme
-(straight-use-package 'modus-vivendi-theme)
+(straight-use-package 'modus-themes)
 ;; Configuration
 (setq modus-vivendi-theme-slanted-constructs t
       modus-vivendi-theme-bold-constructs t
@@ -108,21 +108,8 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; Orderless completion style matching
-(straight-use-package 'orderless)
-;; Configuration
-(setq orderless-matching-styles
-      '(orderless-flex
-        orderless-strict-leading-initialism
-        orderless-regexp
-        orderless-prefixes
-        orderless-literal))
-
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
-
-;;; Display completions vertically
-(setq completions-format 'vertical)
 
 ;;; Don't show help for completions
 (setq completion-show-help nil)
@@ -132,25 +119,6 @@
 
 ;;; Indicate minibuffer recursion depth
 (minibuffer-depth-indicate-mode +1)
-
-;;; Icomplete
-(icomplete-mode +1)
-;; Configuration
-(after-load 'icomplete
-  ;; Reduce the completion delay
-  (setq icomplete-delay-completions-threshold 100
-        icomplete-compute-delay 0.2)
-  ;; Complete in other places as well
-  (setq icomplete-in-buffer t)
-  ;; Use single line display
-  (setq icomplete-prospects-height 1))
-
-;; Use `orderless' completion
-(add-hook 'icomplete-minibuffer-setup-hook
-          (lambda () (setq-local completion-styles '(orderless partial-completion))))
-
-;; FIDO mode for making Icomplete behave like IDO
-(fido-mode +1)
 
 ;;; Enable all disabled commands
 (setq disabled-command-function nil)
@@ -250,14 +218,6 @@
 ;; Exclude `no-littering' directories from recent files list
 (add-to-list 'recentf-exclude no-littering-var-directory)
 (add-to-list 'recentf-exclude no-littering-etc-directory)
-;; Add `icomplete' support
-(defun drot/icomplete-recentf-open ()
-  "Use `completing-read' to open a recent file."
-  (interactive)
-  (let ((files (mapcar 'abbreviate-file-name recentf-list)))
-    (find-file (completing-read "Open Recent: " files nil t))))
-;; Set key binding
-(global-set-key (kbd "C-x C-r") #'drot/icomplete-recentf-open)
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -540,15 +500,10 @@
 
 ;;; Find file at point
 (after-load 'ffap
-  ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
   ;; Disable pinging to avoid slowdowns
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Initialize mode
-(ffap-bindings)
 
 ;;; Version control
 (after-load 'vc-hooks
@@ -2100,10 +2055,49 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
+;;; Ido mode
+(after-load 'ido
+  ;; Enable fuzzy matching
+  (setq ido-enable-flex-matching t)
+  ;; Set maximum window height
+  (setq ido-max-window-height 1)
+  ;; Guess file name context
+  (setq ido-use-filename-at-point 'guess
+        ido-use-url-at-point t)
+  ;; Don't ask to create new buffers
+  (setq ido-create-new-buffer 'always)
+  ;; Enable virtual buffers
+  (setq ido-use-virtual-buffers t)
+  ;; Don't use faces
+  (setq ido-use-faces nil))
+;; Enable mode
+(ido-mode +1)
+;; Really enable mode
+(ido-everywhere +1)
+
+;; Custom window rule for listing available Ido completions
+(add-to-list 'display-buffer-alist
+             '("\\*Ido Completions\\*"
+               (display-buffer-reuse-window display-buffer-at-bottom)
+               (window-height . 10)))
+
+;;; Ido everywhere
+(straight-use-package 'ido-completing-read+)
+;; Enable mode
+(ido-ubiquitous-mode +1)
+
+;;; Ido for other commands
+(straight-use-package 'crm-custom)
+;; Enable mode
+(crm-custom-mode +1)
+
+;;; Ido fuzzy matching via Flx
+(straight-use-package 'flx-ido)
+;; Enable mode
+(flx-ido-mode 1)
+
 ;;; Amx
 (straight-use-package 'amx)
-;; Change default backend
-(setq amx-backend 'standard)
 ;; Initialize mode
 (amx-mode +1)
 ;; Set global key bindings
