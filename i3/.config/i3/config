@@ -1,7 +1,6 @@
 # general settings
 workspace_layout tabbed
 workspace_auto_back_and_forth yes
-focus_follows_mouse no
 
 # window colors - border background text indicator
 client.focused #969896 #373b41 #81a2be #81a2be
@@ -171,7 +170,7 @@ bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot up
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+Pause exec i3lock -c 000000
+bindsym $mod+Pause exec --no-startup-id ~/.scripts/lock-screen
 
 # read 1 character and mark the current window with this character
 bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '
