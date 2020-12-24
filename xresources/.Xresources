@@ -38,15 +38,20 @@ XTerm.vt100.saveLines: 65535
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.eightBitInput: false
 
+! Disable full screen key binding
+XTerm.Fullscreen: never
+
 ! Scrolling
 XTerm.vt100.ScrollBar: false
 XTerm.vt100.ScrollKey: true
 
 ! URL selection
 XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! Enable additional key translations for URL following and abbrev expansion
 XTerm.vt100.Translations: #override \n\
-   Meta <KeyPress> o: exec-formatted("firefox '%t'", PRIMARY) select-start() select-end() \n\
-   Meta <KeyPress> /:dabbrev-expand()
+   Meta <KeyPress> o: exec-formatted("chromium '%t'", PRIMARY) select-start() select-end() \n\
+   Shift Meta <KeyPress> /:dabbrev-expand()
 
 ! Font
 XTerm.vt100.faceName: JetBrains Mono NL
@@ -61,6 +66,11 @@ XTerm.vt100.cursorColor: #cccccc
 XTerm.vt100.colorIT: #13a10e
 XTerm.vt100.colorBD: #cccccc
 XTerm.vt100.colorUL: #0037da
+
+! Menu colors
+XTerm.mainMenu.Background: #767676
+XTerm.vtMenu.Background: #767676
+XTerm.fontMenu.Background: #767676
 
 ! Colors
 XTerm.vt100.color0: #0c0c0c
