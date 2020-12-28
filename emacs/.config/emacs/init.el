@@ -1168,11 +1168,12 @@
 (defun irc ()
   "Connect to all my IRC servers after enabling contrib modules."
   (interactive)
+  (require 'circe-chanop)
   (circe-lagmon-mode)
   (enable-circe-color-nicks)
   (enable-lui-autopaste)
   (enable-lui-track)
-  (require 'circe-chanop)
+  (enable-circe-display-images)
   (circe "Rizon"))
 ;; Set global key binding
 (global-set-key (kbd "<f8>") #'irc)
