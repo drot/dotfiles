@@ -1189,6 +1189,7 @@
   ;; Securely fetch passwords
   (defun drot/circe-fetch-password (&rest params)
     "Fetch password from an encrypted source."
+    (require 'auth-source)
     (let ((match (car (apply 'auth-source-search params))))
       (if match
           (let ((secret (plist-get match :secret)))

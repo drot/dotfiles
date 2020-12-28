@@ -175,25 +175,25 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # volume keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/audio_toggle up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/audio_toggle down
-bindsym XF86AudioMute exec --no-startup-id ~/scripts/audio_toggle mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
+bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
 
 # player keys
-bindsym XF86AudioPrev exec --no-startup-id ~/scripts/player-control previous
-bindsym XF86AudioNext exec --no-startup-id ~/scripts/player-control next
-bindsym XF86AudioPlay exec --no-startup-id ~/scripts/player-control
+bindsym XF86AudioPrev exec --no-startup-id ~/.scripts/player-control previous
+bindsym XF86AudioNext exec --no-startup-id ~/.scripts/player-control next
+bindsym XF86AudioPlay exec --no-startup-id ~/.scripts/player-control
 
 # screenshot keys
-bindsym Print exec --no-startup-id ~/scripts/screenshot full
-bindsym --release $mod+Print exec --no-startup-id ~/scripts/screenshot region
-bindsym --release $mod+Shift+Print exec --no-startup-id ~/scripts/screenshot upload
+bindsym Print exec --no-startup-id ~/.scripts/screenshot full
+bindsym --release $mod+Print exec --no-startup-id ~/.scripts/screenshot region
+bindsym --release $mod+Shift+Print exec --no-startup-id ~/.scripts/screenshot upload
 
 # clipboard selection key
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+Pause exec --no-startup-id ~/scripts/lock-screen
+bindsym $mod+Pause exec --no-startup-id ~/.scripts/lock-screen
 
 # read 1 character and mark the current window with this character
 bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '
