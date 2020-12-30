@@ -1,5 +1,5 @@
 # Environment variables
-export EDITOR="emacs"
+export EDITOR="emacsclient"
 export ALTERNATE_EDITOR=""
 export VISUAL="${EDITOR}"
 export PAGER="less"
