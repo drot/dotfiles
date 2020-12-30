@@ -16,6 +16,7 @@ else
 	prompt="$1"
 fi
 
+# Default options
 dmenu_opts=(-i -p "$prompt"
             -nb "$normal_background"
             -nf "$normal_foreground"
