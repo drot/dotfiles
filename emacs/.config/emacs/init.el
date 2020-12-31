@@ -2074,6 +2074,8 @@
   ;; Guess file name context
   (setq ido-use-filename-at-point 'guess
         ido-use-url-at-point t)
+  ;; Quickly open dired
+  (setq ido-show-dot-for-dired t)
   ;; Don't ask to create new buffers
   (setq ido-create-new-buffer 'always)
   ;; Enable virtual buffers
