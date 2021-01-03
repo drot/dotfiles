@@ -22,7 +22,7 @@ dmenu_prompt() {
 
 # Link handling function
 link_handler() {
-    local regex='(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]'
+    local regex='(((http|https|ftp|ftps|gopher|gemini)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]'
     grep -Po "$regex" | tac | dmenu_prompt "$1" | "${@:2}"
 }
 
