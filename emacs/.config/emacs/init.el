@@ -1,6 +1,6 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2020 drot
+;; Copyright (C) 2009-2021 drot
 
 ;; Author: drot
 ;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.config/emacs
@@ -1961,6 +1961,8 @@
   ;; Guess file name context
   (setq ido-use-filename-at-point 'guess
         ido-use-url-at-point t)
+  ;; Quickly open dired
+  (setq ido-show-dot-for-dired t)
   ;; Don't ask to create new buffers
   (setq ido-create-new-buffer 'always)
   ;; Enable virtual buffers
