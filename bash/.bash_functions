@@ -32,11 +32,15 @@ man () {
             return 1
     esac
 
+    upload_action () {
+        curl -# --fail -F "$curl_opts" "$url"
+    }
+
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
-        curl -# --fail -F "$curl_opts" "$url"
+        upload_action
     else
-        curl -# --fail -F "$curl_opts" "$url" | tr -d '\n' | xsel -b
+        upload_action | tr -d '\n' | xsel -b
     fi
 }
 
