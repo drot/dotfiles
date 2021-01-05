@@ -34,9 +34,9 @@ man () {
 
     # Watch out if we're running X or not for clipboard pasting
     if [[ -z $DISPLAY ]]; then
-        curl -# -F "$curl_opts" "$url"
+        curl -# --fail -F "$curl_opts" "$url"
     else
-        curl -# -F "$curl_opts" "$url" | tr -d '\n' | xsel -b
+        curl -# --fail -F "$curl_opts" "$url" | tr -d '\n' | xsel -b
     fi
 }
 
