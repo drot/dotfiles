@@ -1033,12 +1033,18 @@
   (define-key outline-minor-mode-map (kbd "C-c o h") #'drot/outline-transient))
 
 ;;; Org-mode
+(defun drot/toggle-table-mode ()
+  "Initialize Org Table mode."
+  (interactive)
+  (require 'org-table)
+  (orgtbl-mode +1))
+;; Set global key bindings
 (dolist (bind '(("C-c o a" . org-agenda)
                 ("C-c o c" . org-capture)
                 ("C-c o t" . org-todo-list)
                 ("C-c o s" . org-search-view)
                 ("C-c o l" . org-store-link)
-                ("C-c t t" . orgtbl-mode)))
+                ("C-c t t" . drot/toggle-table-mode)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'org
