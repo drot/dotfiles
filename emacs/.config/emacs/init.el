@@ -1036,6 +1036,7 @@
 (defun drot/toggle-table-mode ()
   "Initialize Org Table mode."
   (interactive)
+  ;; Rather hacky mode, needs to be manually loaded
   (require 'org-table)
   (orgtbl-mode +1))
 ;; Set global key bindings
