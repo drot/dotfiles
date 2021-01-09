@@ -684,17 +684,7 @@
 (after-load 'image-dired
   ;; Change default external viewer
   (when (executable-find "feh")
-    (setq image-dired-external-viewer "feh"))
-  ;; Use GraphicsMagick by default
-  (when (executable-find "gm")
-    ;; Override commands
-    (setq image-dired-cmd-create-thumbnail-program "gm"
-          image-dired-cmd-create-temp-image-program "gm"
-          image-dired-cmd-rotate-thumbnail-program "gm")
-    ;; Override options
-    (setq image-dired-cmd-create-thumbnail-options '("convert" "-size" "%wx%h" "%f[0]" "-resize" "%wx%h>" "-strip" "jpeg:%t")
-          image-dired-cmd-create-temp-image-options '("convert" "-size" "%wx%h" "%f[0]" "-resize" "%wx%h>" "-strip" "jpeg:%t")
-          image-dired-cmd-rotate-thumbnail-options '("mogrify" "-rotate" "%d" "%t"))))
+    (setq image-dired-external-viewer "feh")))
 
 ;; Gnus Dired
 (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
@@ -1056,12 +1046,19 @@
   (define-key outline-minor-mode-map (kbd "C-c o h") #'drot/outline-transient))
 
 ;;; Org-mode
+(defun drot/toggle-table-mode ()
+  "Initialize Org Table mode."
+  (interactive)
+  ;; Rather hacky mode, needs to be manually loaded
+  (require 'org-table)
+  (orgtbl-mode +1))
+;; Set global key bindings
 (dolist (bind '(("C-c o a" . org-agenda)
                 ("C-c o c" . org-capture)
                 ("C-c o t" . org-todo-list)
                 ("C-c o s" . org-search-view)
                 ("C-c o l" . org-store-link)
-                ("C-c t t" . orgtbl-mode)))
+                ("C-c t t" . drot/toggle-table-mode)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'org
