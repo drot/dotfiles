@@ -1,6 +1,6 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2020 drot
+;; Copyright (C) 2009-2021 drot
 
 ;; Author: drot
 ;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.config/emacs
@@ -1046,12 +1046,19 @@
   (define-key outline-minor-mode-map (kbd "C-c o h") #'drot/outline-transient))
 
 ;;; Org-mode
+(defun drot/toggle-table-mode ()
+  "Initialize Org Table mode."
+  (interactive)
+  ;; Rather hacky mode, needs to be manually loaded
+  (require 'org-table)
+  (orgtbl-mode +1))
+;; Set global key bindings
 (dolist (bind '(("C-c o a" . org-agenda)
                 ("C-c o c" . org-capture)
                 ("C-c o t" . org-todo-list)
                 ("C-c o s" . org-search-view)
                 ("C-c o l" . org-store-link)
-                ("C-c t t" . orgtbl-mode)))
+                ("C-c t t" . drot/toggle-table-mode)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'org
@@ -2064,6 +2071,8 @@
   ;; Guess file name context
   (setq ido-use-filename-at-point 'guess
         ido-use-url-at-point t)
+  ;; Quickly open dired
+  (setq ido-show-dot-for-dired t)
   ;; Don't ask to create new buffers
   (setq ido-create-new-buffer 'always)
   ;; Enable virtual buffers
