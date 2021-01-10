@@ -2124,7 +2124,11 @@
 ;; Configuration
 (after-load 'consult
   ;; Set narrowing key binding
-  (setq consult-narrow-key (kbd "C-+")))
+  (setq consult-narrow-key (kbd "C-+"))
+  ;; Make narrowing help available in the minibuffer
+  (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+  ;; Don't preview buffers eagerly
+  (setq consult-preview-key (kbd "C-l")))
 
 ;;; Consult Selectrum
 (straight-use-package 'consult-selectrum)
