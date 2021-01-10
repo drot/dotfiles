@@ -2100,8 +2100,8 @@
 (straight-use-package 'consult)
 ;; Set key bindings
 (dolist (bind '(("C-x M-:" . consult-complex-command)
-                ("C-c H" . consult-history)
-                ("C-c M" . consult-mode-command)
+                ("C-c c h" . consult-history)
+                ("C-c c m" . consult-mode-command)
                 ("C-x b" . consult-buffer)
                 ("C-x 4 b" . consult-buffer-other-window)
                 ("C-x 5 b" . consult-buffer-other-frame)
