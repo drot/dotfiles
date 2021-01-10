@@ -2100,26 +2100,26 @@
 (straight-use-package 'consult)
 ;; Set key bindings
 (dolist (bind '(("C-x M-:" . consult-complex-command)
-         ("C-c M-h" . consult-history)
-         ("C-c M-m" . consult-mode-command)
-         ("C-x b" . consult-buffer)
-         ("C-x 4 b" . consult-buffer-other-window)
-         ("C-x 5 b" . consult-buffer-other-frame)
-         ("C-x r x" . consult-register)
-         ("C-x r b" . consult-bookmark)
-         ("M-g g" . consult-goto-line)
-         ("M-g M-g" . consult-goto-line)
-         ("M-g o" . consult-outline)
-         ("M-g l" . consult-line)
-         ("M-g m" . consult-mark)
-         ("M-g k" . consult-global-mark)
-         ("M-g r" . consult-git-grep)
-         ("M-g f" . consult-find)
-         ("M-g i" . consult-project-imenu)
-         ("M-g e" . consult-error)
-         ("M-s m" . consult-multi-occur)
-         ("M-y" . consult-yank-pop)
-         ("<help> a" . consult-apropos)))
+                ("C-c M-h" . consult-history)
+                ("C-c M-m" . consult-mode-command)
+                ("C-x b" . consult-buffer)
+                ("C-x 4 b" . consult-buffer-other-window)
+                ("C-x 5 b" . consult-buffer-other-frame)
+                ("C-x r x" . consult-register)
+                ("C-x r b" . consult-bookmark)
+                ("M-g g" . consult-goto-line)
+                ("M-g M-g" . consult-goto-line)
+                ("M-g o" . consult-outline)
+                ("M-g l" . consult-line)
+                ("M-g m" . consult-mark)
+                ("M-g k" . consult-global-mark)
+                ("M-g r" . consult-git-grep)
+                ("M-g f" . consult-find)
+                ("M-g i" . consult-project-imenu)
+                ("M-g e" . consult-error)
+                ("M-s m" . consult-multi-occur)
+                ("M-y" . consult-yank-pop)
+                ("<help> a" . consult-apropos)))
   (global-set-key (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'consult
@@ -2127,271 +2127,271 @@
   (setq consult-narrow-key (kbd "C-+"))
 
 ;;; Marginalia in the minibuffer
-(straight-use-package 'marginalia)
-;; Set key binidng
-(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
-;; Enable Mode
-(marginalia-mode)
-;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
-(advice-add #'marginalia-cycle :after
-            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+  (straight-use-package 'marginalia)
+  ;; Set key binidng
+  (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+  ;; Enable Mode
+  (marginalia-mode)
+  ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
+  (advice-add #'marginalia-cycle :after
+              (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
 
 ;;; Embark
-(straight-use-package 'embark)
-;; Define key bindings
-(global-set-key (kbd "C-S-a") #'embark-act)
-;; Bind `marginalia-cycle' as an Embark action
-(define-key embark-general-map (kbd "A") #'marginalia-cycle)
-;; Configuration
-(after-load 'embark
-  ;; Enable Selectrum integration
-  (defun current-candidate+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidate))))
+  (straight-use-package 'embark)
+  ;; Define key bindings
+  (global-set-key (kbd "C-S-a") #'embark-act)
+  ;; Bind `marginalia-cycle' as an Embark action
+  (define-key embark-general-map (kbd "A") #'marginalia-cycle)
+  ;; Configuration
+  (after-load 'embark
+    ;; Enable Selectrum integration
+    (defun current-candidate+category ()
+      (when selectrum-active-p
+        (cons (selectrum--get-meta 'category)
+              (selectrum-get-current-candidate))))
 
-  (add-hook 'embark-target-finders #'current-candidate+category)
+    (add-hook 'embark-target-finders #'current-candidate+category)
 
-  (defun current-candidates+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidates
-             ;; Pass relative file names for dired.
-             minibuffer-completing-file-name))))
+    (defun current-candidates+category ()
+      (when selectrum-active-p
+        (cons (selectrum--get-meta 'category)
+              (selectrum-get-current-candidates
+               ;; Pass relative file names for dired.
+               minibuffer-completing-file-name))))
 
-  (add-hook 'embark-candidate-collectors #'current-candidates+category)
+    (add-hook 'embark-candidate-collectors #'current-candidates+category)
 
-  ;; No unnecessary computation delay after injection.
-  (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
+    ;; No unnecessary computation delay after injection.
+    (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
 
 
 ;;; Minions
-(straight-use-package 'minions)
-;; Enable mode
-(minions-mode +1)
-;; Configuration
-(after-load 'minions
-  ;; Change mode lighter and color
-  (setq minions-mode-line-lighter "M+"
-        minions-mode-line-face 'shadow)
-  ;; Don't hide the following minor modes
-  (setq minions-direct
-        '(ace-window-mode
-          artist-mode
-          auto-fill-function
-          auto-revert-mode
-          cider-mode
-          flymake-mode
-          geiser-autodoc-mode
-          geiser-mode
-          isearch-mode
-          js2-minor-mode
-          lsp-mode
-          orgtbl-mode
-          overwrite-mode
-          poly-ansible-mode
-          poly-markdown-mode
-          sqlind-minor-mode
-          subword-mode
-          rcirc-omit-mode
-          visual-line-mode)))
+  (straight-use-package 'minions)
+  ;; Enable mode
+  (minions-mode +1)
+  ;; Configuration
+  (after-load 'minions
+    ;; Change mode lighter and color
+    (setq minions-mode-line-lighter "M+"
+          minions-mode-line-face 'shadow)
+    ;; Don't hide the following minor modes
+    (setq minions-direct
+          '(ace-window-mode
+            artist-mode
+            auto-fill-function
+            auto-revert-mode
+            cider-mode
+            flymake-mode
+            geiser-autodoc-mode
+            geiser-mode
+            isearch-mode
+            js2-minor-mode
+            lsp-mode
+            orgtbl-mode
+            overwrite-mode
+            poly-ansible-mode
+            poly-markdown-mode
+            sqlind-minor-mode
+            subword-mode
+            rcirc-omit-mode
+            visual-line-mode)))
 
 ;;; Paredit
-(straight-use-package 'paredit)
-;; Enable mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                ielm-mode-hook
-                clojure-mode-hook
-                cider-repl-mode-hook
-                scheme-mode-hook
-                sly-mrepl-mode-hook
-                geiser-repl-mode-hook))
-  (add-hook hook #'enable-paredit-mode))
-;; Configuration
-(after-load 'paredit
-  ;; Enable integration with ElDoc
-  (eldoc-add-command
-   #'paredit-backward-delete
-   #'paredit-close-round)
+  (straight-use-package 'paredit)
+  ;; Enable mode
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  ielm-mode-hook
+                  clojure-mode-hook
+                  cider-repl-mode-hook
+                  scheme-mode-hook
+                  sly-mrepl-mode-hook
+                  geiser-repl-mode-hook))
+    (add-hook hook #'enable-paredit-mode))
+  ;; Configuration
+  (after-load 'paredit
+    ;; Enable integration with ElDoc
+    (eldoc-add-command
+     #'paredit-backward-delete
+     #'paredit-close-round)
 
-  ;; Extra functions for ParEdit via `paredit-ext'
-  (straight-use-package
-   '(paredit-ext :type git
-                 :files ("lisp/paredit-ext.el")
-                 :repo "https://github.com/jwiegley/dot-emacs.git"
-                 :nonrecursive t
-                 :depth 1))
+    ;; Extra functions for ParEdit via `paredit-ext'
+    (straight-use-package
+     '(paredit-ext :type git
+                   :files ("lisp/paredit-ext.el")
+                   :repo "https://github.com/jwiegley/dot-emacs.git"
+                   :nonrecursive t
+                   :depth 1))
 
-  ;; Load library
-  (require 'paredit-ext)
+    ;; Load library
+    (require 'paredit-ext)
 
-  ;; Disable conflicting key binding
-  (define-key paredit-mode-map (kbd "M-s") nil)
-  ;; Set local key bindings
-  (dolist (bind '(("M-s M-s" . paredit-splice-sexp)
-                  ("M-{" . paredit-wrap-curly)
-                  ("M-[" . paredit-wrap-square)
-                  ("C-c C-M-s" . mark-containing-sexp)))
-    (define-key paredit-mode-map (kbd (car bind)) (cdr bind)))
+    ;; Disable conflicting key binding
+    (define-key paredit-mode-map (kbd "M-s") nil)
+    ;; Set local key bindings
+    (dolist (bind '(("M-s M-s" . paredit-splice-sexp)
+                    ("M-{" . paredit-wrap-curly)
+                    ("M-[" . paredit-wrap-square)
+                    ("C-c C-M-s" . mark-containing-sexp)))
+      (define-key paredit-mode-map (kbd (car bind)) (cdr bind)))
 
-  ;; Enable Paredit in the minibuffer
-  (defvar drot/paredit-minibuffer-setup-commands
-    '(eval-expression
-      pp-eval-expression
-      eval-expression-with-eldoc
-      ibuffer-do-eval
-      ibuffer-do-view-and-eval)
-    "Interactive commands for which Paredit should be enabled in the minibuffer.")
+    ;; Enable Paredit in the minibuffer
+    (defvar drot/paredit-minibuffer-setup-commands
+      '(eval-expression
+        pp-eval-expression
+        eval-expression-with-eldoc
+        ibuffer-do-eval
+        ibuffer-do-view-and-eval)
+      "Interactive commands for which Paredit should be enabled in the minibuffer.")
 
-  (defun drot/paredit-minibuffer-setup ()
-    "Enable Paredit during lisp-related minibuffer commands."
-    (if (memq this-command drot/paredit-minibuffer-setup-commands)
-        (paredit-mode +1)))
+    (defun drot/paredit-minibuffer-setup ()
+      "Enable Paredit during lisp-related minibuffer commands."
+      (if (memq this-command drot/paredit-minibuffer-setup-commands)
+          (paredit-mode +1)))
 
-  (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
-  ;; Disable Electric Pair mode when Paredit is active
-  (add-hook 'paredit-mode-hook
-            (lambda () (setq-local electric-pair-mode nil))))
+    (add-hook 'minibuffer-setup-hook #'drot/paredit-minibuffer-setup)
+    ;; Disable Electric Pair mode when Paredit is active
+    (add-hook 'paredit-mode-hook
+              (lambda () (setq-local electric-pair-mode nil))))
 
 ;;; Rainbow Delimiters
-(straight-use-package 'rainbow-delimiters)
-;; Enable mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                clojure-mode-hook
-                scheme-mode-hook))
-  (add-hook hook #'rainbow-delimiters-mode))
+  (straight-use-package 'rainbow-delimiters)
+  ;; Enable mode
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  clojure-mode-hook
+                  scheme-mode-hook))
+    (add-hook hook #'rainbow-delimiters-mode))
 
 ;;; Volatile Highlights
-(straight-use-package 'volatile-highlights)
-;; Enable mode
-(volatile-highlights-mode +1)
+  (straight-use-package 'volatile-highlights)
+  ;; Enable mode
+  (volatile-highlights-mode +1)
 
 ;;; YASnippet
-(straight-use-package 'yasnippet)
-;; Enable mode
-(yas-global-mode +1)
+  (straight-use-package 'yasnippet)
+  ;; Enable mode
+  (yas-global-mode +1)
 
 ;;; Artist mode
-(global-set-key (kbd "C-c t a") #'artist-mode)
+  (global-set-key (kbd "C-c t a") #'artist-mode)
 
 ;;; Toggle debug on error
-(global-set-key (kbd "C-c t d") #'toggle-debug-on-error)
+  (global-set-key (kbd "C-c t d") #'toggle-debug-on-error)
 
 ;;; Ediff
-(global-set-key (kbd "C-c f e") #'ediff)
-(global-set-key (kbd "C-c f 3") #'ediff3)
+  (global-set-key (kbd "C-c f e") #'ediff)
+  (global-set-key (kbd "C-c f 3") #'ediff3)
 
 ;;; Hexl mode
-(global-set-key (kbd "C-c t h") #'hexl-mode)
-(global-set-key (kbd "C-c f h") #'hexl-find-file)
+  (global-set-key (kbd "C-c t h") #'hexl-mode)
+  (global-set-key (kbd "C-c f h") #'hexl-find-file)
 
 ;;; Replace strings
-(global-set-key (kbd "C-c s r") #'replace-string)
-(global-set-key (kbd "C-c s C-r") #'replace-regexp)
+  (global-set-key (kbd "C-c s r") #'replace-string)
+  (global-set-key (kbd "C-c s C-r") #'replace-regexp)
 
 ;;; Grep results as a dired buffer
-(global-set-key (kbd "C-c s d") #'find-grep-dired)
+  (global-set-key (kbd "C-c s d") #'find-grep-dired)
 
 ;;; Project
-(dolist (bind '(("C-c p f" . project-find-file)
-                ("C-c p r" . project-find-regexp)
-                ("C-c p s" . project-search)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
+  (dolist (bind '(("C-c p f" . project-find-file)
+                  ("C-c p r" . project-find-regexp)
+                  ("C-c p s" . project-search)))
+    (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find function and variable definitions
-(dolist (bind '(("C-c h f" . find-function)
-                ("C-c h 4 f" . find-function-other-window)
-                ("C-c h k" . find-function-on-key)
-                ("C-c h v" . find-variable)
-                ("C-c h 4 v" . find-variable-other-window)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
+  (dolist (bind '(("C-c h f" . find-function)
+                  ("C-c h 4 f" . find-function-other-window)
+                  ("C-c h k" . find-function-on-key)
+                  ("C-c h v" . find-variable)
+                  ("C-c h 4 v" . find-variable-other-window)))
+    (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Find library
-(global-set-key (kbd "C-c h l") #'find-library)
-(global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
-(global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
+  (global-set-key (kbd "C-c h l") #'find-library)
+  (global-set-key (kbd "C-c h 4 l") #'find-library-other-window)
+  (global-set-key (kbd "C-c h 4 L") #'find-library-other-frame)
 
 ;;; Cycle spacing
-(global-set-key [remap just-one-space] #'cycle-spacing)
+  (global-set-key [remap just-one-space] #'cycle-spacing)
 
 ;;; Sort lines alphabetically
-(global-set-key (kbd "C-c x l") #'sort-lines)
+  (global-set-key (kbd "C-c x l") #'sort-lines)
 
 ;;; Sort fields with regular expressions
-(global-set-key (kbd "C-c x f") #'sort-regexp-fields)
+  (global-set-key (kbd "C-c x f") #'sort-regexp-fields)
 
 ;;; Word capitalization operations
-(global-set-key [remap capitalize-word] #'capitalize-dwim)
-(global-set-key [remap upcase-word] #'upcase-dwim)
-(global-set-key [remap downcase-word] #'downcase-dwim)
+  (global-set-key [remap capitalize-word] #'capitalize-dwim)
+  (global-set-key [remap upcase-word] #'upcase-dwim)
+  (global-set-key [remap downcase-word] #'downcase-dwim)
 
 ;;; Whitespace mode
-(global-set-key (kbd "C-c x w") #'whitespace-cleanup)
-(global-set-key (kbd "C-c t w") #'whitespace-mode)
+  (global-set-key (kbd "C-c x w") #'whitespace-cleanup)
+  (global-set-key (kbd "C-c t w") #'whitespace-mode)
 
 ;;; Auto Fill mode
-(global-set-key (kbd "C-c t f") #'auto-fill-mode)
+  (global-set-key (kbd "C-c t f") #'auto-fill-mode)
 
 ;;; Align
-(dolist (bind '(("C-c x a" . align)
-                ("C-c x c" . align-current)
-                ("C-c x r" . align-regexp)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
+  (dolist (bind '(("C-c x a" . align)
+                  ("C-c x c" . align-current)
+                  ("C-c x r" . align-regexp)))
+    (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Auto Insert
-(global-set-key (kbd "C-c i a") #'auto-insert)
+  (global-set-key (kbd "C-c i a") #'auto-insert)
 
 ;;; Table insertion
-(global-set-key (kbd "C-c i t") #'table-insert)
+  (global-set-key (kbd "C-c i t") #'table-insert)
 
 ;;; Matching lines operation
-(global-set-key (kbd "C-c s l") #'delete-matching-lines)
-(global-set-key (kbd "C-c s C-l") #'delete-non-matching-lines)
+  (global-set-key (kbd "C-c s l") #'delete-matching-lines)
+  (global-set-key (kbd "C-c s C-l") #'delete-non-matching-lines)
 
 ;;; Local variable insertion
-(dolist (bind '(("C-c v d" . add-dir-local-variable)
-                ("C-c v f" . add-file-local-variable)
-                ("C-c v p" . add-file-local-variable-prop-line)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
+  (dolist (bind '(("C-c v d" . add-dir-local-variable)
+                  ("C-c v f" . add-file-local-variable)
+                  ("C-c v p" . add-file-local-variable-prop-line)))
+    (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Extended buffer operation key bindings
-(dolist (bind '(("C-c b DEL" . erase-buffer)
-                ("C-z" . bury-buffer)
-                ("C-S-z" . unbury-buffer)
-                ("C-c b e" . eval-buffer)
-                ("C-c b k" . kill-this-buffer)
-                ("C-c b i" . insert-buffer)
-                ("<f5>" . revert-buffer)))
-  (global-set-key (kbd (car bind)) (cdr bind)))
+  (dolist (bind '(("C-c b DEL" . erase-buffer)
+                  ("C-z" . bury-buffer)
+                  ("C-S-z" . unbury-buffer)
+                  ("C-c b e" . eval-buffer)
+                  ("C-c b k" . kill-this-buffer)
+                  ("C-c b i" . insert-buffer)
+                  ("<f5>" . revert-buffer)))
+    (global-set-key (kbd (car bind)) (cdr bind)))
 
 ;;; Zap up to char
-(defun drot/zap-back-to-char (char)
-  "Like `zap-up-to-char' but goes backwards."
-  (interactive "c")
-  (zap-up-to-char -1 char))
-;; Set global key binding
-(global-set-key (kbd "M-Z") #'drot/zap-back-to-char)
+  (defun drot/zap-back-to-char (char)
+    "Like `zap-up-to-char' but goes backwards."
+    (interactive "c")
+    (zap-up-to-char -1 char))
+  ;; Set global key binding
+  (global-set-key (kbd "M-Z") #'drot/zap-back-to-char)
 
 ;;; Customize interface
-(global-set-key (kbd "<f11>") #'customize-group)
-;; Configuration
-(after-load 'cus-edit
-  ;; Kill buffer when done and shorten help
-  (setq custom-buffer-done-kill t
-        custom-buffer-verbose-help nil)
-  ;; Display entries as words
-  (setq custom-unlispify-tag-names nil
-        custom-unlispify-menu-entries nil))
+  (global-set-key (kbd "<f11>") #'customize-group)
+  ;; Configuration
+  (after-load 'cus-edit
+    ;; Kill buffer when done and shorten help
+    (setq custom-buffer-done-kill t
+          custom-buffer-verbose-help nil)
+    ;; Display entries as words
+    (setq custom-unlispify-tag-names nil
+          custom-unlispify-menu-entries nil))
 
 ;;; Custom theme configuration
-(after-load 'custom
-  ;; Treat themes as safe
-  (setq custom-safe-themes t))
+  (after-load 'custom
+    ;; Treat themes as safe
+    (setq custom-safe-themes t))
 
 ;;; Load changes from the customize interface
-(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
-(load custom-file 'noerror)
+  (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+  (load custom-file 'noerror)
 
 ;;; init.el ends here
