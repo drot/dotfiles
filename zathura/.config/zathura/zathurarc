@@ -1,7 +1,7 @@
 # -*- mode: Conf -*-
 
 # Default font
-set font "JetBrains Mono 13"
+set font "Iosevka 15"
 
 # Display filename as title
 set window-title-basename "true"
