@@ -8,6 +8,7 @@
   title_use_system_font = False
   title_font = Iosevka Lambda 15
 [keybindings]
+  hide_window = None
 [profiles]
   [[default]]
     background_color = "#0c0c0c"
