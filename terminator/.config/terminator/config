@@ -1,0 +1,29 @@
+[global_config]
+  title_transmit_fg_color = "#cccccc"
+  title_transmit_bg_color = "#c50f1f"
+  title_receive_fg_color = "#cccccc"
+  title_receive_bg_color = "#0037da"
+  title_inactive_fg_color = "#0c0c0c"
+  title_inactive_bg_color = "#cccccc"
+  title_use_system_font = False
+  title_font = Iosevka Lambda 15
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#0c0c0c"
+    background_darkness = 0.8
+    cursor_color = "#aaaaaa"
+    font = Iosevka Lambda 15
+    foreground_color = "#cccccc"
+    scrollbar_position = hidden
+    palette = "#0c0c0c:#c50f1f:#13a10e:#c19c00:#0037da:#881798:#3a96dd:#cccccc:#767676:#e74856:#16c60c:#f9f1a5:#3b78ff:#b4009e:#61d6d6:#f2f2f2"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
