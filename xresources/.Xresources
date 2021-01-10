@@ -11,7 +11,7 @@ Xcursor.theme: Adwaita
 
 ! Emacs
 Emacs.font: fontset-startup
-Emacs.Fontset-0: -JB-JetBrains Mono NL-normal-normal-normal-*-17-*-*-*-d-0-fontset-startup,\
+Emacs.Fontset-0: -BE5N-Iosevka Lambda-normal-normal-normal-*-20-*-*-*-m-0-fontset-startup,\
     arabic:-GOOG-Noto Sans Arabic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     burmese:-GOOG-Noto Sans Myanmar-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
     ethiopic:-GOOG-Noto Sans Ethiopic-normal-normal-normal-*-16-*-*-*-*-0-iso10646-1,\
@@ -54,8 +54,8 @@ XTerm.vt100.Translations: #override \n\
    Meta Shift <KeyPress> /:dabbrev-expand()
 
 ! Font
-XTerm.vt100.faceName: JetBrains Mono NL
-XTerm.vt100.faceSize: 13
+XTerm.vt100.faceName: Iosevka Lambda
+XTerm.vt100.faceSize: 15
 
 ! Main colors
 XTerm.vt100.Foreground: #cccccc
