@@ -2138,7 +2138,7 @@
 ;; Set key binidng
 (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 ;; Enable Mode
-(marginalia-mode)
+(marginalia-mode +1)
 ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
 (advice-add #'marginalia-cycle :after
             (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
