@@ -2126,6 +2126,13 @@
   ;; Set narrowing key binding
   (setq consult-narrow-key (kbd "C-+")))
 
+;;; Consult Selectrum
+(straight-use-package 'consult-selectrum)
+;; Enable mode
+(after-load 'selectrum
+  ;; Make sure to load after `selectrum'
+  (require 'consult-selectrum))
+
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
 ;; Set key binidng
