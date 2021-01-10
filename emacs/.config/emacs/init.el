@@ -2128,7 +2128,7 @@
   ;; Make narrowing help available in the minibuffer
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
   ;; Don't preview buffers eagerly
-  (setq consult-preview-key (kbd "C-l")))
+  (setq consult-preview-key (kbd "C-o")))
 
 ;;; Consult Selectrum
 (straight-use-package 'consult-selectrum)
