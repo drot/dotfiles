@@ -8,7 +8,7 @@ Xft.antialias: 1
 Xft.rgba: rgb
 
 ! Emacs
-Emacs.font: JetBrains Mono NL-13
+Emacs.font: Iosevka Lambda-15
 Emacs.background: #222222
 Emacs.menuBar: off
 Emacs.toolBar: off
@@ -35,8 +35,8 @@ XTerm.vt100.Translations: #override \n\
    Meta <KeyPress> o: exec-formatted("xdg-open '%t'", PRIMARY) select-start() select-end()
 
 ! Font
-XTerm.vt100.faceName: JetBrains Mono NL
-XTerm.vt100.faceSize: 13
+XTerm.vt100.faceName: Iosevka Lambda
+XTerm.vt100.faceSize: 15
 
 ! Main colors
 XTerm.vt100.Foreground: #cccccc

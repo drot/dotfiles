@@ -9,7 +9,7 @@ client.unfocused #373b41 #282a2e #969896 #969896
 client.urgent #373b41 #cc6666 #ffffff #cc6666
 
 # font for window titles and the status bar
-font pango:JetBrains Mono NL, FontAwesome 13
+font pango:Iosevka Lambda, FontAwesome 15
 
 # default modifier key
 set $mod Mod4
@@ -196,10 +196,10 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 bindsym $mod+Pause exec --no-startup-id ~/.scripts/lock-screen
 
 # read 1 character and mark the current window with this character
-bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+m exec i3-input -f 'xft:Iosevka Lambda 15' -F 'mark %s' -l 1 -P 'Mark: '
 
 # read 1 character and go to the window with the character
-bindsym $mod+g exec i3-input -f 'xft:JetBrains Mono NL 13' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+g exec i3-input -f 'xft:Iosevka Lambda 15' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2

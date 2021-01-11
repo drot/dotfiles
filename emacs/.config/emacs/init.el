@@ -500,10 +500,15 @@
 
 ;;; Find file at point
 (after-load 'ffap
+  ;; Require prefix
+  (setq ffap-require-prefix t
+        dired-at-point-require-prefix t)
   ;; Disable pinging to avoid slowdowns
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+;; Initialize mode
+(ffap-bindings)
 
 ;;; Version control
 (after-load 'vc-hooks
@@ -1640,6 +1645,19 @@
   ;; Don't insert spaces after a code fence
   (setq markdown-spaces-after-code-fence 0))
 
+;;; Move-text
+(straight-use-package 'move-text)
+;; Define Transient command
+(transient-define-prefix drot/move-text-transient ()
+  "Transient for Move-text commands."
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Move Text"
+   ("p" "Move Up" move-text-up)
+   ("n" "Move Down" move-text-down)])
+;; Set global key binding
+(global-set-key (kbd "C-c x m") #'drot/move-text-transient)
+
 ;;; Multiple cursors
 (straight-use-package 'multiple-cursors)
 ;; Populate default `multiple-cursors' lists
@@ -1904,11 +1922,6 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company Statistics
-(straight-use-package 'company-statistics)
-;; Initialize mode
-(company-statistics-mode +1)
-
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -1959,56 +1972,118 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; Ido mode
-(after-load 'ido
-  ;; Enable fuzzy matching
-  (setq ido-enable-flex-matching t)
-  ;; Set maximum window height
-  (setq ido-max-window-height 1)
-  ;; Guess file name context
-  (setq ido-use-filename-at-point 'guess
-        ido-use-url-at-point t)
-  ;; Quickly open dired
-  (setq ido-show-dot-for-dired t)
-  ;; Don't ask to create new buffers
-  (setq ido-create-new-buffer 'always)
-  ;; Enable virtual buffers
-  (setq ido-use-virtual-buffers t)
-  ;; Don't use faces
-  (setq ido-use-faces nil))
-;; Enable mode
-(ido-mode +1)
-;; Really enable mode
-(ido-everywhere +1)
-
-;; Custom window rule for listing available Ido completions
-(add-to-list 'display-buffer-alist
-             '("\\*Ido Completions\\*"
-               (display-buffer-reuse-window display-buffer-at-bottom)
-               (window-height . 10)))
-
-;;; Ido everywhere
-(straight-use-package 'ido-completing-read+)
-;; Enable mode
-(ido-ubiquitous-mode +1)
-
-;;; Ido for other commands
-(straight-use-package 'crm-custom)
-;; Enable mode
-(crm-custom-mode +1)
-
-;;; Ido fuzzy matching via Flx
-(straight-use-package 'flx-ido)
-;; Enable mode
-(flx-ido-mode 1)
-
-;;; Amx
-(straight-use-package 'amx)
+;;; Selectrum minibuffer completion
+(straight-use-package 'selectrum)
 ;; Initialize mode
-(amx-mode +1)
-;; Set global key bindings
-(global-set-key (kbd "M-X") #'amx-major-mode-commands)
-(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
+(selectrum-mode +1)
+;; Set key binding to repeat last command
+(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+;; Configuration
+(after-load 'selectrum
+  ;; Show line count
+  (setq selectrum-show-indices t)
+  ;; Show total and current matches
+  (setq selectrum-count-style 'current/matches))
+
+;;; Prescient
+(straight-use-package 'prescient)
+;; Configuration
+(after-load 'prescient
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
+  ;; Enable persistent history
+  (prescient-persist-mode +1))
+
+;;; Selectrum Prescient
+(straight-use-package 'selectrum-prescient)
+;; Initialize mode
+(selectrum-prescient-mode +1)
+
+;;; Company Prescient
+(straight-use-package 'company-prescient)
+;; Initialize mode
+(company-prescient-mode +1)
+
+;;; Consult
+(straight-use-package 'consult)
+;; Set key bindings
+(dolist (bind '(("C-x M-:" . consult-complex-command)
+                ("C-c h c" . consult-history)
+                ("C-c h m" . consult-mode-command)
+                ("C-x b" . consult-buffer)
+                ("C-x 4 b" . consult-buffer-other-window)
+                ("C-x 5 b" . consult-buffer-other-frame)
+                ("C-x r x" . consult-register)
+                ("C-x r b" . consult-bookmark)
+                ("M-g g" . consult-goto-line)
+                ("M-g M-g" . consult-goto-line)
+                ("M-g o" . consult-outline)
+                ("M-g l" . consult-line)
+                ("M-g m" . consult-mark)
+                ("M-g k" . consult-global-mark)
+                ("M-g r" . consult-git-grep)
+                ("M-g f" . consult-find)
+                ("M-g i" . consult-project-imenu)
+                ("M-g e" . consult-error)
+                ("M-s m" . consult-multi-occur)
+                ("M-y" . consult-yank-pop)
+                ("<help> a" . consult-apropos)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'consult
+  ;; Set narrowing key binding
+  (setq consult-narrow-key (kbd "C-+"))
+  ;; Make narrowing help available in the minibuffer
+  (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+  ;; Don't preview buffers eagerly
+  (setq consult-preview-key (kbd "C-o")))
+
+;;; Consult Selectrum
+(straight-use-package 'consult-selectrum)
+;; Enable mode
+(after-load 'selectrum
+  ;; Make sure to load after `selectrum'
+  (require 'consult-selectrum))
+
+;;; Marginalia in the minibuffer
+(straight-use-package 'marginalia)
+;; Set key binidng
+(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+;; Enable Mode
+(marginalia-mode +1)
+;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
+(advice-add #'marginalia-cycle :after
+            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+
+;;; Embark
+(straight-use-package 'embark)
+;; Define key bindings
+(global-set-key (kbd "C-S-a") #'embark-act)
+;; Configuration
+(after-load 'embark
+  ;; Bind `marginalia-cycle' as an Embark action
+  (define-key embark-general-map (kbd "A") #'marginalia-cycle)
+  ;; Enable Selectrum integration
+  (defun current-candidate+category ()
+    (when selectrum-active-p
+      (cons (selectrum--get-meta 'category)
+            (selectrum-get-current-candidate))))
+
+  (add-hook 'embark-target-finders #'current-candidate+category)
+
+  (defun current-candidates+category ()
+    (when selectrum-active-p
+      (cons (selectrum--get-meta 'category)
+            (selectrum-get-current-candidates
+             ;; Pass relative file names for dired.
+             minibuffer-completing-file-name))))
+
+  (add-hook 'embark-candidate-collectors #'current-candidates+category)
+
+  ;; No unnecessary computation delay after injection.
+  (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
 
 ;;; Minions
 (straight-use-package 'minions)

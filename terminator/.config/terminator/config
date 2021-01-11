@@ -6,7 +6,7 @@
   title_inactive_fg_color = "#0c0c0c"
   title_inactive_bg_color = "#cccccc"
   title_use_system_font = False
-  title_font = JetBrains Mono NL 13
+  title_font = Iosevka Lambda 15
 [keybindings]
   full_screen = None
 [profiles]
@@ -14,7 +14,7 @@
     background_color = "#0c0c0c"
     background_darkness = 0.8
     cursor_color = "#aaaaaa"
-    font = JetBrains Mono NL 13
+    font = Iosevka Lambda 15
     foreground_color = "#cccccc"
     palette = "#0c0c0c:#c50f1f:#13a10e:#c19c00:#0037da:#881798:#3a96dd:#cccccc:#767676:#e74856:#16c60c:#f9f1a5:#3b78ff:#b4009e:#61d6d6:#f2f2f2"
     use_system_font = False
