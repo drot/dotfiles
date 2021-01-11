@@ -2053,9 +2053,11 @@
 (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 ;; Enable Mode
 (marginalia-mode +1)
-;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
+;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
 (advice-add #'marginalia-cycle :after
             (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+;; Add `tab-bar-mode' support
+(add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
 ;;; Embark
 (straight-use-package 'embark)
