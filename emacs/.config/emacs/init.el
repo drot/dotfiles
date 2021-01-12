@@ -2130,13 +2130,6 @@
   ;; Don't preview buffers eagerly
   (setq consult-preview-key (kbd "C-o")))
 
-;;; Consult Selectrum
-(straight-use-package 'consult-selectrum)
-;; Enable mode
-(after-load 'selectrum
-  ;; Make sure to load after `selectrum'
-  (require 'consult-selectrum))
-
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
 ;; Set key binidng
@@ -2176,6 +2169,20 @@
 
   ;; No unnecessary computation delay after injection.
   (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
+
+;;; Embark Consult integration
+(straight-use-package 'embark-consult)
+;; Load library
+(after-load 'embark
+  ;; Make sure to load after `embark'
+  (require 'embark-consult))
+
+;;; Embark avy integration
+(straight-use-package 'avy-embark-collect)
+;; Load library
+(after-load 'embark
+  ;; Make sure to load after `embark'
+  (require 'avy-embark-collect))
 
 ;;; Minions
 (straight-use-package 'minions)
