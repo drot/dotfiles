@@ -2042,7 +2042,7 @@
 
 ;;; Consult Selectrum
 (straight-use-package 'consult-selectrum)
-;; Enable mode
+;; Load library
 (after-load 'selectrum
   ;; Make sure to load after `selectrum'
   (require 'consult-selectrum))
@@ -2086,6 +2086,20 @@
 
   ;; No unnecessary computation delay after injection.
   (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
+
+;;; Embark Consult integration
+(straight-use-package 'embark-consult)
+;; Load library
+(after-load 'embark
+  ;; Make sure to load after `embark'
+  (require 'embark-consult))
+
+;;; Embark avy integration
+(straight-use-package 'avy-embark-collect)
+;; Load library
+(after-load 'embark
+  ;; Make sure to load after `embark'
+  (require 'avy-embark-collect))
 
 ;;; Minions
 (straight-use-package 'minions)
