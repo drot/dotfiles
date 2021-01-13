@@ -2012,6 +2012,7 @@
 (dolist (bind '(("C-x M-:" . consult-complex-command)
                 ("C-c h c" . consult-history)
                 ("C-c h m" . consult-mode-command)
+                ("C-c s k" . consult-keep-lines)
                 ("C-x b" . consult-buffer)
                 ("C-x 4 b" . consult-buffer-other-window)
                 ("C-x 5 b" . consult-buffer-other-frame)
