@@ -2091,9 +2091,9 @@
   (add-hook 'embark-collect-mode-hook #'embark-consult-preview-minor-mode))
 
 ;;; Embark avy integration
-(straight-use-package 'avy-embark-collect)
-;; Load library
 (after-load 'embark
+  (straight-use-package 'avy-embark-collect)
+  ;; Load library
   (require 'avy-embark-collect)
   ;; Set local key bindings
   (dolist (bind '(("C-'" . avy-embark-collect-choose)
