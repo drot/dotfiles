@@ -2085,15 +2085,20 @@
 (after-load 'embark
   ;; Make sure to load after `embark'
   (straight-use-package 'embark-consult)
+  ;; Load library
+  (require 'embark-consult)
   ;; Automatically preview entry at point in Embark Collect buffers
   (add-hook 'embark-collect-mode-hook #'embark-consult-preview-minor-mode))
 
 ;;; Embark avy integration
 (straight-use-package 'avy-embark-collect)
-;; ;; Load library
-;; (after-load 'embark
-;;   ;; Make sure to load after `embark'
-;;   (require 'avy-embark-collect))
+;; Load library
+(after-load 'embark
+  (require 'avy-embark-collect)
+  ;; Set local key bindings
+  (dolist (bind '(("C-'" . avy-embark-collect-choose)
+                  ("C-\"" . avy-embark-collect-act)))
+    (define-key embark-collect-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Minions
 (straight-use-package 'minions)
