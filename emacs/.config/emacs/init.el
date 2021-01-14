@@ -2092,6 +2092,7 @@
 
 ;;; Embark avy integration
 (after-load 'embark
+  ;; Make sure to load after `embark'
   (straight-use-package 'avy-embark-collect)
   ;; Load library
   (require 'avy-embark-collect)
