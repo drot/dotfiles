@@ -42,18 +42,18 @@
 ;;; Color theme
 (straight-use-package 'modus-themes)
 ;; Configuration
-(setq modus-vivendi-theme-slanted-constructs t
-      modus-vivendi-theme-bold-constructs t
-      modus-vivendi-theme-fringes 'subtle
-      modus-vivendi-theme-3d-modeline t
-      modus-vivendi-theme-intense-paren-match t
-      modus-vivendi-theme-prompts 'subtle
-      modus-vivendi-theme-completions 'moderate
-      modus-vivendi-theme-diffs 'desaturated
-      modus-vivendi-theme-org-blocks 'greyscale
-      modus-vivendi-theme-rainbow-headings t
-      modus-vivendi-theme-section-headings t
-      modus-vivendi-theme-scale-headings t)
+(setq modus-themes-slanted-constructs t
+      modus-themes-bold-constructs t
+      modus-themes-fringes 'subtle
+      modus-themes-mode-line '3d
+      modus-themes-syntax 'alt-syntax
+      modus-themes-paren-match 'subtle-bold
+      modus-themes-links 'faint
+      modus-themes-prompts 'subtle
+      modus-themes-completions 'opinionated
+      modus-themes-diffs 'desaturated
+      modus-themes-org-blocks 'rainbow
+      modus-themes-scale-headings t)
 ;; Load theme
 (load-theme 'modus-vivendi t)
 
