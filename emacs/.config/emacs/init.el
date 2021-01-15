@@ -2155,25 +2155,15 @@
 (after-load 'embark
   ;; Bind `marginalia-cycle' as an Embark action
   (define-key embark-general-map (kbd "A") #'marginalia-cycle)
-  ;; Enable Selectrum integration
-  (defun current-candidate+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidate))))
-
-  (add-hook 'embark-target-finders #'current-candidate+category)
-
-  (defun current-candidates+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidates
-             ;; Pass relative file names for dired.
-             minibuffer-completing-file-name))))
-
-  (add-hook 'embark-candidate-collectors #'current-candidates+category)
-
-  ;; No unnecessary computation delay after injection.
-  (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
+  ;; Selectrum integration
+  (defun drot/pause-selectrum ()
+    "Pause Selectrum while using `embark-collect-live'."
+    (when (eq embark-collect--kind :live)
+      (with-selected-window (active-minibuffer-window)
+        (shrink-window selectrum-num-candidates-displayed)
+        (setq-local selectrum-num-candidates-displayed 0))))
+  ;; Apply the custom hook
+  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum))
 
 ;;; Embark Consult integration
 (straight-use-package 'embark-consult)
