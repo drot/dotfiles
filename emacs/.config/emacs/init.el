@@ -47,7 +47,7 @@
       modus-themes-fringes 'subtle
       modus-themes-mode-line '3d
       modus-themes-syntax 'alt-syntax
-      modus-themes-paren-match 'subtle-bold
+      modus-themes-paren-match 'intense-bold
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
