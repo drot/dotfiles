@@ -2163,7 +2163,15 @@
         (shrink-window selectrum-num-candidates-displayed)
         (setq-local selectrum-num-candidates-displayed 0))))
   ;; Apply the custom hook
-  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum))
+  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum)
+  ;; Refresh candidate list after action
+  (defun drot/refresh-selectrum ()
+    "Refresh candidate list action with `selectrum'."
+    (setq selectrum--previous-input-string nil))
+  ;; Apply the custom hook
+  (add-hook 'embark-pre-action-hook #'drot/refresh-selectrum)
+  ;; Same after `embark-collect'
+  (add-hook 'embark-post-action-hook #'embark-collect--update-linked))
 
 ;;; Embark Consult integration
 (straight-use-package 'embark-consult)
