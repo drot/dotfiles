@@ -47,7 +47,7 @@
       modus-themes-fringes 'subtle
       modus-themes-mode-line '3d
       modus-themes-syntax 'alt-syntax
-      modus-themes-paren-match 'subtle-bold
+      modus-themes-paren-match 'intense-bold
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
@@ -840,6 +840,7 @@
                   ("C-c ! r" . flymake-running-backends)
                   ("C-c ! d" . flymake-show-diagnostics-buffer)
                   ("C-c ! l" . flymake-switch-to-log-buffer)
+                  ("C-c ! c" . consult-flymake)
                   ("C-c ! h" . drot/flymake-transient)))
     (define-key flymake-mode-map (kbd (car bind)) (cdr bind))))
 
@@ -2129,7 +2130,10 @@
   ;; Make narrowing help available in the minibuffer
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
   ;; Don't preview buffers eagerly
-  (setq consult-preview-key (kbd "C-o")))
+  (setq consult-preview-key (kbd "C-o"))
+  ;; Integrate with `register'
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-preview))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
@@ -2172,18 +2176,18 @@
   (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
 
 ;;; Embark Consult integration
+(straight-use-package 'embark-consult)
+;; Configuration
 (after-load 'embark
-  ;; Make sure to load after `embark'
-  (straight-use-package 'embark-consult)
   ;; Load library
   (require 'embark-consult)
   ;; Automatically preview entry at point in Embark Collect buffers
   (add-hook 'embark-collect-mode-hook #'embark-consult-preview-minor-mode))
 
 ;;; Embark avy integration
+(straight-use-package 'avy-embark-collect)
+;; Configuration
 (after-load 'embark
-  ;; Make sure to load after `embark'
-  (straight-use-package 'avy-embark-collect)
   ;; Load library
   (require 'avy-embark-collect)
   ;; Set local key bindings
