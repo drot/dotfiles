@@ -831,6 +831,7 @@
                   ("C-c ! r" . flymake-running-backends)
                   ("C-c ! d" . flymake-show-diagnostics-buffer)
                   ("C-c ! l" . flymake-switch-to-log-buffer)
+                  ("C-c ! c" . consult-flymake)
                   ("C-c ! h" . drot/flymake-transient)))
     (define-key flymake-mode-map (kbd (car bind)) (cdr bind))))
 
@@ -2082,18 +2083,18 @@
   (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
 
 ;;; Embark Consult integration
+(straight-use-package 'embark-consult)
+;; Configuration
 (after-load 'embark
-  ;; Make sure to load after `embark'
-  (straight-use-package 'embark-consult)
   ;; Load library
   (require 'embark-consult)
   ;; Automatically preview entry at point in Embark Collect buffers
   (add-hook 'embark-collect-mode-hook #'embark-consult-preview-minor-mode))
 
 ;;; Embark avy integration
+(straight-use-package 'avy-embark-collect)
+;; Configuration
 (after-load 'embark
-  ;; Make sure to load after `embark'
-  (straight-use-package 'avy-embark-collect)
   ;; Load library
   (require 'avy-embark-collect)
   ;; Set local key bindings
