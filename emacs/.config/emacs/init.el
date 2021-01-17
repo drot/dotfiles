@@ -550,8 +550,6 @@
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
-;; Set key binding
-(global-set-key (kbd "C-c s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
@@ -2103,6 +2101,7 @@
 (dolist (bind '(("C-x M-:" . consult-complex-command)
                 ("C-c h c" . consult-history)
                 ("C-c h m" . consult-mode-command)
+                ("C-c s i" . consult-imenu)
                 ("C-c s k" . consult-keep-lines)
                 ("C-x b" . consult-buffer)
                 ("C-x 4 b" . consult-buffer-other-window)
