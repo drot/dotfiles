@@ -2130,7 +2130,7 @@
   ;; Make narrowing help available in the minibuffer
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
   ;; Don't preview buffers eagerly
-  (setq consult-preview-key (kbd "C-."))
+  (setq consult-config `((consult-buffer :preview-key ,(kbd "C-."))))
   ;; Blink after jumping
   (setq consult-after-jump-hook '(xref-pulse-momentarily))
   ;; Integrate with `register'
