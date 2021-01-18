@@ -550,8 +550,6 @@
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
-;; Set key binding
-(global-set-key (kbd "C-c s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
@@ -2027,7 +2025,7 @@
                 ("M-g k" . consult-global-mark)
                 ("M-g r" . consult-git-grep)
                 ("M-g f" . consult-find)
-                ("M-g i" . consult-project-imenu)
+                ("M-g i" . consult-imenu)
                 ("M-g e" . consult-error)
                 ("M-s m" . consult-multi-occur)
                 ("M-y" . consult-yank-pop)
@@ -2040,7 +2038,9 @@
   ;; Make narrowing help available in the minibuffer
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
   ;; Don't preview buffers eagerly
-  (setq consult-preview-key (kbd "C-o"))
+  (setq consult-config `((consult-buffer :preview-key ,(kbd "C-."))))
+  ;; Blink after jumping
+  (setq consult-after-jump-hook '(xref-pulse-momentarily))
   ;; Integrate with `register'
   (setq register-preview-delay 0
         register-preview-function #'consult-register-preview))
@@ -2065,25 +2065,23 @@
 (after-load 'embark
   ;; Bind `marginalia-cycle' as an Embark action
   (define-key embark-general-map (kbd "A") #'marginalia-cycle)
-  ;; Enable Selectrum integration
-  (defun current-candidate+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidate))))
-
-  (add-hook 'embark-target-finders #'current-candidate+category)
-
-  (defun current-candidates+category ()
-    (when selectrum-active-p
-      (cons (selectrum--get-meta 'category)
-            (selectrum-get-current-candidates
-             ;; Pass relative file names for dired.
-             minibuffer-completing-file-name))))
-
-  (add-hook 'embark-candidate-collectors #'current-candidates+category)
-
-  ;; No unnecessary computation delay after injection.
-  (add-hook 'embark-setup-hook #'selectrum-set-selected-candidate))
+  ;; Selectrum integration
+  (defun drot/pause-selectrum ()
+    "Pause Selectrum while using `embark-collect-live'."
+    (when (eq embark-collect--kind :live)
+      (with-selected-window (active-minibuffer-window)
+        (shrink-window selectrum-num-candidates-displayed)
+        (setq-local selectrum-num-candidates-displayed 0))))
+  ;; Apply the custom hook
+  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum)
+  ;; Refresh candidate list after action
+  (defun drot/refresh-selectrum ()
+    "Refresh candidate list action with `selectrum'."
+    (setq selectrum--previous-input-string nil))
+  ;; Apply the custom hook
+  (add-hook 'embark-pre-action-hook #'drot/refresh-selectrum)
+  ;; Same after `embark-collect'
+  (add-hook 'embark-post-action-hook #'embark-collect--update-linked))
 
 ;;; Embark Consult integration
 (straight-use-package 'embark-consult)
