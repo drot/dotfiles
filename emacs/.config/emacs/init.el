@@ -2051,7 +2051,17 @@
   (setq consult-after-jump-hook '(xref-pulse-momentarily))
   ;; Integrate with `register'
   (setq register-preview-delay 0
-        register-preview-function #'consult-register-preview))
+        register-preview-function #'consult-register-preview)
+  ;; Tweak the register preview window
+  (advice-add #'register-preview :around
+              (lambda (fun buffer &optional show-empty)
+                (let ((register-alist (seq-sort #'car-less-than-car register-alist)))
+                  (funcall fun buffer show-empty))
+                (when-let (win (get-buffer-window buffer))
+                  (with-selected-window win
+                    (setq-local mode-line-format nil)
+                    (setq-local window-min-height 1)
+                    (fit-window-to-buffer))))))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
