@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Reset NVIDIA
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --auto
 
 # Setup monitors
 ~/.screenlayout/primary.sh &

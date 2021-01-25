@@ -107,8 +107,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assing workspaces to specific screens
-workspace $ws2 output DP-1-1
-workspace $ws3 output HDMI-1-1
+workspace $ws2 output DP-2
+workspace $ws3 output DP-1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -234,7 +234,7 @@ assign [class="Pavucontrol"] $ws6
 bar {
     bindsym button4 nop
     bindsym button5 nop
-    tray_output eDP-1-1
+    tray_output eDP-1
     status_command i3status
     colors {
         background #282a2e
