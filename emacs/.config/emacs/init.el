@@ -2133,7 +2133,9 @@
   (setq consult-after-jump-hook '(xref-pulse-momentarily))
   ;; Integrate with `register'
   (setq register-preview-delay 0
-        register-preview-function #'consult-register-preview))
+        register-preview-function #'consult-register-preview)
+  ;; Modify default completion styles
+  (setq completion-styles '(substring partial-completion)))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
