@@ -108,6 +108,9 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; Modify default completion styles
+(setq completion-styles '(substring partial-completion))
+
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -2133,9 +2136,7 @@
   (setq consult-after-jump-hook '(xref-pulse-momentarily))
   ;; Integrate with `register'
   (setq register-preview-delay 0
-        register-preview-function #'consult-register-preview)
-  ;; Modify default completion styles
-  (setq completion-styles '(substring partial-completion)))
+        register-preview-function #'consult-register-preview))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
