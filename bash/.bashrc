@@ -13,7 +13,7 @@ set -o noclobber
 # Shell behavior options
 shopt -s cdspell # correct spelling errors in arguments supplied to cd
 shopt -s dirspell # correct spelling errors during tab-completion
-shopt -s globstar # turn on recursive globbing
+shopt -s extglob # turn on extended globbing
 shopt -s no_empty_cmd_completion # disable tab-completion on an empty line
 
 # History format and size
