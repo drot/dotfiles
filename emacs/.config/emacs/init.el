@@ -108,6 +108,9 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
+;;; Modify default completion styles
+(setq completion-styles '(substring partial-completion))
+
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
