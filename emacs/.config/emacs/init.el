@@ -2014,38 +2014,48 @@
 (dolist (bind '(;; C-c bindings (mode-specific-map)
                 ("C-c h c" . consult-history)
                 ("C-c h m" . consult-mode-command)
-                ("C-c s k" . consult-keep-lines)
-                ("C-x M-:" . consult-complex-command)
-                ("C-x b" . consult-buffer)
-                ("C-x 4 b" . consult-buffer-other-window)
-                ("C-x 5 b" . consult-buffer-other-frame)
+                ("C-c f b" . consult-bookmark)
+                ("C-c k" . consult-kmacro)
+                ;; C-x bindings (ctl-x-map)
+                ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
+                ("C-x b" . consult-buffer)            ;; orig. switch-to-buffer
+                ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+                ("C-x 5 b" . consult-buffer-other-frame) ;; orig. switch-to-buffer-other-frame
                 ;; Custom M-# bindings for fast register access
                 ("M-#" . consult-register-load)
-                ("M-'" . consult-register-store)
+                ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
                 ("C-M-#" . consult-register)
+                ;; Other custom bindings
+                ("M-y" . consult-yank-pop)      ;; orig. yank-pop
+                ("<help> a" . consult-apropos)  ;; orig. apropos-command
                 ;; M-g bindings (goto-map)
-                ("M-g g" . consult-goto-line)
-                ("M-g M-g" . consult-goto-line)
+                ("M-g g" . consult-goto-line)   ;; orig. goto-line
+                ("M-g M-g" . consult-goto-line) ;; orig. goto-line
                 ("M-g o" . consult-outline)
                 ("M-g m" . consult-mark)
                 ("M-g k" . consult-global-mark)
-                ("M-g i" . consult-imenu)
+                ("M-g i" . consult-project-imenu) ;; Alternative: consult-imenu
                 ("M-g e" . consult-error)
                 ;; M-s bindings (search-map)
-                ("M-s g" . consult-git-grep)
-                ("M-s f" . consult-find)
+                ("M-s f" . consult-find)     ;; alt. consult-locate, find-fd
+                ("M-s g" . consult-git-grep) ;; alt. consult-grep
+                ("M-s r" . consult-ripgrep)
                 ("M-s l" . consult-line)
                 ("M-s m" . consult-multi-occur)
                 ("M-s k" . consult-keep-lines)
-                ("M-s u" . consult-focus-lines)
-                ;; Other bindings
-                ("M-y" . consult-yank-pop)
-                ("<help> a" . consult-apropos)))
+                ("M-s u" . consult-focus-lines)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+;; Isearch integration
+(global-set-key (kbd "M-s e") #'consult-isearch)
+;; Set local key bindings
+(dolist (bind '(("M-e" . consult-isearch) ;; orig. isearch-edit-string
+                ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+                ("M-s l" . consult-line))) ;; required by consult-line to detect isearch
+  (define-key isearch-mode-map (kbd (car bind)) (cdr bind)))
 ;; Configuration
 (after-load 'consult
   ;; Set narrowing key binding
-  (setq consult-narrow-key (kbd "C-+"))
+  (setq consult-narrow-key (kbd "<"))
   ;; Make narrowing help available in the minibuffer
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
   ;; Don't preview buffers eagerly
@@ -2056,15 +2066,7 @@
   (setq register-preview-delay 0
         register-preview-function #'consult-register-preview)
   ;; Tweak the register preview window
-  (advice-add #'register-preview :around
-              (lambda (fun buffer &optional show-empty)
-                (let ((register-alist (seq-sort #'car-less-than-car register-alist)))
-                  (funcall fun buffer show-empty))
-                (when-let (win (get-buffer-window buffer))
-                  (with-selected-window win
-                    (setq-local mode-line-format nil)
-                    (setq-local window-min-height 1)
-                    (fit-window-to-buffer))))))
+  (advice-add #'register-preview :override #'consult-register-window))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
