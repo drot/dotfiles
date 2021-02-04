@@ -13,6 +13,8 @@
   hide_window = None
 [profiles]
   [[default]]
+    visible_bell = True
+    urgent_bell = True
     background_color = "#0c0c0c"
     background_darkness = 0.8
     cursor_color = "#aaaaaa"

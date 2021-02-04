@@ -109,7 +109,7 @@
       completion-ignore-case t)
 
 ;;; Modify default completion styles
-(setq completion-styles '(substring partial-completion))
+(setq completion-styles '(substring))
 
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
