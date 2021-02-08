@@ -2018,7 +2018,7 @@
                 ("C-c k" . consult-kmacro)
                 ;; C-x bindings (ctl-x-map)
                 ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
-                ("C-x b" . consult-buffer)            ;; orig. switch-to-buffer
+                ("C-x b" . consult-buffer) ;; orig. switch-to-buffer
                 ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
                 ("C-x 5 b" . consult-buffer-other-frame) ;; orig. switch-to-buffer-other-frame
                 ;; Custom M-# bindings for fast register access
@@ -2026,18 +2026,19 @@
                 ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
                 ("C-M-#" . consult-register)
                 ;; Other custom bindings
-                ("M-y" . consult-yank-pop)      ;; orig. yank-pop
-                ("<help> a" . consult-apropos)  ;; orig. apropos-command
+                ("M-y" . consult-yank-pop) ;; orig. yank-pop
+                ("<help> a" . consult-apropos) ;; orig. apropos-command
                 ;; M-g bindings (goto-map)
-                ("M-g g" . consult-goto-line)   ;; orig. goto-line
+                ("M-g g" . consult-goto-line) ;; orig. goto-line
                 ("M-g M-g" . consult-goto-line) ;; orig. goto-line
                 ("M-g o" . consult-outline)
                 ("M-g m" . consult-mark)
                 ("M-g k" . consult-global-mark)
-                ("M-g i" . consult-project-imenu) ;; Alternative: consult-imenu
+                ("M-g i" . consult-imenu)
+                ("M-g I" . consult-project-imenu)
                 ("M-g e" . consult-error)
                 ;; M-s bindings (search-map)
-                ("M-s f" . consult-find)     ;; alt. consult-locate, find-fd
+                ("M-s f" . consult-find) ;; alt. consult-locate
                 ("M-s g" . consult-git-grep) ;; alt. consult-grep
                 ("M-s r" . consult-ripgrep)
                 ("M-s l" . consult-line)
