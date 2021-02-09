@@ -2038,8 +2038,10 @@
                 ("M-g I" . consult-project-imenu)
                 ("M-g e" . consult-error)
                 ;; M-s bindings (search-map)
-                ("M-s f" . consult-find) ;; alt. consult-locate
-                ("M-s g" . consult-git-grep) ;; alt. consult-grep
+                ("M-s f" . consult-find)
+                ("M-s L" . consult-locate)
+                ("M-s g" . consult-grep)
+                ("M-s G" . consult-git-grep)
                 ("M-s r" . consult-ripgrep)
                 ("M-s l" . consult-line)
                 ("M-s m" . consult-multi-occur)
