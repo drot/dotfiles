@@ -781,7 +781,10 @@
     ;; Disable Company since we use `completion-at-point'
     (company-mode -1))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup)
+  ;; Add Outline support for Eshell prompts
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq outline-regexp eshell-prompt-regexp))))
 
 ;; Eshell smart display
 (after-load 'eshell
