@@ -50,6 +50,10 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
 
+# Bash completion
+[[ -r /etc/profile.d/bash_completion.sh ]] &&
+    source /etc/profile.d/bash_completion.sh
+
 # Git prompt support
 [[ -r /usr/share/git-core/contrib/completion/git-prompt.sh ]] &&
     source /usr/share/git-core/contrib/completion/git-prompt.sh
