@@ -790,7 +790,10 @@
     ;; Disable Company since we use `completion-at-point'
     (company-mode -1))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup)
+  ;; Add Outline support for Eshell prompts
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq outline-regexp eshell-prompt-regexp))))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -1701,6 +1704,10 @@
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'magit
+  ;; Use `selectrum' for candidate sorting
+  (setq magit-completing-read-function #'selectrum-completing-read))
 
 ;;; Markdown mode
 (straight-use-package 'markdown-mode)
@@ -2128,8 +2135,10 @@
                 ("M-g I" . consult-project-imenu)
                 ("M-g e" . consult-error)
                 ;; M-s bindings (search-map)
-                ("M-s f" . consult-find) ;; alt. consult-locate
-                ("M-s g" . consult-git-grep) ;; alt. consult-grep
+                ("M-s f" . consult-find)
+                ("M-s L" . consult-locate)
+                ("M-s g" . consult-grep)
+                ("M-s G" . consult-git-grep)
                 ("M-s r" . consult-ripgrep)
                 ("M-s l" . consult-line)
                 ("M-s m" . consult-multi-occur)
