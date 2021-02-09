@@ -1617,6 +1617,10 @@
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'magit
+  ;; Use `selectrum' for candidate sorting
+  (setq magit-completing-read-function #'selectrum-completing-read))
 
 ;;; Markdown mode
 (straight-use-package 'markdown-mode)
