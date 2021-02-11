@@ -1,5 +1,8 @@
 # Shell behavior options
-setopt autocd extendedglob nomatch completealiases
+setopt autocd
+setopt extendedglob
+setopt nomatch
+setopt completealiases
 setopt correct
 setopt no_correctall
 
