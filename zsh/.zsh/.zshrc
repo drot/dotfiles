@@ -46,6 +46,13 @@ if [[ -f ~/.dircolors ]]; then
     eval $(dircolors -b ~/.dircolors)
 fi
 
+# Load custom functions
+if [[ -d "$ZDOTDIR" ]]; then
+  for file in "$ZDOTDIR"/*.zsh; do
+    source "$file"
+  done
+fi
+
 # Prompt
 LPROMPT () {
     PS1="┌─[%{$fg[cyan]%}%m%{$fg_bold[blue]%} %~%{$fg_no_bold[yellow]%}%(0?.. %?)%{$reset_color%}]
