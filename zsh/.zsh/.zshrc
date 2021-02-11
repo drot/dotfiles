@@ -10,6 +10,7 @@ setopt no_correctall
 export HISTFILE="$ZDOTDIR/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=$((HISTSIZE/2))
+
 # History options
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
