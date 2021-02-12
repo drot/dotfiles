@@ -54,9 +54,5 @@ if [[ -d "$ZDOTDIR" ]]; then
 fi
 
 # Prompt
-LPROMPT () {
-    PS1="┌─[%{$fg[cyan]%}%m%{$fg_bold[blue]%} %~%{$fg_no_bold[yellow]%}%(0?.. %?)%{$reset_color%}]
-└─╼ "
-}
-LPROMPT
-PROMPT_EOL_MARK=" •"
+EX_CODE="%(?..%{$fg[green]%}[%{$fg[red]%}%?%{$fg[green]%}]%{$reset_color%} )"
+PROMPT="${EX_CODE}%{$fg[blue]%}%(4~|%-1~/.../%3~|%4~)%{$fg[yellow]%} > %{$reset_color%}"
