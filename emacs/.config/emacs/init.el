@@ -201,7 +201,7 @@
 (savehist-mode +1)
 
 ;;; Save recent files list
-(setq recentf-max-saved-items 100
+(setq recentf-max-saved-items nil
       recentf-max-menu-items 20
       recentf-auto-cleanup 600)
 ;; Exclude certain files
