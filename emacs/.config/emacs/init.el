@@ -42,18 +42,18 @@
 ;;; Color theme
 (straight-use-package 'modus-themes)
 ;; Configuration
-(setq modus-vivendi-theme-slanted-constructs t
-      modus-vivendi-theme-bold-constructs t
-      modus-vivendi-theme-fringes 'subtle
-      modus-vivendi-theme-3d-modeline t
-      modus-vivendi-theme-intense-paren-match t
-      modus-vivendi-theme-prompts 'subtle
-      modus-vivendi-theme-completions 'moderate
-      modus-vivendi-theme-diffs 'desaturated
-      modus-vivendi-theme-org-blocks 'greyscale
-      modus-vivendi-theme-rainbow-headings t
-      modus-vivendi-theme-section-headings t
-      modus-vivendi-theme-scale-headings t)
+(setq modus-themes-slanted-constructs t
+      modus-themes-bold-constructs t
+      modus-themes-fringes 'subtle
+      modus-themes-mode-line '3d
+      modus-themes-syntax 'alt-syntax
+      modus-themes-paren-match 'intense-bold
+      modus-themes-links 'faint
+      modus-themes-prompts 'subtle
+      modus-themes-completions 'opinionated
+      modus-themes-diffs 'desaturated
+      modus-themes-org-blocks 'rainbow
+      modus-themes-scale-headings t)
 ;; Load theme
 (load-theme 'modus-vivendi t)
 
@@ -107,6 +107,9 @@
 (setq read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
+
+;;; Modify default completion styles
+(setq completion-styles '(substring))
 
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
@@ -198,7 +201,7 @@
 (savehist-mode +1)
 
 ;;; Save recent files list
-(setq recentf-max-saved-items 100
+(setq recentf-max-saved-items nil
       recentf-max-menu-items 20
       recentf-auto-cleanup 600)
 ;; Exclude certain files
@@ -500,10 +503,15 @@
 
 ;;; Find file at point
 (after-load 'ffap
+  ;; Require prefix
+  (setq ffap-require-prefix t
+        dired-at-point-require-prefix t)
   ;; Disable pinging to avoid slowdowns
   (setq ffap-machine-p-known 'reject)
   ;; Default RFC path
   (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
+;; Initialize mode
+(ffap-bindings)
 
 ;;; Version control
 (after-load 'vc-hooks
@@ -545,8 +553,6 @@
 (after-load 'imenu
   ;; Always rescan buffers
   (setq imenu-auto-rescan t))
-;; Set key binding
-(global-set-key (kbd "C-c s i") #'imenu)
 
 ;;; Pcomplete configuration
 (after-load 'pcomplete
@@ -784,7 +790,10 @@
     ;; Disable Company since we use `completion-at-point'
     (company-mode -1))
   ;; Apply the custom hook
-  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup))
+  (add-hook 'eshell-mode-hook #'drot/eshell-mode-setup)
+  ;; Add Outline support for Eshell prompts
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq outline-regexp eshell-prompt-regexp))))
 
 ;; Eshell smart display
 (after-load 'eshell
@@ -835,6 +844,7 @@
                   ("C-c ! r" . flymake-running-backends)
                   ("C-c ! d" . flymake-show-diagnostics-buffer)
                   ("C-c ! l" . flymake-switch-to-log-buffer)
+                  ("C-c ! c" . consult-flymake)
                   ("C-c ! h" . drot/flymake-transient)))
     (define-key flymake-mode-map (kbd (car bind)) (cdr bind))))
 
@@ -1694,6 +1704,10 @@
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'magit
+  ;; Use `selectrum' for candidate sorting
+  (setq magit-completing-read-function #'selectrum-completing-read))
 
 ;;; Markdown mode
 (straight-use-package 'markdown-mode)
@@ -2007,11 +2021,6 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company Statistics
-(straight-use-package 'company-statistics)
-;; Initialize mode
-(company-statistics-mode +1)
-
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -2062,56 +2071,160 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; Ido mode
-(after-load 'ido
-  ;; Enable fuzzy matching
-  (setq ido-enable-flex-matching t)
-  ;; Set maximum window height
-  (setq ido-max-window-height 1)
-  ;; Guess file name context
-  (setq ido-use-filename-at-point 'guess
-        ido-use-url-at-point t)
-  ;; Quickly open dired
-  (setq ido-show-dot-for-dired t)
-  ;; Don't ask to create new buffers
-  (setq ido-create-new-buffer 'always)
-  ;; Enable virtual buffers
-  (setq ido-use-virtual-buffers t)
-  ;; Don't use faces
-  (setq ido-use-faces nil))
-;; Enable mode
-(ido-mode +1)
-;; Really enable mode
-(ido-everywhere +1)
-
-;; Custom window rule for listing available Ido completions
-(add-to-list 'display-buffer-alist
-             '("\\*Ido Completions\\*"
-               (display-buffer-reuse-window display-buffer-at-bottom)
-               (window-height . 10)))
-
-;;; Ido everywhere
-(straight-use-package 'ido-completing-read+)
-;; Enable mode
-(ido-ubiquitous-mode +1)
-
-;;; Ido for other commands
-(straight-use-package 'crm-custom)
-;; Enable mode
-(crm-custom-mode +1)
-
-;;; Ido fuzzy matching via Flx
-(straight-use-package 'flx-ido)
-;; Enable mode
-(flx-ido-mode 1)
-
-;;; Amx
-(straight-use-package 'amx)
+;;; Selectrum minibuffer completion
+(straight-use-package 'selectrum)
 ;; Initialize mode
-(amx-mode +1)
-;; Set global key bindings
-(global-set-key (kbd "M-X") #'amx-major-mode-commands)
-(global-set-key (kbd "C-c h u") #'amx-show-unbound-commands)
+(selectrum-mode +1)
+;; Set key binding to repeat last command
+(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+;; Configuration
+(after-load 'selectrum
+  ;; Show line count
+  (setq selectrum-show-indices t)
+  ;; Show total and current matches
+  (setq selectrum-count-style 'current/matches))
+
+;;; Prescient
+(straight-use-package 'prescient)
+;; Configuration
+(after-load 'prescient
+  ;; Aggressively save history
+  (setq prescient-aggressive-file-save t)
+  ;; Use fuzzy matching by default
+  (setq prescient-filter-method 'fuzzy)
+  ;; Enable persistent history
+  (prescient-persist-mode +1))
+
+;;; Selectrum Prescient
+(straight-use-package 'selectrum-prescient)
+;; Initialize mode
+(selectrum-prescient-mode +1)
+
+;;; Company Prescient
+(straight-use-package 'company-prescient)
+;; Initialize mode
+(company-prescient-mode +1)
+
+;;; Consult
+(straight-use-package 'consult)
+;; Set key bindings
+(dolist (bind '(;; C-c bindings (mode-specific-map)
+                ("C-c h c" . consult-history)
+                ("C-c h m" . consult-mode-command)
+                ("C-c f b" . consult-bookmark)
+                ("C-c k" . consult-kmacro)
+                ;; C-x bindings (ctl-x-map)
+                ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
+                ("C-x b" . consult-buffer) ;; orig. switch-to-buffer
+                ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+                ("C-x 5 b" . consult-buffer-other-frame) ;; orig. switch-to-buffer-other-frame
+                ;; Custom M-# bindings for fast register access
+                ("M-#" . consult-register-load)
+                ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
+                ("C-M-#" . consult-register)
+                ;; Other custom bindings
+                ("M-y" . consult-yank-pop) ;; orig. yank-pop
+                ("<help> a" . consult-apropos) ;; orig. apropos-command
+                ;; M-g bindings (goto-map)
+                ("M-g g" . consult-goto-line) ;; orig. goto-line
+                ("M-g M-g" . consult-goto-line) ;; orig. goto-line
+                ("M-g o" . consult-outline)
+                ("M-g m" . consult-mark)
+                ("M-g k" . consult-global-mark)
+                ("M-g i" . consult-imenu)
+                ("M-g I" . consult-project-imenu)
+                ("M-g e" . consult-error)
+                ;; M-s bindings (search-map)
+                ("M-s f" . consult-find)
+                ("M-s L" . consult-locate)
+                ("M-s g" . consult-grep)
+                ("M-s G" . consult-git-grep)
+                ("M-s r" . consult-ripgrep)
+                ("M-s l" . consult-line)
+                ("M-s m" . consult-multi-occur)
+                ("M-s k" . consult-keep-lines)
+                ("M-s u" . consult-focus-lines)))
+  (global-set-key (kbd (car bind)) (cdr bind)))
+;; Isearch integration
+(global-set-key (kbd "M-s e") #'consult-isearch)
+;; Set local key bindings
+(dolist (bind '(("M-e" . consult-isearch) ;; orig. isearch-edit-string
+                ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+                ("M-s l" . consult-line))) ;; required by consult-line to detect isearch
+  (define-key isearch-mode-map (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'consult
+  ;; Set narrowing key binding
+  (setq consult-narrow-key (kbd "<"))
+  ;; Make narrowing help available in the minibuffer
+  (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+  ;; Don't preview buffers eagerly
+  (setq consult-config `((consult-buffer :preview-key ,(kbd "C-."))))
+  ;; Blink after jumping
+  (setq consult-after-jump-hook '(xref-pulse-momentarily))
+  ;; Integrate with `register'
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-preview)
+  ;; Tweak the register preview window
+  (advice-add #'register-preview :override #'consult-register-window))
+
+;;; Marginalia in the minibuffer
+(straight-use-package 'marginalia)
+;; Set key binidng
+(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+;; Enable Mode
+(marginalia-mode +1)
+;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
+(advice-add #'marginalia-cycle :after
+            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+;; Add `tab-bar-mode' support
+(add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
+
+;;; Embark
+(straight-use-package 'embark)
+;; Define key bindings
+(global-set-key (kbd "C-S-a") #'embark-act)
+;; Configuration
+(after-load 'embark
+  ;; Bind `marginalia-cycle' as an Embark action
+  (define-key embark-general-map (kbd "A") #'marginalia-cycle)
+  ;; Selectrum integration
+  (defun drot/pause-selectrum ()
+    "Pause Selectrum while using `embark-collect-live'."
+    (when (eq embark-collect--kind :live)
+      (with-selected-window (active-minibuffer-window)
+        (shrink-window selectrum-num-candidates-displayed)
+        (setq-local selectrum-num-candidates-displayed 0))))
+  ;; Apply the custom hook
+  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum)
+  ;; Refresh candidate list after action
+  (defun drot/refresh-selectrum ()
+    "Refresh candidate list action with `selectrum'."
+    (setq selectrum--previous-input-string nil))
+  ;; Apply the custom hook
+  (add-hook 'embark-pre-action-hook #'drot/refresh-selectrum)
+  ;; Same after `embark-collect'
+  (add-hook 'embark-post-action-hook #'embark-collect--update-linked))
+
+;;; Embark Consult integration
+(straight-use-package 'embark-consult)
+;; Configuration
+(after-load 'embark
+  ;; Load library
+  (require 'embark-consult)
+  ;; Automatically preview entry at point in Embark Collect buffers
+  (add-hook 'embark-collect-mode-hook #'embark-consult-preview-minor-mode))
+
+;;; Embark avy integration
+(straight-use-package 'avy-embark-collect)
+;; Configuration
+(after-load 'embark
+  ;; Load library
+  (require 'avy-embark-collect)
+  ;; Set local key bindings
+  (dolist (bind '(("C-'" . avy-embark-collect-choose)
+                  ("C-\"" . avy-embark-collect-act)))
+    (define-key embark-collect-mode-map (kbd (car bind)) (cdr bind))))
 
 ;;; Minions
 (straight-use-package 'minions)
