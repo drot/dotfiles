@@ -178,10 +178,10 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 bindsym $mod+Pause exec --no-startup-id ~/.scripts/lock-screen
 
 # read 1 character and mark the current window with this character
-bindsym $mod+m exec i3-input -f 'xft:JetBrains Mono NL 13' -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+m exec i3-input -f 'xft:Iosevka Lambda 15' -F 'mark %s' -l 1 -P 'Mark: '
 
 # read 1 character and go to the window with the character
-bindsym $mod+g exec i3-input -f 'xft:JetBrains Mono NL 13' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+g exec i3-input -f 'xft:Iosevka Lambda 15' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # list of floating applications
 for_window [class="Tor Browser"] floating enable
@@ -199,17 +199,21 @@ for_window [class="Qemu-system-x86_64"] floating enable
 # float special dialogs
 for_window [window_role="Organizer"] floating enable
 for_window [window_role="page-info"] floating enable
+for_window [title="Terminator Preferences"] floating enable
 
 # applications without borders
 for_window [class="XTerm"] border pixel 2
-for_window [class="Terminator"] border pixel 2
 for_window [class="st-256color"] border pixel 2
+for_window [class="Terminator"] border pixel 2
+for_window [class="Emacs"] border pixel 2
 for_window [class="firefox"] border pixel 2
+for_window [class="Chromium"] border pixel 2
 for_window [class="Slack"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 
 # assign applications to certain workspaces
 assign [class="firefox"] $ws2
+assign [class="Chromium"] $ws2
 assign [class="Tor Browser"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="Emacs"] $ws3
