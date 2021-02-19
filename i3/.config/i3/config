@@ -24,7 +24,7 @@ set $right ccaron
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -213,6 +213,7 @@ for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
 for_window [class="firefox"] border pixel 2
 for_window [class="Terminator"] border pixel 2
+for_window [class="Alacritty"] border pixel 2
 for_window [class="XTerm"] border pixel 2
 for_window [class="Emacs"] border pixel 2
 for_window [class="mpv"] floating enable
