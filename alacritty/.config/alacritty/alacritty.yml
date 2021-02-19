@@ -320,7 +320,7 @@ bell:
   duration: 200
 
   # Visual bell animation color.
-  color: '#cccccc'
+  color: '#131415'
 
   # Bell Command
   #
