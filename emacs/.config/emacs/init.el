@@ -2032,6 +2032,11 @@
 ;; Add hooks for `dired' and `magit'
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+;; Add hook for terminal
+(add-hook 'diff-hl-mode-on-hook
+          (lambda ()
+            (unless (window-system)
+              (diff-hl-margin-local-mode))))
 
 ;;; Form-feed
 (straight-use-package 'form-feed)
@@ -2126,6 +2131,7 @@
                 ("M-y" . consult-yank-pop) ;; orig. yank-pop
                 ("<help> a" . consult-apropos) ;; orig. apropos-command
                 ;; M-g bindings (goto-map)
+                ("M-g e" . consult-compile-error)
                 ("M-g g" . consult-goto-line) ;; orig. goto-line
                 ("M-g M-g" . consult-goto-line) ;; orig. goto-line
                 ("M-g o" . consult-outline)
