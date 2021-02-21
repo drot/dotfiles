@@ -12,8 +12,8 @@ alias tb="nc termbin.com 9999"
 # Find process info
 alias pids="pgrep -a"
 
+# Set SSH TERM workaround
+alias ssh="TERM=xterm-256color ssh"
+
 # SSH with default work port
 alias ppsh="ssh -p 1044"
-
-# Set SSH TERM workaround for tmux
-[[ -n $TMUX ]] && alias ssh="TERM=xterm-256color ssh"
