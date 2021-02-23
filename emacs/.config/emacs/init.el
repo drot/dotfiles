@@ -1857,6 +1857,10 @@
 (straight-use-package 'vterm)
 ;; Set global key binding
 (global-set-key (kbd "<f7>") #'vterm)
+;; Configuration
+(after-load 'vterm
+  ;; Set buffer name
+  (setq vterm-buffer-name-string "vterm - %s"))
 
 ;;; Wgrep
 (straight-use-package 'wgrep)
