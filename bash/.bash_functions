@@ -44,13 +44,12 @@ man () {
     fi
 }
 
-# Record desktop
+# Record specific window
 record () {
-    if [[ $1 == *.mp4 ]]; then
-        ffmpeg -y -f x11grab -s $(xdpyinfo | awk '/dimensions:/{print $2}') \
-               -i :0.0 -f pulse -i 0 /tmp/"$1"
-    else
-        echo "Specify an .mp4 output file please."
+    if [[ -z $1 ]]; then
+        echo "Specify output file please."
         return 1
+    else
+        ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') "/tmp/$1.mp4"
     fi
 }
