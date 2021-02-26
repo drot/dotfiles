@@ -51,7 +51,7 @@
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
-      modus-themes-diffs 'desaturated
+      modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
 ;; Load theme
