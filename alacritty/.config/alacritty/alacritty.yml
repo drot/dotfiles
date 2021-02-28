@@ -313,14 +313,14 @@ bell:
   #   - EaseOutExpo
   #   - EaseOutCirc
   #   - Linear
-  animation: EaseOutCubic
+  animation: EaseOut
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  duration: 200
+  duration: 100
 
   # Visual bell animation color.
-  color: '#828482'
+  color: '#242424'
 
   # Bell Command
   #

@@ -51,7 +51,7 @@
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
-      modus-themes-diffs 'desaturated
+      modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
 ;; Load theme
@@ -1884,19 +1884,13 @@
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
-;;; Polymode Ansible
-(straight-use-package 'poly-ansible)
-;; Enable support for Salt state files
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . poly-ansible-mode))
-
-;; Jinja support
-(straight-use-package 'jinja2-mode)
-(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
-
 ;;; Rainbow mode
 (straight-use-package 'rainbow-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t r") #'rainbow-mode)
+
+;;; Salt mode
+(straight-use-package 'salt-mode)
 
 ;;; Skewer
 (straight-use-package 'skewer-mode)
@@ -1947,6 +1941,10 @@
 (straight-use-package 'vterm)
 ;; Set global key binding
 (global-set-key (kbd "<f7>") #'vterm)
+;; Configuration
+(after-load 'vterm
+  ;; Set buffer name
+  (setq vterm-buffer-name-string "vterm - %s"))
 
 ;;; Wgrep
 (straight-use-package 'wgrep)
