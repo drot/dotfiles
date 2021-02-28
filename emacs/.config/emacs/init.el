@@ -1514,22 +1514,22 @@
     (define-key rcirc-mode-map (kbd (car bind)) (cdr bind)))
   ;; Use custom colors
   (setq rcirc-styles-color-vector
-        ["#392a48"
-         "#ff8059"
-         "#44bc44"
-         "#eecc00"
-         "#33beff"
-         "#feacd0"
-         "#00d3d0"
-         "#e0e6f0"
-         "#203448"
-         "#fb6859"
-         "#00fc50"
-         "#ffdd00"
-         "#00a2ff"
-         "#ff8bd4"
-         "#30ffc0"
-         "#ffffff"]))
+        ["black"
+         "#a60000"
+         "#005e00"
+         "#813e00"
+         "#0031a9"
+         "#721045"
+         "#00538b"
+         "gray65"
+         "gray35"
+         "#972500"
+         "#315b00"
+         "#70480f"
+         "#2544bb"
+         "#8f0075"
+         "#30517f"
+         "white"]))
 
 ;; rcirc colored nicknames
 (straight-use-package 'rcirc-color)
