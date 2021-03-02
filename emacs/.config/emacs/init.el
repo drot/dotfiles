@@ -1794,19 +1794,13 @@
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
-;;; Polymode Ansible
-(straight-use-package 'poly-ansible)
-;; Enable support for Salt state files
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . poly-ansible-mode))
-
-;; Jinja support
-(straight-use-package 'jinja2-mode)
-(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
-
 ;;; Rainbow mode
 (straight-use-package 'rainbow-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t r") #'rainbow-mode)
+
+;;; Salt mode
+(straight-use-package 'salt-mode)
 
 ;;; Skewer
 (straight-use-package 'skewer-mode)
@@ -2170,7 +2164,6 @@
           lsp-mode
           orgtbl-mode
           overwrite-mode
-          poly-ansible-mode
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
