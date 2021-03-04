@@ -54,8 +54,10 @@
       modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
-;; Load theme
-(load-theme 'modus-vivendi t)
+;; Load themes
+(modus-themes-load-themes)
+;; Enable dark theme
+(modus-themes-load-vivendi)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
