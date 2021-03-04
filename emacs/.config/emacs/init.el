@@ -2087,12 +2087,12 @@
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
 ;; Set key binidng
-(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+(define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle)
 ;; Enable Mode
 (marginalia-mode +1)
 ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
 (advice-add #'marginalia-cycle :after
-            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit 'keep-selected))))
 ;; Add `tab-bar-mode' support
 (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
