@@ -12,5 +12,8 @@ picom --experimental-backends &
 # Start NetworkManager applet
 nm-applet &
 
+# Start lock screen automatically
+xautolock -time 1 -locker '~/.scripts/lock-screen' &
+
 # Start WM
 i3
