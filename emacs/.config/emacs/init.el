@@ -54,8 +54,10 @@
       modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
-;; Load theme
-(load-theme 'modus-vivendi t)
+;; Load themes
+(modus-themes-load-themes)
+;; Enable dark theme
+(modus-themes-load-vivendi)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
@@ -2175,12 +2177,12 @@
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
 ;; Set key binidng
-(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+(define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle)
 ;; Enable Mode
 (marginalia-mode +1)
 ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
 (advice-add #'marginalia-cycle :after
-            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit 'keep-selected))))
 ;; Add `tab-bar-mode' support
 (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
@@ -2254,7 +2256,6 @@
           lsp-mode
           orgtbl-mode
           overwrite-mode
-          poly-ansible-mode
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
