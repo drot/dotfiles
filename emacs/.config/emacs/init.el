@@ -2335,6 +2335,10 @@
  '(undo-tree :type git :host gitlab :repo "tsc25/undo-tree"))
 ;; Enable mode
 (global-undo-tree-mode +1)
+;; Configuration
+(after-load 'undo-tree
+  ;; Enable undo in region
+  (setq undo-tree-enable-undo-in-region t))
 ;; Exclude `magit' status buffers
 (add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode)
 
