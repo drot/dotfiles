@@ -51,11 +51,13 @@
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
-      modus-themes-diffs 'desaturated
+      modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
-;; Load theme
-(load-theme 'modus-vivendi t)
+;; Load themes
+(modus-themes-load-themes)
+;; Enable dark theme
+(modus-themes-load-vivendi)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
@@ -253,6 +255,7 @@
                 rcirc-mode-hook
                 term-mode-hook
                 vterm-mode-hook
+                undo-tree-visualizer-mode-hook
                 cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
@@ -1514,22 +1517,22 @@
     (define-key rcirc-mode-map (kbd (car bind)) (cdr bind)))
   ;; Use custom colors
   (setq rcirc-styles-color-vector
-        ["#392a48"
-         "#ff8059"
-         "#44bc44"
-         "#eecc00"
-         "#33beff"
-         "#feacd0"
-         "#00d3d0"
-         "#e0e6f0"
-         "#203448"
-         "#fb6859"
-         "#00fc50"
-         "#ffdd00"
-         "#00a2ff"
-         "#ff8bd4"
-         "#30ffc0"
-         "#ffffff"]))
+        ["black"
+         "#a60000"
+         "#005e00"
+         "#813e00"
+         "#0031a9"
+         "#721045"
+         "#00538b"
+         "gray65"
+         "gray35"
+         "#972500"
+         "#315b00"
+         "#70480f"
+         "#2544bb"
+         "#8f0075"
+         "#30517f"
+         "white"]))
 
 ;; rcirc colored nicknames
 (straight-use-package 'rcirc-color)
@@ -1884,19 +1887,13 @@
 ;; Enable mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
-;;; Polymode Ansible
-(straight-use-package 'poly-ansible)
-;; Enable support for Salt state files
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . poly-ansible-mode))
-
-;; Jinja support
-(straight-use-package 'jinja2-mode)
-(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
-
 ;;; Rainbow mode
 (straight-use-package 'rainbow-mode)
 ;; Set global key binding
 (global-set-key (kbd "C-c t r") #'rainbow-mode)
+
+;;; Salt mode
+(straight-use-package 'salt-mode)
 
 ;;; Skewer
 (straight-use-package 'skewer-mode)
@@ -1947,6 +1944,10 @@
 (straight-use-package 'vterm)
 ;; Set global key binding
 (global-set-key (kbd "<f7>") #'vterm)
+;; Configuration
+(after-load 'vterm
+  ;; Set buffer name
+  (setq vterm-buffer-name-string "vterm - %s"))
 
 ;;; Wgrep
 (straight-use-package 'wgrep)
@@ -2032,6 +2033,11 @@
 ;; Add hooks for `dired' and `magit'
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+;; Add hook for terminal
+(add-hook 'diff-hl-mode-on-hook
+          (lambda ()
+            (unless (window-system)
+              (diff-hl-margin-local-mode))))
 
 ;;; Form-feed
 (straight-use-package 'form-feed)
@@ -2126,6 +2132,7 @@
                 ("M-y" . consult-yank-pop) ;; orig. yank-pop
                 ("<help> a" . consult-apropos) ;; orig. apropos-command
                 ;; M-g bindings (goto-map)
+                ("M-g e" . consult-compile-error)
                 ("M-g g" . consult-goto-line) ;; orig. goto-line
                 ("M-g M-g" . consult-goto-line) ;; orig. goto-line
                 ("M-g o" . consult-outline)
@@ -2171,12 +2178,12 @@
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
 ;; Set key binidng
-(define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
+(define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle)
 ;; Enable Mode
 (marginalia-mode +1)
 ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
 (advice-add #'marginalia-cycle :after
-            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit 'keep-selected))))
 ;; Add `tab-bar-mode' support
 (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
@@ -2250,7 +2257,6 @@
           lsp-mode
           orgtbl-mode
           overwrite-mode
-          poly-ansible-mode
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
@@ -2323,6 +2329,18 @@
                 clojure-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
+
+;;; Undo Tree
+(straight-use-package
+ '(undo-tree :type git :host gitlab :repo "tsc25/undo-tree"))
+;; Enable mode
+(global-undo-tree-mode +1)
+;; Configuration
+(after-load 'undo-tree
+  ;; Enable in region
+  (setq undo-tree-enable-undo-in-region t))
+;; Exclude `magit' status buffers
+(add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode)
 
 ;;; Volatile Highlights
 (straight-use-package 'volatile-highlights)
