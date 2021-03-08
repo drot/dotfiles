@@ -255,6 +255,7 @@
                 rcirc-mode-hook
                 term-mode-hook
                 vterm-mode-hook
+                undo-tree-visualizer-mode-hook
                 cider-repl-mode-hook))
   (add-hook hook
             (lambda () (setq-local global-hl-line-mode nil))))
@@ -2238,6 +2239,18 @@
                 clojure-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'rainbow-delimiters-mode))
+
+;;; Undo Tree
+(straight-use-package
+ '(undo-tree :type git :host gitlab :repo "tsc25/undo-tree"))
+;; Enable mode
+(global-undo-tree-mode +1)
+;; Configuration
+(after-load 'undo-tree
+  ;; Enable in region
+  (setq undo-tree-enable-undo-in-region t))
+;; Exclude `magit' status buffers
+(add-to-list 'undo-tree-incompatible-major-modes #'magit-status-mode)
 
 ;;; Volatile Highlights
 (straight-use-package 'volatile-highlights)
