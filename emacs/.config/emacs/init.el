@@ -2165,6 +2165,7 @@
           isearch-mode
           js2-minor-mode
           lsp-mode
+          multiple-cursors-mode
           orgtbl-mode
           overwrite-mode
           poly-markdown-mode

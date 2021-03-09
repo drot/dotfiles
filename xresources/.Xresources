@@ -74,3 +74,8 @@ XTerm.vt100.color12: #3b78ff
 XTerm.vt100.color13: #b4009e
 XTerm.vt100.color14: #61d6d6
 XTerm.vt100.color15: #f2f2f2
+
+! Xautolock
+Xautolock.corners: -000
+Xautolock.time: 1
+Xautolock.locker: ~/.scripts/lock-screen
