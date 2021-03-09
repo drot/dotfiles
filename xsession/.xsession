@@ -13,7 +13,7 @@ picom --experimental-backends &
 nm-applet &
 
 # Start lock screen automatically
-xautolock -time 1 -locker '~/.scripts/lock-screen' &
+xautolock -time 1 -corners -000 -locker '~/.scripts/lock-screen' &
 
 # Start WM
 i3
