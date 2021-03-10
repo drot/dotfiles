@@ -247,6 +247,7 @@
                 ediff-mode-hook
                 elpher-mode-hook
                 Custom-mode-hook
+                Info-mode-hook
                 eshell-mode-hook
                 nov-mode-hook
                 rcirc-mode-hook
