@@ -110,9 +110,6 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t)
 
-;;; Modify default completion styles
-(setq completion-styles '(substring))
-
 ;;; Cycle completion on smaller number of candidates
 (setq completion-cycle-threshold 5)
 
@@ -2013,8 +2010,19 @@
 
 ;;; Selectrum Prescient
 (straight-use-package 'selectrum-prescient)
+;; Disable filtering
+(setq selectrum-prescient-enable-filtering nil)
 ;; Initialize mode
 (selectrum-prescient-mode +1)
+
+;;; Orderless
+(straight-use-package 'orderless)
+;; Use single completion style explicitly
+(setq completion-styles '(orderless))
+;; Skip matching part highlight
+(setq orderless-skip-highlighting (lambda () selectrum-is-active))
+;; Enable `orderless' candidate highlight
+(setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
 
 ;;; Company Prescient
 (straight-use-package 'company-prescient)
