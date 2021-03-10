@@ -46,10 +46,7 @@ man () {
 
 # Record specific window
 record () {
-    if [[ -z $1 ]]; then
-        echo "Specify output file please."
-        return 1
-    else
-        ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') "/tmp/$1.mp4"
-    fi
+    local video_file
+    videofile=$(mktemp --suffix=.mp4)
+    ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') "$videofile"
 }
