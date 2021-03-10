@@ -46,7 +46,5 @@ man () {
 
 # Record specific window
 record () {
-    local video_file
-    videofile=$(mktemp --suffix=.mp4)
-    ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') "$videofile"
+    ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') $(mktemp -u -t 'XXXXXX' --suffix=.mp4)
 }
