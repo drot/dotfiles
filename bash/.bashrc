@@ -29,7 +29,7 @@ shopt -s cmdhist # save multi-line commands as one command
 
 # Colored listings
 if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
-    eval $(dircolors -b ~/.dircolors)
+    eval $(dircolors ~/.dircolors)
 fi
 
 # Load aliases
