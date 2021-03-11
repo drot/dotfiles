@@ -468,11 +468,11 @@
                       (mode . tags-table-mode)
                       (name . "*nrepl-server")
                       (name . "*Flymake log*")
+                      (name . "*EGLOT*")
                       (name . "*sly-inferior-lisp for sbcl*")
                       (name . "*sly-events for sbcl*")
                       (name . "*inferior-lisp*")
                       (name . "*Warnings*")))
-           ("LSP" (name . "*lsp-log*"))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Newsticker" (derived-mode . newsticker-treeview-mode))
@@ -1452,6 +1452,25 @@
 ;;; Dockerfile mode
 (straight-use-package 'dockerfile-mode)
 
+;;; Eglot
+(straight-use-package 'eglot)
+;; Set global key binding
+(global-set-key (kbd "C-c e t") #'eglot)
+;; Configuration
+(after-load 'eglot
+  ;; Set local key bindings
+  (dolist (bind '(("C-c e c" . eglot-reconnect)
+                  ("C-c e s" . eglot-shutdown)
+                  ("C-c e r" . eglot-rename)
+                  ("C-c e f" . eglot-format)
+                  ("C-c e h" . eldoc)
+                  ("C-c e a" . eglot-code-actions)
+                  ("C-c e b" . eglot-events-buffer)
+                  ("C-c e e" . eglot-stderr-buffer)))
+    (define-key eglot-mode-map (kbd (car bind)) (cdr bind)))
+  ;; Add the Lua language server
+  (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
+
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
 ;; Set key binding
@@ -1513,18 +1532,6 @@
 
 ;;; Go mode
 (straight-use-package 'go-mode)
-;; Configuration
-(defun drot/lsp-mode-setup ()
-  "Custom hook to run for Go buffers."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t)
-  ;; Customize `compile' command to run go build
-  (if (not (string-match "go" compile-command))
-      (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet")))
-(add-hook 'go-mode-hook #'drot/lsp-mode-setup)
-;; Enable LSP
-(add-hook 'go-mode-hook #'lsp-deferred)
 
 ;;; htmlize
 (straight-use-package 'htmlize)
@@ -1562,13 +1569,6 @@
 ;;; JSON mode
 (straight-use-package
  '(json-mode :type git :host github :repo "emacs-straight/json-mode"))
-
-;;; LSP mode
-(straight-use-package 'lsp-mode)
-;; Change default prefix
-(setq lsp-keymap-prefix "C-c l")
-;; Set global key binding
-(global-set-key (kbd "C-c t l") #'lsp)
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
@@ -2173,7 +2173,6 @@
           geiser-mode
           isearch-mode
           js2-minor-mode
-          lsp-mode
           multiple-cursors-mode
           orgtbl-mode
           overwrite-mode
