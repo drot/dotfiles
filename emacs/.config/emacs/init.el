@@ -853,9 +853,9 @@
   (require 'ansi-color)
   ;; Colorization function
   (defun drot/ansi-color-compilation-buffer ()
-    "Colorize from `compilation-filter-start' to `point'."
-    (let ((inhibit-read-only t))
-      (ansi-color-apply-on-region compilation-filter-start (point))))
+    "Apply ANSI color codes in compilation buffers."
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
   ;; Apply colorization
   (add-hook 'compilation-filter-hook #'drot/ansi-color-compilation-buffer)
   ;; Change default behavior
