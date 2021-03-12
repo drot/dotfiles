@@ -15,6 +15,9 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 # Check for Cargo binaries if available
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
+# Check for Go binaries if available
+[[ -d $HOME/go/bin ]] && export PATH="$HOME/go/bin:$PATH"
+
 # Set PATH so it includes user directory
 [[ -d $HOME/.local/bin ]] && export PATH="$HOME/.local/bin:$PATH"
 
