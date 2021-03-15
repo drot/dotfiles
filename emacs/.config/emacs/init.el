@@ -2059,7 +2059,6 @@
                 ("M-g k" . consult-global-mark)
                 ("M-g i" . consult-imenu)
                 ("M-g I" . consult-project-imenu)
-                ("M-g e" . consult-error)
                 ;; M-s bindings (search-map)
                 ("M-s f" . consult-find)
                 ("M-s L" . consult-locate)
