@@ -2070,6 +2070,7 @@
                 ("M-s k" . consult-keep-lines)
                 ("M-s u" . consult-focus-lines)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+
 ;; Isearch integration
 (global-set-key (kbd "M-s e") #'consult-isearch)
 ;; Set local key bindings
@@ -2077,6 +2078,17 @@
                 ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
                 ("M-s l" . consult-line))) ;; required by consult-line to detect isearch
   (define-key isearch-mode-map (kbd (car bind)) (cdr bind)))
+
+;; Integrate with `register'
+(setq register-preview-delay 0
+      register-preview-function #'consult-register-preview)
+;; Tweak the register preview window
+(advice-add #'register-preview :override #'consult-register-window)
+
+;; Integrate with `xref'
+(setq xref-show-xrefs-function #'consult-xref
+      xref-show-definitions-function #'consult-xref)
+
 ;; Configuration
 (after-load 'consult
   ;; Set narrowing key binding
@@ -2086,12 +2098,7 @@
   ;; Don't preview buffers eagerly
   (setq consult-config `((consult-buffer :preview-key ,(kbd "C-."))))
   ;; Blink after jumping
-  (setq consult-after-jump-hook '(xref-pulse-momentarily))
-  ;; Integrate with `register'
-  (setq register-preview-delay 0
-        register-preview-function #'consult-register-preview)
-  ;; Tweak the register preview window
-  (advice-add #'register-preview :override #'consult-register-window))
+  (setq consult-after-jump-hook '(xref-pulse-momentarily)))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
