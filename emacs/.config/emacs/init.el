@@ -1617,10 +1617,6 @@
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
-;; Configuration
-(after-load 'magit
-  ;; Use `selectrum' for candidate sorting
-  (setq magit-completing-read-function #'selectrum-completing-read))
 
 ;;; Markdown mode
 (straight-use-package 'markdown-mode)
@@ -1984,19 +1980,16 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; Selectrum minibuffer completion
-(straight-use-package 'selectrum)
-;; Initialize mode
-(selectrum-mode +1)
-;; Set key binding to repeat last command
-(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
-;; Configuration
-(after-load 'selectrum
-  ;; Show line count
-  (setq selectrum-show-indices t)
-  ;; Show total and current matches
-  (setq selectrum-count-style 'current/matches))
-
+;;; VERTical Interactive COmpletion
+(straight-use-package 'vertico)
+;; Enable mode
+(vertico-mode +1)
+(defun crm-indicator (args)
+  (cons (concat "[CRM] " (car args)) (cdr args)))
+(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+(setq minibuffer-prompt-properties
+      '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 ;;; Prescient
 (straight-use-package 'prescient)
 ;; Configuration
@@ -2008,21 +2001,13 @@
   ;; Enable persistent history
   (prescient-persist-mode +1))
 
-;;; Selectrum Prescient
-(straight-use-package 'selectrum-prescient)
-;; Disable filtering
-(setq selectrum-prescient-enable-filtering nil)
-;; Initialize mode
-(selectrum-prescient-mode +1)
-
 ;;; Orderless
 (straight-use-package 'orderless)
 ;; Use single completion style explicitly
 (setq completion-styles '(orderless))
-;; Skip matching part highlight
-(setq orderless-skip-highlighting (lambda () selectrum-is-active))
-;; Enable `orderless' candidate highlight
-(setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
+;; Integrate with `vertico'
+(setq completion-category-defaults nil
+      completion-category-overrides '((file (styles . (partial-completion)))))
 
 ;;; Company Prescient
 (straight-use-package 'company-prescient)
@@ -2105,9 +2090,6 @@
 (define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle)
 ;; Enable Mode
 (marginalia-mode +1)
-;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations
-(advice-add #'marginalia-cycle :after
-            (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit 'keep-selected))))
 ;; Add `tab-bar-mode' support
 (add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
@@ -2118,24 +2100,7 @@
 ;; Configuration
 (after-load 'embark
   ;; Bind `marginalia-cycle' as an Embark action
-  (define-key embark-general-map (kbd "A") #'marginalia-cycle)
-  ;; Selectrum integration
-  (defun drot/pause-selectrum ()
-    "Pause Selectrum while using `embark-collect-live'."
-    (when (eq embark-collect--kind :live)
-      (with-selected-window (active-minibuffer-window)
-        (shrink-window selectrum-num-candidates-displayed)
-        (setq-local selectrum-num-candidates-displayed 0))))
-  ;; Apply the custom hook
-  (add-hook 'embark-collect-mode-hook #'drot/pause-selectrum)
-  ;; Refresh candidate list after action
-  (defun drot/refresh-selectrum ()
-    "Refresh candidate list action with `selectrum'."
-    (setq selectrum--previous-input-string nil))
-  ;; Apply the custom hook
-  (add-hook 'embark-pre-action-hook #'drot/refresh-selectrum)
-  ;; Same after `embark-collect'
-  (add-hook 'embark-post-action-hook #'embark-collect--update-linked))
+  (define-key embark-general-map (kbd "A") #'marginalia-cycle))
 
 ;;; Embark Consult integration
 (straight-use-package 'embark-consult)
