@@ -1925,6 +1925,11 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
+;;; Company Statistics
+(straight-use-package 'company-statistics)
+;; Initialize mode
+(company-statistics-mode +1)
+
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -1990,16 +1995,6 @@
 (setq minibuffer-prompt-properties
       '(read-only t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-;;; Prescient
-(straight-use-package 'prescient)
-;; Configuration
-(after-load 'prescient
-  ;; Aggressively save history
-  (setq prescient-aggressive-file-save t)
-  ;; Use fuzzy matching by default
-  (setq prescient-filter-method 'fuzzy)
-  ;; Enable persistent history
-  (prescient-persist-mode +1))
 
 ;;; Orderless
 (straight-use-package 'orderless)
@@ -2008,11 +2003,6 @@
 ;; Integrate with `vertico'
 (setq completion-category-defaults nil
       completion-category-overrides '((file (styles . (partial-completion)))))
-
-;;; Company Prescient
-(straight-use-package 'company-prescient)
-;; Initialize mode
-(company-prescient-mode +1)
 
 ;;; Consult
 (straight-use-package 'consult)
