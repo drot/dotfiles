@@ -206,11 +206,7 @@
 ;; Exclude certain files
 (setq recentf-exclude
       '("/\\.git/.*\\'"
-        "/elpa/.*\\'"
-        "/image-dired/.*\\'"
-        "/newsticker/.*\\'"
         "/straight/.*\\'"
-        "/url/.*\\'"
         "/dev/shm/.*\\'"
         ".*\\.gz\\'"
         "newsrc"
@@ -1446,6 +1442,7 @@
 (straight-use-package 'dired-rsync)
 ;; Configuration
 (after-load 'dired-async
+  ;; Set local key binding
   (define-key dired-mode-map (kbd "C-c C-r") #'dired-rsync))
 
 ;;; Dockerfile mode
@@ -1553,7 +1550,7 @@
   ;; Disable conflicting key binding
   (setq iedit-toggle-key-default nil))
 
-;;; JavaScript mode
+;;; JavaScript 2 mode
 (straight-use-package 'js2-mode)
 ;; Enable mode
 (add-hook 'js-mode-hook #'js2-minor-mode)
@@ -1610,9 +1607,7 @@
 ;;; Magit
 (straight-use-package 'magit)
 ;; Set global key bindings
-(dolist (bind '(("C-x g" . magit-status)
-                ("C-x M-g" . magit-dispatch-popup)
-                ("C-c g c" . magit-clone)
+(dolist (bind '(("C-c g c" . magit-clone)
                 ("C-c g b" . magit-blame)
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
@@ -1927,7 +1922,7 @@
 
 ;;; Company Statistics
 (straight-use-package 'company-statistics)
-;; Initialize mode
+;; Enable mode
 (company-statistics-mode +1)
 
 ;;; Diff-Hl
@@ -2000,7 +1995,9 @@
 
 ;;; Orderless
 (straight-use-package 'orderless)
-;; Use single completion style explicitly
+;; Enable mode
+(require 'orderless)
+;; Set completion style explicitly
 (setq completion-styles '(orderless))
 ;; Integrate with `vertico'
 (setq completion-category-defaults nil
@@ -2165,11 +2162,7 @@
 
   ;; Extra functions for ParEdit via `paredit-ext'
   (straight-use-package
-   '(paredit-ext :type git
-                 :files ("lisp/paredit-ext.el")
-                 :repo "https://github.com/jwiegley/dot-emacs.git"
-                 :nonrecursive t
-                 :depth 1))
+   '(paredit-ext :type git :host github :repo "drot/paredit-ext"))
 
   ;; Load library
   (require 'paredit-ext)
