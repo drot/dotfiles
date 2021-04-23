@@ -1412,7 +1412,7 @@
 (global-set-key (kbd "<f8>") #'drot/erc-init)
 ;; Configuration
 (after-load 'erc
-  ;; Set local key bindings
+  ;; Set local key binding
   (define-key erc-mode-map (kbd "C-c M-o") #'ace-link)
   ;; Connect to specified servers
   (setq erc-prompt-for-password nil)
