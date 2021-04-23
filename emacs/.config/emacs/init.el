@@ -246,7 +246,7 @@
                 Info-mode-hook
                 eshell-mode-hook
                 nov-mode-hook
-                rcirc-mode-hook
+                erc-mode-hook
                 term-mode-hook
                 vterm-mode-hook
                 cider-repl-mode-hook))
@@ -441,7 +441,7 @@
                            (derived-mode . markdown-mode)
                            (derived-mode . pdf-view-mode)
                            (derived-mode . nov-mode)))
-           ("IRC" (mode . rcirc-mode))
+           ("IRC" (mode . erc-mode))
            ("Ediff" (or (mode . ediff-mode)
                         (mode . ediff-meta-mode)
                         (name . "*ediff-errors*")
@@ -658,7 +658,9 @@
 (after-load 'dired-x
   ;; Omit dotfiles as well
   (setq dired-omit-files
-        (concat dired-omit-files "\\|^\\..+$")))
+        (concat dired-omit-files "\\|^\\..+$"))
+  ;; Use xdg-open for every file
+  (setq dired-guess-shell-alist-user '(("" "xdg-open"))))
 
 ;; Wdired movement and editable parts
 (after-load 'wdired
@@ -1175,110 +1177,12 @@
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-;;; Circe
-(straight-use-package 'circe)
-;; Use custom entry function
-(defun irc ()
-  "Connect to all my IRC servers after enabling contrib modules."
-  (interactive)
-  (require 'circe-chanop)
-  (circe-lagmon-mode)
-  (enable-circe-color-nicks)
-  (enable-lui-autopaste)
-  (enable-lui-track)
-  (enable-circe-display-images)
-  (circe "Rizon"))
-;; Set global key binding
-(global-set-key (kbd "<f8>") #'irc)
-;; Configuration
-(after-load 'circe
-  ;; Default credentials
-  (setq circe-default-nick "drot"
-        circe-default-user "drot"
-        circe-default-realname "drot"
-        circe-default-part-message "Part."
-        circe-default-quit-message "Quit.")
-
-  ;; Securely fetch passwords
-  (defun drot/circe-fetch-password (&rest params)
-    "Fetch password from an encrypted source."
-    (require 'auth-source)
-    (let ((match (car (apply 'auth-source-search params))))
-      (if match
-          (let ((secret (plist-get match :secret)))
-            (if (functionp secret)
-                (funcall secret)
-              secret))
-        (error "Password not found for %S" params))))
-
-  ;; Add server entry
-  (setq circe-network-options
-        `(("Rizon"
-           :host "irc.rizon.net"
-           :port 6697
-           :tls t
-           :sasl-username "drot"
-           :sasl-password ,(drot/circe-fetch-password :login "drot" :machine "irc.rizon.net"))))
-
-  ;; Custom highlight rules
-  (defun drot/face-at-point-p (face)
-    (let ((face-or-faces (get-text-property (point) 'face)))
-      (cond
-       ((consp face-or-faces)
-        (memq face face-or-faces))
-       ((symbolp face-or-faces)
-        (eq face face-or-faces)))))
-
-  (defun drot/circe-inhibit-nick-highlight-function ()
-    (or (eq major-mode 'circe-server-mode)
-        (drot/face-at-point-p 'circe-server-face)
-        (drot/face-at-point-p 'circe-drot/message-face)))
-
-  (setq circe-inhibit-nick-highlight-function
-        #'drot/circe-inhibit-nick-highlight-function)
-
-  (setq circe-track-faces-priorities '(circe-highlight-nick-face))
-  ;; Add extra formatting types
-  (setq lui-formatting-list '(("\\(?:^\\|[[:space:]]\\)\\(\\*[^*[:space:]]+?\\*\\)\\(?:$\\|[[:space:]]\\)" 1 lui-strong-face)
-                              ("\\(?:^\\|[[:space:]]\\)\\(_[^_[:space:]]+?_\\)\\(?:$\\|[[:space:]]\\)" 1 underline))
-        circe-highlight-nick-in-server-messages-p nil
-        circe-highlight-nick-type 'all)
-  ;; Cycle nick completion
-  (setq circe-use-cycle-completion t)
-  ;; Hide irrelevant messages from lurkers
-  (setq circe-reduce-lurker-spam t)
-  ;; Move track bar when switching away from buffer
-  (setq lui-track-behavior 'before-switch-to-buffer)
-  ;; Default format for various text
-  (setq circe-format-self-say "<{nick}> {body}"
-        circe-format-server-topic "*** Topic Change by {userhost}: {topic-diff}"
-        circe-server-buffer-name "{network}"
-        circe-prompt-string (propertize ">>> " 'face 'circe-prompt-face))
-  ;; Colorize nicks in messages too
-  (setq circe-color-nicks-everywhere t)
-  ;; Custom fill for Circe buffers
-  (setq lui-time-stamp-position 'right-margin
-        lui-fill-type nil)
-  ;; Text fill setup
-  (defun drot/lui-no-fill-setup ()
-    "Adjust text fill in Circe buffers."
-    (setq fringes-outside-margins t
-          right-margin-width 10
-          fill-column 80
-          wrap-prefix "    ")
-    (visual-line-mode)
-    (setf (cdr (assoc 'continuation fringe-indicator-alist)) nil)
-    (make-local-variable 'overflow-newline-into-fringe)
-    (setq overflow-newline-into-fringe nil))
-  ;; Apply the custom hook
-  (add-hook 'circe-chat-mode-hook #'drot/lui-no-fill-setup))
-
 ;;; Dash
 (straight-use-package 'dash)
 ;; Configuration
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
-  (dash-enable-font-lock))
+  (global-dash-fontify-mode +1))
 
 ;;; Debbugs browser
 (straight-use-package 'debbugs)
@@ -1310,33 +1214,50 @@
   ;; Enable mode
   (require 'dired-rainbow)
   ;; Define faces by file type
-  (dired-rainbow-define audio "DeepPink" ("mp3" "MP3" "ogg" "OGG"
-                                          "flac" "FLAC" "wav" "WAV"))
-  (dired-rainbow-define compressed "tomato" ("zip" "bz2" "tgz" "txz" "gz"
-                                             "xz" "z" "Z" "jar" "war"
-                                             "ear" "rar" "sar" "xpi"
-                                             "apk" "xz" "tar"))
-  (dired-rainbow-define document "bisque" ("doc" "docx" "odt" "pdb" "pdf"
-                                           "ps" "rtf" "djvu" "epub" "md"
-                                           "tex" "org" "txt" "xlsx"))
-  (dired-rainbow-define encrypted "salmon" ("gpg" "pgp" "rsa"))
-  (dired-rainbow-define executable (:foreground "gold" :italic t) ("exe" "msi"))
-  (dired-rainbow-define html "wheat" ("htm" "html" "xhtml"))
-  (dired-rainbow-define image "goldenrod" ("jpg" "png" "jpeg" "gif"))
-  (dired-rainbow-define log "dark slate gray" ("log"))
-  (dired-rainbow-define config (:foreground "cadet blue" :italic t) ("conf" "ini" "yml"))
-  (dired-rainbow-define packaged "khaki" ("deb" "rpm"))
-  (dired-rainbow-define sourcefile "orchid" ("py" "c" "cc" "h" "java"
-                                             "pl" "rb" "R" "php" "el"
-                                             "scm" "cpp" "fos" "lisp" "clj"
-                                             "lua" "lisp" "sh"))
-  (dired-rainbow-define patch (:background "red4") ("diff" "patch"))
-  (dired-rainbow-define video "firebrick2" ("vob" "VOB" "mkv" "MKV" "mpe"
-                                            "mpg" "MPG" "mp4" "MP4" "ts"
-                                            "TS" "m2ts" "M2TS" "avi" "AVI"
-                                            "mov" "MOV" "wmv" "asf" "m2v"
-                                            "m4v" "mpeg" "MPEG" "tp"))
-  (dired-rainbow-define xml "RosyBrown" ("xml" "xsd" "xsl" "xslt" "wsdl"))
+  (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html"
+                                        "jhtm" "mht" "eml" "mustache" "xhtml"))
+  (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib"
+                                       "json" "msg" "pgn" "rss" "yaml" "yml"
+                                       "rdata"))
+  (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb"
+                                            "pdf" "ps" "rtf" "djvu" "epub" "odp"
+                                            "ppt" "pptx"))
+  (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md"
+                                            "mkd" "nfo" "pod" "rst" "tex"
+                                            "textfile" "txt"))
+  (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb"
+                                            "sqlite" "nc"))
+  (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg"
+                                         "mpg" "flv" "ogg" "mov" "mid" "midi"
+                                         "wav" "aiff" "flac"))
+  (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg"
+                                         "jpg" "png" "psd" "eps" "svg"))
+  (dired-rainbow-define log "#c17d11" ("log"))
+  (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh"
+                                         "vim"))
+  (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql"
+                                               "mysql" "pgsql" "sql" "r" "clj"
+                                               "cljs" "scala" "js" "scm"))
+  (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++"
+                                            "h++" "hpp" "hxx" "m" "cc" "cs" "cp"
+                                            "cpp" "go" "f" "for" "ftn" "f90"
+                                            "f95" "f03" "f08" "s" "rs" "hi" "hs"
+                                            "pyc" ".java"))
+  (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+  (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz"
+                                              "xz" "z" "Z" "jar" "war" "ear"
+                                              "rar" "sar" "xpi" "apk" "xz"
+                                              "tar"))
+  (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab"
+                                            "pak" "pk3" "vdf" "vpk" "bsp"))
+  (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc"
+                                             "signature" "sig" "p12" "pem"))
+  (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf"
+                                         "otf"))
+  (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow"
+                                             "toast" "vcd" "vmdk" "bak"))
+  (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes"
+                                      "gitmodules"))
   ;; Define faces by file permission
   (dired-rainbow-define-chmod executable-unix (:foreground "gold" :bold t) "-.*x.*")
   (dired-rainbow-define-chmod directory-unix (:foreground "DeepSkyBlue" :bold t) "d.*")
@@ -1347,7 +1268,9 @@
 ;; Configuration
 (after-load 'dired-rainbow
   ;; Enable mode
-  (diredfl-global-mode +1))
+  (diredfl-global-mode +1)
+  ;; Use `dired-rainbow' directory face
+  (setq diredfl-dir-name 'dired-rainbow-directory-unix-face))
 
 ;;; Dired Subtree
 (straight-use-package 'dired-subtree)
@@ -1475,6 +1398,75 @@
 (after-load 'elpher
   ;; Colorize escape sequences by default
   (setq elpher-filter-ansi-from-text t))
+
+;;; ERC
+(defun drot/erc-init ()
+  "Connect to IRC."
+  (interactive)
+  (when (y-or-n-p "Connect to IRC? ")
+    ;; Freenode
+    (erc-tls :server "chat.freenode.net" :port 6697
+             :nick "drot")))
+
+;; Set key binding
+(global-set-key (kbd "<f8>") #'drot/erc-init)
+;; Configuration
+(after-load 'erc
+  ;; Connect to specified servers
+  (setq erc-prompt-for-password nil)
+  (setq erc-autojoin-timing 'ident)
+  (setq erc-server-reconnect-timeout 30)
+  ;; Configure text filling
+  (setq erc-fill-function #'erc-fill-static
+        erc-fill-column 180
+        erc-fill-static-center 10)
+  ;; Timestap formatting
+  (setq erc-insert-timestamp-function #'erc-insert-timestamp-left
+        erc-timestamp-only-if-changed-flag nil
+        erc-timestamp-format "[%H:%M] ")
+  ;; Text formatting
+  (setq erc-header-line-format "%t: %o"
+        erc-interpret-mirc-color t
+        erc-button-buttonize-nicks nil
+        erc-format-nick-function #'erc-format-@nick
+        erc-nick-uniquifier "_")
+  ;; Custom prompt
+  (setq erc-prompt
+        (lambda () (concat (buffer-name) ">")))
+  ;; Channel tracking options
+  (setq erc-track-exclude-server-buffer t
+        erc-track-showcount t
+        erc-track-switch-direction 'importance
+        erc-track-visibility 'selected-visible)
+  ;; Hide lurker activity
+  (setq erc-lurker-threshold-time 3600
+        erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+  ;; Fix for `minions' support
+  (setq erc-track-position-in-mode-line t)
+  ;; Open query buffers in the current window
+  (setq erc-query-display 'buffer)
+  ;; Kill all buffers upon ERC quit
+  (setq erc-kill-buffer-on-part t
+        erc-kill-queries-on-quit t
+        erc-kill-server-buffer-on-quit t)
+  ;; Prevent accidental paste
+  (setq erc-accidental-paste-threshold-seconds 0.5)
+  ;; Disable some conflicting modes
+  (defun drot/erc-mode-setup ()
+    "Custom hook to run for my ERC buffers."
+    ;; Disable company popups since they are annoying while chatting
+    (company-mode -1))
+  ;; Apply the custom hook
+  (add-hook 'erc-mode-hook #'drot/erc-mode-setup)
+  ;; Enable notifications
+  (erc-notifications-mode)
+  ;; Enable spell-checking
+  (erc-spelling-mode)
+  ;; Keep point at bottom always
+  (erc-scrolltobottom-mode)
+  ;; Truncate buffer
+  (setq erc-truncate-buffer-on-save t)
+  (add-hook 'erc-insert-post-hook #'erc-truncate-buffer))
 
 ;;; Expand region
 (straight-use-package 'expand-region)
@@ -2086,10 +2078,14 @@
 (straight-use-package 'embark)
 ;; Define key bindings
 (global-set-key (kbd "C-S-a") #'embark-act)
+(global-set-key (kbd "C-h B") #'embark-bindings)
 ;; Configuration
 (after-load 'embark
-  ;; Bind `marginalia-cycle' as an Embark action
-  (define-key embark-general-map (kbd "A") #'marginalia-cycle))
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
 
 ;;; Embark Consult integration
 (straight-use-package 'embark-consult)
@@ -2138,7 +2134,6 @@
           poly-markdown-mode
           sqlind-minor-mode
           subword-mode
-          rcirc-omit-mode
           visual-line-mode)))
 
 ;;; Paredit
