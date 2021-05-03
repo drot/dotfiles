@@ -1,5 +1,0 @@
-# command to invoke for selected URL
-COMMAND /home/drot/.scripts/linkhandler
-
-# set to yes to enable menu wrapping
-WRAP Yes
