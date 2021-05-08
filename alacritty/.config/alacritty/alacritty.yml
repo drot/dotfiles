@@ -451,7 +451,7 @@ mouse:
 # and pipe it to other applications.
 hints:
   # Keys used for the hint labels.
-  #alphabet: "jfkdls;ahgurieowpq"
+  alphabet: "asdfghjkl"
 
   # List with all available hints
   #
