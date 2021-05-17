@@ -469,11 +469,11 @@
                       (mode . tags-table-mode)
                       (name . "*nrepl-server")
                       (name . "*Flymake log*")
-                      (name . "*EGLOT*")
                       (name . "*sly-inferior-lisp for sbcl*")
                       (name . "*sly-events for sbcl*")
                       (name . "*inferior-lisp*")
                       (name . "*Warnings*")))
+           ("LSP" (name . "*lsp-log*"))
            ("Mail" (or (derived-mode . message-mode)
                        (derived-mode . mail-mode)))
            ("Newsticker" (derived-mode . newsticker-treeview-mode))
@@ -1377,25 +1377,6 @@
 ;;; Dockerfile mode
 (straight-use-package 'dockerfile-mode)
 
-;;; Eglot
-(straight-use-package 'eglot)
-;; Set global key binding
-(global-set-key (kbd "C-c e t") #'eglot)
-;; Configuration
-(after-load 'eglot
-  ;; Set local key bindings
-  (dolist (bind '(("C-c e c" . eglot-reconnect)
-                  ("C-c e s" . eglot-shutdown)
-                  ("C-c e r" . eglot-rename)
-                  ("C-c e f" . eglot-format)
-                  ("C-c e h" . eldoc)
-                  ("C-c e a" . eglot-code-actions)
-                  ("C-c e b" . eglot-events-buffer)
-                  ("C-c e e" . eglot-stderr-buffer)))
-    (define-key eglot-mode-map (kbd (car bind)) (cdr bind)))
-  ;; Add the Lua language server
-  (add-to-list 'eglot-server-programs '(lua-mode . ("lua-lsp"))))
-
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
 ;; Set key binding
@@ -1568,6 +1549,17 @@
 (straight-use-package
  '(json-mode :type git :host github :repo "emacs-straight/json-mode"))
 
+;;; LSP mode
+(straight-use-package 'lsp-mode)
+;; Set default prefix
+(setq lsp-keymap-prefix "C-c l")
+;; Set global key binding
+(global-set-key (kbd "C-c t l") #'lsp)
+(after-load 'lsp-mode
+  ;; Use `consult-lsp' features instead
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+  (define-key lsp-mode-map (kbd "C-c l g d") #'consult-lsp-diagnostics))
+
 ;;; Lua mode
 (straight-use-package 'lua-mode)
 
@@ -1599,6 +1591,10 @@
                 ("C-c g l" . magit-log-buffer-file)
                 ("C-c g p" . magit-pull)))
   (global-set-key (kbd (car bind)) (cdr bind)))
+;; Configuration
+(after-load 'magit
+  ;; Use `selectrum' for candidate sorting
+  (setq magit-completing-read-function #'selectrum-completing-read))
 
 ;;; Markdown mode
 (straight-use-package 'markdown-mode)
@@ -1815,6 +1811,11 @@
   (define-key sly-mode-map (kbd "C-c M-s i") #'sly-import-symbol-at-point)
   (define-key sly-mode-map (kbd "C-c M-s x") #'sly-export-symbol-at-point))
 
+;;; Unfill
+(straight-use-package 'unfill)
+;; Set global key binding
+(global-set-key [remap fill-paragraph] #'unfill-toggle)
+
 ;;; SLY macrostep
 (straight-use-package 'sly-macrostep)
 
@@ -1907,11 +1908,6 @@
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
 
-;;; Company Statistics
-(straight-use-package 'company-statistics)
-;; Enable mode
-(company-statistics-mode +1)
-
 ;;; Diff-Hl
 (straight-use-package 'diff-hl)
 ;; Enable mode
@@ -1928,19 +1924,6 @@
           (lambda ()
             (unless (window-system)
               (diff-hl-margin-local-mode))))
-
-;;; Form-feed
-(straight-use-package 'form-feed)
-;; Same line width as `fill-column' width
-(setq form-feed-line-width fill-column)
-;; Enable mode
-(global-form-feed-mode +1)
-;; Configuration
-(after-load 'form-feed
-  ;; Make `form-feed-line' color equal to comment color
-  (set-face-attribute 'form-feed-line nil
-                      :strike-through t
-                      :inherit font-lock-comment-face))
 
 ;;; Hl-Todo
 (straight-use-package 'hl-todo)
@@ -1961,18 +1944,27 @@
                   ("C-c p i" . hl-todo-insert-keyword)))
     (define-key hl-todo-mode-map (kbd (car bind)) (cdr bind))))
 
-;;; VERTical Interactive COmpletion
-(straight-use-package 'vertico)
+;;; Page break lines
+(straight-use-package 'page-break-lines)
 ;; Enable mode
-(vertico-mode +1)
-;; Add prompt indicator to `completing-read-multiple'.
-(defun crm-indicator (args)
-  (cons (concat "[CRM] " (car args)) (cdr args)))
-(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-;; Do not allow the cursor in the minibuffer prompt
-(setq minibuffer-prompt-properties
-      '(read-only t cursor-intangible t face minibuffer-prompt))
-(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+(global-page-break-lines-mode +1)
+;; Configuration
+(after-load 'page-break-lines
+  ;; Adhere to `fill-column' width
+  (setq page-break-lines-max-width fill-column))
+
+;;; Selectrum minibuffer completion
+(straight-use-package 'selectrum)
+;; Enable mode
+(selectrum-mode +1)
+;; Set key binding to repeat last command
+(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+;; Configuration
+(after-load 'selectrum
+  ;; Show line count
+  (setq selectrum-show-indices t)
+  ;; Show total and current matches
+  (setq selectrum-count-style 'current/matches))
 
 ;;; Orderless
 (straight-use-package 'orderless)
@@ -1980,9 +1972,23 @@
 (require 'orderless)
 ;; Set completion style explicitly
 (setq completion-styles '(orderless))
-;; Integrate with `vertico'
-(setq completion-category-defaults nil
-      completion-category-overrides '((file (styles . (partial-completion)))))
+;; Skip matching part highlight
+(setq orderless-skip-highlighting (lambda () selectrum-is-active))
+;; Enable `orderless' candidate highlight
+(setq selectrum-highlight-candidates-function #'orderless-highlight-matches)
+
+;;; Prescient
+(straight-use-package 'selectrum-prescient)
+;; Disable default filtering
+(setq selectrum-prescient-enable-filtering nil)
+;; Enable persistence across sessions
+(selectrum-prescient-mode +1)
+(prescient-persist-mode +1)
+
+;;; Company Prescient
+(straight-use-package 'company-prescient)
+;; Enable mode
+(company-prescient-mode +1)
 
 ;;; Consult
 (straight-use-package 'consult)
