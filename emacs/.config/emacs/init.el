@@ -1555,8 +1555,10 @@
 (setq lsp-keymap-prefix "C-c l")
 ;; Set global key binding
 (global-set-key (kbd "C-c t l") #'lsp)
+;; Configuration
 (after-load 'lsp-mode
   ;; Use `consult-lsp' features instead
+  (straight-use-package 'consult-lsp)
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
   (define-key lsp-mode-map (kbd "C-c l g d") #'consult-lsp-diagnostics))
 
