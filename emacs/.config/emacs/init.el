@@ -1559,6 +1559,7 @@
 (after-load 'lsp-mode
   ;; Use `consult-lsp' features instead
   (straight-use-package 'consult-lsp)
+  ;; Set local key bindings
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
   (define-key lsp-mode-map (kbd "C-c l g d") #'consult-lsp-diagnostics))
 
