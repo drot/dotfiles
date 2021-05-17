@@ -51,6 +51,7 @@
       modus-themes-links 'faint
       modus-themes-prompts 'subtle
       modus-themes-completions 'opinionated
+      modus-themes-success-deuteranopia t
       modus-themes-diffs 'deuteranopia
       modus-themes-org-blocks 'rainbow
       modus-themes-scale-headings t)
@@ -391,6 +392,11 @@
 (setq isearch-yank-on-move 'shift)
 ;; Add local key binding for `isearch-occur'
 (define-key isearch-mode-map (kbd "C-o") #'isearch-occur)
+
+;;; Diff mode
+(after-load 'diff-mode
+  ;; More prettier diff format
+  (setq diff-font-lock-prettify t))
 
 ;;; Ediff window split
 (after-load 'ediff-wind
@@ -1410,6 +1416,7 @@
 
 ;; Set global key binding
 (global-set-key (kbd "<f8>") #'drot/erc-init)
+
 ;; Configuration
 (after-load 'erc
   ;; Set local key binding
@@ -1421,11 +1428,12 @@
   ;; Configure text filling
   (setq erc-fill-function #'erc-fill-static
         erc-fill-column 180
-        erc-fill-static-center 10)
+        erc-fill-static-center 15)
   ;; Timestap formatting
   (setq erc-insert-timestamp-function #'erc-insert-timestamp-left
         erc-timestamp-only-if-changed-flag nil
-        erc-timestamp-format "[%H:%M] ")
+        erc-timestamp-format "[%H:%M] "
+        erc-timestamp-intangible t)
   ;; Text formatting
   (setq erc-header-line-format "%t: %o"
         erc-interpret-mirc-color t
@@ -1562,21 +1570,6 @@
 
 ;;; Lua mode
 (straight-use-package 'lua-mode)
-
-;;; Enhanced Ruby mode
-(straight-use-package 'enh-ruby-mode)
-(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-;; Add interpreter support
-(straight-use-package 'inf-ruby)
-(add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
-
-;;; Rubocop
-(straight-use-package 'rubocop)
-;; Change default prefix
-(setq rubocop-keymap-prefix (kbd "C-c C-c"))
-;; Enable mode
-(add-hook 'enh-ruby-mode-hook #'rubocop-mode)
 
 ;;; EPUB format support
 (straight-use-package 'nov)
@@ -1830,7 +1823,7 @@
 
 ;;; Systemd mode
 (straight-use-package
- '(systemd :type git :host github :repo "drot/systemd-mode"))
+ '(systemd :host github :repo "drot/systemd-mode"))
 
 ;;; VTerm
 (straight-use-package 'vterm)
@@ -1941,13 +1934,7 @@
 ;; Same line width as `fill-column' width
 (setq form-feed-line-width fill-column)
 ;; Enable mode
-(dolist (hook '(emacs-lisp-mode-hook
-                lisp-mode-hook
-                scheme-mode-hook
-                compilation-mode-hook
-                outline-mode-hook
-                help-mode-hook))
-  (add-hook hook #'form-feed-mode))
+(global-form-feed-mode +1)
 ;; Configuration
 (after-load 'form-feed
   ;; Make `form-feed-line' color equal to comment color
@@ -2065,7 +2052,31 @@
   ;; Don't preview buffers eagerly
   (setq consult-config `((consult-buffer :preview-key ,(kbd "C-."))))
   ;; Blink after jumping
-  (setq consult-after-jump-hook '(xref-pulse-momentarily)))
+  (setq consult-after-jump-hook '(xref-pulse-momentarily))
+  ;; Add ERC support for `consult-buffer'
+  (autoload 'erc-buffer-list "erc")
+
+  (defvar erc-buffer-source
+    `(:name "ERC"
+            :hidden t
+            :narrow ?e
+            :category buffer
+            :state ,#'consult--buffer-state
+            :items ,(lambda () (mapcar #'buffer-name (erc-buffer-list)))))
+
+  (add-to-list 'consult-buffer-sources 'erc-buffer-source 'append)
+
+  ;; Add Org support for `consult-buffer'
+  (autoload 'org-buffer-list "org")
+
+  (defvar org-buffer-source
+    `(:name "Org"
+            :narrow ?o
+            :category buffer
+            :state ,#'consult--buffer-state
+            :items ,(lambda () (mapcar #'buffer-name (org-buffer-list)))))
+
+  (add-to-list 'consult-buffer-sources 'org-buffer-source 'append))
 
 ;;; Marginalia in the minibuffer
 (straight-use-package 'marginalia)
@@ -2159,7 +2170,7 @@
 
   ;; Extra functions for ParEdit via `paredit-ext'
   (straight-use-package
-   '(paredit-ext :type git :host github :repo "drot/paredit-ext"))
+   '(paredit-ext :host nil :type git :repo "git@github.com:drot/paredit-ext"))
 
   ;; Load library
   (require 'paredit-ext)
