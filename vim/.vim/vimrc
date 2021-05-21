@@ -49,7 +49,7 @@ set showcmd
 set laststatus=2
 
 " Status line format
-set statusline=[%n]\ %F\ %M%=%y%w%r%h\ %{&fenc}\ %l,%c\ %p%%\ %L
+set statusline=[%n]\ %F\ %M%=%y%w%r%h\ %{&fenc}\ %l,%c\ (%L)\ --%p%%--
 
 " Show relative line numbers
 set relativenumber
