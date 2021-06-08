@@ -81,3 +81,34 @@ XTerm.vt100.color15: #f2f2f2
 Xautolock.corners: -000
 Xautolock.time: 5
 Xautolock.locker: ~/.scripts/lock-screen
+
+! Zutty
+Zutty.geometry: 120x30
+Zutty.altScroll: true
+Zutty.font: iosevka-lambda
+Zutty.fontsize: 20
+Zutty.fontpath: /home/drotim/.local/share/fonts
+Zutty.saveLines: 10000
+
+! Main colors
+Zutty.fg: #cccccc
+Zutty.bg: #0c0c0c
+Zutty.cr: #cccccc
+
+! Colors
+Zutty.color0: #0c0c0c
+Zutty.color1: #c50f1f
+Zutty.color2: #13a10e
+Zutty.color3: #c19c00
+Zutty.color4: #0037da
+Zutty.color5: #881798
+Zutty.color6: #3a96dd
+Zutty.color7: #cccccc
+Zutty.color8: #767676
+Zutty.color9: #e74856
+Zutty.color10: #16c60c
+Zutty.color11: #f9f1a5
+Zutty.color12: #3b78ff
+Zutty.color13: #b4009e
+Zutty.color14: #61d6d6
+Zutty.color15: #f2f2f2
