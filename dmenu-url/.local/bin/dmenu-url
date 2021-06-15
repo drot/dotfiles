@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Font
+font="IosevkaLambda-15"
+
+# Colors
+normal_background="#282a2e"
+normal_foreground="#969896"
+selected_background="#1d1f21"
+selected_foreground="#f0c674"
+
+# Customize prompt
+dmenu_prompt() {
+    dmenu -i -l 10  \
+          -fn "$font" \
+          -nb "$normal_background" \
+          -nf "$normal_foreground" \
+          -sb "$selected_background" \
+          -sf "$selected_foreground" \
+          -w "$WINDOWID" -p "$1"
+}
+
+# Link handling function
+link_handler() {
+    local regex='(((http|https|ftp|ftps|gopher|gemini)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]'
+    grep -Po "$regex" | tac | uniq | dmenu_prompt "$1" | "${@:2}"
+}
+
+# Handle selection
+case $1 in
+    open)
+        link_handler "Open URL:" xargs -r xdg-open
+        ;;
+    copy)
+        link_handler "Copy URL:" xclip -selection clipboard
+        ;;
+    *)
+        printf >&2 'Bad option "%s"\n' "$1"
+        exit 1
+        ;;
+esac
