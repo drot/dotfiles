@@ -73,6 +73,6 @@ case $TERM in
         PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
     *)
-        PS1="${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        PS1="${SSH_CONN}${ERROR_CODE}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac
