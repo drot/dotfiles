@@ -226,6 +226,7 @@ for_window [class="Slack"] border pixel 2
 for_window [class="firefox"] border pixel 2
 for_window [class="Terminator"] border pixel 2
 for_window [class="Alacritty"] border pixel 2
+for_window [class="Code"] border pixel 2
 for_window [class="st-256color"] border pixel 2
 for_window [class="Zutty"] border pixel 2
 for_window [class="XTerm"] border pixel 2
