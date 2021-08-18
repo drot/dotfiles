@@ -14,7 +14,8 @@ font pango:Iosevka Lambda, FontAwesome 15
 # default modifier key
 set $mod Mod4
 
-# default movement keys
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
 set $up l
 set $down k
 set $left j
@@ -38,7 +39,7 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# alternate cursor keys
+# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -50,7 +51,7 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# alternate cursor keys
+# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -65,7 +66,7 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout
+# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -91,10 +92,12 @@ bindsym $mod+u [urgent="latest"] focus
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-# show the next scratchpad window or hide the focused scratchpad window
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# define names for default workspaces
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -106,7 +109,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# assing workspaces to specific screens
+# assign workspaces to specific screens
 workspace $ws2 output DP-2
 workspace $ws3 output DP-1
 workspace $ws4 output DP-1
@@ -140,7 +143,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace
 bindsym $mod+Shift+r restart
 # exit i3
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # move workspace to certain output
 mode "RandR" {
