@@ -223,6 +223,9 @@ bindsym $mod+m exec i3-input -f 'xft:Iosevka Lambda 15' -F 'mark %s' -l 1 -P 'Ma
 # read 1 character and go to the window with the character
 bindsym $mod+g exec i3-input -f 'xft:Iosevka Lambda 15' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
+# smart hide borders when fullscreen
+hide_edge_borders smart
+
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
