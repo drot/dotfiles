@@ -1,4 +1,4 @@
-## supported terminals  -*- mode: conf-space; -*-
+## supported terminals -*- mode: conf-space; -*-
 TERM alacritty
 TERM ansi
 TERM color-xterm
@@ -56,29 +56,30 @@ TERM xterm-debian
 TERM xterm-kitty
 
 ## special files
-NORMAL 0
-FILE 0
-DIR 38;5;12;1
-LINK 38;5;177;4
-ORPHAN 48;5;196;38;5;232;1
-FIFO 38;5;126
-EXEC 38;5;208;1
-SOCK 38;5;197
-DOOR 38;5;127
 BLK 38;5;68
-CHR 38;5;113;1
 CAPABILITY 38;5;17
+CHR 38;5;113;1
+DIR 38;5;30
+DOOR 38;5;127
+EXEC 38;5;208;1
+FIFO 38;5;126
+FILE 0
+LINK target
 MULTIHARDLINK 38;5;222;1
+NORMAL 0
+ORPHAN 48;5;196;38;5;232;1
 OTHER_WRITABLE 38;5;220;1
 SETGID 48;5;3;38;5;0
 SETUID 38;5;220;1;3;100;1
+SOCK 38;5;197
 STICKY 38;5;86;48;5;234
 STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 
 ## ls color setup file
 .dircolors 48;5;89;38;5;197;1;3;4;7
 
-## documents
+
+# documents
 *README 38;5;220;1
 *README.rst 38;5;220;1
 *README.md 38;5;220;1
@@ -94,29 +95,36 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *NOTICE 38;5;220;1
 *CHANGES 38;5;220;1
 .log 38;5;190
+
 # plain-text
 .txt 38;5;253
+
 # markup
+.adoc 38;5;184
+.asciidoc 38;5;184
 .etx 38;5;184
 .info 38;5;184
 .markdown 38;5;184
 .md 38;5;184
 .mkd 38;5;184
 .nfo 38;5;184
-.org 38;5;184
+.pod 38;5;184
+.rst 38;5;184
 .tex 38;5;184
 .textile 38;5;184
+
 # key-value, non-relational data
 .bib 38;5;178
 .json 38;5;178
 .jsonl 38;5;178
-.ndjson 38;5;178
 .jsonnet 38;5;178
 .libsonnet 38;5;142
+.ndjson 38;5;178
 .msg 38;5;178
 .pgn 38;5;178
 .rss 38;5;178
 .xml 38;5;178
+.fxml 38;5;178
 .toml 38;5;178
 .yaml 38;5;178
 .yml 38;5;178
@@ -127,14 +135,18 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sgml 38;5;178
 .rng 38;5;178
 .rnc 38;5;178
+
 # binary
 .cbr 38;5;141
 .cbz 38;5;141
 .chm 38;5;141
 .djvu 38;5;141
-.epub 38;5;141
 .pdf 38;5;141
 .PDF 38;5;141
+.mobi 38;5;141
+.epub 38;5;141
+
+# Microsoft
 # words
 .docm 38;5;111;4
 .doc 38;5;111
@@ -167,30 +179,62 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # Excel module
 .xltm 38;5;73;4
 .xltx 38;5;73
+# macOS office suite
+.pages 38;5;111
+.numbers 38;5;112
+.key 38;5;166
 
-## configs
+# configs
+*config 1
 *cfg 1
 *conf 1
-*config 1
 *rc 1
 *authorized_keys 1
 *known_hosts 1
 .ini 1
 .plist 1
+# bash environment config
+.profile 1
+.bash_profile 1
+.bash_login 1
+.bash_logout 1
+# zsh environment config
+.zshenv 1
+.zprofile 1
+.zlogin 1
+.zlogout 1
 # vim
 .viminfo 1
 # cisco VPN client configuration
 .pcf 1
 # adobe photoshop proof settings file
 .psf 1
+# Sublime Text config
+.hidden-color-scheme 1
+.hidden-tmTheme 1
+.last-run 1
+.merged-ca-bundle 1
+.sublime-build 1
+.sublime-commands 1
+.sublime-keymap 1
+.sublime-settings 1
+.sublime-snippet 1
+.sublime-project 1
+.sublime-workspace 1
+.tmTheme 1
+.user-ca-bundle 1
+# RStudio config
+.rstheme 1
+# eclipse
+.epf 1
 
-## version control
+# code
+# version control
 .git 38;5;197
 .gitignore 38;5;240
 .gitattributes 38;5;240
 .gitmodules 38;5;240
-
-## shell
+# shell
 .awk 38;5;172
 .bash 38;5;172
 .bat 38;5;172
@@ -200,8 +244,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .zsh 38;5;172
 .vim 38;5;172
 .kak 38;5;172
-
-## interpreted
+# interpreted
 .ahk 38;5;41
 # python
 .py 38;5;41
@@ -211,7 +254,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .gemspec 38;5;41
 # perl
 .pl 38;5;208
-.PL 38;5;124
+.PL 38;5;160
 .t 38;5;114
 # sql
 .msql 38;5;222
@@ -233,16 +276,17 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cljw 38;5;41
 # Scala
 .scala 38;5;41
+.sc 38;5;41
 # Dart
 .dart 38;5;51
+
+# compiled
 # assembly language
 .asm 38;5;81
 # LISP
 .cl 38;5;81
-.el 38;5;81
 .lisp 38;5;81
 .rkt 38;5;81
-.scm 38;5;81
 # lua
 .lua 38;5;81
 # Moonscript
@@ -255,7 +299,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tcc 38;5;110
 # C++
 .c++ 38;5;81
-.fos 38;5;110
 .h++ 38;5;110
 .hpp 38;5;110
 .hxx 38;5;110
@@ -275,26 +318,37 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .go 38;5;81
 # fortran
 .f 38;5;81
+.F 38;5;81
 .for 38;5;81
 .ftn 38;5;81
+.f90 38;5;81
+.F90 38;5;81
+.f95 38;5;81
+.F95 38;5;81
+.f03 38;5;81
+.F03 38;5;81
+.f08 38;5;81
+.F08 38;5;81
 # Nim
 .nim 38;5;81
+.nimble 38;5;81
 # pascal
 .s 38;5;110
 .S 38;5;110
 # Rust
 .rs 38;5;81
+# AppleScript
+.scpt 38;5;219
 # Swift
 .swift 38;5;219
-# ?
+# SimplexNumerica
 .sx 38;5;81
-# V
-.v 38;5;81
 # Vala
 .vala 38;5;81
 .vapi 38;5;81
-# haskell
+# interface file in GHC - https://github.com/trapd00r/LS_COLORS/pull/9
 .hi 38;5;110
+# haskell
 .hs 38;5;81
 .lhs 38;5;81
 # agda
@@ -306,9 +360,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .agdai 38;5;110
 # Zig
 .zig 38;5;81
-
-## binaries
-# compiled apps for interpreted languages
+# V
+.v 38;5;81
+# Python
 .pyc 38;5;240
 
 # orchestration
@@ -316,7 +370,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tfstate 38;5;168
 .tfvars 38;5;168
 
-## html
+# html
 .css 38;5;125;1
 .less 38;5;125;1
 .sass 38;5;125;1
@@ -328,7 +382,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .eml 38;5;125;1
 .mustache 38;5;125;1
 
-## java
+# java
 .coffee 38;5;074;1
 .java 38;5;074;1
 .js 38;5;074;1
@@ -336,25 +390,25 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .jsm 38;5;074;1
 .jsp 38;5;074;1
 
-## php
+# php
 .php 38;5;81
 # CakePHP view scripts and helpers
 .ctp 38;5;81
-# twig template engine
+# Twig template engine
 .twig 38;5;81
 
-## vb/a
+# vb/a
 .vb 38;5;81
 .vba 38;5;81
 .vbs 38;5;81
-
-## build stuff
+# 2}}}
+# Build stuff
 *Dockerfile 38;5;155
 .dockerignore 38;5;240
 *Makefile 38;5;155
 *MANIFEST 38;5;243
 *pm_to_blib 38;5;240
-# functional configuration
+# Functional Configuration
 .nix 38;5;155
 .dhall 38;5;178
 # ruby rake
@@ -368,11 +422,12 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .old 38;5;242
 .out 38;5;242
 .SKIP 38;5;244
+
 # patch files
 .diff 48;5;197;38;5;232
 .patch 48;5;197;38;5;232;1
 
-## graphics
+# graphics
 .bmp 38;5;97
 .dicom 38;5;97
 .tiff 38;5;97
@@ -381,6 +436,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cdr 38;5;97
 .flif 38;5;97
 .gif 38;5;97
+.icns 38;5;97
 .ico 38;5;97
 .jpeg 38;5;97
 .JPG 38;5;97
@@ -388,9 +444,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .nth 38;5;97
 .png 38;5;97
 .psd 38;5;97
-.xbm 38;5;97
+.pxd 38;5;97
+.pxm 38;5;97
 .xpm 38;5;97
 .webp 38;5;97
+
 # vector
 .ai 38;5;99
 .eps 38;5;99
@@ -399,7 +457,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .ps 38;5;99
 .svg 38;5;99
 
-## video
+# video
 .avi 38;5;114
 .divx 38;5;114
 .IFO 38;5;114
@@ -426,21 +484,30 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .ts 38;5;115
 .ogv 38;5;115
 .f4v 38;5;115
+
 # lossless
 .VOB 38;5;115;1
 .vob 38;5;115;1
 
-## audio
+# subtitles
+.ass 38;5;117
+.srt 38;5;117
+.ssa 38;5;117
+.sub 38;5;117
+.sup 38;5;117 # bitmap image track
+.vtt 38;5;117
+
+# audio
 .3ga 38;5;137;1
 .S3M 38;5;137;1
 .aac 38;5;137;1
+.amr 38;5;137;1
 .au 38;5;137;1
+.caf 38;5;137;1
 .dat 38;5;137;1
 .dts 38;5;137;1
 .fcm 38;5;137;1
 .m4a 38;5;137;1
-.mid 38;5;137;1
-.midi 38;5;137;1
 .mod 38;5;137;1
 .mp3 38;5;137;1
 .mp4a 38;5;137;1
@@ -456,12 +523,14 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cda 38;5;136;1
 .flac 38;5;136;1
 .alac 38;5;136;1
+.mid 38;5;136;1
+.midi 38;5;136;1
 .pcm 38;5;136;1
 .wav 38;5;136;1
 .wv 38;5;136;1
 .wvc 38;5;136;1
 
-## fonts
+# fonts
 .afm 38;5;66
 .fon 38;5;66
 .fnt 38;5;66
@@ -469,70 +538,79 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pfm 38;5;66
 .ttf 38;5;66
 .otf 38;5;66
+# Web Open Font Format
+.woff 38;5;66
+.woff2 38;5;66
 # postscript fonts
 .PFA 38;5;66
 .pfa 38;5;66
 
-## archives
-.7z 38;5;40
-.a 38;5;40
-.arj 38;5;40
-.bz2 38;5;40
-.cpio 38;5;40
-.gz 38;5;40
-.lrz 38;5;40
-.lz 38;5;40
-.lzma 38;5;40
-.lzo 38;5;40
-.rar 38;5;40
-.s7z 38;5;40
-.sz 38;5;40
-.tar 38;5;40
-.tgz 38;5;40
-.warc 38;5;40
-.WARC 38;5;40
-.xz 38;5;40
-.z 38;5;40
-.zip 38;5;40
-.zipx 38;5;40
-.zoo 38;5;40
-.zpaq 38;5;40
-.zst 38;5;40
-.zz 38;5;40
+# archives
+*.7z 38;5;40
+*.a 38;5;40
+*.arj 38;5;40
+*.bz2 38;5;40
+*.cpio 38;5;40
+*.gz 38;5;40
+*.lrz 38;5;40
+*.lz 38;5;40
+*.lzma 38;5;40
+*.lzo 38;5;40
+*.rar 38;5;40
+*.s7z 38;5;40
+*.sz 38;5;40
+*.tar 38;5;40
+*.tbz 38;5;40
+*.tgz 38;5;40
+*.warc 38;5;40
+*.WARC 38;5;40
+*.xz 38;5;40
+*.z 38;5;40
+*.zip 38;5;40
+*.zipx 38;5;40
+*.zoo 38;5;40
+*.zpaq 38;5;40
+*.zst 38;5;40
+*.zstd 38;5;40
+*.zz 38;5;40
 
-## packaged applications
-.AppImage 38;5;215
+# packaged apps
 .apk 38;5;215
+.ipa 38;5;215
 .deb 38;5;215
 .rpm 38;5;215
 .jad 38;5;215
 .jar 38;5;215
+.ear 38;5;215
+.war 38;5;215
 .cab 38;5;215
 .pak 38;5;215
 .pk3 38;5;215
 .vdf 38;5;215
 .vpk 38;5;215
 .bsp 38;5;215
+.dmg 38;5;215
+.crx 38;5;215 # Google Chrome extension
+.xpi 38;5;215 # Mozilla Firefox extension
 
-## segments from 0 to three digits after first extension letter
+# segments from 0 to three digits after first extension letter
 .r[0-9]{0,2} 38;5;239
 .zx[0-9]{0,2} 38;5;239
 .z[0-9]{0,2} 38;5;239
 # partial files
 .part 38;5;239
 
-## partition images
-.dmg 38;5;160
-.iso 38;5;160
-.bin 38;5;160
-.nrg 38;5;160
-.qcow 38;5;160
-.sparseimage 38;5;160
-.toast 38;5;160
-.vcd 38;5;160
-.vmdk 38;5;160
+# partition images
+.iso 38;5;124
+.bin 38;5;124
+.nrg 38;5;124
+.qcow 38;5;124
+.sparseimage 38;5;124
+.toast 38;5;124
+.vcd 38;5;124
+.vmdk 38;5;124
 
-## databases
+# databases
 .accdb 38;5;60
 .accde 38;5;60
 .accdr 38;5;60
@@ -548,7 +626,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # NetCDF database
 .nc 38;5;60
 
-## tempfiles
+# tempfiles
 # undo files
 .pacnew 38;5;33
 .un~ 38;5;241
@@ -556,16 +634,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # backups
 .BUP 38;5;241
 .bak 38;5;241
-# object files
-.o 38;5;241
-# core dumps
-*core 38;5;241
-# Mini DuMP crash report
-.mdump 38;5;241
-# static Rust library
-.rlib 38;5;241
-# dynamic linked library
-.dll 38;5;241
+.o 38;5;241 # *nix Object file (shared libraries, core dumps etc)
+*core 38;5;241 # Linux user core dump file (from /proc/sys/kernel/core_pattern)
+.mdump 38;5;241 # Mini DuMP crash report
+.rlib 38;5;241 # Static rust library
+.dll 38;5;241 # dynamic linked library
 # temporary files
 .swp 38;5;244
 .swo 38;5;244
@@ -577,9 +650,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *lockfile 38;5;248
 *lock 38;5;248
 # error logs
-.err 38;5;124;1
-.error 38;5;124;1
-.stderr 38;5;124;1
+.err 38;5;160;1
+.error 38;5;160;1
+.stderr 38;5;160;1
 # state dumps
 .aria2 38;5;241
 .dump 38;5;241
@@ -600,7 +673,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .allow 38;5;112
 .deny 38;5;196
 
-## systemd
+# systemd
+# http://www.freedesktop.org/software/systemd/man/systemd.unit.html
 .service 38;5;45
 *@.service 38;5;45
 .socket 38;5;45
@@ -613,7 +687,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .timer 38;5;45
 .snapshot 38;5;45
 
-## metadata
+# metadata
 .application 38;5;116
 .cue 38;5;116
 .description 38;5;116
@@ -623,41 +697,54 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .md5 38;5;116
 .properties 38;5;116
 .sfv 38;5;116
-.srt 38;5;116
-.sub 38;5;116
 .theme 38;5;116
 .torrent 38;5;116
 .urlview 38;5;116
+.webloc 38;5;116
 .lnk 38;5;39
 
-## encrypted data
+# macOS files
+*CodeResources 38;5;239 # code signing apps
+*PkgInfo 38;5;239 # app bundle id
+.nib 38;5;57 # UI
+.car 38;5;57 # asset catalog
+.dylib 38;5;241 # shared lib
+
+# Xcode files
+.entitlements 1
+.pbxproj 1
+.strings 1
+.storyboard 38;5;196
+.xcconfig 1
+.xcsettings 1
+.xcuserstate 1
+.xcworkspacedata 1
+.xib 38;5;208
+
+# encrypted data
 .asc 38;5;192;3
 .bfe 38;5;192;3
 .enc 38;5;192;3
 .gpg 38;5;192;3
-.key 38;5;192;3
 .signature 38;5;192;3
 .sig 38;5;192;3
 .p12 38;5;192;3
 .pem 38;5;192;3
 .pgp 38;5;192;3
 .p7s 38;5;192;3
-.rsa 38;5;192;3
-.ecdsa 38;5;192;3
-.ed25519 38;5;192;3
 *id_dsa 38;5;192;3
 *id_rsa 38;5;192;3
 *id_ecdsa 38;5;192;3
 *id_ed25519 38;5;192;3
 
-## emulators
+# emulators
 .32x 38;5;213
 .cdi 38;5;213
 .fm2 38;5;213
 .rom 38;5;213
 .sav 38;5;213
 .st 38;5;213
-# atari
+ # atari
 .a00 38;5;213
 .a52 38;5;213
 .A64 38;5;213
@@ -665,31 +752,44 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .a78 38;5;213
 .adf 38;5;213
 .atr 38;5;213
-# nintendo
+ # nintendo
 .gb 38;5;213
 .gba 38;5;213
 .gbc 38;5;213
 .gel 38;5;213
 .gg 38;5;213
 .ggl 38;5;213
-.ipk 38;5;213
+.ipk 38;5;213 # Nintendo (DS Packed Images)
 .j64 38;5;213
 .nds 38;5;213
 .nes 38;5;213
-# Sega
+ # Sega
 .sms 38;5;213
 
-## unsorted
+# Texas Instruments Calculator files
+# for more see http://tibasicdev.wikidot.com/file-extensions
+.8xp 38;5;121
+.8eu 38;5;121
+.82p 38;5;121
+.83p 38;5;121
+.8xe 38;5;121
+
+# 3D printing
+.stl 38;5;216
+.dwg 38;5;216
+.ply 38;5;216
+.wrl 38;5;216
+
+# unsorted
 # Portable Object Translation for GNU Gettext
 .pot 38;5;7
 # CAD files for printed circuit boards
 .pcb 38;5;7
 # groff (rendering app for texinfo)
 .mm 38;5;7
-# perldoc
-.pod 38;5;7
 # GIMP files
 .gbr 38;5;7
+.scm 38;5;7
 .xcf 38;5;7
 # printer spool file
 .spl 38;5;7
@@ -705,6 +805,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .example 38;5;7
 .feature 38;5;7
 .ger 38;5;7
+.ics 38;5;7 # calendar information
 .map 38;5;7
 .mf 38;5;7
 .mfasl 38;5;7
@@ -715,7 +816,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .plt 38;5;7
 .pm 38;5;7
 .rdf 38;5;7
-.rst 38;5;7
 .ru 38;5;7
 .sch 38;5;7
 .sty 38;5;7
@@ -725,16 +825,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tfnt 38;5;7
 .tg 38;5;7
 .vcard 38;5;7
-.vcf 38;5;7
+.vcf 38;5;7 #contact information
 .xln 38;5;7
 # AppCode files
 .iml 38;5;166
-# Xcode files
-.xcconfig 1
-.entitlements 1
-.strings 1
-.storyboard 38;5;196
-.xcsettings 1
-.xib 38;5;208
-# X resources
-.Xresources 38;5;180;04
