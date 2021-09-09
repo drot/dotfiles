@@ -135,6 +135,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sgml 38;5;178
 .rng 38;5;178
 .rnc 38;5;178
+.sls 38;5;178
 
 # binary
 .cbr 38;5;141
