@@ -5,6 +5,7 @@
   title_receive_bg_color = "#0037da"
   title_inactive_fg_color = "#0c0c0c"
   title_inactive_bg_color = "#cccccc"
+  inactive_color_offset = 0.6038647342995169
   enabled_plugins = ,
   title_use_system_font = False
   title_font = Iosevka Lambda 15
@@ -19,6 +20,7 @@
     cursor_color = "#aaaaaa"
     font = Iosevka Lambda 15
     foreground_color = "#cccccc"
+    show_titlebar = False
     scrollback_lines = 1000
     scrollback_infinite = True
     palette = "#0c0c0c:#c50f1f:#13a10e:#c19c00:#0037da:#881798:#3a96dd:#cccccc:#767676:#e74856:#16c60c:#f9f1a5:#3b78ff:#b4009e:#61d6d6:#f2f2f2"
