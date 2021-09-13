@@ -185,6 +185,7 @@ bindsym $mod+r mode "RESIZE"
 mode "SCREENSHOT" {
      bindsym a exec --no-startup-id ~/.scripts/screenshot full; mode "default"
      bindsym r exec --no-startup-id ~/.scripts/screenshot region; mode "default"
+     bindsym Mod1+r exec --no-startup-id ~/.scripts/screenshot region-copy; mode "default"
      bindsym u exec --no-startup-id ~/.scripts/screenshot upload; mode "default"
      # with delay
      bindsym Shift+a exec --no-startup-id ~/.scripts/screenshot full 3; mode "default"
