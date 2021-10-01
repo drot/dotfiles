@@ -258,6 +258,7 @@ assign [class="libreoffice"] $ws5
 assign [class="Gimp"] $ws5
 assign [class="Evince"] $ws5
 assign [class="Pavucontrol"] $ws6
+assign [class="Idena"] $ws6
 
 # start i3bar to display a workspace bar
 bar {
