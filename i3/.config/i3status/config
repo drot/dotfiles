@@ -14,6 +14,7 @@ order += "disk /"
 order += "wireless _first_"
 order += "battery 0"
 order += "volume master"
+order += "read_file shiba"
 order += "time"
 
 cpu_usage {
@@ -64,6 +65,13 @@ volume master {
     format = " %volume"
     format_muted = " (%volume)"
     device = "pulse"
+    separator_block_width = 30
+}
+
+read_file shiba {
+    format = "SHIB: %content"
+    format_bad = "SHIB: %error"
+    path = /tmp/shib-price.txt
     separator_block_width = 30
 }
 
