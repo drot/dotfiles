@@ -1,0 +1,6 @@
+[Unit]
+Description=Fetch current SHIB price.
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'curl -s "https://api.binance.com/api/v1/ticker/24hr?symbol=SHIBUSDT" | jq -r \'"\\(.priceChangePercent)%"\' > /tmp/shib-price.txt'
