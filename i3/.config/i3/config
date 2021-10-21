@@ -190,6 +190,7 @@ mode "SCREENSHOT" {
      # with delay
      bindsym Mod1+a exec --no-startup-id ~/.scripts/screenshot full 3; mode "default"
      bindsym Mod1+r exec --no-startup-id ~/.scripts/screenshot region 3; mode "default"
+     bindsym Mod1+Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy 3; mode "default"
      bindsym Mod1+u exec --no-startup-id ~/.scripts/screenshot upload 3; mode "default"
      # back to normal
      bindsym q mode "default"
