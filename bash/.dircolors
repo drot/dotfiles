@@ -78,7 +78,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 ## ls color setup file
 .dircolors 48;5;89;38;5;197;1;3;4;7
 
-
 # documents
 *README 38;5;220;1
 *README.rst 38;5;220;1
@@ -288,6 +287,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cl 38;5;81
 .lisp 38;5;81
 .rkt 38;5;81
+.scm 38;5;81
 # lua
 .lua 38;5;81
 # Moonscript
@@ -300,6 +300,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tcc 38;5;110
 # C++
 .c++ 38;5;81
+.fos 38;5;110
 .h++ 38;5;110
 .hpp 38;5;110
 .hxx 38;5;110
@@ -347,7 +348,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # Vala
 .vala 38;5;81
 .vapi 38;5;81
-# interface file in GHC - https://github.com/trapd00r/LS_COLORS/pull/9
+# interface file in GHC
 .hi 38;5;110
 # haskell
 .hs 38;5;81
@@ -402,7 +403,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .vb 38;5;81
 .vba 38;5;81
 .vbs 38;5;81
-# 2}}}
+
 # Build stuff
 *Dockerfile 38;5;155
 .dockerignore 38;5;240
@@ -447,6 +448,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .psd 38;5;97
 .pxd 38;5;97
 .pxm 38;5;97
+.xbm 38;5;97
 .xpm 38;5;97
 .webp 38;5;97
 
@@ -576,6 +578,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *.zz 38;5;40
 
 # packaged apps
+.AppImage 38;5;215
 .apk 38;5;215
 .ipa 38;5;215
 .deb 38;5;215
@@ -698,6 +701,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .md5 38;5;116
 .properties 38;5;116
 .sfv 38;5;116
+.srt 38;5;116
+.sub 38;5;116
 .theme 38;5;116
 .torrent 38;5;116
 .urlview 38;5;116
@@ -727,12 +732,17 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .bfe 38;5;192;3
 .enc 38;5;192;3
 .gpg 38;5;192;3
+.key 38;5;192;3
+.kdbx 38;5;192;3
 .signature 38;5;192;3
 .sig 38;5;192;3
 .p12 38;5;192;3
 .pem 38;5;192;3
 .pgp 38;5;192;3
 .p7s 38;5;192;3
+.rsa 38;5;192;3
+.ecdsa 38;5;192;3
+.ed25519 38;5;192;3
 *id_dsa 38;5;192;3
 *id_rsa 38;5;192;3
 *id_ecdsa 38;5;192;3
@@ -745,7 +755,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .rom 38;5;213
 .sav 38;5;213
 .st 38;5;213
- # atari
+# atari
 .a00 38;5;213
 .a52 38;5;213
 .A64 38;5;213
@@ -753,7 +763,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .a78 38;5;213
 .adf 38;5;213
 .atr 38;5;213
- # nintendo
+# nintendo
 .gb 38;5;213
 .gba 38;5;213
 .gbc 38;5;213
@@ -764,7 +774,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .j64 38;5;213
 .nds 38;5;213
 .nes 38;5;213
- # Sega
+# Sega
 .sms 38;5;213
 
 # Texas Instruments Calculator files
@@ -788,9 +798,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pcb 38;5;7
 # groff (rendering app for texinfo)
 .mm 38;5;7
+# perldoc
+.pod 38;5;7
 # GIMP files
 .gbr 38;5;7
-.scm 38;5;7
 .xcf 38;5;7
 # printer spool file
 .spl 38;5;7
@@ -828,5 +839,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .vcard 38;5;7
 .vcf 38;5;7 #contact information
 .xln 38;5;7
+
 # AppCode files
 .iml 38;5;166
+
+# X resources
+.Xresources 38;5;180;04
