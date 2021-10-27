@@ -241,6 +241,7 @@ for_window [class="XTerm"] border pixel 2
 for_window [class="Emacs"] border pixel 2
 for_window [class="mpv"] floating enable
 for_window [class="flameshot"] floating enable
+for_window [class="Arandr"] floating enable
 for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Org.gnome.Nautilus"] floating enable
