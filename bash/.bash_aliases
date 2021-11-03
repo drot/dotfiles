@@ -15,8 +15,8 @@ alias tcpst="socat - OPENSSL:tcp.st:8777"
 # Find process info
 alias pids="pgrep -a"
 
-# Set SSH TERM workaround
-alias ssh="TERM=xterm-256color ssh"
+# Set SSH TERM workaround for tmux
+[[ -n $TMUX ]] && alias ssh="TERM=xterm-256color ssh"
 
 # SSH with default work port
 alias ppsh="ssh -p 1044"
