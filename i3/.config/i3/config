@@ -219,6 +219,12 @@ bindsym $mod+Insert exec --no-startup-id clipmenusel
 # lock screen
 bindsym $mod+Pause exec --no-startup-id xautolock -locknow
 
+# notification keys
+bindsym $mod+Delete exec --no-startup-id dunstctl close
+bindsym $mod+Shift+Delete exec --no-startup-id dunstctl close-all
+bindsym $mod+grave exec --no-startup-id dunstctl history-pop
+bindsym $mod+Home exec --no-startup-id dunstctl context
+
 # read 1 character and mark the current window with this character
 bindsym $mod+m exec i3-input -f 'xft:Iosevka Lambda 15' -F 'mark %s' -l 1 -P 'Mark: '
 
