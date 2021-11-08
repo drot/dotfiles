@@ -2,7 +2,7 @@
 Description=Fetch current SHIB price.
 
 [Timer]
-OnActiveSec=60m
+OnBootSec=1m
 OnUnitActiveSec=60m
 
 [Install]
