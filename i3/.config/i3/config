@@ -234,6 +234,9 @@ bindsym $mod+g exec i3-input -f 'xft:Iosevka Lambda 15' -F '[con_mark="%s"] focu
 # smart hide borders when fullscreen
 hide_edge_borders smart
 
+# enable window icons
+for_window [all] title_window_icon on
+
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
