@@ -262,6 +262,7 @@ for_window [title="Terminator Preferences"] floating enable
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
 assign [class="Google-chrome"] $ws2
+for_window [instance="^slack-nsoft\.slack\.com$" class="Google-chrome"] move container to workspace $ws1
 assign [class="firefox"] $ws2
 assign [class="Emacs"] $ws3
 assign [class="Code"] $ws3
