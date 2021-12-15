@@ -11,6 +11,7 @@
 [keybindings]
   full_screen = None
   hide_window = None
+  help = ""
 [profiles]
   [[default]]
     urgent_bell = True
