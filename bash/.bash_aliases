@@ -15,5 +15,5 @@ alias tcpst="socat - OPENSSL:tcp.st:8777"
 # Find process info
 alias pids="pgrep -a"
 
-# SSH with default work port
+# SSH with different port
 alias ppsh="ssh -p 1044"
