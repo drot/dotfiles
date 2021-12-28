@@ -13,6 +13,13 @@ export SBCL_HOME="$HOME/.local/lib/sbcl"
 # Qt5 default style
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+# Wine specific variables
+export WINEPREFIX="$HOME/.config/wine"
+export WINEARCH="win32"
+export WINEDEBUG="-all"
+# Disable Gecko install prompt; prevent .desktop creation
+export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
+
 # Check for Cargo binaries if available
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
