@@ -25,7 +25,7 @@ set $right ccaron
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -271,6 +271,8 @@ assign [class="Gimp"] $ws5
 assign [class="Evince"] $ws5
 assign [class="Pavucontrol"] $ws6
 assign [class="Idena"] $ws6
+
+#exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/drotim/tree.json'"
 
 # start i3bar to display a workspace bar
 bar {

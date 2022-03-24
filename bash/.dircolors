@@ -285,6 +285,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .asm 38;5;81
 # LISP
 .cl 38;5;81
+.el 38;5;81
 .lisp 38;5;81
 .rkt 38;5;81
 .scm 38;5;81
