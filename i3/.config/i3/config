@@ -182,7 +182,8 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # screenshot mode
-mode "SCREENSHOT" {
+set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Upload
+mode "$mode_screenshot" {
      bindsym a exec --no-startup-id ~/.scripts/screenshot full; mode "default"
      bindsym r exec --no-startup-id ~/.scripts/screenshot region; mode "default"
      bindsym Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy; mode "default"
@@ -197,7 +198,7 @@ mode "SCREENSHOT" {
      bindsym Escape mode "default"
 }
 
-bindsym Print mode "SCREENSHOT"
+bindsym Print mode "$mode_screenshot"
 
 # volume keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
