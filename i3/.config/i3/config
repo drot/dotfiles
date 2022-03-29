@@ -182,7 +182,7 @@ mode "RESIZE" {
 bindsym $mod+r mode "RESIZE"
 
 # screenshot mode
-set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Upload
+set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Upload Region
 mode "$mode_screenshot" {
      bindsym a exec --no-startup-id ~/.scripts/screenshot full; mode "default"
      bindsym r exec --no-startup-id ~/.scripts/screenshot region; mode "default"
