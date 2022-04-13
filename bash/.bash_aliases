@@ -17,3 +17,6 @@ alias pids="pgrep -a"
 
 # SSH with different port
 alias ppsh="ssh -p 1044"
+
+# Save tmux pane contents
+alias tmux-save-pane="tmux capture-pane -pS -"
