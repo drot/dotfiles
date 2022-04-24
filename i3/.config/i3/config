@@ -184,7 +184,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -f 'xft:Iosevka Lambda 15' -t warning -m 'Exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # move workspace to certain output
-mode "RandR" {
+set $mode_randr RandR: (direction keys) - Move Workspace, (c) Cycle Outputs
+mode "$mode_randr" {
      bindsym $left move workspace to output left
      bindsym $down move workspace to output down
      bindsym $up move workspace to output up
@@ -194,15 +195,17 @@ mode "RandR" {
      bindsym Down move workspace to output down
      bindsym Up move workspace to output up
      bindsym Right move workspace to output right
+     # cycle output key
+     bindsym c exec --no-startup-id autorandr --cycle
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
 }
 
-bindsym $mod+x mode "RandR"
+bindsym $mod+x mode "$mode_randr"
 
 # resize window mode
-mode "RESIZE" {
+mode "Resize window" {
      bindsym $left resize shrink width 10 px or 10 ppt
      bindsym $down resize grow height 10 px or 10 ppt
      bindsym $up resize shrink height 10 px or 10 ppt
