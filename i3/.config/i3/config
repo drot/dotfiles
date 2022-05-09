@@ -196,7 +196,7 @@ mode "$mode_randr" {
      bindsym Up move workspace to output up
      bindsym Right move workspace to output right
      # cycle output key
-     bindsym c exec --no-startup-id autorandr --cycle
+     bindsym c exec --no-startup-id autorandr --cycle; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
