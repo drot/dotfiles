@@ -34,11 +34,17 @@ fi
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
+# Setup monitors
+autorandr --cycle &
+
+# Start compositing
+picom --experimental-backends &
+
+# Start lock screen automatically
+xautolock &
+
 # Start clipmenu
 systemctl --user restart clipmenud
-
-# Set wallpaper
-~/.fehbg &
 
 # Start window manager
 exec i3
