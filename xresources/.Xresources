@@ -7,6 +7,9 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
+! Cursor
+Xcursor.theme: Adwaita
+
 ! Emacs
 Emacs.font: Iosevka Lambda-15
 Emacs.background: #222222
@@ -34,8 +37,11 @@ XTerm.vt100.alternateScroll: true
 
 ! URL selection
 XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! Enable additional key translations for URL following and abbrev expansion
 XTerm.vt100.Translations: #override \n\
-   Meta <KeyPress> o: exec-formatted("xdg-open '%t'", PRIMARY) select-start() select-end()
+   Meta <KeyPress> o: exec-formatted("xdg-open '%t'", PRIMARY) select-start() select-end() \n\
+   Meta Shift <KeyPress> /:dabbrev-expand()
 
 ! Font
 XTerm.vt100.faceName: Iosevka Lambda

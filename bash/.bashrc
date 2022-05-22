@@ -1,5 +1,5 @@
-# Source global definitions
-[[ -r /etc/bashrc ]] && source /etc/bashrc
+# Check for interactive
+[[ $- != *i* ]] && return
 
 # Remap stop key for flow control
 stty stop ^P
@@ -51,8 +51,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_DIRTRIM="2"
 
 # Git prompt support
-[[ -r /usr/share/git-core/contrib/completion/git-prompt.sh ]] &&
-    source /usr/share/git-core/contrib/completion/git-prompt.sh
+[[ -r /usr/share/git/git-prompt.sh ]] && source /usr/share/git/git-prompt.sh
 
 # Git prompt format
 GIT="\$(declare -F __git_ps1 &>/dev/null && __git_ps1 ' %s')"

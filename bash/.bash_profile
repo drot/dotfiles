@@ -7,7 +7,6 @@ export LESS="-Ri"
 export GREP_COLORS="mt=01;37;41"
 export NAME="Davor Rotim"
 export EMAIL="rotim.davor@nsoft.com"
-export GROFF_NO_SGR=yes
 export SBCL_HOME="$HOME/.local/lib/sbcl"
 
 # Qt5 default style

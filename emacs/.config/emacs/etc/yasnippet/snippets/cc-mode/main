@@ -1,9 +1,0 @@
-# name: Main template
-# key: main
-# --
-#include <${2:$$(yas-choose-value '("stdio.h" "iostream"))}>
-
-main()
-{
-    $0
-}
