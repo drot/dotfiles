@@ -41,7 +41,9 @@ autorandr --cycle &
 picom --experimental-backends &
 
 # Start lock screen automatically
-xautolock &
+xss-lock --transfer-sleep-lock -- i3lock -n -t -i $HOME/.scripts/lock-phoenix.png &
+xset s 300 &
+xset dpms 0 360 420 &
 
 # Start clipmenu
 systemctl --user restart clipmenud

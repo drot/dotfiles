@@ -259,7 +259,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle 
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+Pause exec --no-startup-id xautolock -locknow
+bindsym $mod+Pause exec --no-startup-id xset s activate
 
 # notification keys
 bindsym $mod+Delete exec --no-startup-id dunstctl close
