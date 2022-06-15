@@ -148,9 +148,9 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assign workspaces to specific screens
-workspace $ws2 output DP-2
-workspace $ws3 output DP-1
-workspace $ws4 output DP-1
+workspace $ws2 output DP-2-9
+workspace $ws3 output DP-2-8
+workspace $ws4 output DP-2-8
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
