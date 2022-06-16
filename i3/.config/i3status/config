@@ -26,7 +26,7 @@ cpu_temperature 0 {
     format = " %degrees°C"
     max_threshold = 60
     format_above_threshold = " %degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp2_input"
+    path = "/sys/class/thermal/thermal_zone0/temp"
     separator_block_width = 30
 }
 

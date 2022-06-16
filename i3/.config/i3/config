@@ -148,9 +148,9 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assign workspaces to specific screens
-workspace $ws2 output DP-2-9
-workspace $ws3 output DP-2-8
-workspace $ws4 output DP-2-8
+workspace $ws2 output DP-3
+workspace $ws3 output DP-2
+workspace $ws4 output DP-2
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -259,7 +259,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle 
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+Pause exec --no-startup-id xset s activate
+bindsym $mod+End exec --no-startup-id xset s activate
 
 # notification keys
 bindsym $mod+Delete exec --no-startup-id dunstctl close
