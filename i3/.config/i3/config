@@ -247,8 +247,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
 bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
 
 # player keys
-bindsym XF86AudioPrev exec --no-startup-id ~/.scripts/player-control previous
-bindsym XF86AudioNext exec --no-startup-id ~/.scripts/player-control next
+bindsym $mod+less exec --no-startup-id ~/.scripts/player-control previous
+bindsym $mod+Shift+less exec --no-startup-id ~/.scripts/player-control next
 bindsym XF86AudioPlay exec --no-startup-id ~/.scripts/player-control
 
 # brightness keys
@@ -259,7 +259,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle 
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym $mod+End exec --no-startup-id xset s activate
+bindsym XF86Calculator exec --no-startup-id xset s activate
 
 # notification keys
 bindsym $mod+Delete exec --no-startup-id dunstctl close
