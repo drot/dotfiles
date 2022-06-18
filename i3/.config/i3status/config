@@ -24,7 +24,6 @@ cpu_usage {
 
 cpu_temperature 0 {
     format = " %degrees°C"
-    max_threshold = 60
     format_above_threshold = " %degrees°C"
     path = "/sys/class/thermal/thermal_zone0/temp"
     separator_block_width = 30
@@ -49,7 +48,7 @@ wireless _first_ {
 }
 
 battery 0 {
-    format = " %status %percentage"
+    format = " %percentage %status"
     integer_battery_capacity = true
     low_threshold = 20
     threshold_type="percentage"
