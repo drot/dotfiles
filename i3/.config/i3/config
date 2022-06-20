@@ -63,7 +63,7 @@ set $right ccaron
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec zutty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -259,7 +259,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle 
 bindsym $mod+Insert exec --no-startup-id clipmenusel
 
 # lock screen
-bindsym XF86Calculator exec --no-startup-id xset s activate
+bindsym Pause exec --no-startup-id xset s activate
 
 # notification keys
 bindsym $mod+Delete exec --no-startup-id dunstctl close
