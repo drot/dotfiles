@@ -63,7 +63,7 @@ set $right ccaron
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec zutty
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
