@@ -41,10 +41,12 @@ XTerm.vt100.alternateScroll: true
 ! URL selection
 XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
 
-! Enable additional key translations for URL following and abbrev expansion
+! Enable additional key translations for URL following, abbrev expansion and copy/paste
 XTerm.vt100.Translations: #override \n\
    Meta <KeyPress> o: exec-formatted("xdg-open '%t'", PRIMARY) select-start() select-end() \n\
-   Meta Shift <KeyPress> /:dabbrev-expand()
+   Meta Shift <KeyPress> /: dabbrev-expand() \n\
+   Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
+   Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD)
 
 ! Font
 XTerm.vt100.faceName: Iosevka Lambda
