@@ -90,7 +90,7 @@ Zutty.geometry: 120x30
 Zutty.altScroll: true
 Zutty.font: iosevka-lambda
 Zutty.fontsize: 20
-Zutty.fontpath: /home/drotim/.local/share/fonts
+Zutty.fontpath: /home/drotim/.local/share/fonts:/usr/share/fonts
 Zutty.saveLines: 10000
 
 ! Main colors
