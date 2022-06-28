@@ -20,8 +20,12 @@ Emacs.verticalScrollBars: off
 ! XTerm
 XTerm.termName: xterm-256color
 XTerm.vt100.Locale: true
-XTerm.vt100.bellIsUrgent: true
 XTerm.vt100.saveLines: 65535
+
+! Bell options
+XTerm.vt100.bellIsUrgent: true
+XTerm.vt100.visualBell: true
+XTerm.vt100.visualBellLine: true
 
 ! Set default geometry
 XTerm.vt100.geometry: 120x30
