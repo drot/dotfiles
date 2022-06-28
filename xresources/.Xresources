@@ -30,6 +30,9 @@ XTerm.vt100.visualBellLine: true
 ! Set default geometry
 XTerm.vt100.geometry: 120x30
 
+! Default shell command
+XTerm.vt100.printerCommand: dmenu-url
+
 ! Release Meta binding
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.eightBitInput: false
@@ -45,9 +48,9 @@ XTerm.vt100.alternateScroll: true
 ! URL selection
 XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
 
-! Enable additional key translations for URL following, abbrev expansion and copy/paste
+! Enable additional key translations for URL selection, abbrev expansion and copy/paste
 XTerm.vt100.Translations: #override \n\
-   Meta <KeyPress> o: exec-formatted("xdg-open '%t'", PRIMARY) select-start() select-end() \n\
+   Ctrl Shift <KeyPress> u: print(noAttrs, noNewLine) \n\
    Meta Shift <KeyPress> /: dabbrev-expand() \n\
    Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
    Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD)
