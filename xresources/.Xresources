@@ -52,8 +52,8 @@ XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43
 XTerm.vt100.Translations: #override \n\
    Ctrl Shift <KeyPress> u: print(noAttrs, noNewLine) \n\
    Meta Shift <KeyPress> /: dabbrev-expand() \n\
-   Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
-   Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD)
+   Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
+   Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
 
 ! Font
 XTerm.vt100.faceName: Iosevka Lambda
