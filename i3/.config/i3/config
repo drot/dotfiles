@@ -305,8 +305,9 @@ for_window [title="Terminator Preferences"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
-assign [class="Google-chrome"] $ws2
+assign [class="Google-chrome"] $ws5
 for_window [instance="^slack-nsoft\.slack\.com$" class="Google-chrome"] move container to workspace $ws1, floating disable
+for_window [instance="^uchiwa\.nsoft\.com$" class="Google-chrome"] move container to workspace $ws2, floating disable
 assign [class="firefox"] $ws2
 assign [class="Emacs"] $ws3
 assign [class="Code"] $ws3
@@ -314,7 +315,6 @@ assign [class="libreoffice"] $ws5
 assign [class="Gimp"] $ws5
 assign [class="Evince"] $ws5
 assign [class="Pavucontrol"] $ws6
-assign [class="Idena"] $ws6
 
 #exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/drotim/tree.json'"
 
