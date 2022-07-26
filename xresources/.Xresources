@@ -74,6 +74,10 @@ XTerm.mainMenu.Background: #767676
 XTerm.vtMenu.Background: #767676
 XTerm.fontMenu.Background: #767676
 
+! Border
+XTerm.vt100.internalBorder: 4
+XTerm.vt100.ColorInnerBorder: true
+
 ! Colors
 XTerm.vt100.color0: #0c0c0c
 XTerm.vt100.color1: #c50f1f
