@@ -2,4 +2,4 @@
 Description=Change wallpaper
 
 [Service]
-ExecStart=%h/.scripts/wallchanger.sh
+ExecStart=%h/.scripts/wallchanger

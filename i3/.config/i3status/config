@@ -68,8 +68,8 @@ volume master {
 }
 
 read_file shiba {
-    format = "SHIB: %content"
-    format_bad = "SHIB: %error"
+    format = "%content"
+    format_bad = "%error"
     path = /tmp/shib-price.txt
     separator_block_width = 30
 }
