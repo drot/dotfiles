@@ -40,9 +40,7 @@ XTerm.vt100.eightBitInput: false
 ! Disable full screen key binding
 XTerm.Fullscreen: never
 
-! Scrolling
-XTerm.vt100.ScrollBar: false
-XTerm.vt100.ScrollKey: true
+! Enable scrolling in alternate screen
 XTerm.vt100.alternateScroll: true
 
 ! URL selection
