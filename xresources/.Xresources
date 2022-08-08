@@ -37,6 +37,10 @@ XTerm.vt100.printerCommand: dmenu-url
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.eightBitInput: false
 
+! Fix backspace key
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
 ! Disable full screen key binding
 XTerm.Fullscreen: never
 
