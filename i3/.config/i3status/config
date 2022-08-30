@@ -14,7 +14,7 @@ order += "disk /"
 order += "wireless _first_"
 order += "battery 0"
 order += "volume master"
-order += "read_file shiba"
+order += "read_file weather"
 order += "time"
 
 cpu_usage {
@@ -67,10 +67,10 @@ volume master {
     separator_block_width = 30
 }
 
-read_file shiba {
+read_file weather {
     format = "%content"
     format_bad = "%error"
-    path = /tmp/shib-price.txt
+    path = /tmp/weather-data.txt
     separator_block_width = 30
 }
 
