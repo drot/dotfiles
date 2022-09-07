@@ -26,7 +26,7 @@ dmenu_opts=(-i -p "$prompt"
 
 # Run dmenu
 if [[ -z $1 ]]; then
-    dmenu_run "${dmenu_opts[@]}"
+    dmenu_run_history "${dmenu_opts[@]}"
 else
 	dmenu "${dmenu_opts[@]} $@"
 fi
