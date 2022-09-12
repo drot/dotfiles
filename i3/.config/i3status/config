@@ -30,7 +30,7 @@ cpu_temperature 0 {
 }
 
 memory {
-    format = " %percentage_used"
+    format = " %percentage_used"
     threshold_degraded = 40%
     threshold_critical = 20%
     separator_block_width = 30
