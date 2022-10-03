@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009-2019  drot
 
 ;; Author: drot
-;; URL: https://github.com/drot/dotfiles/tree/master/emacs/.emacs.d
+;; URL: https://github.com/drot/dotfiles/tree/work-arch/emacs/.config/emacs
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
