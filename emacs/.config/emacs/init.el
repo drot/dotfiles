@@ -2405,6 +2405,7 @@
 ;;; Load changes from the customize interface
 (after-load 'no-littering
   (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+  ;; Load unconditionally
   (load custom-file 'noerror))
 
 ;;; init.el ends here
