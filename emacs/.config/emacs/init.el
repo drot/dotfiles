@@ -766,6 +766,9 @@
   ;; Apply the custom hook
   (add-hook 'shell-mode-hook #'site/shell-mode-setup))
 
+;;; Enhanced shell command completion
+(elpaca pcmpl-args)
+
 ;;; IELM
 (keymap-global-set "C-c r i" 'ielm)
 ;; Configuration
@@ -1066,6 +1069,9 @@
   ;; Start from the last closed clock
   (setq org-clock-continuously t))
 
+;;; Convert to HTML
+(elpaca htmlize)
+
 ;;; Time display
 (keymap-global-set "C-<f12>" 'world-clock)
 ;; Configuration
@@ -1167,6 +1173,9 @@
   (add-hook 'clojure-mode-hook #'cider-mode)
   ;; Enable SubWord mode
   (add-hook 'clojure-mode-hook #'subword-mode))
+
+;;; CSV mode
+(elpaca csv-mode)
 
 ;;; Dash
 (after-load 'dash
@@ -1546,16 +1555,14 @@
                           'magit-insert-stashes
                           'append))
 
-;;; git modes
+;;; git additional modes
 (elpaca git-modes)
 
-(elpaca i3wm-config-mode)
-(elpaca htmlize)
+;;; Groovy mode
 (elpaca groovy-mode)
-(elpaca pcmpl-args)
-(elpaca php-mode)
-(elpaca csv-mode)
-(elpaca sql-indent)
+
+;;; i3 WM configuration mode
+(elpaca i3wm-config-mode)
 
 ;;; Markdown mode
 (elpaca markdown-mode)
@@ -1734,6 +1741,9 @@
                display-buffer-in-direction
                (direction . right)))
 
+;;; PHP mode
+(elpaca php-mode)
+
 ;;; Polymode Markdown
 (elpaca poly-markdown
   ;; Enable mode
@@ -1854,6 +1864,9 @@
   ;; Set local key bindings
   (keymap-set sly-mode-map "C-c M-s i" 'sly-import-symbol-at-point)
   (keymap-set sly-mode-map "C-c M-s x" 'sly-export-symbol-at-point))
+
+;;; SQL indentation mode
+(elpaca sql-indent)
 
 ;;; Tree-sitter
 (elpaca tree-sitter-langs
