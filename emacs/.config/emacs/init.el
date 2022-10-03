@@ -29,14 +29,7 @@
 
 ;;; Keep main Emacs directory clean from various cache and save files
 (elpaca no-littering
-  (require 'no-littering)
-;;; Auto save file configuration
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-  ;; Exclude `no-littering' directories from recent files list
-  (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory)
-  (setq custom-file (no-littering-expand-etc-file-name "custom.el")))
+  (require 'no-littering))
 
 ;;; Color theme
 (elpaca ef-themes
@@ -173,6 +166,11 @@
       delete-old-versions t
       backup-by-copying t)
 
+;;; Auto save file configuration
+(after-load 'no-littering
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 ;;; Save minibuffer history
 (setq savehist-autosave-interval nil
       savehist-additional-variables '(search-ring regexp-search-ring))
@@ -193,6 +191,10 @@
         "TAGS"))
 ;; Enable mode
 (recentf-mode +1)
+;; Exclude `no-littering' directories from recent files list
+(after-load 'no-littering
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -2226,122 +2228,124 @@
 (elpaca yasnippet
   (yas-global-mode +1))
 
-;; ;;; Artist mode
-;; (keymap-global-set "C-c t a" 'artist-mode)
+;;; Artist mode
+(keymap-global-set "C-c t a" 'artist-mode)
 
-;; ;;; Toggle debug on error
-;; (keymap-global-set "C-c t d" 'toggle-debug-on-error)
+;;; Toggle debug on error
+(keymap-global-set "C-c t d" 'toggle-debug-on-error)
 
-;; ;;; Ediff
-;; (keymap-global-set "C-c f e" 'ediff)
-;; (keymap-global-set "C-c f 3" 'ediff3)
+;;; Ediff
+(keymap-global-set "C-c f e" 'ediff)
+(keymap-global-set "C-c f 3" 'ediff3)
 
-;; ;;; Hexl mode
-;; (keymap-global-set "C-c t h" 'hexl-mode)
-;; (keymap-global-set "C-c f h" 'hexl-find-file)
+;;; Hexl mode
+(keymap-global-set "C-c t h" 'hexl-mode)
+(keymap-global-set "C-c f h" 'hexl-find-file)
 
-;; ;;; Find sibling files
-;; (setq find-sibling-rules '(("\\([^/]+\\)\\.c\\'" "\\1.h")))
-;; (keymap-global-set "C-c f s" 'find-sibling-file)
+;;; Find sibling files
+(setq find-sibling-rules '(("\\([^/]+\\)\\.c\\'" "\\1.h")))
+(keymap-global-set "C-c f s" 'find-sibling-file)
 
-;; ;;; Replace strings
-;; (keymap-global-set "C-c s r" 'replace-string)
-;; (keymap-global-set "C-c s C-r" 'replace-regexp)
+;;; Replace strings
+(keymap-global-set "C-c s r" 'replace-string)
+(keymap-global-set "C-c s C-r" 'replace-regexp)
 
-;; ;;; Grep results as a dired buffer
-;; (keymap-global-set "C-c s d" 'find-grep-dired)
+;;; Grep results as a dired buffer
+(keymap-global-set "C-c s d" 'find-grep-dired)
 
-;; ;;; Project
-;; (dolist (bind '(("C-c p f" . project-find-file)
-;;                 ("C-c p r" . project-find-regexp)
-;;                 ("C-c p s" . project-search)))
-;;   (keymap-global-set (car bind) (cdr bind)))
+;;; Project
+(dolist (bind '(("C-c p f" . project-find-file)
+                ("C-c p r" . project-find-regexp)
+                ("C-c p s" . project-search)))
+  (keymap-global-set (car bind) (cdr bind)))
 
-;; ;;; Find function and variable definitions
-;; (dolist (bind '(("C-c h f" . find-function)
-;;                 ("C-c h 4 f" . find-function-other-window)
-;;                 ("C-c h k" . find-function-on-key)
-;;                 ("C-c h v" . find-variable)
-;;                 ("C-c h 4 v" . find-variable-other-window)))
-;;   (keymap-global-set (car bind) (cdr bind)))
+;;; Find function and variable definitions
+(dolist (bind '(("C-c h f" . find-function)
+                ("C-c h 4 f" . find-function-other-window)
+                ("C-c h k" . find-function-on-key)
+                ("C-c h v" . find-variable)
+                ("C-c h 4 v" . find-variable-other-window)))
+  (keymap-global-set (car bind) (cdr bind)))
 
-;; ;;; Find library
-;; (keymap-global-set "C-c h l" 'find-library)
-;; (keymap-global-set "C-c h 4 l" 'find-library-other-window)
-;; (keymap-global-set "C-c h 4 L" 'find-library-other-frame)
+;;; Find library
+(keymap-global-set "C-c h l" 'find-library)
+(keymap-global-set "C-c h 4 l" 'find-library-other-window)
+(keymap-global-set "C-c h 4 L" 'find-library-other-frame)
 
-;; ;;; Menu bar
-;; (keymap-global-set "M-`" 'tmm-menubar)
+;;; Menu bar
+(keymap-global-set "M-`" 'tmm-menubar)
 
-;; ;;; Sort lines alphabetically
-;; (keymap-global-set "C-c x l" 'sort-lines)
+;;; Sort lines alphabetically
+(keymap-global-set "C-c x l" 'sort-lines)
 
-;; ;;; Sort fields with regular expressions
-;; (keymap-global-set "C-c x f" 'sort-regexp-fields)
+;;; Sort fields with regular expressions
+(keymap-global-set "C-c x f" 'sort-regexp-fields)
 
-;; ;;; Word capitalization operations
-;; (keymap-global-set "M-c" 'capitalize-dwim)
-;; (keymap-global-set "M-u" 'upcase-dwim)
-;; (keymap-global-set "M-l" 'downcase-dwim)
+;;; Word capitalization operations
+(keymap-global-set "M-c" 'capitalize-dwim)
+(keymap-global-set "M-u" 'upcase-dwim)
+(keymap-global-set "M-l" 'downcase-dwim)
 
-;; ;;; Whitespace mode
-;; (keymap-global-set "C-c x w" 'whitespace-cleanup)
-;; (keymap-global-set "C-c t w" 'whitespace-mode)
+;;; Whitespace mode
+(keymap-global-set "C-c x w" 'whitespace-cleanup)
+(keymap-global-set "C-c t w" 'whitespace-mode)
 
-;; ;;; Auto Fill mode
-;; (keymap-global-set "C-c t f" 'auto-fill-mode)
+;;; Auto Fill mode
+(keymap-global-set "C-c t f" 'auto-fill-mode)
 
-;; ;;; Align
-;; (dolist (bind '(("C-c x a" . align)
-;;                 ("C-c x c" . align-current)
-;;                 ("C-c x r" . align-regexp)))
-;;   (keymap-global-set (car bind) (cdr bind)))
+;;; Align
+(dolist (bind '(("C-c x a" . align)
+                ("C-c x c" . align-current)
+                ("C-c x r" . align-regexp)))
+  (keymap-global-set (car bind) (cdr bind)))
 
-;; ;;; Auto Insert
-;; (keymap-global-set "C-c i a" 'auto-insert)
+;;; Auto Insert
+(keymap-global-set "C-c i a" 'auto-insert)
 
-;; ;;; Table insertion
-;; (keymap-global-set "C-c i t" 'table-insert)
+;;; Table insertion
+(keymap-global-set "C-c i t" 'table-insert)
 
-;; ;;; Transpose regions
-;; (keymap-global-set "C-c x t" 'transpose-regions)
+;;; Transpose regions
+(keymap-global-set "C-c x t" 'transpose-regions)
 
-;; ;;; Matching lines operation
-;; (keymap-global-set "C-c s l" 'delete-matching-lines)
-;; (keymap-global-set "C-c s C-l" 'delete-non-matching-lines)
+;;; Matching lines operation
+(keymap-global-set "C-c s l" 'delete-matching-lines)
+(keymap-global-set "C-c s C-l" 'delete-non-matching-lines)
 
-;; ;;; Local variable insertion
-;; (dolist (bind '(("C-c v d" . add-dir-local-variable)
-;;                 ("C-c v f" . add-file-local-variable)
-;;                 ("C-c v p" . add-file-local-variable-prop-line)))
-;;   (keymap-global-set (car bind) (cdr bind)))
+;;; Local variable insertion
+(dolist (bind '(("C-c v d" . add-dir-local-variable)
+                ("C-c v f" . add-file-local-variable)
+                ("C-c v p" . add-file-local-variable-prop-line)))
+  (keymap-global-set (car bind) (cdr bind)))
 
-;; ;;; Zap up to char
-;; (defun site/zap-back-to-char (char)
-;;   "Like `zap-up-to-char' but goes backwards."
-;;   (interactive "c")
-;;   (zap-up-to-char -1 char))
-;; ;; Set global key binding
-;; (keymap-global-set "M-Z" 'site/zap-back-to-char)
+;;; Zap up to char
+(defun site/zap-back-to-char (char)
+  "Like `zap-up-to-char' but goes backwards."
+  (interactive "c")
+  (zap-up-to-char -1 char))
+;; Set global key binding
+(keymap-global-set "M-Z" 'site/zap-back-to-char)
 
-;; ;;; Customize interface
-;; (keymap-global-set "<f11>" 'customize-group)
-;; ;; Configuration
-;; (after-load 'cus-edit
-;;   ;; Kill buffer when done and shorten help
-;;   (setq custom-buffer-done-kill t
-;;         custom-buffer-verbose-help nil)
-;;   ;; Display entries as words
-;;   (setq custom-unlispify-tag-names nil
-;;         custom-unlispify-menu-entries nil))
+;;; Customize interface
+(keymap-global-set "<f11>" 'customize-group)
+;; Configuration
+(after-load 'cus-edit
+  ;; Kill buffer when done and shorten help
+  (setq custom-buffer-done-kill t
+        custom-buffer-verbose-help nil)
+  ;; Display entries as words
+  (setq custom-unlispify-tag-names nil
+        custom-unlispify-menu-entries nil))
 
-;; ;;; Custom theme configuration
-;; (after-load 'custom
-;;   ;; Treat themes as safe
-;;   (setq custom-safe-themes t))
+;;; Custom theme configuration
+(after-load 'custom
+  ;; Treat themes as safe
+  (setq custom-safe-themes t))
 
-;; ;;; Load changes from the customize interface
-;; (load custom-file 'noerror)
+;;; Load changes from the customize interface
+(after-load 'no-littering
+  (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+  (load custom-file 'noerror))
 
 ;;; init.el ends here
 
