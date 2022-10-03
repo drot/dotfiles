@@ -776,9 +776,6 @@
   ;; Change default prompt
   (setq ielm-prompt "(>) "))
 
-;;; Transient
-(require 'transient)
-
 ;;; Flymake
 (keymap-global-set "C-c ! t" 'flymake-mode)
 ;; Configuration
