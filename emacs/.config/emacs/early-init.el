@@ -74,28 +74,67 @@
 ;;; Disable `package' initialization
 (setq package-enable-at-startup nil)
 
-;;; `straight.el' configuration
-(setq straight-repository-branch "develop")
+;;; Bootstrap `elpaca'
+(declare-function elpaca-generate-autoloads "elpaca")
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(when-let ((elpaca-repo (expand-file-name "repos/elpaca/" elpaca-directory))
+           (elpaca-build (expand-file-name "elpaca/" elpaca-builds-directory))
+           (elpaca-target (if (file-exists-p elpaca-build) elpaca-build elpaca-repo))
+           (elpaca-url  "https://www.github.com/progfolio/elpaca.git")
+           ((add-to-list 'load-path elpaca-target))
+           ((not (file-exists-p elpaca-repo)))
+           (buffer (get-buffer-create "*elpaca-bootstrap*")))
+  (condition-case-unless-debug err
+      (progn
+        (unless (zerop (call-process "git" nil buffer t "clone" elpaca-url elpaca-repo))
+          (error "%s" (list (with-current-buffer buffer (buffer-string)))))
+        (byte-recompile-directory elpaca-repo 0 'force)
+        (require 'elpaca)
+        (elpaca-generate-autoloads "elpaca" elpaca-repo)
+        (kill-buffer buffer))
+    ((error)
+     (delete-directory elpaca-directory 'recursive)
+     (with-current-buffer buffer
+       (goto-char (point-max))
+       (insert (format "\n%S" err))
+       (display-buffer buffer)))))
+(require 'elpaca-autoloads)
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca (elpaca :host github :repo "progfolio/elpaca"))
 
-;; Hide process buffer
-(setq straight-process-buffer " *straight-process*")
+;;; Install and integrate `setup' with `elpaca'
+(elpaca setup (require 'setup))
+;; Also enable `no-littering' as early as possible
+(elpaca no-littering (require 'no-littering))
+(elpaca-process-queues)
 
-;; Don't check for modifications before the packages are loaded
-(setq straight-check-for-modifications '(check-on-save find-when-checking))
+(defun setup-wrap-to-install-package (body _name)
+  "Wrap BODY in an `elpaca' block if necessary.
+The body is wrapped in an `elpaca' block if `setup-attributes'
+contains an alist with the key `elpaca'."
+  (if (assq 'elpaca setup-attributes)
+      `(elpaca ,(cdr (assq 'elpaca setup-attributes)) ,@(macroexp-unprogn body))
+    body))
 
-;; Bootstrap
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; Add the wrapper function
+(add-to-list 'setup-modifier-list #'setup-wrap-to-install-package)
+
+(setup-define :elpaca
+  (lambda (order &rest recipe)
+    (push (cond
+           ((eq order t) `(elpaca . ,(setup-get 'feature)))
+           ((eq order nil) '(elpaca . nil))
+           (`(elpaca . (,order ,@recipe))))
+          setup-attributes)
+    ;; If the macro wouldn't return nil, it would try to insert the result of
+    ;; `push' which is the new value of the modified list. As this value usually
+    ;; cannot be evaluated, it is better to return nil which the byte compiler
+    ;; would optimize away anyway.
+    nil)
+  :documentation "Install ORDER with `elpaca'.
+The ORDER can be used to deduce the feature context."
+  :shorthand #'cadr)
 
 ;; Local Variables:
 ;; no-byte-compile: t
