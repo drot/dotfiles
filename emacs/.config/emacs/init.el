@@ -1449,9 +1449,12 @@
     (add-hook 'sh-mode-hook #'flymake-shellcheck-load)))
 
 ;;; Geiser Guile
-;; (elpaca geiser-guile)
-;; (after-load 'geiser-guile
-;;   (setq geiser-guile-binary "guile3.0"))
+(elpaca-queue
+ (elpaca geiser
+  (elpaca geiser-guile)))
+;; Configuration
+(after-load 'geiser-guile
+  (setq geiser-guile-binary "guile3.0"))
 
 ;;; Go mode
 (elpaca go-mode)
@@ -1499,7 +1502,6 @@
 
 ;;; Eglot
 (elpaca eglot)
-(elpaca consult-eglot)
 ;; Set global key binding
 (keymap-global-set "C-c t e" 'eglot)
 ;; Configuration
@@ -1742,9 +1744,11 @@
 (elpaca php-mode)
 
 ;;; Polymode Markdown
-(elpaca poly-markdown
-  ;; Enable mode
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
+(elpaca-queue
+ (elpaca polymode)
+ (elpaca poly-markdown
+   ;; Enable mode
+   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))))
 
 ;;; Rainbow mode
 (elpaca rainbow-mode)
@@ -1866,11 +1870,13 @@
 (elpaca sql-indent)
 
 ;;; Tree-sitter
-(elpaca tree-sitter-langs
-  ;; Enable mode
-  (global-tree-sitter-mode +1)
-  ;; Enable syntax highlight
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(elpaca-queue
+ (elpaca tree-sitter
+   ;; Enable mode
+   (global-tree-sitter-mode +1)
+   ;; Enable syntax highlight
+   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+   (elpaca tree-sitter-langs)))
 
 ;;; Unfill
 (elpaca unfill)
@@ -1942,9 +1948,14 @@
 (keymap-global-set "C-c w c" 'link-hint-copy-link)
 
 ;;; Company mode
-(elpaca company
-  ;; Enable mode
-  (global-company-mode +1))
+(elpaca-queue
+ (elpaca company
+   ;; Enable mode
+   (global-company-mode +1))
+;;; Company Statistics
+ (elpaca company-statistics
+   ;; Enable mode
+   (company-statistics-mode +1)))
 ;; Set global key binding
 (keymap-global-set "C-c i y" 'company-yasnippet)
 ;; Configuration
@@ -1969,11 +1980,6 @@
   (setq company-dabbrev-code-everywhere t
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case t))
-
-;; ;;; Company Statistics
-(elpaca company-statistics
-  ;; Enable mode
-  (company-statistics-mode +1))
 
 ;;; Diff-Hl
 (elpaca diff-hl
@@ -2069,7 +2075,9 @@
         completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; Consult
-(elpaca consult)
+(elpaca-queue
+ (elpaca consult)
+ (elpaca consult-eglot))
 ;; Add global key bindings
 (dolist (bind '(;; C-c bindings (mode-specific-map)
                 ("C-c h c" . consult-history)
