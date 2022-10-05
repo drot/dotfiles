@@ -1447,7 +1447,7 @@
     (add-hook 'sh-mode-hook #'flymake-shellcheck-load)))
 
 ;;; Geiser Guile
-;; (elpaca geiser-guile)
+;; (setup (:elpaca geiser-guile))
 ;; (after-load 'geiser-guile
 ;;   (setq geiser-guile-binary "guile3.0"))
 
