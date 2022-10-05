@@ -74,34 +74,28 @@
 ;;; Disable `package' initialization
 (setq package-enable-at-startup nil)
 
-;;; Bootstrap `elpaca'
-(declare-function elpaca-generate-autoloads "elpaca")
-(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(when-let ((elpaca-repo (expand-file-name "repos/elpaca/" elpaca-directory))
-           (elpaca-build (expand-file-name "elpaca/" elpaca-builds-directory))
-           (elpaca-target (if (file-exists-p elpaca-build) elpaca-build elpaca-repo))
-           (elpaca-url  "https://www.github.com/progfolio/elpaca.git")
-           ((add-to-list 'load-path elpaca-target))
-           ((not (file-exists-p elpaca-repo)))
-           (buffer (get-buffer-create "*elpaca-bootstrap*")))
-  (condition-case-unless-debug err
-      (progn
-        (unless (zerop (call-process "git" nil buffer t "clone" elpaca-url elpaca-repo))
-          (error "%s" (list (with-current-buffer buffer (buffer-string)))))
-        (byte-recompile-directory elpaca-repo 0 'force)
-        (require 'elpaca)
-        (elpaca-generate-autoloads "elpaca" elpaca-repo)
-        (kill-buffer buffer))
-    ((error)
-     (delete-directory elpaca-directory 'recursive)
-     (with-current-buffer buffer
-       (goto-char (point-max))
-       (insert (format "\n%S" err))
-       (display-buffer buffer)))))
-(require 'elpaca-autoloads)
-(add-hook 'after-init-hook #'elpaca-process-queues)
-(elpaca (elpaca :host github :repo "progfolio/elpaca"))
+;;; `straight.el' configuration
+(setq straight-repository-branch "develop")
+
+;; Hide process buffer
+(setq straight-process-buffer " *straight-process*")
+
+;; Don't check for modifications before the packages are loaded
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
+;; Bootstrap
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;; Local Variables:
 ;; no-byte-compile: t
