@@ -1736,6 +1736,9 @@
 ;;; PHP mode
 (setup (:elpaca php-mode))
 
+;;; PKGBUILD mode
+(setup (:elpaca pkgbuild-mode))
+
 ;;; Polymode Markdown
 (setup (:elpaca poly-markdown)
   ;; Enable mode
