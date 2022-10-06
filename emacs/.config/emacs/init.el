@@ -1442,9 +1442,13 @@
     (add-hook 'sh-mode-hook #'flymake-shellcheck-load)))
 
 ;;; Geiser Guile
-;; (setup (:elpaca geiser-guile))
-;; (after-load 'geiser-guile
-;;   (setq geiser-guile-binary "guile3.0"))
+;; (setup geiser
+;;   (:elpaca t)
+;;   (:option geiser-default-implementation
+;;            (when (executable-find "guile")
+;;                 (:elpaca geiser-guile)
+;;                 'guile))
+;;   (:hook-into scheme-mode))
 
 ;;; Go mode
 (setup (:elpaca go-mode))
