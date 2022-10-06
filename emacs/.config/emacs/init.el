@@ -169,9 +169,8 @@
       backup-by-copying t)
 
 ;;; Auto save file configuration
-(after-load 'no-littering
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;;; Save minibuffer history
 (setq savehist-autosave-interval nil
@@ -194,9 +193,8 @@
 ;; Enable mode
 (recentf-mode +1)
 ;; Exclude `no-littering' directories from recent files list
-(after-load 'no-littering
-  (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory))
+(add-to-list 'recentf-exclude no-littering-var-directory)
+(add-to-list 'recentf-exclude no-littering-etc-directory)
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -235,9 +233,9 @@
   (add-hook hook
             (lambda () (hl-line-mode -1))))
 ;; Configuration
-(after-load 'hl-line
+(setup hl-line
   ;; Don't display line highlight in inactive windows
-  (setq global-hl-line-sticky-flag nil))
+  (:option global-hl-line-sticky-flag nil))
 
 ;;; Highlight matching parentheses configuration
 (setq show-paren-delay 0
@@ -261,9 +259,9 @@
 ;;; Electric pair mode
 (electric-pair-mode +1)
 ;; Configuration
-(after-load 'electric
+(setup electric
   ;; Watch out for context
-  (setq electric-quote-context-sensitive t))
+  (:option electric-quote-context-sensitive t))
 
 ;;; Prettify-Symbols mode
 (setq prettify-symbols-unprettify-at-point t)
@@ -280,10 +278,10 @@
 ;; Set key bindings to delete windows
 (windmove-delete-default-keybindings)
 ;; Configuration
-(after-load 'windmove
+(setup windmove
   ;; Cycle windows and create them if needed
-  (setq windmove-wrap-around t
-        windmove-create-window t))
+  (:option windmove-wrap-around t
+           windmove-create-window t))
 
 ;;; Undo and redo the window configuration
 (setq winner-dont-bind-my-keys t)
@@ -294,12 +292,15 @@
 (winner-mode +1)
 
 ;;; Hide Show mode
-(dolist (hook '(c-mode-common-hook
-                emacs-lisp-mode-hook
-                python-mode-hook))
-  (add-hook hook #'hs-minor-mode))
-;; Configuration
-(after-load 'hideshow
+(setup hideshow
+  (dolist (hook '(c-mode-common-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook))
+    (add-hook hook #'hs-minor-mode))
+  ;; Use nesting, apply custom overlay and unfold when search is active
+  (:option hs-allow-nesting t
+           hs-set-up-overlay #'site/hs-display-code-line-counts
+           hs-isearch-open t)
   ;; Custom overlay function
   (defun site/hs-display-code-line-counts (ov)
     "Unique overlay function to be applied with `hs-minor-mode'."
@@ -309,12 +310,7 @@
                     (format " ... / %d"
                             (count-lines (overlay-start ov)
                                          (overlay-end ov)))
-                    'face 'font-lock-comment-face))))
-  ;; Use nesting
-  (setq hs-allow-nesting t)
-  ;; Unfold when search is active and apply custom overlay
-  (setq hs-set-up-overlay #'site/hs-display-code-line-counts
-        hs-isearch-open t))
+                    'face 'font-lock-comment-face)))))
 
 ;;; Bug Reference mode
 (add-hook 'text-mode-hook #'bug-reference-mode)
@@ -324,34 +320,34 @@
 ;;; Goto Address mode
 (global-goto-address-mode +1)
 
-;;; Fly Spell mode configuration
-(add-hook 'text-mode-hook #'flyspell-mode)
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-;; Set global key bindings
-(keymap-global-set "C-c c b" 'flyspell-buffer)
-(keymap-global-set "C-c c r" 'flyspell-region)
+;;; Fly Spell mode
 ;; Configuration
-(after-load 'flyspell
+(setup flyspell
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  ;; Set global key bindings
+  (:global "C-c c b" flyspell-buffer
+           "C-c c r" flyspell-region)
   ;; Disable conflicting key binding
-  (keymap-unset flyspell-mode-map "C-M-i")
+  (:unbind "C-M-i")
   ;; Correct some annoying defaults
-  (setq flyspell-use-meta-tab nil
-        flyspell-issue-message-flag nil
-        flyspell-issue-welcome-flag nil
-        flyspell-consider-dash-as-word-delimiter-flag t)
-  ;; Don't slowdown looking for duplicates
-  (setq flyspell-duplicate-distance 12000))
+  (:option flyspell-use-meta-tab nil
+           flyspell-issue-message-flag nil
+           flyspell-issue-welcome-flag nil
+           flyspell-consider-dash-as-word-delimiter-flag t
+           ;; Don't slowdown looking for duplicates
+           flyspell-duplicate-distance 12000))
 
 ;;; Ispell
-(keymap-global-set "C-c c d" 'ispell-change-dictionary)
-;; Configuration
-(after-load 'ispell
+(setup ispell
+  ;; Set global key binding
+  (:global "C-c c d" 'ispell-change-dictionary)
   ;; Ensure spell checking program is available
-  (setq ispell-program-name (executable-find "aspell"))
-  ;; Extra switches
-  (setq ispell-extra-args '("--sug-mode=ultra"))
-  ;; Default dictionary
-  (setq ispell-dictionary "english"))
+  (:option ispell-program-name (executable-find "aspell")
+           ;; Extra switches
+           ispell-extra-args '("--sug-mode=ultra")
+           ;; Default dictionary
+           ispell-dictionary "english"))
 
 ;;; Isearch
 (setq isearch-allow-scroll t)
@@ -366,36 +362,35 @@
 (keymap-set isearch-mode-map "C-o" 'isearch-occur)
 
 ;;; Diff mode
-(after-load 'diff-mode
+(setup diff-mode
   ;; More prettier diff format
-  (setq diff-font-lock-prettify t))
+  (:option diff-font-lock-prettify t))
 
 ;;; Ediff window split
-(after-load 'ediff-wind
+(setup ediff-wind
   ;; Two windows, side by side
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain
-        ediff-split-window-function #'split-window-horizontally)
-  ;; Don't touch the mouse
-  (setq ediff-grab-mouse nil))
+  (:option ediff-window-setup-function #'ediff-setup-windows-plain
+           ediff-split-window-function #'split-window-horizontally
+           ;; Don't touch the mouse
+           ediff-grab-mouse nil))
 
 ;; Ediff restore previous window configuration
-(after-load 'ediff-util
+(setup ediff-util
   ;; Clever hack using `winner-undo'
   (add-hook 'ediff-after-quit-hook-internal #'winner-undo))
 
 ;;; Uniquify buffer names
-(after-load 'uniquify
+(setup uniquify
   ;; Configuration
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-trailing-separator-p t
-        uniquify-ignore-buffers-re "^\\*"))
+  (:option uniquify-buffer-name-style 'forward
+           uniquify-trailing-separator-p t
+           uniquify-ignore-buffers-re "^\\*"))
 
 ;;; Tab bar
-(after-load 'tab-bar
-  ;; Don't show on single tab
-  (setq tab-bar-show 1)
-  ;; Display numbers on tabs
-  (setq tab-bar-tab-hints t))
+(setup tab-bar
+  ;; Don't show on single tab, show numbers on tabs
+  (:option tab-bar-show 1
+           tab-bar-tab-hints t))
 
 ;;; Use Ibuffer for buffer list
 (keymap-global-set "C-x C-b" 'ibuffer)
@@ -480,31 +475,30 @@
   (setq ibuffer-use-other-window t))
 
 ;;; Find file at point
-(after-load 'ffap
+(setup ffap
+  ;; Initialize mode
+  (ffap-bindings)
   ;; Require prefix
-  (setq ffap-require-prefix t
-        dired-at-point-require-prefix t)
-  ;; Disable pinging to avoid slowdowns
-  (setq ffap-machine-p-known 'reject)
-  ;; Default RFC path
-  (setq ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
-;; Initialize mode
-(ffap-bindings)
+  (:option ffap-require-prefix t
+           dired-at-point-require-prefix t
+           ;; Disable pinging to avoid slowdowns
+           ffap-machine-p-known 'reject
+           ;; Default RFC path
+           ffap-rfc-path "https://ietf.org/rfc/rfc%s.txt"))
 
 ;;; Version control
-(after-load 'vc-hooks
+(setup vc-hooks
   ;; TRAMP speedup
-  (setq vc-ignore-dir-regexp
-        (format "\\(%s\\)\\|\\(%s\\)"
-                vc-ignore-dir-regexp
-                tramp-file-name-regexp))
-  ;; Don't ask to follow symlinks
-  (setq vc-follow-symlinks t)
-  ;; Make backups even under version control
-  (setq vc-make-backup-files t))
+  (:option vc-ignore-dir-regexp (format "\\(%s\\)\\|\\(%s\\)"
+                                        vc-ignore-dir-regexp
+                                        tramp-file-name-regexp)
+           ;; Don't ask to follow symlinks
+           vc-follow-symlinks t
+           ;; Make backups even under version control
+           vc-make-backup-files t))
 
 ;;; Image mode
-(after-load 'image-mode
+(setup image-mode
   ;; Show image dimension function
   (defun site/image-dimensions-minor-mode ()
     "Display image dimensions in the mode line."
@@ -521,21 +515,20 @@
   (add-hook 'image-mode-hook #'image-toggle-animation))
 
 ;;; Change default print command
-(setq lpr-command "lp")
-;; Configuration
-(after-load 'lpr
-  ;; Don't add extra switches
-  (setq lpr-add-switches nil))
+(setup lpr  
+  (:option lpr-command "lp"
+           ;; Don't add extra switches
+           lpr-add-switches nil))
 
 ;;; Imenu configuration
-(after-load 'imenu
+(setup imenu
   ;; Always rescan buffers
-  (setq imenu-auto-rescan t))
+  (:option imenu-auto-rescan t))
 
 ;;; Apropos configuration
-(after-load 'apropos
+(setup apropos
   ;; Search more extensively
-  (setq apropos-do-all t))
+  (:option apropos-do-all t))
 
 ;;; Python mode configuration
 (after-load 'python
@@ -546,11 +539,6 @@
             (lambda () (setq fill-column 79)))
   ;; Enable SubWord mode
   (add-hook 'python-mode-hook #'subword-mode))
-
-;;; Ruby inferior mode
-(setup (:elpaca inf-ruby)
-  ;; Configuration
-  (setq inf-ruby-default-implementation "pry"))
 
 ;;; CC mode
 (add-to-list 'auto-mode-alist '("\\.fos\\'" . c++-mode))
@@ -567,24 +555,24 @@
   (add-hook 'c-mode-common-hook #'auto-fill-mode))
 
 ;;; Etags
-(after-load 'etags
+(setup etags
   ;; Default filename
-  (setq tags-file-name "TAGS"))
+  (:option tags-file-name "TAGS"))
 
 ;;; Scheme mode
-(after-load 'scheme
+(setup scheme
   ;; Use Guile as the default interpreter
-  (setq scheme-program-name "guile3.0"))
+  (:option scheme-program-name "guile3.0"))
 
 ;;; CSS mode
-(after-load 'css-mode
+(setup css-mode
   ;; Indent level
-  (setq css-indent-offset 2))
+  (:option css-indent-offset 2))
 
 ;;; NXML mode
-(after-load 'nxml-mode
+(setup nxml-mode
   ;; Auto complete closing tags
-  (setq nxml-slash-auto-complete-flag t))
+  (:option nxml-slash-auto-complete-flag t))
 
 ;;; Doc View mode
 (after-load 'doc-view
@@ -1825,6 +1813,11 @@
   ;; Apply the same for `rcirc-color'
   (setq rcirc-colors rcirc-styles-color-vector))
 
+;;; Ruby inferior mode
+(setup (:elpaca inf-ruby)
+  ;; Configuration
+  (:option inf-ruby-default-implementation "pry"))
+
 ;;; Salt mode
 (setup (:elpaca salt-mode))
 
@@ -2168,7 +2161,8 @@
   (add-to-list 'marginalia-prompt-categories '("tab by name" . tab)))
 
 ;;; Embark
-(setup (:elpaca embark)
+(setup embark
+  (:elpaca t)
   ;; Replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command))
 ;; Set global key bindings
@@ -2193,6 +2187,14 @@
   (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))
 
 ;;; Embark avy integration
+;; (setup avy-embark-collect
+;;   (:elpaca t)
+;;   (after-load 'embark
+;;     ;; Load library
+;;     (require 'avy-embark-collect))
+;;   (:bind "C-'" avy-embark-collect-choose
+;;          "C-\"" avy-embark-collect-act))
+(setup avy-embark-collect (:elpaca t))
 (after-load 'embark
   ;; Load library
   (require 'avy-embark-collect)
