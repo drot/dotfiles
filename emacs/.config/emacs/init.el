@@ -39,6 +39,9 @@
 (setq inhibit-startup-screen t)
 (fset 'display-startup-echo-area-message #'ignore)
 
+;;; Hide async compilation warnings buffer
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;;; Disable scratch buffer info text
 (setq initial-scratch-message nil)
 
