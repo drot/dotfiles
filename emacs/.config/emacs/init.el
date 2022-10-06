@@ -1525,25 +1525,27 @@
   (setq nov-text-width 80))
 
 ;;; Macrostep
-(setup (:elpaca macrostep))
-;; Set key binding
-(keymap-set emacs-lisp-mode-map "C-c M-e" 'macrostep-expand)
+(setup elisp-mode
+  (:elpaca macrostep)
+  ;; Set key binding
+  (:with-mode emacs-lisp-mode
+    (:bind "C-c M-e" macrostep-expand)))
 
 ;;; Magit
-(setup (:elpaca magit))
-;; Set global key bindings
-(dolist (bind '(("C-c g c" . magit-clone)
-                ("C-c g b" . magit-blame)
-                ("C-c g l" . magit-log-buffer-file)
-                ("C-c g p" . magit-pull)))
-  (keymap-global-set (car bind) (cdr bind)))
-;; Configuration
-(after-load 'magit
-  ;; Insert submodule sections
-  (magit-add-section-hook 'magit-status-sections-hook
-                          'magit-insert-modules
-                          'magit-insert-stashes
-                          'append))
+(setup magit
+  (:elpaca t)
+  ;; Set global key bindings
+  (:global "C-c g c" magit-clone
+           "C-c g b" magit-blame
+           "C-c g l" magit-log-buffer-file
+           "C-c g p"  magit-pull)
+  ;; Configuration
+  (after-load 'magit
+    ;; Insert submodule sections
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules
+                            'magit-insert-stashes
+                            'append)))
 
 ;;; git additional modes
 (setup (:elpaca git-modes))
