@@ -1502,6 +1502,13 @@
   ;; Highlight unused variables
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
+;;; JSON mode
+(setup json-mode
+  (:elpaca json-mode
+           :host github
+           :repo "emacs-straight/json-mode"
+           :protocol ssh))
+
 ;;; Eglot
 (setup eglot
   (:elpaca t)
