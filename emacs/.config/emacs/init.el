@@ -1937,7 +1937,14 @@
 (setup avy
   (:elpaca t)
   ;; Enable mode
-  (avy-setup-default))
+  (avy-setup-default)
+  ;; Set global key bindings
+  (:global "C-:" avy-goto-char
+           "C-'" avy-goto-char-timer
+           "M-g f" avy-goto-line
+           "M-g w" avy-goto-word-1
+           "M-g e" avy-goto-word-0
+           "C-M-'" site/avy-transient))
 ;; Define Transient command
 (transient-define-prefix site/avy-transient ()
   :transient-suffix 'transient--do-stay
@@ -1945,14 +1952,6 @@
   ["Cycle avy Candidates"
    ("n" "Next" avy-next)
    ("p" "Previous" avy-prev)])
-;; Set global key bindings
-(dolist (bind '(("C-:" . avy-goto-char)
-                ("C-'" . avy-goto-char-timer)
-                ("M-g f" . avy-goto-line)
-                ("M-g w" . avy-goto-word-1)
-                ("M-g e" . avy-goto-word-0)
-                ("C-M-'" . site/avy-transient)))
-  (keymap-global-set (car bind) (cdr bind)))
 ;; Configuration
 (after-load 'avy
   ;; Work across all frames
