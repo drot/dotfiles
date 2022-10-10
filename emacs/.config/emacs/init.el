@@ -2271,18 +2271,20 @@
           ztreedir-mode)))
 
 ;;; Paredit
-(setup (:elpaca paredit :host github :repo "emacsmirror/paredit" :protocol ssh)
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  ielm-mode-hook
-                  clojure-mode-hook
-                  cider-repl-mode-hook
-                  scheme-mode-hook
-                  sly-mrepl-mode-hook
-                  geiser-repl-mode-hook))
-    (add-hook hook #'enable-paredit-mode)))
+(setup paredit
+  (:elpaca paredit :host github :repo "emacsmirror/paredit" :protocol ssh)
+  ;; Enable mode
+  (:with-hook (emacs-lisp-mode-hook
+               lisp-mode-hook
+               ielm-mode-hook
+               clojure-mode-hook
+               cider-repl-mode-hook
+               scheme-mode-hook
+               sly-mrepl-mode-hook
+               geiser-repl-mode-hook)
+    (:hook #'enable-paredit-mode)))
 ;; Add extra functions via `paredit-ext'
-(setup (:elpaca paredit-ext :host github :repo "drot/paredit-ext" :protocol ssh))
+(setup paredit-ext (:elpaca paredit-ext :host github :repo "drot/paredit-ext" :protocol ssh))
 ;; Configuration
 (after-load 'paredit
   ;; Enable integration with ElDoc
