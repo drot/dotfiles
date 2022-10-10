@@ -1954,17 +1954,19 @@
         avy-highlight-first t))
 
 ;;; Link-hint
-(setup (:elpaca link-hint))
-;; Set global key bindings
-(keymap-global-set "C-c w o" 'link-hint-open-link)
-(keymap-global-set "C-c w c" 'link-hint-copy-link)
+(setup link-hint
+  (:elpaca t)
+  ;; Set global key bindings
+  (:global "C-c w o" link-hint-open-link
+           "C-c w c" link-hint-copy-link))
 
 ;;; Company mode
-(setup (:elpaca company)
+(setup company
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "C-c i y" company-yasnippet)
   ;; Enable mode
   (global-company-mode +1))
-;; Set global key binding
-(keymap-global-set "C-c i y" 'company-yasnippet)
 ;; Configuration
 (after-load 'company
   ;; Change default backends
@@ -1989,18 +1991,20 @@
         company-dabbrev-ignore-case t))
 
 ;; ;;; Company Statistics
-(setup (:elpaca company-statistics)
+(setup company-statistics
+  (:elpaca t)
   ;; Enable mode
   (company-statistics-mode +1))
 
 ;;; Diff-Hl
-(setup (:elpaca diff-hl)
+(setup diff-hl
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "C-c t v" diff-hl-margin-mode)
   ;; Enable mode
   (global-diff-hl-mode +1)
   ;; Update diffs immediately
   (diff-hl-flydiff-mode +1))
-;; Set global key binding
-(keymap-global-set "C-c t v" 'diff-hl-margin-mode)
 ;; Add hooks for `dired' and `magit'
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
@@ -2011,7 +2015,8 @@
               (diff-hl-margin-local-mode))))
 
 ;; ;;; Hl-Todo
-(setup (:elpaca hl-todo)
+(setup hl-todo
+  (:elpaca t)
   ;; Enable mode
   (global-hl-todo-mode +1))
 ;; Configuration
@@ -2030,7 +2035,8 @@
     (keymap-set hl-todo-mode-map (car bind) (cdr bind))))
 
 ;;; Page break lines
-(setup (:elpaca page-break-lines)
+(setup page-break-lines
+  (:elpaca t)
   ;; Enable mode
   (global-page-break-lines-mode +1))
 ;; Configuration
@@ -2041,7 +2047,8 @@
   (add-to-list 'page-break-lines-modes 'emacs-news-view-mode))
 
 ;;; VERTical Interactive COmpletion
-(setup (:elpaca vertico)
+(setup vertico
+  (:elpaca t)
   ;; Enable mode
   (vertico-mode +1)
   ;; Add prompt indicator to `completing-read-multiple'.
@@ -2077,7 +2084,7 @@
   (setq vertico-cycle t))
 
 ;;; Orderless
-(setup (:elpaca orderless)
+(setup orderless (:elpaca t)
   ;; Load library
   (require 'orderless)
   ;; Set completion style explicitly
@@ -2087,44 +2094,44 @@
         completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;;; Consult
-(setup (:elpaca consult))
-;; Add global key bindings
-(dolist (bind '(;; C-c bindings (mode-specific-map)
-                ("C-c h c" . consult-history)
-                ("C-c h m" . consult-mode-command)
-                ("C-c f b" . consult-bookmark)
-                ("C-c k" . consult-kmacro)
-                ;; C-x bindings (ctl-x-map)
-                ("C-x M-:" . consult-complex-command) ;; orig. `repeat-complex-command'
-                ("C-x b" . consult-buffer) ;; orig. `switch-to-buffer'
-                ("C-x 4 b" . consult-buffer-other-window) ;; orig. `switch-to-buffer-other-window'
-                ("C-x 5 b" . consult-buffer-other-frame) ;; orig. `switch-to-buffer-other-frame'
-                ;; Custom M-# bindings for fast register access
-                ("M-#" . consult-register-load)
-                ("M-'" . consult-register-store) ;; orig. `abbrev-prefix-mark' (unrelated)
-                ("C-M-#" . consult-register)
-                ;; Other custom bindings
-                ("<help> a" . consult-apropos) ;; orig. `apropos-command'
-                ;; M-g bindings (goto-map)
-                ("M-g e" . consult-compile-error)
-                ("M-g g" . consult-goto-line) ;; orig. `goto-line'
-                ("M-g M-g" . consult-goto-line) ;; orig. `goto-line'
-                ("M-g o" . consult-outline)
-                ("M-g m" . consult-mark)
-                ("M-g k" . consult-global-mark)
-                ("M-g i" . consult-imenu)
-                ("M-g I" . consult-imenu-multi)
-                ;; M-s bindings (search-map)
-                ("M-s f" . consult-find)
-                ("M-s L" . consult-locate)
-                ("M-s g" . consult-grep)
-                ("M-s G" . consult-git-grep)
-                ("M-s r" . consult-ripgrep)
-                ("M-s l" . consult-line)
-                ("M-s m" . consult-multi-occur)
-                ("M-s k" . consult-keep-lines)
-                ("M-s u" . consult-focus-lines)))
-  (keymap-global-set (car bind) (cdr bind)))
+(setup consult
+  (:elpaca t)
+  ;; C-c bindings (mode-specific-map)
+  (:global 
+   "C-c h c" consult-history
+   "C-c h m" consult-mode-command
+   "C-c f b" consult-bookmark
+   "C-c k" consult-kmacro
+   ;; C-x bindings (ctl-x-map)
+   "C-x M-:" consult-complex-command         ;; orig. `repeat-complex-command'
+   "C-x b" consult-buffer                    ;; orig. `switch-to-buffer'
+   "C-x 4 b" consult-buffer-other-window ;; orig. `switch-to-buffer-other-window'
+   "C-x 5 b" consult-buffer-other-frame  ;; orig. `switch-to-buffer-other-frame'
+   ;; Custom M-# bindings for fast register access
+   "M-#" consult-register-load
+   "M-'" consult-register-store ;; orig. `abbrev-prefix-mark' (unrelated)
+   "C-M-#" consult-register
+   ;; Other custom bindings
+   "<help> a" consult-apropos ;; orig. `apropos-command'
+   ;; M-g bindings (goto-map)
+   "M-g e" consult-compile-error
+   "M-g g" consult-goto-line       ;; orig. `goto-line'
+   "M-g M-g" consult-goto-line     ;; orig. `goto-line'
+   "M-g o" consult-outline
+   "M-g m" consult-mark
+   "M-g k" consult-global-mark
+   "M-g i" consult-imenu
+   "M-g I" consult-imenu-multi
+   ;; M-s bindings (search-map)
+   "M-s f" consult-find
+   "M-s L" consult-locate
+   "M-s g" consult-grep
+   "M-s G" consult-git-grep
+   "M-s r" consult-ripgrep
+   "M-s l" consult-line
+   "M-s m" consult-multi-occur
+   "M-s k" consult-keep-lines
+   "M-s u" consult-focus-lines))
 
 ;; Isearch integration
 (keymap-global-set "M-s e" 'consult-isearch-history)
@@ -2175,7 +2182,8 @@
   (add-to-list 'consult-buffer-sources 'org-buffer-source 'append))
 
 ;;; Marginalia in the minibuffer
-(setup (:elpaca marginalia)
+(setup marginalia
+  (:elpaca t)
   ;; Set key binding
   (keymap-set minibuffer-local-map "M-A" 'marginalia-cycle)
   ;; Enable Mode
@@ -2186,12 +2194,12 @@
 ;;; Embark
 (setup embark
   (:elpaca t)
+  ;; Set global key bindings
+  (:global  "C-S-a" embark-act
+            "C-S-d" embark-dwim
+            "C-h B" embark-bindings)
   ;; Replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command))
-;; Set global key bindings
-(keymap-global-set "C-S-a" 'embark-act)
-(keymap-global-set "C-S-d" 'embark-dwim)
-(keymap-global-set "C-h B" 'embark-bindings)
 ;; Configuration
 (after-load 'embark
   ;; Hide the mode line of the Embark live/completions buffers
@@ -2201,7 +2209,7 @@
                  (window-parameters (mode-line-format . none)))))
 
 ;;; Embark Consult integration
-(setup (:elpaca embark-consult))
+(setup embark-consult (:elpaca t))
 ;; Configuration
 (after-load 'embark
   ;; Load library
@@ -2221,7 +2229,8 @@
       (keymap-set embark-collect-mode-map (car bind) (cdr bind)))))
 
 ;;; Minions
-(setup (:elpaca minions)
+(setup minions
+  (:elpaca t)
   ;; Enable mode
   (minions-mode +1))
 ;; Configuration
@@ -2306,16 +2315,17 @@
             (lambda () (setq-local electric-pair-mode nil))))
 
 ;;; Rainbow Delimiters
-(setup (:elpaca rainbow-delimiters)
+(setup rainbow-delimiters
+  (:elpaca t)
   ;; Enable mode
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  clojure-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook #'rainbow-delimiters-mode)))
+  (:hook-into emacs-lisp-mode
+              lisp-mode
+              clojure-mode
+              scheme-mode))
 
 ;;; YASnippet
-(setup (:elpaca yasnippet)
+(setup yasnippet
+  (:elpaca t)
   ;; Enable mode
   (yas-global-mode +1))
 
