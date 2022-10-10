@@ -8,6 +8,7 @@ export GREP_COLORS="mt=01;37;41"
 export NAME="Davor Rotim"
 export EMAIL="rotim.davor@nsoft.com"
 export SBCL_HOME="$HOME/.local/lib/sbcl"
+export SSH_AUTH_SOCK="/run/user/1000/gcr/ssh"
 
 # Qt5 default style
 export QT_QPA_PLATFORMTHEME="qt5ct"
