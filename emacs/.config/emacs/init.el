@@ -1119,9 +1119,10 @@
                 "C-c x y" 0x0-upload-text))
 
 ;;; Ace-window
-(setup ace-window (:elpaca t))
-;; Set global key binding
-(keymap-global-set "M-o" 'ace-window)
+(setup ace-window
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "M-o" ace-window))
 ;; Configuration
 (after-load 'ace-window
   ;; Use keys on the home row
@@ -2084,7 +2085,8 @@
   (setq vertico-cycle t))
 
 ;;; Orderless
-(setup orderless (:elpaca t)
+(setup orderless
+  (:elpaca t)
   ;; Load library
   (require 'orderless)
   ;; Set completion style explicitly
@@ -2185,7 +2187,8 @@
 (setup marginalia
   (:elpaca t)
   ;; Set key binding
-  (keymap-set minibuffer-local-map "M-A" 'marginalia-cycle)
+  (:with-map minibuffer-local-map
+    :bind "M-A" marginalia-cycle)
   ;; Enable Mode
   (marginalia-mode +1)
   ;; Add `tab-bar-mode' support
