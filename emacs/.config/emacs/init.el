@@ -2194,7 +2194,7 @@
   ;; Set key binding
   (:with-map minibuffer-local-map
     (:bind "M-A" marginalia-cycle))
-  ;; Enable Mode
+  ;; Enable mode
   (marginalia-mode +1)
   ;; Add `tab-bar-mode' support
   (add-to-list 'marginalia-prompt-categories '("tab by name" . tab)))
