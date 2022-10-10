@@ -1439,10 +1439,12 @@
 (keymap-global-set "C-=" 'er/expand-region)
 
 ;;; Flymake ShellCheck support
-(setup flymake-shellcheck (:elpaca t)
+(setup flymake-shellcheck
+  (:elpaca t)
   ;; Enable mode
   (when (executable-find "shellcheck")
-    (add-hook 'sh-mode-hook #'flymake-shellcheck-load)))
+    (:with-hook sh-mode-hook
+      (:hook #'flymake-shellcheck-load))))
 
 ;;; Geiser Guile
 ;; (setup geiser
