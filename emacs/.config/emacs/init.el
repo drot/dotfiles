@@ -30,7 +30,7 @@
 ;;; Keep main Emacs directory clean from various cache and save files
 
 ;;; Color theme
-(setup (:elpaca ef-themes)
+(setup ef-themes (:elpaca t)
   ;; Load theme
   (mapc #'disable-theme custom-enabled-themes)
   (ef-themes-select 'ef-deuteranopia-dark))
@@ -759,7 +759,7 @@
   (add-hook 'shell-mode-hook #'site/shell-mode-setup))
 
 ;;; Enhanced shell command completion
-(setup (:elpaca pcmpl-args))
+(setup pcmpl-args (:elpaca t))
 
 ;;; IELM
 (keymap-global-set "C-c r i" 'ielm)
@@ -1059,7 +1059,7 @@
   (setq org-clock-continuously t))
 
 ;;; Convert to HTML
-(setup (:elpaca htmlize))
+(setup htmlize (:elpaca t))
 
 ;;; Time display
 (keymap-global-set "C-<f12>" 'world-clock)
@@ -1111,15 +1111,15 @@
           ("UTC" "Universal"))))
 
 ;;; 0x0 paste support
-(setup (:elpaca 0x0))
-;; Set global key bindings
-(dolist (bind '(("C-c b y" . 0x0-upload-kill-ring)
-                ("C-c f u" . 0x0-upload-file)
-                ("C-c x y" . 0x0-upload-text)))
-  (keymap-global-set (car bind) (cdr bind)))
+(setup 0x0
+       (:elpaca t)
+       ;; Set global key bindings
+       (:global "C-c b y" 0x0-upload-kill-ring
+                "C-c f u" 0x0-upload-file
+                "C-c x y" 0x0-upload-text))
 
 ;;; Ace-window
-(setup (:elpaca ace-window))
+(setup ace-window (:elpaca t))
 ;; Set global key binding
 (keymap-global-set "M-o" 'ace-window)
 ;; Configuration
@@ -1128,7 +1128,7 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;;; CIDER
-(setup (:elpaca cider))
+(setup cider (:elpaca t))
 ;; Configuration
 (after-load 'cider-mode
   ;; More rich syntax highlight
@@ -1164,30 +1164,30 @@
   (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;;; CSV mode
-(setup (:elpaca csv-mode))
+(setup csv-mode (:elpaca csv-mode))
 
 ;;; Dash
-(setup (:elpaca dash))
+(setup dash (:elpaca t))
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (global-dash-fontify-mode +1))
 
 ;;; Debbugs browser
-(setup (:elpaca debbugs))
-;; Set global key bindings
-(dolist (bind '(("C-c d g" . debbugs-gnu)
-                ("C-c d s" . debbugs-gnu-search)
-                ("C-c d t" . debbugs-gnu-usertags)
-                ("C-c d p" . debbugs-gnu-patches)
-                ("C-c d b" . debbugs-gnu-bugs)
-                ("C-c d C-o" . debbugs-org)
-                ("C-c d C-s" . debbugs-org-search)
-                ("C-c d C-p" . debbugs-org-patches)
-                ("C-c d C-b" . debbugs-org-bugs)))
-  (keymap-global-set (car bind) (cdr bind)))
+(setup debbugs
+  (:elpaca t)
+  ;; Set global key bindings
+  (:global "C-c d g" debbugs-gnu
+           "C-c d s" debbugs-gnu-search
+           "C-c d t" debbugs-gnu-usertags
+           "C-c d p" debbugs-gnu-patches
+           "C-c d b" debbugs-gnu-bugs
+           "C-c d C-o" debbugs-org
+           "C-c d C-s" debbugs-org-search
+           "C-c d C-p" debbugs-org-patches
+           "C-c d C-b" debbugs-org-bugs))
 
 ;;; Dired Filter
-(setup (:elpaca dired-filter))
+(setup dired-filter (:elpaca t))
 ;; Configuration
 (after-load 'dired-x
   ;; Load library
@@ -1196,7 +1196,7 @@
   (keymap-set dired-mode-map "\\" dired-filter-mark-map))
 
 ;;; Dired Rainbow
-(setup (:elpaca dired-rainbow))
+(setup dired-rainbow (:elpaca t))
 ;; Configuration
 (after-load 'dired-filter
   ;; Load library
@@ -1270,7 +1270,7 @@
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
 
 ;;; Extra miscellaneous colorization
-(setup (:elpaca diredfl))
+(setup diredfl (:elpaca t))
 ;; Configuration
 (after-load 'dired-x
   ;; Enable mode
@@ -1279,7 +1279,7 @@
   (setq diredfl-dir-name 'dired-rainbow-directory-unix-face))
 
 ;;; Dired Subtree
-(setup (:elpaca dired-subtree))
+(setup dired-subtree (:elpaca t))
 ;; Configuration
 (after-load 'diredfl
   ;; Enable mode
@@ -1305,7 +1305,7 @@
   (keymap-set dired-mode-map "C-," dired-subtree-map))
 
 ;;; Dired Ranger
-(setup (:elpaca dired-ranger))
+(setup dired-ranger (:elpaca t))
 ;; Configuration
 (after-load 'dired-subtree
   ;; Enable mode
@@ -1323,7 +1323,7 @@
   (keymap-set dired-mode-map "`" 'dired-ranger-bookmark-visit))
 
 ;;; Dired Narrow
-(setup (:elpaca dired-narrow))
+(setup dired-narrow (:elpaca t))
 ;; Configuration
 (after-load 'dired-ranger
   ;; Enable mode
@@ -1334,7 +1334,7 @@
   (setq dired-narrow-exit-when-one-left t))
 
 ;;; Dired Collapse
-(setup (:elpaca dired-collapse))
+(setup dired-collapse (:elpaca t))
 ;; Configuration
 (after-load 'dired-narrow
   ;; Enable mode
@@ -1343,7 +1343,7 @@
   (keymap-set dired-mode-map "," 'dired-collapse-mode))
 
 ;;; Dired-du
-(setup (:elpaca dired-du))
+(setup dired-du (:elpaca t))
 ;; Configuration
 (after-load 'dired-collapse
   ;; Enable mode
@@ -1352,7 +1352,7 @@
   (setq dired-du-size-format t))
 
 ;;; Dired Async
-(setup (:elpaca async))
+(setup async (:elpaca t))
 ;; Configuration
 (after-load 'dired-du
   ;; Enable mode
@@ -1366,27 +1366,29 @@
     (keymap-set dired-mode-map (car bind) (cdr bind))))
 
 ;;; Dired rsync
-(setup (:elpaca dired-rsync))
+(setup dired-rsync (:elpaca t))
 ;; Configuration
 (after-load 'dired-async
   ;; Set local key binding
   (keymap-set dired-mode-map "C-c C-r" 'dired-rsync))
 
 ;;; Docker
-(setup (:elpaca docker))
-;; Set key binding
-(keymap-global-set "C-c r d" 'docker)
+(setup docker
+  (:elpaca t)
+  ;; Set key binding
+  (:global "C-c r d" docker))
 
 ;;; Dockerfile mode
-(setup (:elpaca dockerfile-mode))
+(setup dockerfile-mode (:elpaca t))
 
 ;;; Docker Compose mode
-(setup (:elpaca docker-compose-mode)
+(setup docker-compose-mode
+  (:elpaca t)
   ;; Enable mode
   (add-to-list 'auto-mode-alist '("/docker-compose.yml\\'" . docker-compose-mode)))
 
 ;;; Elpher Gopher browser
-(setup (:elpaca elpher))
+(setup elpher (:elpaca t))
 ;; Set global key binding
 (keymap-global-set "C-c w e" 'elpher)
 ;; Configuration
@@ -1395,7 +1397,7 @@
   (setq elpher-filter-ansi-from-text t))
 
 ;;; Expand region
-(setup (:elpaca expand-region))
+(setup expand-region (:elpaca t))
 ;; Add missing autoloads
 (autoload #'er/mark-defun "er-basic-expansions"
   "Mark defun around or in front of point." t)
@@ -1436,7 +1438,7 @@
 (keymap-global-set "C-=" 'er/expand-region)
 
 ;;; Flymake ShellCheck support
-(setup (:elpaca flymake-shellcheck)
+(setup flymake-shellcheck (:elpaca t)
   ;; Enable mode
   (when (executable-find "shellcheck")
     (add-hook 'sh-mode-hook #'flymake-shellcheck-load)))
@@ -1451,21 +1453,22 @@
 ;;   (:hook-into scheme-mode))
 
 ;;; Go mode
-(setup (:elpaca go-mode))
+(setup go-mode (:elpaca t))
 
 ;;; Goggles
-(setup (:elpaca goggles)
+(setup goggles
+  (:elpaca t)
   ;; Enable mode
-  (add-hook 'prog-mode-hook #'goggles-mode)
-  (add-hook 'text-mode-hook #'goggles-mode)
-  (add-hook 'conf-mode-hook #'goggles-mode))
+  (:hook-into prog-mode
+              text-mode
+              conf-mode))
 ;; Configuration
 (after-load 'goggles
   ;; Don't pulse just highlight
   (setq-default goggles-pulse nil))
 
 ;;; Iedit
-(setup (:elpaca iedit))
+(setup iedit (:elpaca t))
 ;; Add missing autoloads
 (autoload #'iedit-mode-from-isearch "iedit"
   "Start Iedit mode using last search string as the regexp." t)
@@ -1483,7 +1486,8 @@
   (setq iedit-toggle-key-default nil))
 
 ;;; JavaScript 2 mode
-(setup (:elpaca js2-mode)
+(setup js2-mode
+  (:elpaca t)
   ;; Enable mode
   (add-hook 'js-mode-hook #'js2-minor-mode))
 ;; Configuration
@@ -1495,8 +1499,8 @@
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;;; Eglot
-(setup (:elpaca eglot))
-(setup (:elpaca consult-eglot))
+(setup eglot (:elpaca t))
+(setup consult-eglot (:elpaca t))
 ;; Set global key binding
 (keymap-global-set "C-c t e" 'eglot)
 ;; Configuration
@@ -1514,7 +1518,8 @@
   (keymap-set eglot-mode-map "C-M-." 'consult-eglot-symbols))
 
 ;;; EPUB format support
-(setup (:elpaca nov)
+(setup nov
+  (:elpaca t)
   ;; Enable mode
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 ;; Configuration
@@ -1552,16 +1557,16 @@
                             'append)))
 
 ;;; git additional modes
-(setup (:elpaca git-modes))
+(setup git-modes (:elpaca t))
 
 ;;; Groovy mode
-(setup (:elpaca groovy-mode))
+(setup groovy-mode (:elpaca t))
 
 ;;; i3 WM configuration mode
-(setup (:elpaca i3wm-config-mode))
+(setup i3wm-config-mode (:elpaca t))
 
 ;;; Markdown mode
-(setup (:elpaca markdown-mode))
+(setup markdown-mode (:elpaca t))
 ;; Configuration
 (after-load 'markdown-mode
   ;; Default markdown command
@@ -1593,7 +1598,7 @@
   (setq markdown-spaces-after-code-fence 0))
 
 ;;; Move-text
-(setup (:elpaca move-text))
+(setup move-text (:elpaca t))
 ;; Configuration
 (transient-define-prefix site/move-text-transient ()
   "Transient for Move-text commands."
@@ -1619,7 +1624,7 @@
 (keymap-global-set "C-c x m" 'site/move-text-transient)
 
 ;;; Multiple cursors
-(setup (:elpaca multiple-cursors)
+(setup multiple-cursors (:elpaca t)
   (unless (file-exists-p mc/list-file)
     ;; Commands to run always
     (setq mc/cmds-to-run-for-all
@@ -1707,7 +1712,7 @@
 (keymap-global-set "C-c m h" 'site/multiple-cursors-transient)
 
 ;;; PDF Tools
-(setup (:elpaca pdf-tools)
+(setup pdf-tools (:elpaca t)
   ;; Enable mode
   (pdf-loader-install t))
 ;; Enable SyncTeX support
@@ -1738,23 +1743,23 @@
                (direction . right)))
 
 ;;; PHP mode
-(setup (:elpaca php-mode))
+(setup php-mode (:elpaca t))
 
 ;;; PKGBUILD mode
-(setup (:elpaca pkgbuild-mode))
+(setup pkgbuild-mode (:elpaca t))
 
 ;;; Polymode Markdown
-(setup (:elpaca poly-markdown)
+(setup poly-markdown (:elpaca t)
   ;; Enable mode
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
 
 ;;; Rainbow mode
-(setup (:elpaca rainbow-mode))
+(setup rainbow-mode (:elpaca t))
 ;; Set global key binding
 (keymap-global-set "C-c t r" 'rainbow-mode)
 
 ;;; rcirc
-(setup (:elpaca rcirc-color))
+(setup rcirc-color (:elpaca t))
 ;; Set global key binding
 (keymap-global-set "<f8>" 'irc)
 ;; Configuration
@@ -1794,7 +1799,7 @@
   (add-to-list 'yank-excluded-properties 'rcirc-text))
 
 ;; rcirc color codes support
-(setup (:elpaca rcirc-styles))
+(setup rcirc-styles (:elpaca t))
 ;; Configuration
 (after-load 'rcirc
   ;; Enable mode
@@ -1827,15 +1832,16 @@
   (setq rcirc-colors rcirc-styles-color-vector))
 
 ;;; Ruby inferior mode
-(setup (:elpaca inf-ruby)
+(setup inf-ruby
+  (:elpaca t)
   ;; Configuration
   (:option inf-ruby-default-implementation "pry"))
 
 ;;; Salt mode
-(setup (:elpaca salt-mode))
+(setup salt-mode (:elpaca t))
 
 ;;; Skewer
-(setup (:elpaca skewer-mode))
+(setup skewer-mode (:elpaca t))
 ;; Enable mode
 (add-hook 'js2-mode-hook #'skewer-mode)
 ;; Set global key binding
@@ -1848,10 +1854,11 @@
 (add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
 ;;; SLY
-(setup (:elpaca sly))
-;; Set global key bindings
-(keymap-global-set "C-c r s" 'sly)
-(keymap-global-set "C-c r C-s" 'sly-connect)
+(setup sly
+  (:elpaca t)
+  ;; Set global key bindings
+  (:global "C-c r s" sly
+           "C-c r C-s" sly-connect))
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
@@ -1870,27 +1877,29 @@
   (keymap-set sly-mode-map "C-c M-s x" 'sly-export-symbol-at-point))
 
 ;;; SQL indentation mode
-(setup (:elpaca sql-indent))
+(setup sql-indent (:elpaca t))
 
 ;;; Tree-sitter
-(setup (:elpaca tree-sitter-langs)
+(setup tree-sitter-langs (:elpaca t)
   ;; Enable mode
   (global-tree-sitter-mode +1)
   ;; Enable syntax highlight
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;;; Unfill
-(setup (:elpaca unfill))
-;; Set global key binding
-(keymap-global-set "M-q" 'unfill-toggle)
+(setup unfill
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "M-q" unfill-toggle))
 
 ;;; Systemd mode
 (setup (:elpaca systemd-mode :host github :repo "drot/systemd-mode"))
 
 ;;; VTerm
-(setup (:elpaca vterm))
-;; Set global key binding
-(keymap-global-set "<f7>" 'vterm)
+(setup vterm
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "<f7>" vterm))
 ;; Configuration
 (after-load 'vterm
   ;; Set buffer name
@@ -1898,14 +1907,15 @@
         vterm-max-scrollback 10000))
 
 ;;; YAML mode
-(setup (:elpaca yaml-mode)
-  ;; Tweak word movement
-  (add-hook 'yaml-mode-hook #'subword-mode))
+(setup yaml-mode
+  (:elpaca t)
+  (:hook subword-mode))
 
 ;;; Ztree
-(setup (:elpaca ztree))
-;; Set global key binding
-(keymap-global-set "C-c f d" 'ztree-diff)
+(setup ztree
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "C-c f d" ztree-diff))
 ;; Configuration
 (after-load 'ztree-view
   ;; Use unicode lines
