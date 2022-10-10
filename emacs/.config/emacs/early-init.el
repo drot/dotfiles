@@ -136,7 +136,4 @@ contains an alist with the key `elpaca'."
 The ORDER can be used to deduce the feature context."
   :shorthand #'cadr)
 
-;; Local Variables:
-;; no-byte-compile: t
-;; End:
 ;;; early-init.el ends here
