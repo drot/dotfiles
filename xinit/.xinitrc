@@ -30,10 +30,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# Start GNOME keyring service
-eval $(gnome-keyring-daemon --start)
-export SSH_AUTH_SOCK
-
 # Setup monitors
 autorandr --cycle &
 
