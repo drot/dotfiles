@@ -1492,7 +1492,8 @@
 (setup js2-mode
   (:elpaca t)
   ;; Enable mode
-  (add-hook 'js-mode-hook #'js2-minor-mode))
+  (:with-hook js-mode-hook
+    (:hook #'js2-minor-mode)))
 ;; Configuration
 (after-load 'js2-mode
   ;; Syntax defaults
