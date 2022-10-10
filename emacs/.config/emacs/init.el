@@ -1884,7 +1884,8 @@
 (setup sql-indent (:elpaca t))
 
 ;;; Tree-sitter
-(setup tree-sitter-langs (:elpaca t)
+(setup tree-sitter-langs
+  (:elpaca t)
   ;; Enable mode
   (global-tree-sitter-mode +1)
   ;; Enable syntax highlight
@@ -2091,7 +2092,7 @@
 (setup orderless
   (:elpaca t)
   ;; Load library
-  (require 'orderless)
+  (:require orderless)
   ;; Set completion style explicitly
   (setq completion-styles '(substring orderless))
   ;; Use `orderless' where possible
