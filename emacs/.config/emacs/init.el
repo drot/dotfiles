@@ -2027,21 +2027,18 @@
 (setup hl-todo
   (:elpaca t)
   ;; Enable mode
-  (global-hl-todo-mode +1))
-;; Configuration
-(after-load 'hl-todo
-  ;; Define Transient command
-  (transient-define-prefix site/hl-todo-transient ()
-    :transient-suffix 'transient--do-stay
-    :transient-non-suffix 'transient--do-warn
-    ["Highlight TODO"
-     ("n" "Next" hl-todo-next)
-     ("p" "Previous" hl-todo-previous)])
+  (global-hl-todo-mode +1)
   ;; Set local key bindings
-  (dolist (bind '(("M-s t" . hl-todo-occur)
-                  ("C-c p t" . site/hl-todo-transient)
-                  ("C-c p i" . hl-todo-insert-keyword)))
-    (keymap-set hl-todo-mode-map (car bind) (cdr bind))))
+  (:bind "M-s t" hl-todo-occur
+         "C-c p t" site/hl-todo-transient
+         "C-c p i" hl-todo-insert-keyword))
+;; Define Transient command
+(transient-define-prefix site/hl-todo-transient ()
+  :transient-suffix 'transient--do-stay
+  :transient-non-suffix 'transient--do-warn
+  ["Highlight TODO"
+   ("n" "Next" hl-todo-next)
+   ("p" "Previous" hl-todo-previous)])
 
 ;;; Page break lines
 (setup page-break-lines
