@@ -1503,23 +1503,25 @@
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;;; Eglot
-(setup eglot (:elpaca t))
-(setup consult-eglot (:elpaca t))
-;; Set global key binding
-(keymap-global-set "C-c t e" 'eglot)
-;; Configuration
-(after-load 'eglot
+(setup eglot
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "C-c t e" eglot)
   ;; Set local key bindings
-  (dolist (bind '(("C-c e c" . eglot-reconnect)
-                  ("C-c e s" . eglot-shutdown)
-                  ("C-c e r" . eglot-rename)
-                  ("C-c e f" . eglot-format)
-                  ("C-c e a" . eglot-code-actions)
-                  ("C-c e b" . eglot-events-buffer)
-                  ("C-c e e" . eglot-stderr-buffer)))
-    (keymap-set eglot-mode-map (car bind) (cdr bind)))
-  ;; Consult Eglot
-  (keymap-set eglot-mode-map "C-M-." 'consult-eglot-symbols))
+  (:bind "C-c e c" eglot-reconnect
+         "C-c e s" eglot-shutdown
+         "C-c e r" eglot-rename
+         "C-c e f" eglot-format
+         "C-c e a" eglot-code-actions
+         "C-c e b" eglot-events-buffer
+         "C-c e e" eglot-stderr-buffer))
+
+;; Consult Eglot
+(setup consult-eglot
+  (:elpaca t)
+  ;; Set key binding
+  (:with-map eglot-mode-map
+    (:bind "C-M-." consult-eglot-symbols)))
 
 ;;; EPUB format support
 (setup nov
