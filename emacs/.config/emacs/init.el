@@ -1714,7 +1714,8 @@
 (keymap-global-set "C-c m h" 'site/multiple-cursors-transient)
 
 ;;; PDF Tools
-(setup pdf-tools (:elpaca t)
+(setup pdf-tools
+  (:elpaca t)
   ;; Enable mode
   (pdf-loader-install t))
 ;; Enable SyncTeX support
@@ -1843,17 +1844,18 @@
 (setup salt-mode (:elpaca t))
 
 ;;; Skewer
-(setup skewer-mode (:elpaca t))
-;; Enable mode
-(add-hook 'js2-mode-hook #'skewer-mode)
-;; Set global key binding
-(keymap-global-set "C-c r w" 'skewer-repl)
-
-;; Skewer CSS
-(add-hook 'css-mode-hook #'skewer-css-mode)
-
-;; Skewer HTML
-(add-hook 'mhtml-mode-hook #'skewer-html-mode)
+(setup skewer-mode
+  (:elpaca t)
+  ;; Set global key binding
+  (:global "C-c r w" skewer-repl)
+  ;; Enable mode
+  (:hook-into js2-mode)
+  ;; Skewer CSS
+  (:with-mode css-mode
+    (:hook skewer-css-mode))
+  ;; Skewer HTML
+  (:with-mode mhtml-mode
+    (:hook skewer-html-mode)))
 
 ;;; SLY
 (setup sly
