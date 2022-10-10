@@ -1535,11 +1535,12 @@
   (setq nov-text-width 80))
 
 ;;; Macrostep
-(setup elisp-mode
-  (:elpaca macrostep)
+(setup macrostep
+  (:elpaca t)
   ;; Set key binding
-  (:with-mode emacs-lisp-mode
-    (:bind "C-c M-e" macrostep-expand)))
+  (dolist (mode '(emacs-lisp-mode-map
+                  lisp-interaction-mode-map))
+    (keymap-set (symbol-value mode) "C-c M-e" 'macrostep-expand)))
 
 ;;; Magit
 (setup magit
@@ -1625,7 +1626,19 @@
 (keymap-global-set "C-c x m" 'site/move-text-transient)
 
 ;;; Multiple cursors
-(setup multiple-cursors (:elpaca t)
+(setup multiple-cursors
+  (:elpaca t)
+  ;; Set global key bindings
+  (:global "C-c m <SPC>" mc/vertical-align-with-space
+           "C-c m a" mc/vertical-align
+           "C-c m e" mc/mark-more-like-this-extended
+           "C-c m m" mc/mark-all-like-this-dwim
+           "C-c m l" mc/edit-lines
+           "C-c m n" mc/mark-next-like-this
+           "C-c m p" mc/mark-previous-like-this
+           "C-c m C-a" mc/edit-beginnings-of-lines
+           "C-c m C-e" mc/edit-ends-of-lines
+           "C-c m C-s" mc/mark-all-in-region)
   (unless (file-exists-p mc/list-file)
     ;; Commands to run always
     (setq mc/cmds-to-run-for-all
@@ -1668,18 +1681,6 @@
   (setq mc/cmds-to-run-once
         '(down-list
           mouse-drag-mode-line)))
-;; Set global key bindings
-(dolist (bind '(("C-c m <SPC>" . mc/vertical-align-with-space)
-                ("C-c m a" . mc/vertical-align)
-                ("C-c m e" . mc/mark-more-like-this-extended)
-                ("C-c m m" . mc/mark-all-like-this-dwim)
-                ("C-c m l" . mc/edit-lines)
-                ("C-c m n" . mc/mark-next-like-this)
-                ("C-c m p" . mc/mark-previous-like-this)
-                ("C-c m C-a" . mc/edit-beginnings-of-lines)
-                ("C-c m C-e" . mc/edit-ends-of-lines)
-                ("C-c m C-s" . mc/mark-all-in-region)))
-  (keymap-global-set (car bind) (cdr bind)))
 ;; Define Transient command
 (transient-define-prefix site/multiple-cursors-transient ()
   "Transient for Multiple Cursors commands."
@@ -2188,7 +2189,7 @@
   (:elpaca t)
   ;; Set key binding
   (:with-map minibuffer-local-map
-    :bind "M-A" marginalia-cycle)
+    (:bind "M-A" marginalia-cycle))
   ;; Enable Mode
   (marginalia-mode +1)
   ;; Add `tab-bar-mode' support
@@ -2198,9 +2199,9 @@
 (setup embark
   (:elpaca t)
   ;; Set global key bindings
-  (:global  "C-S-a" embark-act
-            "C-S-d" embark-dwim
-            "C-h B" embark-bindings)
+  (:global "C-S-a" embark-act
+           "C-S-d" embark-dwim
+           "C-h B" embark-bindings)
   ;; Replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command))
 ;; Configuration
