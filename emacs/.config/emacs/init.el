@@ -28,12 +28,15 @@
 ;;; Code:
 
 ;;; Keep main Emacs directory clean from various cache and save files
+(straight-use-package 'no-littering)
+;; Load library
+(require 'no-littering)
 
 ;;; Color theme
-(setup ef-themes (:elpaca t)
-  ;; Load theme
-  (mapc #'disable-theme custom-enabled-themes)
-  (ef-themes-select 'ef-deuteranopia-dark))
+(straight-use-package 'ef-themes)
+;; Load theme
+(mapc #'disable-theme custom-enabled-themes)
+(ef-themes-select 'ef-deuteranopia-dark)
 
 ;;; Don't show the startup welcome messages
 (setq inhibit-startup-screen t)
@@ -322,33 +325,34 @@
 ;;; Goto Address mode
 (global-goto-address-mode +1)
 
-;;; Fly Spell mode
-(setup flyspell
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  ;; Set global key bindings
-  (:global "C-c c b" flyspell-buffer
-           "C-c c r" flyspell-region)
+;;; Fly Spell mode configuration
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+;; Set global key bindings
+(keymap-global-set "C-c c b" 'flyspell-buffer)
+(keymap-global-set "C-c c r" 'flyspell-region)
+;; Configuration
+(after-load 'flyspell
   ;; Disable conflicting key binding
-  (:unbind "C-M-i")
+  (keymap-unset flyspell-mode-map "C-M-i")
   ;; Correct some annoying defaults
-  (:option flyspell-use-meta-tab nil
-           flyspell-issue-message-flag nil
-           flyspell-issue-welcome-flag nil
-           flyspell-consider-dash-as-word-delimiter-flag t
-           ;; Don't slowdown looking for duplicates
-           flyspell-duplicate-distance 12000))
+  (setq flyspell-use-meta-tab nil
+        flyspell-issue-message-flag nil
+        flyspell-issue-welcome-flag nil
+        flyspell-consider-dash-as-word-delimiter-flag t)
+  ;; Don't slowdown looking for duplicates
+  (setq flyspell-duplicate-distance 12000))
 
 ;;; Ispell
-(setup ispell
-  ;; Set global key binding
-  (:global "C-c c d" 'ispell-change-dictionary)
+(keymap-global-set "C-c c d" 'ispell-change-dictionary)
+;; Configuration
+(after-load 'ispell
   ;; Ensure spell checking program is available
-  (:option ispell-program-name (executable-find "aspell")
-           ;; Extra switches
-           ispell-extra-args '("--sug-mode=ultra")
-           ;; Default dictionary
-           ispell-dictionary "english"))
+  (setq ispell-program-name (executable-find "aspell"))
+  ;; Extra switches
+  (setq ispell-extra-args '("--sug-mode=ultra"))
+  ;; Default dictionary
+  (setq ispell-dictionary "english"))
 
 ;;; Isearch
 (setq isearch-allow-scroll t)
@@ -759,7 +763,7 @@
   (add-hook 'shell-mode-hook #'site/shell-mode-setup))
 
 ;;; Enhanced shell command completion
-(setup pcmpl-args (:elpaca t))
+(straight-use-package 'pcmpl-args)
 
 ;;; IELM
 (keymap-global-set "C-c r i" 'ielm)
@@ -1059,7 +1063,7 @@
   (setq org-clock-continuously t))
 
 ;;; Convert to HTML
-(setup htmlize (:elpaca t))
+(straight-use-package 'htmlize)
 
 ;;; Time display
 (keymap-global-set "C-<f12>" 'world-clock)
@@ -1111,25 +1115,24 @@
           ("UTC" "Universal"))))
 
 ;;; 0x0 paste support
-(setup 0x0
-       (:elpaca t)
-       ;; Set global key bindings
-       (:global "C-c b y" 0x0-upload-kill-ring
-                "C-c f u" 0x0-upload-file
-                "C-c x y" 0x0-upload-text))
+(straight-use-package '0x0)
+;; Set global key bindings
+(dolist (bind '(("C-c b y" . 0x0-upload-kill-ring)
+                ("C-c f u" . 0x0-upload-file)
+                ("C-c x y" . 0x0-upload-text)))
+  (keymap-global-set (car bind) (cdr bind)))
 
 ;;; Ace-window
-(setup ace-window
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "M-o" ace-window))
+(straight-use-package 'ace-window)
+;; Set global key binding
+(keymap-global-set "M-o" 'ace-window)
 ;; Configuration
 (after-load 'ace-window
   ;; Use keys on the home row
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;;; CIDER
-(setup cider (:elpaca t))
+(straight-use-package 'cider)
 ;; Configuration
 (after-load 'cider-mode
   ;; More rich syntax highlight
@@ -1165,30 +1168,29 @@
   (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;;; CSV mode
-(setup csv-mode (:elpaca csv-mode))
+(straight-use-package 'csv-mode)
 
 ;;; Dash
-(setup dash (:elpaca t))
 (after-load 'dash
   ;; Enable syntax coloring for Dash functions
   (global-dash-fontify-mode +1))
 
 ;;; Debbugs browser
-(setup debbugs
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-c d g" debbugs-gnu
-           "C-c d s" debbugs-gnu-search
-           "C-c d t" debbugs-gnu-usertags
-           "C-c d p" debbugs-gnu-patches
-           "C-c d b" debbugs-gnu-bugs
-           "C-c d C-o" debbugs-org
-           "C-c d C-s" debbugs-org-search
-           "C-c d C-p" debbugs-org-patches
-           "C-c d C-b" debbugs-org-bugs))
+(straight-use-package 'debbugs)
+;; Set global key bindings
+(dolist (bind '(("C-c d g" . debbugs-gnu)
+                ("C-c d s" . debbugs-gnu-search)
+                ("C-c d t" . debbugs-gnu-usertags)
+                ("C-c d p" . debbugs-gnu-patches)
+                ("C-c d b" . debbugs-gnu-bugs)
+                ("C-c d C-o" . debbugs-org)
+                ("C-c d C-s" . debbugs-org-search)
+                ("C-c d C-p" . debbugs-org-patches)
+                ("C-c d C-b" . debbugs-org-bugs)))
+  (keymap-global-set (car bind) (cdr bind)))
 
 ;;; Dired Filter
-(setup dired-filter (:elpaca t))
+(straight-use-package 'dired-filter)
 ;; Configuration
 (after-load 'dired-x
   ;; Load library
@@ -1197,7 +1199,7 @@
   (keymap-set dired-mode-map "\\" dired-filter-mark-map))
 
 ;;; Dired Rainbow
-(setup dired-rainbow (:elpaca t))
+(straight-use-package 'dired-rainbow)
 ;; Configuration
 (after-load 'dired-filter
   ;; Load library
@@ -1271,7 +1273,7 @@
   (dired-rainbow-define-chmod symlink-unix (:foreground "violet" :underline t) "l.*"))
 
 ;;; Extra miscellaneous colorization
-(setup diredfl (:elpaca t))
+(straight-use-package 'diredfl)
 ;; Configuration
 (after-load 'dired-x
   ;; Enable mode
@@ -1280,7 +1282,7 @@
   (setq diredfl-dir-name 'dired-rainbow-directory-unix-face))
 
 ;;; Dired Subtree
-(setup dired-subtree (:elpaca t))
+(straight-use-package 'dired-subtree)
 ;; Configuration
 (after-load 'diredfl
   ;; Enable mode
@@ -1306,7 +1308,7 @@
   (keymap-set dired-mode-map "C-," dired-subtree-map))
 
 ;;; Dired Ranger
-(setup dired-ranger (:elpaca t))
+(straight-use-package 'dired-ranger)
 ;; Configuration
 (after-load 'dired-subtree
   ;; Enable mode
@@ -1324,7 +1326,7 @@
   (keymap-set dired-mode-map "`" 'dired-ranger-bookmark-visit))
 
 ;;; Dired Narrow
-(setup dired-narrow (:elpaca t))
+(straight-use-package 'dired-narrow)
 ;; Configuration
 (after-load 'dired-ranger
   ;; Enable mode
@@ -1335,7 +1337,7 @@
   (setq dired-narrow-exit-when-one-left t))
 
 ;;; Dired Collapse
-(setup dired-collapse (:elpaca t))
+(straight-use-package 'dired-collapse)
 ;; Configuration
 (after-load 'dired-narrow
   ;; Enable mode
@@ -1344,7 +1346,7 @@
   (keymap-set dired-mode-map "," 'dired-collapse-mode))
 
 ;;; Dired-du
-(setup dired-du (:elpaca t))
+(straight-use-package 'dired-du)
 ;; Configuration
 (after-load 'dired-collapse
   ;; Enable mode
@@ -1353,7 +1355,7 @@
   (setq dired-du-size-format t))
 
 ;;; Dired Async
-(setup async (:elpaca t))
+(straight-use-package 'async)
 ;; Configuration
 (after-load 'dired-du
   ;; Enable mode
@@ -1367,29 +1369,27 @@
     (keymap-set dired-mode-map (car bind) (cdr bind))))
 
 ;;; Dired rsync
-(setup dired-rsync (:elpaca t))
+(straight-use-package 'dired-rsync)
 ;; Configuration
 (after-load 'dired-async
   ;; Set local key binding
   (keymap-set dired-mode-map "C-c C-r" 'dired-rsync))
 
 ;;; Docker
-(setup docker
-  (:elpaca t)
-  ;; Set key binding
-  (:global "C-c r d" docker))
+(straight-use-package 'docker)
+;; Set key binding
+(keymap-global-set "C-c r d" 'docker)
 
 ;;; Dockerfile mode
-(setup dockerfile-mode (:elpaca t))
+(straight-use-package 'dockerfile-mode)
 
 ;;; Docker Compose mode
-(setup docker-compose-mode
-  (:elpaca t)
+(straight-use-package 'docker-compose-mode
   ;; Enable mode
   (add-to-list 'auto-mode-alist '("/docker-compose.yml\\'" . docker-compose-mode)))
 
 ;;; Elpher Gopher browser
-(setup elpher (:elpaca t))
+(straight-use-package 'elpher)
 ;; Set global key binding
 (keymap-global-set "C-c w e" 'elpher)
 ;; Configuration
@@ -1398,7 +1398,7 @@
   (setq elpher-filter-ansi-from-text t))
 
 ;;; Expand region
-(setup expand-region (:elpaca t))
+(straight-use-package 'expand-region)
 ;; Add missing autoloads
 (autoload #'er/mark-defun "er-basic-expansions"
   "Mark defun around or in front of point." t)
@@ -1439,39 +1439,33 @@
 (keymap-global-set "C-=" 'er/expand-region)
 
 ;;; Flymake ShellCheck support
-(setup flymake-shellcheck
-  (:elpaca t)
-  ;; Enable mode
-  (when (executable-find "shellcheck")
-    (:with-hook sh-mode-hook
-      (:hook #'flymake-shellcheck-load))))
+(straight-use-package 'flymake-shellcheck)
+;; Enable mode
+(when (executable-find "shellcheck")
+  (add-hook 'sh-mode-hook #'flymake-shellcheck-load))
 
 ;;; Geiser Guile
-;; (setup geiser
-;;   (:elpaca t)
-;;   (:option geiser-default-implementation
-;;            (when (executable-find "guile")
-;;                 (:elpaca geiser-guile)
-;;                 'guile))
-;;   (:hook-into scheme-mode))
+(straight-use-package 'geiser-guile)
+;; Configuration
+(after-load 'geiser-guile
+  (setq geiser-guile-binary "guile3.0"))
 
 ;;; Go mode
-(setup go-mode (:elpaca t))
+(straight-use-package 'go-mode)
 
 ;;; Goggles
-(setup goggles
-  (:elpaca t)
-  ;; Enable mode
-  (:hook-into prog-mode
-              text-mode
-              conf-mode))
+(straight-use-package 'goggles)
+;; Enable mode
+(add-hook 'prog-mode-hook #'goggles-mode)
+(add-hook 'text-mode-hook #'goggles-mode)
+(add-hook 'conf-mode-hook #'goggles-mode)
 ;; Configuration
 (after-load 'goggles
   ;; Don't pulse just highlight
   (setq-default goggles-pulse nil))
 
 ;;; Iedit
-(setup iedit (:elpaca t))
+(straight-use-package 'iedit)
 ;; Add missing autoloads
 (autoload #'iedit-mode-from-isearch "iedit"
   "Start Iedit mode using last search string as the regexp." t)
@@ -1489,11 +1483,9 @@
   (setq iedit-toggle-key-default nil))
 
 ;;; JavaScript 2 mode
-(setup js2-mode
-  (:elpaca t)
-  ;; Enable mode
-  (:with-hook js-mode-hook
-    (:hook #'js2-minor-mode)))
+(straight-use-package 'js2-mode)
+;; Enable mode
+(add-hook 'js-mode-hook #'js2-minor-mode)
 ;; Configuration
 (after-load 'js2-mode
   ;; Syntax defaults
@@ -1503,38 +1495,31 @@
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode))
 
 ;;; JSON mode
-(setup json-mode
-  (:elpaca json-mode
-           :host github
-           :repo "emacs-straight/json-mode"
-           :protocol ssh))
+(straight-use-package '(json-mode :host github :repo "emacs-straight/json-mode"))
 
 ;;; Eglot
-(setup eglot
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "C-c t e" eglot)
+(straight-use-package 'eglot)
+;; Set global key binding
+(keymap-global-set "C-c t e" 'eglot)
+;; Configuration
+(after-load 'eglot
   ;; Set local key bindings
-  (:bind "C-c e c" eglot-reconnect
-         "C-c e s" eglot-shutdown
-         "C-c e r" eglot-rename
-         "C-c e f" eglot-format
-         "C-c e a" eglot-code-actions
-         "C-c e b" eglot-events-buffer
-         "C-c e e" eglot-stderr-buffer))
-
-;; Consult Eglot
-(setup consult-eglot
-  (:elpaca t)
-  ;; Set key binding
-  (:with-map eglot-mode-map
-    (:bind "C-M-." consult-eglot-symbols)))
+  (dolist (bind '(("C-c e c" . eglot-reconnect)
+                  ("C-c e s" . eglot-shutdown)
+                  ("C-c e r" . eglot-rename)
+                  ("C-c e f" . eglot-format)
+                  ("C-c e a" . eglot-code-actions)
+                  ("C-c e b" . eglot-events-buffer)
+                  ("C-c e e" . eglot-stderr-buffer)))
+    (keymap-set eglot-mode-map (car bind) (cdr bind)))
+  ;; Consult Eglot
+  (straight-use-package 'consult-eglot)
+  (keymap-set eglot-mode-map "C-M-." 'consult-eglot-symbols))
 
 ;;; EPUB format support
-(setup nov
-  (:elpaca t)
-  ;; Enable mode
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+(straight-use-package 'nov)
+;; Enable mode
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 ;; Configuration
 (after-load 'nov
   ;; Change default font
@@ -1547,40 +1532,39 @@
   (setq nov-text-width 80))
 
 ;;; Macrostep
-(setup macrostep
-  (:elpaca t)
-  ;; Set key binding
-  (dolist (mode '(emacs-lisp-mode-map
-                  lisp-interaction-mode-map))
-    (keymap-set (symbol-value mode) "C-c M-e" 'macrostep-expand)))
+(straight-use-package 'macrostep)
+;; Set key binding
+(dolist (mode '(emacs-lisp-mode-map
+                lisp-interaction-mode-map))
+  (keymap-set (symbol-value mode) "C-c M-e" 'macrostep-expand))
 
 ;;; Magit
-(setup magit
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-c g c" magit-clone
-           "C-c g b" magit-blame
-           "C-c g l" magit-log-buffer-file
-           "C-c g p"  magit-pull)
-  ;; Configuration
-  (after-load 'magit
-    ;; Insert submodule sections
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules
-                            'magit-insert-stashes
-                            'append)))
+(straight-use-package 'magit)
+;; Set global key bindings
+(dolist (bind '(("C-c g c" . magit-clone)
+                ("C-c g b" . magit-blame)
+                ("C-c g l" . magit-log-buffer-file)
+                ("C-c g p" . magit-pull)))
+  (keymap-global-set (car bind) (cdr bind)))
+;; Configuration
+(after-load 'magit
+  ;; Insert submodule sections
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-modules
+                          'magit-insert-stashes
+                          'append))
 
 ;;; git additional modes
-(setup git-modes (:elpaca t))
+(straight-use-package 'git-modes)
 
 ;;; Groovy mode
-(setup groovy-mode (:elpaca t))
+(straight-use-package 'groovy-mode)
 
 ;;; i3 WM configuration mode
-(setup i3wm-config-mode (:elpaca t))
+(straight-use-package 'i3wm-config-mode)
 
 ;;; Markdown mode
-(setup markdown-mode (:elpaca t))
+(straight-use-package 'markdown-mode)
 ;; Configuration
 (after-load 'markdown-mode
   ;; Default markdown command
@@ -1612,7 +1596,7 @@
   (setq markdown-spaces-after-code-fence 0))
 
 ;;; Move-text
-(setup move-text (:elpaca t))
+(straight-use-package 'move-text)
 ;; Configuration
 (transient-define-prefix site/move-text-transient ()
   "Transient for Move-text commands."
@@ -1638,61 +1622,61 @@
 (keymap-global-set "C-c x m" 'site/move-text-transient)
 
 ;;; Multiple cursors
-(setup multiple-cursors
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-c m <SPC>" mc/vertical-align-with-space
-           "C-c m a" mc/vertical-align
-           "C-c m e" mc/mark-more-like-this-extended
-           "C-c m m" mc/mark-all-like-this-dwim
-           "C-c m l" mc/edit-lines
-           "C-c m n" mc/mark-next-like-this
-           "C-c m p" mc/mark-previous-like-this
-           "C-c m C-a" mc/edit-beginnings-of-lines
-           "C-c m C-e" mc/edit-ends-of-lines
-           "C-c m C-s" mc/mark-all-in-region)
-  (unless (file-exists-p mc/list-file)
-    ;; Commands to run always
-    (setq mc/cmds-to-run-for-all
-          '(backward-sexp
-            downcase-region
-            electric-newline-and-maybe-indent
-            end-of-buffer
-            forward-sexp
-            indent-for-tab-command
-            kill-region
-            paredit-backslash
-            paredit-backward
-            paredit-close-round
-            paredit-close-square
-            paredit-comment-dwim
-            paredit-convolute-sexp
-            paredit-doublequote
-            paredit-forward
-            paredit-forward-barf-sexp
-            paredit-forward-delete
-            paredit-forward-down
-            paredit-forward-slurp-sexp
-            paredit-kill
-            paredit-newline
-            paredit-open-round
-            paredit-open-square
-            paredit-wrap-round
-            paredit-wrap-square
-            paredit-reindent-defun
-            paredit-semicolon
-            paredit-splice-sexp
-            paredit-splice-sexp-killing-backward
-            paredit-backslash
-            reindent-then-newline-and-indent
-            scroll-other-window
-            switch-to-buffer
-            upcase-region
-            yank-rectangle)))
-  ;; Commands to run only once
-  (setq mc/cmds-to-run-once
-        '(down-list
-          mouse-drag-mode-line)))
+(straight-use-package 'multiple-cursors)
+(unless (file-exists-p mc/list-file)
+  ;; Commands to run always
+  (setq mc/cmds-to-run-for-all
+        '(backward-sexp
+          downcase-region
+          electric-newline-and-maybe-indent
+          end-of-buffer
+          forward-sexp
+          indent-for-tab-command
+          kill-region
+          paredit-backslash
+          paredit-backward
+          paredit-close-round
+          paredit-close-square
+          paredit-comment-dwim
+          paredit-convolute-sexp
+          paredit-doublequote
+          paredit-forward
+          paredit-forward-barf-sexp
+          paredit-forward-delete
+          paredit-forward-down
+          paredit-forward-slurp-sexp
+          paredit-kill
+          paredit-newline
+          paredit-open-round
+          paredit-open-square
+          paredit-wrap-round
+          paredit-wrap-square
+          paredit-reindent-defun
+          paredit-semicolon
+          paredit-splice-sexp
+          paredit-splice-sexp-killing-backward
+          paredit-backslash
+          reindent-then-newline-and-indent
+          scroll-other-window
+          switch-to-buffer
+          upcase-region
+          yank-rectangle)))
+;; Commands to run only once
+(setq mc/cmds-to-run-once
+      '(down-list
+        mouse-drag-mode-line))
+;; Set global key bindings
+(dolist (bind '(("C-c m <SPC>" . mc/vertical-align-with-space)
+                ("C-c m a" . mc/vertical-align)
+                ("C-c m e" . mc/mark-more-like-this-extended)
+                ("C-c m m" . mc/mark-all-like-this-dwim)
+                ("C-c m l" . mc/edit-lines)
+                ("C-c m n" . mc/mark-next-like-this)
+                ("C-c m p" . mc/mark-previous-like-this)
+                ("C-c m C-a" . mc/edit-beginnings-of-lines)
+                ("C-c m C-e" . mc/edit-ends-of-lines)
+                ("C-c m C-s" . mc/mark-all-in-region)))
+  (keymap-global-set (car bind) (cdr bind)))
 ;; Define Transient command
 (transient-define-prefix site/multiple-cursors-transient ()
   "Transient for Multiple Cursors commands."
@@ -1726,10 +1710,9 @@
 (keymap-global-set "C-c m h" 'site/multiple-cursors-transient)
 
 ;;; PDF Tools
-(setup pdf-tools
-  (:elpaca t)
-  ;; Enable mode
-  (pdf-loader-install t))
+(straight-use-package 'pdf-tools)
+;; Enable mode
+(pdf-loader-install t)
 ;; Enable SyncTeX support
 (add-hook 'pdf-view-mode-hook #'pdf-sync-minor-mode)
 ;; Enable link following
@@ -1758,24 +1741,22 @@
                (direction . right)))
 
 ;;; PHP mode
-(setup php-mode (:elpaca t))
+(straight-use-package 'php-mode)
 
 ;;; PKGBUILD mode
-(setup pkgbuild-mode (:elpaca t))
+(straight-use-package 'pkgbuild-mode)
 
 ;;; Polymode Markdown
-(setup poly-markdown (:elpaca t)
-  ;; Enable mode
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
+(straight-use-package 'poly-markdown)
+;; Enable mode
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 
 ;;; Rainbow mode
-(setup rainbow-mode (:elpaca t))
+(straight-use-package 'rainbow-mode)
 ;; Set global key binding
 (keymap-global-set "C-c t r" 'rainbow-mode)
 
 ;;; rcirc
-(setup rcirc-color (:elpaca t))
-;; Set global key binding
 (keymap-global-set "<f8>" 'irc)
 ;; Configuration
 (after-load 'rcirc
@@ -1803,7 +1784,9 @@
   (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
   (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
   (add-hook 'rcirc-mode-hook #'flyspell-mode)
-  ;; Load `rcirc-color'
+  ;; Use `rcirc-color' for nick colorization
+  (straight-use-package 'rcirc-color)
+  ;; Enable mode
   (add-hook 'rcirc-mode-hook
             (lambda ()
               (require 'rcirc-color)))
@@ -1814,7 +1797,7 @@
   (add-to-list 'yank-excluded-properties 'rcirc-text))
 
 ;; rcirc color codes support
-(setup rcirc-styles (:elpaca t))
+(straight-use-package 'rcirc-styles)
 ;; Configuration
 (after-load 'rcirc
   ;; Enable mode
@@ -1847,34 +1830,31 @@
   (setq rcirc-colors rcirc-styles-color-vector))
 
 ;;; Ruby inferior mode
-(setup inf-ruby
-  (:elpaca t)
-  ;; Configuration
-  (:option inf-ruby-default-implementation "pry"))
+(straight-use-package 'inf-ruby)
+;; Configuration
+(setq inf-ruby-default-implementation "pry")
 
 ;;; Salt mode
-(setup salt-mode (:elpaca t))
+(straight-use-package 'salt-mode)
 
 ;;; Skewer
-(setup skewer-mode
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "C-c r w" skewer-repl)
-  ;; Enable mode
-  (:hook-into js2-mode)
-  ;; Skewer CSS
-  (:with-mode css-mode
-    (:hook skewer-css-mode))
-  ;; Skewer HTML
-  (:with-mode mhtml-mode
-    (:hook skewer-html-mode)))
+(straight-use-package 'skewer-mode)
+;; Enable mode
+(add-hook 'js2-mode-hook #'skewer-mode)
+;; Set global key binding
+(keymap-global-set "C-c r w" 'skewer-repl)
+
+;; Skewer CSS
+(add-hook 'css-mode-hook #'skewer-css-mode)
+
+;; Skewer HTML
+(add-hook 'mhtml-mode-hook #'skewer-html-mode)
 
 ;;; SLY
-(setup sly
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-c r s" sly
-           "C-c r C-s" sly-connect))
+(straight-use-package 'sly)
+;; Set global key bindings
+(keymap-global-set "C-c r s" 'sly)
+(keymap-global-set "C-c r C-s" 'sly-connect)
 ;; Configuration
 (after-load 'sly
   ;; Use SBCL by default
@@ -1893,30 +1873,27 @@
   (keymap-set sly-mode-map "C-c M-s x" 'sly-export-symbol-at-point))
 
 ;;; SQL indentation mode
-(setup sql-indent (:elpaca t))
+(straight-use-package 'sql-indent)
 
 ;;; Tree-sitter
-(setup tree-sitter-langs
-  (:elpaca t)
-  ;; Enable mode
-  (global-tree-sitter-mode +1)
-  ;; Enable syntax highlight
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(straight-use-package 'tree-sitter-langs)
+;; Enable mode
+(global-tree-sitter-mode +1)
+;; Enable syntax highlight
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;;; Unfill
-(setup unfill
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "M-q" unfill-toggle))
+(straight-use-package 'unfill)
+;; Set global key binding
+(keymap-global-set "M-q" 'unfill-toggle)
 
 ;;; Systemd mode
-(setup (:elpaca systemd-mode :host github :repo "drot/systemd-mode"))
+(straight-use-package '(systemd :host github :repo "drot/systemd-mode"))
 
 ;;; VTerm
-(setup vterm
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "<f7>" vterm))
+(straight-use-package 'vterm)
+;; Set global key binding
+(keymap-global-set "<f7>" 'vterm)
 ;; Configuration
 (after-load 'vterm
   ;; Set buffer name
@@ -1924,15 +1901,14 @@
         vterm-max-scrollback 10000))
 
 ;;; YAML mode
-(setup yaml-mode
-  (:elpaca t)
-  (:hook subword-mode))
+(straight-use-package 'yaml-mode
+  ;; Tweak word movement
+  (add-hook 'yaml-mode-hook #'subword-mode))
 
 ;;; Ztree
-(setup ztree
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "C-c f d" ztree-diff))
+(straight-use-package 'ztree)
+;; Set global key binding
+(keymap-global-set "C-c f d" 'ztree-diff)
 ;; Configuration
 (after-load 'ztree-view
   ;; Use unicode lines
@@ -1941,17 +1917,9 @@
   (setq ztree-show-number-of-children t))
 
 ;;; Avy
-(setup avy
-  (:elpaca t)
-  ;; Enable mode
-  (avy-setup-default)
-  ;; Set global key bindings
-  (:global "C-:" avy-goto-char
-           "C-'" avy-goto-char-timer
-           "M-g f" avy-goto-line
-           "M-g w" avy-goto-word-1
-           "M-g e" avy-goto-word-0
-           "C-M-'" site/avy-transient))
+(straight-use-package 'avy)
+;; Enable mode
+(avy-setup-default)
 ;; Define Transient command
 (transient-define-prefix site/avy-transient ()
   :transient-suffix 'transient--do-stay
@@ -1959,6 +1927,14 @@
   ["Cycle avy Candidates"
    ("n" "Next" avy-next)
    ("p" "Previous" avy-prev)])
+;; Set global key bindings
+(dolist (bind '(("C-:" . avy-goto-char)
+                ("C-'" . avy-goto-char-timer)
+                ("M-g f" . avy-goto-line)
+                ("M-g w" . avy-goto-word-1)
+                ("M-g e" . avy-goto-word-0)
+                ("C-M-'" . site/avy-transient)))
+  (keymap-global-set (car bind) (cdr bind)))
 ;; Configuration
 (after-load 'avy
   ;; Work across all frames
@@ -1970,19 +1946,17 @@
         avy-highlight-first t))
 
 ;;; Link-hint
-(setup link-hint
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-c w o" link-hint-open-link
-           "C-c w c" link-hint-copy-link))
+(straight-use-package 'link-hint)
+;; Set global key bindings
+(keymap-global-set "C-c w o" 'link-hint-open-link)
+(keymap-global-set "C-c w c" 'link-hint-copy-link)
 
 ;;; Company mode
-(setup company
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "C-c i y" company-yasnippet)
-  ;; Enable mode
-  (global-company-mode +1))
+(straight-use-package 'company)
+;; Enable mode
+(global-company-mode +1)
+;; Set global key binding
+(keymap-global-set "C-c i y" 'company-yasnippet)
 ;; Configuration
 (after-load 'company
   ;; Change default backends
@@ -2007,20 +1981,18 @@
         company-dabbrev-ignore-case t))
 
 ;; ;;; Company Statistics
-(setup company-statistics
-  (:elpaca t)
-  ;; Enable mode
-  (company-statistics-mode +1))
+(straight-use-package 'company-statistics)
+;; Enable mode
+(company-statistics-mode +1)
 
 ;;; Diff-Hl
-(setup diff-hl
-  (:elpaca t)
-  ;; Set global key binding
-  (:global "C-c t v" diff-hl-margin-mode)
-  ;; Enable mode
-  (global-diff-hl-mode +1)
-  ;; Update diffs immediately
-  (diff-hl-flydiff-mode +1))
+(straight-use-package 'diff-hl)
+;; Enable mode
+(global-diff-hl-mode +1)
+;; Update diffs immediately
+(diff-hl-flydiff-mode +1)
+;; Set global key binding
+(keymap-global-set "C-c t v" 'diff-hl-margin-mode)
 ;; Add hooks for `dired' and `magit'
 (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote)
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
@@ -2031,27 +2003,28 @@
               (diff-hl-margin-local-mode))))
 
 ;; ;;; Hl-Todo
-(setup hl-todo
-  (:elpaca t)
-  ;; Enable mode
-  (global-hl-todo-mode +1)
+(straight-use-package 'hl-todo)
+;; Enable mode
+(global-hl-todo-mode +1)
+;; Configuration
+(after-load 'hl-todo
+  ;; Define Transient command
+  (transient-define-prefix site/hl-todo-transient ()
+    :transient-suffix 'transient--do-stay
+    :transient-non-suffix 'transient--do-warn
+    ["Highlight TODO"
+     ("n" "Next" hl-todo-next)
+     ("p" "Previous" hl-todo-previous)])
   ;; Set local key bindings
-  (:bind "M-s t" hl-todo-occur
-         "C-c p t" site/hl-todo-transient
-         "C-c p i" hl-todo-insert-keyword))
-;; Define Transient command
-(transient-define-prefix site/hl-todo-transient ()
-  :transient-suffix 'transient--do-stay
-  :transient-non-suffix 'transient--do-warn
-  ["Highlight TODO"
-   ("n" "Next" hl-todo-next)
-   ("p" "Previous" hl-todo-previous)])
+  (dolist (bind '(("M-s t" . hl-todo-occur)
+                  ("C-c p t" . site/hl-todo-transient)
+                  ("C-c p i" . hl-todo-insert-keyword)))
+    (keymap-set hl-todo-mode-map (car bind) (cdr bind))))
 
 ;;; Page break lines
-(setup page-break-lines
-  (:elpaca t)
-  ;; Enable mode
-  (global-page-break-lines-mode +1))
+(straight-use-package 'page-break-lines)
+;; Enable mode
+(global-page-break-lines-mode +1)
 ;; Configuration
 (after-load 'page-break-lines
   ;; Adhere to `fill-column' width
@@ -2060,92 +2033,90 @@
   (add-to-list 'page-break-lines-modes 'emacs-news-view-mode))
 
 ;;; VERTical Interactive COmpletion
-(setup vertico
-  (:elpaca t)
-  ;; Enable mode
-  (vertico-mode +1)
-  ;; Add prompt indicator to `completing-read-multiple'.
-  (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
+(straight-use-package 'vertico)
+;; Enable mode
+(vertico-mode +1)
+;; Add prompt indicator to `completing-read-multiple'.
+(defun crm-indicator (args)
+  (cons (format "[CRM%s] %s"
+                (replace-regexp-in-string
+                 "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                 crm-separator)
+                (car args))
+        (cdr args)))
 
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-  ;; Hide commands in M-x which do not work in the current mode
-  (setq read-extended-command-predicate
-        #'command-completion-default-include-p)
-  ;; Hide completions buffer for menu items
-  (advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions)
-  ;; Enable mouse mode
-  ;;(vertico-mouse-mode +1)
-  ;; Use default TAB completion behavior
-  (keymap-set vertico-map "?" 'minibuffer-completion-help)
-  (keymap-set vertico-map "M-RET" 'minibuffer-force-complete-and-exit)
-  (keymap-set vertico-map "M-TAB" 'minibuffer-complete)
-  ;; Enable quick keys
-  (keymap-set vertico-map "M-q" 'vertico-quick-insert)
-  (keymap-set vertico-map "C-q" 'vertico-quick-exit)
-  ;; Enable cycling for `vertico-next' and `vertico-previous'
-  (setq vertico-cycle t))
+;; Do not allow the cursor in the minibuffer prompt
+(setq minibuffer-prompt-properties
+      '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+;; Hide commands in M-x which do not work in the current mode
+(setq read-extended-command-predicate
+      #'command-completion-default-include-p)
+;; Hide completions buffer for menu items
+(advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions)
+;; Enable mouse mode
+;;(vertico-mouse-mode +1)
+;; Use default TAB completion behavior
+(keymap-set vertico-map "?" 'minibuffer-completion-help)
+(keymap-set vertico-map "M-RET" 'minibuffer-force-complete-and-exit)
+(keymap-set vertico-map "M-TAB" 'minibuffer-complete)
+;; Enable quick keys
+(keymap-set vertico-map "M-q" 'vertico-quick-insert)
+(keymap-set vertico-map "C-q" 'vertico-quick-exit)
+;; Enable cycling for `vertico-next' and `vertico-previous'
+(setq vertico-cycle t)
 
 ;;; Orderless
-(setup orderless
-  (:elpaca t)
-  ;; Load library
-  (:require orderless)
-  ;; Set completion style explicitly
-  (setq completion-styles '(substring orderless))
-  ;; Use `orderless' where possible
-  (setq completion-category-defaults nil
-        completion-category-overrides '((file (styles basic partial-completion)))))
+(straight-use-package 'orderless)
+;; Load library
+(require 'orderless)
+;; Set completion style explicitly
+(setq completion-styles '(substring orderless))
+;; Use `orderless' where possible
+(setq completion-category-defaults nil
+      completion-category-overrides '((file (styles basic partial-completion))))
 
 ;;; Consult
-(setup consult
-  (:elpaca t)
-  ;; C-c bindings (mode-specific-map)
-  (:global 
-   "C-c h c" consult-history
-   "C-c h m" consult-mode-command
-   "C-c f b" consult-bookmark
-   "C-c k" consult-kmacro
-   ;; C-x bindings (ctl-x-map)
-   "C-x M-:" consult-complex-command         ;; orig. `repeat-complex-command'
-   "C-x b" consult-buffer                    ;; orig. `switch-to-buffer'
-   "C-x 4 b" consult-buffer-other-window ;; orig. `switch-to-buffer-other-window'
-   "C-x 5 b" consult-buffer-other-frame  ;; orig. `switch-to-buffer-other-frame'
-   ;; Custom M-# bindings for fast register access
-   "M-#" consult-register-load
-   "M-'" consult-register-store ;; orig. `abbrev-prefix-mark' (unrelated)
-   "C-M-#" consult-register
-   ;; Other custom bindings
-   "<help> a" consult-apropos ;; orig. `apropos-command'
-   ;; M-g bindings (goto-map)
-   "M-g e" consult-compile-error
-   "M-g g" consult-goto-line       ;; orig. `goto-line'
-   "M-g M-g" consult-goto-line     ;; orig. `goto-line'
-   "M-g o" consult-outline
-   "M-g m" consult-mark
-   "M-g k" consult-global-mark
-   "M-g i" consult-imenu
-   "M-g I" consult-imenu-multi
-   ;; M-s bindings (search-map)
-   "M-s f" consult-find
-   "M-s L" consult-locate
-   "M-s g" consult-grep
-   "M-s G" consult-git-grep
-   "M-s r" consult-ripgrep
-   "M-s l" consult-line
-   "M-s m" consult-multi-occur
-   "M-s k" consult-keep-lines
-   "M-s u" consult-focus-lines))
+(straight-use-package 'consult)
+;; Add global key bindings
+(dolist (bind '(;; C-c bindings (mode-specific-map)
+                ("C-c h c" . consult-history)
+                ("C-c h m" . consult-mode-command)
+                ("C-c f b" . consult-bookmark)
+                ("C-c k" . consult-kmacro)
+                ;; C-x bindings (ctl-x-map)
+                ("C-x M-:" . consult-complex-command) ;; orig. `repeat-complex-command'
+                ("C-x b" . consult-buffer) ;; orig. `switch-to-buffer'
+                ("C-x 4 b" . consult-buffer-other-window) ;; orig. `switch-to-buffer-other-window'
+                ("C-x 5 b" . consult-buffer-other-frame) ;; orig. `switch-to-buffer-other-frame'
+                ;; Custom M-# bindings for fast register access
+                ("M-#" . consult-register-load)
+                ("M-'" . consult-register-store) ;; orig. `abbrev-prefix-mark' (unrelated)
+                ("C-M-#" . consult-register)
+                ;; Other custom bindings
+                ("<help> a" . consult-apropos) ;; orig. `apropos-command'
+                ;; M-g bindings (goto-map)
+                ("M-g e" . consult-compile-error)
+                ("M-g g" . consult-goto-line) ;; orig. `goto-line'
+                ("M-g M-g" . consult-goto-line) ;; orig. `goto-line'
+                ("M-g o" . consult-outline)
+                ("M-g m" . consult-mark)
+                ("M-g k" . consult-global-mark)
+                ("M-g i" . consult-imenu)
+                ("M-g I" . consult-imenu-multi)
+                ;; M-s bindings (search-map)
+                ("M-s f" . consult-find)
+                ("M-s L" . consult-locate)
+                ("M-s g" . consult-grep)
+                ("M-s G" . consult-git-grep)
+                ("M-s r" . consult-ripgrep)
+                ("M-s l" . consult-line)
+                ("M-s m" . consult-multi-occur)
+                ("M-s k" . consult-keep-lines)
+                ("M-s u" . consult-focus-lines)))
+  (keymap-global-set (car bind) (cdr bind)))
 
 ;; Isearch integration
 (keymap-global-set "M-s e" 'consult-isearch-history)
@@ -2196,25 +2167,22 @@
   (add-to-list 'consult-buffer-sources 'org-buffer-source 'append))
 
 ;;; Marginalia in the minibuffer
-(setup marginalia
-  (:elpaca t)
-  ;; Set key binding
-  (:with-map minibuffer-local-map
-    (:bind "M-A" marginalia-cycle))
-  ;; Enable mode
-  (marginalia-mode +1)
-  ;; Add `tab-bar-mode' support
-  (add-to-list 'marginalia-prompt-categories '("tab by name" . tab)))
+(straight-use-package 'marginalia)
+;; Set key binding
+(keymap-set minibuffer-local-map "M-A" 'marginalia-cycle)
+;; Enable Mode
+(marginalia-mode +1)
+;; Add `tab-bar-mode' support
+(add-to-list 'marginalia-prompt-categories '("tab by name" . tab))
 
 ;;; Embark
-(setup embark
-  (:elpaca t)
-  ;; Set global key bindings
-  (:global "C-S-a" embark-act
-           "C-S-d" embark-dwim
-           "C-h B" embark-bindings)
-  ;; Replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command))
+(straight-use-package 'embark)
+;; Replace the key help with a completing-read interface
+(setq prefix-help-command #'embark-prefix-help-command)
+;; Set global key bindings
+(keymap-global-set "C-S-a" 'embark-act)
+(keymap-global-set "C-S-d" 'embark-dwim)
+(keymap-global-set "C-h B" 'embark-bindings)
 ;; Configuration
 (after-load 'embark
   ;; Hide the mode line of the Embark live/completions buffers
@@ -2224,7 +2192,7 @@
                  (window-parameters (mode-line-format . none)))))
 
 ;;; Embark Consult integration
-(setup embark-consult (:elpaca t))
+(straight-use-package 'embark-consult)
 ;; Configuration
 (after-load 'embark
   ;; Load library
@@ -2233,21 +2201,20 @@
   (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))
 
 ;;; Embark avy integration
-(setup avy-embark-collect
-  (:elpaca t)
-  (after-load 'embark
-    ;; Load library
-    (require 'avy-embark-collect)
-    ;; Set local key bindings
-    (dolist (bind '(("C-'" . avy-embark-collect-choose)
-                    ("C-\"" . avy-embark-collect-act)))
-      (keymap-set embark-collect-mode-map (car bind) (cdr bind)))))
+(straight-use-package 'avy-embark-collect)
+;; Configuration
+(after-load 'embark  
+  ;; Load library
+  (require 'avy-embark-collect)
+  ;; Set local key bindings
+  (dolist (bind '(("C-'" . avy-embark-collect-choose)
+                  ("C-\"" . avy-embark-collect-act)))
+    (keymap-set embark-collect-mode-map (car bind) (cdr bind))))
 
 ;;; Minions
-(setup minions
-  (:elpaca t)
-  ;; Enable mode
-  (minions-mode +1))
+(straight-use-package 'minions)
+;; Enable mode
+(minions-mode +1)
 ;; Configuration
 (after-load 'minions
   ;; Change mode lighter and color
@@ -2279,20 +2246,16 @@
           ztreedir-mode)))
 
 ;;; Paredit
-(setup paredit
-  (:elpaca paredit :host github :repo "emacsmirror/paredit" :protocol ssh)
-  ;; Enable mode
-  (:with-hook (emacs-lisp-mode-hook
-               lisp-mode-hook
-               ielm-mode-hook
-               clojure-mode-hook
-               cider-repl-mode-hook
-               scheme-mode-hook
-               sly-mrepl-mode-hook
-               geiser-repl-mode-hook)
-    (:hook #'enable-paredit-mode)))
-;; Add extra functions via `paredit-ext'
-(setup paredit-ext (:elpaca paredit-ext :host github :repo "drot/paredit-ext" :protocol ssh))
+(straight-use-package 'paredit)
+(dolist (hook '(emacs-lisp-mode-hook
+                lisp-mode-hook
+                ielm-mode-hook
+                clojure-mode-hook
+                cider-repl-mode-hook
+                scheme-mode-hook
+                sly-mrepl-mode-hook
+                geiser-repl-mode-hook))
+  (add-hook hook #'enable-paredit-mode))
 ;; Configuration
 (after-load 'paredit
   ;; Enable integration with ElDoc
@@ -2300,7 +2263,10 @@
    #'paredit-backward-delete
    #'paredit-close-round)
 
-  ;; Load extra functions
+  ;; Add extra functions via `paredit-ext'
+  (straight-use-package
+   '(paredit-ext :host nil :type git :repo "git@github.com:drot/paredit-ext"))
+  ;; Load library
   (require 'paredit-ext)
 
   ;; Disable conflicting key binding
@@ -2332,19 +2298,18 @@
             (lambda () (setq-local electric-pair-mode nil))))
 
 ;;; Rainbow Delimiters
-(setup rainbow-delimiters
-  (:elpaca t)
-  ;; Enable mode
-  (:hook-into emacs-lisp-mode
-              lisp-mode
-              clojure-mode
-              scheme-mode))
+(straight-use-package 'rainbow-delimiters)
+;; Enable mode
+(dolist (hook '(emacs-lisp-mode-hook
+                lisp-mode-hook
+                clojure-mode-hook
+                scheme-mode-hook))
+  (add-hook hook #'rainbow-delimiters-mode))
 
 ;;; YASnippet
-(setup yasnippet
-  (:elpaca t)
-  ;; Enable mode
-  (yas-global-mode +1))
+(straight-use-package 'yasnippet)
+;; Enable mode
+(yas-global-mode +1)
 
 ;;; Artist mode
 (keymap-global-set "C-c t a" 'artist-mode)
