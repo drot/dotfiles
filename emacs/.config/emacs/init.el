@@ -1446,9 +1446,6 @@
 
 ;;; Geiser Guile
 (straight-use-package 'geiser-guile)
-;; Configuration
-(after-load 'geiser-guile
-  (setq geiser-guile-binary "guile3.0"))
 
 ;;; Go mode
 (straight-use-package 'go-mode)
