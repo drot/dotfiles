@@ -990,8 +990,10 @@
       ("p" "Previous Visible" outline-previous-visible-heading)
       ("f" "Forward Same Level" outline-forward-same-level)
       ("b" "Backward Same Level" outline-backward-same-level)]])
-  ;; Set local key binding
-  (keymap-set outline-minor-mode-map "C-c o h" 'site/outline-transient))
+  ;; Set local key bindings
+  (dolist (mode '(outline-mode-map
+                  outline-minor-mode-map))
+    (keymap-set (symbol-value mode) "C-c o h" 'site/outline-transient)))
 
 ;;; Org-mode
 (defun site/toggle-table-mode ()
@@ -1407,9 +1409,9 @@
 (straight-use-package 'dockerfile-mode)
 
 ;;; Docker Compose mode
-(straight-use-package 'docker-compose-mode
-  ;; Enable mode
-  (add-to-list 'auto-mode-alist '("/docker-compose.yml\\'" . docker-compose-mode)))
+(straight-use-package 'docker-compose-mode)
+;; Enable mode
+(add-to-list 'auto-mode-alist '("/docker-compose.yml\\'" . docker-compose-mode))
 
 ;;; Elpher Gopher browser
 (straight-use-package 'elpher)
@@ -1921,9 +1923,9 @@
         vterm-max-scrollback 10000))
 
 ;;; YAML mode
-(straight-use-package 'yaml-mode
-  ;; Tweak word movement
-  (add-hook 'yaml-mode-hook #'subword-mode))
+(straight-use-package 'yaml-mode)
+;; Tweak word movement
+(add-hook 'yaml-mode-hook #'subword-mode)
 
 ;;; Ztree
 (straight-use-package 'ztree)
