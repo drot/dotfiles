@@ -234,7 +234,7 @@
                 vterm-mode-hook
                 cider-repl-mode-hook))
   (add-hook hook
-            (lambda () (hl-line-mode -1))))
+            (lambda () (setq-local global-hl-line-mode nil))))
 ;; Configuration
 (after-load 'hl-line
   ;; Don't display line highlight in inactive windows
@@ -1520,8 +1520,6 @@
 (straight-use-package '(json-mode :host github :repo "emacs-straight/json-mode"))
 
 ;;; Eglot
-(straight-use-package 'eglot)
-;; Set global key binding
 (keymap-global-set "C-c t e" 'eglot)
 ;; Configuration
 (after-load 'eglot
