@@ -28,6 +28,9 @@ XTerm.vt100.bellIsUrgent: true
 XTerm.vt100.visualBell: true
 XTerm.vt100.visualBellLine: true
 
+! Enable cursor blink
+XTerm.vt100.cursorBlink: true
+
 ! Set default geometry
 XTerm.vt100.geometry: 120x30
 
