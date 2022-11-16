@@ -34,7 +34,7 @@ fi
 autorandr --cycle &
 
 # Start compositing
-picom --experimental-backends &
+picom &
 
 # Start lock screen automatically
 xss-lock --transfer-sleep-lock -- i3lock -n -t -i $HOME/.scripts/lock-phoenix.png &
