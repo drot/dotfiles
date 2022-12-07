@@ -75,6 +75,6 @@ read_file weather {
 }
 
 time {
-    format = " %d-%m  %H:%M"
+    format = " %a, %d-%m  %H:%M"
     separator_block_width = 30
 }
