@@ -302,8 +302,11 @@ for_window [class="pritunl"] floating enable, border pixel 2
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 for_window [title="Terminator Preferences"] floating enable
-for_window [title="Friends List"] floating enable
 for_window [title="Bitwarden"] floating enable
+
+# steam specific
+for_window [title="Friends List"] floating enable
+for_window [title="Steam - News"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
