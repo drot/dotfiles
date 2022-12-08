@@ -284,13 +284,14 @@ for_window [all] title_window_icon on
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
 for_window [class="firefox"] border pixel 2
-for_window [class="Terminator"] border pixel 2
-for_window [class="Alacritty"] border pixel 2
-for_window [class="Code"] border pixel 2
-for_window [class="st-256color"] border pixel 2
-for_window [class="Zutty"] border pixel 2
+
 for_window [class="XTerm"] border pixel 2
+for_window [class="Terminator"] border pixel 2
+for_window [title="Terminator Preferences"] floating enable
+
 for_window [class="Emacs"] border pixel 2
+for_window [class="Code"] border pixel 2
+
 for_window [class="mpv"] floating enable
 for_window [class="flameshot"] floating enable
 for_window [class="Arandr"] floating enable
@@ -301,7 +302,6 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="pritunl"] floating enable, border pixel 2
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
-for_window [title="Terminator Preferences"] floating enable
 for_window [title="Bitwarden"] floating enable
 
 # steam specific
