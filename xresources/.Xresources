@@ -49,6 +49,7 @@ XTerm.ttyModes: erase ^?
 XTerm.Fullscreen: never
 
 ! Various scrolling options
+XTerm.vt100.alternateScroll: true
 XTerm.vt100.scrollTtyOutput: false
 XTerm.vt100.scrollKey: true
 
