@@ -148,10 +148,10 @@ set $ws9 "9"
 set $ws10 "10"
 
 # assign workspaces to specific screens
-workspace $ws2 output DP-3
-workspace $ws3 output DP-2
-workspace $ws4 output DP-2
-workspace $ws5 output DP-2
+workspace $ws2 output DP-2
+workspace $ws3 output DP-3
+workspace $ws4 output DP-3
+workspace $ws5 output DP-3
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -283,6 +283,8 @@ for_window [all] title_window_icon on
 # list of floating applications
 for_window [class="Google-chrome"] border pixel 2
 for_window [class="Slack"] border pixel 2
+for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb" class="Google-chrome"] floating enable
+
 for_window [class="firefox"] border pixel 2
 
 for_window [class="XTerm"] border pixel 2
@@ -296,17 +298,15 @@ for_window [class="mpv"] floating enable
 for_window [class="flameshot"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Vncviewer"] floating enable
+
 for_window [class="Wine"] floating enable
+for_window [class="Steam"] floating enable
+
 for_window [class="Org.gnome.Nautilus"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="pritunl"] floating enable, border pixel 2
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
-for_window [title="Bitwarden"] floating enable
-
-# steam specific
-for_window [title="Friends List"] floating enable
-for_window [title="Steam - News"] floating enable
 
 # assign applications to certain workspaces
 assign [class="Slack"] $ws1
