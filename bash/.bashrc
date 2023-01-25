@@ -17,7 +17,7 @@ shopt -s extglob # turn on extended globbing
 shopt -s no_empty_cmd_completion # disable tab-completion on an empty line
 
 # History format and size
-HISTSIZE="20000"
+HISTSIZE=-1
 HISTFILESIZE="${HISTSIZE}"
 HISTCONTROL="ignoreboth:erasedups"
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
