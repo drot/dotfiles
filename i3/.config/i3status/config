@@ -12,6 +12,7 @@ order += "cpu_temperature 0"
 order += "memory"
 order += "disk /"
 order += "wireless _first_"
+order += "path_exists VPN"
 order += "battery 0"
 order += "volume master"
 order += "read_file weather"
@@ -44,6 +45,13 @@ disk "/" {
 wireless _first_ {
     format_up = "%quality"
     format_down = " "
+    separator_block_width = 30
+}
+
+path_exists VPN {
+    format = " %title"
+    format_down = ""
+    path = "/proc/sys/net/ipv4/conf/tun0"
     separator_block_width = 30
 }
 
