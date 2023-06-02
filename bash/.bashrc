@@ -71,7 +71,13 @@ case $TERM in
     alacritty|*256*)
         PS1="${TITLE}${ERROR_CODE}${SSH_CONN}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
+    eat-truecolor)
+        PS1="${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
+        ;;
     *)
         PS1="${SSH_CONN}${ERROR_CODE}${BLUE}\w${RED}${GIT}${GREEN} > ${RESET}"
         ;;
 esac
+
+# Eat integration
+[[ -n $EAT_SHELL_INTEGRATION_DIR ]] && source "$EAT_SHELL_INTEGRATION_DIR/bash"
