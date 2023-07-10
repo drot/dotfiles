@@ -54,6 +54,7 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-kitty
+TERM eat-truecolor
 
 BLK 38;5;68 # core
 CAPABILITY 38;5;17 # core
