@@ -9,6 +9,7 @@ export NAME="Davor Rotim"
 export EMAIL="rotim.davor@nsoft.com"
 export SBCL_HOME="${HOME}/.local/lib/sbcl"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gcr/ssh"
+export GROFF_NO_SGR=1
 
 # Qt5 default style
 export QT_QPA_PLATFORMTHEME="qt5ct"
