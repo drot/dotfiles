@@ -34,7 +34,7 @@ XTerm.vt100.cursorBlink: true
 ! Set default geometry
 XTerm.vt100.geometry: 120x30
 
-! Default shell command
+! Default shell command for printer
 XTerm.vt100.printerCommand: dmenu-url
 
 ! Release Meta binding
