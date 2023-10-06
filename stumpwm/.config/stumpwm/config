@@ -160,7 +160,7 @@
 
 ;;; Remap Firefox keys
 (define-remapped-keys
-    '(("Firefox"
+    '(("Google-chrome"
        ("C-n" . "Down")
        ("C-p" . "Up")
        ("C-f" . "Right")
