@@ -17,6 +17,9 @@
 ;;; Debug instead of abort
 (setf *top-level-error-action* :break)
 
+;;; Set default font
+(set-font "-xos4-terminus-medium-r-normal-*-22-*-*-*-*-*-*-*")
+
 ;;; Change default color map
 (setf *colors* '("#1d1f21"              ; 0 black
                  "#cc6666"              ; 1 red
