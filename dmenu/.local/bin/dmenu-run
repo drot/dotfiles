@@ -11,7 +11,7 @@ selected_foreground="#1d1f21"
 
 # Change prompt if necessary
 if [[ -z $1 ]]; then
-    prompt=">_"
+    prompt="Run:"
 else
 	prompt="$1"
 fi
