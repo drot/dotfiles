@@ -302,7 +302,7 @@ for_window [class="Vncviewer"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Steam"] floating enable
 
-for_window [class="Org.gnome.Nautilus"] floating enable
+for_window [class="org.gnome.Nautilus"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="pritunl"] floating enable, border pixel 2
 for_window [class="Qemu-system-x86_64"] floating enable
