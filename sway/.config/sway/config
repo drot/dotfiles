@@ -1,0 +1,361 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+# General settings
+workspace_layout tabbed
+workspace_auto_back_and_forth yes
+
+### Variables
+#
+# Define color names
+set $black #1C1B19
+set $bright_black #918175
+
+set $red #EF2F27
+set $bright_red #F75341
+
+set $green #519F50
+set $bright_green #98BC37
+
+set $yellow #FBB829
+set $bright_yellow #FED06E
+
+set $blue #2C78BF
+set $bright_blue #68A8E4
+
+set $magenta #E02C6D
+set $bright_magenta #FF5C8F
+
+set $cyan #0AAEB3
+set $bright_cyan #53FDE9
+
+set $white #D0BFA1
+set $bright_white #FCE8C3
+
+set $orange #D75F00
+set $bright_orange #FF8700
+
+set $xgray1 #262626
+set $xgray2 #303030
+set $xgray3 #3A3A3A
+set $xgray4 #444444
+set $xgray5 #4E4E4E
+
+set $hard_black #121212
+
+# Multihead setup
+output eDP-1 pos 320 1080 res 1920x1200
+output DP-4 pos 1920 0 res 1920x1080
+output DP-5 pos 3840 0 res 1920x1080
+output * bg /home/drotim/Pictures/phoenix.png fill
+
+# Keyboard layout
+input * xkb_layout "hr"
+
+# window colors - border background text indicator
+client.focused $bright_black $xgray3 $yellow $yellow $bright_black
+client.focused_inactive $xgray3 $xgray3 $bright_black $xgray3 $xgray3
+client.unfocused $xgray1 $xgray1 $bright_black $xgray1 $xgray1
+client.urgent $red $xgray1 $red $red $red
+client.placeholder $xgray3 $hard_black $bright_black $xgray3 $xgray3
+client.background $black
+
+# font for window titles and the status bar
+font pango:Iosevka Lambda, FontAwesome 15
+
+# default modifier key
+set $mod Mod4
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up l
+set $down k
+set $left j
+set $right ccaron
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec foot
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start launcher
+bindsym $mod+p exec --no-startup-id dmenu-run
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# toggle sticky floating
+bindsym $mod+Shift+s sticky toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+# focus the latest urgent window.
+bindsym $mod+u [urgent="latest"] focus
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# assign workspaces to specific screens
+workspace $ws2 output DP-2 DP-4
+workspace $ws3 output DP-3 DP-5
+workspace $ws4 output DP-3 DP-5
+workspace $ws5 output DP-3 DP-5
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+# exit sway
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# move workspace to certain output
+set $mode_randr RandR: (direction keys) - Move Workspace, (c) Cycle Outputs
+mode "$mode_randr" {
+     bindsym $left move workspace to output left
+     bindsym $down move workspace to output down
+     bindsym $up move workspace to output up
+     bindsym $right move workspace to output right
+     # same bindings, but for the arrow keys
+     bindsym Left move workspace to output left
+     bindsym Down move workspace to output down
+     bindsym Up move workspace to output up
+     bindsym Right move workspace to output right
+     # cycle output key
+     bindsym c exec --no-startup-id autorandr --cycle; mode "default"
+     # back to normal
+     bindsym q mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "$mode_randr"
+
+# resize window mode
+mode "Resize window" {
+     bindsym $left resize shrink width 10 px or 10 ppt
+     bindsym $down resize grow height 10 px or 10 ppt
+     bindsym $up resize shrink height 10 px or 10 ppt
+     bindsym $right resize grow width 10 px or 10 ppt
+     # same bindings, but for the arrow keys
+     bindsym Left resize shrink width 10 px or 10 ppt
+     bindsym Down resize grow height 10 px or 10 ppt
+     bindsym Up resize shrink height 10 px or 10 ppt
+     bindsym Right resize grow width 10 px or 10 ppt
+     # back to normal
+     bindsym q mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "RESIZE"
+
+# screenshot mode
+set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload, (Alt) Delay
+mode "$mode_screenshot" {
+     bindsym a exec --no-startup-id ~/.scripts/screenshot full; mode "default"
+     bindsym r exec --no-startup-id ~/.scripts/screenshot region; mode "default"
+     bindsym Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy; mode "default"
+     bindsym u exec --no-startup-id ~/.scripts/screenshot upload; mode "default"
+     # with delay
+     bindsym Mod1+a exec --no-startup-id ~/.scripts/screenshot full 3; mode "default"
+     bindsym Mod1+r exec --no-startup-id ~/.scripts/screenshot region 3; mode "default"
+     bindsym Mod1+Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy 3; mode "default"
+     bindsym Mod1+u exec --no-startup-id ~/.scripts/screenshot upload 3; mode "default"
+     # back to normal
+     bindsym q mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym Print mode "$mode_screenshot"
+
+# volume keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
+bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
+
+# player keys
+bindsym $mod+less exec --no-startup-id ~/.scripts/player-control previous
+bindsym $mod+Shift+less exec --no-startup-id ~/.scripts/player-control next
+bindsym XF86AudioPlay exec --no-startup-id ~/.scripts/player-control
+
+# brightness keys
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness_toggle up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle down
+
+# clipboard selection key
+bindsym $mod+Insert exec --no-startup-id clipmenusel
+
+# lock screen
+bindsym Pause exec --no-startup-id xset s activate
+
+# notification keys
+bindsym $mod+Delete exec --no-startup-id dunstctl close
+bindsym $mod+Shift+Delete exec --no-startup-id dunstctl close-all
+bindsym $mod+grave exec --no-startup-id dunstctl history-pop
+bindsym $mod+Home exec --no-startup-id dunstctl context
+
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -f 'xft:Iosevka Lambda 15' -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -f 'xft:Iosevka Lambda 15' -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+# smart hide borders when fullscreen
+hide_edge_borders smart
+
+# enable window icons
+#for_window [all] title_window_icon on
+
+# list of floating applications
+for_window [class="Google-chrome"] border pixel 2
+for_window [class="Slack"] border pixel 2
+for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb" class="Google-chrome"] floating enable
+
+for_window [class="firefox"] border pixel 2
+
+for_window [class="XTerm"] border pixel 2
+for_window [class="Terminator"] border pixel 2
+for_window [title="Terminator Preferences"] floating enable
+
+for_window [class="Emacs"] border pixel 2
+for_window [class="Code"] border pixel 2
+
+for_window [class="mpv"] floating enable
+for_window [class="flameshot"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Vncviewer"] floating enable
+
+for_window [class="Wine"] floating enable
+for_window [class="Steam"] floating enable
+
+for_window [class="Org.gnome.Nautilus"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="pritunl"] floating enable, border pixel 2
+for_window [class="Qemu-system-x86_64"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+
+# assign applications to certain workspaces
+assign [class="Slack"] $ws1
+assign [class="Google-chrome"] $ws5
+for_window [instance="^slack-nsoft\.slack\.com$" class="Google-chrome"] move --no-auto-back-and-forth container to workspace $ws1, floating disable
+for_window [instance="^uchiwa\.nsoft\.com$" class="Google-chrome"] move --no-auto-back-and-forth container to workspace $ws2, floating disable
+assign [class="firefox"] $ws2
+assign [class="Emacs"] $ws3
+assign [class="Code"] $ws3
+assign [class="libreoffice"] $ws6
+assign [class="Gimp"] $ws5
+assign [class="Zathura"] $ws6
+assign [class="Pavucontrol"] $ws6
+
+# start i3bar to display a workspace bar
+bar {
+    bindsym button4 nop
+    bindsym button5 nop
+    tray_output eDP-1
+    status_command i3status
+    colors {
+        background $black
+        statusline $white
+        separator  $white
+        # workspace colors - border background text
+        focused_workspace $bright_black $xgray3 $yellow
+        active_workspace $xgray3 $xgray3 $bright_black
+        inactive_workspace $xgray3 $xgray1 $bright_black
+        urgent_workspace $red $red $black
+        binding_mode $magenta $magenta $bright_white
+    }
+}
+
+# Include default configuration
+include /etc/sway/config.d/*
