@@ -47,9 +47,9 @@ set $xgray5 #4E4E4E
 set $hard_black #121212
 
 # Multihead setup
-output eDP-1 pos 320 1080 res 1920x1200
-output DP-4 pos 1920 0 res 1920x1080
-output DP-5 pos 3840 0 res 1920x1080
+output eDP-1 position 1297 1080 resolution 1920x1200
+output DP-2 position 0 0 resolution 1920x1080
+output DP-3 position 1920 0 resolution 1920x1080
 output * bg /home/drotim/Pictures/phoenix.png fill
 
 # Keyboard layout
@@ -196,7 +196,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace
+# restart sway inplace
 bindsym $mod+Shift+r restart
 # exit sway
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -338,7 +338,10 @@ assign [class="Gimp"] $ws5
 assign [class="Zathura"] $ws6
 assign [class="Pavucontrol"] $ws6
 
-# start i3bar to display a workspace bar
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
 bar {
     bindsym button4 nop
     bindsym button5 nop
