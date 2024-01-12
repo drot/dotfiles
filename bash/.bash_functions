@@ -48,3 +48,27 @@ man () {
 record () {
     ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') $(mktemp -u -t 'XXXXXX' --suffix=.mp4)
 }
+
+tminus () {
+    # Time Arithmetic
+
+    TIME1=$(date "+%Y-%m-%d 07:00:00")
+    TIME2=$(date "+%Y-%m-%d $1")
+
+    # Convert the times to seconds from the Epoch
+    SEC1=$(date -u -d "${TIME1}" +%s)
+    SEC2=$(date -u -d "${TIME2}" +%s)
+
+    # Use expr to do the math, let's say TIME1 was the start and TIME2 was the finish
+    DIFFSEC=$(expr ${SEC2} - ${SEC1})
+    DIFFSEC=${DIFFSEC#-}
+    # And use date to convert the seconds back to something more meaningful
+
+    TIMENOW=$(date "+%Y-%m-%d %H:%M:%S")
+    TIMENOWTS=$(date -u -d "${TIMENOW}" +%s)
+    ENDINGTS=$(expr ${TIMENOWTS} + ${DIFFSEC})
+    ENDTIME=$(date -u -d "@${ENDINGTS}" "+%H:%M:%S")
+    REMAINING=$(date -u -d "@${DIFFSEC}" "+%H:%M:%S")
+
+    echo "Time Remaining :: ${REMAINING} | You're free to go at :: ${ENDTIME}"
+}
