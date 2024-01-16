@@ -49,7 +49,7 @@ record () {
     ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') $(mktemp -u -t 'XXXXXX' --suffix=.mp4)
 }
 
-tminus () {
+worktime () {
     # Time Arithmetic
 
     TIME1=$(date "+%Y-%m-%d 07:00:00")
