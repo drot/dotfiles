@@ -49,6 +49,12 @@ record () {
     ffmpeg -f x11grab -framerate 25 $(slop -f '-video_size %wx%h -i +%x,%y') $(mktemp -u -t 'XXXXXX' --suffix=.mp4)
 }
 
+# Combine 2 PDFs
+pdfcombine () {
+    gs -q -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=${1%.*}___${2%.*}.pdf -dBATCH $1 $2
+}
+
+# Calculate remaining worktime
 worktime () {
     # Time Arithmetic
 
