@@ -36,6 +36,9 @@ autorandr --cycle &
 # Start compositing
 picom &
 
+# Set mouse rules
+xinput set-prop "Logitech ERGO M575" "libinput Scroll Method Enabled" 0, 0, 1 &
+
 # Start lock screen automatically
 xss-lock --transfer-sleep-lock -- i3lock -n -t -i $HOME/.scripts/lock-phoenix.png &
 xset s 300 &

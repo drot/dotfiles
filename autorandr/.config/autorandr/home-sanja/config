@@ -1,0 +1,27 @@
+output DP-1
+off
+output HDMI-1
+crtc 1
+mode 1280x720
+pos 77x0
+rate 59.86
+x-prop-colorspace Default
+x-prop-max_bpc 16
+x-prop-non_desktop 0
+x-prop-scaling_mode None
+x-prop-underscan off
+x-prop-underscan_hborder 0
+x-prop-underscan_vborder 0
+output eDP-1
+crtc 0
+mode 1920x1200
+pos 0x720
+primary
+rate 60.01
+x-prop-colorspace Default
+x-prop-max_bpc 16
+x-prop-non_desktop 0
+x-prop-scaling_mode None
+x-prop-underscan off
+x-prop-underscan_hborder 0
+x-prop-underscan_vborder 0
