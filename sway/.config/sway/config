@@ -297,46 +297,46 @@ hide_edge_borders smart
 # enable window icons
 #for_window [all] title_window_icon on
 
-# list of floating applications
-for_window [class="Google-chrome"] border pixel 2
-for_window [class="Slack"] border pixel 2
-for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb" class="Google-chrome"] floating enable
+# Chrome disable window borders
+# for_window [app_id="google-chrome"] border pixel 2
+# for_window [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] border pixel 2
+# for_window [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] border pixel 2
 
-for_window [class="firefox"] border pixel 2
+#for_window [app_id="foot"] border pixel 2
 
-for_window [class="XTerm"] border pixel 2
-for_window [class="Terminator"] border pixel 2
-for_window [title="Terminator Preferences"] floating enable
+# Bitwarden float
+for_window [app_id="chrome-nngceckbapebfimnlniiiahkandclblb-Profile_3"] floating enable
+# for_window [app_id="Terminator"] border pixel 2
+# for_window [title="Terminator Preferences"] floating enable
 
-for_window [class="Emacs"] border pixel 2
-for_window [class="Code"] border pixel 2
+# for_window [app_id="Emacs"] border pixel 2
+# for_window [app_id="Code"] border pixel 2
 
-for_window [class="mpv"] floating enable
-for_window [class="flameshot"] floating enable
-for_window [class="Arandr"] floating enable
-for_window [class="Vncviewer"] floating enable
+# for_window [app_id="mpv"] floating enable
+# for_window [app_id="flameshot"] floating enable
+# for_window [app_id="Arandr"] floating enable
+# for_window [app_id="Vncviewer"] floating enable
 
-for_window [class="Wine"] floating enable
-for_window [class="Steam"] floating enable
+# for_window [app_id="Wine"] floating enable
+# for_window [app_id="Steam"] floating enable
 
-for_window [class="Org.gnome.Nautilus"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="pritunl"] floating enable, border pixel 2
-for_window [class="Qemu-system-x86_64"] floating enable
-for_window [class="Nm-connection-editor"] floating enable
+# for_window [app_id="Org.gnome.Nautilus"] floating enable
+# for_window [app_id="Pavucontrol"] floating enable
+# for_window [app_id="pritunl"] floating enable, border pixel 2
+# for_window [app_id="Qemu-system-x86_64"] floating enable
+# for_window [app_id="Nm-connection-editor"] floating enable
 
 # assign applications to certain workspaces
-assign [class="Slack"] $ws1
-assign [class="Google-chrome"] $ws5
-for_window [instance="^slack-nsoft\.slack\.com$" class="Google-chrome"] move --no-auto-back-and-forth container to workspace $ws1, floating disable
-for_window [instance="^uchiwa\.nsoft\.com$" class="Google-chrome"] move --no-auto-back-and-forth container to workspace $ws2, floating disable
-assign [class="firefox"] $ws2
-assign [class="Emacs"] $ws3
-assign [class="Code"] $ws3
-assign [class="libreoffice"] $ws6
-assign [class="Gimp"] $ws5
-assign [class="Zathura"] $ws6
-assign [class="Pavucontrol"] $ws6
+assign [app_id="google-chrome"] $ws5
+assign [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] $ws2
+assign [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] $ws1
+# assign [class="firefox"] $ws2
+# assign [class="Emacs"] $ws3
+# assign [class="Code"] $ws3
+# assign [class="libreoffice"] $ws6
+# assign [class="Gimp"] $ws5
+# assign [class="Zathura"] $ws6
+# assign [class="Pavucontrol"] $ws6
 
 #
 # Status Bar:
