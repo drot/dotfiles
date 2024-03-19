@@ -9,6 +9,9 @@ set window-title-basename "true"
 # More natural scrolling
 set scroll-full-overlap 0.1
 
+# Set default database
+set database sqlite
+
 # Interface colors
 set default-bg "#1d1f21"
 set default-fg "#282a2e"
