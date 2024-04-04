@@ -37,7 +37,7 @@ wmenu_opts=(-i -p "$prompt"
 # Run wmenu
 case $menu_action in
     run)
-        dmenu_path | wmenu "${wmenu_opts[@]}" | xargs swaymsg exec --    
+        dmenu_path | wmenu "${wmenu_opts[@]}" | xargs swaymsg exec --
         ;;
     paste)
         cliphist list | wmenu -l 10 "${wmenu_opts[@]}" | cliphist decode | wl-copy
