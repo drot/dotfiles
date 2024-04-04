@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Default action
+menu_action="$1"
+
+# Font
+font="Iosevka Lambda 15"
+
+# Colors
+normal_background="#1d1f21"
+normal_foreground="#969896"
+selected_background="#81a2be"
+selected_foreground="#1d1f21"
+
+# Run or paste
+case $menu_action in
+    run)
+        prompt="Run:"
+        ;;
+    paste)
+        prompt="Paste:"
+        ;;
+    *)
+        echo "Invalid argument."
+        exit 1
+        ;;
+esac
+
+# Default options
+wmenu_opts=(-i -p "$prompt"
+            -N "$normal_background"
+            -n "$normal_foreground"
+            -S "$selected_background"
+            -s "$selected_foreground"
+            -f "$font")
+
+# Run wmenu
+case $menu_action in
+    run)
+        dmenu_path | wmenu "${wmenu_opts[@]}" | xargs swaymsg exec --    
+        ;;
+    paste)
+        cliphist list | wmenu -l 10 "${wmenu_opts[@]}" | cliphist decode | wl-copy
+        ;;
+esac

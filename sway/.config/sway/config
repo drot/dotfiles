@@ -61,6 +61,9 @@ exec swayidle -w \
 # Keyboard layout
 input * xkb_layout "hr"
 
+# Clipboard manager
+exec wl-paste --watch cliphist store
+
 # window colors - border background text indicator
 client.focused $bright_black $xgray3 $yellow $yellow $bright_black
 client.focused_inactive $xgray3 $xgray3 $bright_black $xgray3 $xgray3
@@ -92,7 +95,7 @@ bindsym $mod+Return exec foot
 bindsym $mod+Shift+q kill
 
 # start launcher
-bindsym $mod+p exec wmenu-run
+bindsym $mod+p exec wmenu-sway run
 
 # change focus
 bindsym $mod+$left focus left
@@ -280,7 +283,7 @@ bindsym XF86MonBrightnessUp exec ~/.scripts/brightness_toggle up
 bindsym XF86MonBrightnessDown exec ~/.scripts/brightness_toggle down
 
 # clipboard selection key
-bindsym $mod+Insert exec clipmenusel
+bindsym $mod+Insert exec wmenu-sway paste
 
 # lock screen
 bindsym Pause exec swaylock
