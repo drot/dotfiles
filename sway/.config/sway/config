@@ -92,7 +92,7 @@ bindsym $mod+Return exec foot
 bindsym $mod+Shift+q kill
 
 # start launcher
-bindsym $mod+p exec dmenu-run
+bindsym $mod+p exec wmenu-run
 
 # change focus
 bindsym $mod+$left focus left
@@ -296,6 +296,7 @@ hide_edge_borders --i3 smart
 
 # Disable window borders on single focus
 for_window [app_id="foot"] border pixel 2
+for_window [app_id="emacs"] border pixel 2
 for_window [app_id="google-chrome"] border pixel 2
 for_window [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] border pixel 2
 for_window [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] border pixel 2
