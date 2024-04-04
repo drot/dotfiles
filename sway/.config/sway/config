@@ -250,17 +250,12 @@ mode "Resize window" {
 bindsym $mod+r mode "RESIZE"
 
 # screenshot mode
-set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload, (Alt) Delay
+set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload
 mode "$mode_screenshot" {
-     bindsym a exec ~/.scripts/screenshot full; mode "default"
-     bindsym r exec ~/.scripts/screenshot region; mode "default"
-     bindsym Shift+r exec ~/.scripts/screenshot region-copy; mode "default"
-     bindsym u exec ~/.scripts/screenshot upload; mode "default"
-     # with delay
-     bindsym Mod1+a exec ~/.scripts/screenshot full 3; mode "default"
-     bindsym Mod1+r exec ~/.scripts/screenshot region 3; mode "default"
-     bindsym Mod1+Shift+r exec ~/.scripts/screenshot region-copy 3; mode "default"
-     bindsym Mod1+u exec ~/.scripts/screenshot upload 3; mode "default"
+     bindsym a exec ~/.scripts/wl-screenshot full; mode "default"
+     bindsym r exec ~/.scripts/wl-screenshot region; mode "default"
+     bindsym Shift+r exec ~/.scripts/wl-screenshot region-copy; mode "default"
+     bindsym u exec ~/.scripts/wl-screenshot upload; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
