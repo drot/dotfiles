@@ -211,7 +211,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec swaynag -f 'Iosevka Lambda 15' -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
 # move workspace to certain output
-set $mode_outputs Outputs: (direction keys) - Move Workspace, (c) Cycle Outputs
+set $mode_outputs Outputs: (direction keys) - Move Workspace
 mode "$mode_outputs" {
      bindsym $left move workspace to output left
      bindsym $down move workspace to output down
@@ -222,14 +222,12 @@ mode "$mode_outputs" {
      bindsym Down move workspace to output down
      bindsym Up move workspace to output up
      bindsym Right move workspace to output right
-     # cycle output key
-     bindsym c exec autorandr --cycle; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
 }
 
-bindsym $mod+x mode "$mode_randr"
+bindsym $mod+x mode "$mode_outputs"
 
 # resize window mode
 mode "Resize window" {
