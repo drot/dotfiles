@@ -208,7 +208,7 @@ bindsym $mod+Shift+c reload
 # restart sway inplace
 bindsym $mod+Shift+r restart
 # exit sway
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynag -f 'Iosevka Lambda 15' -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
 # move workspace to certain output
 set $mode_randr RandR: (direction keys) - Move Workspace, (c) Cycle Outputs
