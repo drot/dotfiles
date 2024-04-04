@@ -1,4 +1,4 @@
-# Default config for sway
+# Default config for sway  -*- mode: i3wm-config; -*-
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -211,8 +211,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec swaynag -f 'Iosevka Lambda 15' -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
 # move workspace to certain output
-set $mode_randr RandR: (direction keys) - Move Workspace, (c) Cycle Outputs
-mode "$mode_randr" {
+set $mode_outputs Outputs: (direction keys) - Move Workspace, (c) Cycle Outputs
+mode "$mode_outputs" {
      bindsym $left move workspace to output left
      bindsym $down move workspace to output down
      bindsym $up move workspace to output up
