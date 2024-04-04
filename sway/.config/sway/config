@@ -54,7 +54,7 @@ output * bg /home/drotim/Pictures/phoenix.png fill
 
 # Lock screen setup
 exec swayidle -w \
-     timeout 300 'swaylock -f --image ~/.scripts/lock-phoenix.png' \
+     timeout 300 'swaylock' \
      timeout 305 'swaymsg "output * power off"' \
      resume 'swaymsg "output * power on"'
 
@@ -92,7 +92,7 @@ bindsym $mod+Return exec foot
 bindsym $mod+Shift+q kill
 
 # start launcher
-bindsym $mod+p exec --no-startup-id dmenu-run
+bindsym $mod+p exec dmenu-run
 
 # change focus
 bindsym $mod+$left focus left
@@ -220,7 +220,7 @@ mode "$mode_randr" {
      bindsym Up move workspace to output up
      bindsym Right move workspace to output right
      # cycle output key
-     bindsym c exec --no-startup-id autorandr --cycle; mode "default"
+     bindsym c exec autorandr --cycle; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
@@ -249,15 +249,15 @@ bindsym $mod+r mode "RESIZE"
 # screenshot mode
 set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload, (Alt) Delay
 mode "$mode_screenshot" {
-     bindsym a exec --no-startup-id ~/.scripts/screenshot full; mode "default"
-     bindsym r exec --no-startup-id ~/.scripts/screenshot region; mode "default"
-     bindsym Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy; mode "default"
-     bindsym u exec --no-startup-id ~/.scripts/screenshot upload; mode "default"
+     bindsym a exec ~/.scripts/screenshot full; mode "default"
+     bindsym r exec ~/.scripts/screenshot region; mode "default"
+     bindsym Shift+r exec ~/.scripts/screenshot region-copy; mode "default"
+     bindsym u exec ~/.scripts/screenshot upload; mode "default"
      # with delay
-     bindsym Mod1+a exec --no-startup-id ~/.scripts/screenshot full 3; mode "default"
-     bindsym Mod1+r exec --no-startup-id ~/.scripts/screenshot region 3; mode "default"
-     bindsym Mod1+Shift+r exec --no-startup-id ~/.scripts/screenshot region-copy 3; mode "default"
-     bindsym Mod1+u exec --no-startup-id ~/.scripts/screenshot upload 3; mode "default"
+     bindsym Mod1+a exec ~/.scripts/screenshot full 3; mode "default"
+     bindsym Mod1+r exec ~/.scripts/screenshot region 3; mode "default"
+     bindsym Mod1+Shift+r exec ~/.scripts/screenshot region-copy 3; mode "default"
+     bindsym Mod1+u exec ~/.scripts/screenshot upload 3; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
@@ -266,30 +266,30 @@ mode "$mode_screenshot" {
 bindsym Print mode "$mode_screenshot"
 
 # volume keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/audio_toggle up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/audio_toggle down
-bindsym XF86AudioMute exec --no-startup-id ~/.scripts/audio_toggle mute
+bindsym XF86AudioRaiseVolume exec ~/.scripts/audio_toggle up
+bindsym XF86AudioLowerVolume exec ~/.scripts/audio_toggle down
+bindsym XF86AudioMute exec ~/.scripts/audio_toggle mute
 
 # player keys
-bindsym $mod+less exec --no-startup-id ~/.scripts/player-control previous
-bindsym $mod+Shift+less exec --no-startup-id ~/.scripts/player-control next
-bindsym XF86AudioPlay exec --no-startup-id ~/.scripts/player-control
+bindsym $mod+less exec ~/.scripts/player-control previous
+bindsym $mod+Shift+less exec ~/.scripts/player-control next
+bindsym XF86AudioPlay exec ~/.scripts/player-control
 
 # brightness keys
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness_toggle up
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness_toggle down
+bindsym XF86MonBrightnessUp exec ~/.scripts/brightness_toggle up
+bindsym XF86MonBrightnessDown exec ~/.scripts/brightness_toggle down
 
 # clipboard selection key
-bindsym $mod+Insert exec --no-startup-id clipmenusel
+bindsym $mod+Insert exec clipmenusel
 
 # lock screen
-bindsym Pause exec --no-startup-id xset s activate
+bindsym Pause exec swaylock
 
 # notification keys
-bindsym $mod+Delete exec --no-startup-id dunstctl close
-bindsym $mod+Shift+Delete exec --no-startup-id dunstctl close-all
-bindsym $mod+grave exec --no-startup-id dunstctl history-pop
-bindsym $mod+Home exec --no-startup-id dunstctl context
+bindsym $mod+Delete exec dunstctl close
+bindsym $mod+Shift+Delete exec dunstctl close-all
+bindsym $mod+grave exec dunstctl history-pop
+bindsym $mod+Home exec dunstctl context
 
 # smart hide borders when fullscreen
 hide_edge_borders --i3 smart
