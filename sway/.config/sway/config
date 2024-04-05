@@ -59,7 +59,14 @@ exec swayidle -w \
      resume 'swaymsg "output * power on"'
 
 # Keyboard layout
-input * xkb_layout "hr"
+input type:keyboard {
+      xkb_layout "hr"
+}
+
+# Enable scroll with the trackball
+input "1133:16534:Logitech_ERGO_M575" {
+      scroll_method on_button_down
+}
 
 # Clipboard manager
 exec wl-paste --watch cliphist store
