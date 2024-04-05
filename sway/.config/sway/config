@@ -307,10 +307,11 @@ for_window [app_id="mpv"] floating enable
 # for_window [app_id="pritunl"] floating enable, border pixel 2
 
 # assign applications to certain workspaces
-assign [app_id="google-chrome"] $ws5
-assign [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] $ws2
 assign [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] $ws1
+assign [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] $ws2
 assign [app_id="emacs"] $ws3
+assign [app_id="google-chrome"] $ws5
+assign [app_id="org.pwmt.zathura"] $ws6
 
 #
 # Status Bar:
