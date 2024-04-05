@@ -59,7 +59,7 @@ exec swayidle -w \
      resume 'swaymsg "output * power on"'
 
 # Keyboard layout
-input type:keyboard {
+input "type:keyboard" {
       xkb_layout "hr"
 }
 
