@@ -1,2 +1,5 @@
+font=Iosevka Lambda
+font-size=22
 scaling=tile
 image=~/.scripts/lock-phoenix.png
+indicator-radius=100
