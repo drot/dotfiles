@@ -206,6 +206,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3 # core
 .user-ca-bundle 1 # Configs
 .rstheme 1 # Configs
 .epf 1 # Configs
+.Xdefaults 38;5;180;04 # Configs
 .Xresources 38;5;180;04 # Configs
 .git 38;5;197 # Version control
 .gitignore 38;5;240 # Version control
