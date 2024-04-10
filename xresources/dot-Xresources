@@ -1,0 +1,110 @@
+! Font hinting settings
+Xft.dpi: 96
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+! Cursor
+Xcursor.theme: Adwaita
+
+! Emacs
+Emacs.font: Iosevka Lambda-15
+Emacs.background: #222222
+Emacs.menuBar: off
+Emacs.toolBar: off
+Emacs.verticalScrollBars: off
+Emacs.synchronizeResize: extended
+
+! XTerm
+XTerm.termName: xterm-256color
+XTerm.vt100.Locale: true
+XTerm.vt100.saveLines: 65535
+
+! Bell options
+XTerm.vt100.bellIsUrgent: true
+XTerm.vt100.visualBell: true
+XTerm.vt100.visualBellLine: true
+
+! Enable cursor blink
+XTerm.vt100.cursorBlink: true
+
+! Set default geometry
+XTerm.vt100.geometry: 120x30
+
+! Default shell command for printer
+XTerm.vt100.printerCommand: dmenu-url
+
+! Release Meta binding
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.eightBitInput: false
+
+! Fix backspace key
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+! Disable full screen key binding
+XTerm.Fullscreen: never
+
+! Various scrolling options
+XTerm.vt100.alternateScroll: true
+XTerm.vt100.scrollTtyOutput: false
+XTerm.vt100.scrollKey: true
+
+! URL selection
+XTerm.vt100.charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! Enable additional key translations for URL selection, abbrev expansion and copy/paste
+XTerm.vt100.Translations: #override \n\
+   Ctrl Shift <KeyPress> u: print(noAttrs, noNewLine) \n\
+   Meta Shift <KeyPress> /: dabbrev-expand() \n\
+   Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
+   Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
+
+! Font
+XTerm.vt100.faceName: Iosevka Lambda
+XTerm.vt100.faceSize: 15
+
+! Main colors
+XTerm.vt100.Foreground: #cccccc
+XTerm.vt100.Background: #0c0c0c
+XTerm.vt100.cursorColor: #cccccc
+
+! Stylized colors
+XTerm.vt100.colorIT: #13a10e
+XTerm.vt100.colorBD: #cccccc
+XTerm.vt100.colorUL: #0037da
+
+! Menu colors
+XTerm.mainMenu.Background: #767676
+XTerm.vtMenu.Background: #767676
+XTerm.fontMenu.Background: #767676
+
+! Border
+XTerm.vt100.internalBorder: 4
+XTerm.vt100.ColorInnerBorder: true
+
+! Colors
+XTerm.vt100.color0: #0c0c0c
+XTerm.vt100.color1: #c50f1f
+XTerm.vt100.color2: #13a10e
+XTerm.vt100.color3: #c19c00
+XTerm.vt100.color4: #0037da
+XTerm.vt100.color5: #881798
+XTerm.vt100.color6: #3a96dd
+XTerm.vt100.color7: #cccccc
+XTerm.vt100.color8: #767676
+XTerm.vt100.color9: #e74856
+XTerm.vt100.color10: #16c60c
+XTerm.vt100.color11: #f9f1a5
+XTerm.vt100.color12: #3b78ff
+XTerm.vt100.color13: #b4009e
+XTerm.vt100.color14: #61d6d6
+XTerm.vt100.color15: #f2f2f2
+
+! Xautolock
+Xautolock.corners: -000
+Xautolock.time: 5
+Xautolock.locker: ~/.scripts/lock-screen

@@ -1,8 +1,15 @@
 {
-  "default-address-pools": [
-    {
-      "base": "10.100.0.0/16",
-      "size": 24
+    "default-address-pools": [
+        {
+          "base": "10.100.0.0/16",
+          "size": 24
+        }
+      ],
+  "default-ulimits": {
+    "nofile": {
+      "Hard": 10000,
+      "Name": "nofile",
+      "Soft": 10000
+        }
     }
-  ]
 }
