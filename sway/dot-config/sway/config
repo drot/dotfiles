@@ -317,7 +317,7 @@ for_window [app_id="mpv"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [class="pritunl"] floating enable, border pixel 2
 
-for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb"] floating enable
+for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb"] floating enable, border pixel 2
 
 # assign applications to certain workspaces
 assign [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] $ws1
