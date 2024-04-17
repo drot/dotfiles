@@ -20,6 +20,9 @@ case $menu_action in
     paste)
         prompt="Paste:"
         ;;
+    dunst)
+        prompt="dunst:"
+        ;;
     *)
         echo "Invalid argument."
         exit 1
@@ -41,5 +44,8 @@ case $menu_action in
         ;;
     paste)
         cliphist list | wmenu -l 10 "${wmenu_opts[@]}" | cliphist decode | wl-copy
+        ;;
+    dunst)
+        wmenu -l 10 "${wmenu_opts[@]}"
         ;;
 esac
