@@ -261,6 +261,8 @@ mode "$mode_screenshot" {
      bindsym r exec ~/.scripts/wl-screenshot region; mode "default"
      bindsym Shift+r exec ~/.scripts/wl-screenshot region-copy; mode "default"
      bindsym u exec ~/.scripts/wl-screenshot upload; mode "default"
+     bindsym w exec ~/.scripts/wl-screenshot swappy-window; mode "default"
+     bindsym s exec ~/.scripts/wl-screenshot swappy-region; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
