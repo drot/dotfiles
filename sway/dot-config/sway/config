@@ -255,14 +255,14 @@ mode "Resize window" {
 bindsym $mod+r mode "RESIZE"
 
 # screenshot mode
-set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload
+set $mode_screenshot Screenshot: (a) Full, (r) Region, (R) Region Copy, (u) Region Upload, (s) Swappy Region, (w) Swappy Window
 mode "$mode_screenshot" {
      bindsym a exec ~/.scripts/wl-screenshot full; mode "default"
      bindsym r exec ~/.scripts/wl-screenshot region; mode "default"
      bindsym Shift+r exec ~/.scripts/wl-screenshot region-copy; mode "default"
      bindsym u exec ~/.scripts/wl-screenshot upload; mode "default"
-     bindsym w exec ~/.scripts/wl-screenshot swappy-window; mode "default"
      bindsym s exec ~/.scripts/wl-screenshot swappy-region; mode "default"
+     bindsym w exec ~/.scripts/wl-screenshot swappy-window; mode "default"
      # back to normal
      bindsym q mode "default"
      bindsym Escape mode "default"
