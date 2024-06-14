@@ -1,9 +1,9 @@
 ;;; init.el --- drot Emacs configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2023 drot
+;; Copyright (C) 2009-2024 drot
 
 ;; Author: drot
-;; URL: https://github.com/drot/dotfiles/tree/work-arch/emacs/.config/emacs
+;; URL: https://github.com/drot/dotfiles/blob/master/emacs/dot-config/emacs
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
@@ -67,6 +67,9 @@
 ;;; Show unfinished keystrokes early
 (setopt echo-keystrokes 0.01)
 
+;;; Repeat certain multi-key sequences by typing a single key
+(repeat-mode +1)
+
 ;;; Indicate buffer boundaries and empty lines
 (setopt indicate-buffer-boundaries 'left
         indicate-empty-lines t)
@@ -96,7 +99,10 @@
         completion-ignore-case t)
 
 ;;; Cycle completion on smaller number of candidates
-(setopt completion-cycle-threshold 5)
+(setopt completion-cycle-threshold 3)
+
+;;; Try completion before indentation
+(setq tab-always-indent 'complete)
 
 ;;; Don't show help for completions
 (setopt completion-show-help nil)
@@ -201,6 +207,8 @@
 ;; Exclude `no-littering' directories from recent files list
 (add-to-list 'recentf-exclude no-littering-var-directory)
 (add-to-list 'recentf-exclude no-littering-etc-directory)
+;; Workaround for Emacs daemon unclean shutdowns
+(run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;;; Remember point position in files
 (save-place-mode +1)
@@ -261,6 +269,16 @@
     (quietly-read-abbrev-file))
 ;; Enable mode
 (setopt abbrev-mode t)
+
+;;; Dynamic abbreviation configuration
+(keymap-global-set "M-/" 'dabbrev-completion)
+(keymap-global-set "C-M-/" 'dabbrev-expand)
+;; Configuration
+(after-load 'dabbrev
+  ;; Don't check buffers containing media
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 
 ;;; Electric pair mode
 (electric-pair-mode +1)
@@ -332,8 +350,8 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 ;; Set global key bindings
-(keymap-global-set "C-c c b" 'flyspell-buffer)
-(keymap-global-set "C-c c r" 'flyspell-region)
+(keymap-global-set "C-c l b" 'flyspell-buffer)
+(keymap-global-set "C-c l r" 'flyspell-region)
 ;; Configuration
 (after-load 'flyspell
   ;; Disable conflicting key binding
@@ -347,7 +365,7 @@
   (setopt flyspell-duplicate-distance 12000))
 
 ;;; Ispell
-(keymap-global-set "C-c c d" 'ispell-change-dictionary)
+(keymap-global-set "C-c l d" 'ispell-change-dictionary)
 ;; Configuration
 (after-load 'ispell
   ;; Ensure spell checking program is available
@@ -368,6 +386,45 @@
 (setopt isearch-yank-on-move 'shift)
 ;; Add local key binding for `isearch-occur'
 (keymap-set isearch-mode-map "C-o" 'isearch-occur)
+;; Define Transient command
+(transient-define-prefix site/isearch-transient ()
+  "isearch Menu"
+  [["Edit Search String"
+    ("e" "Edit the search string (recursive)" isearch-edit-string
+     :transient nil)
+    ("w" "Pull next word or character word from buffer" isearch-yank-word-or-char
+     :transient nil)
+    ("s" "Pull next symbol or character from buffer" isearch-yank-symbol-or-char
+     :transient nil)
+    ("l" "Pull rest of line from buffer" isearch-yank-line
+     :transient nil)
+    ("y" "Pull string from kill ring" isearch-yank-kill
+     :transient nil)
+    ("t" "Pull thing from buffer" isearch-forward-thing-at-point
+     :transient nil)]
+   ["Replace"
+    ("q" "Start `query-replace'" isearch-query-replace
+     :if-nil buffer-read-only
+     :transient nil)
+    ("x" "Start `query-replace-regexp'" isearch-query-replace-regexp
+     :if-nil buffer-read-only
+     :transient nil)]]
+  [["Toggle"
+    ("X" "Toggle regexp searching" isearch-toggle-regexp
+     :transient nil)
+    ("S" "Toggle symbol searching" isearch-toggle-symbol
+     :transient nil)
+    ("W" "Toggle word searching" isearch-toggle-word
+     :transient nil)
+    ("F" "Toggle case fold" isearch-toggle-case-fold
+     :transient nil)
+    ("L" "Toggle lax whitespace" isearch-toggle-lax-whitespace
+     :transient nil)]
+   ["Misc"
+    ("o" "occur" isearch-occur
+     :transient nil)]])
+;; Set local key binding
+(define-key isearch-mode-map (kbd "<f2>") 'site/isearch-transient)
 
 ;;; Diff mode
 (after-load 'diff-mode
@@ -569,7 +626,7 @@
 ;;; Scheme mode
 (after-load 'scheme
   ;; Use Guile as the default interpreter
-  (setopt scheme-program-name "guile3.0"))
+  (setopt scheme-program-name "guile"))
 
 ;;; CSS mode
 (after-load 'css-mode
@@ -719,7 +776,7 @@
   (setopt browse-url-browser-function #'browse-url-xdg-open))
 
 ;;; Speedbar
-(keymap-global-set "C-c p s" 'speedbar)
+(keymap-global-set "C-c t s" 'speedbar)
 ;; Configuration
 (after-load 'speedbar
   ;; Set local key binding
@@ -741,10 +798,10 @@
           eshell-cmpl-ignore-case t)
   (defun site/eshell-mode-setup ()
     "Custom hook to run for my Eshell buffers."
-    ;; Disable Company since we use `completion-at-point'
-    (company-mode -1)
     ;; Add Outline support for Eshell prompts
-    (setq-local outline-regexp eshell-prompt-regexp))
+    (setq-local outline-regexp eshell-prompt-regexp)
+    ;; Disable `corfu' for native shell behavior
+    (corfu-mode -1))
   ;; Apply the custom hook
   (add-hook 'eshell-mode-hook #'site/eshell-mode-setup))
 
@@ -760,9 +817,9 @@
   ;; Custom hook to avoid conflicts
   (defun site/shell-mode-setup ()
     "Custom hook to run for my Shell buffers."
-    ;; Enable clickable file paths and disable Company
+    ;; Enable clickable file paths and disable `corfu'
     (compilation-shell-minor-mode +1)
-    (company-mode -1))
+    (corfu-mode -1))
   ;; Apply the custom hook
   (add-hook 'shell-mode-hook #'site/shell-mode-setup))
 
@@ -930,8 +987,7 @@
   ;; Add my feeds
   (setopt newsticker-url-list
           '(("Bljesak.info" "http://bljesak.info/rss")
-            ("Klix.ba" "https://www.klix.ba/rss/naslovnica")
-            ("Hacker News" "https://news.ycombinator.com/rss")
+            ("Hetzner" "https://status.hetzner.com/en.atom")
             ("LWN" "https://lwn.net/headlines/rss")
             ("Reddit Emacs" "https://www.reddit.com/r/emacs/.rss")
             ("Reddit Linux" "https://www.reddit.com/r/linux/.rss")
@@ -998,22 +1054,13 @@
   (keymap-set outline-mode-map "C-c h" 'site/outline-transient))
 
 ;;; Org-mode
-(defun site/toggle-table-mode ()
-  "Initialize Org Table mode."
-  (interactive)
-  ;; Rather hacky mode, needs to be manually loaded
-  (require 'org-table)
-  ;; And manually checked to be enabled/disabled
-  (if (bound-and-true-p orgtbl-mode)
-      (orgtbl-mode -1)
-    (orgtbl-mode +1)))
 ;; Set global key bindings
 (dolist (bind '(("C-c o a" . org-agenda)
                 ("C-c o c" . org-capture)
                 ("C-c o t" . org-todo-list)
                 ("C-c o s" . org-search-view)
                 ("C-c o l" . org-store-link)
-                ("C-c t t" . site/toggle-table-mode)))
+                ("C-c t t" . orgtbl-mode)))
   (keymap-global-set (car bind) (cdr bind)))
 ;; Configuration
 (after-load 'org
@@ -1143,9 +1190,7 @@
   ;; Configuration
   (after-load 'cider-mode
     ;; More rich syntax highlight
-    (setopt cider-font-lock-dynamically '(macro core function var))
-    ;; Enable fuzzy completion with Company
-    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)))
+    (setopt cider-font-lock-dynamically '(macro core function var))))
 
 ;; CIDER REPL
 (keymap-global-set "C-c r c" 'cider-connect-clj)
@@ -1157,8 +1202,6 @@
   (setopt cider-repl-display-help-banner nil)
   ;; Display result prefix
   (setopt cider-repl-result-prefix ";; => ")
-  ;; Enable fuzzy completion with Company
-  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   ;; Enable SubWord mode
   (add-hook 'cider-repl-mode-hook #'subword-mode))
 
@@ -1549,8 +1592,22 @@
                   ("C-c e b" . eglot-events-buffer)
                   ("C-c e e" . eglot-stderr-buffer)))
     (keymap-set eglot-mode-map (car bind) (cdr bind)))
-  ;; Consult Eglot
+  ;; Always refresh the completion table when using `corfu'
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
+
+;; Consult Eglot
+(after-load 'eglot
+  ;; Load library
+  (require 'consult-eglot)
+  ;; Set local key binding
   (keymap-set eglot-mode-map "C-M-." 'consult-eglot-symbols))
+
+;; Consult Eglot Embark
+(after-load 'consult-eglot
+  ;; Load library
+  (require 'consult-eglot-embark)
+  ;; Enable mode
+  (consult-eglot-embark-mode))
 
 ;;; EPUB format support
 (elpaca nov
@@ -1768,44 +1825,41 @@
   (keymap-global-set "C-c t r" 'rainbow-mode))
 
 ;;; rcirc
-(elpaca rcirc-color
-  ;; Set global key binding
-  (keymap-global-set "<f8>" 'irc)
-  ;; Configuration
-  (after-load 'rcirc
-    ;; User defaults
-    (setopt rcirc-default-user-name "drot"
-            rcirc-default-nick "drot")
-    ;; Default server
-    (setopt rcirc-server-alist
-            '(("irc.libera.chat"
-               :port 6697
-               :encryption tls
-               :channels ("#archlinux" "#emacs" "#bash" "#jenkins"))))
-    ;; Use cert authorization
-    (setopt rcirc-authinfo
-            `(("Libera.Chat" certfp
-               ,(expand-file-name "~/Documents/Keys/libera-cert/libera.key")
-               ,(expand-file-name "~/Documents/Keys/libera-cert/libera.crt"))))
-    ;; Truncate buffer output
-    (setopt rcirc-buffer-maximum-lines 2048)
-    ;; Set fill column value to frame width
-    (setopt rcirc-fill-column #'window-text-width)
-    ;; Enable logging
-    (setopt rcirc-log-flag t)
-    ;; Enable additional modes
-    (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
-    (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
-    (add-hook 'rcirc-mode-hook #'flyspell-mode)
-    ;; Enable `rcirc-color' mode for nick colorization
-    (add-hook 'rcirc-mode-hook
-              (lambda ()
-                (require 'rcirc-color)))
-    ;; Disable company mode in rcirc buffers
-    (add-hook 'rcirc-mode-hook
-              (lambda () (company-mode -1)))
-    ;; Exclude text properties when yanking text in rcirc buffers
-    (add-to-list 'yank-excluded-properties 'rcirc-text)))
+(keymap-global-set "<f8>" 'irc)
+;; Configuration
+(after-load 'rcirc
+  ;; User defaults
+  (setopt rcirc-default-user-name "drot"
+          rcirc-default-nick "drot")
+  ;; Default server
+  (setopt rcirc-server-alist
+          '(("irc.libera.chat"
+             :port 6697
+             :encryption tls
+             :channels ("#archlinux" "#emacs" "#bash" "#jenkins"))))
+  ;; Use cert authorization
+  (setopt rcirc-authinfo
+          `(("Libera.Chat" certfp
+             ,(expand-file-name "~/Documents/Keys/libera-cert/libera.key")
+             ,(expand-file-name "~/Documents/Keys/libera-cert/libera.crt"))))
+  ;; Truncate buffer output
+  (setopt rcirc-buffer-maximum-lines 2048)
+  ;; Set fill column value to frame width
+  (setopt rcirc-fill-column #'window-text-width)
+  ;; Enable logging
+  (setopt rcirc-sqlite-database (no-littering-expand-var-file-name "rcirc-log.db"))
+  (add-hook 'rcirc-mode-hook #'rcirc-sqlite-log-mode)
+  ;; Enable additional modes
+  (add-hook 'rcirc-mode-hook #'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook #'rcirc-omit-mode)
+  (add-hook 'rcirc-mode-hook #'flyspell-mode)
+  ;; Use `rcirc-color' for nick colorization, disable `corfu' completion
+  (add-hook 'rcirc-mode-hook
+            (lambda ()
+              (require 'rcirc-color)
+              (corfu-mode -1)))
+  ;; Exclude text properties when yanking text in rcirc buffers
+  (add-to-list 'yank-excluded-properties 'rcirc-text))
 
 ;; rcirc color codes support
 (elpaca rcirc-styles
@@ -1897,7 +1951,9 @@
   ;; Configuration
   (after-load 'telega-customize
     ;; Use Docker image to load TDLib
-    (setq telega-use-docker t)))
+    (setopt telega-use-docker t)
+    ;; Use Emacs own support for emojis
+    (setopt telega-emoji-use-images nil)))
 
 ;;; Unfill
 (elpaca unfill
@@ -1961,40 +2017,6 @@
   (keymap-global-set "C-c w o" 'link-hint-open-link)
   (keymap-global-set "C-c w c" 'link-hint-copy-link))
 
-;;; Company mode
-(elpaca company
-  ;; Enable mode
-  (global-company-mode +1)
-  ;; Set global key binding
-  (keymap-global-set "C-c i y" 'company-yasnippet)
-  ;; Configuration
-  (after-load 'company
-    ;; Change default backends
-    (setopt company-backends
-            '(company-capf
-              company-files
-              (company-dabbrev-code company-etags company-keywords)
-              company-dabbrev))
-    ;; More eager completion and cycle candidates
-    (setopt company-minimum-prefix-length 2
-            company-selection-wrap-around t)
-    ;; Allow non-matching input
-    (setopt company-require-match nil)
-    ;; Show numbers on candidates
-    (setopt company-show-quick-access t)
-    ;; Tooltip behavior
-    (setopt company-tooltip-align-annotations t
-            company-tooltip-flip-when-above t)
-    ;; Dabbrev completion behavior
-    (setopt company-dabbrev-code-everywhere t
-            company-dabbrev-downcase nil
-            company-dabbrev-ignore-case t)))
-
-;;; Company Statistics
-(elpaca company-statistics
-  ;; Enable mode
-  (company-statistics-mode +1))
-
 ;;; Diff-Hl
 (elpaca diff-hl
   ;; Enable mode
@@ -2018,19 +2040,18 @@
   (global-hl-todo-mode +1)
   ;; Configuration
   (after-load 'hl-todo
-    ;; Define Transient command
-    (transient-define-prefix site/hl-todo-transient ()
-      "Transient for hl-todo commands."
-      :transient-suffix 'transient--do-stay
-      :transient-non-suffix 'transient--do-warn
-      ["Highlight TODO"
-       ("n" "Next" hl-todo-next)
-       ("p" "Previous" hl-todo-previous)])
-    ;; Set local key bindings
-    (dolist (bind '(("M-s t" . hl-todo-occur)
-                    ("C-c p t" . site/hl-todo-transient)
-                    ("C-c p i" . hl-todo-insert-keyword)))
-      (keymap-set hl-todo-mode-map (car bind) (cdr bind)))))
+  ;; Create local repeat keymap
+  (defvar-keymap hl-todo-repeat-map
+    :repeat (:enter (hl-todo-insert) :exit (hl-todo-occur))
+    "n" #'hl-todo-next
+    "p" #'hl-todo-previous
+    "o" #'hl-todo-occur)
+  ;; Set local key bindings
+  (dolist (bind '(("C-c v C-n" . hl-todo-next)
+                  ("C-c v C-p" . hl-todo-previous)
+                  ("M-s t" . hl-todo-occur)
+                  ("C-c v t" . hl-todo-insert)))
+    (keymap-set hl-todo-mode-map (car bind) (cdr bind)))))
 
 ;;; Page break lines
 (elpaca page-break-lines
@@ -2075,7 +2096,14 @@
   (keymap-set vertico-map "M-q" 'vertico-quick-insert)
   (keymap-set vertico-map "C-q" 'vertico-quick-exit)
   ;; Enable cycling for `vertico-next' and `vertico-previous'
-  (setopt vertico-cycle t))
+  (setopt vertico-cycle t)
+  ;; Enable vertico-multiform
+  (vertico-multiform-mode +1)
+  ;; Configure multiform display per command
+  (add-to-list 'vertico-multiform-commands '(consult-imenu buffer indexed))
+  ;; Configure multiform display per completion category
+  (add-to-list 'vertico-multiform-categories '(consult-grep buffer))
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid)))
 
 ;;; Orderless
 (elpaca orderless
@@ -2204,38 +2232,79 @@
                     ("C-\"" . avy-embark-collect-act)))
       (keymap-set embark-collect-mode-map (car bind) (cdr bind)))))
 
+;;; corfu
+(global-corfu-mode +1)
+;; Enable in terminal as well
+(unless (display-graphic-p)
+  (corfu-terminal-mode +1))
+;; Configuration
+(after-load 'corfu
+  ;; Cycle completions
+  (setopt corfu-cycle t)
+  ;; Add more context for completions
+  (setopt corfu-scroll-margin 5))
+;; Enable indexed mode
+(corfu-indexed-mode +1)
+;; Save selection history
+(corfu-history-mode +1)
+;; Persist history via `savehist'
+(add-to-list 'savehist-additional-variables 'corfu-history)
+
+;;; Cape
+(dolist (bind '(("C-c c p" . completion-at-point)
+                ("C-c c t" . complete-tag)
+                ("C-c c d" . cape-dabbrev)
+                ("C-c c h" . cape-history)
+                ("C-c c f" . cape-file)
+                ("C-c c k" . cape-keyword)
+                ("C-c c s" . cape-elisp-symbol)
+                ("C-c c e" . cape-elisp-block)
+                ("C-c c a" . cape-abbrev)
+                ("C-c c l" . cape-line)
+                ("C-c c w" . cape-dict)
+                ("C-c c :" . cape-emoji)
+                ("C-c c \\" . cape-tex)
+                ("C-c c _" . cape-tex)
+                ("C-c c ^" . cape-tex)
+                ("C-c c &" . cape-sgml)
+                ("C-c c r" . cape-rfc1345)))
+  (keymap-global-set (car bind) (cdr bind)))
+;; Add to the global default value of `completion-at-point-functions'
+(add-hook 'completion-at-point-functions #'cape-dabbrev)
+(add-hook 'completion-at-point-functions #'cape-file)
+(add-hook 'completion-at-point-functions #'cape-elisp-block)
+
 ;;; Minions
 (elpaca minions
-  ;; Enable mode
-  (minions-mode +1)
-  ;; Configuration
-  (after-load 'minions
-    ;; Change mode lighter and color
-    (setopt minions-mode-line-lighter "ξ"
-            minions-mode-line-face 'button)
-    ;; Don't hide the following minor modes
-    (setopt minions-prominent-modes
-            '(ace-window-mode
-              artist-mode
-              auto-fill-function
-              auto-revert-mode
-              cider-mode
-              dired-omit-mode
-              flymake-mode
-              geiser-autodoc-mode
-              geiser-mode
-              isearch-mode
-              iedit-mode
-              js2-minor-mode
-              multiple-cursors-mode
-              orgtbl-mode
-              overwrite-mode
-              poly-markdown-mode
-              sqlind-minor-mode
-              subword-mode
-              visual-line-mode
-              ztreediff-mode
-              ztreedir-mode))))
+        ;; Enable mode
+        (minions-mode +1)
+        ;; Configuration
+        (after-load 'minions
+                    ;; Change mode color
+                    (setopt minions-mode-line-face 'button)
+                    ;; Don't hide the following minor modes
+                    (setopt minions-prominent-modes
+                            '(ace-window-mode
+                              artist-mode
+                              auto-fill-function
+                              auto-revert-mode
+                              cider-mode
+                              dired-omit-mode
+                              flymake-mode
+                              geiser-autodoc-mode
+                              geiser-mode
+                              isearch-mode
+                              iedit-mode
+                              js2-minor-mode
+                              multiple-cursors-mode
+                              orgtbl-mode
+                              overwrite-mode
+                              poly-markdown-mode
+                              sqlind-minor-mode
+                              subword-mode
+                              visual-line-mode
+                              ztreediff-mode
+                              ztreedir-mode))))
 
 ;;; Paredit
 (elpaca paredit
@@ -2262,11 +2331,33 @@
     ;; Disable conflicting key binding
     (keymap-unset paredit-mode-map "M-s")
     ;; Set local key bindings
-    (dolist (bind '(("M-s M-s" . paredit-splice-sexp)
-                    ("M-{" . paredit-wrap-curly)
-                    ("M-[" . paredit-wrap-square)
-                    ("C-c C-M-s" . mark-containing-sexp)))
-      (keymap-set paredit-mode-map (car bind) (cdr bind)))
+    (keymap-set paredit-mode-map "M-s M-s" 'paredit-splice-sexp)
+    (keymap-set paredit-mode-map "C-c C-M-s" 'mark-containing-sexp)
+    ;; All-in-one paredit wrap key binding
+    (defun site/paredit-wrap-based-on-prefix (arg)
+      "Call different paredit wrap functions based on the prefix argument."
+      (interactive "P")
+      (cond
+       ((equal arg 1)
+        (paredit-wrap-square))
+       ((equal arg 2)
+        (paredit-wrap-curly))
+       (t
+        (paredit-wrap-round))))
+    ;; Set local key binding
+    (keymap-set paredit-mode-map "M-(" 'site/paredit-wrap-based-on-prefix)
+  ;; Paredit Enter key workaround
+  (defun site/paredit-enter-key-disable ()
+    "Remove `paredit' interference with Enter key."
+    (let ((oldmap (cdr (assoc 'paredit-mode minor-mode-map-alist)))
+          (newmap (make-sparse-keymap)))
+      (set-keymap-parent newmap oldmap)
+      (keymap-set newmap "RET" nil)
+      (make-local-variable 'minor-mode-overriding-map-alist)
+      (push `(paredit-mode . ,newmap) minor-mode-overriding-map-alist)))
+
+  ;; Apply hook for `geiser'
+  (add-hook 'geiser-repl-mode-hook #'site/paredit-enter-key-disable)
     ;; Enable Paredit in the minibuffer
     (defvar site/paredit-minibuffer-setup-commands
       '(eval-expression
@@ -2276,9 +2367,10 @@
         ibuffer-do-view-and-eval)
       "Interactive commands for which Paredit should be enabled in the minibuffer.")
     (defun site/paredit-minibuffer-setup ()
-      "Enable Paredit during lisp-related minibuffer commands."
-      (if (memq this-command site/paredit-minibuffer-setup-commands)
-          (paredit-mode +1)))
+    "Enable Paredit during lisp-related minibuffer commands."
+    (if (memq this-command site/paredit-minibuffer-setup-commands)
+        (progn (paredit-mode +1)
+               (site/paredit-enter-key-disable))))
     (add-hook 'minibuffer-setup-hook #'site/paredit-minibuffer-setup)
     ;; Disable Electric Pair mode when Paredit is active
     (add-hook 'paredit-mode-hook
@@ -2324,9 +2416,9 @@
 (keymap-global-set "C-c s d" 'find-grep-dired)
 
 ;;; Project
-(dolist (bind '(("C-c p f" . project-find-file)
-                ("C-c p r" . project-find-regexp)
-                ("C-c p s" . project-search)))
+(dolist (bind '(("C-c f p" . project-find-file)
+                ("C-c s C-p" . project-find-regexp)
+                ("C-c s p" . project-search)))
   (keymap-global-set (car bind) (cdr bind)))
 
 ;;; Find function and variable definitions
