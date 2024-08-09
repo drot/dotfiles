@@ -4,7 +4,7 @@
 menu_action="$1"
 
 # Font
-font="Iosevka Lambda 15"
+font="JuliaMono 14"
 
 # Colors
 normal_background="#1d1f21"
