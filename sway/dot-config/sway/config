@@ -80,7 +80,7 @@ client.placeholder $xgray3 $hard_black $bright_black $xgray3 $xgray3
 client.background $black
 
 # font for window titles and the status bar
-font pango:Iosevka Lambda, FontAwesome 15
+font pango:JuliaMono, FontAwesome 14
 
 # default modifier key
 set $mod Mod4
@@ -307,14 +307,18 @@ for_window [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] border pixel 2
 for_window [app_id="chrome-slack-nsoft.slack.com__-Profile_3"] border pixel 2
 for_window [app_id="chrome-nngceckbapebfimnlniiiahkandclblb-Profile_3"] border pixel 2
 for_window [app_id="code-url-handler"] border pixel 2
+for_window [app_id="org.telegram.desktop._6337491cb38512b292f37b979433804d"] border pixel 2
+for_window [app_id="chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Profile_4"] border pixel 2
 
 # XWayland specific
 for_window [instance="uchiwa.nsoft.com"] border pixel 2
 for_window [instance="slack-nsoft.slack.com"] border pixel 2
 for_window [instance="google-chrome"] border pixel 2
+for_window [instance="crx_cinhimbnkkaeohfgghhklpknlkffjgod"] border pixel 2
 
 # Floating applications
 for_window [app_id="chrome-nngceckbapebfimnlniiiahkandclblb-Profile_3"] floating enable
+for_window [title="Open File"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [class="pritunl"] floating enable, border pixel 2
@@ -328,11 +332,13 @@ assign [app_id="chrome-uchiwa.nsoft.com__-Profile_3"] $ws2
 assign [app_id="emacs"] $ws3
 assign [app_id="google-chrome"] $ws5
 assign [app_id="org.pwmt.zathura"] $ws6
+assign [app_id="chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Profile_4"] $ws6
 
 # XWayland specific
 assign [instance="slack-nsoft.slack.com"] $ws1
 assign [instance="uchiwa.nsoft.com"] $ws2
 assign [instance="google-chrome"] $ws5
+assign [instance="crx_cinhimbnkkaeohfgghhklpknlkffjgod"] $ws6
 
 #
 # Status Bar:
