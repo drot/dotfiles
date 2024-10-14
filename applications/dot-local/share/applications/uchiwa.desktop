@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Uchiwa
+Exec=/home/drotim/.scripts/uchiwa
+Icon=face-crying-symbolic
+Type=Application
+Categories=Network;

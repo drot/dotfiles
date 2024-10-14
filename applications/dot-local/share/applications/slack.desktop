@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Slack
+Exec=/home/drotim/.scripts/slek
+Icon=phone-old-symbolic
+Type=Application
+Categories=Network;
