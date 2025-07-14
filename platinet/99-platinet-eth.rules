@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="8153", RUN+="/usr/bin/usb_modeswitch -v 0bda -p 8153 -R", RUN+="/usr/local/bin/platinet-eth-reload.sh"
