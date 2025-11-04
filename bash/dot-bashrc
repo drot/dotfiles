@@ -51,8 +51,8 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_DIRTRIM="2"
 
 # Git prompt support
-[[ -r /usr/share/git-core/contrib/completion/git-prompt.sh ]] &&
-    source /usr/share/git-core/contrib/completion/git-prompt.sh
+[[ -r /usr/lib/git-core/git-sh-prompt ]] &&
+    source /usr/lib/git-core/git-sh-prompt
 
 # Git prompt format
 GIT="\$(declare -F __git_ps1 &>/dev/null && __git_ps1 ' %s')"
