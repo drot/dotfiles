@@ -20,6 +20,3 @@ alias ppsh="ssh -p 1044"
 
 # Save tmux pane contents
 alias tmux-save-pane="tmux capture-pane -pS -"
-
-# Use stow with special dotfiles handling
-alias stow="stow --dotfiles"
