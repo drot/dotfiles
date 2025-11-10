@@ -1,5 +1,5 @@
 # Source global definitions
-[[ -r /etc/bashrc ]] && source /etc/bashrc
+[[ -r /etc/bash.bashrc ]] && source /etc/bash.bashrc
 
 # Remap stop key for flow control
 stty stop ^P
@@ -28,8 +28,8 @@ shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
 # Colored listings
-if [[ -r ~/.dircolors ]] && type -p dircolors >/dev/null; then
-    eval $(dircolors ~/.dircolors)
+if type -p dircolors >/dev/null; then
+    eval "$(dircolors -b ~/.dircolors 2>/dev/null || dircolors -b)"
 fi
 
 # Load aliases
