@@ -4,3 +4,8 @@ if [[ -d $HOME/.local/etc/bash_completion.d ]]; then
         source "$compfile"
     done
 fi
+
+# Enable Terraform completion if available
+if command -v terraform >/dev/null 2>&1; then
+  complete -C "$(command -v terraform)" terraform
+fi
