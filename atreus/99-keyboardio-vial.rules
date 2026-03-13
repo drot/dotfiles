@@ -1,0 +1,17 @@
+# /etc/udev/rules.d/99-keyboardio-vial.rules
+# ==============================================================================
+# Keyboardio Atreus - Permissions & Vial Configuration
+# ==============================================================================
+
+# --- Bootloader (Flashing Mode) -----------------------------------------------
+# PID 2302: Matches the device when holding ESC during plug-in.
+# Prevent ModemManager from interfering and grant user access.
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2302", SYMLINK+="atreus_boot", ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="uaccess"
+
+# --- Application (Normal Typing Mode) -----------------------------------------
+# PID 2303: Matches the device during normal operation.
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", SYMLINK+="atreus",      ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="uaccess"
+
+# --- WebHID / Vial Configuration ----------------------------------------------
+# Explicitly grants RW access to the 'hidraw' interface for Chrome/Chromium.
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", MODE="0660", GROUP="plugdev", TAG+="uaccess"
