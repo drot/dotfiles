@@ -26,6 +26,9 @@ export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 # Check for Go binaries if available
 [[ -d $HOME/go/bin ]] && export PATH="${HOME}/go/bin:$PATH"
 
+# opencode
+[[ -d $HOME/.opencode/bin ]] && export PATH="${HOME}/.opencode/bin:$PATH"
+
 # Set PATH so it includes user directory
 [[ -d $HOME/.local/bin ]] && export PATH="${HOME}/.local/bin:$PATH"
 
