@@ -12,8 +12,8 @@
 /* Enable Permissive Hold for fast Emacs rolling */
 #define PERMISSIVE_HOLD
 
-/* Enable Retro Tapping for faster modifiers */
-#define RETRO_TAPPING
+/* Remove the auto-repeat ability and activate the hold function instead */
+#define QUICK_TAP_TERM 0
 
 /* Optional: Tune the timing (Default is 200ms) */
 /* 135ms is usually snappier for Mod-Tap */
