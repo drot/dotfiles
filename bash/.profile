@@ -29,6 +29,11 @@ export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 # opencode
 [[ -d $HOME/.opencode/bin ]] && export PATH="${HOME}/.opencode/bin:$PATH"
 
+# Kafka tools
+[[ -d $HOME/kafka-tools/bin ]] && \
+    export CLASSPATH="${HOME}/kafka-tools/libs/aws-msk-iam-auth-2.3.5-all.jar:${CLASSPATH:+:$CLASSPATH}" && \
+    export PATH="${HOME}/kafka-tools/bin:$PATH"
+
 # Set PATH so it includes user directory
 [[ -d $HOME/.local/bin ]] && export PATH="${HOME}/.local/bin:$PATH"
 
