@@ -1,3 +1,5 @@
+# shellcheck shell=sh
+
 # Environment variables
 export EDITOR="emacsclient"
 export ALTERNATE_EDITOR=""
@@ -21,21 +23,25 @@ export WINEDEBUG="-all"
 export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 
 # Check for Cargo binaries if available
-[[ -d $HOME/.cargo/bin ]] && export PATH="${HOME}/.cargo/bin:$PATH"
+[ -d "$HOME/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:$PATH"
 
 # Check for Go binaries if available
-[[ -d $HOME/go/bin ]] && export PATH="${HOME}/go/bin:$PATH"
+[ -d "$HOME/go/bin" ] && export PATH="${HOME}/go/bin:$PATH"
 
 # opencode
-[[ -d $HOME/.opencode/bin ]] && export PATH="${HOME}/.opencode/bin:$PATH"
+[ -d "$HOME/.opencode/bin" ] && export PATH="${HOME}/.opencode/bin:$PATH"
 
 # Kafka tools
-[[ -d $HOME/kafka-tools/bin ]] && \
-    export CLASSPATH="${HOME}/kafka-tools/libs/aws-msk-iam-auth-2.3.5-all.jar:${CLASSPATH:+:$CLASSPATH}" && \
+[ -d "$HOME/kafka-tools/bin" ] && {
+    export CLASSPATH="${HOME}/kafka-tools/libs/aws-msk-iam-auth-2.3.5-all.jar${CLASSPATH:+:$CLASSPATH}"
     export PATH="${HOME}/kafka-tools/bin:$PATH"
+}
 
 # Set PATH so it includes user directory
-[[ -d $HOME/.local/bin ]] && export PATH="${HOME}/.local/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="${HOME}/.local/bin:$PATH"
 
 # Initialize Bash
-[[ -r ~/.bashrc ]] && source ~/.bashrc
+if [ -n "${BASH_VERSION:-}" ] && [ -r "$HOME/.bashrc" ]; then
+    # shellcheck disable=SC1091 # user-specific Bash configuration
+    . "$HOME/.bashrc"
+fi

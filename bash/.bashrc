@@ -105,7 +105,10 @@ TITLE="\[\e]2;\u@\h:\W\a\]"
 ERROR_CODE="\$(code=\${PROMPT_EXIT_STATUS##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
 
 # Check if we are on a SSH connection
-[[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
+SSH_CONN=""
+if [[ -n ${SSH_CONNECTION:-} || -n ${SSH_CLIENT:-} || -n ${SSH_TTY:-} ]]; then
+    SSH_CONN="${RED}@ "
+fi
 
 # Prompt format
 case $TERM in
