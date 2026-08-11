@@ -1,8 +1,13 @@
+# shellcheck shell=bash
+
+# Only configure interactive shells
+[[ $- != *i* ]] && return
+
 # Source global definitions
 [[ -r /etc/bash.bashrc ]] && source /etc/bash.bashrc
 
 # Remap stop key for flow control
-stty stop ^P
+[[ -t 0 ]] && stty stop ^P
 
 # Notify of completed background jobs immediately
 set -o notify
@@ -24,6 +29,7 @@ HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 HISTTIMEFORMAT="%F %T "
 
 # History options
+shopt -s histappend # append rather than overwrite history on shell exit
 shopt -s histverify # allow history replacement editing
 shopt -s cmdhist # save multi-line commands as one command
 
@@ -39,13 +45,47 @@ fi
 [[ -r ~/.bash_functions ]] && source ~/.bash_functions
 
 # Prompt colors
-RED="\[$(tput setaf 1)\]"
-GREEN="\[$(tput setaf 2)\]"
-BLUE="\[$(tput setaf 4)\]"
-RESET="\[$(tput sgr0)\]"
+RED=""
+GREEN=""
+BLUE=""
+RESET=""
+if [[ -t 1 && -n $TERM ]] &&
+    type -p tput >/dev/null &&
+    tput setaf 1 >/dev/null 2>&1; then
+    RED="\[$(tput setaf 1)\]"
+    GREEN="\[$(tput setaf 2)\]"
+    BLUE="\[$(tput setaf 4)\]"
+    RESET="\[$(tput sgr0)\]"
+fi
 
-# Save history after each command execution
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# Preserve the previous command's status and save new history
+PROMPT_EXIT_STATUS=0
+__prompt_command () {
+    local exit_status=$?
+
+    # shellcheck disable=SC2034 # expanded indirectly while rendering PS1
+    PROMPT_EXIT_STATUS=$exit_status
+    history -a
+    return "$exit_status"
+}
+
+# Register our prompt hook without discarding existing hooks
+_prompt_command_registered=""
+for _prompt_command in "${PROMPT_COMMAND[@]}"; do
+    [[ $_prompt_command == "__prompt_command" ]] &&
+        _prompt_command_registered="yes"
+done
+
+if [[ -z $_prompt_command_registered ]]; then
+    if [[ $(declare -p PROMPT_COMMAND 2>/dev/null) == "declare -a"* ]]; then
+        PROMPT_COMMAND=("__prompt_command" "${PROMPT_COMMAND[@]}")
+    elif [[ -n ${PROMPT_COMMAND[0]:-} ]]; then
+        PROMPT_COMMAND=("__prompt_command" "${PROMPT_COMMAND[0]}")
+    else
+        PROMPT_COMMAND=("__prompt_command")
+    fi
+fi
+unset _prompt_command _prompt_command_registered
 
 # Trim deep directory paths
 PROMPT_DIRTRIM="2"
@@ -62,7 +102,7 @@ GIT_PS1_SHOWDIRTYSTATE="yes"
 TITLE="\[\e]2;\u@\h:\W\a\]"
 
 # Make dynamic prompt based on exit command value
-ERROR_CODE="\$(code=\${?##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
+ERROR_CODE="\$(code=\${PROMPT_EXIT_STATUS##0}; echo \${code:+${GREEN}(${RED}\${code}${GREEN}) ${RESET}})"
 
 # Check if we are on a SSH connection
 [[ -n $SSH_CLIENT ]] && SSH_CONN="${RED}@ "
