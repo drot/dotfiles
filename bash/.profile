@@ -25,10 +25,19 @@ export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 _profile_path_prepend () {
     [ -d "$1" ] || return
 
-    case ":$PATH:" in
-        *:"$1":*) ;;
-        *) PATH="$1${PATH:+:$PATH}" ;;
-    esac
+    # Remove every existing exact occurrence
+    while :; do
+        # shellcheck disable=SC2123 # temporarily empty before prepending
+        case $PATH in
+            "$1") PATH= ;;
+            "$1":*) PATH=${PATH#*:} ;;
+            *:"$1":*) PATH=${PATH%%:"$1":*}:${PATH#*:"$1":} ;;
+            *:"$1") PATH=${PATH%:*} ;;
+            *) break ;;
+        esac
+    done
+
+    PATH="$1${PATH:+:$PATH}"
 }
 
 # Check for Cargo binaries if available
