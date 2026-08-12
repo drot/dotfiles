@@ -72,30 +72,96 @@ man () {
 
 # Record specific window
 record () {
+    if (( $# > 1 )); then
+        echo "Usage: record [OUTPUT.mp4]" >&2
+        return 2
+    fi
+
     local -a capture_args
-    local output_dir output
+    local geometry
+    local output
+    output=${1:-"recording-$(date '+%Y%m%d-%H%M%S').mp4"}
 
-    read -r -a capture_args < <(slop -f '-video_size %wx%h -i +%x,%y') ||
-        return
-    output_dir=$(mktemp -d -t 'record.XXXXXX') || return
-    output="$output_dir/recording.mp4"
+    [[ $output == -* ]] && output="./$output"
 
-    ffmpeg -f x11grab -framerate 25 "${capture_args[@]}" "$output" &&
-        printf 'Saved recording to %s\n' "$output"
+    if [[ -e $output ]]; then
+        printf 'record: output already exists: %s\n' "$output" >&2
+        return 1
+    fi
+
+    if [[ -n ${WAYLAND_DISPLAY:-} ]]; then
+        if ! type -P wf-recorder >/dev/null || ! type -P slurp >/dev/null; then
+            echo "record: Wayland recording requires wf-recorder and slurp" >&2
+            return 127
+        fi
+
+        geometry=$(slurp) || return
+        wf-recorder --geometry "$geometry" --file "$output" || return
+    elif [[ -n ${DISPLAY:-} ]]; then
+        if ! type -P ffmpeg >/dev/null || ! type -P slop >/dev/null; then
+            echo "record: X11 recording requires ffmpeg and slop" >&2
+            return 127
+        fi
+
+        read -r -a capture_args < <(
+            slop -f '-video_size %wx%h -i +%x,%y'
+        ) || return
+        ffmpeg -f x11grab -framerate 25 "${capture_args[@]}" "$output" ||
+            return
+    else
+        echo "record: no graphical display detected" >&2
+        return 1
+    fi
+
+    printf 'Saved recording to %s\n' "$output"
 }
 
 # Combine 2 PDFs
 pdfcombine () {
+    local force=""
+
+    if [[ ${1:-} == "-f" ]]; then
+        force="yes"
+        shift
+    fi
+
     if (( $# != 2 )); then
-        echo "Usage: pdfcombine FIRST.pdf SECOND.pdf" >&2
+        echo "Usage: pdfcombine [-f] FIRST.pdf SECOND.pdf" >&2
         return 2
     fi
 
-    local second_name=${2##*/}
-    local output="${1%.*}___${second_name%.*}.pdf"
+    local first=$1
+    local second=$2
+
+    [[ $first == -* ]] && first="./$first"
+    [[ $second == -* ]] && second="./$second"
+
+    local second_name=${second##*/}
+    local output="${first%.*}___${second_name%.*}.pdf"
+
+    if ! type -P gs >/dev/null; then
+        echo "pdfcombine: Ghostscript is required" >&2
+        return 127
+    fi
+
+    if [[ ! -f $first || ! -r $first ]]; then
+        printf 'pdfcombine: input is not readable: %s\n' "$first" >&2
+        return 1
+    fi
+
+    if [[ ! -f $second || ! -r $second ]]; then
+        printf 'pdfcombine: input is not readable: %s\n' "$second" >&2
+        return 1
+    fi
+
+    if [[ -e $output && -z $force ]]; then
+        printf 'pdfcombine: output already exists: %s (use -f to replace it)\n' \
+            "$output" >&2
+        return 1
+    fi
 
     gs -q -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE="$output" \
-        -dBATCH "$1" "$2"
+        -dBATCH "$first" "$second"
 }
 
 # Calculate remaining worktime
@@ -105,28 +171,35 @@ worktime () {
         return 2
     fi
 
-    local time1 time2 sec1 sec2 diffsec
-    local time_now time_now_ts ending_ts end_time remaining
+    local hours minutes seconds
+    local required_seconds worked_seconds remaining_seconds
+    local now ending_ts end_time remaining
 
-    # Time Arithmetic
+    if [[ $1 =~ ^([0-9]{1,2}):([0-5][0-9]):([0-5][0-9])$ ]]; then
+        hours=${BASH_REMATCH[1]}
+        minutes=${BASH_REMATCH[2]}
+        seconds=${BASH_REMATCH[3]}
+    elif [[ $1 =~ ^([0-9]{1,2}):([0-5][0-9])$ ]]; then
+        hours=${BASH_REMATCH[1]}
+        minutes=${BASH_REMATCH[2]}
+        seconds=0
+    else
+        printf 'worktime: invalid time: %s\n' "$1" >&2
+        return 2
+    fi
 
-    time1=$(date "+%Y-%m-%d 07:00:00")
-    time2=$(date "+%Y-%m-%d $1")
+    required_seconds=$((7 * 60 * 60))
+    worked_seconds=$((10#$hours * 60 * 60 + 10#$minutes * 60 + 10#$seconds))
+    remaining_seconds=$((required_seconds - worked_seconds))
+    (( remaining_seconds < 0 )) && remaining_seconds=0
 
-    # Convert the times to seconds from the Epoch
-    sec1=$(date -u -d "$time1" +%s) || return
-    sec2=$(date -u -d "$time2" +%s) || return
-
-    # Calculate the absolute difference between start and finish
-    diffsec=$((sec2 - sec1))
-    diffsec=${diffsec#-}
-    # And use date to convert the seconds back to something more meaningful
-
-    time_now=$(date "+%Y-%m-%d %H:%M:%S")
-    time_now_ts=$(date -u -d "$time_now" +%s) || return
-    ending_ts=$((time_now_ts + diffsec))
-    end_time=$(date -u -d "@$ending_ts" "+%H:%M:%S") || return
-    remaining=$(date -u -d "@$diffsec" "+%H:%M:%S") || return
+    now=$(date +%s) || return
+    ending_ts=$((now + remaining_seconds))
+    end_time=$(date -d "@$ending_ts" "+%H:%M:%S") || return
+    printf -v remaining '%02d:%02d:%02d' \
+        "$((remaining_seconds / 3600))" \
+        "$(((remaining_seconds % 3600) / 60))" \
+        "$((remaining_seconds % 60))"
 
     echo "Time Remaining :: $remaining | You're free to go at :: $end_time"
 }

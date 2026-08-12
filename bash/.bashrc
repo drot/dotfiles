@@ -58,7 +58,7 @@ if [[ -t 1 && -n $TERM ]] &&
     RESET="\[$(tput sgr0)\]"
 fi
 
-# Preserve the previous command's status and save new history
+# Preserve command status and synchronize history between open shells
 PROMPT_EXIT_STATUS=0
 __prompt_command () {
     local exit_status=$?
@@ -66,6 +66,7 @@ __prompt_command () {
     # shellcheck disable=SC2034 # expanded indirectly while rendering PS1
     PROMPT_EXIT_STATUS=$exit_status
     history -a
+    history -n
     return "$exit_status"
 }
 

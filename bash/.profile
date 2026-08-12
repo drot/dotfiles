@@ -22,23 +22,35 @@ export WINEDEBUG="-all"
 # Disable Gecko install prompt; prevent .desktop creation
 export WINEDLLOVERRIDES="winemenubuilder.exe,mshtml=d"
 
+_profile_path_prepend () {
+    [ -d "$1" ] || return
+
+    case ":$PATH:" in
+        *:"$1":*) ;;
+        *) PATH="$1${PATH:+:$PATH}" ;;
+    esac
+}
+
 # Check for Cargo binaries if available
-[ -d "$HOME/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:$PATH"
+_profile_path_prepend "$HOME/.cargo/bin"
 
 # Check for Go binaries if available
-[ -d "$HOME/go/bin" ] && export PATH="${HOME}/go/bin:$PATH"
+_profile_path_prepend "$HOME/go/bin"
 
 # opencode
-[ -d "$HOME/.opencode/bin" ] && export PATH="${HOME}/.opencode/bin:$PATH"
+_profile_path_prepend "$HOME/.opencode/bin"
 
 # Kafka tools
 [ -d "$HOME/kafka-tools/bin" ] && {
     export CLASSPATH="${HOME}/kafka-tools/libs/aws-msk-iam-auth-2.3.5-all.jar${CLASSPATH:+:$CLASSPATH}"
-    export PATH="${HOME}/kafka-tools/bin:$PATH"
+    _profile_path_prepend "$HOME/kafka-tools/bin"
 }
 
 # Set PATH so it includes user directory
-[ -d "$HOME/.local/bin" ] && export PATH="${HOME}/.local/bin:$PATH"
+_profile_path_prepend "$HOME/.local/bin"
+
+export PATH
+unset -f _profile_path_prepend
 
 # Initialize Bash
 if [ -n "${BASH_VERSION:-}" ] && [ -r "$HOME/.bashrc" ]; then
