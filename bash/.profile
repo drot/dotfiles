@@ -50,10 +50,7 @@ _profile_path_prepend "$HOME/go/bin"
 _profile_path_prepend "$HOME/.opencode/bin"
 
 # Kafka tools
-[ -d "$HOME/kafka-tools/bin" ] && {
-    export CLASSPATH="${HOME}/kafka-tools/libs/aws-msk-iam-auth-2.3.5-all.jar${CLASSPATH:+:$CLASSPATH}"
-    _profile_path_prepend "$HOME/kafka-tools/bin"
-}
+_profile_path_prepend "$HOME/kafka-tools/bin"
 
 # Set PATH so it includes user directory
 _profile_path_prepend "$HOME/.local/bin"
