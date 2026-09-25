@@ -1,0 +1,16 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1090 # user-installed completion files are discovered at runtime
+
+# Add completions from user installs -*- mode: sh; -*-
+if [[ -d $HOME/.local/etc/bash_completion.d ]]; then
+    for compfile in "$HOME"/.local/etc/bash_completion.d/*; do
+        [[ -f $compfile && -r $compfile ]] || continue
+        source "$compfile"
+    done
+    unset compfile
+fi
+
+# Enable Terraform completion if available
+if command -v terraform >/dev/null 2>&1; then
+    complete -C "$(command -v terraform)" terraform
+fi
