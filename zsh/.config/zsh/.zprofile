@@ -18,5 +18,3 @@ do
     [[ -d $_user_bin ]] && path=("$_user_bin" $path)
 done
 unset _user_bin
-
-export PATH

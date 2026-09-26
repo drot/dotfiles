@@ -21,11 +21,6 @@ man () {
         return 2
     fi
 
-    if (( ! $+commands[curl] )); then
-        print -u2 "0x0: curl is required"
-        return 127
-    fi
-
     case $1 in
         -f)
             if [[ ! -f $2 || ! -r $2 ]]; then

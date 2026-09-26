@@ -11,6 +11,8 @@ export PAGER="less"
 # -R colors, -i smart-case search, -F quit if output fits one screen,
 # -X don't clear the screen on exit
 export LESS="-RiFX"
-export GREP_COLORS="mt=01;37;41"
+# Grep matches as bold red blocks (GREP_COLOR for macOS grep, GREP_COLORS for GNU grep)
+export GREP_COLOR="01;07;31"
+export GREP_COLORS="mt=$GREP_COLOR"
 export NAME="Davor Rotim"
 export EMAIL="d.rotim@sportradar.com"

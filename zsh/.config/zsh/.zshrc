@@ -10,7 +10,6 @@ setopt AUTO_CD           # cd into a directory by typing its name
 setopt AUTO_PUSHD        # every cd pushes onto the dir stack; `cd -<TAB>` lists it, `cd -2` jumps
 setopt PUSHD_IGNORE_DUPS # keep the directory stack free of duplicates
 setopt PUSHD_SILENT      # do not print the directory stack after pushd/popd
-setopt NOTIFY            # report completed background jobs immediately
 setopt NOCLOBBER         # prevent file overwrite on stdout redirection (use >| to force)
 setopt CORRECT           # offer spelling correction for commands
 # Correction prompt: n = run as typed, y = run fix, a = abort, e = edit line
@@ -66,11 +65,8 @@ compinit -d "$HOME/.cache/zsh/zcompdump"
 _comp_options+=(globdots)
 
 # Completion options
-setopt AUTO_MENU          # cycle through matches on repeated tab
 setopt NO_LIST_AMBIGUOUS  # show all matches on the first tab
-setopt LIST_TYPES         # append file type when listing completions
 setopt COMPLETE_IN_WORD   # skip already completed text after the cursor
-setopt AUTO_PARAM_SLASH   # add trailing slashes to directories and symlinks
 # Try normal completion first, then fuzzy matches that fix typos
 zstyle ':completion:*' completer _complete _approximate
 # Case-insensitive matching
