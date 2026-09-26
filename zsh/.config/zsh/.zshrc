@@ -1,11 +1,14 @@
 # Only configure interactive shells
 [[ -o interactive ]] || return
 
-# Remap stop key for flow control
-[[ -t 0 ]] && stty stop '^P'
+# Disable flow control so ^S and ^Q reach the line editor
+unsetopt FLOW_CONTROL
 
 # Shell behavior options
 setopt AUTO_CD           # cd into a directory by typing its name
+setopt AUTO_PUSHD        # push visited directories onto the directory stack
+setopt PUSHD_IGNORE_DUPS # keep the directory stack free of duplicates
+setopt PUSHD_SILENT      # do not print the directory stack after pushd/popd
 setopt NOTIFY            # report completed background jobs immediately
 setopt NOCLOBBER         # prevent file overwrite on stdout redirection
 setopt CORRECT           # offer spelling correction for commands
@@ -23,8 +26,6 @@ setopt EXTENDED_HISTORY       # save timestamps
 setopt SHARE_HISTORY          # synchronize history between open shells
 setopt HIST_IGNORE_SPACE      # skip commands starting with a space
 setopt HIST_IGNORE_ALL_DUPS   # erase older duplicates
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY            # allow history replacement editing
 
@@ -43,13 +44,8 @@ fi
 
 # Completion search path
 typeset -U fpath
-for _completion_dir in \
-    "$HOME/.local/share/zsh/site-functions" \
-    /opt/homebrew/share/zsh/site-functions
-do
-    [[ -d $_completion_dir ]] && fpath=("$_completion_dir" $fpath)
-done
-unset _completion_dir
+[[ -d $HOME/.local/share/zsh/site-functions ]] &&
+    fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
 
 # Initialize completion
 zmodload zsh/complist
@@ -70,6 +66,8 @@ zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.cache/zsh/compcache"
 # Disable tab-completion on an empty line
 _complete_unless_empty () {
     [[ -z ${BUFFER//[[:space:]]/} ]] && return
@@ -79,6 +77,9 @@ zle -N _complete_unless_empty
 
 # Emacs key bindings
 bindkey -e
+
+# Treat path separators as word boundaries
+WORDCHARS=${WORDCHARS//\/}
 
 # Use Emacs-style history search keys
 bindkey '^[p' history-beginning-search-backward
@@ -111,6 +112,13 @@ _prompt_precmd () {
         eat-truecolor) ;;
         *) print -Pn '\e]2;%n@%m:%1~\a' ;;
     esac
+
+    # Report working directory
+    local LC_ALL=C cwd= ch
+    for ch in ${(s::)PWD}; do
+        [[ $ch == [[:alnum:]/._~-] ]] && cwd+=$ch || cwd+=$(printf '%%%02X' "'$ch")
+    done
+    print -n "\e]7;file://${HOST}${cwd}\a"
 
     # Prompt jumping
     case $TERM in
