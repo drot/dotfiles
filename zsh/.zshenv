@@ -1,10 +1,12 @@
 # Specify main configuration directory
-ZDOTDIR="${ZDOTDIR:-$HOME/.zsh}"
+ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
 
-# Global variables
+# Environment variables
+export EDITOR="emacsclient"
+export ALTERNATE_EDITOR=""
+export VISUAL="$EDITOR"
 export PAGER="less"
 export LESS="-Ri"
 export GREP_COLORS="mt=01;37;41"
 export NAME="Davor Rotim"
-export EMAIL="rotim.davor@nsoft.com"
-export GROFF_NO_SGR=yes
+export EMAIL="d.rotim@sportradar.com"
