@@ -53,10 +53,9 @@ unset _completion_dir
 
 # Initialize completion
 zmodload zsh/complist
-autoload -Uz compinit bashcompinit
+autoload -Uz compinit
 [[ -d $HOME/.cache/zsh ]] || mkdir -p "$HOME/.cache/zsh"
 compinit -d "$HOME/.cache/zsh/zcompdump"
-bashcompinit
 
 # Include hidden files in completion without affecting globbing
 _comp_options+=(globdots)
@@ -71,10 +70,6 @@ zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Enable Terraform completion if available
-(( $+commands[terraform] )) && complete -C "${commands[terraform]}" terraform
-
 # Disable tab-completion on an empty line
 _complete_unless_empty () {
     [[ -z ${BUFFER//[[:space:]]/} ]] && return
