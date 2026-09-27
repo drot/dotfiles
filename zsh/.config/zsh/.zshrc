@@ -3,7 +3,7 @@
 
 # Disable flow control so ^S and ^Q reach the line editor
 # (^S = forward history search instead of freezing the terminal)
-unsetopt FLOW_CONTROL
+setopt NO_FLOW_CONTROL
 
 # Shell behavior options
 setopt AUTO_CD           # cd into a directory by typing its name
@@ -176,7 +176,11 @@ _prompt_precmd () {
     # and splits can open in the same directory
     local LC_ALL=C cwd= ch
     for ch in ${(s::)PWD}; do
-        [[ $ch == [[:alnum:]/._~-] ]] && cwd+=$ch || cwd+=$(printf '%%%02X' "'$ch")
+        if [[ $ch == [[:alnum:]/._~-] ]]; then
+            cwd+=$ch
+        else
+            cwd+=%${(l:2::0:)$(( [##16] #ch ))}
+        fi
     done
     print -n "\e]7;file://${HOST}${cwd}\a"
 
