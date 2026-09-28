@@ -93,9 +93,9 @@ zle -N _complete_unless_empty
 # Emacs key bindings
 bindkey -e
 
-# Treat path separators as word boundaries
-# (M-DEL, M-b, M-f move one path component at a time)
-WORDCHARS=${WORDCHARS//\/}
+# Words are only letters and digits, like Emacs
+# (M-DEL, M-b, M-f stop at every -, ., /, _ and so on)
+WORDCHARS=''
 
 # M-p / M-n: search history for lines starting with the text before the cursor
 bindkey '^[p' history-beginning-search-backward
