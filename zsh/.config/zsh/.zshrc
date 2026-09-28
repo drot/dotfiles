@@ -93,9 +93,16 @@ zle -N _complete_unless_empty
 # Emacs key bindings
 bindkey -e
 
-# Words are only letters and digits, like Emacs
-# (M-DEL, M-b, M-f stop at every -, ., /, _ and so on)
-WORDCHARS=''
+# Bash-style words: only letters and digits, so M-b, M-f and M-DEL stop
+# at every -, ., /, _ and so on, and M-f moves to the end of the word
+autoload -Uz select-word-style
+select-word-style bash
+
+# ^W deletes back to the previous space, like bash's unix-word-rubout
+autoload -Uz backward-kill-word-match
+zle -N unix-word-rubout backward-kill-word-match
+zstyle ':zle:unix-word-rubout' word-style whitespace
+bindkey '^W' unix-word-rubout
 
 # M-p / M-n: search history for lines starting with the text before the cursor
 bindkey '^[p' history-beginning-search-backward
