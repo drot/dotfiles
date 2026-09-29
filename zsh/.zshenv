@@ -1,18 +1,19 @@
-# Specify main configuration directory
+# Config directory
 ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
 
-# Environment variables
-# EDITOR opens in the terminal, VISUAL in a new GUI frame (most tools prefer VISUAL);
-# an empty ALTERNATE_EDITOR starts the Emacs daemon if it isn't running
+# Editor: -t in terminal, -c new GUI frame (most tools use VISUAL)
 export EDITOR="emacsclient -t"
-export ALTERNATE_EDITOR=""
+export ALTERNATE_EDITOR="" # start Emacs daemon if not running
 export VISUAL="emacsclient -c"
+
+# Pager: colors, smart-case search, quit if output fits one screen
 export PAGER="less"
-# -R colors, -i smart-case search, -F quit if output fits one screen,
-# -X don't clear the screen on exit
-export LESS="-RiFX"
-# Grep matches as bold red blocks (GREP_COLOR for macOS grep, GREP_COLORS for GNU grep)
+export LESS="-RiF"
+
+# Grep matches as bold red blocks (GREP_COLOR: macOS grep, GREP_COLORS: GNU grep)
 export GREP_COLOR="01;07;31"
 export GREP_COLORS="mt=$GREP_COLOR"
+
+# Identity (Emacs, git)
 export NAME="Davor Rotim"
 export EMAIL="d.rotim@sportradar.com"

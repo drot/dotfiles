@@ -11,16 +11,16 @@ _jdk="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/openjdk@21/libexec/openjdk.jdk/Conte
 [[ -d $_jdk ]] && export JAVA_HOME="$_jdk"
 unset _jdk
 
-# Prepend user directories to PATH if they exist
+# Prepend user directories to PATH; earlier entries take precedence,
+# missing directories are skipped by the (N-/) glob qualifier
 typeset -U path PATH
-for _user_bin in \
-    "${JAVA_HOME:+$JAVA_HOME/bin}" \
-    "$HOME/.cargo/bin" \
-    "$HOME/go/bin" \
-    "$HOME/.opencode/bin" \
-    "$HOME/.kafka-tools/bin" \
-    "$HOME/.local/bin"
-do
-    [[ -d $_user_bin ]] && path=("$_user_bin" $path)
-done
-unset _user_bin
+_user_bins=(
+    $HOME/.local/bin
+    $HOME/.kafka-tools/bin
+    ${JAVA_HOME:+$JAVA_HOME/bin}
+    $HOME/.opencode/bin
+    $HOME/go/bin
+    $HOME/.cargo/bin
+)
+path=(${^_user_bins}(N-/) $path)
+unset _user_bins
