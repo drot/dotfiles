@@ -177,10 +177,10 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 _prompt_precmd () {
     vcs_info
 
-    # Window title: user@host:dir
+    # Window and tab title: user@host:dir
     case $TERM in
         eat-truecolor) ;;
-        *) print -Pn '\e]2;%n@%m:%1~\a' ;;
+        *) print -Pn '\e]0;%n@%m:%1~\a' ;;
     esac
 
     # Tell terminal the cwd (OSC 7) so new tabs open here
