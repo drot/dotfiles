@@ -173,8 +173,19 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
         hook_com[unstaged]+='?'
 }
 
+# Prompt marks (OSC 133) for iTerm2 and tmux: jump between prompts, select output
+[[ $TERM_PROGRAM == iTerm.app || $TERM == tmux-256color ]] && _prompt_marks=1
+
 # Before each prompt
 _prompt_precmd () {
+    local ret=$? # must be first, before anything changes $?
+
+    # Mark end of previous command's output with its exit status
+    if (( _prompt_marks && _prompt_cmd_ran )); then
+        print -n "\e]133;D;$ret\a"
+    fi
+    _prompt_cmd_ran=0
+
     vcs_info
 
     # Window and tab title: user@host:dir
@@ -193,13 +204,15 @@ _prompt_precmd () {
         fi
     done
     print -n "\e]7;file://${HOST}${cwd}\a"
-
-    # Prompt marker for jumping between prompts in tmux
-    case $TERM in
-        tmux-256color) print -n '\e]133;A\e\\' ;;
-    esac
 }
 add-zsh-hook precmd _prompt_precmd
+
+# Before each command runs: mark start of output
+_prompt_preexec () {
+    _prompt_cmd_ran=1
+    (( _prompt_marks )) && print -n '\e]133;C\a'
+}
+add-zsh-hook preexec _prompt_preexec
 
 PROMPT_ERROR='%(?..%F{green}(%F{red}%?%F{green}%) %f)' # (code) if last command failed
 PROMPT_SSH='' # red @ over SSH
@@ -208,6 +221,13 @@ if [[ -n ${SSH_CONNECTION:-}${SSH_CLIENT:-}${SSH_TTY:-} ]]; then
 fi
 PROMPT_DIR='%F{blue}%(4~|%-1~/.../%2~|%~)' # cwd, shortened when deep
 PROMPT_GIT='%F{red}${vcs_info_msg_0_}'
+# Prompt start/end marks; start must be in PROMPT, zsh clears the line after precmd
+PROMPT_MARK_START=''
+PROMPT_MARK_END=''
+if (( _prompt_marks )); then
+    PROMPT_MARK_START=$'%{\e]133;A\a%}'
+    PROMPT_MARK_END=$'%{\e]133;B\a%}'
+fi
 
 case $TERM in
     eat-truecolor)
@@ -217,6 +237,6 @@ case $TERM in
             source "$EAT_SHELL_INTEGRATION_DIR/zsh"
         ;;
     *)
-        PROMPT="${PROMPT_ERROR}${PROMPT_SSH}${PROMPT_DIR}${PROMPT_GIT}%F{green} > %f"
+        PROMPT="${PROMPT_MARK_START}${PROMPT_ERROR}${PROMPT_SSH}${PROMPT_DIR}${PROMPT_GIT}%F{green} > %f${PROMPT_MARK_END}"
         ;;
 esac
