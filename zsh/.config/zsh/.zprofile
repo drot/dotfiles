@@ -24,3 +24,10 @@ _user_bins=(
 )
 path=(${^_user_bins}(N-/) $path)
 unset _user_bins
+
+# Point the docker CLI at the Podman machine socket
+if (( $+commands[podman] )); then
+    _sock=$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}' 2>/dev/null)
+    [[ -n $_sock ]] && export DOCKER_HOST="unix://$_sock"
+    unset _sock
+fi
