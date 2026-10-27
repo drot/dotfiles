@@ -15,6 +15,7 @@ setopt PUSHD_SILENT # don't print dir stack on pushd/popd
 setopt NOCLOBBER # > won't overwrite files (>| forces)
 setopt EXTENDED_GLOB # extended glob patterns (^, ~, #)
 setopt NO_BEEP # no beep
+setopt INTERACTIVE_COMMENTS # allow # comments at the prompt
 setopt NO_FLOW_CONTROL # free ^S/^Q from terminal freeze
 
 # Correction
@@ -207,9 +208,18 @@ _prompt_precmd () {
 }
 add-zsh-hook precmd _prompt_precmd
 
-# Before each command runs: mark start of output
+# Before each command runs
 _prompt_preexec () {
     _prompt_cmd_ran=1
+
+    # Window and tab title: running command (first line, max 60 chars)
+    if [[ $TERM != eat-truecolor ]]; then
+        local cmd=${${1%%$'\n'*}//[[:cntrl:]]/}
+        (( ${#cmd} > 60 )) && cmd="${cmd[1,59]}…"
+        print -rn -- $'\e]0;'"$cmd"$'\a'
+    fi
+
+    # Mark start of output
     (( _prompt_marks )) && print -n '\e]133;C\a'
 }
 add-zsh-hook preexec _prompt_preexec
