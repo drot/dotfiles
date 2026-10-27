@@ -1,4 +1,0 @@
-#!/bin/bash
-
-feh --bg-scale ~/Pictures/phoenix.png
-dunstify -r 43 -i display "Display profile" "$AUTORANDR_CURRENT_PROFILE"

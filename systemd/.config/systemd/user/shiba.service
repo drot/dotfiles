@@ -1,6 +1,0 @@
-[Unit]
-Description=Fetch current SHIB price.
-
-[Service]
-Type=oneshot
-ExecStart=%h/.scripts/shib

@@ -1,6 +1,0 @@
-[Unit]
-Description=Fetch current weather data.
-
-[Service]
-Type=oneshot
-ExecStart=%h/.scripts/weather

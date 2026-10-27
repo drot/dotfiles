@@ -1,9 +1,0 @@
-[Unit]
-Description=Fetch current SHIB price.
-
-[Timer]
-OnBootSec=1m
-OnUnitActiveSec=60m
-
-[Install]
-WantedBy=timers.target
