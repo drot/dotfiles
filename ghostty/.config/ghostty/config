@@ -2,5 +2,10 @@
 font-family = JuliaMono
 font-size = 19
 
-# Theme
-theme = Tomorrow Night
+# Theme (colors from iTerm, follows macOS light/dark mode)
+theme = light:iterm-light,dark:iterm-dark
+bold-color = bright
+
+# Cursor (no-cursor stops shell integration switching to a bar at the prompt)
+cursor-style = block
+shell-integration-features = no-cursor
