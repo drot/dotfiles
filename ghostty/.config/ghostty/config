@@ -3,7 +3,7 @@ font-family = JuliaMono
 font-size = 19
 
 # Theme
-theme = Atom
+theme = Brogrammer
 bold-color = bright
 
 # Cursor (no-cursor stops shell integration switching to a bar at the prompt)
