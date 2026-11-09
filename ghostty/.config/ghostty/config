@@ -2,8 +2,8 @@
 font-family = JuliaMono
 font-size = 19
 
-# Theme (colors from iTerm, follows macOS light/dark mode)
-theme = light:iterm-light,dark:iterm-dark
+# Theme
+theme = Atom
 bold-color = bright
 
 # Cursor (no-cursor stops shell integration switching to a bar at the prompt)
